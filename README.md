@@ -85,7 +85,7 @@ SVG is a visual preview, not a cartographic projection suitable for area or dist
 
 - Compiler tests validate source attributes, missing ISO codes, aliases, holes, stable IDs, deterministic outputs, manifest checksums, simplification validity, unsafe ZIP rejection, ambiguous shapefile rejection, and source archive checksums.
 - SVG tests validate well-formed XML, the 512×512 viewBox, polygon holes, multipart geometry, unsupported/empty geometry rejection, and output across low/medium/high profiles.
-- GDScript runtime behavior should also be exercised in Godot itself; Python tests cannot prove runtime APIs or SVG rendering inside the engine work.
+- A Godot runtime fixture test is provided at `tests/godot/test_country_assets.gd`. Run it from the consuming Godot project with `godot --headless --path . --script tests/godot/test_country_assets.gd`; the project must have the addon available and its `CountryAssets` global class registered.
 - The current detail profiles are separate geometry files so the runtime can load only the desired profile. Avoid loading all profiles at startup on memory-constrained devices.
 - Region classifications and aliases are configurable and independent of original source attributes.
 
