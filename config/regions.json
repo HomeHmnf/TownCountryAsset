@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "regions": {
+    "Africa": ["Africa"],
+    "Asia": ["Asia"],
+    "Europe": ["Europe"],
+    "North America": ["North America"],
+    "South America": ["South America"],
+    "Oceania": ["Oceania"],
+    "Antarctica": ["Antarctica"]
+  },
+  "aliases": {
+    "USA": ["United States of America", "United States"],
+    "GBR": ["United Kingdom", "UK"],
+    "KOR": ["South Korea", "Republic of Korea"],
+    "PRK": ["North Korea", "Democratic People's Republic of Korea"]
+  }
+}
