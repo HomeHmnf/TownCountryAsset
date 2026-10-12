@@ -2,6 +2,7 @@ extends SceneTree
 ## Run inside a Godot project that includes addons/town_country_asset/runtime/country_assets.gd:
 ## godot --headless --path . --script tests/godot/test_country_assets.gd
 
+const CountryAssetsScript = preload("res://addons/town_country_asset/runtime/country_assets.gd")
 const TEST_ROOT := "user://town_country_asset_svg_test"
 
 
@@ -45,7 +46,7 @@ func _run() -> void:
             "geometries": {"TST": polygon, "ISL": multipolygon},
         })
 
-    var assets := CountryAssets.new(TEST_ROOT)
+    var assets = CountryAssetsScript.new(TEST_ROOT)
     assert(assets.get_country("TST").get("name") == "Testland")
     assert(assets.get_country("Test Republic").get("id") == "TST")
     assert(assets.get_country("missing").is_empty())
