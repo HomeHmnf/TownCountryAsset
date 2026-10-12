@@ -105,8 +105,10 @@ func get_country_svg(code_or_id: String, profile: String = "medium") -> String:
     var path_data := _build_svg_rings(geometry.get("coordinates", []), min_x, max_y, scale, offset_x, offset_y)
     if path_data.is_empty():
         return ""
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">' + \
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">' +
         '<path d="' + path_data + '" fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-width="0.5" stroke-linejoin="round"/></svg>'
+    )
 
 
 func _is_position(value: Variant) -> bool:
