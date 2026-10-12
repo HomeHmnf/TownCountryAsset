@@ -21,7 +21,7 @@ The compiler accepts a local Natural Earth Admin 0 Countries 1:50m ZIP, shapefil
    git fetch origin
    git switch --track origin/work/compiler-hardening
    ```
-   If you already cloned the repo, run `git fetch origin; and git switch work/compiler-hardening` (or `git switch --track origin/work/compiler-hardening` if the local branch does not exist).
+   If you already cloned the repo, run `git fetch origin; and git switch work/compiler-hardening; and git pull --ff-only origin work/compiler-hardening`.
 3. Sync the locked runtime and development dependencies:
    ```fish
    uv sync --extra dev
