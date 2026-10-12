@@ -46,22 +46,22 @@ func _run() -> void:
         })
 
     var assets := CountryAssets.new(TEST_ROOT)
-    assert assets.get_country("TST").get("name") == "Testland"
-    assert assets.get_country("Test Republic").get("id") == "TST"
-    assert assets.get_country("missing").is_empty()
-    assert assets.get_geometry("TST", "low").get("type") == "Polygon"
-    assert assets.get_geometry("ISL", "high").get("type") == "MultiPolygon"
+    assert(assets.get_country("TST").get("name") == "Testland")
+    assert(assets.get_country("Test Republic").get("id") == "TST")
+    assert(assets.get_country("missing").is_empty())
+    assert(assets.get_geometry("TST", "low").get("type") == "Polygon")
+    assert(assets.get_geometry("ISL", "high").get("type") == "MultiPolygon")
 
     var polygon_svg := assets.get_country_svg("TST", "medium")
-    assert not polygon_svg.is_empty()
-    assert polygon_svg.contains('viewBox="0 0 512 512"')
-    assert polygon_svg.contains('fill-rule="evenodd"')
-    assert polygon_svg.count("M") == 2
+    assert(not polygon_svg.is_empty())
+    assert(polygon_svg.contains('viewBox="0 0 512 512"'))
+    assert(polygon_svg.contains('fill-rule="evenodd"'))
+    assert(polygon_svg.count("M") == 2)
     var multipart_svg := assets.get_country_svg("ISL", "low")
-    assert not multipart_svg.is_empty()
-    assert multipart_svg.count("M") == 2
-    assert assets.get_country_svg("missing").is_empty()
-    assert assets.get_country_svg("TST", "invalid").is_empty()
+    assert(not multipart_svg.is_empty())
+    assert(multipart_svg.count("M") == 2)
+    assert(assets.get_country_svg("missing").is_empty())
+    assert(assets.get_country_svg("TST", "invalid").is_empty())
 
     print("CountryAssets runtime and SVG tests passed.")
     quit(0)
