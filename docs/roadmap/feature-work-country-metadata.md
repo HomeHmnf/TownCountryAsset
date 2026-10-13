@@ -26,14 +26,14 @@ The current generated snapshot contains 242 records and unique internal IDs, but
 - Add tests proving that ordinary Americas records receive a region and that unmapped exceptions are visible/auditable.
 
 ### 3. Make source provenance reproducible
-**Implementation status:** Pending source archive/acquisition metadata; values remain null rather than guessed.
+**Implementation status:** Source archive has been verified locally and its checksum is part of the established workflow; release/version and retrieval-date fields remain null until confirmed from the acquisition record.
 - Record the exact Natural Earth release/version and the date the source archive was retrieved in `config/generation.json` before publishing a regenerated asset set.
 - Preserve the source archive SHA-256 in the manifest.
 - Keep builds deterministic: do not add generation timestamps to output JSON.
 - Do not guess a release/date from the current generated files; obtain these values from the actual source archive or acquisition record.
 
 ### 4. Regenerate and audit generated data
-**Implementation status:** Blocked on obtaining the source archive with provenance. Do not treat the committed generated snapshot as updated by the compiler changes.
+**Implementation status:** Source archive is available locally and verified. An automated structural/manifest audit has been added; regenerate the committed snapshot locally, run the audit against the exact ZIP, and review the report before publishing.
 - Regenerate `countries.json`, geometry profiles, and manifest from the reviewed source archive after compiler/config changes.
 - Verify unique internal IDs, geometry keys matching metadata IDs, ISO candidate behavior, region assignment, deterministic checksums, and manifest provenance.
 - Do not hand-edit generated metadata in a way that leaves geometry keys or checksums inconsistent.
@@ -55,4 +55,4 @@ The current generated snapshot contains 242 records and unique internal IDs, but
 
 ## Current constraints
 
-The Natural Earth source archive is not committed to this repository. If it is not available locally, do not fabricate or claim a full regeneration; obtain the exact archive and its acquisition metadata first. Keep this work on `work/compiler-hardening` and do not target `main` until reviewed.
+The Natural Earth source archive is intentionally not committed to this repository (`raw_data/` is ignored); use the verified local archive for regeneration. Do not infer a release version or retrieval date without the acquisition record. Keep this work on `work/compiler-hardening` and do not target `main` until reviewed.
