@@ -16,13 +16,14 @@ def make_fixture(tmp_path: Path) -> Path:
         writer.field("ISO_A3", "C", size=8)
         writer.field("ADMIN", "C", size=40)
         writer.field("REGION_UN", "C", size=40)
+        writer.field("SUBREGION", "C", size=40)
         writer.poly([[(0, 0), (0, 10), (10, 10), (10, 0), (0, 0)],
                      [(2, 2), (8, 2), (8, 8), (2, 8), (2, 2)]])
-        writer.record("TST", "TST", "Testland", "Asia")
+        writer.record("TST", "TST", "Testland", "Asia", "Eastern Asia")
         writer.poly([[(20, 0), (20, 1), (21, 1), (21, 0), (20, 0)]])
-        writer.record("-99", "-99", "Islandia", "Oceania")
+        writer.record("-99", "-99", "Islandia", "Oceania", "Australia and New Zealand")
         writer.poly([[(30, 0), (30, 1), (31, 1), (31, 0), (30, 0)]])
-        writer.record("TST", "TST", "Duplicate ID", "Asia")
+        writer.record("TST", "TST", "Duplicate ID", "Asia", "Eastern Asia")
     return base.with_suffix(".shp")
 
 
@@ -115,3 +116,64 @@ def test_zip_input_records_archive_checksum(tmp_path):
     config, regions = write_config(tmp_path)
     result = compile_data(archive_path, tmp_path / "zip-out", config, regions)
     assert len(result["source"]["archive_sha256"]) == 64
+
+
+
+def test_iso_code_never_falls_back_to_administrative_id_and_regions_use_subregion(tmp_path):
+    source = make_fixture(tmp_path)
+    config, regions = write_config(tmp_path)
+    config_data = json.loads(config.read_text())
+    config_data["iso3_fields"] = ["ISO_A3"]
+    config_data["region_field"] = "SUBREGION"
+    config.write_text(json.dumps(config_data))
+    region_data = json.loads(regions.read_text())
+    region_data["regions"] = {
+        "North America": ["Northern America", "Central America", "Caribbean"],
+        "South America": ["South America"],
+        "Asia": ["Eastern Asia"],
+        "Oceania": ["Australia and New Zealand"],
+    }
+    regions.write_text(json.dumps(region_data))
+
+    # A source admin ID can differ from the ISO code; only ISO_A3 is used.
+    source_iso = shapefile.Reader(str(source))
+    try:
+        fields = [field[0] for field in source_iso.fields[1:]]
+        records = [dict(zip(fields, record)) for record in source_iso.records()]
+    finally:
+        source_iso.close()
+    assert records[0]["ADM0_A3"] == "TST"
+    assert records[0]["ISO_A3"] == "TST"
+
+    result = compile_data(source, tmp_path / "out", config, regions)
+    assert result["countries"][0]["iso3"] == "TST"
+    assert result["countries"][0]["regions"] == ["Asia"]
+    assert result["countries"][1]["iso3"] is None
+    assert result["region_audit"]["unmapped_count"] == 0
+
+
+def test_iso_candidate_rejects_non_iso_source_identifiers():
+    from tools.compile_natural_earth import iso_candidate
+
+    assert iso_candidate({"ADM0_A3": "SDS", "ISO_A3": "SSD"}, ["ISO_A3"]) == "SSD"
+    assert iso_candidate({"ADM0_A3": "KOS", "ISO_A3": "-99"}, ["ISO_A3"]) is None
+    assert iso_candidate({"ISO_A3": "ABC1"}, ["ISO_A3"]) is None
+
+
+def test_americas_subregions_are_classified(tmp_path):
+    source = make_fixture(tmp_path)
+    config, regions = write_config(tmp_path)
+    config_data = json.loads(config.read_text())
+    config_data["region_field"] = "SUBREGION"
+    config.write_text(json.dumps(config_data))
+    region_data = json.loads(regions.read_text())
+    region_data["regions"] = {
+        "North America": ["Northern America", "Central America", "Caribbean"],
+        "South America": ["South America"],
+        "Asia": ["Eastern Asia"],
+        "Oceania": ["Australia and New Zealand"],
+    }
+    regions.write_text(json.dumps(region_data))
+    result = compile_data(source, tmp_path / "out", config, regions)
+    assert result["region_audit"]["unmapped_count"] == 0
+    assert result["region_audit"]["unmapped_ids"] == []
