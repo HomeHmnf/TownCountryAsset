@@ -102,9 +102,16 @@ def audit(asset_data: Path, game_root: Path) -> dict[str, Any]:
             "question_count":len(data[qf]),"catalog_labels_missing_from_color_map":sorted(catalog[n] for n in catalog.keys()-color.keys()),
             "color_map_labels_missing_from_catalog":sorted(color[n] for n in color.keys()-catalog.keys()),
             "question_answers_missing_from_catalog":sorted({a for a in answers if norm(a) not in catalog})}
+    name_ids=defaultdict(set)
+    for country in countries:
+        attrs=country.get("source_attributes",{})
+        for name in (country.get("name"),attrs.get("ADMIN"),attrs.get("NAME"),attrs.get("NAME_LONG")):
+            if isinstance(name,str) and name.strip(): name_ids[norm(name)].add(str(country.get("id","")))
+    duplicate_names=[{"normalized_name":name,"source_ids":sorted(ids)}
+                     for name,ids in sorted(name_ids.items()) if len(ids)>1]
     return {"schema_version":1,"report_type":"read_only_game_country_crosswalk_audit",
       "asset_country_count":len(countries),"game_label_count":len(game_rows),"asset_countries":asset_rows,
-      "game_labels":game_rows,"region_audits":region_audits,
+      "game_labels":game_rows,"region_audits":region_audits,"duplicate_asset_name_candidates":duplicate_names,
       "summary":{"matched_candidate_labels":sum(r["match_status"]=="candidate_needs_review" for r in game_rows),
        "ambiguous_candidate_labels":sum(r["match_status"]=="ambiguous_candidate" for r in game_rows),
        "unmatched_game_labels":sum(r["match_status"]=="unmatched" for r in game_rows),
