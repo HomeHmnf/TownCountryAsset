@@ -51,6 +51,10 @@ def audit(asset_data: Path, game_root: Path) -> dict[str, Any]:
             for label in items: add(label,f"Flag_Data.json:{tier}")
     for en,fa in data["Flag_Translation.json"].items():
         add(en,"Flag_Translation.json:English"); add(fa,"Flag_Translation.json:Persian")
+    for i,q in enumerate(data["GeneralInfo_Questions.json"]):
+        if isinstance(q,dict):
+            add(q.get("answer"),f"GeneralInfo_Questions.json#{i}:answer")
+            for choice in q.get("choices",[]): add(choice,f"GeneralInfo_Questions.json#{i}:choice")
     for region,tiers in data["GeneralInfo_CountriesCapitals.json"].items():
         if isinstance(tiers,dict):
             for tier,pairs in tiers.items():
@@ -91,12 +95,12 @@ def audit(asset_data: Path, game_root: Path) -> dict[str, Any]:
             "match_status":"ambiguous_candidate" if len(ids)>1 else "candidate_needs_review" if ids else "unmatched"})
     region_audits={}
     for region,(cf,mf,qf) in REGIONS.items():
-        catalog={norm(x) for x in data[cf]}
-        color={norm(v[0]) for v in data[mf].values() if isinstance(v,list) and v and isinstance(v[0],str)}
+        catalog={norm(x):x for x in data[cf]}
+        color={norm(v[0]):v[0] for v in data[mf].values() if isinstance(v,list) and v and isinstance(v[0],str)}
         answers=[q.get("answer") for q in data[qf] if isinstance(q,dict) and isinstance(q.get("answer"),str)]
         region_audits[region]={"catalog_entries":len(data[cf]),"color_map_entries":len(data[mf]),
-            "question_count":len(data[qf]),"catalog_labels_missing_from_color_map":sorted(catalog-color),
-            "color_map_labels_missing_from_catalog":sorted(color-catalog),
+            "question_count":len(data[qf]),"catalog_labels_missing_from_color_map":sorted(catalog[n] for n in catalog.keys()-color.keys()),
+            "color_map_labels_missing_from_catalog":sorted(color[n] for n in color.keys()-catalog.keys()),
             "question_answers_missing_from_catalog":sorted({a for a in answers if norm(a) not in catalog})}
     return {"schema_version":1,"report_type":"read_only_game_country_crosswalk_audit",
       "asset_country_count":len(countries),"game_label_count":len(game_rows),"asset_countries":asset_rows,
