@@ -107,6 +107,28 @@ def audit_generated_assets(data_dir: Path, source: Path | None = None) -> list[s
             if entry.get("size_bytes") != path.stat().st_size:
                 errors.append(f"{filename}: size_bytes does not match manifest")
 
+    source_schema = metadata.get("source_schema")
+    if not isinstance(source_schema, dict):
+        errors.append("source_schema is missing or invalid")
+    else:
+        schema_fields = source_schema.get("fields")
+        if not isinstance(schema_fields, list) or not all(isinstance(field, str) for field in schema_fields):
+            errors.append("source_schema.fields must be an array of field names")
+        stable_field = source_schema.get("stable_id_field")
+        if not isinstance(stable_field, str) or not stable_field:
+            errors.append("source_schema.stable_id_field must be a non-empty string")
+        elif isinstance(schema_fields, list) and stable_field not in schema_fields:
+            errors.append("source_schema.stable_id_field is absent from source_schema.fields")
+
+    build_inputs = metadata.get("build_inputs")
+    if not isinstance(build_inputs, dict):
+        errors.append("build_inputs is missing or invalid")
+    else:
+        for key in ("generation_config_sha256", "regions_config_sha256"):
+            value = build_inputs.get(key)
+            if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
+                errors.append(f"build_inputs.{key} must be a SHA-256 hex digest")
+
     source_meta = metadata.get("source")
     if not isinstance(source_meta, dict):
         errors.append("countries.json must contain source provenance")
