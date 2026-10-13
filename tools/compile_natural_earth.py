@@ -7,6 +7,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -114,12 +115,18 @@ def load_config(path: Path) -> dict[str, Any]:
 
 
 def iso_candidate(attrs: dict[str, Any], fields: list[str]) -> str | None:
+    """Return a source-provided ISO alpha-3 candidate, never a Natural Earth ID."""
     for field in fields:
         value = attrs.get(field)
-        if value is not None:
-            value = str(value).strip()
-            if value not in INVALID_IDENTIFIERS:
-                return value
+        if value is None:
+            continue
+        value = str(value).strip().upper()
+        if value in INVALID_IDENTIFIERS:
+            continue
+        # Do not label arbitrary source identifiers as ISO codes merely because
+        # they are non-empty. ISO alpha-3 candidates must have exactly 3 letters.
+        if re.fullmatch(r"[A-Z]{3}", value):
+            return value
     return None
 
 
@@ -213,6 +220,10 @@ def compile_data(source: Path, output: Path, config_path: Path, regions_path: Pa
         "count": len(countries),
         "countries": countries,
         "aliases": alias_config,
+        "region_audit": {
+            "unmapped_count": sum(not country["regions"] for country in countries),
+            "unmapped_ids": sorted(country["id"] for country in countries if not country["regions"]),
+        },
     }
     country_bytes = (json.dumps(metadata, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
     generated_files: dict[str, bytes] = {"countries.json": country_bytes}
