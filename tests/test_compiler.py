@@ -160,6 +160,38 @@ def test_iso_candidate_rejects_non_iso_source_identifiers():
     assert iso_candidate({"ISO_A3": "ABC1"}, ["ISO_A3"]) is None
 
 
+def test_compiler_keeps_admin_id_separate_from_iso3(tmp_path):
+    base = tmp_path / "identity-fixture"
+    with shapefile.Writer(str(base), shapeType=shapefile.POLYGON) as writer:
+        writer.field("ADM0_A3", "C", size=8)
+        writer.field("ISO_A3", "C", size=8)
+        writer.field("ADMIN", "C", size=40)
+        writer.field("REGION_UN", "C", size=40)
+        writer.field("SUBREGION", "C", size=40)
+        writer.poly([[(0, 0), (0, 1), (1, 1), (1, 0), (0, 0)]])
+        writer.record("SDS", "SSD", "South Sudan", "Africa", "Eastern Africa")
+        writer.poly([[(2, 0), (2, 1), (3, 1), (3, 0), (2, 0)]])
+        writer.record("KOS", "-99", "Kosovo", "Europe", "Southern Europe")
+    config, regions = write_config(tmp_path)
+    config_data = json.loads(config.read_text())
+    config_data["iso3_fields"] = ["ISO_A3"]
+    config_data["region_field"] = "SUBREGION"
+    config.write_text(json.dumps(config_data))
+    region_data = json.loads(regions.read_text())
+    region_data["regions"] = {
+        "Africa": ["Eastern Africa"],
+        "Europe": ["Southern Europe"],
+    }
+    regions.write_text(json.dumps(region_data))
+
+    result = compile_data(base.with_suffix(".shp"), tmp_path / "out", config, regions)
+    south_sudan, kosovo = result["countries"]
+    assert south_sudan["id"] == "SDS"
+    assert south_sudan["iso3"] == "SSD"
+    assert kosovo["id"] == "KOS"
+    assert kosovo["iso3"] is None
+
+
 def test_americas_subregions_are_classified(tmp_path):
     source = make_fixture(tmp_path)
     config, regions = write_config(tmp_path)
