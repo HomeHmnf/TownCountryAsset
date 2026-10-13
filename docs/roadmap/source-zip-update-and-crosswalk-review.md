@@ -1,6 +1,6 @@
 # Source ZIP evolution and country-catalog review plan
 
-**Status:** Contract and review plan; no generated assets or game data changed.  
+**Status:** Review plan plus implemented compiler ID/schema safeguards and snapshot-comparison tool; local tests pending. No generated assets or game data changed.  
 **Branch:** `work/compiler-hardening`
 
 ## Goal
@@ -18,7 +18,11 @@ Keep the asset project maintainable when a newer Natural Earth database ZIP repl
    uv run python tools/audit_generated_assets.py --data generated/town_country_asset_candidate --source /path/to/new_ne_50m_admin_0_countries.zip
    uv run python tools/generate_country_svgs.py --data generated/town_country_asset_candidate --output generated/town_country_asset_candidate/svg
    ```
-5. Run `uv run pytest -v`. Compare old and candidate metadata, source attributes, IDs, ISO candidates, regions, geometry keys, SVG counts, and manifest hashes. Review all added, removed, renamed, split, merged, or re-keyed features.
+5. Run `uv run pytest -v`. Then compare the approved snapshot with the candidate:
+   ```fish
+   uv run python tools/compare_asset_snapshots.py --old generated/town_country_asset --new generated/town_country_asset_candidate --output reports/source-update-comparison.md
+   ```
+   The report includes source/schema/config changes, added/removed IDs, possible rekeys inferred from unique shared ISO candidates, changed source attributes/names/regions, and per-feature geometry changes. Review all added, removed, renamed, split, merged, or re-keyed features. It does not approve mappings automatically.
 6. Re-run `tools/audit_game_country_crosswalk.py` against the candidate output and the game checkout. Review every changed candidate and every newly unmatched label. The crosswalk is a proposal, not permission to change game identity.
 7. Promote the candidate only after review and successful tests/audits. Keep the previous source ZIP and output snapshot available for rollback.
 
