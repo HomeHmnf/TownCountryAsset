@@ -1,6 +1,6 @@
 # Feature Work: Country Identity and Geographic Metadata Hardening
 
-**Status:** Asset compiler and generated snapshot validated locally; game crosswalk audit tool committed and awaiting local report review.  
+**Status:** Asset compiler and generated snapshot validated locally; crosswalk audit reviewed at summary level; explicit mapping review remains in progress.  
 **Target branch:** `work/compiler-hardening`  
 **Scope:** Offline Natural Earth compiler, generated asset contract, and later game crosswalk. Do not change gameplay catalogs or runtime identity semantics until the asset contract is reviewed.
 
@@ -40,11 +40,15 @@ Natural Earth source IDs, ISO 3166-1 codes, names, and regions are distinct conc
 - Do not hand-edit generated metadata in a way that leaves geometry keys or checksums inconsistent.
 
 ### 5. Compare game data and prepare a reviewed crosswalk
-**Implementation status:** Read-only audit tool and tests committed; local report not yet reviewed.
+**Implementation status:** Read-only audit tool and tests committed; local report reviewed at summary level; no game data changed.
 - `tools/audit_game_country_crosswalk.py` reads the generated asset metadata and game JSON catalogs, color-map labels, map question answers/choices, flag tiers/translations, general-information country entries, and existing aliases.
 - It produces Markdown and JSON reports under `reports/country-crosswalk-audit/`.
 - Candidate links are derived only through exact normalized text bridged by the game's existing English-to-Persian flag translation. They are suggestions, not approved mappings.
 - Report missing, ambiguous, duplicate, and one-to-many candidates for human review.
+- Latest local validation: `uv run pytest -v` passed 20 tests; audit found 242 asset records, 241 regional catalog entries, 175 single-candidate country-catalog labels, 66 unmatched country-catalog labels, and no ambiguous country-catalog labels.
+- Latest regional catalog/color-map differences: America has catalog-only label `دومینیکن`; Africa has nine catalog-only labels: `اسواتینی`, `جزایر قناری`, `جزایر مایوت`, `جمهوری دموکراتیک عربی صحرا`, `جمهوری دموکراتیک کنگو`, `جمهوری کنگو`, `سبته`, `مادیرا`, and `ملیلیه`. Asia and Europe have no catalog/color-map label differences.
+- The report found zero question answers absent from their region's catalog; this is only a structural consistency check, not proof that the answers resolve to valid/selectable entities.
+- Next: review the 66 unmatched catalog labels and all proposed single-candidate IDs in small batches, checking source attributes, ISO assignment, region, and whether each game entry is a sovereign state, territory, dependency, constituent country, or disputed entity. Resolve the America/Africa color-map discrepancies separately.
 - Do not rewrite game content or merge entities based on name similarity alone.
 - Preserve existing legacy catalog behavior until each discrepancy is reviewed.
 - Keep Iran's province/city content separate from the Natural Earth country crosswalk.
