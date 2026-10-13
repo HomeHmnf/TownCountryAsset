@@ -7,13 +7,18 @@
   "retrieval_date": null,
   "attribution": "Made with Natural Earth",
   "license": "Public domain",
-  "iso3_fields": ["ADM0_A3", "ISO_A3"],
-  "name_fields": ["ADMIN", "NAME"],
+  "iso3_fields": [
+    "ISO_A3"
+  ],
+  "name_fields": [
+    "ADMIN",
+    "NAME"
+  ],
   "stable_id_field": "ADM0_A3",
   "geometry_profiles": {
     "low": 0.08,
     "medium": 0.02,
     "high": 0.002
   },
-  "region_field": "REGION_UN"
+  "region_field": "SUBREGION"
 }
