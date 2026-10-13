@@ -18,6 +18,9 @@ def make_assets(tmp_path: Path) -> Path:
         "schema_version": 1,
         "count": 2,
         "source": {"archive_sha256": "a" * 64},
+        "source_schema": {"fields": ["ADM0_A3", "ISO_A3", "ADMIN"], "stable_id_field": "ADM0_A3",
+                          "missing_configured_iso_fields": [], "missing_configured_name_fields": []},
+        "build_inputs": {"generation_config_sha256": "b" * 64, "regions_config_sha256": "c" * 64},
         "countries": [
             {"id": "JPN", "iso3": "JPN", "name": "Japan", "regions": ["Asia"], "source_attributes": {}},
             {"id": "KOS", "iso3": None, "name": "Kosovo", "regions": [], "source_attributes": {}},
@@ -37,6 +40,8 @@ def make_assets(tmp_path: Path) -> Path:
             for name, content in sorted(files.items())
         },
         "source": metadata["source"],
+        "source_schema": metadata["source_schema"],
+        "build_inputs": metadata["build_inputs"],
     }
     write_json(data_dir / "manifest.json", manifest)
     return data_dir
