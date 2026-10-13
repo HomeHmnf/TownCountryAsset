@@ -129,6 +129,12 @@ def audit_generated_assets(data_dir: Path, source: Path | None = None) -> list[s
             if not isinstance(value, str) or not re.fullmatch(r"[0-9a-f]{64}", value):
                 errors.append(f"build_inputs.{key} must be a SHA-256 hex digest")
 
+    if isinstance(manifest, dict):
+        if manifest.get("source_schema") != metadata.get("source_schema"):
+            errors.append("manifest source_schema does not match countries.json")
+        if manifest.get("build_inputs") != metadata.get("build_inputs"):
+            errors.append("manifest build_inputs does not match countries.json")
+
     source_meta = metadata.get("source")
     if not isinstance(source_meta, dict):
         errors.append("countries.json must contain source provenance")
