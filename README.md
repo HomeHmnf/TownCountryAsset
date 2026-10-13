@@ -55,6 +55,7 @@ The compiler accepts a local Natural Earth Admin 0 Countries 1:50m ZIP, shapefil
 
 ```fish
 uv run pytest -v
+uv run python tools/audit_generated_assets.py --data generated/town_country_asset --source /path/to/ne_50m_admin_0_countries.zip
 uv run python --version
 uv run python -c 'import shapely, shapefile; print("Shapely", shapely.__version__); print("pyshp", shapefile.__version__)'
 ```
@@ -84,6 +85,7 @@ SVG is a visual preview, not a cartographic projection suitable for area or dist
 ## Validation and limitations
 
 - Compiler tests validate source attributes, ISO/source-ID separation, missing and malformed ISO candidates, aliases, holes, stable IDs, region classification/audit output, deterministic outputs, manifest checksums, simplification validity, unsafe ZIP rejection, ambiguous shapefile rejection, and source archive checksums.
+- `tools/audit_generated_assets.py` checks country ID uniqueness, ISO candidate syntax, geometry-key coverage across low/medium/high profiles, region-audit consistency, generated-file hashes/sizes, and (when `--source` is provided) the local source ZIP checksum. It reports unmapped regions for review; it does not silently assign them.
 - SVG tests validate well-formed XML, the 512×512 viewBox, polygon holes, multipart geometry, unsupported/empty geometry rejection, and output across low/medium/high profiles.
 - A Godot runtime fixture test is provided at `tests/godot/test_country_assets.gd`. Run it from the consuming Godot project with `godot --headless --path . --script tests/godot/test_country_assets.gd`; the project must have the addon available and its `CountryAssets` global class registered.
 - The current detail profiles are separate geometry files so the runtime can load only the desired profile. Avoid loading all profiles at startup on memory-constrained devices.
