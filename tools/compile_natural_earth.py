@@ -111,6 +111,9 @@ def load_config(path: Path) -> dict[str, Any]:
     for field in ("iso3_fields", "name_fields"):
         if not isinstance(config.get(field), list):
             raise ValueError(f"Config must define {field} as a list")
+    stable_id_field = config.get("stable_id_field")
+    if not isinstance(stable_id_field, str) or not stable_id_field.strip():
+        raise ValueError("Config must define stable_id_field as a non-empty source field name")
     return config
 
 
@@ -147,10 +150,24 @@ def _source_provenance(source: Path, config: dict[str, Any]) -> dict[str, Any]:
 def compile_data(source: Path, output: Path, config_path: Path, regions_path: Path) -> dict[str, Any]:
     config = load_config(config_path)
     region_config = json.loads(regions_path.read_text(encoding="utf-8"))
+    config_bytes = config_path.read_bytes()
+    regions_bytes = regions_path.read_bytes()
+    config_sha256 = hashlib.sha256(config_bytes).hexdigest()
+    regions_sha256 = hashlib.sha256(regions_bytes).hexdigest()
     shp_path = locate_shapefile(source)
     reader = shapefile.Reader(str(shp_path), encoding=config.get("encoding", "utf-8"))
     try:
         fields = [field[0] for field in reader.fields[1:]]
+        stable_id_field = config["stable_id_field"]
+        if stable_id_field not in fields:
+            raise ValueError(
+                f"Configured stable_id_field {stable_id_field!r} is absent from source schema; "
+                f"available fields: {', '.join(fields)}"
+            )
+        missing_iso_fields = [field for field in config["iso3_fields"] if field not in fields]
+        missing_name_fields = [field for field in config["name_fields"] if field not in fields]
+        # ISO/name field fallback lists are allowed to be partially absent across source versions,
+        # but report them explicitly in the generated metadata for review.
         countries: list[dict[str, Any]] = []
         seen_ids: set[str] = set()
         geometry_by_profile = {name: {} for name in config["geometry_profiles"]}
@@ -166,16 +183,18 @@ def compile_data(source: Path, output: Path, config_path: Path, regions_path: Pa
             if not original.is_valid:
                 raise ValueError(f"Invalid source geometry at feature {index}: {explain_validity(original)}")
 
-            raw_id = attrs.get(config.get("stable_id_field", ""))
+            raw_id = attrs.get(stable_id_field)
             internal_id = str(raw_id).strip() if raw_id is not None else ""
             if internal_id in INVALID_IDENTIFIERS:
-                internal_id = f"feature-{index:04d}"
+                raise ValueError(
+                    f"Feature {index} has no usable value for configured stable_id_field "
+                    f"{stable_id_field!r}: {raw_id!r}; refusing to create an order-dependent ID"
+                )
             if internal_id in seen_ids:
-                base_id = internal_id
-                suffix = 1
-                while f"{base_id}#{suffix:04d}" in seen_ids:
-                    suffix += 1
-                internal_id = f"{base_id}#{suffix:04d}"
+                raise ValueError(
+                    f"Duplicate value {internal_id!r} in configured stable_id_field "
+                    f"{stable_id_field!r} at feature {index}; source IDs must be unique"
+                )
             seen_ids.add(internal_id)
 
             iso = iso_candidate(attrs, config["iso3_fields"])
@@ -217,6 +236,16 @@ def compile_data(source: Path, output: Path, config_path: Path, regions_path: Pa
     metadata = {
         "schema_version": SCHEMA_VERSION,
         "source": _source_provenance(source, config),
+        "source_schema": {
+            "fields": fields,
+            "stable_id_field": config["stable_id_field"],
+            "missing_configured_iso_fields": missing_iso_fields,
+            "missing_configured_name_fields": missing_name_fields,
+        },
+        "build_inputs": {
+            "generation_config_sha256": config_sha256,
+            "regions_config_sha256": regions_sha256,
+        },
         "count": len(countries),
         "countries": countries,
         "aliases": alias_config,
@@ -242,6 +271,8 @@ def compile_data(source: Path, output: Path, config_path: Path, regions_path: Pa
             for filename, data in sorted(generated_files.items())
         },
         "source": metadata["source"],
+        "source_schema": metadata["source_schema"],
+        "build_inputs": metadata["build_inputs"],
     }
     (output / "manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n",
