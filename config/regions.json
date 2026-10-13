@@ -1,18 +1,61 @@
 {
   "schema_version": 1,
   "regions": {
-    "Africa": ["Africa"],
-    "Asia": ["Asia"],
-    "Europe": ["Europe"],
-    "North America": ["North America"],
-    "South America": ["South America"],
-    "Oceania": ["Oceania"],
-    "Antarctica": ["Antarctica"]
+    "Africa": [
+      "Africa",
+      "Eastern Africa",
+      "Western Africa",
+      "Northern Africa",
+      "Southern Africa",
+      "Middle Africa"
+    ],
+    "Asia": [
+      "Western Asia",
+      "Central Asia",
+      "South-Eastern Asia",
+      "Eastern Asia",
+      "Southern Asia"
+    ],
+    "Europe": [
+      "Southern Europe",
+      "Northern Europe",
+      "Eastern Europe",
+      "Western Europe"
+    ],
+    "North America": [
+      "Northern America",
+      "Central America",
+      "Caribbean"
+    ],
+    "South America": [
+      "South America"
+    ],
+    "Oceania": [
+      "Australia and New Zealand",
+      "Melanesia",
+      "Micronesia",
+      "Polynesia"
+    ],
+    "Antarctica": [
+      "Antarctica"
+    ]
   },
   "aliases": {
-    "USA": ["United States of America", "United States"],
-    "GBR": ["United Kingdom", "UK"],
-    "KOR": ["South Korea", "Republic of Korea"],
-    "PRK": ["North Korea", "Democratic People's Republic of Korea"]
+    "USA": [
+      "United States of America",
+      "United States"
+    ],
+    "GBR": [
+      "United Kingdom",
+      "UK"
+    ],
+    "KOR": [
+      "South Korea",
+      "Republic of Korea"
+    ],
+    "PRK": [
+      "North Korea",
+      "Democratic People's Republic of Korea"
+    ]
   }
 }
