@@ -1,6 +1,6 @@
 # Feature Work: Country Identity and Geographic Metadata Hardening
 
-**Status:** Asset compiler and generated snapshot validated locally; crosswalk audit reviewed at summary level; explicit mapping review remains in progress.  
+**Status:** Source-ID/schema safeguards and snapshot comparison are implemented on the work branch; local verification is pending after pull. Crosswalk audit reviewed at summary level; explicit mapping review remains in progress.  
 **Target branch:** `work/compiler-hardening`  
 **Scope:** Offline Natural Earth compiler, generated asset contract, and later game crosswalk. Do not change gameplay catalogs or runtime identity semantics until the asset contract is reviewed.
 
@@ -16,6 +16,8 @@ Natural Earth source IDs, ISO 3166-1 codes, names, and regions are distinct conc
 - Treat `id`/source ID and `iso3` as separate concepts. Never fall back from an ISO field to `ADM0_A3` when populating `iso3`.
 - Normalize Natural Earth sentinel values such as `-99` to null.
 - Regression coverage includes administrative IDs that differ from ISO codes and records without an applicable ISO candidate.
+- The configured stable-ID field must exist in the source schema, and every feature must have a usable, unique value. Missing fields, sentinel IDs, and duplicate IDs fail with a clear error; no feature-order fallback or automatic suffixing is allowed.
+- Generated metadata and manifest record source field names, the stable-ID field, missing configured name/ISO fields, and SHA-256 fingerprints of the generation and region configuration files.
 - A syntactically valid three-letter string is not, by itself, proof of ISO validity.
 
 ### 2. Fix continent/region classification
@@ -31,10 +33,11 @@ Natural Earth source IDs, ISO 3166-1 codes, names, and regions are distinct conc
 - Keep builds deterministic and do not add generation timestamps to output JSON.
 - Do not guess a release/date from generated files.
 
-### 4. Regenerate and audit generated data
+### 4. Regenerate, compare, and audit generated data
 **Implementation status:** Regenerated locally and audit passed.
 - The user ran the compiler against the verified ZIP and compiled 242 features.
-- `tools/audit_generated_assets.py` passed against the generated data and source ZIP.
+- `tools/audit_generated_assets.py` passed against the generated data and source ZIP before the new source-schema contract was added; rerun it after pulling the latest commits.
+- `tools/compare_asset_snapshots.py` now compares a known-good snapshot with a candidate and reports source archive/schema/config changes, added/removed IDs, possible rekeys inferred from unique ISO candidates, metadata changes, and per-feature geometry changes. These are review signals, not approved identity changes.
 - All three SVG profiles were generated: 726 SVG files total.
 - Local test result: 18 tests passed before the game-crosswalk audit tests were added. Re-run the suite after pulling the latest audit-tool commits.
 - Do not hand-edit generated metadata in a way that leaves geometry keys or checksums inconsistent.
@@ -59,7 +62,8 @@ Natural Earth source IDs, ISO 3166-1 codes, names, and regions are distinct conc
 - `iso3` contains only values from configured ISO candidate field(s), with sentinel values normalized to null; it is never populated from `ADM0_A3` as a fallback.
 - Region mapping is explicit, tested, and unmapped exceptions are reported.
 - The manifest records the source archive hash and, for release builds, the actual source version and retrieval date.
-- Compiler tests, generated-data audit, and SVG generation pass before runtime/catalog changes.
+- Compiler tests cover missing/invalid/duplicate stable IDs and provenance fingerprints; snapshot comparison tests cover added/removed IDs, possible rekeys, metadata changes, and duplicate-ID rejection. These tests have been committed but still require a local run after pull.
+- Compiler tests, generated-data audit, snapshot comparison, and SVG generation must pass before runtime/catalog changes.
 - Every game crosswalk entry has a review status; unresolved or ambiguous mappings remain explicit.
 - Existing GDScript interfaces, Persian UI, legacy SVG hit-testing, and save data remain compatible during migration.
 
