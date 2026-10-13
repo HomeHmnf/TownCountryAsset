@@ -98,10 +98,18 @@ def audit(asset_data: Path, game_root: Path) -> dict[str, Any]:
         catalog={norm(x):x for x in data[cf]}
         color={norm(v[0]):v[0] for v in data[mf].values() if isinstance(v,list) and v and isinstance(v[0],str)}
         answers=[q.get("answer") for q in data[qf] if isinstance(q,dict) and isinstance(q.get("answer"),str)]
+        catalog_candidates=[]
+        for normalized,label in sorted(catalog.items()):
+            ids=sorted(fa_to_ids.get(normalized,set()))
+            catalog_candidates.append({"label":label,"asset_source_id_candidates":ids,
+                "match_status":"ambiguous_candidate" if len(ids)>1 else "candidate_needs_review" if ids else "unmatched"})
         region_audits[region]={"catalog_entries":len(data[cf]),"color_map_entries":len(data[mf]),
             "question_count":len(data[qf]),"catalog_labels_missing_from_color_map":sorted(catalog[n] for n in catalog.keys()-color.keys()),
             "color_map_labels_missing_from_catalog":sorted(color[n] for n in color.keys()-catalog.keys()),
-            "question_answers_missing_from_catalog":sorted({a for a in answers if norm(a) not in catalog})}
+            "question_answers_missing_from_catalog":sorted({a for a in answers if norm(a) not in catalog}),
+            "country_catalog_candidate_matches":catalog_candidates,
+            "country_catalog_unmatched_labels":[row["label"] for row in catalog_candidates if row["match_status"]=="unmatched"],
+            "country_catalog_ambiguous_labels":[row["label"] for row in catalog_candidates if row["match_status"]=="ambiguous_candidate"]}
     name_ids=defaultdict(set)
     for country in countries:
         attrs=country.get("source_attributes",{})
@@ -114,7 +122,11 @@ def audit(asset_data: Path, game_root: Path) -> dict[str, Any]:
       "game_labels":game_rows,"region_audits":region_audits,"duplicate_asset_name_candidates":duplicate_names,
       "summary":{"matched_candidate_labels":sum(r["match_status"]=="candidate_needs_review" for r in game_rows),
        "ambiguous_candidate_labels":sum(r["match_status"]=="ambiguous_candidate" for r in game_rows),
-       "unmatched_game_labels":sum(r["match_status"]=="unmatched" for r in game_rows),
+       "unmatched_game_labels_all_sources":sum(r["match_status"]=="unmatched" for r in game_rows),
+       "country_catalog_labels_total":sum(v["catalog_entries"] for v in region_audits.values()),
+       "country_catalog_labels_with_single_candidate":sum(row["match_status"]=="candidate_needs_review" for v in region_audits.values() for row in v["country_catalog_candidate_matches"]),
+       "country_catalog_labels_unmatched":sum(len(v["country_catalog_unmatched_labels"]) for v in region_audits.values()),
+       "country_catalog_labels_ambiguous":sum(len(v["country_catalog_ambiguous_labels"]) for v in region_audits.values()),
        "region_catalogs_with_catalog_color_differences":sum(bool(v["catalog_labels_missing_from_color_map"] or v["color_map_labels_missing_from_catalog"]) for v in region_audits.values()),
        "regions_with_question_answers_missing_from_catalog":sum(bool(v["question_answers_missing_from_catalog"]) for v in region_audits.values()),
        "warning":"All proposed matches require human review. Source IDs are not approved game country IDs; ISO syntax alone does not verify an ISO assignment."}}
@@ -123,13 +135,27 @@ def markdown(r: dict[str,Any]) -> str:
     s=r["summary"]; lines=["# Game country crosswalk audit","","Read-only report. Candidate matches are not approved mappings.","",
       "## Summary","",f"- Asset records: {r['asset_country_count']}",f"- Distinct normalized game labels: {r['game_label_count']}",
       f"- Single-candidate labels requiring review: {s['matched_candidate_labels']}",f"- Ambiguous candidate labels: {s['ambiguous_candidate_labels']}",
-      f"- Unmatched labels: {s['unmatched_game_labels']}",f"- Regions with catalog/color-map differences: {s['region_catalogs_with_catalog_color_differences']}",
+      f"- Unmatched labels across all collected game text (includes quiz text, aliases, capitals, and other labels): {s['unmatched_game_labels_all_sources']}",
+      f"- Regional country-catalog labels: {s['country_catalog_labels_total']}",
+      f"- Country-catalog labels with a single candidate requiring review: {s['country_catalog_labels_with_single_candidate']}",
+      f"- Country-catalog labels unmatched by the current bridge: {s['country_catalog_labels_unmatched']}",
+      f"- Country-catalog labels with ambiguous candidates: {s['country_catalog_labels_ambiguous']}",
+      f"- Regions with catalog/color-map differences: {s['region_catalogs_with_catalog_color_differences']}",
       f"- Regions with question answers absent from catalog: {s['regions_with_question_answers_missing_from_catalog']}","",
       f"Warning: {s['warning']}","","## Per-region checks","","| Region | Catalog | Color map | Questions | Catalog labels absent from map | Map labels absent from catalog | Answers absent from catalog |",
       "|---|---:|---:|---:|---:|---:|---:|"]
     for region,v in r["region_audits"].items():
         lines.append(f"| {region} | {v['catalog_entries']} | {v['color_map_entries']} | {v['question_count']} | {len(v['catalog_labels_missing_from_color_map'])} | {len(v['color_map_labels_missing_from_catalog'])} | {len(v['question_answers_missing_from_catalog'])} |")
-    lines += ["","## Unmatched and ambiguous labels",""]
+    lines += ["","## Exact regional country-catalog/color-map differences",""]
+    for region,v in r["region_audits"].items():
+        lines.append(f"### {region.title()}")
+        lines.append(f"- Country catalog labels absent from color map: {', '.join(v['catalog_labels_missing_from_color_map']) or 'none'}")
+        lines.append(f"- Color-map labels absent from country catalog: {', '.join(v['color_map_labels_missing_from_catalog']) or 'none'}")
+        lines.append(f"- Unmatched country-catalog labels: {', '.join(v['country_catalog_unmatched_labels']) or 'none'}")
+        lines.append(f"- Ambiguous country-catalog labels: {', '.join(v['country_catalog_ambiguous_labels']) or 'none'}")
+        lines.append("")
+    lines += ["## Unmatched and ambiguous labels across all game text","",
+      "This section includes quiz choices/answers, aliases, capitals, translations, and map labels; an unmatched item is not necessarily a country.",""]
     for row in r["game_labels"]:
         if row["match_status"] in ("unmatched","ambiguous_candidate"):
             lines.append(f"- {', '.join(row['labels'])} ({', '.join(row['regions']) or 'global'}): {row['match_status']}; candidate source IDs: {', '.join(row['asset_source_id_candidates']) or 'none'}")
