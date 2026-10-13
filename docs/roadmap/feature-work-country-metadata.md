@@ -1,6 +1,6 @@
 # Feature Work: Country Identity and Geographic Metadata Hardening
 
-**Status:** Planned / in progress  
+**Status:** In progress  
 **Target branch:** `work/compiler-hardening`  
 **Scope:** Offline Natural Earth compiler, generated asset contract, and later game crosswalk. Do not change gameplay catalogs or runtime identity semantics until the asset contract is reviewed.
 
@@ -11,6 +11,7 @@ The current generated snapshot contains 242 records and unique internal IDs, but
 ## Work items
 
 ### 1. Separate source identity from ISO identity
+**Implementation status:** Compiler/config changes committed; regression tests added, awaiting local test run and regenerated-data verification.
 - Keep the stable internal `id` based on the configured Natural Earth stable-ID field so geometry keys remain compatible.
 - Treat `id`/source ID and `iso3` as separate concepts. Never fall back from an ISO field to `ADM0_A3` when populating `iso3`.
 - Normalize Natural Earth sentinel values such as `-99` to null.
@@ -18,18 +19,21 @@ The current generated snapshot contains 242 records and unique internal IDs, but
 - Document that a syntactically valid three-letter string is not, by itself, proof of ISO validity. Any future use of alternate fields must be supported by an explicit field-semantics review.
 
 ### 2. Fix continent/region classification
+**Implementation status:** Compiler now maps configured subregions and emits a `region_audit` with unmapped IDs; regression coverage added. Existing generated files still need a reproducible rebuild.
 - Use the source's continent/subregion attributes rather than trying to split the single `REGION_UN=Americas` value.
 - Map Natural Earth `SUBREGION` values to the project's `North America` and `South America` groupings; include Caribbean and Central America in North America for the current continent-based game grouping.
 - Identify and explicitly review exceptional records whose source subregion does not fit these mappings (notably `Seven seas (open ocean)` records). Do not silently guess a region.
 - Add tests proving that ordinary Americas records receive a region and that unmapped exceptions are visible/auditable.
 
 ### 3. Make source provenance reproducible
+**Implementation status:** Pending source archive/acquisition metadata; values remain null rather than guessed.
 - Record the exact Natural Earth release/version and the date the source archive was retrieved in `config/generation.json` before publishing a regenerated asset set.
 - Preserve the source archive SHA-256 in the manifest.
 - Keep builds deterministic: do not add generation timestamps to output JSON.
 - Do not guess a release/date from the current generated files; obtain these values from the actual source archive or acquisition record.
 
 ### 4. Regenerate and audit generated data
+**Implementation status:** Blocked on obtaining the source archive with provenance. Do not treat the committed generated snapshot as updated by the compiler changes.
 - Regenerate `countries.json`, geometry profiles, and manifest from the reviewed source archive after compiler/config changes.
 - Verify unique internal IDs, geometry keys matching metadata IDs, ISO candidate behavior, region assignment, deterministic checksums, and manifest provenance.
 - Do not hand-edit generated metadata in a way that leaves geometry keys or checksums inconsistent.
