@@ -35,3 +35,7 @@ The reports are local generated outputs; do not commit them automatically. Inspe
 - Catalog keys, color-map labels, and question answers are audited separately. A question answer must resolve to an entity selectable on its map; catalog presence alone does not prove selectability.
 - Iran's province/city dataset is local administrative content and is intentionally excluded from the Natural Earth country crosswalk.
 - The script is read-only. It must not modify game catalogs, flag data, save data, or runtime GDScript.
+
+## Reporting refinement
+
+The audit distinguishes the count of unmatched labels across all collected game text from the much narrower regional country catalogs. The broad label inventory includes quiz choices and answers, capitals, aliases, translations, and map labels; unmatched broad labels must not be interpreted as missing countries. Each regional section now lists its exact catalog/color-map label differences and reports country-catalog candidate, unmatched, and ambiguous labels separately.
