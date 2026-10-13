@@ -45,4 +45,8 @@ def test_audit_proposes_review_only_candidate_and_reports_catalog_mismatch(tmp_p
     assert japan["match_status"] == "candidate_needs_review"
     assert report["region_audits"]["asia"]["color_map_labels_missing_from_catalog"] == ["نام ناشناخته"]
     assert report["region_audits"]["asia"]["question_answers_missing_from_catalog"] == ["نام ناشناخته"]
+    assert report["region_audits"]["asia"]["country_catalog_unmatched_labels"] == []
+    assert report["summary"]["country_catalog_labels_total"] == 4
+    assert report["summary"]["country_catalog_labels_with_single_candidate"] == 4
+    assert report["summary"]["unmatched_game_labels_all_sources"] > 0
     assert report["asset_countries"][0]["review_status"] == "needs_human_review"
