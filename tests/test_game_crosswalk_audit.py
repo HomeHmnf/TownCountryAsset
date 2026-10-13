@@ -43,6 +43,6 @@ def test_audit_proposes_review_only_candidate_and_reports_catalog_mismatch(tmp_p
     japan = next(row for row in report["game_labels"] if "ژاپن" in row["labels"])
     assert japan["asset_source_id_candidates"] == ["JPN"]
     assert japan["match_status"] == "candidate_needs_review"
-    assert report["region_audits"]["asia"]["color_map_labels_missing_from_catalog"] == ["نامناشناخته"]
+    assert report["region_audits"]["asia"]["color_map_labels_missing_from_catalog"] == ["نام ناشناخته"]
     assert report["region_audits"]["asia"]["question_answers_missing_from_catalog"] == ["نام ناشناخته"]
     assert report["asset_countries"][0]["review_status"] == "needs_human_review"
