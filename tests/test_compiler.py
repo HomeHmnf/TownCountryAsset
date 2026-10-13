@@ -21,9 +21,9 @@ def make_fixture(tmp_path: Path) -> Path:
                      [(2, 2), (8, 2), (8, 8), (2, 8), (2, 2)]])
         writer.record("TST", "TST", "Testland", "Asia", "Eastern Asia")
         writer.poly([[(20, 0), (20, 1), (21, 1), (21, 0), (20, 0)]])
-        writer.record("-99", "-99", "Islandia", "Oceania", "Australia and New Zealand")
+        writer.record("ISL", "-99", "Islandia", "Oceania", "Australia and New Zealand")
         writer.poly([[(30, 0), (30, 1), (31, 1), (31, 0), (30, 0)]])
-        writer.record("TST", "TST", "Duplicate ID", "Asia", "Eastern Asia")
+        writer.record("DUP", "DUP", "Distinct ID", "Asia", "Eastern Asia")
     return base.with_suffix(".shp")
 
 
@@ -60,8 +60,8 @@ def test_preserves_attributes_hole_missing_iso_and_aliases(tmp_path):
     high = json.loads((out / "geometry_high.json").read_text())
     assert len(high["geometries"]["TST"]["coordinates"]) == 2
     assert result["countries"][1]["iso3"] is None
-    assert result["countries"][1]["id"] == "feature-0001"
-    assert result["countries"][2]["id"] == "TST#0001"
+    assert result["countries"][1]["id"] == "ISL"
+    assert result["countries"][2]["id"] == "DUP"
 
 
 def test_output_files_and_manifest_checksums_are_deterministic(tmp_path):
@@ -230,3 +230,69 @@ def test_americas_subregions_are_classified_and_exceptions_are_reported(tmp_path
     assert by_id["BRA"]["regions"] == ["South America"]
     assert result["region_audit"]["unmapped_count"] == 1
     assert result["region_audit"]["unmapped_ids"] == ["SGS"]
+
+
+
+def test_missing_configured_stable_id_field_fails_explicitly(tmp_path):
+    source = make_fixture(tmp_path)
+    config, regions = write_config(tmp_path)
+    config_data = json.loads(config.read_text())
+    config_data["stable_id_field"] = "MISSING_ID"
+    config.write_text(json.dumps(config_data))
+
+    with pytest.raises(ValueError, match="stable_id_field.*absent from source schema"):
+        compile_data(source, tmp_path / "out", config, regions)
+
+
+def test_unusable_stable_id_fails_instead_of_using_feature_order(tmp_path):
+    source = make_fixture(tmp_path)
+    reader = shapefile.Reader(str(source))
+    fields = [field[0] for field in reader.fields[1:]]
+    records = [dict(zip(fields, record)) for record in reader.records()]
+    shapes = list(reader.iterShapes())
+    reader.close()
+    base = tmp_path / "invalid-id"
+    with shapefile.Writer(str(base), shapeType=shapefile.POLYGON) as writer:
+        for field in fields:
+            writer.field(field, "C", size=40)
+        for geom, record in zip(shapes, records):
+            writer.shape(geom)
+            writer.record(*[("-99" if field == "ADM0_A3" else record[field]) for field in fields])
+    config, regions = write_config(tmp_path)
+    with pytest.raises(ValueError, match="refusing to create an order-dependent ID"):
+        compile_data(base.with_suffix(".shp"), tmp_path / "out", config, regions)
+
+
+def test_duplicate_stable_ids_fail_instead_of_being_suffixed(tmp_path):
+    source = make_fixture(tmp_path)
+    reader = shapefile.Reader(str(source))
+    fields = [field[0] for field in reader.fields[1:]]
+    records = [dict(zip(fields, record)) for record in reader.records()]
+    shapes = list(reader.iterShapes())
+    reader.close()
+    records[2]["ADM0_A3"] = records[0]["ADM0_A3"]
+    base = tmp_path / "duplicate-id"
+    with shapefile.Writer(str(base), shapeType=shapefile.POLYGON) as writer:
+        for field in fields:
+            writer.field(field, "C", size=40)
+        for geom, record in zip(shapes, records):
+            writer.shape(geom)
+            writer.record(*[record[field] for field in fields])
+    config, regions = write_config(tmp_path)
+    with pytest.raises(ValueError, match="Duplicate value.*source IDs must be unique"):
+        compile_data(base.with_suffix(".shp"), tmp_path / "out", config, regions)
+
+
+def test_manifest_records_source_schema_and_config_hashes(tmp_path):
+    source = make_fixture(tmp_path)
+    config, regions = write_config(tmp_path)
+    out = tmp_path / "out"
+    compile_data(source, out, config, regions)
+    metadata = json.loads((out / "countries.json").read_text())
+    manifest = json.loads((out / "manifest.json").read_text())
+    assert metadata["source_schema"]["stable_id_field"] == "ADM0_A3"
+    assert "ADM0_A3" in metadata["source_schema"]["fields"]
+    assert metadata["build_inputs"]["generation_config_sha256"]
+    assert metadata["build_inputs"]["regions_config_sha256"]
+    assert manifest["source_schema"] == metadata["source_schema"]
+    assert manifest["build_inputs"] == metadata["build_inputs"]
