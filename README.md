@@ -77,17 +77,17 @@ var geometry = assets.get_geometry("JPN", "medium")
 var svg = assets.get_country_svg("JPN", "medium")
 ```
 
-Country lookup accepts the source ISO candidate, stable internal ID, normalized country name, or configured aliases. Geometry profiles are low/medium/high and are loaded lazily by the runtime. `get_country_svg()` produces a 512×512 fitted SVG string from the selected profile on demand. The optional offline SVG tool instead pre-generates SVG files, useful when static files are preferred or runtime path generation should be avoided.
+Country lookup accepts a source-provided ISO alpha-3 candidate, stable internal ID, normalized country name, or configured aliases. The stable internal ID is based on the configured Natural Earth identifier and is not necessarily an ISO code; do not treat it as one. Geometry profiles are low/medium/high and are loaded lazily by the runtime. `get_country_svg()` produces a 512×512 fitted SVG string from the selected profile on demand. The optional offline SVG tool instead pre-generates SVG files, useful when static files are preferred or runtime path generation should be avoided.
 
 SVG is a visual preview, not a cartographic projection suitable for area or distance analysis. Polygon holes use `fill-rule="evenodd"`. Antimeridian-crossing features may need a projection-aware renderer for ideal visual results.
 
 ## Validation and limitations
 
-- Compiler tests validate source attributes, missing ISO codes, aliases, holes, stable IDs, deterministic outputs, manifest checksums, simplification validity, unsafe ZIP rejection, ambiguous shapefile rejection, and source archive checksums.
+- Compiler tests validate source attributes, ISO/source-ID separation, missing and malformed ISO candidates, aliases, holes, stable IDs, region classification/audit output, deterministic outputs, manifest checksums, simplification validity, unsafe ZIP rejection, ambiguous shapefile rejection, and source archive checksums.
 - SVG tests validate well-formed XML, the 512×512 viewBox, polygon holes, multipart geometry, unsupported/empty geometry rejection, and output across low/medium/high profiles.
 - A Godot runtime fixture test is provided at `tests/godot/test_country_assets.gd`. Run it from the consuming Godot project with `godot --headless --path . --script tests/godot/test_country_assets.gd`; the project must have the addon available and its `CountryAssets` global class registered.
 - The current detail profiles are separate geometry files so the runtime can load only the desired profile. Avoid loading all profiles at startup on memory-constrained devices.
-- Region classifications and aliases are configurable and independent of original source attributes.
+- Region classifications and aliases are configurable and independent of original source attributes. The current compiler uses Natural Earth `SUBREGION` to map North America (including Central America and the Caribbean) and South America. Any records outside the configured mappings are listed in `region_audit.unmapped_ids`; review these rather than assigning a region by guesswork.
 
 ## Build provenance and determinism
 
