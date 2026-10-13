@@ -192,8 +192,25 @@ def test_compiler_keeps_admin_id_separate_from_iso3(tmp_path):
     assert kosovo["iso3"] is None
 
 
-def test_americas_subregions_are_classified(tmp_path):
-    source = make_fixture(tmp_path)
+def test_americas_subregions_are_classified_and_exceptions_are_reported(tmp_path):
+    base = tmp_path / "americas-fixture"
+    with shapefile.Writer(str(base), shapeType=shapefile.POLYGON) as writer:
+        writer.field("ADM0_A3", "C", size=8)
+        writer.field("ISO_A3", "C", size=8)
+        writer.field("ADMIN", "C", size=40)
+        writer.field("REGION_UN", "C", size=40)
+        writer.field("SUBREGION", "C", size=40)
+        for index, (admin_id, name, subregion) in enumerate([
+            ("CAN", "Canada", "Northern America"),
+            ("BLZ", "Belize", "Central America"),
+            ("JAM", "Jamaica", "Caribbean"),
+            ("BRA", "Brazil", "South America"),
+            ("SGS", "South Georgia", "Seven seas (open ocean)"),
+        ]):
+            x = index * 2
+            writer.poly([[(x, 0), (x, 1), (x + 1, 1), (x + 1, 0), (x, 0)]])
+            writer.record(admin_id, admin_id, name, "Americas", subregion)
+
     config, regions = write_config(tmp_path)
     config_data = json.loads(config.read_text())
     config_data["region_field"] = "SUBREGION"
@@ -202,10 +219,14 @@ def test_americas_subregions_are_classified(tmp_path):
     region_data["regions"] = {
         "North America": ["Northern America", "Central America", "Caribbean"],
         "South America": ["South America"],
-        "Asia": ["Eastern Asia"],
-        "Oceania": ["Australia and New Zealand"],
     }
     regions.write_text(json.dumps(region_data))
-    result = compile_data(source, tmp_path / "out", config, regions)
-    assert result["region_audit"]["unmapped_count"] == 0
-    assert result["region_audit"]["unmapped_ids"] == []
+
+    result = compile_data(base.with_suffix(".shp"), tmp_path / "out", config, regions)
+    by_id = {country["id"]: country for country in result["countries"]}
+    assert by_id["CAN"]["regions"] == ["North America"]
+    assert by_id["BLZ"]["regions"] == ["North America"]
+    assert by_id["JAM"]["regions"] == ["North America"]
+    assert by_id["BRA"]["regions"] == ["South America"]
+    assert result["region_audit"]["unmapped_count"] == 1
+    assert result["region_audit"]["unmapped_ids"] == ["SGS"]
