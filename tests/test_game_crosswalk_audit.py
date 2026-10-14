@@ -21,11 +21,17 @@ def test_audit_proposes_review_only_candidate_and_reports_catalog_mismatch(tmp_p
     asset.mkdir()
     gd.mkdir(parents=True)
     write_json(asset / "countries.json", {
-        "count": 1,
-        "countries": [{
-            "id": "JPN", "name": "Japan", "iso3": "JPN", "regions": ["Asia"],
-            "aliases": [], "source_attributes": {"ADMIN": "Japan", "NAME": "Japan", "NAME_LONG": "Japan"}
-        }]
+        "count": 2,
+        "countries": [
+            {
+                "id": "JPN", "name": "Japan", "iso3": "JPN", "regions": ["Asia"],
+                "aliases": [], "source_attributes": {"ADMIN": "Japan", "NAME": "Japan", "NAME_LONG": "Japan"}
+            },
+            {
+                "id": "FRA", "name": "France", "iso3": "FRA", "regions": ["Europe"],
+                "aliases": [], "source_attributes": {"ADMIN": "France", "NAME": "France", "NAME_LONG": "France"}
+            }
+        ]
     })
     for region, prefix in (("asia", "MapAsia"), ("europe", "MapEurope"),
                            ("america", "MapAmerica"), ("africa", "MapAfrica")):
