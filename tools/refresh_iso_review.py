@@ -49,7 +49,7 @@ def fetch_bytes(url: str = SOURCE_URL, timeout: float = 30.0) -> bytes:
     return payload
 
 
-def normalize_source(raw_bytes: bytes) -> tuple[str, int]:
+def normalize_source(raw_bytes: bytes, minimum_rows: int = 200) -> tuple[str, int]:
     """Convert upstream CSV to the proposal tool's strict uppercase schema."""
     try:
         text = raw_bytes.decode("utf-8-sig")
@@ -91,7 +91,7 @@ def normalize_source(raw_bytes: bytes) -> tuple[str, int]:
             {"alpha2": alpha2, "alpha3": alpha3, "english_name": name}
         )
         count += 1
-    if count < 200:
+    if count < minimum_rows:
         raise ValueError(
             f"Reference unexpectedly contains only {count} rows; refusing to use it"
         )
