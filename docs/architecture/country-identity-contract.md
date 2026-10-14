@@ -89,3 +89,16 @@ Before a registry can be considered usable, automated checks must establish that
 5. Validate the registry against the source and geometry outputs.
 6. Produce a separate legacy-game compatibility crosswalk keyed by `game_id`.
 7. Only after review, plan a compatibility-safe game migration for catalogs, maps, flags, questions, and saved progress.
+
+## ISO assignment proposal workflow
+
+The ISO proposal generator is intentionally separate from registry validation and never edits registry records:
+
+1. Obtain an ISO 3166-1 reference export from the ISO Online Browsing Platform / ISO Country Codes Collection. The ISO overview is https://www.iso.org/iso-3166-country-codes.html. Record the retrieval date and retain the original downloaded file.
+2. Prepare a UTF-8 CSV with columns `alpha2`, `alpha3`, and `english_name`, preserving the reference's official English short names and code values. Do not supplement the file with Natural Earth source IDs or user-assigned codes.
+3. Run `uv run python tools/propose_iso_assignments.py --reference data/iso/iso-3166-1.csv`.
+4. Review `reports/iso-assignment-proposals.md`. Exact normalized English-name matches are candidates only. Unmatched records and naming variants need separate evidence-backed review; fuzzy matching is intentionally not used.
+5. For each accepted proposal, record the authoritative source and retrieval date in the registry's evidence/provenance fields before changing any code or marking `assignment_status` as `verified`. Keep ISO fields null when no appropriate code exists. Do not change `game_id`.
+6. Re-run the registry audit and tests after any reviewed registry changes.
+
+The proposal generator never writes to `config/country_identity_registry.json`. A valid code and a name match do not by themselves prove that an entity belongs in ISO 3166-1 or that the assignment is correct. The ISO Maintenance Agency notes that official code elements are available through its Online Browsing Platform and that codes are not assigned to every geopolitical area: https://www.iso.org/iso-3166-country-codes.html.
