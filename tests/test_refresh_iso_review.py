@@ -88,5 +88,5 @@ def test_refresh_preserves_raw_snapshot_and_writes_provenance_and_report(tmp_pat
 
 
 def test_normalize_source_rejects_too_small_reference():
-    with pytest.raises(ValueError, match="only 1 rows"):
+    with pytest.raises(ValueError, match="only 2 rows"):
         refresh_tool.normalize_source(upstream_csv())
