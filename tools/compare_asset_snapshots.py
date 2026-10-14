@@ -107,6 +107,47 @@ def compare_snapshots(old_dir: Path, new_dir: Path) -> dict[str, Any]:
         if changed_ids or missing:
             geometry_changes[profile] = {"changed_ids": changed_ids, "missing_shared_ids": missing}
 
+    game_id_values = [
+        country.get("game_id")
+        for country in new_countries.values()
+        if isinstance(country.get("game_id"), str) and country.get("game_id")
+    ]
+    game_id_counts: dict[str, int] = defaultdict(int)
+    for game_id in game_id_values:
+        game_id_counts[game_id] += 1
+    missing_game_id_source_ids = sorted(
+        country_id for country_id, country in new_countries.items()
+        if not isinstance(country.get("game_id"), str) or not country.get("game_id")
+    )
+    duplicate_game_ids = sorted(game_id for game_id, count in game_id_counts.items() if count > 1)
+    canonical_geometry = {}
+    for profile in ("low", "medium", "high"):
+        geometry_path = new_dir / f"geometry_game_id_{profile}.json"
+        if not geometry_path.exists():
+            canonical_geometry[profile] = {"present": False, "geometry_count": 0, "missing_game_ids": sorted(set(game_id_values))}
+            continue
+        try:
+            payload = json.loads(geometry_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Cannot read canonical geometry file {geometry_path}: {exc}") from exc
+        geometries = payload.get("geometries", {})
+        geometry_keys = set(geometries) if isinstance(geometries, dict) else set()
+        expected_game_ids = set(game_id_values)
+        canonical_geometry[profile] = {
+            "present": True,
+            "geometry_count": len(geometry_keys),
+            "missing_game_ids": sorted(expected_game_ids - geometry_keys),
+            "unexpected_geometry_ids": sorted(geometry_keys - expected_game_ids),
+            "key_field": payload.get("key"),
+        }
+    game_identity = {
+        "records_with_game_id": len(game_id_values),
+        "records_missing_game_id": len(missing_game_id_source_ids),
+        "missing_game_id_source_ids": missing_game_id_source_ids,
+        "unique_game_ids": len(game_id_counts),
+        "duplicate_game_ids": duplicate_game_ids,
+        "canonical_geometry": canonical_geometry,
+    }
     old_source = old_meta.get("source", {})
     new_source = new_meta.get("source", {})
     old_manifest = old["manifest"]
@@ -128,6 +169,7 @@ def compare_snapshots(old_dir: Path, new_dir: Path) -> dict[str, Any]:
             "changed": old_meta.get("build_inputs") != new_meta.get("build_inputs"),
         },
         "feature_count": {"old": len(old_ids), "new": len(new_ids), "delta": len(new_ids) - len(old_ids)},
+        "game_identity": game_identity,
         "added_ids": added,
         "removed_ids": removed,
         "possible_rekeys_by_unique_iso3": rekeyed,
@@ -157,6 +199,29 @@ def render_markdown(report: dict[str, Any]) -> str:
     ]
     for item in report["possible_rekeys_by_unique_iso3"]:
         lines.append(f"  - `{item['old_id']}` → `{item['new_id']}` ({item['iso3']}), {item['old_name']} → {item['new_name']}")
+    identity = report["game_identity"]
+    lines += [
+        "",
+        "## Canonical game identity checks",
+        "",
+        f"- Records with game_id: {identity['records_with_game_id']}",
+        f"- Records missing game_id: {identity['records_missing_game_id']}",
+        f"- Unique game_id values: {identity['unique_game_ids']}",
+        f"- Duplicate game_id values: {len(identity['duplicate_game_ids'])}",
+    ]
+    if identity["missing_game_id_source_ids"]:
+        lines.append("  - Missing on source IDs: " + ", ".join(f"`{v}`" for v in identity["missing_game_id_source_ids"]))
+    if identity["duplicate_game_ids"]:
+        lines.append("  - Duplicates: " + ", ".join(f"`{v}`" for v in identity["duplicate_game_ids"]))
+    lines.append("- Canonical geometry coverage:")
+    for profile, details in identity["canonical_geometry"].items():
+        status = "present" if details["present"] else "MISSING FILE"
+        lines.append(
+            f"  - {profile}: {status}; {details['geometry_count']} geometries; "
+            f"{len(details['missing_game_ids'])} missing IDs; "
+            f"{len(details.get('unexpected_geometry_ids', []))} unexpected IDs; "
+            f"key field={details.get('key_field')!r}"
+        )
     lines += ["", "## Existing feature metadata changes", ""]
     if report["changed_existing_features"]:
         for item in report["changed_existing_features"]:
