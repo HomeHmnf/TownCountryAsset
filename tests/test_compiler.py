@@ -33,7 +33,7 @@ def write_config(tmp_path: Path):
         "schema_version": 1, "layer": "test", "scale": "test",
         "source_url": "https://example.invalid", "source_version": "fixture",
         "retrieval_date": "2026-01-01", "attribution": "fixture", "license": "fixture",
-        "iso3_fields": ["ADM0_A3", "ISO_A3"], "name_fields": ["ADMIN"],
+        "iso3_fields": ["ISO_A3"], "name_fields": ["ADMIN"],
         "stable_id_field": "ADM0_A3", "region_field": "REGION_UN",
         "geometry_profiles": {"low": 0.1, "medium": 0.01, "high": 0.0},
     }))
