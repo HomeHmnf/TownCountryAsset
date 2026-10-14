@@ -147,7 +147,12 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
     }
 
 
-def render_report(result: dict[str, Any], reference_source: str) -> str:
+def render_report(
+    result: dict[str, Any],
+    reference_source: str,
+    source_url: str = "not supplied",
+    retrieved_on: str = "not supplied",
+) -> str:
     lines = [
         "# ISO 3166-1 assignment proposals",
         "",
@@ -158,6 +163,8 @@ def render_report(result: dict[str, Any], reference_source: str) -> str:
         f"- Ambiguous reference matches: {result['ambiguous_count']}",
         f"- Records already marked verified: {result['already_verified_count']}",
         f"- Reference file: `{reference_source}`",
+        f"- Reference source URL: {source_url}",
+        f"- Retrieved on: {retrieved_on}",
         "",
         "## Candidate review",
         "",
@@ -195,12 +202,18 @@ def main() -> int:
     parser.add_argument("--reference", type=Path, required=True,
                         help="CSV exported from an authoritative ISO 3166-1 reference, with alpha2,alpha3,english_name columns")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--source-url", required=True,
+                        help="URL identifying the authoritative reference source")
+    parser.add_argument("--retrieved-on", required=True,
+                        help="Date the reference was retrieved, in YYYY-MM-DD format")
     args = parser.parse_args()
 
     registry = json.loads(args.registry.read_text(encoding="utf-8"))
     reference = read_reference(args.reference)
+    if not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", args.retrieved_on):
+        parser.error("--retrieved-on must use YYYY-MM-DD format")
     result = propose(registry, reference)
-    report = render_report(result, str(args.reference))
+    report = render_report(result, str(args.reference), args.source_url, args.retrieved_on)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding="utf-8")
     print(
