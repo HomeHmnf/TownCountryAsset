@@ -1,6 +1,6 @@
 # Canonical country identity contract
 
-**Status:** Design contract; implementation is not yet migrated to this schema.  
+**Status:** Registry proposal/validator added; compiler integration and local verification are still pending.  
 **Owner:** TownCountryAsset  
 **Scope:** Source-derived country/territory records and the future game-facing identity layer.
 
@@ -58,7 +58,7 @@ This is an illustrative contract, not a claim that these fields or values are al
 - The crosswalk audit remains read-only. A proposed match must record evidence and a human decision before it is approved.
 - The game repository should consume a generated manifest keyed by `game_id` only after the identity registry and compatibility migration are reviewed. Do not change game runtime data as part of the initial registry creation.
 
-## Required validation
+## Registry tooling currently implemented\n\n`tools/country_identity_registry.py` can create an initial proposal with `--bootstrap` and validate a persisted registry against compiled `countries.json`. Bootstrap uses random UUID-backed IDs and refuses to overwrite an existing registry. It copies source-derived English names, aliases, regions, and ISO alpha-3 candidates as unverified/provisional metadata; it does not approve those assignments. The registry is not yet consumed by the compiler, and the existing geometry keys remain source IDs. Do not treat a successful registry-only check as proof that the full pipeline is enforcing canonical IDs.\n\nWhen a source release changes, do not rerun bootstrap. Review the source diff first. For a source ID rename, edit the existing registry record to keep its `game_id`, record the old source ID in `previous_source_ids`, set the reviewed new `current_source_id`, and update `geometry_key`. New features require an explicit new registry entry; removed, split, or merged features require a documented decision. The validator fails on coverage/count mismatches and conflicting mappings rather than auto-assigning identities.\n\n## Required validation
 
 Before a registry can be considered usable, automated checks must establish that:
 
