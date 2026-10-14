@@ -18,7 +18,10 @@ from typing import Any
 import shapefile
 from shapely.geometry import mapping, shape
 
-from tools.country_identity_registry import read_json as read_identity_json, validate as validate_identity_registry
+try:
+    from tools.country_identity_registry import read_json as read_identity_json, validate as validate_identity_registry
+except ModuleNotFoundError:  # Direct execution as `python tools/compile_natural_earth.py`.
+    from country_identity_registry import read_json as read_identity_json, validate as validate_identity_registry
 from shapely.validation import explain_validity
 
 SCHEMA_VERSION = 1
