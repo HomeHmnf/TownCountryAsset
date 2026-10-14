@@ -77,6 +77,56 @@ def test_output_files_and_manifest_checksums_are_deterministic(tmp_path):
     assert manifest["files"]["countries.json"]["sha256"]
 
 
+def test_identity_registry_adds_game_ids_and_parallel_geometry_without_breaking_legacy_keys(tmp_path):
+    from tools.country_identity_registry import bootstrap
+
+    source = make_fixture(tmp_path)
+    config, regions = write_config(tmp_path)
+    # Build the same source metadata once without a registry to bootstrap a test registry.
+    base = compile_data(source, tmp_path / "base", config, regions)
+    registry_path = tmp_path / "identity_registry.json"
+    registry_path.write_text(json.dumps(bootstrap(base)), encoding="utf-8")
+
+    out = tmp_path / "with-identities"
+    result = compile_data(source, out, config, regions, registry_path)
+    by_source_id = {country["id"]: country for country in result["countries"]}
+    registry = json.loads(registry_path.read_text())
+    game_id_by_source = {
+        record["source"]["current_source_id"]: record["game_id"]
+        for record in registry["records"]
+    }
+
+    assert set(by_source_id) == {"TST", "ISL", "DUP"}
+    assert all(by_source_id[source_id]["game_id"] == game_id
+               for source_id, game_id in game_id_by_source.items())
+    assert by_source_id["ISL"]["iso3"] is None
+    assert by_source_id["TST"]["source_attributes"]["ADMIN"] == "Testland"
+
+    legacy_geometry = json.loads((out / "geometry_high.json").read_text())
+    canonical_geometry = json.loads((out / "geometry_game_id_high.json").read_text())
+    assert set(legacy_geometry["geometries"]) == {"TST", "ISL", "DUP"}
+    assert set(canonical_geometry["geometries"]) == set(game_id_by_source.values())
+    assert canonical_geometry["key"] == "game_id"
+    manifest = json.loads((out / "manifest.json").read_text())
+    assert "geometry_game_id_high.json" in manifest["files"]
+    assert result["identity_registry"]["game_id_count"] == 3
+
+
+def test_compiler_with_identity_registry_fails_on_unmapped_source_feature(tmp_path):
+    from tools.country_identity_registry import bootstrap
+
+    source = make_fixture(tmp_path)
+    config, regions = write_config(tmp_path)
+    base = compile_data(source, tmp_path / "base", config, regions)
+    registry = bootstrap(base)
+    registry["records"].pop()
+    registry_path = tmp_path / "identity_registry.json"
+    registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="Identity registry validation failed"):
+        compile_data(source, tmp_path / "out", config, regions, registry_path)
+
+
 def test_simplified_geometry_remains_valid(tmp_path):
     source = make_fixture(tmp_path)
     config, regions = write_config(tmp_path)
