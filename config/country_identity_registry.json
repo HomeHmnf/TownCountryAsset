@@ -1,0 +1,6301 @@
+{
+  "schema_version": 1,
+  "dataset": "natural_earth_admin_0",
+  "status": "proposal",
+  "records": [
+    {
+      "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ZWE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ZWE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Zimbabwe",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "ZWE"
+    },
+    {
+      "game_id": "tc_e75bc9ac62fa443c90b5529778f3b1af",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ZMB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ZMB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Zambia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "ZMB"
+    },
+    {
+      "game_id": "tc_e32ec835b247449084d1b535ebccf7f1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "YEM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "YEM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Yemen",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "YEM"
+    },
+    {
+      "game_id": "tc_e65eabf3cd054585a43347bdfea6201b",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "VNM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "VNM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Vietnam",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "VNM"
+    },
+    {
+      "game_id": "tc_1aa00cb7ebb34cdca928353a58ff5b12",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "VEN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "VEN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Venezuela",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "VEN"
+    },
+    {
+      "game_id": "tc_a8a10a8bdf13428593d1b0ab46990697",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "VAT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "VAT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Vatican",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "VAT"
+    },
+    {
+      "game_id": "tc_43c4be0a76ca43a2bb7e634de5a1f4f4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "VUT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "VUT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Vanuatu",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "VUT"
+    },
+    {
+      "game_id": "tc_5d951c36a4ad4471ae9b9037fe338d70",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "UZB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "UZB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Uzbekistan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "UZB"
+    },
+    {
+      "game_id": "tc_e19506c4a1564ca085b73b9284fa6f56",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "URY",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "URY",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Uruguay",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "URY"
+    },
+    {
+      "game_id": "tc_4add61cba99b4e63a37406cd1d0feb5f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "FSM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "FSM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Federated States of Micronesia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "FSM"
+    },
+    {
+      "game_id": "tc_f201b19690a04a8f903f9ea4cb0c7af4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MHL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MHL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Marshall Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "MHL"
+    },
+    {
+      "game_id": "tc_07747651759a40219ba3f4710fa6ab11",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MNP",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MNP",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Northern Mariana Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "MNP"
+    },
+    {
+      "game_id": "tc_504d6ccab85e4fbdad7ddd881dd6d87d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "VIR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "VIR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "United States Virgin Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "VIR"
+    },
+    {
+      "game_id": "tc_ff2aa3765a3d4ee4a6d0c0bd0fb61ddd",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GUM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GUM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Guam",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "GUM"
+    },
+    {
+      "game_id": "tc_ab146a31fa9243bc81a35e9cfaa1ed05",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ASM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ASM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "American Samoa",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "ASM"
+    },
+    {
+      "game_id": "tc_37f10315a18d4c3abf3486086b5822e1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PRI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PRI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Puerto Rico",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "PRI"
+    },
+    {
+      "game_id": "tc_f0a8b61c54a14d4089774716657e9433",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "USA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "USA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "United States of America",
+        "fa": null,
+        "aliases_en": [
+          "United States of America",
+          "United States"
+        ],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "USA"
+    },
+    {
+      "game_id": "tc_c08d501548d346c3ad3e27b514e1e902",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SGS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SGS",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "South Georgia and the Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [],
+      "geometry_key": "SGS"
+    },
+    {
+      "game_id": "tc_73138c628d2a4509bad88f66deb5b27b",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IOT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "IOT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "British Indian Ocean Territory",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [],
+      "geometry_key": "IOT"
+    },
+    {
+      "game_id": "tc_9bd5e00f9fc944edbf2eb3097e413328",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SHN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SHN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saint Helena",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SHN"
+    },
+    {
+      "game_id": "tc_0900903d1eb84838aae9c039c9fd0da2",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PCN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PCN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Pitcairn Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "PCN"
+    },
+    {
+      "game_id": "tc_0b9688bbf4264477b023a0f2af180c2e",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "AIA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "AIA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Anguilla",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "AIA"
+    },
+    {
+      "game_id": "tc_815eb2563fde4a4cb077173220e2a533",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "FLK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "FLK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Falkland Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "FLK"
+    },
+    {
+      "game_id": "tc_19acfc8e1cf44c25aa753729115d60d6",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CYM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CYM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Cayman Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "CYM"
+    },
+    {
+      "game_id": "tc_d81e2d4c4b934f57a67f380b2fdaec9d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BMU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BMU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Bermuda",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "BMU"
+    },
+    {
+      "game_id": "tc_f3832fd029cb445483c26654bddadfac",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "VGB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "VGB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "British Virgin Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "VGB"
+    },
+    {
+      "game_id": "tc_ea6ba8b48782477bad74e946641a16ae",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TCA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TCA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Turks and Caicos Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "TCA"
+    },
+    {
+      "game_id": "tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MSR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MSR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Montserrat",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "MSR"
+    },
+    {
+      "game_id": "tc_43796017cb7d4a279de2d9ed65c32c80",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "JEY",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "JEY",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Jersey",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "JEY"
+    },
+    {
+      "game_id": "tc_be9b1fd97db1475191612805ba7f9920",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GGY",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GGY",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Guernsey",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "GGY"
+    },
+    {
+      "game_id": "tc_f94f97a8ffc24ef18872cadb5736ea2b",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IMN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "IMN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Isle of Man",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "IMN"
+    },
+    {
+      "game_id": "tc_8d01644699e04b74ae3a4751c6f1fc41",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GBR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GBR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "United Kingdom",
+        "fa": null,
+        "aliases_en": [
+          "United Kingdom",
+          "UK"
+        ],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "GBR"
+    },
+    {
+      "game_id": "tc_3cbd960008724744b928265acc0638a4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ARE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ARE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "United Arab Emirates",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "ARE"
+    },
+    {
+      "game_id": "tc_65f8a168b10143c2a596917c1fca3731",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "UKR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "UKR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Ukraine",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "UKR"
+    },
+    {
+      "game_id": "tc_2bd67b30564b46b4b502a36decc333bf",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "UGA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "UGA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Uganda",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "UGA"
+    },
+    {
+      "game_id": "tc_72de9a194d85404098bb741ae4ffc826",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TKM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TKM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Turkmenistan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "TKM"
+    },
+    {
+      "game_id": "tc_155414257ec0498690f73c3595d85e7c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TUR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TUR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Turkey",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "TUR"
+    },
+    {
+      "game_id": "tc_1d1d2c1274384efa82f9591e1c069aba",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TUN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TUN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Tunisia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "TUN"
+    },
+    {
+      "game_id": "tc_1bd98a138f884dd4b4d9d1efbbf357b0",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TTO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TTO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Trinidad and Tobago",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "TTO"
+    },
+    {
+      "game_id": "tc_2c6f6c5486f04a87aa94277e67d6e51a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TON",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TON",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Tonga",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "TON"
+    },
+    {
+      "game_id": "tc_06a09ff0e27b49e392ef2e88161023eb",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TGO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TGO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Togo",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "TGO"
+    },
+    {
+      "game_id": "tc_bd40ea14860a4c4083eced5549d2d9c4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TLS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TLS",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "East Timor",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "TLS"
+    },
+    {
+      "game_id": "tc_fc12d0184fc7498f982ab8033ae64436",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "THA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "THA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Thailand",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "THA"
+    },
+    {
+      "game_id": "tc_0f4c47ec59434e46871845e474964499",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TZA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TZA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "United Republic of Tanzania",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "TZA"
+    },
+    {
+      "game_id": "tc_772e2ac5253c46e98b79cf5a6f19e9f5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TJK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TJK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Tajikistan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "TJK"
+    },
+    {
+      "game_id": "tc_98ab3dee1d554162b6bbd5dac6374fc8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TWN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TWN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Taiwan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "TWN"
+    },
+    {
+      "game_id": "tc_c205b2615c45490182519ecedb651e99",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SYR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SYR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Syria",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "SYR"
+    },
+    {
+      "game_id": "tc_e693e8b799f94e7bb814e89bd46d886d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CHE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CHE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Switzerland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "CHE"
+    },
+    {
+      "game_id": "tc_d74b429fff544cf9bafeb459c4b3edd8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SWE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SWE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Sweden",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "SWE"
+    },
+    {
+      "game_id": "tc_fc2ad04f3c88446e91bd770190d6fe4c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SWZ",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SWZ",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "eSwatini",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SWZ"
+    },
+    {
+      "game_id": "tc_168a848021b84cc6a6c3fc320012a176",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SUR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SUR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Suriname",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "SUR"
+    },
+    {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SDS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SSD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "South Sudan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SDS"
+    },
+    {
+      "game_id": "tc_b0ca3e0386b34603a6356b8ebc8b0565",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SDN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SDN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Sudan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SDN"
+    },
+    {
+      "game_id": "tc_5e47c88bebac452e953fc5dfa8b1ba06",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LKA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LKA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Sri Lanka",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "LKA"
+    },
+    {
+      "game_id": "tc_21a70a0fbf1b43c292783397ce218239",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ESP",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ESP",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Spain",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "ESP"
+    },
+    {
+      "game_id": "tc_cf8be733dbf44dd6b112e9fe12d2b19e",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KOR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KOR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "South Korea",
+        "fa": null,
+        "aliases_en": [
+          "South Korea",
+          "Republic of Korea"
+        ],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "KOR"
+    },
+    {
+      "game_id": "tc_dc6419869818416db051f50cbfd95036",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ZAF",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ZAF",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "South Africa",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "ZAF"
+    },
+    {
+      "game_id": "tc_e82cc51b989841109d9e1a7f6a5d1727",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SOM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SOM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Somalia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SOM"
+    },
+    {
+      "game_id": "tc_9a78f2eebcc24906a5c67581c0c3895e",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SOL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Somaliland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SOL"
+    },
+    {
+      "game_id": "tc_0ce7eb254c32428c88601905c0df8e87",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SLB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SLB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Solomon Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "SLB"
+    },
+    {
+      "game_id": "tc_b3bea891d7114d148714d5e398ee06b1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SVK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SVK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Slovakia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "SVK"
+    },
+    {
+      "game_id": "tc_c0484640d9554c8285e92412bae25785",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SVN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SVN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Slovenia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "SVN"
+    },
+    {
+      "game_id": "tc_9d65e06bf97d417c8aa62742225ef5c9",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SGP",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SGP",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Singapore",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "SGP"
+    },
+    {
+      "game_id": "tc_56e9d1977fa14da298ae125fbda1b63c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SLE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SLE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Sierra Leone",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SLE"
+    },
+    {
+      "game_id": "tc_4bc377d3ea57485bac43c9b512587dbc",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SYC",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SYC",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Seychelles",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SYC"
+    },
+    {
+      "game_id": "tc_98a68180b9f0479f90dcde7809d60470",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SRB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SRB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Republic of Serbia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "SRB"
+    },
+    {
+      "game_id": "tc_29ec74ae4e094053a930487b9ce602d1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SEN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SEN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Senegal",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SEN"
+    },
+    {
+      "game_id": "tc_86b0f7fcb4504f9b8dc1b60b42b16ea0",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SAU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SAU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saudi Arabia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "SAU"
+    },
+    {
+      "game_id": "tc_4a2ed326dc6047efa2e28926df0bc7f0",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "STP",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "STP",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "São Tomé and Principe",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "STP"
+    },
+    {
+      "game_id": "tc_e4ea859bd6704c13912ad7f5cf19de41",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SMR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SMR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "San Marino",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "SMR"
+    },
+    {
+      "game_id": "tc_76082bd796c546d1ab76a7a8a3251369",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "WSM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "WSM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Samoa",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "WSM"
+    },
+    {
+      "game_id": "tc_67290f5714c846f4a84d1f53c6fd495a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "VCT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "VCT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saint Vincent and the Grenadines",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "VCT"
+    },
+    {
+      "game_id": "tc_6629fdb92d05409f856d9030b63b1470",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LCA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LCA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saint Lucia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "LCA"
+    },
+    {
+      "game_id": "tc_f22d58e7280f41f7a5a68fb03e1ab87e",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KNA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KNA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saint Kitts and Nevis",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "KNA"
+    },
+    {
+      "game_id": "tc_7f3c6637070f4c42a40c1f5456ec4721",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "RWA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "RWA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Rwanda",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "RWA"
+    },
+    {
+      "game_id": "tc_c587d1c1cd8d4ec489f3d8e2524ec607",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "RUS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "RUS",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Russia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "RUS"
+    },
+    {
+      "game_id": "tc_c41863f7cb4e4dccbbdf0a1296f9ee1c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ROU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ROU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Romania",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "ROU"
+    },
+    {
+      "game_id": "tc_13df99232f33400d9079316c041f066c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "QAT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "QAT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Qatar",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "QAT"
+    },
+    {
+      "game_id": "tc_43ee3db974884a72bacf5f5519e2c145",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PRT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PRT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Portugal",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "PRT"
+    },
+    {
+      "game_id": "tc_9865dd6a50c3458b98f5040f0cc76357",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "POL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "POL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Poland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "POL"
+    },
+    {
+      "game_id": "tc_fc8f1a9536d342899526129acf15acd2",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PHL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PHL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Philippines",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "PHL"
+    },
+    {
+      "game_id": "tc_a90d391a4a9a473b9074fc99cce11cb5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PER",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PER",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Peru",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "PER"
+    },
+    {
+      "game_id": "tc_3eb6dc12494541e793a8a5b68980f29f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PRY",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PRY",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Paraguay",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "PRY"
+    },
+    {
+      "game_id": "tc_82d51d964745422e8ed3a9109757d2ee",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PNG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PNG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Papua New Guinea",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "PNG"
+    },
+    {
+      "game_id": "tc_ba6cf14fa6224eb4a0b085b3ea1df6dc",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PAN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PAN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Panama",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "PAN"
+    },
+    {
+      "game_id": "tc_642fbe2581cf4b8c857d967717d1f1ef",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PLW",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PLW",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Palau",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "PLW"
+    },
+    {
+      "game_id": "tc_0dc6216a94e34b44b27e42ed35fa6376",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PAK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PAK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Pakistan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "PAK"
+    },
+    {
+      "game_id": "tc_22bd85ff61234a46a95506d105d5fee4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "OMN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "OMN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Oman",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "OMN"
+    },
+    {
+      "game_id": "tc_f4a6e15a05474af2b81c9524ed988d89",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NOR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Norway",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "NOR"
+    },
+    {
+      "game_id": "tc_4a3793e49e5441ae94aeec78cc887021",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PRK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PRK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "North Korea",
+        "fa": null,
+        "aliases_en": [
+          "North Korea",
+          "Democratic People's Republic of Korea"
+        ],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "PRK"
+    },
+    {
+      "game_id": "tc_7a8158c93a934345a2ade9fd16ee4999",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NGA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NGA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Nigeria",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "NGA"
+    },
+    {
+      "game_id": "tc_4d31375845614c2b91a71736069d4ab3",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NER",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NER",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Niger",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "NER"
+    },
+    {
+      "game_id": "tc_2fdae8757e51402e9f67c428d2b79368",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NIC",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NIC",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Nicaragua",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "NIC"
+    },
+    {
+      "game_id": "tc_d4b67e03f0c04d9a87089f477e5fa669",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NZL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NZL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "New Zealand",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "NZL"
+    },
+    {
+      "game_id": "tc_4cb90152915543348c9a793599240eaa",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NIU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NIU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Niue",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "NIU"
+    },
+    {
+      "game_id": "tc_d0017ca5d5084ceeaedc02b6d436fb39",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "COK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "COK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Cook Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "COK"
+    },
+    {
+      "game_id": "tc_898b220cf53a425e9bac3630f2c17473",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NLD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NLD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Netherlands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "NLD"
+    },
+    {
+      "game_id": "tc_8344feaf14da4684aaa8d4c263653778",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ABW",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ABW",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Aruba",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "ABW"
+    },
+    {
+      "game_id": "tc_2d0dc3f3edb9467090ea74861dbc7b9e",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CUW",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CUW",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Curaçao",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "CUW"
+    },
+    {
+      "game_id": "tc_1c4ff3f2a8f04b43b0c28e830a9403ad",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NPL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NPL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Nepal",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "NPL"
+    },
+    {
+      "game_id": "tc_2722269bdef04648b655fe363650d565",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NRU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NRU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Nauru",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "NRU"
+    },
+    {
+      "game_id": "tc_7379cdcc5c4848c181ace3144aeba70f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NAM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NAM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Namibia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "NAM"
+    },
+    {
+      "game_id": "tc_2249b79a9c944a1c835b0cad2676e48d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MOZ",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MOZ",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Mozambique",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "MOZ"
+    },
+    {
+      "game_id": "tc_84dc0c18f03144bea337f6aacd50bf0f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MAR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MAR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Morocco",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "MAR"
+    },
+    {
+      "game_id": "tc_3487eebc07114ff589974150237cae4f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SAH",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ESH",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Western Sahara",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "SAH"
+    },
+    {
+      "game_id": "tc_eb1de71332ef4db496cb76c95aa56cd4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MNE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MNE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Montenegro",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "MNE"
+    },
+    {
+      "game_id": "tc_d0fb202ca0aa4a868af6fa154ab84c30",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MNG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MNG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Mongolia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "MNG"
+    },
+    {
+      "game_id": "tc_96ea5c49288d40b0945401031405c2c8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MDA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MDA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Moldova",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "MDA"
+    },
+    {
+      "game_id": "tc_da92472e602c45c69d331812fa5193d8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MCO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MCO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Monaco",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "MCO"
+    },
+    {
+      "game_id": "tc_c6b830c3cba64d4883eac8cee7864cfd",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MEX",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MEX",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Mexico",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "MEX"
+    },
+    {
+      "game_id": "tc_c7b728ec16b94e35b05d96d14a253eec",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MUS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MUS",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Mauritius",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "MUS"
+    },
+    {
+      "game_id": "tc_17137c4e4fcc4fa58e32c924f08efcda",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MRT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MRT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Mauritania",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "MRT"
+    },
+    {
+      "game_id": "tc_f97b2223a2a84e53ac13614ddde1f602",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MLT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MLT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Malta",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "MLT"
+    },
+    {
+      "game_id": "tc_a3f73fd3bb6d4d7fb4ea31d433453bae",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MLI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MLI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Mali",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "MLI"
+    },
+    {
+      "game_id": "tc_408d22fe5b894b4b947a0521ace1018a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MDV",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MDV",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Maldives",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "MDV"
+    },
+    {
+      "game_id": "tc_b21225f45c3b40509640603249110f89",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MYS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MYS",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Malaysia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "MYS"
+    },
+    {
+      "game_id": "tc_ee1c1ac1ad5c4faf818070115133b174",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MWI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MWI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Malawi",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "MWI"
+    },
+    {
+      "game_id": "tc_7abbe0f9aa1346c7a9f69cc1027b4282",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MDG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MDG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Madagascar",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "MDG"
+    },
+    {
+      "game_id": "tc_949bf877e3284f5c8a56cfc89bcafa90",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MKD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MKD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "North Macedonia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "MKD"
+    },
+    {
+      "game_id": "tc_f4261f4507cd48858cdfb7e3bd0ae738",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LUX",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LUX",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Luxembourg",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "LUX"
+    },
+    {
+      "game_id": "tc_77de0a41c4d94d8388d6f0732438be81",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LTU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LTU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Lithuania",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "LTU"
+    },
+    {
+      "game_id": "tc_a8bd42bd635b43289f3c26695dc58939",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LIE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LIE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Liechtenstein",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "LIE"
+    },
+    {
+      "game_id": "tc_bb5622bab363429ca481c5476acc824c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LBY",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LBY",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Libya",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "LBY"
+    },
+    {
+      "game_id": "tc_40dc9d2e141343e98a4d0c762c578473",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LBR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LBR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Liberia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "LBR"
+    },
+    {
+      "game_id": "tc_c0fa4e9b8e984f59ba17beb7547c5811",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LSO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LSO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Lesotho",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "LSO"
+    },
+    {
+      "game_id": "tc_8466a0747d0b4d1a8c23feb70f7c6ed1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LBN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LBN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Lebanon",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "LBN"
+    },
+    {
+      "game_id": "tc_f161aef25a39413e8aef8c147e97b28a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LVA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LVA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Latvia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "LVA"
+    },
+    {
+      "game_id": "tc_71a3ecd24ca74da9a6cea3dae8cd1f82",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "LAO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "LAO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Laos",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "LAO"
+    },
+    {
+      "game_id": "tc_130ca81b84d04b058e9301121b2b7802",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KGZ",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KGZ",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Kyrgyzstan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "KGZ"
+    },
+    {
+      "game_id": "tc_fa491c61ffa24dc3a21c6a6da7d39fad",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KWT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KWT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Kuwait",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "KWT"
+    },
+    {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KOS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Kosovo",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "KOS"
+    },
+    {
+      "game_id": "tc_c23a3cf00b1a4ebf97a70a4f41a7761d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KIR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KIR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Kiribati",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "KIR"
+    },
+    {
+      "game_id": "tc_9f3dc962bf9744a5a3cdf1f7a1cbb159",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KEN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KEN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Kenya",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "KEN"
+    },
+    {
+      "game_id": "tc_feadffc011db4cf695df6c0997a003c8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KAZ",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KAZ",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Kazakhstan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "KAZ"
+    },
+    {
+      "game_id": "tc_6e28258973b54dfeb5811c563cd0a2e8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "JOR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "JOR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Jordan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "JOR"
+    },
+    {
+      "game_id": "tc_8d0620ea475f498d9402134857882bf1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "JPN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "JPN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Japan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "JPN"
+    },
+    {
+      "game_id": "tc_bf02736242694622ae7c730beb0f0da6",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "JAM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "JAM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Jamaica",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "JAM"
+    },
+    {
+      "game_id": "tc_1f3e0c90df4341f082ed90ecdd95fb10",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ITA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ITA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Italy",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "ITA"
+    },
+    {
+      "game_id": "tc_28952c75855947a7b31bb7509dc1fce1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ISR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ISR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Israel",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "ISR"
+    },
+    {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PSX",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PSE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Palestine",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "PSX"
+    },
+    {
+      "game_id": "tc_16d6044d9abf4743821a6fb238942a22",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IRL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "IRL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Ireland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "IRL"
+    },
+    {
+      "game_id": "tc_5ee7b31f968941dca65e70519901915f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IRQ",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "IRQ",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Iraq",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "IRQ"
+    },
+    {
+      "game_id": "tc_ddf21c4d378e4fc9bc3d5b4ba50890a2",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IRN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "IRN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Iran",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "IRN"
+    },
+    {
+      "game_id": "tc_c40da0ac977b4201b8587ce04aa66f56",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IDN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "IDN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Indonesia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "IDN"
+    },
+    {
+      "game_id": "tc_39ad5030b5f94f068d4a1528c60e5638",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IND",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "IND",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "India",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "IND"
+    },
+    {
+      "game_id": "tc_861af4b9250e4e17a9d3f1f4e1ea33d4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ISL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ISL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Iceland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "ISL"
+    },
+    {
+      "game_id": "tc_e3ede57c1b754a2dbd940335f9655f11",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "HUN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "HUN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Hungary",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "HUN"
+    },
+    {
+      "game_id": "tc_80c318b9217a4320beaad6b93eb74ac5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "HND",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "HND",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Honduras",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "HND"
+    },
+    {
+      "game_id": "tc_9ee610c6d55a4f4bbdbbb073b33628a2",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "HTI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "HTI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Haiti",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "HTI"
+    },
+    {
+      "game_id": "tc_893d4efa8ccf42af896949ffd7007fef",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GUY",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GUY",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Guyana",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "GUY"
+    },
+    {
+      "game_id": "tc_dc93b6caf7324df884ec2b070a5296b9",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GNB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GNB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Guinea-Bissau",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "GNB"
+    },
+    {
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GIN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GIN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Guinea",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "GIN"
+    },
+    {
+      "game_id": "tc_9348779eba844ab2beb5bed00053b7c6",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GTM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GTM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Guatemala",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "GTM"
+    },
+    {
+      "game_id": "tc_c5b3fecc12a94e85a7acddc70fa7a086",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GRD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GRD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Grenada",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "GRD"
+    },
+    {
+      "game_id": "tc_dab67464d7ad44cdbf925450627e4186",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GRC",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GRC",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Greece",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "GRC"
+    },
+    {
+      "game_id": "tc_f63061b714ce4390948838410758c016",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GHA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GHA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Ghana",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "GHA"
+    },
+    {
+      "game_id": "tc_ff445b0a87494070bf868827de190acf",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "DEU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "DEU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Germany",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "DEU"
+    },
+    {
+      "game_id": "tc_741bd244c1ec4961918565c4ed02c5c6",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GEO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GEO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Georgia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "GEO"
+    },
+    {
+      "game_id": "tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GMB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GMB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Gambia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "GMB"
+    },
+    {
+      "game_id": "tc_d59dfb6324524b07a32c87b73009e97f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GAB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GAB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Gabon",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "GAB"
+    },
+    {
+      "game_id": "tc_471ae6d7112b4537a7ae5ca1e6a816a5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "FRA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "France",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "FRA"
+    },
+    {
+      "game_id": "tc_5551c0cc249f4e4e9ea6d57a0dacd2d5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SPM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SPM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saint Pierre and Miquelon",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "SPM"
+    },
+    {
+      "game_id": "tc_9f1be169ba5347ff81384c532820401b",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "WLF",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "WLF",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Wallis and Futuna",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "WLF"
+    },
+    {
+      "game_id": "tc_cc0688860b8848ddb5f52395162d9b71",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MAF",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MAF",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saint Martin",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "MAF"
+    },
+    {
+      "game_id": "tc_e0f0ed8d4d284acd8b41435902f2a6cc",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BLM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BLM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Saint Barthelemy",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "BLM"
+    },
+    {
+      "game_id": "tc_2493e62a2f78442e8fd4b8c0f0ca847c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "PYF",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "PYF",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "French Polynesia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "PYF"
+    },
+    {
+      "game_id": "tc_e7d7320224a64229881b6b49ef1e74c3",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NCL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NCL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "New Caledonia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "NCL"
+    },
+    {
+      "game_id": "tc_c84e6493c6fc4373842ee9ba3a509db0",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ATF",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ATF",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "French Southern and Antarctic Lands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [],
+      "geometry_key": "ATF"
+    },
+    {
+      "game_id": "tc_592dfefc0b584872853eedbd05b5e970",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ALD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ALA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Aland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "ALD"
+    },
+    {
+      "game_id": "tc_374e55a3eefe4a1a83fed6b64b5045f5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "FIN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "FIN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Finland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "FIN"
+    },
+    {
+      "game_id": "tc_8d67737674744dce8986565b98cbbb1f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "FJI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "FJI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Fiji",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "FJI"
+    },
+    {
+      "game_id": "tc_860d12ee66fc4fceb3faddbc92c87930",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ETH",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ETH",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Ethiopia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "ETH"
+    },
+    {
+      "game_id": "tc_383873de760147cd97dfac5ef5d60b08",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "EST",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "EST",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Estonia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "EST"
+    },
+    {
+      "game_id": "tc_f9d7128c5ef04c6f955f43f9bcc56a0c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ERI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ERI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Eritrea",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "ERI"
+    },
+    {
+      "game_id": "tc_06d71df13c4f415fbf22a0147f19bc53",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GNQ",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GNQ",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Equatorial Guinea",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "GNQ"
+    },
+    {
+      "game_id": "tc_471268dbb85845de93e546317686debb",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SLV",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SLV",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "El Salvador",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "SLV"
+    },
+    {
+      "game_id": "tc_939f236600dd47a8bf850a7ff19dc047",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "EGY",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "EGY",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Egypt",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "EGY"
+    },
+    {
+      "game_id": "tc_2a54eb1caed54a2185a62cce0c2db6cb",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ECU",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ECU",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Ecuador",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "ECU"
+    },
+    {
+      "game_id": "tc_ee04e01170f84b92afabbb40abdbd4e3",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "DOM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "DOM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Dominican Republic",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "DOM"
+    },
+    {
+      "game_id": "tc_e5391af862dd490bb3a01fa80f4ac15e",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "DMA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "DMA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Dominica",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "DMA"
+    },
+    {
+      "game_id": "tc_f4814b1a89384c4d93a92c19b301a814",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "DJI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "DJI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Djibouti",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "DJI"
+    },
+    {
+      "game_id": "tc_cbf271e54b9c4e3fbaa93c291355f6f7",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "GRL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "GRL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Greenland",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "GRL"
+    },
+    {
+      "game_id": "tc_d608e7f9138e459ab3b96263618ae407",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "FRO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "FRO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Faroe Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "FRO"
+    },
+    {
+      "game_id": "tc_11da440eb0704bd195fe0b11fa0890af",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "DNK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "DNK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Denmark",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "DNK"
+    },
+    {
+      "game_id": "tc_e43afc3a83a3458c833dac5644b7186a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CZE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CZE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Czechia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "CZE"
+    },
+    {
+      "game_id": "tc_d3e7f81572fd44ab920bfc066d592873",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CYN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Northern Cyprus",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "CYN"
+    },
+    {
+      "game_id": "tc_3c148b1f7650455fa710ca87cf376728",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CYP",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CYP",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Cyprus",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "CYP"
+    },
+    {
+      "game_id": "tc_576e758e1fbb456a973d63c58222dc30",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CUB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CUB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Cuba",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "CUB"
+    },
+    {
+      "game_id": "tc_fb4046d4910a4bf89f4a93810e2f4d8a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "HRV",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "HRV",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Croatia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "HRV"
+    },
+    {
+      "game_id": "tc_18c639798e4948899643d84aa2bce93c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CIV",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CIV",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Ivory Coast",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "CIV"
+    },
+    {
+      "game_id": "tc_79512b2eaf8f45b5b118130859ebdaaf",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CRI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CRI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Costa Rica",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "CRI"
+    },
+    {
+      "game_id": "tc_2763c19aa8734ce9aa8b17d8effb6645",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "COD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "COD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Democratic Republic of the Congo",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "COD"
+    },
+    {
+      "game_id": "tc_451d8109e28b45eaa6923dfcac9d1601",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "COG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "COG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Republic of the Congo",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "COG"
+    },
+    {
+      "game_id": "tc_10dd5e9664664abf9eca33c250a74cdb",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "COM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "COM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Comoros",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "COM"
+    },
+    {
+      "game_id": "tc_648b019cc83e486ab9fb8497386777a9",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "COL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "COL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Colombia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "COL"
+    },
+    {
+      "game_id": "tc_3349a0b8b7454088b11e917a24de3ad5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CHN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CHN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "China",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "CHN"
+    },
+    {
+      "game_id": "tc_f9a64d8c1e6342d2b1941833ff7588d0",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MAC",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MAC",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Macao S.A.R",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "MAC"
+    },
+    {
+      "game_id": "tc_394248a9960c4d28b4385210c82a0a0b",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "HKG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "HKG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Hong Kong S.A.R.",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "HKG"
+    },
+    {
+      "game_id": "tc_4c51c695cb6e47d2aed2fb04c397bece",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CHL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CHL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Chile",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "CHL"
+    },
+    {
+      "game_id": "tc_1da2daf3a3d34a30b96100d643963f70",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TCD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TCD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Chad",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "TCD"
+    },
+    {
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CAF",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CAF",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Central African Republic",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "CAF"
+    },
+    {
+      "game_id": "tc_d9d1737635ce4385a50c4307c2716832",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CPV",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CPV",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Cabo Verde",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "CPV"
+    },
+    {
+      "game_id": "tc_ba9087366ba54d51932e88bf8a11616d",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CAN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CAN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Canada",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "CAN"
+    },
+    {
+      "game_id": "tc_f5cd614ef03c414d8e98d87102df5c14",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "CMR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "CMR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Cameroon",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "CMR"
+    },
+    {
+      "game_id": "tc_f956986338e5418481784ba2d2781063",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KHM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "KHM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Cambodia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "KHM"
+    },
+    {
+      "game_id": "tc_b4847e5d14f94efdbbd46d6467d90237",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "MMR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "MMR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Myanmar",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "MMR"
+    },
+    {
+      "game_id": "tc_4ac5b3c6b7774a05b4ceb5573c4a9d27",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BDI",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BDI",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Burundi",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "BDI"
+    },
+    {
+      "game_id": "tc_3c920b9b9f324cb19ef9d4b6debf10ba",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BFA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BFA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Burkina Faso",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "BFA"
+    },
+    {
+      "game_id": "tc_523810acde564c1c907acd5befe575ab",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BGR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BGR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Bulgaria",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "BGR"
+    },
+    {
+      "game_id": "tc_e416804f7e41490a9e7d743a45a72f0e",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BRN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BRN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Brunei",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "BRN"
+    },
+    {
+      "game_id": "tc_4923336d91d94afc919d8a2b8a4ad415",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BRA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BRA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Brazil",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "BRA"
+    },
+    {
+      "game_id": "tc_ca2bdd688a454bb8b6457c9448612669",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BWA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BWA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Botswana",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "BWA"
+    },
+    {
+      "game_id": "tc_0628271c897b49558f423321cbc48ce4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BIH",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BIH",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Bosnia and Herzegovina",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "BIH"
+    },
+    {
+      "game_id": "tc_4cd6d52014244914bdeb62e6a6452e42",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BOL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BOL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Bolivia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "BOL"
+    },
+    {
+      "game_id": "tc_91f04a21215642aeb5da856a78dc9949",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BTN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BTN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Bhutan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "BTN"
+    },
+    {
+      "game_id": "tc_874ae1f05e8c4d67a2c839095d760b72",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BEN",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BEN",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Benin",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "BEN"
+    },
+    {
+      "game_id": "tc_d066174c4df546d1a410d386f363ee80",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BLZ",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BLZ",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Belize",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "BLZ"
+    },
+    {
+      "game_id": "tc_f1cc713e923c4be48e176657a00469f0",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BEL",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BEL",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Belgium",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "BEL"
+    },
+    {
+      "game_id": "tc_6ebc90b251e14f70b8bf758d8008e839",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BLR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BLR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Belarus",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "BLR"
+    },
+    {
+      "game_id": "tc_7a679c592eef40c58b7cdf58e6032bb5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BRB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BRB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Barbados",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "BRB"
+    },
+    {
+      "game_id": "tc_8169e562ece7475e960f78f231cb1ab7",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BGD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BGD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Bangladesh",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "BGD"
+    },
+    {
+      "game_id": "tc_38fd6c5cd2be45739f3be11bc4cab9c8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BHR",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BHR",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Bahrain",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "BHR"
+    },
+    {
+      "game_id": "tc_53553c35a9f44fddb64f46b5b2d7b90c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "BHS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "BHS",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "The Bahamas",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "BHS"
+    },
+    {
+      "game_id": "tc_b8c860bb8d404dcca918bad769e7ead7",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "AZE",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "AZE",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Azerbaijan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "AZE"
+    },
+    {
+      "game_id": "tc_a0422e821c824e78bd95525b36155b65",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "AUT",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "AUT",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Austria",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "AUT"
+    },
+    {
+      "game_id": "tc_270a6ecb902d4ea1ac7373b3d1a3b2cc",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "AUS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "AUS",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Australia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "AUS"
+    },
+    {
+      "game_id": "tc_7cd2130353a64e57bd3782773a8e12c7",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "IOA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Indian Ocean Territories",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [],
+      "geometry_key": "IOA"
+    },
+    {
+      "game_id": "tc_e86aec8164734ab8be1b207a743e6ea4",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "HMD",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "HMD",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Heard Island and McDonald Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [],
+      "geometry_key": "HMD"
+    },
+    {
+      "game_id": "tc_003dbd71493240f5bd22a52176868806",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "NFK",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "NFK",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Norfolk Island",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "NFK"
+    },
+    {
+      "game_id": "tc_b61ca098adb74efc84564fd9fa800bf8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ATC",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Ashmore and Cartier Islands",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "ATC"
+    },
+    {
+      "game_id": "tc_f97b56c9c74845de8b41aa24ed12a47f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ARM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ARM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Armenia",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "ARM"
+    },
+    {
+      "game_id": "tc_2a29d5b72b294244a5de6db37118237a",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ARG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ARG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Argentina",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "South America"
+      ],
+      "geometry_key": "ARG"
+    },
+    {
+      "game_id": "tc_9221f2a3fd704847b66da16efa03c2b8",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ATG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ATG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Antigua and Barbuda",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "ATG"
+    },
+    {
+      "game_id": "tc_fa43ff476d6b428fa8edb4dde1aa9d3f",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "AGO",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "AGO",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Angola",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "AGO"
+    },
+    {
+      "game_id": "tc_224c06bfe0f04031b422bddc81ea3ce5",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "AND",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "AND",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Andorra",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "AND"
+    },
+    {
+      "game_id": "tc_e245d37005f843168d67b7b327ece7f9",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "DZA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "DZA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Algeria",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Africa"
+      ],
+      "geometry_key": "DZA"
+    },
+    {
+      "game_id": "tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ALB",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ALB",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Albania",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Europe"
+      ],
+      "geometry_key": "ALB"
+    },
+    {
+      "game_id": "tc_928d15fd89764353a6889f571bfd0a1c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "AFG",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "AFG",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Afghanistan",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "AFG"
+    },
+    {
+      "game_id": "tc_644aaabf37604038996e34c1bc91c970",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "KAS",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Siachen Glacier",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Asia"
+      ],
+      "geometry_key": "KAS"
+    },
+    {
+      "game_id": "tc_c3c21e18d6e94254a4ca4a009530bac9",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "ATA",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "ATA",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Antarctica",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Antarctica"
+      ],
+      "geometry_key": "ATA"
+    },
+    {
+      "game_id": "tc_d79e2777be2741c3bcf291431e2e4efb",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "SXM",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "SXM",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Sint Maarten",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "North America"
+      ],
+      "geometry_key": "SXM"
+    },
+    {
+      "game_id": "tc_47cd272cd9c9455185a13f6e69bd805c",
+      "source": {
+        "dataset": "natural_earth_admin_0",
+        "current_source_id": "TUV",
+        "previous_source_ids": []
+      },
+      "status": "proposed",
+      "iso": {
+        "alpha2": null,
+        "alpha3": "TUV",
+        "assignment_status": "unverified"
+      },
+      "names": {
+        "en": "Tuvalu",
+        "fa": null,
+        "aliases_en": [],
+        "aliases_fa": [],
+        "localization_status": "unreviewed"
+      },
+      "entity_type": "unreviewed",
+      "regions": [
+        "Oceania"
+      ],
+      "geometry_key": "TUV"
+    }
+  ]
+}
