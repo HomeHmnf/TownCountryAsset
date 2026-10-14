@@ -70,25 +70,36 @@ def audit(asset_data: Path, game_root: Path) -> dict[str, Any]:
     fa_to_en=defaultdict(set)
     for en,fa in data["Flag_Translation.json"].items():
         if isinstance(en,str) and isinstance(fa,str): fa_to_en[norm(fa)].add(norm(en))
+    # Build a source-name index from the processed asset dataset itself. The
+    # game repository contributes labels for audit only; it never defines asset
+    # identities or source metadata.
+    source_name_to_ids=defaultdict(set)
     asset_rows=[]
     for c in countries:
         sid=str(c.get("id",""))
         attrs=c.get("source_attributes",{})
-        names={c.get("name"),attrs.get("ADMIN"),attrs.get("NAME"),attrs.get("NAME_LONG")}
-        if isinstance(c.get("aliases"),list): names.update(c["aliases"])
-        names={norm(n) for n in names if isinstance(n,str) and n.strip()}
+        raw_names={c.get("name"),attrs.get("ADMIN"),attrs.get("NAME"),attrs.get("NAME_LONG")}
+        if isinstance(c.get("aliases"),list): raw_names.update(c["aliases"])
+        names={norm(n) for n in raw_names if isinstance(n,str) and n.strip()}
+        for name in names: source_name_to_ids[name].add(sid)
         persian=set()
         for fa,ens in fa_to_en.items():
             if names & ens: persian.add(fa)
         asset_rows.append({"source_id":sid,"name":c.get("name"),"iso3_candidate":c.get("iso3"),
-                           "regions":c.get("regions",[]),"legacy_persian_labels_from_flag_translation":sorted(persian),
+                           "regions":c.get("regions",[]),"source_name_candidates":sorted(names),
+                           "legacy_persian_labels_from_flag_translation":sorted(persian),
                            "review_status":"needs_human_review"})
-    fa_to_ids=defaultdict(set)
-    for c in asset_rows:
-        for fa in c["legacy_persian_labels_from_flag_translation"]: fa_to_ids[fa].add(c["source_id"])
+    def candidates_for_label(normalized_label):
+        # Match either a normalized source name directly (including English
+        # game labels) or a Persian label translated by the legacy dictionary
+        # to an English name present in the source-derived asset dataset.
+        ids=set(source_name_to_ids.get(normalized_label,set()))
+        for english_name in fa_to_en.get(normalized_label,set()):
+            ids.update(source_name_to_ids.get(english_name,set()))
+        return ids
     game_rows=[]
     for n,occ in sorted(labels.items()):
-        ids=sorted(fa_to_ids.get(n,set()))
+        ids=sorted(candidates_for_label(n))
         game_rows.append({"normalized_label":n,"labels":sorted({o["label"] for o in occ}),
             "sources":sorted({o["source"] for o in occ}),"regions":sorted({o["region"] for o in occ if o["region"]}),
             "asset_source_id_candidates":ids,
@@ -100,7 +111,7 @@ def audit(asset_data: Path, game_root: Path) -> dict[str, Any]:
         answers=[q.get("answer") for q in data[qf] if isinstance(q,dict) and isinstance(q.get("answer"),str)]
         catalog_candidates=[]
         for normalized,label in sorted(catalog.items()):
-            ids=sorted(fa_to_ids.get(normalized,set()))
+            ids=sorted(candidates_for_label(normalized))
             catalog_candidates.append({"label":label,"asset_source_id_candidates":ids,
                 "match_status":"ambiguous_candidate" if len(ids)>1 else "candidate_needs_review" if ids else "unmatched"})
         region_audits[region]={"catalog_entries":len(data[cf]),"color_map_entries":len(data[mf]),
