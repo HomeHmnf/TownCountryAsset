@@ -96,7 +96,7 @@ The ISO proposal generator is intentionally separate from registry validation an
 
 1. Obtain an ISO 3166-1 reference export from the ISO Online Browsing Platform / ISO Country Codes Collection. The ISO overview is https://www.iso.org/iso-3166-country-codes.html. Record the retrieval date and retain the original downloaded file.
 2. Prepare a UTF-8 CSV with columns `alpha2`, `alpha3`, and `english_name`, preserving the reference's official English short names and code values. Do not supplement the file with Natural Earth source IDs or user-assigned codes.
-3. Run `uv run python tools/propose_iso_assignments.py --reference data/iso/iso-3166-1.csv`.
+3. Run `uv run python tools/propose_iso_assignments.py --reference data/iso/iso-3166-1.csv --source-url https://www.iso.org/iso-3166-country-codes.html --retrieved-on YYYY-MM-DD` (replace `YYYY-MM-DD` with the actual retrieval date). The report records both provenance fields.
 4. Review `reports/iso-assignment-proposals.md`. Exact normalized English-name matches are candidates only. Unmatched records and naming variants need separate evidence-backed review; fuzzy matching is intentionally not used.
 5. For each accepted proposal, record the authoritative source and retrieval date in the registry's evidence/provenance fields before changing any code or marking `assignment_status` as `verified`. Keep ISO fields null when no appropriate code exists. Do not change `game_id`.
 6. Re-run the registry audit and tests after any reviewed registry changes.
