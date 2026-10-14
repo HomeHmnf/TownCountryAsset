@@ -90,6 +90,20 @@ Before a registry can be considered usable, automated checks must establish that
 6. Produce a separate legacy-game compatibility crosswalk keyed by `game_id`.
 7. Only after review, plan a compatibility-safe game migration for catalogs, maps, flags, questions, and saved progress.
 
+## Automated ISO reference refresh
+
+For a one-command refresh, run:
+
+```fish
+uv run python tools/refresh_iso_review.py
+```
+
+This downloads the maintained `stefangabos/world_countries` English `world.csv` distribution, normalizes its lowercase code fields to the proposal tool's uppercase schema, validates the required columns, unique codes, and a minimum expected row count, and generates `reports/iso-assignment-proposals.md`. The raw response is preserved as a timestamped file under `raw_data/iso/`; a separate timestamped JSON provenance record captures the source URL, UTC retrieval time, raw and normalized SHA-256 checksums, and row count. The normalized `raw_data/iso/iso-3166-1.csv` is refreshed for convenient reuse. The raw snapshots and provenance records are locally preserved and `raw_data/` is git-ignored by default.
+
+**Source limitation:** this download is a third-party maintained distribution, not a direct export from ISO's own Online Browsing Platform. It is useful for automated candidate discovery, but it is not sufficient evidence to mark a code verified. The ISO organization explains that its Online Browsing Platform is the authoritative current source and that the downloadable Country Codes Collection may require a subscription: https://www.iso.org/iso-3166-country-codes.html. Review candidates against appropriate authoritative evidence before approving them.
+
+The refresh command never edits `config/country_identity_registry.json`, canonical IDs, or generated asset snapshots. It fails on network errors, an unexpected schema, invalid or duplicate codes, an implausibly small reference, or a timestamp collision rather than silently accepting questionable data. Re-running it on the same UTC second refuses to overwrite the prior raw snapshot; run again later if that occurs.
+
 ## ISO assignment proposal workflow
 
 The ISO proposal generator is intentionally separate from registry validation and never edits registry records:
