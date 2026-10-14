@@ -17,6 +17,8 @@ from typing import Any
 
 import shapefile
 from shapely.geometry import mapping, shape
+
+from tools.country_identity_registry import read_json as read_identity_json, validate as validate_identity_registry
 from shapely.validation import explain_validity
 
 SCHEMA_VERSION = 1
@@ -147,7 +149,13 @@ def _source_provenance(source: Path, config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def compile_data(source: Path, output: Path, config_path: Path, regions_path: Path) -> dict[str, Any]:
+def compile_data(
+    source: Path,
+    output: Path,
+    config_path: Path,
+    regions_path: Path,
+    identity_registry_path: Path | None = None,
+) -> dict[str, Any]:
     config = load_config(config_path)
     region_config = json.loads(regions_path.read_text(encoding="utf-8"))
     config_bytes = config_path.read_bytes()
@@ -254,6 +262,29 @@ def compile_data(source: Path, output: Path, config_path: Path, regions_path: Pa
             "unmapped_ids": sorted(country["id"] for country in countries if not country["regions"]),
         },
     }
+    game_id_by_source_id: dict[str, str] | None = None
+    if identity_registry_path is not None:
+        registry = read_identity_json(identity_registry_path)
+        registry_errors = validate_identity_registry(registry, metadata)
+        if registry_errors:
+            raise ValueError(
+                "Identity registry validation failed: " + "; ".join(registry_errors[:30])
+            )
+        game_id_by_source_id = {
+            record["source"]["current_source_id"]: record["game_id"]
+            for record in registry["records"]
+        }
+        for country in countries:
+            country["game_id"] = game_id_by_source_id[country["id"]]
+        metadata["identity_registry"] = {
+            "schema_version": registry["schema_version"],
+            "dataset": registry["dataset"],
+            "status": registry.get("status", "proposal"),
+            "registry_path": identity_registry_path.as_posix(),
+            "game_id_count": len(game_id_by_source_id),
+            "geometry_key_mode": "legacy_source_id_with_parallel_game_id_files",
+        }
+
     country_bytes = (json.dumps(metadata, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
     generated_files: dict[str, bytes] = {"countries.json": country_bytes}
     for profile, geometries in geometry_by_profile.items():
@@ -261,6 +292,20 @@ def compile_data(source: Path, output: Path, config_path: Path, regions_path: Pa
         generated_files[f"geometry_{profile}.json"] = (
             json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
         ).encode("utf-8")
+        if game_id_by_source_id is not None:
+            game_id_geometries = {
+                game_id_by_source_id[source_id]: geometry
+                for source_id, geometry in geometries.items()
+            }
+            game_id_payload = {
+                "schema_version": SCHEMA_VERSION,
+                "profile": profile,
+                "key": "game_id",
+                "geometries": game_id_geometries,
+            }
+            generated_files[f"geometry_game_id_{profile}.json"] = (
+                json.dumps(game_id_payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+            ).encode("utf-8")
 
     for filename, data in generated_files.items():
         (output / filename).write_bytes(data)
@@ -287,9 +332,10 @@ def main() -> int:
     parser.add_argument("--output", type=Path, default=Path("generated/town_country_asset"))
     parser.add_argument("--config", type=Path, default=Path("config/generation.json"))
     parser.add_argument("--regions", type=Path, default=Path("config/regions.json"))
+    parser.add_argument("--identity-registry", type=Path, help="Optional persistent canonical identity registry; adds game_id metadata and parallel game_id-keyed geometry files")
     args = parser.parse_args()
     try:
-        result = compile_data(args.source, args.output, args.config, args.regions)
+        result = compile_data(args.source, args.output, args.config, args.regions, args.identity_registry)
     except Exception as exc:
         print(f"compile error: {exc}", file=sys.stderr)
         return 1
