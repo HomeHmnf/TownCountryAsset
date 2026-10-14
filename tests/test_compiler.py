@@ -112,6 +112,51 @@ def test_identity_registry_adds_game_ids_and_parallel_geometry_without_breaking_
     assert result["identity_registry"]["game_id_count"] == 3
 
 
+def test_compiler_preserves_game_id_when_source_id_is_explicitly_renamed(tmp_path):
+    from tools.country_identity_registry import bootstrap
+
+    source = make_fixture(tmp_path)
+    config, regions = write_config(tmp_path)
+    base = compile_data(source, tmp_path / "base", config, regions)
+    registry = bootstrap(base)
+    target = next(
+        record for record in registry["records"]
+        if record["source"]["current_source_id"] == "TST"
+    )
+    stable_game_id = target["game_id"]
+    target["source"]["current_source_id"] = "TST_NEW"
+    target["source"]["previous_source_ids"] = ["TST"]
+    target["geometry_key"] = "TST_NEW"
+    registry_path = tmp_path / "identity_registry.json"
+    registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+    # Simulate an upstream source-ID rename while preserving the feature's
+    # other attributes and geometry.
+    reader = shapefile.Reader(str(source))
+    fields = [field[0] for field in reader.fields[1:]]
+    records = [dict(zip(fields, record)) for record in reader.records()]
+    geometries = list(reader.iterShapes())
+    reader.close()
+    records[0]["ADM0_A3"] = "TST_NEW"
+    renamed_base = tmp_path / "renamed-source"
+    with shapefile.Writer(str(renamed_base), shapeType=shapefile.POLYGON) as writer:
+        for field in fields:
+            writer.field(field, "C", size=40)
+        for geometry, record in zip(geometries, records):
+            writer.shape(geometry)
+            writer.record(*[record[field] for field in fields])
+
+    out = tmp_path / "renamed-output"
+    result = compile_data(renamed_base.with_suffix(".shp"), out, config, regions, registry_path)
+    renamed = next(country for country in result["countries"] if country["id"] == "TST_NEW")
+    assert renamed["game_id"] == stable_game_id
+    assert renamed["name"] == "Testland"
+    assert renamed["source_attributes"]["ADMIN"] == "Testland"
+
+    canonical = json.loads((out / "geometry_game_id_high.json").read_text())
+    assert stable_game_id in canonical["geometries"]
+    assert "TST_NEW" not in canonical["geometries"]
+
 def test_compiler_with_identity_registry_fails_on_unmapped_source_feature(tmp_path):
     from tools.country_identity_registry import bootstrap
 
