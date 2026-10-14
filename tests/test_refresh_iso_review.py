@@ -26,7 +26,7 @@ def upstream_csv(rows=None):
 
 def test_normalize_source_uppercases_codes_and_preserves_names():
     payload = upstream_csv()
-    normalized, count = refresh_tool.normalize_source(payload)
+    normalized, count = refresh_tool.normalize_source(payload, minimum_rows=1)
     assert count == 2
     assert normalized.splitlines()[0] == "alpha2,alpha3,english_name"
     assert "AF,AFG,Afghanistan" in normalized
