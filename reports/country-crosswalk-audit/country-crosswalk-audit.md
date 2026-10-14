@@ -6,9 +6,9 @@ Read-only report. Candidate matches are not approved mappings.
 
 - Asset records: 242
 - Distinct normalized game labels: 586
-- Single-candidate labels requiring review: 172
+- Single-candidate labels requiring review: 344
 - Ambiguous candidate labels: 0
-- Unmatched labels across all collected game text (includes quiz text, aliases, capitals, and other labels): 414
+- Unmatched labels across all collected game text (includes quiz text, aliases, capitals, and other labels): 242
 - Regional country-catalog labels: 241
 - Country-catalog labels with a single candidate requiring review: 175
 - Country-catalog labels unmatched by the current bridge: 66
@@ -58,259 +58,87 @@ Warning: All proposed matches require human review. Source IDs are not approved 
 This section includes quiz choices/answers, aliases, capitals, translations, and map labels; an unmatched item is not necessarily a country.
 
 - (کره جنوبی)سئول (global): unmatched; candidate source IDs: none
-- Afghanistan (global): unmatched; candidate source IDs: none
 - Aland Islands (global): unmatched; candidate source IDs: none
-- Albania (global): unmatched; candidate source IDs: none
-- Algeria (global): unmatched; candidate source IDs: none
-- Andorra (global): unmatched; candidate source IDs: none
 - Angiela (global): unmatched; candidate source IDs: none
-- Angola (global): unmatched; candidate source IDs: none
 - Antarctic (global): unmatched; candidate source IDs: none
-- Antigua and Barbuda (global): unmatched; candidate source IDs: none
 - Arba (global): unmatched; candidate source IDs: none
-- Argentina (global): unmatched; candidate source IDs: none
-- Armenia (global): unmatched; candidate source IDs: none
-- Australia (global): unmatched; candidate source IDs: none
-- Austria (global): unmatched; candidate source IDs: none
-- Azerbaijan (global): unmatched; candidate source IDs: none
-- Bahamas (global): unmatched; candidate source IDs: none
-- Bahrain (global): unmatched; candidate source IDs: none
-- Bangladesh (global): unmatched; candidate source IDs: none
-- Barbados (global): unmatched; candidate source IDs: none
 - Barceli's tradition (global): unmatched; candidate source IDs: none
-- Belarus (global): unmatched; candidate source IDs: none
-- Belgium (global): unmatched; candidate source IDs: none
-- Belize (global): unmatched; candidate source IDs: none
-- Benin (global): unmatched; candidate source IDs: none
-- Bermuda (global): unmatched; candidate source IDs: none
-- Bolivia (global): unmatched; candidate source IDs: none
-- Bosnia and Herzegovina (global): unmatched; candidate source IDs: none
 - Botsawa (global): unmatched; candidate source IDs: none
 - Bouva Island (global): unmatched; candidate source IDs: none
-- Brazil (global): unmatched; candidate source IDs: none
 - Britain (global): unmatched; candidate source IDs: none
-- British Virgin Islands (global): unmatched; candidate source IDs: none
-- Brunei (global): unmatched; candidate source IDs: none
-- Bulgaria (global): unmatched; candidate source IDs: none
-- Burkina Faso (global): unmatched; candidate source IDs: none
-- Burundi (global): unmatched; candidate source IDs: none
 - Butane (global): unmatched; candidate source IDs: none
-- Cambodia (global): unmatched; candidate source IDs: none
 - Cameron (global): unmatched; candidate source IDs: none
-- Canada (global): unmatched; candidate source IDs: none
 - Cape Word (global): unmatched; candidate source IDs: none
 - Caribbean Dutch (global): unmatched; candidate source IDs: none
-- Cayman Islands (global): unmatched; candidate source IDs: none
-- Central African Republic (global): unmatched; candidate source IDs: none
-- Chad (global): unmatched; candidate source IDs: none
-- Chile (global): unmatched; candidate source IDs: none
-- China (global): unmatched; candidate source IDs: none
 - Christmas Island (global): unmatched; candidate source IDs: none
 - Cocoa (Kiling) Criminal (global): unmatched; candidate source IDs: none
-- Colombia (global): unmatched; candidate source IDs: none
 - Comor (global): unmatched; candidate source IDs: none
-- Congo (global): unmatched; candidate source IDs: none
 - Congo Democratic Republic (global): unmatched; candidate source IDs: none
-- Cook Islands (global): unmatched; candidate source IDs: none
-- Costa Rica (global): unmatched; candidate source IDs: none
-- Croatia (global): unmatched; candidate source IDs: none
-- Cuba (global): unmatched; candidate source IDs: none
-- Cyprus (global): unmatched; candidate source IDs: none
-- Czech Republic (global): unmatched; candidate source IDs: none
-- Denmark (global): unmatched; candidate source IDs: none
-- Djibouti (global): unmatched; candidate source IDs: none
-- Dominica (global): unmatched; candidate source IDs: none
-- Dominican Republic (global): unmatched; candidate source IDs: none
 - East Timur (global): unmatched; candidate source IDs: none
-- Ecuador (global): unmatched; candidate source IDs: none
-- Egypt (global): unmatched; candidate source IDs: none
-- El Salvador (global): unmatched; candidate source IDs: none
-- Eritrea (global): unmatched; candidate source IDs: none
-- Estonia (global): unmatched; candidate source IDs: none
-- Ethiopia (global): unmatched; candidate source IDs: none
-- Falkland Islands (global): unmatched; candidate source IDs: none
 - Farrow Islands (global): unmatched; candidate source IDs: none
-- Fiji (global): unmatched; candidate source IDs: none
 - Financial (global): unmatched; candidate source IDs: none
-- Finland (global): unmatched; candidate source IDs: none
-- France (global): unmatched; candidate source IDs: none
 - France Polynesis (global): unmatched; candidate source IDs: none
 - France shows (global): unmatched; candidate source IDs: none
-- Gabon (global): unmatched; candidate source IDs: none
-- Gambia (global): unmatched; candidate source IDs: none
-- Georgia (global): unmatched; candidate source IDs: none
-- Germany (global): unmatched; candidate source IDs: none
-- Ghana (global): unmatched; candidate source IDs: none
 - Gibraltar (global): unmatched; candidate source IDs: none
 - Granada (global): unmatched; candidate source IDs: none
 - Granzai Island (global): unmatched; candidate source IDs: none
-- Greece (global): unmatched; candidate source IDs: none
-- Greenland (global): unmatched; candidate source IDs: none
 - Guadlop (global): unmatched; candidate source IDs: none
-- Guam (global): unmatched; candidate source IDs: none
-- Guatemala (global): unmatched; candidate source IDs: none
-- Guinea (global): unmatched; candidate source IDs: none
 - Guinea Bisao (global): unmatched; candidate source IDs: none
-- Guyana (global): unmatched; candidate source IDs: none
-- Haiti (global): unmatched; candidate source IDs: none
 - Heot (global): unmatched; candidate source IDs: none
 - Holland (global): unmatched; candidate source IDs: none
-- Honduras (global): unmatched; candidate source IDs: none
-- Hong Kong (global): unmatched; candidate source IDs: none
-- Hungary (global): unmatched; candidate source IDs: none
-- Iceland (global): unmatched; candidate source IDs: none
-- India (global): unmatched; candidate source IDs: none
-- Indonesia (global): unmatched; candidate source IDs: none
-- Iran (global): unmatched; candidate source IDs: none
-- Iraq (global): unmatched; candidate source IDs: none
-- Ireland (global): unmatched; candidate source IDs: none
-- Israel (global): unmatched; candidate source IDs: none
-- Italy (global): unmatched; candidate source IDs: none
-- Ivory Coast (global): unmatched; candidate source IDs: none
-- Jamaica (global): unmatched; candidate source IDs: none
-- Japan (global): unmatched; candidate source IDs: none
 - Jerzi (global): unmatched; candidate source IDs: none
 - Jizya Heard and McDonald's Islands (global): unmatched; candidate source IDs: none
-- Jordan (global): unmatched; candidate source IDs: none
-- Kazakhstan (global): unmatched; candidate source IDs: none
-- Kenya (global): unmatched; candidate source IDs: none
-- Kiribati (global): unmatched; candidate source IDs: none
 - Korasao (global): unmatched; candidate source IDs: none
-- Kuwait (global): unmatched; candidate source IDs: none
-- Kyrgyzstan (global): unmatched; candidate source IDs: none
-- Laos (global): unmatched; candidate source IDs: none
-- Latvia (global): unmatched; candidate source IDs: none
-- Lebanon (global): unmatched; candidate source IDs: none
 - Lesoto (global): unmatched; candidate source IDs: none
-- Liberia (global): unmatched; candidate source IDs: none
-- Libya (global): unmatched; candidate source IDs: none
-- Liechtenstein (global): unmatched; candidate source IDs: none
-- Lithuania (global): unmatched; candidate source IDs: none
-- Luxembourg (global): unmatched; candidate source IDs: none
 - Macau (global): unmatched; candidate source IDs: none
 - Macedonia former Yugoslavia (global): unmatched; candidate source IDs: none
-- Madagascar (global): unmatched; candidate source IDs: none
-- Malawi (global): unmatched; candidate source IDs: none
-- Malaysia (global): unmatched; candidate source IDs: none
-- Maldives (global): unmatched; candidate source IDs: none
-- Malta (global): unmatched; candidate source IDs: none
-- Marshall Islands (global): unmatched; candidate source IDs: none
 - Martinic (global): unmatched; candidate source IDs: none
 - Maurice (global): unmatched; candidate source IDs: none
-- Mauritania (global): unmatched; candidate source IDs: none
-- Mexico (global): unmatched; candidate source IDs: none
 - Micrones (global): unmatched; candidate source IDs: none
-- Moldova (global): unmatched; candidate source IDs: none
-- Monaco (global): unmatched; candidate source IDs: none
-- Mongolia (global): unmatched; candidate source IDs: none
-- Montenegro (global): unmatched; candidate source IDs: none
 - Montesrate (global): unmatched; candidate source IDs: none
-- Morocco (global): unmatched; candidate source IDs: none
-- Mozambique (global): unmatched; candidate source IDs: none
-- Myanmar (global): unmatched; candidate source IDs: none
-- Namibia (global): unmatched; candidate source IDs: none
 - Nauro (global): unmatched; candidate source IDs: none
-- Nepal (global): unmatched; candidate source IDs: none
 - New (global): unmatched; candidate source IDs: none
 - New Caldonia (global): unmatched; candidate source IDs: none
 - New Guinea (global): unmatched; candidate source IDs: none
-- New Zealand (global): unmatched; candidate source IDs: none
 - Nicarogua (global): unmatched; candidate source IDs: none
-- Niger (global): unmatched; candidate source IDs: none
-- Nigeria (global): unmatched; candidate source IDs: none
-- Norfolk Island (global): unmatched; candidate source IDs: none
 - Northern Ireland (global): unmatched; candidate source IDs: none
-- North Korea (global): unmatched; candidate source IDs: none
 - North Mariana (global): unmatched; candidate source IDs: none
-- Norway (global): unmatched; candidate source IDs: none
-- Oman (global): unmatched; candidate source IDs: none
 - Our island (global): unmatched; candidate source IDs: none
-- Pakistan (global): unmatched; candidate source IDs: none
-- Palau (global): unmatched; candidate source IDs: none
-- Palestine (global): unmatched; candidate source IDs: none
-- Panama (global): unmatched; candidate source IDs: none
-- Paraguay (global): unmatched; candidate source IDs: none
-- Peru (global): unmatched; candidate source IDs: none
-- Philippines (global): unmatched; candidate source IDs: none
 - Pitcran Islands (global): unmatched; candidate source IDs: none
-- Poland (global): unmatched; candidate source IDs: none
-- Portugal (global): unmatched; candidate source IDs: none
-- Puerto Rico (global): unmatched; candidate source IDs: none
-- Qatar (global): unmatched; candidate source IDs: none
 - Questioner (global): unmatched; candidate source IDs: none
 - Republic of Kosovo (global): unmatched; candidate source IDs: none
-- Romania (global): unmatched; candidate source IDs: none
 - Ronion (global): unmatched; candidate source IDs: none
-- Russia (global): unmatched; candidate source IDs: none
-- Rwanda (global): unmatched; candidate source IDs: none
-- Samoa (global): unmatched; candidate source IDs: none
 - Samoa Islands (global): unmatched; candidate source IDs: none
-- San Marino (global): unmatched; candidate source IDs: none
-- Saudi Arabia (global): unmatched; candidate source IDs: none
 - Sautoma and Princess (global): unmatched; candidate source IDs: none
 - Scotland (global): unmatched; candidate source IDs: none
-- Senegal (global): unmatched; candidate source IDs: none
-- Serbia (global): unmatched; candidate source IDs: none
-- Seychelles (global): unmatched; candidate source IDs: none
-- Singapore (global): unmatched; candidate source IDs: none
 - Sira Leon (global): unmatched; candidate source IDs: none
-- Slovakia (global): unmatched; candidate source IDs: none
-- Slovenia (global): unmatched; candidate source IDs: none
-- Solomon Islands (global): unmatched; candidate source IDs: none
-- Somalia (global): unmatched; candidate source IDs: none
-- South Africa (global): unmatched; candidate source IDs: none
 - Southern French lands (global): unmatched; candidate source IDs: none
 - South Georgia and South Sandwag Islands (global): unmatched; candidate source IDs: none
-- South Korea (global): unmatched; candidate source IDs: none
-- South Sudan (global): unmatched; candidate source IDs: none
-- Spain (global): unmatched; candidate source IDs: none
-- Sri Lanka (global): unmatched; candidate source IDs: none
 - St. Helena (global): unmatched; candidate source IDs: none
 - St. Kitz and Ney (global): unmatched; candidate source IDs: none
 - St. Lucia (global): unmatched; candidate source IDs: none
 - St. Martin Dutch (global): unmatched; candidate source IDs: none
 - St. Martin France (global): unmatched; candidate source IDs: none
 - St. Vincent and Grenadins (global): unmatched; candidate source IDs: none
-- Sudan (global): unmatched; candidate source IDs: none
 - Surinam (global): unmatched; candidate source IDs: none
 - Swaziland (global): unmatched; candidate source IDs: none
-- Sweden (global): unmatched; candidate source IDs: none
-- Switzerland (global): unmatched; candidate source IDs: none
-- Syria (global): unmatched; candidate source IDs: none
-- Taiwan (global): unmatched; candidate source IDs: none
-- Tajikistan (global): unmatched; candidate source IDs: none
-- Tanzania (global): unmatched; candidate source IDs: none
 - Tawalou (global): unmatched; candidate source IDs: none
-- Thailand (global): unmatched; candidate source IDs: none
 - The territory of the British Ocean (global): unmatched; candidate source IDs: none
 - The tropical Guinea (global): unmatched; candidate source IDs: none
 - The United Arab Emirates (global): unmatched; candidate source IDs: none
 - The united kingdom of Britain (global): unmatched; candidate source IDs: none
-- Togo (global): unmatched; candidate source IDs: none
 - Toklau (global): unmatched; candidate source IDs: none
-- Tonga (global): unmatched; candidate source IDs: none
 - Traditional (global): unmatched; candidate source IDs: none
-- Trinidad and Tobago (global): unmatched; candidate source IDs: none
-- Tunisia (global): unmatched; candidate source IDs: none
-- Turkmenistan (global): unmatched; candidate source IDs: none
 - Turks and Ciches islands (global): unmatched; candidate source IDs: none
 - Türkiye (global): unmatched; candidate source IDs: none
-- Uganda (global): unmatched; candidate source IDs: none
-- Ukraine (global): unmatched; candidate source IDs: none
-- Uruguay (global): unmatched; candidate source IDs: none
 - USA (global): unmatched; candidate source IDs: none
 - US Small Marginal Islands (global): unmatched; candidate source IDs: none
 - US Virgin Islands (global): unmatched; candidate source IDs: none
-- Uzbekistan (global): unmatched; candidate source IDs: none
 - Valis and Photona (global): unmatched; candidate source IDs: none
 - Vanuato (global): unmatched; candidate source IDs: none
 - Vatican City (global): unmatched; candidate source IDs: none
-- Venezuela (global): unmatched; candidate source IDs: none
-- Vietnam (global): unmatched; candidate source IDs: none
 - Wales (global): unmatched; candidate source IDs: none
 - Western Desert (global): unmatched; candidate source IDs: none
-- Yemen (global): unmatched; candidate source IDs: none
-- Zimbabwe (global): unmatched; candidate source IDs: none
 - Zombia (global): unmatched; candidate source IDs: none
 - آروبا, آروبا  (america, آمریکا): unmatched; candidate source IDs: none
 -  آفریقای مرکزی (آفریقا): unmatched; candidate source IDs: none
@@ -478,6 +306,178 @@ These are exact normalized Persian matches reached through Flag_Translation.json
 
 | Game label | Region | Candidate source ID |
 |---|---|---|
+| Afghanistan | global | AFG |
+| Albania | global | ALB |
+| Algeria | global | DZA |
+| Andorra | global | AND |
+| Angola | global | AGO |
+| Antigua and Barbuda | global | ATG |
+| Argentina | global | ARG |
+| Armenia | global | ARM |
+| Australia | global | AUS |
+| Austria | global | AUT |
+| Azerbaijan | global | AZE |
+| Bahamas | global | BHS |
+| Bahrain | global | BHR |
+| Bangladesh | global | BGD |
+| Barbados | global | BRB |
+| Belarus | global | BLR |
+| Belgium | global | BEL |
+| Belize | global | BLZ |
+| Benin | global | BEN |
+| Bermuda | global | BMU |
+| Bolivia | global | BOL |
+| Bosnia and Herzegovina | global | BIH |
+| Brazil | global | BRA |
+| British Virgin Islands | global | VGB |
+| Brunei | global | BRN |
+| Bulgaria | global | BGR |
+| Burkina Faso | global | BFA |
+| Burundi | global | BDI |
+| Cambodia | global | KHM |
+| Canada | global | CAN |
+| Cayman Islands | global | CYM |
+| Central African Republic | global | CAF |
+| Chad | global | TCD |
+| Chile | global | CHL |
+| China | global | CHN |
+| Colombia | global | COL |
+| Congo | global | COG |
+| Cook Islands | global | COK |
+| Costa Rica | global | CRI |
+| Croatia | global | HRV |
+| Cuba | global | CUB |
+| Cyprus | global | CYP |
+| Czech Republic | global | CZE |
+| Denmark | global | DNK |
+| Djibouti | global | DJI |
+| Dominica | global | DMA |
+| Dominican Republic | global | DOM |
+| Ecuador | global | ECU |
+| Egypt | global | EGY |
+| El Salvador | global | SLV |
+| Eritrea | global | ERI |
+| Estonia | global | EST |
+| Ethiopia | global | ETH |
+| Falkland Islands | global | FLK |
+| Fiji | global | FJI |
+| Finland | global | FIN |
+| France | global | FRA |
+| Gabon | global | GAB |
+| Gambia | global | GMB |
+| Georgia | global | GEO |
+| Germany | global | DEU |
+| Ghana | global | GHA |
+| Greece | global | GRC |
+| Greenland | global | GRL |
+| Guam | global | GUM |
+| Guatemala | global | GTM |
+| Guinea | global | GIN |
+| Guyana | global | GUY |
+| Haiti | global | HTI |
+| Honduras | global | HND |
+| Hong Kong | global | HKG |
+| Hungary | global | HUN |
+| Iceland | global | ISL |
+| India | global | IND |
+| Indonesia | global | IDN |
+| Iran | global | IRN |
+| Iraq | global | IRQ |
+| Ireland | global | IRL |
+| Israel | global | ISR |
+| Italy | global | ITA |
+| Ivory Coast | global | CIV |
+| Jamaica | global | JAM |
+| Japan | global | JPN |
+| Jordan | global | JOR |
+| Kazakhstan | global | KAZ |
+| Kenya | global | KEN |
+| Kiribati | global | KIR |
+| Kuwait | global | KWT |
+| Kyrgyzstan | global | KGZ |
+| Laos | global | LAO |
+| Latvia | global | LVA |
+| Lebanon | global | LBN |
+| Liberia | global | LBR |
+| Libya | global | LBY |
+| Liechtenstein | global | LIE |
+| Lithuania | global | LTU |
+| Luxembourg | global | LUX |
+| Madagascar | global | MDG |
+| Malawi | global | MWI |
+| Malaysia | global | MYS |
+| Maldives | global | MDV |
+| Malta | global | MLT |
+| Marshall Islands | global | MHL |
+| Mauritania | global | MRT |
+| Mexico | global | MEX |
+| Moldova | global | MDA |
+| Monaco | global | MCO |
+| Mongolia | global | MNG |
+| Montenegro | global | MNE |
+| Morocco | global | MAR |
+| Mozambique | global | MOZ |
+| Myanmar | global | MMR |
+| Namibia | global | NAM |
+| Nepal | global | NPL |
+| New Zealand | global | NZL |
+| Niger | global | NER |
+| Nigeria | global | NGA |
+| Norfolk Island | global | NFK |
+| North Korea | global | PRK |
+| Norway | global | NOR |
+| Oman | global | OMN |
+| Pakistan | global | PAK |
+| Palau | global | PLW |
+| Palestine | global | PSX |
+| Panama | global | PAN |
+| Paraguay | global | PRY |
+| Peru | global | PER |
+| Philippines | global | PHL |
+| Poland | global | POL |
+| Portugal | global | PRT |
+| Puerto Rico | global | PRI |
+| Qatar | global | QAT |
+| Romania | global | ROU |
+| Russia | global | RUS |
+| Rwanda | global | RWA |
+| Samoa | global | WSM |
+| San Marino | global | SMR |
+| Saudi Arabia | global | SAU |
+| Senegal | global | SEN |
+| Serbia | global | SRB |
+| Seychelles | global | SYC |
+| Singapore | global | SGP |
+| Slovakia | global | SVK |
+| Slovenia | global | SVN |
+| Solomon Islands | global | SLB |
+| Somalia | global | SOM |
+| South Africa | global | ZAF |
+| South Korea | global | KOR |
+| South Sudan | global | SDS |
+| Spain | global | ESP |
+| Sri Lanka | global | LKA |
+| Sudan | global | SDN |
+| Sweden | global | SWE |
+| Switzerland | global | CHE |
+| Syria | global | SYR |
+| Taiwan | global | TWN |
+| Tajikistan | global | TJK |
+| Tanzania | global | TZA |
+| Thailand | global | THA |
+| Togo | global | TGO |
+| Tonga | global | TON |
+| Trinidad and Tobago | global | TTO |
+| Tunisia | global | TUN |
+| Turkmenistan | global | TKM |
+| Uganda | global | UGA |
+| Ukraine | global | UKR |
+| Uruguay | global | URY |
+| Uzbekistan | global | UZB |
+| Venezuela | global | VEN |
+| Vietnam | global | VNM |
+| Yemen | global | YEM |
+| Zimbabwe | global | ZWE |
 |  آذربایجان, آذربایجان | asia, europe, آسیا | AZE |
 | آرژانتین | america, آمریکا | ARG |
 | آفریقای جنوبی | africa, آفریقا | ZAF |

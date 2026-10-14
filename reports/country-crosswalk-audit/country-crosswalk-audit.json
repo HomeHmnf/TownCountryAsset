@@ -11,6 +11,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "zimbabwe"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "زیمبابوه"
       ],
@@ -23,6 +26,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "zambia"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -32,6 +38,9 @@
       "iso3_candidate": "YEM",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "yemen"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "یمن"
@@ -45,6 +54,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "vietnam"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "ویتنام"
       ],
@@ -56,6 +68,9 @@
       "iso3_candidate": "VEN",
       "regions": [
         "South America"
+      ],
+      "source_name_candidates": [
+        "venezuela"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "ونزوئلا"
@@ -69,6 +84,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "vatican"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -79,6 +97,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "vanuatu"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -88,6 +109,9 @@
       "iso3_candidate": "UZB",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "uzbekistan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "ازبکستان"
@@ -101,6 +125,9 @@
       "regions": [
         "South America"
       ],
+      "source_name_candidates": [
+        "uruguay"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "اروگوئه"
       ],
@@ -113,6 +140,10 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "federatedstatesofmicronesia",
+        "micronesia"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -122,6 +153,10 @@
       "iso3_candidate": "MHL",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "marshallis.",
+        "marshallislands"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "جزایرمارشال"
@@ -135,6 +170,10 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "n.marianais.",
+        "northernmarianaislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -145,6 +184,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "u.s.virginis.",
+        "unitedstatesvirginislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -154,6 +197,9 @@
       "iso3_candidate": "GUM",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "guam"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "گوام"
@@ -167,6 +213,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "americansamoa"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -176,6 +225,9 @@
       "iso3_candidate": "PRI",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "puertorico"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "پورتوریکو"
@@ -189,6 +241,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "unitedstates",
+        "unitedstatesofamerica"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -197,6 +253,10 @@
       "name": "South Georgia and the Islands",
       "iso3_candidate": "SGS",
       "regions": [],
+      "source_name_candidates": [
+        "s.geo.andtheis.",
+        "southgeorgiaandtheislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -205,6 +265,10 @@
       "name": "British Indian Ocean Territory",
       "iso3_candidate": "IOT",
       "regions": [],
+      "source_name_candidates": [
+        "br.indianoceanter.",
+        "britishindianoceanterritory"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -214,6 +278,9 @@
       "iso3_candidate": "SHN",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "sainthelena"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -225,6 +292,10 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "pitcairnis.",
+        "pitcairnislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -235,6 +306,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "anguilla"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -244,6 +318,11 @@
       "iso3_candidate": "FLK",
       "regions": [
         "South America"
+      ],
+      "source_name_candidates": [
+        "falklandis.",
+        "falklandislands",
+        "falklandislands/malvinas"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "جزایرفالکلند"
@@ -257,6 +336,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "caymanis.",
+        "caymanislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "جزایرکیمن"
       ],
@@ -268,6 +351,9 @@
       "iso3_candidate": "BMU",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "bermuda"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "برمودا"
@@ -281,6 +367,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "britishvirginis.",
+        "britishvirginislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "جزایرویرجینبریتانیا"
       ],
@@ -293,6 +383,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "turksandcaicosis.",
+        "turksandcaicosislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -302,6 +396,9 @@
       "iso3_candidate": "MSR",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "montserrat"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -313,6 +410,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "jersey"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -322,6 +422,9 @@
       "iso3_candidate": "GGY",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "guernsey"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -333,6 +436,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "isleofman"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -342,6 +448,10 @@
       "iso3_candidate": "GBR",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "uk",
+        "unitedkingdom"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -353,6 +463,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "unitedarabemirates"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -362,6 +475,9 @@
       "iso3_candidate": "UKR",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "ukraine"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "اوکراین"
@@ -375,6 +491,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "uganda"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "اوگاندا"
       ],
@@ -386,6 +505,9 @@
       "iso3_candidate": "TKM",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "turkmenistan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "ترکمنستان"
@@ -399,6 +521,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "turkey"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -408,6 +533,9 @@
       "iso3_candidate": "TUN",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "tunisia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "تونس"
@@ -421,6 +549,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "trinidadandtobago"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "ترینیدادوتوباگو"
       ],
@@ -432,6 +563,9 @@
       "iso3_candidate": "TON",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "tonga"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "تونگا"
@@ -445,6 +579,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "togo"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "توگو"
       ],
@@ -457,6 +594,10 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "easttimor",
+        "timor-leste"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -466,6 +607,9 @@
       "iso3_candidate": "THA",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "thailand"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "تایلند"
@@ -479,6 +623,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "tanzania",
+        "unitedrepublicoftanzania"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "تانزانیا"
       ],
@@ -490,6 +638,9 @@
       "iso3_candidate": "TJK",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "tajikistan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "تاجیکستان"
@@ -503,6 +654,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "taiwan"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "تایوان"
       ],
@@ -514,6 +668,9 @@
       "iso3_candidate": "SYR",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "syria"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سوریه"
@@ -527,6 +684,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "switzerland"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "سوئیس"
       ],
@@ -538,6 +698,9 @@
       "iso3_candidate": "SWE",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "sweden"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سوئد"
@@ -551,6 +714,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "eswatini",
+        "kingdomofeswatini"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -561,6 +728,9 @@
       "regions": [
         "South America"
       ],
+      "source_name_candidates": [
+        "suriname"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -570,6 +740,10 @@
       "iso3_candidate": "SSD",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "s.sudan",
+        "southsudan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سودانجنوبی"
@@ -583,6 +757,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "sudan"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "سودان"
       ],
@@ -594,6 +771,9 @@
       "iso3_candidate": "LKA",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "srilanka"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سریلانکا"
@@ -607,6 +787,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "spain"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "اسپانیا"
       ],
@@ -618,6 +801,10 @@
       "iso3_candidate": "KOR",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "republicofkorea",
+        "southkorea"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کرهجنوبی"
@@ -631,6 +818,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "southafrica"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "آفریقایجنوبی"
       ],
@@ -642,6 +832,9 @@
       "iso3_candidate": "SOM",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "somalia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سومالی"
@@ -655,6 +848,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "somaliland"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -664,6 +860,10 @@
       "iso3_candidate": "SLB",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "solomonis.",
+        "solomonislands"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "جزایرسلیمان"
@@ -677,6 +877,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "slovakia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "اسلواکی"
       ],
@@ -688,6 +891,9 @@
       "iso3_candidate": "SVN",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "slovenia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "اسلوونی"
@@ -701,6 +907,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "singapore"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "سنگاپور"
       ],
@@ -713,6 +922,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "sierraleone"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -722,6 +934,9 @@
       "iso3_candidate": "SYC",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "seychelles"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سیشل"
@@ -735,6 +950,10 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "republicofserbia",
+        "serbia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "صربستان"
       ],
@@ -746,6 +965,9 @@
       "iso3_candidate": "SEN",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "senegal"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سنگال"
@@ -759,6 +981,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "saudiarabia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "عربستانسعودی"
       ],
@@ -771,6 +996,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "sãotoméandprincipe"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -780,6 +1008,9 @@
       "iso3_candidate": "SMR",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "sanmarino"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "سنمارینو"
@@ -793,6 +1024,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "samoa"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "ساموآ"
       ],
@@ -805,6 +1039,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "saintvincentandthegrenadines",
+        "st.vin.andgren."
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -814,6 +1052,9 @@
       "iso3_candidate": "LCA",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "saintlucia"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -825,6 +1066,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "saintkittsandnevis",
+        "st.kittsandnevis"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -834,6 +1079,9 @@
       "iso3_candidate": "RWA",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "rwanda"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "رواندا"
@@ -847,6 +1095,10 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "russia",
+        "russianfederation"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "روسیه"
       ],
@@ -858,6 +1110,9 @@
       "iso3_candidate": "ROU",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "romania"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "رومانی"
@@ -871,6 +1126,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "qatar"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "قطر"
       ],
@@ -882,6 +1140,9 @@
       "iso3_candidate": "PRT",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "portugal"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "پرتغال"
@@ -895,6 +1156,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "poland"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "لهستان"
       ],
@@ -906,6 +1170,9 @@
       "iso3_candidate": "PHL",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "philippines"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "فیلیپین"
@@ -919,6 +1186,9 @@
       "regions": [
         "South America"
       ],
+      "source_name_candidates": [
+        "peru"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "پرو"
       ],
@@ -930,6 +1200,9 @@
       "iso3_candidate": "PRY",
       "regions": [
         "South America"
+      ],
+      "source_name_candidates": [
+        "paraguay"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "پاراگوئه"
@@ -943,6 +1216,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "papuanewguinea"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -952,6 +1228,9 @@
       "iso3_candidate": "PAN",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "panama"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "پاناما"
@@ -965,6 +1244,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "palau"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "پالائو"
       ],
@@ -976,6 +1258,9 @@
       "iso3_candidate": "PAK",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "pakistan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "پاکستان"
@@ -989,6 +1274,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "oman"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "عمان"
       ],
@@ -1000,6 +1288,9 @@
       "iso3_candidate": null,
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "norway"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "نروژ"
@@ -1013,6 +1304,11 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "dem.rep.korea",
+        "democraticpeople'srepublicofkorea",
+        "northkorea"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "کرهشمالی"
       ],
@@ -1024,6 +1320,9 @@
       "iso3_candidate": "NGA",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "nigeria"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "نیجریه"
@@ -1037,6 +1336,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "niger"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "نیجر"
       ],
@@ -1049,6 +1351,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "nicaragua"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1058,6 +1363,9 @@
       "iso3_candidate": "NZL",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "newzealand"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "نیوزیلند"
@@ -1071,6 +1379,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "niue"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1080,6 +1391,10 @@
       "iso3_candidate": "COK",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "cookis.",
+        "cookislands"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "جزایرکوک"
@@ -1093,6 +1408,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "netherlands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1102,6 +1420,9 @@
       "iso3_candidate": "ABW",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "aruba"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -1113,6 +1434,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "curaçao"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1122,6 +1446,9 @@
       "iso3_candidate": "NPL",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "nepal"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "نپال"
@@ -1135,6 +1462,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "nauru"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1144,6 +1474,9 @@
       "iso3_candidate": "NAM",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "namibia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "نامیبیا"
@@ -1157,6 +1490,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "mozambique"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "موزامبیک"
       ],
@@ -1168,6 +1504,9 @@
       "iso3_candidate": "MAR",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "morocco"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "مراکش"
@@ -1181,6 +1520,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "w.sahara",
+        "westernsahara"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1190,6 +1533,9 @@
       "iso3_candidate": "MNE",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "montenegro"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "مونتهنگرو"
@@ -1203,6 +1549,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "mongolia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "مغولستان"
       ],
@@ -1214,6 +1563,9 @@
       "iso3_candidate": "MDA",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "moldova"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "مولداوی"
@@ -1227,6 +1579,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "monaco"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "موناکو"
       ],
@@ -1238,6 +1593,9 @@
       "iso3_candidate": "MEX",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "mexico"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "مکزیک"
@@ -1251,6 +1609,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "mauritius"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1260,6 +1621,9 @@
       "iso3_candidate": "MRT",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "mauritania"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "موریتانی"
@@ -1273,6 +1637,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "malta"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "مالت"
       ],
@@ -1285,6 +1652,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "mali"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1294,6 +1664,9 @@
       "iso3_candidate": "MDV",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "maldives"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "مالدیو"
@@ -1307,6 +1680,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "malaysia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "مالزی"
       ],
@@ -1318,6 +1694,9 @@
       "iso3_candidate": "MWI",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "malawi"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "مالاوی"
@@ -1331,6 +1710,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "madagascar"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "ماداگاسکار"
       ],
@@ -1343,6 +1725,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "northmacedonia"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1352,6 +1737,9 @@
       "iso3_candidate": "LUX",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "luxembourg"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "لوکزامبورگ"
@@ -1365,6 +1753,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "lithuania"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "لیتوانی"
       ],
@@ -1376,6 +1767,9 @@
       "iso3_candidate": "LIE",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "liechtenstein"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "لیختناشتاین"
@@ -1389,6 +1783,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "libya"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "لیبی"
       ],
@@ -1400,6 +1797,9 @@
       "iso3_candidate": "LBR",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "liberia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "لیبریا"
@@ -1413,6 +1813,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "lesotho"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1422,6 +1825,9 @@
       "iso3_candidate": "LBN",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "lebanon"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "لبنان"
@@ -1435,6 +1841,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "latvia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "لتونی"
       ],
@@ -1446,6 +1855,10 @@
       "iso3_candidate": "LAO",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "laopdr",
+        "laos"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "لائوس"
@@ -1459,6 +1872,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "kyrgyzstan"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "قرقیزستان"
       ],
@@ -1470,6 +1886,9 @@
       "iso3_candidate": "KWT",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "kuwait"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کویت"
@@ -1483,6 +1902,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "kosovo"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1492,6 +1914,9 @@
       "iso3_candidate": "KIR",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "kiribati"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کیریباتی"
@@ -1505,6 +1930,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "kenya"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "کنیا"
       ],
@@ -1516,6 +1944,9 @@
       "iso3_candidate": "KAZ",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "kazakhstan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "قزاقستان"
@@ -1529,6 +1960,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "jordan"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "اردن"
       ],
@@ -1540,6 +1974,9 @@
       "iso3_candidate": "JPN",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "japan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "ژاپن"
@@ -1553,6 +1990,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "jamaica"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "جامائیکا"
       ],
@@ -1564,6 +2004,9 @@
       "iso3_candidate": "ITA",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "italy"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "ایتالیا"
@@ -1577,6 +2020,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "israel"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "اسرائیل"
       ],
@@ -1588,6 +2034,9 @@
       "iso3_candidate": "PSE",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "palestine"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "فلسطین"
@@ -1601,6 +2050,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "ireland"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "ایرلند"
       ],
@@ -1612,6 +2064,9 @@
       "iso3_candidate": "IRQ",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "iraq"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "عراق"
@@ -1625,6 +2080,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "iran"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "ایران"
       ],
@@ -1636,6 +2094,9 @@
       "iso3_candidate": "IDN",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "indonesia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "اندونزی"
@@ -1649,6 +2110,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "india"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "هند"
       ],
@@ -1660,6 +2124,9 @@
       "iso3_candidate": "ISL",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "iceland"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "ایسلند"
@@ -1673,6 +2140,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "hungary"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "مجارستان"
       ],
@@ -1684,6 +2154,9 @@
       "iso3_candidate": "HND",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "honduras"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "هندوراس"
@@ -1697,6 +2170,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "haiti"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "هائیتی"
       ],
@@ -1708,6 +2184,9 @@
       "iso3_candidate": "GUY",
       "regions": [
         "South America"
+      ],
+      "source_name_candidates": [
+        "guyana"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "گویان"
@@ -1721,6 +2200,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "guinea-bissau"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1730,6 +2212,9 @@
       "iso3_candidate": "GIN",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "guinea"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "گینه"
@@ -1743,6 +2228,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "guatemala"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "گواتمالا"
       ],
@@ -1755,6 +2243,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "grenada"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1764,6 +2255,9 @@
       "iso3_candidate": "GRC",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "greece"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "یونان"
@@ -1777,6 +2271,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "ghana"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "غنا"
       ],
@@ -1788,6 +2285,9 @@
       "iso3_candidate": "DEU",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "germany"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "آلمان"
@@ -1801,6 +2301,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "georgia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "گرجستان"
       ],
@@ -1812,6 +2315,10 @@
       "iso3_candidate": "GMB",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "gambia",
+        "thegambia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "گامبیا"
@@ -1825,6 +2332,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "gabon"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "گابن"
       ],
@@ -1836,6 +2346,9 @@
       "iso3_candidate": null,
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "france"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "فرانسه"
@@ -1849,6 +2362,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "saintpierreandmiquelon",
+        "st.pierreandmiquelon"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1858,6 +2375,11 @@
       "iso3_candidate": "WLF",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "wallisandfutuna",
+        "wallisandfutunais.",
+        "wallisandfutunaislands"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -1869,6 +2391,11 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "saint-martin",
+        "saintmartin",
+        "st-martin"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1878,6 +2405,11 @@
       "iso3_candidate": "BLM",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "saint-barthélemy",
+        "saintbarthelemy",
+        "st-barthélemy"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -1889,6 +2421,10 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "fr.polynesia",
+        "frenchpolynesia"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1899,6 +2435,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "newcaledonia"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1907,6 +2446,10 @@
       "name": "French Southern and Antarctic Lands",
       "iso3_candidate": "ATF",
       "regions": [],
+      "source_name_candidates": [
+        "fr.s.antarcticlands",
+        "frenchsouthernandantarcticlands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1917,6 +2460,11 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "aland",
+        "åland",
+        "ålandislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1926,6 +2474,9 @@
       "iso3_candidate": "FIN",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "finland"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "فنلاند"
@@ -1939,6 +2490,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "fiji"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "فیجی"
       ],
@@ -1950,6 +2504,9 @@
       "iso3_candidate": "ETH",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "ethiopia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "اتیوپی"
@@ -1963,6 +2520,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "estonia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "استونی"
       ],
@@ -1974,6 +2534,9 @@
       "iso3_candidate": "ERI",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "eritrea"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "اریتره"
@@ -1987,6 +2550,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "eq.guinea",
+        "equatorialguinea"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -1996,6 +2563,9 @@
       "iso3_candidate": "SLV",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "elsalvador"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "السالوادور"
@@ -2009,6 +2579,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "egypt"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "مصر"
       ],
@@ -2020,6 +2593,9 @@
       "iso3_candidate": "ECU",
       "regions": [
         "South America"
+      ],
+      "source_name_candidates": [
+        "ecuador"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "اکوادور"
@@ -2033,6 +2609,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "dominicanrep.",
+        "dominicanrepublic"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "جمهوریدومینیکن"
       ],
@@ -2044,6 +2624,9 @@
       "iso3_candidate": "DMA",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "dominica"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "دومینیکا"
@@ -2057,6 +2640,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "djibouti"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "جیبوتی"
       ],
@@ -2068,6 +2654,9 @@
       "iso3_candidate": "GRL",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "greenland"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "گرینلند"
@@ -2081,6 +2670,11 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "faeroeis.",
+        "faeroeislands",
+        "faroeislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2090,6 +2684,9 @@
       "iso3_candidate": "DNK",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "denmark"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "دانمارک"
@@ -2103,6 +2700,10 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "czechia",
+        "czechrepublic"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "جمهوریچک"
       ],
@@ -2115,6 +2716,10 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "n.cyprus",
+        "northerncyprus"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2124,6 +2729,9 @@
       "iso3_candidate": "CYP",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "cyprus"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "قبرس"
@@ -2137,6 +2745,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "cuba"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "کوبا"
       ],
@@ -2148,6 +2759,9 @@
       "iso3_candidate": "HRV",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "croatia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کرواسی"
@@ -2161,6 +2775,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "côted'ivoire",
+        "ivorycoast"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "ساحلعاج"
       ],
@@ -2172,6 +2790,9 @@
       "iso3_candidate": "CRI",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "costarica"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کاستاریکا"
@@ -2185,6 +2806,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "dem.rep.congo",
+        "democraticrepublicofthecongo"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2194,6 +2819,10 @@
       "iso3_candidate": "COG",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "congo",
+        "republicofthecongo"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کنگو"
@@ -2207,6 +2836,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "comoros"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2216,6 +2848,9 @@
       "iso3_candidate": "COL",
       "regions": [
         "South America"
+      ],
+      "source_name_candidates": [
+        "colombia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کلمبیا"
@@ -2229,6 +2864,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "china"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "چین"
       ],
@@ -2241,6 +2879,10 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "macao",
+        "macaos.a.r"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2250,6 +2892,10 @@
       "iso3_candidate": "HKG",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "hongkong",
+        "hongkongs.a.r."
       ],
       "legacy_persian_labels_from_flag_translation": [
         "هنگکنگ"
@@ -2263,6 +2909,9 @@
       "regions": [
         "South America"
       ],
+      "source_name_candidates": [
+        "chile"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "شیلی"
       ],
@@ -2274,6 +2923,9 @@
       "iso3_candidate": "TCD",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "chad"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "چاد"
@@ -2287,6 +2939,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "centralafricanrep.",
+        "centralafricanrepublic"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "جمهوریآفریقایمرکزی"
       ],
@@ -2299,6 +2955,10 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "caboverde",
+        "republicofcaboverde"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2308,6 +2968,9 @@
       "iso3_candidate": "CAN",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "canada"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کانادا"
@@ -2321,6 +2984,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "cameroon"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2330,6 +2996,9 @@
       "iso3_candidate": "KHM",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "cambodia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "کامبوج"
@@ -2343,6 +3012,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "myanmar"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "میانمار"
       ],
@@ -2354,6 +3026,9 @@
       "iso3_candidate": "BDI",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "burundi"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "بوروندی"
@@ -2367,6 +3042,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "burkinafaso"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "بورکینافاسو"
       ],
@@ -2378,6 +3056,9 @@
       "iso3_candidate": "BGR",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "bulgaria"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "بلغارستان"
@@ -2391,6 +3072,10 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "brunei",
+        "bruneidarussalam"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "برونئی"
       ],
@@ -2402,6 +3087,9 @@
       "iso3_candidate": "BRA",
       "regions": [
         "South America"
+      ],
+      "source_name_candidates": [
+        "brazil"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "برزیل"
@@ -2415,6 +3103,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "botswana"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2424,6 +3115,10 @@
       "iso3_candidate": "BIH",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "bosniaandherz.",
+        "bosniaandherzegovina"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "بوسنیوهرزگوین"
@@ -2437,6 +3132,9 @@
       "regions": [
         "South America"
       ],
+      "source_name_candidates": [
+        "bolivia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "بولیوی"
       ],
@@ -2449,6 +3147,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "bhutan"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2458,6 +3159,9 @@
       "iso3_candidate": "BEN",
       "regions": [
         "Africa"
+      ],
+      "source_name_candidates": [
+        "benin"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "بنین"
@@ -2471,6 +3175,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "belize"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "بلیز"
       ],
@@ -2482,6 +3189,9 @@
       "iso3_candidate": "BEL",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "belgium"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "بلژیک"
@@ -2495,6 +3205,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "belarus"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "بلاروس"
       ],
@@ -2506,6 +3219,9 @@
       "iso3_candidate": "BRB",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "barbados"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "باربادوس"
@@ -2519,6 +3235,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "bangladesh"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "بنگلادش"
       ],
@@ -2530,6 +3249,9 @@
       "iso3_candidate": "BHR",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "bahrain"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "بحرین"
@@ -2543,6 +3265,10 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "bahamas",
+        "thebahamas"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "باهاماس"
       ],
@@ -2554,6 +3280,9 @@
       "iso3_candidate": "AZE",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "azerbaijan"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "آذربایجان"
@@ -2567,6 +3296,9 @@
       "regions": [
         "Europe"
       ],
+      "source_name_candidates": [
+        "austria"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "اتریش"
       ],
@@ -2579,6 +3311,9 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "australia"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "استرالیا"
       ],
@@ -2589,6 +3324,10 @@
       "name": "Indian Ocean Territories",
       "iso3_candidate": null,
       "regions": [],
+      "source_name_candidates": [
+        "indianoceanter.",
+        "indianoceanterritories"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2597,6 +3336,11 @@
       "name": "Heard Island and McDonald Islands",
       "iso3_candidate": "HMD",
       "regions": [],
+      "source_name_candidates": [
+        "heardi.andmcdonaldis.",
+        "heardi.andmcdonaldislands",
+        "heardislandandmcdonaldislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2606,6 +3350,9 @@
       "iso3_candidate": "NFK",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "norfolkisland"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "جزیرهنورفولک"
@@ -2619,6 +3366,10 @@
       "regions": [
         "Oceania"
       ],
+      "source_name_candidates": [
+        "ashmoreandcartieris.",
+        "ashmoreandcartierislands"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2628,6 +3379,9 @@
       "iso3_candidate": "ARM",
       "regions": [
         "Asia"
+      ],
+      "source_name_candidates": [
+        "armenia"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "ارمنستان"
@@ -2641,6 +3395,9 @@
       "regions": [
         "South America"
       ],
+      "source_name_candidates": [
+        "argentina"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "آرژانتین"
       ],
@@ -2652,6 +3409,10 @@
       "iso3_candidate": "ATG",
       "regions": [
         "North America"
+      ],
+      "source_name_candidates": [
+        "antiguaandbarb.",
+        "antiguaandbarbuda"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "آنتیگواوباربودا"
@@ -2665,6 +3426,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "angola"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "آنگولا"
       ],
@@ -2676,6 +3440,9 @@
       "iso3_candidate": "AND",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "andorra"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "آندورا"
@@ -2689,6 +3456,9 @@
       "regions": [
         "Africa"
       ],
+      "source_name_candidates": [
+        "algeria"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "الجزایر"
       ],
@@ -2700,6 +3470,9 @@
       "iso3_candidate": "ALB",
       "regions": [
         "Europe"
+      ],
+      "source_name_candidates": [
+        "albania"
       ],
       "legacy_persian_labels_from_flag_translation": [
         "آلبانی"
@@ -2713,6 +3486,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "afghanistan"
+      ],
       "legacy_persian_labels_from_flag_translation": [
         "افغانستان"
       ],
@@ -2725,6 +3501,9 @@
       "regions": [
         "Asia"
       ],
+      "source_name_candidates": [
+        "siachenglacier"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2734,6 +3513,9 @@
       "iso3_candidate": "ATA",
       "regions": [
         "Antarctica"
+      ],
+      "source_name_candidates": [
+        "antarctica"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -2745,6 +3527,9 @@
       "regions": [
         "North America"
       ],
+      "source_name_candidates": [
+        "sintmaarten"
+      ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
     },
@@ -2754,6 +3539,9 @@
       "iso3_candidate": "TUV",
       "regions": [
         "Oceania"
+      ],
+      "source_name_candidates": [
+        "tuvalu"
       ],
       "legacy_persian_labels_from_flag_translation": [],
       "review_status": "needs_human_review"
@@ -2781,8 +3569,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "AFG"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "alandislands",
@@ -2805,8 +3595,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ALB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "algeria",
@@ -2817,8 +3609,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "DZA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "andorra",
@@ -2829,8 +3623,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "AND"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "angiela",
@@ -2853,8 +3649,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "AGO"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "antarctic",
@@ -2877,8 +3675,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ATG"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "arba",
@@ -2901,8 +3701,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ARG"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "armenia",
@@ -2913,8 +3715,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ARM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "australia",
@@ -2925,8 +3729,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "AUS"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "austria",
@@ -2937,8 +3743,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "AUT"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "azerbaijan",
@@ -2949,8 +3757,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "AZE"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "bahamas",
@@ -2961,8 +3771,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BHS"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "bahrain",
@@ -2973,8 +3785,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BHR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "bangladesh",
@@ -2985,8 +3799,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BGD"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "barbados",
@@ -2997,8 +3813,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BRB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "barceli'stradition",
@@ -3021,8 +3839,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BLR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "belgium",
@@ -3033,8 +3853,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BEL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "belize",
@@ -3045,8 +3867,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BLZ"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "benin",
@@ -3057,8 +3881,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BEN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "bermuda",
@@ -3069,8 +3895,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BMU"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "bolivia",
@@ -3081,8 +3909,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BOL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "bosniaandherzegovina",
@@ -3093,8 +3923,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BIH"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "botsawa",
@@ -3129,8 +3961,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BRA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "britain",
@@ -3153,8 +3987,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "VGB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "brunei",
@@ -3165,8 +4001,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BRN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "bulgaria",
@@ -3177,8 +4015,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BGR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "burkinafaso",
@@ -3189,8 +4029,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BFA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "burundi",
@@ -3201,8 +4043,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "BDI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "butane",
@@ -3225,8 +4069,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "KHM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "cameron",
@@ -3249,8 +4095,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CAN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "capeword",
@@ -3285,8 +4133,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CYM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "centralafricanrepublic",
@@ -3297,8 +4147,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CAF"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "chad",
@@ -3309,8 +4161,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TCD"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "chile",
@@ -3321,8 +4175,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CHL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "china",
@@ -3333,8 +4189,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CHN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "christmasisland",
@@ -3369,8 +4227,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "COL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "comor",
@@ -3393,8 +4253,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "COG"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "congodemocraticrepublic",
@@ -3417,8 +4279,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "COK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "costarica",
@@ -3429,8 +4293,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CRI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "croatia",
@@ -3441,8 +4307,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "HRV"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "cuba",
@@ -3453,8 +4321,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CUB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "cyprus",
@@ -3465,8 +4335,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CYP"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "czechrepublic",
@@ -3477,8 +4349,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CZE"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "denmark",
@@ -3489,8 +4363,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "DNK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "djibouti",
@@ -3501,8 +4377,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "DJI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "dominica",
@@ -3513,8 +4391,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "DMA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "dominicanrepublic",
@@ -3525,8 +4405,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "DOM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "easttimur",
@@ -3549,8 +4431,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ECU"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "egypt",
@@ -3561,8 +4445,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "EGY"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "elsalvador",
@@ -3573,8 +4459,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SLV"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "eritrea",
@@ -3585,8 +4473,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ERI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "estonia",
@@ -3597,8 +4487,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "EST"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "ethiopia",
@@ -3609,8 +4501,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ETH"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "falklandislands",
@@ -3621,8 +4515,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "FLK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "farrowislands",
@@ -3645,8 +4541,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "FJI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "financial",
@@ -3669,8 +4567,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "FIN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "france",
@@ -3681,8 +4581,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "FRA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "francepolynesis",
@@ -3717,8 +4619,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GAB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "gambia",
@@ -3729,8 +4633,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GMB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "georgia",
@@ -3741,8 +4647,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GEO"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "germany",
@@ -3753,8 +4661,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "DEU"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "ghana",
@@ -3765,8 +4675,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GHA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "gibraltar",
@@ -3813,8 +4725,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GRC"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "greenland",
@@ -3825,8 +4739,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GRL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "guadlop",
@@ -3849,8 +4765,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GUM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "guatemala",
@@ -3861,8 +4779,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GTM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "guinea",
@@ -3873,8 +4793,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GIN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "guineabisao",
@@ -3897,8 +4819,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "GUY"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "haiti",
@@ -3909,8 +4833,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "HTI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "heot",
@@ -3945,8 +4871,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "HND"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "hongkong",
@@ -3957,8 +4885,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "HKG"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "hungary",
@@ -3969,8 +4899,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "HUN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "iceland",
@@ -3981,8 +4913,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ISL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "india",
@@ -3993,8 +4927,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "IND"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "indonesia",
@@ -4005,8 +4941,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "IDN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "iran",
@@ -4017,8 +4955,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "IRN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "iraq",
@@ -4029,8 +4969,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "IRQ"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "ireland",
@@ -4041,8 +4983,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "IRL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "israel",
@@ -4053,8 +4997,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ISR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "italy",
@@ -4065,8 +5011,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ITA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "ivorycoast",
@@ -4077,8 +5025,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CIV"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "jamaica",
@@ -4089,8 +5039,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "JAM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "japan",
@@ -4101,8 +5053,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "JPN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "jerzi",
@@ -4137,8 +5091,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "JOR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "kazakhstan",
@@ -4149,8 +5105,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "KAZ"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "kenya",
@@ -4161,8 +5119,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "KEN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "kiribati",
@@ -4173,8 +5133,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "KIR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "korasao",
@@ -4197,8 +5159,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "KWT"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "kyrgyzstan",
@@ -4209,8 +5173,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "KGZ"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "laos",
@@ -4221,8 +5187,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LAO"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "latvia",
@@ -4233,8 +5201,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LVA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "lebanon",
@@ -4245,8 +5215,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LBN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "lesoto",
@@ -4269,8 +5241,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LBR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "libya",
@@ -4281,8 +5255,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LBY"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "liechtenstein",
@@ -4293,8 +5269,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LIE"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "lithuania",
@@ -4305,8 +5283,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LTU"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "luxembourg",
@@ -4317,8 +5297,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LUX"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "macau",
@@ -4353,8 +5335,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MDG"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "malawi",
@@ -4365,8 +5349,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MWI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "malaysia",
@@ -4377,8 +5363,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MYS"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "maldives",
@@ -4389,8 +5377,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MDV"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "malta",
@@ -4401,8 +5391,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MLT"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "marshallislands",
@@ -4413,8 +5405,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MHL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "martinic",
@@ -4449,8 +5443,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MRT"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "mexico",
@@ -4461,8 +5457,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MEX"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "micrones",
@@ -4485,8 +5483,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MDA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "monaco",
@@ -4497,8 +5497,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MCO"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "mongolia",
@@ -4509,8 +5511,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MNG"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "montenegro",
@@ -4521,8 +5525,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MNE"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "montesrate",
@@ -4545,8 +5551,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MAR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "mozambique",
@@ -4557,8 +5565,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MOZ"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "myanmar",
@@ -4569,8 +5579,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "MMR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "namibia",
@@ -4581,8 +5593,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "NAM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "nauro",
@@ -4605,8 +5619,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "NPL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "new",
@@ -4653,8 +5669,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "NZL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "nicarogua",
@@ -4677,8 +5695,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "NER"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "nigeria",
@@ -4689,8 +5709,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "NGA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "norfolkisland",
@@ -4701,8 +5723,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "NFK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "northernireland",
@@ -4725,8 +5749,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PRK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "northmariana",
@@ -4749,8 +5775,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "NOR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "oman",
@@ -4761,8 +5789,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "OMN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "ourisland",
@@ -4785,8 +5815,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PAK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "palau",
@@ -4797,8 +5829,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PLW"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "palestine",
@@ -4809,8 +5843,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PSX"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "panama",
@@ -4821,8 +5857,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PAN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "paraguay",
@@ -4833,8 +5871,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PRY"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "peru",
@@ -4845,8 +5885,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PER"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "philippines",
@@ -4857,8 +5899,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PHL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "pitcranislands",
@@ -4881,8 +5925,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "POL"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "portugal",
@@ -4893,8 +5939,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PRT"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "puertorico",
@@ -4905,8 +5953,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "PRI"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "qatar",
@@ -4917,8 +5967,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "QAT"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "questioner",
@@ -4953,8 +6005,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ROU"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "ronion",
@@ -4977,8 +6031,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "RUS"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "rwanda",
@@ -4989,8 +6045,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "RWA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "samoa",
@@ -5001,8 +6059,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "WSM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "samoaislands",
@@ -5025,8 +6085,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SMR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "saudiarabia",
@@ -5037,8 +6099,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SAU"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "sautomaandprincess",
@@ -5073,8 +6137,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SEN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "serbia",
@@ -5085,8 +6151,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SRB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "seychelles",
@@ -5097,8 +6165,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SYC"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "singapore",
@@ -5109,8 +6179,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SGP"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "siraleon",
@@ -5133,8 +6205,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SVK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "slovenia",
@@ -5145,8 +6219,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SVN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "solomonislands",
@@ -5157,8 +6233,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SLB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "somalia",
@@ -5169,8 +6247,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SOM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "southafrica",
@@ -5181,8 +6261,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ZAF"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "southernfrenchlands",
@@ -5217,8 +6299,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "KOR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "southsudan",
@@ -5229,8 +6313,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SDS"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "spain",
@@ -5241,8 +6327,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ESP"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "srilanka",
@@ -5253,8 +6341,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "LKA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "st.helena",
@@ -5337,8 +6427,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SDN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "surinam",
@@ -5373,8 +6465,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SWE"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "switzerland",
@@ -5385,8 +6479,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "CHE"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "syria",
@@ -5397,8 +6493,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "SYR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "taiwan",
@@ -5409,8 +6507,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TWN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "tajikistan",
@@ -5421,8 +6521,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TJK"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "tanzania",
@@ -5433,8 +6535,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TZA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "tawalou",
@@ -5457,8 +6561,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "THA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "theterritoryofthebritishocean",
@@ -5517,8 +6623,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TGO"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "toklau",
@@ -5541,8 +6649,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TON"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "traditional",
@@ -5565,8 +6675,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TTO"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "tunisia",
@@ -5577,8 +6689,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TUN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "turkmenistan",
@@ -5589,8 +6703,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "TKM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "turksandcichesislands",
@@ -5625,8 +6741,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "UGA"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "ukraine",
@@ -5637,8 +6755,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "UKR"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "uruguay",
@@ -5649,8 +6769,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "URY"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "usa",
@@ -5697,8 +6819,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "UZB"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "valisandphotona",
@@ -5745,8 +6869,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "VEN"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "vietnam",
@@ -5757,8 +6883,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "VNM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "wales",
@@ -5793,8 +6921,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "YEM"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "zimbabwe",
@@ -5805,8 +6935,10 @@
         "Flag_Translation.json:English"
       ],
       "regions": [],
-      "asset_source_id_candidates": [],
-      "match_status": "unmatched"
+      "asset_source_id_candidates": [
+        "ZWE"
+      ],
+      "match_status": "candidate_needs_review"
     },
     {
       "normalized_label": "zombia",
@@ -13809,9 +14941,9 @@
   },
   "duplicate_asset_name_candidates": [],
   "summary": {
-    "matched_candidate_labels": 172,
+    "matched_candidate_labels": 344,
     "ambiguous_candidate_labels": 0,
-    "unmatched_game_labels_all_sources": 414,
+    "unmatched_game_labels_all_sources": 242,
     "country_catalog_labels_total": 241,
     "country_catalog_labels_with_single_candidate": 175,
     "country_catalog_labels_unmatched": 66,
