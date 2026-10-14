@@ -32,14 +32,14 @@ def test_audit_proposes_review_only_candidate_and_reports_catalog_mismatch(tmp_p
         write_json(gd / f"{prefix}_Countries.json", {"ژاپن": "ژاپن"})
         write_json(gd / f"{prefix}_ColorMap.json", {"abc123": ["ژاپن", [0, 0, 1, 1]], "def456": ["نام ناشناخته", [0, 0, 1, 1]]})
         write_json(gd / f"{prefix}_Questions.json", [{"question": "کجا؟", "answer": "نام ناشناخته"}])
-    write_json(gd / "Flag_Data.json", {"easy": ["ژاپن"]})
+    write_json(gd / "Flag_Data.json", {"easy": ["ژاپن", "France"]})
     write_json(gd / "Flag_Translation.json", {"Japan": "ژاپن"})
     write_json(gd / "GeneralInfo_CountriesCapitals.json", {"آسیا": {"easy": [["ژاپن", "توکیو"]]}})
     write_json(gd / "GeneralInfo_Questions.json", [{"question": "پایتخت؟", "answer": "توکیو"}])
     write_json(gd / "Country_Aliases.json", {"_schema_version": 1, "asia": {"ژاپن قدیم": "ژاپن"}})
 
     report = audit(asset, game)
-    assert report["asset_country_count"] == 1
+    assert report["asset_country_count"] == 2
     japan = next(row for row in report["game_labels"] if "ژاپن" in row["labels"])
     assert japan["asset_source_id_candidates"] == ["JPN"]
     assert japan["match_status"] == "candidate_needs_review"
@@ -49,4 +49,7 @@ def test_audit_proposes_review_only_candidate_and_reports_catalog_mismatch(tmp_p
     assert report["summary"]["country_catalog_labels_total"] == 4
     assert report["summary"]["country_catalog_labels_with_single_candidate"] == 4
     assert report["summary"]["unmatched_game_labels_all_sources"] > 0
+    france = next(row for row in report["game_labels"] if "France" in row["labels"])
+    assert france["asset_source_id_candidates"] == ["FRA"]
+    assert france["match_status"] == "candidate_needs_review"
     assert report["asset_countries"][0]["review_status"] == "needs_human_review"
