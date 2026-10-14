@@ -13,6 +13,17 @@
 - Removed IDs (0): none
 - Possible rekeys by unique ISO3 (0):
 
+## Canonical game identity checks
+
+- Records with game_id: 242
+- Records missing game_id: 0
+- Unique game_id values: 242
+- Duplicate game_id values: 0
+- Canonical geometry coverage:
+  - low: present; 242 geometries; 0 missing IDs; 0 unexpected IDs; key field='game_id'
+  - medium: present; 242 geometries; 0 missing IDs; 0 unexpected IDs; key field='game_id'
+  - high: present; 242 geometries; 0 missing IDs; 0 unexpected IDs; key field='game_id'
+
 ## Existing feature metadata changes
 
 - none
