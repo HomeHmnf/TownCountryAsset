@@ -19,7 +19,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from tools.propose_iso_assignments import propose, read_reference, render_report
+# Support both direct execution (python tools/refresh_iso_review.py) and
+# module execution (python -m tools.refresh_iso_review) without requiring
+# the repository to be installed as a package.
+if __package__ in (None, ""):
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from propose_iso_assignments import propose, read_reference, render_report
+else:
+    from tools.propose_iso_assignments import propose, read_reference, render_report
 
 
 SOURCE_REPOSITORY = "https://github.com/stefangabos/world_countries"
