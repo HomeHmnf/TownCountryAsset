@@ -6,7 +6,7 @@
 
 ## Purpose
 
-Record what can be established from the existing country catalogs, color maps, and `Country_Aliases.json` before making any runtime or catalog changes. This is a review worksheet, not an approved country-ID crosswalk.
+Record what can be established from the existing country catalogs, color maps, and `Country_Aliases.json` before making any runtime or catalog changes. This is a review worksheet, not an approved country-ID crosswalk. The asset project's canonical identity contract is documented in [country-identity-contract.md](../architecture/country-identity-contract.md); the game repository is compatibility evidence, not the source of canonical country records.
 
 ## America
 
@@ -37,7 +37,7 @@ Before changing any JSON:
 
 ## Next review batch
 
-After this discrepancy triage, review unmatched country-catalog labels in small regional batches, starting with the labels that are likely name/translation variants (for example, `امارات متحده عربی`, `بوتان`, `تیمور`, `هلند`, `چک`, and `واتیکان`). Validate each against source attributes and the game's intended geographic scope. Do not infer an approved ISO code from name similarity or three-letter syntax.
+After updating and testing the candidate matcher, implement and review the asset-owned `game_id` registry for all source records before approving legacy crosswalk rows. Then review unmatched country-catalog labels in small regional batches, starting with the labels that are likely name/translation variants (for example, `امارات متحده عربی`, `بوتان`, `تیمور`, `هلند`, `چک`, and `واتیکان`). Validate each against source attributes and the game's intended geographic scope. Do not infer an approved ISO code from name similarity or three-letter syntax.
 
 ## Guardrails
 
