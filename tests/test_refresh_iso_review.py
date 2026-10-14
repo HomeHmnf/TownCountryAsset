@@ -3,6 +3,8 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import subprocess
+import sys
 from datetime import datetime, timezone
 
 import pytest
@@ -90,3 +92,15 @@ def test_refresh_preserves_raw_snapshot_and_writes_provenance_and_report(tmp_pat
 def test_normalize_source_rejects_too_small_reference():
     with pytest.raises(ValueError, match="only 2 rows"):
         refresh_tool.normalize_source(upstream_csv())
+
+
+
+def test_refresh_script_supports_direct_cli_execution():
+    completed = subprocess.run(
+        [sys.executable, "tools/refresh_iso_review.py", "--help"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "Fetch an ISO-code reference snapshot" in completed.stdout
