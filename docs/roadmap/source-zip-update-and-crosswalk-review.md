@@ -1,6 +1,6 @@
 # Source ZIP evolution and country-catalog review plan
 
-**Status:** Review plan plus implemented compiler ID/schema safeguards and snapshot-comparison tool; local tests pending. No generated assets or game data changed.  
+**Status:** Compiler safeguards and snapshot comparison are implemented. Crosswalk matching now includes direct normalized source-name candidates as well as the legacy Persian translation bridge; local tests and report regeneration are pending after that change. No generated assets or game data changed.  
 **Branch:** `work/compiler-hardening`
 
 ## Goal
@@ -28,7 +28,7 @@ Keep the asset project maintainable when a newer Natural Earth database ZIP repl
 
 ## Identity and schema safeguards
 
-- `id` is the configured source identifier used by geometry files; `iso3` is a separate source-provided ISO alpha-3 candidate. Never derive one from the other.
+- The current compiled `id` is a source identifier used by geometry files; it is not yet the canonical `game_id`. The canonical identity contract is documented in [country-identity-contract.md](../architecture/country-identity-contract.md). Never derive a game ID from ISO, a display name, or array order.
 - A three-letter string is only syntactically ISO-shaped; verify the assignment independently before treating it as authoritative.
 - Source identifiers can change between releases. If a configured stable-ID field disappears, changes meaning, or becomes non-unique, fail and review rather than silently treating array order as identity.
 - Preserve raw source attributes and source archive SHA-256. A changed archive hash is expected after an update, but it must be accompanied by a reviewed change report.
@@ -36,7 +36,7 @@ Keep the asset project maintainable when a newer Natural Earth database ZIP repl
 - Do not commit the downloaded ZIP or generated output unless repository policy explicitly changes; `raw_data/` is ignored. Keep generated data reproducible from the recorded source and config.
 - Do not update runtime catalogs, save IDs, flag data, aliases, quiz answers, or Godot code merely because Natural Earth changed a name or feature. These need an explicit compatibility plan.
 
-## First unmatched-label review batch
+## Next implementation steps\n\n1. Run the updated crosswalk tests and regenerate both audit reports. Direct source-name matches and translation-bridge matches must remain review-only candidates.\n2. Implement the explicit asset-owned identity registry described in [country-identity-contract.md](../architecture/country-identity-contract.md). Every source feature must resolve to a unique `game_id`, including features without ISO values.\n3. Generate and review the proposed registry for all current source records before preparing any game migration.\n4. Build a separate compatibility crosswalk from legacy game labels to canonical `game_id`; do not use legacy game data as the source of canonical records.\n\n## First unmatched-label review batch
 
 These are review targets from the current game's Persian catalog, not approved matches. For each one, confirm the exact catalog key and its use, inspect the compiled Natural Earth `name`, `source_attributes`, `iso3`, `regions`, and geometry, then record a decision. Do not infer a match solely from translation or similar spelling.
 
