@@ -210,7 +210,7 @@ def main() -> int:
 
     registry = json.loads(args.registry.read_text(encoding="utf-8"))
     reference = read_reference(args.reference)
-    if not re.fullmatch(r"\\d{4}-\\d{2}-\\d{2}", args.retrieved_on):
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", args.retrieved_on):
         parser.error("--retrieved-on must use YYYY-MM-DD format")
     result = propose(registry, reference)
     report = render_report(result, str(args.reference), args.source_url, args.retrieved_on)
