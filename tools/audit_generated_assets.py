@@ -67,6 +67,23 @@ def audit_generated_assets(data_dir: Path, source: Path | None = None) -> list[s
         errors.append("duplicate country ids: " + ", ".join(duplicates))
     id_set = set(ids)
 
+    has_game_ids = any(isinstance(country, dict) and "game_id" in country for country in countries)
+    game_ids: list[str] = []
+    if has_game_ids:
+        for index, country in enumerate(countries):
+            if not isinstance(country, dict):
+                continue
+            game_id = country.get("game_id")
+            if not isinstance(game_id, str) or not game_id.strip():
+                errors.append(f"{country.get('id', index)}: game_id must be a non-empty string")
+            else:
+                game_ids.append(game_id)
+        duplicate_game_ids = sorted({game_id for game_id in game_ids if game_ids.count(game_id) > 1})
+        if duplicate_game_ids:
+            errors.append("duplicate game_ids: " + ", ".join(duplicate_game_ids))
+        if len(game_ids) != len(countries):
+            errors.append("when identity integration is enabled, every country must have a game_id")
+
     for profile in PROFILES:
         filename = f"geometry_{profile}.json"
         path = data_dir / filename
@@ -89,11 +106,37 @@ def audit_generated_assets(data_dir: Path, source: Path | None = None) -> list[s
         if extra:
             errors.append(f"{filename}: unknown geometry IDs: {', '.join(extra[:20])}")
 
+        if has_game_ids:
+            game_filename = f"geometry_game_id_{profile}.json"
+            game_path = data_dir / game_filename
+            try:
+                game_payload = json.loads(game_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as exc:
+                errors.append(f"{game_filename}: cannot read JSON: {exc}")
+                continue
+            if game_payload.get("profile") != profile:
+                errors.append(f"{game_filename}: profile field does not match filename")
+            if game_payload.get("key") != "game_id":
+                errors.append(f"{game_filename}: key must be 'game_id'")
+            game_geometries = game_payload.get("geometries")
+            if not isinstance(game_geometries, dict):
+                errors.append(f"{game_filename}: geometries must be an object")
+            else:
+                missing_game = sorted(set(game_ids) - set(game_geometries))
+                extra_game = sorted(set(game_geometries) - set(game_ids))
+                if missing_game:
+                    errors.append(f"{game_filename}: missing game_ids: {', '.join(missing_game[:20])}")
+                if extra_game:
+                    errors.append(f"{game_filename}: unknown game_ids: {', '.join(extra_game[:20])}")
+
     manifest_files = manifest.get("files")
     if not isinstance(manifest_files, dict):
         errors.append("manifest.json must contain a files object")
     else:
-        for filename in ("countries.json", *(f"geometry_{p}.json" for p in PROFILES)):
+        required_files = ["countries.json", *(f"geometry_{p}.json" for p in PROFILES)]
+        if has_game_ids:
+            required_files.extend(f"geometry_game_id_{p}.json" for p in PROFILES)
+        for filename in required_files:
             entry: Any = manifest_files.get(filename)
             path = data_dir / filename
             if not isinstance(entry, dict):
