@@ -41,6 +41,10 @@ uv run python tools/run_data_pipeline.py
 
 Use `--help` to inspect supported CLI options. The command should be safe to rerun, report each stage, preserve timestamped upstream evidence, and return non-zero if a required stage fails. It must not silently promote candidate output over the approved snapshot.
 
+## Snapshot comparison details
+
+The comparison report distinguishes a real difference from unavailable metadata. If either snapshot lacks source-schema or build-input metadata (as can happen with older approved snapshots), that comparison is marked “not comparable” rather than “changed.” During a pipeline run, the comparison is performed against the isolated staging directory, while the report displays the configured candidate output path.
+
 ## Outputs and reports
 
 - **Fetched source data:** immutable/timestamped source downloads and provenance.
