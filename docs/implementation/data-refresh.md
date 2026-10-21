@@ -41,6 +41,13 @@ Safety detail: this implementation uses the current Natural Earth download URL a
 - Updated the CLI default and `.env.example` to use Natural Earth's S3 distribution endpoint: `https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip`.
 - Documented that a local `.env` overrides the default. The owner must update the existing local `.env` before retrying; the new endpoint has not yet been validated by a complete local run.
 
+## Phase 4 — Correct identity audit invocation
+
+- The first full online run successfully fetched Natural Earth, refreshed ISO proposals, compiled 242 countries, generated 726 SVGs, and passed the generated-asset audit.
+- The run then failed because the pipeline passed an unsupported `--source-data` option to `audit_country_identity_registry.py`. That audit is intentionally registry-focused and accepts `--registry` and `--output`.
+- Updated the orchestration command to use the supported options and write its read-only review report to `reports/data-refresh/country-identity-review.md`.
+- No registry content was changed, no ISO proposals were approved, and no candidate output was promoted. The corrected end-to-end run still requires local validation.
+
 ## Remaining phases
 
 1. Run the new unit tests and CLI help locally; fix any issues found before extending the pipeline.
