@@ -12,6 +12,9 @@ import json
 import os
 import subprocess
 import sys
+import shutil
+import tempfile
+import uuid
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -123,6 +126,43 @@ def fetch_archive(url: str, destination_dir: Path, timeout: float, now: datetime
     return {"archive": archive_path, "provenance": provenance_path, **metadata}
 
 
+def create_staging_dir(output_dir: Path) -> Path:
+    """Create an isolated sibling directory for a candidate build."""
+    output_dir.parent.mkdir(parents=True, exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix=f".{output_dir.name}.staging-", dir=output_dir.parent))
+
+
+def _remove_path(path: Path) -> None:
+    if path.is_dir() and not path.is_symlink():
+        shutil.rmtree(path, ignore_errors=True)
+    else:
+        try:
+            path.unlink(missing_ok=True)
+        except OSError:
+            pass
+
+
+def publish_candidate(staging_dir: Path, output_dir: Path) -> None:
+    """Replace candidate output only after all build stages and audits pass.
+
+    The existing candidate is moved aside first and restored if publishing the
+    staging directory fails. The approved snapshot is never touched.
+    """
+    output_dir.parent.mkdir(parents=True, exist_ok=True)
+    backup_dir = output_dir.with_name(f".{output_dir.name}.backup-{uuid.uuid4().hex}")
+    had_output = output_dir.exists() or output_dir.is_symlink()
+    if had_output:
+        output_dir.rename(backup_dir)
+    try:
+        staging_dir.rename(output_dir)
+    except OSError:
+        if had_output and backup_dir.exists() and not output_dir.exists():
+            backup_dir.rename(output_dir)
+        raise
+    if had_output:
+        _remove_path(backup_dir)
+
+
 def run_command(label: str, command: list[str], results: list[dict[str, Any]]) -> bool:
     try:
         completed = subprocess.run(
@@ -215,6 +255,7 @@ def execute(config: dict[str, str]) -> int:
     iso_dir = configured_path(config, "TCA_ISO_DATA_DIR")
     stages: list[dict[str, Any]] = []
     fetched: dict[str, Any] | None = None
+    staging_dir: Path | None = None
     failed = False
     timeout = float(config["TCA_HTTP_TIMEOUT_SECONDS"])
     if timeout <= 0:
@@ -245,10 +286,24 @@ def execute(config: dict[str, str]) -> int:
         failed = failed or not ok
 
     if not failed and fetched:
+        try:
+            staging_dir = create_staging_dir(output_dir)
+            stages.append({
+                "stage": "prepare isolated candidate directory", "status": "success",
+                "stdout": str(staging_dir), "stderr": "",
+            })
+        except OSError as exc:
+            failed = True
+            stages.append({
+                "stage": "prepare isolated candidate directory", "status": "failed",
+                "return_code": None, "stdout": "", "stderr": str(exc),
+            })
+
+    if not failed and fetched and staging_dir:
         compile_command = [
             sys.executable, "tools/compile_natural_earth.py",
             "--source", str(fetched["archive"]),
-            "--output", str(output_dir),
+            "--output", str(staging_dir),
             "--config", str(configured_path(config, "TCA_GENERATION_CONFIG")),
             "--regions", str(configured_path(config, "TCA_REGIONS_CONFIG")),
             "--identity-registry", str(configured_path(config, "TCA_IDENTITY_REGISTRY")),
@@ -259,15 +314,15 @@ def execute(config: dict[str, str]) -> int:
     if not failed and enabled(config["TCA_GENERATE_SVGS"], "TCA_GENERATE_SVGS"):
         ok = run_command("generate SVG assets", [
             sys.executable, "tools/generate_country_svgs.py",
-            "--data", str(output_dir),
-            "--output", str(output_dir / "svg"),
+            "--data", str(staging_dir),
+            "--output", str(staging_dir / "svg"),
         ], stages)
         failed = failed or not ok
 
     if not failed:
         ok = run_command("audit generated assets", [
             sys.executable, "tools/audit_generated_assets.py",
-            "--data", str(output_dir),
+            "--data", str(staging_dir),
             "--source", str(fetched["archive"]),
         ], stages)
         failed = failed or not ok
@@ -285,7 +340,7 @@ def execute(config: dict[str, str]) -> int:
         if approved.is_dir() and (approved / "countries.json").is_file():
             ok = run_command("compare candidate with approved snapshot", [
                 sys.executable, "tools/compare_asset_snapshots.py",
-                "--old", str(approved), "--new", str(output_dir),
+                "--old", str(approved), "--new", str(staging_dir),
                 "--output", str(report_dir / "asset-comparison.md"),
             ], stages)
             failed = failed or not ok
@@ -296,6 +351,24 @@ def execute(config: dict[str, str]) -> int:
                 "stdout": f"No approved snapshot found at {approved}; no comparison performed.",
                 "stderr": "",
             })
+
+    if not failed and staging_dir is not None:
+        try:
+            publish_candidate(staging_dir, output_dir)
+            staging_dir = None
+            stages.append({
+                "stage": "publish validated candidate", "status": "success",
+                "stdout": f"Published validated candidate to {output_dir}", "stderr": "",
+            })
+        except OSError as exc:
+            failed = True
+            stages.append({
+                "stage": "publish validated candidate", "status": "failed",
+                "return_code": None, "stdout": "", "stderr": str(exc),
+            })
+
+    if staging_dir is not None:
+        _remove_path(staging_dir)
 
     status = "failed" if failed else "success"
     try:
