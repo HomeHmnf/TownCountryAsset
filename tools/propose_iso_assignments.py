@@ -117,6 +117,8 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
     no_match = 0
     ambiguous = 0
     already_verified = 0
+    exact_match_count = 0
+    explicit_variant_count = 0
     for index, record in enumerate(records):
         if not isinstance(record, dict):
             continue
@@ -130,6 +132,7 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
                 "candidate_alpha2": "",
                 "candidate_alpha3": "",
                 "reference_name": "",
+                "match_type": "unmatched",
                 "decision": "review: missing registry English name",
                 "note": "No assignment proposed.",
             })
@@ -158,15 +161,21 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
                 if variant_note
                 else "Name match is evidence for review, not approval. Confirm entity scope and source provenance."
             )
+            match_type = "explicit name variant" if variant_note else "exact normalized name"
             proposals.append({
                 "game_id": str(record.get("game_id") or ""),
                 "english_name": name,
                 "candidate_alpha2": candidate["alpha2"],
                 "candidate_alpha3": candidate["alpha3"],
                 "reference_name": candidate["english_name"],
+                "match_type": match_type,
                 "decision": decision,
                 "note": note,
             })
+            if variant_note:
+                explicit_variant_count += 1
+            else:
+                exact_match_count += 1
             if current_status == "verified":
                 already_verified += 1
         elif len(matches) > 1:
@@ -177,6 +186,7 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
                 "candidate_alpha2": "",
                 "candidate_alpha3": "",
                 "reference_name": "; ".join(item["english_name"] for item in matches),
+                "match_type": "ambiguous",
                 "decision": "review: ambiguous reference names",
                 "note": "No code proposed because the reference contains multiple normalized-name matches.",
             })
@@ -189,6 +199,7 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
                 "candidate_alpha2": "",
                 "candidate_alpha3": "",
                 "reference_name": "",
+                "match_type": "unmatched",
                 "decision": "review: no exact normalized English-name match",
                 "note": (
                     f"{variant_message} No assignment proposed."
@@ -201,6 +212,8 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
         "record_count": len(records),
         "reference_count": len(reference),
         "candidate_count": sum(bool(row["candidate_alpha2"]) for row in proposals),
+        "exact_match_count": exact_match_count,
+        "explicit_variant_count": explicit_variant_count,
         "no_match_count": no_match,
         "ambiguous_count": ambiguous,
         "already_verified_count": already_verified,
@@ -219,7 +232,9 @@ def render_report(
         "",
         f"- Registry records reviewed: {result['record_count']}",
         f"- Reference rows: {result['reference_count']}",
-        f"- Exact normalized-name candidates: {result['candidate_count']}",
+        f"- Total ISO candidates proposed: {result['candidate_count']}",
+        f"- Exact normalized-name matches: {result['exact_match_count']}",
+        f"- Explicit reviewed name-variant matches: {result['explicit_variant_count']}",
         f"- No-match or missing-name records: {result['no_match_count']}",
         f"- Ambiguous reference matches: {result['ambiguous_count']}",
         f"- Records already marked verified: {result['already_verified_count']}",
@@ -229,13 +244,13 @@ def render_report(
         "",
         "## Candidate review",
         "",
-        "| game_id | Registry English name | Candidate alpha-2 | Candidate alpha-3 | Reference English name | Decision |",
-        "|---|---|---|---|---|---|",
+        "| game_id | Registry English name | Candidate alpha-2 | Candidate alpha-3 | Reference English name | Match type | Decision |",
+        "|---|---|---|---|---|---|---|",
     ]
     for row in result["proposals"]:
         values = [
             row["game_id"], row["english_name"], row["candidate_alpha2"],
-            row["candidate_alpha3"], row["reference_name"], row["decision"],
+            row["candidate_alpha3"], row["reference_name"], row.get("match_type", ""), row["decision"],
         ]
         lines.append("| " + " | ".join(_md(value) for value in values) + " |")
     lines.extend([
