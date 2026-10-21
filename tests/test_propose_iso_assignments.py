@@ -88,3 +88,26 @@ def test_report_explains_review_only_policy():
     report = render_report(propose(registry(), reference()), "official-iso.csv")
     assert "does not modify the registry or approve" in report
     assert "source IDs and existing ISO fields are never used" in report
+
+def test_explicit_name_variant_proposes_candidate_but_never_verifies():
+    data = {"records": [
+        {"game_id": "tc_vietnam", "names": {"en": "Vietnam"},
+         "iso": {"alpha2": None, "alpha3": None, "assignment_status": "unverified"}},
+        {"game_id": "tc_ivory_coast", "names": {"en": "Ivory Coast"}, "iso": {}},
+        {"game_id": "tc_kosovo", "names": {"en": "Kosovo"}, "iso": {}},
+    ]}
+    refs = [
+        {"alpha2": "VN", "alpha3": "VNM", "english_name": "Viet Nam"},
+        {"alpha2": "CI", "alpha3": "CIV", "english_name": "Côte d'Ivoire"},
+    ]
+    result = propose(data, refs)
+    by_id = {row["game_id"]: row for row in result["proposals"]}
+
+    assert by_id["tc_vietnam"]["candidate_alpha2"] == "VN"
+    assert "explicit name-variant match" in by_id["tc_vietnam"]["decision"]
+    assert "Current reference spelling differs" in by_id["tc_vietnam"]["note"]
+    assert by_id["tc_ivory_coast"]["candidate_alpha3"] == "CIV"
+    assert by_id["tc_kosovo"]["candidate_alpha2"] == ""
+    assert by_id["tc_kosovo"]["candidate_alpha3"] == ""
+    assert result["candidate_count"] == 2
+
