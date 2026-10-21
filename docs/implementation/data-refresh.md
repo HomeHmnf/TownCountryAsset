@@ -57,6 +57,13 @@ Safety detail: this implementation uses the current Natural Earth download URL a
 - Updated the CLI documentation and README to explain the isolation/publish boundary.
 - Local validation of this phase is pending; run the tests and complete online pipeline before considering it finished.
 
+## Phase 6 — Make snapshot comparison reports accurate
+
+- The approved snapshot predates the compiler metadata fields for source schema and build-input fingerprints. Missing legacy metadata is now reported as “not comparable” rather than a misleading schema/configuration change.
+- The comparison CLI accepts a logical candidate display path so reports identify `generated/town_country_asset_candidate`, not the temporary staging directory used during validation. The comparison still reads the isolated staging files.
+- Added regression coverage for legacy snapshots without comparison metadata and for the logical candidate path.
+- Local tests and a fresh end-to-end run are pending.
+
 ## Remaining phases
 
 1. Pull the implementation, run the unit tests and CLI help locally; fix any issues found.
