@@ -2,6 +2,10 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+# Local environment configuration (never commit credentials or machine paths)
+.env
+.env.*.local
+
 # raw_data/
 venv/
 build/
