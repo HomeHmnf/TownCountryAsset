@@ -341,6 +341,7 @@ def execute(config: dict[str, str]) -> int:
             ok = run_command("compare candidate with approved snapshot", [
                 sys.executable, "tools/compare_asset_snapshots.py",
                 "--old", str(approved), "--new", str(staging_dir),
+                "--new-display-path", str(output_dir),
                 "--output", str(report_dir / "asset-comparison.md"),
             ], stages)
             failed = failed or not ok
