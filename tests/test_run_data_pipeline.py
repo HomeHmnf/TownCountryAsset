@@ -92,3 +92,41 @@ def test_write_summary_writes_success_and_failure_reports(tmp_path):
     assert report["status"] == "failed"
     assert report["stages"][0]["stderr"] == "offline"
     assert "FAILED" in markdown_path.read_text(encoding="utf-8")
+
+def test_publish_candidate_replaces_existing_output_and_removes_backup(tmp_path):
+    output_dir = tmp_path / "candidate"
+    output_dir.mkdir()
+    (output_dir / "old.json").write_text("old", encoding="utf-8")
+    staging_dir = pipeline.create_staging_dir(output_dir)
+    (staging_dir / "new.json").write_text("new", encoding="utf-8")
+
+    pipeline.publish_candidate(staging_dir, output_dir)
+
+    assert not staging_dir.exists()
+    assert not (output_dir / "old.json").exists()
+    assert (output_dir / "new.json").read_text(encoding="utf-8") == "new"
+    assert not list(tmp_path.glob(".candidate.backup-*"))
+
+
+def test_publish_candidate_keeps_existing_output_if_staging_rename_fails(tmp_path, monkeypatch):
+    output_dir = tmp_path / "candidate"
+    output_dir.mkdir()
+    (output_dir / "known-good.json").write_text("known-good", encoding="utf-8")
+    staging_dir = pipeline.create_staging_dir(output_dir)
+    (staging_dir / "new.json").write_text("new", encoding="utf-8")
+    real_rename = pipeline.Path.rename
+
+    def fail_staging_rename(path, target):
+        if path == staging_dir:
+            raise OSError("simulated publish failure")
+        return real_rename(path, target)
+
+    monkeypatch.setattr(pipeline.Path, "rename", fail_staging_rename)
+    with pytest.raises(OSError, match="simulated publish failure"):
+        pipeline.publish_candidate(staging_dir, output_dir)
+
+    assert (output_dir / "known-good.json").read_text(encoding="utf-8") == "known-good"
+    assert not (output_dir / "new.json").exists()
+    assert staging_dir.exists()
+    assert not list(tmp_path.glob(".candidate.backup-*"))
+
