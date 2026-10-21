@@ -1,11 +1,11 @@
 # Asset snapshot comparison
 
 - Old snapshot: `/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset`
-- New snapshot: `/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-ijup1oji`
+- New snapshot: `/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset_candidate`
 - Feature count: 242 → 242 (Δ 0)
 - Source archive hash changed: False
-- Source schema changed: True
-- Build configuration changed: True
+- Source schema comparison: not comparable (schema metadata missing from at least one snapshot)
+- Build configuration comparison: not comparable (build-input metadata missing from at least one snapshot)
 
 ## Identity changes
 
