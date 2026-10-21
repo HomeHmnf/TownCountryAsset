@@ -28,6 +28,7 @@ DEFAULTS = {
     "TCA_GAME_DATA_OUTPUT_DIR": "generated/town_country_asset_candidate",
     "TCA_APPROVED_DATA_DIR": "generated/town_country_asset",
     "TCA_REPORT_DIR": "reports/data-refresh",
+    "TCA_ISO_PROPOSAL_REPORT": "reports/iso-assignment-proposals.md",
     "TCA_GENERATION_CONFIG": "config/generation.json",
     "TCA_REGIONS_CONFIG": "config/regions.json",
     "TCA_IDENTITY_REGISTRY": "config/country_identity_registry.json",
@@ -236,7 +237,7 @@ def execute(config: dict[str, str]) -> int:
         ok = run_command("refresh ISO review proposals", [
             sys.executable, "tools/refresh_iso_review.py",
             "--output-dir", str(iso_dir),
-            "--report", str(ROOT / "reports" / "iso-assignment-proposals.md"),
+            "--report", str(configured_path(config, "TCA_ISO_PROPOSAL_REPORT")),
             "--source-url", config["TCA_ISO_REFERENCE_URL"],
         ], stages)
         failed = failed or not ok
@@ -323,7 +324,20 @@ def main() -> int:
         config = load_dotenv(args.env_file.expanduser())
         return execute(config)
     except (OSError, ValueError) as exc:
-        print(f"Configuration error: {exc}", file=sys.stderr)
+        started = datetime.now(timezone.utc)
+        try:
+            report_dir = ROOT / "reports" / "data-refresh"
+            md_path, json_path = write_summary(
+                report_dir, started,
+                [{"stage": "load configuration", "status": "failed", "return_code": None,
+                  "stdout": "", "stderr": str(exc)}],
+                None, ROOT / "generated" / "town_country_asset_candidate", "failed",
+            )
+            print(f"Configuration failed: {exc}", file=sys.stderr)
+            print(f"Failure report: {md_path}", file=sys.stderr)
+            print(f"Machine-readable report: {json_path}", file=sys.stderr)
+        except OSError as report_error:
+            print(f"Configuration error: {exc}; also failed to write report: {report_error}", file=sys.stderr)
         return 2
 
 
