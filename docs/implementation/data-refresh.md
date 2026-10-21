@@ -34,6 +34,13 @@ Added `tests/test_run_data_pipeline.py` for environment precedence, boolean pars
 
 Safety detail: this implementation uses the current Natural Earth download URL as the configurable example default. It records the actual URL, retrieval timestamp and hash, but intentionally leaves the release version null unless verified upstream metadata is available.
 
+## Phase 3 — Fix the failed source download default
+
+- Local validation confirmed all 61 tests pass and both CLI help commands work.
+- The first online run failed before any later stage because the legacy Natural Earth website download URL returned HTTP 500.
+- Updated the CLI default and `.env.example` to use Natural Earth's S3 distribution endpoint: `https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip`.
+- Documented that a local `.env` overrides the default. The owner must update the existing local `.env` before retrying; the new endpoint has not yet been validated by a complete local run.
+
 ## Remaining phases
 
 1. Run the new unit tests and CLI help locally; fix any issues found before extending the pipeline.
