@@ -185,6 +185,8 @@ def refresh(
         "normalized_sha256": normalized_sha256,
         "reference_row_count": row_count,
         "candidate_count": result["candidate_count"],
+        "exact_match_count": result["exact_match_count"],
+        "explicit_variant_count": result["explicit_variant_count"],
         "no_match_count": result["no_match_count"],
         "ambiguous_count": result["ambiguous_count"],
     }
