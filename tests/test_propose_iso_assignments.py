@@ -66,7 +66,7 @@ def test_no_match_does_not_fall_back_to_source_or_existing_iso_code():
 def test_normalized_spelling_format_matches_but_does_not_use_fuzzy_synonyms():
     data = {"records": [
         {"game_id": "tc_one", "names": {"en": "Côte d'Ivoire"}, "iso": {}},
-        {"game_id": "tc_two", "names": {"en": "Ivory Coast"}, "iso": {}},
+        {"game_id": "tc_two", "names": {"en": "Ivory Shore"}, "iso": {}},
     ]}
     refs = [{"alpha2": "CI", "alpha3": "CIV", "english_name": "Cote d Ivoire"}]
     result = propose(data, refs)
