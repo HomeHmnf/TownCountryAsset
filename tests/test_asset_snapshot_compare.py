@@ -2,7 +2,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from tools.compare_asset_snapshots import compare_snapshots
+from tools.compare_asset_snapshots import compare_snapshots, render_markdown
 
 
 def write_snapshot(root: Path, countries: list[dict], source_hash: str, schema_fields: list[str]):
@@ -69,3 +69,33 @@ def test_compare_rejects_duplicate_ids_in_snapshot(tmp_path):
         assert "duplicate country ID" in str(exc)
     else:
         raise AssertionError("expected duplicate IDs to be rejected")
+
+
+
+def test_missing_legacy_metadata_is_not_reported_as_a_change(tmp_path):
+    old = tmp_path / "old"
+    new = tmp_path / "new"
+    write_snapshot(old, [country("KEEP", "BBB", "Keep")], "1" * 64, ["ADM0_A3", "ISO_A3", "ADMIN"])
+    write_snapshot(new, [country("KEEP", "BBB", "Keep")], "1" * 64, ["ADM0_A3", "ISO_A3", "ADMIN"])
+
+    old_metadata_path = old / "countries.json"
+    old_metadata = json.loads(old_metadata_path.read_text(encoding="utf-8"))
+    old_metadata.pop("source_schema")
+    old_metadata.pop("build_inputs")
+    old_metadata_path.write_text(json.dumps(old_metadata), encoding="utf-8")
+    old_manifest_path = old / "manifest.json"
+    old_manifest = json.loads(old_manifest_path.read_text(encoding="utf-8"))
+    old_manifest.pop("source_schema")
+    old_manifest.pop("build_inputs")
+    old_manifest_path.write_text(json.dumps(old_manifest), encoding="utf-8")
+
+    report = compare_snapshots(old, new, new_snapshot_label="generated/town_country_asset_candidate")
+
+    assert report["source_schema"]["comparable"] is False
+    assert report["source_schema"]["changed"] is None
+    assert report["build_inputs"]["comparable"] is False
+    assert report["build_inputs"]["changed"] is None
+    assert report["new_snapshot"] == "generated/town_country_asset_candidate"
+    markdown = render_markdown(report)
+    assert "Source schema comparison: not comparable" in markdown
+    assert "Build configuration comparison: not comparable" in markdown
