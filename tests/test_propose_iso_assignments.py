@@ -43,6 +43,8 @@ def test_proposals_match_names_but_never_mutate_registry():
     before = json.dumps(data, sort_keys=True)
     result = propose(data, reference())
     assert result["candidate_count"] == 3
+    assert result["exact_match_count"] == 3
+    assert result["explicit_variant_count"] == 0
     assert result["proposals"][0]["candidate_alpha2"] == "AA"
     assert "human verification required" in result["proposals"][0]["decision"]
     assert "already marked verified" in result["proposals"][2]["decision"]
@@ -88,6 +90,10 @@ def test_report_explains_review_only_policy():
     report = render_report(propose(registry(), reference()), "official-iso.csv")
     assert "does not modify the registry or approve" in report
     assert "source IDs and existing ISO fields are never used" in report
+    assert "- Total ISO candidates proposed: 3" in report
+    assert "- Exact normalized-name matches: 3" in report
+    assert "- Explicit reviewed name-variant matches: 0" in report
+    assert "| Match type | Decision |" in report
 
 def test_explicit_name_variant_proposes_candidate_but_never_verifies():
     data = {"records": [
@@ -106,6 +112,8 @@ def test_explicit_name_variant_proposes_candidate_but_never_verifies():
     assert by_id["tc_vietnam"]["candidate_alpha2"] == "VN"
     assert "explicit name-variant match" in by_id["tc_vietnam"]["decision"]
     assert "Current reference spelling differs" in by_id["tc_vietnam"]["note"]
+    assert by_id["tc_vietnam"]["match_type"] == "explicit name variant"
+    assert by_id["tc_ivory_coast"]["match_type"] == "explicit name variant"
     assert by_id["tc_ivory_coast"]["candidate_alpha3"] == "CIV"
     assert by_id["tc_kosovo"]["candidate_alpha2"] == ""
     assert by_id["tc_kosovo"]["candidate_alpha3"] == ""
