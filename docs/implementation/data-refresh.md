@@ -48,11 +48,19 @@ Safety detail: this implementation uses the current Natural Earth download URL a
 - Updated the orchestration command to use the supported options and write its read-only review report to `reports/data-refresh/country-identity-review.md`.
 - No registry content was changed, no ISO proposals were approved, and no candidate output was promoted. The corrected end-to-end run still requires local validation.
 
+## Phase 5 — Isolated candidate build and guarded publication
+
+- The pipeline now compiles and generates SVGs in a temporary sibling directory instead of writing directly into `TCA_GAME_DATA_OUTPUT_DIR`.
+- Asset audits, identity-registry review, and approved-snapshot comparison run against that isolated candidate.
+- Only after every required stage succeeds does the pipeline publish the candidate directory. If publication fails, it attempts to restore the previous candidate; failed stages clean up temporary output and leave the previous candidate untouched.
+- Added tests for replacing a candidate on success and preserving the known-good candidate when publication fails.
+- Updated the CLI documentation and README to explain the isolation/publish boundary.
+- Local validation of this phase is pending; run the tests and complete online pipeline before considering it finished.
+
 ## Remaining phases
 
-1. Run the new unit tests and CLI help locally; fix any issues found before extending the pipeline.
-2. Review output isolation and failure handling, including whether failed stages leave candidate-only partial files; add/adjust tests as needed.
-3. Verify the full one-command workflow locally against online sources, and inspect its summary and comparison report.
-4. Update the top-level README with the canonical CLI command and finish this log after successful local verification.
+1. Pull the implementation, run the unit tests and CLI help locally; fix any issues found.
+2. Run the complete one-command workflow against online sources and inspect the summary and comparison report.
+3. Review the diff and `git status` before committing. Keep fetched source snapshots tracked as intended by the project's reproducibility policy; do not stage local `.env`.
 
 Each phase is recorded here after implementation and before the next phase. Any product/data-policy decision that cannot be safely inferred must be asked before proceeding.
