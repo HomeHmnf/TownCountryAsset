@@ -31,6 +31,8 @@ Paths may be absolute or relative to the repository root. Boolean values accept 
 
 ## Usage
 
+The CLI builds into a temporary sibling directory. Compilation, SVG generation, asset audits, identity-registry review, and comparison must all pass before the validated directory replaces `TCA_GAME_DATA_OUTPUT_DIR`. On a failed build or audit, the previous candidate directory is preserved and temporary output is removed. This publication step never changes `TCA_APPROVED_DATA_DIR`.
+
 The target interface is:
 
 ```fish
@@ -42,7 +44,7 @@ Use `--help` to inspect supported CLI options. The command should be safe to rer
 ## Outputs and reports
 
 - **Fetched source data:** immutable/timestamped source downloads and provenance.
-- **Candidate game data:** metadata, geometry profiles, manifest and optional SVGs in `TCA_GAME_DATA_OUTPUT_DIR`.
+- **Candidate game data:** metadata, geometry profiles, manifest and optional SVGs are built in an isolated temporary directory, then published to `TCA_GAME_DATA_OUTPUT_DIR` only after successful validation. A failed run preserves the prior candidate.
 - **ISO review:** proposals only; a name match is never approval.
 - **Run summary:** one Markdown report and one machine-readable JSON report per invocation.
 - **Comparison:** added/removed identities, possible rekeys, metadata changes and geometry changes versus the approved snapshot.
