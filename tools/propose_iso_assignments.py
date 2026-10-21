@@ -18,6 +18,50 @@ from typing import Any
 
 
 REQUIRED_COLUMNS = {"alpha2", "alpha3", "english_name"}
+
+# Explicit, review-only naming variants. These are maintained mappings, not
+# fuzzy matches; every resulting code remains a candidate requiring human review.
+# The keys are normalized registry labels and values are exact reference labels.
+REVIEWED_NAME_VARIANTS = {
+    "aland": ("Åland Islands", "Diacritic and abbreviated display-name variant."),
+    "bahamas": ("Bahamas", "Reference uses the formal name without the leading article."),
+    "bolivia": ("Bolivia, Plurinational State of", "Reference uses the formal state name."),
+    "brunei": ("Brunei Darussalam", "Reference uses the formal country name."),
+    "democratic republic of the congo": ("Congo, Democratic Republic of the", "Word-order variant of the formal name."),
+    "east timor": ("Timor-Leste", "Common English name variant."),
+    "federated states of micronesia": ("Micronesia, Federated States of", "Word-order variant of the formal name."),
+    "french southern and antarctic lands": ("French Southern Territories", "Natural Earth display label differs from the ISO reference name; verify entity scope."),
+    "hong kong s a r": ("Hong Kong", "Administrative-region suffix variant."),
+    "iran": ("Iran, Islamic Republic of", "Reference uses the formal name."),
+    "ivory coast": ("Côte d'Ivoire", "Common English name variant."),
+    "laos": ("Lao People's Democratic Republic", "Common English name variant."),
+    "macao s a r": ("Macao", "Administrative-region suffix variant."),
+    "moldova": ("Moldova, Republic of", "Reference uses the formal name."),
+    "north korea": ("Korea, Democratic People's Republic of", "Common English name variant."),
+    "palestine": ("Palestine, State of", "Reference uses the formal name."),
+    "pitcairn islands": ("Pitcairn", "Plural display-name variant."),
+    "republic of the congo": ("Congo", "Common country-name variant; verify entity distinction."),
+    "republic of serbia": ("Serbia", "Display-name prefix variant."),
+    "russia": ("Russian Federation", "Common English name variant."),
+    "saint helena": ("Saint Helena, Ascension and Tristan da Cunha", "Reference uses the extended territory name."),
+    "saint martin": ("Saint Martin (French part)", "Reference identifies the French part explicitly; verify geometry/entity scope."),
+    "south georgia and the islands": ("South Georgia and the South Sandwich Islands", "Display-name variant; verify geometry/entity scope."),
+    "south korea": ("Korea, Republic of", "Common English name variant."),
+    "syria": ("Syrian Arab Republic", "Common English name variant."),
+    "taiwan": ("Taiwan, Province of China", "Reference uses its published formal label; assignment requires policy review."),
+    "the bahamas": ("Bahamas", "Reference omits the leading article."),
+    "turkey": ("Türkiye", "Current reference spelling differs."),
+    "united kingdom": ("United Kingdom of Great Britain and Northern Ireland", "Reference uses the full formal name."),
+    "united republic of tanzania": ("Tanzania, United Republic of", "Word-order variant of the formal name."),
+    "united states virgin islands": ("Virgin Islands (U.S.)", "Display-name variant; verify entity scope."),
+    "vatican": ("Holy See", "ISO reference identifies the Holy See; review entity-vs-display-label semantics."),
+    "venezuela": ("Venezuela, Bolivarian Republic of", "Reference uses the formal name."),
+    "vietnam": ("Viet Nam", "ISO reference spelling differs."),
+    "british virgin islands": ("Virgin Islands (British)", "Display-name variant."),
+    "kosovo": ("", "No ISO 3166-1 candidate is proposed by this alias map."),
+    "somaliland": ("", "No ISO 3166-1 candidate is proposed by this alias map."),
+    "northern cyprus": ("", "No ISO 3166-1 candidate is proposed by this alias map."),
+}
 DEFAULT_REGISTRY = Path("config/country_identity_registry.json")
 DEFAULT_OUTPUT = Path("reports/iso-assignment-proposals.md")
 
@@ -92,16 +136,28 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
             no_match += 1
             continue
 
-        matches = by_name.get(normalize_name(name), [])
+        normalized_name = normalize_name(name)
+        matches = by_name.get(normalized_name, [])
+        variant = REVIEWED_NAME_VARIANTS.get(normalized_name)
+        variant_note = ""
+        if not matches and variant and variant[0]:
+            variant_name, variant_note = variant
+            matches = by_name.get(normalize_name(variant_name), [])
         if len(matches) == 1:
             candidate = matches[0]
             current_status = iso.get("assignment_status")
-            decision = (
-                "review: already marked verified; compare before changing"
-                if current_status == "verified"
-                else "candidate: exact normalized English-name match; human verification required"
+            if current_status == "verified":
+                decision = "review: already marked verified; compare before changing"
+            elif variant_note:
+                decision = "candidate: explicit name-variant match; human verification required"
+            else:
+                decision = "candidate: exact normalized English-name match; human verification required"
+            note = (
+                f"Explicit variant: {variant_note} "
+                "This is review evidence, not approval; confirm entity scope and source provenance."
+                if variant_note
+                else "Name match is evidence for review, not approval. Confirm entity scope and source provenance."
             )
-            note = "Name match is evidence for review, not approval. Confirm entity scope and source provenance."
             proposals.append({
                 "game_id": str(record.get("game_id") or ""),
                 "english_name": name,
@@ -126,6 +182,7 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
             })
         else:
             no_match += 1
+            variant_message = variant[1] if variant and variant[1] else ""
             proposals.append({
                 "game_id": str(record.get("game_id") or ""),
                 "english_name": name,
@@ -133,7 +190,11 @@ def propose(registry: dict[str, Any], reference: list[dict[str, str]]) -> dict[s
                 "candidate_alpha3": "",
                 "reference_name": "",
                 "decision": "review: no exact normalized English-name match",
-                "note": "Do not infer codes from source IDs, existing ISO fields, aliases, or approximate names.",
+                "note": (
+                    f"{variant_message} No assignment proposed."
+                    if variant_message
+                    else "Do not infer codes from source IDs, existing ISO fields, aliases, or approximate names."
+                ),
             })
 
     return {
