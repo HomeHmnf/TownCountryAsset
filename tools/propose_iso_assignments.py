@@ -56,7 +56,7 @@ REVIEWED_NAME_VARIANTS = {
     "united states virgin islands": ("Virgin Islands (U.S.)", "Display-name variant; verify entity scope."),
     "vatican": ("Holy See", "ISO reference identifies the Holy See; review entity-vs-display-label semantics."),
     "venezuela": ("Venezuela, Bolivarian Republic of", "Reference uses the formal name."),
-    "vietnam": ("Viet Nam", "ISO reference spelling differs."),
+    "vietnam": ("Viet Nam", "Current reference spelling differs from the registry display name."),
     "british virgin islands": ("Virgin Islands (British)", "Display-name variant."),
     "kosovo": ("", "No ISO 3166-1 candidate is proposed by this alias map."),
     "somaliland": ("", "No ISO 3166-1 candidate is proposed by this alias map."),
