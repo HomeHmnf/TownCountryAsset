@@ -275,8 +275,8 @@ def execute(config: dict[str, str]) -> int:
     if not failed:
         ok = run_command("audit persistent identity registry", [
             sys.executable, "tools/audit_country_identity_registry.py",
-            "--source-data", str(output_dir / "countries.json"),
             "--registry", str(configured_path(config, "TCA_IDENTITY_REGISTRY")),
+            "--output", str(report_dir / "country-identity-review.md"),
         ], stages)
         failed = failed or not ok
 
