@@ -56,4 +56,6 @@ Use `--help` to inspect supported CLI options. The command should be safe to rer
 - Do not claim an upstream version unless it was obtained from source metadata or release information; always record retrieval time and SHA-256.
 - When a source changes schema or fails validation, stop the affected stage, write a failure summary, and preserve the last known-good approved output.
 
+The default Natural Earth archive URL uses the Natural Earth S3 distribution endpoint. The older website download URL returned HTTP 500 during a local end-to-end run; existing `.env` files override defaults, so update `TCA_NATURAL_EARTH_URL` in `.env` when adopting a changed default.
+
 The CLI implementation and each completed implementation phase are tracked in `docs/implementation/data-refresh.md`.
