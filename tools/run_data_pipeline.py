@@ -216,10 +216,12 @@ def execute(config: dict[str, str]) -> int:
     stages: list[dict[str, Any]] = []
     fetched: dict[str, Any] | None = None
     failed = False
+    timeout = float(config["TCA_HTTP_TIMEOUT_SECONDS"])
+    if timeout <= 0:
+        raise ValueError("TCA_HTTP_TIMEOUT_SECONDS must be positive")
+    for flag in ("TCA_GENERATE_SVGS", "TCA_COMPARE_WITH_APPROVED", "TCA_RUN_ISO_REVIEW"):
+        enabled(config[flag], flag)
     try:
-        timeout = float(config["TCA_HTTP_TIMEOUT_SECONDS"])
-        if timeout <= 0:
-            raise ValueError("TCA_HTTP_TIMEOUT_SECONDS must be positive")
         fetched = fetch_archive(
             config["TCA_NATURAL_EARTH_URL"], source_dir, timeout, started
         )
