@@ -51,6 +51,22 @@ The compiler accepts a local Natural Earth Admin 0 Countries 1:50m ZIP, shapefil
    Output is grouped as `svg/low/`, `svg/medium/`, and `svg/high/`, with one SVG per stable country ID. To generate only selected profiles, repeat `--profile`, for example `--profile low --profile medium`.
 7. Copy `addons/town_country_asset` and the generated data into your Godot project. The runtime default data path is `res://generated/town_country_asset`.
 
+## Automatic online data refresh
+
+Copy `.env.example` to `.env`, adjust the source URLs and local folders, then run the complete data-preparation pipeline:
+
+```fish
+cp .env.example .env
+# Edit .env for your source URLs and preferred paths.
+uv run python tools/run_data_pipeline.py
+```
+
+The CLI fetches the configured Natural Earth source, refreshes ISO review proposals, compiles candidate metadata and geometry using the persistent identity registry, generates SVGs when enabled, audits the result, and compares it with the approved snapshot when available. It writes a Markdown and JSON run summary under `TCA_REPORT_DIR`; failures are reported and return a non-zero exit status. Run `uv run python tools/run_data_pipeline.py --help` or `--help-config` for CLI options and configuration defaults.
+
+All URLs and output/input directories are configurable through `.env` or process environment variables. Existing process environment variables take precedence. The local `.env` is ignored by Git; commit only changes to `.env.example`.
+
+This workflow prepares data in **TownCountryAsset only**. It does not update TownCountryGame, promote candidate outputs over approved assets, regenerate the identity registry, or verify ISO proposals automatically. See [CLI documentation](docs/cli-tool.md) and the [implementation log](docs/implementation/data-refresh.md).
+
 ## Common development commands
 
 ```fish
