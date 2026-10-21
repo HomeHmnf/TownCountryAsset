@@ -21,7 +21,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULTS = {
-    "TCA_NATURAL_EARTH_URL": "https://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_0_countries.zip",
+    "TCA_NATURAL_EARTH_URL": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip",
     "TCA_ISO_REFERENCE_URL": "https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv",
     "TCA_FETCHED_DATA_DIR": "raw_data/fetched",
     "TCA_ISO_DATA_DIR": "raw_data/iso",
