@@ -270,8 +270,8 @@
 
 ## Download provenance
 
-- Raw snapshot: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-upstream-20261021T090745Z.csv`
-- Provenance metadata: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-provenance-20261021T090745Z.json`
+- Raw snapshot: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-upstream-20261021T092846Z.csv`
+- Provenance metadata: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-provenance-20261021T092846Z.json`
 - Raw SHA-256: `d5a40f6d8eeb8bb1981c93c54b8d56c9d08a7c0a0b8272f40fd22f705689c8b9`
 - Normalized SHA-256: `10893d35138839a13d417137ee2122d1934beee4839e5578da2c1d0b1e25afb2`
 - Reference row count: 249

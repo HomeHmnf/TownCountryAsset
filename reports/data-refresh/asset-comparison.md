@@ -1,7 +1,7 @@
 # Asset snapshot comparison
 
 - Old snapshot: `/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset`
-- New snapshot: `/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset_candidate`
+- New snapshot: `/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-ijup1oji`
 - Feature count: 242 → 242 (Δ 0)
 - Source archive hash changed: False
 - Source schema changed: True
