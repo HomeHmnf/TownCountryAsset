@@ -4,9 +4,9 @@
 
 ## Step 1 — Environment configuration and CLI contract
 
-**Status:** Steps 1–2 implemented on `work/compiler-hardening`; local execution and test validation are pending.
+**Status:** Completed and locally validated.
 
-Added `.env.example` with source URLs, fetched-data folders, candidate/approved output folders, report folder, compiler configuration paths, feature toggles, and HTTP timeout. Added `docs/cli-tool.md` describing the intended one-command interface, output/report behavior, and safety boundaries.
+Added `.env.example` with source URLs, fetched-data folders, candidate/approved output folders, report folder, compiler configuration paths, feature toggles, and HTTP timeout. Added `docs/cli-tool.md` describing the one-command interface, output/report behavior, and safety boundaries.
 
 Design decisions captured:
 - Local `.env` is not committed; `.env.example` is the shareable template.
@@ -15,11 +15,9 @@ Design decisions captured:
 - ISO matches remain proposals; the identity registry is persistent and must never be regenerated automatically.
 - This repository does not modify the game repository.
 
-Validation still required locally: check that `.env` is ignored, run the CLI help/tests once the CLI implementation lands, and verify no workflow touches the game repository.
-
 ## Step 2 — Environment-driven orchestration CLI
 
-**Status:** Implemented; local validation pending.
+**Status:** Completed and locally validated.
 
 Added `tools/run_data_pipeline.py` with:
 - `.env` parsing without a new dependency; existing process environment values take precedence.
@@ -30,44 +28,67 @@ Added `tools/run_data_pipeline.py` with:
 - Non-zero exit on failed stages; no automatic promotion to approved data and no writes to TownCountryGame.
 - Pre-flight configuration validation and failure reporting for configuration errors.
 
-Added `tests/test_run_data_pipeline.py` for environment precedence, boolean parsing, archive validation/provenance, and summary reporting. Added `.env` ignore rules so local configuration is not committed, and documented the CLI in `docs/cli-tool.md`.
+Added `tests/test_run_data_pipeline.py` for environment precedence, boolean parsing, archive validation/provenance, and summary reporting. Added `.env` ignore rules and documented the CLI.
 
-Safety detail: this implementation uses the current Natural Earth download URL as the configurable example default. It records the actual URL, retrieval timestamp and hash, but intentionally leaves the release version null unless verified upstream metadata is available.
+Safety detail: the implementation records the actual source URL, retrieval timestamp and hash, but leaves the release version null unless verified upstream metadata is available.
 
 ## Phase 3 — Fix the failed source download default
 
-- Local validation confirmed all 61 tests pass and both CLI help commands work.
-- The first online run failed before any later stage because the legacy Natural Earth website download URL returned HTTP 500.
+- Local validation confirmed all 61 tests passed and both CLI help commands worked at that point.
+- The first online run failed before later stages because the legacy Natural Earth website download URL returned HTTP 500.
 - Updated the CLI default and `.env.example` to use Natural Earth's S3 distribution endpoint: `https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip`.
-- Documented that a local `.env` overrides the default. The owner must update the existing local `.env` before retrying; the new endpoint has not yet been validated by a complete local run.
+- The local `.env` overrides the default and was updated before the successful complete run.
 
 ## Phase 4 — Correct identity audit invocation
 
-- The first full online run successfully fetched Natural Earth, refreshed ISO proposals, compiled 242 countries, generated 726 SVGs, and passed the generated-asset audit.
-- The run then failed because the pipeline passed an unsupported `--source-data` option to `audit_country_identity_registry.py`. That audit is intentionally registry-focused and accepts `--registry` and `--output`.
-- Updated the orchestration command to use the supported options and write its read-only review report to `reports/data-refresh/country-identity-review.md`.
-- No registry content was changed, no ISO proposals were approved, and no candidate output was promoted. The corrected end-to-end run still requires local validation.
+- The first full online run successfully fetched Natural Earth, refreshed ISO proposals, compiled 242 features, generated 726 SVGs, and passed the generated-asset audit.
+- The run then failed because the pipeline passed an unsupported `--source-data` option to `audit_country_identity_registry.py`. That audit accepts `--registry` and `--output`.
+- Updated orchestration to use supported options and write a read-only review report to `reports/data-refresh/country-identity-review.md`.
+- No registry content was changed, no ISO proposals were approved, and no candidate output was promoted during the failed run.
 
 ## Phase 5 — Isolated candidate build and guarded publication
 
-- The pipeline now compiles and generates SVGs in a temporary sibling directory instead of writing directly into `TCA_GAME_DATA_OUTPUT_DIR`.
+- The pipeline compiles and generates SVGs in a temporary sibling directory instead of writing directly into `TCA_GAME_DATA_OUTPUT_DIR`.
 - Asset audits, identity-registry review, and approved-snapshot comparison run against that isolated candidate.
 - Only after every required stage succeeds does the pipeline publish the candidate directory. If publication fails, it attempts to restore the previous candidate; failed stages clean up temporary output and leave the previous candidate untouched.
 - Added tests for replacing a candidate on success and preserving the known-good candidate when publication fails.
-- Updated the CLI documentation and README to explain the isolation/publish boundary.
-- Local validation of this phase is pending; run the tests and complete online pipeline before considering it finished.
+- Updated the CLI documentation and README to explain the isolation/publication boundary.
 
 ## Phase 6 — Make snapshot comparison reports accurate
 
-- The approved snapshot predates the compiler metadata fields for source schema and build-input fingerprints. Missing legacy metadata is now reported as “not comparable” rather than a misleading schema/configuration change.
+- The approved snapshot predates compiler metadata fields for source schema and build-input fingerprints. Missing legacy metadata is reported as “not comparable” rather than a misleading schema/configuration change.
 - The comparison CLI accepts a logical candidate display path so reports identify `generated/town_country_asset_candidate`, not the temporary staging directory used during validation. The comparison still reads the isolated staging files.
 - Added regression coverage for legacy snapshots without comparison metadata and for the logical candidate path.
-- Local tests and a fresh end-to-end run are pending.
 
-## Remaining phases
+## Phase 7 — Country identity and metadata review (planned)
 
-1. Pull the implementation, run the unit tests and CLI help locally; fix any issues found.
-2. Run the complete one-command workflow against online sources and inspect the summary and comparison report.
-3. Review the diff and `git status` before committing. Keep fetched source snapshots tracked as intended by the project's reproducibility policy; do not stage local `.env`.
+**Status:** Planning recorded; implementation not started.
 
-Each phase is recorded here after implementation and before the next phase. Any product/data-policy decision that cannot be safely inferred must be asked before proceeding.
+Goal: improve the quality and auditability of the 242 persistent identity records without changing stable IDs or silently treating proposals as approved.
+
+Planned work:
+1. Inspect the current identity registry schema, compiler expectations, ISO proposal generator, and audits before changing any data model.
+2. Produce a review artifact that groups records needing ISO review, entity-type classification, and Persian localization, preserving a clear source/evidence trail for each proposed value.
+3. Verify ISO alpha-2 and alpha-3 candidates against the captured reference dataset; keep exact matches, explicit variants, ambiguous cases, and no-match cases distinguishable. A match is evidence, not automatic approval.
+4. Explicitly identify features for which an ISO code may legitimately not apply. Do not invent codes; require a documented rationale and source for exceptions.
+5. Define controlled entity-type values and validation rules based on the actual feature set and source attributes. Keep uncertain classifications unreviewed.
+6. Define a source-backed Persian-name workflow; do not machine-invent or silently transliterate names as verified localization.
+7. Add read-only audits and tests for proposal/evidence completeness, invalid codes, unsupported statuses, and preservation of all existing `game_id` values.
+8. Document this phase and its local validation results before moving to any approval workflow.
+
+Safety constraints:
+- Do not regenerate, rename, or replace persistent `game_id` values.
+- Do not automatically approve ISO assignments, entity types, or Persian names.
+- Do not edit the approved asset snapshot or TownCountryGame as part of this phase.
+- Missing codes are not inherently errors when no code applies; exceptions must be evidence-backed and documented.
+- Preserve raw source snapshots and provenance for reproducibility. Never commit local `.env`.
+
+## Validation record
+
+- Latest local validation reported by the owner on 2026-10-21: `uv run pytest -v` — **64 passed**.
+- The online pipeline completed successfully with all nine stages successful: Natural Earth fetch, ISO proposal refresh, isolated candidate preparation, compilation, SVG generation, asset audit, identity registry audit, snapshot comparison, and candidate publication.
+- Candidate contains 242 features and 726 SVG files. Identity audit found 242 records, 242 unique non-empty IDs, and zero structural issues.
+- Comparison correctly reports source-schema and build-input comparisons as “not comparable” because metadata is missing from at least one snapshot; it does not claim false-positive changes.
+- The owner committed the raw Natural Earth/ISO evidence and refresh reports in commit `e4d3c42` on `work/compiler-hardening`. The approved snapshot and game repository were not modified.
+
+Each phase is recorded here before implementation and updated with results. Any product/data-policy decision that cannot be safely inferred must be asked before proceeding.
