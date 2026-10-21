@@ -59,7 +59,7 @@ def _geometry_fingerprints(path: Path, country_ids: set[str]) -> dict[str, dict[
     return result
 
 
-def compare_snapshots(old_dir: Path, new_dir: Path) -> dict[str, Any]:
+def compare_snapshots(old_dir: Path, new_dir: Path, *, new_snapshot_label: str | None = None) -> dict[str, Any]:
     old_meta, old = load_snapshot(old_dir)
     new_meta, new = load_snapshot(new_dir)
     old_countries, new_countries = old["countries"], new["countries"]
@@ -152,21 +152,27 @@ def compare_snapshots(old_dir: Path, new_dir: Path) -> dict[str, Any]:
     new_source = new_meta.get("source", {})
     old_manifest = old["manifest"]
     new_manifest = new["manifest"]
+    old_schema, new_schema = old_meta.get("source_schema"), new_meta.get("source_schema")
+    old_build_inputs, new_build_inputs = old_meta.get("build_inputs"), new_meta.get("build_inputs")
+    schema_comparable = old_schema is not None and new_schema is not None
+    build_inputs_comparable = old_build_inputs is not None and new_build_inputs is not None
     return {
         "old_snapshot": str(old_dir),
-        "new_snapshot": str(new_dir),
+        "new_snapshot": str(new_snapshot_label if new_snapshot_label is not None else new_dir),
         "source_archive_sha256": {
             "old": old_source.get("archive_sha256"), "new": new_source.get("archive_sha256"),
             "changed": old_source.get("archive_sha256") != new_source.get("archive_sha256"),
         },
         "source_version": {"old": old_source.get("source_version"), "new": new_source.get("source_version")},
         "source_schema": {
-            "old": old_meta.get("source_schema"), "new": new_meta.get("source_schema"),
-            "changed": old_meta.get("source_schema") != new_meta.get("source_schema"),
+            "old": old_schema, "new": new_schema,
+            "comparable": schema_comparable,
+            "changed": old_schema != new_schema if schema_comparable else None,
         },
         "build_inputs": {
-            "old": old_meta.get("build_inputs"), "new": new_meta.get("build_inputs"),
-            "changed": old_meta.get("build_inputs") != new_meta.get("build_inputs"),
+            "old": old_build_inputs, "new": new_build_inputs,
+            "comparable": build_inputs_comparable,
+            "changed": old_build_inputs != new_build_inputs if build_inputs_comparable else None,
         },
         "feature_count": {"old": len(old_ids), "new": len(new_ids), "delta": len(new_ids) - len(old_ids)},
         "game_identity": game_identity,
@@ -190,8 +196,14 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- New snapshot: `{report['new_snapshot']}`",
         f"- Feature count: {report['feature_count']['old']} → {report['feature_count']['new']} (Δ {report['feature_count']['delta']})",
         f"- Source archive hash changed: {report['source_archive_sha256']['changed']}",
-        f"- Source schema changed: {report['source_schema']['changed']}",
-        f"- Build configuration changed: {report['build_inputs']['changed']}", "",
+        "- Source schema comparison: " + (
+            str(report["source_schema"]["changed"]) if report["source_schema"]["comparable"]
+            else "not comparable (schema metadata missing from at least one snapshot)"
+        ),
+        "- Build configuration comparison: " + (
+            str(report["build_inputs"]["changed"]) if report["build_inputs"]["comparable"]
+            else "not comparable (build-input metadata missing from at least one snapshot)"
+        ), "",
         "## Identity changes", "",
         f"- Added IDs ({len(report['added_ids'])}): " + (", ".join(f"`{v}`" for v in report["added_ids"]) or "none"),
         f"- Removed IDs ({len(report['removed_ids'])}): " + (", ".join(f"`{v}`" for v in report["removed_ids"]) or "none"),
@@ -243,9 +255,16 @@ def main() -> int:
     parser.add_argument("--old", required=True, type=Path, help="Previously approved generated asset directory")
     parser.add_argument("--new", required=True, type=Path, help="Candidate generated asset directory")
     parser.add_argument("--output", type=Path, help="Optional report path (.json or .md)")
+    parser.add_argument(
+        "--new-display-path", type=Path,
+        help="Logical candidate path to show in the report when comparing a temporary staging directory",
+    )
     args = parser.parse_args()
     try:
-        report = compare_snapshots(args.old, args.new)
+        report = compare_snapshots(
+            args.old, args.new,
+            new_snapshot_label=str(args.new_display_path) if args.new_display_path else None,
+        )
     except (ValueError, OSError, json.JSONDecodeError) as exc:
         print(f"comparison error: {exc}", file=sys.stderr)
         return 1
