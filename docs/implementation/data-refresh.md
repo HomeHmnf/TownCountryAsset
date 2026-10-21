@@ -4,7 +4,7 @@
 
 ## Step 1 — Environment configuration and CLI contract
 
-**Status:** Configuration contract documented; runtime CLI implementation is the next step.
+**Status:** Steps 1–2 implemented on `work/compiler-hardening`; local execution and test validation are pending.
 
 Added `.env.example` with source URLs, fetched-data folders, candidate/approved output folders, report folder, compiler configuration paths, feature toggles, and HTTP timeout. Added `docs/cli-tool.md` describing the intended one-command interface, output/report behavior, and safety boundaries.
 
@@ -17,12 +17,28 @@ Design decisions captured:
 
 Validation still required locally: check that `.env` is ignored, run the CLI help/tests once the CLI implementation lands, and verify no workflow touches the game repository.
 
+## Step 2 — Environment-driven orchestration CLI
+
+**Status:** Implemented; local validation pending.
+
+Added `tools/run_data_pipeline.py` with:
+- `.env` parsing without a new dependency; existing process environment values take precedence.
+- Configurable source URLs, fetched-data folders, ISO evidence folders, candidate/approved output paths, report paths, generation settings, registry path, toggles, and network timeout.
+- Natural Earth HTTPS download, ZIP-signature check, timestamped immutable archive, SHA-256 and provenance metadata.
+- Orchestration of ISO proposal refresh, Natural Earth compilation with the persistent registry, optional SVG generation, generated-asset audit, identity-registry audit, and comparison to the approved snapshot.
+- Markdown and JSON run summaries with per-stage status, command output, failure details, duration, and source checksum.
+- Non-zero exit on failed stages; no automatic promotion to approved data and no writes to TownCountryGame.
+- Pre-flight configuration validation and failure reporting for configuration errors.
+
+Added `tests/test_run_data_pipeline.py` for environment precedence, boolean parsing, archive validation/provenance, and summary reporting. Added `.env` ignore rules so local configuration is not committed, and documented the CLI in `docs/cli-tool.md`.
+
+Safety detail: this implementation uses the current Natural Earth download URL as the configurable example default. It records the actual URL, retrieval timestamp and hash, but intentionally leaves the release version null unless verified upstream metadata is available.
+
 ## Remaining phases
 
-1. Environment loader and orchestrating CLI, including stage-by-stage success/failure reporting.
-2. Atomic fetch/provenance and input validation, with safe failure behavior.
-3. Candidate compile, SVG generation, asset/identity audits, ISO proposal refresh, and approved-snapshot comparison.
-4. Tests for configuration precedence, offline/failing fetches, partial failure summaries, and safe output boundaries.
-5. Final CLI README review and local end-to-end verification.
+1. Run the new unit tests and CLI help locally; fix any issues found before extending the pipeline.
+2. Review output isolation and failure handling, including whether failed stages leave candidate-only partial files; add/adjust tests as needed.
+3. Verify the full one-command workflow locally against online sources, and inspect its summary and comparison report.
+4. Update the top-level README with the canonical CLI command and finish this log after successful local verification.
 
-Each phase must be recorded here after its implementation and before moving to the next phase. Any product/data-policy decision that cannot be safely inferred must be asked before proceeding.
+Each phase is recorded here after implementation and before the next phase. Any product/data-policy decision that cannot be safely inferred must be asked before proceeding.
