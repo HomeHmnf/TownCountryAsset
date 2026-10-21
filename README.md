@@ -61,7 +61,7 @@ cp .env.example .env
 uv run python tools/run_data_pipeline.py
 ```
 
-The CLI fetches the configured Natural Earth source, refreshes ISO review proposals, compiles candidate metadata and geometry using the persistent identity registry, generates SVGs when enabled, audits the result, and compares it with the approved snapshot when available. It writes a Markdown and JSON run summary under `TCA_REPORT_DIR`; failures are reported and return a non-zero exit status. Run `uv run python tools/run_data_pipeline.py --help` or `--help-config` for CLI options and configuration defaults.
+The CLI fetches the configured Natural Earth source, refreshes ISO review proposals, compiles candidate metadata and geometry using the persistent identity registry, generates SVGs when enabled, audits the result, and compares it with the approved snapshot when available. Candidate files are built in an isolated temporary directory and replace the previous candidate only after all required stages pass; failed runs preserve the previous candidate. It writes a Markdown and JSON run summary under `TCA_REPORT_DIR`; failures are reported and return a non-zero exit status. Run `uv run python tools/run_data_pipeline.py --help` or `--help-config` for CLI options and configuration defaults.
 
 All URLs and output/input directories are configurable through `.env` or process environment variables. Existing process environment variables take precedence. The local `.env` is ignored by Git; commit only changes to `.env.example`.
 
