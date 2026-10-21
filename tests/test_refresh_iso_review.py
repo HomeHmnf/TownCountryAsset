@@ -87,6 +87,12 @@ def test_refresh_preserves_raw_snapshot_and_writes_provenance_and_report(tmp_pat
     assert normalized_path.exists()
     assert "candidate_alpha3" not in report_path.read_text(encoding="utf-8")
     assert result["candidate_count"] == 1
+    assert result["exact_match_count"] == 1
+    assert result["explicit_variant_count"] == 0
+    report = report_path.read_text(encoding="utf-8")
+    assert "- Total ISO candidates proposed: 1" in report
+    assert "- Exact normalized-name matches: 1" in report
+    assert "- Explicit reviewed name-variant matches: 0" in report
 
 
 def test_normalize_source_rejects_too_small_reference():
