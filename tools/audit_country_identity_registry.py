@@ -4,9 +4,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
+
+ISO_ALPHA2_RE = re.compile(r"^[A-Z]{2}$")
+ISO_ALPHA3_RE = re.compile(r"^[A-Z]{3}$")
+RECORD_STATUSES = {"proposed", "approved"}
+ISO_ASSIGNMENT_STATUSES = {"unverified", "verified"}
+LOCALIZATION_STATUSES = {"unreviewed", "reviewed"}
 
 
 def _text(value: Any) -> str:
@@ -26,6 +33,7 @@ def audit_registry(registry: dict[str, Any]) -> dict[str, Any]:
     seen_game_ids: set[str] = set()
     seen_current: dict[str, str] = {}
     seen_source_history: dict[str, str] = {}
+    seen_iso: dict[tuple[str, str], str] = {}
 
     for index, record in enumerate(records):
         if not isinstance(record, dict):
@@ -77,17 +85,50 @@ def audit_registry(registry: dict[str, Any]) -> dict[str, Any]:
                 issues.append(f"Source ID {old_id!r} is current for another game_id and historical for {gid_text!r}")
                 reasons.append("current/history source ID collision")
 
+        record_status = record.get("status")
+        if record_status not in RECORD_STATUSES:
+            issues.append(f"{gid_text or index}: unsupported record status {record_status!r}")
+            reasons.append("invalid record status")
+        if record_status != "approved":
+            reasons.append(f"record status {record_status or 'missing'}")
+
+        iso_status = iso.get("assignment_status")
+        if iso_status not in ISO_ASSIGNMENT_STATUSES:
+            issues.append(f"{gid_text or index}: unsupported ISO assignment status {iso_status!r}")
+            reasons.append("invalid ISO assignment status")
+        if iso_status != "verified":
+            reasons.append(f"ISO status {iso_status or 'missing'}")
+
+        for field, pattern, label in (
+            ("alpha2", ISO_ALPHA2_RE, "ISO alpha-2"),
+            ("alpha3", ISO_ALPHA3_RE, "ISO alpha-3"),
+        ):
+            code = iso.get(field)
+            if code is None or code == "":
+                reasons.append(f"{label} missing")
+                continue
+            if not isinstance(code, str) or not pattern.fullmatch(code):
+                issues.append(f"{gid_text or index}: invalid {label} format {code!r}")
+                reasons.append(f"invalid {label} format")
+                continue
+            key = (field, code)
+            if key in seen_iso and seen_iso[key] != gid_text:
+                issues.append(
+                    f"Duplicate {label} code {code!r} assigned to game_ids "
+                    f"{seen_iso[key]!r} and {gid_text!r}"
+                )
+                reasons.append(f"duplicate {label} assignment")
+            else:
+                seen_iso[key] = gid_text
+
         entity_type = record.get("entity_type")
         if not isinstance(entity_type, str) or not entity_type.strip() or entity_type == "unreviewed":
             reasons.append("entity type unreviewed")
-        iso_status = iso.get("assignment_status")
-        if iso_status != "verified":
-            reasons.append(f"ISO status {iso_status or 'missing'}")
-        if iso.get("alpha2") is None:
-            reasons.append("ISO alpha-2 missing")
-        if iso.get("alpha3") is None:
-            reasons.append("ISO alpha-3 missing")
+
         localization_status = names.get("localization_status")
+        if localization_status not in LOCALIZATION_STATUSES:
+            issues.append(f"{gid_text or index}: unsupported localization status {localization_status!r}")
+            reasons.append("invalid localization status")
         if localization_status != "reviewed":
             reasons.append(f"localization {localization_status or 'missing'}")
         if not isinstance(names.get("fa"), str) or not names.get("fa", "").strip():
@@ -98,8 +139,6 @@ def audit_registry(registry: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(record.get("regions"), list):
             issues.append(f"{gid_text or index}: regions must be an array")
             reasons.append("invalid regions")
-        if record.get("status") != "approved":
-            reasons.append(f"record status {record.get('status', 'missing')}")
 
         for reason in reasons:
             counts[reason] += 1
@@ -144,6 +183,10 @@ def render_report(result: dict[str, Any]) -> str:
         "ISO alpha-3 missing",
         "localization unreviewed",
         "Persian name missing",
+        "invalid ISO alpha-2 format",
+        "invalid ISO alpha-3 format",
+        "duplicate ISO alpha-2 assignment",
+        "duplicate ISO alpha-3 assignment",
     ]:
         lines.append(f"| {item} | {counts.get(item, 0)} |")
     lines.extend(["", "## Structural issues", ""])
@@ -168,7 +211,8 @@ def render_report(result: dict[str, Any]) -> str:
         "## Interpretation and safeguards",
         "",
         "- This is a read-only review report; it does not approve or change any record.",
-        "- A syntactically valid ISO code is not evidence that the code belongs to the entity. Verify assignments against an authoritative source before marking them verified.",
+        "- ISO codes must use uppercase ISO alpha-2 (two-letter) or alpha-3 (three-letter) syntax. Syntax and uniqueness checks do not establish that a code belongs to an entity.",
+        "- Duplicate ISO assignments and unsupported workflow statuses are structural issues requiring review.",
         "- Missing ISO codes are allowed where no appropriate code applies; document the reason rather than inventing a value.",
         "- Entity type, Persian localization, aliases, and region assignments require source-backed review.",
         "- Do not regenerate, replace, or derive canonical game IDs from source IDs, names, ISO codes, or record order.",
