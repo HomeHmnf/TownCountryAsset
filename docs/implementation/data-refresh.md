@@ -78,11 +78,11 @@ Planned work:
 
 ### Phase 7b — ISO proposal evidence review
 
-**Status:** Read-only evidence audit implemented; local validation pending.
+**Status:** Completed and locally validated on 2026-10-22.
 
 Implemented `tools/audit_iso_proposal_evidence.py` to compare the saved proposal table with freshly computed proposals from the persistent registry and captured ISO reference. It checks registry/proposal coverage, duplicate or stale `game_id` rows, edited/stale candidate fields, reference code-pair and label consistency, malformed candidate pairs, and duplicate alpha-2/alpha-3 proposals across distinct records. It writes a Markdown report and exits non-zero when issues are found. It does not modify the registry or approve any assignment.
 
-Added `tests/test_iso_proposal_evidence_audit.py` for clean evidence, missing/stale/duplicate rows, edited code candidates, and cross-record code conflicts. Local test results are pending.
+Added `tests/test_iso_proposal_evidence_audit.py` for clean evidence, missing/stale/duplicate rows, edited code candidates, and cross-record code conflicts. Local validation: `uv run pytest -v` — **71 passed**; the saved proposal/reference/registry audit reported **0 consistency issues** across 242 registry IDs, 249 reference rows, and 242 proposal rows (234 candidate code pairs). `git diff --check` passed and the working tree was clean.
 
 Before applying any candidate to the registry:
 - Treat the captured ISO CSV as a third-party reference distribution, not an ISO-hosted authoritative export; retain its URL, retrieval date, and checksums in review evidence.
@@ -91,6 +91,18 @@ Before applying any candidate to the registry:
 - Add a read-only evidence audit that compares proposal rows to the captured reference and persistent game ID set, detects missing/stale/duplicate proposal rows, and reports proposed code conflicts without writing to the registry.
 - Preserve every existing `game_id`; do not populate `alpha2`, change assignment statuses, approve records, or modify the approved snapshot/game repository during evidence-audit implementation.
 - Record local tests and report counts before any human-reviewed registry update workflow is designed.
+### Phase 7c — Controlled entity-classification vocabulary and worksheet
+
+**Status:** Implemented; local validation pending.
+
+Added `config/entity_types.json` as a controlled, explicitly provisional vocabulary: `sovereign_state`, `dependent_territory`, `special_administrative_region`, `disputed_or_partially_recognized_entity`, `geographic_territory`, `other_administrative_entity`, and `unreviewed`. Definitions specify the kind of source evidence and policy decision required. These categories are a review vocabulary, not a geopolitical adjudication.
+
+Added `tools/audit_entity_classification.py` to create a record-level review worksheet using persistent registry IDs and the saved ISO proposal table. It reports controlled-type distribution, ISO match context, evidence expectations, missing/stale proposal rows, and invalid type values. It is read-only and does not assign classifications or mutate any registry, ISO assignment, generated asset, approved snapshot, or game-repository file.
+
+Added `tests/test_entity_classification_review.py` for stable-ID preservation, keeping unreviewed values unaltered, invalid types, missing/stale proposal rows, and report safeguards.
+
+Important schema finding: the current registry stores `entity_type` but does not have a separate entity-classification review status or evidence record. A non-`unreviewed` type must therefore not be treated as verified until the evidence model is designed. All 242 existing classifications remain `unreviewed`; this phase intentionally does not populate them.
+
 ### Phase 7a — Read-only ISO metadata validation
 
 - Extended `tools/audit_country_identity_registry.py` to validate uppercase ISO alpha-2/alpha-3 syntax, detect duplicate code assignments across distinct `game_id` records, and flag unsupported record/ISO/localization workflow statuses.
@@ -115,3 +127,6 @@ Safety constraints:
 - The owner committed raw Natural Earth/ISO evidence and refresh reports in commits `e4d3c42` and `8b143ef` on `work/compiler-hardening`. The approved snapshot and game repository were not modified.
 
 Each phase is recorded here before implementation and updated with results. Any product/data-policy decision that cannot be safely inferred must be asked before proceeding.
+
+
+- Additional local validation reported on 2026-10-22: `uv run pytest -v` — **71 passed**; `tools/audit_iso_proposal_evidence.py` reported **0 consistency issues**. Phase 7c implementation is now awaiting local validation.
