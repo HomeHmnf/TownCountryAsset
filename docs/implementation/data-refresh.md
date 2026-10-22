@@ -76,7 +76,13 @@ Planned work:
 7. Add read-only audits and tests for proposal/evidence completeness, invalid codes, unsupported statuses, and preservation of all existing `game_id` values.
 8. Document this phase and its local validation results before moving to any approval workflow.
 
-### Phase 7b — ISO proposal evidence review (next)
+### Phase 7b — ISO proposal evidence review
+
+**Status:** Read-only evidence audit implemented; local validation pending.
+
+Implemented `tools/audit_iso_proposal_evidence.py` to compare the saved proposal table with freshly computed proposals from the persistent registry and captured ISO reference. It checks registry/proposal coverage, duplicate or stale `game_id` rows, edited/stale candidate fields, reference code-pair and label consistency, malformed candidate pairs, and duplicate alpha-2/alpha-3 proposals across distinct records. It writes a Markdown report and exits non-zero when issues are found. It does not modify the registry or approve any assignment.
+
+Added `tests/test_iso_proposal_evidence_audit.py` for clean evidence, missing/stale/duplicate rows, edited code candidates, and cross-record code conflicts. Local test results are pending.
 
 Before applying any candidate to the registry:
 - Treat the captured ISO CSV as a third-party reference distribution, not an ISO-hosted authoritative export; retain its URL, retrieval date, and checksums in review evidence.
