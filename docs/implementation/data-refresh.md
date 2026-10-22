@@ -156,9 +156,29 @@ Added tests for source-field mapping, SPARQL query construction and response par
 - Do not regenerate or change any `game_id`, approve ISO proposals, edit the approved snapshot, or modify TownCountryGame as part of this feature.
 - Source refresh must be reproducible and license-aware; document upstream attribution and preserve provenance with the assets.
 
+### Stage 8a — Configuration and mapping contract
+
+**Status:** Implemented in the repository; local validation pending.
+
+Added the following flag settings to `.env.example` and the pipeline configuration defaults:
+- `TCA_FLAG_SOURCE_URL`
+- `TCA_FLAG_SOURCE_REF`
+- `TCA_FLAG_SOURCE_DIR`
+- `TCA_FLAG_ASSET_OUTPUT_DIR`
+- `TCA_FLAG_MAPPING`
+- `TCA_FLAG_REPORT`
+- `TCA_FLAG_REFRESH_ENABLED`
+
+The source defaults to the MIT-licensed `lipis/flag-icons` repository. The configuration and CLI documentation state that the resolved immutable source revision and provenance must be recorded during refresh. The environment template remains free of local machine-specific values.
+
+Added `config/country_flag_mapping.json` with one explicit mapping record for each of the **242** persistent registry IDs. Every record currently has a null source flag code and `unreviewed` status by design. No flag assignments have been inferred or approved in this configuration stage. Records include fields for a decision note and evidence so later reviews can record why a particular source flag is appropriate.
+
+Updated `docs/cli-tool.md` with the configuration contract. The mapping file is only a reviewed-decision input at this stage; flag download, mapping validation, SVG generation, and pipeline integration are not implemented yet.
+
+Next: implement Stage 8b, safely refresh the configured source and preserve revision, license, checksum, and retrieval provenance.
+
 ### Planned implementation stages
 
-- **8a — Configuration and mapping contract:** document and add environment variables, mapping schema, source pinning, and the initial coverage audit contract.
 - **8b — Source refresh and provenance:** fetch the configured source safely, preserve revision/checksum/license evidence, and test refresh behavior.
 - **8c — Flag asset generation and validation:** resolve reviewed mappings to SVGs, emit deterministic `game_id`-keyed assets, and audit file validity and complete coverage.
 - **8d — Pipeline integration and documentation:** add isolated pipeline stages, reports, regression tests, and usage guidance; validate end-to-end before marking complete.
