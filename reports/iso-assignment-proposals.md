@@ -10,7 +10,7 @@
 - Records already marked verified: 0
 - Reference file: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1.csv`
 - Reference source URL: https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv (third-party distribution; repository: https://github.com/stefangabos/world_countries)
-- Retrieved on: 2026-10-21
+- Retrieved on: 2026-10-22
 
 ## Candidate review
 
@@ -270,8 +270,8 @@
 
 ## Download provenance
 
-- Raw snapshot: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-upstream-20261021T093840Z.csv`
-- Provenance metadata: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-provenance-20261021T093840Z.json`
+- Raw snapshot: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-upstream-20261022T065502Z.csv`
+- Provenance metadata: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-provenance-20261022T065502Z.json`
 - Raw SHA-256: `d5a40f6d8eeb8bb1981c93c54b8d56c9d08a7c0a0b8272f40fd22f705689c8b9`
 - Normalized SHA-256: `10893d35138839a13d417137ee2122d1934beee4839e5578da2c1d0b1e25afb2`
 - Reference row count: 249
