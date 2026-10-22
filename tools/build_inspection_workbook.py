@@ -18,7 +18,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REGISTRY = Path("config/country_identity_registry.json")
 DEFAULT_MAPPING = Path("config/country_flag_mapping.json")
-DEFAULT_METADATA = Path("generated/town_country_asset_candidate/metadata.json")
+DEFAULT_METADATA = Path("generated/town_country_asset_candidate/countries.json")
 DEFAULT_ISO_REPORT = Path("reports/iso-assignment-proposals.md")
 DEFAULT_PERSIAN_DIR = Path("raw_data/persian")
 DEFAULT_OUTPUT = Path("reports/country-entity-inspection.xlsx")
