@@ -12,6 +12,37 @@
 - Reference source URL: https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv (third-party distribution; repository: https://github.com/stefangabos/world_countries)
 - Retrieved on: 2026-10-22
 
+## Step 2 — systematic ISO alpha-2 review (2026-10-22)
+
+**Scope decision:** Review all 242 registry records, including records with no alpha-2 proposal.
+**Evidence policy:** Record source references, findings, and proposed dispositions; keep every assignment unverified until separately approved.
+**Disposition:** Review-only. No registry, candidate asset, approved snapshot, or TownCountryGame data was changed.
+
+### Findings
+
+- All **242** persistent registry records are represented in the candidate review table below; the table remains keyed by stable `game_id`.
+- The captured third-party reference contains **249** code/name rows. It yielded **234** candidate code pairs: **200** exact normalized-name matches and **34** explicit name variants. **Eight** records have no candidate from that name-matching process.
+- These counts describe proposal generation and consistency, not official ISO verification. The captured CSV is distributed by the third party `stefangabos/world_countries`, not by ISO. The repository's evidence audit previously found zero internal consistency issues, but that does not establish authoritative assignment or entity-scope correctness.
+- ISO states that its Online Browsing Platform (OBP) is the current source for ISO 3166 codes and distinguishes officially assigned codes from user-assigned code elements. The current public ISO overview is the authoritative policy reference: [ISO 3166 — Country Codes](https://www.iso.org/iso-3166-country-codes.html). A current maintained secondary cross-check is available from [RIPE NCC's ISO country-code list](https://www.ripe.net/community/internet-governance/internet-technical-community/the-rir-system/list-of-country-codes-and-rirs/). Neither the captured third-party CSV nor a name match alone is sufficient to mark a record verified.
+- Accordingly, **none of the 234 proposed pairs is promoted or marked verified by this review**. Before any assignment is verified, the review needs a traceable ISO OBP record or other direct ISO-maintained evidence for the code, plus a separate check that the source feature is the same entity/scope as the ISO record.
+- The 34 name variants remain explicit human-review items, especially where the difference can reflect political/entity scope rather than a spelling variant (including Holy See/Vatican, Taiwan, Saint Martin, South Georgia, and territory labels).
+- The eight no-match records are **not** automatically “no ISO code” cases. In particular, Falkland Islands and Sint Maarten need explicit name-variant/evidence review; Somaliland, Kosovo, Northern Cyprus, Indian Ocean Territories, Ashmore and Cartier Islands, and Siachen Glacier need entity-scope/applicability review. Do not infer codes from Natural Earth source IDs, parent-state fallback values, or unverified alpha-3 values.
+
+### Proposed dispositions (not approvals)
+
+| Review class | Count | Proposed disposition |
+|---|---:|---|
+| Exact normalized-name candidates | 200 | Retain as unverified candidates; verify code and entity scope against ISO-maintained evidence before any approval. |
+| Explicit name variants | 34 | Hold for record-level name/scope evidence review; no automatic acceptance. |
+| No candidate from name matching | 8 | Investigate individually; distinguish known code/name variants from records where ISO 3166-1 may not apply. |
+| Registry records in scope | 242 | Keep all assignments unverified; no data promotion in this step. |
+
+### Record-level evidence and remaining gate
+
+The **242-row candidate review table immediately below** is the row-level inventory, including stable `game_id`, registry English name, candidate code pair, reference label, match type, and provisional decision. Each row is a proposal trace, not a verification claim. The eight no-match cases and all 34 variants remain open review cases. For the 200 exact-name matches, exact text agreement is useful discovery evidence but does not itself prove that the ISO record corresponds to the same source feature.
+
+**Decision gate:** No registry changes, approvals, assignment-status changes, candidate regeneration, approved-snapshot updates, or game-repository changes are authorized by this review. Ask for a separate decision after the record-level official-evidence work is complete.
+
 ## Candidate review
 
 | game_id | Registry English name | Candidate alpha-2 | Candidate alpha-3 | Reference English name | Match type | Decision |
@@ -269,6 +300,8 @@
 - Record the reference source and retrieval date in the review evidence before changing assignment_status to verified.
 
 ## Download provenance
+
+**Step 2 review note:** The provenance below identifies the third-party reference used for candidate discovery; it is not an ISO-hosted export and must not be treated as direct ISO verification.
 
 - Raw snapshot: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-upstream-20261022T081930Z.csv`
 - Provenance metadata: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-provenance-20261022T081930Z.json`
