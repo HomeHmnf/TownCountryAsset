@@ -210,16 +210,18 @@ Each phase is recorded here before implementation and updated with results. Any 
 
 ### Stage 8c — Flag asset generation and coverage audit
 
-**Status:** Planned; next implementation step.
+**Status:** Implemented in the repository; local validation pending.
 
-**Scope:** Add a standalone generator/auditor that reads the persistent identity registry and explicit flag mapping, resolves reviewed source codes against the cached upstream archive, and writes deterministic SVG assets named by `game_id`. Validate SVG XML and non-empty content, reject unknown or duplicate IDs/codes/output paths, and report all unresolved mappings. The audit must require exactly one approved mapping and one valid output asset per registry ID; it must not infer a flag choice or use a generic fallback.
+Added `tools/generate_country_flags.py` and `tests/test_generate_country_flags.py`. The generator:
+- Reads the persistent identity registry, explicit flag mapping, cached source archive, and provenance written by `tools/refresh_flag_source.py`.
+- Verifies the cached archive SHA-256 and resolved commit against its provenance before reading any source assets.
+- Reads SVGs from the source collection's `flags/4x3/` directory, rejects unsafe archive paths and symbolic links, validates XML and the SVG root element, and rejects duplicate source codes.
+- Requires one mapping per registry ID, rejects duplicate/unknown IDs and duplicate source-code assignments, and accepts only `status: "reviewed"` plus a lowercase two-letter source code. It does not infer a flag from names, ISO proposals, or row order.
+- Produces deterministic `<game_id>.svg` filenames and a manifest with the source revision, retrieval metadata, archive/license hashes, and per-asset SHA-256/size.
+- Writes a Markdown coverage report to `TCA_FLAG_REPORT`. It replaces the output directory only after full coverage and all assets validate; a failed audit returns non-zero and preserves the previous output.
 
-**Implementation sequence:**
-1. Inspect and reuse the existing source refresh archive/provenance format and registry/mapping schemas.
-2. Extract only validated SVGs from the commit-keyed source archive into a controlled staging area; reject unsafe paths and ambiguous source filenames.
-3. Generate `flags/<game_id>.svg` only for records whose mapping is explicitly marked reviewed and has a valid source code. Preserve source file hashes and source revision in generated metadata/report.
-4. Add a read-only audit/report that compares the exact registry ID set against mapping records and generated assets, requiring one-to-one coverage. With the current all-unreviewed mapping, the audit is expected to report unresolved records and return non-zero rather than inventing assignments.
-5. Add unit tests for clean coverage, missing/duplicate/unknown IDs, unreviewed and invalid codes, missing/malformed SVGs, deterministic filenames, provenance, and preservation of registry/mapping inputs.
-6. Run focused tests and CLI checks; record actual results below before starting Stage 8d.
+Updated `docs/cli-tool.md` with source-refresh and generation/audit commands and the current review gate. The existing mapping still has 242 records with null source codes and `unreviewed` statuses, so a full generation run is expected to fail until explicit decisions are reviewed. This is intentional; no flags have been guessed or approved automatically.
+
+**Local validation:** Pending. Run the focused tests and CLI help/checks before marking this stage complete. The generator is not integrated into `tools/run_data_pipeline.py`; integration and README updates are Stage 8d.
 
 **Safety boundary:** This stage does not integrate flags into the main candidate pipeline yet, does not modify the identity registry or approved snapshot, and does not write to TownCountryGame. Pipeline integration is reserved for Stage 8d after generator/audit behavior is tested.
