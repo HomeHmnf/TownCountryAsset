@@ -371,15 +371,11 @@ def execute(config: dict[str, str]) -> int:
         ]
         ok = run_command("generate and audit country flag assets", flag_command, stages)
         if not ok and flag_report_contains_only_review_gaps(flag_report):
-            review_only = True
-            if review_only:
-                stages[-1]["status"] = "review_required"
-                stages[-1]["stderr"] = (
-                    "Flag assets were not published because mapping decisions remain unreviewed. "
-                    f"Review {flag_report}; candidate country data refresh may continue without flags."
-                )
-            else:
-                failed = True
+            stages[-1]["status"] = "review_required"
+            stages[-1]["stderr"] = (
+                "Flag assets were not published because mapping decisions remain unreviewed. "
+                f"Review {flag_report}; candidate country data refresh may continue without flags."
+            )
         else:
             failed = failed or not ok
 
