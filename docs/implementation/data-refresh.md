@@ -208,25 +208,18 @@ Each phase is recorded here before implementation and updated with results. Any 
 
 - Additional local validation reported on 2026-10-22: `uv run pytest -v` — **71 passed**; `tools/audit_iso_proposal_evidence.py` reported **0 consistency issues**. Phase 7c implementation is now awaiting local validation.
 
-## Phase 8 — Country flag assets
+### Stage 8c — Flag asset generation and coverage audit
 
-**Status:** Planned; implementation starts after this plan update.
+**Status:** Planned; next implementation step.
 
-Goal: provide one validated flag asset for every persistent `game_id`, using a configurable, traceable source and without conflating flag codes with internal identity.
+**Scope:** Add a standalone generator/auditor that reads the persistent identity registry and explicit flag mapping, resolves reviewed source codes against the cached upstream archive, and writes deterministic SVG assets named by `game_id`. Validate SVG XML and non-empty content, reject unknown or duplicate IDs/codes/output paths, and report all unresolved mappings. The audit must require exactly one approved mapping and one valid output asset per registry ID; it must not infer a flag choice or use a generic fallback.
 
-Implementation sequence:
-1. Inspect the existing pipeline, source-fetch/provenance utilities, manifest/audit conventions, identity registry schema, and tests. Reuse existing architecture rather than introducing a separate workflow or dependency without need.
-2. Configure the flag source and refresh behavior in `.env.example`; keep local values in ignored `.env`. Pin the source to a reproducible release/ref rather than silently following a moving branch where practical. Record source URL/ref, retrieval time, and SHA-256 checksums.
-3. Add an explicit, reviewable mapping from persistent `game_id` records to source flag codes. Do not derive `game_id` values from ISO codes, filenames, names, or source order. Mapping exceptions and disputed/ambiguous cases must be explicit and documented; do not guess.
-4. Fetch and preserve source evidence, then stage flag assets under the candidate output using filenames keyed by stable `game_id`. Preserve upstream attribution and license information.
-5. Add a read-only flag audit that verifies every registry `game_id` has exactly one mapping and one valid non-empty flag asset; reject missing/duplicate IDs, duplicate output paths, missing source files, malformed/empty SVGs, and unexpected files as appropriate. Never silently substitute a generic flag.
-6. Integrate flag refresh and audit into `tools/run_data_pipeline.py` using its isolated staging/publication guarantees. A required flag-stage failure must fail the run and preserve the previous candidate.
-7. Add focused unit/integration tests for mapping coverage, duplicate and missing entries, invalid source codes/assets, deterministic output naming, provenance, configuration precedence, and candidate preservation on failure.
-8. Update README and CLI documentation with configuration, attribution/license, output layout, and local commands. Record actual test/run results here only after validation.
+**Implementation sequence:**
+1. Inspect and reuse the existing source refresh archive/provenance format and registry/mapping schemas.
+2. Extract only validated SVGs from the commit-keyed source archive into a controlled staging area; reject unsafe paths and ambiguous source filenames.
+3. Generate `flags/<game_id>.svg` only for records whose mapping is explicitly marked reviewed and has a valid source code. Preserve source file hashes and source revision in generated metadata/report.
+4. Add a read-only audit/report that compares the exact registry ID set against mapping records and generated assets, requiring one-to-one coverage. With the current all-unreviewed mapping, the audit is expected to report unresolved records and return non-zero rather than inventing assignments.
+5. Add unit tests for clean coverage, missing/duplicate/unknown IDs, unreviewed and invalid codes, missing/malformed SVGs, deterministic filenames, provenance, and preservation of registry/mapping inputs.
+6. Run focused tests and CLI checks; record actual results below before starting Stage 8d.
 
-Acceptance criteria:
-- Every persistent registry `game_id` has exactly one explicit flag mapping and exactly one validated candidate flag file.
-- Stable IDs and registry assignments remain unchanged; no ISO or geopolitical decisions are inferred or approved by the flag pipeline.
-- Source URL/ref, retrieval metadata, checksums, and license/attribution are retained.
-- Flag generation/audit runs as part of the existing pipeline and participates in guarded candidate publication.
-- Tests and end-to-end validation pass before marking this phase complete.
+**Safety boundary:** This stage does not integrate flags into the main candidate pipeline yet, does not modify the identity registry or approved snapshot, and does not write to TownCountryGame. Pipeline integration is reserved for Stage 8d after generator/audit behavior is tested.
