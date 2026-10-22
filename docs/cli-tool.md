@@ -14,8 +14,11 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 |---|---|
 | `TCA_NATURAL_EARTH_URL` | URL for the Natural Earth Admin 0 Countries archive |
 | `TCA_ISO_REFERENCE_URL` | URL for the ISO 3166-1 discovery/reference CSV |
+| `TCA_PERSIAN_LABEL_SOURCE_URL` | HTTPS endpoint queried for current Wikidata Persian (`fa`) labels; labels remain candidates |
 | `TCA_FETCHED_DATA_DIR` | Local directory for fetched source archives |
 | `TCA_ISO_DATA_DIR` | Raw snapshots and normalized ISO reference |
+| `TCA_PERSIAN_DATA_DIR` | Timestamped raw Wikidata responses, candidate snapshots, and provenance |
+| `TCA_PERSIAN_LOCALIZATION_REPORT` | Latest Persian localization review worksheet |
 | `TCA_GAME_DATA_OUTPUT_DIR` | Candidate game-data output directory |
 | `TCA_APPROVED_DATA_DIR` | Existing approved snapshot used only for comparison |
 | `TCA_REPORT_DIR` | Run summaries and comparison reports |
@@ -25,6 +28,7 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 | `TCA_GENERATE_SVGS` | Generate static SVG files after successful compilation |
 | `TCA_COMPARE_WITH_APPROVED` | Compare candidate output with approved output if present |
 | `TCA_RUN_ISO_REVIEW` | Refresh the ISO proposal report without approving assignments |
+| `TCA_RUN_PERSIAN_LOCALIZATION` | Fetch current Wikidata Persian labels and refresh the review worksheet on each pipeline run |
 | `TCA_HTTP_TIMEOUT_SECONDS` | Network timeout per download |
 
 Paths may be absolute or relative to the repository root. Boolean values accept `true/false`, `1/0`, and `yes/no`.
@@ -50,6 +54,7 @@ The comparison report distinguishes a real difference from unavailable metadata.
 - **Fetched source data:** immutable/timestamped source downloads and provenance.
 - **Candidate game data:** metadata, geometry profiles, manifest and optional SVGs are built in an isolated temporary directory, then published to `TCA_GAME_DATA_OUTPUT_DIR` only after successful validation. A failed run preserves the prior candidate.
 - **ISO review:** proposals only; a name match is never approval.
+- **Persian localization review:** each pipeline run queries the configured live endpoint, preserves a timestamped raw response and SHA-256 provenance, and refreshes `reports/persian-localization-proposals.md`. Candidate snapshots are timestamped and immutable. Features are mapped to Wikidata only through Natural Earth's explicit `WIKIDATAID` attribute; no name-based or fuzzy entity matching is used. Missing QIDs and missing Persian labels are reported for review.
 - **Run summary:** one Markdown report and one machine-readable JSON report per invocation.
 - **Comparison:** added/removed identities, possible rekeys, metadata changes and geometry changes versus the approved snapshot.
 
@@ -57,7 +62,7 @@ The comparison report distinguishes a real difference from unavailable metadata.
 
 - The asset project prepares data; it does not update the game repository.
 - Do not overwrite the identity registry automatically or regenerate stable IDs from source order, names, or ISO codes.
-- Do not automatically approve ISO assignments.
+- Do not automatically approve ISO assignments or Persian labels. Persian labels are source candidates, not proof of an official or preferred translation.
 - Do not replace approved data based only on successful compilation. Keep generated candidate data separate until the owner reviews the report.
 - Do not claim an upstream version unless it was obtained from source metadata or release information; always record retrieval time and SHA-256.
 - When a source changes schema or fails validation, stop the affected stage, write a failure summary, and preserve the last known-good approved output.
