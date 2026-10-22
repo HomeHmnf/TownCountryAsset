@@ -118,6 +118,18 @@ Safety constraints:
 - Missing codes are not inherently errors when no code applies; exceptions must be evidence-backed and documented.
 - Preserve raw source snapshots and provenance for reproducibility. Never commit local `.env`.
 
+### Phase 7d — Live Persian localization source and refresh workflow
+
+**Status:** Implemented; local validation pending.
+
+Added `TCA_PERSIAN_LABEL_SOURCE_URL` to the environment-driven configuration (default: Wikidata SPARQL endpoint), plus `TCA_PERSIAN_DATA_DIR`, `TCA_PERSIAN_LOCALIZATION_REPORT`, and `TCA_RUN_PERSIAN_LOCALIZATION`. These settings are listed in `.env.example` and `--help-config`; local `.env` values and process-environment precedence follow the existing pipeline behavior.
+
+Added `tools/refresh_persian_localization.py`. On each normal pipeline run, it queries the configured endpoint for the current Persian (`fa`) labels of QIDs explicitly present in Natural Earth's `WIKIDATAID` field. It joins those source IDs to persistent registry records through `current_source_id`; names, ISO codes, row order, and fuzzy matching are not used to infer Wikidata identity. The refresh preserves a timestamped raw response, a timestamped candidate JSON snapshot, source URL/retrieval timestamp/SHA-256/size provenance, and a latest Markdown review worksheet. Missing QIDs and missing labels are reported distinctly.
+
+All labels remain unreviewed candidates. The script never updates the identity registry, candidate game assets, approved snapshot, or TownCountryGame. By default, a localization refresh failure fails the overall pipeline before candidate publication; `TCA_RUN_PERSIAN_LOCALIZATION=false` is available as an explicit opt-out. The configured endpoint can be changed without editing code.
+
+Added tests for source-field mapping, SPARQL query construction and response parsing, stable-ID preservation, snapshot provenance, and review-only behavior. Local validation is pending; do not treat this phase as validated until the owner runs the test suite and CLI checks.
+
 ## Validation record
 
 - Latest local validation reported by the owner on 2026-10-21: `uv run pytest -v` — **64 passed**.
