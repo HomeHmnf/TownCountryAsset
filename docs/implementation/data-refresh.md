@@ -175,11 +175,23 @@ Added `config/country_flag_mapping.json` with one explicit mapping record for ea
 
 Updated `docs/cli-tool.md` with the configuration contract. The mapping file is only a reviewed-decision input at this stage; flag download, mapping validation, SVG generation, and pipeline integration are not implemented yet.
 
-Next: implement Stage 8b, safely refresh the configured source and preserve revision, license, checksum, and retrieval provenance.
+### Stage 8b — Source refresh and provenance
+
+**Status:** Implemented in the repository; local validation pending.
+
+Added `tools/refresh_flag_source.py`. The standalone command:
+- Reads the flag source URL/ref, cache directory, and HTTP timeout from environment configuration, preserving process-environment precedence over `.env`.
+- Accepts only an HTTPS GitHub repository URL, resolves the configured ref to a full commit SHA via the GitHub API, and downloads the archive for that immutable commit.
+- Rejects malformed ZIPs, unsafe traversal paths, symbolic links, archives without SVGs under a `flags/` directory, and archives without an MIT license file.
+- Saves a commit-keyed archive, the source license text, a provenance JSON document, and a latest-snapshot pointer. Provenance records the configured ref, resolved commit, source/archive URLs, retrieval time, archive SHA-256 and size, license path/hash, and SVG count.
+- Writes archive, license, and provenance files via temporary files and atomic replacement. It does not extract files, map identities, generate game assets, or modify approved/game data.
+
+Added `tests/test_refresh_flag_source.py` covering GitHub URL validation, source archive/license checks, path traversal rejection, environment precedence, and malformed configuration. Added the standalone command's usage and current scope to `docs/cli-tool.md`.
+
+**Validation:** Not yet run locally. Do not mark this stage validated until the owner runs the targeted test and CLI help/refresh checks. The main pipeline does not call this command yet.
 
 ### Planned implementation stages
 
-- **8b — Source refresh and provenance:** fetch the configured source safely, preserve revision/checksum/license evidence, and test refresh behavior.
 - **8c — Flag asset generation and validation:** resolve reviewed mappings to SVGs, emit deterministic `game_id`-keyed assets, and audit file validity and complete coverage.
 - **8d — Pipeline integration and documentation:** add isolated pipeline stages, reports, regression tests, and usage guidance; validate end-to-end before marking complete.
 
