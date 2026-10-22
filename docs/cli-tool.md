@@ -113,3 +113,28 @@ The default output is `reports/country-entity-inspection.xlsx`. Sheets cover the
 The default Natural Earth archive URL uses the Natural Earth S3 distribution endpoint. The older website download URL returned HTTP 500 during a local end-to-end run; existing `.env` files override defaults, so update `TCA_NATURAL_EARTH_URL` in `.env` when adopting a changed default.
 
 The CLI implementation and each completed implementation phase are tracked in `docs/implementation/data-refresh.md`.
+
+
+## Human-readable inspection workbook
+
+Run:
+
+```bash
+uv run python tools/export_country_inspection_workbook.py
+```
+
+By default this writes `reports/country-data-inspection.xlsx`. Override inputs or output when needed:
+
+```bash
+uv run python tools/export_country_inspection_workbook.py \
+  --registry config/country_identity_registry.json \
+  --countries generated/town_country_asset_candidate/countries.json \
+  --iso-report reports/iso-assignment-proposals.md \
+  --persian-report reports/persian-localization-proposals.md \
+  --flag-mapping config/country_flag_mapping.json \
+  --output reports/country-data-inspection.xlsx
+```
+
+Sheets include a read-me page, master inventory, ISO review, entity review, Persian review, flag review, data-quality findings, and all compiled source attributes. Tables are filterable and the headers are frozen. The exporter joins records by persistent `game_id`, not row order or display name. Candidate fields are shown as candidates, and review decision columns are left for human inspection. Exporting does not modify any input, approve proposals, or apply workbook edits to project data.
+
+The exporter reads `generated/town_country_asset_candidate/countries.json` so it can include the current compiled source attributes. Run the data pipeline first if this file is absent or stale. The Python project dependency `openpyxl` is used to write the XLSX workbook.
