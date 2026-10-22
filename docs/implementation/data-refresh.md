@@ -326,3 +326,7 @@ The project owner decided to record France `FR` and Norway `NO` as registry prop
 The persistent identity registry was inspected and already contained `FR` for France and `NO` for Norway with `assignment_status=unverified`; those values were retained, so no registry edit was necessary. Their record status remains `proposed`; no record was promoted to approved or verified. Stable `game_id` values were preserved. The candidate output has not been regenerated in this step, the approved snapshot was not changed, and TownCountryGame was not touched. Entity classifications, Persian localization, and flag mappings remain open.
 
 **Next decision gate:** Before changing any other metadata, review the eight-case report and decide how to proceed with systematic verification of official ISO assignments across all 242 records.
+
+### ISO proposal review — user-assigned code policy check (2026-10-22)
+
+Added an official ISO policy note to [the ISO assignment proposal report](../../reports/iso-assignment-proposals.md): ISO identifies `XA`–`XZ` as a user-assigned range and states it has no procedure for assigning such elements. Therefore `XK` is not an officially assigned ISO 3166-1 alpha-2 code; any project use must be considered separately as an application-specific convention. This does not close the per-record live OBP evidence gate. No registry assignments were verified or changed, and no candidate or approved output was promoted.
