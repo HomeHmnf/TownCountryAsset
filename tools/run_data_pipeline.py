@@ -329,7 +329,7 @@ def execute(config: dict[str, str]) -> int:
             "--source-url", config["TCA_FLAG_SOURCE_URL"],
             "--source-ref", config["TCA_FLAG_SOURCE_REF"],
             "--output-dir", str(configured_path(config, "TCA_FLAG_SOURCE_DIR")),
-            "--timeout", str(timeout),
+            "--timeout", config["TCA_HTTP_TIMEOUT_SECONDS"],
         ], stages)
         failed = failed or not ok
 
