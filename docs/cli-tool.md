@@ -91,6 +91,16 @@ The comparison report distinguishes a real difference from unavailable metadata.
 - **Run summary:** one Markdown report and one machine-readable JSON report per invocation.
 - **Comparison:** added/removed identities, possible rekeys, metadata changes and geometry changes versus the approved snapshot.
 
+## Human-readable inspection workbook
+
+Build a filterable Excel workbook from the persistent identity registry, latest compiled candidate metadata, ISO proposal report, latest Persian candidate snapshot, and explicit flag mapping:
+
+```bash
+uv run --with openpyxl python tools/build_inspection_workbook.py
+```
+
+The default output is `reports/country-entity-inspection.xlsx`. Sheets cover the master inventory, entity/identity records, ISO review, Persian review, flag review, all available Natural Earth source attributes, and data-quality/review findings. Decision, reviewer, date, and evidence fields are blank for human completion. The workbook is read-only with respect to source data and never approves or writes back review decisions. Run the data pipeline first for complete compiled source attributes.
+
 ## Safety boundaries
 
 - The asset project prepares data; it does not update the game repository.
