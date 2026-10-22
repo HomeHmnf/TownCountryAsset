@@ -242,3 +242,28 @@ Integrated flag handling into `tools/run_data_pipeline.py`:
 **Local validation:** On 2026-10-22, the owner ran the focused pipeline/flag tests — **41 passed**; the full suite — **106 passed**; `--help` and `--help-config` for the pipeline; `--help` for both flag tools; and `git diff --check` with no reported issues. `git pull --ff-only` reported already up to date. `git status --short` was empty, and HEAD was `6714132` (`fix: pass integer timeout to flag source refresher`). Lint and architecture checks were not included in this validation run.
 
 **Safety boundary:** Candidate assets remain in TownCountryAsset. The approved snapshot, identity registry, and TownCountryGame are not modified by this integration.
+
+
+## Stage 9 — Comprehensive human-readable inspection workbook
+
+**Status:** Implemented in the repository; local validation pending.
+
+Added `tools/build_inspection_workbook.py`, which builds a filterable Excel workbook at `reports/country-entity-inspection.xlsx` from the persistent identity registry, compiled candidate metadata (`countries.json`), saved ISO proposal report, latest timestamped Persian candidate snapshot, and explicit flag mapping. It does not require a network request.
+
+The workbook includes:
+- **Read Me:** generation time, source availability, record counts, limitations, and review guidance.
+- **Master Inventory:** one row per `game_id), with identity, English/Persian names, regions, current and proposed ISO values, localization candidates, flag mapping state, and a review summary.
+- **Entity & Identity:** stable IDs, current/previous source IDs, aliases, regions, and the complete registry record as JSON.
+- **ISO Review**, **Persian Review**, and **Flag Review:** separate current/candidate fields plus blank human decision, reviewer, date, and evidence columns.
+- **Source Attributes:** every available original Natural Earth source attribute as its own column, linked to the persistent `game_id`.
+- **Data Quality:** missing mapping records, unresolved reviews, missing fields, and other inspection findings.
+
+The workbook is a human inspection artifact only. It never edits the identity registry, approves ISO assignments/localization/flag choices, changes the approved snapshot, or writes to TownCountryGame. The generated workbook is local output and should be reviewed before deciding whether to commit or share it. Run the data pipeline first to ensure the candidate `countries.json` provides complete source attributes. The script uses `openpyxl) through an ephemeral uv invocation so it does not add a runtime dependency to the asset pipeline.
+
+**Usage:**
+
+```bash
+uv run --with openpyxl python tools/build_inspection_workbook.py
+```
+
+**Local validation:** Pending. Verify CLI help, build the workbook, inspect all sheet names and row counts, and run the full tests and lint/architecture checks before marking this stage validated.
