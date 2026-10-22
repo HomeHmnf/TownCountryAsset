@@ -52,6 +52,20 @@ uv run python tools/run_data_pipeline.py
 
 Use `--help` to inspect supported CLI options. The command should be safe to rerun, report each stage, preserve timestamped upstream evidence, and return non-zero if a required stage fails. It must not silently promote candidate output over the approved snapshot.
 
+## Flag source refresh (staged rollout)
+
+The standalone flag-source refresh command is available while the flag feature is being built out:
+
+```fish
+uv run python tools/refresh_flag_source.py
+```
+
+It reads `TCA_FLAG_SOURCE_URL`, `TCA_FLAG_SOURCE_REF`, `TCA_FLAG_SOURCE_DIR`, and `TCA_HTTP_TIMEOUT_SECONDS` from `.env` (process environment overrides file values). Optional flags `--source-url`, `--source-ref`, `--output-dir`, `--timeout`, and `--env-file` override those values for one invocation.
+
+The command accepts only an HTTPS GitHub repository URL, resolves the configured ref to a full commit SHA using GitHub's API, then downloads the archive for that immutable commit. It validates the ZIP structure, rejects traversal paths and symlinks, requires SVGs under a `flags/` directory and an MIT license file, and records archive/license SHA-256 hashes, sizes, retrieval time, configured ref, resolved commit, and source URL. Timestamped snapshots are not overwritten when the upstream commit changes; the cache filenames are commit-keyed. It does not extract files or assign flags.
+
+This stage only refreshes and records upstream source evidence. It does **not** yet generate country assets or make the mapping complete. Those are subsequent implementation stages, and the flag stage is not yet part of the main data-refresh pipeline.
+
 ## Snapshot comparison details
 
 The comparison report distinguishes a real difference from unavailable metadata. If either snapshot lacks source-schema or build-input metadata (as can happen with older approved snapshots), that comparison is marked “not comparable” rather than “changed.” During a pipeline run, the comparison is performed against the isolated staging directory, while the report displays the configured candidate output path.
