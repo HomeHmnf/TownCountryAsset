@@ -177,7 +177,7 @@ Updated `docs/cli-tool.md` with the configuration contract. The mapping file is 
 
 ### Stage 8b — Source refresh and provenance
 
-**Status:** Implemented in the repository; local validation pending.
+**Status:** Implemented and locally validated on 2026-10-22.
 
 Added `tools/refresh_flag_source.py`. The standalone command:
 - Reads the flag source URL/ref, cache directory, and HTTP timeout from environment configuration, preserving process-environment precedence over `.env`.
@@ -188,12 +188,11 @@ Added `tools/refresh_flag_source.py`. The standalone command:
 
 Added `tests/test_refresh_flag_source.py` covering GitHub URL validation, source archive/license checks, path traversal rejection, environment precedence, and malformed configuration. Added the standalone command's usage and current scope to `docs/cli-tool.md`.
 
-**Validation:** Not yet run locally. Do not mark this stage validated until the owner runs the targeted test and CLI help/refresh checks. The main pipeline does not call this command yet.
+**Validation:** The owner ran the focused flag generator/source refresher tests as part of Stage 8c (26 passed), and on 2026-10-22 the complete suite passed with 106 tests. The standalone refresher `--help` check passed. Stage 8d now invokes this command from the pipeline when enabled.
 
-### Planned implementation stages
+### Implementation stages
 
-- **8c — Flag asset generation and validation:** resolve reviewed mappings to SVGs, emit deterministic `game_id`-keyed assets, and audit file validity and complete coverage.
-- **8d — Pipeline integration and documentation:** add isolated pipeline stages, reports, regression tests, and usage guidance; validate end-to-end before marking complete.
+Stages 8c and 8d are implemented and have passed their local automated test/CLI checks. The remaining work is the human review of all 242 country/entity-to-source-flag mappings; implementation and automated tests do not constitute approval of those political representation choices.
 
 ## Validation record
 
@@ -210,7 +209,7 @@ Each phase is recorded here before implementation and updated with results. Any 
 
 ### Stage 8c — Flag asset generation and coverage audit
 
-**Status:** Implemented in the repository; local validation pending.
+**Status:** Implemented and locally validated on 2026-10-22.
 
 Added `tools/generate_country_flags.py` and `tests/test_generate_country_flags.py`. The generator:
 - Reads the persistent identity registry, explicit flag mapping, cached source archive, and provenance written by `tools/refresh_flag_source.py`.
@@ -229,7 +228,7 @@ Updated `docs/cli-tool.md` with source-refresh and generation/audit commands and
 
 ### Stage 8d — Pipeline integration and operator documentation
 
-**Status:** Implemented in the repository; local validation pending.
+**Status:** Implemented and locally validated on 2026-10-22.
 
 Integrated flag handling into `tools/run_data_pipeline.py`:
 - When `TCA_FLAG_REFRESH_ENABLED=true`, refresh the configured flag source before candidate compilation and preserve immutable commit/archive/license provenance. A refresh failure is a required-stage failure.
@@ -240,6 +239,6 @@ Integrated flag handling into `tools/run_data_pipeline.py`:
 
 **Important limitation:** The mapping currently has 242 unreviewed records. Until every registry ID has exactly one reviewed, valid mapping and the flag audit passes, the pipeline may publish candidate country data without a flag directory. This is an explicit temporary review gate, not a claim that flag coverage is complete. No assignment is inferred from names, source order, or unverified ISO proposals.
 
-**Local validation:** Pending. Run the focused pipeline tests, all flag tests, full test suite, lint, architecture check, and diff check before marking Stage 8d complete.
+**Local validation:** On 2026-10-22, the owner ran the focused pipeline/flag tests — **41 passed**; the full suite — **106 passed**; `--help` and `--help-config` for the pipeline; `--help` for both flag tools; and `git diff --check` with no reported issues. `git pull --ff-only` reported already up to date. `git status --short` was empty, and HEAD was `6714132` (`fix: pass integer timeout to flag source refresher`). Lint and architecture checks were not included in this validation run.
 
 **Safety boundary:** Candidate assets remain in TownCountryAsset. The approved snapshot, identity registry, and TownCountryGame are not modified by this integration.
