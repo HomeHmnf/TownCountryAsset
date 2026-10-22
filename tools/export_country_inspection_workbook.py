@@ -361,9 +361,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Export a multi-sheet, read-only country data inspection workbook.")
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY)
     parser.add_argument("--countries", type=Path, default=DEFAULT_COUNTRIES,
-                        help="compiled candidate countries.json; pass an empty string to omit candidate/source attributes")
+                        help="compiled candidate countries.json used to include compiled fields and all source attributes")
     parser.add_argument("--iso-report", type=Path, default=DEFAULT_ISO_REPORT)
-    parser.add_argument("--persian-report", type=Path, default=DEFAULT_PERSIAN_REPORT if "DEFAULT_PERSIAN_REPORT" in globals() else ROOT / "reports/persian-localization-proposals.md")
+    parser.add_argument("--persian-report", type=Path, default=DEFAULT_PERSIAN_REPORT)
     parser.add_argument("--flag-mapping", type=Path, default=DEFAULT_FLAG_MAPPING)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     return parser.parse_args()
@@ -371,8 +371,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    countries_path = args.countries
-    countries = read_json(countries_path, "compiled candidate") if str(countries_path) else None
+    countries = read_json(args.countries, "compiled candidate")
     registry = read_json(args.registry, "identity registry")
     flags = read_json(args.flag_mapping, "flag mapping")
     iso_rows = read_markdown_table(args.iso_report, ISO_HEADER, "ISO proposal")
