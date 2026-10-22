@@ -23,7 +23,27 @@ def test_load_dotenv_defaults_and_environment_precedence(tmp_path):
     assert values["TCA_NATURAL_EARTH_URL"] == pipeline.DEFAULTS["TCA_NATURAL_EARTH_URL"]
     assert values["TCA_PERSIAN_LABEL_SOURCE_URL"] == "https://query.wikidata.org/sparql"
     assert values["TCA_RUN_PERSIAN_LOCALIZATION"] == "true"
+    assert values["TCA_FLAG_REFRESH_ENABLED"] == "true"
+    assert values["TCA_FLAG_MAPPING"] == "config/country_flag_mapping.json"
     assert values["EXISTING"] == "kept"
+
+
+def test_flag_report_classifies_only_unreviewed_mappings_as_review_gaps(tmp_path):
+    report = tmp_path / "flags.md"
+    report.write_text(
+        "# Flag asset coverage audit\n\n## Issues\n\n"
+        "- tc_one: mapping status is 'unreviewed'; expected 'reviewed'\n"
+        "- tc_two: missing flag mapping for game_id tc_two\n",
+        encoding="utf-8",
+    )
+    assert pipeline.flag_report_contains_only_review_gaps(report)
+
+    report.write_text(
+        "# Flag asset coverage audit\n\n## Issues\n\n"
+        "- tc_one: malformed SVG XML\n",
+        encoding="utf-8",
+    )
+    assert not pipeline.flag_report_contains_only_review_gaps(report)
 
 
 def test_load_dotenv_rejects_malformed_line(tmp_path):
