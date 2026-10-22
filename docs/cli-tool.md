@@ -15,10 +15,16 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 | `TCA_NATURAL_EARTH_URL` | URL for the Natural Earth Admin 0 Countries archive |
 | `TCA_ISO_REFERENCE_URL` | URL for the ISO 3166-1 discovery/reference CSV |
 | `TCA_PERSIAN_LABEL_SOURCE_URL` | HTTPS endpoint queried for current Wikidata Persian (`fa`) labels; labels remain candidates |
+| `TCA_FLAG_SOURCE_URL` | Flag source repository URL (initial source: `lipis/flag-icons`, MIT licensed) |
+| `TCA_FLAG_SOURCE_REF` | Configured source ref; refresh tooling must record the resolved immutable commit |
 | `TCA_FETCHED_DATA_DIR` | Local directory for fetched source archives |
 | `TCA_ISO_DATA_DIR` | Raw snapshots and normalized ISO reference |
 | `TCA_PERSIAN_DATA_DIR` | Timestamped raw Wikidata responses, candidate snapshots, and provenance |
 | `TCA_PERSIAN_LOCALIZATION_REPORT` | Latest Persian localization review worksheet |
+| `TCA_FLAG_SOURCE_DIR` | Local cache for fetched flag source files and provenance |
+| `TCA_FLAG_ASSET_OUTPUT_DIR` | Candidate flag asset output directory, keyed by persistent `game_id` |
+| `TCA_FLAG_MAPPING` | Explicit reviewed mapping from persistent IDs to source flag identifiers |
+| `TCA_FLAG_REPORT` | Flag mapping and asset coverage review report |
 | `TCA_GAME_DATA_OUTPUT_DIR` | Candidate game-data output directory |
 | `TCA_APPROVED_DATA_DIR` | Existing approved snapshot used only for comparison |
 | `TCA_REPORT_DIR` | Run summaries and comparison reports |
@@ -29,6 +35,7 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 | `TCA_COMPARE_WITH_APPROVED` | Compare candidate output with approved output if present |
 | `TCA_RUN_ISO_REVIEW` | Refresh the ISO proposal report without approving assignments |
 | `TCA_RUN_PERSIAN_LOCALIZATION` | Fetch current Wikidata Persian labels and refresh the review worksheet on each pipeline run |
+| `TCA_FLAG_REFRESH_ENABLED` | Enable the planned flag-source refresh stage |
 | `TCA_HTTP_TIMEOUT_SECONDS` | Network timeout per download |
 
 Paths may be absolute or relative to the repository root. Boolean values accept `true/false`, `1/0`, and `yes/no`.
