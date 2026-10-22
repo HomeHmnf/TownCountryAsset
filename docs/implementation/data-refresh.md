@@ -60,9 +60,9 @@ Safety detail: the implementation records the actual source URL, retrieval times
 - The comparison CLI accepts a logical candidate display path so reports identify `generated/town_country_asset_candidate`, not the temporary staging directory used during validation. The comparison still reads the isolated staging files.
 - Added regression coverage for legacy snapshots without comparison metadata and for the logical candidate path.
 
-## Phase 7 — Country identity and metadata review (planned)
+## Phase 7 — Country identity and metadata review
 
-**Status:** Planning recorded; implementation not started.
+**Status:** In progress; read-only audit hardening pushed for local validation.
 
 Goal: improve the quality and auditability of the 242 persistent identity records without changing stable IDs or silently treating proposals as approved.
 
@@ -75,6 +75,14 @@ Planned work:
 6. Define a source-backed Persian-name workflow; do not machine-invent or silently transliterate names as verified localization.
 7. Add read-only audits and tests for proposal/evidence completeness, invalid codes, unsupported statuses, and preservation of all existing `game_id` values.
 8. Document this phase and its local validation results before moving to any approval workflow.
+
+### Phase 7a — Read-only ISO metadata validation
+
+- Extended `tools/audit_country_identity_registry.py` to validate uppercase ISO alpha-2/alpha-3 syntax, detect duplicate code assignments across distinct `game_id` records, and flag unsupported record/ISO/localization workflow statuses.
+- Added review counts and safeguards to the Markdown report. Missing ISO values remain review items rather than errors by themselves, because some features may legitimately have no applicable code.
+- Added regression tests for malformed codes, duplicate assignments, unsupported statuses, and read-only behavior.
+- This is a syntax/consistency audit only: it does not prove that a code belongs to an entity, approve assignments, modify registry records, or change stable IDs.
+- Local test results are pending; the owner must pull the branch and run the test suite before this sub-phase is marked complete.
 
 Safety constraints:
 - Do not regenerate, rename, or replace persistent `game_id` values.
@@ -89,6 +97,6 @@ Safety constraints:
 - The online pipeline completed successfully with all nine stages successful: Natural Earth fetch, ISO proposal refresh, isolated candidate preparation, compilation, SVG generation, asset audit, identity registry audit, snapshot comparison, and candidate publication.
 - Candidate contains 242 features and 726 SVG files. Identity audit found 242 records, 242 unique non-empty IDs, and zero structural issues.
 - Comparison correctly reports source-schema and build-input comparisons as “not comparable” because metadata is missing from at least one snapshot; it does not claim false-positive changes.
-- The owner committed the raw Natural Earth/ISO evidence and refresh reports in commit `e4d3c42` on `work/compiler-hardening`. The approved snapshot and game repository were not modified.
+- The owner committed raw Natural Earth/ISO evidence and refresh reports in commits `e4d3c42` and `8b143ef` on `work/compiler-hardening`. The approved snapshot and game repository were not modified.
 
 Each phase is recorded here before implementation and updated with results. Any product/data-policy decision that cannot be safely inferred must be asked before proceeding.
