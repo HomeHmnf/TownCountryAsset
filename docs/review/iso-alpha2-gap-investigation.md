@@ -1,6 +1,6 @@
 # ISO alpha-2 gap investigation — Step 1
 
-**Status:** Evidence gathered; no registry, candidate, or approved data changed.
+**Status:** Step 1 decision recorded. Registry already contains `FR` and `NO` as unverified proposals; no registry values needed changing. Candidate and approved data remain unchanged.
 **Branch:** `work/compiler-hardening`
 **Scope:** Investigate the eight candidate records whose Natural Earth `ISO_A2` value is `-99`. This report is a review aid, not an approval.
 
