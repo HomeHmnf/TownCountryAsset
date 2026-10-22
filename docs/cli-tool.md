@@ -4,7 +4,7 @@
 
 The data-refresh CLI is the entry point for preparing game-ready country assets from online sources. It belongs to **TownCountryAsset**; it does not update or commit files in the separate TownCountryGame repository.
 
-The intended one-command workflow fetches the configured source datasets, preserves source evidence and checksums, validates the inputs, compiles country metadata and geometry, optionally generates SVGs, audits outputs, compares a candidate with the last approved asset snapshot, and writes a human-readable run summary. Failures must produce a failure report and a non-zero exit status.
+The one-command workflow fetches configured source datasets, preserves source evidence and checksums, refreshes flag-source provenance when enabled, compiles country metadata and geometry, attempts reviewed flag generation, optionally generates country SVGs, audits outputs, compares a candidate with the approved snapshot, and writes a run summary. Required source/compile/asset failures produce a failure report and non-zero exit status. Incomplete flag review is recorded as `review_required` and does not invent mappings.
 
 ## Configuration
 
@@ -16,7 +16,7 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 | `TCA_ISO_REFERENCE_URL` | URL for the ISO 3166-1 discovery/reference CSV |
 | `TCA_PERSIAN_LABEL_SOURCE_URL` | HTTPS endpoint queried for current Wikidata Persian (`fa`) labels; labels remain candidates |
 | `TCA_FLAG_SOURCE_URL` | Flag source repository URL (initial source: `lipis/flag-icons`, MIT licensed) |
-| `TCA_FLAG_SOURCE_REF` | Configured source ref; refresh tooling must record the resolved immutable commit |
+| `TCA_FLAG_SOURCE_REF` | Configured source ref; refresh tooling records the resolved immutable commit |
 | `TCA_FETCHED_DATA_DIR` | Local directory for fetched source archives |
 | `TCA_ISO_DATA_DIR` | Raw snapshots and normalized ISO reference |
 | `TCA_PERSIAN_DATA_DIR` | Timestamped raw Wikidata responses, candidate snapshots, and provenance |
@@ -35,14 +35,14 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 | `TCA_COMPARE_WITH_APPROVED` | Compare candidate output with approved output if present |
 | `TCA_RUN_ISO_REVIEW` | Refresh the ISO proposal report without approving assignments |
 | `TCA_RUN_PERSIAN_LOCALIZATION` | Fetch current Wikidata Persian labels and refresh the review worksheet on each pipeline run |
-| `TCA_FLAG_REFRESH_ENABLED` | Enable the planned flag-source refresh stage |
+| `TCA_FLAG_REFRESH_ENABLED` | Refresh the configured flag source and record immutable provenance during the pipeline run |
 | `TCA_HTTP_TIMEOUT_SECONDS` | Network timeout per download |
 
 Paths may be absolute or relative to the repository root. Boolean values accept `true/false`, `1/0`, and `yes/no`.
 
 ## Usage
 
-The CLI builds into a temporary sibling directory. Compilation, SVG generation, asset audits, identity-registry review, and comparison must all pass before the validated directory replaces `TCA_GAME_DATA_OUTPUT_DIR`. On a failed build or audit, the previous candidate directory is preserved and temporary output is removed. This publication step never changes `TCA_APPROVED_DATA_DIR`.
+The CLI builds into a temporary sibling directory. Compilation, country-SVG generation when enabled, asset audits, identity-registry audit, and comparison must pass before the validated directory replaces `TCA_GAME_DATA_OUTPUT_DIR`. Flag generation runs against the isolated candidate directory. If its only issues are unreviewed or missing mapping decisions, the stage is marked `review_required`, no partial flags are written, and the non-flag candidate refresh may continue. Source integrity errors, malformed SVGs, duplicate/unknown mappings, or other asset errors fail the run. On a failed required build or audit, the previous candidate directory is preserved and temporary output is removed. This publication step never changes `TCA_APPROVED_DATA_DIR`.
 
 The target interface is:
 
@@ -64,7 +64,7 @@ It reads `TCA_FLAG_SOURCE_URL`, `TCA_FLAG_SOURCE_REF`, `TCA_FLAG_SOURCE_DIR`, an
 
 The command accepts only an HTTPS GitHub repository URL, resolves the configured ref to a full commit SHA using GitHub's API, then downloads the archive for that immutable commit. It validates the ZIP structure, rejects traversal paths and symlinks, requires SVGs under a `flags/` directory and an MIT license file, and records archive/license SHA-256 hashes, sizes, retrieval time, configured ref, resolved commit, and source URL. Timestamped snapshots are not overwritten when the upstream commit changes; the cache filenames are commit-keyed. It does not extract files or assign flags.
 
-This stage refreshes and records upstream source evidence. It does not assign flags and is not yet part of the main data-refresh pipeline.
+The main data-refresh pipeline runs this source refresh when `TCA_FLAG_REFRESH_ENABLED=true`. A failed enabled refresh fails the pipeline; disable it only when intentionally using an already-cached source archive. The pipeline subsequently runs the generator against its isolated candidate directory.
 
 ### Generate and audit reviewed flag assets (Stage 8c)
 
@@ -76,7 +76,7 @@ uv run python tools/generate_country_flags.py
 
 The command reads the persistent identity registry, `TCA_FLAG_MAPPING`, and the commit-keyed archive in `TCA_FLAG_SOURCE_DIR`. It verifies the archive checksum against provenance, reads the source's `flags/4x3/<code>.svg` files, validates each selected SVG, and writes output as `<game_id>.svg` with a manifest containing per-file hashes and source revision metadata. The output directory is replaced only after complete one-to-one coverage validates; failed audits preserve existing output. A Markdown audit is written to `TCA_FLAG_REPORT`.
 
-Only mapping records with `status: "reviewed"` and a valid lowercase two-letter source code are eligible. Missing mappings, duplicate IDs/codes, unknown IDs, missing source files, and malformed SVGs fail closed. The current mapping intentionally has null codes and `unreviewed` statuses, so the audit is expected to fail until mapping decisions are reviewed. It does not guess flags, use generic fallbacks, or modify the identity registry. This generator is not yet wired into the main pipeline; that is Stage 8d.
+Only mapping records with `status: "reviewed"` and a valid lowercase two-letter source code are eligible. Missing mappings, duplicate IDs/codes, unknown IDs, missing source files, and malformed SVGs fail closed. The current mapping intentionally has null codes and `unreviewed` statuses, so the audit is expected to fail until mapping decisions are reviewed. It does not guess flags, use generic fallbacks, or modify the identity registry. The main pipeline now runs this generator after candidate compilation. If all records are reviewed and valid, the flags are published inside the candidate as `flags/<game_id>.svg`. If the report contains only unreviewed/missing mapping decisions, the pipeline marks the stage `review_required` and continues the country-data refresh without flags; no partial set is published. All other generator errors fail the pipeline. This temporary review gate lets the existing data refresh remain usable while the explicit mapping is reviewed; flag completeness is not considered achieved until the audit reports PASS for every registry ID.
 
 ## Snapshot comparison details
 
