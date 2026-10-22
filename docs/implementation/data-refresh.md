@@ -293,16 +293,16 @@ The owner selected:
 - **Scope:** all 242 ISO proposals, including missing assignments.
 - **Evidence policy:** record evidence references, findings, and proposed dispositions in Markdown; keep all assignments unverified until separately approved.
 
-Updated [the ISO assignment proposal report](../../reports/iso-assignment-proposals.md) with the Step 2 review scope, source limitations, proposed dispositions, and record-level candidate inventory.
+Updated [the ISO assignment proposal report](../../reports/iso-assignment-proposals.md) with the Step 2 review scope, authoritative source hierarchy, record-level candidate inventory, an explicit evidence-status column for all 242 rows, and proposed dispositions.
 
 Review findings from the saved proposal/reference set:
 - 242 registry records included; all rows remain keyed to the persistent `game_id`.
 - 249 rows in the captured reference; 234 candidate code pairs (200 exact normalized-name matches and 34 explicit name variants); 8 records unmatched by the name-matching process.
-- The captured reference is a third-party distribution, not an ISO-hosted export. Its consistency audit is not authoritative verification. ISO identifies the Online Browsing Platform as the current source for official code assignments.
+- The captured reference is a third-party distribution, not an ISO-hosted export. Its consistency audit is not authoritative verification. ISO identifies the Online Browsing Platform (OBP) as the current source for official code assignments; ISO's ISO 3166-1:2020 page says the standard was confirmed in 2025, and ISO naming guidance illustrates why official labels and display-name variants need distinct treatment.
 - Exact-name matches remain candidates only. Explicit variants require entity/name scope review. Unmatched records are not automatically treated as lacking an ISO code; Falkland Islands and Sint Maarten require explicit variant investigation, while the other six require entity-scope/applicability investigation.
 - All assignments remain unverified. No registry fields, candidate assets, approved snapshot, stable IDs, or TownCountryGame files were changed.
 
-**Evidence limitation and next gate:** The report does not falsely claim that all 234 pairs have already been checked against an individual current ISO OBP record. Before any verification or promotion, capture direct ISO-maintained evidence for each assignment and confirm entity scope, especially for name variants and special/disputed features. Request a separate owner decision before changing registry values, statuses, or approved data.
+**Evidence limitation and next gate:** The 242-row table now labels every record as an exact-name candidate with OBP confirmation pending, a name/entity-scope variant with OBP confirmation pending, or an unmatched/applicability case requiring direct evidence. This completes systematic triage, but **not** the 234 individual OBP checks. Before verification or promotion, capture direct ISO-maintained evidence for each assignment and confirm entity scope, especially for name variants and special/disputed features. Request a separate owner decision before changing registry values, statuses, or approved data.
 
 ## Metadata review workflow — Step 1: ISO alpha-2 gaps
 
