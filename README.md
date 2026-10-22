@@ -51,6 +51,16 @@ The compiler accepts a local Natural Earth Admin 0 Countries 1:50m ZIP, shapefil
    Output is grouped as `svg/low/`, `svg/medium/`, and `svg/high/`, with one SVG per stable country ID. To generate only selected profiles, repeat `--profile`, for example `--profile low --profile medium`.
 7. Copy `addons/town_country_asset` and the generated data into your Godot project. The runtime default data path is `res://generated/town_country_asset`.
 
+## Human-readable data inspection workbook
+
+After running the data pipeline to produce candidate metadata, build an Excel workbook that brings the identity registry, all compiled Natural Earth source attributes, ISO proposals, Persian localization candidates, flag mappings, and data-quality findings together for human inspection:
+
+```fish
+uv run --with openpyxl python tools/build_inspection_workbook.py
+```
+
+The default output is `reports/country-entity-inspection.xlsx`. It contains a master inventory and dedicated `Entity & Identity`, `ISO Review`, `Persian Review`, `Flag Review`, `Source Attributes`, and `Data Quality` worksheets. Each review sheet includes blank decision/evidence fields for humans to fill in. The workbook is generated locally and is not committed by the tool. It never writes decisions back to configuration, approves proposals, modifies the approved snapshot, or changes TownCountryGame. Run the pipeline first if you want the complete raw source attribute columns; without candidate `countries.json`, those columns will be reported as unavailable.
+
 ## Automatic online data refresh
 
 Copy `.env.example` to `.env`, adjust the source URLs and local folders, then run the complete data-preparation pipeline:
