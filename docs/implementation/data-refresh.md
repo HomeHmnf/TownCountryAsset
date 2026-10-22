@@ -304,6 +304,15 @@ Review findings from the saved proposal/reference set:
 
 **Evidence limitation and next gate:** The 242-row table now labels every record as an exact-name candidate with OBP confirmation pending, a name/entity-scope variant with OBP confirmation pending, or an unmatched/applicability case requiring direct evidence. This completes systematic triage, but **not** the 234 individual OBP checks. Before verification or promotion, capture direct ISO-maintained evidence for each assignment and confirm entity scope, especially for name variants and special/disputed features. Request a separate owner decision before changing registry values, statuses, or approved data.
 
+
+### Priority evidence-gathering pass — 2026-10-22
+
+Added a dedicated evidence section to the [ISO assignment proposal report](../../reports/iso-assignment-proposals.md) for the 34 name variants and eight unmatched records. It cites current ISO guidance on the Online Browsing Platform, ISO naming guidance, the ISO/TC 211 DOMES-to-alpha-3 cross-reference (explicitly caveated as a tentative table generated from a 2023 export), and ISO Maintenance Agency newsletters for Saint Helena and Sint Maarten.
+
+The pass found useful ISO-hosted alpha-3/name corroboration for many variants and official historical notices for the SH/SHN and SX/SXM cases. For Falkland Islands, the ISO-hosted cross-reference corroborates FLK and the [Malvinas] label, but current alpha-2 FK still requires a current OBP record. For Indian Ocean Territories, IOT is a name/scope lead only; the Natural Earth feature must be reconciled before assigning any code. Somaliland, Kosovo, Northern Cyprus, Ashmore and Cartier Islands, and Siachen Glacier remain unresolved; no missing code is inferred from absence in a secondary list.
+
+**Remaining gate:** The OBP is JavaScript-rendered and the available text retrieval could not expose individual live country records. Accordingly, this pass does not claim 42 record-level cases fully verified, does not change any assignment status or data, and does not authorize promotion. Current per-record OBP capture plus source-feature scope confirmation is still required for each assignment before a separate owner decision.
+
 ## Metadata review workflow — Step 1: ISO alpha-2 gaps
 
 **Status:** Decision applied and documented. The eight-case report is committed; ISO assignments remain unverified.
