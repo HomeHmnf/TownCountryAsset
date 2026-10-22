@@ -43,6 +43,46 @@ The **242-row candidate review table immediately below** is the row-level invent
 
 **Decision gate:** No registry changes, approvals, assignment-status changes, candidate regeneration, approved-snapshot updates, or game-repository changes are authorized by this review. Ask for a separate decision after the record-level official-evidence work is complete.
 
+
+## Priority evidence review — variants and unmatched records (2026-10-22)
+
+This is an evidence-gathering pass for the 34 explicit name variants and eight records unmatched by the third-party name matcher. It does not change the proposal table's unverified status.
+
+### Source hierarchy and limits
+
+1. **Current authoritative lookup:** ISO says the Online Browsing Platform (OBP) contains the up-to-date ISO 3166 codes. The OBP application is JavaScript-rendered; this review could reach the official interface but could not retrieve individual country-record content through the available text interface. Therefore no individual record is claimed as directly confirmed in the live OBP.
+   - ISO overview: https://www.iso.org/iso-3166-country-codes.html
+   - OBP: https://www.iso.org/obp/ui/
+2. **Official ISO naming guidance:** ISO's house-style guidance explicitly requires “Viet Nam” rather than “Vietnam”, “Russian Federation” rather than “Russia”, “Korea, Republic of” rather than “South Korea”, and “Democratic People's Republic of Korea” rather than “North Korea”; it also points users to the OBP for country-code listings: https://committee.iso.org/fr/sites/isoorg/home/developing-standards/resources/drafting-standards/iso-house-style-search.html
+3. **ISO-hosted technical cross-check (not the official master list):** ISO/TC 211 publishes a DOMES-to-ISO-alpha-3 cross-reference. The page explicitly warns that the translation table is tentative and was built from an IGN DOMES export dated 2023-12-12; it is useful corroboration for alpha-3/name pairs, but it is not a substitute for current OBP records and does not establish alpha-2 values: https://committee.iso.org/sites/tc211/home/standards-in-action/domes.html
+4. **Historical ISO Maintenance Agency notices:** the official ISO newsletter VI-7 documents the alpha-2 SH / alpha-3 SHN entry for Saint Helena, Ascension and Tristan da Cunha; newsletters VI-8 and VI-14 document the split and later naming of Sint Maarten (Dutch part), alpha-2 SX, alpha-3 SXM. These notices evidence historical assignment decisions, but current OBP confirmation remains open:
+   - VI-7 (2010): https://www.iso.org/iso/iso_3166-1_newsletter_vi-7_2010-02-22.pdf
+   - VI-8 (2010): https://www.iso.org/iso/iso_3166-1_newsletter_vi-8_split_of_the_dutch_antilles_final-en.pdf
+   - VI-14 (2013): https://www.iso.org/iso/iso_3166-1_newsletter_vi-14_name_change_state_of_palestine.pdf
+
+### Findings for the 34 name variants
+
+The ISO-hosted DOMES cross-reference corroborates the candidate alpha-3/name pair for these proposal rows: Micronesia (FSM), U.S. Virgin Islands (VIR), Saint Helena, Ascension and Tristan da Cunha (SHN), British Virgin Islands (VGB), United Kingdom (GBR), Türkiye (TUR), Timor-Leste (TLS), Tanzania (TZA), Taiwan (TWN), Syrian Arab Republic (SYR), Korea, Republic of (KOR), Serbia (SRB), Russian Federation (RUS), Lao People's Democratic Republic (LAO), Palestine, State of (PSE), Iran, Islamic Republic of (IRN), French Southern Territories (ATF), Côte d'Ivoire (CIV), Congo, Democratic Republic of the (COD), Congo (COG), Macao (MAC), Hong Kong (HKG), Brunei Darussalam (BRN), Bolivia, Plurinational State of (BOL), Bahamas (BHS), Venezuela, Bolivarian Republic of (VEN), South Georgia and the South Sandwich Islands (SGS), Sint Maarten (SXM), and Falkland Islands [Malvinas] (FLK). The page also corroborates the names/codes for Saint Martin (French part, MAF), French Southern Territories (ATF), and British Indian Ocean Territory (IOT) in its listed cross-reference.
+
+These are **alpha-3/name corroborations from an ISO-hosted technical page**, not direct current alpha-2 verification. ISO's naming guidance independently explains several common display-name differences (Vietnam/Viet Nam, Russia/Russian Federation, South Korea/Korea, Republic of, North Korea/Democratic People's Republic of Korea). For all 34 variant records, proposed alpha-2 values remain unverified pending a live OBP record capture and a source-feature/entity-scope check. For Holy See/Vatican, Moldova, Pitcairn, and any variant not explicitly covered by the cited cross-reference, no record-specific official evidence is claimed in this pass; direct OBP evidence remains outstanding.
+
+### Findings for the eight unmatched records
+
+| game_id | Registry feature | Evidence found | Proposed disposition |
+|---|---|---|---|
+| tc_815eb2563fde4a4cb077173220e2a533 | Falkland Islands | ISO/TC 211's cross-reference lists the name “Falkland Islands (the) [Malvinas]” with alpha-3 FLK. This supports investigating the name mismatch, but does not by itself verify alpha-2 FK in the current OBP. | Keep alpha-2 empty until current OBP record and entity scope are captured; evaluate FK only as an unverified proposal after that check. |
+| tc_9a78f2eebcc24906a5c67581c0c3895e | Somaliland | No direct ISO-maintained country-code record found in this pass. Absence from the name-matching reference is not proof that no code exists. | Leave alpha-2 empty; document entity-scope/applicability finding only after checking OBP and relevant ISO/MA material. |
+| tc_28aa17b84db24952b92fc51b421075e0 | Kosovo | No current official ISO 3166-1 alpha-2 assignment established by the evidence collected here. XK remains outside the official-assignment evidence and was previously deferred as an application-specific-code question. | Leave ISO alpha-2 empty; do not treat XK as official ISO 3166-1. Keep application-specific code decision separate. |
+| tc_d3e7f81572fd44ab920bfc066d592873 | Northern Cyprus | No direct ISO-maintained country-code record found in this pass. | Leave alpha-2 empty; investigate feature classification and ISO 3166-1 applicability before any proposal. |
+| tc_7cd2130353a64e57bd3782773a8e12c7 | Indian Ocean Territories | ISO/TC 211's cross-reference lists “British Indian Ocean Territory (the)” with alpha-3 IOT; that is a plausible name/scope lead, not proof that this Natural Earth feature is the same entity or that alpha-2 IO applies. | Leave alpha-2 empty pending source-feature reconciliation and current OBP confirmation. Do not use parent-state AU as a distinct territory code. |
+| tc_b61ca098adb74efc84564fd9fa800bf8 | Ashmore and Cartier Islands | No direct ISO-maintained record for this specific feature found in this pass. | Leave alpha-2 empty; investigate whether the feature is separately represented in ISO 3166-1 before proposing a code. |
+| tc_644aaabf37604038996e34c1bc91c970 | Siachen Glacier | No direct ISO-maintained country-code record found in this pass. | Leave alpha-2 empty; resolve feature classification and applicability first. |
+| tc_d79e2777be2741c3bcf291431e2e4efb | Sint Maarten | ISO Maintenance Agency newsletters document SX / SXM for Sint Maarten (Dutch part); the ISO/TC 211 cross-reference also lists “Sint Maarten (Dutch part)” with SXM. The remaining question is whether the registry's “Sint Maarten” feature maps to that precise entity. | Record SX only as an unverified proposal after entity-scope reconciliation; do not promote from name evidence alone. |
+
+### Required next evidence gate
+
+For each candidate that may eventually be approved, capture a dated, record-specific current OBP result (name, alpha-2, alpha-3, and any scope/remarks visible), plus the source-feature match rationale. For the unmatched cases, record an explicit “code applies / code does not apply / unresolved” finding with the source supporting it. This text-only review could not retrieve individual OBP record contents, so it deliberately leaves all assignments unverified and requests no registry, candidate, approved-snapshot, or game-data change.
+
 ## Candidate review
 
 | game_id | Registry English name | Candidate alpha-2 | Candidate alpha-3 | Reference English name | Match type | Authoritative evidence status | Proposed disposition |
