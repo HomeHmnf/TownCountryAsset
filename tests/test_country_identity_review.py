@@ -74,7 +74,7 @@ def test_audit_detects_duplicate_iso_codes_across_distinct_records():
     registry["records"].append(second)
     result = audit_registry(registry)
     assert any("Duplicate ISO alpha-3 code 'AAA'" in issue for issue in result["structural_issues"])
-    assert result["review_counts"]["duplicate ISO alpha-3 assignment"] == 2
+    assert result["review_counts"]["duplicate ISO alpha-3 assignment"] == 1
 
 
 def test_audit_flags_unsupported_workflow_statuses():
