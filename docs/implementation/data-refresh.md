@@ -285,6 +285,25 @@ The exporter treats the registry as the identity source of truth and candidate/p
 **Local validation pending:** Refresh `uv.lock` for the new dependency, then run the focused workbook test and full suite. Generate the workbook locally and inspect the sheet/row counts before calling this stage validated. The workbook output defaults to `reports/country-data-inspection.xlsx`; it should be regenerated after source or proposal refreshes.
 
 
+## Metadata review workflow — Step 2: systematic ISO assignment evidence review
+
+**Status:** Review scope applied; all 242 records inventoried. No assignments approved or promoted. Direct record-level ISO OBP verification remains an explicit evidence gate.
+
+The owner selected:
+- **Scope:** all 242 ISO proposals, including missing assignments.
+- **Evidence policy:** record evidence references, findings, and proposed dispositions in Markdown; keep all assignments unverified until separately approved.
+
+Updated [the ISO assignment proposal report](../../reports/iso-assignment-proposals.md) with the Step 2 review scope, source limitations, proposed dispositions, and record-level candidate inventory.
+
+Review findings from the saved proposal/reference set:
+- 242 registry records included; all rows remain keyed to the persistent `game_id`.
+- 249 rows in the captured reference; 234 candidate code pairs (200 exact normalized-name matches and 34 explicit name variants); 8 records unmatched by the name-matching process.
+- The captured reference is a third-party distribution, not an ISO-hosted export. Its consistency audit is not authoritative verification. ISO identifies the Online Browsing Platform as the current source for official code assignments.
+- Exact-name matches remain candidates only. Explicit variants require entity/name scope review. Unmatched records are not automatically treated as lacking an ISO code; Falkland Islands and Sint Maarten require explicit variant investigation, while the other six require entity-scope/applicability investigation.
+- All assignments remain unverified. No registry fields, candidate assets, approved snapshot, stable IDs, or TownCountryGame files were changed.
+
+**Evidence limitation and next gate:** The report does not falsely claim that all 234 pairs have already been checked against an individual current ISO OBP record. Before any verification or promotion, capture direct ISO-maintained evidence for each assignment and confirm entity scope, especially for name variants and special/disputed features. Request a separate owner decision before changing registry values, statuses, or approved data.
+
 ## Metadata review workflow — Step 1: ISO alpha-2 gaps
 
 **Status:** Decision applied and documented. The eight-case report is committed; ISO assignments remain unverified.
