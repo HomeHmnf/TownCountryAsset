@@ -158,7 +158,7 @@ Added tests for source-field mapping, SPARQL query construction and response par
 
 ### Stage 8a — Configuration and mapping contract
 
-**Status:** Implemented in the repository; local validation pending.
+**Status:** Implemented and focused local validation passed on 2026-10-22.
 
 Added the following flag settings to `.env.example` and the pipeline configuration defaults:
 - `TCA_FLAG_SOURCE_URL`
@@ -222,6 +222,24 @@ Added `tools/generate_country_flags.py` and `tests/test_generate_country_flags.p
 
 Updated `docs/cli-tool.md` with source-refresh and generation/audit commands and the current review gate. The existing mapping still has 242 records with null source codes and `unreviewed` statuses, so a full generation run is expected to fail until explicit decisions are reviewed. This is intentional; no flags have been guessed or approved automatically.
 
-**Local validation:** Pending. Run the focused tests and CLI help/checks before marking this stage complete. The generator is not integrated into `tools/run_data_pipeline.py`; integration and README updates are Stage 8d.
+**Local validation:** The owner ran `uv run pytest -v tests/test_generate_country_flags.py tests/test_refresh_flag_source.py`: **26 passed**. Both `tools/generate_country_flags.py --help` and `tools/refresh_flag_source.py --help` succeeded, and `git diff --check` reported no issues. The owner then pulled commit `1180bdb7be487841e91d6fe04fe1eba74ad290fa` containing Stage 8c.
 
-**Safety boundary:** This stage does not integrate flags into the main candidate pipeline yet, does not modify the identity registry or approved snapshot, and does not write to TownCountryGame. Pipeline integration is reserved for Stage 8d after generator/audit behavior is tested.
+**Safety boundary:** This stage does not modify the identity registry or approved snapshot and does not write to TownCountryGame.
+
+
+### Stage 8d — Pipeline integration and operator documentation
+
+**Status:** Implemented in the repository; local validation pending.
+
+Integrated flag handling into `tools/run_data_pipeline.py`:
+- When `TCA_FLAG_REFRESH_ENABLED=true`, refresh the configured flag source before candidate compilation and preserve immutable commit/archive/license provenance. A refresh failure is a required-stage failure.
+- After compiling the candidate, run `tools/generate_country_flags.py` with the isolated staging directory as its output. Complete reviewed mappings produce `flags/<game_id>.svg` and a manifest as part of the candidate directory.
+- Classify only explicitly unreviewed/missing mapping gaps as `review_required`; do not write partial flag assets and allow unrelated country-data refresh to continue. Source/provenance errors, malformed SVGs, duplicate or unknown mapping IDs, and other validation errors still fail the pipeline.
+- Added `flag_report_contains_only_review_gaps` and unit coverage for the review gate and configuration defaults.
+- Updated `.env.example`, README, and CLI documentation for the source refresh, mapping, generated assets, and temporary review gate.
+
+**Important limitation:** The mapping currently has 242 unreviewed records. Until every registry ID has exactly one reviewed, valid mapping and the flag audit passes, the pipeline may publish candidate country data without a flag directory. This is an explicit temporary review gate, not a claim that flag coverage is complete. No assignment is inferred from names, source order, or unverified ISO proposals.
+
+**Local validation:** Pending. Run the focused pipeline tests, all flag tests, full test suite, lint, architecture check, and diff check before marking Stage 8d complete.
+
+**Safety boundary:** Candidate assets remain in TownCountryAsset. The approved snapshot, identity registry, and TownCountryGame are not modified by this integration.
