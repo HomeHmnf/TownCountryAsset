@@ -295,6 +295,6 @@ Added:
 
 The project owner decided to record France `FR` and Norway `NO` as registry proposals with `assignment_status=unverified`; leave the other six official ISO alpha-2 values empty; and defer Kosovo `XK` as a possible application-specific code to a later decision.
 
-The persistent identity registry was updated for exactly France and Norway. Their record status remains `proposed`; no record was promoted to approved or verified. Stable `game_id` values were preserved. The candidate output has not been regenerated in this step, the approved snapshot was not changed, and TownCountryGame was not touched. Entity classifications, Persian localization, and flag mappings remain open.
+The persistent identity registry was inspected and already contained `FR` for France and `NO` for Norway with `assignment_status=unverified`; those values were retained, so no registry edit was necessary. Their record status remains `proposed`; no record was promoted to approved or verified. Stable `game_id` values were preserved. The candidate output has not been regenerated in this step, the approved snapshot was not changed, and TownCountryGame was not touched. Entity classifications, Persian localization, and flag mappings remain open.
 
 **Next decision gate:** Before changing any other metadata, review the eight-case report and decide how to proceed with systematic verification of official ISO assignments across all 242 records.
