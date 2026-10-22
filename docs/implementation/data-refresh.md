@@ -287,15 +287,14 @@ The exporter treats the registry as the identity source of truth and candidate/p
 
 ## Metadata review workflow — Step 1: ISO alpha-2 gaps
 
-**Status:** Evidence report committed; awaiting user decision. No data approvals or identity changes were made.
+**Status:** Decision applied and documented. The eight-case report is committed; ISO assignments remain unverified.
 
-Added [ISO alpha-2 gap investigation](../review/iso-alpha2-gap-investigation.md) after inspecting the eight candidate records whose Natural Earth `ISO_A2` field is `-99`.
+Added:
+- [Detailed investigation](../review/iso-alpha2-gap-investigation.md)
+- [Eight-case ISO gap review report](../../reports/iso-alpha2-gap-review.md)
 
-Key findings:
-- France and Norway have source fallback values `FR` and `NO` in `ISO_A2_EH`; these are suitable as proposed official-code candidates, pending confirmation against ISO's current listing and a human decision.
-- Kosovo's `XK` is not an official ISO 3166-1 alpha-2 assignment.
-- Somaliland, Northern Cyprus, and Siachen Glacier have no official alpha-2 code evidenced in the inspected source.
-- Indian Ocean Territories and Ashmore and Cartier Islands have `AU` in the fallback field, but that represents their parent/sovereign state and must not be treated as a distinct code for either feature.
-- All eight remain review items; stable `game_id` values, the identity registry's approval status, candidate output, approved snapshot, entity classifications, and flag mappings remain unchanged.
+The project owner decided to record France `FR` and Norway `NO` as registry proposals with `assignment_status=unverified`; leave the other six official ISO alpha-2 values empty; and defer Kosovo `XK` as a possible application-specific code to a later decision.
 
-**Decision gate:** Ask the project owner whether to record `FR` and `NO` as unverified proposals and keep the other six official ISO alpha-2 values empty for now. Do not proceed to bulk ISO verification until this decision is made.
+The persistent identity registry was updated for exactly France and Norway. Their record status remains `proposed`; no record was promoted to approved or verified. Stable `game_id` values were preserved. The candidate output has not been regenerated in this step, the approved snapshot was not changed, and TownCountryGame was not touched. Entity classifications, Persian localization, and flag mappings remain open.
+
+**Next decision gate:** Before changing any other metadata, review the eight-case report and decide how to proceed with systematic verification of official ISO assignments across all 242 records.
