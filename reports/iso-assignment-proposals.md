@@ -354,3 +354,11 @@ The row-level table now has an **Authoritative evidence status** column for all 
 - Normalized SHA-256: `10893d35138839a13d417137ee2122d1934beee4839e5578da2c1d0b1e25afb2`
 - Reference row count: 249
 - The source is not an ISO-hosted export; candidates remain unverified.
+
+## Additional official policy check — user-assigned code elements (2026-10-22)
+
+ISO's country-code guidance explains that code elements outside the officially assigned set may be selected from specified user-assigned ranges, including `XA`–`XZ`, and explicitly states that ISO has no procedure for assigning these user-assigned elements. Source: https://www.iso.org/iso-3166-country-codes.html
+
+**Disposition for Kosovo:** `XK` falls in the `XA`–`XZ` user-assigned range. It must not be represented as an officially assigned ISO 3166-1 alpha-2 code. A project may separately decide to use `XK` as an application-specific interoperability convention, but that decision requires its own namespace, collision, and downstream-compatibility review. This supports the existing disposition: keep the registry's official ISO alpha-2 field empty and leave the application-specific-code question deferred.
+
+This policy check does not resolve the remaining live-OBP evidence gap for the other proposals. No assignment was marked verified; no registry, candidate output, approved snapshot, or game data was changed.
