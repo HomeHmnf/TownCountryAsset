@@ -121,6 +121,8 @@ def audit_evidence(
     ref_by_codes = {(row["alpha2"], row["alpha3"]): row for row in reference}
     ref_by_name = {normalize_name(row["english_name"]): row for row in reference}
     code_owners: dict[tuple[str, str], str] = {}
+    alpha2_owners: dict[str, str] = {}
+    alpha3_owners: dict[str, str] = {}
     for row in report_rows:
         gid = row.get("game_id", "")
         alpha2 = row.get("Candidate alpha-2", "")
@@ -153,6 +155,14 @@ def audit_evidence(
             )
         else:
             code_owners[key] = gid
+        if alpha2 in alpha2_owners and alpha2_owners[alpha2] != gid:
+            issues.append(f"Candidate alpha-2 {alpha2} is proposed for multiple game_ids {alpha2_owners[alpha2]!r} and {gid!r}")
+        else:
+            alpha2_owners[alpha2] = gid
+        if alpha3 in alpha3_owners and alpha3_owners[alpha3] != gid:
+            issues.append(f"Candidate alpha-3 {alpha3} is proposed for multiple game_ids {alpha3_owners[alpha3]!r} and {gid!r}")
+        else:
+            alpha3_owners[alpha3] = gid
 
         match_type = row.get("Match type", "")
         registry_record = next(
@@ -223,7 +233,7 @@ def render_report(result: dict[str, Any], registry_path: Path, reference_path: P
         lines.append(f"| {label} | {counts.get(label, 0)} |")
     lines.extend(["", "## Findings", ""])
     if result["issues"]:
-        lines.extend(f"- {issue.replace('|', '\\|')}" for issue in result["issues"])
+        lines.extend("- " + issue.replace("|", "\\|") for issue in result["issues"])
     else:
         lines.append("No proposal/registry/reference consistency issues detected by this audit.")
     lines.extend([
