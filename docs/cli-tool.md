@@ -64,7 +64,19 @@ It reads `TCA_FLAG_SOURCE_URL`, `TCA_FLAG_SOURCE_REF`, `TCA_FLAG_SOURCE_DIR`, an
 
 The command accepts only an HTTPS GitHub repository URL, resolves the configured ref to a full commit SHA using GitHub's API, then downloads the archive for that immutable commit. It validates the ZIP structure, rejects traversal paths and symlinks, requires SVGs under a `flags/` directory and an MIT license file, and records archive/license SHA-256 hashes, sizes, retrieval time, configured ref, resolved commit, and source URL. Timestamped snapshots are not overwritten when the upstream commit changes; the cache filenames are commit-keyed. It does not extract files or assign flags.
 
-This stage only refreshes and records upstream source evidence. It does **not** yet generate country assets or make the mapping complete. Those are subsequent implementation stages, and the flag stage is not yet part of the main data-refresh pipeline.
+This stage refreshes and records upstream source evidence. It does not assign flags and is not yet part of the main data-refresh pipeline.
+
+### Generate and audit reviewed flag assets (Stage 8c)
+
+After the source archive is refreshed and the mapping contains reviewed decisions, run:
+
+```fish
+uv run python tools/generate_country_flags.py
+```
+
+The command reads the persistent identity registry, `TCA_FLAG_MAPPING`, and the commit-keyed archive in `TCA_FLAG_SOURCE_DIR`. It verifies the archive checksum against provenance, reads the source's `flags/4x3/<code>.svg` files, validates each selected SVG, and writes output as `<game_id>.svg` with a manifest containing per-file hashes and source revision metadata. The output directory is replaced only after complete one-to-one coverage validates; failed audits preserve existing output. A Markdown audit is written to `TCA_FLAG_REPORT`.
+
+Only mapping records with `status: "reviewed"` and a valid lowercase two-letter source code are eligible. Missing mappings, duplicate IDs/codes, unknown IDs, missing source files, and malformed SVGs fail closed. The current mapping intentionally has null codes and `unreviewed` statuses, so the audit is expected to fail until mapping decisions are reviewed. It does not guess flags, use generic fallbacks, or modify the identity registry. This generator is not yet wired into the main pipeline; that is Stage 8d.
 
 ## Snapshot comparison details
 
