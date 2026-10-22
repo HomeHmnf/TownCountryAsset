@@ -130,6 +130,39 @@ All labels remain unreviewed candidates. The script never updates the identity r
 
 Added tests for source-field mapping, SPARQL query construction and response parsing, stable-ID preservation, snapshot provenance, and review-only behavior. Local validation is pending; do not treat this phase as validated until the owner runs the test suite and CLI checks.
 
+## Phase 8 — Country flag assets and identity coverage
+
+**Status:** Planned; documentation-first stage.
+
+**Goal:** Add reproducible, source-backed flag assets for the complete persistent country/entity identity registry, without changing stable IDs or silently adjudicating disputed political representations.
+
+### Agreed design
+
+1. Use the MIT-licensed `lipis/flag-icons` SVG collection as the initial flag asset source, subject to verifying the selected revision's license and source layout during implementation. Pin the source to an explicit Git ref/commit for reproducible refreshes rather than relying on a moving branch alone.
+2. Add environment settings to `.env.example` for the flag source URL/ref, raw source cache, generated flag output directory, mapping configuration, review report, refresh toggle, and HTTP timeout. Local `.env` remains untracked.
+3. Add a dedicated, version-controlled mapping file that maps persistent `game_id` values to reviewed source flag identifiers. Do not derive the mapping from row order, display names, or current game data. ISO alpha-2 codes may identify source files only when their applicability and intended flag representation have been reviewed.
+4. Generate deterministic asset filenames keyed by `game_id`, so downstream consumers do not depend on source naming conventions or mutable country names.
+5. Preserve source revision, retrieval time, source URL, SHA-256 checksums, and license/attribution information. Validate downloaded files and reject missing, empty, malformed, duplicate, or unexpected assets.
+6. Add a read-only mapping/asset audit that checks every registry `game_id` has exactly one reviewed mapping and exactly one generated flag, detects mappings to unknown IDs and source identifiers, and reports unresolved political/entity cases explicitly.
+7. Integrate refresh, generation, and audit into the existing isolated candidate pipeline. A required-stage failure must preserve the previous candidate. Never write to TownCountryGame or promote the approved snapshot automatically.
+8. Add tests for coverage, duplicate mappings, unknown IDs, unresolved mappings, malformed/missing assets, source provenance, deterministic filenames, environment precedence, and failure-safe pipeline publication.
+9. Update the CLI documentation, README, and this implementation log as the feature progresses. Validate locally before marking each implementation stage complete.
+
+### Policy and safety constraints
+
+- The persistent identity registry remains the single source of truth for the set of `game_id` values; flag mappings are a separate explicit reviewed relationship.
+- A flag choice is a representation decision, not something to infer automatically from a name or ISO match. Disputed territories, special administrative regions, and entities with multiple plausible representations must remain unresolved until an explicit decision is recorded.
+- Do not use a generic fallback flag to disguise missing coverage. The audit must fail when required mappings or assets are absent or ambiguous.
+- Do not regenerate or change any `game_id`, approve ISO proposals, edit the approved snapshot, or modify TownCountryGame as part of this feature.
+- Source refresh must be reproducible and license-aware; document upstream attribution and preserve provenance with the assets.
+
+### Planned implementation stages
+
+- **8a — Configuration and mapping contract:** document and add environment variables, mapping schema, source pinning, and the initial coverage audit contract.
+- **8b — Source refresh and provenance:** fetch the configured source safely, preserve revision/checksum/license evidence, and test refresh behavior.
+- **8c — Flag asset generation and validation:** resolve reviewed mappings to SVGs, emit deterministic `game_id`-keyed assets, and audit file validity and complete coverage.
+- **8d — Pipeline integration and documentation:** add isolated pipeline stages, reports, regression tests, and usage guidance; validate end-to-end before marking complete.
+
 ## Validation record
 
 - Latest local validation reported by the owner on 2026-10-21: `uv run pytest -v` — **64 passed**.
