@@ -2305,7 +2305,7 @@
       },
       "status": "proposed",
       "iso": {
-        "alpha2": null,
+        "alpha2": "NO",
         "alpha3": null,
         "assignment_status": "unverified"
       },
@@ -4180,7 +4180,7 @@
       },
       "status": "proposed",
       "iso": {
-        "alpha2": null,
+        "alpha2": "FR",
         "alpha3": null,
         "assignment_status": "unverified"
       },
