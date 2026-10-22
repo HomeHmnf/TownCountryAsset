@@ -174,6 +174,19 @@ def publish_candidate(staging_dir: Path, output_dir: Path) -> None:
         _remove_path(backup_dir)
 
 
+def flag_report_contains_only_review_gaps(report_path: Path) -> bool:
+    """Distinguish expected unreviewed mapping gaps from source/asset errors."""
+    if not report_path.is_file():
+        return False
+    report_text = report_path.read_text(encoding="utf-8")
+    issues_section = report_text.partition("## Issues")[2].partition("\n## ")[0]
+    issue_lines = [line[2:] for line in issues_section.splitlines() if line.startswith("- ")]
+    return bool(issue_lines) and all(
+        ("expected 'reviewed'" in line or "missing flag mapping for game_id " in line)
+        for line in issue_lines
+    )
+
+
 def run_command(label: str, command: list[str], results: list[dict[str, Any]]) -> bool:
     try:
         completed = subprocess.run(
@@ -357,14 +370,8 @@ def execute(config: dict[str, str]) -> int:
             "--report", str(flag_report),
         ]
         ok = run_command("generate and audit country flag assets", flag_command, stages)
-        if not ok and flag_report.is_file():
-            report_text = flag_report.read_text(encoding="utf-8")
-            issues_section = report_text.partition("## Issues")[2].partition("\n## ")[0]
-            issue_lines = [line[2:] for line in issues_section.splitlines() if line.startswith("- ")]
-            review_only = bool(issue_lines) and all(
-                ("expected 'reviewed'" in line or "missing flag mapping for game_id " in line)
-                for line in issue_lines
-            )
+        if not ok and flag_report_contains_only_review_gaps(flag_report):
+            review_only = True
             if review_only:
                 stages[-1]["status"] = "review_required"
                 stages[-1]["stderr"] = (
