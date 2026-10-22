@@ -102,7 +102,7 @@ def test_workbook_contains_all_review_sheets_and_keeps_candidates_unapproved(tmp
     assert row["Flag mapping status"] == "unreviewed"
     assert row["Candidate present"] == "yes"
     assert "CUSTOM_FIELD" in [cell.value for cell in workbook["Source Attributes"][1]]
-    assert workbook["ISO Review"]["K2"].value == ""
-    assert workbook["Flag Review"]["K2"].value == ""
+    assert workbook["ISO Review"]["K2"].value is None
+    assert workbook["Flag Review"]["K2"].value is None
     assert workbook["Data Quality"].max_row > 1
     workbook.close()
