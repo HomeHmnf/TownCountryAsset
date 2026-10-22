@@ -283,3 +283,19 @@ Added `tools/export_country_inspection_workbook.py` to export a filterable XLSX 
 The exporter treats the registry as the identity source of truth and candidate/proposal values as unapproved. It does not modify any input data or apply workbook edits. Added `openpyxl` as a project dependency, usage documentation in README and `docs/cli-tool.md`, and `tests/test_export_country_inspection_workbook.py`.
 
 **Local validation pending:** Refresh `uv.lock` for the new dependency, then run the focused workbook test and full suite. Generate the workbook locally and inspect the sheet/row counts before calling this stage validated. The workbook output defaults to `reports/country-data-inspection.xlsx`; it should be regenerated after source or proposal refreshes.
+
+
+## Metadata review workflow — Step 1: ISO alpha-2 gaps
+
+**Status:** Evidence report committed; awaiting user decision. No data approvals or identity changes were made.
+
+Added [ISO alpha-2 gap investigation](../review/iso-alpha2-gap-investigation.md) after inspecting the eight candidate records whose Natural Earth `ISO_A2` field is `-99`.
+
+Key findings:
+- France and Norway have source fallback values `FR` and `NO` in `ISO_A2_EH`; these are suitable as proposed official-code candidates, pending confirmation against ISO's current listing and a human decision.
+- Kosovo's `XK` is not an official ISO 3166-1 alpha-2 assignment.
+- Somaliland, Northern Cyprus, and Siachen Glacier have no official alpha-2 code evidenced in the inspected source.
+- Indian Ocean Territories and Ashmore and Cartier Islands have `AU` in the fallback field, but that represents their parent/sovereign state and must not be treated as a distinct code for either feature.
+- All eight remain review items; stable `game_id` values, the identity registry's approval status, candidate output, approved snapshot, entity classifications, and flag mappings remain unchanged.
+
+**Decision gate:** Ask the project owner whether to record `FR` and `NO` as unverified proposals and keep the other six official ISO alpha-2 values empty for now. Do not proceed to bulk ISO verification until this decision is made.
