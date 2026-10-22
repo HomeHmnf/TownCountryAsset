@@ -21,6 +21,8 @@ def test_load_dotenv_defaults_and_environment_precedence(tmp_path):
     assert values["TCA_REPORT_DIR"] == "custom reports"
     assert values["TCA_HTTP_TIMEOUT_SECONDS"] == "9"
     assert values["TCA_NATURAL_EARTH_URL"] == pipeline.DEFAULTS["TCA_NATURAL_EARTH_URL"]
+    assert values["TCA_PERSIAN_LABEL_SOURCE_URL"] == "https://query.wikidata.org/sparql"
+    assert values["TCA_RUN_PERSIAN_LOCALIZATION"] == "true"
     assert values["EXISTING"] == "kept"
 
 
