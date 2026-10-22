@@ -253,6 +253,7 @@ def write_summary(report_dir: Path, started: datetime, stages: list[dict[str, An
         "- This run does not write to TownCountryGame.",
         "- ISO candidates remain review-only; no assignment is automatically verified.",
         "- Persian localization labels remain review-only; no label is automatically approved or written to the identity registry.",
+        "- Flag assignments require explicit reviewed mappings; incomplete mappings are reported and never guessed.",
         "",
     ]
     md_path.write_text("\n".join(lines), encoding="utf-8")
@@ -272,7 +273,7 @@ def execute(config: dict[str, str]) -> int:
     timeout = float(config["TCA_HTTP_TIMEOUT_SECONDS"])
     if timeout <= 0:
         raise ValueError("TCA_HTTP_TIMEOUT_SECONDS must be positive")
-    for flag in ("TCA_GENERATE_SVGS", "TCA_COMPARE_WITH_APPROVED", "TCA_RUN_ISO_REVIEW", "TCA_RUN_PERSIAN_LOCALIZATION"):
+    for flag in ("TCA_GENERATE_SVGS", "TCA_COMPARE_WITH_APPROVED", "TCA_RUN_ISO_REVIEW", "TCA_RUN_PERSIAN_LOCALIZATION", "TCA_FLAG_REFRESH_ENABLED"):
         enabled(config[flag], flag)
     try:
         fetched = fetch_archive(
@@ -309,6 +310,16 @@ def execute(config: dict[str, str]) -> int:
         ], stages)
         failed = failed or not ok
 
+    if not failed and fetched and enabled(config["TCA_FLAG_REFRESH_ENABLED"], "TCA_FLAG_REFRESH_ENABLED"):
+        ok = run_command("refresh flag source archive and provenance", [
+            sys.executable, "tools/refresh_flag_source.py",
+            "--source-url", config["TCA_FLAG_SOURCE_URL"],
+            "--source-ref", config["TCA_FLAG_SOURCE_REF"],
+            "--output-dir", str(configured_path(config, "TCA_FLAG_SOURCE_DIR")),
+            "--timeout", str(timeout),
+        ], stages)
+        failed = failed or not ok
+
     if not failed and fetched:
         try:
             staging_dir = create_staging_dir(output_dir)
@@ -334,6 +345,36 @@ def execute(config: dict[str, str]) -> int:
         ]
         ok = run_command("compile candidate game data", compile_command, stages)
         failed = failed or not ok
+
+    if not failed and staging_dir is not None:
+        flag_report = configured_path(config, "TCA_FLAG_REPORT")
+        flag_command = [
+            sys.executable, "tools/generate_country_flags.py",
+            "--registry", str(configured_path(config, "TCA_IDENTITY_REGISTRY")),
+            "--mapping", str(configured_path(config, "TCA_FLAG_MAPPING")),
+            "--source-dir", str(configured_path(config, "TCA_FLAG_SOURCE_DIR")),
+            "--output-dir", str(staging_dir / "flags"),
+            "--report", str(flag_report),
+        ]
+        ok = run_command("generate and audit country flag assets", flag_command, stages)
+        if not ok and flag_report.is_file():
+            report_text = flag_report.read_text(encoding="utf-8")
+            issues_section = report_text.partition("## Issues")[2].partition("\n## ")[0]
+            issue_lines = [line[2:] for line in issues_section.splitlines() if line.startswith("- ")]
+            review_only = bool(issue_lines) and all(
+                ("expected 'reviewed'" in line or "missing flag mapping for game_id " in line)
+                for line in issue_lines
+            )
+            if review_only:
+                stages[-1]["status"] = "review_required"
+                stages[-1]["stderr"] = (
+                    "Flag assets were not published because mapping decisions remain unreviewed. "
+                    f"Review {flag_report}; candidate country data refresh may continue without flags."
+                )
+            else:
+                failed = True
+        else:
+            failed = failed or not ok
 
     if not failed and enabled(config["TCA_GENERATE_SVGS"], "TCA_GENERATE_SVGS"):
         ok = run_command("generate SVG assets", [
