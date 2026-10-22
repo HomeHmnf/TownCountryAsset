@@ -330,3 +330,7 @@ The persistent identity registry was inspected and already contained `FR` for Fr
 ### ISO proposal review — user-assigned code policy check (2026-10-22)
 
 Added an official ISO policy note to [the ISO assignment proposal report](../../reports/iso-assignment-proposals.md): ISO identifies `XA`–`XZ` as a user-assigned range and states it has no procedure for assigning such elements. Therefore `XK` is not an officially assigned ISO 3166-1 alpha-2 code; any project use must be considered separately as an application-specific convention. This does not close the per-record live OBP evidence gate. No registry assignments were verified or changed, and no candidate or approved output was promoted.
+
+### ISO review — secondary current-list cross-check (2026-10-22)
+
+Added a clearly bounded secondary cross-check to [the ISO assignment proposal report](../../reports/iso-assignment-proposals.md), using the Austrian government EDM public reference list, which identifies itself as based on ISO 3166-1 and reports 249 entries. It corroborates a set of code/name pairs and helps with name/scope reconciliation, but the CSV export could not be archived through the available retrieval path and no live individual ISO OBP records were captured. This is not direct verification and does not change the per-record evidence gate. Registry statuses and data outputs remain unchanged.
