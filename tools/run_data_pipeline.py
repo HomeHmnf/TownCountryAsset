@@ -26,8 +26,11 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULTS = {
     "TCA_NATURAL_EARTH_URL": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip",
     "TCA_ISO_REFERENCE_URL": "https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv",
+    "TCA_PERSIAN_LABEL_SOURCE_URL": "https://query.wikidata.org/sparql",
     "TCA_FETCHED_DATA_DIR": "raw_data/fetched",
     "TCA_ISO_DATA_DIR": "raw_data/iso",
+    "TCA_PERSIAN_DATA_DIR": "raw_data/persian",
+    "TCA_PERSIAN_LOCALIZATION_REPORT": "reports/persian-localization-proposals.md",
     "TCA_GAME_DATA_OUTPUT_DIR": "generated/town_country_asset_candidate",
     "TCA_APPROVED_DATA_DIR": "generated/town_country_asset",
     "TCA_REPORT_DIR": "reports/data-refresh",
@@ -38,6 +41,7 @@ DEFAULTS = {
     "TCA_GENERATE_SVGS": "true",
     "TCA_COMPARE_WITH_APPROVED": "true",
     "TCA_RUN_ISO_REVIEW": "true",
+    "TCA_RUN_PERSIAN_LOCALIZATION": "true",
     "TCA_HTTP_TIMEOUT_SECONDS": "60",
 }
 USER_AGENT = "TownCountryAsset-DataPipeline/1.0"
@@ -241,6 +245,7 @@ def write_summary(report_dir: Path, started: datetime, stages: list[dict[str, An
         "- Candidate outputs are not promoted to the approved snapshot.",
         "- This run does not write to TownCountryGame.",
         "- ISO candidates remain review-only; no assignment is automatically verified.",
+        "- Persian localization labels remain review-only; no label is automatically approved or written to the identity registry.",
         "",
     ]
     md_path.write_text("\n".join(lines), encoding="utf-8")
@@ -260,7 +265,7 @@ def execute(config: dict[str, str]) -> int:
     timeout = float(config["TCA_HTTP_TIMEOUT_SECONDS"])
     if timeout <= 0:
         raise ValueError("TCA_HTTP_TIMEOUT_SECONDS must be positive")
-    for flag in ("TCA_GENERATE_SVGS", "TCA_COMPARE_WITH_APPROVED", "TCA_RUN_ISO_REVIEW"):
+    for flag in ("TCA_GENERATE_SVGS", "TCA_COMPARE_WITH_APPROVED", "TCA_RUN_ISO_REVIEW", "TCA_RUN_PERSIAN_LOCALIZATION"):
         enabled(config[flag], flag)
     try:
         fetched = fetch_archive(
@@ -282,6 +287,18 @@ def execute(config: dict[str, str]) -> int:
             "--output-dir", str(iso_dir),
             "--report", str(configured_path(config, "TCA_ISO_PROPOSAL_REPORT")),
             "--source-url", config["TCA_ISO_REFERENCE_URL"],
+        ], stages)
+        failed = failed or not ok
+
+    if not failed and fetched and enabled(config["TCA_RUN_PERSIAN_LOCALIZATION"], "TCA_RUN_PERSIAN_LOCALIZATION"):
+        ok = run_command("refresh Persian localization proposals from current Wikidata labels", [
+            sys.executable, "tools/refresh_persian_localization.py",
+            "--source-archive", str(fetched["archive"]),
+            "--registry", str(configured_path(config, "TCA_IDENTITY_REGISTRY")),
+            "--output-dir", str(configured_path(config, "TCA_PERSIAN_DATA_DIR")),
+            "--report", str(configured_path(config, "TCA_PERSIAN_LOCALIZATION_REPORT")),
+            "--source-url", config["TCA_PERSIAN_LABEL_SOURCE_URL"],
+            "--timeout", str(timeout),
         ], stages)
         failed = failed or not ok
 
