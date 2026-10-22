@@ -43,6 +43,10 @@ The source's `ISO_A2` field is not authoritative by itself when its value is `-9
 
 ## Decision record
 
-- Decision: **Pending user review.**
-- Approved codes: none yet.
-- Records modified: none.
+- Decision: **Applied per user decision.**
+- France: registry `iso.alpha2=FR`, `status=proposed`, `assignment_status=unverified`.
+- Norway: registry `iso.alpha2=NO`, `status=proposed`, `assignment_status=unverified`.
+- Somaliland, Kosovo, Northern Cyprus, Indian Ocean Territories, Ashmore and Cartier Islands, and Siachen Glacier: registry `iso.alpha2=null`; assignment status remains unverified.
+- Kosovo `XK`: deferred; it is not treated as an official ISO code.
+- Stable `game_id` values unchanged; no approved snapshot or TownCountryGame files changed.
+- Full decision report: [reports/iso-alpha2-gap-review.md](../../reports/iso-alpha2-gap-review.md).
