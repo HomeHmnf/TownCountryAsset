@@ -152,5 +152,5 @@ def test_refresh_preserves_timestamped_snapshot_provenance_and_review_report(tmp
     assert provenance["raw_sha256"] == hashlib.sha256(raw).hexdigest()
     assert provenance["retrieved_at_utc"] == now.isoformat()
     assert "نام پیشنهادی" in report_path.read_text(encoding="utf-8")
-    assert "no label is approved" in report_path.read_text(encoding="utf-8")
+    assert "no labels are approved" in report_path.read_text(encoding="utf-8")
     assert registry_path.read_text(encoding="utf-8") == original
