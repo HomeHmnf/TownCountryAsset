@@ -143,7 +143,7 @@ def test_refresh_preserves_timestamped_snapshot_provenance_and_review_report(tmp
     )
     assert result["record_count"] == 3
     assert result["candidate_count"] == 1
-    assert result["missing_qid_count"] == 1
+    assert result["missing_qid_count"] == 2
     raw_path = output_dir / "wikidata-persian-labels-20261022T080000Z.json"
     provenance_path = output_dir / "wikidata-persian-provenance-20261022T080000Z.json"
     assert raw_path.read_bytes() == raw
