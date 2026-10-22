@@ -133,3 +133,14 @@ SVG is a visual preview, not a cartographic projection suitable for area or dist
 ## Attribution
 
 Natural Earth data is public domain; retain source attribution and provenance for reproducible builds. See [Natural Earth terms](https://www.naturalearthdata.com/about/terms-of-use/).
+
+
+## Human-readable data inspection workbook
+
+Generate a filterable Excel workbook covering the persistent identity registry, compiled candidate metadata and source attributes, ISO proposals, entity classification, Persian localization, flag mapping, and review findings:
+
+```bash
+uv run python tools/export_country_inspection_workbook.py
+```
+
+The default output is `reports/country-data-inspection.xlsx`. The workbook includes separate review worksheets with blank human-decision/evidence fields. It is a **read-only export**: editing the workbook does not change the registry, approve proposals, or update generated assets. Regenerate it after refreshing candidate data or proposal reports so it reflects current inputs.
