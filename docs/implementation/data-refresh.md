@@ -76,13 +76,22 @@ Planned work:
 7. Add read-only audits and tests for proposal/evidence completeness, invalid codes, unsupported statuses, and preservation of all existing `game_id` values.
 8. Document this phase and its local validation results before moving to any approval workflow.
 
+### Phase 7b — ISO proposal evidence review (next)
+
+Before applying any candidate to the registry:
+- Treat the captured ISO CSV as a third-party reference distribution, not an ISO-hosted authoritative export; retain its URL, retrieval date, and checksums in review evidence.
+- Triage the 234 current candidates into exact-name matches and explicit variants. Variants involving entity scope or political/status semantics (including Holy See/Vatican, Taiwan, Saint Martin, South Georgia, and territory labels) require explicit review rather than bulk acceptance.
+- Investigate the eight unmatched records individually. Do not infer codes from Natural Earth source IDs or current registry alpha-3 fields; document when ISO 3166-1 is not applicable and why.
+- Add a read-only evidence audit that compares proposal rows to the captured reference and persistent game ID set, detects missing/stale/duplicate proposal rows, and reports proposed code conflicts without writing to the registry.
+- Preserve every existing `game_id`; do not populate `alpha2`, change assignment statuses, approve records, or modify the approved snapshot/game repository during evidence-audit implementation.
+- Record local tests and report counts before any human-reviewed registry update workflow is designed.
 ### Phase 7a — Read-only ISO metadata validation
 
 - Extended `tools/audit_country_identity_registry.py` to validate uppercase ISO alpha-2/alpha-3 syntax, detect duplicate code assignments across distinct `game_id` records, and flag unsupported record/ISO/localization workflow statuses.
 - Added review counts and safeguards to the Markdown report. Missing ISO values remain review items rather than errors by themselves, because some features may legitimately have no applicable code.
 - Added regression tests for malformed codes, duplicate assignments, unsupported statuses, and read-only behavior.
 - This is a syntax/consistency audit only: it does not prove that a code belongs to an entity, approve assignments, modify registry records, or change stable IDs.
-- Local test results are pending; the owner must pull the branch and run the test suite before this sub-phase is marked complete.
+- Local validation completed on 2026-10-22: `uv run pytest -v` — **67 passed**. The read-only registry audit reported 242 records, 242 unique non-empty `game_id` values, zero structural issues, zero malformed ISO codes, and zero duplicate ISO assignments. All 242 records remain review rows because their status, entity type, ISO assignment status, or Persian localization is still unreviewed. This result validates structure, not semantic correctness of any code.
 
 Safety constraints:
 - Do not regenerate, rename, or replace persistent `game_id` values.
