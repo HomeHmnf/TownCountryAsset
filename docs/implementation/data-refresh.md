@@ -267,3 +267,19 @@ uv run --with openpyxl python tools/build_inspection_workbook.py
 ```
 
 **Local validation:** Pending. Verify CLI help, build the workbook, inspect all sheet names and row counts, and run the full tests and lint/architecture checks before marking this stage validated.
+
+
+### Stage 9 — Human-readable country data inspection workbook
+
+**Status:** Implemented; local validation and lockfile refresh pending.
+
+Added `tools/export_country_inspection_workbook.py` to export a filterable XLSX workbook joined by persistent `game_id`. It includes:
+- Read Me / provenance and review-policy guidance.
+- Master Inventory combining identity registry values, ISO proposal context, Persian localization candidates, flag mapping state, and compiled candidate fields.
+- Dedicated ISO, entity-classification, Persian-localization, and flag review sheets with blank human decision/evidence fields.
+- Data Quality findings for missing/unreviewed fields, absent proposal rows, candidate gaps, and mapping gaps.
+- A Source Attributes sheet preserving every attribute present in the compiled candidate `countries.json`, rather than limiting inspection to a hand-picked subset.
+
+The exporter treats the registry as the identity source of truth and candidate/proposal values as unapproved. It does not modify any input data or apply workbook edits. Added `openpyxl` as a project dependency, usage documentation in README and `docs/cli-tool.md`, and `tests/test_export_country_inspection_workbook.py`.
+
+**Local validation pending:** Refresh `uv.lock` for the new dependency, then run the focused workbook test and full suite. Generate the workbook locally and inspect the sheet/row counts before calling this stage validated. The workbook output defaults to `reports/country-data-inspection.xlsx`; it should be regenerated after source or proposal refreshes.
