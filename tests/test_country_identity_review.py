@@ -48,3 +48,42 @@ def test_report_includes_record_level_review_reasons_and_safety_guidance():
     assert "| tc_alpha | AAA | Alpha |" in report
     assert "does not approve or change any record" in report
     assert "Do not regenerate, replace, or derive canonical game IDs" in report
+
+
+
+def test_audit_rejects_malformed_iso_code_syntax():
+    registry = sample_registry()
+    registry["records"][0]["iso"]["alpha2"] = "usa"
+    result = audit_registry(registry)
+    assert any("invalid ISO alpha-2 format" in issue for issue in result["structural_issues"])
+    assert "invalid ISO alpha-2 format" in result["review_rows"][0]["reasons"]
+
+
+def test_audit_detects_duplicate_iso_codes_across_distinct_records():
+    registry = sample_registry()
+    second = {
+        "game_id": "tc_beta",
+        "source": {"current_source_id": "BBB", "previous_source_ids": []},
+        "geometry_key": "BBB",
+        "status": "proposed",
+        "iso": {"alpha2": None, "alpha3": "AAA", "assignment_status": "unverified"},
+        "names": {"en": "Beta", "fa": None, "aliases_en": [], "aliases_fa": [], "localization_status": "unreviewed"},
+        "entity_type": "unreviewed",
+        "regions": ["Asia"],
+    }
+    registry["records"].append(second)
+    result = audit_registry(registry)
+    assert any("Duplicate ISO alpha-3 code 'AAA'" in issue for issue in result["structural_issues"])
+    assert result["review_counts"]["duplicate ISO alpha-3 assignment"] == 2
+
+
+def test_audit_flags_unsupported_workflow_statuses():
+    registry = sample_registry()
+    record = registry["records"][0]
+    record["status"] = "final"
+    record["iso"]["assignment_status"] = "maybe"
+    record["names"]["localization_status"] = "machine-generated"
+    result = audit_registry(registry)
+    assert any("unsupported record status" in issue for issue in result["structural_issues"])
+    assert any("unsupported ISO assignment status" in issue for issue in result["structural_issues"])
+    assert any("unsupported localization status" in issue for issue in result["structural_issues"])
