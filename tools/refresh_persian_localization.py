@@ -93,6 +93,8 @@ def build_sparql_query(qids: list[str]) -> str:
         raise ValueError("No valid Wikidata QIDs found in Natural Earth WIKIDATAID fields")
     values = " ".join(f"wd:{qid}" for qid in valid)
     return (
+        "PREFIX wd: <http://www.wikidata.org/entity/> "
+        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> "
         "SELECT ?item ?itemLabel WHERE { VALUES ?item { " + values + " } "
         "?item rdfs:label ?itemLabel . FILTER(LANG(?itemLabel) = \"fa\") } "
         "ORDER BY ?item"
