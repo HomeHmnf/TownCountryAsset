@@ -101,8 +101,8 @@ def test_manual_iso_reference_reads_valid_tsv_and_preserves_numeric_leading_zero
     reference_dir = tmp_path / "data" / "reference" / "iso"
     reference_dir.mkdir(parents=True)
     (reference_dir / "iso-3166-1-2026-10.tsv").write_text(
-        "name_en\\tname_fr\\talpha2\\talpha3\\tnumeric\\n"
-        "Afghanistan\\tAfghanistan\\tAF\\tAFG\\t004\\n",
+        "name_en\tname_fr\talpha2\talpha3\tnumeric\\n"
+        "Afghanistan\tAfghanistan\tAF\tAFG\t004\\n",
         encoding="utf-8",
     )
 
