@@ -101,8 +101,8 @@ def test_manual_iso_reference_reads_comma_csv_and_preserves_numeric_leading_zero
     reference_dir = tmp_path / "data" / "reference" / "iso"
     reference_dir.mkdir(parents=True)
     (reference_dir / "iso-3166-1-2026-10.csv").write_text(
-        "English short name,French short name,Alpha-2 code,Alpha-3 code,Numeric\\n"
-        "Afghanistan,Afghanistan,AF,AFG,004\\n",
+        "English short name,French short name,Alpha-2 code,Alpha-3 code,Numeric\n"
+        "Afghanistan,Afghanistan,AF,AFG,004\n",
         encoding="utf-8",
     )
 
@@ -117,9 +117,9 @@ def test_manual_iso_reference_accepts_calc_tab_delimited_export_and_warns(tmp_pa
     reference_dir = tmp_path / "data" / "reference" / "iso"
     reference_dir.mkdir(parents=True)
     (reference_dir / "iso-3166-1-2026-10.csv").write_text(
-        "English short name\\tFrench short name\\tAlpha-2 code\\tAlpha-3 code\\tNumeric\\n"
-        "Afghanistan\\tAfghanistan\\tAF\\tAFG\\t4\\n"
-        "Zambia\\tZambie\\tZM\\tZMB\\t\\n",
+        "English short name\tFrench short name\tAlpha-2 code\tAlpha-3 code\tNumeric\n"
+        "Afghanistan\tAfghanistan\tAF\tAFG\t4\n"
+        "Zambia\tZambie\tZM\tZMB\t\n",
         encoding="utf-8",
     )
 
