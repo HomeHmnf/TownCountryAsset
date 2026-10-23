@@ -172,4 +172,4 @@ uv run pytest -v
 
 Only run additional checks when the relevant scripts or configuration exist in this repository. Do not infer frontend lint, architecture, test, or build commands from another project. A passing targeted test suite validates only the covered behavior; it does not prove that a live data refresh is correct or authorize changes to the identity registry, approved snapshot, or TownCountryGame.
 
-Most recent local validation reported by the project owner on 2026-10-23: `tests/test_run_data_pipeline.py` — **17 passed**; `run_data_pipeline.py --help` and `--help-config` both completed successfully. The full Python test suite has not yet been reported for this revision.
+Validation reported by the project owner on 2026-10-23: `tests/test_run_data_pipeline.py` — **17 passed**; `run_data_pipeline.py --help` and `--help-config` completed successfully; the full suite `uv run pytest -v` — **109 passed in 1.84 seconds**. No frontend/npm checks are applicable to this Python repository. These tests do not establish the correctness of a new live refresh or authorize promotion of candidate data.
