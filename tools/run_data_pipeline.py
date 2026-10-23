@@ -451,6 +451,21 @@ def execute(config: dict[str, str]) -> int:
     source_dir = configured_path(config, "TCA_FETCHED_DATA_DIR")
     iso_dir = configured_path(config, "TCA_ISO_DATA_DIR")
     stages: list[dict[str, Any]] = []
+    manual_iso = select_manual_iso_reference()
+    manual_iso_warning = manual_iso_reference_warning()
+    if manual_iso["warning"]:
+        print(f"WARNING: {manual_iso_warning}", file=sys.stderr)
+    else:
+        print(manual_iso_warning)
+    stages.append({
+        "stage": "validate manual ISO reference",
+        "status": "warning" if manual_iso["warning"] or not manual_iso["path"] else "success",
+        "stdout": (
+            f"Selected {manual_iso['format'].upper()} reference with {len(manual_iso['rows'])} validated rows."
+            if manual_iso["path"] else "No valid manual ISO reference was selected."
+        ),
+        "stderr": manual_iso_warning if manual_iso["warning"] or not manual_iso["path"] else "",
+    })
     fetched: dict[str, Any] | None = None
     staging_dir: Path | None = None
     failed = False
