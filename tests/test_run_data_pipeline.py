@@ -46,12 +46,12 @@ def test_flag_report_classifies_only_unreviewed_mappings_as_review_gaps(tmp_path
     assert not pipeline.flag_report_contains_only_review_gaps(report)
 
 
-def test_manual_iso_reference_uses_ods_when_tsv_is_spreadsheet_xml(tmp_path):
+def test_manual_iso_reference_uses_ods_when_csv_is_invalid(tmp_path):
     import zipfile
 
     reference_dir = tmp_path / "data" / "reference" / "iso"
     reference_dir.mkdir(parents=True)
-    (reference_dir / "iso-3166-1-2026-10.tsv").write_text(
+    (reference_dir / "iso-3166-1-2026-10.csv").write_text(
         '<?xml version="1.0"?><Workbook><Worksheet/></Workbook>',
         encoding="utf-8",
     )
@@ -97,20 +97,39 @@ def test_manual_iso_reference_uses_ods_when_tsv_is_spreadsheet_xml(tmp_path):
     assert "Zambia" in selected["warning"]
 
 
-def test_manual_iso_reference_reads_valid_tsv_and_preserves_numeric_leading_zero(tmp_path):
+def test_manual_iso_reference_reads_comma_csv_and_preserves_numeric_leading_zero(tmp_path):
     reference_dir = tmp_path / "data" / "reference" / "iso"
     reference_dir.mkdir(parents=True)
-    (reference_dir / "iso-3166-1-2026-10.tsv").write_text(
-        "name_en\tname_fr\talpha2\talpha3\tnumeric\n"
-        "Afghanistan\tAfghanistan\tAF\tAFG\t004\n",
+    (reference_dir / "iso-3166-1-2026-10.csv").write_text(
+        "English short name,French short name,Alpha-2 code,Alpha-3 code,Numeric\\n"
+        "Afghanistan,Afghanistan,AF,AFG,004\\n",
         encoding="utf-8",
     )
 
     selected = pipeline.select_manual_iso_reference(tmp_path)
 
-    assert selected["format"] == "tsv"
+    assert selected["format"] == "csv"
     assert selected["rows"][0]["numeric"] == "004"
     assert selected["warning"] is None
+
+
+def test_manual_iso_reference_accepts_calc_tab_delimited_export_and_warns(tmp_path):
+    reference_dir = tmp_path / "data" / "reference" / "iso"
+    reference_dir.mkdir(parents=True)
+    (reference_dir / "iso-3166-1-2026-10.csv").write_text(
+        "English short name\\tFrench short name\\tAlpha-2 code\\tAlpha-3 code\\tNumeric\\n"
+        "Afghanistan\\tAfghanistan\\tAF\\tAFG\\t4\\n"
+        "Zambia\\tZambie\\tZM\\tZMB\\t\\n",
+        encoding="utf-8",
+    )
+
+    selected = pipeline.select_manual_iso_reference(tmp_path)
+
+    assert selected["format"] == "csv"
+    assert selected["rows"][0]["numeric"] == "004"
+    assert selected["rows"][1]["numeric"] == ""
+    assert "tab-delimited" in selected["warning"]
+    assert "Zambia" in selected["warning"]
 
 
 def test_load_dotenv_rejects_malformed_line(tmp_path):
