@@ -2,9 +2,9 @@
 
 - **Status:** proposals only; no labels are approved or written to the identity registry.
 - Source endpoint: https://query.wikidata.org/sparql
-- Retrieved at (UTC): 2026-10-22T08:19:31.719803+00:00
-- Raw response: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-labels-20261022T081931Z.json`
-- Provenance: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-provenance-20261022T081931Z.json`
+- Retrieved at (UTC): 2026-10-23T18:35:02.227766+00:00
+- Raw response: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-labels-20261023T183502Z.json`
+- Provenance: `/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-provenance-20261023T183502Z.json`
 - Raw response SHA-256: `e2aca29fdfa3709cfe46b42745fdef764fc89f7e41e8f3e3d0ef6879576195b5`
 - Registry records: 242
 - Unique stable game IDs: 242

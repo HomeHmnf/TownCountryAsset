@@ -12,7 +12,7 @@
 | record status proposed | 242 |
 | entity type unreviewed | 242 |
 | ISO status unverified | 242 |
-| ISO alpha-2 missing | 242 |
+| ISO alpha-2 missing | 240 |
 | ISO alpha-3 missing | 8 |
 | localization unreviewed | 242 |
 | Persian name missing | 242 |
@@ -117,7 +117,7 @@ None detected by this report.
 | tc_642fbe2581cf4b8c857d967717d1f1ef | PLW | Palau | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_0dc6216a94e34b44b27e42ed35fa6376 | PAK | Pakistan | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_22bd85ff61234a46a95506d105d5fee4 | OMN | Oman | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
-| tc_f4a6e15a05474af2b81c9524ed988d89 | NOR | Norway | record status proposed; ISO status unverified; ISO alpha-2 missing; ISO alpha-3 missing; entity type unreviewed; localization unreviewed; Persian name missing |
+| tc_f4a6e15a05474af2b81c9524ed988d89 | NOR | Norway | record status proposed; ISO status unverified; ISO alpha-3 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_4a3793e49e5441ae94aeec78cc887021 | PRK | North Korea | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_7a8158c93a934345a2ade9fd16ee4999 | NGA | Nigeria | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_4d31375845614c2b91a71736069d4ab3 | NER | Niger | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
@@ -189,7 +189,7 @@ None detected by this report.
 | tc_741bd244c1ec4961918565c4ed02c5c6 | GEO | Georgia | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a | GMB | Gambia | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_d59dfb6324524b07a32c87b73009e97f | GAB | Gabon | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
-| tc_471ae6d7112b4537a7ae5ca1e6a816a5 | FRA | France | record status proposed; ISO status unverified; ISO alpha-2 missing; ISO alpha-3 missing; entity type unreviewed; localization unreviewed; Persian name missing |
+| tc_471ae6d7112b4537a7ae5ca1e6a816a5 | FRA | France | record status proposed; ISO status unverified; ISO alpha-3 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_5551c0cc249f4e4e9ea6d57a0dacd2d5 | SPM | Saint Pierre and Miquelon | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_9f1be169ba5347ff81384c532820401b | WLF | Wallis and Futuna | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |
 | tc_cc0688860b8848ddb5f52395162d9b71 | MAF | Saint Martin | record status proposed; ISO status unverified; ISO alpha-2 missing; entity type unreviewed; localization unreviewed; Persian name missing |

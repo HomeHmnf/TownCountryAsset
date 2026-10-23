@@ -1,0 +1,14 @@
+{
+  "dataset": "Wikidata Persian-language labels for Natural Earth Admin 0 features",
+  "source_url": "https://query.wikidata.org/sparql",
+  "source_description": "Current Persian (fa) rdfs:label values queried from Wikidata; review-only candidates.",
+  "retrieved_at_utc": "2026-10-23T18:35:02.227766+00:00",
+  "raw_snapshot": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-labels-20261023T183502Z.json",
+  "raw_sha256": "e2aca29fdfa3709cfe46b42745fdef764fc89f7e41e8f3e3d0ef6879576195b5",
+  "raw_size_bytes": 57661,
+  "candidate_snapshot": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-candidates-20261023T183502Z.json",
+  "candidate_count": 242,
+  "registry_record_count": 242,
+  "wikidata_qid_count": 242,
+  "label_count": 242
+}
