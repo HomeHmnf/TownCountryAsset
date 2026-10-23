@@ -268,7 +268,7 @@ Removed the older duplicate `tools/build_inspection_workbook.py` and consolidate
 
 **Safety boundary:** The exporter is read-only with respect to the identity registry, proposal data, candidate assets, approved snapshot, and TownCountryGame. It does not regenerate or change `game_id` values or approve any metadata.
 
-**Validation completed:** The project owner reported `uv run pytest -v` — **110 passed**, including the canonical workbook exporter test. The next local check is to generate the workbook from the current candidate inputs, verify worksheet names and row counts, and confirm `git status --short` shows only expected local report output (if reports are not ignored).
+**Validation completed:** The project owner reported `uv run pytest -v` — **110 passed**, including the canonical workbook exporter test. The first actual export then exposed a report-contract mismatch: the exporter expected an older seven-column ISO proposal header, while the saved evidence-review report uses an eight-column row-level table with `Authoritative evidence status` and `Proposed disposition`. Updated the exporter to consume the current table and normalize `Proposed disposition` into its internal `Decision` field; added a regression test and documented the report contract. The fix is committed, but focused/full tests and workbook generation must be rerun locally after pulling the fix. Then verify worksheet names and row counts and confirm `git status --short` shows only expected local report output (if reports are not ignored).
 
 
 
