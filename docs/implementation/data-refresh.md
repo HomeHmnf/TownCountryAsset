@@ -342,3 +342,17 @@ Updated `tools/run_data_pipeline.py` so `data/reference/iso/iso-3166-1-2026-10.c
 Added tests for invalid-CSV-to-ODS fallback, comma-delimited CSV parsing and leading-zero preservation, and tab-delimited Calc export warnings. This change affects only reference-file parsing and diagnostics; it does not approve ISO assignments, alter the identity registry, generate candidate assets, change the approved snapshot, or touch TownCountryGame.
 
 **Validation status:** Locally validated on 2026-10-23. `uv run pytest -v tests/test_run_data_pipeline.py` — **18 passed**; `uv run pytest -v` — **110 passed**; `uv run python tools/run_data_pipeline.py --help` and `--help-config` both passed. This validates the parser and CLI tests, not an online data refresh or the semantic correctness of ISO assignments.
+
+## Automation contract — inspection workbook included in pipeline
+
+**Status:** Implemented in the pipeline; local regression validation pending.
+
+Updated `tools/run_data_pipeline.py` to invoke the canonical `tools/export_country_inspection_workbook.py` automatically after candidate compilation, asset/identity audits, and snapshot comparison succeed, and before the candidate directory is published. It passes the isolated staging `countries.json`, current identity registry, latest ISO and Persian reports, and flag mapping. The default output is `reports/country-data-inspection.xlsx`, configurable with `TCA_INSPECTION_WORKBOOK`. A workbook-export failure now fails the run before candidate publication, preserving the previous candidate output. This avoids a stale workbook being generated from a previously published candidate.
+
+Automation boundary:
+- Natural Earth archive fetch, third-party ISO-reference proposal refresh, Wikidata Persian-label refresh, flag-source archive/provenance refresh, candidate compilation, audits, comparison, and workbook export run through the one-command pipeline when their documented switches are enabled.
+- The manually maintained ISO reference snapshot is still read locally and checked for validity; refreshing that snapshot is intentionally manual.
+- Direct per-record evidence capture against the official ISO Online Browsing Platform is not automated and remains a human evidence task. Automated name matching or a third-party reference must never be described as official ISO verification.
+- Workbook generation and source refreshes do not approve ISO assignments, Persian labels, entity classifications, or flags. Human review, stable-ID preservation, and the separate owner decision gate remain mandatory.
+
+The new pipeline integration and documentation have been committed to `work/compiler-hardening`. Run the focused pipeline/workbook tests and the full test suite locally before treating this automation change as validated. No live pipeline run or candidate promotion was performed as part of the code edit.
