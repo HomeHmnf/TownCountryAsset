@@ -52,21 +52,36 @@ def read_markdown_table(path: Path, header: list[str], label: str) -> list[dict[
         raise FileNotFoundError(f"{label} report not found: {path}")
     lines = path.read_text(encoding="utf-8").splitlines()
     expected = "| " + " | ".join(header) + " |"
+    table_header = header
     try:
         start = lines.index(expected)
     except ValueError as exc:
-        raise ValueError(f"{label} report has no expected table header: {path}") from exc
+        # The current proposal generator still emits the original seven-column
+        # schema. Accept it without treating its Decision text as authoritative
+        # verification; normalize both schemas to the workbook's internal shape.
+        legacy_iso_header = [
+            "game_id", "Registry English name", "Candidate alpha-2",
+            "Candidate alpha-3", "Reference English name", "Match type", "Decision",
+        ]
+        legacy_expected = "| " + " | ".join(legacy_iso_header) + " |"
+        if label != "ISO proposal" or legacy_expected not in lines:
+            raise ValueError(f"{label} report has no expected table header: {path}") from exc
+        table_header = legacy_iso_header
+        start = lines.index(legacy_expected)
     rows: list[dict[str, str]] = []
     for line_number, line in enumerate(lines[start + 2 :], start=start + 3):
         if not line.startswith("|"):
             break
         cells = [cell.strip().replace("\\|", "|") for cell in line.strip().strip("|").split("|")]
-        if len(cells) != len(header):
-            raise ValueError(f"{label} report line {line_number}: expected {len(header)} columns, found {len(cells)}")
-        rows.append(dict(zip(header, cells, strict=True)))
+        if len(cells) != len(table_header):
+            raise ValueError(f"{label} report line {line_number}: expected {len(table_header)} columns, found {len(cells)}")
+        row = dict(zip(table_header, cells, strict=True))
+        if label == "ISO proposal" and "Decision" in row:
+            row["Proposed disposition"] = row["Decision"]
+            row["Authoritative evidence status"] = "Not verified; official ISO OBP review required"
+        rows.append(row)
     if label == "ISO proposal":
-        # The evidence-review report's row-level table uses "Proposed disposition";
-        # normalize that field for the workbook's established internal column name.
+        # Normalize both current and legacy schemas for workbook consumers.
         for row in rows:
             if "Proposed disposition" in row:
                 row["Decision"] = row["Proposed disposition"]
