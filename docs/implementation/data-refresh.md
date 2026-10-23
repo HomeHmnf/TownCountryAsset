@@ -128,7 +128,7 @@ Safety constraints:
 
 ### Phase 7d — Live Persian localization source and refresh workflow
 
-**Status:** Implemented; local validation pending.
+**Status:** Implemented and locally validated on 2026-10-23 for automated tests and CLI configuration/help; a live endpoint refresh has not been run.
 
 Added `TCA_PERSIAN_LABEL_SOURCE_URL` to the environment-driven configuration (default: Wikidata SPARQL endpoint), plus `TCA_PERSIAN_DATA_DIR`, `TCA_PERSIAN_LOCALIZATION_REPORT`, and `TCA_RUN_PERSIAN_LOCALIZATION`. These settings are listed in `.env.example` and `--help-config`; local `.env` values and process-environment precedence follow the existing pipeline behavior.
 
@@ -349,7 +349,9 @@ Added a clearly bounded secondary cross-check to [the ISO assignment proposal re
 The project owner pulled `work/compiler-hardening` and ran the full Python test suite from the TownCountryAsset repository root:
 
 - Command: `uv run pytest -v`
-- Result: **109 passed in 1.84 seconds**.
+- Focused pipeline tests: `uv run pytest -v tests/test_run_data_pipeline.py` — **18 passed**.
+- Full suite: `uv run pytest -v` — **110 passed**.
+- `tools/run_data_pipeline.py --help` and `--help-config` both completed successfully.
 - `git status --short` produced no entries in the supplied terminal output, indicating a clean working tree after the test run.
 
 This confirms the current automated tests pass across the compiler, identity registry, asset audits, ISO proposal tooling, entity-classification review, flag source/generation tools, Persian localization, snapshot comparison, SVG generation, and data-pipeline CLI. It does not validate a new live refresh or approve/promote candidate data. No npm/frontend checks are part of this Python repository's validation workflow.
@@ -360,4 +362,4 @@ Updated `tools/run_data_pipeline.py` so `data/reference/iso/iso-3166-1-2026-10.c
 
 Added tests for invalid-CSV-to-ODS fallback, comma-delimited CSV parsing and leading-zero preservation, and tab-delimited Calc export warnings. This change affects only reference-file parsing and diagnostics; it does not approve ISO assignments, alter the identity registry, generate candidate assets, change the approved snapshot, or touch TownCountryGame.
 
-**Validation status:** Code and tests are committed; local test execution is pending. Run `uv run pytest -v tests/test_run_data_pipeline.py`, then `uv run pytest -v` before considering this change validated.
+**Validation status:** Locally validated on 2026-10-23. `uv run pytest -v tests/test_run_data_pipeline.py` — **18 passed**; `uv run pytest -v` — **110 passed**; `uv run python tools/run_data_pipeline.py --help` and `--help-config` both passed. This validates the parser and CLI tests, not an online data refresh or the semantic correctness of ISO assignments.
