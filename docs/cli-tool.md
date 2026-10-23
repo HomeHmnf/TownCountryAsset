@@ -149,3 +149,27 @@ uv run python tools/export_country_inspection_workbook.py \
 Sheets include a read-me page, master inventory, ISO review, entity review, Persian review, flag review, data-quality findings, and all compiled source attributes. Tables are filterable and the headers are frozen. The exporter joins records by persistent `game_id`, not row order or display name. Candidate fields are shown as candidates, and review decision columns are left for human inspection. Exporting does not modify any input, approve proposals, or apply workbook edits to project data.
 
 The exporter reads `generated/town_country_asset_candidate/countries.json` so it can include the current compiled source attributes. Run the data pipeline first if this file is absent or stale. The Python project dependency `openpyxl` is used to write the XLSX workbook.
+
+
+## Repository scope and validation commands
+
+This repository is **TownCountryAsset**, a Python project defined by `pyproject.toml`. Do not run or recommend `npm` commands here unless a frontend package is actually added to this repository and its `package.json` is inspected. The separate TownCountryGame/frontend project has its own toolchain and must not be treated as part of this Python repository.
+
+For the data-pipeline changes, validate from the TownCountryAsset repository root:
+
+```fish
+uv run pytest -v tests/test_run_data_pipeline.py
+uv run python tools/run_data_pipeline.py --help
+uv run python tools/run_data_pipeline.py --help-config
+git status --short
+```
+
+For broader Python regression coverage, run:
+
+```fish
+uv run pytest -v
+```
+
+Only run additional checks when the relevant scripts or configuration exist in this repository. Do not infer frontend lint, architecture, test, or build commands from another project. A passing targeted test suite validates only the covered behavior; it does not prove that a live data refresh is correct or authorize changes to the identity registry, approved snapshot, or TownCountryGame.
+
+Most recent local validation reported by the project owner on 2026-10-23: `tests/test_run_data_pipeline.py` — **17 passed**; `run_data_pipeline.py --help` and `--help-config` both completed successfully. The full Python test suite has not yet been reported for this revision.
