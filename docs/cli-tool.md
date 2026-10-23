@@ -4,7 +4,7 @@
 
 The data-refresh CLI is the entry point for preparing game-ready country assets from online sources. It belongs to **TownCountryAsset**; it does not update or commit files in the separate TownCountryGame repository.
 
-The one-command workflow fetches configured source datasets, preserves source evidence and checksums, refreshes flag-source provenance when enabled, compiles country metadata and geometry, attempts reviewed flag generation, optionally generates country SVGs, audits outputs, compares a candidate with the approved snapshot, and writes a run summary. Required source/compile/asset failures produce a failure report and non-zero exit status. Incomplete flag review is recorded as `review_required` and does not invent mappings.
+The one-command workflow fetches configured source datasets, preserves source evidence and checksums, refreshes flag-source provenance when enabled, compiles country metadata and geometry, attempts reviewed flag generation, optionally generates country SVGs, audits outputs, compares a candidate with the approved snapshot, automatically exports the inspection workbook from the validated staging candidate, and writes a run summary. Required source/compile/asset/workbook failures produce a failure report and non-zero exit status. Incomplete flag review is recorded as `review_required` and does not invent mappings. The current ISO proposal reference refresh is automated from its configured third-party reference; direct record-by-record verification against the official ISO Online Browsing Platform remains a manual evidence task.
 
 ## Configuration
 
@@ -28,6 +28,8 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 | `TCA_GAME_DATA_OUTPUT_DIR` | Candidate game-data output directory |
 | `TCA_APPROVED_DATA_DIR` | Existing approved snapshot used only for comparison |
 | `TCA_REPORT_DIR` | Run summaries and comparison reports |
+| `TCA_ISO_PROPOSAL_REPORT` | Latest ISO assignment proposal and evidence review report |
+| `TCA_INSPECTION_WORKBOOK` | Automatically exported review workbook path (default `reports/country-data-inspection.xlsx`) |
 | `TCA_GENERATION_CONFIG` | Generation settings JSON |
 | `TCA_REGIONS_CONFIG` | Region mapping JSON |
 | `TCA_IDENTITY_REGISTRY` | Persistent identity registry; the pipeline must never bootstrap or overwrite it |
@@ -42,7 +44,7 @@ Paths may be absolute or relative to the repository root. Boolean values accept 
 
 ## Usage
 
-The CLI builds into a temporary sibling directory. Compilation, country-SVG generation when enabled, asset audits, identity-registry audit, and comparison must pass before the validated directory replaces `TCA_GAME_DATA_OUTPUT_DIR`. Flag generation runs against the isolated candidate directory. If its only issues are unreviewed or missing mapping decisions, the stage is marked `review_required`, no partial flags are written, and the non-flag candidate refresh may continue. Source integrity errors, malformed SVGs, duplicate/unknown mappings, or other asset errors fail the run. On a failed required build or audit, the previous candidate directory is preserved and temporary output is removed. This publication step never changes `TCA_APPROVED_DATA_DIR`.
+The CLI builds into a temporary sibling directory. Compilation, country-SVG generation when enabled, asset audits, identity-registry audit, comparison, and inspection-workbook export must pass before the validated directory replaces `TCA_GAME_DATA_OUTPUT_DIR`. Flag generation runs against the isolated candidate directory. If its only issues are unreviewed or missing mapping decisions, the stage is marked `review_required`, no partial flags are written, and the non-flag candidate refresh may continue. Source integrity errors, malformed SVGs, duplicate/unknown mappings, or other asset errors fail the run. On a failed required build or audit, the previous candidate directory is preserved and temporary output is removed. This publication step never changes `TCA_APPROVED_DATA_DIR`.
 
 The target interface is:
 
@@ -106,13 +108,13 @@ The comparison report distinguishes a real difference from unavailable metadata.
 
 ## Canonical inspection workbook
 
-Use the single maintained exporter after refreshing candidate data and review reports:
+Normally, the main pipeline exports the workbook automatically after proposal refresh and candidate validation. Use the single maintained exporter directly only when you intentionally need a standalone re-export:
 
 ```fish
 uv run python tools/export_country_inspection_workbook.py
 ```
 
-The default output is `reports/country-data-inspection.xlsx`. The workbook joins records by persistent `game_id` and contains the master inventory, ISO review, entity-classification review, Persian review, flag review, data-quality findings, and all compiled source attributes. The ISO parser reads the report's current row-level evidence table, including its authoritative-evidence status and proposed disposition; the disposition is normalized to the workbook's internal `Decision` field. A report-schema regression test protects this contract. Decision and evidence fields remain blank for human completion. It is a read-only review artifact: exporting never updates the registry, approves proposals, modifies the approved snapshot, or writes to TownCountryGame. Run the data pipeline first for current compiled metadata.
+The default output is `reports/country-data-inspection.xlsx` and can be changed with `TCA_INSPECTION_WORKBOOK`. The pipeline passes the isolated staging `countries.json`, so the workbook matches the candidate being validated and is generated before that candidate is published. The workbook joins records by persistent `game_id` and contains the master inventory, ISO review, entity-classification review, Persian review, flag review, data-quality findings, and all compiled source attributes. The ISO parser reads the report's current row-level evidence table, including its authoritative-evidence status and proposed disposition; the disposition is normalized to the workbook's internal `Decision` field. A report-schema regression test protects this contract. Decision and evidence fields remain blank for human completion. It is a read-only review artifact: exporting never updates the registry, approves proposals, modifies the approved snapshot, or writes to TownCountryGame. Run the data pipeline first for current compiled metadata.
 
 ## Safety boundaries
 
