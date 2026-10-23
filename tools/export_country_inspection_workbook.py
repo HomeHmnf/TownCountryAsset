@@ -29,7 +29,8 @@ DEFAULT_OUTPUT = ROOT / "reports/country-data-inspection.xlsx"
 
 ISO_HEADER = [
     "game_id", "Registry English name", "Candidate alpha-2",
-    "Candidate alpha-3", "Reference English name", "Match type", "Decision",
+    "Candidate alpha-3", "Reference English name", "Match type",
+    "Authoritative evidence status", "Proposed disposition",
 ]
 PERSIAN_HEADER = [
     "game_id", "Source ID", "English name", "Current Persian name",
@@ -63,6 +64,12 @@ def read_markdown_table(path: Path, header: list[str], label: str) -> list[dict[
         if len(cells) != len(header):
             raise ValueError(f"{label} report line {line_number}: expected {len(header)} columns, found {len(cells)}")
         rows.append(dict(zip(header, cells, strict=True)))
+    if label == "ISO proposal":
+        # The evidence-review report's row-level table uses "Proposed disposition";
+        # normalize that field for the workbook's established internal column name.
+        for row in rows:
+            if "Proposed disposition" in row:
+                row["Decision"] = row["Proposed disposition"]
     return rows
 
 
