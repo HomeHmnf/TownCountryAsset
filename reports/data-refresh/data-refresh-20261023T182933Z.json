@@ -1,0 +1,17 @@
+{
+  "status": "failed",
+  "started_at_utc": "2026-10-23T18:29:33.819178+00:00",
+  "finished_at_utc": "2026-10-23T18:29:33.819224+00:00",
+  "duration_seconds": 0.0,
+  "candidate_output_dir": "/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset_candidate",
+  "natural_earth": null,
+  "stages": [
+    {
+      "stage": "load configuration",
+      "status": "failed",
+      "return_code": null,
+      "stdout": "",
+      "stderr": "/home/hmnf/Projects/Python/TownAndCountry/.env:14: expected KEY=VALUE"
+    }
+  ]
+}
