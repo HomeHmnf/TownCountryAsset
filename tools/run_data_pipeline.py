@@ -52,7 +52,7 @@ DEFAULTS = {
     "TCA_HTTP_TIMEOUT_SECONDS": "60",
 }
 USER_AGENT = "TownCountryAsset-DataPipeline/1.0"
-MANUAL_ISO_REFERENCE_TSV = Path("data/reference/iso/iso-3166-1-2026-10.tsv")
+MANUAL_ISO_REFERENCE_CSV = Path("data/reference/iso/iso-3166-1-2026-10.csv")
 MANUAL_ISO_REFERENCE_ODS = Path("data/reference/iso/iso-3166-1-2026-10.ods")
 ISO_REFERENCE_FIELDS = ("name_en", "name_fr", "alpha2", "alpha3", "numeric")
 
@@ -98,25 +98,31 @@ def _validate_iso_rows(rows: list[dict[str, str]], *, allow_missing_numeric: boo
     return rows
 
 
-def read_iso_tsv(path: Path) -> list[dict[str, str]]:
-    """Read and validate the intended tab-separated manual reference."""
+def read_iso_csv(path: Path) -> list[dict[str, str]]:
+    """Read the primary manual ISO reference as delimited text from Calc."""
     import csv
 
     with path.open("r", encoding="utf-8-sig", newline="") as stream:
-        sample = stream.read(512)
+        sample = stream.read(8192)
         if sample.lstrip().startswith("<?xml") or "<Workbook" in sample or "<ss:Worksheet" in sample:
-            raise ValueError("file contains spreadsheet XML, not TSV")
-        if "\t" not in sample:
-            raise ValueError("no tab-separated columns detected")
+            raise ValueError("file contains spreadsheet XML, not delimited text")
+        if not sample.strip():
+            raise ValueError("file is empty")
+        try:
+            dialect = csv.Sniffer().sniff(sample, delimiters=",;\\t")
+        except csv.Error as exc:
+            raise ValueError("could not detect comma, semicolon, or tab field delimiter") from exc
+        if dialect.delimiter not in {",", ";", "\\t"}:
+            raise ValueError("unsupported field delimiter")
         stream.seek(0)
-        reader = csv.reader(stream, delimiter="\t")
+        reader = csv.reader(stream, dialect)
         try:
             header = next(reader)
         except StopIteration as exc:
             raise ValueError("file is empty") from exc
         mapped = [_normalize_iso_header(value) for value in header]
         if set(mapped) != set(ISO_REFERENCE_FIELDS) or len(mapped) != len(ISO_REFERENCE_FIELDS):
-            raise ValueError("TSV header must identify name_en, name_fr, alpha2, alpha3, numeric")
+            raise ValueError("CSV header must identify name_en, name_fr, alpha2, alpha3, numeric")
         rows: list[dict[str, str]] = []
         for values in reader:
             if not values or all(not value.strip() for value in values):
@@ -124,8 +130,7 @@ def read_iso_tsv(path: Path) -> list[dict[str, str]]:
             if len(values) != len(mapped):
                 raise ValueError(f"row {reader.line_num} has {len(values)} fields; expected {len(mapped)}")
             rows.append({field: value for field, value in zip(mapped, values)})
-    return _validate_iso_rows(rows)
-
+    return _validate_iso_rows(rows, allow_missing_numeric=True)
 
 def read_iso_ods(path: Path) -> list[dict[str, str]]:
     """Read the first sheet of an ODS workbook using the standard library."""
@@ -180,23 +185,52 @@ def read_iso_ods(path: Path) -> list[dict[str, str]]:
 
 
 def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
-    """Prefer valid TSV; fall back to the ODS workbook when TSV is absent or invalid."""
-    tsv_path = root / MANUAL_ISO_REFERENCE_TSV
+    """Prefer the CSV export; fall back to the editable ODS workbook if needed."""
+    csv_path = root / MANUAL_ISO_REFERENCE_CSV
     ods_path = root / MANUAL_ISO_REFERENCE_ODS
-    tsv_error: str | None = None
-    if tsv_path.is_file():
+    csv_error: str | None = None
+    if csv_path.is_file():
         try:
-            return {"path": tsv_path, "format": "tsv", "rows": read_iso_tsv(tsv_path), "warning": None}
+            rows = read_iso_csv(csv_path)
+            incomplete_numeric = [row["name_en"] for row in rows if not row["numeric"]]
+            warning_parts = []
+            # Calc may export tab-delimited text depending on the selected export options.
+            # Accept it for compatibility, while the .csv extension remains the preferred filename.
+            with csv_path.open("r", encoding="utf-8-sig", newline="") as stream:
+                sample = stream.read(8192)
+            try:
+                delimiter = __import__("csv").Sniffer().sniff(sample, delimiters=",;\\t").delimiter
+            except __import__("csv").Error:
+                delimiter = ","
+            if delimiter == "\\t":
+                warning_parts.append(
+                    "The primary .csv reference is tab-delimited; it was parsed successfully, "
+                    "but export comma-delimited CSV from Calc for format consistency."
+                )
+            elif delimiter == ";":
+                warning_parts.append(
+                    "The primary .csv reference uses semicolon delimiters; it was parsed successfully."
+                )
+            if incomplete_numeric:
+                warning_parts.append(
+                    "CSV has missing numeric codes for: " + ", ".join(incomplete_numeric[:10]) +
+                    (" (and more)" if len(incomplete_numeric) > 10 else "") +
+                    ". Do not compare numeric codes for those rows until corrected."
+                )
+            return {
+                "path": csv_path, "format": "csv", "rows": rows,
+                "warning": " ".join(warning_parts) or None,
+            }
         except (OSError, ValueError, UnicodeError) as exc:
-            tsv_error = str(exc)
+            csv_error = str(exc)
     else:
-        tsv_error = "TSV file is missing"
+        csv_error = "CSV file is missing"
     if ods_path.is_file():
         try:
             rows = read_iso_ods(ods_path)
             incomplete_numeric = [row["name_en"] for row in rows if not row["numeric"]]
             warning_parts = [
-                f"TSV reference is unusable ({tsv_error}); using the ODS workbook as the manual reference instead."
+                f"CSV reference is unusable ({csv_error}); using the ODS workbook as the manual reference instead."
             ]
             if incomplete_numeric:
                 warning_parts.append(
@@ -213,11 +247,11 @@ def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
         except (OSError, ValueError, UnicodeError) as exc:
             return {
                 "path": None, "format": None, "rows": [],
-                "warning": f"Neither manual reference is usable. TSV: {tsv_error}. ODS: {exc}.",
+                "warning": f"Neither manual reference is usable. CSV: {csv_error}. ODS: {exc}.",
             }
     return {
         "path": None, "format": None, "rows": [],
-        "warning": f"Neither manual reference is usable. TSV: {tsv_error}. ODS workbook is missing.",
+        "warning": f"Neither manual reference is usable. CSV: {csv_error}. ODS workbook is missing.",
     }
 
 
