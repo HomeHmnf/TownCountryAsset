@@ -112,7 +112,7 @@ Use the single maintained exporter after refreshing candidate data and review re
 uv run python tools/export_country_inspection_workbook.py
 ```
 
-The default output is `reports/country-data-inspection.xlsx`. The workbook joins records by persistent `game_id` and contains the master inventory, ISO review, entity-classification review, Persian review, flag review, data-quality findings, and all compiled source attributes. Decision and evidence fields remain blank for human completion. It is a read-only review artifact: exporting never updates the registry, approves proposals, modifies the approved snapshot, or writes to TownCountryGame. Run the data pipeline first for current compiled metadata.
+The default output is `reports/country-data-inspection.xlsx`. The workbook joins records by persistent `game_id` and contains the master inventory, ISO review, entity-classification review, Persian review, flag review, data-quality findings, and all compiled source attributes. The ISO parser reads the report's current row-level evidence table, including its authoritative-evidence status and proposed disposition; the disposition is normalized to the workbook's internal `Decision` field. A report-schema regression test protects this contract. Decision and evidence fields remain blank for human completion. It is a read-only review artifact: exporting never updates the registry, approves proposals, modifies the approved snapshot, or writes to TownCountryGame. Run the data pipeline first for current compiled metadata.
 
 ## Safety boundaries
 
