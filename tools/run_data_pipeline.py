@@ -54,35 +54,174 @@ DEFAULTS = {
 USER_AGENT = "TownCountryAsset-DataPipeline/1.0"
 MANUAL_ISO_REFERENCE_TSV = Path("data/reference/iso/iso-3166-1-2026-10.tsv")
 MANUAL_ISO_REFERENCE_ODS = Path("data/reference/iso/iso-3166-1-2026-10.ods")
+ISO_REFERENCE_FIELDS = ("name_en", "name_fr", "alpha2", "alpha3", "numeric")
+
+
+def _normalize_iso_header(value: str) -> str | None:
+    normalized = "".join(character for character in value.casefold() if character.isalnum())
+    aliases = {
+        "nameen": "name_en", "englishshortname": "name_en", "englishname": "name_en",
+        "namefr": "name_fr", "frenchshortname": "name_fr", "frenchname": "name_fr",
+        "alpha2": "alpha2", "alpha2code": "alpha2", "iso31661alpha2": "alpha2",
+        "alpha3": "alpha3", "alpha3code": "alpha3", "iso31661alpha3": "alpha3",
+        "numeric": "numeric", "numericcode": "numeric", "isonumeric": "numeric",
+        "iso31661numeric": "numeric",
+    }
+    return aliases.get(normalized)
+
+
+def _validate_iso_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    if not rows:
+        raise ValueError("reference has no data rows")
+    seen_alpha2: set[str] = set()
+    for number, row in enumerate(rows, start=2):
+        for field in ISO_REFERENCE_FIELDS:
+            row[field] = row.get(field, "").strip()
+        if not row["name_en"] or not row["alpha2"] or not row["alpha3"] or not row["numeric"]:
+            raise ValueError(f"row {number} has a missing required field")
+        row["alpha2"] = row["alpha2"].upper()
+        row["alpha3"] = row["alpha3"].upper()
+        if len(row["alpha2"]) != 2 or not row["alpha2"].isalpha():
+            raise ValueError(f"row {number} has invalid alpha-2 code {row['alpha2']!r}")
+        if len(row["alpha3"]) != 3 or not row["alpha3"].isalpha():
+            raise ValueError(f"row {number} has invalid alpha-3 code {row['alpha3']!r}")
+        numeric = row["numeric"]
+        if not numeric.isdigit() or len(numeric) > 3:
+            raise ValueError(f"row {number} has invalid numeric code {numeric!r}")
+        row["numeric"] = numeric.zfill(3)
+        if row["alpha2"] in seen_alpha2:
+            raise ValueError(f"duplicate alpha-2 code {row['alpha2']!r}")
+        seen_alpha2.add(row["alpha2"])
+    return rows
+
+
+def read_iso_tsv(path: Path) -> list[dict[str, str]]:
+    """Read and validate the intended tab-separated manual reference."""
+    import csv
+
+    with path.open("r", encoding="utf-8-sig", newline="") as stream:
+        sample = stream.read(512)
+        if sample.lstrip().startswith("<?xml") or "<Workbook" in sample or "<ss:Worksheet" in sample:
+            raise ValueError("file contains spreadsheet XML, not TSV")
+        if "\\t" not in sample:
+            raise ValueError("no tab-separated columns detected")
+        stream.seek(0)
+        reader = csv.reader(stream, delimiter="\\t")
+        try:
+            header = next(reader)
+        except StopIteration as exc:
+            raise ValueError("file is empty") from exc
+        mapped = [_normalize_iso_header(value) for value in header]
+        if set(mapped) != set(ISO_REFERENCE_FIELDS) or len(mapped) != len(ISO_REFERENCE_FIELDS):
+            raise ValueError("TSV header must identify name_en, name_fr, alpha2, alpha3, numeric")
+        rows: list[dict[str, str]] = []
+        for values in reader:
+            if not values or all(not value.strip() for value in values):
+                continue
+            if len(values) != len(mapped):
+                raise ValueError(f"row {reader.line_num} has {len(values)} fields; expected {len(mapped)}")
+            rows.append({field: value for field, value in zip(mapped, values)})
+    return _validate_iso_rows(rows)
+
+
+def read_iso_ods(path: Path) -> list[dict[str, str]]:
+    """Read the first sheet of an ODS workbook using the standard library."""
+    import zipfile
+    import xml.etree.ElementTree as ET
+
+    namespaces = {
+        "table": "urn:oasis:names:tc:opendocument:xmlns:table:1.0",
+        "text": "urn:oasis:names:tc:opendocument:xmlns:text:1.0",
+        "office": "urn:oasis:names:tc:opendocument:xmlns:office:1.0",
+    }
+    try:
+        with zipfile.ZipFile(path) as archive:
+            xml_content = archive.read("content.xml")
+    except (OSError, KeyError, zipfile.BadZipFile) as exc:
+        raise ValueError(f"cannot read ODS workbook: {exc}") from exc
+    root = ET.fromstring(xml_content)
+    sheet = root.find(".//table:table", namespaces)
+    if sheet is None:
+        raise ValueError("ODS workbook contains no sheet")
+    table_rows: list[list[str]] = []
+    for row_element in sheet.findall("table:table-row", namespaces):
+        cells: list[str] = []
+        for cell in list(row_element):
+            if cell.tag not in {
+                f"{{{namespaces['table']}}}table-cell",
+                f"{{{namespaces['table']}}}covered-table-cell",
+            }:
+                continue
+            value = "".join(part.text or "" for part in cell.findall(".//text:p", namespaces)).strip()
+            if not value:
+                value = cell.get(f"{{{namespaces['office']}}}value", "")
+            repeat = int(cell.get(f"{{{namespaces['table']}}}number-columns-repeated", "1"))
+            if repeat > 1000:
+                raise ValueError("ODS contains an unreasonable repeated-column count")
+            cells.extend([value] * repeat)
+        repeat_rows = int(row_element.get(f"{{{namespaces['table']}}}number-rows-repeated", "1"))
+        if repeat_rows > 1000:
+            raise ValueError("ODS contains an unreasonable repeated-row count")
+        table_rows.extend([cells] * repeat_rows)
+    table_rows = [row for row in table_rows if any(value.strip() for value in row)]
+    if not table_rows:
+        raise ValueError("ODS sheet is empty")
+    mapped = [_normalize_iso_header(value) for value in table_rows[0]]
+    if set(mapped) != set(ISO_REFERENCE_FIELDS) or len(mapped) != len(ISO_REFERENCE_FIELDS):
+        raise ValueError("ODS header must identify English/French names, alpha-2, alpha-3, and numeric")
+    rows: list[dict[str, str]] = []
+    for row_number, values in enumerate(table_rows[1:], start=2):
+        values = values[:len(mapped)] + [""] * max(0, len(mapped) - len(values))
+        rows.append({field: value for field, value in zip(mapped, values)})
+    return _validate_iso_rows(rows)
+
+
+def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
+    """Prefer valid TSV; fall back to the ODS workbook when TSV is absent or invalid."""
+    tsv_path = root / MANUAL_ISO_REFERENCE_TSV
+    ods_path = root / MANUAL_ISO_REFERENCE_ODS
+    tsv_error: str | None = None
+    if tsv_path.is_file():
+        try:
+            return {"path": tsv_path, "format": "tsv", "rows": read_iso_tsv(tsv_path), "warning": None}
+        except (OSError, ValueError, UnicodeError) as exc:
+            tsv_error = str(exc)
+    else:
+        tsv_error = "TSV file is missing"
+    if ods_path.is_file():
+        try:
+            rows = read_iso_ods(ods_path)
+            return {
+                "path": ods_path,
+                "format": "ods",
+                "rows": rows,
+                "warning": f"TSV reference is unusable ({tsv_error}); using the ODS workbook as the manual reference instead.",
+            }
+        except (OSError, ValueError, UnicodeError) as exc:
+            return {
+                "path": None, "format": None, "rows": [],
+                "warning": f"Neither manual reference is usable. TSV: {tsv_error}. ODS: {exc}.",
+            }
+    return {
+        "path": None, "format": None, "rows": [],
+        "warning": f"Neither manual reference is usable. TSV: {tsv_error}. ODS workbook is missing.",
+    }
 
 
 def manual_iso_reference_warning(root: Path = ROOT) -> str:
-    """Describe the manually maintained ISO snapshot and detect a mislabeled export."""
-    tsv_path = root / MANUAL_ISO_REFERENCE_TSV
-    ods_path = root / MANUAL_ISO_REFERENCE_ODS
+    """Return CLI warning/status text for the monthly manual ISO reference."""
+    selected = select_manual_iso_reference(root)
     notes = [
         "Manual ISO reference reminder: review and refresh the saved reference monthly.",
-        f"Workbook: {MANUAL_ISO_REFERENCE_ODS.as_posix()} ({'present' if ods_path.is_file() else 'missing'}).",
-        f"Machine-readable reference: {MANUAL_ISO_REFERENCE_TSV.as_posix()} ({'present' if tsv_path.is_file() else 'missing'}).",
         "This snapshot is a manual comparison aid, not proof of an official ISO-hosted export; it never verifies or approves registry assignments.",
     ]
-    if tsv_path.is_file():
-        try:
-            with tsv_path.open("rb") as stream:
-                prefix = stream.read(256).lstrip()
-            if prefix.startswith(b"<?xml") or b"<Workbook" in prefix or b"<ss:Worksheet" in prefix:
-                notes.append(
-                    "FORMAT ERROR: the .tsv file contains Excel XML rather than tab-separated text. "
-                    "Re-export it from Calc with Tab as the field delimiter before using it in automated comparisons."
-                )
-            elif b"\t" not in prefix and b"\n" in prefix:
-                notes.append(
-                    "FORMAT WARNING: no tab delimiter was detected near the start of the .tsv file; verify the export format."
-                )
-        except OSError as exc:
-            notes.append(f"Could not inspect the .tsv reference file: {exc}")
-    else:
-        notes.append("The expected .tsv reference is missing; do not treat the ISO reference comparison as current.")
+    if selected["path"] is not None:
+        notes.append(
+            f"Selected {selected['format'].upper()} reference: {selected['path'].relative_to(root).as_posix()} "
+            f"({len(selected['rows'])} validated data rows)."
+        )
+    if selected["warning"]:
+        notes.append("WARNING: " + selected["warning"])
     return " ".join(notes)
 
 
