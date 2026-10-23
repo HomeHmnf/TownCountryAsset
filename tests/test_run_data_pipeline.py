@@ -46,6 +46,73 @@ def test_flag_report_classifies_only_unreviewed_mappings_as_review_gaps(tmp_path
     assert not pipeline.flag_report_contains_only_review_gaps(report)
 
 
+def test_manual_iso_reference_uses_ods_when_tsv_is_spreadsheet_xml(tmp_path):
+    import zipfile
+
+    reference_dir = tmp_path / "data" / "reference" / "iso"
+    reference_dir.mkdir(parents=True)
+    (reference_dir / "iso-3166-1-2026-10.tsv").write_text(
+        '<?xml version="1.0"?><Workbook><Worksheet/></Workbook>',
+        encoding="utf-8",
+    )
+    content_xml = """<?xml version="1.0" encoding="UTF-8"?>
+    <office:document-content
+      xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+      xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0"
+      xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0">
+      <office:body><office:spreadsheet><table:table>
+        <table:table-row>
+          <table:table-cell><text:p>English short name</text:p></table:table-cell>
+          <table:table-cell><text:p>French short name</text:p></table:table-cell>
+          <table:table-cell><text:p>Alpha-2 code</text:p></table:table-cell>
+          <table:table-cell><text:p>Alpha-3 code</text:p></table:table-cell>
+          <table:table-cell><text:p>Numeric</text:p></table:table-cell>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell><text:p>Afghanistan</text:p></table:table-cell>
+          <table:table-cell><text:p>Afghanistan</text:p></table:table-cell>
+          <table:table-cell><text:p>AF</text:p></table:table-cell>
+          <table:table-cell><text:p>AFG</text:p></table:table-cell>
+          <table:table-cell office:value-type="float" office:value="4"/>
+        </table:table-row>
+        <table:table-row>
+          <table:table-cell><text:p>Zambia</text:p></table:table-cell>
+          <table:table-cell><text:p>Zambie</text:p></table:table-cell>
+          <table:table-cell><text:p>ZM</text:p></table:table-cell>
+          <table:table-cell><text:p>ZMB</text:p></table:table-cell>
+          <table:table-cell/>
+        </table:table-row>
+      </table:table></office:spreadsheet></office:body>
+    </office:document-content>"""
+    with zipfile.ZipFile(reference_dir / "iso-3166-1-2026-10.ods", "w") as archive:
+        archive.writestr("content.xml", content_xml)
+
+    selected = pipeline.select_manual_iso_reference(tmp_path)
+
+    assert selected["format"] == "ods"
+    assert len(selected["rows"]) == 2
+    assert selected["rows"][0]["numeric"] == "004"
+    assert selected["rows"][1]["numeric"] == ""
+    assert "using the ODS workbook" in selected["warning"]
+    assert "Zambia" in selected["warning"]
+
+
+def test_manual_iso_reference_reads_valid_tsv_and_preserves_numeric_leading_zero(tmp_path):
+    reference_dir = tmp_path / "data" / "reference" / "iso"
+    reference_dir.mkdir(parents=True)
+    (reference_dir / "iso-3166-1-2026-10.tsv").write_text(
+        "name_en\\tname_fr\\talpha2\\talpha3\\tnumeric\\n"
+        "Afghanistan\\tAfghanistan\\tAF\\tAFG\\t004\\n",
+        encoding="utf-8",
+    )
+
+    selected = pipeline.select_manual_iso_reference(tmp_path)
+
+    assert selected["format"] == "tsv"
+    assert selected["rows"][0]["numeric"] == "004"
+    assert selected["warning"] is None
+
+
 def test_load_dotenv_rejects_malformed_line(tmp_path):
     env_file = tmp_path / ".env"
     env_file.write_text("NOT_A_VALID_LINE\n", encoding="utf-8")
