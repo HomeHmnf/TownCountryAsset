@@ -104,15 +104,15 @@ The comparison report distinguishes a real difference from unavailable metadata.
 - **Run summary:** one Markdown report and one machine-readable JSON report per invocation.
 - **Comparison:** added/removed identities, possible rekeys, metadata changes and geometry changes versus the approved snapshot.
 
-## Human-readable inspection workbook
+## Canonical inspection workbook
 
-Build a filterable Excel workbook from the persistent identity registry, latest compiled candidate metadata, ISO proposal report, latest Persian candidate snapshot, and explicit flag mapping:
+Use the single maintained exporter after refreshing candidate data and review reports:
 
-```bash
-uv run --with openpyxl python tools/build_inspection_workbook.py
+```fish
+uv run python tools/export_country_inspection_workbook.py
 ```
 
-The default output is `reports/country-entity-inspection.xlsx`. Sheets cover the master inventory, entity/identity records, ISO review, Persian review, flag review, all available Natural Earth source attributes, and data-quality/review findings. Decision, reviewer, date, and evidence fields are blank for human completion. The workbook is read-only with respect to source data and never approves or writes back review decisions. Run the data pipeline first for complete compiled source attributes.
+The default output is `reports/country-data-inspection.xlsx`. The workbook joins records by persistent `game_id` and contains the master inventory, ISO review, entity-classification review, Persian review, flag review, data-quality findings, and all compiled source attributes. Decision and evidence fields remain blank for human completion. It is a read-only review artifact: exporting never updates the registry, approves proposals, modifies the approved snapshot, or writes to TownCountryGame. Run the data pipeline first for current compiled metadata.
 
 ## Safety boundaries
 
@@ -128,7 +128,7 @@ The default Natural Earth archive URL uses the Natural Earth S3 distribution end
 The CLI implementation and each completed implementation phase are tracked in `docs/implementation/data-refresh.md`.
 
 
-## Human-readable inspection workbook
+### Override workbook inputs or output
 
 Run:
 
@@ -174,4 +174,4 @@ uv run pytest -v
 
 Only run additional checks when the relevant scripts or configuration exist in this repository. Do not infer frontend lint, architecture, test, or build commands from another project. A passing targeted test suite validates only the covered behavior; it does not prove that a live data refresh is correct or authorize changes to the identity registry, approved snapshot, or TownCountryGame.
 
-Validation reported by the project owner on 2026-10-23: `tests/test_run_data_pipeline.py` — **18 passed**; `uv run python tools/run_data_pipeline.py --help` and `--help-config` completed successfully; the full suite `uv run pytest -v` — **110 passed**. These checks do not establish the correctness of a new live refresh or authorize promotion of candidate data. No frontend/npm checks are applicable to this Python repository. These tests do not establish the correctness of a new live refresh or authorize promotion of candidate data.
+Validation reported by the project owner on 2026-10-23: `tests/test_run_data_pipeline.py` — **18 passed**; `uv run python tools/run_data_pipeline.py --help` and `--help-config` completed successfully; the full suite `uv run pytest -v` — **110 passed**. These checks do not establish the correctness of a new live refresh or authorize promotion of candidate data. No frontend/npm checks are applicable to this Python repository.
