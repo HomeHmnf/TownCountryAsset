@@ -7,7 +7,7 @@
 - Source repository: https://github.com/lipis/flag-icons
 - Configured ref: main
 - Resolved commit: ac7e0eb3259eb62aa6100c435607e2fe03896a97
-- Retrieved (UTC): 2026-10-23T18:35:08Z
+- Retrieved (UTC): 2026-10-23T18:40:00Z
 - Archive SHA-256: 478bf8407080f3e8a0ed8b688f29daf7fcaed585be829fe3f980229e35b2f3ae
 - License: MIT
 - License SHA-256: 8f1195d55a2fd315a07d812328470ca9ba2abb78c8d317ff19619d5125e00cea
