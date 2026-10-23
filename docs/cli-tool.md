@@ -52,6 +52,17 @@ uv run python tools/run_data_pipeline.py
 
 Use `--help` to inspect supported CLI options. The command should be safe to rerun, report each stage, preserve timestamped upstream evidence, and return non-zero if a required stage fails. It must not silently promote candidate output over the approved snapshot.
 
+## Manually maintained ISO reference snapshot
+
+The manual reference files are stored under `data/reference/iso/`:
+
+- `iso-3166-1-2026-10.ods` — editable Calc workbook for inspection and monthly maintenance.
+- `iso-3166-1-2026-10.tsv` — intended machine-readable tab-separated export.
+
+The CLI validates the reference at the start of every run. It prefers a well-formed TSV; if the TSV is missing or malformed (including spreadsheet XML saved with a `.tsv` extension), it falls back to parsing the ODS workbook directly. The selected source, validated row count, and fallback/quality warnings are recorded in the run summary. If neither file can be parsed, the CLI warns and continues the other pipeline stages without treating the manual reference as current.
+
+The committed TSV was detected as Excel XML rather than tab-separated text, so automation should select the ODS workbook. The ODS reader preserves leading zeros in numeric codes and warns about missing numeric values; the current workbook appears to omit Zambia's numeric code. Correct the workbook and re-export a true TSV from Calc with Tab as the field delimiter when convenient. Do not use the workbook or this manually assembled snapshot as proof of an official ISO-hosted export. This manual snapshot is a comparison input only: it does not verify, approve, or write ISO assignments to `config/country_identity_registry.json`. The existing online ISO proposal refresh remains a separate workflow.
+
 ## Flag source refresh (staged rollout)
 
 The standalone flag-source refresh command is available while the flag feature is being built out:
