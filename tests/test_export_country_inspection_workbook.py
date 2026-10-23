@@ -131,3 +131,30 @@ def test_iso_report_parser_accepts_evidence_review_schema_and_normalizes_disposi
     assert rows[0]["game_id"] == "tc_example"
     assert rows[0]["Candidate alpha-2"] == "EX"
     assert rows[0]["Decision"] == "Keep as unverified candidate"
+
+
+
+def test_iso_report_parser_accepts_legacy_decision_schema_without_claiming_verification(tmp_path: Path) -> None:
+    report = tmp_path / "iso-assignment-proposals.md"
+    report.write_text(
+        "\\n".join(
+            [
+                "# ISO 3166-1 assignment proposals",
+                "",
+                "| game_id | Registry English name | Candidate alpha-2 | Candidate alpha-3 | Reference English name | Match type | Decision |",
+                "|---|---|---|---|---|---|---|",
+                "| tc_example | Example Entity | EX | EXM | Example Entity | exact normalized name | candidate: human verification required |",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    rows = read_markdown_table(report, ISO_HEADER, "ISO proposal")
+
+    assert len(rows) == 1
+    assert rows[0]["game_id"] == "tc_example"
+    assert rows[0]["Candidate alpha-2"] == "EX"
+    assert rows[0]["Decision"] == "candidate: human verification required"
+    assert rows[0]["Proposed disposition"] == "candidate: human verification required"
+    assert rows[0]["Authoritative evidence status"] == "Not verified; official ISO OBP review required"
