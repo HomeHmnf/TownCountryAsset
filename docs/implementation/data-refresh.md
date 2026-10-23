@@ -353,3 +353,11 @@ The project owner pulled `work/compiler-hardening` and ran the full Python test 
 - `git status --short` produced no entries in the supplied terminal output, indicating a clean working tree after the test run.
 
 This confirms the current automated tests pass across the compiler, identity registry, asset audits, ISO proposal tooling, entity-classification review, flag source/generation tools, Persian localization, snapshot comparison, SVG generation, and data-pipeline CLI. It does not validate a new live refresh or approve/promote candidate data. No npm/frontend checks are part of this Python repository's validation workflow.
+
+### Manual ISO reference — CSV-first selection (2026-10-23)
+
+Updated `tools/run_data_pipeline.py` so `data/reference/iso/iso-3166-1-2026-10.csv` is the primary manual reference and `iso-3166-1-2026-10.ods` is the fallback. The text reader detects comma, semicolon, or tab delimiters to accommodate Calc exports; a tab-delimited file with a `.csv` extension is accepted with a warning to export comma-delimited CSV for consistency. Missing numeric codes remain blank and are surfaced as warnings rather than guessed, while numeric codes are normalized to three digits (for example, `004`).
+
+Added tests for invalid-CSV-to-ODS fallback, comma-delimited CSV parsing and leading-zero preservation, and tab-delimited Calc export warnings. This change affects only reference-file parsing and diagnostics; it does not approve ISO assignments, alter the identity registry, generate candidate assets, change the approved snapshot, or touch TownCountryGame.
+
+**Validation status:** Code and tests are committed; local test execution is pending. Run `uv run pytest -v tests/test_run_data_pipeline.py`, then `uv run pytest -v` before considering this change validated.
