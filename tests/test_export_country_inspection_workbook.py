@@ -4,7 +4,7 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
-from tools.export_country_inspection_workbook import build_workbook
+from tools.export_country_inspection_workbook import ISO_HEADER, build_workbook, read_markdown_table
 
 
 def test_workbook_contains_all_review_sheets_and_keeps_candidates_unapproved(tmp_path: Path) -> None:
@@ -106,3 +106,28 @@ def test_workbook_contains_all_review_sheets_and_keeps_candidates_unapproved(tmp
     assert workbook["Flag Review"]["K2"].value is None
     assert workbook["Data Quality"].max_row > 1
     workbook.close()
+
+
+
+def test_iso_report_parser_accepts_evidence_review_schema_and_normalizes_disposition(tmp_path: Path) -> None:
+    report = tmp_path / "iso-assignment-proposals.md"
+    report.write_text(
+        "\\n".join(
+            [
+                "# ISO proposal review",
+                "",
+                "| game_id | Registry English name | Candidate alpha-2 | Candidate alpha-3 | Reference English name | Match type | Authoritative evidence status | Proposed disposition |",
+                "|---|---|---|---|---|---|---|---|",
+                "| tc_example | Example Entity | EX | EXM | Example Entity | exact normalized name | OBP confirmation pending | Keep as unverified candidate |",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    rows = read_markdown_table(report, ISO_HEADER, "ISO proposal")
+
+    assert len(rows) == 1
+    assert rows[0]["game_id"] == "tc_example"
+    assert rows[0]["Candidate alpha-2"] == "EX"
+    assert rows[0]["Decision"] == "Keep as unverified candidate"
