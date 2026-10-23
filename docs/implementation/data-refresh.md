@@ -2,6 +2,14 @@
 
 **Scope:** TownCountryAsset fetches online data and prepares game-ready candidate assets. Updating TownCountryGame is explicitly out of scope.
 
+## Manual ISO reference fallback
+
+**Status:** Implemented; local execution and tests still required.
+
+The CLI validates the manually maintained reference at startup. It prefers a valid tab-separated file, but if the TSV is absent or malformed it parses `data/reference/iso/iso-3166-1-2026-10.ods` directly using the Python standard library. The chosen format, validated row count, and any fallback/quality warnings are recorded in the run summary, and warnings are printed in the CLI.
+
+The currently committed `.tsv` is Excel XML under a TSV extension, so the ODS workbook should be selected as fallback. Missing numeric codes are retained as blank and explicitly warned about rather than guessed; the current workbook appears to have a missing numeric code for Zambia. Three-digit numeric values are normalized as text (for example, `004`). This is reference validation only and never verifies or approves registry assignments.
+
 ## Step 1 — Environment configuration and CLI contract
 
 **Status:** Completed and locally validated.
