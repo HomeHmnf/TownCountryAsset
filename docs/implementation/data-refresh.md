@@ -342,3 +342,14 @@ Added an official ISO policy note to [the ISO assignment proposal report](../../
 ### ISO review — secondary current-list cross-check (2026-10-22)
 
 Added a clearly bounded secondary cross-check to [the ISO assignment proposal report](../../reports/iso-assignment-proposals.md), using the Austrian government EDM public reference list, which identifies itself as based on ISO 3166-1 and reports 249 entries. It corroborates a set of code/name pairs and helps with name/scope reconciliation, but the CSV export could not be archived through the available retrieval path and no live individual ISO OBP records were captured. This is not direct verification and does not change the per-record evidence gate. Registry statuses and data outputs remain unchanged.
+
+
+## Validation update — 2026-10-23
+
+The project owner pulled `work/compiler-hardening` and ran the full Python test suite from the TownCountryAsset repository root:
+
+- Command: `uv run pytest -v`
+- Result: **109 passed in 1.84 seconds**.
+- `git status --short` produced no entries in the supplied terminal output, indicating a clean working tree after the test run.
+
+This confirms the current automated tests pass across the compiler, identity registry, asset audits, ISO proposal tooling, entity-classification review, flag source/generation tools, Persian localization, snapshot comparison, SVG generation, and data-pipeline CLI. It does not validate a new live refresh or approve/promote candidate data. No npm/frontend checks are part of this Python repository's validation workflow.
