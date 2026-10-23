@@ -70,15 +70,17 @@ def _normalize_iso_header(value: str) -> str | None:
     return aliases.get(normalized)
 
 
-def _validate_iso_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+def _validate_iso_rows(rows: list[dict[str, str]], *, allow_missing_numeric: bool = False) -> list[dict[str, str]]:
     if not rows:
         raise ValueError("reference has no data rows")
     seen_alpha2: set[str] = set()
     for number, row in enumerate(rows, start=2):
         for field in ISO_REFERENCE_FIELDS:
             row[field] = row.get(field, "").strip()
-        if not row["name_en"] or not row["alpha2"] or not row["alpha3"] or not row["numeric"]:
+        if not row["name_en"] or not row["alpha2"] or not row["alpha3"]:
             raise ValueError(f"row {number} has a missing required field")
+        if not row["numeric"] and not allow_missing_numeric:
+            raise ValueError(f"row {number} has a missing numeric code")
         row["alpha2"] = row["alpha2"].upper()
         row["alpha3"] = row["alpha3"].upper()
         if len(row["alpha2"]) != 2 or not row["alpha2"].isalpha():
@@ -86,9 +88,10 @@ def _validate_iso_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         if len(row["alpha3"]) != 3 or not row["alpha3"].isalpha():
             raise ValueError(f"row {number} has invalid alpha-3 code {row['alpha3']!r}")
         numeric = row["numeric"]
-        if not numeric.isdigit() or len(numeric) > 3:
-            raise ValueError(f"row {number} has invalid numeric code {numeric!r}")
-        row["numeric"] = numeric.zfill(3)
+        if numeric:
+            if not numeric.isdigit() or len(numeric) > 3:
+                raise ValueError(f"row {number} has invalid numeric code {numeric!r}")
+            row["numeric"] = numeric.zfill(3)
         if row["alpha2"] in seen_alpha2:
             raise ValueError(f"duplicate alpha-2 code {row['alpha2']!r}")
         seen_alpha2.add(row["alpha2"])
@@ -173,7 +176,7 @@ def read_iso_ods(path: Path) -> list[dict[str, str]]:
     for row_number, values in enumerate(table_rows[1:], start=2):
         values = values[:len(mapped)] + [""] * max(0, len(mapped) - len(values))
         rows.append({field: value for field, value in zip(mapped, values)})
-    return _validate_iso_rows(rows)
+    return _validate_iso_rows(rows, allow_missing_numeric=True)
 
 
 def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
@@ -191,11 +194,21 @@ def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
     if ods_path.is_file():
         try:
             rows = read_iso_ods(ods_path)
+            incomplete_numeric = [row["name_en"] for row in rows if not row["numeric"]]
+            warning_parts = [
+                f"TSV reference is unusable ({tsv_error}); using the ODS workbook as the manual reference instead."
+            ]
+            if incomplete_numeric:
+                warning_parts.append(
+                    "ODS has missing numeric codes for: " + ", ".join(incomplete_numeric[:10]) +
+                    (" (and more)" if len(incomplete_numeric) > 10 else "") +
+                    ". Do not compare numeric codes for those rows until corrected."
+                )
             return {
                 "path": ods_path,
                 "format": "ods",
                 "rows": rows,
-                "warning": f"TSV reference is unusable ({tsv_error}); using the ODS workbook as the manual reference instead.",
+                "warning": " ".join(warning_parts),
             }
         except (OSError, ValueError, UnicodeError) as exc:
             return {
