@@ -137,7 +137,7 @@ def test_iso_report_parser_accepts_evidence_review_schema_and_normalizes_disposi
 def test_iso_report_parser_accepts_legacy_decision_schema_without_claiming_verification(tmp_path: Path) -> None:
     report = tmp_path / "iso-assignment-proposals.md"
     report.write_text(
-        "\\n".join(
+        "\n".join(
             [
                 "# ISO 3166-1 assignment proposals",
                 "",
