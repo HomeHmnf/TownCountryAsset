@@ -6,9 +6,9 @@
 
 **Status:** Implemented; local execution and tests still required.
 
-The CLI validates the manually maintained reference at startup. It prefers a valid tab-separated file, but if the TSV is absent or malformed it parses `data/reference/iso/iso-3166-1-2026-10.ods` directly using the Python standard library. The chosen format, validated row count, and any fallback/quality warnings are recorded in the run summary, and warnings are printed in the CLI.
+The CLI validates the manually maintained reference at startup. It prefers `data/reference/iso/iso-3166-1-2026-10.csv`, accepting comma, semicolon, or tab delimiters to accommodate Calc export settings. If the CSV is absent or invalid, it parses `data/reference/iso/iso-3166-1-2026-10.ods` as fallback using the Python standard library. The chosen format, validated row count, and any fallback/quality warnings are recorded in the run summary, and warnings are printed in the CLI.
 
-The currently committed `.tsv` is Excel XML under a TSV extension, so the ODS workbook should be selected as fallback. Missing numeric codes are retained as blank and explicitly warned about rather than guessed; the current workbook appears to have a missing numeric code for Zambia. Three-digit numeric values are normalized as text (for example, `004`). This is reference validation only and never verifies or approves registry assignments.
+The primary `.csv` is intended to be the machine-readable export and the `.ods` remains the editable Calc source. If Calc exports tab-delimited text under the `.csv` extension, the parser accepts it but emits a warning recommending a comma-delimited CSV export for format consistency. Missing numeric codes are retained as blank and explicitly warned about rather than guessed; the current reference appears to have a missing numeric code for Zambia. Three-digit numeric values are normalized as text (for example, `004`). This is reference validation only and never verifies or approves registry assignments.
 
 ## Step 1 — Environment configuration and CLI contract
 
