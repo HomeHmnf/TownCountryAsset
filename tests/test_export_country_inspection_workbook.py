@@ -112,7 +112,7 @@ def test_workbook_contains_all_review_sheets_and_keeps_candidates_unapproved(tmp
 def test_iso_report_parser_accepts_evidence_review_schema_and_normalizes_disposition(tmp_path: Path) -> None:
     report = tmp_path / "iso-assignment-proposals.md"
     report.write_text(
-        "\\n".join(
+        "\n".join(
             [
                 "# ISO proposal review",
                 "",
