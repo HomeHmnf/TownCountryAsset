@@ -106,10 +106,10 @@ def read_iso_tsv(path: Path) -> list[dict[str, str]]:
         sample = stream.read(512)
         if sample.lstrip().startswith("<?xml") or "<Workbook" in sample or "<ss:Worksheet" in sample:
             raise ValueError("file contains spreadsheet XML, not TSV")
-        if "\\t" not in sample:
+        if "\t" not in sample:
             raise ValueError("no tab-separated columns detected")
         stream.seek(0)
-        reader = csv.reader(stream, delimiter="\\t")
+        reader = csv.reader(stream, delimiter="\t")
         try:
             header = next(reader)
         except StopIteration as exc:
