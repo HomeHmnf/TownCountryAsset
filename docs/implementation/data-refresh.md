@@ -252,45 +252,24 @@ Integrated flag handling into `tools/run_data_pipeline.py`:
 **Safety boundary:** Candidate assets remain in TownCountryAsset. The approved snapshot, identity registry, and TownCountryGame are not modified by this integration.
 
 
-## Stage 9 — Comprehensive human-readable inspection workbook
+## Stage 9 — Canonical human-readable inspection workbook
 
-**Status:** Implemented in the repository; local validation pending.
+**Status:** Canonical exporter implemented; automated tests passed on 2026-10-23. A generated workbook still needs a local visual/row-count inspection against current candidate data.
 
-Added `tools/build_inspection_workbook.py`, which builds a filterable Excel workbook at `reports/country-entity-inspection.xlsx` from the persistent identity registry, compiled candidate metadata (`countries.json`), saved ISO proposal report, latest timestamped Persian candidate snapshot, and explicit flag mapping. It does not require a network request.
+The repository had two overlapping workbook exporters. Standardized on `tools/export_country_inspection_workbook.py` and its focused test, `tests/test_export_country_inspection_workbook.py`. This is the single documented command and output contract:
 
-The workbook includes:
-- **Read Me:** generation time, source availability, record counts, limitations, and review guidance.
-- **Master Inventory:** one row per `game_id), with identity, English/Persian names, regions, current and proposed ISO values, localization candidates, flag mapping state, and a review summary.
-- **Entity & Identity:** stable IDs, current/previous source IDs, aliases, regions, and the complete registry record as JSON.
-- **ISO Review**, **Persian Review**, and **Flag Review:** separate current/candidate fields plus blank human decision, reviewer, date, and evidence columns.
-- **Source Attributes:** every available original Natural Earth source attribute as its own column, linked to the persistent `game_id`.
-- **Data Quality:** missing mapping records, unresolved reviews, missing fields, and other inspection findings.
-
-The workbook is a human inspection artifact only. It never edits the identity registry, approves ISO assignments/localization/flag choices, changes the approved snapshot, or writes to TownCountryGame. The generated workbook is local output and should be reviewed before deciding whether to commit or share it. Run the data pipeline first to ensure the candidate `countries.json` provides complete source attributes. The script uses `openpyxl) through an ephemeral uv invocation so it does not add a runtime dependency to the asset pipeline.
-
-**Usage:**
-
-```bash
-uv run --with openpyxl python tools/build_inspection_workbook.py
+```fish
+uv run python tools/export_country_inspection_workbook.py
 ```
 
-**Local validation:** Pending. Verify CLI help, build the workbook, inspect all sheet names and row counts, and run the full tests and lint/architecture checks before marking this stage validated.
+Default output: `reports/country-data-inspection.xlsx`. The exporter joins the persistent identity registry, compiled candidate `countries.json`, ISO proposal table, Persian candidate table, and explicit flag mapping by `game_id`. It produces the master inventory, ISO, entity, Persian, flag, data-quality, and complete source-attributes worksheets. Candidate values remain unapproved; reviewer decisions and evidence fields are blank. Exporting never writes decisions back to project files.
 
+Removed the older duplicate `tools/build_inspection_workbook.py` and consolidated README/CLI documentation around the canonical exporter. The older command and output path must no longer be used.
 
-### Stage 9 — Human-readable country data inspection workbook
+**Safety boundary:** The exporter is read-only with respect to the identity registry, proposal data, candidate assets, approved snapshot, and TownCountryGame. It does not regenerate or change `game_id` values or approve any metadata.
 
-**Status:** Implemented; local validation and lockfile refresh pending.
+**Validation completed:** The project owner reported `uv run pytest -v` — **110 passed**, including the canonical workbook exporter test. The next local check is to generate the workbook from the current candidate inputs, verify worksheet names and row counts, and confirm `git status --short` shows only expected local report output (if reports are not ignored).
 
-Added `tools/export_country_inspection_workbook.py` to export a filterable XLSX workbook joined by persistent `game_id`. It includes:
-- Read Me / provenance and review-policy guidance.
-- Master Inventory combining identity registry values, ISO proposal context, Persian localization candidates, flag mapping state, and compiled candidate fields.
-- Dedicated ISO, entity-classification, Persian-localization, and flag review sheets with blank human decision/evidence fields.
-- Data Quality findings for missing/unreviewed fields, absent proposal rows, candidate gaps, and mapping gaps.
-- A Source Attributes sheet preserving every attribute present in the compiled candidate `countries.json`, rather than limiting inspection to a hand-picked subset.
-
-The exporter treats the registry as the identity source of truth and candidate/proposal values as unapproved. It does not modify any input data or apply workbook edits. Added `openpyxl` as a project dependency, usage documentation in README and `docs/cli-tool.md`, and `tests/test_export_country_inspection_workbook.py`.
-
-**Local validation pending:** Refresh `uv.lock` for the new dependency, then run the focused workbook test and full suite. Generate the workbook locally and inspect the sheet/row counts before calling this stage validated. The workbook output defaults to `reports/country-data-inspection.xlsx`; it should be regenerated after source or proposal refreshes.
 
 
 ## Metadata review workflow — Step 2: systematic ISO assignment evidence review
