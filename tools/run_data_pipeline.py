@@ -42,6 +42,7 @@ DEFAULTS = {
     "TCA_APPROVED_DATA_DIR": "generated/town_country_asset",
     "TCA_REPORT_DIR": "reports/data-refresh",
     "TCA_ISO_PROPOSAL_REPORT": "reports/iso-assignment-proposals.md",
+    "TCA_INSPECTION_WORKBOOK": "reports/country-data-inspection.xlsx",
     "TCA_GENERATION_CONFIG": "config/generation.json",
     "TCA_REGIONS_CONFIG": "config/regions.json",
     "TCA_IDENTITY_REGISTRY": "config/country_identity_registry.json",
@@ -653,6 +654,18 @@ def execute(config: dict[str, str]) -> int:
                 "stdout": f"No approved snapshot found at {approved}; no comparison performed.",
                 "stderr": "",
             })
+
+    if not failed and staging_dir is not None:
+        ok = run_command("export country inspection workbook", [
+            sys.executable, "tools/export_country_inspection_workbook.py",
+            "--registry", str(configured_path(config, "TCA_IDENTITY_REGISTRY")),
+            "--countries", str(staging_dir / "countries.json"),
+            "--iso-report", str(configured_path(config, "TCA_ISO_PROPOSAL_REPORT")),
+            "--persian-report", str(configured_path(config, "TCA_PERSIAN_LOCALIZATION_REPORT")),
+            "--flag-mapping", str(configured_path(config, "TCA_FLAG_MAPPING")),
+            "--output", str(configured_path(config, "TCA_INSPECTION_WORKBOOK")),
+        ], stages)
+        failed = failed or not ok
 
     if not failed and staging_dir is not None:
         try:
