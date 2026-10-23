@@ -109,10 +109,10 @@ def read_iso_csv(path: Path) -> list[dict[str, str]]:
         if not sample.strip():
             raise ValueError("file is empty")
         try:
-            dialect = csv.Sniffer().sniff(sample, delimiters=",;\\t")
+            dialect = csv.Sniffer().sniff(sample, delimiters=",;\t")
         except csv.Error as exc:
             raise ValueError("could not detect comma, semicolon, or tab field delimiter") from exc
-        if dialect.delimiter not in {",", ";", "\\t"}:
+        if dialect.delimiter not in {",", ";", "\t"}:
             raise ValueError("unsupported field delimiter")
         stream.seek(0)
         reader = csv.reader(stream, dialect)
@@ -199,10 +199,10 @@ def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
             with csv_path.open("r", encoding="utf-8-sig", newline="") as stream:
                 sample = stream.read(8192)
             try:
-                delimiter = __import__("csv").Sniffer().sniff(sample, delimiters=",;\\t").delimiter
+                delimiter = __import__("csv").Sniffer().sniff(sample, delimiters=",;\t").delimiter
             except __import__("csv").Error:
                 delimiter = ","
-            if delimiter == "\\t":
+            if delimiter == "\t":
                 warning_parts.append(
                     "The primary .csv reference is tab-delimited; it was parsed successfully, "
                     "but export comma-delimited CSV from Calc for format consistency."
