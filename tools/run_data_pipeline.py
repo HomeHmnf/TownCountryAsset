@@ -52,6 +52,38 @@ DEFAULTS = {
     "TCA_HTTP_TIMEOUT_SECONDS": "60",
 }
 USER_AGENT = "TownCountryAsset-DataPipeline/1.0"
+MANUAL_ISO_REFERENCE_TSV = Path("data/reference/iso/iso-3166-1-2026-10.tsv")
+MANUAL_ISO_REFERENCE_ODS = Path("data/reference/iso/iso-3166-1-2026-10.ods")
+
+
+def manual_iso_reference_warning(root: Path = ROOT) -> str:
+    """Describe the manually maintained ISO snapshot and detect a mislabeled export."""
+    tsv_path = root / MANUAL_ISO_REFERENCE_TSV
+    ods_path = root / MANUAL_ISO_REFERENCE_ODS
+    notes = [
+        "Manual ISO reference reminder: review and refresh the saved reference monthly.",
+        f"Workbook: {MANUAL_ISO_REFERENCE_ODS.as_posix()} ({'present' if ods_path.is_file() else 'missing'}).",
+        f"Machine-readable reference: {MANUAL_ISO_REFERENCE_TSV.as_posix()} ({'present' if tsv_path.is_file() else 'missing'}).",
+        "This snapshot is a manual comparison aid, not proof of an official ISO-hosted export; it never verifies or approves registry assignments.",
+    ]
+    if tsv_path.is_file():
+        try:
+            with tsv_path.open("rb") as stream:
+                prefix = stream.read(256).lstrip()
+            if prefix.startswith(b"<?xml") or b"<Workbook" in prefix or b"<ss:Worksheet" in prefix:
+                notes.append(
+                    "FORMAT ERROR: the .tsv file contains Excel XML rather than tab-separated text. "
+                    "Re-export it from Calc with Tab as the field delimiter before using it in automated comparisons."
+                )
+            elif b"\t" not in prefix and b"\n" in prefix:
+                notes.append(
+                    "FORMAT WARNING: no tab delimiter was detected near the start of the .tsv file; verify the export format."
+                )
+        except OSError as exc:
+            notes.append(f"Could not inspect the .tsv reference file: {exc}")
+    else:
+        notes.append("The expected .tsv reference is missing; do not treat the ISO reference comparison as current.")
+    return " ".join(notes)
 
 
 def load_dotenv(path: Path, environ: dict[str, str] | None = None) -> dict[str, str]:
