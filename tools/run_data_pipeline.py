@@ -36,8 +36,8 @@ DEFAULTS = {
     "TCA_FLAG_REVIEW_REPORT": "reports/flag-source-review.md",
     "TCA_FLAG_MANUAL_DIR": "raw_data/flags/manual",
     "TCA_ISO_OFFICIAL_REFERENCE_URL": "https://www.iso.org/iso-3166-country-codes.html",
-    "TCA_ISO_MANUAL_REFERENCE_CSV": "data/reference/iso/iso-3166-1-2026-10.csv",
-    "TCA_ISO_MANUAL_REFERENCE_ODS": "data/reference/iso/iso-3166-1-2026-10.ods",
+    "TCA_ISO_MANUAL_REFERENCE_CSV": "data/reference/iso/iso-3166-1.csv",
+    "TCA_ISO_MANUAL_REFERENCE_ODS": "data/reference/iso/iso-3166-1.ods",
     "TCA_FLAG_EVIDENCE_URL_FALKLANDS": "https://www.gov.fk/about/",
     "TCA_FLAG_EVIDENCE_URL_SOMALILAND": "https://govsomaliland.org/",
     "TCA_FLAG_EVIDENCE_URL_KOSOVO": "https://president-ksgov.net/en/legislation/",
@@ -65,8 +65,8 @@ DEFAULTS = {
     "TCA_HTTP_TIMEOUT_SECONDS": "60",
 }
 USER_AGENT = "TownCountryAsset-DataPipeline/1.0"
-MANUAL_ISO_REFERENCE_CSV = Path("data/reference/iso/iso-3166-1-2026-10.csv")
-MANUAL_ISO_REFERENCE_ODS = Path("data/reference/iso/iso-3166-1-2026-10.ods")
+MANUAL_ISO_REFERENCE_CSV = Path("data/reference/iso/iso-3166-1.csv")
+MANUAL_ISO_REFERENCE_ODS = Path("data/reference/iso/iso-3166-1.ods")
 ISO_REFERENCE_FIELDS = ("name_en", "name_fr", "alpha2", "alpha3", "numeric")
 
 
@@ -272,11 +272,11 @@ def select_manual_iso_reference(root: Path = ROOT, config: dict[str, str] | None
 
 
 def manual_iso_reference_warning(root: Path = ROOT, config: dict[str, str] | None = None) -> str:
-    """Return CLI warning/status text for the monthly manual ISO reference."""
+    """Return CLI warning/status text for the manually refreshed ISO reference."""
     selected = select_manual_iso_reference(root, config)
     notes = [
-        "Manual ISO reference reminder: review and refresh the saved reference monthly.",
-        "This snapshot is a manual comparison aid, not proof of an official ISO-hosted export; it never verifies or approves registry assignments.",
+        "Manual ISO reference reminder: verify this file against the latest official ISO 3166-1 reference before each review run; replace the stable-named snapshot whenever ISO publishes an update.",
+        "This snapshot is a manual comparison aid, not proof of an official ISO-hosted export. Check its publication/version date and file freshness against ISO's current offering; it never verifies or approves registry assignments.",
     ]
     if selected["path"] is not None:
         notes.append(
