@@ -157,7 +157,7 @@ def main() -> int:
             decision = mapping_by_id.get(game_id, {})
             code = decision.get("source_flag_code")
             manual_path = decision.get("manual_svg_path")
-            valid_source = isinstance(code, str) and code in source_codes
+            valid_source = isinstance(code, str) and code in source_codes and not manual_path
             safe_manual_path = PurePosixPath(manual_path) if isinstance(manual_path, str) else None
             valid_manual = bool(
                 safe_manual_path
@@ -165,6 +165,7 @@ def main() -> int:
                 and ".." not in safe_manual_path.parts
                 and "\\" not in manual_path
                 and safe_manual_path.suffix.lower() == ".svg"
+                and code is None
                 and (manual_dir / safe_manual_path.as_posix()).is_file()
             )
             if decision.get("status") != "reviewed" or not (valid_source or valid_manual):
