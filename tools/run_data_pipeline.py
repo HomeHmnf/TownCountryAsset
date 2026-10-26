@@ -33,6 +33,11 @@ DEFAULTS = {
     "TCA_FLAG_ASSET_OUTPUT_DIR": "generated/town_country_asset_candidate/flags",
     "TCA_FLAG_MAPPING": "config/country_flag_mapping.json",
     "TCA_FLAG_REPORT": "reports/flag-asset-review.md",
+    "TCA_FLAG_REVIEW_REPORT": "reports/flag-source-review.md",
+    "TCA_FLAG_MANUAL_DIR": "raw_data/flags/manual",
+    "TCA_ISO_OFFICIAL_REFERENCE_URL": "https://www.iso.org/iso-3166-country-codes.html",
+    "TCA_ISO_MANUAL_REFERENCE_CSV": "data/reference/iso/iso-3166-1-2026-10.csv",
+    "TCA_ISO_MANUAL_REFERENCE_ODS": "data/reference/iso/iso-3166-1-2026-10.ods",
     "TCA_FLAG_REFRESH_ENABLED": "true",
     "TCA_FETCHED_DATA_DIR": "raw_data/fetched",
     "TCA_ISO_DATA_DIR": "raw_data/iso",
@@ -185,10 +190,13 @@ def read_iso_ods(path: Path) -> list[dict[str, str]]:
     return _validate_iso_rows(rows, allow_missing_numeric=True)
 
 
-def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
-    """Prefer the CSV export; fall back to the editable ODS workbook if needed."""
-    csv_path = root / MANUAL_ISO_REFERENCE_CSV
-    ods_path = root / MANUAL_ISO_REFERENCE_ODS
+def select_manual_iso_reference(root: Path = ROOT, config: dict[str, str] | None = None) -> dict[str, Any]:
+    """Prefer the configured CSV export; fall back to the configured ODS workbook."""
+    config = config or {}
+    csv_value = Path(config.get("TCA_ISO_MANUAL_REFERENCE_CSV", str(MANUAL_ISO_REFERENCE_CSV))).expanduser()
+    ods_value = Path(config.get("TCA_ISO_MANUAL_REFERENCE_ODS", str(MANUAL_ISO_REFERENCE_ODS))).expanduser()
+    csv_path = csv_value if csv_value.is_absolute() else root / csv_value
+    ods_path = ods_value if ods_value.is_absolute() else root / ods_value
     csv_error: str | None = None
     if csv_path.is_file():
         try:
@@ -256,9 +264,9 @@ def select_manual_iso_reference(root: Path = ROOT) -> dict[str, Any]:
     }
 
 
-def manual_iso_reference_warning(root: Path = ROOT) -> str:
+def manual_iso_reference_warning(root: Path = ROOT, config: dict[str, str] | None = None) -> str:
     """Return CLI warning/status text for the monthly manual ISO reference."""
-    selected = select_manual_iso_reference(root)
+    selected = select_manual_iso_reference(root, config)
     notes = [
         "Manual ISO reference reminder: review and refresh the saved reference monthly.",
         "This snapshot is a manual comparison aid, not proof of an official ISO-hosted export; it never verifies or approves registry assignments.",
@@ -499,8 +507,8 @@ def execute(config: dict[str, str]) -> int:
     source_dir = configured_path(config, "TCA_FETCHED_DATA_DIR")
     iso_dir = configured_path(config, "TCA_ISO_DATA_DIR")
     stages: list[dict[str, Any]] = []
-    manual_iso = select_manual_iso_reference()
-    manual_iso_warning = manual_iso_reference_warning()
+    manual_iso = select_manual_iso_reference(config=config)
+    manual_iso_warning = manual_iso_reference_warning(config=config)
     if manual_iso["warning"]:
         print(f"WARNING: {manual_iso_warning}", file=sys.stderr)
     else:
