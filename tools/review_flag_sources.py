@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from tools.generate_country_flags import load_latest_source, load_source_svgs, resolve_path
-from tools.run_data_pipeline import DEFAULTS, load_dotenv, select_manual_iso_reference
+from tools.run_data_pipeline import load_dotenv, select_manual_iso_reference
 
 ROOT = Path(__file__).resolve().parents[1]
 EDGE_EVIDENCE_KEYS = {
@@ -55,7 +55,41 @@ def get_record_name(record: dict) -> str:
     names = record.get("names", {})
     if isinstance(names, dict) and isinstance(names.get("en"), str):
         return names["en"]
-    return str(record.get("name") or record.get("source", {}).get("current_source_id") or record.get("game_id"))
+    source = record.get("source", {})
+    source_id = source.get("current_source_id") if isinstance(source, dict) else None
+    return str(record.get("name") or source_id or record.get("game_id"))
+
+EDGE_SOURCE_IDS = {
+    "Falkland Islands": {"FLK"},
+    "Somaliland": {"SOL"},
+    "Kosovo": {"KOS"},
+    "Northern Cyprus": {"CYN"},
+    "Indian Ocean Territories": {"IOA"},
+    "Ashmore and Cartier Islands": {"ATC"},
+    "Siachen Glacier": {"KAS"},
+}
+EDGE_NAME_ALIASES = {
+    "Falkland Islands": {"falkland is", "falkland islands", "falkland islands malvinas"},
+    "Somaliland": {"somaliland"},
+    "Kosovo": {"kosovo"},
+    "Northern Cyprus": {"northern cyprus", "turkish republic of northern cyprus"},
+    "Indian Ocean Territories": {"indian ocean territories", "british indian ocean territory"},
+    "Ashmore and Cartier Islands": {"ashmore and cartier islands", "ashmore and cartier is"},
+    "Siachen Glacier": {"siachen glacier", "siachen"},
+}
+
+def matches_edge_case(record: dict, name: str) -> bool:
+    source = record.get("source", {})
+    source_id = source.get("current_source_id") if isinstance(source, dict) else None
+    if source_id in EDGE_SOURCE_IDS[name]:
+        return True
+    values = [get_record_name(record)]
+    names = record.get("names", {})
+    if isinstance(names, dict):
+        values.extend(item for item in names.get("aliases_en", []) if isinstance(item, str))
+    normalized = {"".join(ch for ch in value.casefold() if ch.isalnum()) for value in values if isinstance(value, str)}
+    aliases = {"".join(ch for ch in value.casefold() if ch.isalnum()) for value in EDGE_NAME_ALIASES[name]}
+    return any(value in alias or alias in value for value in normalized for alias in aliases)
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -131,7 +165,7 @@ def main() -> int:
         manual_files = sorted(p.relative_to(manual_dir).as_posix() for p in manual_dir.rglob("*.svg")) if manual_dir.exists() else []
         edge_lines = []
         for name, note in EDGE_CASES:
-            found = [r for r in records if get_record_name(r).casefold() == name.casefold()]
+            found = [r for r in records if matches_edge_case(r, name)]
             if found:
                 for record in found:
                     decision = mapping_by_id.get(record.get("game_id"), {})
