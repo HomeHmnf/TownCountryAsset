@@ -106,8 +106,8 @@ def main() -> int:
         mapping_path = resolve_path(config["TCA_FLAG_MAPPING"])
         report_path = resolve_path(config.get("TCA_FLAG_REVIEW_REPORT", "reports/flag-source-review.md"))
         manual_dir = resolve_path(config.get("TCA_FLAG_MANUAL_DIR", "raw_data/flags/manual"))
-        iso_csv = resolve_path(config.get("TCA_ISO_MANUAL_REFERENCE_CSV", "data/reference/iso/iso-3166-1-2026-10.csv"))
-        iso_ods = resolve_path(config.get("TCA_ISO_MANUAL_REFERENCE_ODS", "data/reference/iso/iso-3166-1-2026-10.ods"))
+        iso_csv = resolve_path(config.get("TCA_ISO_MANUAL_REFERENCE_CSV", "data/reference/iso/iso-3166-1.csv"))
+        iso_ods = resolve_path(config.get("TCA_ISO_MANUAL_REFERENCE_ODS", "data/reference/iso/iso-3166-1.ods"))
         iso_url = config.get("TCA_ISO_OFFICIAL_REFERENCE_URL", "https://www.iso.org/iso-3166-country-codes.html")
 
         print("Manual ISO reference check")
