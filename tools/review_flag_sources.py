@@ -13,10 +13,14 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
+# Direct script execution sets sys.path[0] to tools/, not the repository root.
+# Add the root so imports using the tools.* package path work both directly and in tests.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from tools.generate_country_flags import load_latest_source, load_source_svgs, resolve_path
 from tools.run_data_pipeline import load_dotenv, select_manual_iso_reference
-
-ROOT = Path(__file__).resolve().parents[1]
 EDGE_EVIDENCE_KEYS = {
     "Falkland Islands": "TCA_FLAG_EVIDENCE_URL_FALKLANDS",
     "Somaliland": "TCA_FLAG_EVIDENCE_URL_SOMALILAND",
