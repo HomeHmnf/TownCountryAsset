@@ -203,11 +203,11 @@ def audit_and_generate(
             issues.append(str(exc))
             continue
         filename = f"{game_id}.svg"
-        generated[filename] = payload
+        generated[filename] = sized_flag_svg(payload)
         file_metadata.append({
             "game_id": game_id, "source_flag_code": code if source_kind == "repository" else None,
             "source_kind": source_kind, "source_identifier": source_identifier,
-            "file": filename, "sha256": sha256_bytes(payload), "size_bytes": len(payload),
+            "file": filename, "sha256": sha256_bytes(generated[filename]), "size_bytes": len(generated[filename]),
         })
     source = {
         "source_url": provenance.get("source_url"),
