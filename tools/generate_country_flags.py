@@ -203,6 +203,42 @@ def audit_and_generate(
     }
 
 
+FLAG_SVG_WIDTH = 512
+FLAG_SVG_HEIGHT = 384
+FLAG_PROFILES = ("low", "medium", "high")
+
+
+def sized_flag_svg(payload: bytes) -> bytes:
+    """Set an explicit 512x384 SVG viewport while preserving the source viewBox."""
+    validate_svg(payload, "flag source")
+    root = ET.fromstring(payload)
+    root.set("width", str(FLAG_SVG_WIDTH))
+    root.set("height", str(FLAG_SVG_HEIGHT))
+    return ET.tostring(root, encoding="utf-8", xml_declaration=True)
+
+
+def write_source_previews(output_dir: Path, source_svgs: dict[str, bytes]) -> None:
+    """Write unassigned source previews; these never imply a game_id mapping."""
+    for profile in FLAG_PROFILES:
+        profile_dir = output_dir / "source" / profile
+        profile_dir.mkdir(parents=True, exist_ok=True)
+        for code, payload in sorted(source_svgs.items()):
+            if not CODE_RE.fullmatch(code):
+                raise ValueError(f"invalid source flag code {code!r}")
+            (profile_dir / f"{code}.svg").write_bytes(sized_flag_svg(payload))
+    manifest = {
+        "schema_version": 1,
+        "purpose": "Unassigned source previews for human review; not game_id mappings or approvals.",
+        "width": FLAG_SVG_WIDTH,
+        "height": FLAG_SVG_HEIGHT,
+        "profiles": list(FLAG_PROFILES),
+        "source_codes": sorted(source_svgs),
+    }
+    (output_dir / "source" / "manifest.json").write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+
 def write_report(path: Path, result: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     lines = [
@@ -229,14 +265,27 @@ def write_report(path: Path, result: dict[str, Any]) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def publish_flags(output_dir: Path, result: dict[str, Any]) -> None:
+def publish_flags(
+    output_dir: Path, result: dict[str, Any], source_svgs: dict[str, bytes] | None = None,
+) -> None:
     output_dir.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{output_dir.name}.staging-", dir=output_dir.parent))
     backup = output_dir.with_name(f".{output_dir.name}.backup")
     try:
         for filename, payload in result["generated"].items():
+            # Keep the original game_id-keyed file for existing consumers.
             (staging / filename).write_bytes(payload)
-        manifest = {"schema_version": 1, "source": result["source"], "flags": result["files"]}
+            # Also publish profile-compatible, explicitly sized vector files.
+            for profile in FLAG_PROFILES:
+                profile_dir = staging / profile
+                profile_dir.mkdir(parents=True, exist_ok=True)
+                (profile_dir / filename).write_bytes(sized_flag_svg(payload))
+        if source_svgs is not None:
+            write_source_previews(staging, source_svgs)
+        manifest = {
+            "schema_version": 1, "source": result["source"], "flags": result["files"],
+            "profiles": list(FLAG_PROFILES), "width": FLAG_SVG_WIDTH, "height": FLAG_SVG_HEIGHT,
+        }
         (staging / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         if backup.exists():
             shutil.rmtree(backup) if backup.is_dir() else backup.unlink()
@@ -278,9 +327,14 @@ def main() -> int:
         result = audit_and_generate(registry, mapping, source_svgs, provenance)
         write_report(report_path, result)
         if not result["ok"]:
+            # Source-code previews remain available for visual review even while
+            # game_id mappings are unreviewed. They are stored separately and
+            # never count as generated/approved country flags.
+            write_source_previews(output_dir, source_svgs)
             print(f"Flag audit failed: {len(result['issues'])} issue(s); see {report_path}", file=sys.stderr)
+            print(f"Unassigned source previews: {output_dir / 'source'}", file=sys.stderr)
             return 1
-        publish_flags(output_dir, result)
+        publish_flags(output_dir, result, source_svgs)
     except (OSError, ValueError, KeyError, json.JSONDecodeError, zipfile.BadZipFile) as exc:
         print(f"Flag generation failed: {exc}", file=sys.stderr)
         return 1
