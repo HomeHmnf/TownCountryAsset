@@ -210,6 +210,9 @@ def audit_and_generate(
         file_metadata.append({
             "game_id": game_id, "source_flag_code": code if source_kind == "repository" else None,
             "source_kind": source_kind, "source_identifier": source_identifier,
+            "decision_note": record.get("decision_note"),
+            "evidence": record.get("evidence", []),
+            "source_license": record.get("source_license"),
             "file": filename, "sha256": sha256_bytes(generated[filename]), "size_bytes": len(generated[filename]),
         })
     source = {
