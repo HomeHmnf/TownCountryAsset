@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import xml.etree.ElementTree as ET
 import zipfile
 from pathlib import Path
 
@@ -14,6 +15,7 @@ from tools.generate_country_flags import (
     publish_flags,
     sha256_bytes,
     validate_svg,
+    write_source_previews,
 )
 
 
@@ -157,11 +159,21 @@ def test_publish_flags_writes_manifest_and_flag_files(tmp_path: Path) -> None:
         registry("tc_one"), mapping(("tc_one", "us")), {"us": svg()}, provenance()
     )
     output = tmp_path / "flags"
-    publish_flags(output, result)
+    publish_flags(output, result, {"us": svg("US"), "gb": svg("GB")})
     assert (output / "tc_one.svg").read_bytes() == svg()
     manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["source"]["resolved_commit"] == "a" * 40
-    assert manifest["flags"][0]["sha256"] == sha256_bytes(svg())
+    assert manifest["flags"][0]["sha256"] == sha256_bytes(svg("US"))
+    assert manifest["profiles"] == ["low", "medium", "high"]
+    for profile in ("low", "medium", "high"):
+        assert (output / profile / "tc_one.svg").is_file()
+        assert (output / "source" / profile / "us.svg").is_file()
+        root = ET.fromstring((output / profile / "tc_one.svg").read_bytes())
+        assert root.attrib["width"] == "512"
+        assert root.attrib["height"] == "384"
+    preview_manifest = json.loads((output / "source" / "manifest.json").read_text(encoding="utf-8"))
+    assert preview_manifest["purpose"].startswith("Unassigned source previews")
+    assert preview_manifest["source_codes"] == ["gb", "us"]
 
 
 def test_load_config_uses_process_environment_precedence(tmp_path: Path) -> None:
@@ -170,3 +182,19 @@ def test_load_config_uses_process_environment_precedence(tmp_path: Path) -> None
     config = load_config(env_file, {"TCA_FLAG_MAPPING": "from-env.json"})
     assert config["TCA_FLAG_MAPPING"] == "from-env.json"
     assert config["TCA_FLAG_SOURCE_DIR"] == "raw_data/flags"
+
+
+
+def test_unreviewed_mappings_can_publish_unassigned_profile_previews(tmp_path: Path) -> None:
+    output = tmp_path / "flags"
+    write_source_previews(output, {"us": svg("US"), "gb": svg("GB")})
+    manifest = json.loads((output / "source" / "manifest.json").read_text(encoding="utf-8"))
+
+    assert manifest["width"] == 512
+    assert manifest["height"] == 384
+    assert manifest["profiles"] == ["low", "medium", "high"]
+    for profile in ("low", "medium", "high"):
+        assert set(path.name for path in (output / "source" / profile).glob("*.svg")) == {"us.svg", "gb.svg"}
+        root = ET.fromstring((output / "source" / profile / "us.svg").read_bytes())
+        assert root.attrib["width"] == "512"
+        assert root.attrib["height"] == "384"
