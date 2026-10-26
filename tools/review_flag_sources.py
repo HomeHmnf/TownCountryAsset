@@ -17,6 +17,15 @@ from tools.generate_country_flags import load_latest_source, load_source_svgs, r
 from tools.run_data_pipeline import DEFAULTS, load_dotenv, select_manual_iso_reference
 
 ROOT = Path(__file__).resolve().parents[1]
+EDGE_EVIDENCE_KEYS = {
+    "Falkland Islands": "TCA_FLAG_EVIDENCE_URL_FALKLANDS",
+    "Somaliland": "TCA_FLAG_EVIDENCE_URL_SOMALILAND",
+    "Kosovo": "TCA_FLAG_EVIDENCE_URL_KOSOVO",
+    "Northern Cyprus": "TCA_FLAG_EVIDENCE_URL_NORTHERN_CYPRUS",
+    "Indian Ocean Territories": "TCA_FLAG_EVIDENCE_URL_INDIAN_OCEAN_TERRITORIES",
+    "Ashmore and Cartier Islands": "TCA_FLAG_EVIDENCE_URL_ASHMORE_CARTIER",
+    "Siachen Glacier": "TCA_FLAG_EVIDENCE_URL_SIACHEN",
+}
 EDGE_CASES = (
     ("Falkland Islands", "The lipis source is expected to contain fk. Verify the territorial flag and add FK/FLK ISO metadata only from authoritative evidence."),
     ("Somaliland", "No official ISO 3166-1 alpha-2/alpha-3 assignment. Use a source flag only if the artwork is explicitly Somaliland's flag; otherwise review a manual SVG."),
@@ -120,9 +129,11 @@ def main() -> int:
                     code = decision.get("source_flag_code")
                     status = decision.get("status", "missing mapping")
                     availability = f"source code available: {code in source_codes}" if isinstance(code, str) else "no source code selected"
-                    edge_lines.append(f"| {name} | {record.get('game_id')} | {status} | {availability} | {note} |")
+                    evidence_url = config.get(EDGE_EVIDENCE_KEYS[name], "not configured")
+                    edge_lines.append(f"| {name} | {record.get('game_id')} | {status} | {availability} | {evidence_url} | {note} |")
             else:
-                edge_lines.append(f"| {name} | not found in current registry | unresolved | unknown | {note} |")
+                evidence_url = config.get(EDGE_EVIDENCE_KEYS[name], "not configured")
+                edge_lines.append(f"| {name} | not found in current registry | unresolved | unknown | {evidence_url} | {note} |")
 
         report_path.parent.mkdir(parents=True, exist_ok=True)
         lines = [
@@ -143,8 +154,8 @@ def main() -> int:
             f"- ISO reference selected: {selected['path'] if selected.get('path') else 'none'}",
             f"- ISO note: {iso_note}",
             "", "## Seven edge cases", "",
-            "| Territory | game_id | Mapping status | Source availability | Review guidance |",
-            "|---|---|---|---|---|",
+            "| Territory | game_id | Mapping status | Source availability | Evidence URL | Review guidance |",
+            "|---|---|---|---|---|---|",
             *edge_lines,
             "", "## Unconfirmed or unusable mappings", "",
             "A mapping is unresolved when it is not marked reviewed or its selected source SVG/manual SVG is unavailable. This report does not approve or edit any mapping.", "",
