@@ -119,3 +119,24 @@ def test_explicit_name_variant_proposes_candidate_but_never_verifies():
     assert by_id["tc_kosovo"]["candidate_alpha3"] == ""
     assert result["candidate_count"] == 2
 
+
+
+def test_falkland_islands_and_sint_maarten_explicit_variants_remain_unverified():
+    data = {"records": [
+        {"game_id": "tc_falkland", "names": {"en": "Falkland Islands"}, "iso": {}},
+        {"game_id": "tc_sint_maarten", "names": {"en": "Sint Maarten"}, "iso": {}},
+    ]}
+    refs = [
+        {"alpha2": "FK", "alpha3": "FLK", "english_name": "Falkland Islands (the) [Malvinas]"},
+        {"alpha2": "SX", "alpha3": "SXM", "english_name": "Sint Maarten (Dutch part)"},
+    ]
+    result = propose(data, refs)
+    by_id = {row["game_id"]: row for row in result["proposals"]}
+
+    assert by_id["tc_falkland"]["candidate_alpha2"] == "FK"
+    assert by_id["tc_falkland"]["candidate_alpha3"] == "FLK"
+    assert by_id["tc_sint_maarten"]["candidate_alpha2"] == "SX"
+    assert by_id["tc_sint_maarten"]["candidate_alpha3"] == "SXM"
+    assert all(row["match_type"] == "explicit name variant" for row in result["proposals"])
+    assert all("human verification required" in row["decision"] for row in result["proposals"])
+    assert result["candidate_count"] == 2
