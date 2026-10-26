@@ -21,6 +21,7 @@ DEFAULTS = {
     "TCA_FLAG_ASSET_OUTPUT_DIR": "generated/town_country_asset_candidate/flags",
     "TCA_FLAG_MAPPING": "config/country_flag_mapping.json",
     "TCA_FLAG_REPORT": "reports/flag-asset-review.md",
+    "TCA_FLAG_MANUAL_DIR": "raw_data/flags/manual",
 }
 CODE_RE = re.compile(r"^[a-z]{2}$")
 
@@ -120,6 +121,7 @@ def validate_svg(payload: bytes, description: str) -> None:
 def audit_and_generate(
     registry: dict[str, Any], mapping: dict[str, Any],
     source_svgs: dict[str, bytes], provenance: dict[str, Any],
+    manual_svgs: dict[str, bytes] | None = None,
 ) -> dict[str, Any]:
     registry_records, mapping_records = registry.get("records"), mapping.get("records")
     if not isinstance(registry_records, list):
@@ -154,36 +156,55 @@ def audit_and_generate(
     for game_id in sorted(registry_set - set(mappings)):
         issues.append(f"missing flag mapping for game_id {game_id}")
 
+    manual_svgs = manual_svgs or {}
     code_owners: dict[str, str] = {}
     generated: dict[str, bytes] = {}
     file_metadata: list[dict[str, Any]] = []
     for game_id in sorted(registry_set & set(mappings)):
         record = mappings[game_id]
-        code, status = record.get("source_flag_code"), record.get("status")
+        code, manual_path, status = record.get("source_flag_code"), record.get("manual_svg_path"), record.get("status")
         if status != "reviewed":
             issues.append(f"{game_id}: mapping status is {status!r}; expected 'reviewed'")
             continue
-        if not isinstance(code, str) or not CODE_RE.fullmatch(code):
-            issues.append(f"{game_id}: source_flag_code must be a lowercase two-letter code")
-            continue
-        if code in code_owners:
-            issues.append(f"source flag code {code!r} maps to both {code_owners[code]} and {game_id}")
-            continue
-        code_owners[code] = game_id
-        payload = source_svgs.get(code)
-        if payload is None:
-            issues.append(f"{game_id}: source SVG for code {code!r} is missing")
+        if isinstance(code, str) and CODE_RE.fullmatch(code):
+            if manual_path:
+                issues.append(f"{game_id}: choose either source_flag_code or manual_svg_path, not both")
+                continue
+            if code in code_owners:
+                issues.append(f"source flag code {code!r} maps to both {code_owners[code]} and {game_id}")
+                continue
+            code_owners[code] = game_id
+            payload = source_svgs.get(code)
+            if payload is None:
+                issues.append(f"{game_id}: source SVG for code {code!r} is missing")
+                continue
+            source_kind = "repository"
+            source_identifier = code
+        elif isinstance(manual_path, str) and manual_path.strip():
+            safe_path = PurePosixPath(manual_path)
+            if safe_path.is_absolute() or ".." in safe_path.parts or "\\" in manual_path or safe_path.suffix.lower() != ".svg":
+                issues.append(f"{game_id}: manual_svg_path must be a safe relative .svg path under the configured manual directory")
+                continue
+            payload = manual_svgs.get(safe_path.as_posix())
+            if payload is None:
+                issues.append(f"{game_id}: manual SVG {manual_path!r} is missing or unreadable")
+                continue
+            source_kind = "manual"
+            source_identifier = manual_path
+        else:
+            issues.append(f"{game_id}: provide a valid source_flag_code or manual_svg_path")
             continue
         try:
-            validate_svg(payload, f"{game_id} ({code})")
+            validate_svg(payload, f"{game_id} ({source_identifier})")
         except ValueError as exc:
             issues.append(str(exc))
             continue
         filename = f"{game_id}.svg"
         generated[filename] = payload
         file_metadata.append({
-            "game_id": game_id, "source_flag_code": code, "file": filename,
-            "sha256": sha256_bytes(payload), "size_bytes": len(payload),
+            "game_id": game_id, "source_flag_code": code if source_kind == "repository" else None,
+            "source_kind": source_kind, "source_identifier": source_identifier,
+            "file": filename, "sha256": sha256_bytes(payload), "size_bytes": len(payload),
         })
     source = {
         "source_url": provenance.get("source_url"),
@@ -259,7 +280,7 @@ def write_report(path: Path, result: dict[str, Any]) -> None:
     lines.extend([f"- {issue}" for issue in result["issues"]] if result["issues"] else ["- None"])
     lines += ["", "## Generated file hashes", "", "| game_id | source code | file | SHA-256 | bytes |", "|---|---|---|---|---:|"]
     lines.extend(
-        f"| {item['game_id']} | {item['source_flag_code']} | {item['file']} | {item['sha256']} | {item['size_bytes']} |"
+        f"| {item['game_id']} | {item['source_identifier']} | {item['file']} | {item['sha256']} | {item['size_bytes']} |"
         for item in result["files"]
     )
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -324,7 +345,17 @@ def main() -> int:
         mapping = json.loads(mapping_path.read_text(encoding="utf-8"))
         archive_path, provenance = load_latest_source(source_dir)
         source_svgs = load_source_svgs(archive_path)
-        result = audit_and_generate(registry, mapping, source_svgs, provenance)
+        manual_dir = resolve_path(config.get("TCA_FLAG_MANUAL_DIR", "raw_data/flags/manual"))
+        manual_svgs: dict[str, bytes] = {}
+        if manual_dir.exists():
+            for path in manual_dir.rglob("*.svg"):
+                if path.is_symlink():
+                    raise ValueError(f"manual flag directory must not contain symlinks: {path}")
+                relative = path.relative_to(manual_dir).as_posix()
+                if ".." in PurePosixPath(relative).parts:
+                    raise ValueError(f"unsafe manual SVG path: {relative}")
+                manual_svgs[relative] = path.read_bytes()
+        result = audit_and_generate(registry, mapping, source_svgs, provenance, manual_svgs)
         write_report(report_path, result)
         if not result["ok"]:
             # Source-code previews remain available for visual review even while
