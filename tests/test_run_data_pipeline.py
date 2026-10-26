@@ -244,8 +244,8 @@ def test_manual_iso_reference_uses_configured_paths(tmp_path):
     reference = tmp_path / "custom" / "official.csv"
     reference.parent.mkdir(parents=True)
     reference.write_text(
-        "English short name,French short name,Alpha-2 code,Alpha-3 code,Numeric\n"
-        "Afghanistan,Afghanistan,AF,AFG,004\n",
+        "English short name,French short name,Alpha-2 code,Alpha-3 code,Numeric\\n"
+        "Afghanistan,Afghanistan,AF,AFG,004\\n",
         encoding="utf-8",
     )
     selected = pipeline.select_manual_iso_reference(
