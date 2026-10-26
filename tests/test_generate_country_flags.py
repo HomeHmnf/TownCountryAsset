@@ -163,7 +163,7 @@ def test_publish_flags_writes_manifest_and_flag_files(tmp_path: Path) -> None:
     assert (output / "tc_one.svg").read_bytes() == svg()
     manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["source"]["resolved_commit"] == "a" * 40
-    assert manifest["flags"][0]["sha256"] == sha256_bytes(svg("US"))
+    assert manifest["flags"][0]["sha256"] == sha256_bytes(svg())
     assert manifest["profiles"] == ["low", "medium", "high"]
     for profile in ("low", "medium", "high"):
         assert (output / profile / "tc_one.svg").is_file()
