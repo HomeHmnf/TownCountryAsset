@@ -14,6 +14,7 @@ from tools.generate_country_flags import (
     load_source_svgs,
     publish_flags,
     sha256_bytes,
+    sized_flag_svg,
     validate_svg,
     write_source_previews,
 )
@@ -58,7 +59,7 @@ def test_audit_generates_deterministic_game_id_filenames() -> None:
     assert result["generated_count"] == 2
     assert set(result["generated"]) == {"tc_one.svg", "tc_two.svg"}
     assert [item["game_id"] for item in result["files"]] == ["tc_one", "tc_two"]
-    assert result["files"][0]["sha256"] == sha256_bytes(svg("US"))
+    assert result["files"][0]["sha256"] == sha256_bytes(sized_flag_svg(svg("US")))
 
 
 def test_audit_fails_for_unreviewed_mapping() -> None:
@@ -160,7 +161,7 @@ def test_publish_flags_writes_manifest_and_flag_files(tmp_path: Path) -> None:
     )
     output = tmp_path / "flags"
     publish_flags(output, result, {"us": svg("US"), "gb": svg("GB")})
-    assert (output / "tc_one.svg").read_bytes() == svg()
+    assert (output / "tc_one.svg").read_bytes() == sized_flag_svg(svg())
     manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["source"]["resolved_commit"] == "a" * 40
     assert manifest["flags"][0]["sha256"] == sha256_bytes(svg())
@@ -198,3 +199,42 @@ def test_unreviewed_mappings_can_publish_unassigned_profile_previews(tmp_path: P
         root = ET.fromstring((output / "source" / profile / "us.svg").read_bytes())
         assert root.attrib["width"] == "512"
         assert root.attrib["height"] == "384"
+
+
+def test_audit_supports_reviewed_manual_svg_mapping_and_sizes_output() -> None:
+    manual_payload = svg("Somaliland")
+    result = audit_and_generate(
+        registry("tc_somaliland"),
+        {"records": [{
+            "game_id": "tc_somaliland",
+            "source_flag_code": None,
+            "manual_svg_path": "somaliland.svg",
+            "status": "reviewed",
+            "decision_note": "Manually reviewed flag artwork",
+            "evidence": ["https://example.org/flag-evidence"],
+        }]},
+        {},
+        provenance(),
+        {"somaliland.svg": manual_payload},
+    )
+    assert result["ok"] is True
+    assert result["generated_count"] == 1
+    assert result["files"][0]["source_kind"] == "manual"
+    assert result["files"][0]["source_identifier"] == "somaliland.svg"
+    root = ET.fromstring(result["generated"]["tc_somaliland.svg"])
+    assert root.attrib["width"] == "512"
+    assert root.attrib["height"] == "384"
+
+
+@pytest.mark.parametrize("manual_path", ["../escape.svg", "/absolute.svg", "bad.png", r"nested\\escape.svg"])
+def test_audit_rejects_unsafe_manual_svg_paths(manual_path: str) -> None:
+    result = audit_and_generate(
+        registry("tc_one"),
+        {"records": [{
+            "game_id": "tc_one", "source_flag_code": None,
+            "manual_svg_path": manual_path, "status": "reviewed",
+        }]},
+        {}, provenance(), {manual_path: svg()},
+    )
+    assert not result["ok"]
+    assert any("manual_svg_path must be a safe relative" in issue for issue in result["issues"])
