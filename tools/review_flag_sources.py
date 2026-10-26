@@ -26,6 +26,15 @@ EDGE_EVIDENCE_KEYS = {
     "Ashmore and Cartier Islands": "TCA_FLAG_EVIDENCE_URL_ASHMORE_CARTIER",
     "Siachen Glacier": "TCA_FLAG_EVIDENCE_URL_SIACHEN",
 }
+EDGE_SOURCE_CANDIDATES = {
+    "Falkland Islands": ("fk",),
+    "Kosovo": ("xk",),
+    "Somaliland": (),
+    "Northern Cyprus": (),
+    "Indian Ocean Territories": (),
+    "Ashmore and Cartier Islands": (),
+    "Siachen Glacier": (),
+}
 EDGE_CASES = (
     ("Falkland Islands", "The lipis source is expected to contain fk. Verify the territorial flag and add FK/FLK ISO metadata only from authoritative evidence."),
     ("Somaliland", "No official ISO 3166-1 alpha-2/alpha-3 assignment. Use a source flag only if the artwork is explicitly Somaliland's flag; otherwise review a manual SVG."),
@@ -128,12 +137,21 @@ def main() -> int:
                     decision = mapping_by_id.get(record.get("game_id"), {})
                     code = decision.get("source_flag_code")
                     status = decision.get("status", "missing mapping")
-                    availability = f"source code available: {code in source_codes}" if isinstance(code, str) else "no source code selected"
+                    candidates = EDGE_SOURCE_CANDIDATES[name]
+                    available_candidates = [candidate for candidate in candidates if candidate in source_codes]
+                    availability = ", ".join(f"{candidate} (available)" for candidate in available_candidates) or (
+                        ", ".join(f"{candidate} (absent)" for candidate in candidates) if candidates else "no safe automatic candidate"
+                    )
+                    if isinstance(code, str):
+                        availability += f"; selected mapping code {code} is {'available' if code in source_codes else 'absent'}"
                     evidence_url = config.get(EDGE_EVIDENCE_KEYS[name], "not configured")
                     edge_lines.append(f"| {name} | {record.get('game_id')} | {status} | {availability} | {evidence_url} | {note} |")
             else:
+                candidates = EDGE_SOURCE_CANDIDATES[name]
+                available_candidates = [candidate for candidate in candidates if candidate in source_codes]
+                availability = ", ".join(available_candidates) or "no safe automatic candidate"
                 evidence_url = config.get(EDGE_EVIDENCE_KEYS[name], "not configured")
-                edge_lines.append(f"| {name} | not found in current registry | unresolved | unknown | {evidence_url} | {note} |")
+                edge_lines.append(f"| {name} | not found in current registry | unresolved | {availability} | {evidence_url} | {note} |")
 
         report_path.parent.mkdir(parents=True, exist_ok=True)
         lines = [
@@ -154,7 +172,7 @@ def main() -> int:
             f"- ISO reference selected: {selected['path'] if selected.get('path') else 'none'}",
             f"- ISO note: {iso_note}",
             "", "## Seven edge cases", "",
-            "| Territory | game_id | Mapping status | Source availability | Evidence URL | Review guidance |",
+            "| Territory | game_id | Mapping status | Candidate source codes found | Evidence URL | Review guidance |",
             "|---|---|---|---|---|---|",
             *edge_lines,
             "", "## Unconfirmed or unusable mappings", "",
@@ -190,7 +208,7 @@ def main() -> int:
             print("- None")
         print("\nNo mappings were approved or changed.")
         return 0
-    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError, RuntimeError) as exc:
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError, RuntimeError, EOFError) as exc:
         print(f"Flag source review failed: {exc}", file=sys.stderr)
         return 1
 
