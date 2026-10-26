@@ -152,7 +152,7 @@ def main() -> int:
             "|---|---|---|---|---|",
         ]
         lines.extend(
-            f"| {name.replace('|', '\\|')} | {game_id} | {code or '—'} | {manual_path or '—'} | {status} |"
+            f"| {name} | {game_id} | {code or '—'} | {manual_path or '—'} | {status} |"
             for name, game_id, code, manual_path, status in unresolved
         )
         if not unresolved:
