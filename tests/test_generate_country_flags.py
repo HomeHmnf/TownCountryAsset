@@ -221,6 +221,8 @@ def test_audit_supports_reviewed_manual_svg_mapping_and_sizes_output() -> None:
     assert result["generated_count"] == 1
     assert result["files"][0]["source_kind"] == "manual"
     assert result["files"][0]["source_identifier"] == "somaliland.svg"
+    assert result["files"][0]["evidence"] == ["https://example.org/flag-evidence"]
+    assert result["files"][0]["decision_note"] == "Manually reviewed flag artwork"
     root = ET.fromstring(result["generated"]["tc_somaliland.svg"])
     assert root.attrib["width"] == "512"
     assert root.attrib["height"] == "384"
