@@ -192,7 +192,10 @@ def audit_and_generate(
             source_kind = "manual"
             source_identifier = manual_path
         else:
-            issues.append(f"{game_id}: provide a valid source_flag_code or manual_svg_path")
+            if code is not None and not (isinstance(code, str) and CODE_RE.fullmatch(code)):
+                issues.append(f"{game_id}: source_flag_code must be a lowercase two-letter code")
+            else:
+                issues.append(f"{game_id}: provide a valid source_flag_code or manual_svg_path")
             continue
         try:
             validate_svg(payload, f"{game_id} ({source_identifier})")
