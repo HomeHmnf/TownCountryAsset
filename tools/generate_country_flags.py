@@ -181,6 +181,9 @@ def audit_and_generate(
             source_kind = "repository"
             source_identifier = code
         elif isinstance(manual_path, str) and manual_path.strip():
+            if code is not None:
+                issues.append(f"{game_id}: choose either source_flag_code or manual_svg_path, not both")
+                continue
             safe_path = PurePosixPath(manual_path)
             if safe_path.is_absolute() or ".." in safe_path.parts or "\\" in manual_path or safe_path.suffix.lower() != ".svg":
                 issues.append(f"{game_id}: manual_svg_path must be a safe relative .svg path under the configured manual directory")
