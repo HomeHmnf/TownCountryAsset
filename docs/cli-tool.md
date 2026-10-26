@@ -25,6 +25,12 @@ Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without req
 | `TCA_FLAG_ASSET_OUTPUT_DIR` | Candidate flag asset output directory, keyed by persistent `game_id` |
 | `TCA_FLAG_MAPPING` | Explicit reviewed mapping from persistent IDs to source flag identifiers |
 | `TCA_FLAG_REPORT` | Flag mapping and asset coverage review report |
+| `TCA_FLAG_REVIEW_REPORT` | Flag-source discovery report listing available source codes, edge cases, and unresolved mappings |
+| `TCA_FLAG_MANUAL_DIR` | Directory for manually supplied SVGs when the source catalogue lacks a suitable flag |
+| `TCA_ISO_OFFICIAL_REFERENCE_URL` | Official ISO information page used by the interactive manual-reference reminder |
+| `TCA_ISO_MANUAL_REFERENCE_CSV` | Local path for the manually obtained ISO CSV reference |
+| `TCA_ISO_MANUAL_REFERENCE_ODS` | Optional local ODS workbook path for the manually obtained ISO reference |
+| `TCA_FLAG_EVIDENCE_URL_*` | Optional edge-case source URLs; evidence links are review aids, not approvals |
 | `TCA_GAME_DATA_OUTPUT_DIR` | Candidate game-data output directory |
 | `TCA_APPROVED_DATA_DIR` | Existing approved snapshot used only for comparison |
 | `TCA_REPORT_DIR` | Run summaries and comparison reports |
@@ -66,6 +72,28 @@ The CLI prefers the CSV file and falls back to parsing the ODS workbook if the C
 The selected source, validated row count, and fallback/quality warnings are recorded in the run summary. If neither file can be parsed, the CLI warns and continues the other pipeline stages without treating the manual reference as current.
 
 Do not use the workbook or this manually maintained snapshot as proof of an official ISO-hosted export. This manual snapshot is a comparison input only: it does not verify, approve, or write ISO assignments to `config/country_identity_registry.json`. The existing online ISO proposal refresh remains a separate workflow.
+
+## Flag discovery/review pipeline
+
+Run the discovery and review stage separately from asset generation:
+
+```fish
+uv run python tools/review_flag_sources.py
+```
+
+This refreshes the configured flag source, asks whether the current ISO reference was manually obtained and reviewed, prints instructions if that confirmation is missing, then writes `TCA_FLAG_REVIEW_REPORT` (default `reports/flag-source-review.md`). It prints the seven edge cases and every unresolved mapping to the terminal. The report includes source commit/checksum provenance, available source codes, manual SVG instructions, and unresolved mappings. It does not change mappings or approve decisions. The ISO prompt is an operator confirmation; the tool does not pretend to download a restricted ISO product automatically.
+
+For flags absent from the source catalogue, put a reviewed SVG under `TCA_FLAG_MANUAL_DIR` (default `raw_data/flags/manual/`). In `config/country_flag_mapping.json`, use `source_flag_code: null`, `manual_svg_path: "somaliland.svg"` (relative to that directory), and `status: "reviewed"` only after checking the flag identity, evidence URL, provenance, and licence. Never mark an entry reviewed solely because the SVG parses.
+
+## Build game flag assets (separate stage)
+
+After reviewing the report and explicitly reviewing the mapping records, run:
+
+```fish
+uv run python tools/generate_country_flags.py
+```
+
+This is the build stage. It generates `<game_id>.svg` files only when every registry identity has a valid reviewed source-code or manual-SVG mapping. Unconfirmed mappings block a complete build. Manual paths must be safe relative SVG paths under the configured manual directory. Generated SVGs retain the stable game-ID filenames and use the existing 512×384 output viewport. The command writes the detailed audit to `TCA_FLAG_REPORT`; it does not change the identity registry, approve mappings, update the approved snapshot, or write to TownCountryGame.
 
 ## Flag source refresh (staged rollout)
 
