@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Explicit reviewed mapping from persistent game_id to a lipis/flag-icons source identifier. Null codes and unreviewed status are intentional; no flags have been assigned by inference.",
+  "description": "Explicit reviewed mapping from persistent game_id to either a lipis/flag-icons source identifier or a reviewed manual SVG under TCA_FLAG_MANUAL_DIR. Null codes and unreviewed status are intentional; no flags have been assigned by inference.",
   "source": {
     "project": "lipis/flag-icons",
     "repository_url": "https://github.com/lipis/flag-icons",
