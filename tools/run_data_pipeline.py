@@ -273,7 +273,7 @@ def manual_iso_reference_warning(root: Path = ROOT, config: dict[str, str] | Non
     ]
     if selected["path"] is not None:
         notes.append(
-            f"Selected {selected['format'].upper()} reference: {selected['path'].relative_to(root).as_posix()} "
+            f"Selected {selected['format'].upper()} reference: {selected['path']} "
             f"({len(selected['rows'])} validated data rows)."
         )
     if selected["warning"]:
