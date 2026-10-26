@@ -11,7 +11,7 @@ import json
 import subprocess
 import sys
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from tools.generate_country_flags import load_latest_source, load_source_svgs, resolve_path
 from tools.run_data_pipeline import load_dotenv, select_manual_iso_reference
@@ -158,7 +158,15 @@ def main() -> int:
             code = decision.get("source_flag_code")
             manual_path = decision.get("manual_svg_path")
             valid_source = isinstance(code, str) and code in source_codes
-            valid_manual = isinstance(manual_path, str) and (manual_dir / manual_path).is_file()
+            safe_manual_path = PurePosixPath(manual_path) if isinstance(manual_path, str) else None
+            valid_manual = bool(
+                safe_manual_path
+                and not safe_manual_path.is_absolute()
+                and ".." not in safe_manual_path.parts
+                and "\\" not in manual_path
+                and safe_manual_path.suffix.lower() == ".svg"
+                and (manual_dir / safe_manual_path.as_posix()).is_file()
+            )
             if decision.get("status") != "reviewed" or not (valid_source or valid_manual):
                 unresolved.append((get_record_name(record), game_id, code, manual_path, decision.get("status", "missing mapping")))
 
