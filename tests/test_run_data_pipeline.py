@@ -238,3 +238,20 @@ def test_publish_candidate_keeps_existing_output_if_staging_rename_fails(tmp_pat
     assert staging_dir.exists()
     assert not list(tmp_path.glob(".candidate.backup-*"))
 
+
+
+def test_manual_iso_reference_uses_configured_paths(tmp_path):
+    reference = tmp_path / "custom" / "official.csv"
+    reference.parent.mkdir(parents=True)
+    reference.write_text(
+        "English short name,French short name,Alpha-2 code,Alpha-3 code,Numeric\n"
+        "Afghanistan,Afghanistan,AF,AFG,004\n",
+        encoding="utf-8",
+    )
+    selected = pipeline.select_manual_iso_reference(
+        tmp_path,
+        {"TCA_ISO_MANUAL_REFERENCE_CSV": str(reference),
+         "TCA_ISO_MANUAL_REFERENCE_ODS": str(tmp_path / "missing.ods")},
+    )
+    assert selected["path"] == reference
+    assert selected["rows"][0]["alpha2"] == "AF"
