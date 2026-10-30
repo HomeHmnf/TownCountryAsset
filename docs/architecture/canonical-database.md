@@ -1,6 +1,6 @@
 # Canonical SQLite database architecture
 
-**Status:** WP1.1 implemented; schema version 1 is available locally. No production-data migration or consumer cutover is included in WP1.1.
+**Status:** WP1.1 implementation committed; local database initialization and test execution await developer validation. No production-data migration or consumer cutover is included in WP1.1.
 **Canonical local path:** `data/canonical/town_country_asset.sqlite`
 **Schema versioning:** Local database ledger; migration SQL is version-controlled.
 
