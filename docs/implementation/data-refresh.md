@@ -380,3 +380,9 @@ uv run python tools/migrate_database.py --database /tmp/tca-wp1-1.sqlite
 uv run python -m compileall -q tools/database tools/migrate_database.py
 ```
 
+
+
+
+### WP1.1 validation correction — 2026-10-30
+
+The first developer-run `tests/test_database_schema.py` attempt found that both the migration manager and `001_initial_schema.sql` created `schema_migrations`. This caused the fresh-database test to fail and nine fixture setups to error; two tests passed. Removed the migration's duplicate ledger creation so the migration manager exclusively owns the local version ledger. This correction is committed, but it has not been locally validated yet. Pull the latest branch and rerun the focused database tests, migration CLI, and compile check before proceeding to WP1.2.
