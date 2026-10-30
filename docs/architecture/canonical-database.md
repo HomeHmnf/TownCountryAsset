@@ -68,6 +68,9 @@ SQLite database, WAL, and shared-memory files are local state and ignored by Git
 
 ## Migration policy
 
+The migration manager owns the `schema_migrations` ledger and creates it before applying pending migration files. Numbered migration SQL must not create or modify this bookkeeping table; it defines application schema only. This avoids duplicate ledger creation on a fresh database.
+
+
 Migrations are numbered, sequential, immutable once applied, and committed with the code that uses them. Each migration runs in its own `BEGIN IMMEDIATE` transaction; schema DDL and the migration-ledger entry commit together. A failed migration is rolled back. A database with a newer schema version than this checkout is rejected without downgrade. There is no automatic destructive downgrade. Schema changes require a new migration file and tests.
 
 ## Validation
