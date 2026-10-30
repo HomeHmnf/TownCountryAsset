@@ -356,3 +356,27 @@ Automation boundary:
 - Workbook generation and source refreshes do not approve ISO assignments, Persian labels, entity classifications, or flags. Human review, stable-ID preservation, and the separate owner decision gate remain mandatory.
 
 The new pipeline integration and documentation have been committed to `work/compiler-hardening`. Run the focused pipeline/workbook tests and the full test suite locally before treating this automation change as validated. No live pipeline run or candidate promotion was performed as part of the code edit.
+
+
+## WP1 — Canonical SQLite storage
+
+**Overall status:** In progress. The implementation is staged and approval-gated; the existing JSON pipeline remains operational.
+
+### WP1.1 — Schema, connection layer, and local version management
+
+**Status:** Implemented in `work/compiler-hardening`; local test execution is pending in the developer checkout.
+
+Added the version 1 SQL schema at `migrations/001_initial_schema.sql`, connection configuration at `tools/database/connection.py`, migration management at `tools/database/schema.py`, and the initialization CLI at `tools/migrate_database.py`. Added `tests/test_database_schema.py` and documented the architecture in `docs/architecture/canonical-database.md`.
+
+The schema covers country identity, current and historical source identifiers, names/aliases, regions, typed source attributes, low/medium/high geometries, import provenance/runs, current statistics, selective game data, flags, and deduplicated review proposals. Constraints preserve exact persistent ID format, candidate defaults, foreign-key integrity, unique current source IDs, canonical-name uniqueness, ISO syntax and verified-code requirements, valid JSON, geometry profiles, current-statistic uniqueness, proposal fingerprints, and explicit review timestamps.
+
+Database versioning is local. Numbered migration SQL is tracked in Git, while the database file and SQLite sidecars are ignored. Each migration applies transactionally; failed DDL and its ledger update roll back together. Future unsupported schema versions fail safely. WP1.1 creates schema only: it does not import production data, change pipeline consumers, approve review candidates, or modify approved JSON snapshots.
+
+Run these checks from the developer checkout and append the actual results before marking this stage locally validated:
+
+```fish
+uv run pytest -v tests/test_database_schema.py
+uv run python tools/migrate_database.py --database /tmp/tca-wp1-1.sqlite
+uv run python -m compileall -q tools/database tools/migrate_database.py
+```
+

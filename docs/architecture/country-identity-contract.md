@@ -117,3 +117,14 @@ The ISO proposal generator is intentionally separate from registry validation an
 7. Re-run the registry audit and tests after any reviewed registry changes.
 
 The proposal generator never writes to `config/country_identity_registry.json`. A valid code and a name match do not by themselves prove that an entity belongs in ISO 3166-1 or that the assignment is correct. The ISO Maintenance Agency notes that official code elements are available through its Online Browsing Platform and that codes are not assigned to every geopolitical area: https://www.iso.org/iso-3166-country-codes.html.
+
+
+## Canonical SQLite storage (WP1)
+
+**Status:** WP1.1 schema and local migration tooling implemented; production-data migration is not yet authorized or implemented.
+
+The planned canonical structured store is local SQLite at `data/canonical/town_country_asset.sqlite`. The initial schema and constraints are defined in [canonical database architecture](canonical-database.md) and implemented by `migrations/001_initial_schema.sql`. Existing JSON identity registry and generated assets remain available during the parallel migration.
+
+The database preserves the registry's persistent `game_id` as its primary identity key. Its accepted shape is exactly `tc_` followed by 32 lowercase hexadecimal characters. Imported records default to candidate status. Natural Earth source IDs remain dataset-scoped current/historical references; ISO values remain nullable attributes with independent verification status. No WP1.1 operation imports, approves, rewrites, or deletes existing registry records.
+
+The local schema ledger records migration versions. Migration SQL and tooling are committed; database binaries and SQLite WAL/SHM sidecars are ignored by Git. Later WP1 stages will import the registry and source data, verify parity, and only then consider database-backed consumers.

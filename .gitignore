@@ -16,3 +16,9 @@ sources/*
 !sources/.gitkeep
 # generated/*
 # !generated/.gitkeep
+
+# Local canonical SQLite database and transient SQLite sidecars
+data/canonical/*.sqlite
+data/canonical/*.sqlite3
+*.sqlite-wal
+*.sqlite-shm

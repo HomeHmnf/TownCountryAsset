@@ -14,6 +14,8 @@ Use GDScript first. Introducing C# would create a mixed-language project and doe
 
 The compiler accepts a local Natural Earth Admin 0 Countries 1:50m ZIP, shapefile, or extracted shapefile directory. It does not download data automatically or fabricate missing ISO codes. ZIP extraction rejects traversal paths and symbolic links, and ambiguous inputs containing multiple shapefiles fail rather than selecting an arbitrary layer. The configured stable-ID field must exist and contain unique, usable values; the compiler fails instead of generating order-dependent IDs or silently suffixing duplicates. Metadata and the manifest record source fields and SHA-256 fingerprints of both configuration files.
 
+SQLite is the planned canonical structured store for identity, source provenance, metadata, geometry, review evidence, selected game data, and current statistics. The migration is deliberately parallel: existing JSON/configuration assets and compiler behavior remain available until database parity and consumer cutover are separately approved. See the [canonical database architecture](docs/architecture/canonical-database.md) and [database implementation log](docs/implementation/database.md).
+
 ## Quick start (Linux / fish)
 
 1. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if needed:
@@ -77,6 +79,18 @@ All URLs and output/input directories are configurable through `.env` or process
 Flag source settings are `TCA_FLAG_SOURCE_URL`, `TCA_FLAG_SOURCE_REF`, `TCA_FLAG_SOURCE_DIR`, and `TCA_FLAG_REFRESH_ENABLED`. The explicit reviewed mapping lives in `config/country_flag_mapping.json`; the source refresh and generator are also available independently as `tools/refresh_flag_source.py` and `tools/generate_country_flags.py`. See the [flag CLI details](docs/cli-tool.md) and [implementation log](docs/implementation/data-refresh.md).
 
 This workflow prepares data in **TownCountryAsset only**. It does not update TownCountryGame, promote candidate outputs over approved assets, regenerate the identity registry, or verify ISO proposals automatically. See [CLI documentation](docs/cli-tool.md) and the [implementation log](docs/implementation/data-refresh.md).
+
+## Local canonical database schema
+
+WP1.1 provides the local SQLite schema and migration runner. Initialize or upgrade the schema without importing production data:
+
+```fish
+uv run python tools/migrate_database.py
+```
+
+The default path is `data/canonical/town_country_asset.sqlite`; the database and SQLite sidecar files are local and ignored by Git. To use a temporary database, pass `--database /tmp/tca-test.sqlite`. This command applies schema migrations and checks SQLite integrity/foreign keys. It does not migrate the identity registry, generated assets, or game data.
+
+See [canonical database architecture](docs/architecture/canonical-database.md) for the schema contract and migration policy.
 
 ## Common development commands
 
