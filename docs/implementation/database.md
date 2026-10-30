@@ -33,3 +33,9 @@ uv run python -m compileall -q tools/database tools/migrate_database.py
 ```
 
 Record the actual local output here after running these commands. Do not mark WP1.1 locally validated until they pass in the developer checkout.
+
+### WP1.1 migration-ledger correction — 2026-10-30
+
+The first local validation attempt exposed a duplicate ledger definition: the migration manager creates `schema_migrations` before applying pending migrations, while migration 001 also attempted to create it. Removed the duplicate `CREATE TABLE schema_migrations` statement from migration 001. The migration manager is the sole owner of this local bookkeeping table; migration SQL defines application schema only.
+
+The existing fresh-database, repeat-application, and failed-migration rollback tests exercise this boundary. The reported run failed during migration setup (1 failed, 9 setup errors, 2 passed); this is a confirmed implementation defect, not a passing validation. Re-run the focused tests, initialization CLI, and compile check after pulling this correction. WP1.1 remains locally unvalidated until the developer reports successful results.
