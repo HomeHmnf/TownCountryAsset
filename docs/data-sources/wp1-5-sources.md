@@ -14,51 +14,51 @@ Raw source downloads remain local and are not committed. Git tracks source contr
 
 ## Field/source matrix
 
-| Field | Canonical key | Candidate source | Storage | Important contract |
+| Field | Canonical key | Central source ID | Storage | Important contract |
 |---:|---|---|---|---|
-| 1 | population | UN WPP 2024 | scalar | Reference date and estimate status |
-| 2 | population_growth | UN WPP 2024 | scalar | Annual rate and exact period |
-| 3 | population_density | World Bank WDI | scalar | Prefer published indicator; derivation requires aligned population and land-area periods |
-| 6 | median_age | UN WPP 2024 | scalar | Reference year |
-| 12 | age_distribution | UN WPP 2024 | structured | Preserve age-band boundaries, sex scope and units |
-| 13 | sex_distribution | UN WPP 2024 | structured | Preserve source categories and reference year |
-| 14 | net_migration | UN WPP 2024 | scalar | Select either net migrant count or rate; never mix |
-| 15 | gdp | IMF WEO | scalar | Current-price GDP; retain currency/scale and actual/estimate/projected status |
-| 16 | gdp_per_capita | IMF WEO | scalar | Current-price per-capita measure |
-| 18 | gdp_ppp | IMF WEO | scalar | PPP basis and WEO vintage |
-| 20 | inflation | IMF WEO | scalar | Distinguish annual-average from end-period CPI |
-| 21 | unemployment | IMF WEO | scalar | Preserve source definition and status |
-| 22 | labour_force | ILOSTAT | scalar | Age/sex scope and reference year |
-| 33 | total_area | World Bank WDI | scalar | Surface area includes inland water |
-| 34 | land_area | World Bank WDI | scalar | Excludes inland water |
-| 41 | climate_classification | Beck et al. Köppen-Geiger V3 | structured | Spatial overlay; retain multiple classes and area shares |
-| 42 | forest_area | FAO FRA 2025 | scalar | Forest definition and reference year |
-| 45 | natural_resources | USGS MCS 2026 plus specialist sources | structured | Fixed candidate catalogue; distinguish occurrence, reserves, resources and production |
-| 48 | religions | Pew Research Center | structured | Seven broad categories; retain estimate year and rounded-count guidance |
-| 51 | human_development_index | UNDP HDR | scalar | HDI score and reference year |
-| 52 | internet_usage | ITU | scalar | Individuals using the Internet; indicator definition and year |
-| 54 | healthcare_expenditure | WHO GHED | scalar | Expenditure measure and denominator must be explicit |
-| 55 | poverty_rate | World Bank PIP | scalar | Poverty line, welfare aggregate and survey year |
-| 56 | gini_index | World Bank PIP | scalar | Preserve original scale and survey year |
-| 57 | government_system | Official national sources | structured | Country-specific authoritative evidence and effective date |
-| 58 | government_structure | Official national sources | structured | Explicit executive/legislative/judicial and territorial definitions |
-| 62 | political_stability | World Bank WGI | scalar | Keep estimate and 0–100 score as separate keys/scales |
-| 65 | capital_city | Official national sources | structured | Official designation and effective date; not necessarily largest city |
-| 66 | international_memberships | Official organization registers | structured | Organization, status, as-of date and source |
-| 67 | active_military_personnel | IISS Military Balance candidate | scalar | Active-personnel definition and source edition |
-| 69 | military_expenditure_gdp | SIPRI | scalar | Military burden, year and edition |
-| 70 | military_reserve_personnel | IISS Military Balance candidate | scalar | Reserve definition and mobilization category |
-| 71 | defence_structure | IISS Military Balance candidate | structured | Branch/service structure; no operationally sensitive detail |
-| 73 | co2_emissions_per_capita | Global Carbon Project candidate | scalar | Define territorial fossil CO2 versus broader greenhouse gases |
-| 75 | energy_consumption | Energy Institute | scalar | Primary versus final energy and unit |
-| 76 | electricity_production | Energy Institute | scalar | Gross/net generation and unit |
-| 77 | oil_production | Energy Institute | scalar | Crude oil/liquids scope and unit |
-| 78 | natural_gas_production | Energy Institute | scalar | Gross/marketed gas definition and unit |
-| 79 | protected_areas | Protected Planet candidate | structured | Decide aggregate-only versus site-level data after rights review |
-| 80 | water_resources | FAO AQUASTAT | scalar | Select internal versus total renewable freshwater |
-| 81 | water_stress | FAO AQUASTAT | scalar | Preserve denominator, method and reporting year |
+| 1 | population | `un_wpp_2024` | scalar | Reference date and estimate status |
+| 2 | population_growth | `un_wpp_2024` | scalar | Annual rate and exact period |
+| 3 | population_density | `world_bank_wdi` | scalar | Prefer published indicator; derivation requires aligned population and land-area periods |
+| 6 | median_age | `un_wpp_2024` | scalar | Reference year |
+| 12 | age_distribution | `un_wpp_2024` | structured | Preserve age-band boundaries, sex scope and units |
+| 13 | sex_distribution | `un_wpp_2024` | structured | Preserve source categories and reference year |
+| 14 | net_migration | `un_wpp_2024` | scalar | Select either net migrant count or rate; never mix |
+| 15 | gdp | `imf_weo` | scalar | Current-price GDP; retain currency/scale and actual/estimate/projected status |
+| 16 | gdp_per_capita | `imf_weo` | scalar | Current-price per-capita measure |
+| 18 | gdp_ppp | `imf_weo` | scalar | PPP basis and WEO vintage |
+| 20 | inflation | `imf_weo` | scalar | Distinguish annual-average from end-period CPI |
+| 21 | unemployment | `imf_weo` | scalar | Preserve source definition and status |
+| 22 | labour_force | `ilostat` | scalar | Age/sex scope and reference year |
+| 33 | total_area | `world_bank_wdi` | scalar | Surface area includes inland water |
+| 34 | land_area | `world_bank_wdi` | scalar | Excludes inland water |
+| 41 | climate_classification | `koppen_beck_2023` | structured | Spatial overlay; retain multiple classes and area shares |
+| 42 | forest_area | `fao_fra_2025` | scalar | Forest definition and reference year |
+| 45 | natural_resources | `usgs_mcs_2026` | structured | Fixed candidate catalogue; distinguish occurrence, reserves, resources and production |
+| 48 | religions | `pew_religion_2020` | structured | Seven broad categories; retain estimate year and rounded-count guidance |
+| 51 | human_development_index | `undp_hdr` | scalar | HDI score and reference year |
+| 52 | internet_usage | `itu` | scalar | Individuals using the Internet; indicator definition and year |
+| 54 | healthcare_expenditure | `who_ghed` | scalar | Expenditure measure and denominator must be explicit |
+| 55 | poverty_rate | `world_bank_pip` | scalar | Poverty line, welfare aggregate and survey year |
+| 56 | gini_index | `world_bank_pip` | scalar | Preserve original scale and survey year |
+| 57 | government_system | `official_government_sources` | structured | Country-specific authoritative evidence and effective date |
+| 58 | government_structure | `official_government_sources` | structured | Explicit executive/legislative/judicial and territorial definitions |
+| 62 | political_stability | `world_bank_wgi` | scalar | Keep estimate and 0–100 score as separate keys/scales |
+| 65 | capital_city | `official_government_sources` | structured | Official designation and effective date; not necessarily largest city |
+| 66 | international_memberships | `official_organization_registers` | structured | Organization, status, as-of date and source |
+| 67 | active_military_personnel | `iiss_military_balance` | scalar | Active-personnel definition and source edition |
+| 69 | military_expenditure_gdp | `sipri_milex` | scalar | Military burden, year and edition |
+| 70 | military_reserve_personnel | `iiss_military_balance` | scalar | Reserve definition and mobilization category |
+| 71 | defence_structure | `iiss_military_balance` | structured | Branch/service structure; no operationally sensitive detail |
+| 73 | co2_emissions_per_capita | `global_carbon_project` | scalar | Define territorial fossil CO2 versus broader greenhouse gases |
+| 75 | energy_consumption | `energy_institute` | scalar | Primary versus final energy and unit |
+| 76 | electricity_production | `energy_institute` | scalar | Gross/net generation and unit |
+| 77 | oil_production | `energy_institute` | scalar | Crude oil/liquids scope and unit |
+| 78 | natural_gas_production | `energy_institute` | scalar | Gross/marketed gas definition and unit |
+| 79 | protected_areas | `protected_planet` | structured | Decide aggregate-only versus site-level data after rights review |
+| 80 | water_resources | `fao_aquastat` | scalar | Select internal versus total renewable freshwater |
+| 81 | water_stress | `fao_aquastat` | scalar | Preserve denominator, method and reporting year |
 
-The machine-readable field contract is `config/wp1_5_data_sources.json`. The candidate natural-resource vocabulary is in `config/wp1_5_resource_catalog.json`; it is not a claim of complete country coverage.
+The machine-readable field contract is `config/wp1_5_data_sources.json`; its `primary_source` values are stable IDs in the project-wide authoritative registry, `config/data_sources.json`. Source names, endpoints, releases, license metadata and acquisition settings are maintained only in that central registry. The candidate natural-resource vocabulary is in `config/wp1_5_resource_catalog.json`; it is not a claim of complete country coverage.
 
 ## Coverage and methodology constraints
 
@@ -76,6 +76,8 @@ The machine-readable field contract is `config/wp1_5_data_sources.json`. The can
 - **Government and memberships:** no single global source is assumed. Record the exact official authority, URL, access date, status and effective date for each record.
 
 ## Acquisition readiness
+
+Source acquisition is now managed through the project-wide registry and CLI documented in [source management](source-management.md). This WP1.5 document records field-specific coverage and methodology constraints; it is not a second source catalogue.
 
 Every candidate source must pass a source-specific adapter review before production import:
 
