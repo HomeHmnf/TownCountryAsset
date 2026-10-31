@@ -43,6 +43,16 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
+def _parse_aware_timestamp(value: str, label: str) -> datetime:
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise StatisticsImportError(f"{label} must be an ISO-8601 timestamp") from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise StatisticsImportError(f"{label} must include a timezone")
+    return parsed
+
+
 def _text(value: Any, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise StatisticsImportError(f"{label} must be a non-empty string")
@@ -300,6 +310,92 @@ def import_wp1_5_dataset(
             if actual != expected:
                 raise StatisticsImportError("Existing dataset import metadata conflicts with source manifest")
 
+            # A checksum identifies immutable source bytes. Replaying those bytes
+            # must reproduce the exact current rows from that import; it must not
+            # append observations omitted by a changed normalizer or resurrect
+            # rows that a newer release has already superseded.
+            for mapping in crosswalk.mappings:
+                existing_mapping = connection.execute(
+                    """SELECT game_id, is_current FROM country_sources
+                       WHERE dataset = ? AND source_id = ?""",
+                    (source_key, mapping.source_id),
+                ).fetchone()
+                if (
+                    existing_mapping is None
+                    or existing_mapping["game_id"] != mapping.game_id
+                    or existing_mapping["is_current"] != 1
+                ):
+                    raise StatisticsImportError(
+                        f"Existing import crosswalk no longer matches source mapping {mapping.source_id}"
+                    )
+
+            scalar_count = 0
+            structured_count = 0
+            for row in validated:
+                field = row["field"]
+                reference = row["source_reference"] or source_url
+                if field["storage"] == "scalar":
+                    expected_values = (
+                        row["value"], row["unit"], None, row["period"], row["status"],
+                        reference, release, row["methodology"], retrieved_at, import_id,
+                    )
+                    existing = connection.execute(
+                        """SELECT value, unit, observed_at, observation_period, value_status,
+                                  source_reference, source_version, methodology, retrieved_at, import_id
+                           FROM current_statistics WHERE game_id = ? AND statistic_key = ?""",
+                        (row["game_id"], field["key"]),
+                    ).fetchone()
+                    if existing is None or tuple(existing) != expected_values:
+                        raise StatisticsImportError(
+                            f"Refusing non-newer or altered replay of source release for {row['game_id']}/{field['key']}"
+                        )
+                    scalar_count += 1
+                else:
+                    expected_values = (
+                        _canonical_json({"value": row["value"], "unit": row["unit"]}),
+                        row["status"], row["period"], reference, release,
+                        row["methodology"], retrieved_at, import_id,
+                    )
+                    existing = connection.execute(
+                        """SELECT payload_json, value_status, observation_period, source_reference,
+                                  source_version, methodology, retrieved_at, import_id
+                           FROM selected_game_data WHERE game_id = ? AND data_category = 'wp1_5'
+                             AND data_key = ?""",
+                        (row["game_id"], field["key"]),
+                    ).fetchone()
+                    if existing is None or tuple(existing) != expected_values:
+                        raise StatisticsImportError(
+                            f"Refusing non-newer or altered replay of source release for {row['game_id']}/{field['key']}"
+                        )
+                    structured_count += 1
+
+            stored_scalar = connection.execute(
+                "SELECT COUNT(*) FROM current_statistics WHERE import_id = ?", (import_id,)
+            ).fetchone()[0]
+            stored_structured = connection.execute(
+                "SELECT COUNT(*) FROM selected_game_data WHERE import_id = ?", (import_id,)
+            ).fetchone()[0]
+            if stored_scalar != scalar_count or stored_structured != structured_count:
+                raise StatisticsImportError(
+                    "Refusing replay because normalized observations do not exactly match the original import"
+                )
+            issues = validate_database(connection)
+            if issues:
+                raise StatisticsImportError("Database validation failed: " + "; ".join(issues))
+            connection.commit()
+            return {
+                "dataset": source_key,
+                "release": release,
+                "import_id": import_id,
+                "observations": len(validated),
+                "scalar_observations": scalar_count,
+                "structured_observations": structured_count,
+                "crosswalk_mappings": len(crosswalk.mappings),
+                "integrity": "ok",
+                "foreign_keys": "ok",
+                "idempotent": True,
+            }
+
         # Persist explicit provider IDs as source provenance.
         # A changed mapping requires a separate identity-review operation.
         for mapping in crosswalk.mappings:
@@ -345,10 +441,17 @@ def import_wp1_5_dataset(
                         raise StatisticsImportError(
                             f"Existing statistic conflicts with a different source: {row['game_id']}/{field['key']}"
                         )
-                    if existing["retrieved_at"] and retrieved_at <= existing["retrieved_at"]:
-                        raise StatisticsImportError(
-                            f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
+                    if existing["retrieved_at"]:
+                        current_timestamp = _parse_aware_timestamp(
+                            existing["retrieved_at"], "existing observation retrieved_at"
                         )
+                        incoming_timestamp = _parse_aware_timestamp(
+                            retrieved_at, "incoming manifest retrieved_at"
+                        )
+                        if incoming_timestamp <= current_timestamp:
+                            raise StatisticsImportError(
+                                f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
+                            )
                     connection.execute(
                         """UPDATE current_statistics SET value=?, unit=?, observed_at=?, observation_period=?,
                                   value_status=?, source_reference=?, source_version=?, methodology=?,
@@ -388,10 +491,17 @@ def import_wp1_5_dataset(
                         raise StatisticsImportError(
                             f"Existing structured data conflicts with a different source: {row['game_id']}/{field['key']}"
                         )
-                    if existing["retrieved_at"] and retrieved_at <= existing["retrieved_at"]:
-                        raise StatisticsImportError(
-                            f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
+                    if existing["retrieved_at"]:
+                        current_timestamp = _parse_aware_timestamp(
+                            existing["retrieved_at"], "existing observation retrieved_at"
                         )
+                        incoming_timestamp = _parse_aware_timestamp(
+                            retrieved_at, "incoming manifest retrieved_at"
+                        )
+                        if incoming_timestamp <= current_timestamp:
+                            raise StatisticsImportError(
+                                f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
+                            )
                     connection.execute(
                         """UPDATE selected_game_data SET payload_json=?, value_status=?, observation_period=?,
                                   source_reference=?, source_version=?, methodology=?, retrieved_at=?, import_id=?
@@ -422,6 +532,7 @@ def import_wp1_5_dataset(
             "crosswalk_mappings": len(crosswalk.mappings),
             "integrity": "ok",
             "foreign_keys": "ok",
+            "idempotent": False,
         }
     except Exception:
         if connection.in_transaction:
