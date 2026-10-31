@@ -282,3 +282,20 @@ def test_rejects_timezone_naive_retrieval_timestamp(tmp_path):
             observations_path=observations, crosswalk_path=crosswalk,
             manifest_path=manifest, database_path=database,
         )
+
+
+def test_uses_contract_methodology_when_row_omits_it(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(observations.read_text())
+    payload["observations"][0].pop("methodology")
+    observations.write_text(json.dumps(payload))
+    import_wp1_5_dataset(
+        observations_path=observations, crosswalk_path=crosswalk,
+        manifest_path=manifest, database_path=database,
+    )
+    connection = sqlite3.connect(database)
+    method = connection.execute("SELECT methodology FROM current_statistics").fetchone()[0]
+    assert method and method.strip()
+    connection.close()
