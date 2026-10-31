@@ -199,6 +199,6 @@ def test_future_database_schema_fails_safely(tmp_path):
     (migrations / "001_initial.sql").write_text("CREATE TABLE sample (id INTEGER);", encoding="utf-8")
     with connect_database(":memory:") as connection:
         apply_migrations(connection, migrations)
-        connection.execute("INSERT INTO schema_migrations(version, name, applied_at) VALUES (2, 'future', 'now')")
+        connection.execute("INSERT INTO schema_migrations(version, name, applied_at) VALUES (4, 'future', 'now')")
         with pytest.raises(MigrationError, match="newer than supported"):
             apply_migrations(connection, migrations)
