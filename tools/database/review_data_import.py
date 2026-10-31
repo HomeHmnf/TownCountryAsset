@@ -99,6 +99,9 @@ def _validate_iso(
 ) -> dict[str, dict[str, Any]]:
     provenance = _read_json(provenance_path)
     reference_hash = _sha(reference_path)
+    raw_hash = provenance.get("raw_sha256")
+    if not isinstance(raw_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", raw_hash):
+        raise ReviewDataImportError("ISO provenance has no valid raw response SHA-256")
     if provenance.get("normalized_sha256") != reference_hash:
         raise ReviewDataImportError("ISO normalized reference checksum does not match provenance")
     if provenance.get("normalized_reference") and Path(provenance["normalized_reference"]).name != reference_path.name:
@@ -178,7 +181,7 @@ def _validate_persian(
         if row.get("source_id") != source_id or row.get("english_name") != record["names"]["en"]:
             raise ReviewDataImportError(f"{gid}: Persian candidate identity/source mapping mismatch")
         qid, label = row.get("wikidata_qid") or None, row.get("candidate_persian_name") or None
-        if qid is not None and not re.fullmatch(r"Q[1-9][0-9]*", qid):
+        if qid is not None and (not isinstance(qid, str) or not re.fullmatch(r"Q[1-9][0-9]*", qid)):
             raise ReviewDataImportError(f"{gid}: malformed Wikidata QID {qid!r}")
         if label is not None and (not isinstance(label, str) or not label.strip()):
             raise ReviewDataImportError(f"{gid}: Persian candidate label must be non-empty text")
@@ -281,6 +284,8 @@ def import_review_data(
     iso = _validate_iso(registry, Path(iso_reference_path), Path(iso_provenance_path), Path(iso_proposals_path))
     persian = _validate_persian(registry, Path(persian_candidates_path), Path(persian_provenance_path))
     flags_payload = _read_json(Path(flag_mapping_path))
+    if flags_payload.get("schema_version") != 1 or not isinstance(flags_payload.get("source"), dict):
+        raise ReviewDataImportError("Flag mapping has an unsupported schema or missing source metadata")
     flag_rows = flags_payload.get("records")
     if not isinstance(flag_rows, list) or len(flag_rows) != len(by_id):
         raise ReviewDataImportError("Flag mapping records must cover the identity registry exactly")
@@ -294,6 +299,11 @@ def import_review_data(
         code = row.get("source_flag_code")
         if code is not None and (not isinstance(code, str) or not re.fullmatch(r"[a-z]{2}", code)):
             raise ReviewDataImportError(f"{gid}: source_flag_code must be null or two lowercase letters")
+        manual_path = row.get("manual_svg_path")
+        if manual_path is not None and (not isinstance(manual_path, str) or not manual_path.strip()):
+            raise ReviewDataImportError(f"{gid}: manual_svg_path must be null or non-empty text")
+        if code is not None and manual_path is not None:
+            raise ReviewDataImportError(f"{gid}: choose source_flag_code or manual_svg_path, not both")
         evidence = row.get("evidence", [])
         if not isinstance(evidence, list) or any(not isinstance(item, str) or not item.strip() for item in evidence):
             raise ReviewDataImportError(f"{gid}: flag evidence must be an array of non-empty strings")
