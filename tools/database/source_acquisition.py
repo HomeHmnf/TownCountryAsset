@@ -18,9 +18,9 @@ from urllib.parse import urlparse
 
 from tools.database.connection import REPOSITORY_ROOT
 
-DEFAULT_CONFIG = REPOSITORY_ROOT / "config" / "wp1_5_data_sources.json"
-DEFAULT_RAW_ROOT = REPOSITORY_ROOT / "raw_data" / "wp1_5"
-DEFAULT_MANIFEST_ROOT = REPOSITORY_ROOT / "data_manifests" / "wp1_5"
+DEFAULT_CONFIG = REPOSITORY_ROOT / "config" / "data_sources.json"
+DEFAULT_RAW_ROOT = REPOSITORY_ROOT / "raw_data" / "sources"
+DEFAULT_MANIFEST_ROOT = REPOSITORY_ROOT / "data_manifests" / "sources"
 SAFE_COMPONENT = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$")
 
 
@@ -45,10 +45,10 @@ def _load_config(path: Path) -> dict[str, Any]:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise SourceAcquisitionError(f"Cannot read source contract {path}: {exc}") from exc
-    if not isinstance(payload, dict) or payload.get("work_package") != "WP1.5":
-        raise SourceAcquisitionError("Unsupported WP1.5 source contract")
+    if not isinstance(payload, dict) or payload.get("schema_version") != 1:
+        raise SourceAcquisitionError("Unsupported project source registry")
     if not isinstance(payload.get("sources"), dict):
-        raise SourceAcquisitionError("Source contract must define a sources object")
+        raise SourceAcquisitionError("Project source registry must define a sources object")
     return payload
 
 
@@ -91,7 +91,7 @@ def acquire_source_snapshot(
     config = _load_config(Path(config_path))
     sources = config["sources"]
     if source_key not in sources:
-        raise SourceAcquisitionError(f"Unknown source key in WP1.5 contract: {source_key}")
+        raise SourceAcquisitionError(f"Unknown source key in project source registry: {source_key}")
     source = sources[source_key]
 
     raw_dir = Path(raw_root) / source_key / release
@@ -139,6 +139,7 @@ def acquire_source_snapshot(
     manifest = {
         "manifest_schema_version": 1,
         "work_package": "WP1.5",
+        "source_registry": "config/data_sources.json",
         "source_key": source_key,
         "source_name": source.get("name"),
         "release": release,
