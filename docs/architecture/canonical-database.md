@@ -1,6 +1,6 @@
 # Canonical SQLite database architecture
 
-**Status:** WP1.1–WP1.4 implemented and locally validated by the owner. WP1.5 (selective game data and current statistics) is the next planning stage. No consumer cutover is included.
+**Status:** WP1.1–WP1.4 implemented and locally validated by the owner. WP1.5 is in progress; schema v3 and candidate source contracts are committed but await owner-side validation. No consumer cutover is included.
 **Canonical local path:** `data/canonical/town_country_asset.sqlite`
 **Schema versioning:** Local database ledger; migration SQL is version-controlled.
 
@@ -18,9 +18,9 @@ Persistent `game_id` values remain the internal identity. They are exactly `tc_`
 - `tools/migrate_database.py` creates or upgrades the local database and runs SQLite integrity and foreign-key checks.
 - The default database path is repository-relative: `data/canonical/town_country_asset.sqlite`. A `--database` override supports isolated testing and alternate local locations.
 
-## Schema v1 table contract
+## Schema v1–v3 table contract
 
-Schema migration 002 upgrades the local database to schema version 2 by adding `countries.entity_type_status` (`unreviewed` or `reviewed`). The v1 table inventory below remains the base table contract; v2 adds review-state enforcement without introducing parallel domain-specific review tables.
+Schema migration 002 upgrades the local database to schema version 2 by adding `countries.entity_type_status` (`unreviewed` or `reviewed`). Schema migration 003 upgrades to version 3 with explicit statistic value status and source-observation metadata. The v1 table inventory below remains the base table contract; later migrations extend it without introducing parallel domain-specific review tables.
 
 | Table | Responsibility |
 |---|---|
@@ -38,7 +38,7 @@ Schema migration 002 upgrades the local database to schema version 2 by adding `
 | `country_flags` | Flag source mapping, review status, decision note and evidence |
 | `review_proposals` | Deduplicated ISO/localization/entity/flag proposals and evidence |
 
-The exact SQL definitions and constraints are authoritative in `migrations/001_initial_schema.sql`.
+The base SQL definitions are authoritative in `migrations/001_initial_schema.sql`; review-domain changes are in `migrations/002_review_domain_status.sql`; WP1.5 statistic provenance changes are in `migrations/003_statistics_provenance.sql`.
 
 ## Integrity and review constraints
 
@@ -50,7 +50,8 @@ The exact SQL definitions and constraints are authoritative in `migrations/001_i
 - Candidate is the default record/import/proposal status. Approved proposals require a review timestamp. A reviewed flag requires an approved flag proposal.
 - Schema v2 requires a matching approved `entity_type` proposal before `entity_type_status` can become `reviewed`, a matching approved Persian localization proposal before `localization_status` can become `reviewed`, and a matching approved ISO proposal before `iso_assignment_status` can become `verified`. The existing alpha-2/alpha-3 requirement remains in force.
 - Geometry profiles are limited to low, medium, and high. Geometry and selected game-data payloads must be valid JSON; geometry and provenance hashes must be 64-character lowercase SHA-256 strings.
-- Current statistics are unique by country/statistic key. Historical statistics are not part of this current-only table contract.
+- Current statistics are unique by country/statistic key. Historical statistics are not part of this current-only table contract. Schema v3 permits explicit SQL NULL only when `value_status` is `unavailable` or `not_applicable`; non-null values must be `observed`, `estimated` or `projected`. It records observation period, source reference/version, methodology and retrieval timestamp separately from the observation date.
+- Schema v3 adds matching provenance fields to `selected_game_data`; structured payloads remain valid JSON and retain import-level provenance.
 - Proposal fingerprints make repeated imports idempotent at the proposal-record level.
 
 ## Local operation
@@ -162,3 +163,20 @@ WP1.4 does not approve the currently unreviewed source data, fill nulls, migrate
 ### WP1.4 owner validation — 2026-10-31
 
 The owner pulled the corrected branch and validated WP1.4 against `/tmp/tca-wp1-4.sqlite`. The focused schema, review-domain, identity-import, and country-data-import tests passed: **33 passed**. The review-domain import completed with **242 countries, 0 entity-type proposals, 242 flag mappings, 242 flag proposals, 242 ISO proposals, and 242 localization proposals**. SQLite integrity and foreign-key checks passed. The full repository test suite passed: **153 passed in 2.02s**. WP1.4 is locally validated and closed. The owner's working tree also contained unrelated data-refresh/report changes; these were not staged or included in the WP1.4 implementation.
+
+
+## WP1.5 — Selective game data and current statistics
+
+**Status:** In progress; source contracts, candidate natural-resource catalogue, licence register, and schema migration 003 have been added. Production acquisition/import adapters and owner validation are pending.
+
+The approved selection contains 43 fields. Natural Earth is not a statistics source. Candidate field-to-source assignments and storage types are tracked in `config/wp1_5_data_sources.json`; the methodology and coverage constraints are in `docs/data-sources/wp1-5-sources.md`. The candidate resource vocabulary is `config/wp1_5_resource_catalog.json`.
+
+Migration 003 preserves existing `current_statistics` rows while extending the contract:
+- scalar values may be SQL NULL only with an explicit `unavailable` or `not_applicable` status;
+- populated values are distinguished as `observed`, `estimated` or `projected`;
+- observation period, source reference, source release/version, methodology and retrieval timestamp are separate fields;
+- `selected_game_data` retains JSON payloads and gains the corresponding observation/source metadata.
+
+Source downloads are local-only. Git tracks contracts and manifests/checksums, not raw source files. Source licence restrictions are documented separately and do not block local acquisition, but they must not be misrepresented as open redistribution rights. See `reports/wp1-5-source-licenses.md`.
+
+The one consolidated null/empty completeness audit remains deferred until all 43 fields and all applicable country/source domains have been visited. No consumer cutover or JSON pipeline replacement is part of WP1.5.
