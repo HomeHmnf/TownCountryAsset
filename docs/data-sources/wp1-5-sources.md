@@ -108,3 +108,22 @@ Every candidate source must pass a source-specific adapter review before product
 - Energy Institute: https://www.energyinst.org/statistical-review/resources-and-data-downloads
 - Protected Planet: https://www.protectedplanet.net/en/legal
 - FAO AQUASTAT: https://www.fao.org/aquastat/en/
+
+
+## Immutable source acquisition tooling
+
+The initial acquisition utility is available as `tools/acquire_wp1_5_sources.py`. It accepts a **direct HTTPS file URL**, not a provider landing page, and refuses to overwrite an existing release snapshot. Raw bytes are written under `raw_data/wp1_5/<source>/<release>/`; the JSON provenance manifest is written under `data_manifests/wp1_5/<source>/<release>.json`. The manifest records the original/final URL, retrieval timestamp, release, content type, byte count, SHA-256, terms URL, attribution and the declared rights classification.
+
+Example (replace the URL, release and filename with the exact provider download you have verified):
+
+```fish
+uv run python -m tools.acquire_wp1_5_sources \
+  --source un_wpp_2024 \
+  --release 2024 \
+  --url "https://provider.example/path/to/direct-download.zip" \
+  --filename "wpp2024.zip" \
+  --terms-url "https://provider.example/terms" \
+  --license-status "source-terms-to-be-recorded"
+```
+
+The example URL is deliberately a placeholder and is not a valid provider endpoint. Do not run it as-is. Confirm the exact file, edition, format, country-code scheme and dataset terms before acquisition. The utility does not scrape landing pages, guess download links, normalize provider data or import observations into SQLite. Those source-specific steps remain separate so the captured source bytes and provenance are auditable.
