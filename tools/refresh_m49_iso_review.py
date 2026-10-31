@@ -63,15 +63,18 @@ def refresh(registry_path=DEFAULT_REGISTRY, output_dir=DEFAULT_OUTPUT_DIR,
     normalized_digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()
     output_dir.mkdir(parents=True, exist_ok=True)
     normalized_path = output_dir / "m49-iso-reference.csv"
+    normalized_m49_path = output_dir / "m49-country-area.json"
     metadata_path = output_dir / f"m49-provenance-{stamp}.json"
     if metadata_path.exists():
         raise FileExistsError(f"Review provenance already exists for timestamp {stamp}")
     normalized_path.write_text(normalized, encoding="utf-8", newline="")
+    normalized_m49_path.write_text(json.dumps(parsed, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
     metadata = {
         "source_id": SOURCE_ID, "dataset": "UNSD M49 country and area overview",
         "source_url": url, "retrieved_at_utc": retrieved.isoformat(),
         "raw_snapshot": str(raw_path), "source_manifest": str(manifest_path),
-        "raw_sha256": digest, "normalized_reference": str(normalized_path),\n        "normalized_m49_data": str(normalized_m49_path),
+        "raw_sha256": digest, "normalized_reference": str(normalized_path),
+        "normalized_m49_data": str(normalized_m49_path),
         "normalized_sha256": normalized_digest,
         "m49_row_count": parsed["row_count"],
         "iso_candidate_count": parsed["iso_candidate_count"],
@@ -103,7 +106,8 @@ def refresh(registry_path=DEFAULT_REGISTRY, output_dir=DEFAULT_OUTPUT_DIR,
     report_path.write_text(report, encoding="utf-8")
     return {
         "raw_snapshot": str(raw_path), "source_manifest": str(manifest_path),
-        "normalized_reference": str(normalized_path), "normalized_m49_data": str(normalized_m49_path),\n        "provenance": str(metadata_path),
+        "normalized_reference": str(normalized_path), "normalized_m49_data": str(normalized_m49_path),
+        "provenance": str(metadata_path),
         "report": str(report_path), "raw_sha256": digest,
         "normalized_sha256": normalized_digest, "m49_row_count": parsed["row_count"],
         "iso_candidate_count": parsed["iso_candidate_count"],
