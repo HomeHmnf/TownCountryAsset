@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 import hashlib
 import json
 import sqlite3
@@ -132,6 +131,11 @@ def make_database(path: Path) -> None:
             """INSERT INTO country_sources(game_id, dataset, source_id, is_current, import_id)
                VALUES (?, 'natural_earth_admin_0', 'AAA', 1, ?)""",
             (GAME_ID, import_id),
+        )
+        connection.execute(
+            """INSERT INTO country_attributes(game_id, attribute_key, attribute_value, value_type)
+               VALUES (?, 'WIKIDATAID', 'Q30', 'text')""",
+            (GAME_ID,),
         )
     finally:
         connection.close()
