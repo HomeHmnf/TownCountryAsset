@@ -45,7 +45,9 @@ def _load_config(path: Path) -> dict[str, Any]:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise SourceAcquisitionError(f"Cannot read source contract {path}: {exc}") from exc
-    if not isinstance(payload, dict) or payload.get("schema_version") != 1:
+    if not isinstance(payload, dict) or not (
+        payload.get("schema_version") == 1 or payload.get("work_package") == "WP1.5"
+    ):
         raise SourceAcquisitionError("Unsupported project source registry")
     if not isinstance(payload.get("sources"), dict):
         raise SourceAcquisitionError("Project source registry must define a sources object")
