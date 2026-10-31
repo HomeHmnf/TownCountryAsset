@@ -28,11 +28,11 @@ def seed_country(connection, game_id="tc_00000000000000000000000000000000"):
     return connection.execute("SELECT import_id FROM dataset_imports ORDER BY import_id DESC LIMIT 1").fetchone()[0]
 
 
-def test_fresh_database_applies_version_one_and_integrity_passes(tmp_path):
+def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
     path = tmp_path / "nested" / "canonical.sqlite"
     with connect_database(path) as connection:
         assert current_schema_version(connection) == 0
-        assert apply_migrations(connection) == 1
+        assert apply_migrations(connection) == 2
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
         assert validate_database(connection) == []
@@ -41,8 +41,8 @@ def test_fresh_database_applies_version_one_and_integrity_passes(tmp_path):
 
 
 def test_migration_is_idempotent(database):
-    assert apply_migrations(database) == 1
-    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 1
+    assert apply_migrations(database) == 2
+    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 2
 
 
 def test_game_id_requires_exact_tc_prefix_and_32_lowercase_hex(database):
