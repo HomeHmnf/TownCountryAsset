@@ -328,3 +328,49 @@ uv run python -m tools.acquire_wp1_5_sources \
   --attribution "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition." \
   --license-status "CC BY 3.0 IGO"
 ```
+
+
+## Normalized observation import contract
+
+The transactional database import layer is implemented in `tools/database/statistics_import.py`, with CLI `tools/import_wp1_5.py`. It accepts normalized observation JSON; it is deliberately separate from provider-specific parsing. A provider adapter must inspect the acquired source bytes and emit one normalized batch with the exact source checksum and release from its immutable acquisition manifest.
+
+Example normalized batch (illustrative values only):
+
+```json
+{
+  "schema_version": 1,
+  "work_package": "WP1.5",
+  "source_key": "un_wpp_2024",
+  "release": "2024-main-demographic",
+  "source_sha256": "<sha256 copied from the acquisition manifest>",
+  "observations": [
+    {
+      "game_id": "tc_0123456789abcdef0123456789abcdef",
+      "source_id": "4",
+      "field_id": 1,
+      "value": 1234000,
+      "unit": "people",
+      "value_status": "projected",
+      "observation_period": "2026",
+      "source_reference": "WPP2024 demographic indicator; 2026 mid-year",
+      "methodology": "Source value in thousands multiplied by 1,000."
+    }
+  ]
+}
+```
+
+Each observation must carry the persistent `game_id`, the matching provider `source_id` from the explicit crosswalk, approved numeric field ID, value, explicit status, unit and reference period. The importer checks that the field's contracted primary source matches the manifest source. Scalar fields are written to `current_statistics`; structured fields are written to `selected_game_data` as canonical JSON with unit metadata. Scalar SQL NULL is accepted only with `unavailable` or `not_applicable`; structured values must be JSON objects or arrays.
+
+The importer verifies the raw snapshot exists under the repository's `raw_data/` tree, its byte count and SHA-256 match the manifest, the manifest and normalized batch identify the same source/release/checksum, and every crosswalk game identity exists in the canonical database. It records source IDs in `country_sources` and records the acquisition manifest in `dataset_imports`. All provenance, crosswalk and observation writes occur in one SQLite transaction. Repeating an identical import is idempotent. A changed observation can replace the current value only when it comes from a strictly newer retrieval of the same source; conflicting data from another source or a non-newer snapshot is rejected. No observation history is claimed by this current-value table.
+
+Run the importer after preparing the normalized batch and reviewed crosswalk:
+
+```fish
+uv run python -m tools.import_wp1_5 \
+  --database data/canonical/town_country_asset.sqlite \
+  --observations path/to/normalized-observations.json \
+  --crosswalk path/to/source-crosswalk.json \
+  --manifest data_manifests/wp1_5/source/release.json
+```
+
+The paths above are placeholders. Do not run this command until a source-specific adapter has produced the normalized batch and the crosswalk has been reviewed. The importer does not download, parse, or transform provider files. It does not mark source imports approved, promote review statuses, infer absent values, or run the final completeness audit.
