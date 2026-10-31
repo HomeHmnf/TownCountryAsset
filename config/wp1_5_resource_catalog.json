@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "status": "candidate_catalogue",
+  "field_id": 45,
+  "field_key": "natural_resources",
+  "policy": [
+    "A listed resource means that a source reports a country/resource relationship; it does not imply current commercial production.",
+    "Keep occurrence, reserves, resources, production, imports and exports as distinct metrics.",
+    "Never treat an absent source row as evidence that a resource is absent.",
+    "Every record must retain source, source edition, observation period, units and the source's own definition.",
+    "USGS Mineral Commodity Summaries is a principal nonfuel-mineral source but does not provide a complete inventory of all natural resources."
+  ],
+  "resource_groups": [
+    {
+      "group": "energy_fossil",
+      "resources": [
+        {
+          "key": "coal",
+          "label": "Coal",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "crude_oil",
+          "label": "Crude oil",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "natural_gas",
+          "label": "Natural gas",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "energy_nuclear_and_renewable",
+      "resources": [
+        {
+          "key": "uranium",
+          "label": "Uranium",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "hydropower",
+          "label": "Hydropower",
+          "metrics": [
+            "installed_capacity",
+            "electricity_generation"
+          ]
+        },
+        {
+          "key": "geothermal",
+          "label": "Geothermal",
+          "metrics": [
+            "installed_capacity",
+            "electricity_generation"
+          ]
+        },
+        {
+          "key": "solar",
+          "label": "Solar",
+          "metrics": [
+            "installed_capacity",
+            "electricity_generation"
+          ]
+        },
+        {
+          "key": "wind",
+          "label": "Wind",
+          "metrics": [
+            "installed_capacity",
+            "electricity_generation"
+          ]
+        },
+        {
+          "key": "biomass",
+          "label": "Biomass",
+          "metrics": [
+            "installed_capacity",
+            "electricity_generation"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "industrial_and_base_metals",
+      "resources": [
+        {
+          "key": "aluminium_bauxite",
+          "label": "Bauxite",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "copper",
+          "label": "Copper",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "iron_ore",
+          "label": "Iron ore",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "lithium",
+          "label": "Lithium",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "cobalt",
+          "label": "Cobalt",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "nickel",
+          "label": "Nickel",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "manganese",
+          "label": "Manganese",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "chromium",
+          "label": "Chromium",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "zinc",
+          "label": "Zinc",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "lead",
+          "label": "Lead",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "tin",
+          "label": "Tin",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "tungsten",
+          "label": "Tungsten",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "precious_and_specialty_metals",
+      "resources": [
+        {
+          "key": "gold",
+          "label": "Gold",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "silver",
+          "label": "Silver",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "platinum_group_metals",
+          "label": "Platinum-group metals",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "rare_earths",
+          "label": "Rare-earth elements",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "graphite",
+          "label": "Graphite",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "molybdenum",
+          "label": "Molybdenum",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "antimony",
+          "label": "Antimony",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "industrial_minerals",
+      "resources": [
+        {
+          "key": "phosphate_rock",
+          "label": "Phosphate rock",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "potash",
+          "label": "Potash",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "salt",
+          "label": "Salt",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "sulfur",
+          "label": "Sulfur",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "gypsum",
+          "label": "Gypsum",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "barite",
+          "label": "Barite",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "boron",
+          "label": "Boron",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        },
+        {
+          "key": "fluorspar",
+          "label": "Fluorspar",
+          "metrics": [
+            "production",
+            "reserves",
+            "resources"
+          ]
+        }
+      ]
+    }
+  ],
+  "required_record_fields": [
+    "game_id",
+    "resource_key",
+    "metric",
+    "value",
+    "unit",
+    "observation_period",
+    "value_status",
+    "source_reference",
+    "source_version"
+  ],
+  "unresolved_scope": [
+    "This candidate list is not yet a claim that every metric is available for every country.",
+    "Construction materials, gemstones, biological resources, fisheries, soil and freshwater are not exhaustively enumerated here.",
+    "A final field-45 schema decision must be made after checking source coverage and game requirements."
+  ]
+}
