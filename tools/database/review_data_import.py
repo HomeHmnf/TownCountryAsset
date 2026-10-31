@@ -102,10 +102,13 @@ def _validate_iso(
     if provenance.get("normalized_reference") and Path(provenance["normalized_reference"]).name != reference_path.name:
         raise ReviewDataImportError("ISO provenance identifies a different normalized reference file")
     reference = read_reference(reference_path)
+    if provenance.get("reference_row_count") != len(reference):
+        raise ReviewDataImportError("ISO reference row count does not match provenance")
     report_rows = _read_iso_report(report_path)
     fresh = propose(registry, reference)
     expected = {row["game_id"]: row for row in fresh["proposals"]}
     actual: dict[str, dict[str, Any]] = {}
+    code_owners: dict[tuple[str, str], str] = {}
     for row in report_rows:
         gid = row["game_id"]
         if not gid or gid in actual:
@@ -128,6 +131,11 @@ def _validate_iso(
             raise ReviewDataImportError(f"{gid}: ISO candidate must contain both codes or neither")
         if a2 and not any(item["alpha2"] == a2 and item["alpha3"] == a3 and item["english_name"] == row["Reference English name"] for item in reference):
             raise ReviewDataImportError(f"{gid}: ISO candidate pair/label is absent from captured reference")
+        if a2:
+            pair = (a2, a3)
+            if pair in code_owners and code_owners[pair] != gid:
+                raise ReviewDataImportError(f"ISO code pair {a2}/{a3} is proposed for both {code_owners[pair]} and {gid}")
+            code_owners[pair] = gid
         actual[gid] = {
             "alpha2": a2 or None, "alpha3": a3 or None,
             "reference_name": row["Reference English name"] or None,
@@ -221,6 +229,9 @@ def _validate_registry_and_taxonomy(registry: dict[str, Any], taxonomy: dict[str
     unreviewed = taxonomy.get("unreviewed_value", "unreviewed")
     if unreviewed not in types:
         raise ReviewDataImportError("Entity taxonomy unreviewed_value is not a configured type")
+    for type_name, definition in types.items():
+        if not isinstance(definition, dict) or not isinstance(definition.get("evidence_required", []), list):
+            raise ReviewDataImportError(f"Entity taxonomy definition for {type_name!r} is malformed")
     for gid, record in by_id.items():
         if record.get("entity_type") not in types:
             raise ReviewDataImportError(f"{gid}: entity_type {record.get('entity_type')!r} is not in config/entity_types.json")
@@ -285,6 +296,7 @@ def import_review_data(
     if not isinstance(flag_rows, list) or len(flag_rows) != len(by_id):
         raise ReviewDataImportError("Flag mapping records must cover the identity registry exactly")
     flags: dict[str, dict[str, Any]] = {}
+    flag_code_owners: dict[str, str] = {}
     for row in flag_rows:
         if not isinstance(row, dict):
             raise ReviewDataImportError("Flag mapping contains a non-object record")
@@ -297,8 +309,20 @@ def import_review_data(
         manual_path = row.get("manual_svg_path")
         if manual_path is not None and (not isinstance(manual_path, str) or not manual_path.strip()):
             raise ReviewDataImportError(f"{gid}: manual_svg_path must be null or non-empty text")
+        if manual_path is not None:
+            from pathlib import PurePosixPath
+            safe_path = PurePosixPath(manual_path)
+            if safe_path.is_absolute() or ".." in safe_path.parts or "\\" in manual_path or safe_path.suffix.lower() != ".svg":
+                raise ReviewDataImportError(f"{gid}: manual_svg_path must be a safe relative .svg path")
         if code is not None and manual_path is not None:
             raise ReviewDataImportError(f"{gid}: choose source_flag_code or manual_svg_path, not both")
+        if code is not None:
+            if code in flag_code_owners and flag_code_owners[code] != gid:
+                raise ReviewDataImportError(f"Flag source code {code!r} is mapped to both {flag_code_owners[code]} and {gid}")
+            flag_code_owners[code] = gid
+        note = row.get("decision_note")
+        if note is not None and not isinstance(note, str):
+            raise ReviewDataImportError(f"{gid}: decision_note must be null or text")
         evidence = row.get("evidence", [])
         if not isinstance(evidence, list) or any(not isinstance(item, str) or not item.strip() for item in evidence):
             raise ReviewDataImportError(f"{gid}: flag evidence must be an array of non-empty strings")
@@ -314,7 +338,7 @@ def import_review_data(
             raise ReviewDataImportError(f"{gid}: unapproved flag mapping must not have reviewed_at")
         flags[gid] = {
             "code": code, "manual_svg_path": row.get("manual_svg_path"),
-            "note": row.get("decision_note"), "evidence": evidence,
+            "note": note, "evidence": evidence,
             "status": status, "reviewed_at": reviewed_at,
         }
     if set(flags) != set(by_id):
