@@ -356,3 +356,25 @@ def test_older_snapshot_cannot_roll_back_current_observation(tmp_path):
     assert connection.execute("SELECT value FROM current_statistics").fetchone()[0] == 200
     assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
     connection.close()
+
+
+@pytest.mark.parametrize("remove_key, expected", [
+    ("value_status", "value_status is invalid"),
+    ("value", "value must be present"),
+    ("unit", "unit must be a non-empty string"),
+])
+def test_requires_explicit_value_status_value_and_unit(tmp_path, remove_key, expected):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(observations.read_text())
+    del payload["observations"][0][remove_key]
+    observations.write_text(json.dumps(payload))
+    with pytest.raises(StatisticsImportError, match=expected):
+        import_wp1_5_dataset(
+            observations_path=observations, crosswalk_path=crosswalk,
+            manifest_path=manifest, database_path=database,
+        )
+    connection = sqlite3.connect(database)
+    assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
+    connection.close()
