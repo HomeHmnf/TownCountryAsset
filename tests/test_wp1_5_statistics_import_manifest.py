@@ -41,3 +41,12 @@ def test_manifest_verifies_raw_checksum(tmp_path, monkeypatch):
     raw.write_bytes(b"tampered")
     with pytest.raises(StatisticsImportError, match="checksum"):
         _validate_manifest(manifest, "un_wpp_2024")
+
+def test_manifest_rejects_nested_raw_data_directory_outside_repository_raw_root(tmp_path, monkeypatch):
+    monkeypatch.setattr(statistics_import, "REPOSITORY_ROOT", tmp_path)
+    raw = tmp_path / "nested" / "raw_data" / "raw.csv"
+    raw.parent.mkdir(parents=True)
+    raw.write_bytes(b"source,data\\n")
+    manifest = manifest_for(raw)
+    with pytest.raises(StatisticsImportError, match="directly under the repository raw_data tree"):
+        _validate_manifest(manifest, "un_wpp_2024")
