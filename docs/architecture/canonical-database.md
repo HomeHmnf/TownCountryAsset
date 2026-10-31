@@ -108,7 +108,7 @@ Optional `--registry` and `--candidate-dir` arguments allow isolated fixtures or
 
 ### WP1.2 implementation correction — 2026-10-31
 
-The generated production snapshot stores source provenance in the top-level `source` object of `manifest.json`; the importer uses that object as authoritative, while accepting legacy/test inputs that carry the same object in `countries.json`. If both are present, they must match. Dataset provenance columns are now populated in the exact schema order, keeping the archive SHA-256 in the checksum column. Regression coverage includes the production manifest layout. Local WP1.2 validation is still pending.
+The generated production snapshot stores source provenance in the top-level `source` object of `manifest.json`; the importer uses that object as authoritative, while accepting legacy/test inputs that carry the same object in `countries.json`. If both are present, they must match. Dataset provenance columns are now populated in the exact schema order, keeping the archive SHA-256 in the checksum column. Regression coverage includes the production manifest layout. The owner subsequently confirmed that all focused WP1.2 tests passed; WP1.2 is locally validated and closed.
 
 
 ## WP1.3 — Country metadata, source attributes and geometry
