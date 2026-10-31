@@ -162,3 +162,45 @@ uv run python -m compileall -q tools/database
 ``
 
 The crosswalk validator is a validation primitive, not yet a production importer. It does not write `country_sources` or statistic rows. Source-specific crosswalk files must be assembled and reviewed before any dataset import.
+
+
+## Normalized observation import contract
+
+The generic SQLite importer is `tools/database/statistics_import.py`, exposed through `tools/import_wp1_5.py`. It consumes three explicit inputs: (1) a normalized observation JSON file, (2) the source-specific country crosswalk, and (3) the immutable acquisition manifest whose raw file is still present locally. It verifies the raw-file SHA-256 against the manifest before any database write.
+
+Normalized observations use this versioned envelope:
+
+```json
+{
+  "schema_version": 1,
+  "work_package": "WP1.5",
+  "source_key": "un_wpp_2024",
+  "release": "2024-r1",
+  "source_sha256": "<64-character captured raw-file SHA-256>",
+  "observations": [
+    {
+      "game_id": "tc_0123456789abcdef0123456789abcdef",
+      "source_id": "4",
+      "field_id": 1,
+      "value": 123456,
+      "value_status": "observed",
+      "observation_period": "2024",
+      "unit": "people",
+      "source_reference": "https://population.un.org/wpp/",
+      "methodology": "Provider-reported total population"
+    }
+  ]
+}
+```
+
+Every row must resolve through the explicit crosswalk, use a field ID whose contracted primary source matches the manifest source key, and have a non-empty observation period. Scalar values must be finite numbers; explicit SQL NULL requires `unavailable` or `not_applicable`. Structured values must be JSON objects or arrays. Duplicate country/field rows are rejected. The importer preserves actual/estimated/projected status and source release, reference, method and retrieval timestamp.
+
+Writes are transactional. Repeating an identical snapshot is idempotent. A newer release from the same contracted provider replaces that provider's current value for the same country/field; a conflicting value already owned by a different provider is rejected and the transaction is rolled back. The dataset import remains a candidate; this stage does not approve source data or mark any country identity/review status as verified. It does not populate `country_sources`, infer missing rows, or create the final completeness audit.
+
+The generic importer is intentionally not a raw-file parser. Provider-specific adapters must inspect and normalize each exact source release before calling it. Do not manufacture normalized files from placeholder URLs or unverified source schemas.
+
+CLI help:
+
+```fish
+uv run python -m tools.import_wp1_5 --help
+```
