@@ -53,3 +53,6 @@ def test_wpp_download_profile_pins_official_files_and_togo_update():
     assert update["release"] == "2026-01-19-togo-update"
     assert update["scope"].startswith("Togo only")
     assert contract["sources"]["un_wpp_2024"]["license_status"] == "CC BY 3.0 IGO"
+    assert contract["sources"]["un_wpp_2024"]["selected_current_period"] == "2026"
+    assert contract["sources"]["un_wpp_2024"]["selected_variant"] == "Medium"
+    assert contract["sources"]["un_wpp_2024"]["selected_value_status"] == "projected"
