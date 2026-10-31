@@ -21,7 +21,7 @@ def repository_root_for_fixture(tmp_path, monkeypatch):
 
 def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_key=SOURCE, release="2024-r1"):
     tmp_path.mkdir(parents=True, exist_ok=True)
-    raw = tmp_path / "raw_data" / "wp1_5" / source_key / "2024-r1" / "provider.csv"
+    raw = tmp_path / "raw_data" / "wp1_5" / source_key / release / "provider.csv"
     raw.parent.mkdir(parents=True, exist_ok=True)
     raw.write_text("provider,captured\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
@@ -92,6 +92,8 @@ def test_imports_scalar_observation_with_provenance_and_is_idempotent(tmp_path):
         database_path=database,
     )
     assert repeated["import_id"] == result["import_id"]
+    assert result["idempotent"] is False
+    assert repeated["idempotent"] is True
     connection = sqlite3.connect(database)
     row = connection.execute(
         "SELECT value, observed_at, observation_period, source_version, value_status, methodology FROM current_statistics"
