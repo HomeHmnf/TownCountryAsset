@@ -56,10 +56,22 @@ def _now() -> str:
 def _status(value: Any, label: str, *, reviewed_alias: bool = False) -> str:
     if reviewed_alias and value == "reviewed":
         return "approved"
-    if value in (None, "", "unreviewed", "candidate", "proposed"):
+    if value is None or value in ("", "unreviewed", "candidate", "proposed"):
         return "candidate"
-    if value not in {"approved", "rejected"}:
+    if not isinstance(value, str) or value not in {"approved", "rejected"}:
         raise ReviewDataImportError(f"{label} has unsupported review status {value!r}")
+    return value
+
+
+def _review_timestamp(value: Any, label: str) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise ReviewDataImportError(f"{label} requires a timezone-aware reviewed_at timestamp")
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ReviewDataImportError(f"{label} has an invalid reviewed_at timestamp") from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ReviewDataImportError(f"{label} reviewed_at timestamp must include a timezone")
     return value
 
 
@@ -253,8 +265,8 @@ def _proposal(
     connection: sqlite3.Connection, gid: str, kind: str, proposed: dict[str, Any],
     evidence: dict[str, Any], status: str, reviewed_at: str | None, now: str,
 ) -> bool:
-    if status == "approved" and not reviewed_at:
-        raise ReviewDataImportError(f"{gid}: approved {kind} proposal requires an explicit reviewed_at timestamp")
+    if status == "approved":
+        reviewed_at = _review_timestamp(reviewed_at, f"{gid}: approved {kind} proposal")
     if status != "approved" and reviewed_at is not None:
         raise ReviewDataImportError(f"{gid}: non-approved {kind} proposal must not have reviewed_at")
     proposed_json, evidence_json = _canonical(proposed), _canonical(evidence)
@@ -342,8 +354,8 @@ def import_review_data(
         else:
             status = _status(status, f"{gid} flag mapping")
         reviewed_at = row.get("reviewed_at")
-        if status == "approved" and not reviewed_at:
-            raise ReviewDataImportError(f"{gid}: reviewed flag mapping requires an explicit reviewed_at timestamp")
+        if status == "approved":
+            reviewed_at = _review_timestamp(reviewed_at, f"{gid}: reviewed flag mapping")
         if status != "approved" and reviewed_at is not None:
             raise ReviewDataImportError(f"{gid}: unapproved flag mapping must not have reviewed_at")
         flags[gid] = {
