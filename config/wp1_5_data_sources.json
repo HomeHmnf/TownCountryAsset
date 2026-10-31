@@ -578,7 +578,7 @@
       "source_status": "candidate_pending_validation"
     }
   ],
-  "selection_count_reconciliation": {
+  "reconciliation": {
     "approved_count": 41,
     "enumerated_field_ids": 41,
     "status": "confirmed_by_owner",
