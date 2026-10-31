@@ -492,7 +492,7 @@
       ],
       "license_status": "unclear_or_unverified",
       "terms_url": "https://github.com/stefangabos/world_countries",
-      "notes": "Secondary reference only; official ISO remains the authority.",
+      "notes": "Optional secondary cross-check only; third-party mirror, not an official ISO authority. The official UN M49 source is the primary automatically acquired country/area reference; ISO 3166 remains the assignment authority.",
       "acquisition_mode": "https_download",
       "downloads": [
         {
@@ -540,7 +540,7 @@
       ],
       "license_status": "unclear_or_unverified",
       "terms_url": "https://www.iso.org/terms-conditions.html",
-      "notes": "Official reference page; current local CSV/ODS may be manually acquired under applicable terms.",
+      "notes": "ISO is the official ISO 3166 Maintenance Agency/assignment authority. Keep this record distinct from UN M49, which republishes ISO alpha-2/alpha-3 cross-references. Official current reference page; local files may be manually acquired under applicable terms.",
       "acquisition_mode": "manual",
       "downloads": []
     },
@@ -565,6 +565,44 @@
         "ASHMORE_CARTIER": "https://www.dcceew.gov.au/",
         "SIACHEN": "https://www.britannica.com/place/Siachen-Glacier"
       }
+    },
+    "un_m49": {
+      "name": "United Nations Statistics Division M49 country and area overview",
+      "homepage_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "domains": [
+        "identity",
+        "iso_reference",
+        "geography",
+        "regional_classification"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "attribution": "United Nations Statistics Division, Standard country or area codes for statistical use (M49).",
+      "notes": "Official UN Statistics Division reference. Publishes M49 numeric codes, ISO alpha-2 and alpha-3 cross-references, country/area names, and region hierarchy. It republishes ISO codes but is not the ISO 3166 Maintenance Agency or assignment authority. HTML page acquisition is configured with reusable content-contract validation; retain ISO's official record separately.",
+      "acquisition_mode": "https_download",
+      "downloads": [
+        {
+          "id": "country_area_overview_html",
+          "release": "2026-10-current",
+          "filename": "m49-country-area-overview.html",
+          "format": "html",
+          "url": "https://unstats.un.org/unsd/methodology/m49/overview",
+          "fields": [],
+          "validation": {
+            "content_types": [
+              "text/html"
+            ],
+            "required_text": [
+              "Country or Area",
+              "M49 Code",
+              "ISO-alpha2 Code",
+              "ISO-alpha3 Code",
+              "Global Code",
+              "Region Name"
+            ]
+          }
+        }
+      ]
     }
   }
 }
