@@ -225,7 +225,7 @@ This is acquisition infrastructure only. It does not infer provider download URL
 Run the focused WP1.5 checks after pulling:
 
 ```fish
-uv run pytest -v tests/test_wp1_5_source_acquisition.py tests/test_database_schema.py
+uv run pytest -v tests/test_wp1_5_source_contract.py tests/test_wp1_5_source_acquisition.py tests/test_database_schema.py
 uv run python -m tools.migrate_database --database /tmp/tca-wp1-5-schema.sqlite
 uv run python -m tools.acquire_wp1_5_sources --help
 uv run python -m compileall -q tools/database tools/acquire_wp1_5_sources.py
