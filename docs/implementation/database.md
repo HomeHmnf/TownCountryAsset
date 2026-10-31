@@ -271,3 +271,14 @@ uv run python -m compileall -q tools/database tools/import_wp1_5.py
 ```
 
 Owner-side validation is pending.
+
+
+### WP1.5 normalized observation importer and crosswalk persistence
+
+The existing normalized importer in \`tools/database/statistics_import.py\` is the single import implementation; the CLI is \`tools/import_wp1_5.py\`. It validates the 41-field contract, source assignment, manifest release/checksum, explicit crosswalk pairs, canonical country identities, observation period, units, status and scalar/structured value shape before writing.
+
+The importer now persists every explicit provider-ID mapping from the crosswalk in \`country_sources\`, linked to the source dataset import. Existing current mappings are accepted only when they identify the same \`game_id\`; a remapping is rejected and requires a separate identity-review operation. The importer also rejects crosswalk identities absent from the canonical database and timezone-naive retrieval timestamps. For scalar observations, \`observed_at\` is left NULL because the source reference period is stored separately in \`observation_period\`; this avoids treating a period label such as \`2024\` as a timestamp. Missing methodology text falls back to the field contract's documented method.
+
+All source mappings, dataset provenance and observation rows are written in one transaction. A conflict rolls back the complete import. Existing current values from another source are protected; a newer release from the same contracted provider may replace its current value while the previous \`dataset_imports\` provenance row remains. The importer does not parse provider-native files, invent missing observations, or promote review/verification statuses.
+
+Added regression coverage for crosswalk persistence (including mapped countries with no observation in that file) and timezone-aware retrieval metadata. Owner-side execution of the updated importer tests is pending.
