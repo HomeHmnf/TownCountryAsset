@@ -127,7 +127,7 @@ The owner ran both importers sequentially against `/tmp/tca-wp1-3.sqlite`. Ident
 
 ## WP1.4 — ISO, Persian localization, entity classification and flag review
 
-**Status:** Implemented on `work/compiler-hardening`; awaiting owner-side validation. No source-data approvals or consumer cutover are claimed.
+**Status:** Implemented and locally validated by the owner on `work/compiler-hardening`. No source-data approvals or consumer cutover are claimed.
 
 Added:
 - `migrations/002_review_domain_status.sql`
@@ -188,3 +188,10 @@ The first focused run correctly exposed stale WP1.1 schema-test expectations: sc
 The production ISO proposal report reader now locates its table by parsed column names rather than requiring byte-for-byte equality with one Markdown header string. This tolerates harmless whitespace variation while still requiring exactly one table with the expected seven columns. A focused regression test covers that formatting variation.
 
 The first owner run also confirmed schema migration 0→2, successful identity import (242 countries, 250 names, 237 region memberships, 242 source mappings), and successful country data import (40,898 attributes, 242 countries, 726 geometries across three profiles). The review import did not write any data because the ISO header was rejected. WP1.4 remains unvalidated pending rerun of the corrected tests and import.
+
+
+### WP1.4 owner validation confirmation — 2026-10-31
+
+After pulling the parser and schema-test corrections, the owner ran the focused tests: **33 passed in 0.97s**. The review-domain import completed with **242 countries, 0 entity-type proposals, 242 flag mappings, 242 flag proposals, 242 ISO proposals, and 242 localization proposals**. The importer reported successful SQLite integrity and foreign-key checks. The full repository suite passed: **153 passed in 2.02s**. WP1.4 is locally validated and closed.
+
+The first run's two stale schema-version assertions and strict ISO Markdown-header comparison were corrected before this successful run. The owner reported unrelated working-tree changes (including refreshed source/reference files, generated candidate flags, and modified inspection/review reports); those files were not staged, discarded, or included in this implementation.
