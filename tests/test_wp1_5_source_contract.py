@@ -36,7 +36,7 @@ def test_resource_catalog_is_nonempty_and_has_unique_keys():
     catalog = json.loads((ROOT / "config/wp1_5_resource_catalog.json").read_text(encoding="utf-8"))
     resources = [
         resource
-        for group in catalog["groups"]
+        for group in catalog["resource_groups"]
         for resource in group["resources"]
     ]
     keys = [resource["key"] for resource in resources]
