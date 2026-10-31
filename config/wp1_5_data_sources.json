@@ -579,9 +579,9 @@
     }
   ],
   "selection_count_reconciliation": {
-    "approved_count_in_project_decision_summary": 43,
-    "enumerated_field_ids_in_current_approved_list": 41,
-    "status": "blocked_pending_owner_confirmation",
-    "note": "The supplied selected-field list enumerates 41 distinct field IDs. Do not invent two additional fields or mark WP1.5 field coverage complete until the owner confirms whether 41 or 43 is intended."
+    "approved_count": 41,
+    "enumerated_field_ids": 41,
+    "status": "confirmed_by_owner",
+    "note": "The owner confirmed that the intended WP1.5 scope is the 41 distinct field IDs enumerated in this contract. Religion (48) and Gini index (56) are included. No additional fields are to be invented."
   }
 }
