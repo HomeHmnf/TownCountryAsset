@@ -195,7 +195,7 @@ The normalized file identifies the exact source snapshot using \`source_key\`, \
       "value": {"0-4": 3500000, "5-9": 3400000},
       "value_status": "estimated",
       "observation_period": "2024",
-      "unit": "people by five-year age band"
+      "unit": "age_band_share_or_count"
     }
   ]
 }
@@ -222,7 +222,7 @@ The placeholders above are illustrative. Do not run the command until a real pro
 
 The importer now verifies that the manifest's raw snapshot path is under the repository's `raw_data/` tree, the file is non-empty, and both its byte count and SHA-256 match the manifest. The retrieval timestamp must be timezone-aware ISO-8601; a supplied terms URL must use HTTPS. The source contract's declared unit (or one of its explicitly listed `_or_` alternatives) is enforced for every observation. A missing methodology defaults to the field's documented method; a missing row-level source reference falls back to the manifest's final source URL.
 
-A release from the same provider may replace that provider's current value only when its manifest retrieval timestamp is strictly later than the current row's retrieval timestamp. Equal-time changed content and older snapshots are rejected, preventing a late replay of an older release from rolling current data backward. Conflicts with values owned by another source are rejected. All mapping/provenance/observation writes remain in one transaction.
+A release from the same provider may replace that provider's current value only when its manifest retrieval timestamp is strictly later than the current row's retrieval timestamp; timestamps are compared as timezone-aware instants, not lexicographically. Equal-time changed content and older snapshots are rejected, preventing a late replay of an older release from rolling current data backward. Replaying an already imported raw checksum is strictly idempotent: the crosswalk and every normalized observation must exactly match the still-current rows from that import, and row counts must match. The importer rejects a changed normalizer output or a replay after a newer release has superseded any of its rows; it does not append missing rows from an old snapshot. Conflicts with values owned by another source are rejected. All mapping/provenance/observation writes remain in one transaction.
 
 
 ## Verified UN WPP 2024 acquisition profile
