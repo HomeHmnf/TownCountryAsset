@@ -1,0 +1,473 @@
+{
+  "schema_version": 1,
+  "description": "Authoritative project-wide registry of external and local data sources. Domain contracts reference source IDs; source metadata and acquisition definitions live here.",
+  "policy": {
+    "raw_data": "local_only_untracked",
+    "manifests": "tracked",
+    "snapshot_mutation": "immutable_no_overwrite",
+    "license": "informational_not_an_acquisition_gate",
+    "imports": "acquisition_never_imports_or_approves_data",
+    "natural_earth": "geography_and_cartography_only"
+  },
+  "storage": {
+    "raw_root": "raw_data/sources",
+    "manifest_root": "data_manifests/sources",
+    "reports_root": "reports/sources"
+  },
+  "sources": {
+    "un_wpp_2024": {
+      "name": "UN World Population Prospects 2024",
+      "homepage_url": "https://population.un.org/wpp/",
+      "domains": [
+        "demography"
+      ],
+      "license_status": "CC BY 3.0 IGO",
+      "terms_url": "https://population.un.org/wpp/",
+      "attribution": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition.",
+      "notes": "Population, growth, age/sex distributions and migration. Country/area coverage is not identical to the 242 game identities; explicit crosswalk and coverage accounting required.",
+      "acquisition_mode": "https_download",
+      "downloads": [
+        {
+          "id": "demographic_indicators_medium",
+          "release": "2024-main-demographic",
+          "filename": "WPP2024_Demographic_Indicators_Medium.csv.gz",
+          "format": "gzip_csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
+          "fields": [
+            1,
+            2,
+            6,
+            13,
+            14
+          ],
+          "scope": null
+        },
+        {
+          "id": "population_by_age_5_group_sex_medium",
+          "release": "2024-main-age-sex",
+          "filename": "WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+          "format": "gzip_csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+          "fields": [
+            12
+          ],
+          "scope": null
+        },
+        {
+          "id": "demographic_indicator_notes",
+          "release": "2024-demographic-notes",
+          "filename": "WPP2024_Demographic_Indicators_notes.csv",
+          "format": "csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv",
+          "fields": [],
+          "scope": null
+        },
+        {
+          "id": "location_notes",
+          "release": "2024-location-notes",
+          "filename": "WPP2024_Locations_notes.csv",
+          "format": "csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Locations_notes.csv",
+          "fields": [],
+          "scope": null
+        },
+        {
+          "id": "interim_update_togo",
+          "release": "2026-01-19-togo-update",
+          "filename": "WPP2024_CSV_files_update.zip",
+          "format": "zip_csv_bundle",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip",
+          "fields": [
+            1,
+            2,
+            6,
+            12,
+            13,
+            14
+          ],
+          "scope": "Togo only; apply updated rows only for Togo; estimates 1950-2023 and medium projections 2024-2100"
+        }
+      ]
+    },
+    "imf_weo": {
+      "name": "IMF World Economic Outlook",
+      "homepage_url": "https://www.imf.org/en/Publications/WEO/weo-database",
+      "domains": [
+        "macroeconomy"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.imf.org/en/Publications/WEO/weo-database",
+      "attribution": null,
+      "notes": "GDP, GDP per capita, PPP GDP, inflation and unemployment; distinguish actuals, estimates and projections and retain WEO vintage.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "world_bank_wdi": {
+      "name": "World Bank World Development Indicators",
+      "homepage_url": "https://databank.worldbank.org/source/world-development-indicators",
+      "domains": [
+        "labour",
+        "area",
+        "internet",
+        "poverty",
+        "inequality"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://databank.worldbank.org/source/world-development-indicators",
+      "attribution": null,
+      "notes": "Candidate secondary/alternative indicator source. Preserve indicator code, country coverage, reference year and dataset vintage.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "ilostat": {
+      "name": "ILOSTAT",
+      "homepage_url": "https://ilostat.ilo.org/data/",
+      "domains": [
+        "labour"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://ilostat.ilo.org/data/",
+      "attribution": null,
+      "notes": "Preferred specialist source for labour force and labour-market definitions; retain series and sex/age breakdown metadata.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "faostat": {
+      "name": "FAOSTAT",
+      "homepage_url": "https://www.fao.org/faostat/en/#data",
+      "domains": [
+        "area",
+        "forest",
+        "natural_resources"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.fao.org/faostat/en/#data",
+      "attribution": null,
+      "notes": "Candidate source for land/area and selected agriculture/forestry/resource measures; confirm indicator definitions and country coverage.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "koppen_beck_2023": {
+      "name": "Beck et al. Köppen-Geiger V3",
+      "homepage_url": "https://www.gloh2o.org/koppen/",
+      "domains": [
+        "climate"
+      ],
+      "license_status": "CC BY 4.0",
+      "terms_url": "https://www.gloh2o.org/koppen/",
+      "attribution": null,
+      "notes": "Spatial raster, not a single categorical country value. Derive country-level area shares or distributions using the project geometry and retain period/scenario/resolution.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "fao_fra_2025": {
+      "name": "FAO Global Forest Resources Assessment 2025",
+      "homepage_url": "https://www.fao.org/forest-resources-assessment/",
+      "domains": [
+        "forest"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.fao.org/forest-resources-assessment/",
+      "attribution": null,
+      "notes": "Use reported reference-year forest area; do not conflate forest area with tree cover.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "usgs_mcs_2026": {
+      "name": "USGS Mineral Commodity Summaries 2026",
+      "homepage_url": "https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries",
+      "domains": [
+        "natural_resources"
+      ],
+      "license_status": "CC0 1.0 for the 2026 data release",
+      "terms_url": "https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries",
+      "attribution": null,
+      "notes": "Covers more than 90 nonfuel mineral commodities, but global country-level production/reserve coverage varies by commodity. Not a complete natural-resource inventory.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "pew_religion_2020": {
+      "name": "Pew Research Center Global Religious Composition dataset",
+      "homepage_url": "https://www.pewresearch.org/dataset/dataset-of-global-religious-composition-estimates-for-2010-and-2020/",
+      "domains": [
+        "religion"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.pewresearch.org/dataset/dataset-of-global-religious-composition-estimates-for-2010-and-2020/",
+      "attribution": null,
+      "notes": "Seven broad categories; estimates for 201 and territories with population >=100,000 in 2010 or 2020. Use rounded counts for reporting small groups.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "undp_hdr": {
+      "name": "UNDP Human Development Reports statistical data",
+      "homepage_url": "https://hdr.undp.org/data-center/documentation-and-downloads",
+      "domains": [
+        "human_development"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://hdr.undp.org/data-center/documentation-and-downloads",
+      "attribution": null,
+      "notes": "Use HDI and its reported reference year, not report publication year.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "itu": {
+      "name": "ITU DataHub",
+      "homepage_url": "https://datahub.itu.int/",
+      "domains": [
+        "internet"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://datahub.itu.int/",
+      "attribution": null,
+      "notes": "Preferred specialist source for internet-use indicators; check country coverage and reference period.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "who_ghed": {
+      "name": "WHO Global Health Expenditure Database",
+      "homepage_url": "https://apps.who.int/nha/database",
+      "domains": [
+        "health"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://apps.who.int/nha/database",
+      "attribution": null,
+      "notes": "Health expenditure indicators and financing breakdowns; retain current dataset vintage and reference year.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "world_bank_pip": {
+      "name": "World Bank Poverty and Inequality Platform",
+      "homepage_url": "https://pip.worldbank.org/",
+      "domains": [
+        "poverty",
+        "inequality"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://pip.worldbank.org/",
+      "attribution": null,
+      "notes": "Poverty and Gini measures depend on survey year, poverty line and welfare concept; do not treat missing survey years as zero.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "world_bank_wgi": {
+      "name": "World Bank Worldwide Governance Indicators 2026",
+      "homepage_url": "https://www.worldbank.org/en/publication/worldwide-governance-indicators",
+      "domains": [
+        "governance"
+      ],
+      "license_status": "third_party_redistribution_restricted_for_some_inputs",
+      "terms_url": "https://www.worldbank.org/en/publication/worldwide-governance-indicators",
+      "attribution": null,
+      "notes": "Political stability is an estimate, not a definitive rating. Some standardized underlying source values cannot be redistributed without third-party authorization.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "official_government_sources": {
+      "name": "Official national government and constitutional sources",
+      "homepage_url": null,
+      "domains": [
+        "government",
+        "capital"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": null,
+      "attribution": null,
+      "notes": "No single global dataset is assumed. Record the specific official URL, authority, effective date, and classification rationale per country.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "official_organization_registers": {
+      "name": "Official intergovernmental organization membership registers",
+      "homepage_url": null,
+      "domains": [
+        "memberships"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": null,
+      "attribution": null,
+      "notes": "Membership must be checked against each organization's official membership list and an explicit as-of date.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "iiss_military_balance": {
+      "name": "IISS The Military Balance",
+      "homepage_url": "https://www.iiss.org/publications/the-military-balance/",
+      "domains": [
+        "military_personnel",
+        "defence_structure"
+      ],
+      "license_status": "proprietary_subscription",
+      "terms_url": "https://www.iiss.org/publications/the-military-balance/",
+      "attribution": null,
+      "notes": "Candidate specialist source for active/reserve personnel and force structure; subscription and redistribution terms require review.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "sipri_milex": {
+      "name": "SIPRI Military Expenditure Database",
+      "homepage_url": "https://www.sipri.org/databases/milex",
+      "domains": [
+        "military_expenditure"
+      ],
+      "license_status": "commercial_authorization_required",
+      "terms_url": "https://www.sipri.org/databases/milex",
+      "attribution": null,
+      "notes": "Commercial use requires authorization/licensing; annual series and observation year must be retained.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "global_carbon_project": {
+      "name": "Global Carbon Project Global Carbon Budget",
+      "homepage_url": "https://globalcarbonproject.org/carbonbudget/",
+      "domains": [
+        "co2"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://globalcarbonproject.org/carbonbudget/",
+      "attribution": null,
+      "notes": "Confirm country-level per-capita series, methodology and download terms before selecting the exact table.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "energy_institute": {
+      "name": "Energy Institute Statistical Review of World Energy 2026",
+      "homepage_url": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+      "domains": [
+        "energy",
+        "electricity",
+        "oil",
+        "natural_gas"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+      "attribution": null,
+      "notes": "CSV/XLSX consolidated data and archives are available. Retain edition/vintage; historical values may be revised between editions.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "protected_planet": {
+      "name": "Protected Planet WDPA / GD-PAME",
+      "homepage_url": "https://www.protectedplanet.net/en/legal",
+      "domains": [
+        "protected_areas"
+      ],
+      "license_status": "commercial_use_and_redistribution_restricted",
+      "terms_url": "https://www.protectedplanet.net/en/legal",
+      "attribution": null,
+      "notes": "Commercial use requires prior written permission; redistribution is restricted. Store only after explicit field-level decision on whether aggregate derived indicators are permitted.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "fao_aquastat": {
+      "name": "FAO AQUASTAT",
+      "homepage_url": "https://www.fao.org/aquastat/en/",
+      "domains": [
+        "water_resources",
+        "water_stress"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.fao.org/aquastat/en/",
+      "attribution": null,
+      "notes": "Candidate source for water resources and water stress; indicator coverage and reporting years vary.",
+      "acquisition_mode": "manual_or_api",
+      "downloads": []
+    },
+    "natural_earth_admin0": {
+      "name": "Natural Earth Admin 0 Countries",
+      "homepage_url": "https://www.naturalearthdata.com/",
+      "domains": [
+        "geography",
+        "cartography"
+      ],
+      "license_status": "public_domain_or_unverified",
+      "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "notes": "Geography/cartography only; not a WP1.5 statistics source.",
+      "acquisition_mode": "https_download",
+      "downloads": [
+        {
+          "id": "admin0_50m",
+          "release": "rolling",
+          "filename": "ne_50m_admin_0_countries.zip",
+          "format": "zip",
+          "url": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip"
+        }
+      ]
+    },
+    "iso_reference_mirror": {
+      "name": "World Countries ISO reference CSV mirror",
+      "homepage_url": "https://github.com/stefangabos/world_countries",
+      "domains": [
+        "identity",
+        "iso_reference"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://github.com/stefangabos/world_countries",
+      "notes": "Secondary reference only; official ISO remains the authority.",
+      "acquisition_mode": "https_download",
+      "downloads": [
+        {
+          "id": "country_reference_csv",
+          "release": "rolling",
+          "filename": "world.csv",
+          "format": "csv",
+          "url": "https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv"
+        }
+      ]
+    },
+    "wikidata_sparql": {
+      "name": "Wikidata SPARQL service",
+      "homepage_url": "https://query.wikidata.org/sparql",
+      "domains": [
+        "localization",
+        "labels"
+      ],
+      "license_status": "CC0_for_structured_data_subject_to_terms",
+      "terms_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "notes": "Query service; returned Persian labels are review candidates, never automatic approvals.",
+      "acquisition_mode": "api",
+      "downloads": []
+    },
+    "lipis_flag_icons": {
+      "name": "lipis/flag-icons",
+      "homepage_url": "https://github.com/lipis/flag-icons",
+      "domains": [
+        "flags",
+        "assets"
+      ],
+      "license_status": "MIT",
+      "terms_url": "https://github.com/lipis/flag-icons/blob/main/LICENSE",
+      "notes": "Git source; pin an immutable commit for reproducible refreshes.",
+      "acquisition_mode": "git",
+      "downloads": []
+    },
+    "iso_3166_official": {
+      "name": "ISO 3166 country codes",
+      "homepage_url": "https://www.iso.org/iso-3166-country-codes.html",
+      "domains": [
+        "identity",
+        "iso_reference"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.iso.org/terms-conditions.html",
+      "notes": "Official reference page; current local CSV/ODS may be manually acquired under applicable terms.",
+      "acquisition_mode": "manual",
+      "downloads": []
+    },
+    "flag_evidence_official_sources": {
+      "name": "Country and territory official flag evidence",
+      "homepage_url": null,
+      "domains": [
+        "flags",
+        "review_evidence"
+      ],
+      "license_status": "varies_by_source",
+      "terms_url": null,
+      "notes": "Per-record evidence URLs are held in local environment configuration; evidence supports human review only.",
+      "acquisition_mode": "manual",
+      "downloads": []
+    }
+  }
+}
