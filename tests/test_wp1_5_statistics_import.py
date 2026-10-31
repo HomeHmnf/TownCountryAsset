@@ -15,6 +15,7 @@ SOURCE = "un_wpp_2024"
 
 
 def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_key=SOURCE):
+    tmp_path.mkdir(parents=True, exist_ok=True)
     raw = tmp_path / "provider.csv"
     raw.write_text("provider,captured\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
@@ -155,12 +156,32 @@ def test_rejects_duplicate_country_field_rows_without_writes(tmp_path):
     connection.close()
 
 
-def test_rejects_conflicting_source_for_existing_statistic(tmp_path):
+
+def test_rejects_conflict_from_a_different_source_and_rolls_back(tmp_path):
     database = tmp_path / "canonical.sqlite"
     setup_database(database)
-    run_import(tmp_path, database)
     connection = sqlite3.connect(database)
-    connection.execute("UPDATE dataset_imports SET dataset='different_source'")
+    connection.execute(
+        """INSERT INTO dataset_imports
+           (dataset, source_version, source_url, retrieval_date, sha256, import_status, imported_at)
+           VALUES ('different_source', 'v1', 'https://example.test/old', '2025-01-01T00:00:00Z',
+                   ?, 'candidate', '2025-01-01T00:00:00Z')""",
+        ("1" * 64,),
+    )
+    import_id = connection.execute("SELECT import_id FROM dataset_imports").fetchone()[0]
+    connection.execute(
+        """INSERT INTO current_statistics
+           (game_id, statistic_key, value, unit, observed_at, observation_period,
+            value_status, source_reference, source_version, retrieved_at, import_id)
+           VALUES (?, 'population', 10, 'people', '2025', '2025', 'observed',
+                   'https://example.test/old', 'v1', '2025-01-01T00:00:00Z', ?)""",
+        (GAME, import_id),
+    )
     connection.commit()
     connection.close()
-    # A changed release from the same configured provider is tested by source replacement in follow-up tests.
+    with pytest.raises(StatisticsImportError, match="conflicts with a different source"):
+        run_import(tmp_path, database)
+    connection = sqlite3.connect(database)
+    assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
+    assert connection.execute("SELECT value FROM current_statistics").fetchone()[0] == 10
+    connection.close()
