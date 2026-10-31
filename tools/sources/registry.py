@@ -1,6 +1,10 @@
 """Project-wide source registry, immutable acquisition, and snapshot validation."""
 from __future__ import annotations
-import hashlib, json, re, urllib.request
+
+import hashlib
+import json
+import re
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -9,8 +13,10 @@ ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "config" / "data_sources.json"
 SAFE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$")
 
+
 class SourceError(RuntimeError):
     """Source registry or acquisition failure."""
+
 
 def load_registry(path: Path = REGISTRY):
     try:
@@ -31,14 +37,23 @@ def load_registry(path: Path = REGISTRY):
             parsed = urlparse(url or "")
             if parsed.scheme != "https" or not parsed.netloc:
                 raise SourceError(f"Download URL must be HTTPS: {sid}/{did}")
+            validation = item.get("validation", {})
+            if not isinstance(validation, dict):
+                raise SourceError(f"Invalid validation contract for {sid}/{did}")
+            for key in ("content_types", "required_text"):
+                values = validation.get(key, [])
+                if not isinstance(values, list) or any(not isinstance(value, str) or not value for value in values):
+                    raise SourceError(f"Invalid {key} validation contract for {sid}/{did}")
     data["_root"] = ROOT if path.resolve() == REGISTRY.resolve() else path.resolve().parent
     return data
+
 
 def _paths(registry, sid, item):
     root = registry.get("_root", ROOT)
     raw = root / registry["storage"]["raw_root"] / sid / item["id"] / item["release"] / item["filename"]
     manifest = root / registry["storage"]["manifest_root"] / sid / item["id"] / f"{item['release']}.json"
     return raw, manifest
+
 
 def inspect_snapshots(registry):
     rows = []
@@ -63,6 +78,34 @@ def inspect_snapshots(registry):
                          "status": status, "detail": detail, "raw_path": str(raw.relative_to(root))})
     return rows
 
+
+def _validate_response_contract(item, content_type, payload):
+    contract = item.get("validation", {})
+    if not contract:
+        return
+    allowed_types = contract.get("content_types", [])
+    normalized_type = (content_type or "").split(";", 1)[0].strip().lower()
+    if allowed_types and normalized_type not in {value.lower() for value in allowed_types}:
+        raise SourceError(
+            f"Unexpected content type for {item['id']}: {normalized_type or 'missing'}; "
+            f"expected one of {', '.join(allowed_types)}"
+        )
+    required_text = contract.get("required_text", [])
+    if required_text:
+        charset = "utf-8"
+        if content_type and "charset=" in content_type.lower():
+            charset = content_type.lower().split("charset=", 1)[1].split(";", 1)[0].strip()
+        try:
+            text = payload.decode(charset)
+        except (LookupError, UnicodeDecodeError) as exc:
+            raise SourceError(f"Cannot decode response for {item['id']} using {charset}: {exc}") from exc
+        missing = [value for value in required_text if value not in text]
+        if missing:
+            raise SourceError(
+                f"Response failed required-text validation for {item['id']}: {', '.join(missing)}"
+            )
+
+
 def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
     source = registry["sources"][sid]
     raw, manifest = _paths(registry, sid, item)
@@ -70,8 +113,10 @@ def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
         raise SourceError(f"Snapshot already exists; refusing overwrite: {raw}")
     raw.parent.mkdir(parents=True, exist_ok=True)
     manifest.parent.mkdir(parents=True, exist_ok=True)
-    request = urllib.request.Request(item["url"], headers={"User-Agent": "TownCountryAsset-SourceManager/1.0", "Accept": "*/*"})
-    digest, size = hashlib.sha256(), 0
+    request = urllib.request.Request(item["url"], headers={
+        "User-Agent": "TownCountryAsset-SourceManager/1.0", "Accept": "*/*"
+    })
+    digest, size, chunks = hashlib.sha256(), 0, []
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             final_url = response.geturl()
@@ -84,6 +129,8 @@ def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
                     output.write(chunk)
                     digest.update(chunk)
                     size += len(chunk)
+                    if item.get("validation"):
+                        chunks.append(chunk)
     except Exception as exc:
         raw.unlink(missing_ok=True)
         if isinstance(exc, SourceError):
@@ -95,21 +142,30 @@ def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
     if expected_sha256 and digest.hexdigest() != expected_sha256:
         raw.unlink(missing_ok=True)
         raise SourceError("SHA-256 mismatch: expected {}, received {}".format(expected_sha256, digest.hexdigest()))
-    meta = {"manifest_schema_version": 1, "source_id": sid, "source_name": source["name"],
-            "download_id": item["id"], "release": item["release"], "source_url": item["url"],
-            "final_url": final_url, "terms_url": source.get("terms_url"),
-            "attribution": source.get("attribution"),
-            "license_status": source.get("license_status", "unclear_or_unverified"),
-            "retrieved_at": datetime.now(timezone.utc).isoformat(), "filename": item["filename"],
-            "local_raw_path": raw.relative_to(registry.get("_root", ROOT)).as_posix(),
-            "content_type": content_type, "byte_count": size, "sha256": digest.hexdigest(),
-            "format": item.get("format"), "fields": item.get("fields", [])}
+    try:
+        _validate_response_contract(item, content_type, b"".join(chunks))
+    except SourceError:
+        raw.unlink(missing_ok=True)
+        raise
+    meta = {
+        "manifest_schema_version": 1, "source_id": sid, "source_name": source["name"],
+        "download_id": item["id"], "release": item["release"], "source_url": item["url"],
+        "final_url": final_url, "terms_url": source.get("terms_url"),
+        "attribution": source.get("attribution"),
+        "license_status": source.get("license_status", "unclear_or_unverified"),
+        "retrieved_at": datetime.now(timezone.utc).isoformat(), "filename": item["filename"],
+        "local_raw_path": raw.relative_to(registry.get("_root", ROOT)).as_posix(),
+        "content_type": content_type, "byte_count": size, "sha256": digest.hexdigest(),
+        "format": item.get("format"), "fields": item.get("fields", []),
+        "validation_contract": item.get("validation", {})
+    }
     try:
         manifest.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     except OSError as exc:
         raw.unlink(missing_ok=True)
         raise SourceError(f"Cannot write manifest: {exc}") from exc
     return meta
+
 
 def check_online(registry, timeout=15):
     results = []
