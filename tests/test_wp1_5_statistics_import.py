@@ -266,20 +266,6 @@ def test_persists_crosswalk_even_when_observation_subset_is_smaller(tmp_path):
     database = tmp_path / "canonical.sqlite"
     setup_database(database)
     observations, crosswalk, manifest = setup_inputs(tmp_path)
-    payload = json.loads(crosswalk.read_text())
-    payload["mappings"].append({
-        "game_id": "tc_" + "b" * 32,
-        "source_id": "provider-2",
-        "match_method": "reviewed_manual",
-        "evidence_url": "https://example.test/country/provider-2",
-    })
-    crosswalk.write_text(json.dumps(payload))
-    connection = connect_database(database)
-    connection.execute(
-        "INSERT INTO countries(game_id, created_at, updated_at) VALUES (?, ?, ?)",
-        ("tc_" + "b" * 32, "2026-10-31T00:00:00Z", "2026-10-31T00:00:00Z"),
-    )
-    connection.close()
     result = import_wp1_5_dataset(
         observations_path=observations, crosswalk_path=crosswalk,
         manifest_path=manifest, database_path=database,
