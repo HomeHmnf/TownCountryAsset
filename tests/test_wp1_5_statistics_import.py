@@ -121,7 +121,7 @@ def test_imports_structured_data_and_explicit_null_scalar(tmp_path):
 
     # This explicit unavailable value is stored as SQL NULL with its declared status.
     null_result = run_import(
-        tmp_path / "nullcase", database, field_id=1, value=None,
+        tmp_path, database, field_id=1, value=None,
         status="unavailable", release="2024-r2",
     )
     assert null_result["scalar_observations"] == 1
