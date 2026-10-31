@@ -17,6 +17,7 @@ GAME_B = "tc_" + "b" * 32
 def _database(tmp_path):
     path = tmp_path / "canonical.sqlite"
     connection = sqlite3.connect(path)
+    connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys=ON")
     apply_migrations(connection)
     connection.executemany(
