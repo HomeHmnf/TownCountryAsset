@@ -123,11 +123,13 @@ def _validate_observation(
             f"{label} source {source_key!r} is not the contracted primary source for field {field_id}"
         )
     period = _text(row.get("observation_period"), f"{label}.observation_period")
-    status = row.get("value_status", "observed")
+    status = row.get("value_status")
     if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
         raise StatisticsImportError(f"{label}.value_status is invalid")
+    if "value" not in row:
+        raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
     value = row.get("value")
-    unit = row.get("unit", field.get("unit"))
+    unit = row.get("unit")
     if not isinstance(unit, str) or not unit.strip():
         raise StatisticsImportError(f"{label}.unit must be a non-empty string")
     contracted_unit = field.get("unit")
