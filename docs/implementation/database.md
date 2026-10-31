@@ -123,3 +123,59 @@ The identity import command is included to make the isolated WP1.3 database self
 ### WP1.3 owner validation confirmation — 2026-10-31
 
 The owner ran both importers sequentially against `/tmp/tca-wp1-3.sqlite`. Identity import succeeded with **242 countries, 242 source mappings, 250 names, and 237 region memberships**. Country metadata/geometry import succeeded with **242 countries, 40,898 typed attributes, 726 geometries, and all 3 geometry profiles**. Both importers reported successful SQLite integrity and foreign-key checks. `uv run python -m compileall -q tools/database tools/import_country_data.py` completed without errors. The full repository suite passed: **145 passed in 2.42s**. WP1.3 is locally validated and closed.
+
+
+## WP1.4 — ISO, Persian localization, entity classification and flag review
+
+**Status:** Implemented on `work/compiler-hardening`; awaiting owner-side validation. No source-data approvals or consumer cutover are claimed.
+
+Added:
+- `migrations/002_review_domain_status.sql`
+- `tools/database/review_data_import.py`
+- `tools/import_review_data.py`
+- `tests/test_database_review_data_import.py`
+
+Updated the schema to version 2 with `countries.entity_type_status`. New INSERT/UPDATE triggers require a matching approved proposal before an entity classification can be marked reviewed, Persian localization can be marked reviewed, or ISO codes can be marked verified. Verified ISO still requires both alpha-2 and alpha-3. Reviewed flag mappings continue to require an approved flag proposal.
+
+The importer reads the existing identity registry, explicit ISO reference/provenance/proposal inputs, Persian candidate/provenance snapshots, entity taxonomy, and flag mapping. It checks the ISO reference checksum and recomputes proposal rows against the captured reference; it checks Persian QIDs against the explicit Natural Earth `WIKIDATAID` attribute in `country_attributes`; it validates flag and taxonomy schemas; and it requires exact registry/database current-source mapping parity. All writes are transactional and idempotent by deterministic proposal fingerprint. Changed content, conflicting existing rows, missing identities, stale evidence, and invalid approval transitions are rejected.
+
+Unreviewed ISO/Persian/entity/flag values remain candidates. Persian candidate labels are stored only in `review_proposals`, not as canonical `country_names`. Non-unreviewed entity values are proposals with taxonomy requirements recorded as guidance, not evidence. A reviewed flag source mapping must carry an explicit `reviewed_at` timestamp and is not inferred from a source code. Explicitly approved Persian proposals must match the reviewed Persian canonical value in the registry before the canonical name/status is applied. The importer never edits source JSON or generated assets.
+
+### WP1.4 focused validation commands
+
+Run from the repository root after pulling the branch. Use the ISO provenance file and Persian candidate/provenance files from the same captured refreshes; do not mix timestamps.
+
+```fish
+uv run pytest -v \
+  tests/test_database_review_data_import.py \
+  tests/test_database_schema.py \
+  tests/test_database_identity_import.py \
+  tests/test_database_country_data_import.py
+
+uv run python -m tools.import_identity_registry \
+  --database /tmp/tca-wp1-4.sqlite
+
+uv run python -m tools.import_country_data \
+  --database /tmp/tca-wp1-4.sqlite
+
+uv run python -m tools.import_review_data \
+  --database /tmp/tca-wp1-4.sqlite \
+  --registry config/country_identity_registry.json \
+  --iso-reference raw_data/iso/iso-3166-1.csv \
+  --iso-provenance PATH_TO_MATCHING_ISO_PROVENANCE_JSON \
+  --iso-proposals reports/iso-assignment-proposals.md \
+  --persian-candidates PATH_TO_PERSIAN_CANDIDATES_JSON \
+  --persian-provenance PATH_TO_MATCHING_PERSIAN_PROVENANCE_JSON \
+  --entity-taxonomy config/entity_types.json \
+  --flag-mapping config/country_flag_mapping.json
+
+uv run python -m compileall -q \
+  tools/database tools/import_review_data.py
+
+uv run pytest -v
+git status --short
+```
+
+Use the same database for all three imports, in the order shown. Replace the two Persian/ISO provenance placeholders with the exact files corresponding to the captured candidate/reference inputs. The focused tests cover candidate-only import, repeat-import idempotency, checksum rejection, source-ID/game-ID mismatch, explicit Wikidata QID crosswalk, flag review timestamp requirements, and database review-status triggers.
+
+Record actual schema version, import counts, integrity/foreign-key results, focused and full-suite results, and any unrelated working-tree files. Do not mark WP1.4 locally validated until the owner reports the run. The consolidated null/empty completeness report remains deferred until every WP1 data domain has been visited.
