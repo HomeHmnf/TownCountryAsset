@@ -42,3 +42,14 @@ def test_resource_catalog_is_nonempty_and_has_unique_keys():
     keys = [resource["key"] for resource in resources]
     assert resources
     assert len(keys) == len(set(keys))
+
+
+def test_wpp_download_profile_pins_official_files_and_togo_update():
+    contract = json.loads((ROOT / "config/wp1_5_data_sources.json").read_text(encoding="utf-8"))
+    downloads = {item["name"]: item for item in contract["sources"]["un_wpp_2024"]["downloads"]}
+    assert downloads["demographic_indicators_medium"]["fields"] == [1, 2, 6, 13, 14]
+    assert downloads["population_by_age_5_group_sex_medium"]["fields"] == [12]
+    update = downloads["interim_update_togo"]
+    assert update["release"] == "2026-01-19-togo-update"
+    assert update["scope"].startswith("Togo only")
+    assert contract["sources"]["un_wpp_2024"]["license_status"] == "CC BY 3.0 IGO"
