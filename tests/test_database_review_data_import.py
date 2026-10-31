@@ -261,6 +261,34 @@ def test_review_status_triggers_require_matching_approved_proposals(tmp_path: Pa
                 """UPDATE countries SET iso_alpha2='AA', iso_alpha3='AAA',
                    iso_assignment_status='verified' WHERE game_id=?""", (GAME_ID,)
             )
+        for kind, fingerprint, proposed in (
+            ("entity_type", "1" * 64, {"entity_type": "sovereign_state"}),
+            ("localization", "2" * 64, {"language": "fa", "name": "آلفا"}),
+            ("iso", "3" * 64, {"alpha2": "AA", "alpha3": "AAA"}),
+            ("flag", "4" * 64, {"source_flag_code": "aa"}),
+        ):
+            connection.execute(
+                """INSERT INTO review_proposals
+                   (game_id, proposal_type, proposal_fingerprint, proposed_json,
+                    evidence_json, review_status, created_at, reviewed_at)
+                   VALUES (?, ?, ?, ?, '[]', 'approved', 'now', '2026-10-31T00:00:00Z')""",
+                (GAME_ID, kind, fingerprint, json.dumps(proposed)),
+            )
+        connection.execute(
+            "UPDATE countries SET entity_type_status='reviewed' WHERE game_id=?", (GAME_ID,)
+        )
+        connection.execute(
+            "UPDATE countries SET localization_status='reviewed' WHERE game_id=?", (GAME_ID,)
+        )
+        connection.execute(
+            """UPDATE countries SET iso_alpha2='AA', iso_alpha3='AAA',
+               iso_assignment_status='verified' WHERE game_id=?""", (GAME_ID,)
+        )
+        connection.execute(
+            """INSERT INTO country_flags
+               (game_id, source_flag_code, mapping_status, evidence_json)
+               VALUES (?, 'aa', 'reviewed', '[]')""", (GAME_ID,)
+        )
     finally:
         connection.close()
 
