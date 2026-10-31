@@ -1,0 +1,139 @@
+# Canonical country identity contract
+
+**Status:** Persistent proposal registry committed; compiler integration is implemented as an opt-in path and requires local verification.  
+**Owner:** TownCountryAsset  
+**Scope:** Source-derived country/territory records and the future game-facing identity layer.
+
+## Core rule
+
+Every accepted record in the asset project's country/territory catalog must have one non-empty, unique, immutable `game_id`. That ID identifies the entity inside the game and joins its geometry and metadata. It must not be derived from a display name, Persian translation, ISO code, array position, or a source identifier that may change between source releases.
+
+The Natural Earth dataset is input data processed by TownCountryAsset. The legacy game repository is inspected only to audit compatibility; it is not the authority for asset records, source attributes, ISO values, or canonical identity.
+
+## Separate identity from attributes
+
+A future canonical record should have a structure equivalent to:
+
+```json
+{
+  "game_id": "country_<stable-opaque-id>",
+  "source": {
+    "dataset": "natural_earth_admin_0",
+    "source_id": "source-provided-id"
+  },
+  "iso": {
+    "alpha2": null,
+    "alpha3": null,
+    "assignment_status": "unverified"
+  },
+  "names": {
+    "en": "Source-backed English name",
+    "fa": null,
+    "aliases_en": [],
+    "aliases_fa": []
+  },
+  "entity_type": "unreviewed",
+  "regions": [],
+  "geometry_key": "source-or-geometry-key"
+}
+```
+
+This is an illustrative contract, not a claim that these fields or values are already implemented. Field names may be finalized during implementation. Missing ISO values are allowed; missing `game_id` values are not. Persian names must be authored or verified as asset-project localization data, not copied automatically from the legacy game's translation dictionary.
+
+## ID lifecycle
+
+1. Maintain an explicit identity registry in TownCountryAsset. Each current source feature must resolve to exactly one canonical `game_id`.
+2. For the initial registry, propose IDs for all records from the processed source, including records without ISO codes and records that are dependencies, territories, or disputed entities. Do not silently exclude a feature just because it is not a sovereign state.
+3. Once reviewed and committed, keep each `game_id` stable across source updates. If a source ID changes, add a reviewed source-ID-to-`game_id` mapping rather than minting a new game identity automatically.
+4. New source features must be assigned IDs explicitly; removed or merged source features require a documented lifecycle decision. Never use row order or a display name as fallback identity.
+5. ISO alpha-2/alpha-3 codes are attributes with source provenance and verification status, not primary keys. A syntactically valid code is not proof of the assignment.
+6. English and Persian names, aliases, region membership, and geometry references attach to `game_id`. Name changes must not change the ID.
+7. Multiple display labels may refer to one entity. Distinct entities must not be merged merely because their names or translations resemble each other.
+
+## Source and game compatibility
+
+- Source attributes and geometry come from the selected, versioned input dataset and its recorded provenance.
+- Canonical identity and reviewed localization belong to TownCountryAsset.
+- Legacy game catalogs, flag translations, aliases, quiz data, map color labels, and saved progress are compatibility evidence only. They can suggest a candidate mapping but cannot create or override a canonical asset record.
+- The crosswalk audit remains read-only. A proposed match must record evidence and a human decision before it is approved.
+- The game repository should consume a generated manifest keyed by `game_id` only after the identity registry and compatibility migration are reviewed. Do not change game runtime data as part of the initial registry creation.
+
+## Registry tooling and compiler integration
+
+`tools/country_identity_registry.py` creates an initial proposal with `--bootstrap` and validates a persisted registry against compiled `countries.json`. Bootstrap uses random UUID-backed IDs and refuses to overwrite an existing registry. The committed registry contains source-derived English names, aliases, regions, and ISO alpha-3 candidates as unverified/provisional metadata; it does not approve those assignments.
+
+The compiler now accepts `--identity-registry config/country_identity_registry.json`. With that option, it validates full source coverage and unique IDs, adds `game_id` to every country record, and emits parallel `geometry_game_id_low.json`, `geometry_game_id_medium.json`, and `geometry_game_id_high.json` files keyed by canonical `game_id`. Existing `id` fields and `geometry_{profile}.json` files remain source-ID-keyed for compatibility. The generated manifest includes hashes for both output families, and the asset audit checks canonical-keyed geometry when `game_id` is present. This dual-output stage is intentional; the game must not migrate until downstream consumers are reviewed.
+
+The integration is opt-in for now. A successful registry-only check does not prove compiler integration; run the compiler with `--identity-registry`, then audit the resulting candidate directory. Run `uv run python tools/audit_country_identity_registry.py` to generate a read-only, record-level review report at `reports/country-identity-review.md`. This report identifies metadata requiring review and structural mapping conflicts; it does not modify or approve the registry.
+
+When a source release changes, do not rerun bootstrap. Review the source diff first. For a source ID rename, edit the existing registry record to keep its `game_id`, record the old source ID in `previous_source_ids`, set the reviewed new `current_source_id`, and update `geometry_key`. New features require an explicit new registry entry; removed, split, or merged features require a documented decision. The validator fails on coverage/count mismatches and conflicting mappings rather than auto-assigning identities.
+
+## Required validation
+
+Before a registry can be considered usable, automated checks must establish that:
+
+- every source feature is represented exactly once or has an explicit reviewed exclusion;
+- every included record has a unique, non-empty `game_id`;
+- every source feature resolves to a registry entry, with no implicit ID fallback;
+- no ISO value is copied from an administrative source ID;
+- each name and ISO attribute retains source/localization provenance and verification status;
+- source updates report added, removed, changed, and re-keyed features without silently changing `game_id`; and
+- all candidate links to legacy game labels remain review-only until approved.
+
+## Migration order
+
+1. Improve crosswalk candidate discovery and its tests without modifying game data.
+2. Implement the explicit identity registry and schema in TownCountryAsset.
+3. Generate a complete proposed registry from the current source, covering all records; review IDs and entity scope.
+4. Add verified ISO/name/localization attributes and explicit unresolved statuses.
+5. Validate the registry against the source and geometry outputs.
+6. Produce a separate legacy-game compatibility crosswalk keyed by `game_id`.
+7. Only after review, plan a compatibility-safe game migration for catalogs, maps, flags, questions, and saved progress.
+
+## Automated ISO reference refresh
+
+For a one-command refresh, run:
+
+```fish
+uv run python tools/refresh_iso_review.py
+```
+
+This downloads the maintained `stefangabos/world_countries` English `world.csv` distribution, normalizes its lowercase code fields to the proposal tool's uppercase schema, validates the required columns, unique codes, and a minimum expected row count, and generates `reports/iso-assignment-proposals.md`. The raw response is preserved as a timestamped file under `raw_data/iso/`; a separate timestamped JSON provenance record captures the source URL, UTC retrieval time, raw and normalized SHA-256 checksums, and row count. The normalized `raw_data/iso/iso-3166-1.csv` is refreshed for convenient reuse. The raw snapshots and provenance records are locally preserved and `raw_data/` is git-ignored by default.
+
+**Source limitation:** this download is a third-party maintained distribution, not a direct export from ISO's own Online Browsing Platform. It is useful for automated candidate discovery, but it is not sufficient evidence to mark a code verified. The ISO organization explains that its Online Browsing Platform is the authoritative current source and that the downloadable Country Codes Collection may require a subscription: https://www.iso.org/iso-3166-country-codes.html. Review candidates against appropriate authoritative evidence before approving them.
+
+The refresh command never edits `config/country_identity_registry.json`, canonical IDs, or generated asset snapshots. It fails on network errors, an unexpected schema, invalid or duplicate codes, an implausibly small reference, or a timestamp collision rather than silently accepting questionable data. Re-running it on the same UTC second refuses to overwrite the prior raw snapshot; run again later if that occurs.
+
+## ISO assignment proposal workflow
+
+The ISO proposal generator is intentionally separate from registry validation and never edits registry records:
+
+1. Obtain an ISO 3166-1 reference export from the ISO Online Browsing Platform / ISO Country Codes Collection. The ISO overview is https://www.iso.org/iso-3166-country-codes.html. Record the retrieval date and retain the original downloaded file.
+2. Prepare a UTF-8 CSV with columns `alpha2`, `alpha3`, and `english_name`, preserving the reference's official English short names and code values. Do not supplement the file with Natural Earth source IDs or user-assigned codes.
+3. Run `uv run python tools/propose_iso_assignments.py --reference data/iso/iso-3166-1.csv --source-url https://www.iso.org/iso-3166-country-codes.html --retrieved-on YYYY-MM-DD` (replace `YYYY-MM-DD` with the actual retrieval date). The report records both provenance fields.
+4. Review `reports/iso-assignment-proposals.md`. The report separately counts exact normalized-name matches and explicit reviewed name-variant matches; neither category is approved automatically. Fuzzy matching is intentionally not used.
+5. Work through `docs/architecture/iso-assignment-review-log.md` and record the decision and supporting evidence for every unresolved or scope-sensitive record. A missing candidate is not an instruction to invent a code.
+6. For each accepted proposal, record authoritative source and retrieval date in the registry's evidence/provenance fields before changing any code or marking `assignment_status` as `verified`. Keep ISO fields null when no appropriate code exists. Do not change `game_id`.
+7. Re-run the registry audit and tests after any reviewed registry changes.
+
+The proposal generator never writes to `config/country_identity_registry.json`. A valid code and a name match do not by themselves prove that an entity belongs in ISO 3166-1 or that the assignment is correct. The ISO Maintenance Agency notes that official code elements are available through its Online Browsing Platform and that codes are not assigned to every geopolitical area: https://www.iso.org/iso-3166-country-codes.html.
+
+
+## Canonical SQLite storage (WP1)
+
+**Status:** WP1.1 schema and local migration tooling implemented; production-data migration is not yet authorized or implemented.
+
+The planned canonical structured store is local SQLite at `data/canonical/town_country_asset.sqlite`. The initial schema and constraints are defined in [canonical database architecture](canonical-database.md) and implemented by `migrations/001_initial_schema.sql`. Existing JSON identity registry and generated assets remain available during the parallel migration.
+
+The database preserves the registry's persistent `game_id` as its primary identity key. Its accepted shape is exactly `tc_` followed by 32 lowercase hexadecimal characters. Imported records default to candidate status. Natural Earth source IDs remain dataset-scoped current/historical references; ISO values remain nullable attributes with independent verification status. No WP1.1 operation imports, approves, rewrites, or deletes existing registry records.
+
+The local schema ledger records migration versions. Migration SQL and tooling are committed; database binaries and SQLite WAL/SHM sidecars are ignored by Git. Later WP1 stages will import the registry and source data, verify parity, and only then consider database-backed consumers.
+
+
+## Data completeness and verification policy (WP1 update)
+
+Populated values in the selected source/registry are treated as correct inputs unless the owner identifies a specific error. The migration must preserve them and their provenance; it must not create speculative corrections or report workflow labels such as `unreviewed` as data errors.
+
+The consolidated data review report is produced after all planned data domains have been visited. It reports genuinely empty and `null` fields, distinguishing values that are intentionally inapplicable from fields expected to be populated. No missing value is guessed or silently filled.
+
+Verification is a completion step after the relevant data has been populated, not a default warning state for every imported record. The database's integrity constraints still apply: for example, ISO status can be marked `verified` only when both alpha-2 and alpha-3 values are present. Records remain candidates during the parallel migration and are promoted only at the agreed completion point.

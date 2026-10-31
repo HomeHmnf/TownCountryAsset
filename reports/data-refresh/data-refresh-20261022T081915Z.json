@@ -1,0 +1,159 @@
+{
+  "status": "success",
+  "started_at_utc": "2026-10-22T08:19:15.248700+00:00",
+  "finished_at_utc": "2026-10-22T08:19:47.599537+00:00",
+  "duration_seconds": 32.351,
+  "candidate_output_dir": "/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset_candidate",
+  "natural_earth": {
+    "source_url": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip",
+    "archive": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/fetched/natural-earth-admin0-20261022T081915Z.zip",
+    "provenance": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/fetched/natural-earth-admin0-provenance-20261022T081915Z.json",
+    "sha256": "5fed433373581fa648920435f937d95f2d3c0200e067409c6478dcdf1b853139",
+    "size_bytes": 799734
+  },
+  "stages": [
+    {
+      "stage": "fetch Natural Earth archive",
+      "status": "success",
+      "stdout": "Saved /home/hmnf/Projects/Python/TownAndCountry/raw_data/fetched/natural-earth-admin0-20261022T081915Z.zip\nSHA-256: 5fed433373581fa648920435f937d95f2d3c0200e067409c6478dcdf1b853139",
+      "stderr": ""
+    },
+    {
+      "stage": "refresh ISO review proposals",
+      "status": "success",
+      "return_code": 0,
+      "command": [
+        "/home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python",
+        "tools/refresh_iso_review.py",
+        "--output-dir",
+        "/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso",
+        "--report",
+        "/home/hmnf/Projects/Python/TownAndCountry/reports/iso-assignment-proposals.md",
+        "--source-url",
+        "https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv"
+      ],
+      "stdout": "{\n  \"raw_snapshot\": \"/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-upstream-20261022T081930Z.csv\",\n  \"normalized_reference\": \"/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1.csv\",\n  \"provenance\": \"/home/hmnf/Projects/Python/TownAndCountry/raw_data/iso/iso-3166-1-provenance-20261022T081930Z.json\",\n  \"report\": \"/home/hmnf/Projects/Python/TownAndCountry/reports/iso-assignment-proposals.md\",\n  \"raw_sha256\": \"d5a40f6d8eeb8bb1981c93c54b8d56c9d08a7c0a0b8272f40fd22f705689c8b9\",\n  \"normalized_sha256\": \"10893d35138839a13d417137ee2122d1934beee4839e5578da2c1d0b1e25afb2\",\n  \"reference_row_count\": 249,\n  \"candidate_count\": 234,\n  \"exact_match_count\": 200,\n  \"explicit_variant_count\": 34,\n  \"no_match_count\": 8,\n  \"ambiguous_count\": 0\n}",
+      "stderr": ""
+    },
+    {
+      "stage": "refresh Persian localization proposals from current Wikidata labels",
+      "status": "success",
+      "return_code": 0,
+      "command": [
+        "/home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python",
+        "tools/refresh_persian_localization.py",
+        "--source-archive",
+        "/home/hmnf/Projects/Python/TownAndCountry/raw_data/fetched/natural-earth-admin0-20261022T081915Z.zip",
+        "--registry",
+        "/home/hmnf/Projects/Python/TownAndCountry/config/country_identity_registry.json",
+        "--output-dir",
+        "/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian",
+        "--report",
+        "/home/hmnf/Projects/Python/TownAndCountry/reports/persian-localization-proposals.md",
+        "--source-url",
+        "https://query.wikidata.org/sparql",
+        "--timeout",
+        "60.0"
+      ],
+      "stdout": "{\n  \"raw_snapshot\": \"/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-labels-20261022T081931Z.json\",\n  \"candidate_snapshot\": \"/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-candidates-20261022T081931Z.json\",\n  \"provenance\": \"/home/hmnf/Projects/Python/TownAndCountry/raw_data/persian/wikidata-persian-provenance-20261022T081931Z.json\",\n  \"report\": \"/home/hmnf/Projects/Python/TownAndCountry/reports/persian-localization-proposals.md\",\n  \"raw_sha256\": \"e2aca29fdfa3709cfe46b42745fdef764fc89f7e41e8f3e3d0ef6879576195b5\",\n  \"record_count\": 242,\n  \"candidate_count\": 242,\n  \"missing_qid_count\": 0,\n  \"missing_label_count\": 0\n}",
+      "stderr": ""
+    },
+    {
+      "stage": "prepare isolated candidate directory",
+      "status": "success",
+      "stdout": "/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l",
+      "stderr": ""
+    },
+    {
+      "stage": "compile candidate game data",
+      "status": "success",
+      "return_code": 0,
+      "command": [
+        "/home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python",
+        "tools/compile_natural_earth.py",
+        "--source",
+        "/home/hmnf/Projects/Python/TownAndCountry/raw_data/fetched/natural-earth-admin0-20261022T081915Z.zip",
+        "--output",
+        "/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l",
+        "--config",
+        "/home/hmnf/Projects/Python/TownAndCountry/config/generation.json",
+        "--regions",
+        "/home/hmnf/Projects/Python/TownAndCountry/config/regions.json",
+        "--identity-registry",
+        "/home/hmnf/Projects/Python/TownAndCountry/config/country_identity_registry.json"
+      ],
+      "stdout": "Compiled 242 features into /home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l",
+      "stderr": ""
+    },
+    {
+      "stage": "generate SVG assets",
+      "status": "success",
+      "return_code": 0,
+      "command": [
+        "/home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python",
+        "tools/generate_country_svgs.py",
+        "--data",
+        "/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l",
+        "--output",
+        "/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l/svg"
+      ],
+      "stdout": "Generated 726 SVG files in /home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l/svg",
+      "stderr": ""
+    },
+    {
+      "stage": "audit generated assets",
+      "status": "success",
+      "return_code": 0,
+      "command": [
+        "/home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python",
+        "tools/audit_generated_assets.py",
+        "--data",
+        "/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l",
+        "--source",
+        "/home/hmnf/Projects/Python/TownAndCountry/raw_data/fetched/natural-earth-admin0-20261022T081915Z.zip"
+      ],
+      "stdout": "Asset audit passed: /home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l",
+      "stderr": ""
+    },
+    {
+      "stage": "audit persistent identity registry",
+      "status": "success",
+      "return_code": 0,
+      "command": [
+        "/home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python",
+        "tools/audit_country_identity_registry.py",
+        "--registry",
+        "/home/hmnf/Projects/Python/TownAndCountry/config/country_identity_registry.json",
+        "--output",
+        "/home/hmnf/Projects/Python/TownAndCountry/reports/data-refresh/country-identity-review.md"
+      ],
+      "stdout": "Identity review report written to /home/hmnf/Projects/Python/TownAndCountry/reports/data-refresh/country-identity-review.md\nRecords: 242; review rows: 242; structural issues: 0",
+      "stderr": ""
+    },
+    {
+      "stage": "compare candidate with approved snapshot",
+      "status": "success",
+      "return_code": 0,
+      "command": [
+        "/home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python",
+        "tools/compare_asset_snapshots.py",
+        "--old",
+        "/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset",
+        "--new",
+        "/home/hmnf/Projects/Python/TownAndCountry/generated/.town_country_asset_candidate.staging-gvxkjb3l",
+        "--new-display-path",
+        "/home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset_candidate",
+        "--output",
+        "/home/hmnf/Projects/Python/TownAndCountry/reports/data-refresh/asset-comparison.md"
+      ],
+      "stdout": "Comparison report written to /home/hmnf/Projects/Python/TownAndCountry/reports/data-refresh/asset-comparison.md",
+      "stderr": ""
+    },
+    {
+      "stage": "publish validated candidate",
+      "status": "success",
+      "stdout": "Published validated candidate to /home/hmnf/Projects/Python/TownAndCountry/generated/town_country_asset_candidate",
+      "stderr": ""
+    }
+  ]
+}

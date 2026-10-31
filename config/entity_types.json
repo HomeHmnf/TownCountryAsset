@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "proposal",
+  "unreviewed_value": "unreviewed",
+  "types": {
+    "sovereign_state": {
+      "label": "Sovereign state",
+      "definition": "An entity reviewed as a sovereign state for the project's stated country-catalogue policy.",
+      "evidence_required": ["authoritative source describing state status", "explicit project policy decision"]
+    },
+    "dependent_territory": {
+      "label": "Dependent territory",
+      "definition": "A territory with a documented constitutional or administrative relationship to another state.",
+      "evidence_required": ["source describing constitutional or administrative status", "geometry and entity-scope check"]
+    },
+    "special_administrative_region": {
+      "label": "Special administrative region",
+      "definition": "A separately represented administrative region whose status is supported by source evidence.",
+      "evidence_required": ["authoritative administrative-status source", "geometry and entity-scope check"]
+    },
+    "disputed_or_partially_recognized_entity": {
+      "label": "Disputed or partially recognized entity",
+      "definition": "An entity whose statehood, sovereignty, or international recognition is contested or partial.",
+      "evidence_required": ["multiple reputable sources describing the disputed status", "explicit project policy decision"]
+    },
+    "geographic_territory": {
+      "label": "Geographic territory",
+      "definition": "A separately represented geographic territory or possession for which sovereign-state classification is not appropriate.",
+      "evidence_required": ["source describing geographic and administrative scope", "geometry and entity-scope check"]
+    },
+    "other_administrative_entity": {
+      "label": "Other administrative entity",
+      "definition": "A separately represented administrative entity that does not fit another category; use only with a written rationale.",
+      "evidence_required": ["authoritative entity description", "written rationale for category choice", "geometry and entity-scope check"]
+    },
+    "unreviewed": {
+      "label": "Unreviewed",
+      "definition": "No entity classification has been approved.",
+      "evidence_required": ["classification review still required"]
+    }
+  },
+  "policy": [
+    "These categories are a review vocabulary, not a geopolitical adjudication.",
+    "Natural Earth feature presence or a matching ISO name alone does not establish entity type.",
+    "Keep uncertain records unreviewed and document source URLs, access dates, and relevant excerpts in a future evidence record.",
+    "Do not infer entity type from source IDs, ISO codes, regions, geometry keys, or record order."
+  ]
+}

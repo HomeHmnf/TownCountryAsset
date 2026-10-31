@@ -1,0 +1,10 @@
+{
+  "dataset": "Natural Earth Admin 0 Countries",
+  "source_url": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip",
+  "retrieved_at_utc": "2026-10-23T18:39:42.208577+00:00",
+  "archive_path": "raw_data/fetched/natural-earth-admin0-20261023T183942Z.zip",
+  "archive_sha256": "5fed433373581fa648920435f937d95f2d3c0200e067409c6478dcdf1b853139",
+  "archive_size_bytes": 799734,
+  "release_version": null,
+  "release_version_note": "Not inferred from the download URL; fill only from verifiable upstream release metadata."
+}

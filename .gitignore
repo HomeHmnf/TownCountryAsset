@@ -2,6 +2,13 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+# Local environment configuration (never commit credentials or machine paths)
+.env
+.env.*.local
+
+# raw_data/
+# WP1.5 provider downloads are local snapshots; commit their manifests, not raw bytes.
+/raw_data/wp1_5/
 venv/
 build/
 dist/
@@ -9,5 +16,11 @@ dist/
 .generated-tmp/
 sources/*
 !sources/.gitkeep
-generated/*
-!generated/.gitkeep
+# generated/*
+# !generated/.gitkeep
+
+# Local canonical SQLite database and transient SQLite sidecars
+data/canonical/*.sqlite
+data/canonical/*.sqlite3
+*.sqlite-wal
+*.sqlite-shm

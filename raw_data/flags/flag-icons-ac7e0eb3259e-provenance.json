@@ -1,0 +1,15 @@
+{
+  "archive_file": "flag-icons-ac7e0eb3259e.zip",
+  "archive_sha256": "478bf8407080f3e8a0ed8b688f29daf7fcaed585be829fe3f980229e35b2f3ae",
+  "archive_size_bytes": 1494650,
+  "archive_url": "https://codeload.github.com/lipis/flag-icons/zip/ac7e0eb3259eb62aa6100c435607e2fe03896a97",
+  "configured_ref": "main",
+  "license": "MIT",
+  "license_archive_path": "flag-icons-ac7e0eb3259eb62aa6100c435607e2fe03896a97/LICENSE",
+  "license_file": "flag-icons-ac7e0eb3259e-LICENSE.txt",
+  "license_sha256": "8f1195d55a2fd315a07d812328470ca9ba2abb78c8d317ff19619d5125e00cea",
+  "resolved_commit": "ac7e0eb3259eb62aa6100c435607e2fe03896a97",
+  "retrieved_at_utc": "2026-10-23T18:40:00Z",
+  "source_url": "https://github.com/lipis/flag-icons",
+  "svg_file_count": 542
+}
