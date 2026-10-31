@@ -133,7 +133,7 @@ def test_rejects_source_field_mismatch_and_invalid_null_status(tmp_path):
     with pytest.raises(StatisticsImportError, match="not the contracted primary source"):
         run_import(tmp_path, database, field_id=15)
     with pytest.raises(StatisticsImportError, match="NULL value requires"):
-        run_import(tmp_path / "nullcase", database, value=None)
+        run_import(tmp_path, database, value=None)
 
 
 def test_rejects_checksum_mismatch_and_crosswalk_pair_mismatch(tmp_path):
@@ -146,16 +146,15 @@ def test_rejects_checksum_mismatch_and_crosswalk_pair_mismatch(tmp_path):
     with pytest.raises(StatisticsImportError, match="checksum"):
         import_wp1_5_dataset(observations_path=observations, crosswalk_path=crosswalk, manifest_path=manifest, database_path=database)
 
-    setup_inputs(tmp_path / "paircase")
-    pair_dir = tmp_path / "paircase"
-    observations_data = json.loads((pair_dir / "normalized.json").read_text())
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    observations_data = json.loads(observations.read_text())
     observations_data["observations"][0]["source_id"] = "wrong-id"
-    (pair_dir / "normalized.json").write_text(json.dumps(observations_data))
+    observations.write_text(json.dumps(observations_data))
     with pytest.raises(StatisticsImportError, match="absent from the explicit crosswalk"):
         import_wp1_5_dataset(
-            observations_path=pair_dir / "normalized.json",
-            crosswalk_path=pair_dir / "crosswalk.json",
-            manifest_path=pair_dir / "manifest.json",
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
             database_path=database,
         )
 
