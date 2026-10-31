@@ -314,3 +314,6 @@ uv run python -m compileall -q tools/database tools/import_wp1_5.py
 ``
 
 Record the actual focused test, CLI-help and compilation results before treating this importer increment as locally validated.
+
+
+The normalized contract also requires `value`, `value_status`, `observation_period` and `unit` on every row. Missing status is never defaulted to `observed`; unavailable scalar values must explicitly carry JSON `null` plus `unavailable` or `not_applicable`.
