@@ -56,13 +56,20 @@ def extract_table(html: str, required_headers: Iterable[str], *, header_aliases=
     parser.feed(html)
     matches = []
     for table in parser.tables:
-        index = next((i for i, row in enumerate(table) if row and all(k == "th" for k, _ in row)), None)
-        if index is None: continue
-        headers = [aliases.get(normalize_header(v), v.strip()) for _, v in table[index]]
-        normalized = [normalize_header(v) for v in headers]
-        if len(set(normalized)) != len(normalized):
-            raise ValueError("HTML table contains duplicate column headings")
-        if required.issubset(set(normalized)): matches.append((headers, table[index + 1:]))
+        # Some publishers mark column labels with <td> rather than semantic
+        # <th> elements. Identify the header row by its declared labels, not
+        # by the HTML cell tag or its position in the table.
+        for index, row in enumerate(table):
+            if not row:
+                continue
+            headers = [aliases.get(normalize_header(value), value.strip()) for _, value in row]
+            normalized = [normalize_header(value) for value in headers]
+            if not required.issubset(set(normalized)):
+                continue
+            if len(set(normalized)) != len(normalized):
+                raise ValueError("HTML table contains duplicate column headings")
+            matches.append((headers, table[index + 1:]))
+            break
     if len(matches) != 1:
         raise ValueError(f"Expected exactly one HTML table matching required headers; found {len(matches)}")
     headers, raw_rows = matches[0]
