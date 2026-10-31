@@ -127,3 +127,38 @@ uv run python -m tools.acquire_wp1_5_sources \
 ```
 
 The example URL is deliberately a placeholder and is not a valid provider endpoint. Do not run it as-is. Confirm the exact file, edition, format, country-code scheme and dataset terms before acquisition. The utility does not scrape landing pages, guess download links, normalize provider data or import observations into SQLite. Those source-specific steps remain separate so the captured source bytes and provenance are auditable.
+
+
+## Explicit source crosswalk format
+
+WP1.5 crosswalk validation is implemented in `tools/database/source_crosswalk.py`. A crosswalk is a curated JSON file for one provider dataset. It maps each provider's stable identifier to exactly one persistent `game_id`; it does not use labels as keys and it does not perform fuzzy matching.
+
+Example:
+
+```json
+{
+  "schema_version": 1,
+  "dataset": "un_wpp_2024",
+  "source_key": "un_wpp_2024",
+  "mappings": [
+    {
+      "game_id": "tc_0123456789abcdef0123456789abcdef",
+      "source_id": "4",
+      "source_name": "Afghanistan",
+      "match_method": "authoritative_identifier",
+      "evidence_url": "https://population.un.org/wpp/"
+    }
+  ]
+}
+```
+
+Allowed match methods are `authoritative_identifier` and `reviewed_manual`. Provider source IDs and game IDs must each be unique within a crosswalk. Optional evidence URLs must use HTTPS. When the canonical identity set is supplied, unknown game IDs are rejected. Partial coverage is permitted and explicitly reported; a source's absence of a country is not converted to a zero or an inferred match. Name-only, fuzzy-name, ISO-inferred and coordinate-inferred matches are rejected by this validator.
+
+Focused validation:
+
+```fish
+uv run pytest -v tests/test_wp1_5_source_crosswalk.py tests/test_wp1_5_source_acquisition.py tests/test_wp1_5_source_contract.py
+uv run python -m compileall -q tools/database
+``
+
+The crosswalk validator is a validation primitive, not yet a production importer. It does not write `country_sources` or statistic rows. Source-specific crosswalk files must be assembled and reviewed before any dataset import.
