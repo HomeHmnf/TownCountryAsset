@@ -32,17 +32,17 @@ def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
     path = tmp_path / "nested" / "canonical.sqlite"
     with connect_database(path) as connection:
         assert current_schema_version(connection) == 0
-        assert apply_migrations(connection) == 2
+        assert apply_migrations(connection) == 3
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
         assert validate_database(connection) == []
         tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        assert {"countries", "country_sources", "country_geometries", "review_proposals", "schema_migrations"} <= tables
+        assert {"countries", "country_sources", "country_geometries", "review_proposals", "current_statistics", "selected_game_data", "schema_migrations"} <= tables
 
 
 def test_migration_is_idempotent(database):
-    assert apply_migrations(database) == 2
-    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 2
+    assert apply_migrations(database) == 3
+    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 3
 
 
 def test_game_id_requires_exact_tc_prefix_and_32_lowercase_hex(database):
@@ -120,6 +120,36 @@ def test_statistics_and_selected_game_data_are_unique_and_json_valid(database):
     database.execute("INSERT INTO selected_game_data(game_id, data_category, data_key, payload_json) VALUES (?, 'quiz', 'capital', '{\"value\":\"Tehran\"}')", (gid,))
     with pytest.raises(sqlite3.IntegrityError):
         database.execute("INSERT INTO selected_game_data(game_id, data_category, data_key, payload_json) VALUES (?, 'quiz', 'capital', '{')", (gid,))
+
+
+def test_statistics_support_explicit_nulls_and_source_observation_metadata(database):
+    import_id = seed_country(database)
+    gid = "tc_" + "0" * 32
+    database.execute(
+        """INSERT INTO current_statistics(
+            game_id, statistic_key, value, unit, observed_at, observation_period,
+            value_status, source_reference, source_version, methodology, retrieved_at, import_id
+        ) VALUES (?, 'population_growth', NULL, '%', NULL, '2025', 'unavailable',
+                  'https://example.test/source', '2025-release', 'national estimate',
+                  '2026-10-31T00:00:00Z', ?)""",
+        (gid, import_id),
+    )
+    row = database.execute(
+        "SELECT value, value_status, observation_period, source_version FROM current_statistics WHERE game_id = ?",
+        (gid,),
+    ).fetchone()
+    assert tuple(row) == (None, "unavailable", "2025", "2025-release")
+
+    with pytest.raises(sqlite3.IntegrityError):
+        database.execute(
+            "INSERT INTO current_statistics(game_id, statistic_key, value, value_status) VALUES (?, 'invalid_null', NULL, 'observed')",
+            (gid,),
+        )
+    with pytest.raises(sqlite3.IntegrityError):
+        database.execute(
+            "INSERT INTO current_statistics(game_id, statistic_key, value, value_status) VALUES (?, 'invalid_value', 1, 'unavailable')",
+            (gid,),
+        )
 
 
 def test_review_proposal_dedup_and_approval_timestamp(database):
