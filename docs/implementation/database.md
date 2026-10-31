@@ -14,7 +14,7 @@
 
 ## WP1.1 — SQLite schema, connection layer, and local version management
 
-**Status:** Implemented; local test execution is pending in the developer checkout.
+**Status:** Implemented and locally validated by the owner.
 
 Added the version 1 schema in `migrations/001_initial_schema.sql`, SQLite connection configuration in `tools/database/connection.py`, transactional migration management in `tools/database/schema.py`, and the local initialization/upgrade CLI in `tools/migrate_database.py`. Added `tests/test_database_schema.py`.
 
@@ -32,10 +32,39 @@ uv run python tools/migrate_database.py --database /tmp/tca-wp1-1.sqlite
 uv run python -m compileall -q tools/database tools/migrate_database.py
 ```
 
-Record the actual local output here after running these commands. Do not mark WP1.1 locally validated until they pass in the developer checkout.
+Owner-reported validation: `tests/test_database_schema.py` — **12 passed**; `uv run python -m tools.migrate_database --database /tmp/tca-wp1-1-fixed.sqlite` advanced schema 0 → 1 and passed SQLite integrity/foreign-key checks. The module invocation is required so the repository root is on the import path.
 
 ### WP1.1 migration-ledger correction — 2026-10-30
 
 The first local validation attempt exposed a duplicate ledger definition: the migration manager creates `schema_migrations` before applying pending migrations, while migration 001 also attempted to create it. Removed the duplicate `CREATE TABLE schema_migrations` statement from migration 001. The migration manager is the sole owner of this local bookkeeping table; migration SQL defines application schema only.
 
 The existing fresh-database, repeat-application, and failed-migration rollback tests exercise this boundary. The reported run failed during migration setup (1 failed, 9 setup errors, 2 passed); this is a confirmed implementation defect, not a passing validation. Re-run the focused tests, initialization CLI, and compile check after pulling this correction. WP1.1 remains locally unvalidated until the developer reports successful results.
+
+
+## WP1.2 — Identity registry and source provenance
+
+**Status:** Implemented; local validation pending.
+
+Added `tools/database/identity_import.py`, `tools/import_identity_registry.py`, and `tests/test_database_identity_import.py`. The importer reads `config/country_identity_registry.json` and `generated/town_country_asset_candidate/{countries.json,manifest.json}`. It verifies manifest SHA-256, registry/candidate coverage, persistent `game_id` equality, current source IDs, English canonical names/aliases, region memberships, and ISO alpha-3 candidate consistency before writing.
+
+The importer populates `dataset_imports`, `countries`, `country_sources` (including historical IDs), `country_names`, and `country_regions`. It preserves current registry statuses as candidate/unverified values where the database schema requires them; no data is approved or guessed during this partial stage. It does not import source attributes, geometry, Persian localization, selected game data, current statistics, or flags.
+
+The operation is transactional and idempotent for the same dataset/archive checksum. It rejects conflicting existing country/source/name mappings, validates SQLite integrity and foreign keys before commit, and rolls back on failure. It does not edit the JSON registry or generated candidate files.
+
+### Data completeness and verification policy
+
+Treat populated source values as correct unless the owner identifies an error. Do not report `unreviewed` workflow states as data-quality errors. After all WP1 data domains have been visited, produce one consolidated report of genuinely empty/null fields and test results; distinguish intentional inapplicability from missing expected data. Do not infer or fill missing values. Apply verified/reviewed statuses only after the relevant data is complete. In particular, schema v1 requires both ISO alpha-2 and alpha-3 before ISO status can become `verified`.
+
+### WP1.2 validation commands
+
+```fish
+uv run pytest -v tests/test_database_identity_import.py tests/test_database_schema.py tests/test_country_identity_registry.py
+
+uv run python -m tools.import_identity_registry \
+  --database /tmp/tca-wp1-2.sqlite
+
+uv run python -m compileall -q tools/database tools/import_identity_registry.py
+git status --short
+```
+
+Record the actual local output before marking WP1.2 validated or proceeding to WP1.3.

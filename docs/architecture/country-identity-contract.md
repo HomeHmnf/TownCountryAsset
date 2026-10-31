@@ -128,3 +128,12 @@ The planned canonical structured store is local SQLite at `data/canonical/town_c
 The database preserves the registry's persistent `game_id` as its primary identity key. Its accepted shape is exactly `tc_` followed by 32 lowercase hexadecimal characters. Imported records default to candidate status. Natural Earth source IDs remain dataset-scoped current/historical references; ISO values remain nullable attributes with independent verification status. No WP1.1 operation imports, approves, rewrites, or deletes existing registry records.
 
 The local schema ledger records migration versions. Migration SQL and tooling are committed; database binaries and SQLite WAL/SHM sidecars are ignored by Git. Later WP1 stages will import the registry and source data, verify parity, and only then consider database-backed consumers.
+
+
+## Data completeness and verification policy (WP1 update)
+
+Populated values in the selected source/registry are treated as correct inputs unless the owner identifies a specific error. The migration must preserve them and their provenance; it must not create speculative corrections or report workflow labels such as `unreviewed` as data errors.
+
+The consolidated data review report is produced after all planned data domains have been visited. It reports genuinely empty and `null` fields, distinguishing values that are intentionally inapplicable from fields expected to be populated. No missing value is guessed or silently filled.
+
+Verification is a completion step after the relevant data has been populated, not a default warning state for every imported record. The database's integrity constraints still apply: for example, ISO status can be marked `verified` only when both alpha-2 and alpha-3 values are present. Records remain candidates during the parallel migration and are promoted only at the agreed completion point.

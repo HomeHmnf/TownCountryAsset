@@ -1,6 +1,6 @@
 # Canonical SQLite database architecture
 
-**Status:** WP1.1 implementation committed; local database initialization and test execution await developer validation. No production-data migration or consumer cutover is included in WP1.1.
+**Status:** WP1.1 implemented and locally validated; WP1.2 identity/provenance importer implemented, awaiting developer validation. No consumer cutover is included.
 **Canonical local path:** `data/canonical/town_country_asset.sqlite`
 **Schema versioning:** Local database ledger; migration SQL is version-controlled.
 
@@ -8,7 +8,7 @@
 
 SQLite is the planned canonical structured store for country identity, source provenance, names, regions, source attributes, geometry profiles, review evidence, selected game data, and current statistics. The database is local application data and is not committed to Git. Existing JSON configuration, registry, generated assets, and pipeline behavior remain in place during the parallel migration.
 
-Persistent `game_id` values remain the internal identity. They are exactly `tc_` followed by 32 lowercase hexadecimal characters. Natural Earth source identifiers and ISO codes are separate attributes. Imported records default to `candidate`; syntax validation never constitutes approval.
+Persistent `game_id` values remain the internal identity. They are exactly `tc_` followed by 32 lowercase hexadecimal characters. Natural Earth source identifiers and ISO codes are separate attributes. Imported records default to `candidate`. Populated source values are treated as the supplied dataset values unless the owner identifies an error; completeness reporting focuses on empty/null values. Verification is applied after the relevant data domains have been populated, not prematurely during partial imports.
 
 ## WP1.1 implementation
 
@@ -64,7 +64,7 @@ Use an isolated database path for tests or inspection:
 uv run python tools/migrate_database.py --database /tmp/tca-test.sqlite
 ```
 
-SQLite database, WAL, and shared-memory files are local state and ignored by Git. Migration SQL, database code, tests, and architecture documentation are tracked. Backups and production-data import are later WP1 stages; WP1.1 does not create or import production records.
+SQLite database, WAL, and shared-memory files are local state and ignored by Git. Migration SQL, database code, tests, and architecture documentation are tracked. WP1.1 does not import production records. WP1.2 imports identity and source provenance only.
 
 ## Migration policy
 
@@ -78,3 +78,29 @@ Migrations are numbered, sequential, immutable once applied, and committed with 
 WP1.1 tests cover fresh creation, repeat application, exact identity format, unique identity, source ID uniqueness and history, canonical-name uniqueness, ISO constraints and verified-status triggers, JSON validity, geometry profiles, current-statistic and selected-data uniqueness, proposal deduplication and approval timestamps, flag approval requirements, failed-migration rollback, future-schema rejection, and SQLite integrity/foreign-key checks.
 
 No source registry, generated asset, approved snapshot, or game repository is modified by WP1.1.
+
+
+## WP1.2 — Identity registry and source provenance
+
+The importer is implemented in `tools/database/identity_import.py` with the CLI `tools/import_identity_registry.py`. It reads the persistent registry and the isolated generated candidate snapshot, verifies the candidate manifest checksum and exact one-to-one source-ID/`game_id` coverage, and imports the registry's identity relationships into schema v1.
+
+The import populates `dataset_imports`, `countries`, `country_sources`, `country_names`, and `country_regions`. It preserves the registry's current and historical source IDs and English canonical names/aliases. It does not import source attributes, geometry, Persian localization, game data, statistics, flags, or review proposals; those remain assigned to later WP1 stages.
+
+The operation is transactional and repeatable. It reuses the dataset import row for the same dataset/archive checksum, rejects conflicting existing country/source/name records, validates database integrity and foreign keys before commit, and rolls back the entire import on failure. It never changes a `game_id`, infers a missing value, or promotes a candidate record.
+
+### Data completeness and verification policy
+
+- Treat populated source values as correct as supplied unless the owner identifies a specific error; do not turn an unreviewed workflow label into a data-quality warning.
+- Report actual empty and `null` values in the consolidated completeness report after all planned data domains have been visited.
+- Do not fill missing values by guesswork. A genuinely inapplicable field may remain null and should be distinguishable from an expected-but-missing value in the final report.
+- Apply the appropriate verified/reviewed statuses only after the relevant data population is complete. For example, schema v1 requires both ISO alpha-2 and alpha-3 values before an ISO assignment can be marked `verified`.
+- WP1.2 is intentionally partial: its records remain candidate/unverified where later stages still need to populate fields. This is not a finding that the supplied values are incorrect.
+
+### WP1.2 operator command
+
+```fish
+uv run python -m tools.import_identity_registry \
+  --database /tmp/tca-wp1-2.sqlite
+```
+
+Optional `--registry` and `--candidate-dir` arguments allow isolated fixtures or alternate candidate snapshots. The command does not modify the JSON registry or generated candidate directory.
