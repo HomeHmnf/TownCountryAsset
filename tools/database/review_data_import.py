@@ -187,6 +187,7 @@ def _validate_persian(
             "qid": qid, "name": label,
             "status": _status(row.get("review_status"), f"{gid} Persian review"),
             "current_name": row.get("current_persian_name") or None,
+            "reviewed_at": row.get("reviewed_at"),
             "provenance": {
                 "source_url": provenance.get("source_url"),
                 "retrieved_at_utc": provenance.get("retrieved_at_utc"),
@@ -353,17 +354,32 @@ def import_review_data(
             inserted["iso"] += 1
 
             fa = persian[gid]
+            source_qid = connection.execute(
+                """SELECT attribute_value FROM country_attributes
+                   WHERE game_id=? AND upper(attribute_key)='WIKIDATAID'""", (gid,)
+            ).fetchone()
+            if fa["qid"] and (source_qid is None or source_qid["attribute_value"] != fa["qid"]):
+                raise ReviewDataImportError(f"{gid}: Persian Wikidata QID does not match the explicit Natural Earth WIKIDATAID source attribute")
+            if source_qid is not None and source_qid["attribute_value"] and fa["qid"] != source_qid["attribute_value"]:
+                raise ReviewDataImportError(f"{gid}: Persian Wikidata QID conflicts with the Natural Earth WIKIDATAID source attribute")
             persian_status = fa["status"]
+            if persian_status == "approved" and (
+                not fa["name"] or record["names"].get("fa") != fa["name"]
+                or record["names"].get("localization_status") != "reviewed"
+            ):
+                raise ReviewDataImportError(f"{gid}: approved Persian proposal must match the reviewed registry canonical name")
             _proposal(connection, gid, "localization", {
                 "language": "fa", "name": fa["name"], "wikidata_qid": fa["qid"],
-            }, fa["provenance"], persian_status, None, now)
+            }, fa["provenance"], persian_status, fa["reviewed_at"], now)
             inserted["localization"] += 1
             if persian_status == "approved":
-                if not fa["name"] or record["names"].get("fa") != fa["name"] or record["names"].get("localization_status") != "reviewed":
-                    raise ReviewDataImportError(f"{gid}: approved Persian proposal must match the reviewed registry canonical name")
                 connection.execute(
                     """INSERT OR IGNORE INTO country_names(game_id, language, name, name_type)
                        VALUES (?, 'fa', ?, 'canonical')""", (gid, fa["name"])
+                )
+                connection.execute(
+                    "UPDATE countries SET localization_status='reviewed', updated_at=? WHERE game_id=?",
+                    (now, gid),
                 )
 
             entity_type = record.get("entity_type") or unreviewed_value
@@ -430,10 +446,10 @@ def main() -> int:
     parser.add_argument("--database", type=Path, required=True)
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY)
     parser.add_argument("--iso-reference", type=Path, default=DEFAULT_ISO_REFERENCE)
-    parser.add_argument("--iso-provenance", type=Path, default=DEFAULT_ISO_PROVENANCE)
-    parser.add_argument("--iso-proposals", type=Path, default=DEFAULT_ISO_PROPOSALS)
-    parser.add_argument("--persian-candidates", type=Path, default=DEFAULT_PERSIAN_CANDIDATES)
-    parser.add_argument("--persian-provenance", type=Path, default=DEFAULT_PERSIAN_PROVENANCE)
+    parser.add_argument("--iso-provenance", type=Path, required=True)
+    parser.add_argument("--iso-proposals", type=Path, required=True)
+    parser.add_argument("--persian-candidates", type=Path, required=True)
+    parser.add_argument("--persian-provenance", type=Path, required=True)
     parser.add_argument("--entity-taxonomy", type=Path, default=DEFAULT_TAXONOMY)
     parser.add_argument("--flag-mapping", type=Path, default=DEFAULT_FLAGS)
     args = parser.parse_args()
