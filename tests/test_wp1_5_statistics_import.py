@@ -185,3 +185,38 @@ def test_rejects_conflict_from_a_different_source_and_rolls_back(tmp_path):
     assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
     assert connection.execute("SELECT value FROM current_statistics").fetchone()[0] == 10
     connection.close()
+
+
+def test_new_release_from_same_provider_replaces_current_value(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    run_import(tmp_path, database, value=100)
+    raw = tmp_path / "provider.csv"
+    raw.write_text("provider,captured\\nnew-release\\n", encoding="utf-8")
+    digest = hashlib.sha256(raw.read_bytes()).hexdigest()
+    manifest_path = tmp_path / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["release"] = "2025-r1"
+    manifest["sha256"] = digest
+    manifest["retrieved_at"] = "2026-10-31T11:00:00Z"
+    manifest_path.write_text(json.dumps(manifest))
+    observations_path = tmp_path / "normalized.json"
+    observations = json.loads(observations_path.read_text())
+    observations["release"] = "2025-r1"
+    observations["source_sha256"] = digest
+    observations["observations"][0]["value"] = 200
+    observations["observations"][0]["observation_period"] = "2025"
+    observations_path.write_text(json.dumps(observations))
+    result = import_wp1_5_dataset(
+        observations_path=observations_path,
+        crosswalk_path=tmp_path / "crosswalk.json",
+        manifest_path=manifest_path,
+        database_path=database,
+    )
+    assert result["release"] == "2025-r1"
+    connection = sqlite3.connect(database)
+    assert connection.execute(
+        "SELECT value, observation_period, source_version FROM current_statistics"
+    ).fetchone() == (200.0, "2025", "2025-r1")
+    assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 2
+    connection.close()
