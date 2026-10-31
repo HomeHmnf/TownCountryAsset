@@ -216,3 +216,10 @@ uv run python -m tools.import_wp1_5 \\
 \`\`\`
 
 The placeholders above are illustrative. Do not run the command until a real provider snapshot, matching manifest, reviewed crosswalk and source-specific normalized file exist.
+
+
+### Import validation and release ordering
+
+The importer now verifies that the manifest's raw snapshot path is under the repository's `raw_data/` tree, the file is non-empty, and both its byte count and SHA-256 match the manifest. The retrieval timestamp must be timezone-aware ISO-8601; a supplied terms URL must use HTTPS. The source contract's declared unit (or one of its explicitly listed `_or_` alternatives) is enforced for every observation. A missing methodology defaults to the field's documented method; a missing row-level source reference falls back to the manifest's final source URL.
+
+A release from the same provider may replace that provider's current value only when its manifest retrieval timestamp is strictly later than the current row's retrieval timestamp. Equal-time changed content and older snapshots are rejected, preventing a late replay of an older release from rolling current data backward. Conflicts with values owned by another source are rejected. All mapping/provenance/observation writes remain in one transaction.
