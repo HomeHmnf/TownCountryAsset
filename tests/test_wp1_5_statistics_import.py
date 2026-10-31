@@ -18,6 +18,21 @@ SOURCE = "un_wpp_2024"
 @pytest.fixture(autouse=True)
 def repository_root_for_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(statistics_import, "REPOSITORY_ROOT", tmp_path)
+    config_dir = tmp_path / "config"
+    config_dir.mkdir(parents=True, exist_ok=True)
+    (config_dir / "data_sources.json").write_text(
+        json.dumps({
+            "schema_version": 1,
+            "storage": {"raw_root": "raw_data", "manifest_root": "raw_data/manifests"},
+            "sources": {
+                SOURCE: {
+                    "name": "UN World Population Prospects 2024 test fixture",
+                    "downloads": [],
+                }
+            },
+        }),
+        encoding="utf-8",
+    )
 
 
 def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_key=SOURCE, release="2024-r1"):
