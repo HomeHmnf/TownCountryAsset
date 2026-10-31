@@ -27,7 +27,7 @@ License classifications are informational. They do not grant permissions or bloc
 | protected_planet |Protected Planet WDPA / GD-PAME |commercial_use_and_redistribution_restricted |https://www.protectedplanet.net/en/legal |
 | fao_aquastat |FAO AQUASTAT |unclear_or_unverified |https://www.fao.org/aquastat/en/ |
 | natural_earth_admin0 |Natural Earth Admin 0 Countries |public_domain_or_unverified |https://www.naturalearthdata.com/about/terms-of-use/ |
-| iso_reference_mirror |World Countries ISO reference CSV mirror |unclear_or_unverified |https://github.com/stefangabos/world_countries |
+| un_m49 |United Nations Statistics Division M49 country and area overview |unclear_or_unverified |https://unstats.un.org/unsd/methodology/m49/overview |\n| iso_reference_mirror |World Countries ISO reference CSV mirror |unclear_or_unverified |https://github.com/stefangabos/world_countries |
 | wikidata_sparql |Wikidata SPARQL service |CC0_for_structured_data_subject_to_terms |https://www.wikidata.org/wiki/Wikidata:Licensing |
 | lipis_flag_icons |lipis/flag-icons |MIT |https://github.com/lipis/flag-icons/blob/main/LICENSE |
 | iso_3166_official |ISO 3166 country codes |unclear_or_unverified |https://www.iso.org/terms-conditions.html |
