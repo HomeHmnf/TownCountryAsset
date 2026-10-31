@@ -47,6 +47,22 @@
           ]
         },
         {
+          "name": "demographic_indicator_notes",
+          "release": "2024-demographic-notes",
+          "filename": "WPP2024_Demographic_Indicators_notes.csv",
+          "format": "csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv",
+          "fields": []
+        },
+        {
+          "name": "location_notes",
+          "release": "2024-location-notes",
+          "filename": "WPP2024_Locations_notes.csv",
+          "format": "csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Locations_notes.csv",
+          "fields": []
+        },
+        {
           "name": "interim_update_togo",
           "release": "2026-01-19-togo-update",
           "filename": "WPP2024_CSV_files_update.zip",
