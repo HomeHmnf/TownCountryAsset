@@ -87,7 +87,18 @@
           ],
           "scope": "Togo only; apply updated rows only for Togo; estimates 1950-2023 and medium projections 2024-2100"
         }
-      ]
+      ],
+      "field_ids": [
+        1,
+        2,
+        6,
+        12,
+        13,
+        14
+      ],
+      "selected_current_period": "2026",
+      "selected_variant": "Medium",
+      "selected_value_status": "projected"
     },
     "imf_weo": {
       "name": "IMF World Economic Outlook",
@@ -100,7 +111,14 @@
       "attribution": null,
       "notes": "GDP, GDP per capita, PPP GDP, inflation and unemployment; distinguish actuals, estimates and projections and retain WEO vintage.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        15,
+        16,
+        18,
+        20,
+        21
+      ]
     },
     "world_bank_wdi": {
       "name": "World Bank World Development Indicators",
@@ -117,7 +135,12 @@
       "attribution": null,
       "notes": "Candidate secondary/alternative indicator source. Preserve indicator code, country coverage, reference year and dataset vintage.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        3,
+        33,
+        34
+      ]
     },
     "ilostat": {
       "name": "ILOSTAT",
@@ -130,7 +153,10 @@
       "attribution": null,
       "notes": "Preferred specialist source for labour force and labour-market definitions; retain series and sex/age breakdown metadata.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        22
+      ]
     },
     "faostat": {
       "name": "FAOSTAT",
@@ -145,7 +171,8 @@
       "attribution": null,
       "notes": "Candidate source for land/area and selected agriculture/forestry/resource measures; confirm indicator definitions and country coverage.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": []
     },
     "koppen_beck_2023": {
       "name": "Beck et al. Köppen-Geiger V3",
@@ -158,7 +185,10 @@
       "attribution": null,
       "notes": "Spatial raster, not a single categorical country value. Derive country-level area shares or distributions using the project geometry and retain period/scenario/resolution.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        41
+      ]
     },
     "fao_fra_2025": {
       "name": "FAO Global Forest Resources Assessment 2025",
@@ -171,7 +201,10 @@
       "attribution": null,
       "notes": "Use reported reference-year forest area; do not conflate forest area with tree cover.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        42
+      ]
     },
     "usgs_mcs_2026": {
       "name": "USGS Mineral Commodity Summaries 2026",
@@ -184,7 +217,10 @@
       "attribution": null,
       "notes": "Covers more than 90 nonfuel mineral commodities, but global country-level production/reserve coverage varies by commodity. Not a complete natural-resource inventory.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        45
+      ]
     },
     "pew_religion_2020": {
       "name": "Pew Research Center Global Religious Composition dataset",
@@ -197,7 +233,10 @@
       "attribution": null,
       "notes": "Seven broad categories; estimates for 201 and territories with population >=100,000 in 2010 or 2020. Use rounded counts for reporting small groups.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        48
+      ]
     },
     "undp_hdr": {
       "name": "UNDP Human Development Reports statistical data",
@@ -210,7 +249,10 @@
       "attribution": null,
       "notes": "Use HDI and its reported reference year, not report publication year.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        51
+      ]
     },
     "itu": {
       "name": "ITU DataHub",
@@ -223,7 +265,10 @@
       "attribution": null,
       "notes": "Preferred specialist source for internet-use indicators; check country coverage and reference period.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        52
+      ]
     },
     "who_ghed": {
       "name": "WHO Global Health Expenditure Database",
@@ -236,7 +281,10 @@
       "attribution": null,
       "notes": "Health expenditure indicators and financing breakdowns; retain current dataset vintage and reference year.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        54
+      ]
     },
     "world_bank_pip": {
       "name": "World Bank Poverty and Inequality Platform",
@@ -250,7 +298,11 @@
       "attribution": null,
       "notes": "Poverty and Gini measures depend on survey year, poverty line and welfare concept; do not treat missing survey years as zero.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        55,
+        56
+      ]
     },
     "world_bank_wgi": {
       "name": "World Bank Worldwide Governance Indicators 2026",
@@ -263,7 +315,10 @@
       "attribution": null,
       "notes": "Political stability is an estimate, not a definitive rating. Some standardized underlying source values cannot be redistributed without third-party authorization.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        62
+      ]
     },
     "official_government_sources": {
       "name": "Official national government and constitutional sources",
@@ -277,7 +332,12 @@
       "attribution": null,
       "notes": "No single global dataset is assumed. Record the specific official URL, authority, effective date, and classification rationale per country.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        57,
+        58,
+        65
+      ]
     },
     "official_organization_registers": {
       "name": "Official intergovernmental organization membership registers",
@@ -290,7 +350,10 @@
       "attribution": null,
       "notes": "Membership must be checked against each organization's official membership list and an explicit as-of date.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        66
+      ]
     },
     "iiss_military_balance": {
       "name": "IISS The Military Balance",
@@ -304,7 +367,12 @@
       "attribution": null,
       "notes": "Candidate specialist source for active/reserve personnel and force structure; subscription and redistribution terms require review.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        67,
+        70,
+        71
+      ]
     },
     "sipri_milex": {
       "name": "SIPRI Military Expenditure Database",
@@ -317,7 +385,10 @@
       "attribution": null,
       "notes": "Commercial use requires authorization/licensing; annual series and observation year must be retained.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        69
+      ]
     },
     "global_carbon_project": {
       "name": "Global Carbon Project Global Carbon Budget",
@@ -330,7 +401,10 @@
       "attribution": null,
       "notes": "Confirm country-level per-capita series, methodology and download terms before selecting the exact table.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        73
+      ]
     },
     "energy_institute": {
       "name": "Energy Institute Statistical Review of World Energy 2026",
@@ -346,7 +420,13 @@
       "attribution": null,
       "notes": "CSV/XLSX consolidated data and archives are available. Retain edition/vintage; historical values may be revised between editions.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        75,
+        76,
+        77,
+        78
+      ]
     },
     "protected_planet": {
       "name": "Protected Planet WDPA / GD-PAME",
@@ -359,7 +439,10 @@
       "attribution": null,
       "notes": "Commercial use requires prior written permission; redistribution is restricted. Store only after explicit field-level decision on whether aggregate derived indicators are permitted.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        79
+      ]
     },
     "fao_aquastat": {
       "name": "FAO AQUASTAT",
@@ -373,7 +456,11 @@
       "attribution": null,
       "notes": "Candidate source for water resources and water stress; indicator coverage and reporting years vary.",
       "acquisition_mode": "manual_or_api",
-      "downloads": []
+      "downloads": [],
+      "field_ids": [
+        80,
+        81
+      ]
     },
     "natural_earth_admin0": {
       "name": "Natural Earth Admin 0 Countries",
@@ -441,7 +528,8 @@
       "terms_url": "https://github.com/lipis/flag-icons/blob/main/LICENSE",
       "notes": "Git source; pin an immutable commit for reproducible refreshes.",
       "acquisition_mode": "git",
-      "downloads": []
+      "downloads": [],
+      "default_ref": "main"
     },
     "iso_3166_official": {
       "name": "ISO 3166 country codes",
@@ -467,7 +555,16 @@
       "terms_url": null,
       "notes": "Per-record evidence URLs are held in local environment configuration; evidence supports human review only.",
       "acquisition_mode": "manual",
-      "downloads": []
+      "downloads": [],
+      "evidence_urls": {
+        "FALKLANDS": "https://www.gov.fk/about/",
+        "SOMALILAND": "https://govsomaliland.org/",
+        "KOSOVO": "https://president-ksgov.net/en/legislation/",
+        "NORTHERN_CYPRUS": "https://mfa.gov.ct.tr/",
+        "INDIAN_OCEAN_TERRITORIES": "https://www.gov.uk/world/organisations/british-indian-ocean-territory",
+        "ASHMORE_CARTIER": "https://www.dcceew.gov.au/",
+        "SIACHEN": "https://www.britannica.com/place/Siachen-Glacier"
+      }
     }
   }
 }

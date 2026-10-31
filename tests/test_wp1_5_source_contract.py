@@ -26,10 +26,12 @@ def test_wp1_5_contract_has_exact_41_selected_fields_including_religion_and_gini
 
 def test_every_field_source_is_declared_and_natural_earth_is_not_a_wp1_5_source():
     contract = json.loads((ROOT / "config/wp1_5_data_sources.json").read_text(encoding="utf-8"))
-    source_keys = set(contract["sources"])
+    registry = json.loads((ROOT / "config/data_sources.json").read_text(encoding="utf-8"))
+    source_keys = set(registry["sources"])
+    assert contract["source_registry"] == "config/data_sources.json"
     assert all(field["primary_source"] in source_keys for field in contract["fields"])
-    assert not any("natural_earth" in key for key in source_keys)
-    assert contract["policy"]["natural_earth_use"].startswith("geography_and_cartography_only")
+    assert not any("natural_earth" in field["primary_source"] for field in contract["fields"])
+    assert registry["policy"]["natural_earth"] == "geography_and_cartography_only"
 
 
 def test_resource_catalog_is_nonempty_and_has_unique_keys():
@@ -46,13 +48,15 @@ def test_resource_catalog_is_nonempty_and_has_unique_keys():
 
 def test_wpp_download_profile_pins_official_files_and_togo_update():
     contract = json.loads((ROOT / "config/wp1_5_data_sources.json").read_text(encoding="utf-8"))
-    downloads = {item["name"]: item for item in contract["sources"]["un_wpp_2024"]["downloads"]}
+    registry = json.loads((ROOT / "config/data_sources.json").read_text(encoding="utf-8"))
+    downloads = {item["id"]: item for item in registry["sources"]["un_wpp_2024"]["downloads"]}
     assert downloads["demographic_indicators_medium"]["fields"] == [1, 2, 6, 13, 14]
     assert downloads["population_by_age_5_group_sex_medium"]["fields"] == [12]
     update = downloads["interim_update_togo"]
     assert update["release"] == "2026-01-19-togo-update"
     assert update["scope"].startswith("Togo only")
-    assert contract["sources"]["un_wpp_2024"]["license_status"] == "CC BY 3.0 IGO"
-    assert contract["sources"]["un_wpp_2024"]["selected_current_period"] == "2026"
-    assert contract["sources"]["un_wpp_2024"]["selected_variant"] == "Medium"
-    assert contract["sources"]["un_wpp_2024"]["selected_value_status"] == "projected"
+    wpp = registry["sources"]["un_wpp_2024"]
+    assert wpp["license_status"] == "CC BY 3.0 IGO"
+    assert wpp["selected_current_period"] == "2026"
+    assert wpp["selected_variant"] == "Medium"
+    assert wpp["selected_value_status"] == "projected"
