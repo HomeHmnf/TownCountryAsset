@@ -317,3 +317,26 @@ Record the actual focused test, CLI-help and compilation results before treating
 
 
 The normalized contract also requires `value`, `value_status`, `observation_period` and `unit` on every row. Missing status is never defaulted to `observed`; unavailable scalar values must explicitly carry JSON `null` plus `unavailable` or `not_applicable`.
+
+
+### WP1.5 transactional normalized observation importer
+
+Added `tools/database/statistics_import.py`, CLI `tools/import_wp1_5.py`, and `tests/test_wp1_5_observation_import.py`. The importer accepts a normalized batch plus its immutable acquisition manifest and explicit provider crosswalk. It validates the exact 41-field contract, primary-source assignment, field storage type, units, finite scalar values, explicit null statuses, reference periods, source/release/checksum agreement, raw snapshot byte count and SHA-256, crosswalk membership, and canonical database identity coverage.
+
+In one SQLite transaction it records the acquisition in `dataset_imports`, persists explicit provider IDs in `country_sources`, and writes scalar observations to `current_statistics` or structured JSON observations to `selected_game_data`. It validates SQLite integrity and foreign keys before commit. Repeated identical imports are idempotent. A changed current observation is accepted only from a strictly newer retrieval of the same source; conflicting sources and non-newer replacements are rejected. Failed writes roll back provenance, crosswalk and observation changes together.
+
+This is a normalized import framework, not a provider parser. It does not download or interpret raw CSV/XLSX/ZIP/raster files, approve source records, infer missing values, or run the final completeness audit. Source-specific adapters remain pending inspection of the acquired files. The JSON pipeline and its consumers remain unchanged.
+
+Owner validation is pending. After pulling, run:
+
+```fish
+uv run pytest -v \
+  tests/test_wp1_5_observation_import.py \
+  tests/test_wp1_5_source_crosswalk.py \
+  tests/test_wp1_5_source_acquisition.py \
+  tests/test_wp1_5_source_contract.py \
+  tests/test_database_schema.py
+
+uv run python -m compileall -q tools/database tools/import_wp1_5.py
+uv run python -m tools.import_wp1_5 --help
+```
