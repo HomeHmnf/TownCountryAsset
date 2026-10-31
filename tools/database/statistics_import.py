@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
+from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
 from tools.database.schema import apply_migrations, validate_database
 from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 
@@ -58,14 +58,27 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
     sha256 = _text(manifest.get("sha256"), "manifest.sha256")
     if len(sha256) != 64 or any(c not in "0123456789abcdef" for c in sha256):
         raise StatisticsImportError("manifest.sha256 must be a lowercase SHA-256 digest")
-    raw_path = _text(manifest.get("local_raw_path"), "manifest.local_raw_path")
-    raw_file = Path(raw_path)
+    raw_path_value = _text(manifest.get("local_raw_path"), "manifest.local_raw_path")
+    raw_file = Path(raw_path_value)
+    if not raw_file.is_absolute():
+        raw_file = (REPOSITORY_ROOT / raw_file).resolve()
+    else:
+        raw_file = raw_file.resolve()
     try:
-        actual_sha = hashlib.sha256(raw_file.read_bytes()).hexdigest()
+        raw_file.relative_to(REPOSITORY_ROOT.resolve())
+    except ValueError as exc:
+        raise StatisticsImportError("Captured raw source file must be inside the repository") from exc
+    if "raw_data" not in raw_file.parts:
+        raise StatisticsImportError("Captured raw source file must be under raw_data")
+    try:
+        raw_bytes = raw_file.read_bytes()
     except OSError as exc:
         raise StatisticsImportError(f"Cannot read captured raw source file: {raw_file}") from exc
+    actual_sha = hashlib.sha256(raw_bytes).hexdigest()
     if actual_sha != sha256:
         raise StatisticsImportError("Captured raw source checksum does not match its manifest")
+    if not raw_bytes or manifest.get("byte_count") != len(raw_bytes):
+        raise StatisticsImportError("Captured raw source byte count does not match its manifest")
     source_url = _text(manifest.get("final_url") or manifest.get("source_url"), "manifest source URL")
     if not source_url.startswith("https://"):
         raise StatisticsImportError("Source manifest URL must use HTTPS")
@@ -80,6 +93,9 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
         optional_value = manifest.get(optional_key)
         if optional_value is not None and not isinstance(optional_value, str):
             raise StatisticsImportError(f"manifest.{optional_key} must be text when supplied")
+    terms_url = manifest.get("terms_url")
+    if terms_url is not None and (not isinstance(terms_url, str) or not terms_url.startswith("https://")):
+        raise StatisticsImportError("manifest.terms_url must be HTTPS when supplied")
     return release, sha256, source_url, retrieved_at
 
 
@@ -114,6 +130,14 @@ def _validate_observation(
     unit = row.get("unit", field.get("unit"))
     if not isinstance(unit, str) or not unit.strip():
         raise StatisticsImportError(f"{label}.unit must be a non-empty string")
+    contracted_unit = field.get("unit")
+    if not isinstance(contracted_unit, str):
+        raise StatisticsImportError(f"Field contract unit is invalid for field {field_id}")
+    allowed_units = {contracted_unit, *(part.strip() for part in contracted_unit.split("_or_") if part.strip())}
+    if unit not in allowed_units:
+        raise StatisticsImportError(
+            f"{label}.unit {unit!r} is not permitted by field contract {contracted_unit!r}"
+        )
     if field["storage"] == "scalar":
         if value is None:
             if status not in {"unavailable", "not_applicable"}:
@@ -141,12 +165,12 @@ def _validate_observation(
             raise StatisticsImportError(f"{label} structured value is not valid finite JSON") from exc
     source_reference = row.get("source_reference")
     if source_reference is not None and (
-        not isinstance(source_reference, str) or not source_reference.startswith("https://")
+        not isinstance(source_reference, str) or not source_reference.strip()
     ):
-        raise StatisticsImportError(f"{label}.source_reference must be HTTPS when supplied")
-    methodology = row.get("methodology")
-    if methodology is not None and not isinstance(methodology, str):
-        raise StatisticsImportError(f"{label}.methodology must be text when supplied")
+        raise StatisticsImportError(f"{label}.source_reference must be non-empty text when supplied")
+    methodology = row.get("methodology", field.get("method"))
+    if not isinstance(methodology, str) or not methodology.strip():
+        raise StatisticsImportError(f"{label}.methodology must be non-empty text")
     return {
         "game_id": game_id,
         "source_id": source_id,
@@ -239,11 +263,15 @@ def import_wp1_5_dataset(
             )
         connection.execute("BEGIN IMMEDIATE")
         imported_at = _utc_now()
-        existing_import = connection.execute(
-            """SELECT import_id, source_version, source_url, retrieval_date
-               FROM dataset_imports WHERE dataset = ? AND sha256 = ? ORDER BY import_id LIMIT 1""",
+        existing_imports = connection.execute(
+            """SELECT import_id, source_version, source_url, retrieval_date,
+                      attribution, license, import_status
+               FROM dataset_imports WHERE dataset = ? AND sha256 = ? ORDER BY import_id""",
             (source_key, source_sha),
-        ).fetchone()
+        ).fetchall()
+        if len(existing_imports) > 1:
+            raise StatisticsImportError("Multiple dataset_imports rows exist for this source/checksum")
+        existing_import = existing_imports[0] if existing_imports else None
         if existing_import is None:
             cursor = connection.execute(
                 """INSERT INTO dataset_imports
@@ -258,11 +286,14 @@ def import_wp1_5_dataset(
             import_id = int(cursor.lastrowid)
         else:
             import_id = int(existing_import["import_id"])
-            expected = (release, source_url, retrieved_at)
+            expected = (
+                release, source_url, retrieved_at, manifest.get("attribution"),
+                manifest.get("license_status"), "candidate",
+            )
             actual = (
-                existing_import["source_version"],
-                existing_import["source_url"],
-                existing_import["retrieval_date"],
+                existing_import["source_version"], existing_import["source_url"],
+                existing_import["retrieval_date"], existing_import["attribution"],
+                existing_import["license"], existing_import["import_status"],
             )
             if actual != expected:
                 raise StatisticsImportError("Existing dataset import metadata conflicts with source manifest")
@@ -305,12 +336,16 @@ def import_wp1_5_dataset(
                 ).fetchone()
                 if existing is not None and tuple(existing) != values:
                     old_import = connection.execute(
-                        "SELECT dataset FROM dataset_imports WHERE import_id = ?",
+                        "SELECT dataset, retrieval_date FROM dataset_imports WHERE import_id = ?",
                         (existing["import_id"],),
                     ).fetchone()
                     if old_import is None or old_import["dataset"] != source_key:
                         raise StatisticsImportError(
                             f"Existing statistic conflicts with a different source: {row['game_id']}/{field['key']}"
+                        )
+                    if existing["retrieved_at"] and retrieved_at <= existing["retrieved_at"]:
+                        raise StatisticsImportError(
+                            f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
                         )
                     connection.execute(
                         """UPDATE current_statistics SET value=?, unit=?, observed_at=?, observation_period=?,
@@ -344,12 +379,16 @@ def import_wp1_5_dataset(
                 ).fetchone()
                 if existing is not None and tuple(existing) != values:
                     old_import = connection.execute(
-                        "SELECT dataset FROM dataset_imports WHERE import_id = ?",
+                        "SELECT dataset, retrieval_date FROM dataset_imports WHERE import_id = ?",
                         (existing["import_id"],),
                     ).fetchone()
                     if old_import is None or old_import["dataset"] != source_key:
                         raise StatisticsImportError(
                             f"Existing structured data conflicts with a different source: {row['game_id']}/{field['key']}"
+                        )
+                    if existing["retrieved_at"] and retrieved_at <= existing["retrieved_at"]:
+                        raise StatisticsImportError(
+                            f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
                         )
                     connection.execute(
                         """UPDATE selected_game_data SET payload_json=?, value_status=?, observation_period=?,
