@@ -223,3 +223,22 @@ The placeholders above are illustrative. Do not run the command until a real pro
 The importer now verifies that the manifest's raw snapshot path is under the repository's `raw_data/` tree, the file is non-empty, and both its byte count and SHA-256 match the manifest. The retrieval timestamp must be timezone-aware ISO-8601; a supplied terms URL must use HTTPS. The source contract's declared unit (or one of its explicitly listed `_or_` alternatives) is enforced for every observation. A missing methodology defaults to the field's documented method; a missing row-level source reference falls back to the manifest's final source URL.
 
 A release from the same provider may replace that provider's current value only when its manifest retrieval timestamp is strictly later than the current row's retrieval timestamp. Equal-time changed content and older snapshots are rejected, preventing a late replay of an older release from rolling current data backward. Conflicts with values owned by another source are rejected. All mapping/provenance/observation writes remain in one transaction.
+
+
+## Verified UN WPP 2024 acquisition profile
+
+The official UN download catalogue was inspected on 2026-10-31. It declares CC BY 3.0 IGO and documents the CSV schema. The main WPP 2024 release covers 237 countries/areas; estimates run through 2023 and the medium projection covers 2024–2100. CSV location columns include `LocID` (ISO 3166-1 numeric for countries/areas), `ISO3_code`, `ISO2_code`, `LocTypeID`, `LocTypeName`, `ParentID`, and `Location`. Use the codes and type metadata; do not join by `Location` text. The common dimensions include `Time` and `MidPeriod`; age-disaggregated files add `AgeGrp`, `AgeGrpStart`, and `AgeGrpSpan`.
+
+Pinned direct downloads from the official catalogue:
+
+| Snapshot purpose | Release key | File |
+|---|---|---|
+| Total population, population growth, median age, male/female population, net migration | `2024-main-demographic` | [WPP2024_Demographic_Indicators_Medium.csv.gz](https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz) |
+| Population by five-year age group and sex | `2024-main-age-sex` | [WPP2024_PopulationByAge5GroupSex_Medium.csv.gz](https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz) |
+| Interim revision bundle | `2026-01-19-togo-update` | [WPP2024_CSV_files_update.zip](https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip) |
+
+The interim update is dated 19 January 2026 and corrects Togo population estimates and medium projections using newly available 2022 census results. The UN says other locations and global/regional aggregates are unchanged. Apply its matching `*_Update.csv` rows only to Togo; do not replace the full base dataset with this Togo-only bundle. It includes updated demographic-indicator, total-population-by-sex and population-by-age/sex files. The next WPP revision was postponed to 11 July 2027, so this is the latest published WPP revision/update identified in this source review.
+
+The exact URLs, filenames, release keys, field IDs and rights metadata are machine-readable under `sources.un_wpp_2024.downloads` in `config/wp1_5_data_sources.json`. Capture each file as its own immutable acquisition snapshot using the release key shown above. Use terms URL `https://population.un.org/wpp/`, licence status `CC BY 3.0 IGO`, and attribution: United Nations, Department of Economic and Social Affairs, Population Division (2024). *World Population Prospects 2024, Online Edition*.
+
+Do not implement the WPP adapter until the owner has acquired these snapshots and the actual CSV headers/notes have been inspected locally. In particular, retain WPP's thousand-person units and distinguish historical estimates (through 2023) from medium-variant projections (2024 onward). Population density is not sourced from WPP under this contract; field 3 remains World Bank WDI.
