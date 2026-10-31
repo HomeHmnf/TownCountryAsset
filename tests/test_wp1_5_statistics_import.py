@@ -8,15 +8,21 @@ import pytest
 
 from tools.database.connection import connect_database
 from tools.database.schema import apply_migrations
+import tools.database.statistics_import as statistics_import
 from tools.database.statistics_import import StatisticsImportError, import_wp1_5_dataset
 
 GAME = "tc_" + "a" * 32
 SOURCE = "un_wpp_2024"
 
+@pytest.fixture(autouse=True)
+def repository_root_for_fixture(tmp_path, monkeypatch):
+    monkeypatch.setattr(statistics_import, "REPOSITORY_ROOT", tmp_path)
+
 
 def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_key=SOURCE):
     tmp_path.mkdir(parents=True, exist_ok=True)
-    raw = tmp_path / "provider.csv"
+    raw = tmp_path / "raw_data" / "wp1_5" / source_key / "2024-r1" / "provider.csv"
+    raw.parent.mkdir(parents=True, exist_ok=True)
     raw.write_text("provider,captured\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest = {
@@ -46,7 +52,7 @@ def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_
         "observations": [{
             "game_id": GAME, "source_id": "provider-1", "field_id": field_id,
             "value": value, "value_status": status, "observation_period": "2024",
-            "unit": "people", "methodology": "provider reported",
+            "unit": "people" if field_id == 1 else "age_band_share", "methodology": "provider reported",
         }],
     }
     observations_path = tmp_path / "normalized.json"
@@ -192,7 +198,8 @@ def test_new_release_from_same_provider_replaces_current_value(tmp_path):
     database = tmp_path / "canonical.sqlite"
     setup_database(database)
     run_import(tmp_path, database, value=100)
-    raw = tmp_path / "provider.csv"
+    raw = tmp_path / "raw_data" / "wp1_5" / SOURCE / "2025-r1" / "provider.csv"
+    raw.parent.mkdir(parents=True, exist_ok=True)
     raw.write_text("provider,captured\\nnew-release\\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest_path = tmp_path / "manifest.json"
