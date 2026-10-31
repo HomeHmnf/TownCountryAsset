@@ -17,6 +17,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 from tools.database.connection import REPOSITORY_ROOT
+from tools.sources.registry import load_registry, acquire_one
 
 DEFAULT_CONFIG = REPOSITORY_ROOT / "config" / "data_sources.json"
 DEFAULT_RAW_ROOT = REPOSITORY_ROOT / "raw_data" / "sources"
@@ -95,6 +96,24 @@ def acquire_source_snapshot(
     if source_key not in sources:
         raise SourceAcquisitionError(f"Unknown source key in project source registry: {source_key}")
     source = sources[source_key]
+
+    if (
+        Path(config_path).resolve() == DEFAULT_CONFIG.resolve()
+        and Path(raw_root).resolve() == DEFAULT_RAW_ROOT.resolve()
+        and Path(manifest_root).resolve() == DEFAULT_MANIFEST_ROOT.resolve()
+    ):
+        registry = load_registry(DEFAULT_CONFIG)
+        matches = [
+            item for item in source.get("downloads", [])
+            if item.get("release") == release and item.get("url") == url
+            and item.get("filename") == filename
+        ]
+        if len(matches) != 1:
+            raise SourceAcquisitionError("No unique matching download in the central source registry")
+        try:
+            return acquire_one(registry, source_key, matches[0], timeout=timeout)
+        except Exception as exc:
+            raise SourceAcquisitionError(str(exc)) from exc
 
     raw_dir = Path(raw_root) / source_key / release
     manifest_dir = Path(manifest_root) / source_key
