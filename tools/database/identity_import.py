@@ -55,6 +55,8 @@ def _validate_inputs(
     source = candidate.get("source")
     if not isinstance(source, dict):
         raise IdentityImportError("Candidate countries.json has no source metadata")
+    if source_manifest.get("source") != source:
+        raise IdentityImportError("Candidate source metadata does not match manifest.json")
     if source.get("archive_sha256") is None:
         raise IdentityImportError("Candidate source archive_sha256 is missing")
     archive_sha = _require_text(source.get("archive_sha256"), "source.archive_sha256")
@@ -154,7 +156,7 @@ def _ensure_country(connection: sqlite3.Connection, record: dict[str, Any], now:
     iso = record["iso"]
     names = record["names"]
     expected = (
-        "unreviewed",
+        record.get("entity_type") or "unreviewed",
         "candidate",
         iso.get("alpha2"),
         iso.get("alpha3"),
