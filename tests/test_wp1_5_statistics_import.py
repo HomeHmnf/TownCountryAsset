@@ -19,7 +19,7 @@ def repository_root_for_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(statistics_import, "REPOSITORY_ROOT", tmp_path)
 
 
-def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_key=SOURCE):
+def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_key=SOURCE, release="2024-r1"):
     tmp_path.mkdir(parents=True, exist_ok=True)
     raw = tmp_path / "raw_data" / "wp1_5" / source_key / "2024-r1" / "provider.csv"
     raw.parent.mkdir(parents=True, exist_ok=True)
@@ -27,7 +27,7 @@ def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest = {
         "manifest_schema_version": 1, "work_package": "WP1.5",
-        "source_key": source_key, "release": "2024-r1",
+        "source_key": source_key, "release": release,
         "source_url": "https://example.test/source.csv",
         "final_url": "https://example.test/source.csv",
         "retrieved_at": "2026-10-31T10:00:00Z",
@@ -112,7 +112,10 @@ def test_imports_structured_data_and_explicit_null_scalar(tmp_path):
     connection.close()
 
     # This explicit unavailable value is stored as SQL NULL with its declared status.
-    null_result = run_import(tmp_path / "nullcase", database, field_id=1, value=None, status="unavailable")
+    null_result = run_import(
+        tmp_path / "nullcase", database, field_id=1, value=None,
+        status="unavailable", release="2024-r2",
+    )
     assert null_result["scalar_observations"] == 1
 
 
@@ -378,3 +381,46 @@ def test_requires_explicit_value_status_value_and_unit(tmp_path, remove_key, exp
     connection = sqlite3.connect(database)
     assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
     connection.close()
+
+def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path, monkeypatch):
+    paths = _inputs(tmp_path, monkeypatch)
+    connection = sqlite3.connect(paths[0])
+    connection.execute(
+        """INSERT INTO dataset_imports
+           (dataset, source_version, source_url, retrieval_date, sha256, import_status, imported_at)
+           VALUES ('another_provider', 'v1', 'https://example.test/old', '2025-01-01T00:00:00Z',
+                   ?, 'candidate', '2025-01-01T00:00:00Z')""",
+        ("1" * 64,),
+    )
+    other_import = connection.execute("SELECT import_id FROM dataset_imports").fetchone()[0]
+    connection.execute(
+        """INSERT INTO current_statistics
+           (game_id, statistic_key, value, unit, observed_at, observation_period,
+            value_status, source_reference, source_version, retrieved_at, import_id)
+           VALUES (?, 'population_growth', 0.5, 'percent_per_year', '2025', '2025',
+                   'observed', 'https://example.test/old', 'v1', '2025-01-01T00:00:00Z', ?)""",
+        (GAME_B, other_import),
+    )
+    connection.commit()
+    connection.close()
+
+    batch = json.loads(paths[1].read_text(encoding="utf-8"))
+    batch["observations"].append({
+        "game_id": GAME_B,
+        "source_id": "5",
+        "field_id": 2,
+        "value": 1.2,
+        "unit": "percent_per_year",
+        "value_status": "projected",
+        "observation_period": "2026",
+        "source_reference": "WPP2024:population-growth",
+    })
+    paths[1].write_text(json.dumps(batch), encoding="utf-8")
+    with pytest.raises(StatisticsImportError, match="conflicts with a different source"):
+        _run(paths)
+    with _connect(paths[0]) as connection:
+        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
+        assert connection.execute("SELECT COUNT(*) FROM country_sources WHERE dataset = ?", (SOURCE,)).fetchone()[0] == 0
+        assert connection.execute("SELECT COUNT(*) FROM current_statistics WHERE game_id = ?", (GAME_A,)).fetchone()[0] == 0
+        assert connection.execute("SELECT value FROM current_statistics WHERE game_id = ?", (GAME_B,)).fetchone()[0] == 0.5
+
