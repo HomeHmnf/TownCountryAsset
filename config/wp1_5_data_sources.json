@@ -78,7 +78,10 @@
           ],
           "scope": "Togo only; apply updated rows only for Togo; estimates 1950-2023 and medium projections 2024-2100"
         }
-      ]
+      ],
+      "selected_current_period": "2026",
+      "selected_variant": "Medium",
+      "selected_value_status": "projected"
     },
     "imf_weo": {
       "name": "IMF World Economic Outlook",
