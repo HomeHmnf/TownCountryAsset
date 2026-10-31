@@ -1,10 +1,10 @@
 # WP1.5 data-source contracts
 
-**Status:** Candidate source matrix; source-specific acquisition adapters are not yet approved as production-ready. The currently enumerated list contains 41 distinct field IDs, while the prior decision summary says 43; two fields remain to be reconciled with the owner.
+**Status:** Candidate source matrix; the owner confirmed the complete selection is 41 distinct field IDs. Religion (48) and Gini index (56) are included. Source-specific acquisition adapters still require validation.
 
 ## Scope and source policy
 
-WP1.5 covers the selected data fields currently enumerated in the approved list (41 distinct IDs; the prior summary says 43, so two fields remain unresolved) in `config/wp1_5_data_sources.json`. Natural Earth remains a geographic/cartographic source only. It is not used for statistics, economic classifications, demographics, or other WP1.5 values.
+WP1.5 covers the 41 selected data fields in `config/wp1_5_data_sources.json`. Natural Earth remains a geographic/cartographic source only. It is not used for statistics, economic classifications, demographics, or other WP1.5 values.
 
 The canonical join key is the existing persistent `game_id`. Provider identifiers (ISO codes, UN M49 codes, World Bank codes, IMF codes, and source-specific IDs) are crosswalk attributes, not replacement identities. Every source import must carry an explicit, reviewed country crosswalk. Do not join by display name alone.
 
