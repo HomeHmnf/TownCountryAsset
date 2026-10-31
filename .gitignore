@@ -7,6 +7,8 @@ __pycache__/
 .env.*.local
 
 # raw_data/
+# WP1.5 provider downloads are local snapshots; commit their manifests, not raw bytes.
+/raw_data/wp1_5/
 venv/
 build/
 dist/
