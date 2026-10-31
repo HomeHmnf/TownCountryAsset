@@ -111,7 +111,7 @@ def acquire_source_snapshot(
         if len(matches) != 1:
             raise SourceAcquisitionError("No unique matching download in the central source registry")
         try:
-            return acquire_one(registry, source_key, matches[0], timeout=timeout)
+            return acquire_one(registry, source_key, matches[0], timeout=timeout, expected_sha256=expected_sha256)
         except Exception as exc:
             raise SourceAcquisitionError(str(exc)) from exc
 
