@@ -52,7 +52,7 @@ def refresh(registry_path=DEFAULT_REGISTRY, output_dir=DEFAULT_OUTPUT_DIR,
         "parser": "tools.sources.m49.parse_m49_html",
         "parser_contract_version": 1,
     }
-    metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     reference = read_reference(normalized_path)
     result = propose(registry, reference)
@@ -62,13 +62,13 @@ def refresh(registry_path=DEFAULT_REGISTRY, output_dir=DEFAULT_OUTPUT_DIR,
         retrieved.date().isoformat(),
     )
     report += (
-        "\\n## M49 acquisition and parsing provenance\\n\\n"
-        f"- Raw HTML snapshot: `{raw_path}`\\n"
-        f"- Provenance: `{metadata_path}`\\n"
-        f"- Raw SHA-256: `{digest}`\\n"
-        f"- M49 rows: {parsed['row_count']}\\n"
-        f"- Rows without ISO codes (retained in provenance, not proposed): {len(parsed['excluded_without_iso'])}\\n"
-        "- UN M49 republishes ISO alpha-code cross-references; it is not the ISO 3166 assignment authority. All proposals require human review.\\n"
+        "\n## M49 acquisition and parsing provenance\n\n"
+        f"- Raw HTML snapshot: `{raw_path}`\n"
+        f"- Provenance: `{metadata_path}`\n"
+        f"- Raw SHA-256: `{digest}`\n"
+        f"- M49 rows: {parsed['row_count']}\n"
+        f"- Rows without ISO codes (retained in provenance, not proposed): {len(parsed['excluded_without_iso'])}\n"
+        "- UN M49 republishes ISO alpha-code cross-references; it is not the ISO 3166 assignment authority. All proposals require human review.\n"
     )
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(report, encoding="utf-8")
