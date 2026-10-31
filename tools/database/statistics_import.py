@@ -70,6 +70,12 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
     if not source_url.startswith("https://"):
         raise StatisticsImportError("Source manifest URL must use HTTPS")
     retrieved_at = _text(manifest.get("retrieved_at"), "manifest.retrieved_at")
+    try:
+        retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
+    if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
+        raise StatisticsImportError("manifest.retrieved_at must include a timezone")
     for optional_key in ("attribution", "license_status"):
         optional_value = manifest.get(optional_key)
         if optional_value is not None and not isinstance(optional_value, str):
@@ -219,6 +225,12 @@ def import_wp1_5_dataset(
             str(row["game_id"])
             for row in connection.execute("SELECT game_id FROM countries").fetchall()
         }
+        crosswalk_unknown = sorted({item.game_id for item in crosswalk.mappings} - known)
+        if crosswalk_unknown:
+            raise StatisticsImportError(
+                "Crosswalk references game_id values absent from canonical database: "
+                + ", ".join(crosswalk_unknown[:10])
+            )
         unknown = sorted({row["game_id"] for row in validated} - known)
         if unknown:
             raise StatisticsImportError(
@@ -255,6 +267,26 @@ def import_wp1_5_dataset(
             if actual != expected:
                 raise StatisticsImportError("Existing dataset import metadata conflicts with source manifest")
 
+        # Persist explicit provider IDs as source provenance.
+        # A changed mapping requires a separate identity-review operation.
+        for mapping in crosswalk.mappings:
+            existing_mapping = connection.execute(
+                """SELECT game_id, is_current FROM country_sources
+                   WHERE dataset = ? AND source_id = ?""",
+                (source_key, mapping.source_id),
+            ).fetchone()
+            if existing_mapping is None:
+                connection.execute(
+                    """INSERT INTO country_sources
+                       (game_id, dataset, source_id, is_current, import_id)
+                       VALUES (?, ?, ?, 1, ?)""",
+                    (mapping.game_id, source_key, mapping.source_id, import_id),
+                )
+            elif existing_mapping["game_id"] != mapping.game_id or existing_mapping["is_current"] != 1:
+                raise StatisticsImportError(
+                    f"Crosswalk conflicts with existing source mapping for {mapping.source_id}"
+                )
+
         scalar_count = 0
         structured_count = 0
         for row in validated:
@@ -262,7 +294,7 @@ def import_wp1_5_dataset(
             reference = row["source_reference"] or source_url
             if field["storage"] == "scalar":
                 values = (
-                    row["value"], row["unit"], row["period"], row["period"],
+                    row["value"], row["unit"], None, row["period"],
                     row["status"], reference, release, row["methodology"], retrieved_at, import_id,
                 )
                 existing = connection.execute(
