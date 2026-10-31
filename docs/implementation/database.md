@@ -162,10 +162,10 @@ uv run python -m tools.import_review_data \
   --database /tmp/tca-wp1-4.sqlite \
   --registry config/country_identity_registry.json \
   --iso-reference raw_data/iso/iso-3166-1.csv \
-  --iso-provenance PATH_TO_MATCHING_ISO_PROVENANCE_JSON \
+  --iso-provenance raw_data/iso/iso-3166-1-provenance-20261023T183945Z.json \
   --iso-proposals reports/iso-assignment-proposals.md \
-  --persian-candidates PATH_TO_PERSIAN_CANDIDATES_JSON \
-  --persian-provenance PATH_TO_MATCHING_PERSIAN_PROVENANCE_JSON \
+  --persian-candidates raw_data/persian/wikidata-persian-candidates-20261023T183946Z.json \
+  --persian-provenance raw_data/persian/wikidata-persian-provenance-20261023T183946Z.json \
   --entity-taxonomy config/entity_types.json \
   --flag-mapping config/country_flag_mapping.json
 
@@ -176,6 +176,6 @@ uv run pytest -v
 git status --short
 ```
 
-Use the same database for all three imports, in the order shown. Replace the two Persian/ISO provenance placeholders with the exact files corresponding to the captured candidate/reference inputs. The focused tests cover candidate-only import, repeat-import idempotency, checksum rejection, source-ID/game-ID mismatch, explicit Wikidata QID crosswalk, flag review timestamp requirements, and database review-status triggers.
+Use the same database for all three imports, in the order shown. These paths select the captured ISO reference and Persian candidate/provenance snapshots currently tracked in this branch; keep each candidate paired with its own provenance file. The focused tests cover candidate-only import, repeat-import idempotency, checksum rejection, source-ID/game-ID mismatch, explicit Wikidata QID crosswalk, flag review timestamp requirements, and database review-status triggers.
 
 Record actual schema version, import counts, integrity/foreign-key results, focused and full-suite results, and any unrelated working-tree files. Do not mark WP1.4 locally validated until the owner reports the run. The consolidated null/empty completeness report remains deferred until every WP1 data domain has been visited.
