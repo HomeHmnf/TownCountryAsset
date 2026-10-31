@@ -304,3 +304,6 @@ Official catalogue and documentation:
 - Download catalogue: https://population.un.org/wpp/assets/downloads.json
 - WPP home and coverage description: https://population.un.org/wpp/
 - Licence: https://creativecommons.org/licenses/by/3.0/igo/
+
+
+Every normalized observation must explicitly include `value`, `value_status`, `observation_period` and `unit`. The importer does not default a missing status to `observed`, because that could misclassify an estimate or projection. For a scalar unavailable value, include `"value": null` and an explicit `unavailable` or `not_applicable` status. A missing `value` property is invalid.
