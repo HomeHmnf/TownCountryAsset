@@ -14,6 +14,24 @@ GAME_A = "tc_" + "a" * 32
 GAME_B = "tc_" + "b" * 32
 
 
+def _write_test_source_registry(tmp_path):
+    config_dir = tmp_path / "config"
+    config_dir.mkdir(parents=True, exist_ok=True)
+    (config_dir / "data_sources.json").write_text(
+        json.dumps({
+            "schema_version": 1,
+            "storage": {"raw_root": "raw_data", "manifest_root": "raw_data/manifests"},
+            "sources": {
+                "un_wpp_2024": {
+                    "name": "UN World Population Prospects 2024 test fixture",
+                    "downloads": [],
+                }
+            },
+        }),
+        encoding="utf-8",
+    )
+
+
 def _database(tmp_path):
     path = tmp_path / "canonical.sqlite"
     connection = sqlite3.connect(path)
@@ -32,6 +50,7 @@ def _database(tmp_path):
 def _inputs(tmp_path, monkeypatch, *, field_id=1, value=1234000, status="projected"):
     database_path = _database(tmp_path)
     monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
+    _write_test_source_registry(tmp_path)
     raw = tmp_path / "raw_data" / "wp1_5" / "un_wpp_2024" / "2024-test" / "wpp.csv"
     raw.parent.mkdir(parents=True)
     raw.write_text("Location,Value\n4,1234\n", encoding="utf-8")
