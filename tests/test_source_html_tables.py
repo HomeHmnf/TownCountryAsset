@@ -11,6 +11,16 @@ def test_generic_html_table_selects_by_headers_and_normalizes_cells():
     assert headers[0] == "Country or Area"
     assert rows[0]["Country or Area"] == "Example Land"
 
+
+def test_generic_html_table_detects_header_labels_in_td_cells():
+    html = """<table>
+    <tr><td>Country or Area</td><td>M49 Code</td><td>ISO-alpha2 Code</td><td>ISO-alpha3 Code</td></tr>
+    <tr><td>Example Land</td><td>001</td><td>EX</td><td>EXM</td></tr>
+    </table>"""
+    headers, rows = extract_table(html, ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code"])
+    assert headers == ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code"]
+    assert rows[0]["M49 Code"] == "001"
+
 def test_generic_html_table_rejects_ambiguous_matching_tables():
     html = "<table><tr><th>Name</th></tr><tr><td>A</td></tr></table>" * 2
     with pytest.raises(ValueError, match="exactly one"): extract_table(html, ["Name"])
