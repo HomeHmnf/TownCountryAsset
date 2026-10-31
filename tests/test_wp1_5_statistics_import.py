@@ -308,3 +308,51 @@ def test_uses_contract_methodology_when_row_omits_it(tmp_path):
     method = connection.execute("SELECT methodology FROM current_statistics").fetchone()[0]
     assert method and method.strip()
     connection.close()
+
+
+def test_rejects_unit_outside_field_contract(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(observations.read_text())
+    payload["observations"][0]["unit"] = "percent"
+    observations.write_text(json.dumps(payload))
+    with pytest.raises(StatisticsImportError, match="not permitted by field contract"):
+        import_wp1_5_dataset(
+            observations_path=observations, crosswalk_path=crosswalk,
+            manifest_path=manifest, database_path=database,
+        )
+    connection = sqlite3.connect(database)
+    assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
+    connection.close()
+
+
+def test_older_snapshot_cannot_roll_back_current_observation(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    run_import(tmp_path, database, value=200)
+    raw = tmp_path / "raw_data" / "wp1_5" / SOURCE / "older" / "provider.csv"
+    raw.parent.mkdir(parents=True, exist_ok=True)
+    raw.write_text("provider,older-snapshot\\n", encoding="utf-8")
+    digest = hashlib.sha256(raw.read_bytes()).hexdigest()
+    manifest_path = tmp_path / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest.update({
+        "release": "older", "sha256": digest, "local_raw_path": str(raw),
+        "byte_count": raw.stat().st_size, "retrieved_at": "2026-10-30T09:00:00Z",
+    })
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    observations_path = tmp_path / "normalized.json"
+    observations = json.loads(observations_path.read_text())
+    observations.update({"release": "older", "source_sha256": digest})
+    observations["observations"][0]["value"] = 100
+    observations_path.write_text(json.dumps(observations), encoding="utf-8")
+    with pytest.raises(StatisticsImportError, match="non-newer source snapshot"):
+        import_wp1_5_dataset(
+            observations_path=observations_path, crosswalk_path=tmp_path / "crosswalk.json",
+            manifest_path=manifest_path, database_path=database,
+        )
+    connection = sqlite3.connect(database)
+    assert connection.execute("SELECT value FROM current_statistics").fetchone()[0] == 200
+    assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
+    connection.close()
