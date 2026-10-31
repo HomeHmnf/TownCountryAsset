@@ -73,6 +73,7 @@ def fixture_inputs(tmp_path: Path) -> dict[str, Path]:
         "raw_sha256": "b" * 64,
         "normalized_reference": str(reference_path),
         "normalized_sha256": hashlib.sha256(reference_path.read_bytes()).hexdigest(),
+        "reference_row_count": len(reference),
     })
     persian_path = write_json(tmp_path / "persian-candidates.json", {
         "record_count": 1,
