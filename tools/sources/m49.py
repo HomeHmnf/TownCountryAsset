@@ -19,7 +19,7 @@ def parse_m49_html(html: str) -> dict[str, Any]:
     # single-table providers may omit IDs, so retain unique-header selection.
     english_table_present = bool(
         re.search(
-            r'<table\\b[^>]*\\bid\\s*=\\s*["\\']downloadTableEN["\\']',
+            r"""<table\b[^>]*\bid\s*=\s*["']downloadTableEN["']""",
             html,
             re.IGNORECASE,
         )
