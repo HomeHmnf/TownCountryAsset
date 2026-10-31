@@ -204,3 +204,57 @@ CLI help:
 ```fish
 uv run python -m tools.import_wp1_5 --help
 ```
+
+
+## Normalized observation import contract
+
+The transactional importer is \`tools/database/statistics_import.py\`, exposed through \`tools/import_wp1_5.py\`. Provider-specific adapters must convert captured source files into a normalized JSON file; the importer does not parse provider CSV/XLSX/PDF formats.
+
+The normalized file identifies the exact source snapshot using \`source_key\`, \`release\` and \`source_sha256\`, and carries one row per country/field:
+
+\`\`\`json
+{
+  "schema_version": 1,
+  "work_package": "WP1.5",
+  "source_key": "un_wpp_2024",
+  "release": "2024",
+  "source_sha256": "<64-character SHA-256 from the acquisition manifest>",
+  "observations": [
+    {
+      "game_id": "tc_0123456789abcdef0123456789abcdef",
+      "source_id": "4",
+      "field_id": 1,
+      "value": 42000000,
+      "value_status": "estimated",
+      "observation_period": "2024",
+      "unit": "people",
+      "methodology": "Provider-reported total population"
+    },
+    {
+      "game_id": "tc_0123456789abcdef0123456789abcdef",
+      "source_id": "4",
+      "field_id": 12,
+      "value": {"0-4": 3500000, "5-9": 3400000},
+      "value_status": "estimated",
+      "observation_period": "2024",
+      "unit": "people by five-year age band"
+    }
+  ]
+}
+\`\`\`
+
+Use the provider's exact source identifier in \`source_id\`; \`game_id\` must match the same pair in the explicit crosswalk. The \`field_id\` must be one of the 41 selected IDs and the source must match that field's declared primary source. Scalar \`value\` must be a finite number, or JSON null with \`value_status\` set to \`unavailable\` or \`not_applicable\`. Structured \`value\` must be a finite JSON object or array. The importer stores scalar values in \`current_statistics\` and structured values in \`selected_game_data\`.
+
+The importer verifies the captured raw file against the manifest checksum, release and source key; validates the crosswalk and canonical database identities; persists crosswalk mappings in \`country_sources\`; and writes observations plus dataset provenance in one SQLite transaction. It rejects duplicate country/field rows, wrong-source fields, identity conflicts, and overwrites from a different provider. A later release from the same provider may replace that provider's current observation while preserving the prior dataset-import provenance row. Imported records remain candidate data; no verification/review status is promoted.
+
+Run:
+
+\`\`\`fish
+uv run python -m tools.import_wp1_5 \\
+  --observations path/to/normalized-observations.json \\
+  --crosswalk path/to/provider-crosswalk.json \\
+  --manifest data_manifests/wp1_5/provider-key/release.json \\
+  --database /tmp/tca-wp1-5-import.sqlite
+\`\`\`
+
+The placeholders above are illustrative. Do not run the command until a real provider snapshot, matching manifest, reviewed crosswalk and source-specific normalized file exist.
