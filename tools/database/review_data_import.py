@@ -19,11 +19,6 @@ from tools.propose_iso_assignments import propose, read_reference
 DEFAULT_REGISTRY = REPOSITORY_ROOT / "config/country_identity_registry.json"
 DEFAULT_TAXONOMY = REPOSITORY_ROOT / "config/entity_types.json"
 DEFAULT_FLAGS = REPOSITORY_ROOT / "config/country_flag_mapping.json"
-DEFAULT_ISO_REFERENCE = REPOSITORY_ROOT / "raw_data/iso/iso-3166-1.csv"
-DEFAULT_ISO_PROVENANCE = REPOSITORY_ROOT / "raw_data/iso/iso-3166-1-provenance.json"
-DEFAULT_ISO_PROPOSALS = REPOSITORY_ROOT / "reports/iso-assignment-proposals.md"
-DEFAULT_PERSIAN_CANDIDATES = REPOSITORY_ROOT / "raw_data/persian/wikidata-persian-candidates.json"
-DEFAULT_PERSIAN_PROVENANCE = REPOSITORY_ROOT / "raw_data/persian/wikidata-persian-provenance.json"
 
 
 class ReviewDataImportError(RuntimeError):
@@ -488,7 +483,7 @@ def main() -> int:
             args.iso_proposals, args.persian_candidates, args.persian_provenance,
             args.entity_taxonomy, args.flag_mapping,
         )
-    except (OSError, ValueError, sqlite3.Error) as exc:
+    except (OSError, ValueError, sqlite3.Error, ReviewDataImportError) as exc:
         parser.error(str(exc))
     print(json.dumps(result, indent=2, sort_keys=True))
     print("Review-domain import completed; database integrity and foreign-key checks passed.")
