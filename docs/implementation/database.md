@@ -214,3 +214,21 @@ The schema test suite now expects migration version 3 and includes explicit NULL
 Raw source datasets remain local and untracked. Source contracts, URLs, release identifiers, manifests and SHA-256 checksums are tracked. The initial source-rights review is in `reports/wp1-5-source-licenses.md`; restricted or unclear terms are informational and do not block local acquisition, but do not imply redistribution permission.
 
 Production acquisition must preserve immutable raw snapshots, explicit `game_id` crosswalks, reference periods, release vintages and source coverage. No source value is inferred or filled. The single consolidated completeness report is deferred until every selected field/domain has been visited. Existing JSON pipeline consumers remain unchanged.
+
+
+### WP1.5 source acquisition foundation
+
+Added `tools/database/source_acquisition.py`, the `tools.acquire_wp1_5_sources` CLI and `tests/test_wp1_5_source_acquisition.py`. The utility accepts only direct HTTPS URLs for source keys declared in the WP1.5 contract, validates safe release/filename components, records final redirect URL and response content type, computes SHA-256 while streaming, optionally checks an expected checksum, and refuses to overwrite an existing raw snapshot or manifest. Raw bytes are kept under `raw_data/wp1_5/`; provenance manifests are written under `data_manifests/wp1_5/` for Git tracking. Failed downloads or checksum mismatches remove the incomplete/untrusted raw file.
+
+This is acquisition infrastructure only. It does not infer provider download URLs, scrape landing pages, normalize source records, map provider country codes, or import values. Those tasks require source-specific contracts and explicit country crosswalks. The source tests and schema-v3 migration tests are pending owner execution.
+
+Run the focused WP1.5 checks after pulling:
+
+```fish
+uv run pytest -v tests/test_wp1_5_source_acquisition.py tests/test_database_schema.py
+uv run python -m tools.migrate_database --database /tmp/tca-wp1-5-schema.sqlite
+uv run python -m tools.acquire_wp1_5_sources --help
+uv run python -m compileall -q tools/database tools/acquire_wp1_5_sources.py
+```
+
+Do not run a source acquisition until the exact provider file URL, release identifier, format, country-code scheme and terms URL have been verified. The placeholder URL in the source-methodology documentation is intentionally non-operational. No WP1.5 production data has yet been acquired or imported.
