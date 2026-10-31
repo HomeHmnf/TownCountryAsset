@@ -88,9 +88,10 @@ def test_imports_scalar_observation_with_provenance_and_is_idempotent(tmp_path):
     assert repeated["import_id"] == result["import_id"]
     connection = sqlite3.connect(database)
     row = connection.execute(
-        "SELECT value, observation_period, source_version, value_status FROM current_statistics"
+        "SELECT value, observed_at, observation_period, source_version, value_status, methodology FROM current_statistics"
     ).fetchone()
-    assert row == (1234.0, "2024", "2024-r1", "observed")
+    assert row == (1234.0, None, "2024", "2024-r1", "observed", "provider reported")
+    assert connection.execute("SELECT game_id, dataset, source_id, is_current FROM country_sources").fetchone() == (GAME, SOURCE, "provider-1", 1)
     connection.close()
 
 
@@ -239,3 +240,45 @@ def test_rejects_non_string_value_status_without_partial_import(tmp_path):
     connection = sqlite3.connect(database)
     assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
     connection.close()
+
+
+def test_persists_crosswalk_even_when_observation_subset_is_smaller(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(crosswalk.read_text())
+    payload["mappings"].append({
+        "game_id": "tc_" + "b" * 32,
+        "source_id": "provider-2",
+        "match_method": "reviewed_manual",
+        "evidence_url": "https://example.test/country/provider-2",
+    })
+    crosswalk.write_text(json.dumps(payload))
+    connection = connect_database(database)
+    connection.execute(
+        "INSERT INTO countries(game_id, created_at, updated_at) VALUES (?, ?, ?)",
+        ("tc_" + "b" * 32, "2026-10-31T00:00:00Z", "2026-10-31T00:00:00Z"),
+    )
+    connection.close()
+    result = import_wp1_5_dataset(
+        observations_path=observations, crosswalk_path=crosswalk,
+        manifest_path=manifest, database_path=database,
+    )
+    assert result["crosswalk_mappings"] == 2
+    connection = connect_database(database)
+    assert connection.execute("SELECT COUNT(*) FROM country_sources WHERE dataset = ?", (SOURCE,)).fetchone()[0] == 2
+    connection.close()
+
+
+def test_rejects_timezone_naive_retrieval_timestamp(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(manifest.read_text())
+    payload["retrieved_at"] = "2026-10-31T10:00:00"
+    manifest.write_text(json.dumps(payload))
+    with pytest.raises(StatisticsImportError, match="include a timezone"):
+        import_wp1_5_dataset(
+            observations_path=observations, crosswalk_path=crosswalk,
+            manifest_path=manifest, database_path=database,
+        )
