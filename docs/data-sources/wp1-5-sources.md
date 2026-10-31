@@ -278,3 +278,29 @@ uv run python -m tools.acquire_wp1_5_sources \
 ```
 
 After acquisition, inspect the captured CSV headers and the ZIP member list before adapter implementation. The base files are gzip-compressed CSVs; the interim update is a ZIP containing uncompressed CSV replacements. Do not extract or overwrite the captured ZIP. The adapter should read the ZIP member streams directly and select the matching `*_Update.csv` tables. The WPP catalogue states the update changes Togo only; apply those rows only to the Togo crosswalk entry.
+
+
+## First source-specific acquisition contract: UN WPP 2024
+
+The official UN download catalogue was inspected on 2026-10-31. It identifies the bulk CSV files as UTF-8, commonly gzip-compressed, and documents the common geography/time/variant columns. The source release is CC BY 3.0 IGO; preserve the UN suggested citation and attribution.
+
+Verified direct endpoints:
+
+| File | Purpose | Direct URL |
+|---|---|---|
+| `WPP2024_Demographic_Indicators_Medium.csv.gz` | Main demographic indicator series, including population, growth, median age and migration indicators | https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz |
+| `WPP2024_PopulationByAge5GroupSex_Medium.csv.gz` | Population by five-year age group and sex | https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz |
+| `WPP2024_Demographic_Indicators_notes.csv` | Indicator codes, names, topics and units; required for code-to-field mapping | https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv |
+| `WPP2024_Locations_notes.csv` | Location notes and code context | https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Locations_notes.csv |
+| `WPP2024_CSV_files_update.zip` | Official 19 January 2026 interim update; includes the updated medium demographic and age/sex CSVs | https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip |
+
+The catalogue describes common fields including `LocID`, `ISO3_code`, `ISO2_code`, `Location`, `Variant`, `Time` and `MidPeriod`; age-disaggregated files also use `AgeGrp`, `AgeGrpStart` and `AgeGrpSpan`. The catalogue states that country/area `LocID` follows ISO 3166-1 numeric. Crosswalk candidates should therefore use exact `ISO3_code` and/or ISO numeric identifiers, never `Location` text. The exact indicator column names and units must be read from the downloaded indicator-notes file before parser mappings are finalized.
+
+**Coverage and vintage:** WPP 2024 contains 237 countries/areas. Its estimates run through 2023; the medium projection begins in 2024 and extends to 2100. The 19 January 2026 interim update revises Togo's population and vital-event estimates/projections; other locations and global/regional aggregates are unchanged. Apply that update only to the affected Togo records and preserve the update vintage; do not treat the update archive as a replacement for the full base dataset.
+
+**Candidate field use:** the demographic-indicator CSV is the candidate input for fields 1, 2, 6 and 14. The five-year age/sex CSV is the candidate input for fields 12 and 13. The adapter must inspect the actual headers and notes, preserve the UN reference date, units and variant, convert thousands to people only with an explicit documented transformation, and distinguish estimates through 2023 from medium projections from 2024 onward. No normalized rows or country crosswalks are approved by this source review alone.
+
+Official catalogue and documentation:
+- Download catalogue: https://population.un.org/wpp/assets/downloads.json
+- WPP home and coverage description: https://population.un.org/wpp/
+- Licence: https://creativecommons.org/licenses/by/3.0/igo/
