@@ -30,6 +30,7 @@ def _database(tmp_path):
 
 
 def _inputs(tmp_path, monkeypatch, *, field_id=1, value=1234000, status="projected"):
+    database_path = _database(tmp_path)
     monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
     raw = tmp_path / "raw_data" / "wp1_5" / "un_wpp_2024" / "2024-test" / "wpp.csv"
     raw.parent.mkdir(parents=True)
@@ -87,7 +88,7 @@ def _inputs(tmp_path, monkeypatch, *, field_id=1, value=1234000, status="project
     }
     batch_path = tmp_path / "observations.json"
     batch_path.write_text(json.dumps(batch), encoding="utf-8")
-    return path, batch_path, crosswalk_path, manifest_path, observation
+    return database_path, batch_path, crosswalk_path, manifest_path, observation
 
 
 def _run(paths, **kwargs):
