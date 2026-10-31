@@ -195,3 +195,22 @@ The first owner run also confirmed schema migration 0→2, successful identity i
 After pulling the parser and schema-test corrections, the owner ran the focused tests: **33 passed in 0.97s**. The review-domain import completed with **242 countries, 0 entity-type proposals, 242 flag mappings, 242 flag proposals, 242 ISO proposals, and 242 localization proposals**. The importer reported successful SQLite integrity and foreign-key checks. The full repository suite passed: **153 passed in 2.02s**. WP1.4 is locally validated and closed.
 
 The first run's two stale schema-version assertions and strict ISO Markdown-header comparison were corrected before this successful run. The owner reported unrelated working-tree changes (including refreshed source/reference files, generated candidate flags, and modified inspection/review reports); those files were not staged, discarded, or included in this implementation.
+
+
+## WP1.5 — Selective game data and current statistics
+
+**Status:** In progress. Schema migration 003, field-level source contracts, candidate resource catalogue, source methodology and initial source-licence register are committed. Production source acquisition/importers and owner-side validation remain outstanding.
+
+The approved field selection contains 43 fields. Natural Earth is excluded as a source for all WP1.5 statistics/classifications. Candidate assignments are in `config/wp1_5_data_sources.json`; the source methodology and known coverage constraints are in `docs/data-sources/wp1-5-sources.md`; the candidate resource vocabulary is in `config/wp1_5_resource_catalog.json`.
+
+Migration `003_statistics_provenance.sql` upgrades the schema to version 3. It preserves existing scalar observations and adds:
+- nullable numeric values with an explicit `unavailable` or `not_applicable` status for SQL NULL;
+- `observed`, `estimated` and `projected` states for populated values;
+- separate observation period, source reference, source release/version, methodology and retrieval timestamp;
+- equivalent source/observation metadata on structured `selected_game_data` rows.
+
+The schema test suite now expects migration version 3 and includes explicit NULL/status and provenance metadata constraints. The future-schema test uses version 4. These tests have been committed but have not yet been run by the owner.
+
+Raw source datasets remain local and untracked. Source contracts, URLs, release identifiers, manifests and SHA-256 checksums are tracked. The initial source-rights review is in `reports/wp1-5-source-licenses.md`; restricted or unclear terms are informational and do not block local acquisition, but do not imply redistribution permission.
+
+Production acquisition must preserve immutable raw snapshots, explicit `game_id` crosswalks, reference periods, release vintages and source coverage. No source value is inferred or filled. The single consolidated completeness report is deferred until every selected field/domain has been visited. Existing JSON pipeline consumers remain unchanged.
