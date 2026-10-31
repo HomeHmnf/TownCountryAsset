@@ -1,6 +1,6 @@
 # Canonical SQLite database architecture
 
-**Status:** WP1.1 implemented and locally validated; WP1.2 identity/provenance importer implemented, awaiting developer validation. No consumer cutover is included.
+**Status:** WP1.1 and WP1.2 implemented and locally validated; WP1.3 country metadata/geometry importer implemented, awaiting owner validation. No consumer cutover is included.
 **Canonical local path:** `data/canonical/town_country_asset.sqlite`
 **Schema versioning:** Local database ledger; migration SQL is version-controlled.
 
@@ -109,3 +109,33 @@ Optional `--registry` and `--candidate-dir` arguments allow isolated fixtures or
 ### WP1.2 implementation correction — 2026-10-31
 
 The generated production snapshot stores source provenance in the top-level `source` object of `manifest.json`; the importer uses that object as authoritative, while accepting legacy/test inputs that carry the same object in `countries.json`. If both are present, they must match. Dataset provenance columns are now populated in the exact schema order, keeping the archive SHA-256 in the checksum column. Regression coverage includes the production manifest layout. Local WP1.2 validation is still pending.
+
+
+## WP1.3 — Country metadata, source attributes and geometry
+
+The WP1.3 importer is implemented in `tools/database/country_data_import.py`, with the operator CLI in `tools/import_country_data.py`. It consumes the existing candidate snapshot without modifying the compiler, registry, source data, approved snapshot, or JSON pipeline.
+
+Before opening the database transaction, the importer verifies the manifest SHA-256 checksums for `countries.json` and all three game-ID geometry files. It validates the candidate schema, unique persistent `game_id` and Natural Earth source IDs, required source attributes, and exact geometry key coverage for the low, medium and high profiles. Geometry input must use `key: game_id` and the matching profile name.
+
+The importer then requires exactly one matching WP1.2 `dataset_imports` row and verifies its source provenance. Candidate source-ID/`game_id` pairs must exactly match the database's current Natural Earth source mappings. No identity is inferred from ordering, ISO codes, or names.
+
+Every entry in `source_attributes` is stored in `country_attributes` with its corresponding schema v1 type. JSON objects/arrays are serialized deterministically; explicit nulls remain SQL NULL with `value_type = 'null'`. The compiler-provided `source_geometry_type` is stored as an additional text attribute. Each geometry is serialized deterministically, hashed with SHA-256, and stored in `country_geometries` with the existing WP1.2 `import_id`.
+
+All writes occur in one transaction. Existing identical rows are accepted for idempotency; conflicting rows, provenance mismatches, identity mismatches, malformed inputs, or incomplete geometry coverage abort and roll back the import. SQLite integrity and foreign-key checks run before commit. The importer does not promote records or mark values verified.
+
+### WP1.3 operator command
+
+Run after WP1.2 has populated the same database:
+
+```fish
+uv run python -m tools.import_country_data \\
+  --database /tmp/tca-wp1-3.sqlite
+```
+
+Optional `--candidate-dir` supports isolated snapshots. The importer expects the WP1.2 Natural Earth identity/provenance import to have already run in that database.
+
+### WP1.3 tests and validation
+
+`tests/test_database_country_data_import.py` covers typed attribute preservation, all three geometry profiles and checksums, idempotency, manifest checksum rejection, geometry coverage rejection, candidate/database identity mismatch, and transactional rollback on conflicts.
+
+Owner validation is pending. Do not mark WP1.3 validated until the focused tests, production import, compile check, and full test suite have been run and their actual results recorded.
