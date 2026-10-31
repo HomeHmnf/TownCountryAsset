@@ -88,7 +88,7 @@ The owner confirmed that all focused WP1.2 tests passed after the preflight mism
 
 ## WP1.3 — Country metadata, source attributes and geometry
 
-**Status:** Implemented; owner validation pending.
+**Status:** Implemented and locally validated by the owner.
 
 Added `tools/database/country_data_import.py`, the `tools/import_country_data.py` CLI, and `tests/test_database_country_data_import.py`. The importer reads the candidate `countries.json`, manifest, and low/medium/high geometry files keyed by persistent `game_id`.
 
@@ -118,3 +118,8 @@ git status --short
 ```
 
 The identity import command is included to make the isolated WP1.3 database self-contained; run the country-data import against the same database. Record actual counts for attributes and geometries, the three profile counts, integrity/foreign-key results, and test outcomes. WP1.3 remains pending until the owner reports successful validation.
+
+
+### WP1.3 owner validation confirmation — 2026-10-31
+
+The owner ran both importers sequentially against `/tmp/tca-wp1-3.sqlite`. Identity import succeeded with **242 countries, 242 source mappings, 250 names, and 237 region memberships**. Country metadata/geometry import succeeded with **242 countries, 40,898 typed attributes, 726 geometries, and all 3 geometry profiles**. Both importers reported successful SQLite integrity and foreign-key checks. `uv run python -m compileall -q tools/database tools/import_country_data.py` completed without errors. The full repository suite passed: **145 passed in 2.42s**. WP1.3 is locally validated and closed.
