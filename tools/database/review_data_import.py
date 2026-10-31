@@ -13,7 +13,7 @@ from typing import Any
 
 from tools.database.connection import REPOSITORY_ROOT, connect_database
 from tools.database.schema import apply_migrations, validate_database
-from tools.audit_iso_proposal_evidence import TABLE_HEADER, _cells
+from tools.audit_iso_proposal_evidence import _cells
 from tools.propose_iso_assignments import propose, read_reference
 
 DEFAULT_REGISTRY = REPOSITORY_ROOT / "config/country_identity_registry.json"
