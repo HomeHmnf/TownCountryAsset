@@ -8,7 +8,7 @@ import json
 import re
 import sqlite3
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from tools.database.connection import REPOSITORY_ROOT, connect_database
@@ -310,7 +310,6 @@ def import_review_data(
         if manual_path is not None and (not isinstance(manual_path, str) or not manual_path.strip()):
             raise ReviewDataImportError(f"{gid}: manual_svg_path must be null or non-empty text")
         if manual_path is not None:
-            from pathlib import PurePosixPath
             safe_path = PurePosixPath(manual_path)
             if safe_path.is_absolute() or ".." in safe_path.parts or "\\" in manual_path or safe_path.suffix.lower() != ".svg":
                 raise ReviewDataImportError(f"{gid}: manual_svg_path must be a safe relative .svg path")
