@@ -17,7 +17,52 @@
       "domains": [
         "demography"
       ],
-      "notes": "Population, growth, age/sex distributions and migration. Country/area coverage is not identical to the 242 game identities; explicit crosswalk and coverage accounting required."
+      "notes": "Population, growth, age/sex distributions and migration. Country/area coverage is not identical to the 242 game identities; explicit crosswalk and coverage accounting required.",
+      "license_status": "CC BY 3.0 IGO",
+      "terms_url": "https://population.un.org/wpp/",
+      "attribution": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition.",
+      "downloads": [
+        {
+          "name": "demographic_indicators_medium",
+          "release": "2024-main-demographic",
+          "filename": "WPP2024_Demographic_Indicators_Medium.csv.gz",
+          "format": "gzip_csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
+          "fields": [
+            1,
+            2,
+            6,
+            13,
+            14
+          ]
+        },
+        {
+          "name": "population_by_age_5_group_sex_medium",
+          "release": "2024-main-age-sex",
+          "filename": "WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+          "format": "gzip_csv",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+          "fields": [
+            12
+          ]
+        },
+        {
+          "name": "interim_update_togo",
+          "release": "2026-01-19-togo-update",
+          "filename": "WPP2024_CSV_files_update.zip",
+          "format": "zip_csv_bundle",
+          "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip",
+          "fields": [
+            1,
+            2,
+            6,
+            12,
+            13,
+            14
+          ],
+          "scope": "Togo only; apply updated rows only for Togo; estimates 1950-2023 and medium projections 2024-2100"
+        }
+      ]
     },
     "imf_weo": {
       "name": "IMF World Economic Outlook",
