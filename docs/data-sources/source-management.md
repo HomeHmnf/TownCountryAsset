@@ -38,7 +38,7 @@ uv run python -m tools.manage_sources licenses
 - `status` reports local snapshot status.
 - `licenses` reports recorded license classifications and terms links. The current tracked register is `reports/sources/source-licenses.md`; update it when source metadata changes.
 
-The generic manager currently acquires explicitly configured direct HTTPS downloads. API, Git, manual, subscription, and per-country evidence sources are centrally registered and their endpoint defaults are resolved from this registry, while their existing protocol-specific refreshers retain their specialized validation. Dedicated adapters can be added without changing the registry authority.
+The generic manager acquires explicitly configured HTTPS resources, including downloadable files and HTML pages. HTML page entries use the same immutable snapshot mechanism and may declare a reusable response contract (`validation.content_types` and `validation.required_text`). Acquisition checks the returned media type and required text before writing a manifest; a changed page is rejected and the untrusted snapshot is removed. The manifest records the validation contract used. This is a lightweight structural guard, not a substitute for a parser/schema validator: extracting table rows, checking row counts, uniqueness, identifier formats, and semantic consistency remains a separate provider-specific validation/import step.\n\nAPI, Git, manual, subscription, and per-country evidence sources are centrally registered and their endpoint defaults are resolved from this registry, while their existing protocol-specific refreshers retain their specialized validation. Dedicated adapters can be added without changing the registry authority.
 
 ## Pipeline integration
 
