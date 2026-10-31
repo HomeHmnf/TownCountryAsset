@@ -14,7 +14,22 @@ OPTIONAL_REGION_HEADERS = (
 
 def parse_m49_html(html: str) -> dict[str, Any]:
     """Retain all M49 rows; expose only fully coded rows as ISO candidates."""
-    headers, rows = extract_table(html, REQUIRED_HEADERS, table_id="downloadTableEN")
+    # The live UN page contains several translated tables; select English
+    # explicitly when its stable table ID is present. Small fixtures and other
+    # single-table providers may omit IDs, so retain unique-header selection.
+    english_table_present = bool(
+        re.search(
+            r'<table\\b[^>]*\\bid\\s*=\\s*["\\']downloadTableEN["\\']',
+            html,
+            re.IGNORECASE,
+        )
+    )
+    selected_table_id = ENGLISH_TABLE_ID if english_table_present else None
+    headers, rows = extract_table(
+        html,
+        REQUIRED_HEADERS,
+        table_id=selected_table_id,
+    )
     seen_m49, seen_alpha2, seen_alpha3 = set(), set(), set()
     iso_rows, excluded = [], []
     for line, row in enumerate(rows, start=1):
