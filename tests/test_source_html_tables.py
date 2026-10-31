@@ -51,3 +51,40 @@ def test_m49_adapter_rejects_duplicate_iso_codes():
     <tr><td>One</td><td>001</td><td>EX</td><td>EXM</td></tr>
     <tr><td>Two</td><td>002</td><td>EX</td><td>EXM</td></tr></table>"""
     with pytest.raises(ValueError, match="duplicate ISO"): parse_m49_html(html)
+
+
+def test_generic_html_table_selects_exact_table_id_among_multilingual_matches():
+    html = """
+    <div id="ENG_Overview"><table id="downloadTableEN">
+      <tr><td>Name</td><td>Code</td></tr><tr><td>Algeria</td><td>012</td></tr>
+    </table></div>
+    <div id="FRA_Overview"><table id="downloadTableFR">
+      <tr><td>Name</td><td>Code</td></tr><tr><td>Algérie</td><td>012</td></tr>
+    </table></div>
+    """
+    headers, rows = extract_table(html, ["Name", "Code"], table_id="downloadTableEN")
+    assert headers == ["Name", "Code"]
+    assert rows == [{"Name": "Algeria", "Code": "012"}]
+
+
+def test_generic_html_table_rejects_missing_or_duplicate_requested_id():
+    with pytest.raises(ValueError, match="with id"):
+        extract_table("<table id='other'><tr><td>Name</td></tr><tr><td>A</td></tr></table>",
+                      ["Name"], table_id="wanted")
+    html = ("<table id='wanted'><tr><td>Name</td></tr><tr><td>A</td></tr></table>"
+            "<table id='wanted'><tr><td>Name</td></tr><tr><td>B</td></tr></table>")
+    with pytest.raises(ValueError, match="with id"):
+        extract_table(html, ["Name"], table_id="wanted")
+
+
+def test_m49_adapter_selects_english_table_from_multilingual_page():
+    def table(table_id, name):
+        return (
+            f'<table id="{table_id}"><tr><td>Country or Area</td><td>M49 Code</td>'
+            '<td>ISO-alpha2 Code</td><td>ISO-alpha3 Code</td></tr>'
+            f'<tr><td>{name}</td><td>012</td><td>DZ</td><td>DZA</td></tr></table>'
+        )
+    html = table("downloadTableEN", "Algeria") + table("downloadTableFR", "Algérie")
+    parsed = parse_m49_html(html)
+    assert parsed["table_id"] == "downloadTableEN"
+    assert parsed["iso_rows"][0]["english_name"] == "Algeria"
