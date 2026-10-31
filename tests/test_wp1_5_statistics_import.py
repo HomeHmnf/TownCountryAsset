@@ -108,7 +108,7 @@ def test_imports_structured_data_and_explicit_null_scalar(tmp_path):
     assert result["structured_observations"] == 1
     connection = sqlite3.connect(database)
     payload = json.loads(connection.execute("SELECT payload_json FROM selected_game_data").fetchone()[0])
-    assert payload == {"unit": "people", "value": {"0-4": 100, "5-9": 90}}
+    assert payload == {"unit": "age_band_share", "value": {"0-4": 100, "5-9": 90}}
     connection.close()
 
     # This explicit unavailable value is stored as SQL NULL with its declared status.
@@ -206,6 +206,8 @@ def test_new_release_from_same_provider_replaces_current_value(tmp_path):
     manifest = json.loads(manifest_path.read_text())
     manifest["release"] = "2025-r1"
     manifest["sha256"] = digest
+    manifest["local_raw_path"] = str(raw)
+    manifest["byte_count"] = raw.stat().st_size
     manifest["retrieved_at"] = "2026-10-31T11:00:00Z"
     manifest_path.write_text(json.dumps(manifest))
     observations_path = tmp_path / "normalized.json"
