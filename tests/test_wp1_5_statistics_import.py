@@ -12,6 +12,7 @@ import tools.database.statistics_import as statistics_import
 from tools.database.statistics_import import StatisticsImportError, import_wp1_5_dataset
 
 GAME = "tc_" + "a" * 32
+GAME_B = "tc_" + "b" * 32
 SOURCE = "un_wpp_2024"
 
 @pytest.fixture(autouse=True)
@@ -42,6 +43,10 @@ def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_
             "game_id": GAME, "source_id": "provider-1",
             "match_method": "authoritative_identifier",
             "evidence_url": "https://example.test/country/provider-1",
+        }, {
+            "game_id": GAME_B, "source_id": "provider-2",
+            "match_method": "reviewed_manual",
+            "evidence_url": "https://example.test/country/provider-2",
         }],
     }
     crosswalk_path = tmp_path / "crosswalk.json"
@@ -65,8 +70,9 @@ def setup_database(path):
     apply_migrations(connection)
     connection.execute(
         """INSERT INTO countries (game_id, created_at, updated_at)
-           VALUES (?, '2026-10-31T00:00:00Z', '2026-10-31T00:00:00Z')""",
-        (GAME,),
+           VALUES (?, '2026-10-31T00:00:00Z', '2026-10-31T00:00:00Z'),
+                  (?, '2026-10-31T00:00:00Z', '2026-10-31T00:00:00Z')""",
+        (GAME, GAME_B),
     )
     connection.close()
 
@@ -423,6 +429,6 @@ def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path, mo
     with _connect(paths[0]) as connection:
         assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
         assert connection.execute("SELECT COUNT(*) FROM country_sources WHERE dataset = ?", (SOURCE,)).fetchone()[0] == 0
-        assert connection.execute("SELECT COUNT(*) FROM current_statistics WHERE game_id = ?", (GAME_A,)).fetchone()[0] == 0
+        assert connection.execute("SELECT COUNT(*) FROM current_statistics WHERE game_id = ?", (GAME,)).fetchone()[0] == 0
         assert connection.execute("SELECT value FROM current_statistics WHERE game_id = ?", (GAME_B,)).fetchone()[0] == 0.5
 
