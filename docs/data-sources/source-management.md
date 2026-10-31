@@ -36,7 +36,7 @@ uv run python -m tools.manage_sources licenses
 - `check --online` additionally probes configured HTTPS download endpoints. Endpoint reachability is not proof that a dataset is valid or current.
 - `acquire --source ID` captures all configured direct downloads for one source; `acquire --all` attempts every configured direct download. Batch runs continue after individual failures and return non-zero if any item fails.
 - `status` reports local snapshot status.
-- `licenses` reports recorded license classifications and terms links.
+- `licenses` reports recorded license classifications and terms links. The current tracked register is `reports/sources/source-licenses.md`; update it when source metadata changes.
 
 The generic manager currently acquires explicitly configured direct HTTPS downloads. API, Git, manual, subscription, and per-country evidence sources are centrally registered and their endpoint defaults are resolved from this registry, while their existing protocol-specific refreshers retain their specialized validation. Dedicated adapters can be added without changing the registry authority.
 
