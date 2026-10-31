@@ -138,7 +138,7 @@ def _validate_iso(
                 "retrieved_at_utc": provenance.get("retrieved_at_utc"),
                 "raw_sha256": provenance.get("raw_sha256"),
                 "normalized_sha256": reference_hash,
-                "normalized_reference": str(reference_path),
+                "normalized_reference": reference_path.name,
             },
         }
     if set(actual) != set(expected):
@@ -190,7 +190,7 @@ def _validate_persian(
                 "retrieved_at_utc": provenance.get("retrieved_at_utc"),
                 "raw_sha256": raw_sha,
                 "wikidata_qid": qid,
-                "candidate_snapshot": str(candidates_path),
+                "candidate_snapshot": candidates_path.name,
             },
         }
     if set(result) != set(registry_by_id):
@@ -402,7 +402,7 @@ def import_review_data(
                     "taxonomy_definition": entity_definition.get("definition"),
                     "evidence_required": entity_definition.get("evidence_required", []),
                     "evidence": [],
-                    "taxonomy_path": str(taxonomy_path),
+                    "taxonomy_sha256": _sha(Path(taxonomy_path)),
                 }, entity_status, None, now)
                 inserted["entity_type"] += 1
 
@@ -415,7 +415,6 @@ def import_review_data(
             flag_evidence = {
                 "mapping_source": flags_payload.get("source", {}),
                 "evidence": flag["evidence"],
-                "mapping_file": str(flag_mapping_path),
                 "mapping_sha256": _sha(Path(flag_mapping_path)),
             }
             _proposal(connection, gid, "flag", flag_proposed, flag_evidence, flag["status"], flag["reviewed_at"], now)
