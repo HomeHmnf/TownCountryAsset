@@ -36,7 +36,7 @@ def _timestamp(value: Any, label: str) -> str:
     return value
 
 
-def import_wp1_5_data(
+def _import_wp1_5_data(
     connection: sqlite3.Connection,
     *,
     dataset: str,
@@ -105,6 +105,8 @@ def import_wp1_5_data(
         if methodology is not None and (not isinstance(methodology, str) or not methodology.strip()):
             raise GameDataImportError(f"{label}.methodology must be non-empty text")
         unit = row.get("unit", field.get("unit"))
+        if unit is not None and (not isinstance(unit, str) or not unit.strip()):
+            raise GameDataImportError(f"{label}.unit must be non-empty text")
         observed_at = row.get("observed_at")
         if observed_at is not None:
             observed_at = _timestamp(observed_at, f"{label}.observed_at")
@@ -228,3 +230,60 @@ def import_wp1_5_data(
     except Exception:
         connection.rollback()
         raise
+
+
+
+def import_wp1_5_snapshot(
+    connection: sqlite3.Connection,
+    *,
+    manifest_path: str | Path,
+    crosswalk_path: str | Path,
+    observations: Iterable[dict[str, Any]],
+    contract_path: str | Path,
+) -> dict[str, int | bool]:
+    """Verify captured raw bytes against their acquisition manifest, then import."""
+    import hashlib
+
+    try:
+        manifest = json.loads(Path(manifest_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise GameDataImportError(f"Cannot read acquisition manifest: {exc}") from exc
+    if not isinstance(manifest, dict) or manifest.get("manifest_schema_version") != 1:
+        raise GameDataImportError("Unsupported source acquisition manifest")
+    if manifest.get("work_package") != "WP1.5":
+        raise GameDataImportError("Acquisition manifest is not a WP1.5 snapshot")
+    dataset = _text(manifest.get("source_key"), "manifest.source_key")
+    source_version = _text(manifest.get("release"), "manifest.release")
+    source_url = _text(manifest.get("final_url") or manifest.get("source_url"), "manifest.final_url")
+    retrieved_at = _timestamp(manifest.get("retrieved_at"), "manifest.retrieved_at")
+    sha256 = manifest.get("sha256")
+    if not isinstance(sha256, str) or not _SHA.fullmatch(sha256):
+        raise GameDataImportError("manifest.sha256 must be a lowercase SHA-256")
+    raw_path_value = _text(manifest.get("local_raw_path"), "manifest.local_raw_path")
+    raw_path = Path(raw_path_value)
+    try:
+        digest = hashlib.sha256()
+        byte_count = 0
+        with raw_path.open("rb") as raw_file:
+            while chunk := raw_file.read(1024 * 1024):
+                digest.update(chunk)
+                byte_count += len(chunk)
+    except OSError as exc:
+        raise GameDataImportError(f"Cannot read acquired raw snapshot: {exc}") from exc
+    if digest.hexdigest() != sha256:
+        raise GameDataImportError("Raw snapshot SHA-256 does not match acquisition manifest")
+    if manifest.get("byte_count") != byte_count:
+        raise GameDataImportError("Raw snapshot byte count does not match acquisition manifest")
+    return _import_wp1_5_data(
+        connection,
+        dataset=dataset,
+        source_version=source_version,
+        source_url=source_url,
+        sha256=sha256,
+        retrieved_at=retrieved_at,
+        crosswalk_path=crosswalk_path,
+        observations=observations,
+        contract_path=contract_path,
+        attribution=manifest.get("attribution"),
+        license_text=manifest.get("license_status"),
+    )
