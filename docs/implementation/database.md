@@ -246,3 +246,28 @@ Focused validation:
 uv run pytest -v tests/test_wp1_5_source_crosswalk.py tests/test_wp1_5_source_acquisition.py tests/test_wp1_5_source_contract.py
 uv run python -m compileall -q tools/database
 ``
+
+
+### WP1.5 transactional normalized-observation importer
+
+Added `tools/database/statistics_import.py`, the `tools/import_wp1_5.py` CLI, and `tests/test_wp1_5_statistics_import.py`. The importer accepts normalized provider observations, an explicit source crosswalk, and the immutable acquisition manifest. It verifies the captured raw-file checksum, source/release consistency, the 41-field contract, contracted primary-source ownership, crosswalk identity pairs, canonical database identities, observation periods, scalar/structured value types, and status/null semantics before writing.
+
+Scalar observations populate `current_statistics`; structured observations populate `selected_game_data`. Both retain source reference, release, method, observation period, retrieval timestamp and observed/estimated/projected status. Explicit scalar NULL is accepted only with `unavailable` or `not_applicable`. Duplicate country/field rows are rejected. A new release from the same contracted provider replaces that provider's current value while retaining its source-import record; a conflicting value owned by a different provider is rejected. Writes are transactional, and SQLite integrity/foreign-key checks run before commit.
+
+This importer is deliberately downstream of provider-specific parsers: it does not parse raw provider formats, decide field methodology, infer country matches, or fill absent rows. It does not approve source imports or country review states, populate `country_sources`, change JSON consumers, or generate the consolidated completeness audit.
+
+Focused validation commands:
+
+```fish
+uv run pytest -v \
+  tests/test_wp1_5_statistics_import.py \
+  tests/test_wp1_5_source_crosswalk.py \
+  tests/test_wp1_5_source_acquisition.py \
+  tests/test_wp1_5_source_contract.py \
+  tests/test_database_schema.py
+
+uv run python -m tools.import_wp1_5 --help
+uv run python -m compileall -q tools/database tools/import_wp1_5.py
+```
+
+Owner-side validation is pending.
