@@ -80,16 +80,16 @@ def _read_iso_report(path: Path) -> list[dict[str, str]]:
         lines = path.read_text(encoding="utf-8").splitlines()
     except OSError as exc:
         raise ReviewDataImportError(f"Cannot read ISO proposal report {path}: {exc}") from exc
-    try:
-        index = lines.index(TABLE_HEADER)
-    except ValueError as exc:
-        raise ReviewDataImportError(f"ISO proposal report has no expected table header: {path}") from exc
     expected = [
         "game_id", "Registry English name", "Candidate alpha-2",
         "Candidate alpha-3", "Reference English name", "Match type", "Decision",
     ]
-    if _cells(lines[index]) != expected:
-        raise ReviewDataImportError("ISO proposal report columns do not match the expected schema")
+    header_indexes = [index for index, line in enumerate(lines) if line.startswith("|") and _cells(line) == expected]
+    if len(header_indexes) != 1:
+        raise ReviewDataImportError(
+            f"ISO proposal report must contain exactly one expected table header; found {len(header_indexes)}: {path}"
+        )
+    index = header_indexes[0]
     rows: list[dict[str, str]] = []
     for line_number, line in enumerate(lines[index + 2:], start=index + 3):
         if not line.startswith("|"):
