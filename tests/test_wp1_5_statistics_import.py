@@ -375,9 +375,11 @@ def test_requires_explicit_value_status_value_and_unit(tmp_path, remove_key, exp
     assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
     connection.close()
 
-def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path, monkeypatch):
-    paths = _inputs(tmp_path, monkeypatch)
-    connection = sqlite3.connect(paths[0])
+def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    connection = sqlite3.connect(database)
     connection.execute(
         """INSERT INTO dataset_imports
            (dataset, source_version, source_url, retrieval_date, sha256, import_status, imported_at)
@@ -397,7 +399,7 @@ def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path, mo
     connection.commit()
     connection.close()
 
-    batch = json.loads(paths[1].read_text(encoding="utf-8"))
+    batch = json.loads(observations.read_text(encoding="utf-8"))
     batch["observations"].append({
         "game_id": GAME_B,
         "source_id": "provider-2",
@@ -408,10 +410,15 @@ def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path, mo
         "observation_period": "2026",
         "source_reference": "WPP2024:population-growth",
     })
-    paths[1].write_text(json.dumps(batch), encoding="utf-8")
+    observations.write_text(json.dumps(batch), encoding="utf-8")
     with pytest.raises(StatisticsImportError, match="conflicts with a different source"):
-        _run(paths)
-    with _connect(paths[0]) as connection:
+        import_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
+            database_path=database,
+        )
+    with sqlite3.connect(database) as connection:
         assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
         assert connection.execute("SELECT COUNT(*) FROM country_sources WHERE dataset = ?", (SOURCE,)).fetchone()[0] == 0
         assert connection.execute("SELECT COUNT(*) FROM current_statistics WHERE game_id = ?", (GAME,)).fetchone()[0] == 0
