@@ -307,3 +307,24 @@ Official catalogue and documentation:
 
 
 Every normalized observation must explicitly include `value`, `value_status`, `observation_period` and `unit`. The importer does not default a missing status to `observed`, because that could misclassify an estimate or projection. For a scalar unavailable value, include `"value": null` and an explicit `unavailable` or `not_applicable` status. A missing `value` property is invalid.
+
+
+Acquire the two small metadata tables as separate snapshots as well; they define indicator codes/units and location notes used by the parser and crosswalk review:
+
+```fish
+uv run python -m tools.acquire_wp1_5_sources \
+  --source un_wpp_2024 --release 2024-demographic-notes \
+  --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv" \
+  --filename WPP2024_Demographic_Indicators_notes.csv \
+  --terms-url "https://population.un.org/wpp/" \
+  --attribution "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition." \
+  --license-status "CC BY 3.0 IGO"
+
+uv run python -m tools.acquire_wp1_5_sources \
+  --source un_wpp_2024 --release 2024-location-notes \
+  --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Locations_notes.csv" \
+  --filename WPP2024_Locations_notes.csv \
+  --terms-url "https://population.un.org/wpp/" \
+  --attribution "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition." \
+  --license-status "CC BY 3.0 IGO"
+```
