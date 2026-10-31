@@ -2,6 +2,7 @@ import hashlib
 
 import pytest
 
+import tools.database.statistics_import as statistics_import
 from tools.database.statistics_import import StatisticsImportError, _validate_manifest
 
 
@@ -20,8 +21,10 @@ def manifest_for(path):
     }
 
 
-def test_manifest_verifies_raw_byte_count(tmp_path):
-    raw = tmp_path / "raw.csv"
+def test_manifest_verifies_raw_byte_count(tmp_path, monkeypatch):
+    monkeypatch.setattr(statistics_import, "REPOSITORY_ROOT", tmp_path)
+    raw = tmp_path / "raw_data" / "raw.csv"
+    raw.parent.mkdir(parents=True)
     raw.write_bytes(b"source,data\n")
     manifest = manifest_for(raw)
     manifest["byte_count"] += 1
@@ -29,8 +32,10 @@ def test_manifest_verifies_raw_byte_count(tmp_path):
         _validate_manifest(manifest, "un_wpp_2024")
 
 
-def test_manifest_verifies_raw_checksum(tmp_path):
-    raw = tmp_path / "raw.csv"
+def test_manifest_verifies_raw_checksum(tmp_path, monkeypatch):
+    monkeypatch.setattr(statistics_import, "REPOSITORY_ROOT", tmp_path)
+    raw = tmp_path / "raw_data" / "raw.csv"
+    raw.parent.mkdir(parents=True)
     raw.write_bytes(b"source,data\n")
     manifest = manifest_for(raw)
     raw.write_bytes(b"tampered")
