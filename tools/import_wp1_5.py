@@ -5,6 +5,7 @@ import argparse
 import json
 
 from tools.database.statistics_import import StatisticsImportError, import_wp1_5_dataset
+from tools.database.schema import MigrationError
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -32,7 +33,7 @@ def main() -> int:
         kwargs["config_path"] = args.config
     try:
         result = import_wp1_5_dataset(**kwargs)
-    except (StatisticsImportError, OSError, ValueError) as exc:
+    except (StatisticsImportError, MigrationError, OSError, ValueError) as exc:
         print(f"WP1.5 import failed: {exc}")
         return 1
     print(json.dumps(result, ensure_ascii=False, indent=2))
