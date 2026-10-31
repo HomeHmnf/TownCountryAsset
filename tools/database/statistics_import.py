@@ -534,6 +534,10 @@ def import_wp1_5_dataset(
             "foreign_keys": "ok",
             "idempotent": False,
         }
+    except sqlite3.IntegrityError as exc:
+        if connection.in_transaction:
+            connection.rollback()
+        raise StatisticsImportError(f"SQLite rejected WP1.5 import: {exc}") from exc
     except Exception:
         if connection.in_transaction:
             connection.rollback()
