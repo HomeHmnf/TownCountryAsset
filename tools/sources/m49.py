@@ -14,7 +14,7 @@ OPTIONAL_REGION_HEADERS = (
 
 def parse_m49_html(html: str) -> dict[str, Any]:
     """Retain all M49 rows; expose only fully coded rows as ISO candidates."""
-    headers, rows = extract_table(html, REQUIRED_HEADERS)
+    headers, rows = extract_table(html, REQUIRED_HEADERS, table_id="downloadTableEN")
     seen_m49, seen_alpha2, seen_alpha3 = set(), set(), set()
     iso_rows, excluded = [], []
     for line, row in enumerate(rows, start=1):
@@ -42,7 +42,7 @@ def parse_m49_html(html: str) -> dict[str, Any]:
             **{key: row.get(key, "") for key in OPTIONAL_REGION_HEADERS if key in headers},
         })
     if not iso_rows: raise ValueError("M49 table contains no rows with ISO alpha-2/alpha-3 codes")
-    return {"headers": headers, "all_rows": rows, "iso_rows": iso_rows,
+    return {"headers": headers, "table_id": "downloadTableEN", "all_rows": rows, "iso_rows": iso_rows,
             "excluded_without_iso": excluded, "row_count": len(rows),
             "iso_candidate_count": len(iso_rows)}
 
