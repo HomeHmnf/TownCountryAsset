@@ -340,3 +340,12 @@ uv run pytest -v \
 uv run python -m compileall -q tools/database tools/import_wp1_5.py
 uv run python -m tools.import_wp1_5 --help
 ```
+
+
+### WP1.5 import replay and transaction hardening
+
+The normalized importer now treats a raw source checksum as an immutable import identity. Replaying that checksum is accepted only when the crosswalk and every normalized observation exactly match the rows still current from that import, including row counts. A changed normalized batch cannot append rows under an old checksum, and replaying an older import after a newer release has superseded any of its observations is rejected rather than restoring stale values.
+
+Release ordering compares timezone-aware timestamps as actual instants, including offsets, rather than lexicographic strings. SQLite constraint failures are converted to the importer's domain error after rollback. The importer CLI also reports schema migration failures cleanly. The raw-file path check now requires the captured file to be under the repository-root raw_data/ tree, not merely in an arbitrary nested directory named raw_data.
+
+Regression tests cover exact idempotent replay, altered-batch replay rejection, offset-aware stale-release rejection, and rollback when a later observation in a multi-row batch conflicts with another provider. These tests are committed; owner-side execution is pending.
