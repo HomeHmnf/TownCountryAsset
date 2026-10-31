@@ -81,7 +81,8 @@ def refresh(registry_path=DEFAULT_REGISTRY, output_dir=DEFAULT_OUTPUT_DIR,
         "rows_without_iso_codes": parsed["excluded_without_iso"],
         "table_headers": parsed["headers"],
         "parser": "tools.sources.m49.parse_m49_html",
-        "parser_contract_version": 1,
+        "parser_contract_version": 2,
+        "selected_table_id": parsed["table_id"],
     }
     metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     identity_registry = json.loads(registry_path.read_text(encoding="utf-8"))
