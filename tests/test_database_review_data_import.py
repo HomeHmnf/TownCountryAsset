@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from tools.database.connection import connect_database
-from tools.database.review_data_import import ReviewDataImportError, import_review_data
+from tools.database.review_data_import import ReviewDataImportError, _read_iso_report, import_review_data
 from tools.database.schema import apply_migrations
 from tools.propose_iso_assignments import propose, read_reference, render_report
 
@@ -322,3 +322,26 @@ def test_non_unreviewed_entity_type_is_recorded_as_candidate_not_approved(tmp_pa
         ).fetchone()[0] == "unreviewed"
     finally:
         connection.close()
+
+
+
+def test_iso_report_header_accepts_markdown_spacing_variation(tmp_path: Path):
+    report = tmp_path / "report.md"
+    report.write_text(
+        "# Proposal report\n\n"
+        "|  game_id | Registry English name | Candidate alpha-2 | Candidate alpha-3 | "
+        "Reference English name | Match type | Decision  |\n"
+        "|---|---|---|---|---|---|---|\n"
+        "| " + GAME_ID + " | Alpha | AA | AAA | Alpha | exact | candidate |\n",
+        encoding="utf-8",
+    )
+    rows = _read_iso_report(report)
+    assert rows == [{
+        "game_id": GAME_ID,
+        "Registry English name": "Alpha",
+        "Candidate alpha-2": "AA",
+        "Candidate alpha-3": "AAA",
+        "Reference English name": "Alpha",
+        "Match type": "exact",
+        "Decision": "candidate",
+    }]
