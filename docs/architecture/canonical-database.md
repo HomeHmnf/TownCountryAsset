@@ -104,3 +104,8 @@ uv run python -m tools.import_identity_registry \
 ```
 
 Optional `--registry` and `--candidate-dir` arguments allow isolated fixtures or alternate candidate snapshots. The command does not modify the JSON registry or generated candidate directory.
+
+
+### WP1.2 implementation correction — 2026-10-31
+
+The generated production snapshot stores source provenance in the top-level `source` object of `manifest.json`; the importer uses that object as authoritative, while accepting legacy/test inputs that carry the same object in `countries.json`. If both are present, they must match. Dataset provenance columns are now populated in the exact schema order, keeping the archive SHA-256 in the checksum column. Regression coverage includes the production manifest layout. Local WP1.2 validation is still pending.
