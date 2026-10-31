@@ -80,3 +80,41 @@ The owner-reported run had **6 identity-import failures**, while the schema and 
 ### WP1.2 follow-up test correction — 2026-10-31
 
 The owner reran WP1.2 after the importer fixes. The production database migration succeeded (schema 0 → 1 with SQLite integrity and foreign-key checks passing), and the real identity import succeeded with **242 countries, 242 source mappings, 250 names, and 237 region memberships**. The focused suite reported **24 passed, 1 failed**. Investigation of the remaining failure showed the importer correctly rejects a registry/candidate `game_id` mismatch during preflight, before opening or creating the SQLite database; the test incorrectly attempted to query schema tables in a database that should not exist. Corrected the test to assert that no database file is created on this preflight rejection. Re-run the focused suite to confirm all 25 tests pass before marking WP1.2 locally validated.
+
+
+### WP1.2 owner validation confirmation — 2026-10-31
+
+The owner confirmed that all focused WP1.2 tests passed after the preflight mismatch assertion correction. WP1.2 is therefore locally validated and closed.
+
+## WP1.3 — Country metadata, source attributes and geometry
+
+**Status:** Implemented; owner validation pending.
+
+Added `tools/database/country_data_import.py`, the `tools/import_country_data.py` CLI, and `tests/test_database_country_data_import.py`. The importer reads the candidate `countries.json`, manifest, and low/medium/high geometry files keyed by persistent `game_id`.
+
+Before database writes, it validates all four input file checksums, input schema/profile declarations, unique source and game identities, required attribute objects, and exact geometry identity coverage. It requires the existing WP1.2 dataset import and checks source provenance plus exact current source-ID/`game_id` mapping parity.
+
+The importer preserves source attribute types in schema v1: text, integer, real, boolean, JSON, and null. It stores the source geometry type as an additional text attribute. Geometry payloads are deterministically serialized and SHA-256 hashed. All metadata and geometry writes share one transaction; identical existing rows are idempotent, while conflicts or invalid inputs roll back the import. The importer does not modify source files, generated snapshots, the registry, or existing JSON pipeline consumers, and it does not promote candidate records.
+
+### WP1.3 validation commands
+
+```fish
+uv run pytest -v \\
+  tests/test_database_country_data_import.py \\
+  tests/test_database_identity_import.py \\
+  tests/test_database_schema.py \\
+  tests/test_country_identity_registry.py
+
+uv run python -m tools.import_identity_registry \\
+  --database /tmp/tca-wp1-3.sqlite
+
+uv run python -m tools.import_country_data \\
+  --database /tmp/tca-wp1-3.sqlite
+
+uv run python -m compileall -q tools/database tools/import_country_data.py
+
+uv run pytest -v
+git status --short
+```
+
+The identity import command is included to make the isolated WP1.3 database self-contained; run the country-data import against the same database. Record actual counts for attributes and geometries, the three profile counts, integrity/foreign-key results, and test outcomes. WP1.3 remains pending until the owner reports successful validation.
