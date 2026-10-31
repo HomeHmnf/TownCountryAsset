@@ -24,7 +24,7 @@ def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_
     tmp_path.mkdir(parents=True, exist_ok=True)
     raw = tmp_path / "raw_data" / "wp1_5" / source_key / release / "provider.csv"
     raw.parent.mkdir(parents=True, exist_ok=True)
-    raw.write_text("provider,captured\\n" + release + "\\n", encoding="utf-8")
+    raw.write_text("provider,captured\n" + release + "\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest = {
         "manifest_schema_version": 1, "work_package": "WP1.5",
@@ -211,7 +211,7 @@ def test_new_release_from_same_provider_replaces_current_value(tmp_path):
     run_import(tmp_path, database, value=100)
     raw = tmp_path / "raw_data" / "wp1_5" / SOURCE / "2025-r1" / "provider.csv"
     raw.parent.mkdir(parents=True, exist_ok=True)
-    raw.write_text("provider,captured\\nnew-release\\n", encoding="utf-8")
+    raw.write_text("provider,captured\nnew-release\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest_path = tmp_path / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
@@ -344,7 +344,7 @@ def test_older_snapshot_cannot_roll_back_current_observation(tmp_path):
     run_import(tmp_path, database, value=200)
     raw = tmp_path / "raw_data" / "wp1_5" / SOURCE / "older" / "provider.csv"
     raw.parent.mkdir(parents=True, exist_ok=True)
-    raw.write_text("provider,older-snapshot\\n", encoding="utf-8")
+    raw.write_text("provider,older-snapshot\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest_path = tmp_path / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
