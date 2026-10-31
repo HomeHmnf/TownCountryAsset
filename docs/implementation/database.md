@@ -43,7 +43,7 @@ The existing fresh-database, repeat-application, and failed-migration rollback t
 
 ## WP1.2 — Identity registry and source provenance
 
-**Status:** Implemented; local validation pending.
+**Status:** Implemented and locally validated by the owner.
 
 Added `tools/database/identity_import.py`, `tools/import_identity_registry.py`, and `tests/test_database_identity_import.py`. The importer reads `config/country_identity_registry.json` and `generated/town_country_asset_candidate/{countries.json,manifest.json}`. It verifies manifest SHA-256, registry/candidate coverage, persistent `game_id` equality, current source IDs, English canonical names/aliases, region memberships, and ISO alpha-3 candidate consistency before writing.
 
@@ -74,7 +74,7 @@ Record the actual local output before marking WP1.2 validated or proceeding to W
 
 The first owner-run validation exposed two importer defects. Production candidate provenance is stored in the top-level `source` object in `manifest.json`, not in `countries.json`; the importer now reads that production layout and retains compatibility with isolated fixtures that place provenance in `countries.json`. If both locations are present, they must agree. The dataset-import INSERT also had its attribution value shifted into the SHA-256 column; the value ordering now matches the schema columns. Added a regression test for manifest-based provenance.
 
-The owner-reported run had **6 identity-import failures**, while the schema and identity-registry tests passed (**18 passed** across the combined run). The migration CLI advanced schema 0 → 1 and passed integrity/foreign-key checks; the data import then failed. These are confirmed implementation defects. WP1.2 remains **implemented but not locally validated** until the owner reruns the focused test suite, migration, import, and compile commands successfully.
+The owner-reported run had **6 identity-import failures**, while the schema and identity-registry tests passed (**18 passed** across the combined run). The migration CLI advanced schema 0 → 1 and passed integrity/foreign-key checks; the data import then failed. These are confirmed implementation defects. WP1.2 validation was subsequently completed: the owner confirmed that all focused tests passed after the preflight mismatch assertion correction. WP1.2 is locally validated and closed.
 
 
 ### WP1.2 follow-up test correction — 2026-10-31
