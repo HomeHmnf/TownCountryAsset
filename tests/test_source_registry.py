@@ -44,3 +44,15 @@ def test_project_registry_contains_wp1_5_field_sources_without_contract_duplicat
     for field in contract["fields"]:
         assert field["primary_source"] in registry["sources"]
         assert field["id"] in registry["sources"][field["primary_source"]].get("field_ids", [])
+
+
+def test_expected_checksum_mismatch_removes_download(tmp_path, monkeypatch):
+    import tools.sources.registry as module
+    path = fixture(tmp_path)
+    registry = load_registry(path)
+    item = registry["sources"]["sample"]["downloads"][0]
+    monkeypatch.setattr(module.urllib.request, "urlopen", lambda *a, **k: Response(b"payload"))
+    with pytest.raises(SourceError, match="SHA-256 mismatch"):
+        acquire_one(registry, "sample", item, expected_sha256="0" * 64)
+    raw = tmp_path / "raw/sample/dataset/v1/data.csv"
+    assert not raw.exists()
