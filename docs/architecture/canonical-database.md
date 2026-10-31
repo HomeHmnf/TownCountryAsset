@@ -1,6 +1,6 @@
 # Canonical SQLite database architecture
 
-**Status:** WP1.1 and WP1.2 implemented and locally validated; WP1.3 country metadata/geometry importer implemented, awaiting owner validation. No consumer cutover is included.
+**Status:** WP1.1, WP1.2, and WP1.3 implemented and locally validated by the owner. No consumer cutover is included.
 **Canonical local path:** `data/canonical/town_country_asset.sqlite`
 **Schema versioning:** Local database ledger; migration SQL is version-controlled.
 
@@ -138,4 +138,4 @@ Optional `--candidate-dir` supports isolated snapshots. The importer expects the
 
 `tests/test_database_country_data_import.py` covers typed attribute preservation, all three geometry profiles and checksums, idempotency, manifest checksum rejection, geometry coverage rejection, candidate/database identity mismatch, and transactional rollback on conflicts.
 
-Owner validation is pending. Do not mark WP1.3 validated until the focused tests, production import, compile check, and full test suite have been run and their actual results recorded.
+Owner validation completed on 2026-10-31. The production import reported 242 countries, 40,898 attributes, 726 geometries across all three profiles, and passed SQLite integrity and foreign-key checks. The full repository test suite passed: **145 passed**. `compileall` completed without errors. The operator used `/tmp/tca-wp1-3.sqlite`; the identity and country-data import commands were run sequentially against that same database. WP1.3 is locally validated and closed.
