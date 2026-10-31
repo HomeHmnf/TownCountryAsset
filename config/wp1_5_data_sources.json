@@ -259,7 +259,7 @@
       "storage": "scalar",
       "unit": "people",
       "primary_source": "un_wpp_2024",
-      "method": "total population; one current estimate with reference date; record estimate status",
+      "method": "Total population as of 1 July; WPP stores the measure in thousands, so convert to canonical people by multiplying by 1,000 and record this conversion in methodology.",
       "source_status": "candidate_pending_validation"
     },
     {
@@ -268,7 +268,7 @@
       "storage": "scalar",
       "unit": "percent_per_year",
       "primary_source": "un_wpp_2024",
-      "method": "annual population growth rate; retain exact period",
+      "method": "Annual population growth rate in percent; preserve the annual period and medium-variant estimate/projection status.",
       "source_status": "candidate_pending_validation"
     },
     {
@@ -286,7 +286,7 @@
       "storage": "scalar",
       "unit": "years",
       "primary_source": "un_wpp_2024",
-      "method": "median age; retain reference year and estimate status",
+      "method": "Median age as of 1 July in years; preserve the reference year and medium-variant estimate/projection status.",
       "source_status": "candidate_pending_validation"
     },
     {
@@ -295,7 +295,7 @@
       "storage": "structured",
       "unit": "age_band_share_or_count",
       "primary_source": "un_wpp_2024",
-      "method": "age-band distribution; retain band boundaries, sex scope, units and reference year",
+      "method": "Population by five-year age group and sex; convert source counts from thousands to people by multiplying by 1,000; preserve age-band boundaries and sex scope.",
       "source_status": "candidate_pending_validation"
     },
     {
@@ -304,7 +304,7 @@
       "storage": "structured",
       "unit": "people_or_share",
       "primary_source": "un_wpp_2024",
-      "method": "male/female population distribution; retain source categories and reference year",
+      "method": "Male and female population as of 1 July; convert source counts from thousands to people by multiplying by 1,000; preserve both categories and reference year.",
       "source_status": "candidate_pending_validation"
     },
     {
@@ -313,7 +313,7 @@
       "storage": "scalar",
       "unit": "people_or_rate",
       "primary_source": "un_wpp_2024",
-      "method": "select a single documented measure (net migrants or net migration rate); do not mix",
+      "method": "Use net number of migrants (not rate); convert source counts from thousands to people by multiplying by 1,000; preserve the reference year and medium-variant status.",
       "source_status": "candidate_pending_validation"
     },
     {
