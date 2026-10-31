@@ -43,6 +43,8 @@ def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monk
     assert metadata["iso_candidate_count"] == 1
     assert len(metadata["rows_without_iso_codes"]) == 1
     assert result["candidate_count"] == 1
+    normalized_m49 = json.loads((tmp_path/result["normalized_m49_data"]).read_text())
+    assert normalized_m49["all_rows"][0]["Region Name"] == "Region A"
     report = (tmp_path/result["report"]).read_text()
     assert "not the ISO 3166 assignment authority" in report
     assert "human review" in report
