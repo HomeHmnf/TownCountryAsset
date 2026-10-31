@@ -24,7 +24,7 @@ def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_
     tmp_path.mkdir(parents=True, exist_ok=True)
     raw = tmp_path / "raw_data" / "wp1_5" / source_key / release / "provider.csv"
     raw.parent.mkdir(parents=True, exist_ok=True)
-    raw.write_text("provider,captured\n", encoding="utf-8")
+    raw.write_text("provider,captured\n" + release + "\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest = {
         "manifest_schema_version": 1, "work_package": "WP1.5",
@@ -415,7 +415,7 @@ def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path, mo
     batch = json.loads(paths[1].read_text(encoding="utf-8"))
     batch["observations"].append({
         "game_id": GAME_B,
-        "source_id": "5",
+        "source_id": "provider-2",
         "field_id": 2,
         "value": 1.2,
         "unit": "percent_per_year",
