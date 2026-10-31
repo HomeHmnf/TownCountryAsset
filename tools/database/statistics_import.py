@@ -215,7 +215,9 @@ def import_wp1_5_dataset(
     registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
     registry_path = Path(registry_reference)
     if not registry_path.is_absolute():
-        registry_path = (Path(config_path).resolve().parent / registry_path).resolve()
+        # Registry references in project configuration are repository-root-relative,
+        # not relative to the directory containing the referencing config file.
+        registry_path = (REPOSITORY_ROOT / registry_path).resolve()
     try:
         source_registry = load_registry(registry_path)
     except SourceError as exc:
