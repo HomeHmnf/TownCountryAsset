@@ -24,7 +24,7 @@ def parse_m49_html(html: str) -> dict[str, Any]:
             re.IGNORECASE,
         )
     )
-    selected_table_id = ENGLISH_TABLE_ID if english_table_present else None
+    selected_table_id = "downloadTableEN" if english_table_present else None
     headers, rows = extract_table(
         html,
         REQUIRED_HEADERS,
