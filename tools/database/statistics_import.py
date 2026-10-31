@@ -70,6 +70,10 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
     if not source_url.startswith("https://"):
         raise StatisticsImportError("Source manifest URL must use HTTPS")
     retrieved_at = _text(manifest.get("retrieved_at"), "manifest.retrieved_at")
+    for optional_key in ("attribution", "license_status"):
+        optional_value = manifest.get(optional_key)
+        if optional_value is not None and not isinstance(optional_value, str):
+            raise StatisticsImportError(f"manifest.{optional_key} must be text when supplied")
     return release, sha256, source_url, retrieved_at
 
 
@@ -98,7 +102,7 @@ def _validate_observation(
         )
     period = _text(row.get("observation_period"), f"{label}.observation_period")
     status = row.get("value_status", "observed")
-    if status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
+    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
         raise StatisticsImportError(f"{label}.value_status is invalid")
     value = row.get("value")
     unit = row.get("unit", field.get("unit"))
@@ -109,8 +113,15 @@ def _validate_observation(
             if status not in {"unavailable", "not_applicable"}:
                 raise StatisticsImportError(f"{label} NULL value requires unavailable/not_applicable status")
         else:
-            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
+            try:
+                finite = math.isfinite(float(value))
+            except (OverflowError, ValueError):
+                finite = False
+            if not finite:
+                raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
+            value = float(value)
             if status not in {"observed", "estimated", "projected"}:
                 raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected status")
     else:
