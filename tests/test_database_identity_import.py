@@ -130,12 +130,9 @@ def test_rejects_registry_candidate_game_id_mismatch_without_partial_import(tmp_
     database = tmp_path / "canonical.sqlite"
     with pytest.raises(IdentityImportError, match="game_id mismatch"):
         import_identity_registry(database, registry, candidate)
-    connection = connect_database(database)
-    try:
-        assert connection.execute("SELECT COUNT(*) FROM countries").fetchone()[0] == 0
-        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
-    finally:
-        connection.close()
+    # Input validation runs before opening/creating the database, so a rejected
+    # identity mismatch must leave no database file and no partial schema/data.
+    assert not database.exists()
 
 
 def test_rejects_manifest_checksum_mismatch(tmp_path):
