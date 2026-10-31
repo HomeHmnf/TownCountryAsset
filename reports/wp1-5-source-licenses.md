@@ -17,7 +17,7 @@
 | IISS The Military Balance | 67, 70, 71 | **Proprietary / subscription** | Candidate source; subscription access and redistribution rights require separate review. |
 | Energy Institute Statistical Review | 75–78 | **Unclear / terms not verified** | CSV/XLSX downloads and archives are available, but availability alone does not establish an open licence or redistribution permission. |
 | Pew Global Religious Composition | 48 | **Unclear / dataset-specific terms** | Dataset download is available; confirm the dataset's licence and redistribution conditions before publishing derived or copied values. Respect rounded-count reporting guidance. |
-| UN WPP 2024 | 1, 2, 6, 12, 13, 14 | **Unclear / terms not verified** | Public download/API access is available; exact data licence and redistribution terms must be checked against the downloaded release. |
+| UN WPP 2024 | 1, 2, 6, 12, 13, 14 | **Attribution required — CC BY 3.0 IGO** | Official WPP download catalogue identifies the release as CC BY 3.0 IGO and specifies the suggested citation. Retain UN attribution; verify any later revision or third-party component separately. |
 | IMF WEO | 15, 16, 18, 20, 21 | **Unclear / terms not verified** | Public database access does not by itself establish an open licence. Verify IMF terms for the dataset and intended reuse. |
 | ILOSTAT | 22 | **Unclear / terms not verified** | Confirm the licence and any source-country restrictions for the selected indicator/table. |
 | FAO FRA 2025 | 42 | **Unclear / terms not verified** | Verify dataset-specific licence and attribution requirements for the downloaded tables. |
