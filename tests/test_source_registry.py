@@ -56,3 +56,58 @@ def test_expected_checksum_mismatch_removes_download(tmp_path, monkeypatch):
         acquire_one(registry, "sample", item, expected_sha256="0" * 64)
     raw = tmp_path / "raw/sample/dataset/v1/data.csv"
     assert not raw.exists()
+
+
+def test_html_page_contract_is_reusable_and_enforced(tmp_path, monkeypatch):
+    import tools.sources.registry as module
+
+    path = fixture(tmp_path)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    item = data["sources"]["sample"]["downloads"][0]
+    item["filename"] = "overview.html"
+    item["format"] = "html"
+    item["validation"] = {
+        "content_types": ["text/html"],
+        "required_text": ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code"],
+    }
+    path.write_text(json.dumps(data), encoding="utf-8")
+    registry = load_registry(path)
+    item = registry["sources"]["sample"]["downloads"][0]
+    html = (
+        "<html><table><th>Country or Area</th><th>M49 Code</th>"
+        "<th>ISO-alpha2 Code</th><th>ISO-alpha3 Code</th></table></html>"
+    ).encode()
+
+    class HtmlResponse(Response):
+        headers = {"Content-Type": "text/html; charset=utf-8"}
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", lambda *a, **k: HtmlResponse(html))
+    meta = acquire_one(registry, "sample", item)
+    assert meta["format"] == "html"
+    assert meta["validation_contract"] == item["validation"]
+    assert inspect_snapshots(registry)[0]["status"] == "valid"
+
+
+def test_html_page_contract_rejects_changed_page_and_removes_snapshot(tmp_path, monkeypatch):
+    import tools.sources.registry as module
+
+    path = fixture(tmp_path)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    item = data["sources"]["sample"]["downloads"][0]
+    item["filename"] = "overview.html"
+    item["validation"] = {
+        "content_types": ["text/html"],
+        "required_text": ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code"],
+    }
+    path.write_text(json.dumps(data), encoding="utf-8")
+    registry = load_registry(path)
+    item = registry["sources"]["sample"]["downloads"][0]
+
+    class HtmlResponse(Response):
+        headers = {"Content-Type": "text/html; charset=utf-8"}
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", lambda *a, **k: HtmlResponse(b"<html>changed layout</html>"))
+    with pytest.raises(SourceError, match="required-text validation"):
+        acquire_one(registry, "sample", item)
+    raw = tmp_path / "raw/sample/dataset/v1/overview.html"
+    assert not raw.exists()
