@@ -25,7 +25,7 @@ def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_
         "source_url": "https://example.test/source.csv",
         "final_url": "https://example.test/source.csv",
         "retrieved_at": "2026-10-31T10:00:00Z",
-        "local_raw_path": str(raw), "sha256": digest,
+        "local_raw_path": str(raw), "byte_count": raw.stat().st_size, "sha256": digest,
         "attribution": "Example attribution", "license_status": "unclear_or_unverified",
     }
     manifest_path = tmp_path / "manifest.json"
