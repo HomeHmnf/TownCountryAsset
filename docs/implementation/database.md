@@ -282,3 +282,35 @@ The importer now persists every explicit provider-ID mapping from the crosswalk 
 All source mappings, dataset provenance and observation rows are written in one transaction. A conflict rolls back the complete import. Existing current values from another source are protected; a newer release from the same contracted provider may replace its current value while the previous \`dataset_imports\` provenance row remains. The importer does not parse provider-native files, invent missing observations, or promote review/verification statuses.
 
 Added regression coverage for crosswalk persistence (including mapped countries with no observation in that file) and timezone-aware retrieval metadata. Owner-side execution of the updated importer tests is pending.
+
+
+### WP1.5 transactional observation importer hardening
+
+The existing generic importer in `tools/database/statistics_import.py` is the single production import path; the CLI remains `tools/import_wp1_5.py`. It accepts normalized provider rows, the matching acquisition manifest and an explicit source crosswalk. No provider parser or identity inference is embedded in this layer.
+
+The importer now additionally:
+- constrains raw snapshot paths to the repository's `raw_data/` tree and verifies non-empty bytes, manifest byte count and SHA-256;
+- validates timezone-aware retrieval timestamps and HTTPS terms URLs;
+- enforces the field contract's declared unit or explicit `_or_` alternatives;
+- requires a usable methodology (defaulting to the field contract) and falls back to the manifest source URL when a row omits its source reference;
+- rejects duplicate import records for one source/checksum and provenance mismatches;
+- allows a source to replace its own current value only when the new snapshot's retrieval timestamp is strictly later, preventing stale snapshot rollback;
+- continues to reject cross-provider conflicts and to roll back provenance, crosswalk and observation writes together.
+
+The source importer regression suite is `tests/test_wp1_5_statistics_import.py`. It covers scalar and structured storage, explicit NULL statuses, source/crosswalk constraints, checksum and byte-count verification, unit validation, idempotency, crosswalk persistence, source conflicts, newer-release replacement and rejection of stale releases. No provider-specific observations are claimed as imported by this framework-only change.
+
+Owner validation command:
+
+```fish
+uv run pytest -v \
+  tests/test_wp1_5_statistics_import.py \
+  tests/test_wp1_5_source_crosswalk.py \
+  tests/test_wp1_5_source_acquisition.py \
+  tests/test_wp1_5_source_contract.py \
+  tests/test_database_schema.py
+
+uv run python -m tools.import_wp1_5 --help
+uv run python -m compileall -q tools/database tools/import_wp1_5.py
+``
+
+Record the actual focused test, CLI-help and compilation results before treating this importer increment as locally validated.
