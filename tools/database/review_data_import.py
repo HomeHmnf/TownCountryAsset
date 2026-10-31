@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import hashlib
 import json
 import re
@@ -246,10 +245,18 @@ def _proposal(
         (gid, kind, fingerprint),
     ).fetchone()
     if existing:
-        expected = (status, reviewed_at, proposed_json, evidence_json)
-        actual = tuple(existing[key] for key in ("review_status", "reviewed_at", "proposed_json", "evidence_json"))
-        if actual != expected:
-            raise ReviewDataImportError(f"{gid}: existing {kind} proposal conflicts with imported review state")
+        actual_content = (existing["proposed_json"], existing["evidence_json"])
+        if actual_content != (proposed_json, evidence_json):
+            raise ReviewDataImportError(f"{gid}: existing {kind} proposal conflicts with imported evidence/content")
+        old_status, old_reviewed_at = existing["review_status"], existing["reviewed_at"]
+        if old_status == status and old_reviewed_at == reviewed_at:
+            return False
+        if old_status != "candidate" or status == "candidate":
+            raise ReviewDataImportError(f"{gid}: refusing to downgrade or rewrite an existing {kind} review decision")
+        connection.execute(
+            "UPDATE review_proposals SET review_status=?, reviewed_at=? WHERE proposal_id=?",
+            (status, reviewed_at, existing["proposal_id"]),
+        )
         return False
     connection.execute(
         """INSERT INTO review_proposals
@@ -420,7 +427,19 @@ def import_review_data(
                        VALUES (?, ?, ?, ?, ?)""", (gid, *expected_flag)
                 )
             elif tuple(existing_flag) != expected_flag:
-                raise ReviewDataImportError(f"{gid}: existing country flag mapping conflicts with source mapping")
+                if (
+                    existing_flag["source_flag_code"] == flag["code"]
+                    and existing_flag["decision_note"] == flag["note"]
+                    and existing_flag["evidence_json"] == _canonical(flag["evidence"])
+                    and existing_flag["mapping_status"] == "candidate"
+                    and mapping_status in {"reviewed", "rejected"}
+                ):
+                    connection.execute(
+                        "UPDATE country_flags SET mapping_status=? WHERE game_id=?",
+                        (mapping_status, gid),
+                    )
+                else:
+                    raise ReviewDataImportError(f"{gid}: existing country flag mapping conflicts with source mapping")
             flag_count += 1
 
         issues = validate_database(connection)
@@ -445,7 +464,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--database", type=Path, required=True)
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY)
-    parser.add_argument("--iso-reference", type=Path, default=DEFAULT_ISO_REFERENCE)
+    parser.add_argument("--iso-reference", type=Path, required=True)
     parser.add_argument("--iso-provenance", type=Path, required=True)
     parser.add_argument("--iso-proposals", type=Path, required=True)
     parser.add_argument("--persian-candidates", type=Path, required=True)
