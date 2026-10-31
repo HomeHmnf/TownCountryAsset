@@ -374,7 +374,7 @@ def import_review_data(
         }
         if db_sources != expected_sources:
             raise ReviewDataImportError("Database current source-ID/game_id mapping does not exactly match the identity registry")
-                for gid, record in by_id.items():
+        for gid, record in by_id.items():
             country = connection.execute(
                 "SELECT entity_type, iso_alpha2, iso_alpha3, localization_status FROM countries WHERE game_id=?",
                 (gid,),
