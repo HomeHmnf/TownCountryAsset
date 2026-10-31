@@ -5,7 +5,6 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -226,7 +225,6 @@ def import_country_data(
 
         attribute_count = 0
         geometry_count = 0
-        now = _utc_now()
         for game_id, country in sorted(
             ((item["game_id"], item) for item in countries), key=lambda pair: pair[0]
         ):
