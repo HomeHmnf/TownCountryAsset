@@ -24,7 +24,7 @@ def setup_inputs(tmp_path, *, field_id=1, value=1234, status="observed", source_
     tmp_path.mkdir(parents=True, exist_ok=True)
     raw = tmp_path / "raw_data" / "wp1_5" / source_key / release / "provider.csv"
     raw.parent.mkdir(parents=True, exist_ok=True)
-    raw.write_text("provider,captured\n" + release + "\n", encoding="utf-8")
+    raw.write_text("provider,captured\\n" + release + "\\n", encoding="utf-8")
     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
     manifest = {
         "manifest_schema_version": 1, "work_package": "WP1.5",
