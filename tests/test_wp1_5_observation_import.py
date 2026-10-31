@@ -112,6 +112,7 @@ def test_imports_scalar_provenance_and_is_idempotent(tmp_path, monkeypatch):
     first = _run(paths)
     assert first["scalar_observations"] == 1
     assert first["observations"] == 1
+    assert first["idempotent"] is False
     with _connect(paths[0]) as connection:
         row = connection.execute("SELECT * FROM current_statistics").fetchone()
         assert row["value"] == 1234000
@@ -122,6 +123,7 @@ def test_imports_scalar_provenance_and_is_idempotent(tmp_path, monkeypatch):
     second = _run(paths)
     assert second["import_id"] == first["import_id"]
     assert second["observations"] == 1
+    assert second["idempotent"] is True
 
 
 def test_imports_structured_observation(tmp_path, monkeypatch):
@@ -179,3 +181,54 @@ def test_conflicting_same_release_batch_rolls_back(tmp_path, monkeypatch):
         row = connection.execute("SELECT value FROM current_statistics").fetchone()
         assert row["value"] == 1234000
         assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
+
+def test_same_checksum_cannot_be_replayed_with_a_changed_normalized_batch(tmp_path, monkeypatch):
+    paths = _inputs(tmp_path, monkeypatch)
+    first = _run(paths)
+    batch = json.loads(paths[1].read_text(encoding="utf-8"))
+    batch["observations"].append({
+        "game_id": GAME_A,
+        "source_id": "4",
+        "field_id": 2,
+        "value": 1.2,
+        "unit": "percent_per_year",
+        "value_status": "projected",
+        "observation_period": "2026",
+        "source_reference": "WPP2024:population-growth",
+    })
+    paths[1].write_text(json.dumps(batch), encoding="utf-8")
+    with pytest.raises(StatisticsImportError, match="Refusing non-newer or altered replay"):
+        _run(paths)
+    with _connect(paths[0]) as connection:
+        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
+        assert connection.execute("SELECT COUNT(*) FROM current_statistics").fetchone()[0] == 1
+        assert connection.execute("SELECT value FROM current_statistics").fetchone()[0] == 1234000
+
+
+def test_release_order_uses_instants_not_timestamp_string_sorting(tmp_path, monkeypatch):
+    paths = _inputs(tmp_path, monkeypatch)
+    _run(paths)
+    manifest = json.loads(paths[3].read_text(encoding="utf-8"))
+    manifest["release"] = "2024-r2"
+    manifest["retrieved_at"] = "2026-10-31T11:00:00+01:00"  # 10:00Z, older than initial 10:30Z
+    raw = tmp_path / "raw_data" / "wp1_5" / "un_wpp_2024" / "2024-r2" / "wpp.csv"
+    raw.parent.mkdir(parents=True, exist_ok=True)
+    raw.write_text("Location,Value\\n4,999\\n", encoding="utf-8")
+    manifest["local_raw_path"] = str(raw)
+    manifest["byte_count"] = raw.stat().st_size
+    manifest["sha256"] = hashlib.sha256(raw.read_bytes()).hexdigest()
+    paths[3].write_text(json.dumps(manifest), encoding="utf-8")
+    batch = json.loads(paths[1].read_text(encoding="utf-8"))
+    batch["release"] = "2024-r2"
+    batch["source_sha256"] = manifest["sha256"]
+    batch["observations"][0]["value"] = 999
+    paths[1].write_text(json.dumps(batch), encoding="utf-8")
+    # Move the original observation's retrieval time forward to 10:30Z.
+    with _connect(paths[0]) as connection:
+        connection.execute("UPDATE current_statistics SET retrieved_at = '2026-10-31T10:30:00Z'")
+    with pytest.raises(StatisticsImportError, match="Refusing non-newer"):
+        _run(paths)
+    with _connect(paths[0]) as connection:
+        assert connection.execute("SELECT value FROM current_statistics").fetchone()[0] == 1234000
+        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
+
