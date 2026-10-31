@@ -169,7 +169,7 @@ The owner pulled the corrected branch and validated WP1.4 against `/tmp/tca-wp1-
 
 **Status:** In progress; source contracts, candidate natural-resource catalogue, licence register, and schema migration 003 have been added. Production acquisition/import adapters and owner validation are pending.
 
-The approved selection contains 43 fields. Natural Earth is not a statistics source. Candidate field-to-source assignments and storage types are tracked in `config/wp1_5_data_sources.json`; the methodology and coverage constraints are in `docs/data-sources/wp1-5-sources.md`. The candidate resource vocabulary is `config/wp1_5_resource_catalog.json`.
+The approved selection is recorded as 43 fields in the decision summary, but the enumerated IDs currently present in the project context contain only 41 distinct fields. Two fields are unresolved; WP1.5 completeness must not be marked until the owner reconciles this count. Natural Earth is not a statistics source. Candidate field-to-source assignments and storage types are tracked in `config/wp1_5_data_sources.json`; the methodology and coverage constraints are in `docs/data-sources/wp1-5-sources.md`. The candidate resource vocabulary is `config/wp1_5_resource_catalog.json`.
 
 Migration 003 preserves existing `current_statistics` rows while extending the contract:
 - scalar values may be SQL NULL only with an explicit `unavailable` or `not_applicable` status;
