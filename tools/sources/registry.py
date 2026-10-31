@@ -63,7 +63,7 @@ def inspect_snapshots(registry):
                          "status": status, "detail": detail, "raw_path": str(raw.relative_to(root))})
     return rows
 
-def acquire_one(registry, sid, item, timeout=60):
+def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
     source = registry["sources"][sid]
     raw, manifest = _paths(registry, sid, item)
     if raw.exists() or manifest.exists():
@@ -92,6 +92,9 @@ def acquire_one(registry, sid, item, timeout=60):
     if not size:
         raw.unlink(missing_ok=True)
         raise SourceError("Downloaded file is empty")
+    if expected_sha256 and digest.hexdigest() != expected_sha256:
+        raw.unlink(missing_ok=True)
+        raise SourceError("SHA-256 mismatch: expected {}, received {}".format(expected_sha256, digest.hexdigest()))
     meta = {"manifest_schema_version": 1, "source_id": sid, "source_name": source["name"],
             "download_id": item["id"], "release": item["release"], "source_url": item["url"],
             "final_url": final_url, "terms_url": source.get("terms_url"),
