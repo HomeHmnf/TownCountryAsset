@@ -75,11 +75,11 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
     else:
         raw_file = raw_file.resolve()
     try:
-        raw_file.relative_to(REPOSITORY_ROOT.resolve())
+        relative_raw_path = raw_file.relative_to(REPOSITORY_ROOT.resolve())
     except ValueError as exc:
         raise StatisticsImportError("Captured raw source file must be inside the repository") from exc
-    if "raw_data" not in raw_file.parts:
-        raise StatisticsImportError("Captured raw source file must be under raw_data")
+    if not relative_raw_path.parts or relative_raw_path.parts[0] != "raw_data":
+        raise StatisticsImportError("Captured raw source file must be directly under the repository raw_data tree")
     try:
         raw_bytes = raw_file.read_bytes()
     except OSError as exc:
