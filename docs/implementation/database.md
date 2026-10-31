@@ -232,3 +232,17 @@ uv run python -m compileall -q tools/database tools/acquire_wp1_5_sources.py
 ```
 
 Do not run a source acquisition until the exact provider file URL, release identifier, format, country-code scheme and terms URL have been verified. The placeholder URL in the source-methodology documentation is intentionally non-operational. No WP1.5 production data has yet been acquired or imported.
+
+
+### WP1.5 explicit source identity crosswalk validation
+
+Added `tools/database/source_crosswalk.py` and `tests/test_wp1_5_source_crosswalk.py`. The validator reads a versioned JSON crosswalk and enforces the expected dataset key, persistent `game_id` syntax, optional membership in the canonical identity set, explicit non-empty provider IDs, unique provider IDs and game IDs, approved match-method vocabulary, and HTTPS evidence URLs. It deliberately rejects fuzzy/name-only matching and does not infer ISO or other provider identifiers. Partial provider coverage is allowed and returned as an explicit coverage summary; uncovered identities remain missing rather than being filled.
+
+The crosswalk JSON shape and a minimal example are documented in `docs/data-sources/wp1-5-sources.md`. This commit adds validation only: it does not yet write provider mappings into `country_sources` or import statistical/game values. Owner-side test execution is pending.
+
+Focused validation:
+
+```fish
+uv run pytest -v tests/test_wp1_5_source_crosswalk.py tests/test_wp1_5_source_acquisition.py tests/test_wp1_5_source_contract.py
+uv run python -m compileall -q tools/database
+``
