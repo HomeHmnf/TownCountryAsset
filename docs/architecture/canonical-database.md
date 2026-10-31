@@ -128,7 +128,7 @@ All writes occur in one transaction. Existing identical rows are accepted for id
 Run after WP1.2 has populated the same database:
 
 ```fish
-uv run python -m tools.import_country_data \\
+uv run python -m tools.import_country_data \
   --database /tmp/tca-wp1-3.sqlite
 ```
 
