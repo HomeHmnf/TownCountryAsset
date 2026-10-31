@@ -169,7 +169,7 @@ The owner pulled the corrected branch and validated WP1.4 against `/tmp/tca-wp1-
 
 **Status:** In progress; source contracts, candidate natural-resource catalogue, licence register, and schema migration 003 have been added. Production acquisition/import adapters and owner validation are pending.
 
-The approved selection is recorded as 43 fields in the decision summary, but the enumerated IDs currently present in the project context contain only 41 distinct fields. Two fields are unresolved; WP1.5 completeness must not be marked until the owner reconciles this count. Natural Earth is not a statistics source. Candidate field-to-source assignments and storage types are tracked in `config/wp1_5_data_sources.json`; the methodology and coverage constraints are in `docs/data-sources/wp1-5-sources.md`. The candidate resource vocabulary is `config/wp1_5_resource_catalog.json`.
+The owner confirmed that the approved selection is the 41 distinct field IDs enumerated in the source contract. Religion (48) and Gini index (56) are included; no additional fields are in scope. Natural Earth is not a statistics source. Candidate field-to-source assignments and storage types are tracked in `config/wp1_5_data_sources.json`; the methodology and coverage constraints are in `docs/data-sources/wp1-5-sources.md`. The candidate resource vocabulary is `config/wp1_5_resource_catalog.json`.
 
 Migration 003 preserves existing `current_statistics` rows while extending the contract:
 - scalar values may be SQL NULL only with an explicit `unavailable` or `not_applicable` status;
@@ -179,4 +179,4 @@ Migration 003 preserves existing `current_statistics` rows while extending the c
 
 Source downloads are local-only. Git tracks contracts and manifests/checksums, not raw source files. Source licence restrictions are documented separately and do not block local acquisition, but they must not be misrepresented as open redistribution rights. See `reports/wp1-5-source-licenses.md`.
 
-The one consolidated null/empty completeness audit remains deferred until all 43 fields and all applicable country/source domains have been visited. No consumer cutover or JSON pipeline replacement is part of WP1.5.
+The one consolidated null/empty completeness audit remains deferred until all 41 fields and all applicable country/source domains have been visited. No consumer cutover or JSON pipeline replacement is part of WP1.5.
