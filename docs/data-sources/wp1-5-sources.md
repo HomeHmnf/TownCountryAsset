@@ -242,3 +242,39 @@ The interim update is dated 19 January 2026 and corrects Togo population estimat
 The exact URLs, filenames, release keys, field IDs and rights metadata are machine-readable under `sources.un_wpp_2024.downloads` in `config/wp1_5_data_sources.json`. Capture each file as its own immutable acquisition snapshot using the release key shown above. Use terms URL `https://population.un.org/wpp/`, licence status `CC BY 3.0 IGO`, and attribution: United Nations, Department of Economic and Social Affairs, Population Division (2024). *World Population Prospects 2024, Online Edition*.
 
 Do not implement the WPP adapter until the owner has acquired these snapshots and the actual CSV headers/notes have been inspected locally. In particular, retain WPP's thousand-person units and distinguish historical estimates (through 2023) from medium-variant projections (2024 onward). Population density is not sourced from WPP under this contract; field 3 remains World Bank WDI.
+
+
+### WPP acquisition commands
+
+Run each snapshot separately; the distinct release keys prevent the acquisition utility's immutable-manifest collision. These commands use the verified official direct-download URLs and the WPP attribution/licence metadata:
+
+```fish
+uv run python -m tools.acquire_wp1_5_sources \
+  --source un_wpp_2024 \
+  --release 2024-main-demographic \
+  --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz" \
+  --filename WPP2024_Demographic_Indicators_Medium.csv.gz \
+  --terms-url "https://population.un.org/wpp/" \
+  --attribution "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition." \
+  --license-status "CC BY 3.0 IGO"
+
+uv run python -m tools.acquire_wp1_5_sources \
+  --source un_wpp_2024 \
+  --release 2024-main-age-sex \
+  --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz" \
+  --filename WPP2024_PopulationByAge5GroupSex_Medium.csv.gz \
+  --terms-url "https://population.un.org/wpp/" \
+  --attribution "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition." \
+  --license-status "CC BY 3.0 IGO"
+
+uv run python -m tools.acquire_wp1_5_sources \
+  --source un_wpp_2024 \
+  --release 2026-01-19-togo-update \
+  --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip" \
+  --filename WPP2024_CSV_files_update.zip \
+  --terms-url "https://population.un.org/wpp/" \
+  --attribution "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition." \
+  --license-status "CC BY 3.0 IGO"
+```
+
+After acquisition, inspect the captured CSV headers and the ZIP member list before adapter implementation. The base files are gzip-compressed CSVs; the interim update is a ZIP containing uncompressed CSV replacements. Do not extract or overwrite the captured ZIP. The adapter should read the ZIP member streams directly and select the matching `*_Update.csv` tables. The WPP catalogue states the update changes Togo only; apply those rows only to the Togo crosswalk entry.
