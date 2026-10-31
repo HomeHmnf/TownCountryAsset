@@ -104,7 +104,7 @@ def test_imports_structured_data_and_explicit_null_scalar(tmp_path):
     assert payload == {"unit": "people", "value": {"0-4": 100, "5-9": 90}}
     connection.close()
 
-    # A second source record is not silently synthesized; this explicit null uses a valid status.
+    # This explicit unavailable value is stored as SQL NULL with its declared status.
     null_result = run_import(tmp_path / "nullcase", database, field_id=1, value=None, status="unavailable")
     assert null_result["scalar_observations"] == 1
 
@@ -219,4 +219,23 @@ def test_new_release_from_same_provider_replaces_current_value(tmp_path):
         "SELECT value, observation_period, source_version FROM current_statistics"
     ).fetchone() == (200.0, "2025", "2025-r1")
     assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 2
+    connection.close()
+
+
+def test_rejects_non_string_value_status_without_partial_import(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(observations.read_text())
+    payload["observations"][0]["value_status"] = ["observed"]
+    observations.write_text(json.dumps(payload))
+    with pytest.raises(StatisticsImportError, match="value_status is invalid"):
+        import_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
+            database_path=database,
+        )
+    connection = sqlite3.connect(database)
+    assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
     connection.close()
