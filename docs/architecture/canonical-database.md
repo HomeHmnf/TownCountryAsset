@@ -1,6 +1,6 @@
 # Canonical SQLite database architecture
 
-**Status:** WP1.1–WP1.3 implemented and locally validated by the owner; WP1.4 implementation committed and awaiting owner validation. No consumer cutover is included.
+**Status:** WP1.1–WP1.4 implemented and locally validated by the owner. WP1.5 (selective game data and current statistics) is the next planning stage. No consumer cutover is included.
 **Canonical local path:** `data/canonical/town_country_asset.sqlite`
 **Schema versioning:** Local database ledger; migration SQL is version-controlled.
 
@@ -157,3 +157,8 @@ No blank values are inferred or filled. Candidate and rejected decisions are ret
 Migration 002 adds `countries.entity_type_status` and enforces matching approved proposals for reviewed entity classifications, reviewed Persian localization, and verified ISO assignments. The existing reviewed-flag constraint remains in force. The importer does not edit the registry, taxonomy, flag mapping, captured snapshots, generated assets, or JSON pipeline.
 
 WP1.4 does not approve the currently unreviewed source data, fill nulls, migrate selected game data/current statistics, or produce the consolidated completeness report. That report remains deferred until all WP1 data domains have been visited.
+
+
+### WP1.4 owner validation — 2026-10-31
+
+The owner pulled the corrected branch and validated WP1.4 against `/tmp/tca-wp1-4.sqlite`. The focused schema, review-domain, identity-import, and country-data-import tests passed: **33 passed**. The review-domain import completed with **242 countries, 0 entity-type proposals, 242 flag mappings, 242 flag proposals, 242 ISO proposals, and 242 localization proposals**. SQLite integrity and foreign-key checks passed. The full repository test suite passed: **153 passed in 2.02s**. WP1.4 is locally validated and closed. The owner's working tree also contained unrelated data-refresh/report changes; these were not staged or included in the WP1.4 implementation.
