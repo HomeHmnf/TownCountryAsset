@@ -5,7 +5,6 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -42,10 +41,6 @@ def _canonical_json(value: Any) -> str:
 
 def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
-
-
-def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
 def _attribute_value(value: Any, label: str) -> tuple[str | None, str]:
