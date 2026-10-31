@@ -34,3 +34,13 @@ def test_existing_snapshot_is_never_overwritten(tmp_path,monkeypatch):
  monkeypatch.setattr(module.urllib.request,"urlopen",lambda *a,**k:Response(b"new"))
  with pytest.raises(SourceError,match="already exists"): acquire_one(registry,"sample",item)
  assert raw.read_bytes()==b"original"
+
+
+def test_project_registry_contains_wp1_5_field_sources_without_contract_duplication():
+    registry = json.loads((Path(__file__).resolve().parents[1] / "config/data_sources.json").read_text(encoding="utf-8"))
+    contract = json.loads((Path(__file__).resolve().parents[1] / "config/wp1_5_data_sources.json").read_text(encoding="utf-8"))
+    assert "sources" not in contract
+    assert len(contract["fields"]) == 41
+    for field in contract["fields"]:
+        assert field["primary_source"] in registry["sources"]
+        assert field["id"] in registry["sources"][field["primary_source"]].get("field_ids", [])
