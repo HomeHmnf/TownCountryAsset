@@ -201,7 +201,7 @@ The first run's two stale schema-version assertions and strict ISO Markdown-head
 
 **Status:** In progress. Schema migration 003, field-level source contracts, candidate resource catalogue, source methodology and initial source-licence register are committed. Production source acquisition/importers and owner-side validation remain outstanding.
 
-The decision summary says 41 fields, but the enumerated field IDs currently available contain 41 distinct entries. Two fields remain unresolved pending owner confirmation; do not mark the field catalogue complete. Natural Earth is excluded as a source for all WP1.5 statistics/classifications. Candidate assignments are in `config/wp1_5_data_sources.json`; the source methodology and known coverage constraints are in `docs/data-sources/wp1-5-sources.md`; the candidate resource vocabulary is in `config/wp1_5_resource_catalog.json`.
+The owner confirmed that the approved WP1.5 selection is the 41 distinct field IDs in the source contract. Religion (48) and Gini index (56) are included; no additional fields are in scope. Natural Earth is excluded as a source for all WP1.5 statistics/classifications. Candidate assignments are in `config/wp1_5_data_sources.json`; the source methodology and known coverage constraints are in `docs/data-sources/wp1-5-sources.md`; the candidate resource vocabulary is in `config/wp1_5_resource_catalog.json`.
 
 Migration `003_statistics_provenance.sql` upgrades the schema to version 3. It preserves existing scalar observations and adds:
 - nullable numeric values with an explicit `unavailable` or `not_applicable` status for SQL NULL;
