@@ -5,7 +5,7 @@ import json
 import pytest
 
 from tools.database.connection import connect_database
-from tools.database.game_data_import import GameDataImportError, import_wp1_5_data
+from tools.database.game_data_import import GameDataImportError, import_wp1_5_snapshot
 from tools.database.schema import apply_migrations
 
 G1 = "tc_" + "1" * 32
@@ -46,7 +46,21 @@ def inputs(tmp_path):
             {"game_id": G2, "source_id": "8", "match_method": "reviewed_manual"}
         ]
     }), encoding="utf-8")
-    return contract, crosswalk
+    raw = tmp_path / "wpp.csv"
+    raw.write_bytes(b"source-id,population\\n4,41000000\\n8,35000000\\n")
+    import hashlib
+    digest = hashlib.sha256(raw.read_bytes()).hexdigest()
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(json.dumps({
+        "manifest_schema_version": 1, "work_package": "WP1.5",
+        "source_key": "un_wpp_2024", "release": "WPP2024",
+        "source_url": "https://population.un.org/wpp/",
+        "final_url": "https://population.un.org/wpp/data/wpp.csv",
+        "retrieved_at": "2026-10-31T10:00:00Z",
+        "local_raw_path": str(raw), "byte_count": raw.stat().st_size,
+        "sha256": digest, "attribution": "UN DESA", "license_status": "unclear_or_unverified"
+    }), encoding="utf-8")
+    return contract, crosswalk, manifest, raw
 
 
 def scalar(value=41000000, source_id="4"):
@@ -57,11 +71,9 @@ def scalar(value=41000000, source_id="4"):
     }
 
 
-def call(database, inputs, observations, sha=SHA, dataset="un_wpp_2024"):
-    return import_wp1_5_data(
-        database, dataset=dataset, source_version="WPP2024",
-        source_url="https://population.un.org/wpp/", sha256=sha,
-        retrieved_at="2026-10-31T10:00:00Z", crosswalk_path=inputs[1],
+def call(database, inputs, observations):
+    return import_wp1_5_snapshot(
+        database, manifest_path=inputs[2], crosswalk_path=inputs[1],
         observations=observations, contract_path=inputs[0]
     )
 
@@ -115,8 +127,12 @@ def test_rejects_null_status_nonfinite_and_duplicate_rows(database, inputs):
 
 def test_rejects_new_release_without_replacement_policy(database, inputs):
     call(database, inputs, [scalar()])
-    with pytest.raises(GameDataImportError, match="different snapshot"):
-        call(database, inputs, [scalar()], sha="b" * 64)
+    manifest = json.loads(inputs[2].read_text(encoding="utf-8"))
+    manifest["release"] = "WPP2025"
+    manifest["sha256"] = "b" * 64
+    inputs[2].write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(GameDataImportError, match="Raw snapshot SHA-256"):
+        call(database, inputs, [scalar()])
     assert database.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
 
 
@@ -126,5 +142,12 @@ def test_unknown_crosswalk_identity_fails_before_writes(database, inputs):
         "mappings": [{"game_id": "tc_" + "f" * 32, "source_id": "4", "match_method": "reviewed_manual"}]
     }), encoding="utf-8")
     with pytest.raises(GameDataImportError, match="absent from"):
+        call(database, inputs, [scalar()])
+    assert database.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
+
+
+def test_rejects_raw_snapshot_checksum_tampering(database, inputs):
+    inputs[3].write_bytes(b"tampered")
+    with pytest.raises(GameDataImportError, match="SHA-256 does not match"):
         call(database, inputs, [scalar()])
     assert database.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
