@@ -169,14 +169,25 @@ def test_rejects_candidate_identity_mismatch(tmp_path):
     candidate, source = make_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
     seed_database(database, source)
-    path = candidate / "countries.json"
-    payload = json.loads(path.read_text())
-    payload["countries"][0]["game_id"] = "tc_" + "2" * 32
-    raw = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
-    path.write_bytes(raw)
     manifest_path = candidate / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
+
+    countries_path = candidate / "countries.json"
+    countries = json.loads(countries_path.read_text())
+    replacement_id = "tc_" + "2" * 32
+    countries["countries"][0]["game_id"] = replacement_id
+    raw = json.dumps(countries, sort_keys=True, separators=(",", ":")).encode()
+    countries_path.write_bytes(raw)
     manifest["files"]["countries.json"]["sha256"] = hashlib.sha256(raw).hexdigest()
+
+    for profile in ("low", "medium", "high"):
+        geometry_path = candidate / f"geometry_game_id_{profile}.json"
+        geometry = json.loads(geometry_path.read_text())
+        geometry["geometries"][replacement_id] = geometry["geometries"].pop(GAME_ID)
+        geometry_raw = json.dumps(geometry, sort_keys=True, separators=(",", ":")).encode()
+        geometry_path.write_bytes(geometry_raw)
+        manifest["files"][geometry_path.name]["sha256"] = hashlib.sha256(geometry_raw).hexdigest()
+
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(CountryDataImportError, match="identity coverage mismatch"):
         import_country_data(database, candidate)
