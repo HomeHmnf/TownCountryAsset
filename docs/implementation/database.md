@@ -349,3 +349,28 @@ The normalized importer now treats a raw source checksum as an immutable import 
 Release ordering compares timezone-aware timestamps as actual instants, including offsets, rather than lexicographic strings. SQLite constraint failures are converted to the importer's domain error after rollback. The importer CLI also reports schema migration failures cleanly. The raw-file path check now requires the captured file to be under the repository-root raw_data/ tree, not merely in an arbitrary nested directory named raw_data.
 
 Regression tests cover exact idempotent replay, altered-batch replay rejection, offset-aware stale-release rejection, and rollback when a later observation in a multi-row batch conflicts with another provider. These tests are committed; owner-side execution is pending.
+
+
+### WP1.5 final importer-framework hardening increment
+
+The importer's idempotency boundary is now strict: a repeated raw checksum must reproduce the exact still-current normalized rows and crosswalk from its original import. It cannot append observations omitted by a changed parser output or restore values already superseded by a newer source snapshot. Newer-release ordering compares timezone-aware instants, not timestamp strings. SQLite integrity errors are surfaced as controlled import errors after rollback, and raw snapshot paths must resolve directly beneath the repository's raw_data tree.
+
+The normalized observation example now uses a unit accepted by the machine-readable contract for age-band data. Regression coverage includes multi-row rollback, same-checksum changed-batch rejection, timestamp-offset ordering, release-specific fixture checksums, and raw snapshot path confinement. This is still framework validation only; no provider-specific normalized dataset has been imported.
+
+Owner validation command:
+
+```fish
+uv run pytest -v \
+  tests/test_wp1_5_statistics_import.py \
+  tests/test_wp1_5_observation_import.py \
+  tests/test_wp1_5_statistics_import_manifest.py \
+  tests/test_wp1_5_source_crosswalk.py \
+  tests/test_wp1_5_source_acquisition.py \
+  tests/test_wp1_5_source_contract.py \
+  tests/test_database_schema.py
+
+uv run python -m tools.import_wp1_5 --help
+uv run python -m compileall -q tools/database tools/import_wp1_5.py
+```
+
+Record the owner-run results before marking this increment locally validated.
