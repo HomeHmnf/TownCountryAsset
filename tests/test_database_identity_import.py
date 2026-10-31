@@ -180,3 +180,24 @@ def test_rejects_duplicate_current_source_ids(tmp_path):
     registry.write_text(json.dumps(data))
     with pytest.raises(IdentityImportError, match="Duplicate current source ID"):
         import_identity_registry(tmp_path / "canonical.sqlite", registry, candidate)
+
+
+
+def test_reads_provenance_from_production_manifest(tmp_path):
+    registry, candidate = write_inputs(tmp_path)
+    countries_path = candidate / "countries.json"
+    countries = json.loads(countries_path.read_text())
+    source = countries.pop("source")
+    countries_path.write_text(json.dumps(countries), encoding="utf-8")
+    manifest_path = candidate / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["source"] = source
+    manifest["files"]["countries.json"]["sha256"] = hashlib.sha256(
+        countries_path.read_bytes()
+    ).hexdigest()
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = import_identity_registry(
+        tmp_path / "canonical.sqlite", registry, candidate
+    )
+    assert result["countries"] == 2
