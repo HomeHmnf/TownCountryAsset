@@ -208,9 +208,13 @@ def _validate_persian(
 
 def _validate_registry_and_taxonomy(registry: dict[str, Any], taxonomy: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], str]:
     records = registry.get("records")
+    dataset = registry.get("dataset")
+    if registry.get("schema_version") != 1 or not isinstance(dataset, str) or not dataset.strip():
+        raise ReviewDataImportError("Identity registry has an unsupported schema or missing dataset")
     if not isinstance(records, list) or not records:
         raise ReviewDataImportError("Identity registry records must be a non-empty array")
     by_id: dict[str, dict[str, Any]] = {}
+    source_ids: set[str] = set()
     for record in records:
         if not isinstance(record, dict):
             raise ReviewDataImportError("Identity registry contains a non-object record")
@@ -218,9 +222,16 @@ def _validate_registry_and_taxonomy(registry: dict[str, Any], taxonomy: dict[str
         source = record.get("source")
         if not isinstance(gid, str) or not re.fullmatch(r"tc_[0-9a-f]{32}", gid) or gid in by_id:
             raise ReviewDataImportError(f"Identity registry has an invalid or duplicate game_id: {gid!r}")
-        if not isinstance(source, dict) or not isinstance(source.get("current_source_id"), str):
-            raise ReviewDataImportError(f"{gid}: current source mapping is missing")
-        if not isinstance(record.get("names"), dict):
+        if (
+            not isinstance(source, dict) or source.get("dataset") != dataset
+            or not isinstance(source.get("current_source_id"), str)
+            or not source["current_source_id"].strip()
+        ):
+            raise ReviewDataImportError(f"{gid}: current source mapping is missing or has the wrong dataset")
+        if source["current_source_id"] in source_ids:
+            raise ReviewDataImportError(f"Duplicate current source ID in identity registry: {source['current_source_id']}")
+        source_ids.add(source["current_source_id"])
+        if not isinstance(record.get("names"), dict) or not isinstance(record["names"].get("en"), str):
             raise ReviewDataImportError(f"{gid}: names object is missing")
         by_id[gid] = record
     types = taxonomy.get("types")
@@ -355,15 +366,15 @@ def import_review_data(
                ORDER BY c.game_id"""
         ).fetchall()
         db_sources = {row["game_id"]: (row["dataset"], row["source_id"]) for row in current_rows}
+        if len(current_rows) != len(db_sources):
+            raise ReviewDataImportError("Database contains more than one current source mapping for a country")
         expected_sources = {
             gid: (record["source"].get("dataset"), record["source"]["current_source_id"])
             for gid, record in by_id.items()
         }
         if db_sources != expected_sources:
             raise ReviewDataImportError("Database current source-ID/game_id mapping does not exactly match the identity registry")
-        if connection.execute("PRAGMA user_version").fetchone()[0] not in (0, 1):
-            raise ReviewDataImportError("Unexpected SQLite user_version")
-        for gid, record in by_id.items():
+                for gid, record in by_id.items():
             country = connection.execute(
                 "SELECT entity_type, iso_alpha2, iso_alpha3, localization_status FROM countries WHERE game_id=?",
                 (gid,),
