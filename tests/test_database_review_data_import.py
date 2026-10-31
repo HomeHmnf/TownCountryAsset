@@ -263,3 +263,34 @@ def test_review_status_triggers_require_matching_approved_proposals(tmp_path: Pa
             )
     finally:
         connection.close()
+
+
+def test_non_unreviewed_entity_type_is_recorded_as_candidate_not_approved(tmp_path: Path):
+    inputs = fixture_inputs(tmp_path)
+    registry = json.loads(inputs["registry"].read_text(encoding="utf-8"))
+    registry["records"][0]["entity_type"] = "sovereign_state"
+    write_json(inputs["registry"], registry)
+    database = tmp_path / "canonical.sqlite"
+    make_database(database)
+    connection = connect_database(database)
+    try:
+        connection.execute("UPDATE countries SET entity_type='sovereign_state' WHERE game_id=?", (GAME_ID,))
+    finally:
+        connection.close()
+
+    result = run_import(database, inputs)
+    assert result["entity_type_proposals"] == 1
+    connection = connect_database(database)
+    try:
+        proposal = connection.execute(
+            "SELECT review_status, evidence_json FROM review_proposals WHERE proposal_type='entity_type'"
+        ).fetchone()
+        assert proposal["review_status"] == "candidate"
+        evidence = json.loads(proposal["evidence_json"])
+        assert evidence["evidence"] == []
+        assert evidence["evidence_required"] == ["authoritative status source"]
+        assert connection.execute(
+            "SELECT entity_type_status FROM countries WHERE game_id=?", (GAME_ID,)
+        ).fetchone()[0] == "unreviewed"
+    finally:
+        connection.close()
