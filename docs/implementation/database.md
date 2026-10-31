@@ -99,16 +99,16 @@ The importer preserves source attribute types in schema v1: text, integer, real,
 ### WP1.3 validation commands
 
 ```fish
-uv run pytest -v \\
-  tests/test_database_country_data_import.py \\
-  tests/test_database_identity_import.py \\
-  tests/test_database_schema.py \\
+uv run pytest -v \
+  tests/test_database_country_data_import.py \
+  tests/test_database_identity_import.py \
+  tests/test_database_schema.py \
   tests/test_country_identity_registry.py
 
-uv run python -m tools.import_identity_registry \\
+uv run python -m tools.import_identity_registry \
   --database /tmp/tca-wp1-3.sqlite
 
-uv run python -m tools.import_country_data \\
+uv run python -m tools.import_country_data \
   --database /tmp/tca-wp1-3.sqlite
 
 uv run python -m compileall -q tools/database tools/import_country_data.py
