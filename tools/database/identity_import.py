@@ -52,11 +52,19 @@ def _validate_inputs(
     dataset = _require_text(registry.get("dataset"), "registry.dataset")
     if registry.get("status") not in {"proposal", "candidate", "approved"}:
         raise IdentityImportError("Unsupported identity registry status")
-    source = candidate.get("source")
-    if not isinstance(source, dict):
-        raise IdentityImportError("Candidate countries.json has no source metadata")
-    if source_manifest.get("source") != source:
+    manifest_source = source_manifest.get("source")
+    candidate_source = candidate.get("source")
+    if manifest_source is not None and not isinstance(manifest_source, dict):
+        raise IdentityImportError("manifest.json source metadata must be an object")
+    if candidate_source is not None and not isinstance(candidate_source, dict):
+        raise IdentityImportError("Candidate countries.json source metadata must be an object")
+    if manifest_source is not None and candidate_source is not None and manifest_source != candidate_source:
         raise IdentityImportError("Candidate source metadata does not match manifest.json")
+    # Production snapshots keep provenance in manifest.json; small/legacy fixtures
+    # may carry it in countries.json. Prefer the manifest when both are present.
+    source = manifest_source if manifest_source is not None else candidate_source
+    if not isinstance(source, dict):
+        raise IdentityImportError("Candidate source metadata is missing from manifest.json and countries.json")
     if source.get("archive_sha256") is None:
         raise IdentityImportError("Candidate source archive_sha256 is missing")
     archive_sha = _require_text(source.get("archive_sha256"), "source.archive_sha256")
@@ -276,7 +284,7 @@ def import_identity_registry(
                     dataset, source_version, source_url, retrieval_date, sha256,
                     attribution, license, import_status, imported_at
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (dataset, *metadata[:4], archive_sha, metadata[4], metadata[5], now),
+                (dataset, *metadata[:3], archive_sha, *metadata[3:], now),
             )
             import_id = int(cursor.lastrowid)
 
