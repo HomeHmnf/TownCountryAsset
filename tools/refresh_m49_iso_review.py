@@ -68,7 +68,7 @@ def refresh(registry_path=DEFAULT_REGISTRY, output_dir=DEFAULT_OUTPUT_DIR,
     if metadata_path.exists():
         raise FileExistsError(f"Review provenance already exists for timestamp {stamp}")
     normalized_path.write_text(normalized, encoding="utf-8", newline="")
-    normalized_m49_path.write_text(json.dumps(parsed, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    normalized_m49_path.write_text(json.dumps(parsed, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     metadata = {
         "source_id": SOURCE_ID, "dataset": "UNSD M49 country and area overview",
         "source_url": url, "retrieved_at_utc": retrieved.isoformat(),
