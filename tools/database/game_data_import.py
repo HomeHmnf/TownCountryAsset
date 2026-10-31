@@ -130,7 +130,7 @@ def _validate_batch_rows(
             raise GameDataImportError(f"Duplicate observation for game_id={game_id}, field={field_key}")
         unique.add(identity)
         status = row.get("value_status")
-        if status not in statuses:
+        if not isinstance(status, str) or status not in statuses:
             raise GameDataImportError(f"{label}.value_status is invalid")
         unit = row.get("unit")
         if not isinstance(unit, str) or not unit.strip():
