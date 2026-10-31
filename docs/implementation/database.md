@@ -179,3 +179,12 @@ git status --short
 Use the same database for all three imports, in the order shown. These paths select the captured ISO reference and Persian candidate/provenance snapshots currently tracked in this branch; keep each candidate paired with its own provenance file. The focused tests cover candidate-only import, repeat-import idempotency, checksum rejection, source-ID/game-ID mismatch, explicit Wikidata QID crosswalk, flag review timestamp requirements, and database review-status triggers.
 
 Record actual schema version, import counts, integrity/foreign-key results, focused and full-suite results, and any unrelated working-tree files. Do not mark WP1.4 locally validated until the owner reports the run. The consolidated null/empty completeness report remains deferred until every WP1 data domain has been visited.
+
+
+### WP1.4 validation corrections after first owner run
+
+The first focused run correctly exposed stale WP1.1 schema-test expectations: schema migration 002 means a fresh database now reaches version 2 and records two migrations. The schema tests have been updated to assert version 2 and two ledger entries.
+
+The production ISO proposal report reader now locates its table by parsed column names rather than requiring byte-for-byte equality with one Markdown header string. This tolerates harmless whitespace variation while still requiring exactly one table with the expected seven columns. A focused regression test covers that formatting variation.
+
+The first owner run also confirmed schema migration 0→2, successful identity import (242 countries, 250 names, 237 region memberships, 242 source mappings), and successful country data import (40,898 attributes, 242 countries, 726 geometries across three profiles). The review import did not write any data because the ISO header was rejected. WP1.4 remains unvalidated pending rerun of the corrected tests and import.
