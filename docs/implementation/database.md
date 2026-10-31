@@ -68,3 +68,10 @@ git status --short
 ```
 
 Record the actual local output before marking WP1.2 validated or proceeding to WP1.3.
+
+
+### WP1.2 validation correction — 2026-10-31
+
+The first owner-run validation exposed two importer defects. Production candidate provenance is stored in the top-level `source` object in `manifest.json`, not in `countries.json`; the importer now reads that production layout and retains compatibility with isolated fixtures that place provenance in `countries.json`. If both locations are present, they must agree. The dataset-import INSERT also had its attribution value shifted into the SHA-256 column; the value ordering now matches the schema columns. Added a regression test for manifest-based provenance.
+
+The owner-reported run had **6 identity-import failures**, while the schema and identity-registry tests passed (**18 passed** across the combined run). The migration CLI advanced schema 0 → 1 and passed integrity/foreign-key checks; the data import then failed. These are confirmed implementation defects. WP1.2 remains **implemented but not locally validated** until the owner reruns the focused test suite, migration, import, and compile commands successfully.
