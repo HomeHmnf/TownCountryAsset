@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "work_package": "WP1.5",
+  "status": "source_contract_candidate",
+  "policy": {
+    "natural_earth_use": "geography_and_cartography_only; never a source for WP1.5 statistics or classifications",
+    "identity_join": "persistent_game_id_via_explicit_source_crosswalk",
+    "observation_scope": "one current observation per country and statistic; retain source reference period and distinguish observed, estimated, projected, unavailable, and not_applicable",
+    "missing_values": "never infer or fill; explicit unavailable/not_applicable may be stored as NULL with status; absent rows remain missing for the final completeness audit",
+    "raw_data_version_control": "local_only; track manifests, URLs, retrieval timestamps, release identifiers, and SHA-256 checksums in Git",
+    "source_status": "candidate sources require field-level coverage, definitions, update cadence, download format, and terms verification before production acquisition"
+  },
+  "sources": {
+    "un_wpp_2024": {
+      "name": "UN World Population Prospects 2024",
+      "url": "https://population.un.org/wpp/",
+      "domains": [
+        "demography"
+      ],
+      "notes": "Population, growth, age/sex distributions and migration. Country/area coverage is not identical to the 242 game identities; explicit crosswalk and coverage accounting required."
+    },
+    "imf_weo": {
+      "name": "IMF World Economic Outlook",
+      "url": "https://www.imf.org/en/Publications/WEO/weo-database",
+      "domains": [
+        "macroeconomy"
+      ],
+      "notes": "GDP, GDP per capita, PPP GDP, inflation and unemployment; distinguish actuals, estimates and projections and retain WEO vintage."
+    },
+    "world_bank_wdi": {
+      "name": "World Bank World Development Indicators",
+      "url": "https://databank.worldbank.org/source/world-development-indicators",
+      "domains": [
+        "labour",
+        "area",
+        "internet",
+        "poverty",
+        "inequality"
+      ],
+      "notes": "Candidate secondary/alternative indicator source. Preserve indicator code, country coverage, reference year and dataset vintage."
+    },
+    "ilostat": {
+      "name": "ILOSTAT",
+      "url": "https://ilostat.ilo.org/data/",
+      "domains": [
+        "labour"
+      ],
+      "notes": "Preferred specialist source for labour force and labour-market definitions; retain series and sex/age breakdown metadata."
+    },
+    "faostat": {
+      "name": "FAOSTAT",
+      "url": "https://www.fao.org/faostat/en/#data",
+      "domains": [
+        "area",
+        "forest",
+        "natural_resources"
+      ],
+      "notes": "Candidate source for land/area and selected agriculture/forestry/resource measures; confirm indicator definitions and country coverage."
+    },
+    "koppen_beck_2023": {
+      "name": "Beck et al. Köppen-Geiger V3",
+      "url": "https://www.gloh2o.org/koppen/",
+      "domains": [
+        "climate"
+      ],
+      "license_status": "CC BY 4.0",
+      "notes": "Spatial raster, not a single categorical country value. Derive country-level area shares or distributions using the project geometry and retain period/scenario/resolution."
+    },
+    "fao_fra_2025": {
+      "name": "FAO Global Forest Resources Assessment 2025",
+      "url": "https://www.fao.org/forest-resources-assessment/",
+      "domains": [
+        "forest"
+      ],
+      "notes": "Use reported reference-year forest area; do not conflate forest area with tree cover."
+    },
+    "usgs_mcs_2026": {
+      "name": "USGS Mineral Commodity Summaries 2026",
+      "url": "https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries",
+      "domains": [
+        "natural_resources"
+      ],
+      "license_status": "CC0 1.0 for the 2026 data release",
+      "notes": "Covers more than 90 nonfuel mineral commodities, but global country-level production/reserve coverage varies by commodity. Not a complete natural-resource inventory."
+    },
+    "pew_religion_2020": {
+      "name": "Pew Research Center Global Religious Composition dataset",
+      "url": "https://www.pewresearch.org/dataset/dataset-of-global-religious-composition-estimates-for-2010-and-2020/",
+      "domains": [
+        "religion"
+      ],
+      "notes": "Seven broad categories; estimates for 201 and territories with population >=100,000 in 2010 or 2020. Use rounded counts for reporting small groups."
+    },
+    "undp_hdr": {
+      "name": "UNDP Human Development Reports statistical data",
+      "url": "https://hdr.undp.org/data-center/documentation-and-downloads",
+      "domains": [
+        "human_development"
+      ],
+      "notes": "Use HDI and its reported reference year, not report publication year."
+    },
+    "itu": {
+      "name": "ITU DataHub",
+      "url": "https://datahub.itu.int/",
+      "domains": [
+        "internet"
+      ],
+      "notes": "Preferred specialist source for internet-use indicators; check country coverage and reference period."
+    },
+    "who_ghed": {
+      "name": "WHO Global Health Expenditure Database",
+      "url": "https://apps.who.int/nha/database",
+      "domains": [
+        "health"
+      ],
+      "notes": "Health expenditure indicators and financing breakdowns; retain current dataset vintage and reference year."
+    },
+    "world_bank_pip": {
+      "name": "World Bank Poverty and Inequality Platform",
+      "url": "https://pip.worldbank.org/",
+      "domains": [
+        "poverty",
+        "inequality"
+      ],
+      "notes": "Poverty and Gini measures depend on survey year, poverty line and welfare concept; do not treat missing survey years as zero."
+    },
+    "world_bank_wgi": {
+      "name": "World Bank Worldwide Governance Indicators 2026",
+      "url": "https://www.worldbank.org/en/publication/worldwide-governance-indicators",
+      "domains": [
+        "governance"
+      ],
+      "license_status": "third_party_redistribution_restricted_for_some_inputs",
+      "notes": "Political stability is an estimate, not a definitive rating. Some standardized underlying source values cannot be redistributed without third-party authorization."
+    },
+    "official_government_sources": {
+      "name": "Official national government and constitutional sources",
+      "url": null,
+      "domains": [
+        "government",
+        "capital"
+      ],
+      "notes": "No single global dataset is assumed. Record the specific official URL, authority, effective date, and classification rationale per country."
+    },
+    "official_organization_registers": {
+      "name": "Official intergovernmental organization membership registers",
+      "url": null,
+      "domains": [
+        "memberships"
+      ],
+      "notes": "Membership must be checked against each organization's official membership list and an explicit as-of date."
+    },
+    "iiss_military_balance": {
+      "name": "IISS The Military Balance",
+      "url": "https://www.iiss.org/publications/the-military-balance/",
+      "domains": [
+        "military_personnel",
+        "defence_structure"
+      ],
+      "license_status": "proprietary_subscription",
+      "notes": "Candidate specialist source for active/reserve personnel and force structure; subscription and redistribution terms require review."
+    },
+    "sipri_milex": {
+      "name": "SIPRI Military Expenditure Database",
+      "url": "https://www.sipri.org/databases/milex",
+      "domains": [
+        "military_expenditure"
+      ],
+      "license_status": "commercial_authorization_required",
+      "notes": "Commercial use requires authorization/licensing; annual series and observation year must be retained."
+    },
+    "global_carbon_project": {
+      "name": "Global Carbon Project Global Carbon Budget",
+      "url": "https://globalcarbonproject.org/carbonbudget/",
+      "domains": [
+        "co2"
+      ],
+      "notes": "Confirm country-level per-capita series, methodology and download terms before selecting the exact table."
+    },
+    "energy_institute": {
+      "name": "Energy Institute Statistical Review of World Energy 2026",
+      "url": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+      "domains": [
+        "energy",
+        "electricity",
+        "oil",
+        "natural_gas"
+      ],
+      "notes": "CSV/XLSX consolidated data and archives are available. Retain edition/vintage; historical values may be revised between editions."
+    },
+    "protected_planet": {
+      "name": "Protected Planet WDPA / GD-PAME",
+      "url": "https://www.protectedplanet.net/en/legal",
+      "domains": [
+        "protected_areas"
+      ],
+      "license_status": "commercial_use_and_redistribution_restricted",
+      "notes": "Commercial use requires prior written permission; redistribution is restricted. Store only after explicit field-level decision on whether aggregate derived indicators are permitted."
+    },
+    "fao_aquastat": {
+      "name": "FAO AQUASTAT",
+      "url": "https://www.fao.org/aquastat/en/",
+      "domains": [
+        "water_resources",
+        "water_stress"
+      ],
+      "notes": "Candidate source for water resources and water stress; indicator coverage and reporting years vary."
+    }
+  },
+  "fields": [
+    {
+      "id": 1,
+      "key": "population",
+      "storage": "scalar",
+      "unit": "people",
+      "primary_source": "un_wpp_2024",
+      "method": "total population; one current estimate with reference date; record estimate status",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 2,
+      "key": "population_growth",
+      "storage": "scalar",
+      "unit": "percent_per_year",
+      "primary_source": "un_wpp_2024",
+      "method": "annual population growth rate; retain exact period",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 3,
+      "key": "population_density",
+      "storage": "scalar",
+      "unit": "people_per_km2",
+      "primary_source": "world_bank_wdi",
+      "method": "prefer a published density indicator; otherwise derive only from population and land area with aligned reference periods and documented method",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 6,
+      "key": "median_age",
+      "storage": "scalar",
+      "unit": "years",
+      "primary_source": "un_wpp_2024",
+      "method": "median age; retain reference year and estimate status",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 12,
+      "key": "age_distribution",
+      "storage": "structured",
+      "unit": "age_band_share_or_count",
+      "primary_source": "un_wpp_2024",
+      "method": "age-band distribution; retain band boundaries, sex scope, units and reference year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 13,
+      "key": "sex_distribution",
+      "storage": "structured",
+      "unit": "people_or_share",
+      "primary_source": "un_wpp_2024",
+      "method": "male/female population distribution; retain source categories and reference year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 14,
+      "key": "net_migration",
+      "storage": "scalar",
+      "unit": "people_or_rate",
+      "primary_source": "un_wpp_2024",
+      "method": "select a single documented measure (net migrants or net migration rate); do not mix",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 15,
+      "key": "gdp",
+      "storage": "scalar",
+      "unit": "current_usd",
+      "primary_source": "imf_weo",
+      "method": "GDP at current prices; retain currency/scale and actual/estimate/projected status",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 16,
+      "key": "gdp_per_capita",
+      "storage": "scalar",
+      "unit": "current_usd_per_person",
+      "primary_source": "imf_weo",
+      "method": "GDP per capita at current prices; retain source definition",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 18,
+      "key": "gdp_ppp",
+      "storage": "scalar",
+      "unit": "current_international_dollars",
+      "primary_source": "imf_weo",
+      "method": "GDP at purchasing-power parity; retain PPP basis and source vintage",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 20,
+      "key": "inflation",
+      "storage": "scalar",
+      "unit": "percent_annual",
+      "primary_source": "imf_weo",
+      "method": "consumer-price inflation; distinguish annual average from end-of-period",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 21,
+      "key": "unemployment",
+      "storage": "scalar",
+      "unit": "percent_labour_force",
+      "primary_source": "imf_weo",
+      "method": "unemployment rate; preserve source definition and status",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 22,
+      "key": "labour_force",
+      "storage": "scalar",
+      "unit": "people",
+      "primary_source": "ilostat",
+      "method": "labour force level; preserve age/sex scope and reference year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 33,
+      "key": "total_area",
+      "storage": "scalar",
+      "unit": "km2",
+      "primary_source": "world_bank_wdi",
+      "method": "surface area including inland water; preserve source definition",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 34,
+      "key": "land_area",
+      "storage": "scalar",
+      "unit": "km2",
+      "primary_source": "world_bank_wdi",
+      "method": "land area excluding inland water; do not substitute total/surface area",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 41,
+      "key": "climate_classification",
+      "storage": "structured",
+      "unit": "area_share_by_koppen_class",
+      "primary_source": "koppen_beck_2023",
+      "method": "derive a multi-class country distribution from raster/geometry overlay; never force one class when multiple zones occur",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 42,
+      "key": "forest_area",
+      "storage": "scalar",
+      "unit": "km2_or_percent_land",
+      "primary_source": "fao_fra_2025",
+      "method": "choose one canonical measure and retain source definition/reference year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 45,
+      "key": "natural_resources",
+      "storage": "structured",
+      "unit": "resource_records",
+      "primary_source": "usgs_mcs_2026",
+      "method": "catalogue-based records by resource and metric; source coverage differs by commodity; do not infer absence from missing source rows",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 48,
+      "key": "religions",
+      "storage": "structured",
+      "unit": "population_or_share_by_category",
+      "primary_source": "pew_religion_2020",
+      "method": "seven broad categories; preserve estimate year and rounded-count guidance",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 51,
+      "key": "human_development_index",
+      "storage": "scalar",
+      "unit": "index_0_1",
+      "primary_source": "undp_hdr",
+      "method": "HDI score and source reference year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 52,
+      "key": "internet_usage",
+      "storage": "scalar",
+      "unit": "percent_population",
+      "primary_source": "itu",
+      "method": "individuals using the Internet; preserve indicator definition and year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 54,
+      "key": "healthcare_expenditure",
+      "storage": "scalar",
+      "unit": "percent_gdp_or_current_usd",
+      "primary_source": "who_ghed",
+      "method": "choose one canonical measure or store separate statistic keys for expenditure share and per-capita expenditure",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 55,
+      "key": "poverty_rate",
+      "storage": "scalar",
+      "unit": "percent_population",
+      "primary_source": "world_bank_pip",
+      "method": "must identify poverty line, welfare aggregate and survey year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 56,
+      "key": "gini_index",
+      "storage": "scalar",
+      "unit": "index_0_100_or_0_1",
+      "primary_source": "world_bank_pip",
+      "method": "normalize only with explicit source-unit metadata; preserve survey year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 57,
+      "key": "government_system",
+      "storage": "structured",
+      "unit": "controlled_classification",
+      "primary_source": "official_government_sources",
+      "method": "per-country evidence-based classification; record authority and effective date",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 58,
+      "key": "government_structure",
+      "storage": "structured",
+      "unit": "government_structure_record",
+      "primary_source": "official_government_sources",
+      "method": "structured executive/legislative/judicial and territorial structure; definitions to be finalized",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 62,
+      "key": "political_stability",
+      "storage": "scalar",
+      "unit": "wgi_estimate_or_score",
+      "primary_source": "world_bank_wgi",
+      "method": "store either WGI estimate or 0-100 score under distinct keys; never conflate scales",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 65,
+      "key": "capital_city",
+      "storage": "structured",
+      "unit": "city_and_admin_metadata",
+      "primary_source": "official_government_sources",
+      "method": "official capital designation and effective date; do not infer from largest city",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 66,
+      "key": "international_memberships",
+      "storage": "structured",
+      "unit": "organization_membership_records",
+      "primary_source": "official_organization_registers",
+      "method": "organization, membership status, effective/as-of date and official source",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 67,
+      "key": "active_military_personnel",
+      "storage": "scalar",
+      "unit": "people",
+      "primary_source": "iiss_military_balance",
+      "method": "retain definition of active personnel, reference year and source edition",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 69,
+      "key": "military_expenditure_gdp",
+      "storage": "scalar",
+      "unit": "percent_gdp",
+      "primary_source": "sipri_milex",
+      "method": "SIPRI military burden; retain year and source edition",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 70,
+      "key": "military_reserve_personnel",
+      "storage": "scalar",
+      "unit": "people",
+      "primary_source": "iiss_military_balance",
+      "method": "retain reserve definition, mobilization category and reference year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 71,
+      "key": "defence_structure",
+      "storage": "structured",
+      "unit": "force_structure_records",
+      "primary_source": "iiss_military_balance",
+      "method": "structured branches/services; avoid publishing sensitive operational detail",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 73,
+      "key": "co2_emissions_per_capita",
+      "storage": "scalar",
+      "unit": "tonnes_co2_per_person",
+      "primary_source": "global_carbon_project",
+      "method": "define territorial fossil CO2 versus all greenhouse gases; preserve methodology/year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 75,
+      "key": "energy_consumption",
+      "storage": "scalar",
+      "unit": "energy_unit_per_year",
+      "primary_source": "energy_institute",
+      "method": "define primary energy versus final consumption and unit before import",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 76,
+      "key": "electricity_production",
+      "storage": "scalar",
+      "unit": "gwh_per_year",
+      "primary_source": "energy_institute",
+      "method": "gross/net generation definition and reference year",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 77,
+      "key": "oil_production",
+      "storage": "scalar",
+      "unit": "energy_unit_per_day_or_year",
+      "primary_source": "energy_institute",
+      "method": "retain crude oil/liquids scope and source unit",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 78,
+      "key": "natural_gas_production",
+      "storage": "scalar",
+      "unit": "bcm_per_year",
+      "primary_source": "energy_institute",
+      "method": "retain gross/marketed gas definition and unit",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 79,
+      "key": "protected_areas",
+      "storage": "structured",
+      "unit": "protected_area_aggregate_or_records",
+      "primary_source": "protected_planet",
+      "method": "choose aggregate-only versus per-site records after rights review; coverage date and marine/terrestrial scope required",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 80,
+      "key": "water_resources",
+      "storage": "scalar",
+      "unit": "km3_per_year",
+      "primary_source": "fao_aquastat",
+      "method": "select renewable internal/total freshwater resources explicitly",
+      "source_status": "candidate_pending_validation"
+    },
+    {
+      "id": 81,
+      "key": "water_stress",
+      "storage": "scalar",
+      "unit": "percent",
+      "primary_source": "fao_aquastat",
+      "method": "preserve water-stress definition, denominator and reporting year",
+      "source_status": "candidate_pending_validation"
+    }
+  ]
+}
