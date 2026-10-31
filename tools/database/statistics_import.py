@@ -17,6 +17,7 @@ from typing import Any
 from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
 from tools.database.schema import apply_migrations, validate_database
 from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
+from tools.sources.registry import SourceError, load_registry
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[2] / "config" / "wp1_5_data_sources.json"
 
@@ -211,8 +212,16 @@ def import_wp1_5_dataset(
     if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
         raise StatisticsImportError("Unsupported normalized observation schema")
     source_key = _text(normalized.get("source_key"), "normalized.source_key")
-    if source_key not in config.get("sources", {}):
-        raise StatisticsImportError(f"Unknown source key in WP1.5 contract: {source_key}")
+    registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
+    registry_path = Path(registry_reference)
+    if not registry_path.is_absolute():
+        registry_path = (Path(config_path).resolve().parent / registry_path).resolve()
+    try:
+        source_registry = load_registry(registry_path)
+    except SourceError as exc:
+        raise StatisticsImportError(f"Cannot load project source registry: {exc}") from exc
+    if source_key not in source_registry["sources"]:
+        raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
     release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
     if normalized.get("source_key") != manifest.get("source_key"):
         raise StatisticsImportError("Normalized observations and source manifest do not match")
