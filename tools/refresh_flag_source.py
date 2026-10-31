@@ -22,9 +22,10 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+from tools.sources.catalog import source_url, source_record
 DEFAULTS = {
-    "TCA_FLAG_SOURCE_URL": "https://github.com/lipis/flag-icons",
-    "TCA_FLAG_SOURCE_REF": "main",
+    "TCA_FLAG_SOURCE_URL": source_url("lipis_flag_icons"),
+    "TCA_FLAG_SOURCE_REF": source_record("lipis_flag_icons").get("default_ref", "main"),
     "TCA_FLAG_SOURCE_DIR": "raw_data/flags",
     "TCA_HTTP_TIMEOUT_SECONDS": "60",
 }

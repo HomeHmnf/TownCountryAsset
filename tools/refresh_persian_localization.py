@@ -23,7 +23,8 @@ from typing import Any
 import shapefile
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE_URL = "https://query.wikidata.org/sparql"
+from tools.sources.catalog import source_url
+DEFAULT_SOURCE_URL = source_url("wikidata_sparql")
 DEFAULT_ARCHIVE = Path("raw_data/fetched")
 DEFAULT_REGISTRY = Path("config/country_identity_registry.json")
 DEFAULT_OUTPUT_DIR = Path("raw_data/persian")

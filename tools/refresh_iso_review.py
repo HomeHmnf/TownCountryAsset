@@ -31,11 +31,9 @@ else:
     from tools.propose_iso_assignments import propose, read_reference, render_report
 
 
-SOURCE_REPOSITORY = "https://github.com/stefangabos/world_countries"
-SOURCE_URL = (
-    "https://raw.githubusercontent.com/stefangabos/world_countries/"
-    "master/data/countries/en/world.csv"
-)
+from tools.sources.catalog import source_url
+SOURCE_REPOSITORY = source_url("iso_reference_mirror")
+SOURCE_URL = source_url("iso_reference_mirror", "country_reference_csv")
 DEFAULT_OUTPUT_DIR = Path("raw_data/iso")
 DEFAULT_REGISTRY = Path("config/country_identity_registry.json")
 DEFAULT_REPORT = Path("reports/iso-assignment-proposals.md")
