@@ -310,6 +310,10 @@ def resolve_field(
             methodology=override.get("methodology") or override["reason"],
             retrieved_at=override["effective_at"],
             override_id=override["override_id"],
+            override_reason=override["reason"],
+            override_author=override["author"],
+            override_source=override.get("source"),
+            effective_at=override["effective_at"],
             reason="Explicit, scoped manual override takes precedence over provider observations",
             prior_provider_candidate=primary,
         )
@@ -338,16 +342,18 @@ def resolve_field(
                 if not candidates:
                     continue
                 candidate = candidates[0]
-                if candidate.get("compatibility_status") != "compatible":
+                if candidate.get("compatibility_status") != "compatible" or not isinstance(candidate.get("compatibility_reference"), str) or not candidate["compatibility_reference"].strip():
                     decision["rejected_candidates"].append({
                         "source_id": fallback_id,
                         "release_id": candidate["release_id"],
-                        "reason": "Fallback lacks an explicit compatible field/unit/scope/period assessment",
+                        "reason": "Fallback lacks an explicit compatible field/unit/scope/period assessment and its evidence reference",
                     })
                     continue
                 if candidate["status"] == "unavailable":
                     continue
                 chosen = candidate
+                decision["compatibility_status"] = candidate["compatibility_status"]
+                decision["compatibility_reference"] = candidate["compatibility_reference"]
                 break
     else:
         assignments = mixture_assignments or {}
