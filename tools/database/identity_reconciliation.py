@@ -61,6 +61,22 @@ def reconcile_identities(
         if name:
             ref_index[normalize_identity_name(name)].append(i)
 
+    # Precompute name-only candidates and detect multiple registry records
+    # claiming the same single reference row. Such matches remain ambiguous.
+    candidate_map: dict[int, tuple[list[int], str]] = {}
+    reference_claims: dict[int, int] = defaultdict(int)
+    for position, record in enumerate(records):
+        name = _value(record, fields["registry_name"])
+        normalized = normalize_identity_name(name)
+        candidates = list(ref_index.get(normalized, [])) if normalized else []
+        variant_note = ""
+        if not candidates and normalized in variants:
+            target_name, variant_note = variants[normalized]
+            candidates = list(ref_index.get(normalize_identity_name(target_name), []))
+        candidate_map[position] = (candidates, variant_note)
+        if len(candidates) == 1:
+            reference_claims[candidates[0]] += 1
+
     registry_ids: set[str] = set()
     output: list[dict[str, str]] = []
     used_reference_indices: set[int] = set()
@@ -76,14 +92,12 @@ def reconcile_identities(
             raise ValueError(f"registry record {position} has missing or duplicate game_id {game_id!r}")
         registry_ids.add(game_id)
         name = _value(record, fields["registry_name"])
-        normalized = normalize_identity_name(name)
-        candidates = ref_index.get(normalized, []) if normalized else []
-        match_type = "exact_name"
-        variant_note = ""
-        if not candidates and normalized in variants:
-            target_name, variant_note = variants[normalized]
-            candidates = ref_index.get(normalize_identity_name(target_name), [])
-            match_type = "explicit_variant"
+        candidates, variant_note = candidate_map[position]
+        is_variant = bool(variant_note)
+        match_type = "explicit_variant" if is_variant else "exact_name"
+        if len(candidates) == 1 and reference_claims[candidates[0]] > 1:
+            match_type = "ambiguous"
+            candidates = [candidates[0], candidates[0]]
         matched_index = candidates[0] if len(candidates) == 1 else None
         if len(candidates) > 1:
             match_type = "ambiguous"
