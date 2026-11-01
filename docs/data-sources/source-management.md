@@ -188,7 +188,7 @@ An application artifact fingerprints every reviewed input file (normalized obser
 
 The approval ledger distinguishes `pending`, `approved`, `rejected`, `invalidated` and `applied`. The event ledger records proposal, decision, invalidation and application events. The domain importer must verify an approved artifact before domain writes and mark it applied in the same SQLite transaction as those writes. Approval is single-use.
 
-The WP1.5 importer is now integrated with this gate. Its proposal command fingerprints the normalized observations, explicit identity crosswalk, source manifest, immutable raw snapshot, WP1.5 field contract and (when present) project source-selection policy. The importer independently rebuilds and rechecks that artifact before writing, then records application completion in the same transaction as the statistics and provenance writes. Calling the importer without a valid approved application ID is rejected.
+The WP1.5 statistics importer and identity-registry importer are now integrated with this gate. The identity proposal fingerprints the registry, candidate countries payload and candidate manifest after validating their internal consistency. Use `propose-identity` to register the exact identity import artifact, then explicitly approve it before invoking `tools.import_identity_registry` with `--approval-id`. Both importers independently rebuild/recheck their artifacts and record application completion in the same transaction as their domain writes. Its proposal command fingerprints the normalized observations, explicit identity crosswalk, source manifest, immutable raw snapshot, WP1.5 field contract and (when present) project source-selection policy. The importer independently rebuilds and rechecks that artifact before writing, then records application completion in the same transaction as the statistics and provenance writes. Calling the importer without a valid approved application ID is rejected.
 
 Example WP1.5 workflow:
 
@@ -209,6 +209,19 @@ uv run python -m tools.import_wp1_5 \
   --manifest data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json \
   --approval-id wp1-5-un-wpp-2024-001
 ```
+
+uv run python -m tools.manage_database_applications propose-identity \
+  --approval-id identity-registry-2026-001 \
+  --registry config/country_identity_registry.json \
+  --candidate-dir generated/town_country_asset_candidate
+
+uv run python -m tools.manage_database_applications approve \
+  --approval-id identity-registry-2026-001 --actor "reviewer-id"
+
+uv run python -m tools.import_identity_registry \
+  --registry config/country_identity_registry.json \
+  --candidate-dir generated/town_country_asset_candidate \
+  --approval-id identity-registry-2026-001
 
 Use `reject` instead of `approve` to reject a pending proposal. Approval is single-use. A repeated identical dataset import requires a separately reviewed approval; it remains idempotent with respect to domain data. Changed or missing inputs invalidate an approval. The proposal/decision CLI currently exposes the WP1.5 proposal builder; other domain importers must adopt the same shared contract before they can be described as approval-gated.
 
