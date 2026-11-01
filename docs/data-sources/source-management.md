@@ -101,3 +101,29 @@ uv run python -m tools.refresh_m49_iso_review --verbose
 ```
 
 Quiet mode changes only terminal presentation; it never disables report generation or validation.
+
+
+## Release discovery and selection
+
+Release discovery is declared per source in `release_discovery` within `config/data_sources.json`. It is deliberately separate from acquisition: a provider page or API may identify a candidate release without providing a downloadable snapshot, and a reachable download URL does not prove that its contents are current or valid.
+
+Supported discovery modes are:
+
+- `manual_review`: check the authoritative provider publication or release page manually.
+- `website_page`: inspect a provider page for a publication/update and record a release label only when supported by evidence.
+- `rolling_url`: the URL can change in place; a changed checksum is a candidate update, not proof of a new semantic edition.
+- `provider_metadata`: use a documented provider API/feed that exposes release identifiers or publication dates. A mode declaration does not mean an adapter is implemented.
+- `git_ref`: record an immutable tag or commit, not a moving branch name.
+
+Every source currently records `automation_status`; `not_implemented` means discovery remains manual and no automated latest-release claim is made. The `latest_available`, `latest_validated`, and `latest_applied` fields remain null until supported release records are produced. Current declarations are metadata contracts, not a claim that all sources are automatically monitored.
+
+Each configured download also declares a `release_kind`:
+
+- `edition_or_snapshot`: a named provider edition or immutable source snapshot.
+- `current_reference`: a current/rolling reference page or dataset.
+- `rolling`: a mutable endpoint without a stable edition identifier.
+- `supplement`: a scoped update supplement that must be applied only to its stated scope.
+
+The global `release_management` section defines the state meanings and release-record contract. Release state records are intended for `reports/sources/releases/<source-id>.json`; they distinguish discovery, acquisition, validation and application timestamps and retain release history. The registry itself remains source configuration, not a mutable ledger of changing release events.
+
+**Promotion rules:** discovery does not imply validation; acquisition does not imply validation; validation does not imply application. Only a successfully acquired snapshot that passes its registered source/data contract can become `latest_validated`. Applying it to the canonical database is a separate explicit operation. Older snapshots and manifests remain immutable.
