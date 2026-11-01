@@ -108,6 +108,7 @@ def resolve_structured_field(
     release_states: dict[str, str] | None = None,
     manual_overrides: Iterable[dict[str, Any]] = (),
     mixture_assignments: dict[str, str] | None = None,
+    expected_records: Iterable[dict[str, str]] = (),
 ) -> dict[str, Any]:
     """Resolve each record/subfield independently with immutable release provenance.
 
@@ -143,6 +144,16 @@ def resolve_structured_field(
     }
     overrides = _overrides(manual_overrides, game_id=game_id, field_key=field_key, field=field)
     scopes = set(overrides)
+    for expected in expected_records:
+        if not isinstance(expected, dict):
+            raise SourceSelectionError("expected_records entries must be objects")
+        record_key = expected.get("record_key")
+        subfield_key = expected.get("subfield_key")
+        if not isinstance(record_key, str) or not record_key.strip():
+            raise SourceSelectionError("expected_records require non-empty record_key")
+        if subfield_key is not None and (not isinstance(subfield_key, str) or not subfield_key.strip()):
+            raise SourceSelectionError("expected_records subfield_key must be non-empty text")
+        scopes.add((record_key, subfield_key))
     for items in source_data.values():
         scopes.update(items)
     assignments = mixture_assignments or {}
@@ -176,6 +187,10 @@ def resolve_structured_field(
             else:
                 for source_id in source_ids:
                     if source_id == primary_id:
+                        continue
+                    resource_policy = field.get("resource_policy", {})
+                    resource_fallbacks = resource_policy.get("resource_fallbacks", {}) if isinstance(resource_policy, dict) else {}
+                    if resource_fallbacks and resource_fallbacks.get(record_key) != source_id:
                         continue
                     candidate = source_data[source_id].get(scope)
                     if candidate is None:
