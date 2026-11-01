@@ -175,3 +175,40 @@ def test_rejects_togo_supplement_with_non_togo_country(tmp_path, monkeypatch):
             togo_zip_path=inputs[4], togo_manifest_path=inputs[5],
             crosswalk_path=inputs[6], output_dir=tmp_path / "candidate",
         )
+
+
+def test_taiwan_crosswalk_requires_the_explicit_wpp_identity():
+    from types import SimpleNamespace
+
+    mapping = SimpleNamespace(
+        game_id=wpp.TAIWAN_GAME_ID,
+        source_id="158",
+        match_method="reviewed_manual",
+    )
+    demographic = {
+        "158": {
+            "Location": "China, Taiwan Province of China",
+            "ISO2_code": "TW",
+            "ISO3_code": "TWN",
+        }
+    }
+    ages = {"158": {}}
+    wpp._validate_taiwan_crosswalk((mapping,), demographic, ages)
+
+    bad_mapping = SimpleNamespace(
+        game_id=wpp.TAIWAN_GAME_ID,
+        source_id="158",
+        match_method="authoritative_identifier",
+    )
+    with pytest.raises(wpp.WPPAdapterError, match="reviewed_manual"):
+        wpp._validate_taiwan_crosswalk((bad_mapping,), demographic, ages)
+
+    bad_demographic = {
+        "158": {
+            "Location": "Taiwan",
+            "ISO2_code": "TW",
+            "ISO3_code": "TWN",
+        }
+    }
+    with pytest.raises(wpp.WPPAdapterError, match="does not identify"):
+        wpp._validate_taiwan_crosswalk((mapping,), bad_demographic, ages)
