@@ -112,14 +112,15 @@ def test_location_index_reads_unique_2026_medium_location_rows(tmp_path):
             "ISO2_code": "TW", "ISO3_code": "TWN", "LocTypeName": "Country/Area",
             "VarID": "2", "Variant": "Medium", "Time": "2026",
         },
-        {
-            "LocID": "158", "Location": "China, Taiwan Province of China",
-            "ISO2_code": "TW", "ISO3_code": "TWN", "LocTypeName": "Country/Area",
-            "VarID": "2", "Variant": "Medium", "Time": "2026",
-        },
     ]
     with gzip.open(path, "wt", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=columns)
         writer.writeheader()
         writer.writerows(rows)
     assert _location_index(path, "test")["158"]["iso3"] == "TWN"
+    with gzip.open(path, "at", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=columns)
+        writer.writerow(rows[0])
+    with pytest.raises(WPPSourceCrosswalkError, match="duplicate 2026 Medium LocID"):
+        _location_index(path, "test")
+    assert _location_index(path, "test age", allow_repeated_loc_ids=True)["158"]["iso3"] == "TWN"
