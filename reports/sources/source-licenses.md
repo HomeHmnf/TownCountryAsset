@@ -17,13 +17,13 @@ License classifications are informational. They do not grant permissions or bloc
 | itu |ITU DataHub |unclear_or_unverified |https://datahub.itu.int/ |
 | who_ghed |WHO Global Health Expenditure Database |unclear_or_unverified |https://apps.who.int/nha/database |
 | world_bank_pip |World Bank Poverty and Inequality Platform |unclear_or_unverified |https://pip.worldbank.org/ |
-| world_bank_wgi |World Bank Worldwide Governance Indicators 2026 |third_party_redistribution_restricted_for_some_inputs |https://www.worldbank.org/en/publication/worldwide-governance-indicators |
+| world_bank_wgi |World Bank Worldwide Governance Indicators |third_party_redistribution_restricted_for_some_inputs |https://www.worldbank.org/en/publication/worldwide-governance-indicators |
 | official_government_sources |Official national government and constitutional sources |unclear_or_unverified |Not recorded |
 | official_organization_registers |Official intergovernmental organization membership registers |unclear_or_unverified |Not recorded |
 | iiss_military_balance |IISS The Military Balance |proprietary_subscription |https://www.iiss.org/publications/the-military-balance/ |
 | sipri_milex |SIPRI Military Expenditure Database |commercial_authorization_required |https://www.sipri.org/databases/milex |
 | global_carbon_project |Global Carbon Project Global Carbon Budget |unclear_or_unverified |https://globalcarbonproject.org/carbonbudget/ |
-| energy_institute |Energy Institute Statistical Review of World Energy 2026 |unclear_or_unverified |https://www.energyinst.org/statistical-review/resources-and-data-downloads |
+| energy_institute |Energy Institute Statistical Review of World Energy |unclear_or_unverified |https://www.energyinst.org/statistical-review/resources-and-data-downloads |
 | protected_planet |Protected Planet WDPA / GD-PAME |commercial_use_and_redistribution_restricted |https://www.protectedplanet.net/en/legal |
 | fao_aquastat |FAO AQUASTAT |unclear_or_unverified |https://www.fao.org/aquastat/en/ |
 | natural_earth_admin0 |Natural Earth Admin 0 Countries |public_domain_or_unverified |https://www.naturalearthdata.com/about/terms-of-use/ |
