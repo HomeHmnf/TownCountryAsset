@@ -170,7 +170,29 @@ def require_approved_application(
     ).fetchone()
     if row is None:
         raise ApplicationApprovalError(f"Unknown application approval: {approval_id}")
-    body = {key: value for key, value in artifact.items() if key != "artifact_sha256"}
+    # Re-read every path at apply time. Comparing only a caller-supplied
+    # artifact object would allow stale hashes to survive changed input files.
+    inputs = artifact.get("inputs")
+    if not isinstance(inputs, list) or not inputs:
+        raise ApplicationApprovalError("Application artifact has no reviewed input files")
+    refreshed_inputs = []
+    for item in inputs:
+        if not isinstance(item, dict) or not isinstance(item.get("path"), str):
+            raise ApplicationApprovalError("Application artifact contains an invalid input entry")
+        path = (REPOSITORY_ROOT / item["path"]).resolve()
+        digest = sha256_file(path)
+        refreshed_inputs.append({
+            "path": path.relative_to(REPOSITORY_ROOT.resolve()).as_posix(),
+            "sha256": digest,
+            "byte_count": path.stat().st_size,
+        })
+    refreshed_inputs.sort(key=lambda entry: entry["path"])
+    body = {
+        "schema_version": artifact.get("schema_version"),
+        "domain": artifact.get("domain"),
+        "inputs": refreshed_inputs,
+        "metadata": artifact.get("metadata", {}),
+    }
     actual_digest = hashlib.sha256(canonical_json(body).encode("utf-8")).hexdigest()
     if actual_digest != artifact.get("artifact_sha256") or actual_digest != row["artifact_sha256"]:
         if row["status"] == "approved":
