@@ -222,6 +222,15 @@ def test_imports_review_candidates_without_promoting_or_filling_values(tmp_path:
         assert connection.execute("SELECT COUNT(*) FROM country_names WHERE language='fa'").fetchone()[0] == 0
         flag = connection.execute("SELECT source_flag_code, mapping_status FROM country_flags").fetchone()
         assert tuple(flag) == (None, "candidate")
+        approval = connection.execute(
+            "SELECT status, application_id FROM application_approvals WHERE approval_id='review-data-test-001'"
+        ).fetchone()
+        assert approval["status"] == "applied"
+        assert approval["application_id"].startswith("review-data:")
+        events = connection.execute(
+            "SELECT event_type FROM database_application_events WHERE approval_id='review-data-test-001' ORDER BY event_id"
+        ).fetchall()
+        assert [row["event_type"] for row in events] == ["proposed", "approved", "applied"]
     finally:
         connection.close()
 
