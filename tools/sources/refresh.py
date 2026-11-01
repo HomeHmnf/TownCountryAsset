@@ -48,12 +48,6 @@ def run_refresh(
             ),
             "downloads": [],
         }
-        # A declared mode is not treated as an implemented provider adapter.
-        source_result["discovery_status"] = (
-            "manual_review_required"
-            if discovery["automation_status"] != "implemented"
-            else "adapter_declared"
-        )
         for item in source.get("downloads", []):
             prior = snapshot_rows[(source_id, item["id"])]
             result = {
