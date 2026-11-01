@@ -17,7 +17,7 @@
       "key": "population",
       "storage": "scalar",
       "unit": "people",
-      "primary_source": "un_wpp_2024",
+      "primary_source": "un_wpp",
       "method": "Total population as of 1 July; WPP stores the measure in thousands, so convert to canonical people by multiplying by 1,000 and record this conversion in methodology.",
       "source_status": "candidate_pending_validation"
     },
@@ -26,7 +26,7 @@
       "key": "population_growth",
       "storage": "scalar",
       "unit": "percent_per_year",
-      "primary_source": "un_wpp_2024",
+      "primary_source": "un_wpp",
       "method": "Annual population growth rate in percent; preserve the annual period and medium-variant estimate/projection status.",
       "source_status": "candidate_pending_validation"
     },
@@ -44,7 +44,7 @@
       "key": "median_age",
       "storage": "scalar",
       "unit": "years",
-      "primary_source": "un_wpp_2024",
+      "primary_source": "un_wpp",
       "method": "Median age as of 1 July in years; preserve the reference year and medium-variant estimate/projection status.",
       "source_status": "candidate_pending_validation"
     },
@@ -53,7 +53,7 @@
       "key": "age_distribution",
       "storage": "structured",
       "unit": "age_band_share_or_count",
-      "primary_source": "un_wpp_2024",
+      "primary_source": "un_wpp",
       "method": "Population by five-year age group and sex; convert source counts from thousands to people by multiplying by 1,000; preserve age-band boundaries and sex scope.",
       "source_status": "candidate_pending_validation"
     },
@@ -62,7 +62,7 @@
       "key": "sex_distribution",
       "storage": "structured",
       "unit": "people_or_share",
-      "primary_source": "un_wpp_2024",
+      "primary_source": "un_wpp",
       "method": "Male and female population as of 1 July; convert source counts from thousands to people by multiplying by 1,000; preserve both categories and reference year.",
       "source_status": "candidate_pending_validation"
     },
@@ -71,7 +71,7 @@
       "key": "net_migration",
       "storage": "scalar",
       "unit": "people_or_rate",
-      "primary_source": "un_wpp_2024",
+      "primary_source": "un_wpp",
       "method": "Use net number of migrants (not rate); convert source counts from thousands to people by multiplying by 1,000; preserve the reference year and medium-variant status.",
       "source_status": "candidate_pending_validation"
     },
@@ -152,7 +152,7 @@
       "key": "climate_classification",
       "storage": "structured",
       "unit": "area_share_by_koppen_class",
-      "primary_source": "koppen_beck_2023",
+      "primary_source": "koppen_beck",
       "method": "derive a multi-class country distribution from raster/geometry overlay; never force one class when multiple zones occur",
       "source_status": "candidate_pending_validation"
     },
@@ -161,7 +161,7 @@
       "key": "forest_area",
       "storage": "scalar",
       "unit": "km2_or_percent_land",
-      "primary_source": "fao_fra_2025",
+      "primary_source": "fao_fra",
       "method": "choose one canonical measure and retain source definition/reference year",
       "source_status": "candidate_pending_validation"
     },
@@ -170,7 +170,7 @@
       "key": "natural_resources",
       "storage": "structured",
       "unit": "resource_records",
-      "primary_source": "usgs_mcs_2026",
+      "primary_source": "usgs_mcs",
       "method": "catalogue-based records by resource and metric; source coverage differs by commodity; do not infer absence from missing source rows",
       "source_status": "candidate_pending_validation"
     },
@@ -179,7 +179,7 @@
       "key": "religions",
       "storage": "structured",
       "unit": "population_or_share_by_category",
-      "primary_source": "pew_religion_2020",
+      "primary_source": "pew_religion",
       "method": "seven broad categories; preserve estimate year and rounded-count guidance",
       "source_status": "candidate_pending_validation"
     },
