@@ -72,6 +72,8 @@ def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monk
     report_metadata = json.loads((bundle / "provenance.json").read_text())
     assert report_metadata["read_only"] is True
     assert report_metadata["provider"] == "un_m49"
+    assert report_metadata["reviewed_name_variants"]["south korea"]["reference_name"] == "Republic of Korea"
+    assert report_metadata["reviewed_name_variants"]["netherlands"]["reference_name"] == "Netherlands (Kingdom of the)"
     assert result["identity_reconciliation"]["summary"]["registry_count"] == 1
     assert result["identity_reconciliation"]["summary"]["reference_count"] == 2
     assert result["identity_reconciliation"]["summary"]["matched_count"] == 1
