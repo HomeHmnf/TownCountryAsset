@@ -113,6 +113,20 @@ def _release_state_path(registry: dict, source_id: str) -> Path:
     return root / relative
 
 
+def _latest_available_release_id(registry: dict, source_id: str) -> str | None:
+    """Read the current candidate release identifier without changing its ledger."""
+    path = _release_state_path(registry, source_id)
+    if not path.is_file():
+        return None
+    try:
+        state = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SourceError(f"Cannot read release state {path}: {exc}") from exc
+    latest = state.get("latest_available")
+    release_id = latest.get("release_id") if isinstance(latest, dict) else None
+    return release_id if isinstance(release_id, str) else None
+
+
 def _record_release(
     registry: dict,
     source_id: str,
@@ -258,12 +272,14 @@ def run_refresh(
         ):
             try:
                 discovered = _discover_git_ref(discovery, timeout)
+                release_changed = _latest_available_release_id(registry, source_id) != discovered["release_id"]
                 state_path = _record_release(registry, source_id, discovered, status="discovered")
                 source_result["discovery_status"] = "git_ref_discovery"
                 source_result["git_ref"] = {
                     "release_id": discovered["release_id"],
                     "commit_timestamp": discovered["provider_commit_timestamp"],
                     "fetched_at": discovered["fetched_at"],
+                    "release_changed": release_changed,
                     "release_state_path": state_path.as_posix(),
                     "detail": "Default-branch commit discovered; source archive acquisition and content validation remain separate",
                 }
@@ -285,6 +301,7 @@ def run_refresh(
                     continue
                 try:
                     discovered = _discover_fingerprint(item, timeout)
+                    release_changed = _latest_available_release_id(registry, source_id) != discovered["release_id"]
                     dynamic_item = {**item, "release": discovered["release_id"]}
                     prior = _inspect_release_snapshot(registry, source_id, dynamic_item)
                     manifest_path = (
@@ -313,6 +330,7 @@ def run_refresh(
                         "release_state_path": state_path.as_posix(),
                         "discovered_sha256": discovered["sha256"],
                         "discovered_fetched_at": discovered.get("fetched_at"),
+                        "release_changed": release_changed,
                     }
                     if prior["status"] == "valid":
                         result.update(
