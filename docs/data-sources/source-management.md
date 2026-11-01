@@ -60,7 +60,6 @@ License status is informational and does not block acquisition. Record whether t
 
 Natural Earth is registered for geography/cartography only and is not an accepted source for WP1.5 statistics or classifications. Raw snapshots remain outside Git; manifests and source metadata are versioned. Review-only ISO, localization, and flag proposal workflows retain their existing human-review and approval safeguards.
 
-
 ## Shared database reports
 
 Database reports use one standard directory and artifact contract:
@@ -102,7 +101,6 @@ uv run python -m tools.refresh_m49_iso_review --verbose
 
 Quiet mode changes only terminal presentation; it never disables report generation or validation.
 
-
 ## Release discovery and selection
 
 Release discovery is declared per source in `release_discovery` within `config/data_sources.json`. It is deliberately separate from acquisition: a provider page or API may identify a candidate release without providing a downloadable snapshot, and a reachable download URL does not prove that its contents are current or valid.
@@ -140,7 +138,7 @@ uv run python -m tools.refresh_sources --dry-run
 
 The refresh runner uses the central registry and shared immutable acquisition service. It skips snapshots whose raw file and manifest pass checksum/identity checks, reports invalid snapshots without overwriting them, and attempts missing configured HTTPS downloads. A batch continues after an individual acquisition failure. Use repeated `--source` arguments to limit a run to selected registered sources.
 
-An acquisition result is labelled `acquired_pending_source_validation`: it means the download and its generic registered response checks succeeded, not that provider-specific data semantics, coverage, identifiers, or release suitability have been validated. Existing valid snapshots are reported as unchanged. Invalid snapshots are retained for investigation and are never silently replaced. A dry run reports intended acquisitions without making network requests.
+An acquisition result is labelled `acquired_pending_source_validation`; it means the download and its generic registered response checks succeeded, not that provider-specific data semantics, coverage, identifiers, or release suitability have been validated. Existing valid snapshots are reported as unchanged. Invalid snapshots are retained for investigation and are never silently replaced. A dry run reports intended acquisitions without making network requests.
 
 The command writes timestamped JSON and Markdown reports below `reports/sources/refreshes/`. Sources without configured generic HTTPS downloads are explicitly reported for manual review or a future protocol-specific adapter. The three implemented rolling/current-reference adapters discover content-fingerprint candidates and persist them in the release ledger. A matching fingerprint reuses the existing immutable snapshot; a new fingerprint is acquired under a new content-addressed release ID. If the content changes between discovery and acquisition, the acquired snapshot is retained but reported as a race and is not marked acquired in the ledger. Dry runs do not contact providers. This generic fingerprint check does not establish a provider's semantic release, publication date, or data correctness. It updates `latest_available` only; provider-specific semantic validation must succeed before a separate process can promote `latest_validated`.
 
@@ -188,89 +186,97 @@ An application artifact fingerprints every reviewed input file (normalized obser
 
 The approval ledger distinguishes `pending`, `approved`, `rejected`, `invalidated` and `applied`. The event ledger records proposal, decision, invalidation and application events. The domain importer must verify an approved artifact before domain writes and mark it applied in the same SQLite transaction as those writes. Approval is single-use.
 
-For multi-file provider adapters, the derived WP1.5 manifest may declare `additional_inputs` (raw snapshots) and `upstream_manifests` (the original source-manager manifests). The statistics importer validates the additional snapshot checksums and fingerprints every listed raw file and upstream manifest at proposal and apply time. This prevents a scoped supplement or secondary dataset from changing after approval without invalidating the application. The UN WPP adapter uses this mechanism for its main demographic file, main age-sex file and Togo interim update.\n\nThe WP1.5 statistics importer, identity-registry importer, country-data importer and review-data importer are now integrated with this gate. The identity proposal fingerprints the registry, candidate countries payload and candidate manifest after validating their internal consistency. The country-data proposal fingerprints the manifest, countries payload and all three game-ID geometry profiles, after validating checksums, identity coverage and GeoJSON structure. The review-data proposal fingerprints the identity registry, ISO reference/provenance/proposal report, Persian candidates/provenance, entity taxonomy and flag mapping. Use `propose-identity` to register the exact identity import artifact, then explicitly approve it before invoking `tools.import_identity_registry` with `--approval-id`. Use `propose-country-data` and the same approve/apply sequence for source attributes and geometry. All four importers independently rebuild/recheck their artifacts and record application completion in the same transaction as their domain writes. Its proposal command fingerprints the normalized observations, explicit identity crosswalk, source manifest, immutable raw snapshot, WP1.5 field contract and (when present) project source-selection policy. The importer independently rebuilds and rechecks that artifact before writing, then records application completion in the same transaction as the statistics and provenance writes. Calling the importer without a valid approved application ID is rejected.
+For multi-file provider adapters, the derived WP1.5 manifest may declare `additional_inputs` (raw snapshots) and `upstream_manifests` (the original source-manager manifests). The statistics importer validates the additional snapshot checksums and fingerprints every listed raw file and upstream manifest at proposal and apply time. This prevents a scoped supplement or secondary dataset from changing after approval without invalidating the application. The UN WPP adapter uses this mechanism for its main demographic file, main age-sex file and Togo interim update.
 
-Example WP1.5 workflow:
+The WP1.5 statistics importer, identity-registry importer, country-data importer and review-data importer are integrated with this gate:
+- Identity proposals fingerprint the registry, candidate countries payload and candidate manifest after validating their internal consistency.
+- Country-data proposals fingerprint the manifest, countries payload and all three game-ID geometry profiles, after validating checksums, identity coverage and GeoJSON structure.
+- Review-data proposals fingerprint the identity registry, ISO reference/provenance/proposal report, Persian candidates/provenance, entity taxonomy and flag mapping.
+- WP1.5 proposals fingerprint normalized observations, the explicit identity crosswalk, source manifest, immutable raw snapshot, WP1.5 field contract and (when present) project source-selection policy.
 
-```fish
-uv run python -m tools.manage_database_applications propose-wp1-5 \
-  --approval-id wp1-5-un-wpp-2024-001 \
-  --observations raw_data/normalized/un-wpp-observations.json \
-  --crosswalk raw_data/normalized/un-wpp-crosswalk.json \
-  --manifest data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json
+All importers independently rebuild/recheck their artifacts and record application completion in the same transaction as their domain writes. Calling an importer without a valid approved application ID is rejected. A changed or missing input invalidates approval and requires a new proposal and review.
 
-# Review the emitted input paths, checksums, release and artifact fingerprint before approving.
-uv run python -m tools.manage_database_applications approve \
-  --approval-id wp1-5-un-wpp-2024-001 --actor "reviewer-id"
+### Required application order
 
-uv run python -m tools.import_wp1_5 \
-  --observations raw_data/normalized/un-wpp-observations.json \
-  --crosswalk raw_data/normalized/un-wpp-crosswalk.json \
-  --manifest data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json \
-  --approval-id wp1-5-un-wpp-2024-001
-```
+Identity records are a prerequisite for any application whose crosswalk references `game_id` values in the canonical `countries` table. Therefore, on a new or empty canonical database, apply the identity registry before country data, review data, or WP1.5 observations. A pending or approved identity proposal is not sufficient: the identity importer must complete successfully and its country rows must exist before downstream importers run.
 
-Example identity-registry workflow:
+The standard inspected sequence is:
+
+1. Acquire immutable source snapshots and verify their manifests/checksums.
+2. Parse, validate and normalize provider data; build and review the explicit identity crosswalk.
+3. Generate the application manifest and proposal artifact.
+4. Inspect the proposal's domain, metadata, artifact SHA-256, exact input paths, hashes and byte counts.
+5. Explicitly approve that exact artifact.
+6. Apply the identity registry first when canonical identity rows are absent.
+7. Apply the domain dataset using its own separately approved artifact.
+8. Audit domain counts, provenance, approval/event state, SQLite integrity and foreign keys.
+9. Promote a release to `latest_validated` only through the separate release-validation process; database application does not implicitly promote a release.
+
+### UN WPP 2024 Medium example (2026 observations)
+
+This is the first fully inspected WP1.5 provider application. The canonical population reference date is 1 July. The 2026 values are projections. The main demographic and age-sex files are separate immutable snapshots; the 2026-01-19 Togo interim ZIP is a scoped correction and applies only to Togo, not as a replacement for either main release. The adapter validates the three snapshots, upstream manifests, M49-based LocID crosswalk and age/sex structure before producing normalized observations. Taiwan is included through the specifically approved WPP-only exception (LocID 158); this does not change global identity, ISO or M49 assignments.
+
+The reviewed candidate contained 199 approved game-country mappings and 1,194 projected observations: six fields per country (population, population growth, median age, age distribution, sex distribution and net migration). Four fields are scalar (796 scalar records total) and two are structured (398 structured records total). Small differences of a few people between published totals and sums of rounded age/sex components are retained rather than artificially adjusted.
+
+For this inspected run, the identity application was:
+- Approval ID: `identity-registry-2026-11-01`
+- Artifact SHA-256: `dbc2e7d1f2ed14452c07ec10ff5e938276cf9e354d5baf4cf422e0360f049f1f`
+- Result: 242 countries, 250 names, 237 region memberships and 242 source mappings; database integrity and foreign-key checks passed.
+
+The WP1.5 application was:
+- Approval ID: `un-wpp-2026-11-01`
+- Artifact SHA-256: `000ec80bae30c890f1d4487e56908b809434b14c6fef7b477d6a29b655fdce24`
+- Release: `2024-main-demographic+2026-01-19-togo-update`
+- Result: 1,194 observations (796 scalar, 398 structured), 199 crosswalk mappings; database integrity and foreign-key checks passed.
+
+The commands used for the identity proposal, approval and application are:
 
 ```fish
 uv run python -m tools.manage_database_applications propose-identity \
-  --approval-id identity-registry-2026-001 \
-  --registry config/country_identity_registry.json \
-  --candidate-dir generated/town_country_asset_candidate
+  --approval-id identity-registry-2026-11-01
 
 uv run python -m tools.manage_database_applications approve \
-  --approval-id identity-registry-2026-001 --actor "reviewer-id"
+  --approval-id identity-registry-2026-11-01 \
+  --actor project-owner \
+  --note "Approved reviewed 242-country identity registry application."
 
 uv run python -m tools.import_identity_registry \
-  --registry config/country_identity_registry.json \
-  --candidate-dir generated/town_country_asset_candidate \
-  --approval-id identity-registry-2026-001
+  --approval-id identity-registry-2026-11-01
 ```
 
-Example country-data workflow:
+The commands used for the already-built and reviewed WPP candidate are:
 
 ```fish
-uv run python -m tools.manage_database_applications propose-country-data \
-  --approval-id country-data-natural-earth-2026-001 \
-  --candidate-dir generated/town_country_asset_candidate
+uv run python -m tools.manage_database_applications propose-wp1-5 \
+  --approval-id un-wpp-2026-11-01 \
+  --observations generated/un_wpp_2026_candidate_20261101/normalized_observations.json \
+  --crosswalk data/manual/source_crosswalks/un_wpp.json \
+  --manifest generated/un_wpp_2026_candidate_20261101/application_manifest.json
 
 uv run python -m tools.manage_database_applications approve \
-  --approval-id country-data-natural-earth-2026-001 --actor "reviewer-id"
+  --approval-id un-wpp-2026-11-01 \
+  --actor project-owner \
+  --note "Approved reviewed UN WPP 2026 Medium candidate; 199 countries, 1194 projected observations, six fields."
 
-uv run python -m tools.import_country_data \
-  --candidate-dir generated/town_country_asset_candidate \
-  --approval-id country-data-natural-earth-2026-001
+uv run python -m tools.import_wp1_5 \
+  --observations generated/un_wpp_2026_candidate_20261101/normalized_observations.json \
+  --crosswalk data/manual/source_crosswalks/un_wpp.json \
+  --manifest generated/un_wpp_2026_candidate_20261101/application_manifest.json \
+  --approval-id un-wpp-2026-11-01
 ```
 
-Example review-data workflow (all source/report inputs are required):
+### Automation backlog
 
-```fish
-uv run python -m tools.manage_database_applications propose-review-data \
-  --approval-id review-data-2026-001 \
-  --registry config/country_identity_registry.json \
-  --iso-reference raw_data/iso/m49-iso-reference.csv \
-  --iso-provenance raw_data/iso/m49-provenance-20261031T140848Z.json \
-  --iso-proposals reports/iso-assignment-proposals.md \
-  --persian-candidates generated/persian_candidates.json \
-  --persian-provenance generated/persian_provenance.json \
-  --entity-taxonomy config/entity_types.json \
-  --flag-mapping config/country_flag_mapping.json
+The current workflow is intentionally inspected one provider/application at a time. Future orchestration should automate repeatable mechanics without weakening the approval boundary:
 
-uv run python -m tools.manage_database_applications approve \
-  --approval-id review-data-2026-001 --actor "reviewer-id"
+- Preflight the canonical database and check that all crosswalk `game_id` values exist; if not, report the identity prerequisite and stop before beginning a domain transaction.
+- Check existing application records and never silently create duplicate proposals or approvals.
+- Acquire/verify immutable snapshots, run provider-specific validation, normalize data and build crosswalks through registered adapters.
+- Produce a review bundle with coverage, unmatched identities, held/excluded records, field counts, units, statuses, provenance and rounding/reconciliation diagnostics.
+- Propose an immutable artifact and display its exact SHA-256 and input fingerprints for human review.
+- Wait for explicit human approval; automation must not approve its own proposal or silently reuse an approval for changed inputs.
+- Apply identity prerequisites before dependent domains, then apply the approved domain artifact transactionally.
+- Run post-application audits and report approval/event state, counts, provenance, integrity and foreign-key results.
+- Keep release promotion separate from database application; never automatically promote merely because import succeeded.
 
-uv run python -m tools.database.review_data_import \
-  --database data/canonical/town_country_asset.sqlite \
-  --registry config/country_identity_registry.json \
-  --iso-reference raw_data/iso/m49-iso-reference.csv \
-  --iso-provenance raw_data/iso/m49-provenance-20261031T140848Z.json \
-  --iso-proposals reports/iso-assignment-proposals.md \
-  --persian-candidates generated/persian_candidates.json \
-  --persian-provenance generated/persian_provenance.json \
-  --entity-taxonomy config/entity_types.json \
-  --flag-mapping config/country_flag_mapping.json \
-  --approval-id review-data-2026-001
-```
-
-Use `reject` instead of `approve` to reject a pending proposal. Approval is single-use. A repeated identical dataset import requires a separately reviewed approval; it remains idempotent with respect to domain data. Changed or missing inputs invalidate an approval. The proposal/decision CLI currently exposes WP1.5 and identity-registry proposal builders. The shared approval gate now covers all four existing canonical import domains. Any future importer must adopt this contract before it can write to canonical SQLite.
-
+The orchestrator should expose separate `prepare`, `review`, `approve`, `apply` and `audit` states (or equivalent commands). A failed preflight must not invalidate or consume an otherwise valid approval unless one of its fingerprinted inputs has actually changed. Provider-specific adapters and domain importers remain responsible for their contracts; the orchestrator coordinates them and does not bypass them.
