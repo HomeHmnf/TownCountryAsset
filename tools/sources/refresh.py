@@ -239,6 +239,14 @@ def run_refresh(
             not source.get("downloads")
             and discovery["automation_status"] == "implemented"
             and discovery["mode"] == "git_ref"
+            and dry_run
+        ):
+            source_result["discovery_status"] = "dry_run_not_checked"
+            source_result["detail"] = "Dry run does not query Git provider metadata"
+        elif (
+            not source.get("downloads")
+            and discovery["automation_status"] == "implemented"
+            and discovery["mode"] == "git_ref"
         ):
             try:
                 discovered = _discover_git_ref(discovery, timeout)
@@ -408,7 +416,7 @@ def run_refresh(
                     result.update(status="acquisition_failed", detail=str(exc))
             source_result["downloads"].append(result)
 
-        if not source.get("downloads"):
+        if not source.get("downloads") and source_result["discovery_status"] == "implemented_adapter_not_applicable":
             source_result["discovery_status"] = "manual_review_required"
             source_result["detail"] = (
                 "No generic HTTPS download is configured; use a provider-specific adapter or manual workflow"
