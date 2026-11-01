@@ -144,6 +144,7 @@ def resolve_structured_field(
     }
     overrides = _overrides(manual_overrides, game_id=game_id, field_key=field_key, field=field)
     scopes = set(overrides)
+    expected_seen = set()
     for expected in expected_records:
         if not isinstance(expected, dict):
             raise SourceSelectionError("expected_records entries must be objects")
@@ -153,7 +154,11 @@ def resolve_structured_field(
             raise SourceSelectionError("expected_records require non-empty record_key")
         if subfield_key is not None and (not isinstance(subfield_key, str) or not subfield_key.strip()):
             raise SourceSelectionError("expected_records subfield_key must be non-empty text")
-        scopes.add((record_key, subfield_key))
+        expected_scope = (record_key, subfield_key)
+        if expected_scope in expected_seen:
+            raise SourceSelectionError(f"Duplicate expected structured record {expected_scope}")
+        expected_seen.add(expected_scope)
+        scopes.add(expected_scope)
     for items in source_data.values():
         scopes.update(items)
     assignments = mixture_assignments or {}
