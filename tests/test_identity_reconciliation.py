@@ -135,7 +135,7 @@ def test_report_path_segments_are_validated(tmp_path):
 
 def test_ten_owner_approved_m49_name_variants_match_without_assigning_codes():
     pairs = [
-        ("Falkland Islands", "Falkland Islands (Malvinas)"),
+        ("Falkland Islands", "Falkland Islands (the) [Malvinas]"),
         ("South Korea", "Republic of Korea"),
         ("North Korea", "Democratic People's Republic of Korea"),
         ("Netherlands", "Netherlands (Kingdom of the)"),
