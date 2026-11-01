@@ -16,13 +16,13 @@ Raw source downloads remain local and are not committed. Git tracks source contr
 
 | Field | Canonical key | Central source ID | Storage | Important contract |
 |---:|---|---|---|---|
-| 1 | population | `un_wpp_2024` | scalar | Reference date and estimate status |
-| 2 | population_growth | `un_wpp_2024` | scalar | Annual rate and exact period |
+| 1 | population | `un_wpp` | scalar | Reference date and estimate status |
+| 2 | population_growth | `un_wpp` | scalar | Annual rate and exact period |
 | 3 | population_density | `world_bank_wdi` | scalar | Prefer published indicator; derivation requires aligned population and land-area periods |
-| 6 | median_age | `un_wpp_2024` | scalar | Reference year |
-| 12 | age_distribution | `un_wpp_2024` | structured | Preserve age-band boundaries, sex scope and units |
-| 13 | sex_distribution | `un_wpp_2024` | structured | Preserve source categories and reference year |
-| 14 | net_migration | `un_wpp_2024` | scalar | Select either net migrant count or rate; never mix |
+| 6 | median_age | `un_wpp` | scalar | Reference year |
+| 12 | age_distribution | `un_wpp` | structured | Preserve age-band boundaries, sex scope and units |
+| 13 | sex_distribution | `un_wpp` | structured | Preserve source categories and reference year |
+| 14 | net_migration | `un_wpp` | scalar | Select either net migrant count or rate; never mix |
 | 15 | gdp | `imf_weo` | scalar | Current-price GDP; retain currency/scale and actual/estimate/projected status |
 | 16 | gdp_per_capita | `imf_weo` | scalar | Current-price per-capita measure |
 | 18 | gdp_ppp | `imf_weo` | scalar | PPP basis and WEO vintage |
@@ -31,10 +31,10 @@ Raw source downloads remain local and are not committed. Git tracks source contr
 | 22 | labour_force | `ilostat` | scalar | Age/sex scope and reference year |
 | 33 | total_area | `world_bank_wdi` | scalar | Surface area includes inland water |
 | 34 | land_area | `world_bank_wdi` | scalar | Excludes inland water |
-| 41 | climate_classification | `koppen_beck_2023` | structured | Spatial overlay; retain multiple classes and area shares |
-| 42 | forest_area | `fao_fra_2025` | scalar | Forest definition and reference year |
-| 45 | natural_resources | `usgs_mcs_2026` | structured | Fixed candidate catalogue; distinguish occurrence, reserves, resources and production |
-| 48 | religions | `pew_religion_2020` | structured | Seven broad categories; retain estimate year and rounded-count guidance |
+| 41 | climate_classification | `koppen_beck` | structured | Spatial overlay; retain multiple classes and area shares |
+| 42 | forest_area | `fao_fra` | scalar | Forest definition and reference year |
+| 45 | natural_resources | `usgs_mcs` | structured | Fixed candidate catalogue; distinguish occurrence, reserves, resources and production |
+| 48 | religions | `pew_religion` | structured | Seven broad categories; retain estimate year and rounded-count guidance |
 | 51 | human_development_index | `undp_hdr` | scalar | HDI score and reference year |
 | 52 | internet_usage | `itu` | scalar | Individuals using the Internet; indicator definition and year |
 | 54 | healthcare_expenditure | `who_ghed` | scalar | Expenditure measure and denominator must be explicit |
@@ -120,7 +120,7 @@ Example (replace the URL, release and filename with the exact provider download 
 
 ```fish
 uv run python -m tools.acquire_wp1_5_sources \
-  --source un_wpp_2024 \
+  --source un_wpp \
   --release 2024 \
   --url "https://provider.example/path/to/direct-download.zip" \
   --filename "wpp2024.zip" \
@@ -140,8 +140,8 @@ Example:
 ```json
 {
   "schema_version": 1,
-  "dataset": "un_wpp_2024",
-  "source_key": "un_wpp_2024",
+  "dataset": "un_wpp",
+  "source_key": "un_wpp",
   "mappings": [
     {
       "game_id": "tc_0123456789abcdef0123456789abcdef",
@@ -176,7 +176,7 @@ The normalized file identifies the exact source snapshot using \`source_key\`, \
 {
   "schema_version": 1,
   "work_package": "WP1.5",
-  "source_key": "un_wpp_2024",
+  "source_key": "un_wpp",
   "release": "2024",
   "source_sha256": "<64-character SHA-256 from the acquisition manifest>",
   "observations": [
@@ -241,9 +241,9 @@ Pinned direct downloads from the official catalogue:
 
 The interim update is dated 19 January 2026 and corrects Togo population estimates and medium projections using newly available 2022 census results. The UN says other locations and global/regional aggregates are unchanged. Apply its matching `*_Update.csv` rows only to Togo; do not replace the full base dataset with this Togo-only bundle. It includes updated demographic-indicator, total-population-by-sex and population-by-age/sex files. The next WPP revision was postponed to 11 July 2027, so this is the latest published WPP revision/update identified in this source review.
 
-The exact URLs, filenames, release keys, field IDs and rights metadata are machine-readable under `sources.un_wpp_2024.downloads` in `config/wp1_5_data_sources.json`. Capture each file as its own immutable acquisition snapshot using the release key shown above. Use terms URL `https://population.un.org/wpp/`, licence status `CC BY 3.0 IGO`, and attribution: United Nations, Department of Economic and Social Affairs, Population Division (2024). *World Population Prospects 2024, Online Edition*.
+The exact URLs, filenames, release keys, field IDs and rights metadata are machine-readable under `sources.un_wpp.downloads` in `config/wp1_5_data_sources.json`. Capture each file as its own immutable acquisition snapshot using the release key shown above. Use terms URL `https://population.un.org/wpp/`, licence status `CC BY 3.0 IGO`, and attribution: United Nations, Department of Economic and Social Affairs, Population Division (2024). *World Population Prospects 2024, Online Edition*.
 
-Do not implement the WPP adapter until the owner has acquired these snapshots and the actual CSV headers/notes have been inspected locally. In particular, WPP's population, age/sex counts and net-migration counts are expressed in thousands: normalize count values to the canonical unit (people) by multiplying by 1,000, and record the conversion in each row's methodology. Growth remains percent per year and median age remains years. Distinguish historical estimates (through 2023) from medium-variant projections (2024 onward). For the current-statistics snapshot, the source contract selects **2026, Medium variant** for the WPP fields and requires `value_status=projected`; do not label these values as observed. This selection is recorded in `sources.un_wpp_2024.selected_current_period`, `selected_variant` and `selected_value_status`. Population density is not sourced from WPP under this contract; field 3 remains World Bank WDI.
+Do not implement the WPP adapter until the owner has acquired these snapshots and the actual CSV headers/notes have been inspected locally. In particular, WPP's population, age/sex counts and net-migration counts are expressed in thousands: normalize count values to the canonical unit (people) by multiplying by 1,000, and record the conversion in each row's methodology. Growth remains percent per year and median age remains years. Distinguish historical estimates (through 2023) from medium-variant projections (2024 onward). For the current-statistics snapshot, the source contract selects **2026, Medium variant** for the WPP fields and requires `value_status=projected`; do not label these values as observed. This selection is recorded in `sources.un_wpp.selected_current_period`, `selected_variant` and `selected_value_status`. Population density is not sourced from WPP under this contract; field 3 remains World Bank WDI.
 
 
 ### WPP acquisition commands
@@ -252,7 +252,7 @@ Run each snapshot separately; the distinct release keys prevent the acquisition 
 
 ```fish
 uv run python -m tools.acquire_wp1_5_sources \
-  --source un_wpp_2024 \
+  --source un_wpp \
   --release 2024-main-demographic \
   --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz" \
   --filename WPP2024_Demographic_Indicators_Medium.csv.gz \
@@ -261,7 +261,7 @@ uv run python -m tools.acquire_wp1_5_sources \
   --license-status "CC BY 3.0 IGO"
 
 uv run python -m tools.acquire_wp1_5_sources \
-  --source un_wpp_2024 \
+  --source un_wpp \
   --release 2024-main-age-sex \
   --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz" \
   --filename WPP2024_PopulationByAge5GroupSex_Medium.csv.gz \
@@ -270,7 +270,7 @@ uv run python -m tools.acquire_wp1_5_sources \
   --license-status "CC BY 3.0 IGO"
 
 uv run python -m tools.acquire_wp1_5_sources \
-  --source un_wpp_2024 \
+  --source un_wpp \
   --release 2026-01-19-togo-update \
   --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip" \
   --filename WPP2024_CSV_files_update.zip \
@@ -315,7 +315,7 @@ Acquire the two small metadata tables as separate snapshots as well; they define
 
 ```fish
 uv run python -m tools.acquire_wp1_5_sources \
-  --source un_wpp_2024 --release 2024-demographic-notes \
+  --source un_wpp --release 2024-demographic-notes \
   --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv" \
   --filename WPP2024_Demographic_Indicators_notes.csv \
   --terms-url "https://population.un.org/wpp/" \
@@ -323,7 +323,7 @@ uv run python -m tools.acquire_wp1_5_sources \
   --license-status "CC BY 3.0 IGO"
 
 uv run python -m tools.acquire_wp1_5_sources \
-  --source un_wpp_2024 --release 2024-location-notes \
+  --source un_wpp --release 2024-location-notes \
   --url "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Locations_notes.csv" \
   --filename WPP2024_Locations_notes.csv \
   --terms-url "https://population.un.org/wpp/" \
@@ -342,7 +342,7 @@ Example normalized batch (illustrative values only):
 {
   "schema_version": 1,
   "work_package": "WP1.5",
-  "source_key": "un_wpp_2024",
+  "source_key": "un_wpp",
   "release": "2024-main-demographic",
   "source_sha256": "<sha256 copied from the acquisition manifest>",
   "observations": [
