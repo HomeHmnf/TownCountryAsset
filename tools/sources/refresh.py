@@ -44,7 +44,7 @@ def run_refresh(
             "discovery_status": (
                 "manual_review_required"
                 if discovery["automation_status"] != "implemented"
-                else "adapter_declared",
+                else "adapter_declared"
             ),
             "downloads": [],
         }
