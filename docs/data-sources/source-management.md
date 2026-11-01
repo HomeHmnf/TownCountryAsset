@@ -4,7 +4,7 @@
 
 ## Purpose and authority
 
-`config/data_sources.json` is the single authoritative registry for external and local sources across the project. It covers WP1.5 providers and sources used by identity, geography, localization, flags, and asset refresh workflows. Domain contracts describe data requirements and refer to stable source IDs; they do not duplicate source definitions. The WP1.5 field contract (`config/wp1_5_data_sources.json`) therefore contains its approved 41 field definitions and references this registry.
+`config/data_sources.json` is the single authoritative registry for external and local sources across the project. It covers WP1.5 providers and sources used by identity, geography, localization, flags, and asset refresh workflows. Domain contracts describe data requirements and refer to stable provider IDs; edition years belong in release identifiers and manifests, never in source IDs. Historical IDs are declared in `legacy_source_ids` and remain readable for existing snapshots; historical manifests and raw snapshot paths are not rewritten. The WP1.5 field contract (`config/wp1_5_data_sources.json`) therefore contains its approved 41 field definitions and references this registry.
 
 Each source record can hold its homepage, domain, acquisition mode, direct download definitions, formats, releases, applicable WP1.5 field IDs, terms, attribution, license classification, and source-specific settings. Manual, API, Git, subscription, and per-record evidence sources remain registered even when no generic file download is configured.
 
@@ -23,10 +23,10 @@ Run from the repository root:
 
 ```sh
 uv run python -m tools.manage_sources list
-uv run python -m tools.manage_sources show un_wpp_2024
+uv run python -m tools.manage_sources show un_wpp
 uv run python -m tools.manage_sources check
 uv run python -m tools.manage_sources check --online
-uv run python -m tools.manage_sources acquire --source un_wpp_2024
+uv run python -m tools.manage_sources acquire --source un_wpp
 uv run python -m tools.manage_sources acquire --all
 uv run python -m tools.manage_sources status
 uv run python -m tools.manage_sources licenses
