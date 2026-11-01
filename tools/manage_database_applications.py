@@ -3,19 +3,19 @@ from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
-
 from tools.database.application_approval import (
     ApplicationApprovalError,
-    build_application_artifact,
     decide_application,
     propose_application,
 )
 from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
 from tools.database.schema import MigrationError, apply_migrations
-from tools.database.statistics_import import build_wp1_5_application_artifact
+from tools.database.statistics_import import (
+    StatisticsImportError, build_wp1_5_application_artifact,
+)
 from tools.database.identity_import import (
-    DEFAULT_REGISTRY_PATH, DEFAULT_CANDIDATE_DIR, build_identity_application_artifact,
+    DEFAULT_REGISTRY_PATH, DEFAULT_CANDIDATE_DIR, IdentityImportError,
+    build_identity_application_artifact,
 )
 
 
@@ -85,7 +85,7 @@ def main() -> int:
                 "actor": args.actor,
             }, ensure_ascii=False, indent=2))
         return 0
-    except (ApplicationApprovalError, MigrationError, OSError, ValueError) as exc:
+    except (ApplicationApprovalError, IdentityImportError, StatisticsImportError, MigrationError, OSError, ValueError) as exc:
         if connection.in_transaction:
             connection.rollback()
         print(f"Database application {args.command} failed: {exc}")
