@@ -94,7 +94,9 @@ def write_source_report_bundle(
     report_id = _safe_segment(report_id)
     report_type = _safe_segment(report_type)
     directory = Path(output_root) / report_id
-    directory.mkdir(parents=True, exist_ok=True)
+    if directory.exists():
+        raise FileExistsError(f"Source report already exists; refusing to overwrite immutable bundle: {directory}")
+    directory.mkdir(parents=True, exist_ok=False)
     paths = {"directory": str(directory), "summary": str(directory / "summary.md"),
              "provenance": str(directory / "provenance.json")}
     (directory / "summary.md").write_text(summary_markdown.rstrip() + "\n", encoding="utf-8")
@@ -135,7 +137,6 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
                 "discovery_mode": source.get("discovery_mode"),
                 "discovery_automation": source.get("discovery_automation"),
                 "status": "discovered", "provider_commit_timestamp": git_ref.get("commit_timestamp"),
-                "fetched_at": git_ref.get("fetched_at"),
                 "fetched_at": git_ref.get("fetched_at"),
                 "release_changed": git_ref.get("release_changed"), "detail": git_ref.get("detail"),
             }
