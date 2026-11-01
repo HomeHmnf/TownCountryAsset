@@ -69,6 +69,8 @@ def test_refresh_skips_valid_snapshots_and_reports_manual_sources(tmp_path):
     assert report["database_imported"] is False
     assert Path(report["report_paths"]["json"]).is_file()
     assert Path(report["report_paths"]["markdown"]).is_file()
+    assert (Path(report["report_paths"]["bundle"]) / "records.csv").is_file()
+    assert (Path(report["report_paths"]["bundle"]) / "provenance.json").is_file()
 
 
 def test_refresh_dry_run_does_not_acquire_missing_snapshot(tmp_path):
