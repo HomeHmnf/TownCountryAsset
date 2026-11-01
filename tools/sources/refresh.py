@@ -60,6 +60,20 @@ def run_refresh(
                 result.update(status="unchanged", detail="Existing immutable snapshot and manifest passed checksum validation")
             elif prior["status"] == "invalid":
                 result.update(status="validation_error", detail=prior["detail"])
+            elif prior["status"] == "missing" and (
+                (registry.get("_root", ROOT) / prior["raw_path"]).exists()
+                or (
+                    registry.get("_root", ROOT)
+                    / registry["storage"]["manifest_root"]
+                    / prior["snapshot_source_id"]
+                    / item["id"]
+                    / f"{item['release']}.json"
+                ).exists()
+            ):
+                result.update(
+                    status="validation_error",
+                    detail="Incomplete snapshot: raw file or manifest exists without its counterpart; preserved without overwrite",
+                )
             elif dry_run:
                 result.update(status="would_acquire", detail="Configured snapshot is missing; dry run made no network request")
             else:
