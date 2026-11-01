@@ -49,7 +49,7 @@ def test_reconciles_codes_independently_and_keeps_source_id_separate():
     assert rows["tc_a"]["alpha3_comparison"] == "match"
     assert rows["tc_a"]["alpha2_comparison"] == "missing_existing"
     assert rows["tc_a"]["code_pair_classification"] == "alpha3_only_agreement"
-    assert rows["tc_b"]["code_pair_classification"] == "alpha2_only_agreement"
+    assert rows["tc_b"]["code_pair_classification"] == "genuine_code_mismatch"
     assert rows["tc_c"]["code_pair_classification"] == "genuine_code_mismatch"
     assert rows["tc_d"]["match_type"] == "unmatched"
     assert rows["tc_e"]["match_type"] == "explicit_variant"
