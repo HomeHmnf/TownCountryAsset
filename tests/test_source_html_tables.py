@@ -37,6 +37,7 @@ def test_m49_adapter_retains_regions_and_excludes_rows_without_iso_codes():
     </table>"""
     parsed = parse_m49_html(html)
     assert parsed["row_count"] == 2 and parsed["iso_candidate_count"] == 1
+    assert parsed["table_id"] is None
     assert parsed["excluded_without_iso"][0]["m49_code"] == "002"
     assert parsed["iso_rows"][0]["Region Name"] == "Region A"
     assert "EX,EXM,Example Land" in render_iso_reference_csv(parsed)
