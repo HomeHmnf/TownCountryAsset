@@ -188,5 +188,27 @@ An application artifact fingerprints every reviewed input file (normalized obser
 
 The approval ledger distinguishes `pending`, `approved`, `rejected`, `invalidated` and `applied`. The event ledger records proposal, decision, invalidation and application events. The domain importer must verify an approved artifact before domain writes and mark it applied in the same SQLite transaction as those writes. Approval is single-use.
 
-This establishes the common approval data model and reusable enforcement primitives. It does **not yet mean every existing import command has been migrated to require an approval ID**; provider/domain import integrations and user-facing proposal/approve/apply commands are follow-on work. Until those integrations are complete, do not treat legacy import commands as approval-gated. The WP1.5 importer is specifically still on its existing direct-import interface.
+The WP1.5 importer is now integrated with this gate. Its proposal command fingerprints the normalized observations, explicit identity crosswalk, source manifest, immutable raw snapshot, WP1.5 field contract and (when present) project source-selection policy. The importer independently rebuilds and rechecks that artifact before writing, then records application completion in the same transaction as the statistics and provenance writes. Calling the importer without a valid approved application ID is rejected.
+
+Example WP1.5 workflow:
+
+```fish
+uv run python -m tools.manage_database_applications propose-wp1-5 \
+  --approval-id wp1-5-un-wpp-2024-001 \
+  --observations raw_data/normalized/un-wpp-observations.json \
+  --crosswalk raw_data/normalized/un-wpp-crosswalk.json \
+  --manifest data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json
+
+# Review the emitted input paths, checksums, release and artifact fingerprint before approving.
+uv run python -m tools.manage_database_applications approve \
+  --approval-id wp1-5-un-wpp-2024-001 --actor "reviewer-id"
+
+uv run python -m tools.import_wp1_5 \
+  --observations raw_data/normalized/un-wpp-observations.json \
+  --crosswalk raw_data/normalized/un-wpp-crosswalk.json \
+  --manifest data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json \
+  --approval-id wp1-5-un-wpp-2024-001
+```
+
+Use `reject` instead of `approve` to reject a pending proposal. Approval is single-use. A repeated identical dataset import requires a separately reviewed approval; it remains idempotent with respect to domain data. Changed or missing inputs invalidate an approval. The proposal/decision CLI currently exposes the WP1.5 proposal builder; other domain importers must adopt the same shared contract before they can be described as approval-gated.
 
