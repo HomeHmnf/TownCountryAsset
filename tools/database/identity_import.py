@@ -11,6 +11,10 @@ from pathlib import Path
 from typing import Any
 
 from tools.database.connection import REPOSITORY_ROOT, connect_database
+from tools.database.application_approval import (
+    ApplicationApprovalError, build_application_artifact,
+    require_approved_application, record_application_applied,
+)
 from tools.database.schema import apply_migrations, validate_database
 
 DEFAULT_REGISTRY_PATH = REPOSITORY_ROOT / "config" / "country_identity_registry.json"
@@ -238,12 +242,39 @@ def _ensure_name(
         )
 
 
+def build_identity_application_artifact(
+    registry_path: str | Path = DEFAULT_REGISTRY_PATH,
+    candidate_dir: str | Path = DEFAULT_CANDIDATE_DIR,
+) -> dict[str, Any]:
+    registry_path, candidate_dir = Path(registry_path), Path(candidate_dir)
+    manifest = _read_json(candidate_dir / "manifest.json")
+    registry = _read_json(registry_path)
+    candidate = _read_json(candidate_dir / "countries.json")
+    dataset, records, source = _validate_inputs(
+        registry, candidate, manifest, candidate_dir / "countries.json"
+    )
+    return build_application_artifact(
+        domain="identity_registry",
+        inputs=[
+            registry_path, candidate_dir / "manifest.json",
+            candidate_dir / "countries.json",
+        ],
+        metadata={
+            "dataset": dataset,
+            "archive_sha256": source["archive_sha256"],
+            "country_count": len(records),
+            "registry_status": registry.get("status"),
+        },
+    )
+
+
 def import_identity_registry(
     database_path: str | Path,
     registry_path: str | Path = DEFAULT_REGISTRY_PATH,
     candidate_dir: str | Path = DEFAULT_CANDIDATE_DIR,
+    *, approval_id: str,
 ) -> dict[str, int | str]:
-    """Import registry identity and source provenance; never approve or infer data."""
+    """Import approved registry identity and source provenance transactionally."""
     registry_path = Path(registry_path)
     candidate_dir = Path(candidate_dir)
     countries_path = candidate_dir / "countries.json"
@@ -251,11 +282,23 @@ def import_identity_registry(
     candidate = _read_json(countries_path)
     manifest = _read_json(candidate_dir / "manifest.json")
     dataset, records, source = _validate_inputs(registry, candidate, manifest, countries_path)
+    artifact = build_identity_application_artifact(registry_path, candidate_dir)
     now = _utc_now()
     connection = connect_database(database_path)
     try:
         apply_migrations(connection)
         connection.execute("BEGIN IMMEDIATE")
+        try:
+            require_approved_application(connection, approval_id=approval_id, artifact=artifact)
+        except ApplicationApprovalError as exc:
+            status_row = connection.execute(
+                "SELECT status FROM application_approvals WHERE approval_id = ?", (approval_id,)
+            ).fetchone()
+            if status_row is not None and status_row["status"] == "invalidated":
+                connection.commit()
+            elif connection.in_transaction:
+                connection.rollback()
+            raise IdentityImportError(str(exc)) from exc
         archive_sha = source["archive_sha256"]
         imports = connection.execute(
             "SELECT * FROM dataset_imports WHERE dataset = ? AND sha256 = ?",
@@ -315,6 +358,14 @@ def import_identity_registry(
         issues = validate_database(connection)
         if issues:
             raise IdentityImportError("Database validation failed: " + "; ".join(issues))
+        try:
+            record_application_applied(
+                connection, approval_id=approval_id,
+                application_id=f"identity:{dataset}:{archive_sha[:12]}",
+                details={"countries": len(records), "import_id": import_id},
+            )
+        except ApplicationApprovalError as exc:
+            raise IdentityImportError(str(exc)) from exc
         connection.commit()
         return {
             "dataset": dataset,
