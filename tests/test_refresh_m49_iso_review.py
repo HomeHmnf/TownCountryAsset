@@ -1,7 +1,12 @@
 from __future__ import annotations
 import json
+import sys
 from datetime import datetime, timezone
+
+import pytest
+
 from tools import refresh_m49_iso_review as tool
+
 
 def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monkeypatch):
     html = b"""<table><tr><th>Country or Area</th><th>M49 Code</th><th>ISO-alpha2 Code</th><th>ISO-alpha3 Code</th><th>Region Name</th></tr>
@@ -17,10 +22,13 @@ def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monk
     }
     state = {"status": "missing"}
     monkeypatch.setattr(tool, "load_registry", lambda path: registry)
+
     def inspect(_registry):
         return [{"source_id": "un_m49", "download_id": "country_area_overview_html",
                  "status": state["status"], "detail": "test"}]
+
     monkeypatch.setattr(tool, "inspect_snapshots", inspect)
+
     def acquire(_registry, sid, item):
         raw = tmp_path / "raw" / sid / item["id"] / item["release"] / item["filename"]
         raw.parent.mkdir(parents=True, exist_ok=True)
@@ -29,6 +37,7 @@ def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monk
         manifest.parent.mkdir(parents=True, exist_ok=True)
         manifest.write_text("{}", encoding="utf-8")
         state["status"] = "valid"
+
     monkeypatch.setattr(tool, "acquire_one", acquire)
     identity_registry = tmp_path / "identity.json"
     original_registry = {"records":[{
@@ -67,3 +76,46 @@ def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monk
     assert result["identity_reconciliation"]["summary"]["reference_count"] == 2
     assert result["identity_reconciliation"]["summary"]["matched_count"] == 1
     assert result["identity_reconciliation"]["summary"]["unmatched_reference_count"] == 1
+
+
+@pytest.mark.parametrize(
+    ("flags", "expected"),
+    [
+        (["--quiet"], ""),
+        ([], "Identity reconciliation"),
+        (["--verbose"], "Record-level results:"),
+    ],
+)
+def test_cli_terminal_output_modes_are_wired_end_to_end(monkeypatch, capsys, flags, expected):
+    summary = {
+        "registry_count": 1,
+        "reference_count": 1,
+        "matched_count": 1,
+        "unmatched_registry_count": 0,
+        "ambiguous_registry_count": 0,
+        "unmatched_reference_count": 0,
+        "alpha2_matches": 1,
+        "alpha2_mismatches": 0,
+        "alpha3_matches": 1,
+        "alpha3_mismatches": 0,
+        "code_pair_classifications": {"complete_pair_agreement": 1},
+        "source_id_alpha3_same": 1,
+        "source_id_alpha3_different": 0,
+    }
+    reconciliation = {"summary": summary, "records": []}
+    paths = {"directory": "reports/database/test/identity/m49-current"}
+    monkeypatch.setattr(
+        tool, "refresh",
+        lambda *args, **kwargs: {
+            "identity_reconciliation": reconciliation,
+            "identity_report_paths": paths,
+        },
+    )
+    monkeypatch.setattr(sys, "argv", ["refresh_m49_iso_review", *flags])
+
+    assert tool.main() == 0
+    output = capsys.readouterr().out
+    if expected:
+        assert expected in output
+    else:
+        assert output == ""
