@@ -17,7 +17,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 from tools.database.connection import REPOSITORY_ROOT
-from tools.sources.registry import load_registry, acquire_one
+from tools.sources.registry import load_registry, acquire_one, canonical_source_id
 
 DEFAULT_CONFIG = REPOSITORY_ROOT / "config" / "data_sources.json"
 DEFAULT_RAW_ROOT = REPOSITORY_ROOT / "raw_data" / "sources"
@@ -93,9 +93,17 @@ def acquire_source_snapshot(
 
     config = _load_config(Path(config_path))
     sources = config["sources"]
-    if source_key not in sources:
-        raise SourceAcquisitionError(f"Unknown source key in project source registry: {source_key}")
-    source = sources[source_key]
+    canonical_key = source_key
+    if canonical_key not in sources:
+        matches = [
+            sid for sid, record in sources.items()
+            if source_key in record.get("legacy_source_ids", [])
+        ]
+        if len(matches) == 1:
+            canonical_key = matches[0]
+        else:
+            raise SourceAcquisitionError(f"Unknown source key in project source registry: {source_key}")
+    source = sources[canonical_key]
 
     if (
         Path(config_path).resolve() == DEFAULT_CONFIG.resolve()
@@ -111,7 +119,7 @@ def acquire_source_snapshot(
         if len(matches) != 1:
             raise SourceAcquisitionError("No unique matching download in the central source registry")
         try:
-            return acquire_one(registry, source_key, matches[0], timeout=timeout, expected_sha256=expected_sha256)
+            return acquire_one(registry, canonical_key, matches[0], timeout=timeout, expected_sha256=expected_sha256)
         except Exception as exc:
             raise SourceAcquisitionError(str(exc)) from exc
 
