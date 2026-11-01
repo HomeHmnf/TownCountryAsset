@@ -443,6 +443,7 @@ def run_refresh(
                     )
                 except Exception as exc:
                     result.update(status="acquisition_failed", detail=str(exc))
+            result["release_changed"] = result.get("status") == "acquired_pending_source_validation"
             source_result["downloads"].append(result)
 
         if not source.get("downloads") and source_result["discovery_status"] == "implemented_adapter_not_applicable":
