@@ -202,7 +202,7 @@ def test_rejects_conflicting_existing_country_record_and_rolls_back(tmp_path):
     finally:
         connection.close()
     with pytest.raises(IdentityImportError, match="conflicts"):
-        import_identity_registry(database, registry, candidate)
+        approved_import(database, registry, candidate)
     connection = connect_database(database)
     try:
         assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
@@ -217,7 +217,7 @@ def test_rejects_duplicate_current_source_ids(tmp_path):
     data["records"][1]["source"]["current_source_id"] = "AAA"
     registry.write_text(json.dumps(data))
     with pytest.raises(IdentityImportError, match="Duplicate current source ID"):
-        import_identity_registry(tmp_path / "canonical.sqlite", registry, candidate)
+        approved_import(tmp_path / "canonical.sqlite", registry, candidate)
 
 
 
