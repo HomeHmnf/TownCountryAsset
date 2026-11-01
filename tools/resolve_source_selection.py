@@ -110,9 +110,15 @@ def main(argv: list[str] | None = None) -> int:
         ):
             raise SourceSelectionError("release_states must map source IDs to non-empty validated release IDs")
         if release_states is not None:
-            for source_id in release_states:
-                if canonical_source_id(registry, source_id) is None:
+            normalized_states = {}
+            for source_id, release_id in release_states.items():
+                canonical = canonical_source_id(registry, source_id)
+                if canonical is None:
                     raise SourceSelectionError(f"release_states contains an unregistered source ID: {source_id}")
+                if canonical in normalized_states and normalized_states[canonical] != release_id:
+                    raise SourceSelectionError(f"Conflicting release_states aliases for {canonical}")
+                normalized_states[canonical] = release_id
+            release_states = normalized_states
         assignments = payload.get("mixture_assignments", {})
         expected_records = payload.get("expected_records", {})
         if not isinstance(assignments, dict) or not isinstance(expected_records, dict):
