@@ -14,6 +14,9 @@ from tools.database.application_approval import (
 from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
 from tools.database.schema import MigrationError, apply_migrations
 from tools.database.statistics_import import build_wp1_5_application_artifact
+from tools.database.identity_import import (
+    DEFAULT_REGISTRY_PATH, DEFAULT_CANDIDATE_DIR, build_identity_application_artifact,
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -26,6 +29,10 @@ def build_parser() -> argparse.ArgumentParser:
     propose.add_argument("--crosswalk", required=True)
     propose.add_argument("--manifest", required=True)
     propose.add_argument("--config")
+    identity = commands.add_parser("propose-identity", help="Fingerprint and register an identity-registry import proposal")
+    identity.add_argument("--approval-id", required=True)
+    identity.add_argument("--registry", default=str(DEFAULT_REGISTRY_PATH))
+    identity.add_argument("--candidate-dir", default=str(DEFAULT_CANDIDATE_DIR))
     for name in ("approve", "reject"):
         decision = commands.add_parser(name, help=f"Record explicit {name} decision")
         decision.add_argument("--approval-id", required=True)
@@ -48,6 +55,8 @@ def main() -> int:
             if args.config:
                 kwargs["config_path"] = args.config
             artifact = build_wp1_5_application_artifact(**kwargs)
+        elif args.command == "propose-identity":
+            artifact = build_identity_application_artifact(args.registry, args.candidate_dir)
             connection.execute("BEGIN IMMEDIATE")
             propose_application(connection, approval_id=args.approval_id, artifact=artifact)
             connection.commit()
