@@ -14,7 +14,8 @@ def _registry(tmp_path: Path) -> dict:
         "storage": {"raw_root": "raw", "manifest_root": "manifests", "reports_root": "reports"},
         "release_management": {
             "selection_policy": "latest_validated",
-            "discovery_modes": {"manual_review": "manual"},
+            "discovery_modes": {"manual_review": "manual", "rolling_url": "rolling", "website_page": "page"},
+            "release_record": {"path_template": "reports/sources/releases/<source-id>.json"},
         },
         "sources": {
             "sample": {
@@ -128,4 +129,117 @@ def test_refresh_reports_incomplete_snapshot_without_overwriting(tmp_path, monke
     item = report["sources"][0]["downloads"][0]
     assert item["status"] == "validation_error"
     assert raw.read_bytes() == b"partial"
+
+def _enable_fingerprint_discovery(registry: dict, mode: str = "rolling_url") -> dict:
+    source = registry["sources"]["sample"]
+    source["release_discovery"]["mode"] = mode
+    source["release_discovery"]["automation_status"] = "implemented"
+    source["downloads"][0]["release_kind"] = "rolling" if mode == "rolling_url" else "current_reference"
+    return registry
+
+
+def _candidate(payload: bytes = b"new-provider-content") -> dict:
+    digest = hashlib.sha256(payload).hexdigest()
+    return {
+        "release_id": "content-" + digest,
+        "provider_release_label": "content-sha256:" + digest,
+        "sha256": digest,
+        "byte_count": len(payload),
+        "content_type": "text/csv",
+        "url": "https://example.test/data.csv",
+        "discovered_at": "2026-11-01T00:00:00+00:00",
+    }
+
+
+def test_fingerprint_discovery_records_latest_available_and_acquires_immutable_release(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _enable_fingerprint_discovery(_registry(tmp_path))
+    candidate = _candidate()
+    monkeypatch.setattr(module, "_discover_fingerprint", lambda *args, **kwargs: candidate)
+    monkeypatch.setattr(module, "_inspect_release_snapshot", lambda *args, **kwargs: {
+        "status": "missing", "raw_path": "raw/sample/dataset/missing/data.csv",
+    })
+    monkeypatch.setattr(module, "acquire_one", lambda reg, sid, item, **kwargs: {
+        "sha256": candidate["sha256"], "byte_count": candidate["byte_count"],
+    })
+
+    report = run_refresh(registry, report_root=tmp_path / "reports" / "refreshes")
+    item = report["sources"][0]["downloads"][0]
+    assert item["status"] == "acquired_pending_source_validation"
+    state_path = tmp_path / "reports/sources/releases/sample.json"
+    state = json.loads(state_path.read_text(encoding="utf-8"))
+    assert state["latest_available"]["release_id"] == candidate["release_id"]
+    assert state["latest_available"]["status"] == "acquired"
+    assert state["latest_validated"] is None
+    assert state["latest_applied"] is None
+    assert report["database_imported"] is False
+
+
+def test_fingerprint_discovery_skips_existing_identical_snapshot(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _enable_fingerprint_discovery(_registry(tmp_path))
+    candidate = _candidate()
+    monkeypatch.setattr(module, "_discover_fingerprint", lambda *args, **kwargs: candidate)
+    monkeypatch.setattr(module, "_inspect_release_snapshot", lambda *args, **kwargs: {
+        "status": "valid", "raw_path": "raw/sample/dataset/existing/data.csv",
+    })
+    monkeypatch.setattr(
+        module, "acquire_one",
+        lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("identical release must not be reacquired")),
+    )
+    report = run_refresh(registry, report_root=tmp_path / "reports" / "refreshes")
+    assert report["sources"][0]["downloads"][0]["status"] == "unchanged"
+    state = json.loads((tmp_path / "reports/sources/releases/sample.json").read_text(encoding="utf-8"))
+    assert len(state["history"]) == 1
+    assert state["latest_validated"] is None
+
+
+def test_fingerprint_discovery_failure_is_reported_without_release_state(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _enable_fingerprint_discovery(_registry(tmp_path))
+
+    def fail(*args, **kwargs):
+        raise RuntimeError("endpoint unavailable")
+
+    monkeypatch.setattr(module, "_discover_fingerprint", fail)
+    report = run_refresh(registry, report_root=tmp_path / "reports" / "refreshes")
+    assert report["sources"][0]["downloads"][0]["status"] == "discovery_or_acquisition_failed"
+    assert not (tmp_path / "reports/sources/releases/sample.json").exists()
+
+
+def test_fingerprint_discovery_dry_run_does_not_contact_provider(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _enable_fingerprint_discovery(_registry(tmp_path))
+    monkeypatch.setattr(
+        module, "_discover_fingerprint",
+        lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("dry run must not contact provider")),
+    )
+    report = run_refresh(
+        registry, dry_run=True, report_root=tmp_path / "reports" / "refreshes",
+    )
+    assert report["sources"][0]["downloads"][0]["status"] == "would_discover"
+    assert not (tmp_path / "reports/sources/releases/sample.json").exists()
+
+
+def test_fingerprint_acquisition_race_is_not_marked_acquired(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _enable_fingerprint_discovery(_registry(tmp_path))
+    candidate = _candidate(b"first response")
+    monkeypatch.setattr(module, "_discover_fingerprint", lambda *args, **kwargs: candidate)
+    monkeypatch.setattr(module, "_inspect_release_snapshot", lambda *args, **kwargs: {
+        "status": "missing", "raw_path": "raw/sample/dataset/missing/data.csv",
+    })
+    monkeypatch.setattr(module, "acquire_one", lambda *args, **kwargs: {
+        "sha256": hashlib.sha256(b"different response").hexdigest(), "byte_count": 18,
+    })
+    report = run_refresh(registry, report_root=tmp_path / "reports" / "refreshes")
+    assert report["sources"][0]["downloads"][0]["status"] == "changed_during_acquisition"
+    state = json.loads((tmp_path / "reports/sources/releases/sample.json").read_text(encoding="utf-8"))
+    assert state["latest_available"]["status"] == "discovered"
+    assert state["latest_validated"] is None
 
