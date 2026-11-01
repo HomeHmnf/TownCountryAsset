@@ -220,8 +220,11 @@ def build_wp1_5_application_artifact(
         Path(config_path), raw_path,
     ]
     selection_policy = REPOSITORY_ROOT / "config" / "source_selection.json"
+    policy_version = None
     if selection_policy.is_file():
         inputs.append(selection_policy)
+        policy = _read_object(selection_policy, "source-selection policy")
+        policy_version = policy.get("policy_version")
     normalized = _read_object(observations_path, "normalized observations")
     return build_application_artifact(
         domain="wp1_5_statistics",
@@ -230,7 +233,7 @@ def build_wp1_5_application_artifact(
             "source_key": normalized.get("source_key"),
             "release": normalized.get("release"),
             "source_sha256": normalized.get("source_sha256"),
-            "policy_version": 1,
+            "policy_version": policy_version,
         },
     )
 
