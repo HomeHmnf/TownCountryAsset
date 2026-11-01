@@ -210,6 +210,9 @@ uv run python -m tools.import_wp1_5 \
   --approval-id wp1-5-un-wpp-2024-001
 ```
 
+Example identity-registry workflow:
+
+```fish
 uv run python -m tools.manage_database_applications propose-identity \
   --approval-id identity-registry-2026-001 \
   --registry config/country_identity_registry.json \
@@ -222,6 +225,7 @@ uv run python -m tools.import_identity_registry \
   --registry config/country_identity_registry.json \
   --candidate-dir generated/town_country_asset_candidate \
   --approval-id identity-registry-2026-001
+```
 
-Use `reject` instead of `approve` to reject a pending proposal. Approval is single-use. A repeated identical dataset import requires a separately reviewed approval; it remains idempotent with respect to domain data. Changed or missing inputs invalidate an approval. The proposal/decision CLI currently exposes the WP1.5 proposal builder; other domain importers must adopt the same shared contract before they can be described as approval-gated.
+Use `reject` instead of `approve` to reject a pending proposal. Approval is single-use. A repeated identical dataset import requires a separately reviewed approval; it remains idempotent with respect to domain data. Changed or missing inputs invalidate an approval. The proposal/decision CLI currently exposes WP1.5 and identity-registry proposal builders. Country-data and review-data importers remain to be migrated; until then, those legacy import paths are not approval-gated.
 
