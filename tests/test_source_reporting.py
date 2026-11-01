@@ -160,6 +160,8 @@ def test_resolution_cli_writes_read_only_project_wide_audit(tmp_path):
     provenance = json.loads((bundles[0] / "provenance.json").read_text(encoding="utf-8"))
     assert provenance["database_imported"] is False
     assert provenance["policy_version"] == 1
+    assert provenance["summary"]["field_count"] == 41
+    assert "religions" in provenance["summary"]["coverage_by_field"]
     with (bundles[0] / "records.csv").open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
     population = next(row for row in rows if row["field_key"] == "population")
