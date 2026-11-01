@@ -146,3 +146,7 @@ The command writes timestamped JSON and Markdown reports below `reports/sources/
 
 The refresh command never imports into SQLite, changes approved data, or approves review proposals. Acquisition, provider validation, policy-based selection, and canonical application remain separate steps.
 
+## Source-selection boundary
+
+The approved field policy is in `config/source_selection.json`. The shared resolver in `tools/database/source_selection.py` accepts only observations from a source's `latest_validated` release and returns a provenance-rich decision. It enforces priority/fallback/custom-mixture semantics and manual override precedence; it does not acquire or validate provider datasets, calculate derived values, write SQLite, or publish assets. Fallback observations require explicit compatibility evidence. See `docs/data-sources/source-selection.md` for the normalized observation contract and limitations.
+
