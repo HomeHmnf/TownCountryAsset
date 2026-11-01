@@ -99,6 +99,7 @@ def test_refresh_acquires_missing_configured_snapshot_without_promoting_release_
     report = run_refresh(registry, report_root=tmp_path / "reports")
     item = report["sources"][0]["downloads"][0]
     assert item["status"] == "acquired_pending_source_validation"
+    assert item["release_changed"] is True
     assert registry["sources"]["sample"]["release_discovery"]["latest_validated"] is None
     assert report["database_imported"] is False
 
