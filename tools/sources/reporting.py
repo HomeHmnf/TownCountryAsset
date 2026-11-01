@@ -226,7 +226,7 @@ def _selection_rows(decisions: Sequence[Mapping[str, Any]]) -> tuple[list[dict[s
         records.append(row)
         if row.get("selection_status") == "unavailable":
             missing.append({key: row.get(key) for key in ARTIFACT_FIELDS["missing"]})
-        if row.get("fallback_used"):
+        if row.get("fallback_used") and row.get("selection_mode") == "primary_with_fallback":
             fallbacks.append({
                 "game_id": row.get("game_id"), "field_key": row.get("field_key"),
                 "record_key": row.get("record_key"), "subfield_key": row.get("subfield_key"),
