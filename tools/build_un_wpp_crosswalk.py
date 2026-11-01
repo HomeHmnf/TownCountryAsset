@@ -142,6 +142,9 @@ def build_reviewed_crosswalk(
 
     for row in records:
         game_id = row.get("game_id", "").strip()
+        if game_id == TAIWAN_GAME_ID:
+            counts["handled_by_taiwan_exception"] += 1
+            continue
         status = row.get("review_status", "")
         match_type = row.get("identity_match_type", "")
         comparison = row.get("name_comparison", "")
