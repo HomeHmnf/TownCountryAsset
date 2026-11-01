@@ -4,10 +4,44 @@ from __future__ import annotations
 from typing import Any, Iterable
 
 from tools.database.source_selection import (
-    POPULATED_STATUSES, SourceSelectionError, _field, _structured_item_value_valid,
-    _structured_scope, _timestamp, _unit_allowed, _validated_release_id, validate_policy,
+    POPULATED_STATUSES, SourceSelectionError, _field,
+    _timestamp, _unit_allowed, _validated_release_id, validate_policy,
 )
 from tools.sources.registry import canonical_source_id
+
+
+
+def _structured_scope(row):
+    record_key = row.get("record_key")
+    subfield_key = row.get("subfield_key")
+    if not isinstance(record_key, str) or not record_key.strip():
+        raise SourceSelectionError("Structured observations require record_key")
+    if subfield_key is not None and (not isinstance(subfield_key, str) or not subfield_key.strip()):
+        raise SourceSelectionError("Structured subfield_key must be non-empty text")
+    return record_key, subfield_key
+
+
+def _item_value_valid(value, status):
+    if status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
+        return False
+    if value is None:
+        return status in {"unavailable", "not_applicable"}
+    if status not in POPULATED_STATUSES or isinstance(value, bool):
+        return False
+    if isinstance(value, (int, float)):
+        import math
+        try:
+            return math.isfinite(float(value))
+        except (OverflowError, ValueError):
+            return False
+    if isinstance(value, (str, dict, list)):
+        import json
+        try:
+            json.dumps(value, ensure_ascii=False, allow_nan=False)
+        except (TypeError, ValueError):
+            return False
+        return True
+    return False
 
 
 def _source_records(observations, *, game_id, field_key, field, source_id, registry, release_states):
@@ -29,7 +63,7 @@ def _source_records(observations, *, game_id, field_key, field, source_id, regis
         scope = _structured_scope(row)
         if not _unit_allowed(field, row.get("unit")):
             raise SourceSelectionError(f"Invalid unit in structured record {scope}")
-        if not _structured_item_value_valid(row.get("value"), row.get("status")):
+        if not _item_value_valid(row.get("value"), row.get("status")):
             raise SourceSelectionError(f"Invalid value/status in structured record {scope}")
         if not isinstance(row.get("observation_period"), str) or not row["observation_period"]:
             raise SourceSelectionError("Structured records require observation_period")
@@ -60,7 +94,7 @@ def _overrides(records, *, game_id, field_key, field):
         if any(not isinstance(row.get(k), str) or not row[k].strip() for k in required):
             raise SourceSelectionError("Structured override lacks required audit metadata")
         _timestamp(row["effective_at"], "manual_override.effective_at")
-        if not _unit_allowed(field, row["unit"]) or not _structured_item_value_valid(row.get("value"), row["status"]):
+        if not _unit_allowed(field, row["unit"]) or not _item_value_valid(row.get("value"), row["status"]):
             raise SourceSelectionError("Structured override violates field value/unit/status contract")
         if key in result:
             raise SourceSelectionError(f"Multiple overrides for structured scope {key}")
