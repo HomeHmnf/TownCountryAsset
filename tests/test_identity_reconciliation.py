@@ -54,6 +54,7 @@ def test_reconciles_codes_independently_and_keeps_source_id_separate():
     assert rows["tc_c"]["code_pair_classification"] == "genuine_code_mismatch"
     assert rows["tc_d"]["match_type"] == "unmatched"
     assert rows["tc_e"]["match_type"] == "explicit_variant"
+    assert rows["tc_e"]["name_comparison"] == "explicit_variant"
     assert rows["tc_a"]["source_id_vs_reference_alpha3"] == "same"
     assert result["summary"]["unmatched_reference_count"] == 1
     assert repr(registry) == before
