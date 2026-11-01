@@ -13,7 +13,8 @@ Do not add explanatory pseudo-comments to JSON. JSON files must remain valid JSO
 | Configuration | Purpose | Main consumers |
 |---|---|---|
 | `config/data_sources.json` | Authoritative catalogue of external and local data sources, acquisition definitions, terms, license metadata, and storage conventions | Shared source manager and provider refreshers |
-| `config/wp1_5_data_sources.json` | WP1.5 field contract: approved field IDs, keys, storage types, units, candidate source references, and field-specific methodology | WP1.5 acquisition, normalization, and import |
+| `config/wp1_5_data_sources.json` | WP1.5 field contract: approved field IDs, keys, storage types, units, and field-specific methodology | WP1.5 acquisition, normalization, and import |
+| `config/source_selection.json` | Versioned project-wide policy for primary sources, fallbacks, release selection, manual overrides, compatibility, and missing values | Source refresh, resolution, reporting, and later explicit application |
 | `config/wp1_5_resource_catalog.json` | Candidate structured catalogue of natural-resource groups, resource keys, metrics, and required record fields | WP1.5 natural-resources handling |
 | `config/country_identity_registry.json` | Persistent country/entity identity registry; stable `game_id`, names, source identifiers, ISO attributes, and review state | Identity, source crosswalk, review and import workflows |
 | `config/country_flag_mapping.json` | Explicit mapping from persistent identities to flag-source codes, including review status and evidence | Flag refresh and asset generation |
@@ -38,9 +39,9 @@ The inventory must be updated whenever a meaningful configuration file is added,
 - License classification is informational for acquisition; it does not grant redistribution rights or make restricted material open.
 - Raw snapshots remain local and immutable; manifests, checksums, source metadata, and policy documentation are tracked.
 
-### Source-selection policy (planned configuration)
+### Source-selection policy
 
-The future `config/source_selection.json` will be the manually reviewed policy for choosing sources per field. It is deliberately separate from `data_sources.json`: availability and acquisition metadata must not be confused with a decision to use a source.
+`config/source_selection.json` is the manually reviewed, versioned policy for choosing sources per field. It is deliberately separate from `data_sources.json`: availability and acquisition metadata must not be confused with a decision to use a source. The initial policy covers the 41 owner-approved WP1.5 fields and is project-wide in design.
 
 Exactly three selection modes are approved:
 
@@ -50,7 +51,7 @@ Exactly three selection modes are approved:
 
 The third mode supports a manual override dataset/file, but the override data itself should be stored separately from the policy. The policy points to it and defines how it wins. This prevents source preference changes from erasing manual work.
 
-No source-selection file or assignments are to be introduced as approved selections until the M49 identity/reference review has been completed and the owner has reviewed the candidates. The approved policy must be versioned and auditable.
+The current policy is version 1 and has owner-approved status. Its 41 field assignments encode the approved source priorities and fallback modes. A `primary_with_fallback` field may have a conditional fallback requirement that is not yet executable because a suitable provider is not registered; such a fallback must not be guessed or silently substituted. For example, the capital-city policy records the need for a suitable UN official source but does not mis-use the UN M49 identity reference as a capital source. The natural-resources policy requires resource/metric-specific specialist providers to be registered and mapped before they can fill USGS coverage gaps.
 
 ### Resolution and provenance rules
 
@@ -64,6 +65,18 @@ All modes must follow these rules:
 - Report conflicts, missing values, rejected candidates, fallback use, and manual overrides.
 - A changed source release may trigger a new validation/review report; it must not silently change the approved selection or resolved dataset.
 - A policy change must be explicit, reviewed, versioned, and reproducible against preserved source snapshots.
+
+### Release selection and refresh boundary
+
+`release_policy.selection` is `latest_validated`, not `latest_available`. These terms are distinct:
+
+- **Latest available**: newest release identified at the provider, whether or not it has been acquired or checked.
+- **Latest validated**: newest acquired release that passed the registered acquisition and source/data-contract checks; this is the release eligible for selection.
+- **Latest applied**: release actually imported into the canonical dataset. It may lag the latest validated release.
+
+Refresh discovers, acquires and validates releases while preserving immutable snapshots. It does not resolve or import values automatically. Resolution uses the approved policy and records decisions; applying resolved data to the canonical database remains a separate explicit step.
+
+The manual override dataset is `data/manual/source_overrides.json`; it is intentionally separate from policy. The file need not exist until actual overrides are supplied. The policy defines its precedence and expected scope, while each override must retain its reason and provenance.
 
 ## Identity and identifier configuration
 
@@ -79,7 +92,7 @@ Related references: `docs/architecture/country-identity-contract.md`, `docs/arch
 ## WP1.5 data configuration
 
 - The WP1.5 contract contains the 41 owner-approved field IDs. Do not add fields or reinterpret a field without an explicit scope decision.
-- `primary_source` values in the current contract identify candidates, not final owner-approved source-selection policy.
+- `primary_source` values in the contract describe the source candidates; `config/source_selection.json` is authoritative for approved source priorities, selection mode and fallback rules.
 - Scalar observations and structured collections use their declared storage types. Preserve units, definitions, reference periods, actual/estimated/projected status, source release, and methodology.
 - Keep resource catalogue definitions distinct from observations. A catalogue entry does not imply that a country has that resource.
 - Do not infer absence from a missing provider row.
