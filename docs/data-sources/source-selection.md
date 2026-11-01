@@ -92,3 +92,36 @@ A valid matching override wins over provider observations. Its identifier, reaso
 - Resource-specific fallback mappings are constrained to the matching `record_key`; a provider mapped for one commodity cannot fill another commodity. Empty mappings mean no specialist fallback is eligible.
 
 The resolver is deterministic for the same policy, validated-release ledger, observations, overrides and assignments. Its returned decision is suitable as input to the standardized source-selection reports planned for the next stage. It never writes a decision or changes the canonical database itself.
+
+## Standardized resolution and audit reports
+
+Resolve an already-normalized input file and produce the complete project-wide selection audit:
+
+```fish
+uv run python -m tools.resolve_source_selection --input raw_data/normalized/source-observations.json
+```
+
+Optional arguments are `--policy`, `--registry`, `--overrides`, and `--output-dir`. Defaults use the approved policy, central source registry, policy-declared manual override path, and `reports/sources/selections`. The input must be a JSON object with `schema_version: 1`, an `observations` array, and either a `game_ids` array or observations/overrides containing `game_id`. Each `game_id` must already have been assigned through the reviewed identity crosswalk; this command does not perform identity matching.
+
+Optional input properties are:
+- `release_states`: explicit mapping of stable source IDs to validated release IDs. If omitted, the resolver reads each source's `latest_validated` release ledger.
+- `manual_overrides`: an array of scoped override records. If omitted, the resolver reads the policy-declared override file when it exists.
+- `mixture_assignments`: object keyed by field key, each containing explicit game/record-to-source assignments.
+- `expected_records`: object keyed by structured field key, each containing the fixed catalogue's expected `record_key` and optional `subfield_key` entries.
+
+The resolver evaluates every policy field for every supplied identity. Structured fields are resolved independently per record/subfield. An expected structured catalogue is needed to emit explicit unavailable rows for catalogue items with no provider observation; without an expected catalogue, the resolver does not invent missing records.
+
+Each run writes one bundle under `reports/sources/selections/<run-id>/`:
+- `summary.md`: coverage by status, country/entity, field, selected source and release.
+- `records.csv`: every resolved scalar field and structured record/subfield, including source and release provenance.
+- `missing.csv`: unavailable values only. Not-applicable values remain distinct in `records.csv`.
+- `fallbacks.csv`: fallback decisions and compatibility evidence.
+- `conflicts.csv`: rejected candidates and primary candidates not selected because an approved fallback filled the gap.
+- `overrides.csv`: override ID, reason, author, effective time and prior provider candidate.
+- `release_changes.csv` and `failures.csv`: present in the shared bundle contract; empty for a selection-only run.
+- `provenance.json`: input checksum, policy version, release-state snapshot, run metadata and aggregate coverage.
+
+Refresh runs use the same artifact contract under `reports/sources/refreshes/<run-id>/`. Their `records.csv` contains unchanged and attempted snapshots, `release_changes.csv` isolates newly discovered/acquired candidates, and `failures.csv` records acquisition or validation failures. Sources requiring manual review are visible as records, not misclassified as acquisition failures.
+
+Reports are reproducible audit artifacts, not approvals. Neither refresh nor resolution changes the canonical database, advances `latest_validated`, or advances `latest_applied`. The consolidated selection bundle is the single completeness audit for the supplied run; do not create separate competing completeness reports for each field.
+
