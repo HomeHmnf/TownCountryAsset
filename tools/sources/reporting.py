@@ -141,7 +141,7 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
                 "source_id": source_id, "status": source.get("discovery_status"),
                 "detail": source.get("detail") or "No generic download was configured for this source",
             })
-        if source.get("discovery_status") == "discovery_failed":
+        if source.get("discovery_status") == "discovery_failed" and not source.get("downloads"):
             failures.append({
                 "source_id": source_id, "status": source.get("discovery_status"),
                 "detail": source.get("detail") or "Release discovery failed",
@@ -177,7 +177,7 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
         "", "## Release changes and snapshot outcomes", "",
         f"- Release/snapshot records: {len(records)}",
         f"- Candidate release changes: {len(changes)}",
-        f"- Failures or manual-review items: {len(failures)}",
+        f"- Acquisition/discovery/validation failures: {len(failures)}",
         "", "## Boundaries", "",
     ])
     lines.extend(f"- {item}" for item in report.get("limitations", []))
