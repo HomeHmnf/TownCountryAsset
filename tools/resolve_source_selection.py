@@ -31,7 +31,9 @@ def _sha256(path: Path) -> str:
 
 
 def _load_overrides(path: Path | None, payload: dict[str, Any], policy: dict[str, Any]) -> tuple[list[dict[str, Any]], str | None, str | None]:
-    if isinstance(payload.get("manual_overrides"), list):
+    if "manual_overrides" in payload:
+        if not isinstance(payload["manual_overrides"], list):
+            raise SourceSelectionError("Input manual_overrides must be an array")
         return payload["manual_overrides"], "input", None
     if path is None:
         configured = Path(policy["_root"]) / policy["manual_overrides"]["dataset"]
@@ -71,7 +73,7 @@ def _release_state_summary(registry: dict[str, Any]) -> dict[str, str]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, required=True, help="Normalized observations and identity crosswalk JSON")
+    parser.add_argument("--input", type=Path, required=True, help="Normalized observations JSON; game_id values must already use the reviewed identity crosswalk")
     parser.add_argument("--policy", type=Path, default=Path("config/source_selection.json"))
     parser.add_argument("--registry", type=Path, default=Path("config/data_sources.json"))
     parser.add_argument("--overrides", type=Path, help="Optional manual override JSON; otherwise use policy path")
@@ -87,11 +89,14 @@ def main(argv: list[str] | None = None) -> int:
             raise SourceSelectionError("Selection input observations must be an array of objects")
         registry = load_registry(args.registry)
         policy = load_policy(args.policy, registry)
+        input_overrides = payload.get("manual_overrides", [])
+        if not isinstance(input_overrides, list):
+            raise SourceSelectionError("Input manual_overrides must be an array")
         game_ids = payload.get("game_ids")
         if game_ids is None:
             game_ids = sorted({
-                row.get("game_id") for row in observations
-                if isinstance(row.get("game_id"), str) and row.get("game_id")
+                row.get("game_id") for row in [*observations, *input_overrides]
+                if isinstance(row, dict) and isinstance(row.get("game_id"), str) and row.get("game_id")
             })
         if not isinstance(game_ids, list) or not game_ids or any(
             not isinstance(value, str) or not value for value in game_ids
@@ -109,6 +114,8 @@ def main(argv: list[str] | None = None) -> int:
         expected_records = payload.get("expected_records", {})
         if not isinstance(assignments, dict) or not isinstance(expected_records, dict):
             raise SourceSelectionError("mixture_assignments and expected_records must be objects")
+        if any(not isinstance(value, dict) for value in assignments.values()):
+            raise SourceSelectionError("Each mixture_assignments field entry must be an object")
         overrides, override_path, override_sha = _load_overrides(args.overrides, payload, policy)
 
         decisions = []
