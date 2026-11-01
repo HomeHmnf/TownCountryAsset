@@ -13,6 +13,10 @@ from tools.database.schema import MigrationError, apply_migrations
 from tools.database.statistics_import import (
     StatisticsImportError, build_wp1_5_application_artifact,
 )
+from tools.database.country_data_import import (
+    CountryDataImportError, DEFAULT_CANDIDATE_DIR as DEFAULT_COUNTRY_CANDIDATE_DIR,
+    build_country_data_application_artifact,
+)
 from tools.database.identity_import import (
     DEFAULT_REGISTRY_PATH, DEFAULT_CANDIDATE_DIR, IdentityImportError,
     build_identity_application_artifact,
@@ -33,6 +37,9 @@ def build_parser() -> argparse.ArgumentParser:
     identity.add_argument("--approval-id", required=True)
     identity.add_argument("--registry", default=str(DEFAULT_REGISTRY_PATH))
     identity.add_argument("--candidate-dir", default=str(DEFAULT_CANDIDATE_DIR))
+    country = commands.add_parser("propose-country-data", help="Fingerprint country attributes and geometry import")
+    country.add_argument("--approval-id", required=True)
+    country.add_argument("--candidate-dir", default=str(DEFAULT_COUNTRY_CANDIDATE_DIR))
     for name in ("approve", "reject"):
         decision = commands.add_parser(name, help=f"Record explicit {name} decision")
         decision.add_argument("--approval-id", required=True)
@@ -57,7 +64,9 @@ def main() -> int:
             artifact = build_wp1_5_application_artifact(**kwargs)
         elif args.command == "propose-identity":
             artifact = build_identity_application_artifact(args.registry, args.candidate_dir)
-        if args.command in {"propose-wp1-5", "propose-identity"}:
+        elif args.command == "propose-country-data":
+            artifact = build_country_data_application_artifact(args.candidate_dir)
+        if args.command in {"propose-wp1-5", "propose-identity", "propose-country-data"}:
             connection.execute("BEGIN IMMEDIATE")
             propose_application(connection, approval_id=args.approval_id, artifact=artifact)
             connection.commit()
@@ -85,7 +94,7 @@ def main() -> int:
                 "actor": args.actor,
             }, ensure_ascii=False, indent=2))
         return 0
-    except (ApplicationApprovalError, IdentityImportError, StatisticsImportError, MigrationError, OSError, ValueError) as exc:
+    except (ApplicationApprovalError, CountryDataImportError, IdentityImportError, StatisticsImportError, MigrationError, OSError, ValueError) as exc:
         if connection.in_transaction:
             connection.rollback()
         print(f"Database application {args.command} failed: {exc}")
