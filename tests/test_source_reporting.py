@@ -162,3 +162,24 @@ def test_resolution_cli_writes_read_only_project_wide_audit(tmp_path):
     population = next(row for row in rows if row["field_key"] == "population")
     assert population["value"] == "1234"
     assert population["selected_source"] == "un_wpp"
+
+def test_resolution_cli_reads_latest_validated_ledgers_when_release_states_omitted(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    input_path = tmp_path / "empty-observations.json"
+    input_path.write_text(json.dumps({
+        "schema_version": 1,
+        "game_ids": ["tc_demo"],
+        "observations": [],
+    }), encoding="utf-8")
+    result = resolve_main([
+        "--input", str(input_path),
+        "--policy", str(root / "config/source_selection.json"),
+        "--registry", str(root / "config/data_sources.json"),
+        "--output-dir", str(tmp_path / "reports"),
+    ])
+    assert result == 0
+    bundle = next((tmp_path / "reports").iterdir())
+    provenance = json.loads((bundle / "provenance.json").read_text(encoding="utf-8"))
+    assert provenance["latest_validated_releases"] == {}
+    assert provenance["database_imported"] is False
+
