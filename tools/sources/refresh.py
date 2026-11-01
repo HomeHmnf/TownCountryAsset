@@ -147,7 +147,8 @@ def _record_release(
         entry = {
             "release_id": discovered["release_id"],
             "provider_release_label": discovered["provider_release_label"],
-            "provider_published_at": None,
+            "provider_published_at": discovered.get("provider_published_at"),
+            "provider_commit_timestamp": discovered.get("provider_commit_timestamp"),
             "discovered_at": discovered["discovered_at"],
             "acquired_at": None,
             "validated_at": None,
