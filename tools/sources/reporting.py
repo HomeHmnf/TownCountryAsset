@@ -132,7 +132,7 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
             row = {
                 "source_id": source_id, "release_id": git_ref.get("release_id"),
                 "status": "discovered", "provider_commit_timestamp": git_ref.get("commit_timestamp"),
-                "detail": git_ref.get("detail"),
+                "fetched_at": git_ref.get("fetched_at"), "detail": git_ref.get("detail"),
             }
             records.append(row)
             changes.append(row)
@@ -297,6 +297,14 @@ def write_selection_report_bundle(
                 metrics[status] += 1
         return grouped
 
+    country_coverage = coverage("game_id")
+    field_coverage = coverage("field_key")
+    empty_metrics = {"total": 0, "populated": 0, "unavailable": 0, "not_applicable": 0}
+    for game_id in country_ids:
+        country_coverage.setdefault(game_id, dict(empty_metrics))
+    for field_key in field_keys:
+        field_coverage.setdefault(field_key, dict(empty_metrics))
+
     summary = {
         "decision_count": len(records),
         "selected_count": sum(row.get("selection_status") in {"observed", "estimated", "projected"} for row in records),
@@ -305,7 +313,7 @@ def write_selection_report_bundle(
         "fallback_count": len(fallbacks), "override_count": len(overrides),
         "conflict_count": len(conflicts), "country_count": len(country_ids),
         "field_count": len(field_keys), "by_status": dict(status_counts),
-        "coverage_by_country": coverage("game_id"), "coverage_by_field": coverage("field_key"),
+        "coverage_by_country": country_coverage, "coverage_by_field": field_coverage,
         "by_selected_source": dict(source_counts), "by_release": dict(release_counts),
     }
     lines = [
