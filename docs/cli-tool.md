@@ -8,6 +8,8 @@ The one-command workflow fetches configured source datasets, preserves source ev
 
 ## Configuration
 
+See the [central project configuration reference](configuration-reference.md) for configuration ownership, source-selection policy, data contracts, and change rules.
+
 Copy `.env.example` to `.env` and customize it. The CLI reads `.env` without requiring a third-party dotenv package. Existing process environment variables take precedence over values in `.env`. Never commit secrets or a local `.env`.
 
 | Variable | Purpose |
