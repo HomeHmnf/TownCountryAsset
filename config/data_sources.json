@@ -704,11 +704,11 @@
       "release_discovery": {
         "mode": "rolling_url",
         "provider_url": "https://www.naturalearthdata.com/",
-        "automation_status": "not_implemented",
+        "automation_status": "implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
-        "notes": "Mutable endpoint: checksum/content changes must be reviewed as candidate updates, not automatically treated as a new edition."
+        "notes": "Implemented generic HTTPS content-fingerprint discovery. A changed fingerprint is recorded as latest_available only; provider publication dates and semantic editions are not inferred, and latest_validated remains separate."
       }
     },
     "iso_reference_mirror": {
@@ -735,11 +735,11 @@
       "release_discovery": {
         "mode": "rolling_url",
         "provider_url": "https://github.com/stefangabos/world_countries",
-        "automation_status": "not_implemented",
+        "automation_status": "implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
-        "notes": "Mutable endpoint: checksum/content changes must be reviewed as candidate updates, not automatically treated as a new edition."
+        "notes": "Implemented generic HTTPS content-fingerprint discovery. A changed fingerprint is recorded as latest_available only; provider publication dates and semantic editions are not inferred, and latest_validated remains separate."
       }
     },
     "wikidata_sparql": {
@@ -881,11 +881,11 @@
       "release_discovery": {
         "mode": "website_page",
         "provider_url": "https://unstats.un.org/unsd/methodology/m49/overview",
-        "automation_status": "not_implemented",
+        "automation_status": "implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
-        "notes": "Inspect provider publication/page changes and record a provider release label only when supported by evidence."
+        "notes": "Implemented generic HTTPS content-fingerprint discovery. A changed fingerprint is recorded as latest_available only; provider publication dates and semantic editions are not inferred, and latest_validated remains separate."
       }
     }
   },
