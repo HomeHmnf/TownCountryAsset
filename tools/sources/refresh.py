@@ -8,6 +8,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -55,6 +56,48 @@ def _discover_fingerprint(item: dict, timeout: int) -> dict:
         "byte_count": size,
         "content_type": content_type,
         "url": final_url,
+        "discovered_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
+def _discover_git_ref(discovery: dict, timeout: int) -> dict:
+    """Resolve the latest commit on a GitHub repository's default branch."""
+    parsed = urlparse(discovery.get("provider_url") or "")
+    parts = [part for part in parsed.path.strip("/").split("/") if part]
+    if parsed.scheme != "https" or parsed.netloc.lower() not in {"github.com", "www.github.com"} or len(parts) < 2:
+        raise SourceError("git_ref discovery currently requires a GitHub repository URL")
+    owner, repository = parts[0], parts[1].removesuffix(".git")
+    api_url = "https://api.github.com/repos/" + owner + "/" + repository + "/commits?per_page=1"
+    request = urllib.request.Request(api_url, headers={
+        "User-Agent": "TownCountryAsset-SourceRefresh/1.0",
+        "Accept": "application/vnd.github+json",
+    })
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            if response.geturl().split(":", 1)[0].lower() != "https":
+                raise SourceError("GitHub discovery redirect target must remain HTTPS")
+            payload = json.loads(response.read().decode("utf-8"))
+    except SourceError:
+        raise
+    except Exception as exc:
+        raise SourceError("GitHub commit discovery failed: " + str(exc)) from exc
+    if not isinstance(payload, list) or not payload or not isinstance(payload[0], dict):
+        raise SourceError("GitHub returned no default-branch commit")
+    commit = payload[0]
+    sha = commit.get("sha")
+    metadata = commit.get("commit", {})
+    timestamp = metadata.get("committer", {}).get("date") or metadata.get("author", {}).get("date")
+    if not isinstance(sha, str) or re.fullmatch(r"[0-9a-fA-F]{40,64}", sha) is None:
+        raise SourceError("GitHub returned an invalid commit SHA")
+    return {
+        "release_id": "git-" + sha.lower(),
+        "provider_release_label": "git-commit:" + sha.lower(),
+        "provider_published_at": None,
+        "provider_commit_timestamp": timestamp,
+        "sha256": None,
+        "byte_count": None,
+        "content_type": "application/json",
+        "url": "https://github.com/" + owner + "/" + repository + "/commit/" + sha,
         "discovered_at": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -112,8 +155,8 @@ def _record_release(
             "status": status,
             "snapshot_manifest": snapshot_manifest,
             "notes": "Content-fingerprint candidate; no provider publication date or semantic edition is inferred.",
-            "sha256": discovered["sha256"],
-            "byte_count": discovered["byte_count"],
+            "sha256": discovered.get("sha256"),
+            "byte_count": discovered.get("byte_count"),
             "content_type": discovered["content_type"],
             "url": discovered["url"],
         }
@@ -191,6 +234,25 @@ def run_refresh(
             ),
             "downloads": [],
         }
+
+        if (
+            not source.get("downloads")
+            and discovery["automation_status"] == "implemented"
+            and discovery["mode"] == "git_ref"
+        ):
+            try:
+                discovered = _discover_git_ref(discovery, timeout)
+                state_path = _record_release(registry, source_id, discovered, status="discovered")
+                source_result["discovery_status"] = "git_ref_discovery"
+                source_result["git_ref"] = {
+                    "release_id": discovered["release_id"],
+                    "commit_timestamp": discovered["provider_commit_timestamp"],
+                    "release_state_path": state_path.as_posix(),
+                    "detail": "Default-branch commit discovered; source archive acquisition and content validation remain separate",
+                }
+            except Exception as exc:
+                source_result["discovery_status"] = "discovery_failed"
+                source_result["detail"] = str(exc)
 
         for item in source.get("downloads", []):
             if _is_fingerprint_source(discovery, item):
