@@ -25,10 +25,25 @@ def load_registry(path: Path = REGISTRY):
         raise SourceError(f"Cannot load source registry {path}: {exc}") from exc
     if data.get("schema_version") != 1 or not isinstance(data.get("sources"), dict):
         raise SourceError("Invalid project source registry schema")
+    release_management = data.get("release_management")
+    if not isinstance(release_management, dict) or release_management.get("selection_policy") != "latest_validated":
+        raise SourceError("Missing or invalid release_management policy")
+    discovery_modes = set(release_management.get("discovery_modes", {}))
+    if not discovery_modes:
+        raise SourceError("Release discovery modes are not configured")
     aliases = {}
     for sid, source in data["sources"].items():
         if not SAFE.fullmatch(sid) or not isinstance(source, dict) or not isinstance(source.get("downloads", []), list):
             raise SourceError(f"Invalid source record: {sid}")
+        discovery = source.get("release_discovery")
+        if not isinstance(discovery, dict) or discovery.get("mode") not in discovery_modes:
+            raise SourceError(f"Invalid release discovery contract for {sid}")
+        if discovery.get("automation_status") not in {"not_implemented", "implemented"}:
+            raise SourceError(f"Invalid release discovery automation status for {sid}")
+        for state in ("latest_available", "latest_validated", "latest_applied"):
+            value = discovery.get(state)
+            if value is not None and not isinstance(value, dict):
+                raise SourceError(f"Invalid {state} release state for {sid}")
         legacy_ids = source.get("legacy_source_ids", [])
         if not isinstance(legacy_ids, list) or any(
             not isinstance(alias, str) or not SAFE.fullmatch(alias) or alias == sid
@@ -45,6 +60,8 @@ def load_registry(path: Path = REGISTRY):
             if not all(isinstance(v, str) and SAFE.fullmatch(v) for v in (did, release, filename)) or did in seen:
                 raise SourceError(f"Invalid download definition for {sid}")
             seen.add(did)
+            if item.get("release_kind") not in {"edition_or_snapshot", "current_reference", "rolling", "supplement"}:
+                raise SourceError(f"Invalid release kind for {sid}/{did}")
             parsed = urlparse(url or "")
             if parsed.scheme != "https" or not parsed.netloc:
                 raise SourceError(f"Download URL must be HTTPS: {sid}/{did}")
@@ -183,7 +200,8 @@ def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
         raise
     meta = {
         "manifest_schema_version": 1, "source_id": sid, "source_name": source["name"],
-        "download_id": item["id"], "release": item["release"], "source_url": item["url"],
+        "download_id": item["id"], "release": item["release"], "release_kind": item["release_kind"],
+        "release_discovery_mode": source["release_discovery"]["mode"], "source_url": item["url"],
         "final_url": final_url, "terms_url": source.get("terms_url"),
         "attribution": source.get("attribution"),
         "license_status": source.get("license_status", "unclear_or_unverified"),
