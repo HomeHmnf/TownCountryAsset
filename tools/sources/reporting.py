@@ -19,7 +19,9 @@ ARTIFACT_FIELDS = {
         "source_id", "download_id", "release_id", "status", "selection_status",
         "selected_source", "primary_source", "selection_mode", "value", "unit",
         "observation_period", "source_reference", "methodology", "retrieved_at",
-        "fallback_used", "override_id", "reason", "detail",
+        "fallback_used", "override_id", "override_reason", "override_author", "effective_at",
+        "compatibility_reference", "assigned_source", "primary_candidate", "prior_provider_candidate",
+        "rejected_candidates", "reason", "detail",
     ],
     "missing": [
         "game_id", "field_key", "field_id", "record_key", "subfield_key",
@@ -150,6 +152,7 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
                 "release_id": item.get("discovered_release") or item.get("configured_release"),
                 "release_kind": item.get("release_kind"), "status": item.get("status"),
                 "sha256": item.get("sha256") or item.get("discovered_sha256"),
+                "fetched_at": item.get("fetched_at") or item.get("discovered_fetched_at"),
                 "detail": item.get("detail"),
             }
             records.append(row)
@@ -276,19 +279,33 @@ def write_selection_report_bundle(
     """Write field/record decisions and consolidated coverage/audit tables."""
     records, missing, fallbacks, conflicts, overrides = _selection_rows(decisions)
     status_counts = Counter(str(row.get("selection_status")) for row in records)
-    country_counts = Counter(str(row.get("game_id")) for row in records)
-    field_counts = Counter(str(row.get("field_key")) for row in records)
+    country_ids = sorted({item["result"]["game_id"] for item in decisions})
+    field_keys = sorted({item["result"]["field_key"] for item in decisions})
     source_counts = Counter(str(row.get("selected_source")) for row in records if row.get("selected_source"))
     release_counts = Counter(str(row.get("release_id")) for row in records if row.get("release_id"))
+
+    def coverage(key: str) -> dict[str, dict[str, int]]:
+        grouped: dict[str, dict[str, int]] = {}
+        for row in records:
+            label = str(row.get(key))
+            metrics = grouped.setdefault(label, {"total": 0, "populated": 0, "unavailable": 0, "not_applicable": 0})
+            metrics["total"] += 1
+            status = row.get("selection_status")
+            if status in {"observed", "estimated", "projected"}:
+                metrics["populated"] += 1
+            elif status in {"unavailable", "not_applicable"}:
+                metrics[status] += 1
+        return grouped
+
     summary = {
         "decision_count": len(records),
         "selected_count": sum(row.get("selection_status") in {"observed", "estimated", "projected"} for row in records),
         "unavailable_count": status_counts.get("unavailable", 0),
         "not_applicable_count": status_counts.get("not_applicable", 0),
         "fallback_count": len(fallbacks), "override_count": len(overrides),
-        "conflict_count": len(conflicts), "country_count": len(country_counts),
-        "field_count": len(field_counts), "by_status": dict(status_counts),
-        "by_country": dict(country_counts), "by_field": dict(field_counts),
+        "conflict_count": len(conflicts), "country_count": len(country_ids),
+        "field_count": len(field_keys), "by_status": dict(status_counts),
+        "coverage_by_country": coverage("game_id"), "coverage_by_field": coverage("field_key"),
         "by_selected_source": dict(source_counts), "by_release": dict(release_counts),
     }
     lines = [
@@ -307,8 +324,18 @@ def write_selection_report_bundle(
         "## Coverage by status", "",
     ]
     lines.extend(f"- {key}: {value}" for key, value in sorted(summary["by_status"].items()))
+    lines.extend(["", "## Coverage by country/entity", ""])
+    lines.extend(
+        f"- {key}: {value['populated']}/{value['total']} populated; "
+        f"{value['unavailable']} unavailable; {value['not_applicable']} not applicable"
+        for key, value in sorted(summary["coverage_by_country"].items())
+    )
     lines.extend(["", "## Coverage by field", ""])
-    lines.extend(f"- {key}: {value}" for key, value in sorted(field_counts.items()))
+    lines.extend(
+        f"- {key}: {value['populated']}/{value['total']} populated; "
+        f"{value['unavailable']} unavailable; {value['not_applicable']} not applicable"
+        for key, value in sorted(summary["coverage_by_field"].items())
+    )
     lines.extend(["", "## Selected values by source", ""])
     lines.extend(f"- {key}: {value}" for key, value in sorted(source_counts.items()))
     lines.extend(["", "## Selected values by release", ""])
