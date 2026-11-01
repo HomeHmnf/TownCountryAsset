@@ -22,23 +22,23 @@ def _write_test_source_registry(tmp_path):
             "schema_version": 1,
             "storage": {"raw_root": "raw_data", "manifest_root": "raw_data/manifests"},
             "release_management": {
-            "schema_version": 1,
-            "selection_policy": "latest_validated",
-            "discovery_modes": {"manual_review": "Test fixture requires manual release review."}
+                "schema_version": 1,
+                "selection_policy": "latest_validated",
+                "discovery_modes": {"manual_review": "Test fixture requires manual release review."}
             },
             "sources": {
-            "un_wpp": {
-                "name": "UN World Population Prospects test fixture",
-                "legacy_source_ids": ["un_wpp_2024"],
-                "release_discovery": {
-                    "mode": "manual_review",
-                    "automation_status": "not_implemented",
-                    "latest_available": null,
-                    "latest_validated": null,
-                    "latest_applied": null
-                },
-                "downloads": []
-            }
+                "un_wpp": {
+                    "name": "UN World Population Prospects test fixture",
+                    "legacy_source_ids": ["un_wpp_2024"],
+                    "release_discovery": {
+                        "mode": "manual_review",
+                        "automation_status": "not_implemented",
+                        "latest_available": None,
+                        "latest_validated": None,
+                        "latest_applied": None
+                    },
+                    "downloads": []
+                }
             }
         }),
         encoding="utf-8",
