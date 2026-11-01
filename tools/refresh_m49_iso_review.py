@@ -64,7 +64,7 @@ def _render_reconciliation_summary(result, *, source_url, raw_sha256, normalized
         f"| Ambiguous registry identities | {summary['ambiguous_registry_count']} |",
         f"| Unmatched reference rows | {summary['unmatched_reference_count']} |",
         "",
-        "## Code comparisons",
+        "## Name and code comparisons",
         "",
         "| Measure | Count |",
         "|---|---:|",
