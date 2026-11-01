@@ -125,3 +125,47 @@ def test_location_index_reads_unique_2026_medium_location_rows(tmp_path):
     with pytest.raises(WPPSourceCrosswalkError, match="duplicate 2026 Medium LocID"):
         _location_index(path, "test")
     assert _location_index(path, "test age", allow_repeated_loc_ids=True)["158"]["iso3"] == "TWN"
+
+
+
+def test_holds_valid_m49_identity_when_wpp_does_not_cover_source_id():
+    uncovered_game = "tc_" + "c" * 32
+    records = [
+        _review(uncovered_game, "086"),
+        _review(
+            TAIWAN_GAME_ID, "", match_type="unmatched",
+            comparison="not_compared", status="not_eligible",
+        ),
+    ]
+    payload, counts = build_reviewed_crosswalk(
+        records, _index(), _index(), expected_country_area_count=2,
+    )
+    assert all(item["game_id"] != uncovered_game for item in payload["mappings"])
+    assert payload["coverage_exceptions"] == [{
+        "game_id": uncovered_game,
+        "source_id": "86",
+        "m49_reference_name": "Example",
+        "status": "source_not_covered",
+        "reason": (
+            "The official M49 identifier is not present in either 2026 Medium "
+            "Country/Area WPP snapshot; no substitute identifier was inferred."
+        ),
+    }]
+    assert counts["source_not_covered"] == 1
+    assert counts["included_taiwan_manual_exception"] == 1
+
+
+def test_rejects_different_coverage_between_wpp_snapshots():
+    records = [
+        _review("tc_" + "c" * 32, "004"),
+        _review(
+            TAIWAN_GAME_ID, "", match_type="unmatched",
+            comparison="not_compared", status="not_eligible",
+        ),
+    ]
+    age_index = _index()
+    age_index.pop("4")
+    with pytest.raises(WPPSourceCrosswalkError, match="inconsistent coverage"):
+        build_reviewed_crosswalk(
+            records, _index(), age_index, expected_country_area_count=2,
+        )
