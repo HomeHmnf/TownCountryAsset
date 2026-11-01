@@ -25,9 +25,20 @@ def load_registry(path: Path = REGISTRY):
         raise SourceError(f"Cannot load source registry {path}: {exc}") from exc
     if data.get("schema_version") != 1 or not isinstance(data.get("sources"), dict):
         raise SourceError("Invalid project source registry schema")
+    aliases = {}
     for sid, source in data["sources"].items():
         if not SAFE.fullmatch(sid) or not isinstance(source, dict) or not isinstance(source.get("downloads", []), list):
             raise SourceError(f"Invalid source record: {sid}")
+        legacy_ids = source.get("legacy_source_ids", [])
+        if not isinstance(legacy_ids, list) or any(
+            not isinstance(alias, str) or not SAFE.fullmatch(alias) or alias == sid
+            for alias in legacy_ids
+        ):
+            raise SourceError(f"Invalid legacy source IDs for {sid}")
+        for alias in legacy_ids:
+            if alias in data["sources"] or alias in aliases:
+                raise SourceError(f"Duplicate or conflicting legacy source ID: {alias}")
+            aliases[alias] = sid
         seen = set()
         for item in source.get("downloads", []):
             did, release, filename, url = item.get("id"), item.get("release"), item.get("filename"), item.get("url")
@@ -44,8 +55,16 @@ def load_registry(path: Path = REGISTRY):
                 values = validation.get(key, [])
                 if not isinstance(values, list) or any(not isinstance(value, str) or not value for value in values):
                     raise SourceError(f"Invalid {key} validation contract for {sid}/{did}")
+    data["_source_aliases"] = aliases
     data["_root"] = ROOT if path.resolve() == REGISTRY.resolve() else path.resolve().parent
     return data
+
+
+def canonical_source_id(registry, source_id):
+    """Resolve a historical source ID without rewriting its stored provenance."""
+    if source_id in registry["sources"]:
+        return source_id
+    return registry.get("_source_aliases", {}).get(source_id)
 
 
 def _paths(registry, sid, item):
@@ -60,7 +79,14 @@ def inspect_snapshots(registry):
     root = registry.get("_root", ROOT)
     for sid, source in registry["sources"].items():
         for item in source.get("downloads", []):
+            snapshot_sid = sid
             raw, manifest = _paths(registry, sid, item)
+            if not raw.exists() and not manifest.exists():
+                for alias in source.get("legacy_source_ids", []):
+                    legacy_raw, legacy_manifest = _paths(registry, alias, item)
+                    if legacy_raw.exists() or legacy_manifest.exists():
+                        snapshot_sid, raw, manifest = alias, legacy_raw, legacy_manifest
+                        break
             status, detail = "missing", "raw snapshot or manifest missing"
             if raw.is_file() and manifest.is_file():
                 try:
@@ -68,13 +94,14 @@ def inspect_snapshots(registry):
                     digest = hashlib.sha256(raw.read_bytes()).hexdigest()
                     if meta.get("sha256") != digest or meta.get("byte_count") != raw.stat().st_size:
                         status, detail = "invalid", "checksum or byte count mismatch"
-                    elif meta.get("source_id") != sid or meta.get("download_id") != item["id"]:
+                    elif meta.get("source_id") != snapshot_sid or meta.get("download_id") != item["id"]:
                         status, detail = "invalid", "manifest source/download identity mismatch"
                     else:
                         status, detail = "valid", f"{raw.stat().st_size} bytes; sha256 verified"
                 except (OSError, json.JSONDecodeError) as exc:
                     status, detail = "invalid", str(exc)
-            rows.append({"source_id": sid, "download_id": item["id"], "release": item["release"],
+            rows.append({"source_id": sid, "snapshot_source_id": snapshot_sid,
+                         "download_id": item["id"], "release": item["release"],
                          "status": status, "detail": detail, "raw_path": str(raw.relative_to(root))})
     return rows
 
@@ -111,6 +138,13 @@ def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
     raw, manifest = _paths(registry, sid, item)
     if raw.exists() or manifest.exists():
         raise SourceError(f"Snapshot already exists; refusing overwrite: {raw}")
+    for alias in source.get("legacy_source_ids", []):
+        legacy_raw, legacy_manifest = _paths(registry, alias, item)
+        if legacy_raw.exists() or legacy_manifest.exists():
+            raise SourceError(
+                f"Historical snapshot exists under legacy source ID {alias}; "
+                f"it is preserved and will not be recaptured: {legacy_raw}"
+            )
     raw.parent.mkdir(parents=True, exist_ok=True)
     manifest.parent.mkdir(parents=True, exist_ok=True)
     request = urllib.request.Request(item["url"], headers={
