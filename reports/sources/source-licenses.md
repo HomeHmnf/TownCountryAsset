@@ -4,15 +4,15 @@ License classifications are informational. They do not grant permissions or bloc
 
 | Source ID | Source | Recorded license status | Terms |
 |---|---|---|---|
-| un_wpp_2024 |UN World Population Prospects 2024 |CC BY 3.0 IGO |https://population.un.org/wpp/ |
+| un_wpp |UN World Population Prospects |CC BY 3.0 IGO |https://population.un.org/wpp/ |
 | imf_weo |IMF World Economic Outlook |unclear_or_unverified |https://www.imf.org/en/Publications/WEO/weo-database |
 | world_bank_wdi |World Bank World Development Indicators |unclear_or_unverified |https://databank.worldbank.org/source/world-development-indicators |
 | ilostat |ILOSTAT |unclear_or_unverified |https://ilostat.ilo.org/data/ |
 | faostat |FAOSTAT |unclear_or_unverified |https://www.fao.org/faostat/en/#data |
-| koppen_beck_2023 |Beck et al. Köppen-Geiger V3 |CC BY 4.0 |https://www.gloh2o.org/koppen/ |
-| fao_fra_2025 |FAO Global Forest Resources Assessment 2025 |unclear_or_unverified |https://www.fao.org/forest-resources-assessment/ |
-| usgs_mcs_2026 |USGS Mineral Commodity Summaries 2026 |CC0 1.0 for the 2026 data release |https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries |
-| pew_religion_2020 |Pew Research Center Global Religious Composition dataset |unclear_or_unverified |https://www.pewresearch.org/dataset/dataset-of-global-religious-composition-estimates-for-2010-and-2020/ |
+| koppen_beck |Beck et al. Köppen-Geiger climate classification |CC BY 4.0 |https://www.gloh2o.org/koppen/ |
+| fao_fra |FAO Global Forest Resources Assessment |unclear_or_unverified |https://www.fao.org/forest-resources-assessment/ |
+| usgs_mcs |USGS Mineral Commodity Summaries |CC0 1.0 for the 2026 data release |https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries |
+| pew_religion |Pew Research Center Global Religious Composition dataset |unclear_or_unverified |https://www.pewresearch.org/dataset/dataset-of-global-religious-composition-estimates-for-2010-and-2020/ |
 | undp_hdr |UNDP Human Development Reports statistical data |unclear_or_unverified |https://hdr.undp.org/data-center/documentation-and-downloads |
 | itu |ITU DataHub |unclear_or_unverified |https://datahub.itu.int/ |
 | who_ghed |WHO Global Health Expenditure Database |unclear_or_unverified |https://apps.who.int/nha/database |
