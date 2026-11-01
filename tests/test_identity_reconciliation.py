@@ -47,6 +47,7 @@ def test_reconciles_codes_independently_and_keeps_source_id_separate():
     )
     rows = {row["game_id"]: row for row in result["records"]}
     assert rows["tc_a"]["alpha3_comparison"] == "match"
+    assert rows["tc_a"]["name_comparison"] == "exact"
     assert rows["tc_a"]["alpha2_comparison"] == "missing_existing"
     assert rows["tc_a"]["code_pair_classification"] == "alpha3_only_agreement"
     assert rows["tc_b"]["code_pair_classification"] == "genuine_code_mismatch"
