@@ -301,3 +301,44 @@ def test_github_git_ref_dry_run_does_not_query_provider(tmp_path, monkeypatch):
     assert report["sources"][0]["discovery_status"] == "dry_run_not_checked"
     assert not (tmp_path / "reports/sources/releases/manual.json").exists()
 
+def test_github_git_ref_adapter_parses_immutable_default_branch_commit(monkeypatch):
+    import tools.sources.refresh as module
+
+    class FakeResponse:
+        status = 200
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def geturl(self):
+            return "https://api.github.com/repos/lipis/flag-icons/commits?per_page=1"
+
+        def read(self):
+            return json.dumps([{
+                "sha": "b" * 40,
+                "commit": {
+                    "committer": {"date": "2026-10-31T10:20:30Z"},
+                },
+            }]).encode("utf-8")
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", lambda *args, **kwargs: FakeResponse())
+    result = module._discover_git_ref(
+        {"provider_url": "https://github.com/lipis/flag-icons"},
+        timeout=10,
+    )
+    assert result["release_id"] == "git-" + ("b" * 40)
+    assert result["provider_commit_timestamp"] == "2026-10-31T10:20:30Z"
+    assert result["sha256"] is None
+
+
+def test_github_git_ref_adapter_rejects_non_github_provider_url():
+    import pytest
+    from tools.sources.refresh import _discover_git_ref
+    from tools.sources.registry import SourceError
+
+    with pytest.raises(SourceError, match="GitHub repository URL"):
+        _discover_git_ref({"provider_url": "https://example.test/owner/repo"}, timeout=10)
+
