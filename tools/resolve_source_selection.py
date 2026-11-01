@@ -90,13 +90,11 @@ def main(argv: list[str] | None = None) -> int:
             raise SourceSelectionError("Selection input observations must be an array of objects")
         registry = load_registry(args.registry)
         policy = load_policy(args.policy, registry)
-        input_overrides = payload.get("manual_overrides", [])
-        if not isinstance(input_overrides, list):
-            raise SourceSelectionError("Input manual_overrides must be an array")
+        overrides, override_path, override_sha = _load_overrides(args.overrides, payload, policy)
         game_ids = payload.get("game_ids")
         if game_ids is None:
             game_ids = sorted({
-                row.get("game_id") for row in [*observations, *input_overrides]
+                row.get("game_id") for row in [*observations, *overrides]
                 if isinstance(row, dict) and isinstance(row.get("game_id"), str) and row.get("game_id")
             })
         if not isinstance(game_ids, list) or not game_ids or any(
@@ -111,15 +109,38 @@ def main(argv: list[str] | None = None) -> int:
             or any(not isinstance(k, str) or not k or not isinstance(v, str) or not v for k, v in release_states.items())
         ):
             raise SourceSelectionError("release_states must map source IDs to non-empty validated release IDs")
-        for source_id in release_states:
-            canonical_source_id(registry, source_id)
+        if release_states is not None:
+            for source_id in release_states:
+                canonical_source_id(registry, source_id)
         assignments = payload.get("mixture_assignments", {})
         expected_records = payload.get("expected_records", {})
         if not isinstance(assignments, dict) or not isinstance(expected_records, dict):
             raise SourceSelectionError("mixture_assignments and expected_records must be objects")
         if any(not isinstance(value, dict) for value in assignments.values()):
             raise SourceSelectionError("Each mixture_assignments field entry must be an object")
-        overrides, override_path, override_sha = _load_overrides(args.overrides, payload, policy)
+        field_by_key = {field["key"]: field for field in policy["fields"]}
+        known_game_ids = set(game_ids)
+        for row in observations:
+            if any(not isinstance(row.get(key), str) or not row[key] for key in ("game_id", "field_key", "source_id", "release_id")):
+                raise SourceSelectionError("Every observation requires game_id, field_key, source_id and release_id")
+            if row["game_id"] not in known_game_ids:
+                raise SourceSelectionError(f"Observation game_id is not in the requested identity set: {row['game_id']}")
+            if row["field_key"] not in field_by_key:
+                raise SourceSelectionError(f"Observation uses an unknown policy field: {row['field_key']}")
+            canonical_source_id(registry, row["source_id"])
+            if field_by_key[row["field_key"]]["storage"] == "structured" and (
+                not isinstance(row.get("record_key"), str) or not row["record_key"]
+            ):
+                raise SourceSelectionError(f"Structured observation requires record_key: {row['field_key']}")
+        for row in overrides:
+            if not isinstance(row, dict) or row.get("game_id") not in known_game_ids:
+                raise SourceSelectionError("Every manual override must target a requested game_id")
+            if row.get("field_key") not in field_by_key:
+                raise SourceSelectionError(f"Manual override uses an unknown policy field: {row.get('field_key')!r}")
+        if set(expected_records) - {key for key, field in field_by_key.items() if field["storage"] == "structured"}:
+            raise SourceSelectionError("expected_records may only target structured policy fields")
+        if set(assignments) - set(field_by_key):
+            raise SourceSelectionError("mixture_assignments contains an unknown policy field")
 
         decisions = []
         for game_id in game_ids:
