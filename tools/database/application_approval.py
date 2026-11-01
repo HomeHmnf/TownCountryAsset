@@ -190,7 +190,7 @@ def require_approved_application(
     except (OSError, ValueError, ApplicationApprovalError) as exc:
         if row["status"] == "approved":
             connection.execute(
-                "UPDATE application_approvals SET status='invalidated' WHERE approval_id=?",
+                "UPDATE application_approvals SET status='invalidated', approved_by=NULL, approved_at=NULL WHERE approval_id=?",
                 (approval_id,),
             )
             _event(connection, approval_id, "invalidated", details={"reason": str(exc)})
