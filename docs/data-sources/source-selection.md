@@ -61,7 +61,7 @@ For scalar fields, the observation input is an iterable of records with these fi
 | `methodology` | Normalization or source methodology |
 | `retrieved_at` | Timezone-aware ISO 8601 retrieval timestamp |
 
-The scalar and structured resolvers read `reports/sources/releases/<source-id>.json` and accepts only the release recorded as `latest_validated`. Tests and controlled callers may supply an explicit `release_states` mapping. A latest-available discovery, a successful download, or a pending-validation snapshot is never enough.
+The scalar and structured resolvers read `reports/sources/releases/<source-id>.json` and accept only the release recorded as `latest_validated`. Tests and controlled callers may supply an explicit `release_states` mapping. A latest-available discovery, a successful download, or a pending-validation snapshot is never enough.
 
 ## Mode semantics
 
@@ -147,3 +147,8 @@ Refresh runs use the same artifact contract under `reports/sources/refreshes/<ru
 
 Reports are reproducible audit artifacts, not approvals. Neither refresh nor resolution changes the canonical database, advances `latest_validated`, or advances `latest_applied`. The consolidated selection bundle is the single completeness audit for the supplied run; do not create separate competing completeness reports for each field.
 
+## Compatibility and immutable audit history
+
+Historical source IDs remain accepted through the central registry's `legacy_source_ids` aliases. The resolver canonicalizes an alias for policy eligibility while retaining the original source ID in the observation/provenance record. Existing raw snapshots and manifests under legacy source-ID paths are inspected in place; they are not moved, rewritten or recaptured under the new ID. A legacy snapshot is accepted when its original source/download identity, byte count and SHA-256 match, even if it predates newer optional manifest metadata such as `release_kind` or `release_discovery_mode`.
+
+Each report run ID is write-once. If a report directory already exists, the shared writer refuses to overwrite it. Corrected or repeated analyses must use a new run ID so prior audit artifacts remain intact.
