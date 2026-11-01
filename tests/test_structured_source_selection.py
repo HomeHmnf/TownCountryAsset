@@ -173,6 +173,33 @@ def test_expected_record_catalogue_emits_explicit_unavailable_items(policy, regi
     assert all(row["selection_status"] == "unavailable" for row in result["records"])
 
 
+def test_resource_fallback_is_limited_to_its_registered_record_key(policy, registry):
+    changed = copy.deepcopy(policy)
+    field = next(row for row in changed["fields"] if row["key"] == "natural_resources")
+    field["resource_policy"]["resource_fallbacks"] = {"copper/reserves": "world_bank_wdi"}
+    fallback = record(
+        field_key="natural_resources", source_id="world_bank_wdi", release_id="wdi-2025",
+        record_key="gold/production", value={"quantity": 10}, unit="resource_records",
+        compatibility_status="compatible",
+    )
+    result = resolve_structured_field(
+        changed, registry, game_id="tc_example", field_key="natural_resources",
+        observations=[fallback], release_states={"world_bank_wdi": "wdi-2025"},
+        expected_records=[{"record_key": "gold/production"}],
+    )
+    assert result["records"][0]["selection_status"] == "unavailable"
+    assert result["fallback_count"] == 0
+
+
+def test_duplicate_expected_catalogue_records_are_rejected(policy, registry):
+    with pytest.raises(SourceSelectionError, match="Duplicate expected"):
+        resolve_structured_field(
+            policy, registry, game_id="tc_example", field_key="natural_resources",
+            observations=[], release_states={"usgs_mcs": "mcs-2026"},
+            expected_records=[{"record_key": "copper/reserves"}, {"record_key": "copper/reserves"}],
+        )
+
+
 def test_scalar_field_cannot_be_passed_to_structured_resolver(policy, registry):
     with pytest.raises(SourceSelectionError, match="not a structured field"):
         resolve_structured_field(
