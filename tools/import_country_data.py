@@ -15,12 +15,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--database", default=str(DEFAULT_DATABASE_PATH))
     parser.add_argument("--candidate-dir", default=str(DEFAULT_CANDIDATE_DIR))
+    parser.add_argument("--approval-id", required=True, help="Previously approved country-data application ID")
     return parser
 
 
 def main() -> int:
     args = build_parser().parse_args()
-    result = import_country_data(args.database, args.candidate_dir)
+    result = import_country_data(args.database, args.candidate_dir, approval_id=args.approval_id)
     print(json.dumps(result, indent=2, sort_keys=True))
     print("Country metadata and geometry import completed; database integrity and foreign-key checks passed.")
     return 0
