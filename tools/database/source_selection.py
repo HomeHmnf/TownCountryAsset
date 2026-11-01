@@ -49,16 +49,21 @@ def validate_policy(policy: dict[str, Any], source_registry: dict[str, Any]) -> 
         raise SourceSelectionError("policy_version must be a positive integer")
     if policy.get("status") != "approved":
         raise SourceSelectionError("Only an approved source-selection policy can be resolved")
-    if policy.get("release_policy", {}).get("selection") != "latest_validated":
+    release_policy = policy.get("release_policy")
+    overrides_policy = policy.get("manual_overrides")
+    missing_policy = policy.get("missing_value_policy")
+    if not isinstance(release_policy, dict) or release_policy.get("selection") != "latest_validated":
         raise SourceSelectionError("Source selection must use latest_validated releases")
     if policy.get("source_registry") != "config/data_sources.json":
         raise SourceSelectionError("Policy must reference the central source registry")
-    if policy.get("manual_overrides", {}).get("enabled") is not True:
+    if not isinstance(overrides_policy, dict) or overrides_policy.get("enabled") is not True:
         raise SourceSelectionError("Manual override policy must be explicitly enabled")
-    if policy.get("missing_value_policy", {}).get("missing_is_not_zero") is not True:
+    if not isinstance(missing_policy, dict) or missing_policy.get("missing_is_not_zero") is not True:
         raise SourceSelectionError("Missing values must never be interpreted as zero")
-    if policy.get("missing_value_policy", {}).get("missing_is_not_absence") is not True:
+    if missing_policy.get("missing_is_not_absence") is not True:
         raise SourceSelectionError("Missing values must never be interpreted as absence")
+    if not isinstance(policy.get("modes"), dict) or not ALLOWED_MODES.issubset(policy["modes"]):
+        raise SourceSelectionError("All three approved source-selection modes must be documented")
     fields = policy.get("fields")
     if not isinstance(fields, list) or not fields:
         raise SourceSelectionError("Policy fields must be a non-empty array")
@@ -163,7 +168,13 @@ def _valid_value(field: dict[str, Any], row: dict[str, Any]) -> bool:
         if isinstance(value, bool) or not isinstance(value, (int, float)):
             return False
         return math.isfinite(float(value))
-    return isinstance(value, (dict, list))
+    if not isinstance(value, (dict, list)):
+        return False
+    try:
+        json.dumps(value, ensure_ascii=False, allow_nan=False)
+    except (TypeError, ValueError):
+        return False
+    return True
 
 
 def _timestamp(value: Any, label: str) -> datetime:
@@ -198,7 +209,10 @@ def _candidate_rows(
             raise SourceSelectionError("Every observation must be an object")
         if row.get("game_id") != game_id or row.get("field_key") != field_key:
             continue
-        row_source = canonical_source_id(registry, row.get("source_id"))
+        raw_source_id = row.get("source_id")
+        if not isinstance(raw_source_id, str):
+            continue
+        row_source = canonical_source_id(registry, raw_source_id)
         if row_source != canonical or row.get("release_id") != validated_release:
             continue
         if not _valid_value(field, row):
