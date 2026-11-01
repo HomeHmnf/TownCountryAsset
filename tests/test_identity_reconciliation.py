@@ -70,6 +70,16 @@ def test_ambiguous_names_are_not_forced_and_all_reference_rows_remain_accounted(
     assert result["summary"]["unmatched_reference_count"] == 2
 
 
+def test_duplicate_registry_names_cannot_claim_the_same_reference_row():
+    registry = {"records": [_record("tc_a", "Same Name"), _record("tc_b", "Same Name")]}
+    refs = [{"name": "Same Name", "m49": "001", "a2": "AA", "a3": "AAA"}]
+    result = reconcile_identities(registry, refs, fields=FIELDS)
+    assert all(row["match_type"] == "ambiguous" for row in result["records"])
+    assert result["summary"]["matched_count"] == 0
+    assert result["summary"]["ambiguous_registry_count"] == 2
+    assert result["summary"]["unmatched_reference_count"] == 1
+
+
 def test_rejects_duplicate_game_ids():
     registry = {"records": [_record("tc_a", "A"), _record("tc_a", "B")]}
     try:
