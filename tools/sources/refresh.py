@@ -15,6 +15,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from tools.sources.registry import ROOT, SourceError, acquire_one, inspect_snapshots
+from tools.sources.reporting import write_refresh_report_bundle
 
 
 FINGERPRINT_MODES = {"rolling_url", "website_page"}
@@ -466,9 +467,11 @@ def run_refresh(
     }
     json_path = output_root / f"refresh-{run_id}.json"
     markdown_path = output_root / f"refresh-{run_id}.md"
+    bundle_paths = write_refresh_report_bundle(report, output_root)
     report["report_paths"] = {
         "json": json_path.as_posix(),
         "markdown": markdown_path.as_posix(),
+        "bundle": bundle_paths["directory"],
     }
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     lines = [
