@@ -34,7 +34,7 @@ REVIEWED_NAME_VARIANTS = {
     "french southern and antarctic lands": ("French Southern Territories", "Natural Earth display label differs from the ISO reference name; verify entity scope."),
     "falkland islands": ("Falkland Islands (Malvinas)", "M49 formal label includes Malvinas; explicit display-name variant, with entity scope retained for review."),
     "hong kong s a r": ("China, Hong Kong Special Administrative Region", "M49 administrative-region label differs from the registry display name."),
-    "iran": ("Iran (Islamic Republic of)", "Reference uses the formal name."),
+    "iran": ("Iran, Islamic Republic of", "Reference uses the formal name."),
     "ivory coast": ("Côte d'Ivoire", "Common English name variant."),
     "laos": ("Lao People's Democratic Republic", "Common English name variant."),
     "macao s a r": ("China, Macao Special Administrative Region", "M49 administrative-region label differs from the registry display name."),
