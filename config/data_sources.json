@@ -755,13 +755,13 @@
       "acquisition_mode": "api",
       "downloads": [],
       "release_discovery": {
-        "mode": "provider_metadata",
+        "mode": "manual_review",
         "provider_url": "https://query.wikidata.org/sparql",
         "automation_status": "not_implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
-        "notes": "No metadata adapter is implemented yet; record a release only after querying a documented provider metadata interface."
+        "notes": "The configured source is the live Wikidata Query Service, whose result set changes continuously and has no stable versioned release identifier. Weekly Wikidata JSON dumps have dated releases, but they are a distinct acquisition target and must not be used as a release marker for live SPARQL results. Keep live-query refreshes under manual review until a separately registered, versioned dump acquisition contract is approved."
       }
     },
     "lipis_flag_icons": {
