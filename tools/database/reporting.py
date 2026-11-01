@@ -11,7 +11,7 @@ from typing import Any, Mapping, Sequence
 
 RECORD_FIELDS = [
     "game_id", "registry_name", "source_id", "existing_alpha2", "existing_alpha3",
-    "match_type", "variant_note", "reference_name", "reference_id",
+    "match_type", "name_comparison", "variant_note", "reference_name", "reference_id",
     "reference_alpha2", "reference_alpha3", "alpha2_comparison",
     "alpha3_comparison", "code_pair_classification",
     "source_id_vs_reference_alpha3",
@@ -94,11 +94,11 @@ def render_terminal_verbose(result: Mapping[str, Any], paths: Mapping[str, str])
     lines.extend(["", "Source ID vs reference alpha-3 (separate from ISO comparison):"])
     lines.append(f"  Same: {result['summary'].get('source_id_alpha3_same', 0)}")
     lines.append(f"  Different: {result['summary'].get('source_id_alpha3_different', 0)}")
-    lines.extend(["", "Record-level results:", "  game_id | registry name | match | alpha-2 | alpha-3 | classification"])
+    lines.extend(["", "Record-level results:", "  game_id | registry name | match | name comparison | alpha-2 | alpha-3 | classification"])
     for row in result.get("records", []):
         lines.append(
-            "  {game_id} | {registry_name} | {match_type} | {alpha2_comparison} | "
-            "{alpha3_comparison} | {code_pair_classification}".format(**row)
+            "  {game_id} | {registry_name} | {match_type} | {name_comparison} | "
+            "{alpha2_comparison} | {alpha3_comparison} | {code_pair_classification}".format(**row)
         )
     return "\n".join(lines)
 
