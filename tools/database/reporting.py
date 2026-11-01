@@ -46,8 +46,11 @@ def write_report_bundle(
     unmatched_registry: Sequence[Mapping[str, Any]],
     unmatched_reference: Sequence[Mapping[str, Any]],
     provenance: Mapping[str, Any],
+    record_fields: Sequence[str] = RECORD_FIELDS,
+    unmatched_registry_fields: Sequence[str] = UNMATCHED_REGISTRY_FIELDS,
+    unmatched_reference_fields: Sequence[str] = UNMATCHED_REFERENCE_FIELDS,
 ) -> dict[str, str]:
-    """Write the standard Markdown/CSV/JSON report bundle to a stable directory."""
+    """Write the standard Markdown/CSV/JSON bundle; callers declare domain CSV columns."""
     database_id, domain, report_id = map(_safe_segment, (database_id, domain, report_id))
     directory = Path(report_root) / "database" / database_id / domain / report_id
     directory.mkdir(parents=True, exist_ok=True)
@@ -60,9 +63,9 @@ def write_report_bundle(
         "provenance": str(directory / "provenance.json"),
     }
     (directory / "summary.md").write_text(summary_markdown.rstrip() + "\n", encoding="utf-8")
-    _write_csv(directory / "records.csv", records, RECORD_FIELDS)
-    _write_csv(directory / "unmatched_registry.csv", unmatched_registry, UNMATCHED_REGISTRY_FIELDS)
-    _write_csv(directory / "unmatched_reference.csv", unmatched_reference, UNMATCHED_REFERENCE_FIELDS)
+    _write_csv(directory / "records.csv", records, record_fields)
+    _write_csv(directory / "unmatched_registry.csv", unmatched_registry, unmatched_registry_fields)
+    _write_csv(directory / "unmatched_reference.csv", unmatched_reference, unmatched_reference_fields)
     (directory / "provenance.json").write_text(
         json.dumps(dict(provenance), ensure_ascii=False, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
