@@ -22,7 +22,7 @@ def run_refresh(
 ) -> dict:
     """Refresh configured downloads, retaining immutable snapshots and a report."""
     sources = registry["sources"]
-    selected_ids = source_ids if source_ids is not None else list(sources)
+    selected_ids = list(dict.fromkeys(source_ids if source_ids is not None else list(sources)))
     unknown = sorted(set(selected_ids) - set(sources))
     if unknown:
         raise SourceError("Unknown source ID(s): " + ", ".join(unknown))
@@ -44,7 +44,7 @@ def run_refresh(
             "discovery_status": (
                 "manual_review_required"
                 if discovery["automation_status"] != "implemented"
-                else "adapter_declared"
+                else "adapter_not_supported_by_generic_runner"
             ),
             "downloads": [],
         }
@@ -121,6 +121,7 @@ def run_refresh(
     }
     json_path = output_root / f"refresh-{run_id}.json"
     markdown_path = output_root / f"refresh-{run_id}.md"
+    report["report_paths"] = {"json": json_path.as_posix(), "markdown": markdown_path.as_posix()}
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     lines = [
         "# Source refresh report",
@@ -146,8 +147,4 @@ def run_refresh(
     lines.extend(["## Limitations", ""])
     lines.extend(f"- {value}" for value in report["limitations"])
     markdown_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    report["report_paths"] = {
-        "json": json_path.as_posix(),
-        "markdown": markdown_path.as_posix(),
-    }
     return report
