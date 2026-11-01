@@ -155,7 +155,7 @@ def _record_release(
             "applied_at": None,
             "status": status,
             "snapshot_manifest": snapshot_manifest,
-            "notes": "Content-fingerprint candidate; no provider publication date or semantic edition is inferred.",
+            "notes": "Discovered candidate release; provider-specific semantic validation is still required.",
             "sha256": discovered.get("sha256"),
             "byte_count": discovered.get("byte_count"),
             "content_type": discovered["content_type"],
