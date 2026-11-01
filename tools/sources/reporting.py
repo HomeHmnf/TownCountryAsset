@@ -136,6 +136,11 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
             }
             records.append(row)
             changes.append(row)
+        elif source.get("discovery_status") in {"manual_review_required", "discovery_failed", "dry_run_not_checked"}:
+            records.append({
+                "source_id": source_id, "status": source.get("discovery_status"),
+                "detail": source.get("detail") or "Source-level release discovery status",
+            })
         elif not source.get("downloads"):
             records.append({
                 "source_id": source_id, "status": source.get("discovery_status"),
