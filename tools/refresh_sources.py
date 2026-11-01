@@ -31,7 +31,7 @@ def main(argv=None):
             "database_imported": report["database_imported"],
             "reports": report["report_paths"],
         }, indent=2, ensure_ascii=False))
-        failures = {"validation_error", "acquisition_failed"}
+        failures = {"validation_error", "acquisition_failed", "discovery_or_acquisition_failed", "changed_during_acquisition"}
         return 1 if any(
             item["status"] in failures
             for source in report["sources"]
