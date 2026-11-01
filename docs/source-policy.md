@@ -1,5 +1,7 @@
 # Source data policy
 
+This source-specific policy is governed by the [central project configuration reference](configuration-reference.md), which defines project-wide configuration ownership and source-selection conventions.
+
 - Keep the downloaded Natural Earth archive unchanged in local source storage; do not commit large archives by default.
 - Record source URL, retrieval date, layer/scale, actual release version, archive SHA-256, attribution and license. Never guess a release or retrieval date; complete the build config before publishing.
 - Preserve all source attributes. Normalized fields supplement, not replace, source fields.
