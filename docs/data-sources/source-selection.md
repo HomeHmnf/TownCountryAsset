@@ -91,7 +91,7 @@ A valid matching override wins over provider observations. Its identifier, reaso
 - Callers may supply `expected_records=[{"record_key": "..."}]` (optionally with `subfield_key`) from a fixed resource/category catalogue. Expected-but-missing items are returned with `unavailable` status and null value, rather than silently omitted or interpreted as absent.
 - Resource-specific fallback mappings are constrained to the matching `record_key`; a provider mapped for one commodity cannot fill another commodity. Empty mappings mean no specialist fallback is eligible.
 
-The resolver is deterministic for the same policy, validated-release ledger, observations, overrides and assignments. Its returned decision is suitable as input to the standardized source-selection reports planned for the next stage. It never writes a decision or changes the canonical database itself.
+The resolver is deterministic for the same policy, validated-release ledger, observations, overrides and assignments. The project-wide report command consumes its decisions and writes the standardized audit bundle. The resolver itself never writes a decision or changes the canonical database.
 
 ## Standardized resolution and audit reports
 
