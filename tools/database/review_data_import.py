@@ -359,6 +359,10 @@ def import_review_data(
     *, approval_id: str,
 ) -> dict[str, int | str]:
     """Import all review-domain candidates without inventing approvals or filling blanks."""
+    artifact = build_review_application_artifact(
+        registry_path, iso_reference_path, iso_provenance_path, iso_proposals_path,
+        persian_candidates_path, persian_provenance_path, taxonomy_path, flag_mapping_path,
+    )
     registry = _read_json(Path(registry_path))
     taxonomy = _read_json(Path(taxonomy_path))
     by_id, unreviewed_value = _validate_registry_and_taxonomy(registry, taxonomy)
@@ -418,10 +422,6 @@ def import_review_data(
     if set(flags) != set(by_id):
         raise ReviewDataImportError("Flag mapping game_id coverage does not match the identity registry")
 
-    artifact = build_review_application_artifact(
-        registry_path, iso_reference_path, iso_provenance_path, iso_proposals_path,
-        persian_candidates_path, persian_provenance_path, taxonomy_path, flag_mapping_path,
-    )
     now = _now()
     connection = connect_database(database_path)
     try:
