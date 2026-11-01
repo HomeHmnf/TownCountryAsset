@@ -70,6 +70,7 @@ All modes must follow these rules:
 - Source identifiers and ISO alpha-2/alpha-3 codes are separate attributes, even when their character strings happen to match.
 - ISO assignment authority and review/approval rules are described in the identity contract and ISO review documentation. A candidate/reference match is not an approval.
 - Identity reconciliation is read-only. It may report exact names, normalized name variations, explicitly reviewed variants, ambiguities, and unmatched rows; it must not infer identity from code coincidence or force ambiguous matches.
+- Explicit registry-name-to-reference-name variants are maintained in `REVIEWED_NAME_VARIANTS` in `tools/propose_iso_assignments.py` and shared by ISO proposal generation and identity reconciliation. Each mapping targets an exact reference label and carries a rationale; it is matching evidence only, never an ISO assignment or verification.
 - Identity registry changes and assignment approvals require explicit review. Do not mark an assignment verified merely because a reference source publishes a code.
 
 Related references: `docs/architecture/country-identity-contract.md`, `docs/architecture/iso-assignment-review-log.md`, and `docs/review/iso-alpha2-gap-investigation.md`.
