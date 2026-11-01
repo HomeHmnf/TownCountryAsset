@@ -55,7 +55,7 @@ The current policy is version 1 and has owner-approved status. Its 41 field assi
 
 ### Resolution and provenance rules
 
-The shared implementation is `tools/database/source_selection.py`; it validates the approved policy against the central registry and resolves normalized observations only from each provider's `latest_validated` release. It preserves source/release/period/methodology provenance, enforces explicit fallback compatibility, and applies matching manual overrides with precedence. It does not acquire, validate provider datasets, derive values, import into SQLite, or publish data. See `docs/data-sources/source-selection.md` for its input contract, runtime interface and current limitations.
+The shared implementation uses `tools/database/source_selection.py` for scalar fields and `tools/database/structured_source_selection.py` for record/subfield resolution. Both validate the approved policy against the central registry and accept observations only from each provider's `latest_validated` release. They preserve source/release/period/methodology provenance, enforce explicit fallback compatibility, and apply matching manual overrides at their declared scope. Structured callers can provide an expected record catalogue so missing entries are emitted as unavailable; resource-specific fallback mappings are constrained to their exact record keys. The engines do not acquire or validate provider datasets, derive values, import into SQLite, or publish data. See `docs/data-sources/source-selection.md` for their input contracts, runtime interfaces and limitations.
 
 All modes must follow these rules:
 
