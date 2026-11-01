@@ -8,9 +8,18 @@ from pathlib import Path
 import pytest
 
 from tools.database.connection import connect_database
-from tools.database.review_data_import import ReviewDataImportError, _read_iso_report, import_review_data
+from tools.database import application_approval, review_data_import
+from tools.database.review_data_import import (
+    ReviewDataImportError, _read_iso_report, import_review_data,
+)
 from tools.database.schema import apply_migrations
 from tools.propose_iso_assignments import propose, read_reference, render_report
+
+
+@pytest.fixture(autouse=True)
+def repository_root_for_approval(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(review_data_import, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(application_approval, "REPOSITORY_ROOT", tmp_path)
 
 
 GAME_ID = "tc_" + "a" * 32
@@ -142,13 +151,49 @@ def make_database(path: Path) -> None:
         connection.close()
 
 
-def run_import(database: Path, inputs: dict[str, Path]):
+def run_import(database: Path, inputs: dict[str, Path], approval_id: str = "review-data-test-001"):
+    artifact = review_data_import.build_review_application_artifact(
+        inputs["registry"], inputs["iso_reference"], inputs["iso_provenance"],
+        inputs["iso_proposals"], inputs["persian_candidates"],
+        inputs["persian_provenance"], inputs["taxonomy"], inputs["flags"],
+    )
+    connection = connect_database(database)
+    try:
+        connection.execute("BEGIN IMMEDIATE")
+        application_approval.propose_application(
+            connection, approval_id=approval_id, artifact=artifact
+        )
+        application_approval.decide_application(
+            connection, approval_id=approval_id, decision="approved", actor="test-reviewer"
+        )
+        connection.commit()
+    finally:
+        connection.close()
     return import_review_data(
         database, inputs["registry"], inputs["iso_reference"],
         inputs["iso_provenance"], inputs["iso_proposals"],
         inputs["persian_candidates"], inputs["persian_provenance"],
-        inputs["taxonomy"], inputs["flags"],
+        inputs["taxonomy"], inputs["flags"], approval_id=approval_id,
     )
+
+
+def test_review_data_import_rejects_unapproved_direct_write(tmp_path: Path):
+    inputs = fixture_inputs(tmp_path)
+    database = tmp_path / "canonical.sqlite"
+    make_database(database)
+    with pytest.raises(ReviewDataImportError, match="Unknown application approval"):
+        import_review_data(
+            database, inputs["registry"], inputs["iso_reference"],
+            inputs["iso_provenance"], inputs["iso_proposals"],
+            inputs["persian_candidates"], inputs["persian_provenance"],
+            inputs["taxonomy"], inputs["flags"], approval_id="missing-review-data-001",
+        )
+    connection = connect_database(database)
+    try:
+        assert connection.execute("SELECT COUNT(*) FROM review_proposals").fetchone()[0] == 0
+        assert connection.execute("SELECT COUNT(*) FROM country_flags").fetchone()[0] == 0
+    finally:
+        connection.close()
 
 
 def test_imports_review_candidates_without_promoting_or_filling_values(tmp_path: Path):
@@ -185,8 +230,8 @@ def test_repeat_import_is_idempotent(tmp_path: Path):
     inputs = fixture_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
     make_database(database)
-    run_import(database, inputs)
-    run_import(database, inputs)
+    run_import(database, inputs, 'review-data-repeat-001')
+    run_import(database, inputs, 'review-data-repeat-002')
     connection = connect_database(database)
     try:
         assert connection.execute("SELECT COUNT(*) FROM review_proposals").fetchone()[0] == 3
