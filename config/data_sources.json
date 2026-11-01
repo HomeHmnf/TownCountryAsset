@@ -15,8 +15,8 @@
     "reports_root": "reports/sources"
   },
   "sources": {
-    "un_wpp_2024": {
-      "name": "UN World Population Prospects 2024",
+    "un_wpp": {
+      "name": "UN World Population Prospects",
       "homepage_url": "https://population.un.org/wpp/",
       "domains": [
         "demography"
@@ -98,7 +98,10 @@
       ],
       "selected_current_period": "2026",
       "selected_variant": "Medium",
-      "selected_value_status": "projected"
+      "selected_value_status": "projected",
+      "legacy_source_ids": [
+        "un_wpp_2024"
+      ]
     },
     "imf_weo": {
       "name": "IMF World Economic Outlook",
@@ -174,8 +177,8 @@
       "downloads": [],
       "field_ids": []
     },
-    "koppen_beck_2023": {
-      "name": "Beck et al. Köppen-Geiger V3",
+    "koppen_beck": {
+      "name": "Beck et al. Köppen-Geiger climate classification",
       "homepage_url": "https://www.gloh2o.org/koppen/",
       "domains": [
         "climate"
@@ -188,10 +191,13 @@
       "downloads": [],
       "field_ids": [
         41
+      ],
+      "legacy_source_ids": [
+        "koppen_beck_2023"
       ]
     },
-    "fao_fra_2025": {
-      "name": "FAO Global Forest Resources Assessment 2025",
+    "fao_fra": {
+      "name": "FAO Global Forest Resources Assessment",
       "homepage_url": "https://www.fao.org/forest-resources-assessment/",
       "domains": [
         "forest"
@@ -204,10 +210,13 @@
       "downloads": [],
       "field_ids": [
         42
+      ],
+      "legacy_source_ids": [
+        "fao_fra_2025"
       ]
     },
-    "usgs_mcs_2026": {
-      "name": "USGS Mineral Commodity Summaries 2026",
+    "usgs_mcs": {
+      "name": "USGS Mineral Commodity Summaries",
       "homepage_url": "https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries",
       "domains": [
         "natural_resources"
@@ -220,9 +229,12 @@
       "downloads": [],
       "field_ids": [
         45
+      ],
+      "legacy_source_ids": [
+        "usgs_mcs_2026"
       ]
     },
-    "pew_religion_2020": {
+    "pew_religion": {
       "name": "Pew Research Center Global Religious Composition dataset",
       "homepage_url": "https://www.pewresearch.org/dataset/dataset-of-global-religious-composition-estimates-for-2010-and-2020/",
       "domains": [
@@ -236,6 +248,9 @@
       "downloads": [],
       "field_ids": [
         48
+      ],
+      "legacy_source_ids": [
+        "pew_religion_2020"
       ]
     },
     "undp_hdr": {
