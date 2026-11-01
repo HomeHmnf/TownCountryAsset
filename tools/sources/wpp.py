@@ -259,6 +259,10 @@ def prepare_un_wpp(
         crosswalk = load_crosswalk(crosswalk_path, expected_dataset=SOURCE_KEY)
     except CrosswalkError as exc:
         raise WPPAdapterError(f"Invalid reviewed WPP crosswalk: {exc}") from exc
+    if crosswalk.source_key != SOURCE_KEY:
+        raise WPPAdapterError(
+            f"Crosswalk source_key must be {SOURCE_KEY!r}, received {crosswalk.source_key!r}"
+        )
     mapping = {item.source_id: item.game_id for item in crosswalk.mappings}
     if len(mapping) != len(crosswalk.mappings):
         raise WPPAdapterError("WPP crosswalk contains duplicate source IDs")
