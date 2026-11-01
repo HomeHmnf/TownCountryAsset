@@ -1,0 +1,243 @@
+game_id,registry_name,source_id,existing_alpha2,existing_alpha3,match_type,name_comparison,variant_note,reference_name,reference_id,reference_alpha2,reference_alpha3,alpha2_comparison,alpha3_comparison,code_pair_classification,source_id_vs_reference_alpha3
+tc_168ca96e60634f5d83f3f22ad2505e66,Zimbabwe,ZWE,,ZWE,exact_name,exact,,Zimbabwe,716,ZW,ZWE,missing_existing,match,alpha3_only_agreement,same
+tc_e75bc9ac62fa443c90b5529778f3b1af,Zambia,ZMB,,ZMB,exact_name,exact,,Zambia,894,ZM,ZMB,missing_existing,match,alpha3_only_agreement,same
+tc_e32ec835b247449084d1b535ebccf7f1,Yemen,YEM,,YEM,exact_name,exact,,Yemen,887,YE,YEM,missing_existing,match,alpha3_only_agreement,same
+tc_e65eabf3cd054585a43347bdfea6201b,Vietnam,VNM,,VNM,explicit_variant,explicit_variant,Current reference spelling differs from the registry display name.,Viet Nam,704,VN,VNM,missing_existing,match,alpha3_only_agreement,same
+tc_1aa00cb7ebb34cdca928353a58ff5b12,Venezuela,VEN,,VEN,explicit_variant,explicit_variant,Reference uses the formal name.,Venezuela (Bolivarian Republic of),862,VE,VEN,missing_existing,match,alpha3_only_agreement,same
+tc_a8a10a8bdf13428593d1b0ab46990697,Vatican,VAT,,VAT,explicit_variant,explicit_variant,ISO reference identifies the Holy See; review entity-vs-display-label semantics.,Holy See,336,VA,VAT,missing_existing,match,alpha3_only_agreement,same
+tc_43c4be0a76ca43a2bb7e634de5a1f4f4,Vanuatu,VUT,,VUT,exact_name,exact,,Vanuatu,548,VU,VUT,missing_existing,match,alpha3_only_agreement,same
+tc_5d951c36a4ad4471ae9b9037fe338d70,Uzbekistan,UZB,,UZB,exact_name,exact,,Uzbekistan,860,UZ,UZB,missing_existing,match,alpha3_only_agreement,same
+tc_e19506c4a1564ca085b73b9284fa6f56,Uruguay,URY,,URY,exact_name,exact,,Uruguay,858,UY,URY,missing_existing,match,alpha3_only_agreement,same
+tc_4add61cba99b4e63a37406cd1d0feb5f,Federated States of Micronesia,FSM,,FSM,explicit_variant,explicit_variant,Word-order variant of the formal name.,Micronesia (Federated States of),583,FM,FSM,missing_existing,match,alpha3_only_agreement,same
+tc_f201b19690a04a8f903f9ea4cb0c7af4,Marshall Islands,MHL,,MHL,exact_name,exact,,Marshall Islands,584,MH,MHL,missing_existing,match,alpha3_only_agreement,same
+tc_07747651759a40219ba3f4710fa6ab11,Northern Mariana Islands,MNP,,MNP,exact_name,exact,,Northern Mariana Islands,580,MP,MNP,missing_existing,match,alpha3_only_agreement,same
+tc_504d6ccab85e4fbdad7ddd881dd6d87d,United States Virgin Islands,VIR,,VIR,exact_name,exact,,United States Virgin Islands,850,VI,VIR,missing_existing,match,alpha3_only_agreement,same
+tc_ff2aa3765a3d4ee4a6d0c0bd0fb61ddd,Guam,GUM,,GUM,exact_name,exact,,Guam,316,GU,GUM,missing_existing,match,alpha3_only_agreement,same
+tc_ab146a31fa9243bc81a35e9cfaa1ed05,American Samoa,ASM,,ASM,exact_name,exact,,American Samoa,016,AS,ASM,missing_existing,match,alpha3_only_agreement,same
+tc_37f10315a18d4c3abf3486086b5822e1,Puerto Rico,PRI,,PRI,exact_name,exact,,Puerto Rico,630,PR,PRI,missing_existing,match,alpha3_only_agreement,same
+tc_f0a8b61c54a14d4089774716657e9433,United States of America,USA,,USA,exact_name,exact,,United States of America,840,US,USA,missing_existing,match,alpha3_only_agreement,same
+tc_c08d501548d346c3ad3e27b514e1e902,South Georgia and the Islands,SGS,,SGS,explicit_variant,explicit_variant,Display-name variant; verify geometry/entity scope.,South Georgia and the South Sandwich Islands,239,GS,SGS,missing_existing,match,alpha3_only_agreement,same
+tc_73138c628d2a4509bad88f66deb5b27b,British Indian Ocean Territory,IOT,,IOT,exact_name,exact,,British Indian Ocean Territory,086,IO,IOT,missing_existing,match,alpha3_only_agreement,same
+tc_9bd5e00f9fc944edbf2eb3097e413328,Saint Helena,SHN,,SHN,exact_name,exact,,Saint Helena,654,SH,SHN,missing_existing,match,alpha3_only_agreement,same
+tc_0900903d1eb84838aae9c039c9fd0da2,Pitcairn Islands,PCN,,PCN,explicit_variant,explicit_variant,Plural display-name variant.,Pitcairn,612,PN,PCN,missing_existing,match,alpha3_only_agreement,same
+tc_0b9688bbf4264477b023a0f2af180c2e,Anguilla,AIA,,AIA,exact_name,exact,,Anguilla,660,AI,AIA,missing_existing,match,alpha3_only_agreement,same
+tc_815eb2563fde4a4cb077173220e2a533,Falkland Islands,FLK,,FLK,unmatched,not_compared,Reference includes the formal Malvinas name and article; verify entity scope.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_19acfc8e1cf44c25aa753729115d60d6,Cayman Islands,CYM,,CYM,exact_name,exact,,Cayman Islands,136,KY,CYM,missing_existing,match,alpha3_only_agreement,same
+tc_d81e2d4c4b934f57a67f380b2fdaec9d,Bermuda,BMU,,BMU,exact_name,exact,,Bermuda,060,BM,BMU,missing_existing,match,alpha3_only_agreement,same
+tc_f3832fd029cb445483c26654bddadfac,British Virgin Islands,VGB,,VGB,exact_name,exact,,British Virgin Islands,092,VG,VGB,missing_existing,match,alpha3_only_agreement,same
+tc_ea6ba8b48782477bad74e946641a16ae,Turks and Caicos Islands,TCA,,TCA,exact_name,exact,,Turks and Caicos Islands,796,TC,TCA,missing_existing,match,alpha3_only_agreement,same
+tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d,Montserrat,MSR,,MSR,exact_name,exact,,Montserrat,500,MS,MSR,missing_existing,match,alpha3_only_agreement,same
+tc_43796017cb7d4a279de2d9ed65c32c80,Jersey,JEY,,JEY,exact_name,exact,,Jersey,832,JE,JEY,missing_existing,match,alpha3_only_agreement,same
+tc_be9b1fd97db1475191612805ba7f9920,Guernsey,GGY,,GGY,exact_name,exact,,Guernsey,831,GG,GGY,missing_existing,match,alpha3_only_agreement,same
+tc_f94f97a8ffc24ef18872cadb5736ea2b,Isle of Man,IMN,,IMN,exact_name,exact,,Isle of Man,833,IM,IMN,missing_existing,match,alpha3_only_agreement,same
+tc_8d01644699e04b74ae3a4751c6f1fc41,United Kingdom,GBR,,GBR,explicit_variant,explicit_variant,Reference uses the full formal name.,United Kingdom of Great Britain and Northern Ireland,826,GB,GBR,missing_existing,match,alpha3_only_agreement,same
+tc_3cbd960008724744b928265acc0638a4,United Arab Emirates,ARE,,ARE,exact_name,exact,,United Arab Emirates,784,AE,ARE,missing_existing,match,alpha3_only_agreement,same
+tc_65f8a168b10143c2a596917c1fca3731,Ukraine,UKR,,UKR,exact_name,exact,,Ukraine,804,UA,UKR,missing_existing,match,alpha3_only_agreement,same
+tc_2bd67b30564b46b4b502a36decc333bf,Uganda,UGA,,UGA,exact_name,exact,,Uganda,800,UG,UGA,missing_existing,match,alpha3_only_agreement,same
+tc_72de9a194d85404098bb741ae4ffc826,Turkmenistan,TKM,,TKM,exact_name,exact,,Turkmenistan,795,TM,TKM,missing_existing,match,alpha3_only_agreement,same
+tc_155414257ec0498690f73c3595d85e7c,Turkey,TUR,,TUR,explicit_variant,explicit_variant,Current reference spelling differs.,Türkiye,792,TR,TUR,missing_existing,match,alpha3_only_agreement,same
+tc_1d1d2c1274384efa82f9591e1c069aba,Tunisia,TUN,,TUN,exact_name,exact,,Tunisia,788,TN,TUN,missing_existing,match,alpha3_only_agreement,same
+tc_1bd98a138f884dd4b4d9d1efbbf357b0,Trinidad and Tobago,TTO,,TTO,exact_name,exact,,Trinidad and Tobago,780,TT,TTO,missing_existing,match,alpha3_only_agreement,same
+tc_2c6f6c5486f04a87aa94277e67d6e51a,Tonga,TON,,TON,exact_name,exact,,Tonga,776,TO,TON,missing_existing,match,alpha3_only_agreement,same
+tc_06a09ff0e27b49e392ef2e88161023eb,Togo,TGO,,TGO,exact_name,exact,,Togo,768,TG,TGO,missing_existing,match,alpha3_only_agreement,same
+tc_bd40ea14860a4c4083eced5549d2d9c4,East Timor,TLS,,TLS,explicit_variant,explicit_variant,Common English name variant.,Timor-Leste,626,TL,TLS,missing_existing,match,alpha3_only_agreement,same
+tc_fc12d0184fc7498f982ab8033ae64436,Thailand,THA,,THA,exact_name,exact,,Thailand,764,TH,THA,missing_existing,match,alpha3_only_agreement,same
+tc_0f4c47ec59434e46871845e474964499,United Republic of Tanzania,TZA,,TZA,exact_name,exact,,United Republic of Tanzania,834,TZ,TZA,missing_existing,match,alpha3_only_agreement,same
+tc_772e2ac5253c46e98b79cf5a6f19e9f5,Tajikistan,TJK,,TJK,exact_name,exact,,Tajikistan,762,TJ,TJK,missing_existing,match,alpha3_only_agreement,same
+tc_98ab3dee1d554162b6bbd5dac6374fc8,Taiwan,TWN,,TWN,unmatched,not_compared,Reference uses its published formal label; assignment requires policy review.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_c205b2615c45490182519ecedb651e99,Syria,SYR,,SYR,explicit_variant,explicit_variant,Common English name variant.,Syrian Arab Republic,760,SY,SYR,missing_existing,match,alpha3_only_agreement,same
+tc_e693e8b799f94e7bb814e89bd46d886d,Switzerland,CHE,,CHE,exact_name,exact,,Switzerland,756,CH,CHE,missing_existing,match,alpha3_only_agreement,same
+tc_d74b429fff544cf9bafeb459c4b3edd8,Sweden,SWE,,SWE,exact_name,exact,,Sweden,752,SE,SWE,missing_existing,match,alpha3_only_agreement,same
+tc_fc2ad04f3c88446e91bd770190d6fe4c,eSwatini,SWZ,,SWZ,exact_name,normalized_variation,,Eswatini,748,SZ,SWZ,missing_existing,match,alpha3_only_agreement,same
+tc_168a848021b84cc6a6c3fc320012a176,Suriname,SUR,,SUR,exact_name,exact,,Suriname,740,SR,SUR,missing_existing,match,alpha3_only_agreement,same
+tc_12491d45eed544948b316c89f82a7ee7,South Sudan,SDS,,SSD,exact_name,exact,,South Sudan,728,SS,SSD,missing_existing,match,alpha3_only_agreement,different
+tc_b0ca3e0386b34603a6356b8ebc8b0565,Sudan,SDN,,SDN,exact_name,exact,,Sudan,729,SD,SDN,missing_existing,match,alpha3_only_agreement,same
+tc_5e47c88bebac452e953fc5dfa8b1ba06,Sri Lanka,LKA,,LKA,exact_name,exact,,Sri Lanka,144,LK,LKA,missing_existing,match,alpha3_only_agreement,same
+tc_21a70a0fbf1b43c292783397ce218239,Spain,ESP,,ESP,exact_name,exact,,Spain,724,ES,ESP,missing_existing,match,alpha3_only_agreement,same
+tc_cf8be733dbf44dd6b112e9fe12d2b19e,South Korea,KOR,,KOR,unmatched,not_compared,Common English name variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_dc6419869818416db051f50cbfd95036,South Africa,ZAF,,ZAF,exact_name,exact,,South Africa,710,ZA,ZAF,missing_existing,match,alpha3_only_agreement,same
+tc_e82cc51b989841109d9e1a7f6a5d1727,Somalia,SOM,,SOM,exact_name,exact,,Somalia,706,SO,SOM,missing_existing,match,alpha3_only_agreement,same
+tc_9a78f2eebcc24906a5c67581c0c3895e,Somaliland,SOL,,,unmatched,not_compared,No ISO 3166-1 candidate is proposed by this alias map.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_0ce7eb254c32428c88601905c0df8e87,Solomon Islands,SLB,,SLB,exact_name,exact,,Solomon Islands,090,SB,SLB,missing_existing,match,alpha3_only_agreement,same
+tc_b3bea891d7114d148714d5e398ee06b1,Slovakia,SVK,,SVK,exact_name,exact,,Slovakia,703,SK,SVK,missing_existing,match,alpha3_only_agreement,same
+tc_c0484640d9554c8285e92412bae25785,Slovenia,SVN,,SVN,exact_name,exact,,Slovenia,705,SI,SVN,missing_existing,match,alpha3_only_agreement,same
+tc_9d65e06bf97d417c8aa62742225ef5c9,Singapore,SGP,,SGP,exact_name,exact,,Singapore,702,SG,SGP,missing_existing,match,alpha3_only_agreement,same
+tc_56e9d1977fa14da298ae125fbda1b63c,Sierra Leone,SLE,,SLE,exact_name,exact,,Sierra Leone,694,SL,SLE,missing_existing,match,alpha3_only_agreement,same
+tc_4bc377d3ea57485bac43c9b512587dbc,Seychelles,SYC,,SYC,exact_name,exact,,Seychelles,690,SC,SYC,missing_existing,match,alpha3_only_agreement,same
+tc_98a68180b9f0479f90dcde7809d60470,Republic of Serbia,SRB,,SRB,explicit_variant,explicit_variant,Display-name prefix variant.,Serbia,688,RS,SRB,missing_existing,match,alpha3_only_agreement,same
+tc_29ec74ae4e094053a930487b9ce602d1,Senegal,SEN,,SEN,exact_name,exact,,Senegal,686,SN,SEN,missing_existing,match,alpha3_only_agreement,same
+tc_86b0f7fcb4504f9b8dc1b60b42b16ea0,Saudi Arabia,SAU,,SAU,exact_name,exact,,Saudi Arabia,682,SA,SAU,missing_existing,match,alpha3_only_agreement,same
+tc_4a2ed326dc6047efa2e28926df0bc7f0,São Tomé and Principe,STP,,STP,exact_name,normalized_variation,,Sao Tome and Principe,678,ST,STP,missing_existing,match,alpha3_only_agreement,same
+tc_e4ea859bd6704c13912ad7f5cf19de41,San Marino,SMR,,SMR,exact_name,exact,,San Marino,674,SM,SMR,missing_existing,match,alpha3_only_agreement,same
+tc_76082bd796c546d1ab76a7a8a3251369,Samoa,WSM,,WSM,exact_name,exact,,Samoa,882,WS,WSM,missing_existing,match,alpha3_only_agreement,same
+tc_67290f5714c846f4a84d1f53c6fd495a,Saint Vincent and the Grenadines,VCT,,VCT,exact_name,exact,,Saint Vincent and the Grenadines,670,VC,VCT,missing_existing,match,alpha3_only_agreement,same
+tc_6629fdb92d05409f856d9030b63b1470,Saint Lucia,LCA,,LCA,exact_name,exact,,Saint Lucia,662,LC,LCA,missing_existing,match,alpha3_only_agreement,same
+tc_f22d58e7280f41f7a5a68fb03e1ab87e,Saint Kitts and Nevis,KNA,,KNA,exact_name,exact,,Saint Kitts and Nevis,659,KN,KNA,missing_existing,match,alpha3_only_agreement,same
+tc_7f3c6637070f4c42a40c1f5456ec4721,Rwanda,RWA,,RWA,exact_name,exact,,Rwanda,646,RW,RWA,missing_existing,match,alpha3_only_agreement,same
+tc_c587d1c1cd8d4ec489f3d8e2524ec607,Russia,RUS,,RUS,explicit_variant,explicit_variant,Common English name variant.,Russian Federation,643,RU,RUS,missing_existing,match,alpha3_only_agreement,same
+tc_c41863f7cb4e4dccbbdf0a1296f9ee1c,Romania,ROU,,ROU,exact_name,exact,,Romania,642,RO,ROU,missing_existing,match,alpha3_only_agreement,same
+tc_13df99232f33400d9079316c041f066c,Qatar,QAT,,QAT,exact_name,exact,,Qatar,634,QA,QAT,missing_existing,match,alpha3_only_agreement,same
+tc_43ee3db974884a72bacf5f5519e2c145,Portugal,PRT,,PRT,exact_name,exact,,Portugal,620,PT,PRT,missing_existing,match,alpha3_only_agreement,same
+tc_9865dd6a50c3458b98f5040f0cc76357,Poland,POL,,POL,exact_name,exact,,Poland,616,PL,POL,missing_existing,match,alpha3_only_agreement,same
+tc_fc8f1a9536d342899526129acf15acd2,Philippines,PHL,,PHL,exact_name,exact,,Philippines,608,PH,PHL,missing_existing,match,alpha3_only_agreement,same
+tc_a90d391a4a9a473b9074fc99cce11cb5,Peru,PER,,PER,exact_name,exact,,Peru,604,PE,PER,missing_existing,match,alpha3_only_agreement,same
+tc_3eb6dc12494541e793a8a5b68980f29f,Paraguay,PRY,,PRY,exact_name,exact,,Paraguay,600,PY,PRY,missing_existing,match,alpha3_only_agreement,same
+tc_82d51d964745422e8ed3a9109757d2ee,Papua New Guinea,PNG,,PNG,exact_name,exact,,Papua New Guinea,598,PG,PNG,missing_existing,match,alpha3_only_agreement,same
+tc_ba6cf14fa6224eb4a0b085b3ea1df6dc,Panama,PAN,,PAN,exact_name,exact,,Panama,591,PA,PAN,missing_existing,match,alpha3_only_agreement,same
+tc_642fbe2581cf4b8c857d967717d1f1ef,Palau,PLW,,PLW,exact_name,exact,,Palau,585,PW,PLW,missing_existing,match,alpha3_only_agreement,same
+tc_0dc6216a94e34b44b27e42ed35fa6376,Pakistan,PAK,,PAK,exact_name,exact,,Pakistan,586,PK,PAK,missing_existing,match,alpha3_only_agreement,same
+tc_22bd85ff61234a46a95506d105d5fee4,Oman,OMN,,OMN,exact_name,exact,,Oman,512,OM,OMN,missing_existing,match,alpha3_only_agreement,same
+tc_f4a6e15a05474af2b81c9524ed988d89,Norway,NOR,NO,,exact_name,exact,,Norway,578,NO,NOR,match,missing_existing,alpha2_only_agreement,same
+tc_4a3793e49e5441ae94aeec78cc887021,North Korea,PRK,,PRK,unmatched,not_compared,Common English name variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_7a8158c93a934345a2ade9fd16ee4999,Nigeria,NGA,,NGA,exact_name,exact,,Nigeria,566,NG,NGA,missing_existing,match,alpha3_only_agreement,same
+tc_4d31375845614c2b91a71736069d4ab3,Niger,NER,,NER,exact_name,exact,,Niger,562,NE,NER,missing_existing,match,alpha3_only_agreement,same
+tc_2fdae8757e51402e9f67c428d2b79368,Nicaragua,NIC,,NIC,exact_name,exact,,Nicaragua,558,NI,NIC,missing_existing,match,alpha3_only_agreement,same
+tc_d4b67e03f0c04d9a87089f477e5fa669,New Zealand,NZL,,NZL,exact_name,exact,,New Zealand,554,NZ,NZL,missing_existing,match,alpha3_only_agreement,same
+tc_4cb90152915543348c9a793599240eaa,Niue,NIU,,NIU,exact_name,exact,,Niue,570,NU,NIU,missing_existing,match,alpha3_only_agreement,same
+tc_d0017ca5d5084ceeaedc02b6d436fb39,Cook Islands,COK,,COK,exact_name,exact,,Cook Islands,184,CK,COK,missing_existing,match,alpha3_only_agreement,same
+tc_898b220cf53a425e9bac3630f2c17473,Netherlands,NLD,,NLD,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_8344feaf14da4684aaa8d4c263653778,Aruba,ABW,,ABW,exact_name,exact,,Aruba,533,AW,ABW,missing_existing,match,alpha3_only_agreement,same
+tc_2d0dc3f3edb9467090ea74861dbc7b9e,Curaçao,CUW,,CUW,exact_name,exact,,Curaçao,531,CW,CUW,missing_existing,match,alpha3_only_agreement,same
+tc_1c4ff3f2a8f04b43b0c28e830a9403ad,Nepal,NPL,,NPL,exact_name,exact,,Nepal,524,NP,NPL,missing_existing,match,alpha3_only_agreement,same
+tc_2722269bdef04648b655fe363650d565,Nauru,NRU,,NRU,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_7379cdcc5c4848c181ace3144aeba70f,Namibia,NAM,,NAM,exact_name,exact,,Namibia,516,NA,NAM,missing_existing,match,alpha3_only_agreement,same
+tc_2249b79a9c944a1c835b0cad2676e48d,Mozambique,MOZ,,MOZ,exact_name,exact,,Mozambique,508,MZ,MOZ,missing_existing,match,alpha3_only_agreement,same
+tc_84dc0c18f03144bea337f6aacd50bf0f,Morocco,MAR,,MAR,exact_name,exact,,Morocco,504,MA,MAR,missing_existing,match,alpha3_only_agreement,same
+tc_3487eebc07114ff589974150237cae4f,Western Sahara,SAH,,ESH,exact_name,exact,,Western Sahara,732,EH,ESH,missing_existing,match,alpha3_only_agreement,different
+tc_eb1de71332ef4db496cb76c95aa56cd4,Montenegro,MNE,,MNE,exact_name,exact,,Montenegro,499,ME,MNE,missing_existing,match,alpha3_only_agreement,same
+tc_d0fb202ca0aa4a868af6fa154ab84c30,Mongolia,MNG,,MNG,exact_name,exact,,Mongolia,496,MN,MNG,missing_existing,match,alpha3_only_agreement,same
+tc_96ea5c49288d40b0945401031405c2c8,Moldova,MDA,,MDA,unmatched,not_compared,Reference uses the formal name.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_da92472e602c45c69d331812fa5193d8,Monaco,MCO,,MCO,exact_name,exact,,Monaco,492,MC,MCO,missing_existing,match,alpha3_only_agreement,same
+tc_c6b830c3cba64d4883eac8cee7864cfd,Mexico,MEX,,MEX,exact_name,exact,,Mexico,484,MX,MEX,missing_existing,match,alpha3_only_agreement,same
+tc_c7b728ec16b94e35b05d96d14a253eec,Mauritius,MUS,,MUS,exact_name,exact,,Mauritius,480,MU,MUS,missing_existing,match,alpha3_only_agreement,same
+tc_17137c4e4fcc4fa58e32c924f08efcda,Mauritania,MRT,,MRT,exact_name,exact,,Mauritania,478,MR,MRT,missing_existing,match,alpha3_only_agreement,same
+tc_f97b2223a2a84e53ac13614ddde1f602,Malta,MLT,,MLT,exact_name,exact,,Malta,470,MT,MLT,missing_existing,match,alpha3_only_agreement,same
+tc_a3f73fd3bb6d4d7fb4ea31d433453bae,Mali,MLI,,MLI,exact_name,exact,,Mali,466,ML,MLI,missing_existing,match,alpha3_only_agreement,same
+tc_408d22fe5b894b4b947a0521ace1018a,Maldives,MDV,,MDV,exact_name,exact,,Maldives,462,MV,MDV,missing_existing,match,alpha3_only_agreement,same
+tc_b21225f45c3b40509640603249110f89,Malaysia,MYS,,MYS,exact_name,exact,,Malaysia,458,MY,MYS,missing_existing,match,alpha3_only_agreement,same
+tc_ee1c1ac1ad5c4faf818070115133b174,Malawi,MWI,,MWI,exact_name,exact,,Malawi,454,MW,MWI,missing_existing,match,alpha3_only_agreement,same
+tc_7abbe0f9aa1346c7a9f69cc1027b4282,Madagascar,MDG,,MDG,exact_name,exact,,Madagascar,450,MG,MDG,missing_existing,match,alpha3_only_agreement,same
+tc_949bf877e3284f5c8a56cfc89bcafa90,North Macedonia,MKD,,MKD,exact_name,exact,,North Macedonia,807,MK,MKD,missing_existing,match,alpha3_only_agreement,same
+tc_f4261f4507cd48858cdfb7e3bd0ae738,Luxembourg,LUX,,LUX,exact_name,exact,,Luxembourg,442,LU,LUX,missing_existing,match,alpha3_only_agreement,same
+tc_77de0a41c4d94d8388d6f0732438be81,Lithuania,LTU,,LTU,exact_name,exact,,Lithuania,440,LT,LTU,missing_existing,match,alpha3_only_agreement,same
+tc_a8bd42bd635b43289f3c26695dc58939,Liechtenstein,LIE,,LIE,exact_name,exact,,Liechtenstein,438,LI,LIE,missing_existing,match,alpha3_only_agreement,same
+tc_bb5622bab363429ca481c5476acc824c,Libya,LBY,,LBY,exact_name,exact,,Libya,434,LY,LBY,missing_existing,match,alpha3_only_agreement,same
+tc_40dc9d2e141343e98a4d0c762c578473,Liberia,LBR,,LBR,exact_name,exact,,Liberia,430,LR,LBR,missing_existing,match,alpha3_only_agreement,same
+tc_c0fa4e9b8e984f59ba17beb7547c5811,Lesotho,LSO,,LSO,exact_name,exact,,Lesotho,426,LS,LSO,missing_existing,match,alpha3_only_agreement,same
+tc_8466a0747d0b4d1a8c23feb70f7c6ed1,Lebanon,LBN,,LBN,exact_name,exact,,Lebanon,422,LB,LBN,missing_existing,match,alpha3_only_agreement,same
+tc_f161aef25a39413e8aef8c147e97b28a,Latvia,LVA,,LVA,exact_name,exact,,Latvia,428,LV,LVA,missing_existing,match,alpha3_only_agreement,same
+tc_71a3ecd24ca74da9a6cea3dae8cd1f82,Laos,LAO,,LAO,explicit_variant,explicit_variant,Common English name variant.,Lao People's Democratic Republic,418,LA,LAO,missing_existing,match,alpha3_only_agreement,same
+tc_130ca81b84d04b058e9301121b2b7802,Kyrgyzstan,KGZ,,KGZ,exact_name,exact,,Kyrgyzstan,417,KG,KGZ,missing_existing,match,alpha3_only_agreement,same
+tc_fa491c61ffa24dc3a21c6a6da7d39fad,Kuwait,KWT,,KWT,exact_name,exact,,Kuwait,414,KW,KWT,missing_existing,match,alpha3_only_agreement,same
+tc_28aa17b84db24952b92fc51b421075e0,Kosovo,KOS,,,unmatched,not_compared,No ISO 3166-1 candidate is proposed by this alias map.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_c23a3cf00b1a4ebf97a70a4f41a7761d,Kiribati,KIR,,KIR,exact_name,exact,,Kiribati,296,KI,KIR,missing_existing,match,alpha3_only_agreement,same
+tc_9f3dc962bf9744a5a3cdf1f7a1cbb159,Kenya,KEN,,KEN,exact_name,exact,,Kenya,404,KE,KEN,missing_existing,match,alpha3_only_agreement,same
+tc_feadffc011db4cf695df6c0997a003c8,Kazakhstan,KAZ,,KAZ,exact_name,exact,,Kazakhstan,398,KZ,KAZ,missing_existing,match,alpha3_only_agreement,same
+tc_6e28258973b54dfeb5811c563cd0a2e8,Jordan,JOR,,JOR,exact_name,exact,,Jordan,400,JO,JOR,missing_existing,match,alpha3_only_agreement,same
+tc_8d0620ea475f498d9402134857882bf1,Japan,JPN,,JPN,exact_name,exact,,Japan,392,JP,JPN,missing_existing,match,alpha3_only_agreement,same
+tc_bf02736242694622ae7c730beb0f0da6,Jamaica,JAM,,JAM,exact_name,exact,,Jamaica,388,JM,JAM,missing_existing,match,alpha3_only_agreement,same
+tc_1f3e0c90df4341f082ed90ecdd95fb10,Italy,ITA,,ITA,exact_name,exact,,Italy,380,IT,ITA,missing_existing,match,alpha3_only_agreement,same
+tc_28952c75855947a7b31bb7509dc1fce1,Israel,ISR,,ISR,exact_name,exact,,Israel,376,IL,ISR,missing_existing,match,alpha3_only_agreement,same
+tc_50c420df8b2c4c6eaae47d795f9a1ea2,Palestine,PSX,,PSE,unmatched,not_compared,Reference uses the formal name.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_16d6044d9abf4743821a6fb238942a22,Ireland,IRL,,IRL,exact_name,exact,,Ireland,372,IE,IRL,missing_existing,match,alpha3_only_agreement,same
+tc_5ee7b31f968941dca65e70519901915f,Iraq,IRQ,,IRQ,exact_name,exact,,Iraq,368,IQ,IRQ,missing_existing,match,alpha3_only_agreement,same
+tc_ddf21c4d378e4fc9bc3d5b4ba50890a2,Iran,IRN,,IRN,explicit_variant,explicit_variant,Reference uses the formal name.,Iran (Islamic Republic of),364,IR,IRN,missing_existing,match,alpha3_only_agreement,same
+tc_c40da0ac977b4201b8587ce04aa66f56,Indonesia,IDN,,IDN,exact_name,exact,,Indonesia,360,ID,IDN,missing_existing,match,alpha3_only_agreement,same
+tc_39ad5030b5f94f068d4a1528c60e5638,India,IND,,IND,exact_name,exact,,India,356,IN,IND,missing_existing,match,alpha3_only_agreement,same
+tc_861af4b9250e4e17a9d3f1f4e1ea33d4,Iceland,ISL,,ISL,exact_name,exact,,Iceland,352,IS,ISL,missing_existing,match,alpha3_only_agreement,same
+tc_e3ede57c1b754a2dbd940335f9655f11,Hungary,HUN,,HUN,exact_name,exact,,Hungary,348,HU,HUN,missing_existing,match,alpha3_only_agreement,same
+tc_80c318b9217a4320beaad6b93eb74ac5,Honduras,HND,,HND,exact_name,exact,,Honduras,340,HN,HND,missing_existing,match,alpha3_only_agreement,same
+tc_9ee610c6d55a4f4bbdbbb073b33628a2,Haiti,HTI,,HTI,exact_name,exact,,Haiti,332,HT,HTI,missing_existing,match,alpha3_only_agreement,same
+tc_893d4efa8ccf42af896949ffd7007fef,Guyana,GUY,,GUY,exact_name,exact,,Guyana,328,GY,GUY,missing_existing,match,alpha3_only_agreement,same
+tc_dc93b6caf7324df884ec2b070a5296b9,Guinea-Bissau,GNB,,GNB,exact_name,exact,,Guinea-Bissau,624,GW,GNB,missing_existing,match,alpha3_only_agreement,same
+tc_05eaf88055cc4388b518332f2e7fc115,Guinea,GIN,,GIN,exact_name,exact,,Guinea,324,GN,GIN,missing_existing,match,alpha3_only_agreement,same
+tc_9348779eba844ab2beb5bed00053b7c6,Guatemala,GTM,,GTM,exact_name,exact,,Guatemala,320,GT,GTM,missing_existing,match,alpha3_only_agreement,same
+tc_c5b3fecc12a94e85a7acddc70fa7a086,Grenada,GRD,,GRD,exact_name,exact,,Grenada,308,GD,GRD,missing_existing,match,alpha3_only_agreement,same
+tc_dab67464d7ad44cdbf925450627e4186,Greece,GRC,,GRC,exact_name,exact,,Greece,300,GR,GRC,missing_existing,match,alpha3_only_agreement,same
+tc_f63061b714ce4390948838410758c016,Ghana,GHA,,GHA,exact_name,exact,,Ghana,288,GH,GHA,missing_existing,match,alpha3_only_agreement,same
+tc_ff445b0a87494070bf868827de190acf,Germany,DEU,,DEU,exact_name,exact,,Germany,276,DE,DEU,missing_existing,match,alpha3_only_agreement,same
+tc_741bd244c1ec4961918565c4ed02c5c6,Georgia,GEO,,GEO,exact_name,exact,,Georgia,268,GE,GEO,missing_existing,match,alpha3_only_agreement,same
+tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a,Gambia,GMB,,GMB,exact_name,exact,,Gambia,270,GM,GMB,missing_existing,match,alpha3_only_agreement,same
+tc_d59dfb6324524b07a32c87b73009e97f,Gabon,GAB,,GAB,exact_name,exact,,Gabon,266,GA,GAB,missing_existing,match,alpha3_only_agreement,same
+tc_471ae6d7112b4537a7ae5ca1e6a816a5,France,FRA,FR,,exact_name,exact,,France,250,FR,FRA,match,missing_existing,alpha2_only_agreement,same
+tc_5551c0cc249f4e4e9ea6d57a0dacd2d5,Saint Pierre and Miquelon,SPM,,SPM,exact_name,exact,,Saint Pierre and Miquelon,666,PM,SPM,missing_existing,match,alpha3_only_agreement,same
+tc_9f1be169ba5347ff81384c532820401b,Wallis and Futuna,WLF,,WLF,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_cc0688860b8848ddb5f52395162d9b71,Saint Martin,MAF,,MAF,explicit_variant,explicit_variant,Reference identifies the French part explicitly; verify geometry/entity scope.,Saint Martin (French Part),663,MF,MAF,missing_existing,match,alpha3_only_agreement,same
+tc_e0f0ed8d4d284acd8b41435902f2a6cc,Saint Barthelemy,BLM,,BLM,exact_name,normalized_variation,,Saint Barthélemy,652,BL,BLM,missing_existing,match,alpha3_only_agreement,same
+tc_2493e62a2f78442e8fd4b8c0f0ca847c,French Polynesia,PYF,,PYF,exact_name,exact,,French Polynesia,258,PF,PYF,missing_existing,match,alpha3_only_agreement,same
+tc_e7d7320224a64229881b6b49ef1e74c3,New Caledonia,NCL,,NCL,exact_name,exact,,New Caledonia,540,NC,NCL,missing_existing,match,alpha3_only_agreement,same
+tc_c84e6493c6fc4373842ee9ba3a509db0,French Southern and Antarctic Lands,ATF,,ATF,explicit_variant,explicit_variant,Natural Earth display label differs from the ISO reference name; verify entity scope.,French Southern Territories,260,TF,ATF,missing_existing,match,alpha3_only_agreement,same
+tc_592dfefc0b584872853eedbd05b5e970,Aland,ALD,,ALA,explicit_variant,explicit_variant,Diacritic and abbreviated display-name variant.,Åland Islands,248,AX,ALA,missing_existing,match,alpha3_only_agreement,different
+tc_374e55a3eefe4a1a83fed6b64b5045f5,Finland,FIN,,FIN,exact_name,exact,,Finland,246,FI,FIN,missing_existing,match,alpha3_only_agreement,same
+tc_8d67737674744dce8986565b98cbbb1f,Fiji,FJI,,FJI,exact_name,exact,,Fiji,242,FJ,FJI,missing_existing,match,alpha3_only_agreement,same
+tc_860d12ee66fc4fceb3faddbc92c87930,Ethiopia,ETH,,ETH,exact_name,exact,,Ethiopia,231,ET,ETH,missing_existing,match,alpha3_only_agreement,same
+tc_383873de760147cd97dfac5ef5d60b08,Estonia,EST,,EST,exact_name,exact,,Estonia,233,EE,EST,missing_existing,match,alpha3_only_agreement,same
+tc_f9d7128c5ef04c6f955f43f9bcc56a0c,Eritrea,ERI,,ERI,exact_name,exact,,Eritrea,232,ER,ERI,missing_existing,match,alpha3_only_agreement,same
+tc_06d71df13c4f415fbf22a0147f19bc53,Equatorial Guinea,GNQ,,GNQ,exact_name,exact,,Equatorial Guinea,226,GQ,GNQ,missing_existing,match,alpha3_only_agreement,same
+tc_471268dbb85845de93e546317686debb,El Salvador,SLV,,SLV,exact_name,exact,,El Salvador,222,SV,SLV,missing_existing,match,alpha3_only_agreement,same
+tc_939f236600dd47a8bf850a7ff19dc047,Egypt,EGY,,EGY,exact_name,exact,,Egypt,818,EG,EGY,missing_existing,match,alpha3_only_agreement,same
+tc_2a54eb1caed54a2185a62cce0c2db6cb,Ecuador,ECU,,ECU,exact_name,exact,,Ecuador,218,EC,ECU,missing_existing,match,alpha3_only_agreement,same
+tc_ee04e01170f84b92afabbb40abdbd4e3,Dominican Republic,DOM,,DOM,exact_name,exact,,Dominican Republic,214,DO,DOM,missing_existing,match,alpha3_only_agreement,same
+tc_e5391af862dd490bb3a01fa80f4ac15e,Dominica,DMA,,DMA,exact_name,exact,,Dominica,212,DM,DMA,missing_existing,match,alpha3_only_agreement,same
+tc_f4814b1a89384c4d93a92c19b301a814,Djibouti,DJI,,DJI,exact_name,exact,,Djibouti,262,DJ,DJI,missing_existing,match,alpha3_only_agreement,same
+tc_cbf271e54b9c4e3fbaa93c291355f6f7,Greenland,GRL,,GRL,exact_name,exact,,Greenland,304,GL,GRL,missing_existing,match,alpha3_only_agreement,same
+tc_d608e7f9138e459ab3b96263618ae407,Faroe Islands,FRO,,FRO,exact_name,exact,,Faroe Islands,234,FO,FRO,missing_existing,match,alpha3_only_agreement,same
+tc_11da440eb0704bd195fe0b11fa0890af,Denmark,DNK,,DNK,exact_name,exact,,Denmark,208,DK,DNK,missing_existing,match,alpha3_only_agreement,same
+tc_e43afc3a83a3458c833dac5644b7186a,Czechia,CZE,,CZE,exact_name,exact,,Czechia,203,CZ,CZE,missing_existing,match,alpha3_only_agreement,same
+tc_d3e7f81572fd44ab920bfc066d592873,Northern Cyprus,CYN,,,unmatched,not_compared,No ISO 3166-1 candidate is proposed by this alias map.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_3c148b1f7650455fa710ca87cf376728,Cyprus,CYP,,CYP,exact_name,exact,,Cyprus,196,CY,CYP,missing_existing,match,alpha3_only_agreement,same
+tc_576e758e1fbb456a973d63c58222dc30,Cuba,CUB,,CUB,exact_name,exact,,Cuba,192,CU,CUB,missing_existing,match,alpha3_only_agreement,same
+tc_fb4046d4910a4bf89f4a93810e2f4d8a,Croatia,HRV,,HRV,exact_name,exact,,Croatia,191,HR,HRV,missing_existing,match,alpha3_only_agreement,same
+tc_18c639798e4948899643d84aa2bce93c,Ivory Coast,CIV,,CIV,explicit_variant,explicit_variant,Common English name variant.,Côte d’Ivoire,384,CI,CIV,missing_existing,match,alpha3_only_agreement,same
+tc_79512b2eaf8f45b5b118130859ebdaaf,Costa Rica,CRI,,CRI,exact_name,exact,,Costa Rica,188,CR,CRI,missing_existing,match,alpha3_only_agreement,same
+tc_2763c19aa8734ce9aa8b17d8effb6645,Democratic Republic of the Congo,COD,,COD,exact_name,exact,,Democratic Republic of the Congo,180,CD,COD,missing_existing,match,alpha3_only_agreement,same
+tc_451d8109e28b45eaa6923dfcac9d1601,Republic of the Congo,COG,,COG,explicit_variant,explicit_variant,Common country-name variant; verify entity distinction.,Congo,178,CG,COG,missing_existing,match,alpha3_only_agreement,same
+tc_10dd5e9664664abf9eca33c250a74cdb,Comoros,COM,,COM,exact_name,exact,,Comoros,174,KM,COM,missing_existing,match,alpha3_only_agreement,same
+tc_648b019cc83e486ab9fb8497386777a9,Colombia,COL,,COL,exact_name,exact,,Colombia,170,CO,COL,missing_existing,match,alpha3_only_agreement,same
+tc_3349a0b8b7454088b11e917a24de3ad5,China,CHN,,CHN,exact_name,exact,,China,156,CN,CHN,missing_existing,match,alpha3_only_agreement,same
+tc_f9a64d8c1e6342d2b1941833ff7588d0,Macao S.A.R,MAC,,MAC,unmatched,not_compared,Administrative-region suffix variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_394248a9960c4d28b4385210c82a0a0b,Hong Kong S.A.R.,HKG,,HKG,unmatched,not_compared,Administrative-region suffix variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_4c51c695cb6e47d2aed2fb04c397bece,Chile,CHL,,CHL,exact_name,exact,,Chile,152,CL,CHL,missing_existing,match,alpha3_only_agreement,same
+tc_1da2daf3a3d34a30b96100d643963f70,Chad,TCD,,TCD,exact_name,exact,,Chad,148,TD,TCD,missing_existing,match,alpha3_only_agreement,same
+tc_9d80376a997845b6ba6bbc08d436a50d,Central African Republic,CAF,,CAF,exact_name,exact,,Central African Republic,140,CF,CAF,missing_existing,match,alpha3_only_agreement,same
+tc_d9d1737635ce4385a50c4307c2716832,Cabo Verde,CPV,,CPV,exact_name,exact,,Cabo Verde,132,CV,CPV,missing_existing,match,alpha3_only_agreement,same
+tc_ba9087366ba54d51932e88bf8a11616d,Canada,CAN,,CAN,exact_name,exact,,Canada,124,CA,CAN,missing_existing,match,alpha3_only_agreement,same
+tc_f5cd614ef03c414d8e98d87102df5c14,Cameroon,CMR,,CMR,exact_name,exact,,Cameroon,120,CM,CMR,missing_existing,match,alpha3_only_agreement,same
+tc_f956986338e5418481784ba2d2781063,Cambodia,KHM,,KHM,exact_name,exact,,Cambodia,116,KH,KHM,missing_existing,match,alpha3_only_agreement,same
+tc_b4847e5d14f94efdbbd46d6467d90237,Myanmar,MMR,,MMR,exact_name,exact,,Myanmar,104,MM,MMR,missing_existing,match,alpha3_only_agreement,same
+tc_4ac5b3c6b7774a05b4ceb5573c4a9d27,Burundi,BDI,,BDI,exact_name,exact,,Burundi,108,BI,BDI,missing_existing,match,alpha3_only_agreement,same
+tc_3c920b9b9f324cb19ef9d4b6debf10ba,Burkina Faso,BFA,,BFA,exact_name,exact,,Burkina Faso,854,BF,BFA,missing_existing,match,alpha3_only_agreement,same
+tc_523810acde564c1c907acd5befe575ab,Bulgaria,BGR,,BGR,exact_name,exact,,Bulgaria,100,BG,BGR,missing_existing,match,alpha3_only_agreement,same
+tc_e416804f7e41490a9e7d743a45a72f0e,Brunei,BRN,,BRN,explicit_variant,explicit_variant,Reference uses the formal country name.,Brunei Darussalam,096,BN,BRN,missing_existing,match,alpha3_only_agreement,same
+tc_4923336d91d94afc919d8a2b8a4ad415,Brazil,BRA,,BRA,exact_name,exact,,Brazil,076,BR,BRA,missing_existing,match,alpha3_only_agreement,same
+tc_ca2bdd688a454bb8b6457c9448612669,Botswana,BWA,,BWA,exact_name,exact,,Botswana,072,BW,BWA,missing_existing,match,alpha3_only_agreement,same
+tc_0628271c897b49558f423321cbc48ce4,Bosnia and Herzegovina,BIH,,BIH,exact_name,exact,,Bosnia and Herzegovina,070,BA,BIH,missing_existing,match,alpha3_only_agreement,same
+tc_4cd6d52014244914bdeb62e6a6452e42,Bolivia,BOL,,BOL,explicit_variant,explicit_variant,Reference uses the formal state name.,Bolivia (Plurinational State of),068,BO,BOL,missing_existing,match,alpha3_only_agreement,same
+tc_91f04a21215642aeb5da856a78dc9949,Bhutan,BTN,,BTN,exact_name,exact,,Bhutan,064,BT,BTN,missing_existing,match,alpha3_only_agreement,same
+tc_874ae1f05e8c4d67a2c839095d760b72,Benin,BEN,,BEN,exact_name,exact,,Benin,204,BJ,BEN,missing_existing,match,alpha3_only_agreement,same
+tc_d066174c4df546d1a410d386f363ee80,Belize,BLZ,,BLZ,exact_name,exact,,Belize,084,BZ,BLZ,missing_existing,match,alpha3_only_agreement,same
+tc_f1cc713e923c4be48e176657a00469f0,Belgium,BEL,,BEL,exact_name,exact,,Belgium,056,BE,BEL,missing_existing,match,alpha3_only_agreement,same
+tc_6ebc90b251e14f70b8bf758d8008e839,Belarus,BLR,,BLR,exact_name,exact,,Belarus,112,BY,BLR,missing_existing,match,alpha3_only_agreement,same
+tc_7a679c592eef40c58b7cdf58e6032bb5,Barbados,BRB,,BRB,exact_name,exact,,Barbados,052,BB,BRB,missing_existing,match,alpha3_only_agreement,same
+tc_8169e562ece7475e960f78f231cb1ab7,Bangladesh,BGD,,BGD,exact_name,exact,,Bangladesh,050,BD,BGD,missing_existing,match,alpha3_only_agreement,same
+tc_38fd6c5cd2be45739f3be11bc4cab9c8,Bahrain,BHR,,BHR,exact_name,exact,,Bahrain,048,BH,BHR,missing_existing,match,alpha3_only_agreement,same
+tc_53553c35a9f44fddb64f46b5b2d7b90c,The Bahamas,BHS,,BHS,explicit_variant,explicit_variant,Reference omits the leading article.,Bahamas,044,BS,BHS,missing_existing,match,alpha3_only_agreement,same
+tc_b8c860bb8d404dcca918bad769e7ead7,Azerbaijan,AZE,,AZE,exact_name,exact,,Azerbaijan,031,AZ,AZE,missing_existing,match,alpha3_only_agreement,same
+tc_a0422e821c824e78bd95525b36155b65,Austria,AUT,,AUT,exact_name,exact,,Austria,040,AT,AUT,missing_existing,match,alpha3_only_agreement,same
+tc_270a6ecb902d4ea1ac7373b3d1a3b2cc,Australia,AUS,,AUS,exact_name,exact,,Australia,036,AU,AUS,missing_existing,match,alpha3_only_agreement,same
+tc_7cd2130353a64e57bd3782773a8e12c7,Indian Ocean Territories,IOA,,,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_e86aec8164734ab8be1b207a743e6ea4,Heard Island and McDonald Islands,HMD,,HMD,exact_name,exact,,Heard Island and McDonald Islands,334,HM,HMD,missing_existing,match,alpha3_only_agreement,same
+tc_003dbd71493240f5bd22a52176868806,Norfolk Island,NFK,,NFK,exact_name,exact,,Norfolk Island,574,NF,NFK,missing_existing,match,alpha3_only_agreement,same
+tc_b61ca098adb74efc84564fd9fa800bf8,Ashmore and Cartier Islands,ATC,,,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_f97b56c9c74845de8b41aa24ed12a47f,Armenia,ARM,,ARM,exact_name,exact,,Armenia,051,AM,ARM,missing_existing,match,alpha3_only_agreement,same
+tc_2a29d5b72b294244a5de6db37118237a,Argentina,ARG,,ARG,exact_name,exact,,Argentina,032,AR,ARG,missing_existing,match,alpha3_only_agreement,same
+tc_9221f2a3fd704847b66da16efa03c2b8,Antigua and Barbuda,ATG,,ATG,exact_name,exact,,Antigua and Barbuda,028,AG,ATG,missing_existing,match,alpha3_only_agreement,same
+tc_fa43ff476d6b428fa8edb4dde1aa9d3f,Angola,AGO,,AGO,exact_name,exact,,Angola,024,AO,AGO,missing_existing,match,alpha3_only_agreement,same
+tc_224c06bfe0f04031b422bddc81ea3ce5,Andorra,AND,,AND,exact_name,exact,,Andorra,020,AD,AND,missing_existing,match,alpha3_only_agreement,same
+tc_e245d37005f843168d67b7b327ece7f9,Algeria,DZA,,DZA,exact_name,exact,,Algeria,012,DZ,DZA,missing_existing,match,alpha3_only_agreement,same
+tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1,Albania,ALB,,ALB,exact_name,exact,,Albania,008,AL,ALB,missing_existing,match,alpha3_only_agreement,same
+tc_928d15fd89764353a6889f571bfd0a1c,Afghanistan,AFG,,AFG,exact_name,exact,,Afghanistan,004,AF,AFG,missing_existing,match,alpha3_only_agreement,same
+tc_644aaabf37604038996e34c1bc91c970,Siachen Glacier,KAS,,,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_c3c21e18d6e94254a4ca4a009530bac9,Antarctica,ATA,,ATA,exact_name,exact,,Antarctica,010,AQ,ATA,missing_existing,match,alpha3_only_agreement,same
+tc_d79e2777be2741c3bcf291431e2e4efb,Sint Maarten,SXM,,SXM,explicit_variant,explicit_variant,Reference explicitly identifies the Dutch part; verify geometry/entity scope.,Sint Maarten (Dutch part),534,SX,SXM,missing_existing,match,alpha3_only_agreement,same
+tc_47cd272cd9c9455185a13f6e69bd805c,Tuvalu,TUV,,TUV,exact_name,exact,,Tuvalu,798,TV,TUV,missing_existing,match,alpha3_only_agreement,same

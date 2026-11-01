@@ -1,0 +1,2429 @@
+{
+  "record_count": 242,
+  "unique_game_ids": 242,
+  "candidate_count": 242,
+  "missing_qid_count": 0,
+  "missing_label_count": 0,
+  "rows": [
+    {
+      "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+      "source_id": "ZWE",
+      "english_name": "Zimbabwe",
+      "current_persian_name": "",
+      "wikidata_qid": "Q954",
+      "candidate_persian_name": "زیمبابوه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e75bc9ac62fa443c90b5529778f3b1af",
+      "source_id": "ZMB",
+      "english_name": "Zambia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q953",
+      "candidate_persian_name": "زامبیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e32ec835b247449084d1b535ebccf7f1",
+      "source_id": "YEM",
+      "english_name": "Yemen",
+      "current_persian_name": "",
+      "wikidata_qid": "Q805",
+      "candidate_persian_name": "یمن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e65eabf3cd054585a43347bdfea6201b",
+      "source_id": "VNM",
+      "english_name": "Vietnam",
+      "current_persian_name": "",
+      "wikidata_qid": "Q881",
+      "candidate_persian_name": "ویتنام",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_1aa00cb7ebb34cdca928353a58ff5b12",
+      "source_id": "VEN",
+      "english_name": "Venezuela",
+      "current_persian_name": "",
+      "wikidata_qid": "Q717",
+      "candidate_persian_name": "ونزوئلا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_a8a10a8bdf13428593d1b0ab46990697",
+      "source_id": "VAT",
+      "english_name": "Vatican",
+      "current_persian_name": "",
+      "wikidata_qid": "Q237",
+      "candidate_persian_name": "واتیکان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_43c4be0a76ca43a2bb7e634de5a1f4f4",
+      "source_id": "VUT",
+      "english_name": "Vanuatu",
+      "current_persian_name": "",
+      "wikidata_qid": "Q686",
+      "candidate_persian_name": "وانواتو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_5d951c36a4ad4471ae9b9037fe338d70",
+      "source_id": "UZB",
+      "english_name": "Uzbekistan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q265",
+      "candidate_persian_name": "ازبکستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e19506c4a1564ca085b73b9284fa6f56",
+      "source_id": "URY",
+      "english_name": "Uruguay",
+      "current_persian_name": "",
+      "wikidata_qid": "Q77",
+      "candidate_persian_name": "اروگوئه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4add61cba99b4e63a37406cd1d0feb5f",
+      "source_id": "FSM",
+      "english_name": "Federated States of Micronesia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q702",
+      "candidate_persian_name": "میکرونزی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f201b19690a04a8f903f9ea4cb0c7af4",
+      "source_id": "MHL",
+      "english_name": "Marshall Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q709",
+      "candidate_persian_name": "جزایر مارشال",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_07747651759a40219ba3f4710fa6ab11",
+      "source_id": "MNP",
+      "english_name": "Northern Mariana Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q16644",
+      "candidate_persian_name": "جزایر ماریانای شمالی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_504d6ccab85e4fbdad7ddd881dd6d87d",
+      "source_id": "VIR",
+      "english_name": "United States Virgin Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q11703",
+      "candidate_persian_name": "جزایر ویرجین ایالات متحده",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ff2aa3765a3d4ee4a6d0c0bd0fb61ddd",
+      "source_id": "GUM",
+      "english_name": "Guam",
+      "current_persian_name": "",
+      "wikidata_qid": "Q16635",
+      "candidate_persian_name": "گوآم",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ab146a31fa9243bc81a35e9cfaa1ed05",
+      "source_id": "ASM",
+      "english_name": "American Samoa",
+      "current_persian_name": "",
+      "wikidata_qid": "Q16641",
+      "candidate_persian_name": "ساموآی آمریکا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_37f10315a18d4c3abf3486086b5822e1",
+      "source_id": "PRI",
+      "english_name": "Puerto Rico",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1183",
+      "candidate_persian_name": "پورتوریکو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f0a8b61c54a14d4089774716657e9433",
+      "source_id": "USA",
+      "english_name": "United States of America",
+      "current_persian_name": "",
+      "wikidata_qid": "Q30",
+      "candidate_persian_name": "ایالات متحده آمریکا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c08d501548d346c3ad3e27b514e1e902",
+      "source_id": "SGS",
+      "english_name": "South Georgia and the Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q35086",
+      "candidate_persian_name": "جزایر جورجیای جنوبی و ساندویچ جنوبی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_73138c628d2a4509bad88f66deb5b27b",
+      "source_id": "IOT",
+      "english_name": "British Indian Ocean Territory",
+      "current_persian_name": "",
+      "wikidata_qid": "Q43448",
+      "candidate_persian_name": "قلمرو بریتانیا در اقیانوس هند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9bd5e00f9fc944edbf2eb3097e413328",
+      "source_id": "SHN",
+      "english_name": "Saint Helena",
+      "current_persian_name": "",
+      "wikidata_qid": "Q34497",
+      "candidate_persian_name": "سینت هلینا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_0900903d1eb84838aae9c039c9fd0da2",
+      "source_id": "PCN",
+      "english_name": "Pitcairn Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q35672",
+      "candidate_persian_name": "جزایر پیتکرن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_0b9688bbf4264477b023a0f2af180c2e",
+      "source_id": "AIA",
+      "english_name": "Anguilla",
+      "current_persian_name": "",
+      "wikidata_qid": "Q25228",
+      "candidate_persian_name": "آنگویلا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_815eb2563fde4a4cb077173220e2a533",
+      "source_id": "FLK",
+      "english_name": "Falkland Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q9648",
+      "candidate_persian_name": "جزایر فالکلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_19acfc8e1cf44c25aa753729115d60d6",
+      "source_id": "CYM",
+      "english_name": "Cayman Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q5785",
+      "candidate_persian_name": "جزایر کیمن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d81e2d4c4b934f57a67f380b2fdaec9d",
+      "source_id": "BMU",
+      "english_name": "Bermuda",
+      "current_persian_name": "",
+      "wikidata_qid": "Q23635",
+      "candidate_persian_name": "برمودا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f3832fd029cb445483c26654bddadfac",
+      "source_id": "VGB",
+      "english_name": "British Virgin Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q25305",
+      "candidate_persian_name": "جزایر ویرجین بریتانیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ea6ba8b48782477bad74e946641a16ae",
+      "source_id": "TCA",
+      "english_name": "Turks and Caicos Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q18221",
+      "candidate_persian_name": "جزایر تورکس و کایکوس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d",
+      "source_id": "MSR",
+      "english_name": "Montserrat",
+      "current_persian_name": "",
+      "wikidata_qid": "Q13353",
+      "candidate_persian_name": "مونتسرات",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_43796017cb7d4a279de2d9ed65c32c80",
+      "source_id": "JEY",
+      "english_name": "Jersey",
+      "current_persian_name": "",
+      "wikidata_qid": "Q785",
+      "candidate_persian_name": "جرزی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_be9b1fd97db1475191612805ba7f9920",
+      "source_id": "GGY",
+      "english_name": "Guernsey",
+      "current_persian_name": "",
+      "wikidata_qid": "Q25230",
+      "candidate_persian_name": "گرنزی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f94f97a8ffc24ef18872cadb5736ea2b",
+      "source_id": "IMN",
+      "english_name": "Isle of Man",
+      "current_persian_name": "",
+      "wikidata_qid": "Q9676",
+      "candidate_persian_name": "جزیره من",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_8d01644699e04b74ae3a4751c6f1fc41",
+      "source_id": "GBR",
+      "english_name": "United Kingdom",
+      "current_persian_name": "",
+      "wikidata_qid": "Q145",
+      "candidate_persian_name": "بریتانیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_3cbd960008724744b928265acc0638a4",
+      "source_id": "ARE",
+      "english_name": "United Arab Emirates",
+      "current_persian_name": "",
+      "wikidata_qid": "Q878",
+      "candidate_persian_name": "امارات متحده عربی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_65f8a168b10143c2a596917c1fca3731",
+      "source_id": "UKR",
+      "english_name": "Ukraine",
+      "current_persian_name": "",
+      "wikidata_qid": "Q212",
+      "candidate_persian_name": "اوکراین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2bd67b30564b46b4b502a36decc333bf",
+      "source_id": "UGA",
+      "english_name": "Uganda",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1036",
+      "candidate_persian_name": "اوگاندا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_72de9a194d85404098bb741ae4ffc826",
+      "source_id": "TKM",
+      "english_name": "Turkmenistan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q874",
+      "candidate_persian_name": "ترکمنستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_155414257ec0498690f73c3595d85e7c",
+      "source_id": "TUR",
+      "english_name": "Turkey",
+      "current_persian_name": "",
+      "wikidata_qid": "Q43",
+      "candidate_persian_name": "ترکیه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_1d1d2c1274384efa82f9591e1c069aba",
+      "source_id": "TUN",
+      "english_name": "Tunisia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q948",
+      "candidate_persian_name": "تونس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_1bd98a138f884dd4b4d9d1efbbf357b0",
+      "source_id": "TTO",
+      "english_name": "Trinidad and Tobago",
+      "current_persian_name": "",
+      "wikidata_qid": "Q754",
+      "candidate_persian_name": "ترینیداد و توباگو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2c6f6c5486f04a87aa94277e67d6e51a",
+      "source_id": "TON",
+      "english_name": "Tonga",
+      "current_persian_name": "",
+      "wikidata_qid": "Q678",
+      "candidate_persian_name": "تونگا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_06a09ff0e27b49e392ef2e88161023eb",
+      "source_id": "TGO",
+      "english_name": "Togo",
+      "current_persian_name": "",
+      "wikidata_qid": "Q945",
+      "candidate_persian_name": "توگو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_bd40ea14860a4c4083eced5549d2d9c4",
+      "source_id": "TLS",
+      "english_name": "East Timor",
+      "current_persian_name": "",
+      "wikidata_qid": "Q574",
+      "candidate_persian_name": "تیمور شرقی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_fc12d0184fc7498f982ab8033ae64436",
+      "source_id": "THA",
+      "english_name": "Thailand",
+      "current_persian_name": "",
+      "wikidata_qid": "Q869",
+      "candidate_persian_name": "تایلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_0f4c47ec59434e46871845e474964499",
+      "source_id": "TZA",
+      "english_name": "United Republic of Tanzania",
+      "current_persian_name": "",
+      "wikidata_qid": "Q924",
+      "candidate_persian_name": "تانزانیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_772e2ac5253c46e98b79cf5a6f19e9f5",
+      "source_id": "TJK",
+      "english_name": "Tajikistan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q863",
+      "candidate_persian_name": "تاجیکستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_98ab3dee1d554162b6bbd5dac6374fc8",
+      "source_id": "TWN",
+      "english_name": "Taiwan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q865",
+      "candidate_persian_name": "تایوان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c205b2615c45490182519ecedb651e99",
+      "source_id": "SYR",
+      "english_name": "Syria",
+      "current_persian_name": "",
+      "wikidata_qid": "Q858",
+      "candidate_persian_name": "سوریه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e693e8b799f94e7bb814e89bd46d886d",
+      "source_id": "CHE",
+      "english_name": "Switzerland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q39",
+      "candidate_persian_name": "سوئیس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d74b429fff544cf9bafeb459c4b3edd8",
+      "source_id": "SWE",
+      "english_name": "Sweden",
+      "current_persian_name": "",
+      "wikidata_qid": "Q34",
+      "candidate_persian_name": "سوئد",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_fc2ad04f3c88446e91bd770190d6fe4c",
+      "source_id": "SWZ",
+      "english_name": "eSwatini",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1050",
+      "candidate_persian_name": "اسواتینی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_168a848021b84cc6a6c3fc320012a176",
+      "source_id": "SUR",
+      "english_name": "Suriname",
+      "current_persian_name": "",
+      "wikidata_qid": "Q730",
+      "candidate_persian_name": "سورینام",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "source_id": "SDS",
+      "english_name": "South Sudan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q958",
+      "candidate_persian_name": "سودان جنوبی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_b0ca3e0386b34603a6356b8ebc8b0565",
+      "source_id": "SDN",
+      "english_name": "Sudan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1049",
+      "candidate_persian_name": "سودان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_5e47c88bebac452e953fc5dfa8b1ba06",
+      "source_id": "LKA",
+      "english_name": "Sri Lanka",
+      "current_persian_name": "",
+      "wikidata_qid": "Q854",
+      "candidate_persian_name": "سریلنکا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_21a70a0fbf1b43c292783397ce218239",
+      "source_id": "ESP",
+      "english_name": "Spain",
+      "current_persian_name": "",
+      "wikidata_qid": "Q29",
+      "candidate_persian_name": "اسپانیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_cf8be733dbf44dd6b112e9fe12d2b19e",
+      "source_id": "KOR",
+      "english_name": "South Korea",
+      "current_persian_name": "",
+      "wikidata_qid": "Q884",
+      "candidate_persian_name": "کره جنوبی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_dc6419869818416db051f50cbfd95036",
+      "source_id": "ZAF",
+      "english_name": "South Africa",
+      "current_persian_name": "",
+      "wikidata_qid": "Q258",
+      "candidate_persian_name": "آفریقای جنوبی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e82cc51b989841109d9e1a7f6a5d1727",
+      "source_id": "SOM",
+      "english_name": "Somalia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1045",
+      "candidate_persian_name": "سومالی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9a78f2eebcc24906a5c67581c0c3895e",
+      "source_id": "SOL",
+      "english_name": "Somaliland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q34754",
+      "candidate_persian_name": "سومالیلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_0ce7eb254c32428c88601905c0df8e87",
+      "source_id": "SLB",
+      "english_name": "Solomon Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q685",
+      "candidate_persian_name": "جزایر سلیمان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_b3bea891d7114d148714d5e398ee06b1",
+      "source_id": "SVK",
+      "english_name": "Slovakia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q214",
+      "candidate_persian_name": "اسلواکی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c0484640d9554c8285e92412bae25785",
+      "source_id": "SVN",
+      "english_name": "Slovenia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q215",
+      "candidate_persian_name": "اسلوونی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9d65e06bf97d417c8aa62742225ef5c9",
+      "source_id": "SGP",
+      "english_name": "Singapore",
+      "current_persian_name": "",
+      "wikidata_qid": "Q334",
+      "candidate_persian_name": "سنگاپور",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_56e9d1977fa14da298ae125fbda1b63c",
+      "source_id": "SLE",
+      "english_name": "Sierra Leone",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1044",
+      "candidate_persian_name": "سیرالئون",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4bc377d3ea57485bac43c9b512587dbc",
+      "source_id": "SYC",
+      "english_name": "Seychelles",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1042",
+      "candidate_persian_name": "سیشل",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_98a68180b9f0479f90dcde7809d60470",
+      "source_id": "SRB",
+      "english_name": "Republic of Serbia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q403",
+      "candidate_persian_name": "صربستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_29ec74ae4e094053a930487b9ce602d1",
+      "source_id": "SEN",
+      "english_name": "Senegal",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1041",
+      "candidate_persian_name": "سنگال",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_86b0f7fcb4504f9b8dc1b60b42b16ea0",
+      "source_id": "SAU",
+      "english_name": "Saudi Arabia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q851",
+      "candidate_persian_name": "عربستان سعودی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4a2ed326dc6047efa2e28926df0bc7f0",
+      "source_id": "STP",
+      "english_name": "São Tomé and Principe",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1039",
+      "candidate_persian_name": "سائوتومه و پرینسیپ",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e4ea859bd6704c13912ad7f5cf19de41",
+      "source_id": "SMR",
+      "english_name": "San Marino",
+      "current_persian_name": "",
+      "wikidata_qid": "Q238",
+      "candidate_persian_name": "سان مارینو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_76082bd796c546d1ab76a7a8a3251369",
+      "source_id": "WSM",
+      "english_name": "Samoa",
+      "current_persian_name": "",
+      "wikidata_qid": "Q683",
+      "candidate_persian_name": "ساموآ",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_67290f5714c846f4a84d1f53c6fd495a",
+      "source_id": "VCT",
+      "english_name": "Saint Vincent and the Grenadines",
+      "current_persian_name": "",
+      "wikidata_qid": "Q757",
+      "candidate_persian_name": "سنت وینسنت و گرنادینها",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_6629fdb92d05409f856d9030b63b1470",
+      "source_id": "LCA",
+      "english_name": "Saint Lucia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q760",
+      "candidate_persian_name": "سنت لوسیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f22d58e7280f41f7a5a68fb03e1ab87e",
+      "source_id": "KNA",
+      "english_name": "Saint Kitts and Nevis",
+      "current_persian_name": "",
+      "wikidata_qid": "Q763",
+      "candidate_persian_name": "سنت کیتس و نویس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_7f3c6637070f4c42a40c1f5456ec4721",
+      "source_id": "RWA",
+      "english_name": "Rwanda",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1037",
+      "candidate_persian_name": "رواندا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c587d1c1cd8d4ec489f3d8e2524ec607",
+      "source_id": "RUS",
+      "english_name": "Russia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q159",
+      "candidate_persian_name": "روسیه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c41863f7cb4e4dccbbdf0a1296f9ee1c",
+      "source_id": "ROU",
+      "english_name": "Romania",
+      "current_persian_name": "",
+      "wikidata_qid": "Q218",
+      "candidate_persian_name": "رومانی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_13df99232f33400d9079316c041f066c",
+      "source_id": "QAT",
+      "english_name": "Qatar",
+      "current_persian_name": "",
+      "wikidata_qid": "Q846",
+      "candidate_persian_name": "قطر",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_43ee3db974884a72bacf5f5519e2c145",
+      "source_id": "PRT",
+      "english_name": "Portugal",
+      "current_persian_name": "",
+      "wikidata_qid": "Q45",
+      "candidate_persian_name": "پرتغال",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9865dd6a50c3458b98f5040f0cc76357",
+      "source_id": "POL",
+      "english_name": "Poland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q36",
+      "candidate_persian_name": "لهستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_fc8f1a9536d342899526129acf15acd2",
+      "source_id": "PHL",
+      "english_name": "Philippines",
+      "current_persian_name": "",
+      "wikidata_qid": "Q928",
+      "candidate_persian_name": "فیلیپین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_a90d391a4a9a473b9074fc99cce11cb5",
+      "source_id": "PER",
+      "english_name": "Peru",
+      "current_persian_name": "",
+      "wikidata_qid": "Q419",
+      "candidate_persian_name": "پرو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_3eb6dc12494541e793a8a5b68980f29f",
+      "source_id": "PRY",
+      "english_name": "Paraguay",
+      "current_persian_name": "",
+      "wikidata_qid": "Q733",
+      "candidate_persian_name": "پاراگوئه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_82d51d964745422e8ed3a9109757d2ee",
+      "source_id": "PNG",
+      "english_name": "Papua New Guinea",
+      "current_persian_name": "",
+      "wikidata_qid": "Q691",
+      "candidate_persian_name": "پاپوآ گینه نو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ba6cf14fa6224eb4a0b085b3ea1df6dc",
+      "source_id": "PAN",
+      "english_name": "Panama",
+      "current_persian_name": "",
+      "wikidata_qid": "Q804",
+      "candidate_persian_name": "پاناما",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_642fbe2581cf4b8c857d967717d1f1ef",
+      "source_id": "PLW",
+      "english_name": "Palau",
+      "current_persian_name": "",
+      "wikidata_qid": "Q695",
+      "candidate_persian_name": "پالائو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_0dc6216a94e34b44b27e42ed35fa6376",
+      "source_id": "PAK",
+      "english_name": "Pakistan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q843",
+      "candidate_persian_name": "پاکستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_22bd85ff61234a46a95506d105d5fee4",
+      "source_id": "OMN",
+      "english_name": "Oman",
+      "current_persian_name": "",
+      "wikidata_qid": "Q842",
+      "candidate_persian_name": "عمان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f4a6e15a05474af2b81c9524ed988d89",
+      "source_id": "NOR",
+      "english_name": "Norway",
+      "current_persian_name": "",
+      "wikidata_qid": "Q20",
+      "candidate_persian_name": "نروژ",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4a3793e49e5441ae94aeec78cc887021",
+      "source_id": "PRK",
+      "english_name": "North Korea",
+      "current_persian_name": "",
+      "wikidata_qid": "Q423",
+      "candidate_persian_name": "کره شمالی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_7a8158c93a934345a2ade9fd16ee4999",
+      "source_id": "NGA",
+      "english_name": "Nigeria",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1033",
+      "candidate_persian_name": "نیجریه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4d31375845614c2b91a71736069d4ab3",
+      "source_id": "NER",
+      "english_name": "Niger",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1032",
+      "candidate_persian_name": "نیجر",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2fdae8757e51402e9f67c428d2b79368",
+      "source_id": "NIC",
+      "english_name": "Nicaragua",
+      "current_persian_name": "",
+      "wikidata_qid": "Q811",
+      "candidate_persian_name": "نیکاراگوئه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d4b67e03f0c04d9a87089f477e5fa669",
+      "source_id": "NZL",
+      "english_name": "New Zealand",
+      "current_persian_name": "",
+      "wikidata_qid": "Q664",
+      "candidate_persian_name": "نیوزیلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4cb90152915543348c9a793599240eaa",
+      "source_id": "NIU",
+      "english_name": "Niue",
+      "current_persian_name": "",
+      "wikidata_qid": "Q34020",
+      "candidate_persian_name": "نیووی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d0017ca5d5084ceeaedc02b6d436fb39",
+      "source_id": "COK",
+      "english_name": "Cook Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q26988",
+      "candidate_persian_name": "جزایر کوک",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_898b220cf53a425e9bac3630f2c17473",
+      "source_id": "NLD",
+      "english_name": "Netherlands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q55",
+      "candidate_persian_name": "هلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_8344feaf14da4684aaa8d4c263653778",
+      "source_id": "ABW",
+      "english_name": "Aruba",
+      "current_persian_name": "",
+      "wikidata_qid": "Q21203",
+      "candidate_persian_name": "آروبا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2d0dc3f3edb9467090ea74861dbc7b9e",
+      "source_id": "CUW",
+      "english_name": "Curaçao",
+      "current_persian_name": "",
+      "wikidata_qid": "Q25279",
+      "candidate_persian_name": "کوراسائو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_1c4ff3f2a8f04b43b0c28e830a9403ad",
+      "source_id": "NPL",
+      "english_name": "Nepal",
+      "current_persian_name": "",
+      "wikidata_qid": "Q837",
+      "candidate_persian_name": "نپال",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2722269bdef04648b655fe363650d565",
+      "source_id": "NRU",
+      "english_name": "Nauru",
+      "current_persian_name": "",
+      "wikidata_qid": "Q697",
+      "candidate_persian_name": "نائورو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_7379cdcc5c4848c181ace3144aeba70f",
+      "source_id": "NAM",
+      "english_name": "Namibia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1030",
+      "candidate_persian_name": "نامیبیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2249b79a9c944a1c835b0cad2676e48d",
+      "source_id": "MOZ",
+      "english_name": "Mozambique",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1029",
+      "candidate_persian_name": "موزامبیک",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_84dc0c18f03144bea337f6aacd50bf0f",
+      "source_id": "MAR",
+      "english_name": "Morocco",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1028",
+      "candidate_persian_name": "مراکش",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_3487eebc07114ff589974150237cae4f",
+      "source_id": "SAH",
+      "english_name": "Western Sahara",
+      "current_persian_name": "",
+      "wikidata_qid": "Q6250",
+      "candidate_persian_name": "صحرای غربی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_eb1de71332ef4db496cb76c95aa56cd4",
+      "source_id": "MNE",
+      "english_name": "Montenegro",
+      "current_persian_name": "",
+      "wikidata_qid": "Q236",
+      "candidate_persian_name": "مونتهنگرو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d0fb202ca0aa4a868af6fa154ab84c30",
+      "source_id": "MNG",
+      "english_name": "Mongolia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q711",
+      "candidate_persian_name": "مغولستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_96ea5c49288d40b0945401031405c2c8",
+      "source_id": "MDA",
+      "english_name": "Moldova",
+      "current_persian_name": "",
+      "wikidata_qid": "Q217",
+      "candidate_persian_name": "مولداوی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_da92472e602c45c69d331812fa5193d8",
+      "source_id": "MCO",
+      "english_name": "Monaco",
+      "current_persian_name": "",
+      "wikidata_qid": "Q235",
+      "candidate_persian_name": "موناکو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c6b830c3cba64d4883eac8cee7864cfd",
+      "source_id": "MEX",
+      "english_name": "Mexico",
+      "current_persian_name": "",
+      "wikidata_qid": "Q96",
+      "candidate_persian_name": "مکزیک",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c7b728ec16b94e35b05d96d14a253eec",
+      "source_id": "MUS",
+      "english_name": "Mauritius",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1027",
+      "candidate_persian_name": "موریس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_17137c4e4fcc4fa58e32c924f08efcda",
+      "source_id": "MRT",
+      "english_name": "Mauritania",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1025",
+      "candidate_persian_name": "موریتانی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f97b2223a2a84e53ac13614ddde1f602",
+      "source_id": "MLT",
+      "english_name": "Malta",
+      "current_persian_name": "",
+      "wikidata_qid": "Q233",
+      "candidate_persian_name": "مالت",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_a3f73fd3bb6d4d7fb4ea31d433453bae",
+      "source_id": "MLI",
+      "english_name": "Mali",
+      "current_persian_name": "",
+      "wikidata_qid": "Q912",
+      "candidate_persian_name": "مالی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_408d22fe5b894b4b947a0521ace1018a",
+      "source_id": "MDV",
+      "english_name": "Maldives",
+      "current_persian_name": "",
+      "wikidata_qid": "Q826",
+      "candidate_persian_name": "مالدیو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_b21225f45c3b40509640603249110f89",
+      "source_id": "MYS",
+      "english_name": "Malaysia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q833",
+      "candidate_persian_name": "مالزی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ee1c1ac1ad5c4faf818070115133b174",
+      "source_id": "MWI",
+      "english_name": "Malawi",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1020",
+      "candidate_persian_name": "مالاوی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_7abbe0f9aa1346c7a9f69cc1027b4282",
+      "source_id": "MDG",
+      "english_name": "Madagascar",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1019",
+      "candidate_persian_name": "ماداگاسکار",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_949bf877e3284f5c8a56cfc89bcafa90",
+      "source_id": "MKD",
+      "english_name": "North Macedonia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q221",
+      "candidate_persian_name": "مقدونیه شمالی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f4261f4507cd48858cdfb7e3bd0ae738",
+      "source_id": "LUX",
+      "english_name": "Luxembourg",
+      "current_persian_name": "",
+      "wikidata_qid": "Q32",
+      "candidate_persian_name": "لوکزامبورگ",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_77de0a41c4d94d8388d6f0732438be81",
+      "source_id": "LTU",
+      "english_name": "Lithuania",
+      "current_persian_name": "",
+      "wikidata_qid": "Q37",
+      "candidate_persian_name": "لیتوانی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_a8bd42bd635b43289f3c26695dc58939",
+      "source_id": "LIE",
+      "english_name": "Liechtenstein",
+      "current_persian_name": "",
+      "wikidata_qid": "Q347",
+      "candidate_persian_name": "لیختناشتاین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_bb5622bab363429ca481c5476acc824c",
+      "source_id": "LBY",
+      "english_name": "Libya",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1016",
+      "candidate_persian_name": "لیبی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_40dc9d2e141343e98a4d0c762c578473",
+      "source_id": "LBR",
+      "english_name": "Liberia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1014",
+      "candidate_persian_name": "لیبریا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c0fa4e9b8e984f59ba17beb7547c5811",
+      "source_id": "LSO",
+      "english_name": "Lesotho",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1013",
+      "candidate_persian_name": "لسوتو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_8466a0747d0b4d1a8c23feb70f7c6ed1",
+      "source_id": "LBN",
+      "english_name": "Lebanon",
+      "current_persian_name": "",
+      "wikidata_qid": "Q822",
+      "candidate_persian_name": "لبنان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f161aef25a39413e8aef8c147e97b28a",
+      "source_id": "LVA",
+      "english_name": "Latvia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q211",
+      "candidate_persian_name": "لتونی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_71a3ecd24ca74da9a6cea3dae8cd1f82",
+      "source_id": "LAO",
+      "english_name": "Laos",
+      "current_persian_name": "",
+      "wikidata_qid": "Q819",
+      "candidate_persian_name": "لائوس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_130ca81b84d04b058e9301121b2b7802",
+      "source_id": "KGZ",
+      "english_name": "Kyrgyzstan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q813",
+      "candidate_persian_name": "قرقیزستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_fa491c61ffa24dc3a21c6a6da7d39fad",
+      "source_id": "KWT",
+      "english_name": "Kuwait",
+      "current_persian_name": "",
+      "wikidata_qid": "Q817",
+      "candidate_persian_name": "کویت",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "source_id": "KOS",
+      "english_name": "Kosovo",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1246",
+      "candidate_persian_name": "کوزووو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c23a3cf00b1a4ebf97a70a4f41a7761d",
+      "source_id": "KIR",
+      "english_name": "Kiribati",
+      "current_persian_name": "",
+      "wikidata_qid": "Q710",
+      "candidate_persian_name": "کیریباتی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9f3dc962bf9744a5a3cdf1f7a1cbb159",
+      "source_id": "KEN",
+      "english_name": "Kenya",
+      "current_persian_name": "",
+      "wikidata_qid": "Q114",
+      "candidate_persian_name": "کنیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_feadffc011db4cf695df6c0997a003c8",
+      "source_id": "KAZ",
+      "english_name": "Kazakhstan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q232",
+      "candidate_persian_name": "قزاقستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_6e28258973b54dfeb5811c563cd0a2e8",
+      "source_id": "JOR",
+      "english_name": "Jordan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q810",
+      "candidate_persian_name": "اردن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_8d0620ea475f498d9402134857882bf1",
+      "source_id": "JPN",
+      "english_name": "Japan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q17",
+      "candidate_persian_name": "ژاپن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_bf02736242694622ae7c730beb0f0da6",
+      "source_id": "JAM",
+      "english_name": "Jamaica",
+      "current_persian_name": "",
+      "wikidata_qid": "Q766",
+      "candidate_persian_name": "جامائیکا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_1f3e0c90df4341f082ed90ecdd95fb10",
+      "source_id": "ITA",
+      "english_name": "Italy",
+      "current_persian_name": "",
+      "wikidata_qid": "Q38",
+      "candidate_persian_name": "ایتالیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_28952c75855947a7b31bb7509dc1fce1",
+      "source_id": "ISR",
+      "english_name": "Israel",
+      "current_persian_name": "",
+      "wikidata_qid": "Q801",
+      "candidate_persian_name": "اسرائیل",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "source_id": "PSX",
+      "english_name": "Palestine",
+      "current_persian_name": "",
+      "wikidata_qid": "Q23792",
+      "candidate_persian_name": "فلسطین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_16d6044d9abf4743821a6fb238942a22",
+      "source_id": "IRL",
+      "english_name": "Ireland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q27",
+      "candidate_persian_name": "ایرلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_5ee7b31f968941dca65e70519901915f",
+      "source_id": "IRQ",
+      "english_name": "Iraq",
+      "current_persian_name": "",
+      "wikidata_qid": "Q796",
+      "candidate_persian_name": "عراق",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ddf21c4d378e4fc9bc3d5b4ba50890a2",
+      "source_id": "IRN",
+      "english_name": "Iran",
+      "current_persian_name": "",
+      "wikidata_qid": "Q794",
+      "candidate_persian_name": "ایران",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c40da0ac977b4201b8587ce04aa66f56",
+      "source_id": "IDN",
+      "english_name": "Indonesia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q252",
+      "candidate_persian_name": "اندونزی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_39ad5030b5f94f068d4a1528c60e5638",
+      "source_id": "IND",
+      "english_name": "India",
+      "current_persian_name": "",
+      "wikidata_qid": "Q668",
+      "candidate_persian_name": "هند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_861af4b9250e4e17a9d3f1f4e1ea33d4",
+      "source_id": "ISL",
+      "english_name": "Iceland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q189",
+      "candidate_persian_name": "ایسلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e3ede57c1b754a2dbd940335f9655f11",
+      "source_id": "HUN",
+      "english_name": "Hungary",
+      "current_persian_name": "",
+      "wikidata_qid": "Q28",
+      "candidate_persian_name": "مجارستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_80c318b9217a4320beaad6b93eb74ac5",
+      "source_id": "HND",
+      "english_name": "Honduras",
+      "current_persian_name": "",
+      "wikidata_qid": "Q783",
+      "candidate_persian_name": "هندوراس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9ee610c6d55a4f4bbdbbb073b33628a2",
+      "source_id": "HTI",
+      "english_name": "Haiti",
+      "current_persian_name": "",
+      "wikidata_qid": "Q790",
+      "candidate_persian_name": "هائیتی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_893d4efa8ccf42af896949ffd7007fef",
+      "source_id": "GUY",
+      "english_name": "Guyana",
+      "current_persian_name": "",
+      "wikidata_qid": "Q734",
+      "candidate_persian_name": "گویان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_dc93b6caf7324df884ec2b070a5296b9",
+      "source_id": "GNB",
+      "english_name": "Guinea-Bissau",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1007",
+      "candidate_persian_name": "گینه بیسائو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "source_id": "GIN",
+      "english_name": "Guinea",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1006",
+      "candidate_persian_name": "گینه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9348779eba844ab2beb5bed00053b7c6",
+      "source_id": "GTM",
+      "english_name": "Guatemala",
+      "current_persian_name": "",
+      "wikidata_qid": "Q774",
+      "candidate_persian_name": "گواتمالا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c5b3fecc12a94e85a7acddc70fa7a086",
+      "source_id": "GRD",
+      "english_name": "Grenada",
+      "current_persian_name": "",
+      "wikidata_qid": "Q769",
+      "candidate_persian_name": "گرنادا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_dab67464d7ad44cdbf925450627e4186",
+      "source_id": "GRC",
+      "english_name": "Greece",
+      "current_persian_name": "",
+      "wikidata_qid": "Q41",
+      "candidate_persian_name": "یونان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f63061b714ce4390948838410758c016",
+      "source_id": "GHA",
+      "english_name": "Ghana",
+      "current_persian_name": "",
+      "wikidata_qid": "Q117",
+      "candidate_persian_name": "غنا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ff445b0a87494070bf868827de190acf",
+      "source_id": "DEU",
+      "english_name": "Germany",
+      "current_persian_name": "",
+      "wikidata_qid": "Q183",
+      "candidate_persian_name": "آلمان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_741bd244c1ec4961918565c4ed02c5c6",
+      "source_id": "GEO",
+      "english_name": "Georgia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q230",
+      "candidate_persian_name": "گرجستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a",
+      "source_id": "GMB",
+      "english_name": "Gambia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1005",
+      "candidate_persian_name": "گامبیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d59dfb6324524b07a32c87b73009e97f",
+      "source_id": "GAB",
+      "english_name": "Gabon",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1000",
+      "candidate_persian_name": "گابن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_471ae6d7112b4537a7ae5ca1e6a816a5",
+      "source_id": "FRA",
+      "english_name": "France",
+      "current_persian_name": "",
+      "wikidata_qid": "Q142",
+      "candidate_persian_name": "فرانسه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_5551c0cc249f4e4e9ea6d57a0dacd2d5",
+      "source_id": "SPM",
+      "english_name": "Saint Pierre and Miquelon",
+      "current_persian_name": "",
+      "wikidata_qid": "Q34617",
+      "candidate_persian_name": "سن پیر و میکلن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9f1be169ba5347ff81384c532820401b",
+      "source_id": "WLF",
+      "english_name": "Wallis and Futuna",
+      "current_persian_name": "",
+      "wikidata_qid": "Q35555",
+      "candidate_persian_name": "والیس و فوتونا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_cc0688860b8848ddb5f52395162d9b71",
+      "source_id": "MAF",
+      "english_name": "Saint Martin",
+      "current_persian_name": "",
+      "wikidata_qid": "Q126125",
+      "candidate_persian_name": "سنت مارتین فرانسه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e0f0ed8d4d284acd8b41435902f2a6cc",
+      "source_id": "BLM",
+      "english_name": "Saint Barthelemy",
+      "current_persian_name": "",
+      "wikidata_qid": "Q25362",
+      "candidate_persian_name": "سنت بارثلمی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2493e62a2f78442e8fd4b8c0f0ca847c",
+      "source_id": "PYF",
+      "english_name": "French Polynesia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q30971",
+      "candidate_persian_name": "پلینزی فرانسه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e7d7320224a64229881b6b49ef1e74c3",
+      "source_id": "NCL",
+      "english_name": "New Caledonia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q33788",
+      "candidate_persian_name": "کالدونیای جدید",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c84e6493c6fc4373842ee9ba3a509db0",
+      "source_id": "ATF",
+      "english_name": "French Southern and Antarctic Lands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q129003",
+      "candidate_persian_name": "سرزمینهای جنوبی و جنوبگانی فرانسه",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_592dfefc0b584872853eedbd05b5e970",
+      "source_id": "ALD",
+      "english_name": "Aland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q5689",
+      "candidate_persian_name": "جزایر الند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_374e55a3eefe4a1a83fed6b64b5045f5",
+      "source_id": "FIN",
+      "english_name": "Finland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q33",
+      "candidate_persian_name": "فنلاند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_8d67737674744dce8986565b98cbbb1f",
+      "source_id": "FJI",
+      "english_name": "Fiji",
+      "current_persian_name": "",
+      "wikidata_qid": "Q712",
+      "candidate_persian_name": "فیجی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_860d12ee66fc4fceb3faddbc92c87930",
+      "source_id": "ETH",
+      "english_name": "Ethiopia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q115",
+      "candidate_persian_name": "اتیوپی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_383873de760147cd97dfac5ef5d60b08",
+      "source_id": "EST",
+      "english_name": "Estonia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q191",
+      "candidate_persian_name": "استونی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f9d7128c5ef04c6f955f43f9bcc56a0c",
+      "source_id": "ERI",
+      "english_name": "Eritrea",
+      "current_persian_name": "",
+      "wikidata_qid": "Q986",
+      "candidate_persian_name": "اریتره",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_06d71df13c4f415fbf22a0147f19bc53",
+      "source_id": "GNQ",
+      "english_name": "Equatorial Guinea",
+      "current_persian_name": "",
+      "wikidata_qid": "Q983",
+      "candidate_persian_name": "گینه استوایی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_471268dbb85845de93e546317686debb",
+      "source_id": "SLV",
+      "english_name": "El Salvador",
+      "current_persian_name": "",
+      "wikidata_qid": "Q792",
+      "candidate_persian_name": "السالوادور",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_939f236600dd47a8bf850a7ff19dc047",
+      "source_id": "EGY",
+      "english_name": "Egypt",
+      "current_persian_name": "",
+      "wikidata_qid": "Q79",
+      "candidate_persian_name": "مصر",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2a54eb1caed54a2185a62cce0c2db6cb",
+      "source_id": "ECU",
+      "english_name": "Ecuador",
+      "current_persian_name": "",
+      "wikidata_qid": "Q736",
+      "candidate_persian_name": "اکوادور",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ee04e01170f84b92afabbb40abdbd4e3",
+      "source_id": "DOM",
+      "english_name": "Dominican Republic",
+      "current_persian_name": "",
+      "wikidata_qid": "Q786",
+      "candidate_persian_name": "جمهوری دومینیکن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e5391af862dd490bb3a01fa80f4ac15e",
+      "source_id": "DMA",
+      "english_name": "Dominica",
+      "current_persian_name": "",
+      "wikidata_qid": "Q784",
+      "candidate_persian_name": "دومینیکا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f4814b1a89384c4d93a92c19b301a814",
+      "source_id": "DJI",
+      "english_name": "Djibouti",
+      "current_persian_name": "",
+      "wikidata_qid": "Q977",
+      "candidate_persian_name": "جیبوتی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_cbf271e54b9c4e3fbaa93c291355f6f7",
+      "source_id": "GRL",
+      "english_name": "Greenland",
+      "current_persian_name": "",
+      "wikidata_qid": "Q223",
+      "candidate_persian_name": "گرینلند",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d608e7f9138e459ab3b96263618ae407",
+      "source_id": "FRO",
+      "english_name": "Faroe Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q4628",
+      "candidate_persian_name": "جزایر فارو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_11da440eb0704bd195fe0b11fa0890af",
+      "source_id": "DNK",
+      "english_name": "Denmark",
+      "current_persian_name": "",
+      "wikidata_qid": "Q35",
+      "candidate_persian_name": "دانمارک",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e43afc3a83a3458c833dac5644b7186a",
+      "source_id": "CZE",
+      "english_name": "Czechia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q213",
+      "candidate_persian_name": "جمهوری چک",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d3e7f81572fd44ab920bfc066d592873",
+      "source_id": "CYN",
+      "english_name": "Northern Cyprus",
+      "current_persian_name": "",
+      "wikidata_qid": "Q23681",
+      "candidate_persian_name": "جمهوری ترک قبرس شمالی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_3c148b1f7650455fa710ca87cf376728",
+      "source_id": "CYP",
+      "english_name": "Cyprus",
+      "current_persian_name": "",
+      "wikidata_qid": "Q229",
+      "candidate_persian_name": "قبرس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_576e758e1fbb456a973d63c58222dc30",
+      "source_id": "CUB",
+      "english_name": "Cuba",
+      "current_persian_name": "",
+      "wikidata_qid": "Q241",
+      "candidate_persian_name": "کوبا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_fb4046d4910a4bf89f4a93810e2f4d8a",
+      "source_id": "HRV",
+      "english_name": "Croatia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q224",
+      "candidate_persian_name": "کرواسی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_18c639798e4948899643d84aa2bce93c",
+      "source_id": "CIV",
+      "english_name": "Ivory Coast",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1008",
+      "candidate_persian_name": "ساحل عاج",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_79512b2eaf8f45b5b118130859ebdaaf",
+      "source_id": "CRI",
+      "english_name": "Costa Rica",
+      "current_persian_name": "",
+      "wikidata_qid": "Q800",
+      "candidate_persian_name": "کاستاریکا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2763c19aa8734ce9aa8b17d8effb6645",
+      "source_id": "COD",
+      "english_name": "Democratic Republic of the Congo",
+      "current_persian_name": "",
+      "wikidata_qid": "Q974",
+      "candidate_persian_name": "جمهوری دموکراتیک کنگو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_451d8109e28b45eaa6923dfcac9d1601",
+      "source_id": "COG",
+      "english_name": "Republic of the Congo",
+      "current_persian_name": "",
+      "wikidata_qid": "Q971",
+      "candidate_persian_name": "جمهوری کنگو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_10dd5e9664664abf9eca33c250a74cdb",
+      "source_id": "COM",
+      "english_name": "Comoros",
+      "current_persian_name": "",
+      "wikidata_qid": "Q970",
+      "candidate_persian_name": "مجمعالجزایر قمر",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_648b019cc83e486ab9fb8497386777a9",
+      "source_id": "COL",
+      "english_name": "Colombia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q739",
+      "candidate_persian_name": "کلمبیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_3349a0b8b7454088b11e917a24de3ad5",
+      "source_id": "CHN",
+      "english_name": "China",
+      "current_persian_name": "",
+      "wikidata_qid": "Q148",
+      "candidate_persian_name": "جمهوری خلق چین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f9a64d8c1e6342d2b1941833ff7588d0",
+      "source_id": "MAC",
+      "english_name": "Macao S.A.R",
+      "current_persian_name": "",
+      "wikidata_qid": "Q14773",
+      "candidate_persian_name": "ماکائو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_394248a9960c4d28b4385210c82a0a0b",
+      "source_id": "HKG",
+      "english_name": "Hong Kong S.A.R.",
+      "current_persian_name": "",
+      "wikidata_qid": "Q8646",
+      "candidate_persian_name": "هنگ کنگ",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4c51c695cb6e47d2aed2fb04c397bece",
+      "source_id": "CHL",
+      "english_name": "Chile",
+      "current_persian_name": "",
+      "wikidata_qid": "Q298",
+      "candidate_persian_name": "شیلی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_1da2daf3a3d34a30b96100d643963f70",
+      "source_id": "TCD",
+      "english_name": "Chad",
+      "current_persian_name": "",
+      "wikidata_qid": "Q657",
+      "candidate_persian_name": "چاد",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "source_id": "CAF",
+      "english_name": "Central African Republic",
+      "current_persian_name": "",
+      "wikidata_qid": "Q929",
+      "candidate_persian_name": "جمهوری آفریقای مرکزی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d9d1737635ce4385a50c4307c2716832",
+      "source_id": "CPV",
+      "english_name": "Cabo Verde",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1011",
+      "candidate_persian_name": "کیپ ورد",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ba9087366ba54d51932e88bf8a11616d",
+      "source_id": "CAN",
+      "english_name": "Canada",
+      "current_persian_name": "",
+      "wikidata_qid": "Q16",
+      "candidate_persian_name": "کانادا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f5cd614ef03c414d8e98d87102df5c14",
+      "source_id": "CMR",
+      "english_name": "Cameroon",
+      "current_persian_name": "",
+      "wikidata_qid": "Q1009",
+      "candidate_persian_name": "کامرون",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f956986338e5418481784ba2d2781063",
+      "source_id": "KHM",
+      "english_name": "Cambodia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q424",
+      "candidate_persian_name": "کامبوج",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_b4847e5d14f94efdbbd46d6467d90237",
+      "source_id": "MMR",
+      "english_name": "Myanmar",
+      "current_persian_name": "",
+      "wikidata_qid": "Q836",
+      "candidate_persian_name": "میانمار",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4ac5b3c6b7774a05b4ceb5573c4a9d27",
+      "source_id": "BDI",
+      "english_name": "Burundi",
+      "current_persian_name": "",
+      "wikidata_qid": "Q967",
+      "candidate_persian_name": "بوروندی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_3c920b9b9f324cb19ef9d4b6debf10ba",
+      "source_id": "BFA",
+      "english_name": "Burkina Faso",
+      "current_persian_name": "",
+      "wikidata_qid": "Q965",
+      "candidate_persian_name": "بورکینافاسو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_523810acde564c1c907acd5befe575ab",
+      "source_id": "BGR",
+      "english_name": "Bulgaria",
+      "current_persian_name": "",
+      "wikidata_qid": "Q219",
+      "candidate_persian_name": "بلغارستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e416804f7e41490a9e7d743a45a72f0e",
+      "source_id": "BRN",
+      "english_name": "Brunei",
+      "current_persian_name": "",
+      "wikidata_qid": "Q921",
+      "candidate_persian_name": "برونئی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4923336d91d94afc919d8a2b8a4ad415",
+      "source_id": "BRA",
+      "english_name": "Brazil",
+      "current_persian_name": "",
+      "wikidata_qid": "Q155",
+      "candidate_persian_name": "برزیل",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_ca2bdd688a454bb8b6457c9448612669",
+      "source_id": "BWA",
+      "english_name": "Botswana",
+      "current_persian_name": "",
+      "wikidata_qid": "Q963",
+      "candidate_persian_name": "بوتسوانا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_0628271c897b49558f423321cbc48ce4",
+      "source_id": "BIH",
+      "english_name": "Bosnia and Herzegovina",
+      "current_persian_name": "",
+      "wikidata_qid": "Q225",
+      "candidate_persian_name": "بوسنی و هرزگوین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4cd6d52014244914bdeb62e6a6452e42",
+      "source_id": "BOL",
+      "english_name": "Bolivia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q750",
+      "candidate_persian_name": "بولیوی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_91f04a21215642aeb5da856a78dc9949",
+      "source_id": "BTN",
+      "english_name": "Bhutan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q917",
+      "candidate_persian_name": "بوتان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_874ae1f05e8c4d67a2c839095d760b72",
+      "source_id": "BEN",
+      "english_name": "Benin",
+      "current_persian_name": "",
+      "wikidata_qid": "Q962",
+      "candidate_persian_name": "بنین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d066174c4df546d1a410d386f363ee80",
+      "source_id": "BLZ",
+      "english_name": "Belize",
+      "current_persian_name": "",
+      "wikidata_qid": "Q242",
+      "candidate_persian_name": "بلیز",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f1cc713e923c4be48e176657a00469f0",
+      "source_id": "BEL",
+      "english_name": "Belgium",
+      "current_persian_name": "",
+      "wikidata_qid": "Q31",
+      "candidate_persian_name": "بلژیک",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_6ebc90b251e14f70b8bf758d8008e839",
+      "source_id": "BLR",
+      "english_name": "Belarus",
+      "current_persian_name": "",
+      "wikidata_qid": "Q184",
+      "candidate_persian_name": "بلاروس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_7a679c592eef40c58b7cdf58e6032bb5",
+      "source_id": "BRB",
+      "english_name": "Barbados",
+      "current_persian_name": "",
+      "wikidata_qid": "Q244",
+      "candidate_persian_name": "باربادوس",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_8169e562ece7475e960f78f231cb1ab7",
+      "source_id": "BGD",
+      "english_name": "Bangladesh",
+      "current_persian_name": "",
+      "wikidata_qid": "Q902",
+      "candidate_persian_name": "بنگلادش",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_38fd6c5cd2be45739f3be11bc4cab9c8",
+      "source_id": "BHR",
+      "english_name": "Bahrain",
+      "current_persian_name": "",
+      "wikidata_qid": "Q398",
+      "candidate_persian_name": "بحرین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_53553c35a9f44fddb64f46b5b2d7b90c",
+      "source_id": "BHS",
+      "english_name": "The Bahamas",
+      "current_persian_name": "",
+      "wikidata_qid": "Q778",
+      "candidate_persian_name": "باهاما",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_b8c860bb8d404dcca918bad769e7ead7",
+      "source_id": "AZE",
+      "english_name": "Azerbaijan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q227",
+      "candidate_persian_name": "جمهوری آذربایجان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_a0422e821c824e78bd95525b36155b65",
+      "source_id": "AUT",
+      "english_name": "Austria",
+      "current_persian_name": "",
+      "wikidata_qid": "Q40",
+      "candidate_persian_name": "اتریش",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_270a6ecb902d4ea1ac7373b3d1a3b2cc",
+      "source_id": "AUS",
+      "english_name": "Australia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q408",
+      "candidate_persian_name": "استرالیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_7cd2130353a64e57bd3782773a8e12c7",
+      "source_id": "IOA",
+      "english_name": "Indian Ocean Territories",
+      "current_persian_name": "",
+      "wikidata_qid": "Q4824275",
+      "candidate_persian_name": "سرزمینهای اقیانوس هند استرالیا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e86aec8164734ab8be1b207a743e6ea4",
+      "source_id": "HMD",
+      "english_name": "Heard Island and McDonald Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q131198",
+      "candidate_persian_name": "جزیره هرد و جزایر مکدونالد",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_003dbd71493240f5bd22a52176868806",
+      "source_id": "NFK",
+      "english_name": "Norfolk Island",
+      "current_persian_name": "",
+      "wikidata_qid": "Q31057",
+      "candidate_persian_name": "جزیره نورفک",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_b61ca098adb74efc84564fd9fa800bf8",
+      "source_id": "ATC",
+      "english_name": "Ashmore and Cartier Islands",
+      "current_persian_name": "",
+      "wikidata_qid": "Q133888",
+      "candidate_persian_name": "جزیرههای آشمور و کارتیر",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_f97b56c9c74845de8b41aa24ed12a47f",
+      "source_id": "ARM",
+      "english_name": "Armenia",
+      "current_persian_name": "",
+      "wikidata_qid": "Q399",
+      "candidate_persian_name": "ارمنستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_2a29d5b72b294244a5de6db37118237a",
+      "source_id": "ARG",
+      "english_name": "Argentina",
+      "current_persian_name": "",
+      "wikidata_qid": "Q414",
+      "candidate_persian_name": "آرژانتین",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_9221f2a3fd704847b66da16efa03c2b8",
+      "source_id": "ATG",
+      "english_name": "Antigua and Barbuda",
+      "current_persian_name": "",
+      "wikidata_qid": "Q781",
+      "candidate_persian_name": "آنتیگوا و باربودا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_fa43ff476d6b428fa8edb4dde1aa9d3f",
+      "source_id": "AGO",
+      "english_name": "Angola",
+      "current_persian_name": "",
+      "wikidata_qid": "Q916",
+      "candidate_persian_name": "آنگولا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_224c06bfe0f04031b422bddc81ea3ce5",
+      "source_id": "AND",
+      "english_name": "Andorra",
+      "current_persian_name": "",
+      "wikidata_qid": "Q228",
+      "candidate_persian_name": "آندورا",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_e245d37005f843168d67b7b327ece7f9",
+      "source_id": "DZA",
+      "english_name": "Algeria",
+      "current_persian_name": "",
+      "wikidata_qid": "Q262",
+      "candidate_persian_name": "الجزایر",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1",
+      "source_id": "ALB",
+      "english_name": "Albania",
+      "current_persian_name": "",
+      "wikidata_qid": "Q222",
+      "candidate_persian_name": "آلبانی",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_928d15fd89764353a6889f571bfd0a1c",
+      "source_id": "AFG",
+      "english_name": "Afghanistan",
+      "current_persian_name": "",
+      "wikidata_qid": "Q889",
+      "candidate_persian_name": "افغانستان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_644aaabf37604038996e34c1bc91c970",
+      "source_id": "KAS",
+      "english_name": "Siachen Glacier",
+      "current_persian_name": "",
+      "wikidata_qid": "Q333946",
+      "candidate_persian_name": "یخچال سیاچن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_c3c21e18d6e94254a4ca4a009530bac9",
+      "source_id": "ATA",
+      "english_name": "Antarctica",
+      "current_persian_name": "",
+      "wikidata_qid": "Q51",
+      "candidate_persian_name": "جنوبگان",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_d79e2777be2741c3bcf291431e2e4efb",
+      "source_id": "SXM",
+      "english_name": "Sint Maarten",
+      "current_persian_name": "",
+      "wikidata_qid": "Q26273",
+      "candidate_persian_name": "سینت مارتن",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    },
+    {
+      "game_id": "tc_47cd272cd9c9455185a13f6e69bd805c",
+      "source_id": "TUV",
+      "english_name": "Tuvalu",
+      "current_persian_name": "",
+      "wikidata_qid": "Q672",
+      "candidate_persian_name": "تووالو",
+      "candidate_status": "candidate available; human review required",
+      "review_status": "unreviewed"
+    }
+  ]
+}

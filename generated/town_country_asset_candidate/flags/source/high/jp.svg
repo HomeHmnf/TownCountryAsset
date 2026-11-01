@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" id="flag-icons-jp" viewBox="0 0 640 480" width="512" height="384">
+  <ns0:defs>
+    <ns0:clipPath id="jp-a">
+      <ns0:path fill-opacity=".7" d="M-88 32h640v480H-88z" />
+    </ns0:clipPath>
+  </ns0:defs>
+  <ns0:g fill-rule="evenodd" stroke-width="1pt" clip-path="url(#jp-a)" transform="translate(88 -32)">
+    <ns0:path fill="#fff" d="M-128 32h720v480h-720z" />
+    <ns0:circle cx="523.1" cy="344.1" r="194.9" fill="#bc002d" transform="translate(-168.4 8.6)scale(.76554)" />
+  </ns0:g>
+</ns0:svg>

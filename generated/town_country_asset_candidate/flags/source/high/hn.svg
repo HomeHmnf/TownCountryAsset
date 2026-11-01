@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" id="flag-icons-hn" viewBox="0 0 640 480" width="512" height="384">
+  <ns0:path fill="#18c3df" d="M0 0h640v480H0z" />
+  <ns0:path fill="#fff" d="M0 160h640v160H0z" />
+  <ns0:g id="hn-c" fill="#18c3df" transform="translate(320 240)scale(26.66665)">
+    <ns0:g id="hn-b">
+      <ns0:path id="hn-a" d="m-.3 0 .5.1L0-1z" />
+      <ns0:use ns1:href="#hn-a" width="100%" height="100%" transform="scale(-1 1)" />
+    </ns0:g>
+    <ns0:use ns1:href="#hn-b" width="100%" height="100%" transform="rotate(72)" />
+    <ns0:use ns1:href="#hn-b" width="100%" height="100%" transform="rotate(-72)" />
+    <ns0:use ns1:href="#hn-b" width="100%" height="100%" transform="rotate(144)" />
+    <ns0:use ns1:href="#hn-b" width="100%" height="100%" transform="rotate(-144)" />
+  </ns0:g>
+  <ns0:use ns1:href="#hn-c" width="100%" height="100%" transform="translate(133.3 -42.7)" />
+  <ns0:use ns1:href="#hn-c" width="100%" height="100%" transform="translate(133.3 37.3)" />
+  <ns0:use ns1:href="#hn-c" width="100%" height="100%" transform="translate(-133.3 -42.7)" />
+  <ns0:use ns1:href="#hn-c" width="100%" height="100%" transform="translate(-133.3 37.3)" />
+</ns0:svg>

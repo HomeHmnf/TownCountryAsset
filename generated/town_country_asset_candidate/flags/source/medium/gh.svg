@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" id="flag-icons-gh" viewBox="0 0 640 480" width="512" height="384">
+  <ns0:path fill="#006b3f" d="M0 0h640v480H0z" />
+  <ns0:path fill="#fcd116" d="M0 0h640v320H0z" />
+  <ns0:path fill="#ce1126" d="M0 0h640v160H0z" />
+  <ns0:path fill="#000001" d="m320 160 52 160-136.1-98.9H404L268 320z" />
+</ns0:svg>

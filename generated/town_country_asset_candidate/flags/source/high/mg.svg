@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" id="flag-icons-mg" viewBox="0 0 640 480" width="512" height="384">
+  <ns0:g fill-rule="evenodd" stroke-width="1pt">
+    <ns0:path fill="#fc3d32" d="M213.3 0H640v240H213.3z" />
+    <ns0:path fill="#007e3a" d="M213.3 240H640v240H213.3z" />
+    <ns0:path fill="#fff" d="M0 0h213.3v480H0z" />
+  </ns0:g>
+</ns0:svg>

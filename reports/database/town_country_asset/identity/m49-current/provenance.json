@@ -1,0 +1,63 @@
+{
+  "database_id": "town_country_asset",
+  "field_mapping": {
+    "existing_alpha2": "iso.alpha2",
+    "existing_alpha3": "iso.alpha3",
+    "game_id": "game_id",
+    "reference_alpha2": "ISO-alpha2 Code",
+    "reference_alpha3": "ISO-alpha3 Code",
+    "reference_id": "M49 Code",
+    "reference_name": "Country or Area",
+    "registry_name": "names.en",
+    "source_id": "source.current_source_id"
+  },
+  "identity_registry": "config/country_identity_registry.json",
+  "identity_registry_sha256": "329333a8e51e9c6bb50d9ce7a067ce7073174a2c477583374401a100de56f532",
+  "matching_policy": "normalized English names plus explicit reviewed variants; no fuzzy, code, or source-ID matching",
+  "normalized_m49_data": "raw_data/iso/m49-country-area.json",
+  "normalized_reference": "raw_data/iso/m49-iso-reference.csv",
+  "normalized_sha256": "7575550969de58be3909e0c2290478a4331c5c13be123a1043214c73de929b74",
+  "parser": "tools.sources.m49.parse_m49_html",
+  "parser_contract_version": 2,
+  "provider": "un_m49",
+  "raw_sha256": "b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb",
+  "raw_snapshot": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_m49/country_area_overview_html/2026-10-current/m49-country-area-overview.html",
+  "read_only": true,
+  "report_type": "identity_reconciliation",
+  "retrieved_at_utc": "2026-11-01T06:28:38.192950+00:00",
+  "schema_version": 1,
+  "selected_table_id": "downloadTableEN",
+  "source_manifest": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_m49/country_area_overview_html/2026-10-current.json",
+  "source_release": "2026-10-current",
+  "source_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+  "summary": {
+    "alpha2_matches": 2,
+    "alpha2_mismatches": 0,
+    "alpha3_matches": 223,
+    "alpha3_mismatches": 0,
+    "ambiguous_registry_count": 0,
+    "code_pair_classifications": {
+      "alpha2_only_agreement": 2,
+      "alpha3_only_agreement": 223,
+      "unmatched_registry": 17
+    },
+    "match_types": {
+      "exact_name": 202,
+      "explicit_variant": 23,
+      "unmatched": 17
+    },
+    "matched_count": 225,
+    "name_comparisons": {
+      "exact": 199,
+      "explicit_variant": 23,
+      "normalized_variation": 3,
+      "not_compared": 17
+    },
+    "reference_count": 248,
+    "registry_count": 242,
+    "source_id_alpha3_different": 3,
+    "source_id_alpha3_same": 222,
+    "unmatched_reference_count": 23,
+    "unmatched_registry_count": 17
+  }
+}

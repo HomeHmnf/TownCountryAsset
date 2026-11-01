@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" id="flag-icons-bj" viewBox="0 0 640 480" width="512" height="384">
+  <ns0:defs>
+    <ns0:clipPath id="bj-a">
+      <ns0:path fill="gray" d="M67.6-154h666v666h-666z" />
+    </ns0:clipPath>
+  </ns0:defs>
+  <ns0:g clip-path="url(#bj-a)" transform="matrix(.961 0 0 .7207 -65 111)">
+    <ns0:g fill-rule="evenodd" stroke-width="1pt">
+      <ns0:path fill="#319400" d="M0-154h333v666H0z" />
+      <ns0:path fill="#ffd600" d="M333-154h666v333H333z" />
+      <ns0:path fill="#de2110" d="M333 179h666v333H333z" />
+    </ns0:g>
+  </ns0:g>
+</ns0:svg>

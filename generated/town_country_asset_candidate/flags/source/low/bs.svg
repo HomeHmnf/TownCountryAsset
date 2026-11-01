@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" id="flag-icons-bs" viewBox="0 0 640 480" width="512" height="384">
+  <ns0:defs>
+    <ns0:clipPath id="bs-a">
+      <ns0:path fill-opacity=".7" d="M-12 0h640v480H-12z" />
+    </ns0:clipPath>
+  </ns0:defs>
+  <ns0:g fill-rule="evenodd" clip-path="url(#bs-a)" transform="translate(12)">
+    <ns0:path fill="#fff" d="M968.5 480h-979V1.8h979z" />
+    <ns0:path fill="#ffe900" d="M968.5 344.5h-979V143.3h979z" />
+    <ns0:path fill="#08ced6" d="M968.5 480h-979V320.6h979zm0-318.7h-979V2h979z" />
+    <ns0:path fill="#000001" d="M-11 0c2.3 0 391.8 236.8 391.8 236.8L-12 479.2z" />
+  </ns0:g>
+</ns0:svg>
