@@ -16,7 +16,8 @@ from typing import Any, Mapping, Sequence
 ARTIFACT_FIELDS = {
     "records": [
         "game_id", "field_key", "field_id", "storage", "record_key", "subfield_key",
-        "source_id", "download_id", "release_id", "status", "selection_status",
+        "source_id", "download_id", "release_id", "release_kind", "status",
+        "discovery_mode", "discovery_automation", "sha256", "fetched_at", "selection_status",
         "selected_source", "primary_source", "selection_mode", "value", "unit",
         "observation_period", "source_reference", "methodology", "retrieved_at",
         "fallback_used", "override_id", "override_reason", "override_author", "effective_at",
@@ -131,7 +132,10 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
         if git_ref:
             row = {
                 "source_id": source_id, "release_id": git_ref.get("release_id"),
+                "discovery_mode": source.get("discovery_mode"),
+                "discovery_automation": source.get("discovery_automation"),
                 "status": "discovered", "provider_commit_timestamp": git_ref.get("commit_timestamp"),
+                "fetched_at": git_ref.get("fetched_at"),
                 "fetched_at": git_ref.get("fetched_at"), "detail": git_ref.get("detail"),
             }
             records.append(row)
@@ -139,11 +143,15 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
         elif source.get("discovery_status") in {"manual_review_required", "discovery_failed", "dry_run_not_checked"}:
             records.append({
                 "source_id": source_id, "status": source.get("discovery_status"),
+                "discovery_mode": source.get("discovery_mode"),
+                "discovery_automation": source.get("discovery_automation"),
                 "detail": source.get("detail") or "Source-level release discovery status",
             })
         elif not source.get("downloads"):
             records.append({
                 "source_id": source_id, "status": source.get("discovery_status"),
+                "discovery_mode": source.get("discovery_mode"),
+                "discovery_automation": source.get("discovery_automation"),
                 "detail": source.get("detail") or "No generic download was configured for this source",
             })
         if source.get("discovery_status") == "discovery_failed" and not source.get("downloads"):
@@ -156,6 +164,8 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
                 "source_id": source_id, "download_id": item.get("download_id"),
                 "release_id": item.get("discovered_release") or item.get("configured_release"),
                 "release_kind": item.get("release_kind"), "status": item.get("status"),
+                "discovery_mode": source.get("discovery_mode"),
+                "discovery_automation": source.get("discovery_automation"),
                 "sha256": item.get("sha256") or item.get("discovered_sha256"),
                 "fetched_at": item.get("fetched_at") or item.get("discovered_fetched_at"),
                 "detail": item.get("detail"),
