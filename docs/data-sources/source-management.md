@@ -57,3 +57,45 @@ Acquisition does not parse/import data into SQLite, alter country identity, appr
 License status is informational and does not block acquisition. Record whether terms are open, attribution-required, non-commercial, require commercial authorization, restrict redistribution, are proprietary/subscription, or remain unclear. Do not describe restricted or unverified material as open. License reporting does not grant rights; users must comply with source terms.
 
 Natural Earth is registered for geography/cartography only and is not an accepted source for WP1.5 statistics or classifications. Raw snapshots remain outside Git; manifests and source metadata are versioned. Review-only ISO, localization, and flag proposal workflows retain their existing human-review and approval safeguards.
+
+
+## Shared database reports
+
+Database reports use one standard directory and artifact contract:
+
+```text
+reports/
+└── database/
+    └── <database_id>/
+        └── <domain>/
+            └── <report_id>/
+                ├── summary.md
+                ├── records.csv
+                ├── unmatched_registry.csv
+                ├── unmatched_reference.csv
+                └── provenance.json
+```
+
+The provider-neutral writer is `tools/database/reporting.py`; report-specific analysis belongs in reusable domain components such as `tools/database/identity_reconciliation.py`. Database ID, domain and report ID are validated path segments. Markdown is the human-readable summary, CSV files contain record-level comparisons and unmatched rows, and JSON records source/parser versions, checksums, field mappings, matching policy and read-only status. New database report types should use this writer rather than inventing another directory or artifact layout.
+
+The identity reconciliation engine compares every registry identity with every supplied reference row. It matches only normalized English names and explicit, maintained name variants. It does not use source IDs or ISO codes to establish identity, does not perform fuzzy matching, and marks duplicate or many-to-one name matches as ambiguous. Alpha-2 and alpha-3 are compared independently after a unique name match. Source-ID/alpha-3 coincidence is reported separately and is not treated as an ISO conflict. The component is read-only and does not approve or verify identity assignments.
+
+The M49 refresh now writes the full reconciliation bundle to `reports/database/town_country_asset/identity/m49-current/`, alongside the existing ISO proposal report at `reports/iso-assignment-proposals.md` (kept at its existing path for importer compatibility).
+
+### Terminal output modes
+
+Report-producing database commands share the same output policy:
+
+- Default: write all report artifacts and print a concise terminal summary with counts and report location.
+- `--quiet`: write the same artifacts but suppress the successful summary. Errors and non-zero exit status are not suppressed.
+- `--verbose`: write the same artifacts and print expanded classification counts.
+
+For example, the M49 refresh supports:
+
+```fish
+uv run python -m tools.refresh_m49_iso_review
+uv run python -m tools.refresh_m49_iso_review --quiet
+uv run python -m tools.refresh_m49_iso_review --verbose
+```
+
+Quiet mode changes only terminal presentation; it never disables report generation or validation.
