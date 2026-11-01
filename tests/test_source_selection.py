@@ -285,3 +285,15 @@ def test_policy_rejects_unregistered_source_and_invalid_mode(policy, registry):
     changed["fields"][0]["selection_mode"] = "automatic_magic"
     with pytest.raises(SourceSelectionError, match="selection_mode"):
         validate_policy(changed, registry)
+
+
+
+def test_validation_cli_reports_policy_counts(capsys):
+    from tools.validate_source_selection import main
+
+    assert main([]) == 0
+    output = capsys.readouterr().out
+    assert "Fields: 41" in output
+    assert "priority_source: 36" in output
+    assert "primary_with_fallback: 5" in output
+    assert "custom_mixture: 0" in output
