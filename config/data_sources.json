@@ -320,7 +320,7 @@
       ]
     },
     "world_bank_wgi": {
-      "name": "World Bank Worldwide Governance Indicators 2026",
+      "name": "World Bank Worldwide Governance Indicators",
       "homepage_url": "https://www.worldbank.org/en/publication/worldwide-governance-indicators",
       "domains": [
         "governance"
@@ -422,7 +422,7 @@
       ]
     },
     "energy_institute": {
-      "name": "Energy Institute Statistical Review of World Energy 2026",
+      "name": "Energy Institute Statistical Review of World Energy",
       "homepage_url": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
       "domains": [
         "energy",
