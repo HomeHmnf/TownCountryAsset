@@ -451,3 +451,8 @@ inferred or substituted. The generated file is
 `data/manual/source_crosswalks/un_wpp.json`; review it before using it in
 candidate preparation. The WPP adapter independently checks that all mapped
 source IDs exist in both datasets.
+
+
+### UN WPP source-coverage exceptions
+
+The WPP crosswalk builder distinguishes an M49 identity match from WPP dataset coverage. If a valid M49 identifier is absent from **both** 2026 Medium Country/Area snapshots, the mapping is held in the crosswalk's `coverage_exceptions` with status `source_not_covered`; it is not added to `mappings`, and the build continues. If demographic and age-sex snapshots disagree about coverage, the build fails validation. No substitute identifier is inferred. This preserves the distinction between an identity that is unresolved and an identity that is valid but outside WPP's published country/area universe.
