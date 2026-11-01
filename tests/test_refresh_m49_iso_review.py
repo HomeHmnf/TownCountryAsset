@@ -31,12 +31,17 @@ def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monk
         state["status"] = "valid"
     monkeypatch.setattr(tool, "acquire_one", acquire)
     identity_registry = tmp_path / "identity.json"
-    identity_registry.write_text(json.dumps({"records":[{
+    original_registry = {"records":[{
         "game_id":"tc_example", "names":{"en":"Example Land"},
         "iso":{"assignment_status":"unverified"}
-    }]}), encoding="utf-8")
+    }]}
+    original_bytes = json.dumps(original_registry).encode("utf-8")
+    identity_registry.write_bytes(original_bytes)
     now = datetime(2026, 10, 31, 12, 0, tzinfo=timezone.utc)
-    result = tool.refresh(identity_registry, tmp_path/"out", tmp_path/"report.md", now=now)
+    result = tool.refresh(
+        identity_registry, tmp_path/"out", tmp_path/"report.md", now=now,
+        report_root=tmp_path/"reports",
+    )
     metadata = json.loads((tmp_path/result["provenance"]).read_text())
     assert metadata["source_id"] == "un_m49"
     assert metadata["m49_row_count"] == 2
@@ -48,3 +53,17 @@ def test_refresh_m49_creates_review_only_proposals_and_provenance(tmp_path, monk
     report = (tmp_path/result["report"]).read_text()
     assert "not the ISO 3166 assignment authority" in report
     assert "human review" in report
+    assert identity_registry.read_bytes() == original_bytes
+
+    bundle = tmp_path / result["identity_report_paths"]["directory"]
+    assert (bundle / "summary.md").is_file()
+    assert (bundle / "records.csv").is_file()
+    assert (bundle / "unmatched_registry.csv").is_file()
+    assert (bundle / "unmatched_reference.csv").is_file()
+    report_metadata = json.loads((bundle / "provenance.json").read_text())
+    assert report_metadata["read_only"] is True
+    assert report_metadata["provider"] == "un_m49"
+    assert result["identity_reconciliation"]["summary"]["registry_count"] == 1
+    assert result["identity_reconciliation"]["summary"]["reference_count"] == 2
+    assert result["identity_reconciliation"]["summary"]["matched_count"] == 1
+    assert result["identity_reconciliation"]["summary"]["unmatched_reference_count"] == 1
