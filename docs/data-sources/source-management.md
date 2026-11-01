@@ -127,3 +127,22 @@ Each configured download also declares a `release_kind`:
 The global `release_management` section defines the state meanings and release-record contract. Release state records are intended for `reports/sources/releases/<source-id>.json`; they distinguish discovery, acquisition, validation and application timestamps and retain release history. The registry itself remains source configuration, not a mutable ledger of changing release events.
 
 **Promotion rules:** discovery does not imply validation; acquisition does not imply validation; validation does not imply application. Only a successfully acquired snapshot that passes its registered source/data contract can become `latest_validated`. Applying it to the canonical database is a separate explicit operation. Older snapshots and manifests remain immutable.
+
+## Project-wide refresh command
+
+Run the generic refresh from the repository root:
+
+```fish
+uv run python -m tools.refresh_sources
+uv run python -m tools.refresh_sources --source un_wpp
+uv run python -m tools.refresh_sources --dry-run
+```
+
+The refresh runner uses the central registry and shared immutable acquisition service. It skips snapshots whose raw file and manifest pass checksum/identity checks, reports invalid snapshots without overwriting them, and attempts missing configured HTTPS downloads. A batch continues after an individual acquisition failure. Use repeated `--source` arguments to limit a run to selected registered sources.
+
+An acquisition result is labelled `acquired_pending_source_validation`: it means the download and its generic registered response checks succeeded, not that provider-specific data semantics, coverage, identifiers, or release suitability have been validated. Existing valid snapshots are reported as unchanged. Invalid snapshots are retained for investigation and are never silently replaced. A dry run reports intended acquisitions without making network requests.
+
+The command writes timestamped JSON and Markdown reports below `reports/sources/refreshes/`. Sources without configured generic HTTPS downloads are explicitly reported for manual review or a future protocol-specific adapter. A discovery mode declaration alone is not an implemented discovery adapter. This first generic runner does not discover new provider editions, does not promote `latest_available` or `latest_validated`, and does not update the release-state ledger. In particular, it does not treat a rolling URL's existing snapshot as proof that the provider has not published an update. Provider-specific discovery and semantic validators must be implemented and tested before a source can be automatically promoted.
+
+The refresh command never imports into SQLite, changes approved data, or approves review proposals. Acquisition, provider validation, policy-based selection, and canonical application remain separate steps.
+
