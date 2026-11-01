@@ -50,9 +50,11 @@ def _discover_fingerprint(item: dict, timeout: int) -> dict:
     if not size:
         raise SourceError("Release discovery response is empty")
     sha256 = digest.hexdigest()
+    fetched_at = datetime.now(timezone.utc).isoformat()
     return {
         "release_id": "content-" + sha256,
         "provider_release_label": "content-sha256:" + sha256,
+        "fetched_at": fetched_at,
         "sha256": sha256,
         "byte_count": size,
         "content_type": content_type,
@@ -261,6 +263,7 @@ def run_refresh(
                 source_result["git_ref"] = {
                     "release_id": discovered["release_id"],
                     "commit_timestamp": discovered["provider_commit_timestamp"],
+                    "fetched_at": discovered["fetched_at"],
                     "release_state_path": state_path.as_posix(),
                     "detail": "Default-branch commit discovered; source archive acquisition and content validation remain separate",
                 }
@@ -309,6 +312,7 @@ def run_refresh(
                         "prior_snapshot_status": prior["status"],
                         "release_state_path": state_path.as_posix(),
                         "discovered_sha256": discovered["sha256"],
+                        "discovered_fetched_at": discovered.get("fetched_at"),
                     }
                     if prior["status"] == "valid":
                         result.update(
