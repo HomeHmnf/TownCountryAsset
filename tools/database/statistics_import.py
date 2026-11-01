@@ -15,6 +15,12 @@ from pathlib import Path
 from typing import Any
 
 from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
+from tools.database.application_approval import (
+    ApplicationApprovalError,
+    build_application_artifact,
+    require_approved_application,
+    record_application_applied,
+)
 from tools.database.schema import apply_migrations, validate_database
 from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 from tools.sources.registry import SourceError, canonical_source_id, load_registry
@@ -197,6 +203,38 @@ def _validate_observation(
     }
 
 
+def build_wp1_5_application_artifact(
+    *,
+    observations_path: str | Path,
+    crosswalk_path: str | Path,
+    manifest_path: str | Path,
+    config_path: str | Path = DEFAULT_CONFIG,
+) -> dict[str, Any]:
+    """Fingerprint the complete WP1.5 input set that an approver reviewed."""
+    manifest = _read_object(manifest_path, "source manifest")
+    raw_path = Path(_text(manifest.get("local_raw_path"), "manifest.local_raw_path"))
+    if not raw_path.is_absolute():
+        raw_path = (REPOSITORY_ROOT / raw_path).resolve()
+    inputs: list[Path] = [
+        Path(observations_path), Path(crosswalk_path), Path(manifest_path),
+        Path(config_path), raw_path,
+    ]
+    selection_policy = REPOSITORY_ROOT / "config" / "source_selection.json"
+    if selection_policy.is_file():
+        inputs.append(selection_policy)
+    normalized = _read_object(observations_path, "normalized observations")
+    return build_application_artifact(
+        domain="wp1_5_statistics",
+        inputs=inputs,
+        metadata={
+            "source_key": normalized.get("source_key"),
+            "release": normalized.get("release"),
+            "source_sha256": normalized.get("source_sha256"),
+            "policy_version": 1,
+        },
+    )
+
+
 def import_wp1_5_dataset(
     *,
     observations_path: str | Path,
@@ -204,8 +242,9 @@ def import_wp1_5_dataset(
     manifest_path: str | Path,
     database_path: str | Path = DEFAULT_DATABASE_PATH,
     config_path: str | Path = DEFAULT_CONFIG,
+    approval_id: str,
 ) -> dict[str, Any]:
-    """Import one normalized provider snapshot; repeated identical imports are idempotent."""
+    """Import one approved normalized provider snapshot transactionally."""
     normalized = _read_object(observations_path, "normalized observations")
     manifest = _read_object(manifest_path, "source manifest")
     config = _read_object(config_path, "WP1.5 field contract")
@@ -268,6 +307,16 @@ def import_wp1_5_dataset(
     if len(keys) != len(set(keys)):
         raise StatisticsImportError("Duplicate country/field observations in normalized dataset")
 
+    try:
+        application_artifact = build_wp1_5_application_artifact(
+            observations_path=observations_path,
+            crosswalk_path=crosswalk_path,
+            manifest_path=manifest_path,
+            config_path=config_path,
+        )
+    except (ApplicationApprovalError, OSError, ValueError) as exc:
+        raise StatisticsImportError(f"Cannot fingerprint WP1.5 application inputs: {exc}") from exc
+
     connection = connect_database(database_path)
     try:
         apply_migrations(connection)
@@ -288,6 +337,12 @@ def import_wp1_5_dataset(
                 + ", ".join(unknown[:10])
             )
         connection.execute("BEGIN IMMEDIATE")
+        try:
+            require_approved_application(
+                connection, approval_id=approval_id, artifact=application_artifact
+            )
+        except ApplicationApprovalError as exc:
+            raise StatisticsImportError(str(exc)) from exc
         imported_at = _utc_now()
         existing_imports = connection.execute(
             """SELECT import_id, source_version, source_url, retrieval_date,
@@ -396,6 +451,14 @@ def import_wp1_5_dataset(
             issues = validate_database(connection)
             if issues:
                 raise StatisticsImportError("Database validation failed: " + "; ".join(issues))
+            try:
+                record_application_applied(
+                    connection, approval_id=approval_id,
+                    application_id=f"wp1-5:{source_key}:{release}:{source_sha[:12]}",
+                    details={"idempotent": True, "import_id": import_id},
+                )
+            except ApplicationApprovalError as exc:
+                raise StatisticsImportError(str(exc)) from exc
             connection.commit()
             return {
                 "dataset": source_key,
@@ -535,6 +598,19 @@ def import_wp1_5_dataset(
         issues = validate_database(connection)
         if issues:
             raise StatisticsImportError("Database validation failed: " + "; ".join(issues))
+        try:
+            record_application_applied(
+                connection, approval_id=approval_id,
+                application_id=f"wp1-5:{source_key}:{release}:{source_sha[:12]}",
+                details={
+                    "idempotent": False, "import_id": import_id,
+                    "observations": len(validated),
+                    "scalar_observations": scalar_count,
+                    "structured_observations": structured_count,
+                },
+            )
+        except ApplicationApprovalError as exc:
+            raise StatisticsImportError(str(exc)) from exc
         connection.commit()
         return {
             "dataset": source_key,
