@@ -55,6 +55,8 @@ The current policy is version 1 and has owner-approved status. Its 41 field assi
 
 ### Resolution and provenance rules
 
+The shared implementation is `tools/database/source_selection.py`; it validates the approved policy against the central registry and resolves normalized observations only from each provider's `latest_validated` release. It preserves source/release/period/methodology provenance, enforces explicit fallback compatibility, and applies matching manual overrides with precedence. It does not acquire, validate provider datasets, derive values, import into SQLite, or publish data. See `docs/data-sources/source-selection.md` for its input contract, runtime interface and current limitations.
+
 All modes must follow these rules:
 
 - A missing value is not zero, an empty string, or an inferred value.
