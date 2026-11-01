@@ -117,6 +117,7 @@ def _inputs(tmp_path: Path):
 
 def test_prepares_1_july_candidate_and_uses_togo_interim_only_for_togo(tmp_path, monkeypatch):
     monkeypatch.setattr(wpp, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(wpp, "EXPECTED_COUNTRY_AREA_COUNT", 2)
     inputs = _inputs(tmp_path)
     output = tmp_path / "candidate"
     result = wpp.prepare_un_wpp(
@@ -145,11 +146,13 @@ def test_prepares_1_july_candidate_and_uses_togo_interim_only_for_togo(tmp_path,
     assert len(by_field[12]["value"]) == 21
     assert by_field[12]["value"][0]["age_band"] == "0-4"
     assert len(manifest["additional_inputs"]) == 2
+    assert len(manifest["upstream_manifests"]) == 3
     assert manifest["release"] == "2024-main-demographic+2026-01-19-togo-update"
 
 
 def test_rejects_togo_supplement_with_non_togo_country(tmp_path, monkeypatch):
     monkeypatch.setattr(wpp, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(wpp, "EXPECTED_COUNTRY_AREA_COUNT", 2)
     inputs = list(_inputs(tmp_path))
     bad_zip = tmp_path / "raw_data" / "bad-togo.zip"
     with zipfile.ZipFile(bad_zip, "w") as archive:
