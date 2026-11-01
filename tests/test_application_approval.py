@@ -52,9 +52,9 @@ def test_approval_is_explicit_and_consumed_once(monkeypatch, tmp_path):
         approval.require_approved_application(
             connection, approval_id="wp1-5-test-0001", artifact=artifact
         )
-    assert connection.execute(
+    assert [row[0] for row in connection.execute(
         "SELECT event_type FROM database_application_events ORDER BY event_id"
-    ).fetchall() == [("proposed",), ("approved",), ("applied",)]
+    ).fetchall()] == ["proposed", "approved", "applied"]
 
 
 def test_changed_file_invalidates_approval(monkeypatch, tmp_path):
