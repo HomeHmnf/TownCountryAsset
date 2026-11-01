@@ -57,7 +57,7 @@ def test_builds_verified_exact_mapping_and_explicit_taiwan_exception():
     assert mappings[TAIWAN_GAME_ID]["source_id"] == TAIWAN_LOC_ID
     assert mappings[TAIWAN_GAME_ID]["evidence_url"] == "https://population.un.org/wpp/"
     assert counts["included_m49_verified"] == 1
-    assert counts["included_taiwan_manual_exception"] == 1
+    assert counts["included_taiwan_manual_exception"] == 1\n    assert counts["handled_by_taiwan_exception"] == 1
 
 
 def test_holds_explicit_variants_and_unmatched_identities():
