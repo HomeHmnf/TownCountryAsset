@@ -17,6 +17,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--manifest", required=True, help="Immutable source acquisition manifest JSON")
     parser.add_argument("--database", help="Canonical SQLite database path")
     parser.add_argument("--config", help="WP1.5 field contract JSON")
+    parser.add_argument("--approval-id", required=True, help="Previously approved application ID")
     return parser
 
 
@@ -26,6 +27,7 @@ def main() -> int:
         "observations_path": args.observations,
         "crosswalk_path": args.crosswalk,
         "manifest_path": args.manifest,
+        "approval_id": args.approval_id,
     }
     if args.database:
         kwargs["database_path"] = args.database
