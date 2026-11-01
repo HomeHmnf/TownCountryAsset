@@ -167,7 +167,10 @@ def _valid_value(field: dict[str, Any], row: dict[str, Any]) -> bool:
     if field["storage"] == "scalar":
         if isinstance(value, bool) or not isinstance(value, (int, float)):
             return False
-        return math.isfinite(float(value))
+        try:
+            return math.isfinite(float(value))
+        except (OverflowError, ValueError):
+            return False
     if not isinstance(value, (dict, list)):
         return False
     try:
@@ -299,6 +302,7 @@ def resolve_field(
         "policy_version": policy["policy_version"],
         "selection_mode": field["selection_mode"],
         "primary_source": primary_id,
+        "primary_candidate": primary,
         "selected_source": None,
         "release_id": None,
         "selection_status": "unavailable",
