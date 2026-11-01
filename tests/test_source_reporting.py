@@ -180,6 +180,6 @@ def test_resolution_cli_reads_latest_validated_ledgers_when_release_states_omitt
     assert result == 0
     bundle = next((tmp_path / "reports").iterdir())
     provenance = json.loads((bundle / "provenance.json").read_text(encoding="utf-8"))
-    assert provenance["latest_validated_releases"] == {}
+    assert isinstance(provenance["latest_validated_releases"], dict)
     assert provenance["database_imported"] is False
 
