@@ -134,10 +134,15 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
             }
             records.append(row)
             changes.append(row)
-        if source.get("discovery_status") in {"discovery_failed", "manual_review_required"}:
+        elif not source.get("downloads"):
+            records.append({
+                "source_id": source_id, "status": source.get("discovery_status"),
+                "detail": source.get("detail") or "No generic download was configured for this source",
+            })
+        if source.get("discovery_status") == "discovery_failed":
             failures.append({
                 "source_id": source_id, "status": source.get("discovery_status"),
-                "detail": source.get("detail") or "Automated release discovery is not implemented for this source",
+                "detail": source.get("detail") or "Release discovery failed",
             })
         for item in source.get("downloads", []):
             row = {
@@ -148,9 +153,7 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
                 "detail": item.get("detail"),
             }
             records.append(row)
-            if item.get("discovered_release") or item.get("status") in {
-                "acquired_pending_source_validation", "unchanged", "would_discover"
-            }:
+            if item.get("discovered_release") or item.get("status") == "acquired_pending_source_validation":
                 changes.append(row)
             if item.get("status") in {
                 "validation_error", "acquisition_failed", "discovery_or_acquisition_failed",
