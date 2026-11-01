@@ -43,7 +43,7 @@ class WPPSourceCrosswalkError(ValueError):
     """Raised when a proposed WPP crosswalk cannot be safely reviewed."""
 
 
-def _location_index(path: Path, label: str) -> dict[str, dict[str, str]]:
+def _location_index(\n    path: Path, label: str, *, allow_repeated_loc_ids: bool = False\n) -> dict[str, dict[str, str]]:
     required = {
         "LocID", "Location", "ISO2_code", "ISO3_code", "LocTypeName",
         "VarID", "Variant", "Time",
@@ -74,10 +74,15 @@ def _location_index(path: Path, label: str) -> dict[str, dict[str, str]]:
                         f"{label} LocID {source_id} has no Location name"
                     )
                 existing = result.get(source_id)
-                if existing is not None and existing != identity:
-                    raise WPPSourceCrosswalkError(
-                        f"{label} LocID {source_id} has conflicting location metadata"
-                    )
+                if existing is not None:
+                    if existing != identity:
+                        raise WPPSourceCrosswalkError(
+                            f"{label} LocID {source_id} has conflicting location metadata"
+                        )
+                    if not allow_repeated_loc_ids:
+                        raise WPPSourceCrosswalkError(
+                            f"{label} contains duplicate 2026 Medium LocID {source_id}"
+                        )
                 result[source_id] = identity
     except (OSError, UnicodeError, csv.Error) as exc:
         raise WPPSourceCrosswalkError(f"Cannot read {label} WPP snapshot {path}: {exc}") from exc
@@ -254,7 +259,7 @@ def main() -> int:
     try:
         records = _read_review(args.review_csv)
         demographic_index = _location_index(args.demographic, "demographic")
-        age_index = _location_index(args.age, "age-sex")
+        age_index = _location_index(args.age, "age-sex", allow_repeated_loc_ids=True)
         payload, counts = build_reviewed_crosswalk(
             records, demographic_index, age_index,
             expected_country_area_count=args.expected_country_area_count,
