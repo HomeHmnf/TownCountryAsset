@@ -272,6 +272,16 @@ def build_reviewed_crosswalk(
                 "scope": "WPP source crosswalk only; no ISO/M49 registry assignment.",
             },
         },
+        "review_approval": {
+            "status": "approved",
+            "approved_on": "2026-11-01",
+            "approver_role": "project_owner",
+            "approval_record": "docs/data-sources/un-wpp-crosswalk-review.md",
+            "scope": (
+                "UN WPP source crosswalk only; no global identity, ISO/M49 assignment, "
+                "or SQLite application approval."
+            ),
+        },
         "mappings": sorted(mappings, key=lambda item: int(item["source_id"])),
         "coverage_exceptions": sorted(
             coverage_exceptions, key=lambda item: (item["game_id"], int(item["source_id"]))
