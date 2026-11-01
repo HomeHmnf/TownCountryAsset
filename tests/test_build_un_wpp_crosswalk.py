@@ -165,7 +165,12 @@ def test_rejects_different_coverage_between_wpp_snapshots():
     ]
     age_index = _index()
     age_index.pop("4")
-    with pytest.raises(WPPSourceCrosswalkError, match="inconsistent coverage"):
+    age_index["5"] = {
+        "source_name": "Different location",
+        "iso2": "XX",
+        "iso3": "XXX",
+    }
+    with pytest.raises(WPPSourceCrosswalkError, match="different 2026 Medium LocID coverage"):
         build_reviewed_crosswalk(
             records, _index(), age_index, expected_country_area_count=2,
         )
