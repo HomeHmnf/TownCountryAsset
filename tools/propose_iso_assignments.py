@@ -32,7 +32,7 @@ REVIEWED_NAME_VARIANTS = {
     "east timor": ("Timor-Leste", "Common English name variant."),
     "federated states of micronesia": ("Micronesia, Federated States of", "Word-order variant of the formal name."),
     "french southern and antarctic lands": ("French Southern Territories", "Natural Earth display label differs from the ISO reference name; verify entity scope."),
-    "falkland islands": ("Falkland Islands (Malvinas)", "M49 formal label includes Malvinas; explicit display-name variant, with entity scope retained for review."),
+    "falkland islands": ("Falkland Islands (the) [Malvinas]", "Current M49 formal label includes the article and Malvinas; explicit display-name variant, with entity scope retained for review."),
     "hong kong s a r": ("China, Hong Kong Special Administrative Region", "M49 administrative-region label differs from the registry display name."),
     "iran": ("Iran, Islamic Republic of", "Reference uses the formal name."),
     "ivory coast": ("Côte d'Ivoire", "Common English name variant."),
