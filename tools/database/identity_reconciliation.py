@@ -117,12 +117,12 @@ def reconcile_identities(
             pair = "ambiguous_match" if candidates else "unmatched_registry"
         elif a2 == "match" and a3 == "match":
             pair = "complete_pair_agreement"
+        elif a2 == "mismatch" or a3 == "mismatch":
+            pair = "genuine_code_mismatch"
         elif a2 == "match":
             pair = "alpha2_only_agreement"
         elif a3 == "match":
             pair = "alpha3_only_agreement"
-        elif a2 == "mismatch" or a3 == "mismatch":
-            pair = "genuine_code_mismatch"
         elif a2 == "missing_existing" and a3 == "missing_existing":
             pair = "both_existing_codes_missing"
         elif a2 == "missing_reference" or a3 == "missing_reference":
