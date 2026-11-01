@@ -90,6 +90,30 @@ def test_latest_available_is_not_eligible_without_latest_validated(policy, regis
     assert result["selection_status"] == "unavailable"
 
 
+
+def test_release_ledger_uses_latest_validated_not_latest_available(policy, registry, tmp_path):
+    registry = dict(registry)
+    registry["_root"] = tmp_path
+    release_dir = tmp_path / "reports/sources/releases"
+    release_dir.mkdir(parents=True)
+    (release_dir / "un_wpp.json").write_text(json.dumps({
+        "source_id": "un_wpp",
+        "latest_available": {"release_id": "wpp-new", "status": "discovered"},
+        "latest_validated": {"release_id": "wpp-validated", "status": "validated"},
+        "latest_applied": None,
+        "history": [],
+    }), encoding="utf-8")
+    result = resolve_field(
+        policy, registry, game_id="tc_example", field_key="population",
+        observations=[
+            observation(release_id="wpp-new", value=9999),
+            observation(release_id="wpp-validated", value=1234),
+        ],
+    )
+    assert result["value"] == 1234
+    assert result["release_id"] == "wpp-validated"
+
+
 def test_priority_source_does_not_use_unconfigured_alternative(policy, registry):
     result = resolve_field(
         policy, registry, game_id="tc_example", field_key="population",
