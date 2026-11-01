@@ -241,6 +241,18 @@ def test_fingerprint_acquisition_race_is_not_marked_acquired(tmp_path, monkeypat
     assert report["sources"][0]["downloads"][0]["status"] == "changed_during_acquisition"
     state = json.loads((tmp_path / "reports/sources/releases/sample.json").read_text(encoding="utf-8"))
     assert state["latest_available"]["status"] == "discovered"
+    fetched_at = state["latest_available"]["fetched_at"]
+    assert fetched_at.endswith("+00:00") or fetched_at.endswith("Z")
+    assert state["latest_available"]["provider_commit_timestamp"] == discovered["provider_commit_timestamp"]
+    run_refresh(
+        registry,
+        source_ids=["manual"],
+        report_root=tmp_path / "reports" / "refreshes",
+    )
+    repeated = json.loads(
+        (tmp_path / "reports/sources/releases/manual.json").read_text(encoding="utf-8")
+    )
+    assert repeated["latest_available"]["fetched_at"] == fetched_at
     assert state["latest_validated"] is None
 
 def test_github_git_ref_discovery_records_commit_without_acquiring_archive(tmp_path, monkeypatch):
@@ -256,6 +268,7 @@ def test_github_git_ref_discovery_records_commit_without_acquiring_archive(tmp_p
         "provider_release_label": "git-commit:" + ("a" * 40),
         "provider_published_at": None,
         "provider_commit_timestamp": "2026-10-31T10:00:00Z",
+        "fetched_at": "2026-11-01T00:00:00+00:00",
         "sha256": None,
         "byte_count": None,
         "content_type": "application/json",
@@ -331,6 +344,7 @@ def test_github_git_ref_adapter_parses_immutable_default_branch_commit(monkeypat
     )
     assert result["release_id"] == "git-" + ("b" * 40)
     assert result["provider_commit_timestamp"] == "2026-10-31T10:20:30Z"
+    assert result["fetched_at"].endswith("+00:00")
     assert result["sha256"] is None
 
 
