@@ -158,6 +158,21 @@ def test_structured_missing_entries_are_not_invented(policy, registry):
     assert result["unavailable_count"] == 0
 
 
+def test_expected_record_catalogue_emits_explicit_unavailable_items(policy, registry):
+    result = resolve_structured_field(
+        policy, registry, game_id="tc_example", field_key="natural_resources",
+        observations=[], release_states={"usgs_mcs": "mcs-2026"},
+        expected_records=[
+            {"record_key": "copper/reserves"},
+            {"record_key": "gold/production"},
+        ],
+    )
+    assert result["record_count"] == 2
+    assert result["unavailable_count"] == 2
+    assert all(row["value"] is None for row in result["records"])
+    assert all(row["selection_status"] == "unavailable" for row in result["records"])
+
+
 def test_scalar_field_cannot_be_passed_to_structured_resolver(policy, registry):
     with pytest.raises(SourceSelectionError, match="not a structured field"):
         resolve_structured_field(
