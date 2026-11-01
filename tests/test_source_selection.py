@@ -54,6 +54,7 @@ def observation(
     }
     if compatibility_status is not None:
         row["compatibility_status"] = compatibility_status
+        row["compatibility_reference"] = "Reviewed against field definition, unit, scope and period"
     return row
 
 
