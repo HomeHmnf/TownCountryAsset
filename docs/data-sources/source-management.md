@@ -188,7 +188,7 @@ An application artifact fingerprints every reviewed input file (normalized obser
 
 The approval ledger distinguishes `pending`, `approved`, `rejected`, `invalidated` and `applied`. The event ledger records proposal, decision, invalidation and application events. The domain importer must verify an approved artifact before domain writes and mark it applied in the same SQLite transaction as those writes. Approval is single-use.
 
-The WP1.5 statistics importer and identity-registry importer are now integrated with this gate. The identity proposal fingerprints the registry, candidate countries payload and candidate manifest after validating their internal consistency. Use `propose-identity` to register the exact identity import artifact, then explicitly approve it before invoking `tools.import_identity_registry` with `--approval-id`. Both importers independently rebuild/recheck their artifacts and record application completion in the same transaction as their domain writes. Its proposal command fingerprints the normalized observations, explicit identity crosswalk, source manifest, immutable raw snapshot, WP1.5 field contract and (when present) project source-selection policy. The importer independently rebuilds and rechecks that artifact before writing, then records application completion in the same transaction as the statistics and provenance writes. Calling the importer without a valid approved application ID is rejected.
+The WP1.5 statistics importer, identity-registry importer and country-data importer are now integrated with this gate. The identity proposal fingerprints the registry, candidate countries payload and candidate manifest after validating their internal consistency. The country-data proposal fingerprints the manifest, countries payload and all three game-ID geometry profiles, after validating checksums, identity coverage and GeoJSON structure. Use `propose-identity` to register the exact identity import artifact, then explicitly approve it before invoking `tools.import_identity_registry` with `--approval-id`. Use `propose-country-data` and the same approve/apply sequence for source attributes and geometry. All three importers independently rebuild/recheck their artifacts and record application completion in the same transaction as their domain writes. Its proposal command fingerprints the normalized observations, explicit identity crosswalk, source manifest, immutable raw snapshot, WP1.5 field contract and (when present) project source-selection policy. The importer independently rebuilds and rechecks that artifact before writing, then records application completion in the same transaction as the statistics and provenance writes. Calling the importer without a valid approved application ID is rejected.
 
 Example WP1.5 workflow:
 
@@ -227,5 +227,20 @@ uv run python -m tools.import_identity_registry \
   --approval-id identity-registry-2026-001
 ```
 
-Use `reject` instead of `approve` to reject a pending proposal. Approval is single-use. A repeated identical dataset import requires a separately reviewed approval; it remains idempotent with respect to domain data. Changed or missing inputs invalidate an approval. The proposal/decision CLI currently exposes WP1.5 and identity-registry proposal builders. Country-data and review-data importers remain to be migrated; until then, those legacy import paths are not approval-gated.
+Example country-data workflow:
+
+```fish
+uv run python -m tools.manage_database_applications propose-country-data \
+  --approval-id country-data-natural-earth-2026-001 \
+  --candidate-dir generated/town_country_asset_candidate
+
+uv run python -m tools.manage_database_applications approve \
+  --approval-id country-data-natural-earth-2026-001 --actor "reviewer-id"
+
+uv run python -m tools.import_country_data \
+  --candidate-dir generated/town_country_asset_candidate \
+  --approval-id country-data-natural-earth-2026-001
+```
+
+Use `reject` instead of `approve` to reject a pending proposal. Approval is single-use. A repeated identical dataset import requires a separately reviewed approval; it remains idempotent with respect to domain data. Changed or missing inputs invalidate an approval. The proposal/decision CLI currently exposes WP1.5 and identity-registry proposal builders. The review-data importer remains to be migrated; until then, that legacy import path is not approval-gated.
 
