@@ -101,7 +101,29 @@ Resolve an already-normalized input file and produce the complete project-wide s
 uv run python -m tools.resolve_source_selection --input raw_data/normalized/source-observations.json
 ```
 
-Optional arguments are `--policy`, `--registry`, `--overrides`, and `--output-dir`. Defaults use the approved policy, central source registry, policy-declared manual override path, and `reports/sources/selections`. The input must be a JSON object with `schema_version: 1`, an `observations` array, and either a `game_ids` array or observations/overrides containing `game_id`. Each `game_id` must already have been assigned through the reviewed identity crosswalk; this command does not perform identity matching.
+Optional arguments are `--policy`, `--registry`, `--overrides`, and `--output-dir`. Defaults use the approved policy, central source registry, policy-declared manual override path, and `reports/sources/selections`. The input must be a JSON object with `schema_version: 1`, an `observations` array, and either a `game_ids` array or observations/overrides containing `game_id`. Each `game_id` must already have been assigned through the reviewed identity crosswalk; this command does not perform identity matching. A minimal input file has this shape (replace the example identity, release and observation with real normalized records):
+
+```json
+{
+  "schema_version": 1,
+  "game_ids": ["tc_<reviewed-identity>"],
+  "observations": [
+    {
+      "game_id": "tc_<reviewed-identity>",
+      "field_key": "population",
+      "source_id": "un_wpp",
+      "release_id": "<latest-validated-release-id>",
+      "value": 1234000,
+      "unit": "people",
+      "status": "observed",
+      "observation_period": "2024",
+      "source_reference": "provider-table:country-row",
+      "methodology": "Normalized to people",
+      "retrieved_at": "2026-11-01T08:00:00+00:00"
+    }
+  ]
+}
+```
 
 Optional input properties are:
 - `release_states`: explicit mapping of stable source IDs to validated release IDs. If omitted, the resolver reads each source's `latest_validated` release ledger.
