@@ -17,7 +17,7 @@ from typing import Any
 from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
 from tools.database.schema import apply_migrations, validate_database
 from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
-from tools.sources.registry import SourceError, load_registry
+from tools.sources.registry import SourceError, canonical_source_id, load_registry
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[2] / "config" / "wp1_5_data_sources.json"
 
@@ -222,8 +222,11 @@ def import_wp1_5_dataset(
         source_registry = load_registry(registry_path)
     except SourceError as exc:
         raise StatisticsImportError(f"Cannot load project source registry: {exc}") from exc
-    if source_key not in source_registry["sources"]:
+    canonical_source_key = canonical_source_id(source_registry, source_key)
+    if canonical_source_key is None:
         raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
+    # Keep the historical ID in manifests, crosswalks and database provenance;
+    # use its canonical provider ID only for current field-contract validation.
     release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
     if normalized.get("source_key") != manifest.get("source_key"):
         raise StatisticsImportError("Normalized observations and source manifest do not match")
@@ -256,7 +259,7 @@ def import_wp1_5_dataset(
             row,
             index=index,
             field_by_id=field_by_id,
-            source_key=source_key,
+            source_key=canonical_source_key,
             crosswalk_by_game=crosswalk_by_game,
         )
         for index, row in enumerate(rows)
