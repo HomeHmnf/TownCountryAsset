@@ -372,6 +372,11 @@ def prepare_un_wpp(
                 "sha256": str(togo_manifest["sha256"]),
             },
         ],
+        "upstream_manifests": [
+            {"path": str(demographic_manifest_path.resolve()), "sha256": _sha(demographic_manifest_path)},
+            {"path": str(age_manifest_path.resolve()), "sha256": _sha(age_manifest_path)},
+            {"path": str(togo_manifest_path.resolve()), "sha256": _sha(togo_manifest_path)},
+        ],
         "adapter": "tools.sources.wpp",
         "target_year": YEAR,
         "variant": VARIANT,
