@@ -54,6 +54,16 @@ def test_builds_verified_exact_mapping_and_explicit_taiwan_exception():
     mappings = {item["game_id"]: item for item in payload["mappings"]}
     assert mappings[ordinary_game]["source_id"] == "4"
     assert mappings[ordinary_game]["match_method"] == "reviewed_manual"
+    assert payload["review_approval"] == {
+        "status": "approved",
+        "approved_on": "2026-11-01",
+        "approver_role": "project_owner",
+        "approval_record": "docs/data-sources/un-wpp-crosswalk-review.md",
+        "scope": (
+            "UN WPP source crosswalk only; no global identity, ISO/M49 assignment, "
+            "or SQLite application approval."
+        ),
+    }
     assert mappings[TAIWAN_GAME_ID]["source_id"] == TAIWAN_LOC_ID
     assert mappings[TAIWAN_GAME_ID]["evidence_url"] == "https://population.un.org/wpp/"
     assert counts["included_m49_verified"] == 1
