@@ -180,6 +180,23 @@ def _connect(path):
     return connection
 
 
+
+def test_direct_import_without_approved_application_is_rejected(tmp_path, monkeypatch):
+    paths = _inputs(tmp_path, monkeypatch)
+    database, batch, crosswalk, manifest, _ = paths
+    with pytest.raises(StatisticsImportError, match="Unknown application approval"):
+        importer.import_wp1_5_dataset(
+            observations_path=batch,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
+            database_path=database,
+            approval_id="missing-approval-0001",
+        )
+    with _connect(database) as connection:
+        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
+        assert connection.execute("SELECT COUNT(*) FROM current_statistics").fetchone()[0] == 0
+
+
 def test_imports_scalar_provenance_and_is_idempotent(tmp_path, monkeypatch):
     paths = _inputs(tmp_path, monkeypatch)
     first = _run(paths)
