@@ -1,17 +1,18 @@
 """Read-only accessors for the central project-wide source registry."""
 from __future__ import annotations
 from functools import lru_cache
-from tools.sources.registry import REGISTRY, load_registry
+from tools.sources.registry import REGISTRY, canonical_source_id, load_registry
 
 @lru_cache(maxsize=1)
 def _sources():
     return load_registry(REGISTRY)["sources"]
 
 def source_record(source_id: str) -> dict:
-    try:
-        return _sources()[source_id]
-    except KeyError as exc:
-        raise KeyError(f"Unknown project source ID: {source_id}") from exc
+    registry = load_registry(REGISTRY)
+    canonical = canonical_source_id(registry, source_id)
+    if canonical is None:
+        raise KeyError(f"Unknown project source ID: {source_id}")
+    return registry["sources"][canonical]
 
 def source_url(source_id: str, download_id: str | None = None) -> str:
     source = source_record(source_id)
