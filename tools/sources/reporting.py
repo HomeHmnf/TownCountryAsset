@@ -17,7 +17,7 @@ ARTIFACT_FIELDS = {
     "records": [
         "game_id", "field_key", "field_id", "storage", "record_key", "subfield_key",
         "source_id", "download_id", "release_id", "release_kind", "status",
-        "discovery_mode", "discovery_automation", "sha256", "fetched_at", "selection_status",
+        "discovery_mode", "discovery_automation", "sha256", "fetched_at", "release_changed", "selection_status",
         "selected_source", "primary_source", "selection_mode", "value", "unit",
         "observation_period", "source_reference", "methodology", "retrieved_at",
         "fallback_used", "override_id", "override_reason", "override_author", "effective_at",
@@ -43,7 +43,7 @@ ARTIFACT_FIELDS = {
     ],
     "release_changes": [
         "source_id", "download_id", "release_id", "release_kind", "status",
-        "sha256", "provider_commit_timestamp", "fetched_at", "detail",
+        "sha256", "provider_commit_timestamp", "fetched_at", "release_changed", "detail",
     ],
     "failures": [
         "source_id", "download_id", "status", "detail",
@@ -136,10 +136,12 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
                 "discovery_automation": source.get("discovery_automation"),
                 "status": "discovered", "provider_commit_timestamp": git_ref.get("commit_timestamp"),
                 "fetched_at": git_ref.get("fetched_at"),
-                "fetched_at": git_ref.get("fetched_at"), "detail": git_ref.get("detail"),
+                "fetched_at": git_ref.get("fetched_at"),
+                "release_changed": git_ref.get("release_changed"), "detail": git_ref.get("detail"),
             }
             records.append(row)
-            changes.append(row)
+            if git_ref.get("release_changed"):
+                changes.append(row)
         elif source.get("discovery_status") in {"manual_review_required", "discovery_failed", "dry_run_not_checked"}:
             records.append({
                 "source_id": source_id, "status": source.get("discovery_status"),
@@ -168,10 +170,11 @@ def write_refresh_report_bundle(report: Mapping[str, Any], output_root: Path | s
                 "discovery_automation": source.get("discovery_automation"),
                 "sha256": item.get("sha256") or item.get("discovered_sha256"),
                 "fetched_at": item.get("fetched_at") or item.get("discovered_fetched_at"),
+                "release_changed": item.get("release_changed"),
                 "detail": item.get("detail"),
             }
             records.append(row)
-            if item.get("discovered_release") or item.get("status") == "acquired_pending_source_validation":
+            if item.get("release_changed") or item.get("status") == "acquired_pending_source_validation":
                 changes.append(row)
             if item.get("status") in {
                 "validation_error", "acquisition_failed", "discovery_or_acquisition_failed",
