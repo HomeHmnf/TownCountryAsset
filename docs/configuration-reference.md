@@ -122,6 +122,7 @@ Related references: `docs/cli-tool.md` and `docs/implementation/data-refresh.md`
 - Acquisition, validation, normalization, database import, review approval, and asset publication are separate steps. Success in one step must not imply success or approval in another.
 - Shared database reports use `reports/database/<database_id>/<domain>/<report_id>/` with a Markdown summary, record-level CSVs, unmatched CSVs where applicable, and JSON provenance. Reuse `tools/database/reporting.py`; do not invent parallel report layouts.
 - Shared source-management reports use `reports/sources/<report-type>/<run-id>/` and the artifact contract implemented in `tools/sources/reporting.py`. Refresh and selection reports must keep failures, missing values, fallbacks, conflicts and overrides separately auditable.
+- Source report run IDs are write-once: the shared writer refuses to overwrite an existing report directory. Repeated or corrected analyses require a new run ID so historical audit evidence remains intact.
 - Report provenance should identify source/release, checksums, parser/schema version, field mappings, selection policy version, and read-only/approval state where applicable.
 
 ## Change and review policy
