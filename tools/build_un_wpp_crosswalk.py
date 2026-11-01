@@ -147,6 +147,7 @@ def build_reviewed_crosswalk(
         by_game[game_id] = row
 
     mappings: list[dict[str, str]] = []
+    coverage_exceptions: list[dict[str, str]] = []
     counts: Counter[str] = Counter()
     used_games: set[str] = set()
     used_sources: set[str] = set()
@@ -172,10 +173,26 @@ def build_reviewed_crosswalk(
                 f"{game_id}: proposed source ID does not agree with its M49 reference ID"
             )
         source_id = normalize_m49(raw_id)
-        if source_id not in demographic_index or source_id not in age_index:
+        in_demographic = source_id in demographic_index
+        in_age = source_id in age_index
+        if in_demographic != in_age:
             raise WPPSourceCrosswalkError(
-                f"{game_id}: M49 LocID {source_id} is absent from one or both WPP snapshots"
+                f"{game_id}: M49 LocID {source_id} has inconsistent coverage "
+                "between demographic and age-sex WPP snapshots"
             )
+        if not in_demographic:
+            coverage_exceptions.append({
+                "game_id": game_id,
+                "source_id": source_id,
+                "m49_reference_name": row.get("m49_reference_name", "").strip(),
+                "status": "source_not_covered",
+                "reason": (
+                    "The official M49 identifier is not present in either 2026 Medium "
+                    "Country/Area WPP snapshot; no substitute identifier was inferred."
+                ),
+            })
+            counts["source_not_covered"] += 1
+            continue
         if source_id in used_sources or game_id in used_games:
             raise WPPSourceCrosswalkError(
                 f"Duplicate source/game mapping while reviewing {game_id} -> {source_id}"
@@ -256,6 +273,9 @@ def build_reviewed_crosswalk(
             },
         },
         "mappings": sorted(mappings, key=lambda item: int(item["source_id"])),
+        "coverage_exceptions": sorted(
+            coverage_exceptions, key=lambda item: (item["game_id"], int(item["source_id"]))
+        ),
     }
     return payload, dict(sorted(counts.items()))
 
