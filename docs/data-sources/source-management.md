@@ -1,5 +1,7 @@
 # Project-wide data source management
 
+> Configuration authority and the project-wide configuration inventory are documented in [the configuration reference](../configuration-reference.md).
+
 ## Purpose and authority
 
 `config/data_sources.json` is the single authoritative registry for external and local sources across the project. It covers WP1.5 providers and sources used by identity, geography, localization, flags, and asset refresh workflows. Domain contracts describe data requirements and refer to stable source IDs; they do not duplicate source definitions. The WP1.5 field contract (`config/wp1_5_data_sources.json`) therefore contains its approved 41 field definitions and references this registry.
