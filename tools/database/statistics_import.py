@@ -342,6 +342,15 @@ def import_wp1_5_dataset(
                 connection, approval_id=approval_id, artifact=application_artifact
             )
         except ApplicationApprovalError as exc:
+            status_row = connection.execute(
+                "SELECT status FROM application_approvals WHERE approval_id = ?",
+                (approval_id,),
+            ).fetchone()
+            if status_row is not None and status_row["status"] == "invalidated":
+                # Persist invalidation even though no domain data was written.
+                connection.commit()
+            elif connection.in_transaction:
+                connection.rollback()
             raise StatisticsImportError(str(exc)) from exc
         imported_at = _utc_now()
         existing_imports = connection.execute(
