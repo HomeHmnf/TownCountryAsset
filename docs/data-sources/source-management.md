@@ -88,7 +88,7 @@ Report-producing database commands share the same output policy:
 
 - Default: write all report artifacts and print a concise terminal summary with counts and report location.
 - `--quiet`: write the same artifacts but suppress the successful summary. Errors and non-zero exit status are not suppressed.
-- `--verbose`: write the same artifacts and print expanded classification counts.
+- `--verbose`: write the same artifacts and print expanded classification counts and record-level reconciliation results.
 
 For example, the M49 refresh supports:
 
