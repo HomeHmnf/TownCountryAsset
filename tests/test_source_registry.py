@@ -5,7 +5,7 @@ import pytest
 from tools.sources.registry import load_registry,inspect_snapshots,acquire_one,SourceError,canonical_source_id
 
 def fixture(tmp_path):
- p=tmp_path/"registry.json"; p.write_text(json.dumps({"schema_version":1,"storage":{"raw_root":"raw","manifest_root":"manifests"},"sources":{"sample":{"name":"Sample","downloads":[{"id":"dataset","release":"v1","filename":"data.csv","url":"https://example.test/data.csv","format":"csv"}]}}}),encoding="utf-8"); return p
+ p=tmp_path/"registry.json"; p.write_text(json.dumps({"schema_version":1,"storage":{"raw_root":"raw","manifest_root":"manifests"},"release_management":{"selection_policy":"latest_validated","discovery_modes":{"manual_review":"manual","website_page":"website","rolling_url":"rolling","provider_metadata":"metadata","git_ref":"git"}},"sources":{"sample":{"name":"Sample","release_discovery":{"mode":"manual_review","provider_url":"https://example.test/releases","automation_status":"not_implemented","latest_available":None,"latest_validated":None,"latest_applied":None},"downloads":[{"id":"dataset","release":"v1","release_kind":"edition_or_snapshot","filename":"data.csv","url":"https://example.test/data.csv","format":"csv"}]}}}),encoding="utf-8"); return p
 class Response:
  headers={"Content-Type":"text/csv"}
  def __init__(self,b): self.b=b
