@@ -40,7 +40,8 @@
             13,
             14
           ],
-          "scope": null
+          "scope": null,
+          "release_kind": "edition_or_snapshot"
         },
         {
           "id": "population_by_age_5_group_sex_medium",
@@ -51,7 +52,8 @@
           "fields": [
             12
           ],
-          "scope": null
+          "scope": null,
+          "release_kind": "edition_or_snapshot"
         },
         {
           "id": "demographic_indicator_notes",
@@ -60,7 +62,8 @@
           "format": "csv",
           "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv",
           "fields": [],
-          "scope": null
+          "scope": null,
+          "release_kind": "edition_or_snapshot"
         },
         {
           "id": "location_notes",
@@ -69,7 +72,8 @@
           "format": "csv",
           "url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Locations_notes.csv",
           "fields": [],
-          "scope": null
+          "scope": null,
+          "release_kind": "edition_or_snapshot"
         },
         {
           "id": "interim_update_togo",
@@ -85,7 +89,8 @@
             13,
             14
           ],
-          "scope": "Togo only; apply updated rows only for Togo; estimates 1950-2023 and medium projections 2024-2100"
+          "scope": "Togo only; apply updated rows only for Togo; estimates 1950-2023 and medium projections 2024-2100",
+          "release_kind": "supplement"
         }
       ],
       "field_ids": [
@@ -101,7 +106,16 @@
       "selected_value_status": "projected",
       "legacy_source_ids": [
         "un_wpp_2024"
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://population.un.org/wpp/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "imf_weo": {
       "name": "IMF World Economic Outlook",
@@ -121,7 +135,16 @@
         18,
         20,
         21
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.imf.org/en/Publications/WEO/weo-database",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "world_bank_wdi": {
       "name": "World Bank World Development Indicators",
@@ -143,7 +166,16 @@
         3,
         33,
         34
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://databank.worldbank.org/source/world-development-indicators",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "ilostat": {
       "name": "ILOSTAT",
@@ -159,7 +191,16 @@
       "downloads": [],
       "field_ids": [
         22
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://ilostat.ilo.org/data/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "faostat": {
       "name": "FAOSTAT",
@@ -175,7 +216,16 @@
       "notes": "Candidate source for land/area and selected agriculture/forestry/resource measures; confirm indicator definitions and country coverage.",
       "acquisition_mode": "manual_or_api",
       "downloads": [],
-      "field_ids": []
+      "field_ids": [],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.fao.org/faostat/en/#data",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "koppen_beck": {
       "name": "Beck et al. Köppen-Geiger climate classification",
@@ -194,7 +244,16 @@
       ],
       "legacy_source_ids": [
         "koppen_beck_2023"
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.gloh2o.org/koppen/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "fao_fra": {
       "name": "FAO Global Forest Resources Assessment",
@@ -213,7 +272,16 @@
       ],
       "legacy_source_ids": [
         "fao_fra_2025"
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.fao.org/forest-resources-assessment/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "usgs_mcs": {
       "name": "USGS Mineral Commodity Summaries",
@@ -232,7 +300,16 @@
       ],
       "legacy_source_ids": [
         "usgs_mcs_2026"
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.usgs.gov/centers/national-minerals-information-center/mineral-commodity-summaries",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "pew_religion": {
       "name": "Pew Research Center Global Religious Composition dataset",
@@ -251,7 +328,16 @@
       ],
       "legacy_source_ids": [
         "pew_religion_2020"
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.pewresearch.org/dataset/dataset-of-global-religious-composition-estimates-for-2010-and-2020/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "undp_hdr": {
       "name": "UNDP Human Development Reports statistical data",
@@ -267,7 +353,16 @@
       "downloads": [],
       "field_ids": [
         51
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://hdr.undp.org/data-center/documentation-and-downloads",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "itu": {
       "name": "ITU DataHub",
@@ -283,7 +378,16 @@
       "downloads": [],
       "field_ids": [
         52
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://datahub.itu.int/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "who_ghed": {
       "name": "WHO Global Health Expenditure Database",
@@ -299,7 +403,16 @@
       "downloads": [],
       "field_ids": [
         54
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://apps.who.int/nha/database",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "world_bank_pip": {
       "name": "World Bank Poverty and Inequality Platform",
@@ -317,7 +430,16 @@
       "field_ids": [
         55,
         56
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://pip.worldbank.org/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "world_bank_wgi": {
       "name": "World Bank Worldwide Governance Indicators",
@@ -333,7 +455,16 @@
       "downloads": [],
       "field_ids": [
         62
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.worldbank.org/en/publication/worldwide-governance-indicators",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "official_government_sources": {
       "name": "Official national government and constitutional sources",
@@ -352,7 +483,16 @@
         57,
         58,
         65
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": null,
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "official_organization_registers": {
       "name": "Official intergovernmental organization membership registers",
@@ -368,7 +508,16 @@
       "downloads": [],
       "field_ids": [
         66
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": null,
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "iiss_military_balance": {
       "name": "IISS The Military Balance",
@@ -387,7 +536,16 @@
         67,
         70,
         71
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.iiss.org/publications/the-military-balance/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "sipri_milex": {
       "name": "SIPRI Military Expenditure Database",
@@ -403,7 +561,16 @@
       "downloads": [],
       "field_ids": [
         69
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.sipri.org/databases/milex",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "global_carbon_project": {
       "name": "Global Carbon Project Global Carbon Budget",
@@ -419,7 +586,16 @@
       "downloads": [],
       "field_ids": [
         73
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://globalcarbonproject.org/carbonbudget/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "energy_institute": {
       "name": "Energy Institute Statistical Review of World Energy",
@@ -441,7 +617,16 @@
         76,
         77,
         78
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.energyinst.org/statistical-review/resources-and-data-downloads",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "protected_planet": {
       "name": "Protected Planet WDPA / GD-PAME",
@@ -457,7 +642,16 @@
       "downloads": [],
       "field_ids": [
         79
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.protectedplanet.net/en/legal",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "fao_aquastat": {
       "name": "FAO AQUASTAT",
@@ -475,7 +669,16 @@
       "field_ids": [
         80,
         81
-      ]
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.fao.org/aquastat/en/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "natural_earth_admin0": {
       "name": "Natural Earth Admin 0 Countries",
@@ -494,9 +697,19 @@
           "release": "rolling",
           "filename": "ne_50m_admin_0_countries.zip",
           "format": "zip",
-          "url": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip"
+          "url": "https://naturalearth.s3.amazonaws.com/50m_cultural/ne_50m_admin_0_countries.zip",
+          "release_kind": "rolling"
         }
-      ]
+      ],
+      "release_discovery": {
+        "mode": "rolling_url",
+        "provider_url": "https://www.naturalearthdata.com/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Mutable endpoint: checksum/content changes must be reviewed as candidate updates, not automatically treated as a new edition."
+      }
     },
     "iso_reference_mirror": {
       "name": "World Countries ISO reference CSV mirror",
@@ -515,9 +728,19 @@
           "release": "rolling",
           "filename": "world.csv",
           "format": "csv",
-          "url": "https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv"
+          "url": "https://raw.githubusercontent.com/stefangabos/world_countries/master/data/countries/en/world.csv",
+          "release_kind": "rolling"
         }
-      ]
+      ],
+      "release_discovery": {
+        "mode": "rolling_url",
+        "provider_url": "https://github.com/stefangabos/world_countries",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Mutable endpoint: checksum/content changes must be reviewed as candidate updates, not automatically treated as a new edition."
+      }
     },
     "wikidata_sparql": {
       "name": "Wikidata SPARQL service",
@@ -530,7 +753,16 @@
       "terms_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
       "notes": "Query service; returned Persian labels are review candidates, never automatic approvals.",
       "acquisition_mode": "api",
-      "downloads": []
+      "downloads": [],
+      "release_discovery": {
+        "mode": "provider_metadata",
+        "provider_url": "https://query.wikidata.org/sparql",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "No metadata adapter is implemented yet; record a release only after querying a documented provider metadata interface."
+      }
     },
     "lipis_flag_icons": {
       "name": "lipis/flag-icons",
@@ -544,7 +776,16 @@
       "notes": "Git source; pin an immutable commit for reproducible refreshes.",
       "acquisition_mode": "git",
       "downloads": [],
-      "default_ref": "main"
+      "default_ref": "main",
+      "release_discovery": {
+        "mode": "git_ref",
+        "provider_url": "https://github.com/lipis/flag-icons",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Record the exact tag or commit; do not use a moving branch name as a reproducible release identifier."
+      }
     },
     "iso_3166_official": {
       "name": "ISO 3166 country codes",
@@ -557,7 +798,16 @@
       "terms_url": "https://www.iso.org/terms-conditions.html",
       "notes": "ISO is the official ISO 3166 Maintenance Agency/assignment authority. Keep this record distinct from UN M49, which republishes ISO alpha-2/alpha-3 cross-references. Official current reference page; local files may be manually acquired under applicable terms.",
       "acquisition_mode": "manual",
-      "downloads": []
+      "downloads": [],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.iso.org/iso-3166-country-codes.html",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+      }
     },
     "flag_evidence_official_sources": {
       "name": "Country and territory official flag evidence",
@@ -579,6 +829,15 @@
         "INDIAN_OCEAN_TERRITORIES": "https://www.gov.uk/world/organisations/british-indian-ocean-territory",
         "ASHMORE_CARTIER": "https://www.dcceew.gov.au/",
         "SIACHEN": "https://www.britannica.com/place/Siachen-Glacier"
+      },
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": null,
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
       }
     },
     "un_m49": {
@@ -615,9 +874,77 @@
               "Global Code",
               "Region Name"
             ]
-          }
+          },
+          "release_kind": "current_reference"
         }
-      ]
+      ],
+      "release_discovery": {
+        "mode": "website_page",
+        "provider_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Inspect provider publication/page changes and record a provider release label only when supported by evidence."
+      }
     }
+  },
+  "release_management": {
+    "schema_version": 1,
+    "selection_policy": "latest_validated",
+    "states": {
+      "latest_available": "Newest release identified at the provider; discovery alone does not make it eligible for selection.",
+      "latest_validated": "Newest acquired release that passed its registered acquisition and dataset-contract validation.",
+      "latest_applied": "Release actually imported into the canonical dataset; it may lag latest_validated."
+    },
+    "invariants": [
+      "latest_available, latest_validated and latest_applied are independent states and must not be inferred from one another.",
+      "A release becomes latest_validated only after acquisition and source-specific data-contract validation succeeds.",
+      "A newly validated release does not automatically alter canonical database values.",
+      "Historical snapshots and manifests are immutable; a new release uses a new release identifier.",
+      "Unknown or unchecked release state remains null/unknown, never assumed current."
+    ],
+    "release_record": {
+      "path_template": "reports/sources/releases/<source-id>.json",
+      "required_fields": [
+        "source_id",
+        "checked_at",
+        "discovery_mode",
+        "latest_available",
+        "latest_validated",
+        "latest_applied",
+        "history"
+      ],
+      "release_entry_fields": [
+        "release_id",
+        "provider_release_label",
+        "provider_published_at",
+        "discovered_at",
+        "acquired_at",
+        "validated_at",
+        "applied_at",
+        "status",
+        "snapshot_manifest",
+        "notes"
+      ],
+      "status_values": [
+        "discovered",
+        "acquired",
+        "validated",
+        "applied",
+        "rejected",
+        "superseded"
+      ],
+      "timestamp_format": "ISO 8601 with timezone"
+    },
+    "discovery_modes": {
+      "manual_review": "A person checks the provider's release page or authoritative publication and records the result.",
+      "website_page": "A provider webpage is the discovery reference; changes require provider-specific inspection before accepting a release.",
+      "rolling_url": "The URL is mutable/rolling; a changed checksum is a candidate snapshot, not proof of a new semantic release.",
+      "provider_metadata": "A documented provider API or metadata feed exposes release identifiers or publication dates.",
+      "git_ref": "A repository tag or commit identifies the source revision."
+    },
+    "default_discovery_mode": "manual_review",
+    "no_automatic_promotion": true
   }
 }
