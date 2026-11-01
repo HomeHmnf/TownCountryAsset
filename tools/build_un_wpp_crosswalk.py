@@ -14,7 +14,16 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from tools.propose_un_wpp_crosswalk import normalize_m49
+def normalize_m49(value: str) -> str:
+    """Normalize an official numeric M49 identifier without losing validation."""
+    value = value.strip()
+    if not value.isdigit():
+        raise WPPSourceCrosswalkError(
+            f"M49 reference_id must be numeric, received {value!r}"
+        )
+    return str(int(value))
+
+
 
 DEFAULT_REVIEW = Path("reports/sources/crosswalk-review/un-wpp-m49-crosswalk-review.csv")
 DEFAULT_DEMOGRAPHIC = Path(
