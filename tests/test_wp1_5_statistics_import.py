@@ -3,13 +3,47 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
+from itertools import count
 
 import pytest
 
 from tools.database.connection import connect_database
+from tools.database import application_approval
 from tools.database.schema import apply_migrations
 import tools.database.statistics_import as statistics_import
 from tools.database.statistics_import import StatisticsImportError, import_wp1_5_dataset
+
+
+_APPROVAL_COUNTER = count(1)
+
+
+def import_wp1_5_dataset(*, observations_path, crosswalk_path, manifest_path, database_path, config_path=None):
+    selected_config = config_path or statistics_import.DEFAULT_CONFIG
+    artifact = statistics_import.build_wp1_5_application_artifact(
+        observations_path=observations_path,
+        crosswalk_path=crosswalk_path,
+        manifest_path=manifest_path,
+        config_path=selected_config,
+    )
+    approval_id = f"test-wp1-5-{next(_APPROVAL_COUNTER):08d}"
+    with connect_database(database_path) as connection:
+        apply_migrations(connection)
+        connection.execute("BEGIN IMMEDIATE")
+        application_approval.propose_application(
+            connection, approval_id=approval_id, artifact=artifact
+        )
+        application_approval.decide_application(
+            connection, approval_id=approval_id, decision="approved", actor="test-reviewer"
+        )
+        connection.commit()
+    return statistics_import.import_wp1_5_dataset(
+        observations_path=observations_path,
+        crosswalk_path=crosswalk_path,
+        manifest_path=manifest_path,
+        database_path=database_path,
+        config_path=selected_config,
+        approval_id=approval_id,
+    )
 
 GAME = "tc_" + "a" * 32
 GAME_B = "tc_" + "b" * 32
@@ -18,6 +52,13 @@ SOURCE = "un_wpp_2024"
 @pytest.fixture(autouse=True)
 def repository_root_for_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(statistics_import, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(application_approval, "REPOSITORY_ROOT", tmp_path)
+    config_dir = tmp_path / "config"
+    config_dir.mkdir(parents=True, exist_ok=True)
+    contract_source = statistics_import.DEFAULT_CONFIG
+    contract_path = config_dir / "wp1_5_data_sources.json"
+    contract_path.write_bytes(contract_source.read_bytes())
+    monkeypatch.setattr(statistics_import, "DEFAULT_CONFIG", contract_path)
     config_dir = tmp_path / "config"
     config_dir.mkdir(parents=True, exist_ok=True)
     (config_dir / "data_sources.json").write_text(
