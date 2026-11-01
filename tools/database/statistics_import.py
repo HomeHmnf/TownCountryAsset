@@ -135,6 +135,35 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
             raise StatisticsImportError(f"Additional source snapshot checksum mismatch: {additional_path}")
         if item.get("byte_count") != len(additional_bytes):
             raise StatisticsImportError(f"Additional source snapshot byte count mismatch: {additional_path}")
+    upstream_manifests = manifest.get("upstream_manifests", [])
+    if not isinstance(upstream_manifests, list):
+        raise StatisticsImportError("manifest.upstream_manifests must be an array")
+    for index, item in enumerate(upstream_manifests):
+        if not isinstance(item, dict):
+            raise StatisticsImportError(f"manifest.upstream_manifests[{index}] must be an object")
+        manifest_path_value = _text(item.get("path"), f"manifest.upstream_manifests[{index}].path")
+        upstream_path = Path(manifest_path_value)
+        if not upstream_path.is_absolute():
+            upstream_path = (REPOSITORY_ROOT / upstream_path).resolve()
+        else:
+            upstream_path = upstream_path.resolve()
+        try:
+            upstream_relative = upstream_path.relative_to(REPOSITORY_ROOT.resolve())
+        except ValueError as exc:
+            raise StatisticsImportError("Upstream acquisition manifests must be inside the repository") from exc
+        if not upstream_path.is_file():
+            raise StatisticsImportError(f"Upstream acquisition manifest is missing: {upstream_path}")
+        if not upstream_relative.parts:
+            raise StatisticsImportError("Invalid upstream acquisition manifest path")
+        try:
+            upstream_digest = hashlib.sha256(upstream_path.read_bytes()).hexdigest()
+        except OSError as exc:
+            raise StatisticsImportError(f"Cannot read upstream acquisition manifest: {upstream_path}") from exc
+        expected_digest = _text(
+            item.get("sha256"), f"manifest.upstream_manifests[{index}].sha256"
+        )
+        if upstream_digest != expected_digest:
+            raise StatisticsImportError(f"Upstream acquisition manifest checksum mismatch: {upstream_path}")
     for optional_key in ("attribution", "license_status"):
         optional_value = manifest.get(optional_key)
         if optional_value is not None and not isinstance(optional_value, str):
@@ -259,6 +288,15 @@ def build_wp1_5_application_artifact(
             f"manifest.additional_inputs[{index}].local_raw_path",
         ))
         inputs.append(additional_path)
+    upstream_manifests = manifest.get("upstream_manifests", [])
+    if not isinstance(upstream_manifests, list):
+        raise StatisticsImportError("manifest.upstream_manifests must be an array")
+    for index, item in enumerate(upstream_manifests):
+        if not isinstance(item, dict):
+            raise StatisticsImportError(f"manifest.upstream_manifests[{index}] must be an object")
+        inputs.append(Path(_text(
+            item.get("path"), f"manifest.upstream_manifests[{index}].path"
+        )))
     selection_policy = REPOSITORY_ROOT / "config" / "source_selection.json"
     policy_version = None
     if selection_policy.is_file():
