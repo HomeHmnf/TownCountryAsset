@@ -93,6 +93,12 @@ def validate_policy(policy: dict[str, Any], source_registry: dict[str, Any]) -> 
             raise SourceSelectionError(f"{label}: priority_source cannot declare fallbacks")
         if mode == "custom_mixture" and fallbacks:
             raise SourceSelectionError(f"{label}: custom_mixture uses explicit assignments, not ordered fallbacks")
+        mixture_sources = field.get("mixture_sources", [])
+        if not isinstance(mixture_sources, list):
+            raise SourceSelectionError(f"{label}.mixture_sources must be an array")
+        for mixture_source in mixture_sources:
+            if not isinstance(mixture_source, str) or canonical_source_id(source_registry, mixture_source) not in sources:
+                raise SourceSelectionError(f"{label} mixture source is not registered: {mixture_source!r}")
         for fallback_index, fallback in enumerate(fallbacks):
             if not isinstance(fallback, dict):
                 raise SourceSelectionError(f"{label}.fallback_sources[{fallback_index}] must be an object")
@@ -352,9 +358,8 @@ def resolve_field(
         assigned_id = canonical_source_id(source_registry, assigned)
         allowed = {primary_id}
         allowed.update(
-            canonical_source_id(source_registry, item["source_id"])
-            for item in field.get("fallback_sources", [])
-            if isinstance(item, dict) and isinstance(item.get("source_id"), str)
+            canonical_source_id(source_registry, source_id)
+            for source_id in field.get("mixture_sources", [])
         )
         if assigned_id not in allowed:
             raise SourceSelectionError(f"Mixture assignment source is not allowed for {field_key}: {assigned}")
