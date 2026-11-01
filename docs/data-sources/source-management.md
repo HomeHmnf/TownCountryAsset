@@ -150,3 +150,21 @@ The refresh command never imports into SQLite, changes approved data, or approve
 
 The approved field policy is in `config/source_selection.json`. The shared resolver in `tools/database/source_selection.py` accepts only observations from a source's `latest_validated` release and returns a provenance-rich decision. It enforces priority/fallback/custom-mixture semantics and manual override precedence; it does not acquire or validate provider datasets, calculate derived values, write SQLite, or publish assets. Fallback observations require explicit compatibility evidence. See `docs/data-sources/source-selection.md` for the normalized observation contract and limitations.
 
+## Standardized source-management reports
+
+Source refresh and policy resolution use the shared writer in `tools/sources/reporting.py`. Each run receives its own immutable report directory:
+- Refresh: `reports/sources/refreshes/<run-id>/`
+- Selection: `reports/sources/selections/<run-id>/`
+
+The shared bundle contains `summary.md`, `records.csv`, `missing.csv`, `fallbacks.csv`, `conflicts.csv`, `overrides.csv`, `release_changes.csv`, `failures.csv`, and `provenance.json`. CSVs that do not apply to a report type are still written with headers, so downstream review tools can consume one stable artifact contract. The existing timestamped refresh JSON/Markdown files remain available for compatibility; their JSON report also points to the bundle directory.
+
+Run policy resolution against an already-normalized observation file:
+
+```fish
+uv run python -m tools.resolve_source_selection --input raw_data/normalized/source-observations.json
+```
+
+The input's `game_id` values must already use the reviewed identity crosswalk. The command reads `config/source_selection.json`, selects only each source's `latest_validated` release, and writes the complete scalar/structured decision audit. It can accept an explicit `release_states` mapping, manual overrides, mixture assignments, and expected structured-record catalogues in the input JSON; see [source-selection documentation](source-selection.md) for the input contract.
+
+The refresh bundle distinguishes unchanged snapshots, newly discovered/acquired release candidates, manual-review states, and acquisition/validation failures. A download marked `acquired_pending_source_validation` has not passed provider-specific semantic validation. Release changes do not promote `latest_validated`; selection reports do not promote `latest_applied`. Both commands are read-only with respect to the canonical database.
+
