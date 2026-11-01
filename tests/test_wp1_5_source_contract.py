@@ -16,7 +16,7 @@ def test_wp1_5_contract_has_exact_41_selected_fields_including_religion_and_gini
     by_id = {field["id"]: field for field in fields}
     assert by_id[48]["key"] == "religions"
     assert by_id[48]["storage"] == "structured"
-    assert by_id[48]["primary_source"] == "pew_religion_2020"
+    assert by_id[48]["primary_source"] == "pew_religion"
     assert by_id[56]["key"] == "gini_index"
     assert by_id[56]["storage"] == "scalar"
     assert by_id[56]["primary_source"] == "world_bank_pip"
@@ -49,13 +49,13 @@ def test_resource_catalog_is_nonempty_and_has_unique_keys():
 def test_wpp_download_profile_pins_official_files_and_togo_update():
     contract = json.loads((ROOT / "config/wp1_5_data_sources.json").read_text(encoding="utf-8"))
     registry = json.loads((ROOT / "config/data_sources.json").read_text(encoding="utf-8"))
-    downloads = {item["id"]: item for item in registry["sources"]["un_wpp_2024"]["downloads"]}
+    downloads = {item["id"]: item for item in registry["sources"]["un_wpp"]["downloads"]}
     assert downloads["demographic_indicators_medium"]["fields"] == [1, 2, 6, 13, 14]
     assert downloads["population_by_age_5_group_sex_medium"]["fields"] == [12]
     update = downloads["interim_update_togo"]
     assert update["release"] == "2026-01-19-togo-update"
     assert update["scope"].startswith("Togo only")
-    wpp = registry["sources"]["un_wpp_2024"]
+    wpp = registry["sources"]["un_wpp"]
     assert wpp["license_status"] == "CC BY 3.0 IGO"
     assert wpp["selected_current_period"] == "2026"
     assert wpp["selected_variant"] == "Medium"
