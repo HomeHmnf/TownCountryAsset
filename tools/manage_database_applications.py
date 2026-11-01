@@ -57,6 +57,7 @@ def main() -> int:
             artifact = build_wp1_5_application_artifact(**kwargs)
         elif args.command == "propose-identity":
             artifact = build_identity_application_artifact(args.registry, args.candidate_dir)
+        if args.command in {"propose-wp1-5", "propose-identity"}:
             connection.execute("BEGIN IMMEDIATE")
             propose_application(connection, approval_id=args.approval_id, artifact=artifact)
             connection.commit()
