@@ -134,8 +134,8 @@ def test_imports_identity_provenance_names_regions_and_history(tmp_path):
 def test_repeat_import_is_idempotent(tmp_path):
     registry, candidate = write_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
-    first = import_identity_registry(database, registry, candidate)
-    second = import_identity_registry(database, registry, candidate)
+    first = approved_import(database, registry, candidate, 'identity-test-0001')
+    second = approved_import(database, registry, candidate, 'identity-test-0002')
     assert first["import_id"] == second["import_id"]
     connection = connect_database(database)
     try:
@@ -155,7 +155,7 @@ def test_rejects_registry_candidate_game_id_mismatch_without_partial_import(tmp_
     registry, candidate = write_inputs(tmp_path, conflict=True)
     database = tmp_path / "canonical.sqlite"
     with pytest.raises(IdentityImportError, match="game_id mismatch"):
-        import_identity_registry(database, registry, candidate)
+        approved_import(database, registry, candidate)
     # Input validation runs before opening/creating the database, so a rejected
     # identity mismatch must leave no database file and no partial schema/data.
     assert not database.exists()
