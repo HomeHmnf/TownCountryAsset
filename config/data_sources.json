@@ -919,6 +919,8 @@
         "release_id",
         "provider_release_label",
         "provider_published_at",
+        "provider_commit_timestamp",
+        "fetched_at",
         "discovered_at",
         "acquired_at",
         "validated_at",
