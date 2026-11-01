@@ -142,10 +142,13 @@ def test_resolution_cli_writes_read_only_project_wide_audit(tmp_path):
         }],
     }), encoding="utf-8")
     output_dir = tmp_path / "reports"
+    overrides_path = tmp_path / "overrides.json"
+    overrides_path.write_text("[]", encoding="utf-8")
     result = resolve_main([
         "--input", str(input_path),
         "--policy", str(root / "config/source_selection.json"),
         "--registry", str(root / "config/data_sources.json"),
+        "--overrides", str(overrides_path),
         "--output-dir", str(output_dir),
     ])
     assert result == 0
@@ -171,10 +174,13 @@ def test_resolution_cli_reads_latest_validated_ledgers_when_release_states_omitt
         "game_ids": ["tc_demo"],
         "observations": [],
     }), encoding="utf-8")
+    overrides_path = tmp_path / "overrides.json"
+    overrides_path.write_text("[]", encoding="utf-8")
     result = resolve_main([
         "--input", str(input_path),
         "--policy", str(root / "config/source_selection.json"),
         "--registry", str(root / "config/data_sources.json"),
+        "--overrides", str(overrides_path),
         "--output-dir", str(tmp_path / "reports"),
     ])
     assert result == 0
