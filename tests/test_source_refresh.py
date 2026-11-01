@@ -193,9 +193,12 @@ def test_fingerprint_discovery_skips_existing_identical_snapshot(tmp_path, monke
     )
     report = run_refresh(registry, report_root=tmp_path / "reports" / "refreshes")
     assert report["sources"][0]["downloads"][0]["status"] == "unchanged"
+    assert report["sources"][0]["downloads"][0]["release_changed"] is True
     state = json.loads((tmp_path / "reports/sources/releases/sample.json").read_text(encoding="utf-8"))
     assert len(state["history"]) == 1
     assert state["latest_validated"] is None
+    repeated = run_refresh(registry, report_root=tmp_path / "reports" / "refreshes")
+    assert repeated["sources"][0]["downloads"][0]["release_changed"] is False
 
 
 def test_fingerprint_discovery_failure_is_reported_without_release_state(tmp_path, monkeypatch):
