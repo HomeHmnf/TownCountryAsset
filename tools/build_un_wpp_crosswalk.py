@@ -52,7 +52,9 @@ class WPPSourceCrosswalkError(ValueError):
     """Raised when a proposed WPP crosswalk cannot be safely reviewed."""
 
 
-def _location_index(\n    path: Path, label: str, *, allow_repeated_loc_ids: bool = False\n) -> dict[str, dict[str, str]]:
+def _location_index(
+    path: Path, label: str, *, allow_repeated_loc_ids: bool = False
+) -> dict[str, dict[str, str]]:
     required = {
         "LocID", "Location", "ISO2_code", "ISO3_code", "LocTypeName",
         "VarID", "Variant", "Time",
