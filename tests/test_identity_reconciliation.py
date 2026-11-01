@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from tools.database.identity_reconciliation import reconcile_identities
 from tools.database.reporting import emit_terminal_report, write_report_bundle
+from tools.propose_iso_assignments import REVIEWED_NAME_VARIANTS, propose
 
 
 FIELDS = {
@@ -129,3 +130,51 @@ def test_report_path_segments_are_validated(tmp_path):
             report_id="report", summary_markdown="", records=[],
             unmatched_registry=[], unmatched_reference=[], provenance={},
         )
+
+
+
+def test_ten_owner_approved_m49_name_variants_match_without_assigning_codes():
+    pairs = [
+        ("Falkland Islands", "Falkland Islands (Malvinas)"),
+        ("South Korea", "Republic of Korea"),
+        ("North Korea", "Democratic People's Republic of Korea"),
+        ("Netherlands", "Netherlands (Kingdom of the)"),
+        ("Nauru", "Naoero"),
+        ("Moldova", "Republic of Moldova"),
+        ("Palestine", "State of Palestine"),
+        ("Wallis and Futuna", "Wallis and Futuna Islands"),
+        ("Macao S.A.R", "China, Macao Special Administrative Region"),
+        ("Hong Kong S.A.R.", "China, Hong Kong Special Administrative Region"),
+    ]
+    records = [
+        _record(f"tc_variant_{index}", registry_name)
+        for index, (registry_name, _) in enumerate(pairs)
+    ]
+    references = [
+        {"name": reference_name, "m49": f"{index + 1:03}", "a2": "", "a3": ""}
+        for index, (_, reference_name) in enumerate(pairs)
+    ]
+
+    result = reconcile_identities(
+        {"records": records}, references, fields=FIELDS,
+        name_variants=REVIEWED_NAME_VARIANTS,
+    )
+    assert result["summary"]["matched_count"] == 10
+    assert result["summary"]["unmatched_registry_count"] == 0
+    assert result["summary"]["unmatched_reference_count"] == 0
+    assert result["summary"]["name_comparisons"]["explicit_variant"] == 10
+    assert all(row["match_type"] == "explicit_variant" for row in result["records"])
+    assert all(row["existing_alpha2"] == "" and row["existing_alpha3"] == ""
+               for row in result["records"])
+
+    proposal = propose(
+        {"records": records},
+        [
+            {"english_name": row["name"], "alpha2": "AA", "alpha3": "AAA"}
+            for row in references
+        ],
+    )
+    assert proposal["candidate_count"] == 10
+    assert proposal["explicit_variant_count"] == 10
+    assert all(row["match_type"] == "explicit name variant"
+               for row in proposal["proposals"])
