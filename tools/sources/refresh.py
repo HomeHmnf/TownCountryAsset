@@ -98,6 +98,7 @@ def _discover_git_ref(discovery: dict, timeout: int) -> dict:
         "byte_count": None,
         "content_type": "application/json",
         "url": "https://github.com/" + owner + "/" + repository + "/commit/" + sha,
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
         "discovered_at": datetime.now(timezone.utc).isoformat(),
     }
 
@@ -149,6 +150,7 @@ def _record_release(
             "provider_release_label": discovered["provider_release_label"],
             "provider_published_at": discovered.get("provider_published_at"),
             "provider_commit_timestamp": discovered.get("provider_commit_timestamp"),
+            "fetched_at": discovered.get("fetched_at") or datetime.now(timezone.utc).isoformat(),
             "discovered_at": discovered["discovered_at"],
             "acquired_at": datetime.now(timezone.utc).isoformat() if status == "acquired" else None,
             "validated_at": None,
@@ -164,12 +166,14 @@ def _record_release(
         record["history"].append(entry)
     else:
         entry["status"] = status
+        if entry.get("fetched_at") is None:
+            entry["fetched_at"] = discovered.get("fetched_at") or datetime.now(timezone.utc).isoformat()
         if snapshot_manifest is not None:
             entry["snapshot_manifest"] = snapshot_manifest
         if status == "acquired" and entry.get("acquired_at") is None:
             entry["acquired_at"] = datetime.now(timezone.utc).isoformat()
 
-    record["checked_at"] = discovered["discovered_at"]
+    record["checked_at"] = discovered["fetched_at"] if discovered.get("fetched_at") else discovered["discovered_at"]
     record["latest_available"] = dict(entry)
     temporary = path.with_suffix(path.suffix + ".tmp")
     try:
