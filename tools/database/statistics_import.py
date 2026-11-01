@@ -106,6 +106,35 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
         raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
     if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
         raise StatisticsImportError("manifest.retrieved_at must include a timezone")
+    additional_inputs = manifest.get("additional_inputs", [])
+    if not isinstance(additional_inputs, list):
+        raise StatisticsImportError("manifest.additional_inputs must be an array")
+    for index, item in enumerate(additional_inputs):
+        if not isinstance(item, dict):
+            raise StatisticsImportError(f"manifest.additional_inputs[{index}] must be an object")
+        additional_path_value = _text(item.get("local_raw_path"), f"manifest.additional_inputs[{index}].local_raw_path")
+        additional_path = Path(additional_path_value)
+        if not additional_path.is_absolute():
+            additional_path = (REPOSITORY_ROOT / additional_path).resolve()
+        else:
+            additional_path = additional_path.resolve()
+        try:
+            additional_relative = additional_path.relative_to(REPOSITORY_ROOT.resolve())
+        except ValueError as exc:
+            raise StatisticsImportError("Additional source snapshots must be inside the repository") from exc
+        if not additional_relative.parts or additional_relative.parts[0] != "raw_data":
+            raise StatisticsImportError("Additional source snapshots must be under the repository raw_data tree")
+        try:
+            additional_bytes = additional_path.read_bytes()
+        except OSError as exc:
+            raise StatisticsImportError(f"Cannot read additional source snapshot: {additional_path}") from exc
+        additional_sha = _text(item.get("sha256"), f"manifest.additional_inputs[{index}].sha256")
+        if len(additional_sha) != 64 or any(c not in "0123456789abcdef" for c in additional_sha):
+            raise StatisticsImportError(f"manifest.additional_inputs[{index}].sha256 is invalid")
+        if hashlib.sha256(additional_bytes).hexdigest() != additional_sha:
+            raise StatisticsImportError(f"Additional source snapshot checksum mismatch: {additional_path}")
+        if item.get("byte_count") != len(additional_bytes):
+            raise StatisticsImportError(f"Additional source snapshot byte count mismatch: {additional_path}")
     for optional_key in ("attribution", "license_status"):
         optional_value = manifest.get(optional_key)
         if optional_value is not None and not isinstance(optional_value, str):
@@ -219,6 +248,17 @@ def build_wp1_5_application_artifact(
         Path(observations_path), Path(crosswalk_path), Path(manifest_path),
         Path(config_path), raw_path,
     ]
+    additional_inputs = manifest.get("additional_inputs", [])
+    if not isinstance(additional_inputs, list):
+        raise StatisticsImportError("manifest.additional_inputs must be an array")
+    for index, item in enumerate(additional_inputs):
+        if not isinstance(item, dict):
+            raise StatisticsImportError(f"manifest.additional_inputs[{index}] must be an object")
+        additional_path = Path(_text(
+            item.get("local_raw_path"),
+            f"manifest.additional_inputs[{index}].local_raw_path",
+        ))
+        inputs.append(additional_path)
     selection_policy = REPOSITORY_ROOT / "config" / "source_selection.json"
     policy_version = None
     if selection_policy.is_file():
