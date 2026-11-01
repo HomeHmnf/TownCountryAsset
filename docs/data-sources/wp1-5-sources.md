@@ -416,3 +416,38 @@ uv run python -m tools.sources.wpp \
 ```
 
 The generated application manifest is a derived WP1.5 manifest, not a replacement for the immutable acquisition manifests. It binds the three original manifests and all three raw snapshots. Do not edit it by hand. The adapter output is a candidate and remains outside SQLite until the shared WP1.5 proposal/approval/import workflow is completed.
+ 
+
+## UN WPP identity crosswalk
+
+WPP `LocID` is treated as the UN M49 numeric location identifier. The initial
+WPP crosswalk is generated only after the M49 identity report has been reviewed
+and both acquired WPP snapshots have been checked for the same 2026 Medium
+Country/Area `LocID` coverage.
+
+Run:
+
+```fish
+uv run python -m tools.build_un_wpp_crosswalk
+```
+
+The builder:
+- includes exact and normalized-name M49 reconciliation rows only when the
+  normalized M49 ID exists in both the demographic and age-sex snapshots;
+- marks accepted mappings `reviewed_manual` and records the official M49
+  evidence URL and WPP location name;
+- holds explicit name variants and unmatched identities for separate review;
+- adds Taiwan as an explicit WPP-only exception using the existing Taiwan
+  `game_id` and WPP `LocID=158`, but only when both snapshots identify that
+  record as `China, Taiwan Province of China`, ISO2 `TW`, ISO3 `TWN`;
+- does not create or alter an ISO/M49 identity assignment, and does not write
+  to SQLite.
+
+The Taiwan exception is supported by the UN WPP source record and is scoped
+only to the WPP provider crosswalk. The eight previously identified
+entity-scope-sensitive variants remain held, as do other explicit variants
+until separately reviewed. The remaining unmatched identities are not
+inferred or substituted. The generated file is
+`data/manual/source_crosswalks/un_wpp.json`; review it before using it in
+candidate preparation. The WPP adapter independently checks that all mapped
+source IDs exist in both datasets.
