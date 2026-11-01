@@ -190,6 +190,7 @@ def test_direct_import_without_approved_application_is_rejected(tmp_path, monkey
             crosswalk_path=crosswalk,
             manifest_path=manifest,
             database_path=database,
+            config_path=importer.DEFAULT_CONFIG,
             approval_id="missing-approval-0001",
         )
     with _connect(database) as connection:
