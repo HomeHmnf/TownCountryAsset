@@ -270,6 +270,13 @@ def build_wp1_5_application_artifact(
 ) -> dict[str, Any]:
     """Fingerprint the complete WP1.5 input set that an approver reviewed."""
     manifest = _read_object(manifest_path, "source manifest")
+    normalized = _read_object(observations_path, "normalized observations")
+    source_key = _text(normalized.get("source_key"), "normalized.source_key")
+    _validate_manifest(manifest, source_key)
+    if normalized.get("release") != manifest.get("release"):
+        raise StatisticsImportError("Normalized observations and manifest release do not match")
+    if normalized.get("source_sha256") != manifest.get("sha256"):
+        raise StatisticsImportError("Normalized observations and manifest checksum do not match")
     raw_path = Path(_text(manifest.get("local_raw_path"), "manifest.local_raw_path"))
     if not raw_path.is_absolute():
         raw_path = (REPOSITORY_ROOT / raw_path).resolve()
@@ -303,7 +310,6 @@ def build_wp1_5_application_artifact(
         inputs.append(selection_policy)
         policy = _read_object(selection_policy, "source-selection policy")
         policy_version = policy.get("policy_version")
-    normalized = _read_object(observations_path, "normalized observations")
     return build_application_artifact(
         domain="wp1_5_statistics",
         inputs=inputs,
