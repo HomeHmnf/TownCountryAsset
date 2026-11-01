@@ -22,8 +22,9 @@ def _write_test_source_registry(tmp_path):
             "schema_version": 1,
             "storage": {"raw_root": "raw_data", "manifest_root": "raw_data/manifests"},
             "sources": {
-                "un_wpp_2024": {
-                    "name": "UN World Population Prospects 2024 test fixture",
+                "un_wpp": {
+                    "name": "UN World Population Prospects test fixture",
+                    "legacy_source_ids": ["un_wpp_2024"],
                     "downloads": [],
                 }
             },
