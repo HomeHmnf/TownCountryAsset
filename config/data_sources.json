@@ -780,11 +780,11 @@
       "release_discovery": {
         "mode": "git_ref",
         "provider_url": "https://github.com/lipis/flag-icons",
-        "automation_status": "not_implemented",
+        "automation_status": "implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
-        "notes": "Record the exact tag or commit; do not use a moving branch name as a reproducible release identifier."
+        "notes": "Implemented GitHub default-branch commit discovery through the GitHub REST API. The immutable commit SHA is recorded as latest_available; archive acquisition and source-specific content validation remain separate."
       }
     },
     "iso_3166_official": {
