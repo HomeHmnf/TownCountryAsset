@@ -191,3 +191,57 @@ def test_resolution_cli_reads_latest_validated_ledgers_when_release_states_omitt
     assert isinstance(provenance["latest_validated_releases"], dict)
     assert provenance["database_imported"] is False
 
+def test_source_report_bundle_refuses_to_overwrite_existing_run(tmp_path):
+    report = {
+        "run_id": "fixed-run",
+        "checked_at": "2026-11-01T12:00:00+00:00",
+        "dry_run": True,
+        "counts": {},
+        "limitations": [],
+        "sources": [],
+    }
+    paths = write_refresh_report_bundle(report, tmp_path / "refreshes")
+    summary = Path(paths["summary"])
+    original = summary.read_text(encoding="utf-8")
+    import pytest
+    with pytest.raises(FileExistsError, match="refusing to overwrite immutable bundle"):
+        write_refresh_report_bundle(report, tmp_path / "refreshes")
+    assert summary.read_text(encoding="utf-8") == original
+
+
+def test_resolution_cli_emits_expected_missing_structured_catalogue_items(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    input_path = tmp_path / "structured.json"
+    input_path.write_text(json.dumps({
+        "schema_version": 1,
+        "game_ids": ["tc_demo"],
+        "observations": [],
+        "expected_records": {
+            "religions": [{"record_key": "christianity"}]
+        },
+    }), encoding="utf-8")
+    overrides_path = tmp_path / "overrides.json"
+    overrides_path.write_text("[]", encoding="utf-8")
+    output_dir = tmp_path / "reports"
+    result = resolve_main([
+        "--input", str(input_path),
+        "--policy", str(root / "config/source_selection.json"),
+        "--registry", str(root / "config/data_sources.json"),
+        "--overrides", str(overrides_path),
+        "--output-dir", str(output_dir),
+    ])
+    assert result == 0
+    bundle = next(output_dir.iterdir())
+    with (bundle / "records.csv").open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    religion = next(
+        row for row in rows
+        if row["field_key"] == "religions" and row["record_key"] == "christianity"
+    )
+    assert religion["storage"] == "structured"
+    assert religion["selection_status"] == "unavailable"
+    assert religion["value"] == ""
+    with (bundle / "missing.csv").open(encoding="utf-8", newline="") as handle:
+        missing = list(csv.DictReader(handle))
+    assert any(row["field_key"] == "religions" and row["record_key"] == "christianity" for row in missing)
+\n
