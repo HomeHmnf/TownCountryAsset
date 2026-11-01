@@ -225,6 +225,10 @@ def refresh(registry_path=DEFAULT_REGISTRY, output_dir=DEFAULT_OUTPUT_DIR,
             "parser_contract_version": 2, "selected_table_id": parsed["table_id"],
             "field_mapping": RECONCILIATION_FIELDS,
             "matching_policy": "normalized English names plus explicit reviewed variants; no fuzzy, code, or source-ID matching",
+            "reviewed_name_variants": {
+                key: {"reference_name": target, "rationale": rationale}
+                for key, (target, rationale) in REVIEWED_NAME_VARIANTS.items()
+            },
             "read_only": True,
             "summary": reconciliation["summary"],
         },
