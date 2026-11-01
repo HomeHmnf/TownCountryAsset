@@ -21,6 +21,7 @@ from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 from tools.database.connection import REPOSITORY_ROOT
 
 YEAR = 2026
+EXPECTED_COUNTRY_AREA_COUNT = 237
 VARIANT = "Medium"
 VAR_ID = "2"
 TOGO_LOC_ID = "768"
@@ -120,7 +121,7 @@ def _number(row: dict[str, str], key: str, label: str) -> float:
     return value
 
 
-def _validate_demographic_rows(rows: list[dict[str, str]], label: str) -> dict[str, dict[str, str]]:
+def _validate_demographic_rows(\n    rows: list[dict[str, str]], label: str, *, expected_count: int | None = None\n) -> dict[str, dict[str, str]]:
     required = {
         "LocID", "ISO3_code", "LocTypeName", "VarID", "Variant", "Time",
         "TPopulation1July", "TPopulationMale1July", "TPopulationFemale1July",
@@ -151,10 +152,12 @@ def _validate_demographic_rows(rows: list[dict[str, str]], label: str) -> dict[s
         by_id[loc_id] = row
     if not by_id:
         raise WPPAdapterError(f"{label}: no {YEAR} Medium Country/Area rows")
+    if expected_count is not None and len(by_id) != expected_count:
+        raise WPPAdapterError(\n            f"{label}: expected {expected_count} country/area rows, found {len(by_id)}"\n        )
     return by_id
 
 
-def _validate_age_rows(rows: list[dict[str, str]], label: str) -> dict[str, dict[str, dict[str, float]]]:
+def _validate_age_rows(\n    rows: list[dict[str, str]], label: str, *, expected_count: int | None = None\n) -> dict[str, dict[str, dict[str, float]]]:
     required = {
         "LocID", "ISO3_code", "LocTypeName", "VarID", "Variant", "Time",
         "AgeGrp", "PopMale", "PopFemale", "PopTotal",
@@ -186,6 +189,8 @@ def _validate_age_rows(rows: list[dict[str, str]], label: str) -> dict[str, dict
         bands[age] = {"male": male, "female": female, "total": total}
     if not result:
         raise WPPAdapterError(f"{label}: no {YEAR} Medium Country/Area age rows")
+    if expected_count is not None and len(result) != expected_count:
+        raise WPPAdapterError(\n            f"{label}: expected {expected_count} country/area locations, found {len(result)}"\n        )
     for loc_id, bands in result.items():
         if tuple(sorted(bands, key=AGE_GROUPS.index)) != AGE_GROUPS:
             raise WPPAdapterError(
@@ -233,8 +238,8 @@ def prepare_un_wpp(
     togo_demo_rows = _csv_rows_zip(togo_zip_path, "WPP2024_Demographic_Indicators_Medium_Update.csv")
     togo_age_rows = _csv_rows_zip(togo_zip_path, "WPP2024_PopulationByAge5GroupSex_Medium_Update.csv")
 
-    demo = _validate_demographic_rows(main_demo_rows, "main demographic file")
-    ages = _validate_age_rows(main_age_rows, "main age-sex file")
+    demo = _validate_demographic_rows(\n        main_demo_rows, "main demographic file", expected_count=EXPECTED_COUNTRY_AREA_COUNT\n    )
+    ages = _validate_age_rows(\n        main_age_rows, "main age-sex file", expected_count=EXPECTED_COUNTRY_AREA_COUNT\n    )
     togo_demo = _validate_demographic_rows(togo_demo_rows, "Togo demographic supplement")
     togo_ages = _validate_age_rows(togo_age_rows, "Togo age-sex supplement")
     if set(togo_demo) != {TOGO_LOC_ID} or set(togo_ages) != {TOGO_LOC_ID}:
