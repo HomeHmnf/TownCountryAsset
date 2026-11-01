@@ -85,6 +85,7 @@ def render_terminal_summary(summary: Mapping[str, Any], paths: Mapping[str, str]
         f"  Unmatched reference: {summary.get('unmatched_reference_count', 0)}",
         f"  Alpha-2 matches / mismatches: {summary.get('alpha2_matches', 0)} / {summary.get('alpha2_mismatches', 0)}",
         f"  Alpha-3 matches / mismatches: {summary.get('alpha3_matches', 0)} / {summary.get('alpha3_mismatches', 0)}",
+        f"  Genuine code-mismatch records: {summary.get('code_pair_classifications', {}).get('genuine_code_mismatch', 0)}",
         f"  Reports: {paths.get('directory', '')}",
     ]
     return "\n".join(lines)
