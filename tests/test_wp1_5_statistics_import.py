@@ -493,3 +493,39 @@ def test_late_batch_conflict_rolls_back_earlier_rows_and_provenance(tmp_path):
         assert connection.execute("SELECT COUNT(*) FROM current_statistics WHERE game_id = ?", (GAME,)).fetchone()[0] == 0
         assert connection.execute("SELECT value FROM current_statistics WHERE game_id = ?", (GAME_B,)).fetchone()[0] == 0.5
 
+
+
+def test_additional_snapshot_inputs_are_checksum_validated(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest_path = setup_inputs(tmp_path, field_id=1)
+    additional_raw = tmp_path / "raw_data" / "supplement" / "supplement.csv"
+    additional_raw.parent.mkdir(parents=True, exist_ok=True)
+    additional_raw.write_text("country,value\\nTogo,8800\\n", encoding="utf-8")
+    digest = hashlib.sha256(additional_raw.read_bytes()).hexdigest()
+    upstream_manifest = tmp_path / "data_manifests" / "supplement.json"
+    upstream_manifest.parent.mkdir(parents=True, exist_ok=True)
+    upstream_manifest.write_text(json.dumps({"sha256": digest}), encoding="utf-8")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["additional_inputs"] = [{
+        "label": "test supplement", "local_raw_path": str(additional_raw),
+        "byte_count": additional_raw.stat().st_size, "sha256": digest,
+    }]
+    manifest["upstream_manifests"] = [{
+        "path": str(upstream_manifest),
+        "sha256": hashlib.sha256(upstream_manifest.read_bytes()).hexdigest(),
+    }]
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = import_wp1_5_dataset(
+        observations_path=observations, crosswalk_path=crosswalk,
+        manifest_path=manifest_path, database_path=database,
+    )
+    assert result["scalar_observations"] == 1
+
+    additional_raw.write_text("country,value\\nTogo,9000\\n", encoding="utf-8")
+    with pytest.raises(StatisticsImportError, match="Additional source snapshot checksum mismatch"):
+        import_wp1_5_dataset(
+            observations_path=observations, crosswalk_path=crosswalk,
+            manifest_path=manifest_path, database_path=database,
+        )
