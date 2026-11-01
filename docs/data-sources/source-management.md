@@ -156,7 +156,7 @@ Source refresh and policy resolution use the shared writer in `tools/sources/rep
 - Refresh: `reports/sources/refreshes/<run-id>/`
 - Selection: `reports/sources/selections/<run-id>/`
 
-The shared bundle contains `summary.md`, `records.csv`, `missing.csv`, `fallbacks.csv`, `conflicts.csv`, `overrides.csv`, `release_changes.csv`, `failures.csv`, and `provenance.json`. CSVs that do not apply to a report type are still written with headers, so downstream review tools can consume one stable artifact contract. The existing timestamped refresh JSON/Markdown files remain available for compatibility; their JSON report also points to the bundle directory.
+The shared bundle contains `summary.md`, `records.csv`, `missing.csv`, `fallbacks.csv`, `conflicts.csv`, `overrides.csv`, `release_changes.csv`, `failures.csv`, and `provenance.json`. CSVs that do not apply to a report type are still written with headers, so downstream review tools can consume one stable artifact contract. The existing timestamped refresh JSON/Markdown files remain available for compatibility; their JSON report also points to the bundle directory. Each run ID is write-once: an existing bundle directory is never overwritten. Repeated or corrected analyses must use a new run ID.
 
 Run policy resolution against an already-normalized observation file:
 
