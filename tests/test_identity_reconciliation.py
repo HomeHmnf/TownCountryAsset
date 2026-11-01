@@ -110,7 +110,9 @@ def test_standard_report_bundle_and_terminal_modes(tmp_path, capsys):
     emit_terminal_report(result, paths)
     assert "Registry records: 1" in capsys.readouterr().out
     emit_terminal_report(result, paths, verbose=True)
-    assert "Code-pair classifications:" in capsys.readouterr().out
+    verbose_output = capsys.readouterr().out
+    assert "Code-pair classifications:" in verbose_output
+    assert "tc_a" in verbose_output
 
 
 def test_report_path_segments_are_validated(tmp_path):
