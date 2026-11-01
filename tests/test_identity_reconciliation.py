@@ -32,6 +32,7 @@ def test_reconciles_codes_independently_and_keeps_source_id_separate():
         _record("tc_c", "Gamma", "GAM", "GC", "GAM"),
         _record("tc_d", "Missing", "MIS"),
         _record("tc_e", "Variant", "VAA"),
+        _record("tc_f", "Delta", "DEL", "DD", None),
     ]}
     refs = [
         {"name": "Alpha", "m49": "001", "a2": "AA", "a3": "AAA"},
@@ -39,6 +40,7 @@ def test_reconciles_codes_independently_and_keeps_source_id_separate():
         {"name": "Gamma", "m49": "003", "a2": "GG", "a3": "GAM"},
         {"name": "Variant Formal", "m49": "004", "a2": "VV", "a3": "VVA"},
         {"name": "Reference only", "m49": "005", "a2": "", "a3": ""},
+        {"name": "Delta", "m49": "006", "a2": "DD", "a3": "DDD"},
     ]
     before = repr(registry)
     result = reconcile_identities(
@@ -52,6 +54,8 @@ def test_reconciles_codes_independently_and_keeps_source_id_separate():
     assert rows["tc_a"]["code_pair_classification"] == "alpha3_only_agreement"
     assert rows["tc_b"]["code_pair_classification"] == "genuine_code_mismatch"
     assert rows["tc_c"]["code_pair_classification"] == "genuine_code_mismatch"
+    assert rows["tc_f"]["code_pair_classification"] == "alpha2_only_agreement"
+    assert rows["tc_f"]["source_id_vs_reference_alpha3"] == "different"
     assert rows["tc_d"]["match_type"] == "unmatched"
     assert rows["tc_e"]["match_type"] == "explicit_variant"
     assert rows["tc_e"]["name_comparison"] == "explicit_variant"
