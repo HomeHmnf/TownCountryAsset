@@ -85,3 +85,31 @@ def test_refresh_does_not_overwrite_invalid_snapshot(tmp_path):
     report = run_refresh(registry, report_root=tmp_path / "reports")
     assert report["sources"][0]["downloads"][0]["status"] == "validation_error"
     assert raw.read_bytes() == b"tampered"
+
+def test_refresh_acquires_missing_configured_snapshot_without_promoting_release_state(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _registry(tmp_path)
+    monkeypatch.setattr(module, "acquire_one", lambda *args, **kwargs: {
+        "sha256": "a" * 64, "byte_count": 12,
+    })
+    report = run_refresh(registry, report_root=tmp_path / "reports")
+    item = report["sources"][0]["downloads"][0]
+    assert item["status"] == "acquired_pending_source_validation"
+    assert registry["sources"]["sample"]["release_discovery"]["latest_validated"] is None
+    assert report["database_imported"] is False
+
+
+def test_refresh_records_failure_and_continues_other_sources(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _registry(tmp_path)
+
+    def fail(*args, **kwargs):
+        raise RuntimeError("provider unavailable")
+
+    monkeypatch.setattr(module, "acquire_one", fail)
+    report = run_refresh(registry, report_root=tmp_path / "reports")
+    assert report["sources"][0]["downloads"][0]["status"] == "acquisition_failed"
+    assert report["sources"][1]["discovery_status"] == "manual_review_required"
+
