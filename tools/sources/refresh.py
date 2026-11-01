@@ -453,9 +453,10 @@ def run_refresh(
         "sources": results,
         "limitations": [
             "Rolling/current-reference discovery uses content fingerprints, not provider semantic release labels.",
-            "Only sources explicitly marked automation_status=implemented use fingerprint discovery.",
+            "Only sources explicitly marked automation_status=implemented use their configured discovery adapter.",
             "Acquired snapshots have passed only their registered response contract; source-specific semantic validation is still required.",
             "latest_available is recorded in a separate release ledger; latest_validated and latest_applied are never promoted by refresh.",
+            "Git commit discovery records a commit identifier only; it does not acquire or validate the repository contents.",
             "No canonical database import or approval is performed.",
         ],
     }
