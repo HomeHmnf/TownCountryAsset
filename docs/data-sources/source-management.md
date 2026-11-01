@@ -175,3 +175,18 @@ The registry currently contains 29 sources. Automated release discovery is imple
 The generic refresh command supports configured HTTPS downloads and the adapters above. It does not yet provide a complete provider-specific acquisition/normalization adapter for every source in the catalogue. A source can therefore be registered and policy-selected while still having no current normalized observations. The absence of an adapter or snapshot must be reported as unavailable/review-required, never as a zero value or proof that a country lacks the attribute.
 
 The selection CLI consumes normalized JSON observations; it does not generate that file from raw provider snapshots. Identity matching/crosswalk review, provider parsing and semantic validation must occur before resolution. The report bundle records decisions and provenance but does not apply them to SQLite. These boundaries are intentional until provider adapters, semantic validation and explicit application workflows are separately implemented and reviewed.
+
+## Project-wide approval-gated SQLite application
+
+Canonical database writes are governed by one provider-neutral approval contract. A provider adapter may acquire, validate, normalize and resolve data, and produce review reports; it must not write canonical domain tables directly.
+
+The shared approval primitives are implemented in:
+- `migrations/004_application_approval.sql`
+- `tools/database/application_approval.py`
+
+An application artifact fingerprints every reviewed input file (normalized observations, source manifests/snapshots, identity crosswalks, policy and resolver outputs as applicable) and records the application domain plus metadata such as source releases and policy version. Paths are repository-relative and inputs must be inside the repository. At apply time, the shared guard re-reads and hashes every input; a changed or missing file invalidates the approval. A new proposal and review are then required.
+
+The approval ledger distinguishes `pending`, `approved`, `rejected`, `invalidated` and `applied`. The event ledger records proposal, decision, invalidation and application events. The domain importer must verify an approved artifact before domain writes and mark it applied in the same SQLite transaction as those writes. Approval is single-use.
+
+This establishes the common approval data model and reusable enforcement primitives. It does **not yet mean every existing import command has been migrated to require an approval ID**; provider/domain import integrations and user-facing proposal/approve/apply commands are follow-on work. Until those integrations are complete, do not treat legacy import commands as approval-gated. The WP1.5 importer is specifically still on its existing direct-import interface.
+
