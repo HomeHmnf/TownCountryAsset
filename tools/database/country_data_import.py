@@ -9,6 +9,10 @@ from pathlib import Path
 from typing import Any
 
 from tools.database.connection import REPOSITORY_ROOT, connect_database
+from tools.database.application_approval import (
+    ApplicationApprovalError, build_application_artifact,
+    require_approved_application, record_application_applied,
+)
 from tools.database.schema import validate_database
 
 DEFAULT_CANDIDATE_DIR = REPOSITORY_ROOT / "generated" / "town_country_asset_candidate"
@@ -161,22 +165,57 @@ def _load_and_validate(candidate_dir: Path) -> tuple[dict[str, Any], dict[str, A
     return manifest, countries_payload, payloads
 
 
+def build_country_data_application_artifact(
+    candidate_dir: str | Path = DEFAULT_CANDIDATE_DIR,
+) -> dict[str, Any]:
+    candidate_dir = Path(candidate_dir)
+    manifest, countries_payload, _ = _load_and_validate(candidate_dir)
+    source = manifest["source"]
+    return build_application_artifact(
+        domain="country_data",
+        inputs=[
+            candidate_dir / "manifest.json",
+            *(candidate_dir / filename for filename in INPUT_FILES),
+        ],
+        metadata={
+            "dataset": source.get("dataset") or "natural_earth_admin_0",
+            "source_version": source.get("source_version"),
+            "archive_sha256": source["archive_sha256"],
+            "country_count": len(countries_payload["countries"]),
+            "geometry_profiles": list(PROFILES),
+        },
+    )
+
+
 def import_country_data(
     database_path: str | Path,
     candidate_dir: str | Path = DEFAULT_CANDIDATE_DIR,
+    *, approval_id: str,
 ) -> dict[str, int | str]:
-    """Import all source attributes and low/medium/high geometries without promotion."""
+    """Import approved source attributes and geometries transactionally."""
     candidate_dir = Path(candidate_dir)
     manifest, countries_payload, payloads = _load_and_validate(candidate_dir)
     source = manifest["source"]
     archive_sha = source["archive_sha256"]
     dataset = source.get("dataset") or "natural_earth_admin_0"
+    artifact = build_country_data_application_artifact(candidate_dir)
     if not isinstance(dataset, str) or not dataset.strip():
         raise CountryDataImportError("Manifest dataset must be a non-empty string")
 
     connection = connect_database(database_path)
     try:
         connection.execute("BEGIN IMMEDIATE")
+        try:
+            require_approved_application(connection, approval_id=approval_id, artifact=artifact)
+        except ApplicationApprovalError as exc:
+            status_row = connection.execute(
+                "SELECT status FROM application_approvals WHERE approval_id = ?", (approval_id,)
+            ).fetchone()
+            if status_row is not None and status_row["status"] == "invalidated":
+                connection.commit()
+            elif connection.in_transaction:
+                connection.rollback()
+            raise CountryDataImportError(str(exc)) from exc
         imports = connection.execute(
             "SELECT * FROM dataset_imports WHERE dataset = ? AND sha256 = ?",
             (dataset, archive_sha),
@@ -270,6 +309,17 @@ def import_country_data(
         issues = validate_database(connection)
         if issues:
             raise CountryDataImportError("Database validation failed: " + "; ".join(issues))
+        try:
+            record_application_applied(
+                connection, approval_id=approval_id,
+                application_id=f"country-data:{dataset}:{archive_sha[:12]}",
+                details={
+                    "countries": len(countries), "attributes": attribute_count,
+                    "geometries": geometry_count, "import_id": import_id,
+                },
+            )
+        except ApplicationApprovalError as exc:
+            raise CountryDataImportError(str(exc)) from exc
         connection.commit()
         return {
             "dataset": dataset,
