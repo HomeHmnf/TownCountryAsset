@@ -118,6 +118,14 @@ def validate_policy(policy: dict[str, Any], source_registry: dict[str, Any]) -> 
         if resource_policy is not None:
             if not isinstance(resource_policy, dict) or resource_policy.get("missing_is_not_absence") is not True:
                 raise SourceSelectionError(f"{label}.resource_policy is invalid")
+            resource_fallbacks = resource_policy.get("resource_fallbacks", {})
+            if not isinstance(resource_fallbacks, dict):
+                raise SourceSelectionError(f"{label}.resource_policy.resource_fallbacks must be an object")
+            for resource_key, resource_source in resource_fallbacks.items():
+                if not isinstance(resource_key, str) or not resource_key.strip():
+                    raise SourceSelectionError(f"{label} has an invalid resource fallback key")
+                if not isinstance(resource_source, str) or canonical_source_id(source_registry, resource_source) not in sources:
+                    raise SourceSelectionError(f"{label} resource fallback source is not registered: {resource_source!r}")
 
 
 def _field(policy: dict[str, Any], field_key: str) -> dict[str, Any]:
