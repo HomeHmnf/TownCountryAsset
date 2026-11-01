@@ -100,6 +100,21 @@ def write_inputs(tmp_path, *, conflict=False):
     return registry_path, candidate_dir
 
 
+def test_identity_import_rejects_unapproved_direct_write(tmp_path):
+    registry, candidate = write_inputs(tmp_path)
+    database = tmp_path / "canonical.sqlite"
+    with pytest.raises(IdentityImportError, match="Unknown application approval"):
+        identity_import.import_identity_registry(
+            database, registry, candidate, approval_id="missing-identity-0001"
+        )
+    connection = connect_database(database)
+    try:
+        assert connection.execute("SELECT COUNT(*) FROM countries").fetchone()[0] == 0
+        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
+    finally:
+        connection.close()
+
+
 def test_imports_identity_provenance_names_regions_and_history(tmp_path):
     registry, candidate = write_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
