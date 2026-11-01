@@ -138,7 +138,14 @@ def reconcile_identities(
         row = {
             "game_id": game_id, "registry_name": name, "source_id": source_id,
             "existing_alpha2": old2, "existing_alpha3": old3,
-            "match_type": match_type, "variant_note": variant_note,
+            "match_type": match_type,
+            "name_comparison": (
+                "not_compared" if matched_index is None else
+                "explicit_variant" if match_type == "explicit_variant" else
+                "exact" if name == _value(ref, fields["reference_name"]) else
+                "normalized_variation"
+            ),
+            "variant_note": variant_note,
             "reference_name": _value(ref, fields["reference_name"]),
             "reference_id": _value(ref, fields["reference_id"]),
             "reference_alpha2": new2, "reference_alpha3": new3,
@@ -178,6 +185,12 @@ def reconcile_identities(
             "ambiguous_registry_count": len(ambiguous_registry),
             "unmatched_reference_count": len(unmatched_reference),
             "match_types": dict(sorted(match_counts.items())),
+            "name_comparisons": {
+                "exact": sum(row["name_comparison"] == "exact" for row in output),
+                "normalized_variation": sum(row["name_comparison"] == "normalized_variation" for row in output),
+                "explicit_variant": sum(row["name_comparison"] == "explicit_variant" for row in output),
+                "not_compared": sum(row["name_comparison"] == "not_compared" for row in output),
+            },
             "code_pair_classifications": dict(sorted(classifications.items())),
             "alpha2_matches": sum(row["alpha2_comparison"] == "match" for row in output),
             "alpha3_matches": sum(row["alpha3_comparison"] == "match" for row in output),
