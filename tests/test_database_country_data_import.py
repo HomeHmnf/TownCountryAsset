@@ -4,8 +4,34 @@ import json
 import pytest
 
 from tools.database.connection import connect_database
+from tools.database import application_approval, country_data_import
 from tools.database.country_data_import import CountryDataImportError, import_country_data
 from tools.database.schema import apply_migrations
+
+
+@pytest.fixture(autouse=True)
+def repository_root_for_approval(tmp_path, monkeypatch):
+    monkeypatch.setattr(country_data_import, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(application_approval, "REPOSITORY_ROOT", tmp_path)
+
+
+def approved_import(database, candidate, approval_id):
+    artifact = country_data_import.build_country_data_application_artifact(candidate)
+    connection = connect_database(database)
+    try:
+        apply_migrations(connection)
+        connection.execute("BEGIN IMMEDIATE")
+        application_approval.propose_application(
+            connection, approval_id=approval_id, artifact=artifact
+        )
+        application_approval.decide_application(
+            connection, approval_id=approval_id, decision="approved", actor="test-reviewer"
+        )
+        connection.commit()
+    finally:
+        connection.close()
+    return import_country_data(database, candidate, approval_id=approval_id)
+
 
 GAME_ID = "tc_" + "1" * 32
 ARCHIVE_SHA = "a" * 64
@@ -78,11 +104,25 @@ def seed_database(path, source):
         db.close()
 
 
+def test_country_data_import_rejects_unapproved_direct_write(tmp_path):
+    candidate, source = make_inputs(tmp_path)
+    database = tmp_path / "canonical.sqlite"
+    seed_database(database, source)
+    with pytest.raises(CountryDataImportError, match="Unknown application approval"):
+        import_country_data(database, candidate, approval_id="missing-country-data-001")
+    db = connect_database(database)
+    try:
+        assert db.execute("SELECT COUNT(*) FROM country_attributes").fetchone()[0] == 0
+        assert db.execute("SELECT COUNT(*) FROM country_geometries").fetchone()[0] == 0
+    finally:
+        db.close()
+
+
 def test_imports_typed_attributes_and_three_geometry_profiles(tmp_path):
     candidate, source = make_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
     seed_database(database, source)
-    result = import_country_data(database, candidate)
+    result = approved_import(database, candidate, 'country-data-test-001')
     assert result["countries"] == 1
     assert result["attributes"] == 7
     assert result["geometries"] == 3
@@ -108,7 +148,7 @@ def test_repeat_import_is_idempotent(tmp_path):
     candidate, source = make_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
     seed_database(database, source)
-    assert import_country_data(database, candidate) == import_country_data(database, candidate)
+    assert approved_import(database, candidate, 'country-data-test-002') == approved_import(database, candidate, 'country-data-test-003')
 
 
 def test_rejects_changed_file_checksum_without_writing(tmp_path):
@@ -118,7 +158,7 @@ def test_rejects_changed_file_checksum_without_writing(tmp_path):
     path = candidate / "geometry_game_id_low.json"
     path.write_text(path.read_text() + " ", encoding="utf-8")
     with pytest.raises(CountryDataImportError, match="checksum"):
-        import_country_data(database, candidate)
+        approved_import(database, candidate, 'country-data-test-004')
     db = connect_database(database)
     try:
         assert db.execute("SELECT COUNT(*) FROM country_attributes").fetchone()[0] == 0
@@ -141,7 +181,7 @@ def test_rejects_geometry_coverage_mismatch(tmp_path):
     manifest["files"]["geometry_game_id_high.json"]["sha256"] = hashlib.sha256(raw).hexdigest()
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(CountryDataImportError, match="coverage mismatch"):
-        import_country_data(database, candidate)
+        approved_import(database, candidate, 'country-data-test-005')
 
 
 def test_rejects_conflicting_attribute_and_rolls_back_geometry(tmp_path):
@@ -157,7 +197,7 @@ def test_rejects_conflicting_attribute_and_rolls_back_geometry(tmp_path):
     finally:
         db.close()
     with pytest.raises(CountryDataImportError, match="attribute conflicts"):
-        import_country_data(database, candidate)
+        approved_import(database, candidate, 'country-data-test-006')
     db = connect_database(database)
     try:
         assert db.execute("SELECT COUNT(*) FROM country_geometries").fetchone()[0] == 0
@@ -190,4 +230,4 @@ def test_rejects_candidate_identity_mismatch(tmp_path):
 
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(CountryDataImportError, match="identity coverage mismatch"):
-        import_country_data(database, candidate)
+        approved_import(database, candidate, 'country-data-test-007')
