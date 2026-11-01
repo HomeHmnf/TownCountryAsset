@@ -153,3 +153,8 @@ def test_acquisition_does_not_recapture_same_release_from_legacy_path(tmp_path, 
     with pytest.raises(SourceError, match="Historical snapshot exists"):
         acquire_one(registry, "sample", item)
     assert raw.read_bytes() == b"preserved"
+
+
+def test_release_discovery_contract_is_loaded(tmp_path):
+    registry = load_registry(fixture(tmp_path))
+    assert registry['sources']['sample']['release_discovery']['mode'] == 'manual_review'
