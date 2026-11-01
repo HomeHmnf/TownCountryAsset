@@ -17,6 +17,14 @@ It does not acquire data, perform provider-specific semantic validation, create 
 
 ## Runtime interface
 
+Validate the approved policy and all source references from the repository root with:
+
+```fish
+uv run python -m tools.validate_source_selection
+```
+
+The command checks the policy against the central registry and prints field/mode/source counts. It does not resolve or modify data.
+
 Load the central source registry and policy, then call `resolve_field` with normalized observations:
 
 ```python
