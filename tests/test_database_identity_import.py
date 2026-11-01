@@ -5,8 +5,34 @@ import sqlite3
 import pytest
 
 from tools.database.connection import connect_database
+from tools.database import application_approval, identity_import
 from tools.database.identity_import import IdentityImportError, import_identity_registry
 from tools.database.schema import apply_migrations, validate_database
+
+
+
+@pytest.fixture(autouse=True)
+def repository_root_for_approval(tmp_path, monkeypatch):
+    monkeypatch.setattr(identity_import, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(application_approval, "REPOSITORY_ROOT", tmp_path)
+
+
+def approved_import(database, registry, candidate, approval_id="identity-test-0001"):
+    artifact = identity_import.build_identity_application_artifact(registry, candidate)
+    connection = connect_database(database)
+    try:
+        apply_migrations(connection)
+        connection.execute("BEGIN IMMEDIATE")
+        application_approval.propose_application(connection, approval_id=approval_id, artifact=artifact)
+        application_approval.decide_application(
+            connection, approval_id=approval_id, decision="approved", actor="test-reviewer"
+        )
+        connection.commit()
+    finally:
+        connection.close()
+    return identity_import.import_identity_registry(
+        database, registry, candidate, approval_id=approval_id
+    )
 
 
 ARCHIVE_SHA = "a" * 64
@@ -77,7 +103,7 @@ def write_inputs(tmp_path, *, conflict=False):
 def test_imports_identity_provenance_names_regions_and_history(tmp_path):
     registry, candidate = write_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
-    result = import_identity_registry(database, registry, candidate)
+    result = approved_import(database, registry, candidate)
     assert result["countries"] == 2
     connection = connect_database(database)
     try:
@@ -142,7 +168,7 @@ def test_rejects_manifest_checksum_mismatch(tmp_path):
     manifest["files"]["countries.json"]["sha256"] = "0" * 64
     manifest_path.write_text(json.dumps(manifest))
     with pytest.raises(IdentityImportError, match="checksum"):
-        import_identity_registry(tmp_path / "canonical.sqlite", registry, candidate)
+        approved_import(tmp_path / "canonical.sqlite", registry, candidate)
 
 
 def test_rejects_conflicting_existing_country_record_and_rolls_back(tmp_path):
@@ -194,7 +220,7 @@ def test_reads_provenance_from_production_manifest(tmp_path):
     ).hexdigest()
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
 
-    result = import_identity_registry(
+    result = approved_import(
         tmp_path / "canonical.sqlite", registry, candidate
     )
     assert result["countries"] == 2
