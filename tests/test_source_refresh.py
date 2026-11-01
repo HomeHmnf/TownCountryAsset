@@ -241,18 +241,6 @@ def test_fingerprint_acquisition_race_is_not_marked_acquired(tmp_path, monkeypat
     assert report["sources"][0]["downloads"][0]["status"] == "changed_during_acquisition"
     state = json.loads((tmp_path / "reports/sources/releases/sample.json").read_text(encoding="utf-8"))
     assert state["latest_available"]["status"] == "discovered"
-    fetched_at = state["latest_available"]["fetched_at"]
-    assert fetched_at.endswith("+00:00") or fetched_at.endswith("Z")
-    assert state["latest_available"]["provider_commit_timestamp"] == discovered["provider_commit_timestamp"]
-    run_refresh(
-        registry,
-        source_ids=["manual"],
-        report_root=tmp_path / "reports" / "refreshes",
-    )
-    repeated = json.loads(
-        (tmp_path / "reports/sources/releases/manual.json").read_text(encoding="utf-8")
-    )
-    assert repeated["latest_available"]["fetched_at"] == fetched_at
     assert state["latest_validated"] is None
 
 def test_github_git_ref_discovery_records_commit_without_acquiring_archive(tmp_path, monkeypatch):
@@ -289,8 +277,20 @@ def test_github_git_ref_discovery_records_commit_without_acquiring_archive(tmp_p
     )
     assert state["latest_available"]["release_id"] == discovered["release_id"]
     assert state["latest_available"]["status"] == "discovered"
+    fetched_at = state["latest_available"]["fetched_at"]
+    assert fetched_at.endswith("+00:00") or fetched_at.endswith("Z")
+    assert state["latest_available"]["provider_commit_timestamp"] == discovered["provider_commit_timestamp"]
     assert state["latest_validated"] is None
     assert state["latest_applied"] is None
+    run_refresh(
+        registry,
+        source_ids=["manual"],
+        report_root=tmp_path / "reports" / "refreshes",
+    )
+    repeated = json.loads(
+        (tmp_path / "reports/sources/releases/manual.json").read_text(encoding="utf-8")
+    )
+    assert repeated["latest_available"]["fetched_at"] == fetched_at
 
 
 def test_github_git_ref_dry_run_does_not_query_provider(tmp_path, monkeypatch):
