@@ -111,7 +111,8 @@ def main(argv: list[str] | None = None) -> int:
             raise SourceSelectionError("release_states must map source IDs to non-empty validated release IDs")
         if release_states is not None:
             for source_id in release_states:
-                canonical_source_id(registry, source_id)
+                if canonical_source_id(registry, source_id) is None:
+                    raise SourceSelectionError(f"release_states contains an unregistered source ID: {source_id}")
         assignments = payload.get("mixture_assignments", {})
         expected_records = payload.get("expected_records", {})
         if not isinstance(assignments, dict) or not isinstance(expected_records, dict):
@@ -127,7 +128,8 @@ def main(argv: list[str] | None = None) -> int:
                 raise SourceSelectionError(f"Observation game_id is not in the requested identity set: {row['game_id']}")
             if row["field_key"] not in field_by_key:
                 raise SourceSelectionError(f"Observation uses an unknown policy field: {row['field_key']}")
-            canonical_source_id(registry, row["source_id"])
+            if canonical_source_id(registry, row["source_id"]) is None:
+                raise SourceSelectionError(f"Observation uses an unregistered source ID: {row['source_id']}")
             if field_by_key[row["field_key"]]["storage"] == "structured" and (
                 not isinstance(row.get("record_key"), str) or not row["record_key"]
             ):
