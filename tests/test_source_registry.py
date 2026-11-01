@@ -2,7 +2,7 @@ from __future__ import annotations
 import hashlib,json
 from pathlib import Path
 import pytest
-from tools.sources.registry import load_registry,inspect_snapshots,acquire_one,SourceError
+from tools.sources.registry import load_registry,inspect_snapshots,acquire_one,SourceError,canonical_source_id
 
 def fixture(tmp_path):
  p=tmp_path/"registry.json"; p.write_text(json.dumps({"schema_version":1,"storage":{"raw_root":"raw","manifest_root":"manifests"},"sources":{"sample":{"name":"Sample","downloads":[{"id":"dataset","release":"v1","filename":"data.csv","url":"https://example.test/data.csv","format":"csv"}]}}}),encoding="utf-8"); return p
@@ -111,3 +111,45 @@ def test_html_page_contract_rejects_changed_page_and_removes_snapshot(tmp_path, 
         acquire_one(registry, "sample", item)
     raw = tmp_path / "raw/sample/dataset/v1/overview.html"
     assert not raw.exists()
+
+
+
+def test_legacy_source_id_resolves_and_historical_snapshot_remains_valid(tmp_path):
+    path = fixture(tmp_path)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["sources"]["sample"]["legacy_source_ids"] = ["sample_2024"]
+    path.write_text(json.dumps(data), encoding="utf-8")
+    registry = load_registry(path)
+    assert canonical_source_id(registry, "sample_2024") == "sample"
+
+    raw = tmp_path / "raw" / "sample_2024" / "dataset" / "v1" / "data.csv"
+    manifest = tmp_path / "manifests" / "sample_2024" / "dataset" / "v1.json"
+    raw.parent.mkdir(parents=True)
+    manifest.parent.mkdir(parents=True)
+    payload = b"legacy snapshot"
+    raw.write_bytes(payload)
+    manifest.write_text(json.dumps({
+        "source_id": "sample_2024", "download_id": "dataset",
+        "sha256": hashlib.sha256(payload).hexdigest(), "byte_count": len(payload),
+    }), encoding="utf-8")
+
+    row = inspect_snapshots(registry)[0]
+    assert row["source_id"] == "sample"
+    assert row["snapshot_source_id"] == "sample_2024"
+    assert row["status"] == "valid"
+    assert row["raw_path"].startswith("raw/sample_2024/")
+
+
+def test_acquisition_does_not_recapture_same_release_from_legacy_path(tmp_path, monkeypatch):
+    path = fixture(tmp_path)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["sources"]["sample"]["legacy_source_ids"] = ["sample_2024"]
+    path.write_text(json.dumps(data), encoding="utf-8")
+    registry = load_registry(path)
+    item = registry["sources"]["sample"]["downloads"][0]
+    raw = tmp_path / "raw" / "sample_2024" / "dataset" / "v1" / "data.csv"
+    raw.parent.mkdir(parents=True)
+    raw.write_bytes(b"preserved")
+    with pytest.raises(SourceError, match="Historical snapshot exists"):
+        acquire_one(registry, "sample", item)
+    assert raw.read_bytes() == b"preserved"
