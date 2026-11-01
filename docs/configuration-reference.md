@@ -30,7 +30,8 @@ The inventory must be updated whenever a meaningful configuration file is added,
 
 `config/data_sources.json` is the single catalogue of source identities and acquisition metadata. It answers: *what sources exist, where they are, what they provide, how they are acquired, and what terms apply?*
 
-- Source IDs are stable machine identifiers. Human-readable names and descriptions belong in the source record.
+- Source IDs are stable provider identifiers, not release identifiers. For example, use `un_wpp` as the source ID and `2024-main-demographic` as a release key. Edition years, versions and vintages belong in release metadata/manifests, while the source record keeps a stable provider name.
+- When a provider ID is normalized, list the previous ID in `legacy_source_ids`. Existing raw snapshot paths and manifests remain immutable and readable; new acquisitions use the stable ID. Never rewrite historical provenance just to rename a provider.
 - Domain/field contracts refer to source IDs rather than copying source definitions.
 - The catalogue may include downloadable, API, Git, manual, subscription, and per-record evidence sources.
 - Acquisition settings do not constitute approval to use a source for a field.
