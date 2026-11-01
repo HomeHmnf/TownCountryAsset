@@ -244,4 +244,4 @@ def test_resolution_cli_emits_expected_missing_structured_catalogue_items(tmp_pa
     with (bundle / "missing.csv").open(encoding="utf-8", newline="") as handle:
         missing = list(csv.DictReader(handle))
     assert any(row["field_key"] == "religions" and row["record_key"] == "christianity" for row in missing)
-\n
+
