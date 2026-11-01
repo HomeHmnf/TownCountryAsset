@@ -32,17 +32,17 @@ def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
     path = tmp_path / "nested" / "canonical.sqlite"
     with connect_database(path) as connection:
         assert current_schema_version(connection) == 0
-        assert apply_migrations(connection) == 3
+        assert apply_migrations(connection) == 4
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
         assert validate_database(connection) == []
         tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        assert {"countries", "country_sources", "country_geometries", "review_proposals", "current_statistics", "selected_game_data", "schema_migrations"} <= tables
+        assert {"countries", "country_sources", "country_geometries", "review_proposals", "current_statistics", "selected_game_data", "schema_migrations", "application_approvals", "database_application_events"} <= tables
 
 
 def test_migration_is_idempotent(database):
-    assert apply_migrations(database) == 3
-    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 3
+    assert apply_migrations(database) == 4
+    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 4
 
 
 def test_game_id_requires_exact_tc_prefix_and_32_lowercase_hex(database):
