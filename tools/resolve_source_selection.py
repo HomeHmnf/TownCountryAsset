@@ -11,7 +11,7 @@ from typing import Any
 
 from tools.database.source_selection import SourceSelectionError, load_policy, resolve_field
 from tools.database.structured_source_selection import resolve_structured_field
-from tools.sources.registry import SourceError, load_registry
+from tools.sources.registry import SourceError, canonical_source_id, load_registry
 from tools.sources.reporting import write_selection_report_bundle
 
 
@@ -55,8 +55,9 @@ def _load_overrides(path: Path | None, payload: dict[str, Any], policy: dict[str
 def _release_state_summary(registry: dict[str, Any]) -> dict[str, str]:
     root = Path(registry["_root"])
     result = {}
+    template = registry["release_management"]["release_record"]["path_template"]
     for source_id in registry["sources"]:
-        path = root / "reports" / "sources" / "releases" / f"{source_id}.json"
+        path = root / template.replace("<source-id>", source_id)
         if not path.is_file():
             continue
         try:
@@ -107,9 +108,11 @@ def main(argv: list[str] | None = None) -> int:
         release_states = payload.get("release_states")
         if release_states is not None and (
             not isinstance(release_states, dict)
-            or any(not isinstance(k, str) or not isinstance(v, str) for k, v in release_states.items())
+            or any(not isinstance(k, str) or not k or not isinstance(v, str) or not v for k, v in release_states.items())
         ):
-            raise SourceSelectionError("release_states must map source IDs to validated release IDs")
+            raise SourceSelectionError("release_states must map source IDs to non-empty validated release IDs")
+        for source_id in release_states:
+            canonical_source_id(registry, source_id)
         assignments = payload.get("mixture_assignments", {})
         expected_records = payload.get("expected_records", {})
         if not isinstance(assignments, dict) or not isinstance(expected_records, dict):
@@ -151,8 +154,10 @@ def main(argv: list[str] | None = None) -> int:
         provenance = {
             "created_at": now.isoformat(),
             "policy_path": str(args.policy),
+            "policy_sha256": _sha256(args.policy),
             "policy_version": policy["policy_version"],
             "source_registry_path": str(args.registry),
+            "source_registry_sha256": _sha256(args.registry),
             "registered_source_count": len(registry["sources"]),
             "input_path": str(args.input),
             "input_sha256": _sha256(args.input),
