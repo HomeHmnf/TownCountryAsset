@@ -32,6 +32,9 @@ MAIN_DEMOGRAPHIC_RELEASE = "2024-main-demographic"
 AGE_RELEASE = "2024-main-age-sex"
 TOGO_RELEASE = "2026-01-19-togo-update"
 SOURCE_KEY = "un_wpp"
+TAIWAN_GAME_ID = "tc_98ab3dee1d554162b6bbd5dac6374fc8"
+TAIWAN_LOC_ID = "158"
+TAIWAN_LOCATION = "China, Taiwan Province of China"
 
 
 class WPPAdapterError(RuntimeError):
@@ -218,6 +221,35 @@ def _check_population_consistency(row: dict[str, str], bands: dict[str, dict[str
         raise WPPAdapterError(f"{label}: male/female totals do not reconcile to 1 July population")
 
 
+def _validate_taiwan_crosswalk(
+    mappings: tuple[Any, ...],
+    demographic: dict[str, dict[str, str]],
+    ages: dict[str, dict[str, dict[str, float]]],
+) -> None:
+    taiwan_by_game = [item for item in mappings if item.game_id == TAIWAN_GAME_ID]
+    taiwan_by_source = [item for item in mappings if item.source_id == TAIWAN_LOC_ID]
+    if not taiwan_by_game and not taiwan_by_source:
+        return
+    if len(taiwan_by_game) != 1 or len(taiwan_by_source) != 1:
+        raise WPPAdapterError("Taiwan must have exactly one WPP mapping to LocID 158")
+    mapping = taiwan_by_game[0]
+    if mapping.source_id != TAIWAN_LOC_ID or mapping.match_method != "reviewed_manual":
+        raise WPPAdapterError(
+            "Taiwan WPP mapping must use reviewed_manual and source LocID 158"
+        )
+    row = demographic.get(TAIWAN_LOC_ID)
+    if row is None or TAIWAN_LOC_ID not in ages:
+        raise WPPAdapterError("Taiwan WPP LocID 158 is absent from the selected snapshots")
+    if (
+        row.get("Location") != TAIWAN_LOCATION
+        or row.get("ISO2_code") != "TW"
+        or row.get("ISO3_code") != "TWN"
+    ):
+        raise WPPAdapterError(
+            "WPP LocID 158 does not identify the expected Taiwan location and ISO metadata"
+        )
+
+
 def prepare_un_wpp(
     *,
     demographic_path: Path,
@@ -286,6 +318,7 @@ def prepare_un_wpp(
     unknown_loc_ids = sorted(set(mapping) - set(selected_demo))
     if unknown_loc_ids:
         raise WPPAdapterError(f"WPP crosswalk contains unknown LocID values: {unknown_loc_ids[:20]}")
+    _validate_taiwan_crosswalk(crosswalk.mappings, selected_demo, selected_ages)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     observations: list[dict[str, Any]] = []
