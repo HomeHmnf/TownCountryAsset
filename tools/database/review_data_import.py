@@ -12,6 +12,10 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from tools.database.connection import REPOSITORY_ROOT, connect_database
+from tools.database.application_approval import (
+    ApplicationApprovalError, build_application_artifact,
+    require_approved_application, record_application_applied,
+)
 from tools.database.schema import apply_migrations, validate_database
 from tools.audit_iso_proposal_evidence import _cells
 from tools.propose_iso_assignments import propose, read_reference
@@ -300,11 +304,59 @@ def _proposal(
     return True
 
 
+def build_review_application_artifact(
+    registry_path: str | Path = DEFAULT_REGISTRY,
+    iso_reference_path: str | Path = "",
+    iso_provenance_path: str | Path = "",
+    iso_proposals_path: str | Path = "",
+    persian_candidates_path: str | Path = "",
+    persian_provenance_path: str | Path = "",
+    taxonomy_path: str | Path = DEFAULT_TAXONOMY,
+    flag_mapping_path: str | Path = DEFAULT_FLAGS,
+) -> dict[str, Any]:
+    paths = {
+        "registry": Path(registry_path),
+        "iso_reference": Path(iso_reference_path),
+        "iso_provenance": Path(iso_provenance_path),
+        "iso_proposals": Path(iso_proposals_path),
+        "persian_candidates": Path(persian_candidates_path),
+        "persian_provenance": Path(persian_provenance_path),
+        "taxonomy": Path(taxonomy_path),
+        "flag_mapping": Path(flag_mapping_path),
+    }
+    registry = _read_json(paths["registry"])
+    taxonomy = _read_json(paths["taxonomy"])
+    by_id, _ = _validate_registry_and_taxonomy(registry, taxonomy)
+    iso = _validate_iso(registry, paths["iso_reference"], paths["iso_provenance"], paths["iso_proposals"])
+    persian = _validate_persian(registry, paths["persian_candidates"], paths["persian_provenance"])
+    flags = _read_json(paths["flag_mapping"])
+    if flags.get("schema_version") != 1 or not isinstance(flags.get("source"), dict):
+        raise ReviewDataImportError("Flag mapping has an unsupported schema or missing source metadata")
+    rows = flags.get("records")
+    if not isinstance(rows, list) or len(rows) != len(by_id):
+        raise ReviewDataImportError("Flag mapping records must cover the identity registry exactly")
+    if {row.get("game_id") for row in rows if isinstance(row, dict)} != set(by_id):
+        raise ReviewDataImportError("Flag mapping game_id coverage does not match the identity registry")
+    return build_application_artifact(
+        domain="review_data",
+        inputs=list(paths.values()),
+        metadata={
+            "country_count": len(by_id),
+            "iso_proposal_count": len(iso),
+            "persian_candidate_count": len(persian),
+            "flag_mapping_count": len(rows),
+            "taxonomy_sha256": _sha(paths["taxonomy"]),
+            "flag_mapping_sha256": _sha(paths["flag_mapping"]),
+        },
+    )
+
+
 def import_review_data(
     database_path: str | Path, registry_path: str | Path, iso_reference_path: str | Path,
     iso_provenance_path: str | Path, iso_proposals_path: str | Path,
     persian_candidates_path: str | Path, persian_provenance_path: str | Path,
     taxonomy_path: str | Path, flag_mapping_path: str | Path,
+    *, approval_id: str,
 ) -> dict[str, int | str]:
     """Import all review-domain candidates without inventing approvals or filling blanks."""
     registry = _read_json(Path(registry_path))
@@ -366,11 +418,26 @@ def import_review_data(
     if set(flags) != set(by_id):
         raise ReviewDataImportError("Flag mapping game_id coverage does not match the identity registry")
 
+    artifact = build_review_application_artifact(
+        registry_path, iso_reference_path, iso_provenance_path, iso_proposals_path,
+        persian_candidates_path, persian_provenance_path, taxonomy_path, flag_mapping_path,
+    )
     now = _now()
     connection = connect_database(database_path)
     try:
         apply_migrations(connection)
         connection.execute("BEGIN IMMEDIATE")
+        try:
+            require_approved_application(connection, approval_id=approval_id, artifact=artifact)
+        except ApplicationApprovalError as exc:
+            status_row = connection.execute(
+                "SELECT status FROM application_approvals WHERE approval_id = ?", (approval_id,)
+            ).fetchone()
+            if status_row is not None and status_row["status"] == "invalidated":
+                connection.commit()
+            elif connection.in_transaction:
+                connection.rollback()
+            raise ReviewDataImportError(str(exc)) from exc
         current_rows = connection.execute(
             """SELECT c.game_id, cs.dataset, cs.source_id
                FROM countries c JOIN country_sources cs
@@ -495,6 +562,19 @@ def import_review_data(
         issues = validate_database(connection)
         if issues:
             raise ReviewDataImportError("Database validation failed: " + "; ".join(issues))
+        try:
+            record_application_applied(
+                connection, approval_id=approval_id,
+                application_id=f"review-data:{len(by_id)}:{artifact['artifact_sha256'][:12]}",
+                details={
+                    "countries": len(by_id), "iso_proposals": inserted["iso"],
+                    "localization_proposals": inserted["localization"],
+                    "entity_type_proposals": inserted["entity_type"],
+                    "flag_proposals": inserted["flag"], "flag_mappings": flag_count,
+                },
+            )
+        except ApplicationApprovalError as exc:
+            raise ReviewDataImportError(str(exc)) from exc
         connection.commit()
         return {
             "countries": len(by_id), "iso_proposals": inserted["iso"],
@@ -521,12 +601,13 @@ def main() -> int:
     parser.add_argument("--persian-provenance", type=Path, required=True)
     parser.add_argument("--entity-taxonomy", type=Path, default=DEFAULT_TAXONOMY)
     parser.add_argument("--flag-mapping", type=Path, default=DEFAULT_FLAGS)
+    parser.add_argument("--approval-id", required=True, help="Previously approved review-data application ID")
     args = parser.parse_args()
     try:
         result = import_review_data(
             args.database, args.registry, args.iso_reference, args.iso_provenance,
             args.iso_proposals, args.persian_candidates, args.persian_provenance,
-            args.entity_taxonomy, args.flag_mapping,
+            args.entity_taxonomy, args.flag_mapping, approval_id=args.approval_id,
         )
     except (OSError, ValueError, sqlite3.Error, ReviewDataImportError) as exc:
         parser.error(str(exc))
