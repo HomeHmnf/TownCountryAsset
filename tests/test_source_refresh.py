@@ -113,3 +113,19 @@ def test_refresh_records_failure_and_continues_other_sources(tmp_path, monkeypat
     assert report["sources"][0]["downloads"][0]["status"] == "acquisition_failed"
     assert report["sources"][1]["discovery_status"] == "manual_review_required"
 
+def test_refresh_reports_incomplete_snapshot_without_overwriting(tmp_path, monkeypatch):
+    import tools.sources.refresh as module
+
+    registry = _registry(tmp_path)
+    raw = tmp_path / "raw/sample/dataset/v1/data.csv"
+    raw.parent.mkdir(parents=True)
+    raw.write_bytes(b"partial")
+    monkeypatch.setattr(
+        module, "acquire_one",
+        lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("must not acquire over partial snapshot")),
+    )
+    report = run_refresh(registry, report_root=tmp_path / "reports")
+    item = report["sources"][0]["downloads"][0]
+    assert item["status"] == "validation_error"
+    assert raw.read_bytes() == b"partial"
+
