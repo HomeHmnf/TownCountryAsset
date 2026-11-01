@@ -21,7 +21,7 @@ Snapshots are immutable. The manager refuses to overwrite an existing raw file o
 
 Run from the repository root:
 
-```sh
+```fish
 uv run python -m tools.manage_sources list
 uv run python -m tools.manage_sources show un_wpp
 uv run python -m tools.manage_sources check
@@ -168,3 +168,10 @@ The input's `game_id` values must already use the reviewed identity crosswalk. T
 
 The refresh bundle distinguishes unchanged snapshots, newly discovered/acquired release candidates, manual-review states, and acquisition/validation failures. A download marked `acquired_pending_source_validation` has not passed provider-specific semantic validation. Release changes do not promote `latest_validated`; selection reports do not promote `latest_applied`. Both commands are read-only with respect to the canonical database.
 
+## Current implementation matrix
+
+The registry currently contains 29 sources. Automated release discovery is implemented only for the three configured content-fingerprint sources (`natural_earth_admin0`, `iso_reference_mirror`, and `un_m49`) and Git commit metadata for `lipis_flag_icons`. This is release discovery, not universal provider refresh: the Git adapter does not download an archive, and fingerprint acquisition is not semantic dataset validation. Other API, subscription, manual and specialist sources remain registered but require manual review or a dedicated adapter.
+
+The generic refresh command supports configured HTTPS downloads and the adapters above. It does not yet provide a complete provider-specific acquisition/normalization adapter for every source in the catalogue. A source can therefore be registered and policy-selected while still having no current normalized observations. The absence of an adapter or snapshot must be reported as unavailable/review-required, never as a zero value or proof that a country lacks the attribute.
+
+The selection CLI consumes normalized JSON observations; it does not generate that file from raw provider snapshots. Identity matching/crosswalk review, provider parsing and semantic validation must occur before resolution. The report bundle records decisions and provenance but does not apply them to SQLite. These boundaries are intentional until provider adapters, semantic validation and explicit application workflows are separately implemented and reviewed.
