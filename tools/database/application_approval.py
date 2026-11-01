@@ -176,16 +176,25 @@ def require_approved_application(
     if not isinstance(inputs, list) or not inputs:
         raise ApplicationApprovalError("Application artifact has no reviewed input files")
     refreshed_inputs = []
-    for item in inputs:
-        if not isinstance(item, dict) or not isinstance(item.get("path"), str):
-            raise ApplicationApprovalError("Application artifact contains an invalid input entry")
-        path = (REPOSITORY_ROOT / item["path"]).resolve()
-        digest = sha256_file(path)
-        refreshed_inputs.append({
-            "path": path.relative_to(REPOSITORY_ROOT.resolve()).as_posix(),
-            "sha256": digest,
-            "byte_count": path.stat().st_size,
-        })
+    try:
+        for item in inputs:
+            if not isinstance(item, dict) or not isinstance(item.get("path"), str):
+                raise ApplicationApprovalError("Application artifact contains an invalid input entry")
+            path = (REPOSITORY_ROOT / item["path"]).resolve()
+            digest = sha256_file(path)
+            refreshed_inputs.append({
+                "path": path.relative_to(REPOSITORY_ROOT.resolve()).as_posix(),
+                "sha256": digest,
+                "byte_count": path.stat().st_size,
+            })
+    except (OSError, ValueError, ApplicationApprovalError) as exc:
+        if row["status"] == "approved":
+            connection.execute(
+                "UPDATE application_approvals SET status='invalidated' WHERE approval_id=?",
+                (approval_id,),
+            )
+            _event(connection, approval_id, "invalidated", details={"reason": str(exc)})
+        raise ApplicationApprovalError("Reviewed application input is missing or inaccessible; a new approval is required") from exc
     refreshed_inputs.sort(key=lambda entry: entry["path"])
     body = {
         "schema_version": artifact.get("schema_version"),
