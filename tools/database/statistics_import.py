@@ -320,6 +320,16 @@ def import_wp1_5_dataset(
     except (ApplicationApprovalError, OSError, ValueError) as exc:
         raise StatisticsImportError(f"Cannot fingerprint WP1.5 application inputs: {exc}") from exc
 
+    # Ensure the in-memory payloads validated above are exactly the bytes
+    # represented by the approval artifact, not a concurrent file revision.
+    if _read_object(observations_path, "normalized observations") != normalized:
+        raise StatisticsImportError("Normalized observations changed while preparing the approved application")
+    if _read_object(manifest_path, "source manifest") != manifest:
+        raise StatisticsImportError("Source manifest changed while preparing the approved application")
+    if _read_object(config_path, "WP1.5 field contract") != config:
+        raise StatisticsImportError("WP1.5 field contract changed while preparing the approved application")
+    _validate_manifest(manifest, source_key)
+
     connection = connect_database(database_path)
     try:
         apply_migrations(connection)
