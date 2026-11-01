@@ -31,6 +31,7 @@ Load the central source registry and policy, then call `resolve_field` with norm
 from pathlib import Path
 
 from tools.database.source_selection import load_policy, resolve_field
+from tools.database.structured_source_selection import resolve_structured_field
 from tools.sources.registry import load_registry
 
 registry = load_registry()
@@ -46,7 +47,7 @@ decision = resolve_field(
 )
 ```
 
-The observation input is an iterable of records with these fields:
+For scalar fields, the observation input is an iterable of records with these fields. For structured fields, use the same fields plus `record_key` and optional `subfield_key`, and call the structured resolver:
 
 | Field | Meaning |
 |---|---|
@@ -60,7 +61,7 @@ The observation input is an iterable of records with these fields:
 | `methodology` | Normalization or source methodology |
 | `retrieved_at` | Timezone-aware ISO 8601 retrieval timestamp |
 
-The resolver reads `reports/sources/releases/<source-id>.json` and accepts only the release recorded as `latest_validated`. Tests and controlled callers may supply an explicit `release_states` mapping. A latest-available discovery, a successful download, or a pending-validation snapshot is never enough.
+The scalar and structured resolvers read `reports/sources/releases/<source-id>.json` and accepts only the release recorded as `latest_validated`. Tests and controlled callers may supply an explicit `release_states` mapping. A latest-available discovery, a successful download, or a pending-validation snapshot is never enough.
 
 ## Mode semantics
 
@@ -72,7 +73,7 @@ A missing source row is not zero, absence, or not-applicable. Explicit null valu
 
 ## Manual overrides
 
-Manual overrides are supplied separately from the policy. A matching record requires `override_id`, `game_id`, `field_key`, `scope`, `value`, `unit`, `status`, `reason`, `author`, and timezone-aware `effective_at`. Only field-level country overrides are currently resolved; subfield/resource/record-scoped overrides are intentionally not applied by this scalar field resolver.
+Manual overrides are supplied separately from the policy. A matching record requires `override_id`, `game_id`, `field_key`, `scope`, `value`, `unit`, `status`, `reason`, `author`, and timezone-aware `effective_at`. The scalar resolver applies field-level overrides. The structured resolver applies record-level and optional subfield-level overrides independently; multiple matching overrides are rejected.
 
 A valid matching override wins over provider observations. Its identifier, reason, author, optional source, effective time, and the prior primary provider candidate are returned in the decision. Multiple matching overrides are an error, not an arbitrary tie-break.
 
@@ -84,6 +85,10 @@ A valid matching override wins over provider observations. Its identifier, reaso
 - The population-density fallback is a declared derivation only. The resolver reports that it requires a separately validated derivation implementation; it does not calculate density.
 - Natural-resource specialist fallbacks require a resource/metric mapping and per-record provenance; no unmapped specialist source is selected.
 - The conditional capital-city fallback is not activated until a suitable official UN provider is registered and mapped.
-- Structured values are carried as JSON objects/arrays; subfield-level custom mixture and overrides need a later structured-record resolver.
+- Structured fields use `tools/database/structured_source_selection.py` and `resolve_structured_field`. Each observation has a stable `record_key` and optional `subfield_key`; each item retains its own source, validated release, period, method, reference and retrieval timestamp.
+- Structured priority/fallback/custom-mixture behavior is resolved independently per record/subfield. Fallbacks require explicit compatibility status and evidence; custom mixtures require an explicit assignment for each item and an allowlisted source.
+- Record/subfield manual overrides are independently audited and take precedence only for their exact scope. The prior primary-provider candidate is retained.
+- Callers may supply `expected_records=[{"record_key": "..."}]` (optionally with `subfield_key`) from a fixed resource/category catalogue. Expected-but-missing items are returned with `unavailable` status and null value, rather than silently omitted or interpreted as absent.
+- Resource-specific fallback mappings are constrained to the matching `record_key`; a provider mapped for one commodity cannot fill another commodity. Empty mappings mean no specialist fallback is eligible.
 
 The resolver is deterministic for the same policy, validated-release ledger, observations, overrides and assignments. Its returned decision is suitable as input to the standardized source-selection reports planned for the next stage. It never writes a decision or changes the canonical database itself.
