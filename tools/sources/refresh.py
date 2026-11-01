@@ -150,7 +150,7 @@ def _record_release(
             "provider_published_at": discovered.get("provider_published_at"),
             "provider_commit_timestamp": discovered.get("provider_commit_timestamp"),
             "discovered_at": discovered["discovered_at"],
-            "acquired_at": None,
+            "acquired_at": datetime.now(timezone.utc).isoformat() if status == "acquired" else None,
             "validated_at": None,
             "applied_at": None,
             "status": status,
@@ -279,11 +279,22 @@ def run_refresh(
                     discovered = _discover_fingerprint(item, timeout)
                     dynamic_item = {**item, "release": discovered["release_id"]}
                     prior = _inspect_release_snapshot(registry, source_id, dynamic_item)
+                    manifest_path = (
+                        registry["storage"]["manifest_root"]
+                        + "/"
+                        + source_id
+                        + "/"
+                        + item["id"]
+                        + "/"
+                        + dynamic_item["release"]
+                        + ".json"
+                    )
                     state_path = _record_release(
                         registry,
                         source_id,
                         discovered,
                         status="acquired" if prior["status"] == "valid" else "discovered",
+                        snapshot_manifest=manifest_path if prior["status"] == "valid" else None,
                     )
                     result = {
                         "download_id": item["id"],
@@ -324,16 +335,6 @@ def run_refresh(
                                 detail="Provider content changed between discovery and acquisition; snapshot retained but not accepted as the discovered fingerprint",
                             )
                         else:
-                            manifest_path = (
-                                registry["storage"]["manifest_root"]
-                                + "/"
-                                + source_id
-                                + "/"
-                                + item["id"]
-                                + "/"
-                                + dynamic_item["release"]
-                                + ".json"
-                            )
                             _record_release(
                                 registry,
                                 source_id,
