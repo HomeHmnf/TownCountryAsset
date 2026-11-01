@@ -274,6 +274,7 @@ def test_github_git_ref_discovery_records_commit_without_acquiring_archive(tmp_p
     result = report["sources"][0]
     assert result["discovery_status"] == "git_ref_discovery"
     assert result["git_ref"]["release_id"] == discovered["release_id"]
+    assert result["git_ref"]["release_changed"] is True
     state = json.loads(
         (tmp_path / "reports/sources/releases/manual.json").read_text(encoding="utf-8")
     )
@@ -284,11 +285,12 @@ def test_github_git_ref_discovery_records_commit_without_acquiring_archive(tmp_p
     assert state["latest_available"]["provider_commit_timestamp"] == discovered["provider_commit_timestamp"]
     assert state["latest_validated"] is None
     assert state["latest_applied"] is None
-    run_refresh(
+    repeated_report = run_refresh(
         registry,
         source_ids=["manual"],
         report_root=tmp_path / "reports" / "refreshes",
     )
+    assert repeated_report["sources"][0]["git_ref"]["release_changed"] is False
     repeated = json.loads(
         (tmp_path / "reports/sources/releases/manual.json").read_text(encoding="utf-8")
     )
