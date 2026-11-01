@@ -296,7 +296,7 @@ Verified direct endpoints:
 | `WPP2024_Locations_notes.csv` | Location notes and code context | https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Locations_notes.csv |
 | `WPP2024_CSV_files_update.zip` | Official 19 January 2026 interim update; includes the updated medium demographic and age/sex CSVs | https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip |
 
-The catalogue describes common fields including `LocID`, `ISO3_code`, `ISO2_code`, `Location`, `Variant`, `Time` and `MidPeriod`; age-disaggregated files also use `AgeGrp`, `AgeGrpStart` and `AgeGrpSpan`. The catalogue states that country/area `LocID` follows ISO 3166-1 numeric. Crosswalk candidates should therefore use exact `ISO3_code` and/or ISO numeric identifiers, never `Location` text. The exact indicator column names and units must be read from the downloaded indicator-notes file before parser mappings are finalized.
+The catalogue describes common fields including `LocID`, `ISO3_code`, `ISO2_code`, `Location`, `Variant`, `Time` and `MidPeriod`; age-disaggregated files also use `AgeGrp`, `AgeGrpStart` and `AgeGrpSpan`. WPP `LocID` is the location-specific UN M49 numeric code, not an ISO 3166-1 numeric code. Join it to the M49 code in the UN M49 reference, normalizing numeric formatting (for example `004` and `4`) without using country names as the identity key. `ISO3_code` is a secondary consistency check, not the join key. The UN defines M49 numeric codes as statistical-identity codes; see the [M49 standard](https://unstats.un.org/unsd/methodology/m49/) and the WPP methodology's explanation of `LocID`.
 
 **Coverage and vintage:** WPP 2024 contains 237 countries/areas. Its estimates run through 2023; the medium projection begins in 2024 and extends to 2100. The 19 January 2026 interim update revises Togo's population and vital-event estimates/projections; other locations and global/regional aggregates are unchanged. Apply that update only to the affected Togo records and preserve the update vintage; do not treat the update archive as a replacement for the full base dataset.
 
@@ -376,3 +376,43 @@ uv run python -m tools.import_wp1_5 \
 ```
 
 The paths above are placeholders. Do not run this command until a source-specific adapter has produced the normalized batch and the crosswalk has been reviewed. The importer does not download, parse, or transform provider files. It does not mark source imports approved, promote review statuses, infer absent values, or run the final completeness audit.
+
+
+## Implemented UN WPP 2024 adapter
+
+The source-specific parser is `tools/sources/wpp.py`; its tests are in `tests/test_wpp_adapter.py`. It reads the captured gzip CSVs and the two exact update CSV members directly from the Togo ZIP. It validates snapshot manifests/checksums, the 2026 Medium Country/Area rows, all 21 age bands, numeric values, male/female/total arithmetic, and population totals. It selects 1 July population and applies the 19 January 2026 supplement only to Togo. The main demographic, main age-sex and Togo ZIP snapshots **and their three acquisition manifests** are all bound into the derived WP1.5 application manifest so the approval fingerprint covers the complete source set.
+
+The adapter emits:
+- `normalized_observations.json` — six WP1.5 field observations per mapped country (fields 1, 2, 6, 12, 13 and 14).
+- `application_manifest.json` — the WP1.5 import manifest, including the base release and scoped Togo supplement.
+- `coverage.json` — mapped/unmapped LocID coverage and validation flags.
+
+It does not create a SQLite connection, import values, or promote `latest_validated`.
+
+### Prepare and review the WPP crosswalk
+
+WPP `LocID` is the UN M49 numeric code. A review-only helper transfers the already-reconciled M49 reference ID to a CSV proposal:
+
+```fish
+uv run python -m tools.propose_un_wpp_crosswalk
+```
+
+Review every proposed row in `reports/sources/crosswalk-review/un-wpp-m49-crosswalk-review.csv`. The helper deliberately does **not** create an importable crosswalk. Resolve ambiguous/unmatched rows separately and manually create `data/manual/source_crosswalks/un_wpp.json` only after review, using schema version 1, `dataset: "un_wpp"`, `source_key: "un_wpp"`, and mappings with `game_id`, decimal WPP `source_id` (the M49 LocID), `match_method: "reviewed_manual"`, and M49 evidence URL.
+
+### Prepare the normalized candidate
+
+After the crosswalk exists, run:
+
+```fish
+uv run python -m tools.sources.wpp \
+  --demographic raw_data/sources/un_wpp/demographic_indicators_medium/2024-main-demographic/WPP2024_Demographic_Indicators_Medium.csv.gz \
+  --demographic-manifest data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json \
+  --age raw_data/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz \
+  --age-manifest data_manifests/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex.json \
+  --togo-zip raw_data/sources/un_wpp/interim_update_togo/2026-01-19-togo-update/WPP2024_CSV_files_update.zip \
+  --togo-manifest data_manifests/sources/un_wpp/interim_update_togo/2026-01-19-togo-update.json \
+  --crosswalk data/manual/source_crosswalks/un_wpp.json \
+  --output-dir data/candidates/wp1_5/un_wpp/2026
+```
+
+The generated application manifest is a derived WP1.5 manifest, not a replacement for the immutable acquisition manifests. It binds the three original manifests and all three raw snapshots. Do not edit it by hand. The adapter output is a candidate and remains outside SQLite until the shared WP1.5 proposal/approval/import workflow is completed.
