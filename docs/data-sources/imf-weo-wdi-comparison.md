@@ -51,6 +51,19 @@ This is not a like-for-like release-vintage comparison. The IMF input is a fixed
 - **GDP PPP:** the IMF WEO series refers to ICP benchmarks 2017–2021 and has no `LATEST_ACTUAL_ANNUAL_DATA` values in this export. Its actual/estimate/projected status is therefore unclassified. Confirm the PPP benchmark and time-series construction against WDI's indicator note before interpreting discrepancies.
 - **Inflation:** IMF `PCPIPCH` is CPI period-average percent change. Verify that the WDI annual CPI series uses a sufficiently compatible annual-average convention.
 - **Unemployment:** WDI `SL.UEM.TOTL.ZS` is a modelled ILO estimate. The IMF `LUR` export has a blank `UNIT` field and must not be assumed to have a confirmed percent unit or equivalent methodology. Numerical comparison is diagnostic only.
+
+### Field 21 targeted three-way diagnostic
+
+For field 21, the comparison additionally retrieves World Bank `SL.UEM.TOTL.NE.ZS` (unemployment, total, national estimate) over the same year range. It is attached to the IMF/WDI-modelled country-year rows as a separate diagnostic value and its own indicator metadata is retained. It is not treated as a replacement for either series, and absence of a national estimate remains null.
+
+The IMF WEO `LUR` country-series metadata is also preserved per observation: unit, scale, reporting-period type, methodology, methodology notes, historical data source, labour-sector employment type, short source citation and country update date, alongside the already retained latest-actual year and reporting-year months. Blank provider fields remain unknown; the utility does not infer a percentage unit, population coverage, harmonization or actual/estimate status from labels.
+
+For a targeted three-country inspection, review the field 21 rows for Bahrain, Moldova and the Philippines in `country_year_comparison.csv`, alongside the corresponding `wdi_national_estimate_metadata` in `assessment.json`. Interpret the three WDI/IMF series as distinct statistical products:
+- IMF WEO `LUR`: country-desk series; country-specific source and methodology metadata must be reviewed.
+- WDI `SL.UEM.TOTL.ZS`: ILO modelled estimate.
+- WDI `SL.UEM.TOTL.NE.ZS`: national estimate, with potentially different country coverage, reference population and methodology.
+
+This is still a live WDI API diagnostic, not a vintage-aligned comparison or proof of which series is correct. No source selection or policy change follows automatically.
 - IMF `LATEST_ACTUAL_ANNUAL_DATA` is preserved. A simple calendar-year value is used only as a status hint; fiscal-year labels are not coerced, and values after the latest-actual year are not split into estimate versus projection.
 - WDI status is not inferred by this utility.
 - Fiscal-year reporting metadata is retained on the IMF side; a same-numbered year does not prove identical reporting periods.
