@@ -201,7 +201,7 @@ def _cell_number(
         def replace_reference(match: re.Match[str]) -> str:
             ref_cell = sheet[f"{match.group(1)}{match.group(2)}"]
             try:
-                ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack)
+                ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack, cached_sheet)
             except IcaseesAssessmentError as exc:
                 raise IcaseesAssessmentError(
                     f"While evaluating formula {sheet.title}!{cell.coordinate} ({value}), "
