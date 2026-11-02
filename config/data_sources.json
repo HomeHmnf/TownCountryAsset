@@ -936,7 +936,7 @@
       "license_status": "CC BY 4.0",
       "terms_url": "https://icasees.org/publications/tableau-de-bord/statistiques-structurelles/statistiques-economiques/comptes-nationaux",
       "attribution": "Institut Centrafricain des Statistiques et des Études Économiques et Sociales (ICASEES).",
-      "notes": "Official Central African Republic national-accounts dataset and supporting publications. The July 2026 Excel workbook (2005–2019 and 2019–2021), definitive 2019–2021 accounts PDF, and August 2026 GDP rebasing memo (2019 base, SNA 2008) are documented in docs/data-sources/icasees-central-african-republic-national-accounts.md. Files are present in raw_data/sources/icasees/ but have not yet been parsed, checksum-manifested, or validated. No source-selection policy or canonical database application is implied.",
+      "notes": "Official Central African Republic national-accounts dataset and supporting publications. The July 2026 Excel workbook (2005–2019 and 2019–2021), definitive 2019–2021 accounts PDF, and August 2026 GDP rebasing memo (2019 base, SNA 2008) are documented in docs/data-sources/icasees-central-african-republic-national-accounts.md. The committed files are fingerprinted and assessed by tools/assess_icasees_national_accounts.py; the workbook parser keeps historical and revised 2019 series separate and reports the unresolved unit-label conflict. Manual release review remains in force. No source-selection policy or canonical database application is implied.",
       "acquisition_mode": "manual",
       "downloads": [],
       "release_discovery": {
