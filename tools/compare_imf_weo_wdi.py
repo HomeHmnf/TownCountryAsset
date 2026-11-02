@@ -100,7 +100,7 @@ def read_imf_observations(
             if indicator in {"NGDPD", "PPPGDP"} and row.get("SCALE") != "Billions":
                 raise ComparisonError(f"Unexpected IMF scale for {indicator}/{source_code}: {row.get('SCALE')!r}")
             actual_text = (row.get("LATEST_ACTUAL_ANNUAL_DATA") or "").strip()
-            actual_match = re.fullmatch(r"(\\d{4})", actual_text)
+            actual_match = re.fullmatch(r"(\d{4})", actual_text)
             latest_actual_year = int(actual_match.group(1)) if actual_match else None
             for year in range(start_year, end_year + 1):
                 raw = (row.get(str(year)) or "").strip()
