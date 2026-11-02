@@ -24,7 +24,7 @@ from tools.sources.registry import ROOT, SourceError, load_registry
 from tools.sources.reporting import write_source_report_bundle
 
 SOURCE_ID = "icasees_national_accounts"
-MANIFEST = ROOT / "data_manifests/sources/icasees_national_accounts/manual_2026-07-16.json"
+MANIFEST = ROOT / "data_manifests/sources/icasees_national_accounts/manual_publication_bundle/2026-07-16.json"
 OUTPUT_ROOT = ROOT / "reports/sources/icasees-national-accounts"
 EXPECTED_COMMIT = "ed62810037abdc2975a51b0677e3b3d7c6a57bdb"
 
@@ -77,6 +77,8 @@ def build_manifest(recorded_at: datetime | None = None) -> dict[str, Any]:
         entries.append({**item, "byte_count": size, "sha256": digest, "repository_path": item["path"]})
     return {
         "manifest_schema_version": 1, "source_id": SOURCE_ID, "source_name": source["name"],
+        "download_id": "manual_publication_bundle", "release": "2026-07-16",
+        "release_kind": "edition_or_snapshot",
         "snapshot_id": "manual_2026-07-16", "snapshot_kind": "committed_manual_publication_bundle",
         "repository_commit": EXPECTED_COMMIT, "recorded_at": timestamp.astimezone(timezone.utc).isoformat(),
         "license_status": source["license_status"], "terms_url": source["terms_url"],
