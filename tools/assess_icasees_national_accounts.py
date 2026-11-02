@@ -146,6 +146,36 @@ def _number(value: Any) -> float | None:
     return number
 
 
+def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> float | None:
+    """Evaluate numeric cells and simple two-reference arithmetic formulas."""
+    cell = sheet.cell(row, col)
+    value = cell.value
+    if not (isinstance(value, str) and value.startswith("=")):
+        return _number(value)
+    stack = set() if stack is None else stack
+    if cell.coordinate in stack:
+        raise IcaseesAssessmentError(f"Circular formula at {sheet.title}!{cell.coordinate}")
+    match = re.fullmatch(r"=\s*\$?([A-Z]{1,3})\$?(\d+)\s*([+\-*/])\s*\$?([A-Z]{1,3})\$?(\d+)\s*", value)
+    if not match:
+        raise IcaseesAssessmentError(f"Unsupported workbook formula at {sheet.title}!{cell.coordinate}: {value}")
+    stack.add(cell.coordinate)
+    try:
+        left_cell = sheet[f"{match.group(1)}{match.group(2)}"]
+        right_cell = sheet[f"{match.group(4)}{match.group(5)}"]
+        left = _cell_number(sheet, left_cell.row, left_cell.column, stack)
+        right = _cell_number(sheet, right_cell.row, right_cell.column, stack)
+        if left is None or right is None:
+            raise IcaseesAssessmentError(f"Formula at {sheet.title}!{cell.coordinate} references an empty cell")
+        operator = match.group(3)
+        result = {"+": lambda: left + right, "-": lambda: left - right,
+                  "*": lambda: left * right, "/": lambda: left / right if right else math.nan}[operator]()
+        if not math.isfinite(result):
+            raise IcaseesAssessmentError(f"Invalid formula result at {sheet.title}!{cell.coordinate}")
+        return result
+    finally:
+        stack.remove(cell.coordinate)
+
+
 def _find_row(sheet, label_col: int, label: str, start_row: int = 2) -> int:
     target = _normal(label)
     matches = [row for row in range(start_row, sheet.max_row + 1)
@@ -170,7 +200,7 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         vab_row = _find_row(sheet, 2, "TOTAL VAB")
         tax_row = _find_row(sheet, 2, "IMPÔTS ET TAXES SUR LES PRODUITS")
         for year, col in sorted(years.items()):
-            gdp, vab, taxes = (_number(sheet.cell(row, col).value) for row in (gdp_row, vab_row, tax_row))
+            gdp, vab, taxes = (_cell_number(sheet, row, col) for row in (gdp_row, vab_row, tax_row))
             if None in (gdp, vab, taxes):
                 raise IcaseesAssessmentError(f"Missing GDP aggregate in {sheet_name}, {year}")
             series.append({"series_block": "revised", "sheet": sheet_name, "indicator": "IND35",
@@ -183,7 +213,7 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     for year, col in sorted(old_years.items()):
         if 2013 <= year <= 2019:
             series.append({"series_block": "historical", "sheet": old.title, "indicator": "IND35",
-                           "indicator_name": GDP_LABEL, "year": year, "value": _number(old.cell(old_gdp_row, col).value),
+                           "indicator_name": GDP_LABEL, "year": year, "value": _cell_number(old, old_gdp_row, col),
                            "unit_label": old.cell(old_gdp_row, 3).value,
                            "scale_label": old.cell(old_gdp_row, old_years[2013] - 1).value})
     combined = workbook["Donnée_SCN2008"]
@@ -198,7 +228,7 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         if 2013 <= year <= 2019:
             series.append({"series_block": "historical", "sheet": combined.title, "indicator": "IND35",
                            "indicator_name": GDP_LABEL, "year": year,
-                           "value": _number(combined.cell(old_combined_row, col).value),
+                           "value": _cell_number(combined, old_combined_row, col),
                            "unit_label": combined.cell(old_combined_row, 3).value,
                            "scale_label": combined.cell(old_combined_row, left_years[2013] - 1).value})
     right_years = _year_columns(combined, 1, right_label_col + 3, combined.max_column)
@@ -207,7 +237,7 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     right_tax_row = _find_row(combined, right_label_col, "IMPÔTS ET TAXES SUR LES PRODUITS")
     for year, col in sorted(right_years.items()):
         if year in (2019, 2020, 2021):
-            gdp, vab, taxes = (_number(combined.cell(row, col).value)
+            gdp, vab, taxes = (_cell_number(combined, row, col)
                                for row in (right_gdp_row, right_vab_row, right_tax_row))
             series.append({"series_block": "revised", "sheet": combined.title, "indicator": None,
                            "indicator_name": GDP_LABEL, "year": year, "value": gdp,
@@ -233,7 +263,7 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         tertiary = _find_row(sheet, 2, "SECTEUR TERTIAIRE")
         total_vab = _find_row(sheet, 2, "TOTAL VAB")
         for year, col in sorted(years.items()):
-            parts = [_number(sheet.cell(row, col).value) for row in (primary, secondary, tertiary)]
+            parts = [_cell_number(sheet, row, col) for row in (primary, secondary, tertiary)]
             total = _number(sheet.cell(total_vab, col).value)
             checks[f"{sheet_name}_{year}_sector_vab_equals_total_vab"] = (
                 all(value is not None for value in parts) and total is not None
@@ -249,12 +279,12 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         checks[f"historical_gdp_presentations_agree_{year}"] = (
             left is not None and combined_value is not None and abs(left - combined_value) <= TOLERANCE
         )
-    old_2019 = _number(old.cell(old_gdp_row, old_years[2019]).value)
+    old_2019 = _cell_number(old, old_gdp_row, old_years[2019])
     new_sheet = workbook["Donnée nouvelle"]
     new_gdp_row = _find_row(new_sheet, 2, GDP_LABEL)
     new_2019_col = next(col for col in range(1, new_sheet.max_column + 1)
                         if new_sheet.cell(1, col).value == 2019)
-    new_2019 = _number(new_sheet.cell(new_gdp_row, new_2019_col).value)
+    new_2019 = _cell_number(new_sheet, new_gdp_row, new_2019_col)
     delta = new_2019 - old_2019
     checks["gdp_2019_overlap"] = {"historical_value": old_2019, "revised_value": new_2019,
         "absolute_difference": delta, "relative_difference_percent": delta / old_2019 * 100 if old_2019 else None}
