@@ -85,6 +85,7 @@ def test_comparison_joins_via_game_identity_and_scales_billions(tmp_path, monkey
     assert row["wdi_value_canonical_unit"] == 2_000_000_000
     assert row["relative_difference_percent"] == 0
     assert gdp["matched_country_year_count"] == 1
+    assert row["imf_status_hint"] == "actual_per_weo_metadata"
     assert report["side_effects"]["canonical_database_written"] is False
     assert report["side_effects"]["source_selection_policy_changed"] is False
 
