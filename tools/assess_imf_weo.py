@@ -118,8 +118,8 @@ def build_assessment(csv_path: Path = CSV_PATH, appendix_path: Path = PDF_PATH,
         rows = grouped[code]
         prefixes, latest, units, scales, months = Counter(), Counter(), Counter(), Counter(), Counter()
         populated, duplicates, seen = Counter(), [], set()
-        aggregate_prefixes, unmatched = set(), set()
-        registry_matches, name_matches, non_null, invalid = set(), 0, 0, 0
+        aggregate_prefixes, unmatched, name_mismatches = set(), set(), set()
+        registry_matches, name_matches, non_null, invalid = set(), set(), 0, 0
         for row in rows:
             series_code = row["SERIES_CODE"]
             prefix = series_code.split(".")[0]
@@ -143,9 +143,10 @@ def build_assessment(csv_path: Path = CSV_PATH, appendix_path: Path = PDF_PATH,
                 rec = next(m for m in matches if m.get("game_id") == game_id)
                 aliases = [rec.get("names", {}).get("en"), *(rec.get("names", {}).get("aliases_en") or [])]
                 name_match = norm(row.get("COUNTRY")) in {norm(v) for v in aliases if v}
-                name_matches += int(name_match)
-                if not name_match:
-                    unmatched.add(prefix)
+                if name_match:
+                    name_matches.add(prefix)
+                else:
+                    name_mismatches.add(prefix)
             elif len(game_ids) > 1:
                 status, game_id, name_match = "ambiguous_registry_code", None, False
                 unmatched.add(prefix)
@@ -193,7 +194,8 @@ def build_assessment(csv_path: Path = CSV_PATH, appendix_path: Path = PDF_PATH,
             "prefix_lengths": dict(Counter(len(p) for p in prefixes)),
             "non_iso_aggregate_prefixes": sorted(aggregate_prefixes),
             "unmatched_or_ambiguous_three_letter_prefixes": sorted(unmatched),
-            "registry_code_match_count": len(registry_matches), "registry_name_match_count": name_matches,
+            "registry_code_match_count": len(registry_matches), "registry_name_match_count": len(name_matches),
+            "registry_name_mismatch_prefixes": sorted(name_mismatches),
             "unit_distribution": dict(units), "scale_distribution": dict(scales),
             "latest_actual_annual_data_distribution": dict(latest),
             "reporting_year_month_distribution": dict(months),
