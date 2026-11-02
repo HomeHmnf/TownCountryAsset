@@ -70,13 +70,27 @@ Do not assume that the two ranges can be concatenated without a break or that a 
 
 The files being committed is a repository-state fact, not a general change to the source-storage policy. The existing project-wide convention in [source management](source-management.md) says raw snapshots are local/untracked and manifests are tracked. The latest asset commit also changed `.gitignore` to stop ignoring `raw_data/sources/`, and committed other raw source snapshots. This differs from the documented convention and should be treated as a separate repository-policy decision; this document does not silently redefine that policy.
 
-## Next validation steps
+## Assessment commands
 
-1. Inventory workbook sheets, dimensions, merged cells, headers, units and year columns.
-2. Extract candidate GDP series without altering the original workbook.
-3. Reconcile the workbook with the definitive 2019–2021 PDF and rebasing memo.
-4. Determine whether a consistent 2005–2021 nominal GDP series can be constructed and document any break/revision.
-5. Compare aligned Central African Republic values against the IMF WEO and WDI observations, preserving source vintages and units.
-6. Only after that assessment, decide whether a normalized ICASEES adapter and any source-policy review are warranted.
+Run from the repository root:
+
+```fish
+uv run python -m tools.assess_icasees_national_accounts manifest
+uv run --with pypdf python -m tools.assess_icasees_national_accounts assess
+uv run --extra dev python -m pytest -v tests/test_icasees_national_accounts_assessment.py
+```
+
+- `manifest` records hashes for the files already in Git; it does not download or copy them. The manifest is immutable.
+- `assess` verifies all three fingerprints, inventories workbook sheets and formulas, extracts historical and revised GDP separately, checks sector VAB against total VAB and GDP against value added plus product taxes, and cross-checks duplicate tables.
+- pypdf is supplied ephemerally by `uv run --with pypdf` for PDF text extraction; the project dependency list is unchanged.
+- Reports are written under `reports/sources/icasees-national-accounts/<run-id>/` with assessment JSON, Markdown summary, provenance, workbook inventory and GDP-series CSVs.
+- The generic `tools.manage_sources check` command only checks registry entries with generic `downloads`; ICASEES retains its publication-oriented paths and is verified by this dedicated validator. Its absence from the generic snapshot-check listing is expected.
+
+## Remaining analytical decisions
+
+1. Review the extracted evidence pages from the definitive accounts and rebasing memo to resolve the unit/scale conflict and document the 2019 base/revision methodology.
+2. Determine whether the 2005–2019 and 2019–2021 tables can be reconciled into a defensible continuous series; preserve any break if they cannot.
+3. Compare only verified, unit-aligned ICASEES GDP observations with IMF WEO and WDI, retaining provider vintages and year conventions.
+4. Only after that assessment, decide whether a normalized ICASEES adapter and any source-policy review are warranted.
 
 All processing must remain read-only with respect to the canonical SQLite database until the separate validation and approval lifecycle is completed.
