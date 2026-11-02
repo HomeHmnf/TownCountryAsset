@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import math
 import sqlite3
+import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -148,11 +149,43 @@ class UNWPPValidator:
                            "detail": f"Compared {len(grouped)} candidate country-field records against import_id={import_id}; mismatches={len(db_errors)}"})
             checks.extend({"name": "canonical_parity_exception", "status": "FAIL", "detail": item} for item in db_errors[:100])
 
-        # Expose Togo provenance separately because the update is a scoped supplement.
-        togo = next((row for row in observations if row.get("source_id") == "768"), None)
-        if togo:
-            togo_refs = sorted({row.get("source_reference", "") for row in observations if row.get("source_id") == "768"})
-            checks.append({"name": "togo_supplement_provenance_review", "status": "WARNING",
-                           "detail": "Togo observations cite these source references: " + " || ".join(togo_refs) +
-                           ". Confirm each reference matches the actual source member supplying that field."})
+        # Verify that the scoped Togo archive contains both exact source members
+        # consumed by the adapter, and that all Togo observations cite that archive.
+        togo_rows = [row for row in observations if row.get("source_id") == "768"]
+        if togo_rows:
+            provenance_errors = []
+            supplement = next((item for item in manifest.get("additional_inputs", [])
+                               if item.get("label") == "WPP 2026 Togo interim update"), None)
+            if supplement is None:
+                provenance_errors.append("Application manifest does not identify the Togo supplement")
+            else:
+                zip_path = Path(supplement.get("local_raw_path", ""))
+                if not zip_path.is_absolute():
+                    zip_path = (REPOSITORY_ROOT / zip_path).resolve()
+                try:
+                    with zipfile.ZipFile(zip_path) as archive:
+                        members = {Path(name).name for name in archive.namelist()}
+                    required = {
+                        "WPP2024_Demographic_Indicators_Medium_Update.csv",
+                        "WPP2024_PopulationByAge5GroupSex_Medium_Update.csv",
+                    }
+                    missing_members = sorted(required - members)
+                    if missing_members:
+                        provenance_errors.append("Togo ZIP lacks required source members: " + ", ".join(missing_members))
+                    if len(togo_rows) != 6 or {row.get("field_id") for row in togo_rows} != set(FIELD_KEYS):
+                        provenance_errors.append("Togo supplement must supply exactly the six configured WP1.5 fields")
+                    for row in togo_rows:
+                        if not str(row.get("source_reference", "")).startswith("UN WPP 2024 2026-01-19-togo-update;"):
+                            provenance_errors.append(f"Togo field {row.get('field_id')} does not cite the Togo update snapshot")
+                            break
+                except (OSError, zipfile.BadZipFile) as exc:
+                    provenance_errors.append(f"Cannot inspect Togo supplement ZIP: {exc}")
+            checks.append({
+                "name": "togo_supplement_provenance",
+                "status": "FAIL" if provenance_errors else "PASS",
+                "detail": "; ".join(provenance_errors) if provenance_errors else (
+                    "The Togo archive contains both source members used by the adapter: demographic indicators "
+                    "(fields 1, 2, 6, 13, 14) and age-sex data (field 12); all six Togo observations cite the archive."
+                ),
+            })
         return checks
