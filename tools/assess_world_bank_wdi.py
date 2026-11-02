@@ -112,7 +112,16 @@ def summarize_observations(code: str, records: list[dict[str, Any]]) -> dict[str
         # The API's country.id is ISO2; countryiso3code is the ISO3 key.
         # Keep aggregate-region rows out even when they expose a three-letter code.
         iso3 = row.get("countryiso3code")
-        if region.get("value") == "Aggregates" or not isinstance(iso3, str) or len(iso3) != 3:
+        region_value = str(region.get("value") or "").strip().casefold()
+        region_id = str(region.get("id") or "").strip().upper()
+        # World Bank aggregate entries use region id "NA" (and normally
+        # region value "Aggregates"). Exclude by both provider signals.
+        if (
+            region_value == "aggregates"
+            or region_id == "NA"
+            or not isinstance(iso3, str)
+            or len(iso3) != 3
+        ):
             aggregate_rows += 1
             continue
         year = row.get("date")
