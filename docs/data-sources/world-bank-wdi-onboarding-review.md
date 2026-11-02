@@ -107,3 +107,8 @@ The utility retrieves metadata and paginated annual observations for the five ec
 This is an online, read-only assessment, not immutable acquisition. It does not write raw snapshots, acquisition manifests, the source registry, the source-selection policy, release ledgers, or SQLite. It deliberately marks IMF WEO comparability as `not_assessed` until a versioned IMF comparison dataset is available. ISO3 coverage is not treated as a game identity crosswalk.
 
 Automated tests: `tests/test_world_bank_wdi_assessment.py`.
+
+
+## IMF WEO comparative assessment
+
+A read-only country-year comparison utility is now documented in [`imf-weo-wdi-comparison.md`](imf-weo-wdi-comparison.md) and implemented at `tools/compare_imf_weo_wdi.py`. It compares the five candidate economic indicators through the existing identity registry, using the fixed October 2026 IMF CSV and live WDI API observations. The WDI API is rolling rather than an immutable release. The comparison does not change source policy, acquire snapshots, create approvals, or write to the canonical database. Run `uv run python -m tools.compare_imf_weo_wdi` from the repository root after the IMF manual snapshot is present.
