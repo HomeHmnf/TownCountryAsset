@@ -33,7 +33,7 @@ The figures below summarize the existing read-only comparison. The country-year 
 For the full annual rows, signed and absolute differences, and IMF status hints, use the retained source report:
 `reports/sources/imf-wdi-discrepancy-investigation/20261102T112847Z/assessment.md`.
 
-The WDI 2017 Zimbabwe current-PPP GDP observation is an isolated discontinuity relative to its adjacent WDI years in the comparison. The World Bank's WITS country profile independently reports 2017 GDP, PPP (current international dollars) of approximately US$104.36 billion. The IMF's 2021 quota-data methodology paper separately documents a special adjustment to Zimbabwe's 2017 ICP PPP factor. The exact October 2026 WEO/WDI row values and the underlying WDI PPP-factor record should be taken from immutable provider snapshots before any numerical reconciliation is published.
+The WDI API value for Zimbabwe 2017 in the project's comparison is an isolated discontinuity relative to adjacent years. However, the World Bank's WITS profile shows a different value (approximately US$104.36 billion) and identifies its PPP GDP data as based on the 2011 ICP round, while the current WDI series is based on the revised 2017/2021 ICP vintage. This is not a like-for-like validation of the current API value. The World Bank revised 2017 ICP results in its 2021 cycle using updated expenditure, regional PPP, population and market-exchange-rate data. The IMF separately documents a special conversion of Zimbabwe's 2017 ICP PPP factor using desk-supplied exchange rates before applying it to WEO nominal GDP in USD. The two providers' benchmark/currency handling is therefore materially different, but the current WDI 2017 observation cannot be labelled erroneous or anomalous until the exact current WDI and ICP benchmark records are acquired and reconciled.
 
 ## Methodological evidence
 
@@ -72,7 +72,7 @@ For Guinea and CAR, the field 18 median PPP GDP gaps are similar in scale to the
 - The WDI API is rolling/live, not an immutable release. The comparison is not vintage-aligned.
 - ICP PPPs are statistical estimates subject to sampling, measurement and classification errors; the World Bank cautions that they are not measures of currency under- or overvaluation.
 - PPP GDP is not the same concept as nominal GDP in current USD. It is a volume-comparison measure converted using PPP factors; it must retain its international-dollar unit.
-- The 2017 Zimbabwe adjustment in the IMF paper is documented in the 2020 quota-data methodology. The exact implementation in the October 2026 WEO vintage and the exact WDI source records for 2017 still require direct record-level confirmation.
+- The 2017 Zimbabwe adjustment in the IMF paper is documented in the 2020 quota-data methodology. The exact implementation in the October 2026 WEO vintage, the current WDI source record, and the revised ICP 2017 country record still require direct record-level confirmation.
 - No cause has been established for every year of the Guinea or CAR residual PPP factor differences.
 
 ## Source-selection disposition
