@@ -251,6 +251,7 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         lines.extend(["", f"## {item['indicator_code']} — field {item['field_id']}", "",
                       f"- Prefix lengths: {json.dumps(item['prefix_lengths'], sort_keys=True)}",
                       f"- Aggregate prefixes: {', '.join(item['non_iso_aggregate_prefixes']) or 'none'}",
+                      f"- Name mismatches requiring alias review: {', '.join(item['registry_name_mismatch_prefixes']) or 'none'}",
                       f"- Unmatched/ambiguous codes: {', '.join(item['unmatched_or_ambiguous_three_letter_prefixes']) or 'none'}",
                       f"- Units: {json.dumps(item['unit_distribution'], ensure_ascii=False, sort_keys=True)}",
                       f"- Scales: {json.dumps(item['scale_distribution'], sort_keys=True)}",
