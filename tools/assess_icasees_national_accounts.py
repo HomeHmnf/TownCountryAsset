@@ -182,7 +182,12 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                            "unit_label": old.cell(old_gdp_row, 3).value,
                            "scale_label": old.cell(old_gdp_row, old_years[2013] - 1).value})
     combined = workbook["Donnée_SCN2008"]
-    left_years = _year_columns(combined, 1, 4, combined.max_column)
+    right_label_col = next((col for col in range(1, combined.max_column + 1)
+                            if _normal(combined.cell(1, col).value) == "nom des indicateurs"), None)
+    if right_label_col is None:
+        raise IcaseesAssessmentError("Donnée_SCN2008 right-hand indicator block was not found")
+    # Exclude the repeated right-hand 2019-2021 headers; 2019 occurs twice.
+    left_years = _year_columns(combined, 1, 4, right_label_col - 2)
     old_combined_row = _find_row(combined, 2, GDP_LABEL)
     for year, col in sorted(left_years.items()):
         if 2013 <= year <= 2019:
@@ -191,10 +196,6 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                            "value": _number(combined.cell(old_combined_row, col).value),
                            "unit_label": combined.cell(old_combined_row, 3).value,
                            "scale_label": combined.cell(old_combined_row, left_years[2013] - 1).value})
-    right_label_col = next((col for col in range(1, combined.max_column + 1)
-                            if _normal(combined.cell(1, col).value) == "nom des indicateurs"), None)
-    if right_label_col is None:
-        raise IcaseesAssessmentError("Donnée_SCN2008 right-hand indicator block was not found")
     right_years = _year_columns(combined, 1, right_label_col + 3, combined.max_column)
     right_gdp_row = _find_row(combined, right_label_col, GDP_LABEL)
     right_vab_row = _find_row(combined, right_label_col, "TOTAL VAB")
