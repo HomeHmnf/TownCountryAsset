@@ -76,6 +76,10 @@ The targeted field 21 review is documented in [`field-21-unemployment-comparabil
 
 The Bahrain official annual dataset was acquired through `tools.sources.bahrain_unemployment` and reviewed from the immutable snapshot `raw_data/sources/bahrain_open_data/unemployment_yearly/20261102T141738Z/`. The provider published 50 records: 10 years of male and female unemployed counts, and 10 years of male, female and total unemployment rates. The official API total-rate series matches IMF WEO `LUR` for 2017–2025. In 2016, the API value 4.3% matches the Ministry's December rate, while the Ministry states the annual average was 4.0%; GCC-STAT reports the annual citizen rate as 3.9%, matching WEO, and states Bahrain unemployment data are citizen-only Ministry register data. Classify this as a likely reference-period mismatch, noting the API does not explicitly expose its reference period. The official dataset confirms 2022 at 5.4%, matching WEO. Detailed values and sex breakdowns are in the Bahrain assessment document. No source-policy, database or release action follows.
 
+## Targeted GDP and GDP-per-capita investigation
+
+The persistent field 15/16 outliers (Turkmenistan, Guinea and the Central African Republic) have been reviewed against country-specific national-accounts and exchange-rate evidence. The findings and source references are documented in [`field-15-16-gdp-comparability-assessment.md`](field-15-16-gdp-comparability-assessment.md). In summary: Turkmenistan has a documented dual-exchange-rate/alternative-conversion-factor issue; Guinea's 2018-base SNA 2008 rebasing raised the GDP level by 51.4%, and current UN/INS values are much closer to IMF WEO than to the compared WDI values; CAR has a substantial unresolved national-accounts vintage/compilation gap while 2008-SNA retropolation remains in progress. Retain IMF WEO as priority; no source-policy, database, approval or release action follows.
+
 ## Side-effect boundary
 
 The utility is read-only. It does not:
