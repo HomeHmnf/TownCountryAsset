@@ -8,35 +8,74 @@
 
 The large difference between IMF WEO `LUR` and World Bank WDI `SL.UEM.TOTL.ZS` for Bahrain is not evidence that the IMF observations are erroneous. Bahrain's official national statistics explicitly publish unemployment rates for Bahraini citizens aged 15 and above; the 2024 and 2025 rates (6.2% and 5.6%) exactly match IMF WEO.
 
-Historical public evidence also corroborates much of the WEO series, but **does not establish an exact year-by-year match for every year from 2015 through 2025**. In particular, a Government of Bahrain statement reports 4.3% for 2016, while the October 2026 WEO CSV reports 3.9%. That discrepancy must remain visible rather than being silently reconciled.
+The acquired official annual API dataset establishes an exact match with IMF WEO for 2017–2025, while confirming a 0.4 percentage-point discrepancy in 2016 (official 4.3%, WEO 3.9%). The earlier 2022 primary-source verification gap is closed.
 
 ## Year-by-year evidence
 
-| Year | IMF WEO `LUR` | Official/public corroboration located | Assessment |
-|---:|---:|---|---|
-| 2015 | 3.5% | Bahrain Economic Quarterly reports the Ministry of Labour rate at 3.5% in December 2015; a later Government of Bahrain statement also gives 3.5% for 2015. | Corroborated, though the quarterly publication describes a December/monthly rate, not necessarily an annual average. |
-| 2016 | 3.9% | Government of Bahrain statement reports 4.3% for 2016. | **Unresolved 0.4 percentage-point difference.** Possible revision, reference-period or source-vintage difference; no cause established. |
-| 2017 | 4.1% | Government of Bahrain statement reports 4.1%. | Corroborated. |
-| 2018 | 4.3% | Government of Bahrain statement reports 4.3%. | Corroborated. |
-| 2019 | 4.7% | Government of Bahrain statement and UN treaty-body record report 4.7%. | Corroborated. |
-| 2020 | 5.9% | UN treaty-body record reports 5.9% for 2021; a Government of Bahrain statement gives 5.9% for 2020 and 2021. | Corroborated by government statement. |
-| 2021 | 5.9% | Government of Bahrain statement and UN treaty-body record report 5.9%. | Corroborated. |
-| 2022 | 5.4% | The official Bahrain annual unemployment dataset covers the year; WEO value also appears in secondary reproductions of the WEO series. A separately extracted primary annual record was not retained for this assessment. | Consistent, but record-level primary-source verification incomplete. |
-| 2023 | 6.3% | Bahrain's official government facts-and-figures page reports 6.3%. | Corroborated. |
-| 2024 | 6.2% | Bahrain Open Data Portal annual series reports 6.2%; this exactly matches WEO. | Direct official match. |
-| 2025 | 5.6% | Bahrain Open Data Portal annual series reports 5.6%; this exactly matches WEO. | Direct official match. |
+The official Bahrain Open Data Portal dataset `03-unemployment-yearly` was acquired directly through the project's API adapter on 2026-11-02. The supplied API response contains 50 records: 20 sex-specific unemployed-person counts (male and female for each year 2016–2025) and 30 sex-specific/total unemployment-rate observations (male, female and total for each year 2016–2025). The provider labels the count series “Bahraini Unemployed (15 years and above) by Sex (Yearly)” and the rate series “Bahraini Unemployment Rate by Sex (Yearly)”.
 
-### Sources for the year-by-year checks
+### Total unemployment rate: official portal versus IMF WEO
 
-- [Bahrain Open Data Portal: Unemployment (Yearly)](https://www.data.gov.bh/explore/dataset/03-unemployment-yearly/), dataset `03-unemployment-yearly`. Its title/description is “Bahraini Unemployed (15 years and above) and the Unemployment Rate by Sex (Yearly)”. The portal's current annual dataset includes 2024 and 2025; the official figures are 6.2% and 5.6%.
-- [Bahrain Economic Quarterly, March 2016](https://www.bahrainedb.com/app/uploads/2020/08/BEQ-March-2016.pdf), reports the Ministry of Labour unemployment rate at 3.4% in Q4 2015 and its monthly series around 3.5% in December 2015.
-- [Government of Bahrain statement reproduced in a 2021 filing](https://www.rns-pdf.londonstockexchange.com/rns/1517S_1-2021-3-12.pdf): gives unemployment rates for Bahraini nationals of 3.5% (2015), 4.3% (2016), 4.1% (2017), 4.3% (2018) and 4.7% (2019).
-- [Government of Bahrain statement reproduced in a 2022 filing](https://www.rns-pdf.londonstockexchange.com/rns/9948C_2-2022-10-14.pdf): reports 4.1% (2017), 4.3% (2018), 4.7% (2019), 5.9% (2020) and 5.9% (2021) for Bahraini nationals.
-- [UN Committee on Economic, Social and Cultural Rights record E/C.12/2022/SR.19](https://digitallibrary.un.org/nanna/record/3959403/files/E_C.12_2022_SR.19-EN.pdf?registerDownload=1&version=1&withMetadata=0&withWatermark=0): records 4.7% in 2019 and 5.9% in 2021.
-- [Bahrain government Facts & Figures](https://www.bahrain.bh/wps/portal/en/): reports a Bahraini unemployment rate of 6.3% for 2023.
-- [Bahrain Open Data Portal: Statistics Reports](https://data.gov.bh/pages/statistics-page/?flg=en-gb): lists annual Labour Force reports for 2015–2023. These reports provide an avenue for primary record-level verification of the remaining years.
+| Year | Bahrain official total | IMF WEO `LUR` | Difference (official − IMF) | Assessment |
+|---:|---:|---:|---:|---|
+| 2016 | 4.3% | 3.9% | +0.4 pp | Unresolved discrepancy |
+| 2017 | 4.1% | 4.1% | 0.0 pp | Exact match |
+| 2018 | 4.3% | 4.3% | 0.0 pp | Exact match |
+| 2019 | 4.7% | 4.7% | 0.0 pp | Exact match |
+| 2020 | 5.9% | 5.9% | 0.0 pp | Exact match |
+| 2021 | 5.9% | 5.9% | 0.0 pp | Exact match |
+| 2022 | 5.4% | 5.4% | 0.0 pp | Exact match; primary record now verified |
+| 2023 | 6.3% | 6.3% | 0.0 pp | Exact match |
+| 2024 | 6.2% | 6.2% | 0.0 pp | Exact match |
+| 2025 | 5.6% | 5.6% | 0.0 pp | Exact match |
 
-The Government of Bahrain statements are strong official-source evidence, but they are reproduced in third-party-hosted filings. The source and reporting basis should be captured from the original Ministry/portal datasets before claiming that every year is a direct match.
+**Result: 9 of 10 years match exactly.** The official primary dataset resolves the earlier 2022 verification gap. The 2016 discrepancy is confirmed by the dataset itself: official 4.3% versus IMF WEO 3.9%. No cause for the 0.4 percentage-point difference is established.
+
+### Sex-specific rates
+
+| Year | Male | Female | Total |
+|---:|---:|---:|---:|
+| 2016 | 1.00% | 9.30% | 4.30% |
+| 2017 | 0.97% | 9.22% | 4.10% |
+| 2018 | 1.20% | 8.50% | 4.30% |
+| 2019 | 1.64% | 10.92% | 4.70% |
+| 2020 | 2.90% | 10.20% | 5.90% |
+| 2021 | 2.40% | 10.90% | 5.90% |
+| 2022 | 2.10% | 10.10% | 5.40% |
+| 2023 | 3.00% | 11.10% | 6.30% |
+| 2024 | 3.2338% | 10.0342% | 6.20% |
+| 2025 | 2.70% | 8.8635% | 5.60% |
+
+Female unemployment is materially higher than male unemployment in every year in this dataset. The total rate is a labour-force-weighted aggregate; it is not the arithmetic mean of the male and female rates.
+
+### Sex-specific unemployed-person counts
+
+| Year | Male unemployed | Female unemployed |
+|---:|---:|---:|
+| 2016 | 1,487 | 6,998 |
+| 2017 | 1,431 | 6,821 |
+| 2018 | 1,924 | 6,475 |
+| 2019 | 2,473 | 8,322 |
+| 2020 | 4,444 | 10,839 |
+| 2021 | 3,606 | 11,576 |
+| 2022 | 3,286 | 10,746 |
+| 2023 | 4,695 | 12,283 |
+| 2024 | 5,206 | 12,196 |
+| 2025 | 4,483 | 10,950 |
+
+The API response contains male and female counts, but no total-count rows. Do not manufacture a provider total count. Male/female unemployed counts can be summed for a derived combined count if needed, but that derived value must be labelled as calculated, not provider-published. The rates and counts are separate provider observations; deriving labour-force denominators from rounded rates would be approximate and is not necessary to establish the official/IMF rate comparison.
+
+### Primary-source acquisition and provenance
+
+- Dataset: [Bahrain Open Data Portal — Unemployment (Yearly)](https://data.gov.bh/explore/dataset/03-unemployment-yearly/), identifier `03-unemployment-yearly`.
+- API adapter: `uv run python -m tools.sources.bahrain_unemployment`.
+- Reviewed raw snapshot: `raw_data/sources/bahrain_open_data/unemployment_yearly/20261102T141738Z/records_page_0001.json`.
+- Manifest: `data_manifests/sources/bahrain_open_data/unemployment_yearly/20261102T141738Z.json`.
+- Retrieval time: 2026-11-02T14:17:38.347094+00:00.
+- API response: `total_count=50`, one page, 50 result records.
+- The raw snapshot is retained locally and is not committed to Git; the manifest is the tracked provenance record.
+
+Earlier government statements and reports provide historical corroboration, but the acquired official API records now supersede the previous incomplete secondary-source checks for 2016–2025. In particular, they directly establish the official 2016 rate and 2022 rate. The 2015 figure remains outside this dataset's 2016–2025 coverage.
 
 ## IMF WEO country metadata
 
@@ -73,7 +112,7 @@ This survey may provide a more suitable source for an all-resident, internationa
 ## Interpretation and limitations
 
 1. **Population coverage:** The official annual dataset is explicitly about Bahraini unemployed people aged 15 and above. WDI's ILO modelled estimate is a different statistical product. This supports a population/methodology mismatch, but the exact WDI model population and all model inputs were not independently reconstructed.
-2. **Historical coverage:** Public official evidence corroborates most WEO years, but 2016 conflicts (3.9% WEO versus 4.3% in a Government of Bahrain statement), and the 2022 primary annual record has not been independently extracted. Do not describe the entire 2015–2025 series as fully verified.
+2. **Historical coverage:** The acquired official annual dataset directly verifies 2016–2025. Nine of ten total-rate observations (2017–2025) exactly match WEO; 2016 differs by 0.4 percentage points. The dataset does not cover 2015.
 3. **Reference period:** Some historical Ministry figures are monthly or quarterly observations; they must not automatically be treated as annual averages. Confirm the annual series' construction from the Ministry dataset/report metadata.
 4. **Administrative measures:** Historical ILO documentation describes registered-unemployment measures with eligibility and registration conditions. Such administrative measures are not automatically equivalent to a household-survey unemployment rate. Do not use historical registration rules as proof of the current official annual series' methodology.
 5. **IMF status:** `LATEST_ACTUAL_ANNUAL_DATA=2025` is a metadata hint, not proof that every value is an observed national statistic. IMF notes explicitly mention IMF staff projections.
@@ -86,7 +125,7 @@ This survey may provide a more suitable source for an all-resident, internationa
 - Preserve the 2016 discrepancy as unresolved; do not adjust or overwrite the IMF value based on the currently located 4.3% government statement.
 - Do not substitute WDI `SL.UEM.TOTL.ZS` for the IMF values. Retain it as an international-comparability diagnostic with distinct population/methodology.
 - Do not create a Bahrain-only manual override or change the source-selection policy on the basis of this assessment.
-- Revisit the decision when primary Ministry annual reports/dataset records for 2015–2023 have been acquired and checked, particularly the 2016 and 2022 records, and when iGA publishes the 2026 Labour Force Survey results and methodological metadata.
+- Revisit the decision if a primary Ministry source explains the 2016 discrepancy, if the 2015 historical value is needed, or when iGA publishes the 2026 Labour Force Survey results and methodological metadata. The 2022 verification is complete.
 
 ## Reproducibility and side-effect boundary
 
@@ -111,5 +150,5 @@ The adapter captures dataset metadata and all paginated records as immutable JSO
 
 After acquisition, inspect the actual schema and reconcile each year, sex and indicator separately. Counts and rates must remain distinct. A total rate must not be calculated as the arithmetic mean of male and female rates. The dataset is explicitly Bahraini-focused, so retain its population-universe limitation when comparing it with all-resident or modelled ILO series.
 
-This adapter is acquisition-only. It does not normalize observations, approve a source release, change the IMF WEO priority policy, create a WP1.5 application approval, or write to SQLite. The existing 2016 discrepancy (IMF 3.9% versus the previously located official 4.3%) and 2022 primary-record verification remain open until the raw API snapshot has been reviewed.
+This adapter is acquisition-only. It does not normalize observations, approve a source release, change the IMF WEO priority policy, create a WP1.5 application approval, or write to SQLite. The reviewed API snapshot establishes official total rates for 2016–2025, resolves the 2022 verification gap, and confirms the 2016 discrepancy (official 4.3% versus IMF 3.9%). The 50 raw records include male/female counts and male/female/total rates; no provider total-count rows are present.
 
