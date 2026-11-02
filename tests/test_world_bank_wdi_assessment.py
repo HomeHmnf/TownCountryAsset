@@ -31,11 +31,20 @@ def test_observations_follow_pagination_and_exclude_aggregates():
     calls = []
 
     def fake(url):
-        query = parse_qs(urlparse(url).query)
+        parsed = urlparse(url)
+        if parsed.path.endswith("/country"):
+            query = parse_qs(parsed.query)
+            calls.append(("countries", int(query["page"][0])))
+            return [{"pages": 1}, [
+                {"id": "USA", "region": {"id": "NAC", "value": "North America"}},
+                {"id": "WLD", "region": {"id": "NA", "value": "Aggregates"}},
+                {"id": "AFE", "region": {"id": "NA", "value": "Aggregates"}},
+            ]]
+        query = parse_qs(parsed.query)
         page = int(query["page"][0])
-        calls.append(page)
+        calls.append(("observations", page))
         row = {
-            "country": {"id": "US", "value": "United States", "region": {"value": "North America"}},
+            "country": {"id": "US", "value": "United States"},
             "countryiso3code": "USA",
             "date": "2024",
             "value": "100.5",
@@ -43,14 +52,16 @@ def test_observations_follow_pagination_and_exclude_aggregates():
         return [{"pages": 2}, [row]] if page == 1 else [{
             "pages": 2
         }, [
-            {"country": {"id": "1W", "value": "World", "region": {"id": "NA", "value": "Aggregates"}}, "countryiso3code": "WLD", "date": "2024", "value": "200"},
-            {"country": {"id": "A1", "value": "Africa Eastern and Southern", "region": {"id": "NA", "value": "Aggregates"}}, "countryiso3code": "AFE", "date": "2024", "value": "300"},
-            {"country": {"id": "US", "value": "United States", "region": {"value": "North America"}}, "countryiso3code": "USA", "date": "2025", "value": None},
+            {"country": {"id": "1W", "value": "World"}, "countryiso3code": "WLD", "date": "2024", "value": "200"},
+            {"country": {"id": "ZH", "value": "Africa Eastern and Southern"}, "countryiso3code": "AFE", "date": "2024", "value": "300"},
+            {"country": {"id": "US", "value": "United States"}, "countryiso3code": "USA", "date": "2025", "value": None},
         ]]
 
     records = wdi.fetch_indicator_observations("NY.GDP.MKTP.CD", 2020, 2025, fake)
-    summary = wdi.summarize_observations("NY.GDP.MKTP.CD", records)
-    assert calls == [1, 2]
+    regions = wdi.fetch_country_regions(fake)
+    summary = wdi.summarize_observations("NY.GDP.MKTP.CD", records, regions)
+    assert ("observations", 1) in calls
+    assert ("observations", 2) in calls
     assert summary["country_count"] == 1
     assert summary["aggregate_rows_excluded"] == 2
     assert summary["countries"][0]["observation_years"] == [2024]
@@ -64,12 +75,15 @@ def test_rejects_invalid_period():
 def test_assessment_marks_imf_comparison_unassessed_and_has_no_side_effects():
     def fake(url):
         parsed = urlparse(url)
+        if parsed.path.endswith("/country"):
+            return [{"pages": 1}, [
+                {"id": "USA", "region": {"id": "NAC", "value": "North America"}},
+            ]]
         if "/indicator/" in parsed.path and "/country/" not in parsed.path:
             code = parsed.path.rsplit("/", 1)[-1]
             return [None, _metadata(code)]
-        code = parsed.path.rsplit("/", 1)[-1]
         return [{"pages": 1}, [{
-            "country": {"id": "US", "value": "United States", "region": {"value": "North America"}},
+            "country": {"id": "US", "value": "United States"},
             "countryiso3code": "USA",
             "date": "2025", "value": "1.0",
         }]]
