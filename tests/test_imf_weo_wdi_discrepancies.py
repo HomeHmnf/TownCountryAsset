@@ -14,11 +14,11 @@ def _row(field=15, country="Guinea", year=2015, imf=13.0, wdi=10.0):
         "field_id": field, "wdi_indicator": "NY.GDP.MKTP.CD",
         "imf_indicator": "NGDPD", "game_id": "tc_123", "year": year,
         "imf_country": country, "wdi_country": country, "imf_source_code": "GIN",
-        "wdi_iso3": "GIN", "imf_value_canonical_unit": str(imf),
-        "wdi_value_canonical_unit": str(wdi), "signed_difference": str(signed),
-        "absolute_difference": str(abs(signed)),
-        "relative_difference_percent": str(relative),
-        "absolute_relative_difference_percent": str(abs(relative)),
+        "wdi_iso3": "GIN", "imf_value_canonical_unit": imf,
+        "wdi_value_canonical_unit": wdi, "signed_difference": signed,
+        "absolute_difference": abs(signed),
+        "relative_difference_percent": relative,
+        "absolute_relative_difference_percent": abs(relative),
         "imf_status_hint": "actual_per_weo_metadata",
         "imf_latest_actual_annual_data": "2024",
         "imf_reporting_year_months": "January/December",
@@ -43,7 +43,7 @@ def test_reads_and_validates_comparison_csv(tmp_path):
 def test_rejects_inconsistent_difference_formula(tmp_path):
     path = tmp_path / "comparison.csv"
     row = _row()
-    row["absolute_difference"] = "99"
+    row["absolute_difference"] = 99
     with path.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(row))
         writer.writeheader()
