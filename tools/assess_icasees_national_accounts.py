@@ -8,6 +8,7 @@ No database or source-selection policy writes are performed.
 from __future__ import annotations
 
 import argparse
+import ast
 import csv
 import hashlib
 import json
@@ -147,7 +148,7 @@ def _number(value: Any) -> float | None:
 
 
 def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> float | None:
-    """Evaluate numeric cells and simple two-reference arithmetic formulas."""
+    """Evaluate numeric cells and restricted arithmetic formulas with cell references."""
     cell = sheet.cell(row, col)
     value = cell.value
     if not (isinstance(value, str) and value.startswith("=")):
@@ -155,22 +156,49 @@ def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> fl
     stack = set() if stack is None else stack
     if cell.coordinate in stack:
         raise IcaseesAssessmentError(f"Circular formula at {sheet.title}!{cell.coordinate}")
-    match = re.fullmatch(r"=\s*\$?([A-Z]{1,3})\$?(\d+)\s*([+\-*/])\s*\$?([A-Z]{1,3})\$?(\d+)\s*", value)
-    if not match:
-        raise IcaseesAssessmentError(f"Unsupported workbook formula at {sheet.title}!{cell.coordinate}: {value}")
     stack.add(cell.coordinate)
     try:
-        left_cell = sheet[f"{match.group(1)}{match.group(2)}"]
-        right_cell = sheet[f"{match.group(4)}{match.group(5)}"]
-        left = _cell_number(sheet, left_cell.row, left_cell.column, stack)
-        right = _cell_number(sheet, right_cell.row, right_cell.column, stack)
-        if left is None or right is None:
-            raise IcaseesAssessmentError(f"Formula at {sheet.title}!{cell.coordinate} references an empty cell")
-        operator = match.group(3)
-        result = {"+": lambda: left + right, "-": lambda: left - right,
-                  "*": lambda: left * right, "/": lambda: left / right if right else math.nan}[operator]()
+        reference_pattern = re.compile(r"(?<![A-Za-z0-9_])\$?([A-Z]{1,3})\$?(\d+)")
+        def replace_reference(match: re.Match[str]) -> str:
+            ref_cell = sheet[f"{match.group(1)}{match.group(2)}"]
+            ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack)
+            if ref_value is None:
+                raise IcaseesAssessmentError(
+                    f"Formula at {sheet.title}!{cell.coordinate} references empty cell {ref_cell.coordinate}"
+                )
+            return repr(ref_value)
+        expression = reference_pattern.sub(replace_reference, value[1:])
+        try:
+            tree = ast.parse(expression, mode="eval")
+        except SyntaxError as exc:
+            raise IcaseesAssessmentError(
+                f"Unsupported workbook formula at {sheet.title}!{cell.coordinate}: {value}"
+            ) from exc
+        def evaluate(node: ast.AST) -> float:
+            if isinstance(node, ast.Expression):
+                return evaluate(node.body)
+            if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)) and not isinstance(node.value, bool):
+                return float(node.value)
+            if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+                operand = evaluate(node.operand)
+                return operand if isinstance(node.op, ast.UAdd) else -operand
+            if isinstance(node, ast.BinOp) and isinstance(node.op, (ast.Add, ast.Sub, ast.Mult, ast.Div)):
+                left, right = evaluate(node.left), evaluate(node.right)
+                if isinstance(node.op, ast.Add):
+                    return left + right
+                if isinstance(node.op, ast.Sub):
+                    return left - right
+                if isinstance(node.op, ast.Mult):
+                    return left * right
+                if right == 0:
+                    raise IcaseesAssessmentError(f"Division by zero in formula {sheet.title}!{cell.coordinate}")
+                return left / right
+            raise IcaseesAssessmentError(
+                f"Unsupported workbook formula at {sheet.title}!{cell.coordinate}: {value}"
+            )
+        result = evaluate(tree)
         if not math.isfinite(result):
-            raise IcaseesAssessmentError(f"Invalid formula result at {sheet.title}!{cell.coordinate}")
+            raise IcaseesAssessmentError(f"Non-finite formula result at {sheet.title}!{cell.coordinate}")
         return result
     finally:
         stack.remove(cell.coordinate)
