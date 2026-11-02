@@ -70,7 +70,7 @@ def read_imf_observations(
     imf.fingerprint(csv_path, imf.EXPECTED["csv"])
     code_to_game = _identity_by_code(identity_path)
     output: dict[str, dict[tuple[str, int], dict[str, Any]]] = {
-        code: {} for code in PAIRS
+        contract["imf_code"]: {} for contract in PAIRS.values()
     }
     seen_series: set[tuple[str, str]] = set()
     unmatched_codes: dict[str, set[str]] = defaultdict(set)
