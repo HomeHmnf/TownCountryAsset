@@ -8,6 +8,7 @@ from openpyxl import Workbook
 
 from tools.assess_icasees_national_accounts import (
     IcaseesAssessmentError,
+    _cell_number,
     _extract_gdp_rows,
     verify_manifest,
 )
@@ -143,6 +144,16 @@ def test_simple_arithmetic_formula_is_evaluated_without_excel_cache():
     row = next(item for item in series if item["sheet"] == "Donnee" and item["year"] == 2019)
     assert row["value"] == pytest.approx(1952.925)
     assert checks["Donnee_2019_gdp_equals_vab_plus_taxes"] is True
+
+
+def test_chained_arithmetic_formula_is_evaluated():
+    workbook = _workbook_fixture()
+    sheet = workbook["Donnee"]
+    sheet["E5"] = 100.0
+    sheet["E6"] = 200.0
+    sheet["E7"] = 300.0
+    sheet["E8"] = "=E5+E6+E7"
+    assert _cell_number(sheet, 8, 5) == pytest.approx(600.0)
 
 
 def test_unsupported_formula_fails_explicitly():
