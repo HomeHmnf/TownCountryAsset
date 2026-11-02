@@ -156,8 +156,20 @@ def test_chained_arithmetic_formula_is_evaluated():
     assert _cell_number(sheet, 8, 5) == pytest.approx(600.0)
 
 
+def test_sum_range_formula_is_evaluated_without_excel_cache():
+    workbook = _workbook_fixture()
+    sheet = workbook["Donnee"]
+    sheet["E3"] = 10.0
+    sheet["E4"] = 20.0
+    sheet["E5"] = 30.0
+    sheet["E6"] = 40.0
+    sheet["E7"] = 50.0
+    sheet["E2"] = "=SUM(E3:E7)"
+    assert _cell_number(sheet, 2, 5) == pytest.approx(150.0)
+
+
 def test_unsupported_formula_fails_explicitly():
     workbook = _workbook_fixture()
-    workbook["Donnee"]["E7"] = "=SUM(E5:E6)"
+    workbook["Donnee"]["E7"] = "=AVERAGE(E5:E6)"
     with pytest.raises(IcaseesAssessmentError, match="Unsupported workbook formula"):
         _extract_gdp_rows(workbook)
