@@ -132,10 +132,10 @@ This survey may provide a more suitable source for an all-resident, internationa
 
 - Keep field 21's approved `imf_weo` priority-source assignment unchanged.
 - For Bahrain, describe the selected series as a national-definition unemployment rate aligned with the official Bahraini-citizen annual measure (15 years and above), with direct official-value corroboration for 2024 and 2025 and historical corroboration of most, but not all, earlier years.
-- Preserve the 2016 discrepancy as unresolved; do not adjust or overwrite the IMF value based on the currently located 4.3% government statement.
+- Classify the 2016 difference as a likely reference-period mismatch: the API's 4.3% matches the Ministry's December rate, while GCC-STAT's annual citizen rate is 3.9%, matching WEO. Retain the 0.1 pp difference between the Ministry's 4.0% annual average and GCC-STAT's 3.9% as unexplained; do not overwrite either observation.
 - Do not substitute WDI `SL.UEM.TOTL.ZS` for the IMF values. Retain it as an international-comparability diagnostic with distinct population/methodology.
 - Do not create a Bahrain-only manual override or change the source-selection policy on the basis of this assessment.
-- Revisit the decision if a primary Ministry source explains the 2016 discrepancy, if the 2015 historical value is needed, or when iGA publishes the 2026 Labour Force Survey results and methodological metadata. The 2022 verification is complete.
+- Revisit the decision if the 2015 historical value is needed, or when iGA publishes the 2026 Labour Force Survey results and methodological metadata. The 2016 reference-period interpretation and 2022 verification are documented; the 0.1 pp annual-average versus GCC-STAT difference remains unexplained.
 
 ## Reproducibility and side-effect boundary
 
