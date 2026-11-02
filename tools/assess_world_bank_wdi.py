@@ -76,6 +76,40 @@ def fetch_indicator_metadata(code: str, get_json=_get_json) -> dict[str, Any]:
     }
 
 
+def fetch_country_regions(get_json=_get_json) -> dict[str, dict[str, str]]:
+    """Fetch the ISO3 country/aggregate catalogue and its authoritative region labels."""
+    regions: dict[str, dict[str, str]] = {}
+    page = 1
+    while True:
+        payload = get_json(_url(
+            "country",
+            {"format": "json", "per_page": "400", "page": str(page)},
+        ))
+        if not isinstance(payload, list) or len(payload) < 2 or not isinstance(payload[0], dict):
+            raise AssessmentError(f"Invalid country metadata response, page {page}")
+        records = payload[1] or []
+        if not isinstance(records, list):
+            raise AssessmentError(f"Invalid country metadata page {page}")
+        for row in records:
+            iso3 = row.get("id")
+            if not isinstance(iso3, str) or len(iso3) != 3:
+                continue
+            region = row.get("region") or {}
+            regions[iso3] = {
+                "region_id": str(region.get("id") or "").strip().upper(),
+                "region_value": str(region.get("value") or "").strip(),
+            }
+        pages = int(payload[0].get("pages", 1))
+        if page >= pages:
+            break
+        page += 1
+        if page > 1000:
+            raise AssessmentError("Unreasonable country metadata pagination count")
+    if not regions:
+        raise AssessmentError("World Bank country metadata catalogue is empty")
+    return regions
+
+
 def fetch_indicator_observations(
     code: str, start_year: int, end_year: int, get_json=_get_json
 ) -> list[dict[str, Any]]:
@@ -101,27 +135,38 @@ def fetch_indicator_observations(
     return rows
 
 
-def summarize_observations(code: str, records: list[dict[str, Any]]) -> dict[str, Any]:
+def summarize_observations(
+    code: str,
+    records: list[dict[str, Any]],
+    country_regions: dict[str, dict[str, str]] | None = None,
+) -> dict[str, Any]:
     by_country: dict[str, list[int]] = defaultdict(list)
     country_names: dict[str, str] = {}
     aggregate_rows = 0
     invalid_rows = 0
     for row in records:
         country = row.get("country") or {}
-        region = country.get("region") or {}
-        # The API's country.id is ISO2; countryiso3code is the ISO3 key.
-        # Keep aggregate-region rows out even when they expose a three-letter code.
+        # Observation records expose country.id as ISO2 and omit region
+        # metadata. Join countryiso3code to the separate /country catalogue.
         iso3 = row.get("countryiso3code")
-        region_value = str(region.get("value") or "").strip().casefold()
-        region_id = str(region.get("id") or "").strip().upper()
-        # World Bank aggregate entries use region id "NA" (and normally
-        # region value "Aggregates"). Exclude by both provider signals.
-        if (
-            region_value == "aggregates"
-            or region_id == "NA"
-            or not isinstance(iso3, str)
-            or len(iso3) != 3
-        ):
+        if not isinstance(iso3, str) or len(iso3) != 3:
+            aggregate_rows += 1
+            continue
+        if country_regions is None:
+            # Retained for direct callers/tests; production assessment always
+            # supplies the authoritative catalogue fetched by build_assessment.
+            region = country.get("region") or {}
+            region_id = str(region.get("id") or "").strip().upper()
+            region_value = str(region.get("value") or "").strip().casefold()
+        else:
+            metadata = country_regions.get(iso3)
+            if metadata is None:
+                raise AssessmentError(
+                    f"Observation {code}/{iso3} is absent from the World Bank country metadata catalogue"
+                )
+            region_id = metadata["region_id"]
+            region_value = metadata["region_value"].casefold()
+        if region_id == "NA" or region_value == "aggregates":
             aggregate_rows += 1
             continue
         year = row.get("date")
@@ -168,9 +213,16 @@ def build_assessment(start_year: int = START_YEAR, end_year: int = END_YEAR, get
     if start_year < 1900 or end_year < start_year or end_year > 2100:
         raise AssessmentError("Invalid year range")
     results = []
+    # Observation endpoint country objects omit region classification. Fetch
+    # the provider's country catalogue once and join by ISO3 for every series.
+    country_regions = fetch_country_regions(get_json)
     for code, contract in INDICATORS.items():
         metadata = fetch_indicator_metadata(code, get_json)
-        summary = summarize_observations(code, fetch_indicator_observations(code, start_year, end_year, get_json))
+        summary = summarize_observations(
+            code,
+            fetch_indicator_observations(code, start_year, end_year, get_json),
+            country_regions,
+        )
         results.append({
             **contract,
             "metadata": metadata,
