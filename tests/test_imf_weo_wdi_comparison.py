@@ -33,6 +33,7 @@ def _inputs(tmp_path, monkeypatch):
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
+    monkeypatch.setattr(compare.imf, "ROOT", tmp_path)
     monkeypatch.setattr(compare.imf, "EXPECTED", {
         "csv": (hashlib.sha256(csv_path.read_bytes()).hexdigest(), csv_path.stat().st_size),
     })
