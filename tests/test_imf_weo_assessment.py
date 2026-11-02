@@ -74,7 +74,9 @@ def test_assessment_maps_identity_and_excludes_aggregate_prefix(assessment_input
     csv_path, pdf_path, identity = assessment_inputs
     report = imf.build_assessment(csv_path, pdf_path, 2024, 2026, identity)
     gdp = next(item for item in report["indicators"] if item["indicator_code"] == "NGDPD")
-    assert gdp["series_count"] == 2
+    assert gdp["series_count"] == 3
+    assert gdp["unique_series_count"] == 2
+    assert gdp["duplicate_series_codes"] == ["USA.NGDPD.A"]
     assert gdp["registry_code_match_count"] == 1
     assert gdp["registry_name_match_count"] == 1
     assert gdp["non_iso_aggregate_prefixes"] == ["G001"]
