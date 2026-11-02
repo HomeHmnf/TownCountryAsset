@@ -120,6 +120,15 @@ def read_imf_observations(
                 output[indicator][(game_id, year)] = {
                     "value": value, "game_id": game_id, "source_code": source_code,
                     "country_name": row.get("COUNTRY") or source_code,
+                    "imf_unit": row.get("UNIT") or None,
+                    "imf_scale": row.get("SCALE") or None,
+                    "imf_reporting_period_type": row.get("REPORTING_PERIOD_TYPE") or None,
+                    "imf_methodology": row.get("METHODOLOGY") or None,
+                    "imf_methodology_notes": row.get("METHODOLOGY_NOTES") or None,
+                    "imf_historical_data_source": row.get("HISTORICAL_DATA_SOURCE") or None,
+                    "imf_labour_sector_employment_type": row.get("LABOR_SECTOR_EMPLOYMENT_TYPE") or None,
+                    "imf_short_source_citation": row.get("SHORT_SOURCE_CITATION") or None,
+                    "imf_country_update_date": row.get("COUNTRY_UPDATE_DATE") or None,
                     "latest_actual_annual_data": actual_text or None,
                     "status_hint": status,
                     "reporting_year_months": row.get("START_END_MONTHS_OF_REPORTING_YEAR") or None,
@@ -212,6 +221,42 @@ def build_comparison(
                 "country_name": (row.get("country") or {}).get("value") or source_code,
             }
 
+        national_metadata = None
+        national_values: dict[tuple[str, int], dict[str, Any]] = {}
+        if contract["field_id"] == 21:
+            national_code = "SL.UEM.TOTL.NE.ZS"
+            national_metadata = wdi.fetch_indicator_metadata(national_code, get_json)
+            national_records = wdi.fetch_indicator_observations(
+                national_code, start_year, end_year, get_json
+            )
+            for national_row in national_records:
+                national_iso3 = national_row.get("countryiso3code")
+                if not isinstance(national_iso3, str) or len(national_iso3) != 3:
+                    continue
+                region = country_regions.get(national_iso3)
+                if region is None:
+                    raise ComparisonError(f"WDI country {national_iso3} missing from country catalogue")
+                if region["region_id"] == "NA" or region["region_value"].casefold() == "aggregates":
+                    continue
+                national_game_id = code_to_game.get(national_iso3)
+                if not national_game_id or national_row.get("value") is None:
+                    continue
+                try:
+                    national_year = int(national_row.get("date"))
+                    national_value = float(national_row["value"])
+                except (TypeError, ValueError) as exc:
+                    raise ComparisonError(f"Invalid WDI national unemployment observation {national_iso3}") from exc
+                if not math.isfinite(national_value):
+                    raise ComparisonError(f"Non-finite WDI national unemployment observation {national_iso3}/{national_year}")
+                national_key = (national_game_id, national_year)
+                if national_key in national_values:
+                    raise ComparisonError(f"Duplicate WDI national unemployment country-year: {national_iso3}/{national_year}")
+                national_values[national_key] = {
+                    "value": national_value,
+                    "source_code": national_iso3,
+                    "country_name": (national_row.get("country") or {}).get("value") or national_iso3,
+                }
+
         imf_code = contract["imf_code"]
         left = imf_data[imf_code]
         shared = sorted(set(left) & set(wdi_values))
@@ -246,6 +291,18 @@ def build_comparison(
                 "imf_reporting_year_months": reporting_period,
                 "imf_reporting_period_classification": _reporting_period_classification(reporting_period),
                 "wdi_status": "not_classified_by_this_comparison",
+                "imf_unit": a.get("imf_unit"),
+                "imf_scale": a.get("imf_scale"),
+                "imf_reporting_period_type": a.get("imf_reporting_period_type"),
+                "imf_methodology": a.get("imf_methodology"),
+                "imf_methodology_notes": a.get("imf_methodology_notes"),
+                "imf_historical_data_source": a.get("imf_historical_data_source"),
+                "imf_labour_sector_employment_type": a.get("imf_labour_sector_employment_type"),
+                "imf_short_source_citation": a.get("imf_short_source_citation"),
+                "imf_country_update_date": a.get("imf_country_update_date"),
+                "wdi_national_estimate_indicator": "SL.UEM.TOTL.NE.ZS" if contract["field_id"] == 21 else None,
+                "wdi_national_estimate_value": national_values[key]["value"] if key in national_values else None,
+                "wdi_national_estimate_country": national_values[key]["country_name"] if key in national_values else None,
             }
             comparisons.append(item)
             all_pairs.append(item)
@@ -272,6 +329,9 @@ def build_comparison(
         indicators.append({
             **contract, "wdi_indicator": wdi_code, "imf_indicator": imf_code,
             "wdi_metadata": metadata,
+            "wdi_national_estimate_metadata": national_metadata,
+            "wdi_national_estimate_matched_country_year_count": len(set(shared) & set(national_values)) if contract["field_id"] == 21 else 0,
+            "wdi_national_estimate_country_years_only": "SL.UEM.TOTL.NE.ZS is diagnostic context, not an automatic replacement" if contract["field_id"] == 21 else None,
             "imf_country_count": len({k[0] for k in left}),
             "wdi_country_count": len({k[0] for k in wdi_values}),
             "matched_country_count": len({k[0] for k in shared}),
@@ -304,7 +364,7 @@ def build_comparison(
         })
 
     return {
-        "schema_version": 2,
+        "schema_version": 3,
         "assessment": "imf_weo_world_bank_wdi_country_year_comparison",
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "period": {"start_year": start_year, "end_year": end_year},
@@ -350,6 +410,8 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
             f"- WDI originating organization: {notes['wdi_source_organization'] or 'not supplied'}",
             f"- WDI source note: {notes['wdi_source_note'] or 'not supplied'}",
             f"- WDI API last updated: {notes['wdi_api_last_updated'] or 'not supplied'}",
+            f"- WDI national-estimate metadata: {item['wdi_national_estimate_metadata'] or 'not applicable'}",
+            f"- WDI national-estimate matched country-years: {item['wdi_national_estimate_matched_country_year_count']}",
             f"- Mean absolute relative difference: {item['mean_absolute_relative_difference_percent']}",
             f"- Median absolute relative difference: {item['median_absolute_relative_difference_percent']}",
             f"- 95th percentile absolute relative difference: {item['p95_absolute_relative_difference_percent']}",
@@ -366,6 +428,8 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "- The CSV reports signed_difference (IMF minus WDI), absolute_difference, signed relative_difference_percent, and absolute_relative_difference_percent separately.",
         "- Calendar-year sensitivity includes only IMF January/December reporting periods; fiscal-year and unknown-period observations are excluded without shifting year labels.",
         "- WDI observation status is not inferred. WDI is retrieved live and may change between runs.",
+        "- For field 21, SL.UEM.TOTL.NE.ZS is included as a separate national-estimate diagnostic; it is not treated as interchangeable with the ILO-modelled SL.UEM.TOTL.ZS series.",
+        "- Field 21 retains country-specific IMF WEO unit, source, employment-definition, methodology-note, latest-actual and update-date metadata. Blank metadata remains unknown, not inferred.",
         "- Fields 18, 20 and 21 require explicit definition review before a policy decision; PPP benchmark, CPI period convention and unemployment methodology/unit remain material caveats.",
         "- No source-selection, release, approval, or database action is performed."])
     (target / "assessment.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -377,6 +441,11 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "signed_difference", "absolute_difference", "relative_difference_percent",
         "absolute_relative_difference_percent", "imf_status_hint",
         "imf_latest_actual_annual_data", "imf_reporting_year_months", "wdi_status",
+        "imf_unit", "imf_scale", "imf_reporting_period_type", "imf_methodology",
+        "imf_methodology_notes", "imf_historical_data_source",
+        "imf_labour_sector_employment_type", "imf_short_source_citation",
+        "imf_country_update_date", "wdi_national_estimate_indicator",
+        "wdi_national_estimate_value", "wdi_national_estimate_country",
     ]
     with (target / "country_year_comparison.csv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
