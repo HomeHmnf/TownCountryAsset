@@ -212,3 +212,22 @@ def test_non_numeric_observation_reports_exact_sheet_and_cell():
         match=r"Non-numeric workbook observation at Donnee!E7: 'millions de F CFA'",
     ):
         _cell_number(sheet, 7, 5)
+
+
+def test_external_formula_uses_cached_value_inside_local_formula_chain():
+    workbook = _workbook_fixture()
+    cached_workbook = _workbook_fixture()
+    sheet = workbook["Donnée_SCN2008"]
+    cached = cached_workbook["Donnée_SCN2008"]
+    sheet["O2"] = "=[1]PIB_courant!C4/1000"
+    cached["O2"] = 123.5
+    sheet["O5"] = "=O2*2"
+    assert _cell_number(sheet, 5, 15, cached_sheet=cached) == pytest.approx(247.0)
+
+
+def test_external_formula_requires_a_cached_numeric_value():
+    workbook = _workbook_fixture()
+    sheet = workbook["Donnée_SCN2008"]
+    sheet["O2"] = "=[1]PIB_courant!C4/1000"
+    with pytest.raises(IcaseesAssessmentError, match="requires a cached workbook value"):
+        _cell_number(sheet, 2, 15)
