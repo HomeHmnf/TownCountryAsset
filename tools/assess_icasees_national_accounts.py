@@ -238,7 +238,8 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                 and abs(sum(parts) - total) <= TOLERANCE
             )
     historical_by_sheet = {
-        name: {row["year"]: row["value"] for row in series if row["sheet"] == name}
+        name: {row["year"]: row["value"] for row in series
+               if row["sheet"] == name and row["series_block"] == "historical"}
         for name in ("Donnee_2013-2019", "Donnée_SCN2008")
     }
     for year in range(2013, 2020):
