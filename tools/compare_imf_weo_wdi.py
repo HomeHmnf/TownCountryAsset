@@ -84,7 +84,7 @@ def read_imf_observations(
             if len(parts) != 3 or parts[1] not in output or parts[2] != "A":
                 continue
             indicator, source_code = parts[1], parts[0]
-            if row.get("FREQUENCY") != "Annual":
+            if row.get("FREQUENCY") != "Annual" or len(source_code) != 3:
                 continue
             game_id = code_to_game.get(source_code)
             if not game_id:
