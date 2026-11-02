@@ -9,6 +9,9 @@ from pathlib import Path
 from typing import Any
 
 from tools.database.connection import REPOSITORY_ROOT
+from tools.database.source_selection import load_policy, resolve_field
+from tools.database.structured_source_selection import resolve_structured_field
+from tools.sources.registry import load_registry
 
 AGE_GROUPS = tuple([f"{start}-{start + 4}" for start in range(0, 100, 5)] + ["100+"])
 FIELD_KEYS = {
@@ -188,4 +191,73 @@ class UNWPPValidator:
                     "(fields 1, 2, 6, 13, 14) and age-sex data (field 12); all six Togo observations cite the archive."
                 ),
             })
+        # Exercise the production scalar and structured resolvers using an
+        # in-memory release eligibility state; never write or promote a release.
+        resolver_errors: list[str] = []
+        try:
+            registry = load_registry()
+            policy = load_policy(REPOSITORY_ROOT / "config" / "source_selection.json", registry)
+            release_states = {"un_wpp": str(manifest.get("release"))}
+            scalar_rows = []
+            structured_rows = []
+            for row in observations:
+                field_key, storage, _unit = FIELD_KEYS[row["field_id"]]
+                base = {
+                    "game_id": row["game_id"], "field_key": field_key,
+                    "source_id": "un_wpp", "release_id": str(manifest.get("release")),
+                    "unit": row["unit"], "status": row["value_status"],
+                    "observation_period": row["observation_period"],
+                    "source_reference": row.get("source_reference"),
+                    "methodology": row.get("methodology"),
+                    "retrieved_at": manifest.get("retrieved_at"), "value": row.get("value"),
+                }
+                if storage == "scalar":
+                    scalar_rows.append(base)
+                elif row["field_id"] == 12:
+                    structured_rows.extend({**base, "record_key": item["age_band"], "value": item}
+                                           for item in row["value"])
+                else:
+                    structured_rows.extend({**base, "record_key": "population",
+                                             "subfield_key": key, "value": value}
+                                            for key, value in row["value"].items())
+            scalar_count = 0
+            for row in scalar_rows:
+                decision = resolve_field(policy, registry, game_id=row["game_id"],
+                                          field_key=row["field_key"], observations=[row],
+                                          release_states=release_states)
+                if any((decision.get("selected_source") != "un_wpp",
+                        decision.get("release_id") != manifest.get("release"),
+                        decision.get("selection_status") != row["status"],
+                        decision.get("value") != row["value"])):
+                    resolver_errors.append(f"Scalar resolver mismatch: {row['game_id']}/{row['field_key']}")
+                scalar_count += 1
+            structured_count = 0
+            for field_key in ("age_distribution", "sex_distribution"):
+                field_rows = [row for row in structured_rows if row["field_key"] == field_key]
+                for game_id in sorted({row["game_id"] for row in field_rows}):
+                    country_rows = [row for row in field_rows if row["game_id"] == game_id]
+                    decision = resolve_structured_field(policy, registry, game_id=game_id,
+                        field_key=field_key, observations=country_rows, release_states=release_states)
+                    expected = {(row["record_key"], row.get("subfield_key")): row for row in country_rows}
+                    actual = {(row["record_key"], row.get("subfield_key")): row for row in decision["records"]}
+                    if set(actual) != set(expected):
+                        resolver_errors.append(f"Structured resolver scope mismatch: {game_id}/{field_key}")
+                    for scope, source_row in expected.items():
+                        selected = actual.get(scope)
+                        if selected is None or any((selected.get("selected_source") != "un_wpp",
+                            selected.get("release_id") != manifest.get("release"),
+                            selected.get("selection_status") != source_row["status"],
+                            selected.get("value") != source_row["value"])):
+                            resolver_errors.append(f"Structured resolver mismatch: {game_id}/{field_key}/{scope}")
+                    structured_count += len(decision["records"])
+        except Exception as exc:
+            resolver_errors.append(f"Resolver execution failed: {type(exc).__name__}: {exc}")
+            scalar_count = 0
+            structured_count = 0
+        checks.append({"name": "source_selection_resolver_compatibility",
+            "status": "FAIL" if resolver_errors else "PASS",
+            "detail": f"scalar resolutions={scalar_count}; structured record/subfield resolutions={structured_count}; "
+                      f"mismatches={len(resolver_errors)}; release eligibility simulated in memory only; no promotion."})
+        checks.extend({"name": "source_selection_resolver_exception", "status": "FAIL", "detail": item}
+                      for item in resolver_errors[:100])
         return checks
