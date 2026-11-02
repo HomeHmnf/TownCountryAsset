@@ -35,15 +35,16 @@ def test_observations_follow_pagination_and_exclude_aggregates():
         page = int(query["page"][0])
         calls.append(page)
         row = {
-            "country": {"id": "USA", "value": "United States", "region": {"value": "North America"}},
+            "country": {"id": "US", "value": "United States", "region": {"value": "North America"}},
+            "countryiso3code": "USA",
             "date": "2024",
             "value": "100.5",
         }
         return [{"pages": 2}, [row]] if page == 1 else [{
             "pages": 2
         }, [
-            {"country": {"id": "WLD", "value": "World", "region": {"value": "Aggregates"}}, "date": "2024", "value": "200"},
-            {"country": {"id": "USA", "value": "United States", "region": {"value": "North America"}}, "date": "2025", "value": None},
+            {"country": {"id": "1W", "value": "World", "region": {"value": "Aggregates"}}, "countryiso3code": "WLD", "date": "2024", "value": "200"},
+            {"country": {"id": "US", "value": "United States", "region": {"value": "North America"}}, "countryiso3code": "USA", "date": "2025", "value": None},
         ]]
 
     records = wdi.fetch_indicator_observations("NY.GDP.MKTP.CD", 2020, 2025, fake)
