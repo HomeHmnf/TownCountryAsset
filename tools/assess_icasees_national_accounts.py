@@ -284,9 +284,12 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                            "unit_label": combined.cell(old_combined_row, 3).value,
                            "scale_label": combined.cell(old_combined_row, left_years[2013] - 1).value})
     right_years = _year_columns(combined, 1, right_label_col + 3, combined.max_column)
-    right_gdp_row = _find_row(combined, right_label_col, GDP_LABEL)
-    right_vab_row = _find_row(combined, right_label_col, "TOTAL VAB")
-    right_tax_row = _find_row(combined, right_label_col, "IMPÔTS ET TAXES SUR LES PRODUITS")
+    # The right-hand indicator names are external-workbook formulas (for example,
+    # =[1]PIB_courant!$B$34), not cached text. The two blocks share row alignment,
+    # so identify the corresponding indicators from the left-hand text labels.
+    right_gdp_row = _find_row(combined, 2, GDP_LABEL)
+    right_vab_row = _find_row(combined, 2, "TOTAL VAB")
+    right_tax_row = _find_row(combined, 2, "IMPÔTS ET TAXES SUR LES PRODUITS")
     for year, col in sorted(right_years.items()):
         if year in (2019, 2020, 2021):
             gdp, vab, taxes = (_cell_number(combined, row, col)
