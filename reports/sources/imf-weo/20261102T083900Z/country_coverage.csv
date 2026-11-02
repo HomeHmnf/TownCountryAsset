@@ -1,0 +1,907 @@
+field_id,indicator_code,series_code,source_country_code,country_name,identity_status,game_id,registry_name_match,latest_actual_annual_data,unit,scale,reporting_year_months,non_null_observation_count,first_populated_year,latest_populated_year
+15,NGDPD,SYR.NGDPD.A,SYR,Syrian Arab Republic,registry_code_match_review_iso_status,tc_c205b2615c45490182519ecedb651e99,False,2010,US dollar,Billions,January/December,31,1980,2010
+15,NGDPD,ERI.NGDPD.A,ERI,"Eritrea, The State of",registry_code_match_review_iso_status,tc_f9d7128c5ef04c6f955f43f9bcc56a0c,False,2019,US dollar,Billions,January/December,28,1992,2019
+15,NGDPD,SOM.NGDPD.A,SOM,Somalia,registry_code_match_review_iso_status,tc_e82cc51b989841109d9e1a7f6a5d1727,True,2024,US dollar,Billions,January/December,21,2011,2031
+15,NGDPD,SYC.NGDPD.A,SYC,Seychelles,registry_code_match_review_iso_status,tc_4bc377d3ea57485bac43c9b512587dbc,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SSD.NGDPD.A,SSD,"South Sudan, Republic of",registry_code_match_review_iso_status,tc_12491d45eed544948b316c89f82a7ee7,False,2025,US dollar,Billions,January/December,21,2011,2031
+15,NGDPD,NAM.NGDPD.A,NAM,Namibia,registry_code_match_review_iso_status,tc_7379cdcc5c4848c181ace3144aeba70f,True,2025,US dollar,Billions,January/December,43,1989,2031
+15,NGDPD,TGO.NGDPD.A,TGO,Togo,registry_code_match_review_iso_status,tc_06a09ff0e27b49e392ef2e88161023eb,True,2023,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TZA.NGDPD.A,TZA,"Tanzania, United Republic of",registry_code_match_review_iso_status,tc_0f4c47ec59434e46871845e474964499,False,2023,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SWZ.NGDPD.A,SWZ,"Eswatini, Kingdom of",registry_code_match_review_iso_status,tc_fc2ad04f3c88446e91bd770190d6fe4c,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TUN.NGDPD.A,TUN,Tunisia,registry_code_match_review_iso_status,tc_1d1d2c1274384efa82f9591e1c069aba,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BFA.NGDPD.A,BFA,Burkina Faso,registry_code_match_review_iso_status,tc_3c920b9b9f324cb19ef9d4b6debf10ba,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,UGA.NGDPD.A,UGA,Uganda,registry_code_match_review_iso_status,tc_2bd67b30564b46b4b502a36decc333bf,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ZMB.NGDPD.A,ZMB,Zambia,registry_code_match_review_iso_status,tc_e75bc9ac62fa443c90b5529778f3b1af,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TON.NGDPD.A,TON,Tonga,registry_code_match_review_iso_status,tc_2c6f6c5486f04a87aa94277e67d6e51a,True,FY2024/25,US dollar,Billions,July/June,52,1980,2031
+15,NGDPD,SLB.NGDPD.A,SLB,Solomon Islands,registry_code_match_review_iso_status,tc_0ce7eb254c32428c88601905c0df8e87,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,KIR.NGDPD.A,KIR,Kiribati,registry_code_match_review_iso_status,tc_c23a3cf00b1a4ebf97a70a4f41a7761d,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,NRU.NGDPD.A,NRU,"Naoero, Republic of",registry_code_match_review_iso_status,tc_2722269bdef04648b655fe363650d565,False,FY2020/21,US dollar,Billions,July/June,28,2004,2031
+15,NGDPD,FJI.NGDPD.A,FJI,"Fiji, Republic of",registry_code_match_review_iso_status,tc_8d67737674744dce8986565b98cbbb1f,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,VUT.NGDPD.A,VUT,Vanuatu,registry_code_match_review_iso_status,tc_43c4be0a76ca43a2bb7e634de5a1f4f4,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,WSM.NGDPD.A,WSM,Samoa,registry_code_match_review_iso_status,tc_76082bd796c546d1ab76a7a8a3251369,True,FY2024/25,US dollar,Billions,July/June,52,1980,2031
+15,NGDPD,PNG.NGDPD.A,PNG,Papua New Guinea,registry_code_match_review_iso_status,tc_82d51d964745422e8ed3a9109757d2ee,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BLR.NGDPD.A,BLR,"Belarus, Republic of",registry_code_match_review_iso_status,tc_6ebc90b251e14f70b8bf758d8008e839,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,MHL.NGDPD.A,MHL,"Marshall Islands, Republic of the",registry_code_match_review_iso_status,tc_f201b19690a04a8f903f9ea4cb0c7af4,False,FY2024/25,US dollar,Billions,October/September,35,1997,2031
+15,NGDPD,FSM.NGDPD.A,FSM,"Micronesia, Federated States of",registry_code_match_review_iso_status,tc_4add61cba99b4e63a37406cd1d0feb5f,False,FY2024/25,US dollar,Billions,October/September,37,1995,2031
+15,NGDPD,TUV.NGDPD.A,TUV,Tuvalu,registry_code_match_review_iso_status,tc_47cd272cd9c9455185a13f6e69bd805c,True,2025,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,ARM.NGDPD.A,ARM,"Armenia, Republic of",registry_code_match_review_iso_status,tc_f97b56c9c74845de8b41aa24ed12a47f,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,AZE.NGDPD.A,AZE,"Azerbaijan, Republic of",registry_code_match_review_iso_status,tc_b8c860bb8d404dcca918bad769e7ead7,False,2024,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,ALB.NGDPD.A,ALB,Albania,registry_code_match_review_iso_status,tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,KAZ.NGDPD.A,KAZ,"Kazakhstan, Republic of",registry_code_match_review_iso_status,tc_feadffc011db4cf695df6c0997a003c8,False,2024,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,GEO.NGDPD.A,GEO,Georgia,registry_code_match_review_iso_status,tc_741bd244c1ec4961918565c4ed02c5c6,True,2025,US dollar,Billions,January/December,38,1994,2031
+15,NGDPD,RUS.NGDPD.A,RUS,Russian Federation,registry_code_match_review_iso_status,tc_c587d1c1cd8d4ec489f3d8e2524ec607,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,BGR.NGDPD.A,BGR,Bulgaria,registry_code_match_review_iso_status,tc_523810acde564c1c907acd5befe575ab,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,KGZ.NGDPD.A,KGZ,Kyrgyz Republic,registry_code_match_review_iso_status,tc_130ca81b84d04b058e9301121b2b7802,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,MDA.NGDPD.A,MDA,"Moldova, Republic of",registry_code_match_review_iso_status,tc_96ea5c49288d40b0945401031405c2c8,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,TJK.NGDPD.A,TJK,"Tajikistan, Republic of",registry_code_match_review_iso_status,tc_772e2ac5253c46e98b79cf5a6f19e9f5,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,CHN.NGDPD.A,CHN,"China, People's Republic of",registry_code_match_review_iso_status,tc_3349a0b8b7454088b11e917a24de3ad5,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,UZB.NGDPD.A,UZB,"Uzbekistan, Republic of",registry_code_match_review_iso_status,tc_5d951c36a4ad4471ae9b9037fe338d70,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,CZE.NGDPD.A,CZE,Czech Republic,registry_code_match_review_iso_status,tc_e43afc3a83a3458c833dac5644b7186a,False,2025,US dollar,Billions,January/December,37,1995,2031
+15,NGDPD,TKM.NGDPD.A,TKM,Turkmenistan,registry_code_match_review_iso_status,tc_72de9a194d85404098bb741ae4ffc826,True,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,UKR.NGDPD.A,UKR,Ukraine,registry_code_match_review_iso_status,tc_65f8a168b10143c2a596917c1fca3731,True,2025,US dollar,Billions,January/December,41,1991,2031
+15,NGDPD,LVA.NGDPD.A,LVA,"Latvia, Republic of",registry_code_match_review_iso_status,tc_f161aef25a39413e8aef8c147e97b28a,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,SVK.NGDPD.A,SVK,Slovak Republic,registry_code_match_review_iso_status,tc_b3bea891d7114d148714d5e398ee06b1,False,2025,US dollar,Billions,January/December,39,1993,2031
+15,NGDPD,EST.NGDPD.A,EST,"Estonia, Republic of",registry_code_match_review_iso_status,tc_383873de760147cd97dfac5ef5d60b08,False,2025,US dollar,Billions,January/December,39,1993,2031
+15,NGDPD,MNG.NGDPD.A,MNG,Mongolia,registry_code_match_review_iso_status,tc_d0fb202ca0aa4a868af6fa154ab84c30,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SRB.NGDPD.A,SRB,"Serbia, Republic of",registry_code_match_review_iso_status,tc_98a68180b9f0479f90dcde7809d60470,False,2025,US dollar,Billions,January/December,35,1997,2031
+15,NGDPD,MNE.NGDPD.A,MNE,Montenegro,registry_code_match_review_iso_status,tc_eb1de71332ef4db496cb76c95aa56cd4,True,2025,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,HUN.NGDPD.A,HUN,Hungary,registry_code_match_review_iso_status,tc_e3ede57c1b754a2dbd940335f9655f11,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LTU.NGDPD.A,LTU,"Lithuania, Republic of",registry_code_match_review_iso_status,tc_77de0a41c4d94d8388d6f0732438be81,False,2025,US dollar,Billions,January/December,37,1995,2031
+15,NGDPD,HRV.NGDPD.A,HRV,"Croatia, Republic of",registry_code_match_review_iso_status,tc_fb4046d4910a4bf89f4a93810e2f4d8a,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,SVN.NGDPD.A,SVN,"Slovenia, Republic of",registry_code_match_review_iso_status,tc_c0484640d9554c8285e92412bae25785,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,BIH.NGDPD.A,BIH,Bosnia and Herzegovina,registry_code_match_review_iso_status,tc_0628271c897b49558f423321cbc48ce4,True,2025,US dollar,Billions,January/December,36,1996,2031
+15,NGDPD,MKD.NGDPD.A,MKD,"North Macedonia, Republic of",registry_code_match_review_iso_status,tc_949bf877e3284f5c8a56cfc89bcafa90,False,2025,US dollar,Billions,January/December,40,1992,2031
+15,NGDPD,POL.NGDPD.A,POL,"Poland, Republic of",registry_code_match_review_iso_status,tc_9865dd6a50c3458b98f5040f0cc76357,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,KOS.NGDPD.A,KOS,"Kosovo, Republic of",registry_code_match_review_iso_status,tc_28aa17b84db24952b92fc51b421075e0,False,2025,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,ROU.NGDPD.A,ROU,Romania,registry_code_match_review_iso_status,tc_c41863f7cb4e4dccbbdf0a1296f9ee1c,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GBR.NGDPD.A,GBR,United Kingdom,registry_code_match_review_iso_status,tc_8d01644699e04b74ae3a4751c6f1fc41,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,USA.NGDPD.A,USA,United States,registry_code_match_review_iso_status,tc_f0a8b61c54a14d4089774716657e9433,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,AUT.NGDPD.A,AUT,Austria,registry_code_match_review_iso_status,tc_a0422e821c824e78bd95525b36155b65,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BEL.NGDPD.A,BEL,Belgium,registry_code_match_review_iso_status,tc_f1cc713e923c4be48e176657a00469f0,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,DEU.NGDPD.A,DEU,Germany,registry_code_match_review_iso_status,tc_ff445b0a87494070bf868827de190acf,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,DNK.NGDPD.A,DNK,Denmark,registry_code_match_review_iso_status,tc_11da440eb0704bd195fe0b11fa0890af,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,FRA.NGDPD.A,FRA,France,registry_code_match_review_iso_status,tc_471ae6d7112b4537a7ae5ca1e6a816a5,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ITA.NGDPD.A,ITA,Italy,registry_code_match_review_iso_status,tc_1f3e0c90df4341f082ed90ecdd95fb10,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LUX.NGDPD.A,LUX,Luxembourg,registry_code_match_review_iso_status,tc_f4261f4507cd48858cdfb7e3bd0ae738,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SMR.NGDPD.A,SMR,"San Marino, Republic of",registry_code_match_review_iso_status,tc_e4ea859bd6704c13912ad7f5cf19de41,False,2023,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,NLD.NGDPD.A,NLD,"Netherlands, The",registry_code_match_review_iso_status,tc_898b220cf53a425e9bac3630f2c17473,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SWE.NGDPD.A,SWE,Sweden,registry_code_match_review_iso_status,tc_d74b429fff544cf9bafeb459c4b3edd8,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,NOR.NGDPD.A,NOR,Norway,registry_code_match_review_iso_status,tc_f4a6e15a05474af2b81c9524ed988d89,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CHE.NGDPD.A,CHE,Switzerland,registry_code_match_review_iso_status,tc_e693e8b799f94e7bb814e89bd46d886d,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LIE.NGDPD.A,LIE,"Liechtenstein, Principality of",registry_code_match_review_iso_status,tc_a8bd42bd635b43289f3c26695dc58939,False,2023,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,CAN.NGDPD.A,CAN,Canada,registry_code_match_review_iso_status,tc_ba9087366ba54d51932e88bf8a11616d,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,FIN.NGDPD.A,FIN,Finland,registry_code_match_review_iso_status,tc_374e55a3eefe4a1a83fed6b64b5045f5,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,JPN.NGDPD.A,JPN,Japan,registry_code_match_review_iso_status,tc_8d0620ea475f498d9402134857882bf1,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,AND.NGDPD.A,AND,"Andorra, Principality of",registry_code_match_review_iso_status,tc_224c06bfe0f04031b422bddc81ea3ce5,False,2025,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,GRC.NGDPD.A,GRC,Greece,registry_code_match_review_iso_status,tc_dab67464d7ad44cdbf925450627e4186,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ISL.NGDPD.A,ISL,Iceland,registry_code_match_review_iso_status,tc_861af4b9250e4e17a9d3f1f4e1ea33d4,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,IRL.NGDPD.A,IRL,Ireland,registry_code_match_review_iso_status,tc_16d6044d9abf4743821a6fb238942a22,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ESP.NGDPD.A,ESP,Spain,registry_code_match_review_iso_status,tc_21a70a0fbf1b43c292783397ce218239,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MLT.NGDPD.A,MLT,Malta,registry_code_match_review_iso_status,tc_f97b2223a2a84e53ac13614ddde1f602,True,2025,US dollar,Billions,January/December,37,1995,2031
+15,NGDPD,PRT.NGDPD.A,PRT,Portugal,registry_code_match_review_iso_status,tc_43ee3db974884a72bacf5f5519e2c145,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,NZL.NGDPD.A,NZL,New Zealand,registry_code_match_review_iso_status,tc_d4b67e03f0c04d9a87089f477e5fa669,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,AUS.NGDPD.A,AUS,Australia,registry_code_match_review_iso_status,tc_270a6ecb902d4ea1ac7373b3d1a3b2cc,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TUR.NGDPD.A,TUR,"Türkiye, Republic of",registry_code_match_review_iso_status,tc_155414257ec0498690f73c3595d85e7c,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ARG.NGDPD.A,ARG,Argentina,registry_code_match_review_iso_status,tc_2a29d5b72b294244a5de6db37118237a,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ZAF.NGDPD.A,ZAF,South Africa,registry_code_match_review_iso_status,tc_dc6419869818416db051f50cbfd95036,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BOL.NGDPD.A,BOL,Bolivia,registry_code_match_review_iso_status,tc_4cd6d52014244914bdeb62e6a6452e42,True,2025,US dollar,Billions,January/December,47,1980,2026
+15,NGDPD,BRA.NGDPD.A,BRA,Brazil,registry_code_match_review_iso_status,tc_4923336d91d94afc919d8a2b8a4ad415,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,COL.NGDPD.A,COL,Colombia,registry_code_match_review_iso_status,tc_648b019cc83e486ab9fb8497386777a9,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CRI.NGDPD.A,CRI,Costa Rica,registry_code_match_review_iso_status,tc_79512b2eaf8f45b5b118130859ebdaaf,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CHL.NGDPD.A,CHL,Chile,registry_code_match_review_iso_status,tc_4c51c695cb6e47d2aed2fb04c397bece,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ECU.NGDPD.A,ECU,Ecuador,registry_code_match_review_iso_status,tc_2a54eb1caed54a2185a62cce0c2db6cb,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,DOM.NGDPD.A,DOM,Dominican Republic,registry_code_match_review_iso_status,tc_ee04e01170f84b92afabbb40abdbd4e3,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SLV.NGDPD.A,SLV,El Salvador,registry_code_match_review_iso_status,tc_471268dbb85845de93e546317686debb,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,HTI.NGDPD.A,HTI,Haiti,registry_code_match_review_iso_status,tc_9ee610c6d55a4f4bbdbbb073b33628a2,True,FY2024/25,US dollar,Billions,October/September,52,1980,2031
+15,NGDPD,HND.NGDPD.A,HND,Honduras,registry_code_match_review_iso_status,tc_80c318b9217a4320beaad6b93eb74ac5,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GTM.NGDPD.A,GTM,Guatemala,registry_code_match_review_iso_status,tc_9348779eba844ab2beb5bed00053b7c6,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MEX.NGDPD.A,MEX,Mexico,registry_code_match_review_iso_status,tc_c6b830c3cba64d4883eac8cee7864cfd,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,PAN.NGDPD.A,PAN,Panama,registry_code_match_review_iso_status,tc_ba6cf14fa6224eb4a0b085b3ea1df6dc,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,NIC.NGDPD.A,NIC,Nicaragua,registry_code_match_review_iso_status,tc_2fdae8757e51402e9f67c428d2b79368,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,URY.NGDPD.A,URY,Uruguay,registry_code_match_review_iso_status,tc_e19506c4a1564ca085b73b9284fa6f56,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,VEN.NGDPD.A,VEN,"Venezuela, República Bolivariana de",registry_code_match_review_iso_status,tc_1aa00cb7ebb34cdca928353a58ff5b12,False,2025,US dollar,Billions,January/December,48,1980,2027
+15,NGDPD,PER.NGDPD.A,PER,Peru,registry_code_match_review_iso_status,tc_a90d391a4a9a473b9074fc99cce11cb5,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,PRY.NGDPD.A,PRY,Paraguay,registry_code_match_review_iso_status,tc_3eb6dc12494541e793a8a5b68980f29f,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,DMA.NGDPD.A,DMA,Dominica,registry_code_match_review_iso_status,tc_e5391af862dd490bb3a01fa80f4ac15e,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BHS.NGDPD.A,BHS,"Bahamas, The",registry_code_match_review_iso_status,tc_53553c35a9f44fddb64f46b5b2d7b90c,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ABW.NGDPD.A,ABW,"Aruba, Kingdom of the Netherlands",registry_code_match_review_iso_status,tc_8344feaf14da4684aaa8d4c263653778,False,2023,US dollar,Billions,January/December,37,1995,2031
+15,NGDPD,ATG.NGDPD.A,ATG,Antigua and Barbuda,registry_code_match_review_iso_status,tc_9221f2a3fd704847b66da16efa03c2b8,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BRB.NGDPD.A,BRB,Barbados,registry_code_match_review_iso_status,tc_7a679c592eef40c58b7cdf58e6032bb5,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GRD.NGDPD.A,GRD,Grenada,registry_code_match_review_iso_status,tc_c5b3fecc12a94e85a7acddc70fa7a086,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,JAM.NGDPD.A,JAM,Jamaica,registry_code_match_review_iso_status,tc_bf02736242694622ae7c730beb0f0da6,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BLZ.NGDPD.A,BLZ,Belize,registry_code_match_review_iso_status,tc_d066174c4df546d1a410d386f363ee80,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GUY.NGDPD.A,GUY,Guyana,registry_code_match_review_iso_status,tc_893d4efa8ccf42af896949ffd7007fef,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,PRI.NGDPD.A,PRI,Puerto Rico,registry_code_match_review_iso_status,tc_37f10315a18d4c3abf3486086b5822e1,True,FY2024/25,US dollar,Billions,July/June,52,1980,2031
+15,NGDPD,KNA.NGDPD.A,KNA,St. Kitts and Nevis,registry_code_match_review_iso_status,tc_f22d58e7280f41f7a5a68fb03e1ab87e,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,VCT.NGDPD.A,VCT,St. Vincent and the Grenadines,registry_code_match_review_iso_status,tc_67290f5714c846f4a84d1f53c6fd495a,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LCA.NGDPD.A,LCA,St. Lucia,registry_code_match_review_iso_status,tc_6629fdb92d05409f856d9030b63b1470,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SUR.NGDPD.A,SUR,Suriname,registry_code_match_review_iso_status,tc_168a848021b84cc6a6c3fc320012a176,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TTO.NGDPD.A,TTO,Trinidad and Tobago,registry_code_match_review_iso_status,tc_1bd98a138f884dd4b4d9d1efbbf357b0,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,IRQ.NGDPD.A,IRQ,Iraq,registry_code_match_review_iso_status,tc_5ee7b31f968941dca65e70519901915f,True,2025,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,IRN.NGDPD.A,IRN,"Iran, Islamic Republic of",registry_code_match_review_iso_status,tc_ddf21c4d378e4fc9bc3d5b4ba50890a2,False,FY2025/26,US dollar,Billions,April/March,52,1980,2031
+15,NGDPD,BHR.NGDPD.A,BHR,"Bahrain, Kingdom of",registry_code_match_review_iso_status,tc_38fd6c5cd2be45739f3be11bc4cab9c8,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CYP.NGDPD.A,CYP,Cyprus,registry_code_match_review_iso_status,tc_3c148b1f7650455fa710ca87cf376728,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,KWT.NGDPD.A,KWT,Kuwait,registry_code_match_review_iso_status,tc_fa491c61ffa24dc3a21c6a6da7d39fad,True,2025,US dollar,Billions,January/December,51,1981,2031
+15,NGDPD,JOR.NGDPD.A,JOR,Jordan,registry_code_match_review_iso_status,tc_6e28258973b54dfeb5811c563cd0a2e8,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ISR.NGDPD.A,ISR,Israel,registry_code_match_review_iso_status,tc_28952c75855947a7b31bb7509dc1fce1,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,OMN.NGDPD.A,OMN,Oman,registry_code_match_review_iso_status,tc_22bd85ff61234a46a95506d105d5fee4,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,QAT.NGDPD.A,QAT,Qatar,registry_code_match_review_iso_status,tc_13df99232f33400d9079316c041f066c,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LBN.NGDPD.A,LBN,Lebanon,registry_code_match_review_iso_status,tc_8466a0747d0b4d1a8c23feb70f7c6ed1,True,2024,US dollar,Billions,January/December,46,1980,2025
+15,NGDPD,ARE.NGDPD.A,ARE,United Arab Emirates,registry_code_match_review_iso_status,tc_3cbd960008724744b928265acc0638a4,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,EGY.NGDPD.A,EGY,"Egypt, Arab Republic of",registry_code_match_review_iso_status,tc_939f236600dd47a8bf850a7ff19dc047,False,FY2024/25,US dollar,Billions,July/June,52,1980,2031
+15,NGDPD,SAU.NGDPD.A,SAU,Saudi Arabia,registry_code_match_review_iso_status,tc_86b0f7fcb4504f9b8dc1b60b42b16ea0,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,AFG.NGDPD.A,AFG,"Afghanistan, Islamic Republic of",registry_code_match_review_iso_status,tc_928d15fd89764353a6889f571bfd0a1c,False,FY2024/25,US dollar,Billions,April/March,24,2002,2025
+15,NGDPD,YEM.NGDPD.A,YEM,"Yemen, Republic of",registry_code_match_review_iso_status,tc_e32ec835b247449084d1b535ebccf7f1,False,2024,US dollar,Billions,January/December,18,2014,2031
+15,NGDPD,WBG.NGDPD.A,WBG,West Bank and Gaza,unmatched_three_letter_source_code,,False,2025,US dollar,Billions,January/December,32,1994,2025
+15,NGDPD,BGD.NGDPD.A,BGD,Bangladesh,registry_code_match_review_iso_status,tc_8169e562ece7475e960f78f231cb1ab7,True,FY2025/26,US dollar,Billions,July/June,52,1980,2031
+15,NGDPD,BTN.NGDPD.A,BTN,Bhutan,registry_code_match_review_iso_status,tc_91f04a21215642aeb5da856a78dc9949,True,FY2024/25,US dollar,Billions,July/June,52,1980,2031
+15,NGDPD,KHM.NGDPD.A,KHM,Cambodia,registry_code_match_review_iso_status,tc_f956986338e5418481784ba2d2781063,True,2025,US dollar,Billions,January/December,46,1986,2031
+15,NGDPD,MMR.NGDPD.A,MMR,Myanmar,registry_code_match_review_iso_status,tc_b4847e5d14f94efdbbd46d6467d90237,True,FY2021/22,US dollar,Billions,April/March,34,1998,2031
+15,NGDPD,BRN.NGDPD.A,BRN,Brunei Darussalam,registry_code_match_review_iso_status,tc_e416804f7e41490a9e7d743a45a72f0e,False,2025,US dollar,Billions,January/December,47,1985,2031
+15,NGDPD,IDN.NGDPD.A,IDN,Indonesia,registry_code_match_review_iso_status,tc_c40da0ac977b4201b8587ce04aa66f56,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TWN.NGDPD.A,TWN,Taiwan Province of China,registry_code_match_review_iso_status,tc_98ab3dee1d554162b6bbd5dac6374fc8,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,HKG.NGDPD.A,HKG,"Hong Kong Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_394248a9960c4d28b4385210c82a0a0b,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LKA.NGDPD.A,LKA,Sri Lanka,registry_code_match_review_iso_status,tc_5e47c88bebac452e953fc5dfa8b1ba06,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MYS.NGDPD.A,MYS,Malaysia,registry_code_match_review_iso_status,tc_b21225f45c3b40509640603249110f89,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,KOR.NGDPD.A,KOR,"Korea, Republic of",registry_code_match_review_iso_status,tc_cf8be733dbf44dd6b112e9fe12d2b19e,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TLS.NGDPD.A,TLS,"Timor-Leste, Democratic Republic of",registry_code_match_review_iso_status,tc_bd40ea14860a4c4083eced5549d2d9c4,False,2024,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,IND.NGDPD.A,IND,India,registry_code_match_review_iso_status,tc_39ad5030b5f94f068d4a1528c60e5638,True,FY2025/26,US dollar,Billions,April/March,52,1980,2031
+15,NGDPD,LAO.NGDPD.A,LAO,Lao People's Democratic Republic,registry_code_match_review_iso_status,tc_71a3ecd24ca74da9a6cea3dae8cd1f82,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MAC.NGDPD.A,MAC,"Macao Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_f9a64d8c1e6342d2b1941833ff7588d0,False,2025,US dollar,Billions,January/December,31,2001,2031
+15,NGDPD,SGP.NGDPD.A,SGP,Singapore,registry_code_match_review_iso_status,tc_9d65e06bf97d417c8aa62742225ef5c9,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MDV.NGDPD.A,MDV,Maldives,registry_code_match_review_iso_status,tc_408d22fe5b894b4b947a0521ace1018a,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,NPL.NGDPD.A,NPL,Nepal,registry_code_match_review_iso_status,tc_1c4ff3f2a8f04b43b0c28e830a9403ad,True,FY2025/26,US dollar,Billions,August/July,52,1980,2031
+15,NGDPD,PAK.NGDPD.A,PAK,Pakistan,registry_code_match_review_iso_status,tc_0dc6216a94e34b44b27e42ed35fa6376,True,FY2024/25,US dollar,Billions,July/June,47,1980,2026
+15,NGDPD,PLW.NGDPD.A,PLW,"Palau, Republic of",registry_code_match_review_iso_status,tc_642fbe2581cf4b8c857d967717d1f1ef,False,FY2024/25,US dollar,Billions,October/September,32,2000,2031
+15,NGDPD,PHL.NGDPD.A,PHL,Philippines,registry_code_match_review_iso_status,tc_fc8f1a9536d342899526129acf15acd2,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,THA.NGDPD.A,THA,Thailand,registry_code_match_review_iso_status,tc_fc12d0184fc7498f982ab8033ae64436,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,DJI.NGDPD.A,DJI,Djibouti,registry_code_match_review_iso_status,tc_f4814b1a89384c4d93a92c19b301a814,True,2024,US dollar,Billions,January/December,42,1990,2031
+15,NGDPD,VNM.NGDPD.A,VNM,Vietnam,registry_code_match_review_iso_status,tc_e65eabf3cd054585a43347bdfea6201b,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BWA.NGDPD.A,BWA,Botswana,registry_code_match_review_iso_status,tc_ca2bdd688a454bb8b6457c9448612669,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,AGO.NGDPD.A,AGO,Angola,registry_code_match_review_iso_status,tc_fa43ff476d6b428fa8edb4dde1aa9d3f,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,DZA.NGDPD.A,DZA,Algeria,registry_code_match_review_iso_status,tc_e245d37005f843168d67b7b327ece7f9,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CAF.NGDPD.A,CAF,Central African Republic,registry_code_match_review_iso_status,tc_9d80376a997845b6ba6bbc08d436a50d,True,2022,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CMR.NGDPD.A,CMR,Cameroon,registry_code_match_review_iso_status,tc_f5cd614ef03c414d8e98d87102df5c14,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BDI.NGDPD.A,BDI,Burundi,registry_code_match_review_iso_status,tc_4ac5b3c6b7774a05b4ceb5573c4a9d27,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CPV.NGDPD.A,CPV,Cabo Verde,registry_code_match_review_iso_status,tc_d9d1737635ce4385a50c4307c2716832,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,COD.NGDPD.A,COD,"Congo, Democratic Republic of the",registry_code_match_review_iso_status,tc_2763c19aa8734ce9aa8b17d8effb6645,False,2023,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,COG.NGDPD.A,COG,"Congo, Republic of",registry_code_match_review_iso_status,tc_451d8109e28b45eaa6923dfcac9d1601,False,2022,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,TCD.NGDPD.A,TCD,Chad,registry_code_match_review_iso_status,tc_1da2daf3a3d34a30b96100d643963f70,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,COM.NGDPD.A,COM,"Comoros, Union of the",registry_code_match_review_iso_status,tc_10dd5e9664664abf9eca33c250a74cdb,False,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,BEN.NGDPD.A,BEN,Benin,registry_code_match_review_iso_status,tc_874ae1f05e8c4d67a2c839095d760b72,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GNQ.NGDPD.A,GNQ,"Equatorial Guinea, Republic of",registry_code_match_review_iso_status,tc_06d71df13c4f415fbf22a0147f19bc53,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ETH.NGDPD.A,ETH,"Ethiopia, The Federal Democratic Republic of",registry_code_match_review_iso_status,tc_860d12ee66fc4fceb3faddbc92c87930,False,FY2024/25,US dollar,Billions,July/June,52,1980,2031
+15,NGDPD,GMB.NGDPD.A,GMB,"Gambia, The",registry_code_match_review_iso_status,tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a,False,2023,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GAB.NGDPD.A,GAB,Gabon,registry_code_match_review_iso_status,tc_d59dfb6324524b07a32c87b73009e97f,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GNB.NGDPD.A,GNB,Guinea-Bissau,registry_code_match_review_iso_status,tc_dc93b6caf7324df884ec2b070a5296b9,True,2023,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GIN.NGDPD.A,GIN,Guinea,registry_code_match_review_iso_status,tc_05eaf88055cc4388b518332f2e7fc115,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,GHA.NGDPD.A,GHA,Ghana,registry_code_match_review_iso_status,tc_f63061b714ce4390948838410758c016,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MWI.NGDPD.A,MWI,Malawi,registry_code_match_review_iso_status,tc_ee1c1ac1ad5c4faf818070115133b174,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,KEN.NGDPD.A,KEN,Kenya,registry_code_match_review_iso_status,tc_9f3dc962bf9744a5a3cdf1f7a1cbb159,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,CIV.NGDPD.A,CIV,Côte d'Ivoire,registry_code_match_review_iso_status,tc_18c639798e4948899643d84aa2bce93c,False,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LBR.NGDPD.A,LBR,Liberia,registry_code_match_review_iso_status,tc_40dc9d2e141343e98a4d0c762c578473,True,2025,US dollar,Billions,January/December,32,2000,2031
+15,NGDPD,LSO.NGDPD.A,LSO,"Lesotho, Kingdom of",registry_code_match_review_iso_status,tc_c0fa4e9b8e984f59ba17beb7547c5811,False,FY2024/25,US dollar,Billions,April/March,52,1980,2031
+15,NGDPD,MDG.NGDPD.A,MDG,"Madagascar, Republic of",registry_code_match_review_iso_status,tc_7abbe0f9aa1346c7a9f69cc1027b4282,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,LBY.NGDPD.A,LBY,Libya,registry_code_match_review_iso_status,tc_bb5622bab363429ca481c5476acc824c,True,2019,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MRT.NGDPD.A,MRT,"Mauritania, Islamic Republic of",registry_code_match_review_iso_status,tc_17137c4e4fcc4fa58e32c924f08efcda,False,2025,US dollar,Billions,January/December,42,1990,2031
+15,NGDPD,MLI.NGDPD.A,MLI,Mali,registry_code_match_review_iso_status,tc_a3f73fd3bb6d4d7fb4ea31d433453bae,True,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MUS.NGDPD.A,MUS,Mauritius,registry_code_match_review_iso_status,tc_c7b728ec16b94e35b05d96d14a253eec,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,MAR.NGDPD.A,MAR,Morocco,registry_code_match_review_iso_status,tc_84dc0c18f03144bea337f6aacd50bf0f,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,NER.NGDPD.A,NER,Niger,registry_code_match_review_iso_status,tc_4d31375845614c2b91a71736069d4ab3,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,NGA.NGDPD.A,NGA,Nigeria,registry_code_match_review_iso_status,tc_7a8158c93a934345a2ade9fd16ee4999,True,2025,US dollar,Billions,January/December,42,1990,2031
+15,NGDPD,MOZ.NGDPD.A,MOZ,"Mozambique, Republic of",registry_code_match_review_iso_status,tc_2249b79a9c944a1c835b0cad2676e48d,False,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,STP.NGDPD.A,STP,"São Tomé and Príncipe, Democratic Republic of",registry_code_match_review_iso_status,tc_4a2ed326dc6047efa2e28926df0bc7f0,False,2024,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,RWA.NGDPD.A,RWA,Rwanda,registry_code_match_review_iso_status,tc_7f3c6637070f4c42a40c1f5456ec4721,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,ZWE.NGDPD.A,ZWE,Zimbabwe,registry_code_match_review_iso_status,tc_168ca96e60634f5d83f3f22ad2505e66,True,2025,US dollar,Billions,January/December,42,1990,2031
+15,NGDPD,SDN.NGDPD.A,SDN,Sudan,registry_code_match_review_iso_status,tc_b0ca3e0386b34603a6356b8ebc8b0565,True,2019,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SLE.NGDPD.A,SLE,Sierra Leone,registry_code_match_review_iso_status,tc_56e9d1977fa14da298ae125fbda1b63c,True,2025,US dollar,Billions,January/December,52,1980,2031
+15,NGDPD,SEN.NGDPD.A,SEN,Senegal,registry_code_match_review_iso_status,tc_29ec74ae4e094053a930487b9ce602d1,True,2025,US dollar,Billions,January/December,46,1980,2025
+16,NGDPDPC,SYR.NGDPDPC.A,SYR,Syrian Arab Republic,registry_code_match_review_iso_status,tc_c205b2615c45490182519ecedb651e99,False,2010,US dollar,Units,January/December,31,1980,2010
+16,NGDPDPC,ERI.NGDPDPC.A,ERI,"Eritrea, The State of",registry_code_match_review_iso_status,tc_f9d7128c5ef04c6f955f43f9bcc56a0c,False,2019,US dollar,Units,January/December,28,1992,2019
+16,NGDPDPC,SYC.NGDPDPC.A,SYC,Seychelles,registry_code_match_review_iso_status,tc_4bc377d3ea57485bac43c9b512587dbc,True,2025,US dollar,Units,January/December,10,2022,2031
+16,NGDPDPC,SLE.NGDPDPC.A,SLE,Sierra Leone,registry_code_match_review_iso_status,tc_56e9d1977fa14da298ae125fbda1b63c,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SSD.NGDPDPC.A,SSD,"South Sudan, Republic of",registry_code_match_review_iso_status,tc_12491d45eed544948b316c89f82a7ee7,False,2025,US dollar,Units,January/December,21,2011,2031
+16,NGDPDPC,NAM.NGDPDPC.A,NAM,Namibia,registry_code_match_review_iso_status,tc_7379cdcc5c4848c181ace3144aeba70f,True,2025,US dollar,Units,January/December,43,1989,2031
+16,NGDPDPC,SDN.NGDPDPC.A,SDN,Sudan,registry_code_match_review_iso_status,tc_b0ca3e0386b34603a6356b8ebc8b0565,True,2019,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,TZA.NGDPDPC.A,TZA,"Tanzania, United Republic of",registry_code_match_review_iso_status,tc_0f4c47ec59434e46871845e474964499,False,2023,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SWZ.NGDPDPC.A,SWZ,"Eswatini, Kingdom of",registry_code_match_review_iso_status,tc_fc2ad04f3c88446e91bd770190d6fe4c,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,TGO.NGDPDPC.A,TGO,Togo,registry_code_match_review_iso_status,tc_06a09ff0e27b49e392ef2e88161023eb,True,2023,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,TUN.NGDPDPC.A,TUN,Tunisia,registry_code_match_review_iso_status,tc_1d1d2c1274384efa82f9591e1c069aba,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ZMB.NGDPDPC.A,ZMB,Zambia,registry_code_match_review_iso_status,tc_e75bc9ac62fa443c90b5529778f3b1af,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BFA.NGDPDPC.A,BFA,Burkina Faso,registry_code_match_review_iso_status,tc_3c920b9b9f324cb19ef9d4b6debf10ba,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,UGA.NGDPDPC.A,UGA,Uganda,registry_code_match_review_iso_status,tc_2bd67b30564b46b4b502a36decc333bf,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NRU.NGDPDPC.A,NRU,"Naoero, Republic of",registry_code_match_review_iso_status,tc_2722269bdef04648b655fe363650d565,False,FY2020/21,US dollar,Units,July/June,28,2004,2031
+16,NGDPDPC,FJI.NGDPDPC.A,FJI,"Fiji, Republic of",registry_code_match_review_iso_status,tc_8d67737674744dce8986565b98cbbb1f,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,KIR.NGDPDPC.A,KIR,Kiribati,registry_code_match_review_iso_status,tc_c23a3cf00b1a4ebf97a70a4f41a7761d,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SLB.NGDPDPC.A,SLB,Solomon Islands,registry_code_match_review_iso_status,tc_0ce7eb254c32428c88601905c0df8e87,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,VUT.NGDPDPC.A,VUT,Vanuatu,registry_code_match_review_iso_status,tc_43c4be0a76ca43a2bb7e634de5a1f4f4,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,PNG.NGDPDPC.A,PNG,Papua New Guinea,registry_code_match_review_iso_status,tc_82d51d964745422e8ed3a9109757d2ee,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,WSM.NGDPDPC.A,WSM,Samoa,registry_code_match_review_iso_status,tc_76082bd796c546d1ab76a7a8a3251369,True,FY2024/25,US dollar,Units,July/June,34,1998,2031
+16,NGDPDPC,TON.NGDPDPC.A,TON,Tonga,registry_code_match_review_iso_status,tc_2c6f6c5486f04a87aa94277e67d6e51a,True,FY2024/25,US dollar,Units,July/June,52,1980,2031
+16,NGDPDPC,FSM.NGDPDPC.A,FSM,"Micronesia, Federated States of",registry_code_match_review_iso_status,tc_4add61cba99b4e63a37406cd1d0feb5f,False,FY2024/25,US dollar,Units,October/September,37,1995,2031
+16,NGDPDPC,TUV.NGDPDPC.A,TUV,Tuvalu,registry_code_match_review_iso_status,tc_47cd272cd9c9455185a13f6e69bd805c,True,2025,US dollar,Units,January/December,30,2002,2031
+16,NGDPDPC,MHL.NGDPDPC.A,MHL,"Marshall Islands, Republic of the",registry_code_match_review_iso_status,tc_f201b19690a04a8f903f9ea4cb0c7af4,False,FY2024/25,US dollar,Units,October/September,35,1997,2031
+16,NGDPDPC,ARM.NGDPDPC.A,ARM,"Armenia, Republic of",registry_code_match_review_iso_status,tc_f97b56c9c74845de8b41aa24ed12a47f,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,AZE.NGDPDPC.A,AZE,"Azerbaijan, Republic of",registry_code_match_review_iso_status,tc_b8c860bb8d404dcca918bad769e7ead7,False,2024,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,BLR.NGDPDPC.A,BLR,"Belarus, Republic of",registry_code_match_review_iso_status,tc_6ebc90b251e14f70b8bf758d8008e839,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,GEO.NGDPDPC.A,GEO,Georgia,registry_code_match_review_iso_status,tc_741bd244c1ec4961918565c4ed02c5c6,True,2025,US dollar,Units,January/December,38,1994,2031
+16,NGDPDPC,KAZ.NGDPDPC.A,KAZ,"Kazakhstan, Republic of",registry_code_match_review_iso_status,tc_feadffc011db4cf695df6c0997a003c8,False,2024,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,ALB.NGDPDPC.A,ALB,Albania,registry_code_match_review_iso_status,tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BGR.NGDPDPC.A,BGR,Bulgaria,registry_code_match_review_iso_status,tc_523810acde564c1c907acd5befe575ab,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MDA.NGDPDPC.A,MDA,"Moldova, Republic of",registry_code_match_review_iso_status,tc_96ea5c49288d40b0945401031405c2c8,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,KGZ.NGDPDPC.A,KGZ,Kyrgyz Republic,registry_code_match_review_iso_status,tc_130ca81b84d04b058e9301121b2b7802,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,UZB.NGDPDPC.A,UZB,"Uzbekistan, Republic of",registry_code_match_review_iso_status,tc_5d951c36a4ad4471ae9b9037fe338d70,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,TJK.NGDPDPC.A,TJK,"Tajikistan, Republic of",registry_code_match_review_iso_status,tc_772e2ac5253c46e98b79cf5a6f19e9f5,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,RUS.NGDPDPC.A,RUS,Russian Federation,registry_code_match_review_iso_status,tc_c587d1c1cd8d4ec489f3d8e2524ec607,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,CHN.NGDPDPC.A,CHN,"China, People's Republic of",registry_code_match_review_iso_status,tc_3349a0b8b7454088b11e917a24de3ad5,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SVK.NGDPDPC.A,SVK,Slovak Republic,registry_code_match_review_iso_status,tc_b3bea891d7114d148714d5e398ee06b1,False,2025,US dollar,Units,January/December,39,1993,2031
+16,NGDPDPC,CZE.NGDPDPC.A,CZE,Czech Republic,registry_code_match_review_iso_status,tc_e43afc3a83a3458c833dac5644b7186a,False,2025,US dollar,Units,January/December,37,1995,2031
+16,NGDPDPC,UKR.NGDPDPC.A,UKR,Ukraine,registry_code_match_review_iso_status,tc_65f8a168b10143c2a596917c1fca3731,True,2025,US dollar,Units,January/December,41,1991,2031
+16,NGDPDPC,TKM.NGDPDPC.A,TKM,Turkmenistan,registry_code_match_review_iso_status,tc_72de9a194d85404098bb741ae4ffc826,True,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,HUN.NGDPDPC.A,HUN,Hungary,registry_code_match_review_iso_status,tc_e3ede57c1b754a2dbd940335f9655f11,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LVA.NGDPDPC.A,LVA,"Latvia, Republic of",registry_code_match_review_iso_status,tc_f161aef25a39413e8aef8c147e97b28a,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,EST.NGDPDPC.A,EST,"Estonia, Republic of",registry_code_match_review_iso_status,tc_383873de760147cd97dfac5ef5d60b08,False,2025,US dollar,Units,January/December,39,1993,2031
+16,NGDPDPC,MNE.NGDPDPC.A,MNE,Montenegro,registry_code_match_review_iso_status,tc_eb1de71332ef4db496cb76c95aa56cd4,True,2025,US dollar,Units,January/December,32,2000,2031
+16,NGDPDPC,SRB.NGDPDPC.A,SRB,"Serbia, Republic of",registry_code_match_review_iso_status,tc_98a68180b9f0479f90dcde7809d60470,False,2025,US dollar,Units,January/December,33,1999,2031
+16,NGDPDPC,HRV.NGDPDPC.A,HRV,"Croatia, Republic of",registry_code_match_review_iso_status,tc_fb4046d4910a4bf89f4a93810e2f4d8a,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,MNG.NGDPDPC.A,MNG,Mongolia,registry_code_match_review_iso_status,tc_d0fb202ca0aa4a868af6fa154ab84c30,True,2025,US dollar,Units,January/December,42,1990,2031
+16,NGDPDPC,LTU.NGDPDPC.A,LTU,"Lithuania, Republic of",registry_code_match_review_iso_status,tc_77de0a41c4d94d8388d6f0732438be81,False,2025,US dollar,Units,January/December,37,1995,2031
+16,NGDPDPC,BIH.NGDPDPC.A,BIH,Bosnia and Herzegovina,registry_code_match_review_iso_status,tc_0628271c897b49558f423321cbc48ce4,True,2025,US dollar,Units,January/December,36,1996,2031
+16,NGDPDPC,SVN.NGDPDPC.A,SVN,"Slovenia, Republic of",registry_code_match_review_iso_status,tc_c0484640d9554c8285e92412bae25785,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,MKD.NGDPDPC.A,MKD,"North Macedonia, Republic of",registry_code_match_review_iso_status,tc_949bf877e3284f5c8a56cfc89bcafa90,False,2025,US dollar,Units,January/December,40,1992,2031
+16,NGDPDPC,POL.NGDPDPC.A,POL,"Poland, Republic of",registry_code_match_review_iso_status,tc_9865dd6a50c3458b98f5040f0cc76357,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ROU.NGDPDPC.A,ROU,Romania,registry_code_match_review_iso_status,tc_c41863f7cb4e4dccbbdf0a1296f9ee1c,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,KOS.NGDPDPC.A,KOS,"Kosovo, Republic of",registry_code_match_review_iso_status,tc_28aa17b84db24952b92fc51b421075e0,False,2025,US dollar,Units,January/December,32,2000,2031
+16,NGDPDPC,GBR.NGDPDPC.A,GBR,United Kingdom,registry_code_match_review_iso_status,tc_8d01644699e04b74ae3a4751c6f1fc41,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,USA.NGDPDPC.A,USA,United States,registry_code_match_review_iso_status,tc_f0a8b61c54a14d4089774716657e9433,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BEL.NGDPDPC.A,BEL,Belgium,registry_code_match_review_iso_status,tc_f1cc713e923c4be48e176657a00469f0,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,AUT.NGDPDPC.A,AUT,Austria,registry_code_match_review_iso_status,tc_a0422e821c824e78bd95525b36155b65,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,DNK.NGDPDPC.A,DNK,Denmark,registry_code_match_review_iso_status,tc_11da440eb0704bd195fe0b11fa0890af,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,DEU.NGDPDPC.A,DEU,Germany,registry_code_match_review_iso_status,tc_ff445b0a87494070bf868827de190acf,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,FRA.NGDPDPC.A,FRA,France,registry_code_match_review_iso_status,tc_471ae6d7112b4537a7ae5ca1e6a816a5,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SMR.NGDPDPC.A,SMR,"San Marino, Republic of",registry_code_match_review_iso_status,tc_e4ea859bd6704c13912ad7f5cf19de41,False,2023,US dollar,Units,January/December,28,2004,2031
+16,NGDPDPC,ITA.NGDPDPC.A,ITA,Italy,registry_code_match_review_iso_status,tc_1f3e0c90df4341f082ed90ecdd95fb10,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LUX.NGDPDPC.A,LUX,Luxembourg,registry_code_match_review_iso_status,tc_f4261f4507cd48858cdfb7e3bd0ae738,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NOR.NGDPDPC.A,NOR,Norway,registry_code_match_review_iso_status,tc_f4a6e15a05474af2b81c9524ed988d89,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SWE.NGDPDPC.A,SWE,Sweden,registry_code_match_review_iso_status,tc_d74b429fff544cf9bafeb459c4b3edd8,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NLD.NGDPDPC.A,NLD,"Netherlands, The",registry_code_match_review_iso_status,tc_898b220cf53a425e9bac3630f2c17473,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LIE.NGDPDPC.A,LIE,"Liechtenstein, Principality of",registry_code_match_review_iso_status,tc_a8bd42bd635b43289f3c26695dc58939,False,2023,US dollar,Units,January/December,32,2000,2031
+16,NGDPDPC,CHE.NGDPDPC.A,CHE,Switzerland,registry_code_match_review_iso_status,tc_e693e8b799f94e7bb814e89bd46d886d,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,CAN.NGDPDPC.A,CAN,Canada,registry_code_match_review_iso_status,tc_ba9087366ba54d51932e88bf8a11616d,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,FIN.NGDPDPC.A,FIN,Finland,registry_code_match_review_iso_status,tc_374e55a3eefe4a1a83fed6b64b5045f5,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,JPN.NGDPDPC.A,JPN,Japan,registry_code_match_review_iso_status,tc_8d0620ea475f498d9402134857882bf1,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,AND.NGDPDPC.A,AND,"Andorra, Principality of",registry_code_match_review_iso_status,tc_224c06bfe0f04031b422bddc81ea3ce5,False,2025,US dollar,Units,January/December,22,2010,2031
+16,NGDPDPC,ISL.NGDPDPC.A,ISL,Iceland,registry_code_match_review_iso_status,tc_861af4b9250e4e17a9d3f1f4e1ea33d4,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,IRL.NGDPDPC.A,IRL,Ireland,registry_code_match_review_iso_status,tc_16d6044d9abf4743821a6fb238942a22,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GRC.NGDPDPC.A,GRC,Greece,registry_code_match_review_iso_status,tc_dab67464d7ad44cdbf925450627e4186,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MLT.NGDPDPC.A,MLT,Malta,registry_code_match_review_iso_status,tc_f97b2223a2a84e53ac13614ddde1f602,True,2025,US dollar,Units,January/December,37,1995,2031
+16,NGDPDPC,ESP.NGDPDPC.A,ESP,Spain,registry_code_match_review_iso_status,tc_21a70a0fbf1b43c292783397ce218239,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,PRT.NGDPDPC.A,PRT,Portugal,registry_code_match_review_iso_status,tc_43ee3db974884a72bacf5f5519e2c145,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,AUS.NGDPDPC.A,AUS,Australia,registry_code_match_review_iso_status,tc_270a6ecb902d4ea1ac7373b3d1a3b2cc,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NZL.NGDPDPC.A,NZL,New Zealand,registry_code_match_review_iso_status,tc_d4b67e03f0c04d9a87089f477e5fa669,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,TUR.NGDPDPC.A,TUR,"Türkiye, Republic of",registry_code_match_review_iso_status,tc_155414257ec0498690f73c3595d85e7c,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ZAF.NGDPDPC.A,ZAF,South Africa,registry_code_match_review_iso_status,tc_dc6419869818416db051f50cbfd95036,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ARG.NGDPDPC.A,ARG,Argentina,registry_code_match_review_iso_status,tc_2a29d5b72b294244a5de6db37118237a,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BOL.NGDPDPC.A,BOL,Bolivia,registry_code_match_review_iso_status,tc_4cd6d52014244914bdeb62e6a6452e42,True,2025,US dollar,Units,January/December,47,1980,2026
+16,NGDPDPC,BRA.NGDPDPC.A,BRA,Brazil,registry_code_match_review_iso_status,tc_4923336d91d94afc919d8a2b8a4ad415,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,CRI.NGDPDPC.A,CRI,Costa Rica,registry_code_match_review_iso_status,tc_79512b2eaf8f45b5b118130859ebdaaf,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,COL.NGDPDPC.A,COL,Colombia,registry_code_match_review_iso_status,tc_648b019cc83e486ab9fb8497386777a9,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,CHL.NGDPDPC.A,CHL,Chile,registry_code_match_review_iso_status,tc_4c51c695cb6e47d2aed2fb04c397bece,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ECU.NGDPDPC.A,ECU,Ecuador,registry_code_match_review_iso_status,tc_2a54eb1caed54a2185a62cce0c2db6cb,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SLV.NGDPDPC.A,SLV,El Salvador,registry_code_match_review_iso_status,tc_471268dbb85845de93e546317686debb,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,DOM.NGDPDPC.A,DOM,Dominican Republic,registry_code_match_review_iso_status,tc_ee04e01170f84b92afabbb40abdbd4e3,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,HTI.NGDPDPC.A,HTI,Haiti,registry_code_match_review_iso_status,tc_9ee610c6d55a4f4bbdbbb073b33628a2,True,FY2024/25,US dollar,Units,October/September,52,1980,2031
+16,NGDPDPC,GTM.NGDPDPC.A,GTM,Guatemala,registry_code_match_review_iso_status,tc_9348779eba844ab2beb5bed00053b7c6,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,HND.NGDPDPC.A,HND,Honduras,registry_code_match_review_iso_status,tc_80c318b9217a4320beaad6b93eb74ac5,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MEX.NGDPDPC.A,MEX,Mexico,registry_code_match_review_iso_status,tc_c6b830c3cba64d4883eac8cee7864cfd,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NIC.NGDPDPC.A,NIC,Nicaragua,registry_code_match_review_iso_status,tc_2fdae8757e51402e9f67c428d2b79368,True,2025,US dollar,Units,January/December,38,1994,2031
+16,NGDPDPC,PAN.NGDPDPC.A,PAN,Panama,registry_code_match_review_iso_status,tc_ba6cf14fa6224eb4a0b085b3ea1df6dc,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,VEN.NGDPDPC.A,VEN,"Venezuela, República Bolivariana de",registry_code_match_review_iso_status,tc_1aa00cb7ebb34cdca928353a58ff5b12,False,2025,US dollar,Units,January/December,48,1980,2027
+16,NGDPDPC,PER.NGDPDPC.A,PER,Peru,registry_code_match_review_iso_status,tc_a90d391a4a9a473b9074fc99cce11cb5,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,PRY.NGDPDPC.A,PRY,Paraguay,registry_code_match_review_iso_status,tc_3eb6dc12494541e793a8a5b68980f29f,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,URY.NGDPDPC.A,URY,Uruguay,registry_code_match_review_iso_status,tc_e19506c4a1564ca085b73b9284fa6f56,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ABW.NGDPDPC.A,ABW,"Aruba, Kingdom of the Netherlands",registry_code_match_review_iso_status,tc_8344feaf14da4684aaa8d4c263653778,False,2023,US dollar,Units,January/December,37,1995,2031
+16,NGDPDPC,ATG.NGDPDPC.A,ATG,Antigua and Barbuda,registry_code_match_review_iso_status,tc_9221f2a3fd704847b66da16efa03c2b8,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BHS.NGDPDPC.A,BHS,"Bahamas, The",registry_code_match_review_iso_status,tc_53553c35a9f44fddb64f46b5b2d7b90c,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GRD.NGDPDPC.A,GRD,Grenada,registry_code_match_review_iso_status,tc_c5b3fecc12a94e85a7acddc70fa7a086,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,DMA.NGDPDPC.A,DMA,Dominica,registry_code_match_review_iso_status,tc_e5391af862dd490bb3a01fa80f4ac15e,True,2024,US dollar,Units,January/December,51,1981,2031
+16,NGDPDPC,BRB.NGDPDPC.A,BRB,Barbados,registry_code_match_review_iso_status,tc_7a679c592eef40c58b7cdf58e6032bb5,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GUY.NGDPDPC.A,GUY,Guyana,registry_code_match_review_iso_status,tc_893d4efa8ccf42af896949ffd7007fef,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,PRI.NGDPDPC.A,PRI,Puerto Rico,registry_code_match_review_iso_status,tc_37f10315a18d4c3abf3486086b5822e1,True,FY2024/25,US dollar,Units,July/June,52,1980,2031
+16,NGDPDPC,BLZ.NGDPDPC.A,BLZ,Belize,registry_code_match_review_iso_status,tc_d066174c4df546d1a410d386f363ee80,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,JAM.NGDPDPC.A,JAM,Jamaica,registry_code_match_review_iso_status,tc_bf02736242694622ae7c730beb0f0da6,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,KNA.NGDPDPC.A,KNA,St. Kitts and Nevis,registry_code_match_review_iso_status,tc_f22d58e7280f41f7a5a68fb03e1ab87e,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LCA.NGDPDPC.A,LCA,St. Lucia,registry_code_match_review_iso_status,tc_6629fdb92d05409f856d9030b63b1470,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,VCT.NGDPDPC.A,VCT,St. Vincent and the Grenadines,registry_code_match_review_iso_status,tc_67290f5714c846f4a84d1f53c6fd495a,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SUR.NGDPDPC.A,SUR,Suriname,registry_code_match_review_iso_status,tc_168a848021b84cc6a6c3fc320012a176,True,2025,US dollar,Units,January/December,42,1990,2031
+16,NGDPDPC,TTO.NGDPDPC.A,TTO,Trinidad and Tobago,registry_code_match_review_iso_status,tc_1bd98a138f884dd4b4d9d1efbbf357b0,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,CYP.NGDPDPC.A,CYP,Cyprus,registry_code_match_review_iso_status,tc_3c148b1f7650455fa710ca87cf376728,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,IRQ.NGDPDPC.A,IRQ,Iraq,registry_code_match_review_iso_status,tc_5ee7b31f968941dca65e70519901915f,True,2025,US dollar,Units,January/December,29,2003,2031
+16,NGDPDPC,BHR.NGDPDPC.A,BHR,"Bahrain, Kingdom of",registry_code_match_review_iso_status,tc_38fd6c5cd2be45739f3be11bc4cab9c8,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,IRN.NGDPDPC.A,IRN,"Iran, Islamic Republic of",registry_code_match_review_iso_status,tc_ddf21c4d378e4fc9bc3d5b4ba50890a2,False,FY2025/26,US dollar,Units,April/March,52,1980,2031
+16,NGDPDPC,ISR.NGDPDPC.A,ISR,Israel,registry_code_match_review_iso_status,tc_28952c75855947a7b31bb7509dc1fce1,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,JOR.NGDPDPC.A,JOR,Jordan,registry_code_match_review_iso_status,tc_6e28258973b54dfeb5811c563cd0a2e8,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,KWT.NGDPDPC.A,KWT,Kuwait,registry_code_match_review_iso_status,tc_fa491c61ffa24dc3a21c6a6da7d39fad,True,2025,US dollar,Units,January/December,39,1993,2031
+16,NGDPDPC,QAT.NGDPDPC.A,QAT,Qatar,registry_code_match_review_iso_status,tc_13df99232f33400d9079316c041f066c,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,OMN.NGDPDPC.A,OMN,Oman,registry_code_match_review_iso_status,tc_22bd85ff61234a46a95506d105d5fee4,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LBN.NGDPDPC.A,LBN,Lebanon,registry_code_match_review_iso_status,tc_8466a0747d0b4d1a8c23feb70f7c6ed1,True,2024,US dollar,Units,January/December,46,1980,2025
+16,NGDPDPC,EGY.NGDPDPC.A,EGY,"Egypt, Arab Republic of",registry_code_match_review_iso_status,tc_939f236600dd47a8bf850a7ff19dc047,False,FY2024/25,US dollar,Units,July/June,52,1980,2031
+16,NGDPDPC,SAU.NGDPDPC.A,SAU,Saudi Arabia,registry_code_match_review_iso_status,tc_86b0f7fcb4504f9b8dc1b60b42b16ea0,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ARE.NGDPDPC.A,ARE,United Arab Emirates,registry_code_match_review_iso_status,tc_3cbd960008724744b928265acc0638a4,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,WBG.NGDPDPC.A,WBG,West Bank and Gaza,unmatched_three_letter_source_code,,False,2025,US dollar,Units,January/December,32,1994,2025
+16,NGDPDPC,BGD.NGDPDPC.A,BGD,Bangladesh,registry_code_match_review_iso_status,tc_8169e562ece7475e960f78f231cb1ab7,True,FY2025/26,US dollar,Units,July/June,52,1980,2031
+16,NGDPDPC,YEM.NGDPDPC.A,YEM,"Yemen, Republic of",registry_code_match_review_iso_status,tc_e32ec835b247449084d1b535ebccf7f1,False,2024,US dollar,Units,January/December,18,2014,2031
+16,NGDPDPC,MMR.NGDPDPC.A,MMR,Myanmar,registry_code_match_review_iso_status,tc_b4847e5d14f94efdbbd46d6467d90237,True,FY2021/22,US dollar,Units,April/March,34,1998,2031
+16,NGDPDPC,BRN.NGDPDPC.A,BRN,Brunei Darussalam,registry_code_match_review_iso_status,tc_e416804f7e41490a9e7d743a45a72f0e,False,2025,US dollar,Units,January/December,47,1985,2031
+16,NGDPDPC,AFG.NGDPDPC.A,AFG,"Afghanistan, Islamic Republic of",registry_code_match_review_iso_status,tc_928d15fd89764353a6889f571bfd0a1c,False,FY2024/25,US dollar,Units,April/March,24,2002,2025
+16,NGDPDPC,BTN.NGDPDPC.A,BTN,Bhutan,registry_code_match_review_iso_status,tc_91f04a21215642aeb5da856a78dc9949,True,FY2024/25,US dollar,Units,July/June,52,1980,2031
+16,NGDPDPC,LKA.NGDPDPC.A,LKA,Sri Lanka,registry_code_match_review_iso_status,tc_5e47c88bebac452e953fc5dfa8b1ba06,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,KHM.NGDPDPC.A,KHM,Cambodia,registry_code_match_review_iso_status,tc_f956986338e5418481784ba2d2781063,True,2025,US dollar,Units,January/December,46,1986,2031
+16,NGDPDPC,TWN.NGDPDPC.A,TWN,Taiwan Province of China,registry_code_match_review_iso_status,tc_98ab3dee1d554162b6bbd5dac6374fc8,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,HKG.NGDPDPC.A,HKG,"Hong Kong Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_394248a9960c4d28b4385210c82a0a0b,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MAC.NGDPDPC.A,MAC,"Macao Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_f9a64d8c1e6342d2b1941833ff7588d0,False,2025,US dollar,Units,January/December,31,2001,2031
+16,NGDPDPC,KOR.NGDPDPC.A,KOR,"Korea, Republic of",registry_code_match_review_iso_status,tc_cf8be733dbf44dd6b112e9fe12d2b19e,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,IDN.NGDPDPC.A,IDN,Indonesia,registry_code_match_review_iso_status,tc_c40da0ac977b4201b8587ce04aa66f56,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,IND.NGDPDPC.A,IND,India,registry_code_match_review_iso_status,tc_39ad5030b5f94f068d4a1528c60e5638,True,FY2025/26,US dollar,Units,April/March,52,1980,2031
+16,NGDPDPC,TLS.NGDPDPC.A,TLS,"Timor-Leste, Democratic Republic of",registry_code_match_review_iso_status,tc_bd40ea14860a4c4083eced5549d2d9c4,False,2024,US dollar,Units,January/December,32,2000,2031
+16,NGDPDPC,MYS.NGDPDPC.A,MYS,Malaysia,registry_code_match_review_iso_status,tc_b21225f45c3b40509640603249110f89,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LAO.NGDPDPC.A,LAO,Lao People's Democratic Republic,registry_code_match_review_iso_status,tc_71a3ecd24ca74da9a6cea3dae8cd1f82,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,THA.NGDPDPC.A,THA,Thailand,registry_code_match_review_iso_status,tc_fc12d0184fc7498f982ab8033ae64436,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NPL.NGDPDPC.A,NPL,Nepal,registry_code_match_review_iso_status,tc_1c4ff3f2a8f04b43b0c28e830a9403ad,True,FY2025/26,US dollar,Units,August/July,52,1980,2031
+16,NGDPDPC,PLW.NGDPDPC.A,PLW,"Palau, Republic of",registry_code_match_review_iso_status,tc_642fbe2581cf4b8c857d967717d1f1ef,False,FY2024/25,US dollar,Units,October/September,32,2000,2031
+16,NGDPDPC,MDV.NGDPDPC.A,MDV,Maldives,registry_code_match_review_iso_status,tc_408d22fe5b894b4b947a0521ace1018a,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,PAK.NGDPDPC.A,PAK,Pakistan,registry_code_match_review_iso_status,tc_0dc6216a94e34b44b27e42ed35fa6376,True,FY2024/25,US dollar,Units,July/June,47,1980,2026
+16,NGDPDPC,SGP.NGDPDPC.A,SGP,Singapore,registry_code_match_review_iso_status,tc_9d65e06bf97d417c8aa62742225ef5c9,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,PHL.NGDPDPC.A,PHL,Philippines,registry_code_match_review_iso_status,tc_fc8f1a9536d342899526129acf15acd2,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,VNM.NGDPDPC.A,VNM,Vietnam,registry_code_match_review_iso_status,tc_e65eabf3cd054585a43347bdfea6201b,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,DJI.NGDPDPC.A,DJI,Djibouti,registry_code_match_review_iso_status,tc_f4814b1a89384c4d93a92c19b301a814,True,2024,US dollar,Units,January/December,42,1990,2031
+16,NGDPDPC,CMR.NGDPDPC.A,CMR,Cameroon,registry_code_match_review_iso_status,tc_f5cd614ef03c414d8e98d87102df5c14,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,AGO.NGDPDPC.A,AGO,Angola,registry_code_match_review_iso_status,tc_fa43ff476d6b428fa8edb4dde1aa9d3f,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,DZA.NGDPDPC.A,DZA,Algeria,registry_code_match_review_iso_status,tc_e245d37005f843168d67b7b327ece7f9,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BWA.NGDPDPC.A,BWA,Botswana,registry_code_match_review_iso_status,tc_ca2bdd688a454bb8b6457c9448612669,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,COG.NGDPDPC.A,COG,"Congo, Republic of",registry_code_match_review_iso_status,tc_451d8109e28b45eaa6923dfcac9d1601,False,2022,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BDI.NGDPDPC.A,BDI,Burundi,registry_code_match_review_iso_status,tc_4ac5b3c6b7774a05b4ceb5573c4a9d27,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,CAF.NGDPDPC.A,CAF,Central African Republic,registry_code_match_review_iso_status,tc_9d80376a997845b6ba6bbc08d436a50d,True,2022,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,CPV.NGDPDPC.A,CPV,Cabo Verde,registry_code_match_review_iso_status,tc_d9d1737635ce4385a50c4307c2716832,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,TCD.NGDPDPC.A,TCD,Chad,registry_code_match_review_iso_status,tc_1da2daf3a3d34a30b96100d643963f70,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,COM.NGDPDPC.A,COM,"Comoros, Union of the",registry_code_match_review_iso_status,tc_10dd5e9664664abf9eca33c250a74cdb,False,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GNQ.NGDPDPC.A,GNQ,"Equatorial Guinea, Republic of",registry_code_match_review_iso_status,tc_06d71df13c4f415fbf22a0147f19bc53,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,COD.NGDPDPC.A,COD,"Congo, Democratic Republic of the",registry_code_match_review_iso_status,tc_2763c19aa8734ce9aa8b17d8effb6645,False,2023,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,BEN.NGDPDPC.A,BEN,Benin,registry_code_match_review_iso_status,tc_874ae1f05e8c4d67a2c839095d760b72,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GNB.NGDPDPC.A,GNB,Guinea-Bissau,registry_code_match_review_iso_status,tc_dc93b6caf7324df884ec2b070a5296b9,True,2023,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,ETH.NGDPDPC.A,ETH,"Ethiopia, The Federal Democratic Republic of",registry_code_match_review_iso_status,tc_860d12ee66fc4fceb3faddbc92c87930,False,FY2024/25,US dollar,Units,July/June,52,1980,2031
+16,NGDPDPC,GMB.NGDPDPC.A,GMB,"Gambia, The",registry_code_match_review_iso_status,tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a,False,2023,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GAB.NGDPDPC.A,GAB,Gabon,registry_code_match_review_iso_status,tc_d59dfb6324524b07a32c87b73009e97f,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GHA.NGDPDPC.A,GHA,Ghana,registry_code_match_review_iso_status,tc_f63061b714ce4390948838410758c016,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,GIN.NGDPDPC.A,GIN,Guinea,registry_code_match_review_iso_status,tc_05eaf88055cc4388b518332f2e7fc115,True,2024,US dollar,Units,January/December,42,1990,2031
+16,NGDPDPC,MWI.NGDPDPC.A,MWI,Malawi,registry_code_match_review_iso_status,tc_ee1c1ac1ad5c4faf818070115133b174,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,KEN.NGDPDPC.A,KEN,Kenya,registry_code_match_review_iso_status,tc_9f3dc962bf9744a5a3cdf1f7a1cbb159,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,CIV.NGDPDPC.A,CIV,Côte d'Ivoire,registry_code_match_review_iso_status,tc_18c639798e4948899643d84aa2bce93c,False,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LBR.NGDPDPC.A,LBR,Liberia,registry_code_match_review_iso_status,tc_40dc9d2e141343e98a4d0c762c578473,True,2025,US dollar,Units,January/December,32,2000,2031
+16,NGDPDPC,LSO.NGDPDPC.A,LSO,"Lesotho, Kingdom of",registry_code_match_review_iso_status,tc_c0fa4e9b8e984f59ba17beb7547c5811,False,FY2024/25,US dollar,Units,April/March,52,1980,2031
+16,NGDPDPC,MDG.NGDPDPC.A,MDG,"Madagascar, Republic of",registry_code_match_review_iso_status,tc_7abbe0f9aa1346c7a9f69cc1027b4282,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,LBY.NGDPDPC.A,LBY,Libya,registry_code_match_review_iso_status,tc_bb5622bab363429ca481c5476acc824c,True,2019,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MLI.NGDPDPC.A,MLI,Mali,registry_code_match_review_iso_status,tc_a3f73fd3bb6d4d7fb4ea31d433453bae,True,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MUS.NGDPDPC.A,MUS,Mauritius,registry_code_match_review_iso_status,tc_c7b728ec16b94e35b05d96d14a253eec,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MRT.NGDPDPC.A,MRT,"Mauritania, Islamic Republic of",registry_code_match_review_iso_status,tc_17137c4e4fcc4fa58e32c924f08efcda,False,2025,US dollar,Units,January/December,42,1990,2031
+16,NGDPDPC,STP.NGDPDPC.A,STP,"São Tomé and Príncipe, Democratic Republic of",registry_code_match_review_iso_status,tc_4a2ed326dc6047efa2e28926df0bc7f0,False,2024,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MOZ.NGDPDPC.A,MOZ,"Mozambique, Republic of",registry_code_match_review_iso_status,tc_2249b79a9c944a1c835b0cad2676e48d,False,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,MAR.NGDPDPC.A,MAR,Morocco,registry_code_match_review_iso_status,tc_84dc0c18f03144bea337f6aacd50bf0f,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NER.NGDPDPC.A,NER,Niger,registry_code_match_review_iso_status,tc_4d31375845614c2b91a71736069d4ab3,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,NGA.NGDPDPC.A,NGA,Nigeria,registry_code_match_review_iso_status,tc_7a8158c93a934345a2ade9fd16ee4999,True,2025,US dollar,Units,January/December,42,1990,2031
+16,NGDPDPC,SOM.NGDPDPC.A,SOM,Somalia,registry_code_match_review_iso_status,tc_e82cc51b989841109d9e1a7f6a5d1727,True,2024,US dollar,Units,January/December,20,2012,2031
+16,NGDPDPC,ZWE.NGDPDPC.A,ZWE,Zimbabwe,registry_code_match_review_iso_status,tc_168ca96e60634f5d83f3f22ad2505e66,True,2025,US dollar,Units,January/December,42,1990,2031
+16,NGDPDPC,RWA.NGDPDPC.A,RWA,Rwanda,registry_code_match_review_iso_status,tc_7f3c6637070f4c42a40c1f5456ec4721,True,2025,US dollar,Units,January/December,52,1980,2031
+16,NGDPDPC,SEN.NGDPDPC.A,SEN,Senegal,registry_code_match_review_iso_status,tc_29ec74ae4e094053a930487b9ce602d1,True,2025,US dollar,Units,January/December,46,1980,2025
+18,PPPGDP,SYR.PPPGDP.A,SYR,Syrian Arab Republic,registry_code_match_review_iso_status,tc_c205b2615c45490182519ecedb651e99,False,,,Billions,,31,1980,2010
+18,PPPGDP,ERI.PPPGDP.A,ERI,"Eritrea, The State of",registry_code_match_review_iso_status,tc_f9d7128c5ef04c6f955f43f9bcc56a0c,False,,,Billions,,28,1992,2019
+18,PPPGDP,SYC.PPPGDP.A,SYC,Seychelles,registry_code_match_review_iso_status,tc_4bc377d3ea57485bac43c9b512587dbc,True,,,Billions,,52,1980,2031
+18,PPPGDP,SEN.PPPGDP.A,SEN,Senegal,registry_code_match_review_iso_status,tc_29ec74ae4e094053a930487b9ce602d1,True,,,Billions,,46,1980,2025
+18,PPPGDP,SWZ.PPPGDP.A,SWZ,"Eswatini, Kingdom of",registry_code_match_review_iso_status,tc_fc2ad04f3c88446e91bd770190d6fe4c,False,,,Billions,,52,1980,2031
+18,PPPGDP,NAM.PPPGDP.A,NAM,Namibia,registry_code_match_review_iso_status,tc_7379cdcc5c4848c181ace3144aeba70f,True,,,Billions,,42,1990,2031
+18,PPPGDP,SDN.PPPGDP.A,SDN,Sudan,registry_code_match_review_iso_status,tc_b0ca3e0386b34603a6356b8ebc8b0565,True,,,Billions,,52,1980,2031
+18,PPPGDP,SSD.PPPGDP.A,SSD,"South Sudan, Republic of",registry_code_match_review_iso_status,tc_12491d45eed544948b316c89f82a7ee7,False,,,Billions,,21,2011,2031
+18,PPPGDP,SOM.PPPGDP.A,SOM,Somalia,registry_code_match_review_iso_status,tc_e82cc51b989841109d9e1a7f6a5d1727,True,,,Billions,,21,2011,2031
+18,PPPGDP,BFA.PPPGDP.A,BFA,Burkina Faso,registry_code_match_review_iso_status,tc_3c920b9b9f324cb19ef9d4b6debf10ba,True,,,Billions,,52,1980,2031
+18,PPPGDP,TZA.PPPGDP.A,TZA,"Tanzania, United Republic of",registry_code_match_review_iso_status,tc_0f4c47ec59434e46871845e474964499,False,,,Billions,,52,1980,2031
+18,PPPGDP,TGO.PPPGDP.A,TGO,Togo,registry_code_match_review_iso_status,tc_06a09ff0e27b49e392ef2e88161023eb,True,,,Billions,,52,1980,2031
+18,PPPGDP,TUN.PPPGDP.A,TUN,Tunisia,registry_code_match_review_iso_status,tc_1d1d2c1274384efa82f9591e1c069aba,True,,,Billions,,52,1980,2031
+18,PPPGDP,UGA.PPPGDP.A,UGA,Uganda,registry_code_match_review_iso_status,tc_2bd67b30564b46b4b502a36decc333bf,True,,,Billions,,52,1980,2031
+18,PPPGDP,ZMB.PPPGDP.A,ZMB,Zambia,registry_code_match_review_iso_status,tc_e75bc9ac62fa443c90b5529778f3b1af,True,,,Billions,,52,1980,2031
+18,PPPGDP,KIR.PPPGDP.A,KIR,Kiribati,registry_code_match_review_iso_status,tc_c23a3cf00b1a4ebf97a70a4f41a7761d,True,,,Billions,,52,1980,2031
+18,PPPGDP,FJI.PPPGDP.A,FJI,"Fiji, Republic of",registry_code_match_review_iso_status,tc_8d67737674744dce8986565b98cbbb1f,False,,,Billions,,52,1980,2031
+18,PPPGDP,SLB.PPPGDP.A,SLB,Solomon Islands,registry_code_match_review_iso_status,tc_0ce7eb254c32428c88601905c0df8e87,True,,,Billions,,52,1980,2031
+18,PPPGDP,PNG.PPPGDP.A,PNG,Papua New Guinea,registry_code_match_review_iso_status,tc_82d51d964745422e8ed3a9109757d2ee,True,,,Billions,,52,1980,2031
+18,PPPGDP,VUT.PPPGDP.A,VUT,Vanuatu,registry_code_match_review_iso_status,tc_43c4be0a76ca43a2bb7e634de5a1f4f4,True,,,Billions,,52,1980,2031
+18,PPPGDP,WSM.PPPGDP.A,WSM,Samoa,registry_code_match_review_iso_status,tc_76082bd796c546d1ab76a7a8a3251369,True,,,Billions,,52,1980,2031
+18,PPPGDP,NRU.PPPGDP.A,NRU,"Naoero, Republic of",registry_code_match_review_iso_status,tc_2722269bdef04648b655fe363650d565,False,,,Billions,,28,2004,2031
+18,PPPGDP,FSM.PPPGDP.A,FSM,"Micronesia, Federated States of",registry_code_match_review_iso_status,tc_4add61cba99b4e63a37406cd1d0feb5f,False,,,Billions,,37,1995,2031
+18,PPPGDP,TON.PPPGDP.A,TON,Tonga,registry_code_match_review_iso_status,tc_2c6f6c5486f04a87aa94277e67d6e51a,True,,,Billions,,52,1980,2031
+18,PPPGDP,TUV.PPPGDP.A,TUV,Tuvalu,registry_code_match_review_iso_status,tc_47cd272cd9c9455185a13f6e69bd805c,True,,,Billions,,32,2000,2031
+18,PPPGDP,MHL.PPPGDP.A,MHL,"Marshall Islands, Republic of the",registry_code_match_review_iso_status,tc_f201b19690a04a8f903f9ea4cb0c7af4,False,,,Billions,,35,1997,2031
+18,PPPGDP,AZE.PPPGDP.A,AZE,"Azerbaijan, Republic of",registry_code_match_review_iso_status,tc_b8c860bb8d404dcca918bad769e7ead7,False,,,Billions,,40,1992,2031
+18,PPPGDP,ARM.PPPGDP.A,ARM,"Armenia, Republic of",registry_code_match_review_iso_status,tc_f97b56c9c74845de8b41aa24ed12a47f,False,,,Billions,,40,1992,2031
+18,PPPGDP,GEO.PPPGDP.A,GEO,Georgia,registry_code_match_review_iso_status,tc_741bd244c1ec4961918565c4ed02c5c6,True,,,Billions,,38,1994,2031
+18,PPPGDP,ALB.PPPGDP.A,ALB,Albania,registry_code_match_review_iso_status,tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1,True,,,Billions,,52,1980,2031
+18,PPPGDP,BLR.PPPGDP.A,BLR,"Belarus, Republic of",registry_code_match_review_iso_status,tc_6ebc90b251e14f70b8bf758d8008e839,False,,,Billions,,40,1992,2031
+18,PPPGDP,BGR.PPPGDP.A,BGR,Bulgaria,registry_code_match_review_iso_status,tc_523810acde564c1c907acd5befe575ab,True,,,Billions,,52,1980,2031
+18,PPPGDP,KGZ.PPPGDP.A,KGZ,Kyrgyz Republic,registry_code_match_review_iso_status,tc_130ca81b84d04b058e9301121b2b7802,False,,,Billions,,40,1992,2031
+18,PPPGDP,MDA.PPPGDP.A,MDA,"Moldova, Republic of",registry_code_match_review_iso_status,tc_96ea5c49288d40b0945401031405c2c8,False,,,Billions,,40,1992,2031
+18,PPPGDP,KAZ.PPPGDP.A,KAZ,"Kazakhstan, Republic of",registry_code_match_review_iso_status,tc_feadffc011db4cf695df6c0997a003c8,False,,,Billions,,40,1992,2031
+18,PPPGDP,TJK.PPPGDP.A,TJK,"Tajikistan, Republic of",registry_code_match_review_iso_status,tc_772e2ac5253c46e98b79cf5a6f19e9f5,False,,,Billions,,40,1992,2031
+18,PPPGDP,RUS.PPPGDP.A,RUS,Russian Federation,registry_code_match_review_iso_status,tc_c587d1c1cd8d4ec489f3d8e2524ec607,False,,,Billions,,40,1992,2031
+18,PPPGDP,CHN.PPPGDP.A,CHN,"China, People's Republic of",registry_code_match_review_iso_status,tc_3349a0b8b7454088b11e917a24de3ad5,False,,,Billions,,52,1980,2031
+18,PPPGDP,EST.PPPGDP.A,EST,"Estonia, Republic of",registry_code_match_review_iso_status,tc_383873de760147cd97dfac5ef5d60b08,False,,,Billions,,39,1993,2031
+18,PPPGDP,UZB.PPPGDP.A,UZB,"Uzbekistan, Republic of",registry_code_match_review_iso_status,tc_5d951c36a4ad4471ae9b9037fe338d70,False,,,Billions,,40,1992,2031
+18,PPPGDP,TKM.PPPGDP.A,TKM,Turkmenistan,registry_code_match_review_iso_status,tc_72de9a194d85404098bb741ae4ffc826,True,,,Billions,,40,1992,2031
+18,PPPGDP,UKR.PPPGDP.A,UKR,Ukraine,registry_code_match_review_iso_status,tc_65f8a168b10143c2a596917c1fca3731,True,,,Billions,,40,1992,2031
+18,PPPGDP,SVK.PPPGDP.A,SVK,Slovak Republic,registry_code_match_review_iso_status,tc_b3bea891d7114d148714d5e398ee06b1,False,,,Billions,,39,1993,2031
+18,PPPGDP,CZE.PPPGDP.A,CZE,Czech Republic,registry_code_match_review_iso_status,tc_e43afc3a83a3458c833dac5644b7186a,False,,,Billions,,37,1995,2031
+18,PPPGDP,SRB.PPPGDP.A,SRB,"Serbia, Republic of",registry_code_match_review_iso_status,tc_98a68180b9f0479f90dcde7809d60470,False,,,Billions,,35,1997,2031
+18,PPPGDP,LVA.PPPGDP.A,LVA,"Latvia, Republic of",registry_code_match_review_iso_status,tc_f161aef25a39413e8aef8c147e97b28a,False,,,Billions,,40,1992,2031
+18,PPPGDP,MNE.PPPGDP.A,MNE,Montenegro,registry_code_match_review_iso_status,tc_eb1de71332ef4db496cb76c95aa56cd4,True,,,Billions,,32,2000,2031
+18,PPPGDP,HUN.PPPGDP.A,HUN,Hungary,registry_code_match_review_iso_status,tc_e3ede57c1b754a2dbd940335f9655f11,True,,,Billions,,52,1980,2031
+18,PPPGDP,MNG.PPPGDP.A,MNG,Mongolia,registry_code_match_review_iso_status,tc_d0fb202ca0aa4a868af6fa154ab84c30,True,,,Billions,,52,1980,2031
+18,PPPGDP,LTU.PPPGDP.A,LTU,"Lithuania, Republic of",registry_code_match_review_iso_status,tc_77de0a41c4d94d8388d6f0732438be81,False,,,Billions,,37,1995,2031
+18,PPPGDP,HRV.PPPGDP.A,HRV,"Croatia, Republic of",registry_code_match_review_iso_status,tc_fb4046d4910a4bf89f4a93810e2f4d8a,False,,,Billions,,40,1992,2031
+18,PPPGDP,MKD.PPPGDP.A,MKD,"North Macedonia, Republic of",registry_code_match_review_iso_status,tc_949bf877e3284f5c8a56cfc89bcafa90,False,,,Billions,,40,1992,2031
+18,PPPGDP,BIH.PPPGDP.A,BIH,Bosnia and Herzegovina,registry_code_match_review_iso_status,tc_0628271c897b49558f423321cbc48ce4,True,,,Billions,,36,1996,2031
+18,PPPGDP,SVN.PPPGDP.A,SVN,"Slovenia, Republic of",registry_code_match_review_iso_status,tc_c0484640d9554c8285e92412bae25785,False,,,Billions,,40,1992,2031
+18,PPPGDP,ROU.PPPGDP.A,ROU,Romania,registry_code_match_review_iso_status,tc_c41863f7cb4e4dccbbdf0a1296f9ee1c,True,,,Billions,,52,1980,2031
+18,PPPGDP,POL.PPPGDP.A,POL,"Poland, Republic of",registry_code_match_review_iso_status,tc_9865dd6a50c3458b98f5040f0cc76357,False,,,Billions,,52,1980,2031
+18,PPPGDP,KOS.PPPGDP.A,KOS,"Kosovo, Republic of",registry_code_match_review_iso_status,tc_28aa17b84db24952b92fc51b421075e0,False,,,Billions,,32,2000,2031
+18,PPPGDP,GBR.PPPGDP.A,GBR,United Kingdom,registry_code_match_review_iso_status,tc_8d01644699e04b74ae3a4751c6f1fc41,True,,,Billions,,52,1980,2031
+18,PPPGDP,USA.PPPGDP.A,USA,United States,registry_code_match_review_iso_status,tc_f0a8b61c54a14d4089774716657e9433,True,,,Billions,,52,1980,2031
+18,PPPGDP,AUT.PPPGDP.A,AUT,Austria,registry_code_match_review_iso_status,tc_a0422e821c824e78bd95525b36155b65,True,,,Billions,,52,1980,2031
+18,PPPGDP,BEL.PPPGDP.A,BEL,Belgium,registry_code_match_review_iso_status,tc_f1cc713e923c4be48e176657a00469f0,True,,,Billions,,52,1980,2031
+18,PPPGDP,FRA.PPPGDP.A,FRA,France,registry_code_match_review_iso_status,tc_471ae6d7112b4537a7ae5ca1e6a816a5,True,,,Billions,,52,1980,2031
+18,PPPGDP,DNK.PPPGDP.A,DNK,Denmark,registry_code_match_review_iso_status,tc_11da440eb0704bd195fe0b11fa0890af,True,,,Billions,,52,1980,2031
+18,PPPGDP,DEU.PPPGDP.A,DEU,Germany,registry_code_match_review_iso_status,tc_ff445b0a87494070bf868827de190acf,True,,,Billions,,52,1980,2031
+18,PPPGDP,ITA.PPPGDP.A,ITA,Italy,registry_code_match_review_iso_status,tc_1f3e0c90df4341f082ed90ecdd95fb10,True,,,Billions,,52,1980,2031
+18,PPPGDP,SMR.PPPGDP.A,SMR,"San Marino, Republic of",registry_code_match_review_iso_status,tc_e4ea859bd6704c13912ad7f5cf19de41,False,,,Billions,,35,1997,2031
+18,PPPGDP,LUX.PPPGDP.A,LUX,Luxembourg,registry_code_match_review_iso_status,tc_f4261f4507cd48858cdfb7e3bd0ae738,True,,,Billions,,52,1980,2031
+18,PPPGDP,NOR.PPPGDP.A,NOR,Norway,registry_code_match_review_iso_status,tc_f4a6e15a05474af2b81c9524ed988d89,True,,,Billions,,52,1980,2031
+18,PPPGDP,SWE.PPPGDP.A,SWE,Sweden,registry_code_match_review_iso_status,tc_d74b429fff544cf9bafeb459c4b3edd8,True,,,Billions,,52,1980,2031
+18,PPPGDP,NLD.PPPGDP.A,NLD,"Netherlands, The",registry_code_match_review_iso_status,tc_898b220cf53a425e9bac3630f2c17473,False,,,Billions,,52,1980,2031
+18,PPPGDP,CHE.PPPGDP.A,CHE,Switzerland,registry_code_match_review_iso_status,tc_e693e8b799f94e7bb814e89bd46d886d,True,,,Billions,,52,1980,2031
+18,PPPGDP,CAN.PPPGDP.A,CAN,Canada,registry_code_match_review_iso_status,tc_ba9087366ba54d51932e88bf8a11616d,True,,,Billions,,52,1980,2031
+18,PPPGDP,LIE.PPPGDP.A,LIE,"Liechtenstein, Principality of",registry_code_match_review_iso_status,tc_a8bd42bd635b43289f3c26695dc58939,False,,,Billions,,32,2000,2031
+18,PPPGDP,AND.PPPGDP.A,AND,"Andorra, Principality of",registry_code_match_review_iso_status,tc_224c06bfe0f04031b422bddc81ea3ce5,False,,,Billions,,32,2000,2031
+18,PPPGDP,JPN.PPPGDP.A,JPN,Japan,registry_code_match_review_iso_status,tc_8d0620ea475f498d9402134857882bf1,True,,,Billions,,52,1980,2031
+18,PPPGDP,ISL.PPPGDP.A,ISL,Iceland,registry_code_match_review_iso_status,tc_861af4b9250e4e17a9d3f1f4e1ea33d4,True,,,Billions,,52,1980,2031
+18,PPPGDP,FIN.PPPGDP.A,FIN,Finland,registry_code_match_review_iso_status,tc_374e55a3eefe4a1a83fed6b64b5045f5,True,,,Billions,,52,1980,2031
+18,PPPGDP,GRC.PPPGDP.A,GRC,Greece,registry_code_match_review_iso_status,tc_dab67464d7ad44cdbf925450627e4186,True,,,Billions,,52,1980,2031
+18,PPPGDP,MLT.PPPGDP.A,MLT,Malta,registry_code_match_review_iso_status,tc_f97b2223a2a84e53ac13614ddde1f602,True,,,Billions,,52,1980,2031
+18,PPPGDP,PRT.PPPGDP.A,PRT,Portugal,registry_code_match_review_iso_status,tc_43ee3db974884a72bacf5f5519e2c145,True,,,Billions,,52,1980,2031
+18,PPPGDP,IRL.PPPGDP.A,IRL,Ireland,registry_code_match_review_iso_status,tc_16d6044d9abf4743821a6fb238942a22,True,,,Billions,,52,1980,2031
+18,PPPGDP,AUS.PPPGDP.A,AUS,Australia,registry_code_match_review_iso_status,tc_270a6ecb902d4ea1ac7373b3d1a3b2cc,True,,,Billions,,52,1980,2031
+18,PPPGDP,ESP.PPPGDP.A,ESP,Spain,registry_code_match_review_iso_status,tc_21a70a0fbf1b43c292783397ce218239,True,,,Billions,,52,1980,2031
+18,PPPGDP,TUR.PPPGDP.A,TUR,"Türkiye, Republic of",registry_code_match_review_iso_status,tc_155414257ec0498690f73c3595d85e7c,False,,,Billions,,52,1980,2031
+18,PPPGDP,ZAF.PPPGDP.A,ZAF,South Africa,registry_code_match_review_iso_status,tc_dc6419869818416db051f50cbfd95036,True,,,Billions,,52,1980,2031
+18,PPPGDP,NZL.PPPGDP.A,NZL,New Zealand,registry_code_match_review_iso_status,tc_d4b67e03f0c04d9a87089f477e5fa669,True,,,Billions,,52,1980,2031
+18,PPPGDP,BOL.PPPGDP.A,BOL,Bolivia,registry_code_match_review_iso_status,tc_4cd6d52014244914bdeb62e6a6452e42,True,,,Billions,,52,1980,2031
+18,PPPGDP,ARG.PPPGDP.A,ARG,Argentina,registry_code_match_review_iso_status,tc_2a29d5b72b294244a5de6db37118237a,True,,,Billions,,52,1980,2031
+18,PPPGDP,CHL.PPPGDP.A,CHL,Chile,registry_code_match_review_iso_status,tc_4c51c695cb6e47d2aed2fb04c397bece,True,,,Billions,,52,1980,2031
+18,PPPGDP,COL.PPPGDP.A,COL,Colombia,registry_code_match_review_iso_status,tc_648b019cc83e486ab9fb8497386777a9,True,,,Billions,,52,1980,2031
+18,PPPGDP,BRA.PPPGDP.A,BRA,Brazil,registry_code_match_review_iso_status,tc_4923336d91d94afc919d8a2b8a4ad415,True,,,Billions,,52,1980,2031
+18,PPPGDP,DOM.PPPGDP.A,DOM,Dominican Republic,registry_code_match_review_iso_status,tc_ee04e01170f84b92afabbb40abdbd4e3,True,,,Billions,,52,1980,2031
+18,PPPGDP,ECU.PPPGDP.A,ECU,Ecuador,registry_code_match_review_iso_status,tc_2a54eb1caed54a2185a62cce0c2db6cb,True,,,Billions,,52,1980,2031
+18,PPPGDP,CRI.PPPGDP.A,CRI,Costa Rica,registry_code_match_review_iso_status,tc_79512b2eaf8f45b5b118130859ebdaaf,True,,,Billions,,52,1980,2031
+18,PPPGDP,SLV.PPPGDP.A,SLV,El Salvador,registry_code_match_review_iso_status,tc_471268dbb85845de93e546317686debb,True,,,Billions,,52,1980,2031
+18,PPPGDP,HND.PPPGDP.A,HND,Honduras,registry_code_match_review_iso_status,tc_80c318b9217a4320beaad6b93eb74ac5,True,,,Billions,,52,1980,2031
+18,PPPGDP,GTM.PPPGDP.A,GTM,Guatemala,registry_code_match_review_iso_status,tc_9348779eba844ab2beb5bed00053b7c6,True,,,Billions,,52,1980,2031
+18,PPPGDP,HTI.PPPGDP.A,HTI,Haiti,registry_code_match_review_iso_status,tc_9ee610c6d55a4f4bbdbbb073b33628a2,True,,,Billions,,52,1980,2031
+18,PPPGDP,PAN.PPPGDP.A,PAN,Panama,registry_code_match_review_iso_status,tc_ba6cf14fa6224eb4a0b085b3ea1df6dc,True,,,Billions,,52,1980,2031
+18,PPPGDP,MEX.PPPGDP.A,MEX,Mexico,registry_code_match_review_iso_status,tc_c6b830c3cba64d4883eac8cee7864cfd,True,,,Billions,,52,1980,2031
+18,PPPGDP,NIC.PPPGDP.A,NIC,Nicaragua,registry_code_match_review_iso_status,tc_2fdae8757e51402e9f67c428d2b79368,True,,,Billions,,52,1980,2031
+18,PPPGDP,PRY.PPPGDP.A,PRY,Paraguay,registry_code_match_review_iso_status,tc_3eb6dc12494541e793a8a5b68980f29f,True,,,Billions,,52,1980,2031
+18,PPPGDP,PER.PPPGDP.A,PER,Peru,registry_code_match_review_iso_status,tc_a90d391a4a9a473b9074fc99cce11cb5,True,,,Billions,,52,1980,2031
+18,PPPGDP,URY.PPPGDP.A,URY,Uruguay,registry_code_match_review_iso_status,tc_e19506c4a1564ca085b73b9284fa6f56,True,,,Billions,,52,1980,2031
+18,PPPGDP,ABW.PPPGDP.A,ABW,"Aruba, Kingdom of the Netherlands",registry_code_match_review_iso_status,tc_8344feaf14da4684aaa8d4c263653778,False,,,Billions,,46,1986,2031
+18,PPPGDP,ATG.PPPGDP.A,ATG,Antigua and Barbuda,registry_code_match_review_iso_status,tc_9221f2a3fd704847b66da16efa03c2b8,True,,,Billions,,52,1980,2031
+18,PPPGDP,VEN.PPPGDP.A,VEN,"Venezuela, República Bolivariana de",registry_code_match_review_iso_status,tc_1aa00cb7ebb34cdca928353a58ff5b12,False,,,Billions,,48,1980,2027
+18,PPPGDP,BHS.PPPGDP.A,BHS,"Bahamas, The",registry_code_match_review_iso_status,tc_53553c35a9f44fddb64f46b5b2d7b90c,False,,,Billions,,52,1980,2031
+18,PPPGDP,GRD.PPPGDP.A,GRD,Grenada,registry_code_match_review_iso_status,tc_c5b3fecc12a94e85a7acddc70fa7a086,True,,,Billions,,52,1980,2031
+18,PPPGDP,BRB.PPPGDP.A,BRB,Barbados,registry_code_match_review_iso_status,tc_7a679c592eef40c58b7cdf58e6032bb5,True,,,Billions,,52,1980,2031
+18,PPPGDP,DMA.PPPGDP.A,DMA,Dominica,registry_code_match_review_iso_status,tc_e5391af862dd490bb3a01fa80f4ac15e,True,,,Billions,,52,1980,2031
+18,PPPGDP,BLZ.PPPGDP.A,BLZ,Belize,registry_code_match_review_iso_status,tc_d066174c4df546d1a410d386f363ee80,True,,,Billions,,52,1980,2031
+18,PPPGDP,JAM.PPPGDP.A,JAM,Jamaica,registry_code_match_review_iso_status,tc_bf02736242694622ae7c730beb0f0da6,True,,,Billions,,52,1980,2031
+18,PPPGDP,GUY.PPPGDP.A,GUY,Guyana,registry_code_match_review_iso_status,tc_893d4efa8ccf42af896949ffd7007fef,True,,,Billions,,52,1980,2031
+18,PPPGDP,KNA.PPPGDP.A,KNA,St. Kitts and Nevis,registry_code_match_review_iso_status,tc_f22d58e7280f41f7a5a68fb03e1ab87e,False,,,Billions,,52,1980,2031
+18,PPPGDP,VCT.PPPGDP.A,VCT,St. Vincent and the Grenadines,registry_code_match_review_iso_status,tc_67290f5714c846f4a84d1f53c6fd495a,False,,,Billions,,52,1980,2031
+18,PPPGDP,PRI.PPPGDP.A,PRI,Puerto Rico,registry_code_match_review_iso_status,tc_37f10315a18d4c3abf3486086b5822e1,True,,,Billions,,52,1980,2031
+18,PPPGDP,LCA.PPPGDP.A,LCA,St. Lucia,registry_code_match_review_iso_status,tc_6629fdb92d05409f856d9030b63b1470,False,,,Billions,,52,1980,2031
+18,PPPGDP,TTO.PPPGDP.A,TTO,Trinidad and Tobago,registry_code_match_review_iso_status,tc_1bd98a138f884dd4b4d9d1efbbf357b0,True,,,Billions,,52,1980,2031
+18,PPPGDP,SUR.PPPGDP.A,SUR,Suriname,registry_code_match_review_iso_status,tc_168a848021b84cc6a6c3fc320012a176,True,,,Billions,,52,1980,2031
+18,PPPGDP,IRN.PPPGDP.A,IRN,"Iran, Islamic Republic of",registry_code_match_review_iso_status,tc_ddf21c4d378e4fc9bc3d5b4ba50890a2,False,,,Billions,,52,1980,2031
+18,PPPGDP,BHR.PPPGDP.A,BHR,"Bahrain, Kingdom of",registry_code_match_review_iso_status,tc_38fd6c5cd2be45739f3be11bc4cab9c8,False,,,Billions,,52,1980,2031
+18,PPPGDP,CYP.PPPGDP.A,CYP,Cyprus,registry_code_match_review_iso_status,tc_3c148b1f7650455fa710ca87cf376728,True,,,Billions,,52,1980,2031
+18,PPPGDP,JOR.PPPGDP.A,JOR,Jordan,registry_code_match_review_iso_status,tc_6e28258973b54dfeb5811c563cd0a2e8,True,,,Billions,,52,1980,2031
+18,PPPGDP,KWT.PPPGDP.A,KWT,Kuwait,registry_code_match_review_iso_status,tc_fa491c61ffa24dc3a21c6a6da7d39fad,True,,,Billions,,51,1981,2031
+18,PPPGDP,ISR.PPPGDP.A,ISR,Israel,registry_code_match_review_iso_status,tc_28952c75855947a7b31bb7509dc1fce1,True,,,Billions,,52,1980,2031
+18,PPPGDP,IRQ.PPPGDP.A,IRQ,Iraq,registry_code_match_review_iso_status,tc_5ee7b31f968941dca65e70519901915f,True,,,Billions,,32,2000,2031
+18,PPPGDP,ARE.PPPGDP.A,ARE,United Arab Emirates,registry_code_match_review_iso_status,tc_3cbd960008724744b928265acc0638a4,True,,,Billions,,52,1980,2031
+18,PPPGDP,LBN.PPPGDP.A,LBN,Lebanon,registry_code_match_review_iso_status,tc_8466a0747d0b4d1a8c23feb70f7c6ed1,True,,,Billions,,46,1980,2025
+18,PPPGDP,QAT.PPPGDP.A,QAT,Qatar,registry_code_match_review_iso_status,tc_13df99232f33400d9079316c041f066c,True,,,Billions,,52,1980,2031
+18,PPPGDP,OMN.PPPGDP.A,OMN,Oman,registry_code_match_review_iso_status,tc_22bd85ff61234a46a95506d105d5fee4,True,,,Billions,,52,1980,2031
+18,PPPGDP,SAU.PPPGDP.A,SAU,Saudi Arabia,registry_code_match_review_iso_status,tc_86b0f7fcb4504f9b8dc1b60b42b16ea0,True,,,Billions,,52,1980,2031
+18,PPPGDP,WBG.PPPGDP.A,WBG,West Bank and Gaza,unmatched_three_letter_source_code,,False,,,Billions,,32,1994,2025
+18,PPPGDP,YEM.PPPGDP.A,YEM,"Yemen, Republic of",registry_code_match_review_iso_status,tc_e32ec835b247449084d1b535ebccf7f1,False,,,Billions,,18,2014,2031
+18,PPPGDP,EGY.PPPGDP.A,EGY,"Egypt, Arab Republic of",registry_code_match_review_iso_status,tc_939f236600dd47a8bf850a7ff19dc047,False,,,Billions,,52,1980,2031
+18,PPPGDP,BGD.PPPGDP.A,BGD,Bangladesh,registry_code_match_review_iso_status,tc_8169e562ece7475e960f78f231cb1ab7,True,,,Billions,,52,1980,2031
+18,PPPGDP,AFG.PPPGDP.A,AFG,"Afghanistan, Islamic Republic of",registry_code_match_review_iso_status,tc_928d15fd89764353a6889f571bfd0a1c,False,,,Billions,,24,2002,2025
+18,PPPGDP,BTN.PPPGDP.A,BTN,Bhutan,registry_code_match_review_iso_status,tc_91f04a21215642aeb5da856a78dc9949,True,,,Billions,,52,1980,2031
+18,PPPGDP,BRN.PPPGDP.A,BRN,Brunei Darussalam,registry_code_match_review_iso_status,tc_e416804f7e41490a9e7d743a45a72f0e,False,,,Billions,,47,1985,2031
+18,PPPGDP,MMR.PPPGDP.A,MMR,Myanmar,registry_code_match_review_iso_status,tc_b4847e5d14f94efdbbd46d6467d90237,True,,,Billions,,34,1998,2031
+18,PPPGDP,KHM.PPPGDP.A,KHM,Cambodia,registry_code_match_review_iso_status,tc_f956986338e5418481784ba2d2781063,True,,,Billions,,45,1987,2031
+18,PPPGDP,LKA.PPPGDP.A,LKA,Sri Lanka,registry_code_match_review_iso_status,tc_5e47c88bebac452e953fc5dfa8b1ba06,True,,,Billions,,52,1980,2031
+18,PPPGDP,HKG.PPPGDP.A,HKG,"Hong Kong Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_394248a9960c4d28b4385210c82a0a0b,False,,,Billions,,52,1980,2031
+18,PPPGDP,TWN.PPPGDP.A,TWN,Taiwan Province of China,registry_code_match_review_iso_status,tc_98ab3dee1d554162b6bbd5dac6374fc8,False,,,Billions,,52,1980,2031
+18,PPPGDP,IDN.PPPGDP.A,IDN,Indonesia,registry_code_match_review_iso_status,tc_c40da0ac977b4201b8587ce04aa66f56,True,,,Billions,,52,1980,2031
+18,PPPGDP,IND.PPPGDP.A,IND,India,registry_code_match_review_iso_status,tc_39ad5030b5f94f068d4a1528c60e5638,True,,,Billions,,52,1980,2031
+18,PPPGDP,TLS.PPPGDP.A,TLS,"Timor-Leste, Democratic Republic of",registry_code_match_review_iso_status,tc_bd40ea14860a4c4083eced5549d2d9c4,False,,,Billions,,32,2000,2031
+18,PPPGDP,KOR.PPPGDP.A,KOR,"Korea, Republic of",registry_code_match_review_iso_status,tc_cf8be733dbf44dd6b112e9fe12d2b19e,False,,,Billions,,52,1980,2031
+18,PPPGDP,MAC.PPPGDP.A,MAC,"Macao Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_f9a64d8c1e6342d2b1941833ff7588d0,False,,,Billions,,31,2001,2031
+18,PPPGDP,MYS.PPPGDP.A,MYS,Malaysia,registry_code_match_review_iso_status,tc_b21225f45c3b40509640603249110f89,True,,,Billions,,52,1980,2031
+18,PPPGDP,LAO.PPPGDP.A,LAO,Lao People's Democratic Republic,registry_code_match_review_iso_status,tc_71a3ecd24ca74da9a6cea3dae8cd1f82,False,,,Billions,,52,1980,2031
+18,PPPGDP,NPL.PPPGDP.A,NPL,Nepal,registry_code_match_review_iso_status,tc_1c4ff3f2a8f04b43b0c28e830a9403ad,True,,,Billions,,52,1980,2031
+18,PPPGDP,PLW.PPPGDP.A,PLW,"Palau, Republic of",registry_code_match_review_iso_status,tc_642fbe2581cf4b8c857d967717d1f1ef,False,,,Billions,,32,2000,2031
+18,PPPGDP,MDV.PPPGDP.A,MDV,Maldives,registry_code_match_review_iso_status,tc_408d22fe5b894b4b947a0521ace1018a,True,,,Billions,,52,1980,2031
+18,PPPGDP,PAK.PPPGDP.A,PAK,Pakistan,registry_code_match_review_iso_status,tc_0dc6216a94e34b44b27e42ed35fa6376,True,,,Billions,,52,1980,2031
+18,PPPGDP,SGP.PPPGDP.A,SGP,Singapore,registry_code_match_review_iso_status,tc_9d65e06bf97d417c8aa62742225ef5c9,True,,,Billions,,52,1980,2031
+18,PPPGDP,PHL.PPPGDP.A,PHL,Philippines,registry_code_match_review_iso_status,tc_fc8f1a9536d342899526129acf15acd2,True,,,Billions,,52,1980,2031
+18,PPPGDP,THA.PPPGDP.A,THA,Thailand,registry_code_match_review_iso_status,tc_fc12d0184fc7498f982ab8033ae64436,True,,,Billions,,52,1980,2031
+18,PPPGDP,DJI.PPPGDP.A,DJI,Djibouti,registry_code_match_review_iso_status,tc_f4814b1a89384c4d93a92c19b301a814,True,,,Billions,,41,1991,2031
+18,PPPGDP,VNM.PPPGDP.A,VNM,Vietnam,registry_code_match_review_iso_status,tc_e65eabf3cd054585a43347bdfea6201b,True,,,Billions,,52,1980,2031
+18,PPPGDP,AGO.PPPGDP.A,AGO,Angola,registry_code_match_review_iso_status,tc_fa43ff476d6b428fa8edb4dde1aa9d3f,True,,,Billions,,52,1980,2031
+18,PPPGDP,DZA.PPPGDP.A,DZA,Algeria,registry_code_match_review_iso_status,tc_e245d37005f843168d67b7b327ece7f9,True,,,Billions,,52,1980,2031
+18,PPPGDP,BWA.PPPGDP.A,BWA,Botswana,registry_code_match_review_iso_status,tc_ca2bdd688a454bb8b6457c9448612669,True,,,Billions,,52,1980,2031
+18,PPPGDP,TCD.PPPGDP.A,TCD,Chad,registry_code_match_review_iso_status,tc_1da2daf3a3d34a30b96100d643963f70,True,,,Billions,,52,1980,2031
+18,PPPGDP,CMR.PPPGDP.A,CMR,Cameroon,registry_code_match_review_iso_status,tc_f5cd614ef03c414d8e98d87102df5c14,True,,,Billions,,52,1980,2031
+18,PPPGDP,BDI.PPPGDP.A,BDI,Burundi,registry_code_match_review_iso_status,tc_4ac5b3c6b7774a05b4ceb5573c4a9d27,True,,,Billions,,52,1980,2031
+18,PPPGDP,CPV.PPPGDP.A,CPV,Cabo Verde,registry_code_match_review_iso_status,tc_d9d1737635ce4385a50c4307c2716832,True,,,Billions,,52,1980,2031
+18,PPPGDP,BEN.PPPGDP.A,BEN,Benin,registry_code_match_review_iso_status,tc_874ae1f05e8c4d67a2c839095d760b72,True,,,Billions,,52,1980,2031
+18,PPPGDP,CAF.PPPGDP.A,CAF,Central African Republic,registry_code_match_review_iso_status,tc_9d80376a997845b6ba6bbc08d436a50d,True,,,Billions,,52,1980,2031
+18,PPPGDP,COG.PPPGDP.A,COG,"Congo, Republic of",registry_code_match_review_iso_status,tc_451d8109e28b45eaa6923dfcac9d1601,False,,,Billions,,52,1980,2031
+18,PPPGDP,COM.PPPGDP.A,COM,"Comoros, Union of the",registry_code_match_review_iso_status,tc_10dd5e9664664abf9eca33c250a74cdb,False,,,Billions,,52,1980,2031
+18,PPPGDP,COD.PPPGDP.A,COD,"Congo, Democratic Republic of the",registry_code_match_review_iso_status,tc_2763c19aa8734ce9aa8b17d8effb6645,False,,,Billions,,52,1980,2031
+18,PPPGDP,ETH.PPPGDP.A,ETH,"Ethiopia, The Federal Democratic Republic of",registry_code_match_review_iso_status,tc_860d12ee66fc4fceb3faddbc92c87930,False,,,Billions,,52,1980,2031
+18,PPPGDP,GNQ.PPPGDP.A,GNQ,"Equatorial Guinea, Republic of",registry_code_match_review_iso_status,tc_06d71df13c4f415fbf22a0147f19bc53,False,,,Billions,,52,1980,2031
+18,PPPGDP,GAB.PPPGDP.A,GAB,Gabon,registry_code_match_review_iso_status,tc_d59dfb6324524b07a32c87b73009e97f,True,,,Billions,,52,1980,2031
+18,PPPGDP,GNB.PPPGDP.A,GNB,Guinea-Bissau,registry_code_match_review_iso_status,tc_dc93b6caf7324df884ec2b070a5296b9,True,,,Billions,,52,1980,2031
+18,PPPGDP,GMB.PPPGDP.A,GMB,"Gambia, The",registry_code_match_review_iso_status,tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a,False,,,Billions,,52,1980,2031
+18,PPPGDP,GIN.PPPGDP.A,GIN,Guinea,registry_code_match_review_iso_status,tc_05eaf88055cc4388b518332f2e7fc115,True,,,Billions,,52,1980,2031
+18,PPPGDP,GHA.PPPGDP.A,GHA,Ghana,registry_code_match_review_iso_status,tc_f63061b714ce4390948838410758c016,True,,,Billions,,52,1980,2031
+18,PPPGDP,KEN.PPPGDP.A,KEN,Kenya,registry_code_match_review_iso_status,tc_9f3dc962bf9744a5a3cdf1f7a1cbb159,True,,,Billions,,52,1980,2031
+18,PPPGDP,CIV.PPPGDP.A,CIV,Côte d'Ivoire,registry_code_match_review_iso_status,tc_18c639798e4948899643d84aa2bce93c,False,,,Billions,,52,1980,2031
+18,PPPGDP,LSO.PPPGDP.A,LSO,"Lesotho, Kingdom of",registry_code_match_review_iso_status,tc_c0fa4e9b8e984f59ba17beb7547c5811,False,,,Billions,,52,1980,2031
+18,PPPGDP,MWI.PPPGDP.A,MWI,Malawi,registry_code_match_review_iso_status,tc_ee1c1ac1ad5c4faf818070115133b174,True,,,Billions,,52,1980,2031
+18,PPPGDP,LBR.PPPGDP.A,LBR,Liberia,registry_code_match_review_iso_status,tc_40dc9d2e141343e98a4d0c762c578473,True,,,Billions,,32,2000,2031
+18,PPPGDP,LBY.PPPGDP.A,LBY,Libya,registry_code_match_review_iso_status,tc_bb5622bab363429ca481c5476acc824c,True,,,Billions,,52,1980,2031
+18,PPPGDP,MDG.PPPGDP.A,MDG,"Madagascar, Republic of",registry_code_match_review_iso_status,tc_7abbe0f9aa1346c7a9f69cc1027b4282,False,,,Billions,,52,1980,2031
+18,PPPGDP,MRT.PPPGDP.A,MRT,"Mauritania, Islamic Republic of",registry_code_match_review_iso_status,tc_17137c4e4fcc4fa58e32c924f08efcda,False,,,Billions,,42,1990,2031
+18,PPPGDP,MLI.PPPGDP.A,MLI,Mali,registry_code_match_review_iso_status,tc_a3f73fd3bb6d4d7fb4ea31d433453bae,True,,,Billions,,52,1980,2031
+18,PPPGDP,MUS.PPPGDP.A,MUS,Mauritius,registry_code_match_review_iso_status,tc_c7b728ec16b94e35b05d96d14a253eec,True,,,Billions,,52,1980,2031
+18,PPPGDP,NGA.PPPGDP.A,NGA,Nigeria,registry_code_match_review_iso_status,tc_7a8158c93a934345a2ade9fd16ee4999,True,,,Billions,,42,1990,2031
+18,PPPGDP,NER.PPPGDP.A,NER,Niger,registry_code_match_review_iso_status,tc_4d31375845614c2b91a71736069d4ab3,True,,,Billions,,52,1980,2031
+18,PPPGDP,MAR.PPPGDP.A,MAR,Morocco,registry_code_match_review_iso_status,tc_84dc0c18f03144bea337f6aacd50bf0f,True,,,Billions,,52,1980,2031
+18,PPPGDP,MOZ.PPPGDP.A,MOZ,"Mozambique, Republic of",registry_code_match_review_iso_status,tc_2249b79a9c944a1c835b0cad2676e48d,False,,,Billions,,52,1980,2031
+18,PPPGDP,SLE.PPPGDP.A,SLE,Sierra Leone,registry_code_match_review_iso_status,tc_56e9d1977fa14da298ae125fbda1b63c,True,,,Billions,,52,1980,2031
+18,PPPGDP,STP.PPPGDP.A,STP,"São Tomé and Príncipe, Democratic Republic of",registry_code_match_review_iso_status,tc_4a2ed326dc6047efa2e28926df0bc7f0,False,,,Billions,,52,1980,2031
+18,PPPGDP,ZWE.PPPGDP.A,ZWE,Zimbabwe,registry_code_match_review_iso_status,tc_168ca96e60634f5d83f3f22ad2505e66,True,,,Billions,,34,1998,2031
+18,PPPGDP,RWA.PPPGDP.A,RWA,Rwanda,registry_code_match_review_iso_status,tc_7f3c6637070f4c42a40c1f5456ec4721,True,,,Billions,,52,1980,2031
+20,PCPIPCH,SYR.PCPIPCH.A,SYR,Syrian Arab Republic,registry_code_match_review_iso_status,tc_c205b2615c45490182519ecedb651e99,False,2011,Percent,Units,,31,1980,2010
+20,PCPIPCH,ERI.PCPIPCH.A,ERI,"Eritrea, The State of",registry_code_match_review_iso_status,tc_f9d7128c5ef04c6f955f43f9bcc56a0c,False,2019,Percent,Units,,27,1993,2019
+20,PCPIPCH,SEN.PCPIPCH.A,SEN,Senegal,registry_code_match_review_iso_status,tc_29ec74ae4e094053a930487b9ce602d1,True,2025,Percent,Units,,46,1980,2025
+20,PCPIPCH,TGO.PCPIPCH.A,TGO,Togo,registry_code_match_review_iso_status,tc_06a09ff0e27b49e392ef2e88161023eb,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SSD.PCPIPCH.A,SSD,"South Sudan, Republic of",registry_code_match_review_iso_status,tc_12491d45eed544948b316c89f82a7ee7,False,2025,Percent,Units,,20,2012,2031
+20,PCPIPCH,SDN.PCPIPCH.A,SDN,Sudan,registry_code_match_review_iso_status,tc_b0ca3e0386b34603a6356b8ebc8b0565,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,NAM.PCPIPCH.A,NAM,Namibia,registry_code_match_review_iso_status,tc_7379cdcc5c4848c181ace3144aeba70f,True,2025,Percent,Units,,42,1990,2031
+20,PCPIPCH,SOM.PCPIPCH.A,SOM,Somalia,registry_code_match_review_iso_status,tc_e82cc51b989841109d9e1a7f6a5d1727,True,2024,Percent,Units,,19,2013,2031
+20,PCPIPCH,SWZ.PCPIPCH.A,SWZ,"Eswatini, Kingdom of",registry_code_match_review_iso_status,tc_fc2ad04f3c88446e91bd770190d6fe4c,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,TZA.PCPIPCH.A,TZA,"Tanzania, United Republic of",registry_code_match_review_iso_status,tc_0f4c47ec59434e46871845e474964499,False,2023,Percent,Units,,52,1980,2031
+20,PCPIPCH,FJI.PCPIPCH.A,FJI,"Fiji, Republic of",registry_code_match_review_iso_status,tc_8d67737674744dce8986565b98cbbb1f,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,UGA.PCPIPCH.A,UGA,Uganda,registry_code_match_review_iso_status,tc_2bd67b30564b46b4b502a36decc333bf,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BFA.PCPIPCH.A,BFA,Burkina Faso,registry_code_match_review_iso_status,tc_3c920b9b9f324cb19ef9d4b6debf10ba,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ZMB.PCPIPCH.A,ZMB,Zambia,registry_code_match_review_iso_status,tc_e75bc9ac62fa443c90b5529778f3b1af,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,TUN.PCPIPCH.A,TUN,Tunisia,registry_code_match_review_iso_status,tc_1d1d2c1274384efa82f9591e1c069aba,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,KIR.PCPIPCH.A,KIR,Kiribati,registry_code_match_review_iso_status,tc_c23a3cf00b1a4ebf97a70a4f41a7761d,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SLB.PCPIPCH.A,SLB,Solomon Islands,registry_code_match_review_iso_status,tc_0ce7eb254c32428c88601905c0df8e87,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,WSM.PCPIPCH.A,WSM,Samoa,registry_code_match_review_iso_status,tc_76082bd796c546d1ab76a7a8a3251369,True,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,NRU.PCPIPCH.A,NRU,"Naoero, Republic of",registry_code_match_review_iso_status,tc_2722269bdef04648b655fe363650d565,False,FY2023/24,Percent,Units,,27,2005,2031
+20,PCPIPCH,PNG.PCPIPCH.A,PNG,Papua New Guinea,registry_code_match_review_iso_status,tc_82d51d964745422e8ed3a9109757d2ee,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,VUT.PCPIPCH.A,VUT,Vanuatu,registry_code_match_review_iso_status,tc_43c4be0a76ca43a2bb7e634de5a1f4f4,True,2024,Percent,Units,,52,1980,2031
+20,PCPIPCH,MHL.PCPIPCH.A,MHL,"Marshall Islands, Republic of the",registry_code_match_review_iso_status,tc_f201b19690a04a8f903f9ea4cb0c7af4,False,FY2024/25,Percent,Units,,28,2004,2031
+20,PCPIPCH,FSM.PCPIPCH.A,FSM,"Micronesia, Federated States of",registry_code_match_review_iso_status,tc_4add61cba99b4e63a37406cd1d0feb5f,False,FY2024/25,Percent,Units,,36,1996,2031
+20,PCPIPCH,TON.PCPIPCH.A,TON,Tonga,registry_code_match_review_iso_status,tc_2c6f6c5486f04a87aa94277e67d6e51a,True,FY2024/25,Percent,Units,,52,1980,2031
+20,PCPIPCH,TUV.PCPIPCH.A,TUV,Tuvalu,registry_code_match_review_iso_status,tc_47cd272cd9c9455185a13f6e69bd805c,True,2025,Percent,Units,,31,2001,2031
+20,PCPIPCH,AZE.PCPIPCH.A,AZE,"Azerbaijan, Republic of",registry_code_match_review_iso_status,tc_b8c860bb8d404dcca918bad769e7ead7,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,ARM.PCPIPCH.A,ARM,"Armenia, Republic of",registry_code_match_review_iso_status,tc_f97b56c9c74845de8b41aa24ed12a47f,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,MDA.PCPIPCH.A,MDA,"Moldova, Republic of",registry_code_match_review_iso_status,tc_96ea5c49288d40b0945401031405c2c8,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,BLR.PCPIPCH.A,BLR,"Belarus, Republic of",registry_code_match_review_iso_status,tc_6ebc90b251e14f70b8bf758d8008e839,False,2025,Percent,Units,,41,1991,2031
+20,PCPIPCH,GEO.PCPIPCH.A,GEO,Georgia,registry_code_match_review_iso_status,tc_741bd244c1ec4961918565c4ed02c5c6,True,2025,Percent,Units,,35,1997,2031
+20,PCPIPCH,ALB.PCPIPCH.A,ALB,Albania,registry_code_match_review_iso_status,tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1,True,2025,Percent,Units,,42,1990,2031
+20,PCPIPCH,CHN.PCPIPCH.A,CHN,"China, People's Republic of",registry_code_match_review_iso_status,tc_3349a0b8b7454088b11e917a24de3ad5,False,2025,Percent,Units,,51,1981,2031
+20,PCPIPCH,BGR.PCPIPCH.A,BGR,Bulgaria,registry_code_match_review_iso_status,tc_523810acde564c1c907acd5befe575ab,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,KAZ.PCPIPCH.A,KAZ,"Kazakhstan, Republic of",registry_code_match_review_iso_status,tc_feadffc011db4cf695df6c0997a003c8,False,2024,Percent,Units,,39,1993,2031
+20,PCPIPCH,KGZ.PCPIPCH.A,KGZ,Kyrgyz Republic,registry_code_match_review_iso_status,tc_130ca81b84d04b058e9301121b2b7802,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,TKM.PCPIPCH.A,TKM,Turkmenistan,registry_code_match_review_iso_status,tc_72de9a194d85404098bb741ae4ffc826,True,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,RUS.PCPIPCH.A,RUS,Russian Federation,registry_code_match_review_iso_status,tc_c587d1c1cd8d4ec489f3d8e2524ec607,False,2025,Percent,Units,,41,1991,2031
+20,PCPIPCH,TJK.PCPIPCH.A,TJK,"Tajikistan, Republic of",registry_code_match_review_iso_status,tc_772e2ac5253c46e98b79cf5a6f19e9f5,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,UZB.PCPIPCH.A,UZB,"Uzbekistan, Republic of",registry_code_match_review_iso_status,tc_5d951c36a4ad4471ae9b9037fe338d70,False,2025,Percent,Units,,40,1992,2031
+20,PCPIPCH,UKR.PCPIPCH.A,UKR,Ukraine,registry_code_match_review_iso_status,tc_65f8a168b10143c2a596917c1fca3731,True,2025,Percent,Units,,40,1992,2031
+20,PCPIPCH,EST.PCPIPCH.A,EST,"Estonia, Republic of",registry_code_match_review_iso_status,tc_383873de760147cd97dfac5ef5d60b08,False,2025,Percent,Units,,38,1994,2031
+20,PCPIPCH,CZE.PCPIPCH.A,CZE,Czech Republic,registry_code_match_review_iso_status,tc_e43afc3a83a3458c833dac5644b7186a,False,2025,Percent,Units,,36,1996,2031
+20,PCPIPCH,SVK.PCPIPCH.A,SVK,Slovak Republic,registry_code_match_review_iso_status,tc_b3bea891d7114d148714d5e398ee06b1,False,2025,Percent,Units,,36,1996,2031
+20,PCPIPCH,LTU.PCPIPCH.A,LTU,"Lithuania, Republic of",registry_code_match_review_iso_status,tc_77de0a41c4d94d8388d6f0732438be81,False,2025,Percent,Units,,36,1996,2031
+20,PCPIPCH,MNE.PCPIPCH.A,MNE,Montenegro,registry_code_match_review_iso_status,tc_eb1de71332ef4db496cb76c95aa56cd4,True,2025,Percent,Units,,32,2000,2031
+20,PCPIPCH,LVA.PCPIPCH.A,LVA,"Latvia, Republic of",registry_code_match_review_iso_status,tc_f161aef25a39413e8aef8c147e97b28a,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,SRB.PCPIPCH.A,SRB,"Serbia, Republic of",registry_code_match_review_iso_status,tc_98a68180b9f0479f90dcde7809d60470,False,2025,Percent,Units,,34,1998,2031
+20,PCPIPCH,HRV.PCPIPCH.A,HRV,"Croatia, Republic of",registry_code_match_review_iso_status,tc_fb4046d4910a4bf89f4a93810e2f4d8a,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,HUN.PCPIPCH.A,HUN,Hungary,registry_code_match_review_iso_status,tc_e3ede57c1b754a2dbd940335f9655f11,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MNG.PCPIPCH.A,MNG,Mongolia,registry_code_match_review_iso_status,tc_d0fb202ca0aa4a868af6fa154ab84c30,True,2025,Percent,Units,,41,1991,2031
+20,PCPIPCH,BIH.PCPIPCH.A,BIH,Bosnia and Herzegovina,registry_code_match_review_iso_status,tc_0628271c897b49558f423321cbc48ce4,True,2025,Percent,Units,,37,1995,2031
+20,PCPIPCH,MKD.PCPIPCH.A,MKD,"North Macedonia, Republic of",registry_code_match_review_iso_status,tc_949bf877e3284f5c8a56cfc89bcafa90,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,SVN.PCPIPCH.A,SVN,"Slovenia, Republic of",registry_code_match_review_iso_status,tc_c0484640d9554c8285e92412bae25785,False,2025,Percent,Units,,39,1993,2031
+20,PCPIPCH,POL.PCPIPCH.A,POL,"Poland, Republic of",registry_code_match_review_iso_status,tc_9865dd6a50c3458b98f5040f0cc76357,False,2025,Percent,Units,,51,1980,2031
+20,PCPIPCH,KOS.PCPIPCH.A,KOS,"Kosovo, Republic of",registry_code_match_review_iso_status,tc_28aa17b84db24952b92fc51b421075e0,False,2025,Percent,Units,,31,2001,2031
+20,PCPIPCH,ROU.PCPIPCH.A,ROU,Romania,registry_code_match_review_iso_status,tc_c41863f7cb4e4dccbbdf0a1296f9ee1c,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,USA.PCPIPCH.A,USA,United States,registry_code_match_review_iso_status,tc_f0a8b61c54a14d4089774716657e9433,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,GBR.PCPIPCH.A,GBR,United Kingdom,registry_code_match_review_iso_status,tc_8d01644699e04b74ae3a4751c6f1fc41,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,AUT.PCPIPCH.A,AUT,Austria,registry_code_match_review_iso_status,tc_a0422e821c824e78bd95525b36155b65,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BEL.PCPIPCH.A,BEL,Belgium,registry_code_match_review_iso_status,tc_f1cc713e923c4be48e176657a00469f0,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,DEU.PCPIPCH.A,DEU,Germany,registry_code_match_review_iso_status,tc_ff445b0a87494070bf868827de190acf,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,DNK.PCPIPCH.A,DNK,Denmark,registry_code_match_review_iso_status,tc_11da440eb0704bd195fe0b11fa0890af,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,FRA.PCPIPCH.A,FRA,France,registry_code_match_review_iso_status,tc_471ae6d7112b4537a7ae5ca1e6a816a5,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LUX.PCPIPCH.A,LUX,Luxembourg,registry_code_match_review_iso_status,tc_f4261f4507cd48858cdfb7e3bd0ae738,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ITA.PCPIPCH.A,ITA,Italy,registry_code_match_review_iso_status,tc_1f3e0c90df4341f082ed90ecdd95fb10,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SMR.PCPIPCH.A,SMR,"San Marino, Republic of",registry_code_match_review_iso_status,tc_e4ea859bd6704c13912ad7f5cf19de41,False,2025,Percent,Units,,29,2003,2031
+20,PCPIPCH,NLD.PCPIPCH.A,NLD,"Netherlands, The",registry_code_match_review_iso_status,tc_898b220cf53a425e9bac3630f2c17473,False,2025,Percent,Units,,50,1981,2031
+20,PCPIPCH,NOR.PCPIPCH.A,NOR,Norway,registry_code_match_review_iso_status,tc_f4a6e15a05474af2b81c9524ed988d89,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SWE.PCPIPCH.A,SWE,Sweden,registry_code_match_review_iso_status,tc_d74b429fff544cf9bafeb459c4b3edd8,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LIE.PCPIPCH.A,LIE,"Liechtenstein, Principality of",registry_code_match_review_iso_status,tc_a8bd42bd635b43289f3c26695dc58939,False,2025,Percent,Units,,31,2001,2031
+20,PCPIPCH,CAN.PCPIPCH.A,CAN,Canada,registry_code_match_review_iso_status,tc_ba9087366ba54d51932e88bf8a11616d,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,CHE.PCPIPCH.A,CHE,Switzerland,registry_code_match_review_iso_status,tc_e693e8b799f94e7bb814e89bd46d886d,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,JPN.PCPIPCH.A,JPN,Japan,registry_code_match_review_iso_status,tc_8d0620ea475f498d9402134857882bf1,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,AND.PCPIPCH.A,AND,"Andorra, Principality of",registry_code_match_review_iso_status,tc_224c06bfe0f04031b422bddc81ea3ce5,False,2025,Percent,Units,,30,2002,2031
+20,PCPIPCH,GRC.PCPIPCH.A,GRC,Greece,registry_code_match_review_iso_status,tc_dab67464d7ad44cdbf925450627e4186,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ISL.PCPIPCH.A,ISL,Iceland,registry_code_match_review_iso_status,tc_861af4b9250e4e17a9d3f1f4e1ea33d4,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,FIN.PCPIPCH.A,FIN,Finland,registry_code_match_review_iso_status,tc_374e55a3eefe4a1a83fed6b64b5045f5,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,IRL.PCPIPCH.A,IRL,Ireland,registry_code_match_review_iso_status,tc_16d6044d9abf4743821a6fb238942a22,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,PRT.PCPIPCH.A,PRT,Portugal,registry_code_match_review_iso_status,tc_43ee3db974884a72bacf5f5519e2c145,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MLT.PCPIPCH.A,MLT,Malta,registry_code_match_review_iso_status,tc_f97b2223a2a84e53ac13614ddde1f602,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,TUR.PCPIPCH.A,TUR,"Türkiye, Republic of",registry_code_match_review_iso_status,tc_155414257ec0498690f73c3595d85e7c,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ESP.PCPIPCH.A,ESP,Spain,registry_code_match_review_iso_status,tc_21a70a0fbf1b43c292783397ce218239,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,AUS.PCPIPCH.A,AUS,Australia,registry_code_match_review_iso_status,tc_270a6ecb902d4ea1ac7373b3d1a3b2cc,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ZAF.PCPIPCH.A,ZAF,South Africa,registry_code_match_review_iso_status,tc_dc6419869818416db051f50cbfd95036,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,NZL.PCPIPCH.A,NZL,New Zealand,registry_code_match_review_iso_status,tc_d4b67e03f0c04d9a87089f477e5fa669,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BOL.PCPIPCH.A,BOL,Bolivia,registry_code_match_review_iso_status,tc_4cd6d52014244914bdeb62e6a6452e42,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ARG.PCPIPCH.A,ARG,Argentina,registry_code_match_review_iso_status,tc_2a29d5b72b294244a5de6db37118237a,True,2025,Percent,Units,,31,1998,2031
+20,PCPIPCH,COL.PCPIPCH.A,COL,Colombia,registry_code_match_review_iso_status,tc_648b019cc83e486ab9fb8497386777a9,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,CHL.PCPIPCH.A,CHL,Chile,registry_code_match_review_iso_status,tc_4c51c695cb6e47d2aed2fb04c397bece,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BRA.PCPIPCH.A,BRA,Brazil,registry_code_match_review_iso_status,tc_4923336d91d94afc919d8a2b8a4ad415,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,CRI.PCPIPCH.A,CRI,Costa Rica,registry_code_match_review_iso_status,tc_79512b2eaf8f45b5b118130859ebdaaf,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,DOM.PCPIPCH.A,DOM,Dominican Republic,registry_code_match_review_iso_status,tc_ee04e01170f84b92afabbb40abdbd4e3,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SLV.PCPIPCH.A,SLV,El Salvador,registry_code_match_review_iso_status,tc_471268dbb85845de93e546317686debb,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ECU.PCPIPCH.A,ECU,Ecuador,registry_code_match_review_iso_status,tc_2a54eb1caed54a2185a62cce0c2db6cb,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,HTI.PCPIPCH.A,HTI,Haiti,registry_code_match_review_iso_status,tc_9ee610c6d55a4f4bbdbbb073b33628a2,True,FY2024/25,Percent,Units,,52,1980,2031
+20,PCPIPCH,GTM.PCPIPCH.A,GTM,Guatemala,registry_code_match_review_iso_status,tc_9348779eba844ab2beb5bed00053b7c6,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,HND.PCPIPCH.A,HND,Honduras,registry_code_match_review_iso_status,tc_80c318b9217a4320beaad6b93eb74ac5,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,PAN.PCPIPCH.A,PAN,Panama,registry_code_match_review_iso_status,tc_ba6cf14fa6224eb4a0b085b3ea1df6dc,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MEX.PCPIPCH.A,MEX,Mexico,registry_code_match_review_iso_status,tc_c6b830c3cba64d4883eac8cee7864cfd,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,NIC.PCPIPCH.A,NIC,Nicaragua,registry_code_match_review_iso_status,tc_2fdae8757e51402e9f67c428d2b79368,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,PER.PCPIPCH.A,PER,Peru,registry_code_match_review_iso_status,tc_a90d391a4a9a473b9074fc99cce11cb5,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,PRY.PCPIPCH.A,PRY,Paraguay,registry_code_match_review_iso_status,tc_3eb6dc12494541e793a8a5b68980f29f,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,URY.PCPIPCH.A,URY,Uruguay,registry_code_match_review_iso_status,tc_e19506c4a1564ca085b73b9284fa6f56,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ATG.PCPIPCH.A,ATG,Antigua and Barbuda,registry_code_match_review_iso_status,tc_9221f2a3fd704847b66da16efa03c2b8,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ABW.PCPIPCH.A,ABW,"Aruba, Kingdom of the Netherlands",registry_code_match_review_iso_status,tc_8344feaf14da4684aaa8d4c263653778,False,2025,Percent,Units,,45,1987,2031
+20,PCPIPCH,BHS.PCPIPCH.A,BHS,"Bahamas, The",registry_code_match_review_iso_status,tc_53553c35a9f44fddb64f46b5b2d7b90c,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,VEN.PCPIPCH.A,VEN,"Venezuela, República Bolivariana de",registry_code_match_review_iso_status,tc_1aa00cb7ebb34cdca928353a58ff5b12,False,2025,Percent,Units,,48,1980,2027
+20,PCPIPCH,BLZ.PCPIPCH.A,BLZ,Belize,registry_code_match_review_iso_status,tc_d066174c4df546d1a410d386f363ee80,True,2025,Percent,Units,,51,1980,2031
+20,PCPIPCH,GRD.PCPIPCH.A,GRD,Grenada,registry_code_match_review_iso_status,tc_c5b3fecc12a94e85a7acddc70fa7a086,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BRB.PCPIPCH.A,BRB,Barbados,registry_code_match_review_iso_status,tc_7a679c592eef40c58b7cdf58e6032bb5,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,DMA.PCPIPCH.A,DMA,Dominica,registry_code_match_review_iso_status,tc_e5391af862dd490bb3a01fa80f4ac15e,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,JAM.PCPIPCH.A,JAM,Jamaica,registry_code_match_review_iso_status,tc_bf02736242694622ae7c730beb0f0da6,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,GUY.PCPIPCH.A,GUY,Guyana,registry_code_match_review_iso_status,tc_893d4efa8ccf42af896949ffd7007fef,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LCA.PCPIPCH.A,LCA,St. Lucia,registry_code_match_review_iso_status,tc_6629fdb92d05409f856d9030b63b1470,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,PRI.PCPIPCH.A,PRI,Puerto Rico,registry_code_match_review_iso_status,tc_37f10315a18d4c3abf3486086b5822e1,True,2025,Percent,Units,,51,1981,2031
+20,PCPIPCH,VCT.PCPIPCH.A,VCT,St. Vincent and the Grenadines,registry_code_match_review_iso_status,tc_67290f5714c846f4a84d1f53c6fd495a,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,KNA.PCPIPCH.A,KNA,St. Kitts and Nevis,registry_code_match_review_iso_status,tc_f22d58e7280f41f7a5a68fb03e1ab87e,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SUR.PCPIPCH.A,SUR,Suriname,registry_code_match_review_iso_status,tc_168a848021b84cc6a6c3fc320012a176,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,TTO.PCPIPCH.A,TTO,Trinidad and Tobago,registry_code_match_review_iso_status,tc_1bd98a138f884dd4b4d9d1efbbf357b0,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,CYP.PCPIPCH.A,CYP,Cyprus,registry_code_match_review_iso_status,tc_3c148b1f7650455fa710ca87cf376728,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BHR.PCPIPCH.A,BHR,"Bahrain, Kingdom of",registry_code_match_review_iso_status,tc_38fd6c5cd2be45739f3be11bc4cab9c8,False,2025,Percent,Units,,51,1980,2031
+20,PCPIPCH,IRN.PCPIPCH.A,IRN,"Iran, Islamic Republic of",registry_code_match_review_iso_status,tc_ddf21c4d378e4fc9bc3d5b4ba50890a2,False,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,JOR.PCPIPCH.A,JOR,Jordan,registry_code_match_review_iso_status,tc_6e28258973b54dfeb5811c563cd0a2e8,True,2025,Percent,Units,,51,1980,2031
+20,PCPIPCH,ISR.PCPIPCH.A,ISR,Israel,registry_code_match_review_iso_status,tc_28952c75855947a7b31bb7509dc1fce1,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,IRQ.PCPIPCH.A,IRQ,Iraq,registry_code_match_review_iso_status,tc_5ee7b31f968941dca65e70519901915f,True,2025,Percent,Units,,27,2005,2031
+20,PCPIPCH,KWT.PCPIPCH.A,KWT,Kuwait,registry_code_match_review_iso_status,tc_fa491c61ffa24dc3a21c6a6da7d39fad,True,2025,Percent,Units,,18,2014,2031
+20,PCPIPCH,LBN.PCPIPCH.A,LBN,Lebanon,registry_code_match_review_iso_status,tc_8466a0747d0b4d1a8c23feb70f7c6ed1,True,2025,Percent,Units,,46,1980,2025
+20,PCPIPCH,OMN.PCPIPCH.A,OMN,Oman,registry_code_match_review_iso_status,tc_22bd85ff61234a46a95506d105d5fee4,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,QAT.PCPIPCH.A,QAT,Qatar,registry_code_match_review_iso_status,tc_13df99232f33400d9079316c041f066c,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SAU.PCPIPCH.A,SAU,Saudi Arabia,registry_code_match_review_iso_status,tc_86b0f7fcb4504f9b8dc1b60b42b16ea0,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ARE.PCPIPCH.A,ARE,United Arab Emirates,registry_code_match_review_iso_status,tc_3cbd960008724744b928265acc0638a4,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,WBG.PCPIPCH.A,WBG,West Bank and Gaza,unmatched_three_letter_source_code,,False,2025,Percent,Units,,29,1997,2025
+20,PCPIPCH,YEM.PCPIPCH.A,YEM,"Yemen, Republic of",registry_code_match_review_iso_status,tc_e32ec835b247449084d1b535ebccf7f1,False,2025,Percent,Units,,17,2015,2031
+20,PCPIPCH,EGY.PCPIPCH.A,EGY,"Egypt, Arab Republic of",registry_code_match_review_iso_status,tc_939f236600dd47a8bf850a7ff19dc047,False,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,KHM.PCPIPCH.A,KHM,Cambodia,registry_code_match_review_iso_status,tc_f956986338e5418481784ba2d2781063,True,2025,Percent,Units,,45,1987,2031
+20,PCPIPCH,BTN.PCPIPCH.A,BTN,Bhutan,registry_code_match_review_iso_status,tc_91f04a21215642aeb5da856a78dc9949,True,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,BGD.PCPIPCH.A,BGD,Bangladesh,registry_code_match_review_iso_status,tc_8169e562ece7475e960f78f231cb1ab7,True,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,AFG.PCPIPCH.A,AFG,"Afghanistan, Islamic Republic of",registry_code_match_review_iso_status,tc_928d15fd89764353a6889f571bfd0a1c,False,FY2025/26,Percent,Units,,23,2003,2025
+20,PCPIPCH,TWN.PCPIPCH.A,TWN,Taiwan Province of China,registry_code_match_review_iso_status,tc_98ab3dee1d554162b6bbd5dac6374fc8,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BRN.PCPIPCH.A,BRN,Brunei Darussalam,registry_code_match_review_iso_status,tc_e416804f7e41490a9e7d743a45a72f0e,False,2025,Percent,Units,,49,1983,2031
+20,PCPIPCH,MMR.PCPIPCH.A,MMR,Myanmar,registry_code_match_review_iso_status,tc_b4847e5d14f94efdbbd46d6467d90237,True,FY2023/24,Percent,Units,,34,1998,2031
+20,PCPIPCH,HKG.PCPIPCH.A,HKG,"Hong Kong Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_394248a9960c4d28b4385210c82a0a0b,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LKA.PCPIPCH.A,LKA,Sri Lanka,registry_code_match_review_iso_status,tc_5e47c88bebac452e953fc5dfa8b1ba06,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LAO.PCPIPCH.A,LAO,Lao People's Democratic Republic,registry_code_match_review_iso_status,tc_71a3ecd24ca74da9a6cea3dae8cd1f82,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,KOR.PCPIPCH.A,KOR,"Korea, Republic of",registry_code_match_review_iso_status,tc_cf8be733dbf44dd6b112e9fe12d2b19e,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,TLS.PCPIPCH.A,TLS,"Timor-Leste, Democratic Republic of",registry_code_match_review_iso_status,tc_bd40ea14860a4c4083eced5549d2d9c4,False,2025,Percent,Units,,31,2001,2031
+20,PCPIPCH,IDN.PCPIPCH.A,IDN,Indonesia,registry_code_match_review_iso_status,tc_c40da0ac977b4201b8587ce04aa66f56,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,IND.PCPIPCH.A,IND,India,registry_code_match_review_iso_status,tc_39ad5030b5f94f068d4a1528c60e5638,True,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,MAC.PCPIPCH.A,MAC,"Macao Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_f9a64d8c1e6342d2b1941833ff7588d0,False,2025,Percent,Units,,30,2002,2031
+20,PCPIPCH,MYS.PCPIPCH.A,MYS,Malaysia,registry_code_match_review_iso_status,tc_b21225f45c3b40509640603249110f89,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,NPL.PCPIPCH.A,NPL,Nepal,registry_code_match_review_iso_status,tc_1c4ff3f2a8f04b43b0c28e830a9403ad,True,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,PAK.PCPIPCH.A,PAK,Pakistan,registry_code_match_review_iso_status,tc_0dc6216a94e34b44b27e42ed35fa6376,True,FY2025/26,Percent,Units,,52,1980,2031
+20,PCPIPCH,MDV.PCPIPCH.A,MDV,Maldives,registry_code_match_review_iso_status,tc_408d22fe5b894b4b947a0521ace1018a,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SGP.PCPIPCH.A,SGP,Singapore,registry_code_match_review_iso_status,tc_9d65e06bf97d417c8aa62742225ef5c9,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,PLW.PCPIPCH.A,PLW,"Palau, Republic of",registry_code_match_review_iso_status,tc_642fbe2581cf4b8c857d967717d1f1ef,False,2025,Percent,Units,,31,2001,2031
+20,PCPIPCH,PHL.PCPIPCH.A,PHL,Philippines,registry_code_match_review_iso_status,tc_fc8f1a9536d342899526129acf15acd2,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,DJI.PCPIPCH.A,DJI,Djibouti,registry_code_match_review_iso_status,tc_f4814b1a89384c4d93a92c19b301a814,True,2025,Percent,Units,,40,1992,2031
+20,PCPIPCH,THA.PCPIPCH.A,THA,Thailand,registry_code_match_review_iso_status,tc_fc12d0184fc7498f982ab8033ae64436,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,VNM.PCPIPCH.A,VNM,Vietnam,registry_code_match_review_iso_status,tc_e65eabf3cd054585a43347bdfea6201b,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BDI.PCPIPCH.A,BDI,Burundi,registry_code_match_review_iso_status,tc_4ac5b3c6b7774a05b4ceb5573c4a9d27,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,DZA.PCPIPCH.A,DZA,Algeria,registry_code_match_review_iso_status,tc_e245d37005f843168d67b7b327ece7f9,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,AGO.PCPIPCH.A,AGO,Angola,registry_code_match_review_iso_status,tc_fa43ff476d6b428fa8edb4dde1aa9d3f,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,BWA.PCPIPCH.A,BWA,Botswana,registry_code_match_review_iso_status,tc_ca2bdd688a454bb8b6457c9448612669,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,CPV.PCPIPCH.A,CPV,Cabo Verde,registry_code_match_review_iso_status,tc_d9d1737635ce4385a50c4307c2716832,True,2024,Percent,Units,,52,1980,2031
+20,PCPIPCH,CMR.PCPIPCH.A,CMR,Cameroon,registry_code_match_review_iso_status,tc_f5cd614ef03c414d8e98d87102df5c14,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,COM.PCPIPCH.A,COM,"Comoros, Union of the",registry_code_match_review_iso_status,tc_10dd5e9664664abf9eca33c250a74cdb,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,TCD.PCPIPCH.A,TCD,Chad,registry_code_match_review_iso_status,tc_1da2daf3a3d34a30b96100d643963f70,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,CAF.PCPIPCH.A,CAF,Central African Republic,registry_code_match_review_iso_status,tc_9d80376a997845b6ba6bbc08d436a50d,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,COG.PCPIPCH.A,COG,"Congo, Republic of",registry_code_match_review_iso_status,tc_451d8109e28b45eaa6923dfcac9d1601,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ETH.PCPIPCH.A,ETH,"Ethiopia, The Federal Democratic Republic of",registry_code_match_review_iso_status,tc_860d12ee66fc4fceb3faddbc92c87930,False,FY2024/25,Percent,Units,,50,1982,2031
+20,PCPIPCH,BEN.PCPIPCH.A,BEN,Benin,registry_code_match_review_iso_status,tc_874ae1f05e8c4d67a2c839095d760b72,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,GNQ.PCPIPCH.A,GNQ,"Equatorial Guinea, Republic of",registry_code_match_review_iso_status,tc_06d71df13c4f415fbf22a0147f19bc53,False,2025,Percent,Units,,51,1981,2031
+20,PCPIPCH,COD.PCPIPCH.A,COD,"Congo, Democratic Republic of the",registry_code_match_review_iso_status,tc_2763c19aa8734ce9aa8b17d8effb6645,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,GMB.PCPIPCH.A,GMB,"Gambia, The",registry_code_match_review_iso_status,tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a,False,2024,Percent,Units,,52,1980,2031
+20,PCPIPCH,GAB.PCPIPCH.A,GAB,Gabon,registry_code_match_review_iso_status,tc_d59dfb6324524b07a32c87b73009e97f,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,GHA.PCPIPCH.A,GHA,Ghana,registry_code_match_review_iso_status,tc_f63061b714ce4390948838410758c016,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,GNB.PCPIPCH.A,GNB,Guinea-Bissau,registry_code_match_review_iso_status,tc_dc93b6caf7324df884ec2b070a5296b9,True,2024,Percent,Units,,52,1980,2031
+20,PCPIPCH,GIN.PCPIPCH.A,GIN,Guinea,registry_code_match_review_iso_status,tc_05eaf88055cc4388b518332f2e7fc115,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LSO.PCPIPCH.A,LSO,"Lesotho, Kingdom of",registry_code_match_review_iso_status,tc_c0fa4e9b8e984f59ba17beb7547c5811,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,CIV.PCPIPCH.A,CIV,Côte d'Ivoire,registry_code_match_review_iso_status,tc_18c639798e4948899643d84aa2bce93c,False,2024,Percent,Units,,52,1980,2031
+20,PCPIPCH,KEN.PCPIPCH.A,KEN,Kenya,registry_code_match_review_iso_status,tc_9f3dc962bf9744a5a3cdf1f7a1cbb159,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MUS.PCPIPCH.A,MUS,Mauritius,registry_code_match_review_iso_status,tc_c7b728ec16b94e35b05d96d14a253eec,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MDG.PCPIPCH.A,MDG,"Madagascar, Republic of",registry_code_match_review_iso_status,tc_7abbe0f9aa1346c7a9f69cc1027b4282,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LBR.PCPIPCH.A,LBR,Liberia,registry_code_match_review_iso_status,tc_40dc9d2e141343e98a4d0c762c578473,True,2025,Percent,Units,,33,1999,2031
+20,PCPIPCH,MWI.PCPIPCH.A,MWI,Malawi,registry_code_match_review_iso_status,tc_ee1c1ac1ad5c4faf818070115133b174,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,LBY.PCPIPCH.A,LBY,Libya,registry_code_match_review_iso_status,tc_bb5622bab363429ca481c5476acc824c,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MOZ.PCPIPCH.A,MOZ,"Mozambique, Republic of",registry_code_match_review_iso_status,tc_2249b79a9c944a1c835b0cad2676e48d,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MRT.PCPIPCH.A,MRT,"Mauritania, Islamic Republic of",registry_code_match_review_iso_status,tc_17137c4e4fcc4fa58e32c924f08efcda,False,2025,Percent,Units,,41,1991,2031
+20,PCPIPCH,MLI.PCPIPCH.A,MLI,Mali,registry_code_match_review_iso_status,tc_a3f73fd3bb6d4d7fb4ea31d433453bae,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,NGA.PCPIPCH.A,NGA,Nigeria,registry_code_match_review_iso_status,tc_7a8158c93a934345a2ade9fd16ee4999,True,2025,Percent,Units,,36,1996,2031
+20,PCPIPCH,NER.PCPIPCH.A,NER,Niger,registry_code_match_review_iso_status,tc_4d31375845614c2b91a71736069d4ab3,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,MAR.PCPIPCH.A,MAR,Morocco,registry_code_match_review_iso_status,tc_84dc0c18f03144bea337f6aacd50bf0f,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,RWA.PCPIPCH.A,RWA,Rwanda,registry_code_match_review_iso_status,tc_7f3c6637070f4c42a40c1f5456ec4721,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,ZWE.PCPIPCH.A,ZWE,Zimbabwe,registry_code_match_review_iso_status,tc_168ca96e60634f5d83f3f22ad2505e66,True,2025,Percent,Units,,41,1991,2031
+20,PCPIPCH,STP.PCPIPCH.A,STP,"São Tomé and Príncipe, Democratic Republic of",registry_code_match_review_iso_status,tc_4a2ed326dc6047efa2e28926df0bc7f0,False,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SYC.PCPIPCH.A,SYC,Seychelles,registry_code_match_review_iso_status,tc_4bc377d3ea57485bac43c9b512587dbc,True,2025,Percent,Units,,52,1980,2031
+20,PCPIPCH,SLE.PCPIPCH.A,SLE,Sierra Leone,registry_code_match_review_iso_status,tc_56e9d1977fa14da298ae125fbda1b63c,True,2025,Percent,Units,,52,1980,2031
+21,LUR,SYR.LUR.A,SYR,Syrian Arab Republic,registry_code_match_review_iso_status,tc_c205b2615c45490182519ecedb651e99,False,2010,,Units,,14,1997,2010
+21,LUR,SYC.LUR.A,SYC,Seychelles,registry_code_match_review_iso_status,tc_4bc377d3ea57485bac43c9b512587dbc,True,2025,,Units,,37,1995,2031
+21,LUR,TUN.LUR.A,TUN,Tunisia,registry_code_match_review_iso_status,tc_1d1d2c1274384efa82f9591e1c069aba,True,2025,,Units,,36,1990,2025
+21,LUR,SDN.LUR.A,SDN,Sudan,registry_code_match_review_iso_status,tc_b0ca3e0386b34603a6356b8ebc8b0565,True,2011,,Units,,51,1981,2031
+21,LUR,FJI.LUR.A,FJI,"Fiji, Republic of",registry_code_match_review_iso_status,tc_8d67737674744dce8986565b98cbbb1f,False,2020,,Units,,46,1986,2031
+21,LUR,BLR.LUR.A,BLR,"Belarus, Republic of",registry_code_match_review_iso_status,tc_6ebc90b251e14f70b8bf758d8008e839,False,2025,,Units,,39,1993,2031
+21,LUR,AZE.LUR.A,AZE,"Azerbaijan, Republic of",registry_code_match_review_iso_status,tc_b8c860bb8d404dcca918bad769e7ead7,False,2025,,Units,,32,2000,2031
+21,LUR,ARM.LUR.A,ARM,"Armenia, Republic of",registry_code_match_review_iso_status,tc_f97b56c9c74845de8b41aa24ed12a47f,False,2024,,Units,,31,2001,2031
+21,LUR,KAZ.LUR.A,KAZ,"Kazakhstan, Republic of",registry_code_match_review_iso_status,tc_feadffc011db4cf695df6c0997a003c8,False,2024,,Units,,38,1994,2031
+21,LUR,ALB.LUR.A,ALB,Albania,registry_code_match_review_iso_status,tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1,True,2025,,Units,,52,1980,2031
+21,LUR,GEO.LUR.A,GEO,Georgia,registry_code_match_review_iso_status,tc_741bd244c1ec4961918565c4ed02c5c6,True,2025,,Units,,36,1996,2031
+21,LUR,KGZ.LUR.A,KGZ,Kyrgyz Republic,registry_code_match_review_iso_status,tc_130ca81b84d04b058e9301121b2b7802,False,2024,,Units,,38,1994,2031
+21,LUR,BGR.LUR.A,BGR,Bulgaria,registry_code_match_review_iso_status,tc_523810acde564c1c907acd5befe575ab,True,2025,,Units,,43,1989,2031
+21,LUR,MDA.LUR.A,MDA,"Moldova, Republic of",registry_code_match_review_iso_status,tc_96ea5c49288d40b0945401031405c2c8,False,2025,,Units,,39,1993,2031
+21,LUR,TJK.LUR.A,TJK,"Tajikistan, Republic of",registry_code_match_review_iso_status,tc_772e2ac5253c46e98b79cf5a6f19e9f5,False,2020,,Units,,13,1999,2011
+21,LUR,RUS.LUR.A,RUS,Russian Federation,registry_code_match_review_iso_status,tc_c587d1c1cd8d4ec489f3d8e2524ec607,False,2025,,Units,,40,1992,2031
+21,LUR,CHN.LUR.A,CHN,"China, People's Republic of",registry_code_match_review_iso_status,tc_3349a0b8b7454088b11e917a24de3ad5,False,2025,,Units,,15,2017,2031
+21,LUR,UZB.LUR.A,UZB,"Uzbekistan, Republic of",registry_code_match_review_iso_status,tc_5d951c36a4ad4471ae9b9037fe338d70,False,2025,,Units,,30,2002,2031
+21,LUR,CZE.LUR.A,CZE,Czech Republic,registry_code_match_review_iso_status,tc_e43afc3a83a3458c833dac5644b7186a,False,2025,,Units,,37,1995,2031
+21,LUR,UKR.LUR.A,UKR,Ukraine,registry_code_match_review_iso_status,tc_65f8a168b10143c2a596917c1fca3731,True,2021,,Units,,37,1995,2031
+21,LUR,SRB.LUR.A,SRB,"Serbia, Republic of",registry_code_match_review_iso_status,tc_98a68180b9f0479f90dcde7809d60470,False,2025,,Units,,35,1997,2031
+21,LUR,EST.LUR.A,EST,"Estonia, Republic of",registry_code_match_review_iso_status,tc_383873de760147cd97dfac5ef5d60b08,False,2025,,Units,,39,1993,2031
+21,LUR,SVK.LUR.A,SVK,Slovak Republic,registry_code_match_review_iso_status,tc_b3bea891d7114d148714d5e398ee06b1,False,2025,,Units,,39,1993,2031
+21,LUR,LVA.LUR.A,LVA,"Latvia, Republic of",registry_code_match_review_iso_status,tc_f161aef25a39413e8aef8c147e97b28a,False,2025,,Units,,40,1992,2031
+21,LUR,HUN.LUR.A,HUN,Hungary,registry_code_match_review_iso_status,tc_e3ede57c1b754a2dbd940335f9655f11,True,2025,,Units,,52,1980,2031
+21,LUR,HRV.LUR.A,HRV,"Croatia, Republic of",registry_code_match_review_iso_status,tc_fb4046d4910a4bf89f4a93810e2f4d8a,False,2025,,Units,,41,1991,2031
+21,LUR,LTU.LUR.A,LTU,"Lithuania, Republic of",registry_code_match_review_iso_status,tc_77de0a41c4d94d8388d6f0732438be81,False,2025,,Units,,33,1999,2031
+21,LUR,MNG.LUR.A,MNG,Mongolia,registry_code_match_review_iso_status,tc_d0fb202ca0aa4a868af6fa154ab84c30,True,2025,,Units,,25,2007,2031
+21,LUR,BIH.LUR.A,BIH,Bosnia and Herzegovina,registry_code_match_review_iso_status,tc_0628271c897b49558f423321cbc48ce4,True,2025,,Units,,37,1995,2031
+21,LUR,MKD.LUR.A,MKD,"North Macedonia, Republic of",registry_code_match_review_iso_status,tc_949bf877e3284f5c8a56cfc89bcafa90,False,2025,,Units,,36,1996,2031
+21,LUR,SVN.LUR.A,SVN,"Slovenia, Republic of",registry_code_match_review_iso_status,tc_c0484640d9554c8285e92412bae25785,False,2025,,Units,,40,1992,2031
+21,LUR,KOS.LUR.A,KOS,"Kosovo, Republic of",registry_code_match_review_iso_status,tc_28aa17b84db24952b92fc51b421075e0,False,2024,,Units,,13,2012,2024
+21,LUR,ROU.LUR.A,ROU,Romania,registry_code_match_review_iso_status,tc_c41863f7cb4e4dccbbdf0a1296f9ee1c,True,2025,,Units,,47,1985,2031
+21,LUR,POL.LUR.A,POL,"Poland, Republic of",registry_code_match_review_iso_status,tc_9865dd6a50c3458b98f5040f0cc76357,False,2025,,Units,,42,1990,2031
+21,LUR,USA.LUR.A,USA,United States,registry_code_match_review_iso_status,tc_f0a8b61c54a14d4089774716657e9433,True,2025,,Units,,52,1980,2031
+21,LUR,GBR.LUR.A,GBR,United Kingdom,registry_code_match_review_iso_status,tc_8d01644699e04b74ae3a4751c6f1fc41,True,2025,,Units,,52,1980,2031
+21,LUR,AUT.LUR.A,AUT,Austria,registry_code_match_review_iso_status,tc_a0422e821c824e78bd95525b36155b65,True,2025,,Units,,52,1980,2031
+21,LUR,BEL.LUR.A,BEL,Belgium,registry_code_match_review_iso_status,tc_f1cc713e923c4be48e176657a00469f0,True,2025,,Units,,52,1980,2031
+21,LUR,DEU.LUR.A,DEU,Germany,registry_code_match_review_iso_status,tc_ff445b0a87494070bf868827de190acf,True,2025,,Units,,52,1980,2031
+21,LUR,DNK.LUR.A,DNK,Denmark,registry_code_match_review_iso_status,tc_11da440eb0704bd195fe0b11fa0890af,True,2025,,Units,,52,1980,2031
+21,LUR,FRA.LUR.A,FRA,France,registry_code_match_review_iso_status,tc_471ae6d7112b4537a7ae5ca1e6a816a5,True,2025,,Units,,52,1980,2031
+21,LUR,SMR.LUR.A,SMR,"San Marino, Republic of",registry_code_match_review_iso_status,tc_e4ea859bd6704c13912ad7f5cf19de41,False,2025,,Units,,31,2001,2031
+21,LUR,LUX.LUR.A,LUX,Luxembourg,registry_code_match_review_iso_status,tc_f4261f4507cd48858cdfb7e3bd0ae738,True,2025,,Units,,52,1980,2031
+21,LUR,ITA.LUR.A,ITA,Italy,registry_code_match_review_iso_status,tc_1f3e0c90df4341f082ed90ecdd95fb10,True,2025,,Units,,52,1980,2031
+21,LUR,NOR.LUR.A,NOR,Norway,registry_code_match_review_iso_status,tc_f4a6e15a05474af2b81c9524ed988d89,True,2025,,Units,,52,1980,2031
+21,LUR,SWE.LUR.A,SWE,Sweden,registry_code_match_review_iso_status,tc_d74b429fff544cf9bafeb459c4b3edd8,True,2025,,Units,,52,1980,2031
+21,LUR,NLD.LUR.A,NLD,"Netherlands, The",registry_code_match_review_iso_status,tc_898b220cf53a425e9bac3630f2c17473,False,2025,,Units,,52,1980,2031
+21,LUR,LIE.LUR.A,LIE,"Liechtenstein, Principality of",registry_code_match_review_iso_status,tc_a8bd42bd635b43289f3c26695dc58939,False,2025,,Units,,25,2007,2031
+21,LUR,CAN.LUR.A,CAN,Canada,registry_code_match_review_iso_status,tc_ba9087366ba54d51932e88bf8a11616d,True,2025,,Units,,52,1980,2031
+21,LUR,CHE.LUR.A,CHE,Switzerland,registry_code_match_review_iso_status,tc_e693e8b799f94e7bb814e89bd46d886d,True,2025,,Units,,52,1980,2031
+21,LUR,FIN.LUR.A,FIN,Finland,registry_code_match_review_iso_status,tc_374e55a3eefe4a1a83fed6b64b5045f5,True,2025,,Units,,52,1980,2031
+21,LUR,AND.LUR.A,AND,"Andorra, Principality of",registry_code_match_review_iso_status,tc_224c06bfe0f04031b422bddc81ea3ce5,False,2025,,Units,,22,2010,2031
+21,LUR,JPN.LUR.A,JPN,Japan,registry_code_match_review_iso_status,tc_8d0620ea475f498d9402134857882bf1,True,2025,,Units,,52,1980,2031
+21,LUR,ISL.LUR.A,ISL,Iceland,registry_code_match_review_iso_status,tc_861af4b9250e4e17a9d3f1f4e1ea33d4,True,2025,,Units,,52,1980,2031
+21,LUR,IRL.LUR.A,IRL,Ireland,registry_code_match_review_iso_status,tc_16d6044d9abf4743821a6fb238942a22,True,2025,,Units,,47,1985,2031
+21,LUR,GRC.LUR.A,GRC,Greece,registry_code_match_review_iso_status,tc_dab67464d7ad44cdbf925450627e4186,True,2025,,Units,,52,1980,2031
+21,LUR,MLT.LUR.A,MLT,Malta,registry_code_match_review_iso_status,tc_f97b2223a2a84e53ac13614ddde1f602,True,2024,,Units,,49,1983,2031
+21,LUR,PRT.LUR.A,PRT,Portugal,registry_code_match_review_iso_status,tc_43ee3db974884a72bacf5f5519e2c145,True,2025,,Units,,52,1980,2031
+21,LUR,ESP.LUR.A,ESP,Spain,registry_code_match_review_iso_status,tc_21a70a0fbf1b43c292783397ce218239,True,2025,,Units,,52,1980,2031
+21,LUR,NZL.LUR.A,NZL,New Zealand,registry_code_match_review_iso_status,tc_d4b67e03f0c04d9a87089f477e5fa669,True,2025,,Units,,52,1980,2031
+21,LUR,AUS.LUR.A,AUS,Australia,registry_code_match_review_iso_status,tc_270a6ecb902d4ea1ac7373b3d1a3b2cc,True,2025,,Units,,52,1980,2031
+21,LUR,TUR.LUR.A,TUR,"Türkiye, Republic of",registry_code_match_review_iso_status,tc_155414257ec0498690f73c3595d85e7c,False,2025,,Units,,52,1980,2031
+21,LUR,ZAF.LUR.A,ZAF,South Africa,registry_code_match_review_iso_status,tc_dc6419869818416db051f50cbfd95036,True,2025,,Units,,52,1980,2031
+21,LUR,BRA.LUR.A,BRA,Brazil,registry_code_match_review_iso_status,tc_4923336d91d94afc919d8a2b8a4ad415,True,2025,,Units,,41,1991,2031
+21,LUR,BOL.LUR.A,BOL,Bolivia,registry_code_match_review_iso_status,tc_4cd6d52014244914bdeb62e6a6452e42,True,2025,,Units,,32,2000,2031
+21,LUR,ARG.LUR.A,ARG,Argentina,registry_code_match_review_iso_status,tc_2a29d5b72b294244a5de6db37118237a,True,2025,,Units,,52,1980,2031
+21,LUR,CHL.LUR.A,CHL,Chile,registry_code_match_review_iso_status,tc_4c51c695cb6e47d2aed2fb04c397bece,True,2025,,Units,,52,1980,2031
+21,LUR,CRI.LUR.A,CRI,Costa Rica,registry_code_match_review_iso_status,tc_79512b2eaf8f45b5b118130859ebdaaf,True,2025,,Units,,52,1980,2031
+21,LUR,ECU.LUR.A,ECU,Ecuador,registry_code_match_review_iso_status,tc_2a54eb1caed54a2185a62cce0c2db6cb,True,2025,,Units,,44,1988,2031
+21,LUR,COL.LUR.A,COL,Colombia,registry_code_match_review_iso_status,tc_648b019cc83e486ab9fb8497386777a9,True,2025,,Units,,52,1980,2031
+21,LUR,DOM.LUR.A,DOM,Dominican Republic,registry_code_match_review_iso_status,tc_ee04e01170f84b92afabbb40abdbd4e3,True,2025,,Units,,41,1991,2031
+21,LUR,SLV.LUR.A,SLV,El Salvador,registry_code_match_review_iso_status,tc_471268dbb85845de93e546317686debb,True,2025,,Units,,44,1988,2031
+21,LUR,HND.LUR.A,HND,Honduras,registry_code_match_review_iso_status,tc_80c318b9217a4320beaad6b93eb74ac5,True,2025,,Units,,52,1980,2031
+21,LUR,PRY.LUR.A,PRY,Paraguay,registry_code_match_review_iso_status,tc_3eb6dc12494541e793a8a5b68980f29f,True,2025,,Units,,49,1983,2031
+21,LUR,PAN.LUR.A,PAN,Panama,registry_code_match_review_iso_status,tc_ba6cf14fa6224eb4a0b085b3ea1df6dc,True,2025,,Units,,52,1980,2031
+21,LUR,MEX.LUR.A,MEX,Mexico,registry_code_match_review_iso_status,tc_c6b830c3cba64d4883eac8cee7864cfd,True,2025,,Units,,52,1980,2031
+21,LUR,NIC.LUR.A,NIC,Nicaragua,registry_code_match_review_iso_status,tc_2fdae8757e51402e9f67c428d2b79368,True,2025,,Units,,52,1980,2031
+21,LUR,URY.LUR.A,URY,Uruguay,registry_code_match_review_iso_status,tc_e19506c4a1564ca085b73b9284fa6f56,True,2025,,Units,,49,1983,2031
+21,LUR,PER.LUR.A,PER,Peru,registry_code_match_review_iso_status,tc_a90d391a4a9a473b9074fc99cce11cb5,True,2025,,Units,,52,1980,2031
+21,LUR,VEN.LUR.A,VEN,"Venezuela, República Bolivariana de",registry_code_match_review_iso_status,tc_1aa00cb7ebb34cdca928353a58ff5b12,False,2011,,Units,,20,1999,2018
+21,LUR,ABW.LUR.A,ABW,"Aruba, Kingdom of the Netherlands",registry_code_match_review_iso_status,tc_8344feaf14da4684aaa8d4c263653778,False,2024,,Units,,46,1986,2031
+21,LUR,BHS.LUR.A,BHS,"Bahamas, The",registry_code_match_review_iso_status,tc_53553c35a9f44fddb64f46b5b2d7b90c,False,2025,,Units,,46,1986,2031
+21,LUR,BRB.LUR.A,BRB,Barbados,registry_code_match_review_iso_status,tc_7a679c592eef40c58b7cdf58e6032bb5,True,2025,,Units,,51,1981,2031
+21,LUR,BLZ.LUR.A,BLZ,Belize,registry_code_match_review_iso_status,tc_d066174c4df546d1a410d386f363ee80,True,2025,,Units,,42,1990,2031
+21,LUR,JAM.LUR.A,JAM,Jamaica,registry_code_match_review_iso_status,tc_bf02736242694622ae7c730beb0f0da6,True,2025,,Units,,46,1980,2025
+21,LUR,PRI.LUR.A,PRI,Puerto Rico,registry_code_match_review_iso_status,tc_37f10315a18d4c3abf3486086b5822e1,True,2025,,Units,,52,1980,2031
+21,LUR,BHR.LUR.A,BHR,"Bahrain, Kingdom of",registry_code_match_review_iso_status,tc_38fd6c5cd2be45739f3be11bc4cab9c8,False,2025,,Units,,19,2007,2025
+21,LUR,TTO.LUR.A,TTO,Trinidad and Tobago,registry_code_match_review_iso_status,tc_1bd98a138f884dd4b4d9d1efbbf357b0,True,2025,,Units,,41,1991,2031
+21,LUR,SUR.LUR.A,SUR,Suriname,registry_code_match_review_iso_status,tc_168a848021b84cc6a6c3fc320012a176,True,2023,,Units,,38,1994,2031
+21,LUR,IRN.LUR.A,IRN,"Iran, Islamic Republic of",registry_code_match_review_iso_status,tc_ddf21c4d378e4fc9bc3d5b4ba50890a2,False,FY2025/26,,Units,,42,1990,2031
+21,LUR,CYP.LUR.A,CYP,Cyprus,registry_code_match_review_iso_status,tc_3c148b1f7650455fa710ca87cf376728,True,2025,,Units,,50,1982,2031
+21,LUR,JOR.LUR.A,JOR,Jordan,registry_code_match_review_iso_status,tc_6e28258973b54dfeb5811c563cd0a2e8,True,2025,,Units,,42,1984,2025
+21,LUR,ISR.LUR.A,ISR,Israel,registry_code_match_review_iso_status,tc_28952c75855947a7b31bb7509dc1fce1,True,2025,,Units,,52,1980,2031
+21,LUR,LBN.LUR.A,LBN,Lebanon,registry_code_match_review_iso_status,tc_8466a0747d0b4d1a8c23feb70f7c6ed1,True,2019,,Units,,33,1991,2023
+21,LUR,EGY.LUR.A,EGY,"Egypt, Arab Republic of",registry_code_match_review_iso_status,tc_939f236600dd47a8bf850a7ff19dc047,False,FY2024/25,,Units,,36,1990,2025
+21,LUR,SAU.LUR.A,SAU,Saudi Arabia,registry_code_match_review_iso_status,tc_86b0f7fcb4504f9b8dc1b60b42b16ea0,True,2025,,Units,,27,1999,2025
+21,LUR,WBG.LUR.A,WBG,West Bank and Gaza,unmatched_three_letter_source_code,,False,2022,,Units,,30,1993,2022
+21,LUR,BTN.LUR.A,BTN,Bhutan,registry_code_match_review_iso_status,tc_91f04a21215642aeb5da856a78dc9949,True,2025,,Units,,21,2003,2023
+21,LUR,TWN.LUR.A,TWN,Taiwan Province of China,registry_code_match_review_iso_status,tc_98ab3dee1d554162b6bbd5dac6374fc8,False,2025,,Units,,52,1980,2031
+21,LUR,BRN.LUR.A,BRN,Brunei Darussalam,registry_code_match_review_iso_status,tc_e416804f7e41490a9e7d743a45a72f0e,False,2025,,Units,,21,2011,2031
+21,LUR,HKG.LUR.A,HKG,"Hong Kong Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_394248a9960c4d28b4385210c82a0a0b,False,2025,,Units,,52,1980,2031
+21,LUR,LKA.LUR.A,LKA,Sri Lanka,registry_code_match_review_iso_status,tc_5e47c88bebac452e953fc5dfa8b1ba06,True,2025,,Units,,42,1990,2031
+21,LUR,IDN.LUR.A,IDN,Indonesia,registry_code_match_review_iso_status,tc_c40da0ac977b4201b8587ce04aa66f56,True,2025,,Units,,48,1984,2031
+21,LUR,IND.LUR.A,IND,India,registry_code_match_review_iso_status,tc_39ad5030b5f94f068d4a1528c60e5638,True,FY2024/25,,Units,,14,2018,2031
+21,LUR,KOR.LUR.A,KOR,"Korea, Republic of",registry_code_match_review_iso_status,tc_cf8be733dbf44dd6b112e9fe12d2b19e,False,2025,,Units,,52,1980,2031
+21,LUR,MAC.LUR.A,MAC,"Macao Special Administrative Region, People's Republic of China",registry_code_match_review_iso_status,tc_f9a64d8c1e6342d2b1941833ff7588d0,False,2025,,Units,,31,2001,2031
+21,LUR,MYS.LUR.A,MYS,Malaysia,registry_code_match_review_iso_status,tc_b21225f45c3b40509640603249110f89,True,2025,,Units,,47,1985,2031
+21,LUR,PAK.LUR.A,PAK,Pakistan,registry_code_match_review_iso_status,tc_0dc6216a94e34b44b27e42ed35fa6376,True,FY2024/25,,Units,,49,1983,2031
+21,LUR,PHL.LUR.A,PHL,Philippines,registry_code_match_review_iso_status,tc_fc8f1a9536d342899526129acf15acd2,True,2025,,Units,,47,1985,2031
+21,LUR,THA.LUR.A,THA,Thailand,registry_code_match_review_iso_status,tc_fc12d0184fc7498f982ab8033ae64436,True,2024,,Units,,42,1990,2031
+21,LUR,SGP.LUR.A,SGP,Singapore,registry_code_match_review_iso_status,tc_9d65e06bf97d417c8aa62742225ef5c9,True,2025,,Units,,52,1980,2031
+21,LUR,VNM.LUR.A,VNM,Vietnam,registry_code_match_review_iso_status,tc_e65eabf3cd054585a43347bdfea6201b,True,2025,,Units,,42,1990,2031
+21,LUR,DZA.LUR.A,DZA,Algeria,registry_code_match_review_iso_status,tc_e245d37005f843168d67b7b327ece7f9,True,2019,,Units,,40,1980,2019
+21,LUR,CPV.LUR.A,CPV,Cabo Verde,registry_code_match_review_iso_status,tc_d9d1737635ce4385a50c4307c2716832,True,2024,,Units,,52,1980,2031
+21,LUR,MUS.LUR.A,MUS,Mauritius,registry_code_match_review_iso_status,tc_c7b728ec16b94e35b05d96d14a253eec,True,2025,,Units,,50,1982,2031
+21,LUR,STP.LUR.A,STP,"São Tomé and Príncipe, Democratic Republic of",registry_code_match_review_iso_status,tc_4a2ed326dc6047efa2e28926df0bc7f0,False,2017,,Units,,38,1980,2017
+21,LUR,NGA.LUR.A,NGA,Nigeria,registry_code_match_review_iso_status,tc_7a8158c93a934345a2ade9fd16ee4999,True,2020,,Units,,9,2010,2018
+21,LUR,MAR.LUR.A,MAR,Morocco,registry_code_match_review_iso_status,tc_84dc0c18f03144bea337f6aacd50bf0f,True,2025,,Units,,37,1995,2031
