@@ -119,14 +119,14 @@
     },
     "imf_weo": {
       "name": "IMF World Economic Outlook",
-      "homepage_url": "https://www.imf.org/en/Publications/WEO/weo-database",
+      "homepage_url": "https://data.imf.org/datasets/WEO",
       "domains": [
         "macroeconomy"
       ],
       "license_status": "unclear_or_unverified",
-      "terms_url": "https://www.imf.org/en/Publications/WEO/weo-database",
+      "terms_url": "https://www.imf.org/en/about/copyright-and-terms",
       "attribution": null,
-      "notes": "GDP, GDP per capita, PPP GDP, inflation and unemployment; distinguish actuals, estimates and projections and retain WEO vintage.",
+      "notes": "GDP, GDP per capita, PPP GDP, inflation and unemployment. October 2026 WEO dataset and vintage-specific appendix were manually downloaded from the official IMF Data Portal; see docs/data-sources/imf-weo-october-2026-manual-acquisition.md. Retain WEO vintage, portal export timestamp, actual/estimate/projection metadata and country-group distinction. No automated bulk acquisition or policy change is implied.",
       "acquisition_mode": "manual_or_api",
       "downloads": [],
       "field_ids": [
