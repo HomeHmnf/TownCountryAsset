@@ -1,0 +1,47 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "bahrain_open_data",
+  "source_name": "Bahrain Open Data Portal — unemployment (yearly)",
+  "download_id": "unemployment_yearly",
+  "release": "20261102T141738Z",
+  "release_kind": "rolling",
+  "release_discovery_mode": "rolling_url",
+  "dataset_id": "03-unemployment-yearly",
+  "source_url": "https://data.gov.bh/explore/dataset/03-unemployment-yearly/",
+  "api_base_url": "https://data.gov.bh/api/explore/v2.1/catalog/datasets",
+  "retrieved_at": "2026-11-02T14:17:38.347094+00:00",
+  "dataset_metadata_processed": null,
+  "dataset_data_processed": null,
+  "total_record_count": 50,
+  "page_size": 100,
+  "page_count": 1,
+  "files": [
+    {
+      "filename": "dataset_metadata.json",
+      "url": "https://data.gov.bh/api/explore/v2.1/catalog/datasets/03-unemployment-yearly",
+      "final_url": "https://data.gov.bh/api/explore/v2.1/catalog/datasets/03-unemployment-yearly",
+      "content_type": "application/json; charset=utf-8",
+      "byte_count": 3872,
+      "sha256": "fcba79f04431795ce1e3015ad9beb4c8a600eaa664e7f8bad3154e6063bb8dd5",
+      "local_raw_path": "raw_data/sources/bahrain_open_data/unemployment_yearly/20261102T141738Z/dataset_metadata.json"
+    },
+    {
+      "filename": "records_page_0001.json",
+      "url": "https://data.gov.bh/api/explore/v2.1/catalog/datasets/03-unemployment-yearly/records",
+      "final_url": "https://data.gov.bh/api/explore/v2.1/catalog/datasets/03-unemployment-yearly/records?limit=100&offset=0",
+      "content_type": "application/json; charset=utf-8",
+      "byte_count": 19933,
+      "sha256": "47fd83b26fb725e91275aa595491968c69d6dd47268c077f8002b2b8526842c3",
+      "local_raw_path": "raw_data/sources/bahrain_open_data/unemployment_yearly/20261102T141738Z/records_page_0001.json"
+    }
+  ],
+  "license_status": "public_domain_or_unverified",
+  "terms_url": "https://data.gov.bh/pages/faq/",
+  "attribution": "Bahrain Open Data Portal; dataset 03-unemployment-yearly",
+  "side_effects": {
+    "database_written": false,
+    "source_selection_policy_changed": false,
+    "release_promoted": false,
+    "observations_normalized": false
+  }
+}
