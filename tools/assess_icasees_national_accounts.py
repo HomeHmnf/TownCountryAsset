@@ -185,8 +185,8 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                            "unit_label": old.cell(old_gdp_row, 3).value,
                            "scale_label": old.cell(old_gdp_row, old_years[2013] - 1).value})
     combined = workbook["Donnée_SCN2008"]
-    right_label_col = next((col for col in range(1, combined.max_column + 1)
-                            if _normal(combined.cell(1, col).value) == "nom des indicateurs"), None)
+    right_label_col = max((col for col in range(1, combined.max_column + 1)
+                           if _normal(combined.cell(1, col).value) == "nom des indicateurs"), default=None)
     if right_label_col is None:
         raise IcaseesAssessmentError("Donnée_SCN2008 right-hand indicator block was not found")
     # Exclude the repeated right-hand 2019-2021 headers; 2019 occurs twice.
