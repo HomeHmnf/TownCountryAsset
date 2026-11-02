@@ -201,3 +201,14 @@ def test_unsupported_formula_fails_explicitly():
     workbook["Donnee"]["E7"] = "=AVERAGE(E5:E6)"
     with pytest.raises(IcaseesAssessmentError, match="Unsupported workbook formula"):
         _extract_gdp_rows(workbook)
+
+
+def test_non_numeric_observation_reports_exact_sheet_and_cell():
+    workbook = _workbook_fixture()
+    sheet = workbook["Donnee"]
+    sheet["E7"] = "millions de F CFA"
+    with pytest.raises(
+        IcaseesAssessmentError,
+        match=r"Non-numeric workbook observation at Donnee!E7: 'millions de F CFA'",
+    ):
+        _cell_number(sheet, 7, 5)
