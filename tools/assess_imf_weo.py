@@ -33,7 +33,7 @@ INDICATORS = {
     "PCPIPCH": (20, "inflation", "Percent", "Units"),
     "LUR": (21, "unemployment", None, "Units"),
 }
-YEAR = re.compile(r"^\\d{4}$")
+YEAR = re.compile(r"^\d{4}$")
 
 
 class AssessmentError(RuntimeError):
@@ -172,7 +172,7 @@ def build_assessment(csv_path: Path = CSV_PATH, appendix_path: Path = PDF_PATH,
             item = {
                 "field_id": field_id, "indicator_code": code, "series_code": series_code,
                 "source_country_code": prefix, "country_name": row.get("COUNTRY", ""),
-                "identity_status": status, "game_id": game_id, "registry_name_match": name_match,\n                "registry_iso_assignment_status": (rec.get("iso") or {}).get("assignment_status") if status == "registry_code_match_review_iso_status" else None,
+                "identity_status": status, "game_id": game_id, "registry_name_match": name_match,
                 "latest_actual_annual_data": (row.get("LATEST_ACTUAL_ANNUAL_DATA") or "").strip() or None,
                 "unit": (row.get("UNIT") or "").strip() or None,
                 "scale": (row.get("SCALE") or "").strip() or None,
