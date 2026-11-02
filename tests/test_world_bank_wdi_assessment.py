@@ -20,8 +20,12 @@ def _metadata(code):
 
 
 def test_metadata_preserves_source_note_and_originating_organization():
-    result = wdi.fetch_indicator_metadata("NY.GDP.MKTP.CD", lambda url: [None, _metadata("NY.GDP.MKTP.CD")])
+    result = wdi.fetch_indicator_metadata(
+        "NY.GDP.MKTP.CD",
+        lambda url: [{"lastupdated": "2026-11-01"}, _metadata("NY.GDP.MKTP.CD")],
+    )
     assert result["indicator_code"] == "NY.GDP.MKTP.CD"
+    assert result["api_last_updated"] == "2026-11-01"
     assert result["source_note"] == "Series note"
     assert result["source_organization"] == "Originating organization"
     assert result["source_name"] == "World Development Indicators"
