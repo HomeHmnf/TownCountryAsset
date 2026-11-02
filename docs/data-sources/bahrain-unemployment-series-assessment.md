@@ -18,7 +18,7 @@ The official Bahrain Open Data Portal dataset `03-unemployment-yearly` was acqui
 
 | Year | Bahrain official total | IMF WEO `LUR` | Difference (official − IMF) | Assessment |
 |---:|---:|---:|---:|---|
-| 2016 | 4.3% | 3.9% | +0.4 pp | Unresolved discrepancy |
+| 2016 | 4.3% | 3.9% | +0.4 pp | Reference-period mismatch: API value matches December rate; WEO matches GCC-STAT annual citizen rate |
 | 2017 | 4.1% | 4.1% | 0.0 pp | Exact match |
 | 2018 | 4.3% | 4.3% | 0.0 pp | Exact match |
 | 2019 | 4.7% | 4.7% | 0.0 pp | Exact match |
@@ -29,7 +29,7 @@ The official Bahrain Open Data Portal dataset `03-unemployment-yearly` was acqui
 | 2024 | 6.2% | 6.2% | 0.0 pp | Exact match |
 | 2025 | 5.6% | 5.6% | 0.0 pp | Exact match |
 
-**Result: 9 of 10 years match exactly.** The official primary dataset resolves the earlier 2022 verification gap. The 2016 discrepancy is confirmed by the dataset itself: official 4.3% versus IMF WEO 3.9%. No cause for the 0.4 percentage-point difference is established.
+**Result: 9 of 10 years match exactly in the API total-rate series.** The 2022 verification gap is closed. For 2016, the 0.4 pp difference is explained by a likely reference-period mismatch: the Ministry explicitly identifies 4.3% as December 2016 and 4.0% as the annual average; GCC-STAT independently reports 3.9% for Bahrain's annual citizen unemployment rate, matching WEO. The API does not label its reference period explicitly, so the year-end interpretation remains strongly supported but not encoded as a formal API metadata field.
 
 ### Sex-specific rates
 
@@ -64,6 +64,16 @@ Female unemployment is materially higher than male unemployment in every year in
 | 2025 | 4,483 | 10,950 |
 
 The API response contains male and female counts, but no total-count rows. Do not manufacture a provider total count. Male/female unemployed counts can be summed for a derived combined count if needed, but that derived value must be labelled as calculated, not provider-published. The rates and counts are separate provider observations; deriving labour-force denominators from rounded rates would be approximate and is not necessary to establish the official/IMF rate comparison.
+
+### Resolution of the 2016 discrepancy: reference-period mismatch
+
+The apparent 2016 conflict is now substantially explained by primary and contemporaneous evidence. The API dataset's 2016 total rate is 4.3%, but the Bahrain Ministry of Labour's February 2017 clarification states that 4.3% was the **December 2016** rate, while the **2016 annual average** was 4.0%. The same statement distinguishes the average monthly number of jobseekers (7,942) from the year-end number. Therefore, the API's record labelled yearly appears to represent a year-end/December rate for 2016, not an annual-average rate. This interpretation is strongly supported by the exact 4.3% match with the Ministry's December figure; the API schema itself does not expose an explicit reference-period field, so retain “likely year-end/December” as an evidence-based interpretation rather than a formally documented API definition.
+
+Independent corroboration comes from GCC-STAT's *Labour Statistics Bulletin in GCC Countries 2016* (published March 2018). Its country-specific note says Bahrain unemployment data are for citizens only and come from Ministry of Labour registers. The bulletin defines unemployment rate as unemployed persons aged 15+ divided by the labour force aged 15+ and reports Bahrain's 2016 citizen unemployment rate as **3.9%** in Table 3. This exactly matches IMF WEO `LUR` for 2016. The same bulletin's Figure 3 notes that Bahrain unemployment data are for citizens only. This makes the strongest available interpretation that the WEO 3.9% is aligned with the citizen administrative-register series, while the API's 4.3% is the December rate and not the annual-average comparator.
+
+The Ministry's stated 4.0% annual average and GCC-STAT's 3.9% citizen rate differ by 0.1 percentage point. That small difference may reflect rounding, source vintage, or compilation differences; the available evidence does not establish which. Do not claim the Ministry annual average is numerically identical to WEO. The key resolved point is that 4.3% is a December value, whereas WEO 3.9% is corroborated by GCC-STAT's 2016 annual citizen rate.
+
+**Revised assessment:** the 2016 discrepancy is no longer evidence that WEO conflicts with the official annual citizen unemployment rate. It is best classified as a **reference-period mismatch** between the API's likely December/year-end value and the annual citizen rate. Keep the two observations distinct and preserve their reference-period metadata. No manual override is warranted.
 
 ### Primary-source acquisition and provenance
 
