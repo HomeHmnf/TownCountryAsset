@@ -22,63 +22,20 @@ For Guinea and CAR, the PPP GDP gaps are largely inherited from the underlying n
 
 For Zimbabwe, the standout is 2017: WDI PPP GDP is approximately US$159.3 billion versus IMF WEO approximately US$63.4 billion, while the surrounding WDI years are approximately US$62.4 billion (2016) and US$60.0 billion (2018). An IMF methodological paper documents a special adjustment for Zimbabwe's 2017 ICP PPP factor: it was converted from local currency to USD using exchange-rate data supplied by IMF desks before application to nominal GDP submitted in USD to WEO. This is a direct country-specific methodological difference and makes a simple comparison of the two series unsafe.
 
-## Existing comparison values
+## Existing comparison evidence
 
-The figures below come from the project's fixed October 2026 IMF WEO CSV and a live WDI API run. They are not a vintage-aligned source comparison.
+The figures below summarize the existing read-only comparison. The country-year CSV remains the source of exact annual values; this document reports group summaries and only country-specific values independently corroborated by cited sources.
 
-### Guinea
+| Country | Median absolute relative difference, 2015–2025 | Direction |
+|---|---:|---|
+| Guinea | 57.18% | IMF higher in all 11 years |
+| Central African Republic | 53.79% | IMF higher in all 11 years |
+| Zimbabwe | 26.41% | Mixed direction |
 
-| Year | IMF WEO PPP GDP (international $) | WDI PPP GDP (international $) | IMF relative to WDI |
-|---:|---:|---:|---:|
-| 2015 | 42.176 bn | 22.707 bn | +85.7% |
-| 2016 | 46.637 bn | 27.229 bn | +71.3% |
-| 2017 | 53.251 bn | 33.281 bn | +60.0% |
-| 2018 | 54.637 bn | 36.138 bn | +51.2% |
-| 2019 | 61.748 bn | 40.482 bn | +52.5% |
-| 2020 | 74.182 bn | 44.551 bn | +66.5% |
-| 2021 | 78.952 bn | 51.261 bn | +54.0% |
-| 2022 | 88.423 bn | 57.088 bn | +54.9% |
-| 2023 | 97.789 bn | 62.481 bn | +56.5% |
-| 2024 | 106.781 bn | 67.458 bn | +58.3% |
-| 2025 | 117.115 bn | 74.512 bn | +57.2% |
+For the full annual rows, signed and absolute differences, and IMF status hints, use the retained source report:
+`reports/sources/imf-wdi-discrepancy-investigation/20261102T112847Z/assessment.md`.
 
-The Guinea national-accounts rebasing evidence is described in the [field 15/16 GDP assessment](field-15-16-gdp-comparability-assessment.md). The 2018-base SNA 2008 rebasing raised the GDP level by 51.4%; the current UN Statistics Division profile uses INS nominal values for 2018–2024. The WEO/WDI PPP gap is similar in scale to the nominal GDP gap. The near similarity of the 2024 implied PPP multipliers shows that the bulk of the PPP GDP difference is the underlying nominal GDP level, not a 57% disagreement in the PPP factor itself.
-
-### Central African Republic
-
-| Year | IMF WEO PPP GDP (international $) | WDI PPP GDP (international $) | IMF relative to WDI |
-|---:|---:|---:|---:|
-| 2015 | 5.474 bn | 3.559 bn | +53.8% |
-| 2016 | 5.789 bn | 3.894 bn | +48.7% |
-| 2017 | 6.159 bn | 4.237 bn | +45.4% |
-| 2018 | 6.419 bn | 4.419 bn | +45.3% |
-| 2019 | 7.307 bn | 4.870 bn | +50.0% |
-| 2020 | 8.229 bn | 5.360 bn | +53.5% |
-| 2021 | 8.887 bn | 5.769 bn | +54.0% |
-| 2022 | 9.703 bn | 6.208 bn | +56.3% |
-| 2023 | 10.062 bn | 6.482 bn | +55.2% |
-| 2024 | 10.725 bn | 6.743 bn | +59.1% |
-| 2025 | 11.647 bn | 7.244 bn | +60.8% |
-
-CAR has the same material nominal GDP national-accounts vintage/compilation gap described in the field 15/16 assessment. The 2024 implied PPP multipliers differ by approximately 6%, far less than the approximately 50% nominal GDP gap. This supports the interpretation that most of the PPP GDP discrepancy is inherited from the underlying national-accounts GDP levels. The remaining conversion-factor difference is not zero and should not be ignored.
-
-### Zimbabwe
-
-| Year | IMF WEO PPP GDP (international $) | WDI PPP GDP (international $) | IMF relative to WDI |
-|---:|---:|---:|---:|
-| 2015 | 55.505 bn | 58.257 bn | -4.7% |
-| 2016 | 56.700 bn | 62.423 bn | -9.2% |
-| 2017 | 63.379 bn | 159.330 bn | -60.2% |
-| 2018 | 62.043 bn | 60.031 bn | +3.4% |
-| 2019 | 75.853 bn | 63.619 bn | +19.2% |
-| 2020 | 81.074 bn | 64.879 bn | +25.0% |
-| 2021 | 96.802 bn | 76.255 bn | +26.9% |
-| 2022 | 109.614 bn | 86.693 bn | +26.4% |
-| 2023 | 119.729 bn | 94.711 bn | +26.4% |
-| 2024 | 124.935 bn | 98.690 bn | +26.6% |
-| 2025 | 138.849 bn | 109.679 bn | +26.6% |
-
-The 2017 WDI value is an isolated discontinuity: it is more than 2.5 times the adjacent 2016 and 2018 WDI observations. The IMF value is much smoother across those years. The anomaly must not be allowed to dominate the interpretation of the full 11-year median.
+The WDI 2017 Zimbabwe current-PPP GDP observation is an isolated discontinuity relative to its adjacent WDI years in the comparison. The World Bank's WITS country profile independently reports 2017 GDP, PPP (current international dollars) of approximately US$104.36 billion. The IMF's 2021 quota-data methodology paper separately documents a special adjustment to Zimbabwe's 2017 ICP PPP factor. The exact October 2026 WEO/WDI row values and the underlying WDI PPP-factor record should be taken from immutable provider snapshots before any numerical reconciliation is published.
 
 ## Methodological evidence
 
@@ -108,9 +65,7 @@ This is direct evidence that the IMF's Zimbabwe PPP treatment includes a country
 
 ### Guinea and CAR — nominal GDP dominates the PPP gap
 
-For Guinea, the 2024 WEO and WDI PPP GDP values differ by 58.3%, but their implied PPP multipliers differ by only about 3.2%. The official 2018-base rebasing and current INS/UNSD GDP level are close to WEO nominal GDP and far above the WDI nominal GDP in the comparison. The PPP discrepancy is therefore largely a reflection of the nominal GDP vintage gap.
-
-For CAR, the 2024 PPP GDP difference is 59.1%, while the implied PPP multipliers differ by about 6.0%. The country has a documented national-accounts vintage/compilation gap, with production and retropolation under the 2008 SNA still being developed. This supports the nominal-GDP explanation for most of the PPP gap, but the residual PPP factor difference remains.
+For Guinea and CAR, the field 18 median PPP GDP gaps are similar in scale to the field 15 nominal GDP gaps documented in the companion assessment. That is consistent with PPP GDP inheriting much of the underlying nominal GDP source-vintage difference. However, this document does not quantify the separate contribution of nominal GDP and PPP conversion factors because a complete country-year reconstruction of both providers' implied PPP factors has not yet been completed.
 
 ## Status and limitations
 
