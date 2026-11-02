@@ -104,6 +104,18 @@ def read_comparisons(path: Path) -> list[dict[str, Any]]:
                 "signed_difference": signed, "absolute_difference": absolute,
                 "relative_difference_percent": relative,
                 "absolute_relative_difference_percent": absolute_relative,
+                "wdi_national_estimate_indicator": raw.get("wdi_national_estimate_indicator") or None,
+                "wdi_national_estimate_value": _number(raw, "wdi_national_estimate_value", nullable=True),
+                "wdi_national_estimate_country": raw.get("wdi_national_estimate_country") or None,
+                "imf_unit": raw.get("imf_unit") or None,
+                "imf_scale": raw.get("imf_scale") or None,
+                "imf_reporting_period_type": raw.get("imf_reporting_period_type") or None,
+                "imf_methodology": raw.get("imf_methodology") or None,
+                "imf_methodology_notes": raw.get("imf_methodology_notes") or None,
+                "imf_historical_data_source": raw.get("imf_historical_data_source") or None,
+                "imf_labour_sector_employment_type": raw.get("imf_labour_sector_employment_type") or None,
+                "imf_short_source_citation": raw.get("imf_short_source_citation") or None,
+                "imf_country_update_date": raw.get("imf_country_update_date") or None,
             })
     return rows
 
@@ -171,6 +183,18 @@ def build_investigation(rows: list[dict[str, Any]]) -> dict[str, Any]:
                 "imf_reporting_year_months": row["imf_reporting_year_months"] or None,
                 "imf_reporting_period_classification": row["imf_reporting_period_classification"],
                 "wdi_status": row["wdi_status"],
+                "wdi_national_estimate_indicator": row["wdi_national_estimate_indicator"],
+                "wdi_national_estimate_value": row["wdi_national_estimate_value"],
+                "wdi_national_estimate_country": row["wdi_national_estimate_country"],
+                "imf_unit": row["imf_unit"],
+                "imf_scale": row["imf_scale"],
+                "imf_reporting_period_type": row["imf_reporting_period_type"],
+                "imf_methodology": row["imf_methodology"],
+                "imf_methodology_notes": row["imf_methodology_notes"],
+                "imf_historical_data_source": row["imf_historical_data_source"],
+                "imf_labour_sector_employment_type": row["imf_labour_sector_employment_type"],
+                "imf_short_source_citation": row["imf_short_source_citation"],
+                "imf_country_update_date": row["imf_country_update_date"],
             } for row in observations],
         })
 
@@ -216,6 +240,11 @@ def write_reports(report: dict[str, Any], output_root: Path) -> Path:
         "absolute_relative_difference_percent", "imf_status_hint",
         "imf_latest_actual_annual_data", "imf_reporting_year_months",
         "imf_reporting_period_classification", "wdi_status",
+        "wdi_national_estimate_indicator", "wdi_national_estimate_value",
+        "wdi_national_estimate_country", "imf_unit", "imf_scale",
+        "imf_reporting_period_type", "imf_methodology", "imf_methodology_notes",
+        "imf_historical_data_source", "imf_labour_sector_employment_type",
+        "imf_short_source_citation", "imf_country_update_date",
     ]
     with csv_path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
