@@ -29,9 +29,9 @@ OUTPUT_ROOT = ROOT / "reports/sources/icasees-national-accounts"
 EXPECTED_COMMIT = "ed62810037abdc2975a51b0677e3b3d7c6a57bdb"
 
 FILES = [
-    {"file_id": "national_accounts_dataset", "path": "raw_data/sources/icasees/national_accounts_dataset/2026-07-16/11-Comptes nationaux_16-07-2026.xlsx", "provider_url": "https://www.icasees.org/index.php/publications/tableau-de-bord/telecharger/jeux-de-donnees-des-comptes-nationaux-de-2005-2019-et-2019-2021-paru-en-2026", "published_date": "2026-07-16", "format": "xlsx"},
-    {"file_id": "definitive_accounts_2019_2021", "path": "raw_data/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf", "provider_url": "https://www.icasees.org/index.php/publications/tableau-de-bord/telecharger/comptes-nationaux-definitifs-2019-2021-de-la-republique-centrafricaine", "published_date": "2026-07-30", "format": "pdf"},
-    {"file_id": "gdp_rebasing_memo_2019", "path": "raw_data/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf", "provider_url": "https://www.icasees.org/index.php/actualites/399-icasees-publication-de-laide-memoire-sur-les-travaux-de-rebasage-du-pib-base-2019-selon-le-scn-2008", "published_date": "2026-08-07", "format": "pdf"},
+    {"file_id": "national_accounts_dataset", "path": "raw_data/sources/icasees/national_accounts_dataset/2026-07-16/11-Comptes nationaux_16-07-2026.xlsx", "expected_byte_count": 59054, "expected_sha256": "7d6f764f1eba87c5df53ffedbbf0a90a48061098509cd67f9070501737b63dce", "provider_url": "https://www.icasees.org/index.php/publications/tableau-de-bord/telecharger/jeux-de-donnees-des-comptes-nationaux-de-2005-2019-et-2019-2021-paru-en-2026", "published_date": "2026-07-16", "format": "xlsx"},
+    {"file_id": "definitive_accounts_2019_2021", "path": "raw_data/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf", "expected_byte_count": 2071097, "expected_sha256": "e419508a82e9d09421405880c7a8212376d60776cc809ed942241bd231e6d173", "provider_url": "https://www.icasees.org/index.php/publications/tableau-de-bord/telecharger/comptes-nationaux-definitifs-2019-2021-de-la-republique-centrafricaine", "published_date": "2026-07-30", "format": "pdf"},
+    {"file_id": "gdp_rebasing_memo_2019", "path": "raw_data/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf", "expected_byte_count": 298873, "expected_sha256": "403bae60e88c7d8701bc0d1498228a6a49e96bc90cf2cdc4de6be8d451f29bc5", "provider_url": "https://www.icasees.org/index.php/actualites/399-icasees-publication-de-laide-memoire-sur-les-travaux-de-rebasage-du-pib-base-2019-selon-le-scn-2008", "published_date": "2026-08-07", "format": "pdf"},
 ]
 GDP_LABEL = "PRODUIT INTERIEUR BRUT"
 TOLERANCE = 1e-7
@@ -69,10 +69,12 @@ def build_manifest(recorded_at: datetime | None = None) -> dict[str, Any]:
         path = ROOT / item["path"]
         if not path.is_file():
             raise IcaseesAssessmentError(f"Committed ICASEES file is missing: {item['path']}")
-        entries.append({
-            **item, "byte_count": path.stat().st_size, "sha256": _sha256(path),
-            "repository_path": item["path"],
-        })
+        digest, size = _sha256(path), path.stat().st_size
+        if digest != item["expected_sha256"] or size != item["expected_byte_count"]:
+            raise IcaseesAssessmentError(
+                f"Committed file fingerprint differs from the reviewed inventory: {item['path']}"
+            )
+        entries.append({**item, "byte_count": size, "sha256": digest, "repository_path": item["path"]})
     return {
         "manifest_schema_version": 1, "source_id": SOURCE_ID, "source_name": source["name"],
         "snapshot_id": "manual_2026-07-16", "snapshot_kind": "committed_manual_publication_bundle",
@@ -293,7 +295,7 @@ def build_assessment(manifest_path: Path = MANIFEST) -> dict[str, Any]:
         "recorded_manifest": str(manifest_path.relative_to(ROOT)), "source_license": source["license_status"],
         "attribution": source["attribution"], "file_integrity": integrity, "workbook": workbook,
         "pdf_inspection": pdfs, "unit_assessment": {"observed_unit_labels": unit_labels, "status": "unresolved",
-        "reason": "Workbook data rows label values as millions de F CFA, while the Dataset sheet describes value-added values in billions de FCFA. No scale conversion is authorized until the rebasing memo and definitive accounts confirm the unit."},
+        "reason": "Workbook data rows label the GDP and value-added observations as millions de F CFA, while the Dataset sheet describes current-price gross value added in billions de FCFA. This is a scale-label conflict affecting GDP components; no conversion is authorized until the official PDF evidence resolves it."},
         "2019_overlap": overlap, "disposition": {"historical_and_revised_series_spliced": False,
         "normalized_observations_created": False, "source_selection_policy_changed": False,
         "canonical_database_written": False, "release_promoted": False}}
