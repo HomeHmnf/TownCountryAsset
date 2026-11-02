@@ -16,11 +16,9 @@ The read-only comparison shows three distinct patterns:
 | Central African Republic | 53.79% | IMF higher in all 11 years |
 | Zimbabwe | 26.41% | Mixed; WDI has a very large 2017 spike |
 
-For Guinea and CAR, the PPP GDP gaps are largely inherited from the underlying nominal GDP/national-accounts levels rather than being explained solely by different PPP conversion factors. In 2024:
-- Guinea: IMF PPP GDP / IMF nominal GDP is about 2.784; WDI PPP GDP / WDI nominal GDP is about 2.698. The implied multipliers differ by only about 3.2%, while the nominal GDP series differ by 53.3%.
-- CAR: the corresponding multipliers are about 2.599 and 2.451, a difference of about 6.0%, while nominal GDP differs by about 50.0%.
+For Guinea and CAR, the PPP GDP gaps are similar in scale to the nominal GDP gaps documented in the field 15/16 investigation. This is consistent with underlying national-accounts source-vintage differences contributing materially to the PPP GDP divergence. A full decomposition of nominal GDP and PPP conversion-factor effects has not yet been completed.
 
-For Zimbabwe, the standout is 2017: WDI PPP GDP is approximately US$159.3 billion versus IMF WEO approximately US$63.4 billion, while the surrounding WDI years are approximately US$62.4 billion (2016) and US$60.0 billion (2018). An IMF methodological paper documents a special adjustment for Zimbabwe's 2017 ICP PPP factor: it was converted from local currency to USD using exchange-rate data supplied by IMF desks before application to nominal GDP submitted in USD to WEO. This is a direct country-specific methodological difference and makes a simple comparison of the two series unsafe.
+For Zimbabwe, the standout is an isolated WDI PPP GDP spike in 2017 relative to the adjacent WDI observations in the comparison. An IMF methodological paper documents a special adjustment for Zimbabwe's 2017 ICP PPP factor: it was converted from local currency to USD using exchange-rate data supplied by IMF desks before application to nominal GDP submitted in USD to WEO. This is a direct country-specific methodological difference and makes a simple comparison of the two series unsafe.
 
 ## Existing comparison evidence
 
