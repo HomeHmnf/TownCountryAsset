@@ -80,6 +80,10 @@ The Bahrain official annual dataset was acquired through `tools.sources.bahrain_
 
 The persistent field 15/16 outliers (Turkmenistan, Guinea and the Central African Republic) have been reviewed against country-specific national-accounts and exchange-rate evidence. The findings and source references are documented in [`field-15-16-gdp-comparability-assessment.md`](field-15-16-gdp-comparability-assessment.md). In summary: Turkmenistan has a documented dual-exchange-rate/alternative-conversion-factor issue; Guinea's 2018-base SNA 2008 rebasing raised the GDP level by 51.4%, and current UN/INS values are much closer to IMF WEO than to the compared WDI values; CAR has a substantial unresolved national-accounts vintage/compilation gap while 2008-SNA retropolation remains in progress. Retain IMF WEO as priority; no source-policy, database, approval or release action follows.
 
+## Targeted PPP GDP investigation
+
+Field 18 outliers (Guinea, Central African Republic and Zimbabwe) have been reviewed against ICP and country-specific national-accounts/currency evidence. Findings are documented in [`field-18-ppp-gdp-comparability-assessment.md`](field-18-ppp-gdp-comparability-assessment.md). For Guinea and CAR, most of the PPP GDP gap is inherited from the nominal GDP source-vintage difference; the implied PPP multipliers are much closer than the PPP GDP totals. Zimbabwe has an isolated WDI 2017 PPP GDP spike, and an IMF methodological paper documents a special desk-exchange-rate conversion of Zimbabwe's 2017 ICP PPP factor before applying it to WEO nominal GDP submitted in USD. Retain IMF WEO as priority; no source-policy, database, approval or release action follows.
+
 ## Side-effect boundary
 
 The utility is read-only. It does not:
