@@ -349,6 +349,7 @@ def write_assessment(report: dict[str, Any], output_root: Path = OUTPUT_ROOT) ->
         f"- GDP 2019 historical: {overlap['historical_value']}", f"- GDP 2019 revised: {overlap['revised_value']}",
         f"- 2019 level difference: {overlap['relative_difference_percent']:.3f}%",
         f"- Workbook unit assessment: {report['unit_assessment']['status']}",
+        f"- Structural validation: {report['validation_status'].upper()}",
         "- SQLite writes: no", "- Source-selection policy changes: no", "- Release promotion: no", "",
         "## Workbook sheet inventory", "", "| Sheet | Rows | Columns |", "|---|---:|---:|"]
     lines.extend(f"| {r['sheet']} | {r['rows']} | {r['columns']} |" for r in workbook["sheet_inventory"])
@@ -411,7 +412,8 @@ def main(argv: list[str] | None = None) -> int:
                 f"  Workbook sheets: {len(report['workbook']['sheet_inventory'])}",
                 f"  GDP 2019 historical/revised: {overlap['historical_value']} / {overlap['revised_value']}",
                 f"  2019 level difference: {overlap['relative_difference_percent']:.3f}%",
-                f"  Unit interpretation: {report['unit_assessment']['status']}", f"  Report: {directory}",
+                f"  Unit interpretation: {report['unit_assessment']['status']}",
+                f"  Structural validation: {report['validation_status']}", f"  Report: {directory}",
                 "  SQLite writes: none", "  Source policy changes: none"]))
         return 0 if report["validation_status"] == "pass" else 1
     except (IcaseesAssessmentError, SourceError, OSError, KeyError, ValueError) as exc:
