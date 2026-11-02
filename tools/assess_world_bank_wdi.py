@@ -109,7 +109,9 @@ def summarize_observations(code: str, records: list[dict[str, Any]]) -> dict[str
     for row in records:
         country = row.get("country") or {}
         region = country.get("region") or {}
-        iso3 = country.get("id")
+        # The API's country.id is ISO2; countryiso3code is the ISO3 key.
+        # Keep aggregate-region rows out even when they expose a three-letter code.
+        iso3 = row.get("countryiso3code")
         if region.get("value") == "Aggregates" or not isinstance(iso3, str) or len(iso3) != 3:
             aggregate_rows += 1
             continue
