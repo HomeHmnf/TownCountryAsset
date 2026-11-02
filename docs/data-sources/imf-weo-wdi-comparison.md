@@ -38,7 +38,10 @@ The tool writes `assessment.json`, `assessment.md` and `country_year_comparison.
 - IMF GDP and PPP GDP are published in billions in this WEO export; the comparison multiplies those values by 1,000,000,000. GDP per capita and percentage values are not rescaled.
 - Only country-year pairs present and non-null in both sources are numerically compared.
 - The report separately counts IMF-only and WDI-only country-years and lists source codes that cannot be resolved through the existing registry.
-- It reports absolute differences, relative differences, summary percentiles and the number of matched country-years with an absolute relative difference above 5%. The 5% marker is descriptive, not an acceptance threshold.
+- The CSV distinguishes `signed_difference` (IMF minus WDI), `absolute_difference`, signed `relative_difference_percent`, and `absolute_relative_difference_percent`. A zero WDI denominator produces a null relative difference rather than an infinite value.
+- Summary percentiles and threshold counts use absolute relative differences. The 5% and 20% markers are descriptive, not acceptance thresholds.
+- Each row classifies IMF reporting metadata as `calendar_year` only for the exact `January/December` value, `non_calendar_fiscal_year` when another reporting period is supplied, or `unknown` when blank.
+- The report includes a calendar-year-only sensitivity summary using only January/December IMF rows. Fiscal-year and unknown-period rows are excluded; year labels are never shifted or interpreted as fiscal-year end dates.
 
 ## Interpretation constraints
 
