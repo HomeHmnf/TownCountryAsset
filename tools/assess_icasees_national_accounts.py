@@ -325,7 +325,11 @@ def build_assessment(manifest_path: Path = MANIFEST) -> dict[str, Any]:
     overlap = workbook["validation_checks"]["gdp_2019_overlap"]
     unit_labels = sorted({str(row.get("unit_label")) for row in workbook["gdp_series"]
                           if row.get("unit_label") is not None})
+    boolean_checks = {key: value for key, value in workbook["validation_checks"].items()
+                       if isinstance(value, bool)}
+    validation_status = "pass" if all(boolean_checks.values()) else "fail"
     return {"source_id": SOURCE_ID, "snapshot_id": manifest["snapshot_id"],
+        "validation_status": validation_status, "boolean_validation_checks": boolean_checks,
         "recorded_manifest": str(manifest_path.relative_to(ROOT)), "source_license": source["license_status"],
         "attribution": source["attribution"], "file_integrity": integrity, "workbook": workbook,
         "pdf_inspection": pdfs, "unit_assessment": {"observed_unit_labels": unit_labels, "status": "unresolved",
@@ -409,7 +413,7 @@ def main(argv: list[str] | None = None) -> int:
                 f"  2019 level difference: {overlap['relative_difference_percent']:.3f}%",
                 f"  Unit interpretation: {report['unit_assessment']['status']}", f"  Report: {directory}",
                 "  SQLite writes: none", "  Source policy changes: none"]))
-        return 0
+        return 0 if report["validation_status"] == "pass" else 1
     except (IcaseesAssessmentError, SourceError, OSError, KeyError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
