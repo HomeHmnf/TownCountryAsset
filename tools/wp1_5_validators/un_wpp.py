@@ -132,7 +132,7 @@ class UNWPPValidator:
                     if stored is None or row.get("value") is None or abs(float(stored["value"]) - float(row["value"])) > 1e-7:
                         db_errors.append(f"{game_id}/{scalar_map[field_id]} differs or is missing in canonical DB")
                 elif field_id in {12, 13}:
-                    category = "demographics"
+                    category = "wp1_5"
                     data_key = "age_distribution" if field_id == 12 else "sex_distribution"
                     stored = connection.execute(
                         "SELECT payload_json, unit, value_status, observation_period, source_reference FROM selected_game_data WHERE game_id = ? AND data_category = ? AND data_key = ? AND import_id = ?",
