@@ -123,3 +123,13 @@ def test_manifest_verification_requires_exact_file_set(tmp_path, monkeypatch):
                                     "files": []}), encoding="utf-8")
     with pytest.raises(IcaseesAssessmentError, match="exact three"):
         verify_manifest(manifest)
+
+
+def test_sector_and_duplicate_table_consistency_checks_pass():
+    _, checks = _extract_gdp_rows(_workbook_fixture())
+    for year in (2019, 2020, 2021):
+        assert checks[f"Donnee_{year}_sector_vab_equals_total_vab"] is True
+        assert checks[f"Donnée nouvelle_{year}_sector_vab_equals_total_vab"] is True
+        assert checks[f"revised_gdp_presentations_agree_{year}"] is True
+    for year in range(2013, 2020):
+        assert checks[f"historical_gdp_presentations_agree_{year}"] is True
