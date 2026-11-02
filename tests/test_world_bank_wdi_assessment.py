@@ -42,7 +42,7 @@ def test_observations_follow_pagination_and_exclude_aggregates():
         return [{"pages": 2}, [row]] if page == 1 else [{
             "pages": 2
         }, [
-            {"country": {"id": "WLD", "value": "World", "region": {"value": "Aggregates")}, "date": "2024", "value": "200"},
+            {"country": {"id": "WLD", "value": "World", "region": {"value": "Aggregates"}}, "date": "2024", "value": "200"},
             {"country": {"id": "USA", "value": "United States", "region": {"value": "North America"}}, "date": "2025", "value": None},
         ]]
 
