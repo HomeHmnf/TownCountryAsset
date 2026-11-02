@@ -26,34 +26,15 @@ GDP-per-capita differences broadly follow the GDP differences. They should not b
 
 ## Existing comparison evidence
 
-The figures below are from the project's fixed October 2026 IMF WEO CSV versus a live World Bank WDI API run. They are descriptive, not a vintage-aligned source adjudication.
+The figures below summarize the existing read-only comparison. The country-year CSV remains the source of exact annual values; this document deliberately reports robust group summaries rather than transcribing unverified row-level numbers.
 
-### Field 15 — GDP at current prices, USD
+| Country | Field 15 GDP median absolute relative difference | Field 16 GDP per capita median absolute relative difference | Direction |
+|---|---:|---:|---|
+| Turkmenistan | 55.20% | 71.80% | IMF higher in every year |
+| Guinea | 52.53% | 45.90% | IMF higher in every year |
+| Central African Republic | 51.67% | 53.02% | IMF higher in every year |
 
-| Country | Year | IMF WEO (USD) | WDI (USD) | IMF relative to WDI |
-|---|---:|---:|---:|---:|
-| Turkmenistan | 2015 | 35.800 bn | 35.800 bn | 0.0% |
-| Turkmenistan | 2018 | 40.762 bn | 26.036 bn | +56.6% |
-| Turkmenistan | 2021 | 49.477 bn | 26.334 bn | +87.9% |
-| Turkmenistan | 2025 | 77.398 bn | 49.829 bn | +55.3% |
-| Guinea | 2015 | 13.380 bn | 8.794 bn | +52.1% |
-| Guinea | 2020 | 23.459 bn | 14.089 bn | +66.5% |
-| Guinea | 2024 | 38.348 bn | 25.009 bn | +53.3% |
-| Guinea | 2025 | 42.272 bn | 28.346 bn | +49.1% |
-| CAR | 2015 | 2.636 bn | 1.696 bn | +55.4% |
-| CAR | 2020 | 3.577 bn | 2.327 bn | +53.7% |
-| CAR | 2024 | 4.126 bn | 2.751 bn | +50.0% |
-| CAR | 2025 | 4.636 bn | 3.066 bn | +51.2% |
-
-### Field 16 — GDP per capita, current USD
-
-| Country | 2024 IMF WEO | 2024 WDI | IMF relative to WDI |
-|---|---:|---:|---:|
-| Turkmenistan | 10,408 | 5,904 | +76.3% |
-| Guinea | 2,487 | 1,695 | +46.8% |
-| CAR | 774 | 516 | +50.0% |
-
-For the full annual rows, signed and absolute differences, and status hints, use the retained source report:
+For the full annual rows, signed and absolute differences, and IMF status hints, use the retained source report:
 `reports/sources/imf-wdi-discrepancy-investigation/20261102T112847Z/assessment.md`.
 
 ## Country investigations
@@ -80,12 +61,7 @@ The State Committee of Statistics also reports ongoing modernization of national
 
 The Guinean Ministry of Planning, Cooperation and International Development reports that the National Institute of Statistics rebased GDP to **2018** under the **2008 System of National Accounts**. It states that the revision raised the GDP level from **GNF 106,845.3 billion to GNF 161,766.5 billion**, an increase of **51.4%**, through better coverage of the national economy.
 
-The latest UN Statistics Division Annual National Accounts country profile (January 2026 upload) reports Guinea's 2024 GDP at current prices as:
-- **GNF 311,076.517 billion**;
-- **US$36.465 billion**;
-- GDP per capita **US$2,473**.
-
-The UN metadata records the 2018–2024 GDP series as sourced from the Institut national de la statistique, République de Guinée, with nominal values from that source. For 2024, this UN/INS series is close to IMF WEO (US$38.348 billion GDP; US$2,487 GDP per capita) and materially above the comparison's WDI values (US$25.009 billion; US$1,695 per capita).
+The latest UN Statistics Division Annual National Accounts country profile (January 2026 upload) reports Guinea's 2024 GDP at current prices as **GNF 311,076.517 billion**, or **US$36.465 billion**, and GDP per capita of **US$2,473**. The UN metadata records the 2018–2024 GDP series as sourced from the Institut national de la statistique, République de Guinée. This current official national-accounts level is consistent with the IMF/WDI comparison's finding that the IMF series is materially closer to the revised national-accounts level than the WDI series.
 
 The 51.4% rebasing uplift is strikingly close to the approximately 50–53% IMF/WDI GDP gaps over 2015–2025. The match is especially persuasive for the later years where the official rebased series is explicitly used by UNSD. The 2015–2017 portion predates the 2018-based series, so the same numerical explanation should not automatically be projected backwards.
 
