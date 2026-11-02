@@ -70,6 +70,8 @@ This is still a live WDI API diagnostic, not a vintage-aligned comparison or pro
 
 A shared country-year or a small numerical difference does not establish semantic compatibility. In particular, fields 18, 20 and 21 require definition review before any policy proposal.
 
+The targeted field 21 review is documented in [`bahrain-unemployment-series-assessment.md`](bahrain-unemployment-series-assessment.md). It supports retaining IMF WEO as the priority source and treating Bahrain's series as a national-definition measure aligned with the official Bahraini-citizen unemployment rate for 2024 and 2025. This is a country-specific interpretation note, not a change to the approved source-selection policy; historical years before 2024 remain less directly corroborated.
+
 ## Side-effect boundary
 
 The utility is read-only. It does not:
