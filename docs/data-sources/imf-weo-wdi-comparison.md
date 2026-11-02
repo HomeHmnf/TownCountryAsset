@@ -84,6 +84,10 @@ The persistent field 15/16 outliers (Turkmenistan, Guinea and the Central Africa
 
 Field 18 outliers (Guinea, Central African Republic and Zimbabwe) have been reviewed against ICP and country-specific national-accounts/currency evidence. Findings are documented in [`field-18-ppp-gdp-comparability-assessment.md`](field-18-ppp-gdp-comparability-assessment.md). For Guinea and CAR, most of the PPP GDP gap is inherited from the nominal GDP source-vintage difference; the implied PPP multipliers are much closer than the PPP GDP totals. Zimbabwe has an isolated WDI 2017 PPP GDP spike, and an IMF methodological paper documents a special desk-exchange-rate conversion of Zimbabwe's 2017 ICP PPP factor before applying it to WEO nominal GDP submitted in USD. Retain IMF WEO as priority; no source-policy, database, approval or release action follows.
 
+## Targeted inflation investigation
+
+Field 20 outliers (Tonga, Samoa and Palau) have been reviewed against IMF Article IV period-average CPI tables and national statistical office CPI publications. Findings are documented in [`field-20-inflation-comparability-assessment.md`](field-20-inflation-comparability-assessment.md). The strongest explanation for much of the discrepancy is fiscal-year versus calendar-year alignment: Samoa uses July–June, Tonga's fiscal year begins 1 July, and Palau's fiscal year ends 30 September. Tonga also changed its CPI basket/methodology in September 2021. The comparison's WEO reporting-period metadata is blank for this series, so no year shifting or policy change is made; the Samoa 2025 residual and earlier Tonga/Palau years remain under review.
+
 ## Side-effect boundary
 
 The utility is read-only. It does not:
