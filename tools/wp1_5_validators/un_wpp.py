@@ -135,7 +135,7 @@ class UNWPPValidator:
                     category = "wp1_5"
                     data_key = "age_distribution" if field_id == 12 else "sex_distribution"
                     stored = connection.execute(
-                        "SELECT payload_json, unit, value_status, observation_period, source_reference FROM selected_game_data WHERE game_id = ? AND data_category = ? AND data_key = ? AND import_id = ?",
+                        "SELECT payload_json, value_status, observation_period, source_reference FROM selected_game_data WHERE game_id = ? AND data_category = ? AND data_key = ? AND import_id = ?",
                         (game_id, category, data_key, import_id),
                     ).fetchone()
                     if stored is None:
