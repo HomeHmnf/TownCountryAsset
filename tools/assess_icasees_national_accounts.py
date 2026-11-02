@@ -155,12 +155,22 @@ def _number(value: Any, context: str | None = None) -> float | None:
     return number
 
 
-def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> float | None:
-    """Evaluate numeric cells and restricted arithmetic formulas with cell references."""
+def _cell_number(
+    sheet, row: int, col: int, stack: set[str] | None = None, cached_sheet=None
+) -> float | None:
+    """Evaluate local formulas; use Excel's cached result for external-workbook formulas."""
     cell = sheet.cell(row, col)
     value = cell.value
     if not (isinstance(value, str) and value.startswith("=")):
         return _number(value, context=f"{sheet.title}!{cell.coordinate}")
+    if re.search(r"\[[^\]]+\]", value):
+        if cached_sheet is None:
+            raise IcaseesAssessmentError(
+                f"External-workbook formula at {sheet.title}!{cell.coordinate} "
+                "requires a cached workbook value"
+            )
+        cached_value = cached_sheet.cell(row, col).value
+        return _number(cached_value, context=f"{sheet.title}!{cell.coordinate} (cached external formula)")
     stack = set() if stack is None else stack
     if cell.coordinate in stack:
         raise IcaseesAssessmentError(f"Circular formula at {sheet.title}!{cell.coordinate}")
@@ -178,7 +188,7 @@ def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> fl
             total = 0.0
             for row_cells in cells:
                 for ref_cell in row_cells:
-                    ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack)
+                    ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack, cached_sheet)
                     if ref_value is not None:
                         total += ref_value
             return repr(total)
@@ -304,7 +314,7 @@ def _extract_gdp_rows(workbook, cached_workbook=None) -> tuple[list[dict[str, An
     right_tax_row = _find_row(cached_combined, right_label_col, "IMPÔTS ET TAXES SUR LES PRODUITS")
     for year, col in sorted(right_years.items()):
         if year in (2019, 2020, 2021):
-            gdp, vab, taxes = (_cell_number(combined, row, col)
+            gdp, vab, taxes = (_cell_number(combined, row, col, cached_sheet=cached_combined)
                                for row in (right_gdp_row, right_vab_row, right_tax_row))
             series.append({"series_block": "revised", "sheet": combined.title, "indicator": None,
                            "indicator_name": GDP_LABEL, "year": year, "value": gdp,
