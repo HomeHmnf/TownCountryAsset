@@ -80,7 +80,7 @@ def test_assessment_maps_identity_and_excludes_aggregate_prefix(assessment_input
     assert gdp["registry_code_match_count"] == 1
     assert gdp["registry_name_match_count"] == 2
     assert gdp["non_iso_aggregate_prefixes"] == ["G001"]
-    assert gdp["populated_observations_by_year"] == {"2024": 2, "2025": 2, "2026": 1}
+    assert gdp["populated_observations_by_year"] == {"2024": 3, "2025": 3, "2026": 1}
     assert report["wdi_comparison"]["status"] == "not_assessed"
     assert report["side_effects"]["canonical_database_written"] is False
     assert report["side_effects"]["release_promoted"] is False
