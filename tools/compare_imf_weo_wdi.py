@@ -134,6 +134,31 @@ def _percentile(values: list[float], fraction: float) -> float | None:
     return ordered[min(len(ordered) - 1, math.ceil(fraction * len(ordered)) - 1)]
 
 
+def _reporting_period_classification(value: str | None) -> str:
+    if value == "January/December":
+        return "calendar_year"
+    if value:
+        return "non_calendar_fiscal_year"
+    return "unknown"
+
+
+def _difference_summary(comparisons: list[dict[str, Any]]) -> dict[str, Any]:
+    values = [
+        abs(row["relative_difference_percent"])
+        for row in comparisons
+        if row["relative_difference_percent"] is not None
+    ]
+    return {
+        "matched_country_year_count": len(comparisons),
+        "relative_difference_observation_count": len(values),
+        "mean_absolute_relative_difference_percent": statistics.mean(values) if values else None,
+        "median_absolute_relative_difference_percent": statistics.median(values) if values else None,
+        "p95_absolute_relative_difference_percent": _percentile(values, 0.95),
+        "country_years_over_5_percent_difference": sum(value > 5 for value in values),
+        "country_years_over_20_percent_difference": sum(value > 20 for value in values),
+    }
+
+
 def build_comparison(
     csv_path: Path = imf.CSV_PATH,
     identity_path: Path = imf.IDENTITY,
@@ -206,20 +231,43 @@ def build_comparison(
                     over_five += 1
             if contract["field_id"] in {20, 21}:
                 abs_pp.append(abs(difference))
+            reporting_period = a["reporting_year_months"]
             item = {
                 "field_id": contract["field_id"], "wdi_indicator": wdi_code,
                 "imf_indicator": imf_code, "game_id": key[0], "year": key[1],
                 "imf_country": a["country_name"], "wdi_country": b["country_name"],
                 "imf_source_code": a["source_code"], "wdi_iso3": b["source_code"],
                 "imf_value_canonical_unit": a["value"], "wdi_value_canonical_unit": b["value"],
-                "absolute_difference": difference, "relative_difference_percent": relative,
+                "signed_difference": difference, "absolute_difference": abs(difference),
+                "relative_difference_percent": relative,
+                "absolute_relative_difference_percent": abs(relative) if relative is not None else None,
                 "imf_status_hint": a["status_hint"],
                 "imf_latest_actual_annual_data": a["latest_actual_annual_data"],
-                "imf_reporting_year_months": a["reporting_year_months"],
+                "imf_reporting_year_months": reporting_period,
+                "imf_reporting_period_classification": _reporting_period_classification(reporting_period),
                 "wdi_status": "not_classified_by_this_comparison",
             }
             comparisons.append(item)
             all_pairs.append(item)
+
+        calendar_year_comparisons = [
+            row for row in comparisons
+            if row["imf_reporting_period_classification"] == "calendar_year"
+        ]
+        fiscal_year_count = sum(
+            row["imf_reporting_period_classification"] == "non_calendar_fiscal_year"
+            for row in comparisons
+        )
+        unknown_period_count = sum(
+            row["imf_reporting_period_classification"] == "unknown"
+            for row in comparisons
+        )
+        calendar_sensitivity = _difference_summary(calendar_year_comparisons)
+        calendar_sensitivity.update({
+            "period_rule": "Only IMF January/December observations are included; year labels are not shifted.",
+            "excluded_non_calendar_fiscal_year_count": fiscal_year_count,
+            "excluded_unknown_reporting_period_count": unknown_period_count,
+        })
 
         indicators.append({
             **contract, "wdi_indicator": wdi_code, "imf_indicator": imf_code,
@@ -236,7 +284,14 @@ def build_comparison(
             "median_absolute_relative_difference_percent": statistics.median(abs_pct) if abs_pct else None,
             "p95_absolute_relative_difference_percent": _percentile(abs_pct, 0.95),
             "country_years_over_5_percent_difference": over_five,
+            "country_years_over_20_percent_difference": sum(value > 20 for value in abs_pct),
             "mean_absolute_difference_percentage_points": statistics.mean(abs_pp) if abs_pp else None,
+            "imf_reporting_period_counts": {
+                "calendar_year": len(calendar_year_comparisons),
+                "non_calendar_fiscal_year": fiscal_year_count,
+                "unknown": unknown_period_count,
+            },
+            "calendar_year_sensitivity": calendar_sensitivity,
             "comparability_notes": {
                 "definition": contract["comparison"],
                 "wdi_source_organization": metadata.get("source_organization"),
@@ -249,7 +304,7 @@ def build_comparison(
         })
 
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "assessment": "imf_weo_world_bank_wdi_country_year_comparison",
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "period": {"start_year": start_year, "end_year": end_year},
@@ -298,13 +353,18 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
             f"- Mean absolute relative difference: {item['mean_absolute_relative_difference_percent']}",
             f"- Median absolute relative difference: {item['median_absolute_relative_difference_percent']}",
             f"- 95th percentile absolute relative difference: {item['p95_absolute_relative_difference_percent']}",
-            f"- Country-years with >5% relative difference: {item['country_years_over_5_percent_difference']}",
+            f"- Country-years with >5% absolute relative difference: {item['country_years_over_5_percent_difference']}",
+            f"- Country-years with >20% absolute relative difference: {item['country_years_over_20_percent_difference']}",
             f"- Mean absolute difference (percentage points, fields 20/21): {item['mean_absolute_difference_percentage_points']}",
+            f"- IMF reporting-period counts: {item['imf_reporting_period_counts']}",
+            f"- Calendar-year-only sensitivity (January/December only): {item['calendar_year_sensitivity']}",
             f"- Vintage caveat: {notes['vintage']}"])
     lines.extend(["", "## Interpretation limits", "",
         "- A shared country-year is a numerical comparison, not proof of semantic equivalence.",
         "- IMF values in Billions are converted to absolute dollars; GDP per capita and percentage series are not rescaled.",
         "- IMF actual/estimate classification is only a hint from LATEST_ACTUAL_ANNUAL_DATA; fiscal-year labels and PPPGDP are unclassified.",
+        "- The CSV reports signed_difference (IMF minus WDI), absolute_difference, signed relative_difference_percent, and absolute_relative_difference_percent separately.",
+        "- Calendar-year sensitivity includes only IMF January/December reporting periods; fiscal-year and unknown-period observations are excluded without shifting year labels.",
         "- WDI observation status is not inferred. WDI is retrieved live and may change between runs.",
         "- Fields 18, 20 and 21 require explicit definition review before a policy decision; PPP benchmark, CPI period convention and unemployment methodology/unit remain material caveats.",
         "- No source-selection, release, approval, or database action is performed."])
@@ -314,7 +374,8 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "field_id", "wdi_indicator", "imf_indicator", "game_id", "year",
         "imf_country", "wdi_country", "imf_source_code", "wdi_iso3",
         "imf_value_canonical_unit", "wdi_value_canonical_unit",
-        "absolute_difference", "relative_difference_percent", "imf_status_hint",
+        "signed_difference", "absolute_difference", "relative_difference_percent",
+        "absolute_relative_difference_percent", "imf_status_hint",
         "imf_latest_actual_annual_data", "imf_reporting_year_months", "wdi_status",
     ]
     with (target / "country_year_comparison.csv").open("w", encoding="utf-8", newline="") as stream:
