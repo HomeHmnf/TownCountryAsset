@@ -218,7 +218,7 @@ def promote_release(approval_id: str) -> dict[str, Any]:
         "validated_at": now,
         "applied_at": current.get("applied_at") if isinstance(current, dict) else None,
         "status": "applied" if isinstance(current, dict) and current.get("status") == "applied" else "validated",
-        "snapshot_manifest": proposal["validation_report"],
+        "snapshot_manifest": (Path(proposal["candidate_directory"]) / "application_manifest.json").as_posix(),
         "notes": "Approved WP1.5 release validation; see approval artifact " + approval_id,
         "approval_id": approval_id,
         "proposal_sha256": proposal["proposal_sha256"],
