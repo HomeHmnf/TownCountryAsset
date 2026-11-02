@@ -1,0 +1,60 @@
+{
+  "attribution": "Institut Centrafricain des Statistiques et des Études Économiques et Sociales (ICASEES).",
+  "download_id": "manual_publication_bundle",
+  "files": [
+    {
+      "byte_count": 59054,
+      "expected_byte_count": 59054,
+      "expected_sha256": "7d6f764f1eba87c5df53ffedbbf0a90a48061098509cd67f9070501737b63dce",
+      "file_id": "national_accounts_dataset",
+      "format": "xlsx",
+      "path": "raw_data/sources/icasees/national_accounts_dataset/2026-07-16/11-Comptes nationaux_16-07-2026.xlsx",
+      "provider_url": "https://www.icasees.org/index.php/publications/tableau-de-bord/telecharger/jeux-de-donnees-des-comptes-nationaux-de-2005-2019-et-2019-2021-paru-en-2026",
+      "published_date": "2026-07-16",
+      "repository_path": "raw_data/sources/icasees/national_accounts_dataset/2026-07-16/11-Comptes nationaux_16-07-2026.xlsx",
+      "sha256": "7d6f764f1eba87c5df53ffedbbf0a90a48061098509cd67f9070501737b63dce"
+    },
+    {
+      "byte_count": 2071097,
+      "expected_byte_count": 2071097,
+      "expected_sha256": "e419508a82e9d09421405880c7a8212376d60776cc809ed942241bd231e6d173",
+      "file_id": "definitive_accounts_2019_2021",
+      "format": "pdf",
+      "path": "raw_data/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf",
+      "provider_url": "https://www.icasees.org/index.php/publications/tableau-de-bord/telecharger/comptes-nationaux-definitifs-2019-2021-de-la-republique-centrafricaine",
+      "published_date": "2026-07-30",
+      "repository_path": "raw_data/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf",
+      "sha256": "e419508a82e9d09421405880c7a8212376d60776cc809ed942241bd231e6d173"
+    },
+    {
+      "byte_count": 298873,
+      "expected_byte_count": 298873,
+      "expected_sha256": "403bae60e88c7d8701bc0d1498228a6a49e96bc90cf2cdc4de6be8d451f29bc5",
+      "file_id": "gdp_rebasing_memo_2019",
+      "format": "pdf",
+      "path": "raw_data/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf",
+      "provider_url": "https://www.icasees.org/index.php/actualites/399-icasees-publication-de-laide-memoire-sur-les-travaux-de-rebasage-du-pib-base-2019-selon-le-scn-2008",
+      "published_date": "2026-08-07",
+      "repository_path": "raw_data/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf",
+      "sha256": "403bae60e88c7d8701bc0d1498228a6a49e96bc90cf2cdc4de6be8d451f29bc5"
+    }
+  ],
+  "license_status": "CC BY 4.0",
+  "manifest_schema_version": 1,
+  "recorded_at": "2026-11-02T17:42:44.791034+00:00",
+  "release": "2026-07-16",
+  "release_kind": "edition_or_snapshot",
+  "repository_commit": "ed62810037abdc2975a51b0677e3b3d7c6a57bdb",
+  "side_effects": {
+    "database_written": false,
+    "observations_normalized": false,
+    "raw_files_copied": false,
+    "release_promoted": false,
+    "source_selection_policy_changed": false
+  },
+  "snapshot_id": "manual_2026-07-16",
+  "snapshot_kind": "committed_manual_publication_bundle",
+  "source_id": "icasees_national_accounts",
+  "source_name": "ICASEES Central African Republic National Accounts",
+  "terms_url": "https://icasees.org/publications/tableau-de-bord/statistiques-structurelles/statistiques-economiques/comptes-nationaux"
+}
