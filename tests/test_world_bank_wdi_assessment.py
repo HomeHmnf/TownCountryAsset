@@ -43,7 +43,8 @@ def test_observations_follow_pagination_and_exclude_aggregates():
         return [{"pages": 2}, [row]] if page == 1 else [{
             "pages": 2
         }, [
-            {"country": {"id": "1W", "value": "World", "region": {"value": "Aggregates"}}, "countryiso3code": "WLD", "date": "2024", "value": "200"},
+            {"country": {"id": "1W", "value": "World", "region": {"id": "NA", "value": "Aggregates"}}, "countryiso3code": "WLD", "date": "2024", "value": "200"},
+            {"country": {"id": "A1", "value": "Africa Eastern and Southern", "region": {"id": "NA", "value": "Aggregates"}}, "countryiso3code": "AFE", "date": "2024", "value": "300"},
             {"country": {"id": "US", "value": "United States", "region": {"value": "North America"}}, "countryiso3code": "USA", "date": "2025", "value": None},
         ]]
 
@@ -51,7 +52,7 @@ def test_observations_follow_pagination_and_exclude_aggregates():
     summary = wdi.summarize_observations("NY.GDP.MKTP.CD", records)
     assert calls == [1, 2]
     assert summary["country_count"] == 1
-    assert summary["aggregate_rows_excluded"] == 1
+    assert summary["aggregate_rows_excluded"] == 2
     assert summary["countries"][0]["observation_years"] == [2024]
 
 
