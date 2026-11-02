@@ -190,7 +190,13 @@ def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> fl
         reference_pattern = re.compile(r"(?<![A-Za-z0-9_])\$?([A-Z]{1,3})\$?(\d+)")
         def replace_reference(match: re.Match[str]) -> str:
             ref_cell = sheet[f"{match.group(1)}{match.group(2)}"]
-            ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack)
+            try:
+                ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack)
+            except IcaseesAssessmentError as exc:
+                raise IcaseesAssessmentError(
+                    f"While evaluating formula {sheet.title}!{cell.coordinate} ({value}), "
+                    f"reference {ref_cell.coordinate} could not be resolved: {exc}"
+                ) from exc
             if ref_value is None:
                 raise IcaseesAssessmentError(
                     f"Formula at {sheet.title}!{cell.coordinate} references empty cell {ref_cell.coordinate}"
