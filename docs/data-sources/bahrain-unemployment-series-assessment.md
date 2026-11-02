@@ -96,3 +96,20 @@ The underlying comparison and targeted investigation are read-only reports:
 - Targeted investigation with retained IMF/WDI national-estimate metadata: `reports/sources/imf-wdi-discrepancy-investigation/20261102T131406Z/`
 
 This assessment does not change `config/source_selection.json`, source registry entries, approval records, release ledgers or canonical SQLite. No data has been imported or promoted.
+
+## Reproducible primary-data acquisition
+
+The official [Bahrain Open Data Portal annual unemployment dataset](https://data.gov.bh/explore/dataset/03-unemployment-yearly/) is the primary record-level source for the remaining reconciliation. Its description is “Bahraini Unemployed (15 years and above) and the Unemployment Rate by Sex (Yearly)”. The dataset is exposed through the portal's Opendatasoft Explore API v2.1.
+
+Use the project adapter and acquisition procedure documented in [Bahrain annual unemployment data acquisition](bahrain-unemployment-data-acquisition.md):
+
+```fish
+uv run python -m tools.sources.bahrain_unemployment
+```
+
+The adapter captures dataset metadata and all paginated records as immutable JSON under `raw_data/sources/bahrain_open_data/unemployment_yearly/<UTC timestamp>/`, with SHA-256 manifest under `data_manifests/sources/bahrain_open_data/unemployment_yearly/`. It preserves provider fields and categories, including sex-specific and total observations, without deriving or changing values.
+
+After acquisition, inspect the actual schema and reconcile each year, sex and indicator separately. Counts and rates must remain distinct. A total rate must not be calculated as the arithmetic mean of male and female rates. The dataset is explicitly Bahraini-focused, so retain its population-universe limitation when comparing it with all-resident or modelled ILO series.
+
+This adapter is acquisition-only. It does not normalize observations, approve a source release, change the IMF WEO priority policy, create a WP1.5 application approval, or write to SQLite. The existing 2016 discrepancy (IMF 3.9% versus the previously located official 4.3%) and 2022 primary-record verification remain open until the raw API snapshot has been reviewed.
+
