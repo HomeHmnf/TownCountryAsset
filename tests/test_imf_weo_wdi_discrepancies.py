@@ -24,6 +24,18 @@ def _row(field=15, country="Guinea", year=2015, imf=13.0, wdi=10.0):
         "imf_reporting_year_months": "January/December",
         "imf_reporting_period_classification": "calendar_year",
         "wdi_status": "not_classified_by_this_comparison",
+        "wdi_national_estimate_indicator": "SL.UEM.TOTL.NE.ZS" if field == 21 else "",
+        "wdi_national_estimate_value": "1.5" if field == 21 else "",
+        "wdi_national_estimate_country": country if field == 21 else "",
+        "imf_unit": "" if field == 21 else "",
+        "imf_scale": "Units" if field == 21 else "",
+        "imf_reporting_period_type": "" if field == 21 else "",
+        "imf_methodology": "" if field == 21 else "",
+        "imf_methodology_notes": "country metadata note" if field == 21 else "",
+        "imf_historical_data_source": "National Statistics Office" if field == 21 else "",
+        "imf_labour_sector_employment_type": "National definition" if field == 21 else "",
+        "imf_short_source_citation": "IMF staff calculations" if field == 21 else "",
+        "imf_country_update_date": "9/24/2026" if field == 21 else "",
     }
 
 
@@ -69,8 +81,18 @@ def test_reports_targets_not_present():
 
 
 def test_writer_creates_json_markdown_and_csv(tmp_path):
-    report = investigate.build_investigation([_row()])
+    report = investigate.build_investigation([
+        _row(field=21, country="Bahrain, Kingdom of")
+    ])
     target = investigate.write_reports(report, tmp_path)
     assert (target / "assessment.json").is_file()
     assert (target / "assessment.md").is_file()
-    assert (target / "targeted_country_years.csv").is_file()
+    csv_path = target / "targeted_country_years.csv"
+    assert csv_path.is_file()
+    with csv_path.open(newline="", encoding="utf-8") as stream:
+        row = next(csv.DictReader(stream))
+    assert row["wdi_national_estimate_indicator"] == "SL.UEM.TOTL.NE.ZS"
+    assert row["wdi_national_estimate_value"] == "1.5"
+    assert row["imf_methodology_notes"] == "country metadata note"
+    assert row["imf_historical_data_source"] == "National Statistics Office"
+    assert row["imf_labour_sector_employment_type"] == "National definition"
