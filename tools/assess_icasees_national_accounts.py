@@ -188,7 +188,7 @@ def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> fl
                     f"Formula at {sheet.title}!{cell.coordinate} references empty cell {ref_cell.coordinate}"
                 )
             return repr(ref_value)
-        expression = reference_pattern.sub(replace_reference, value[1:])
+        expression = reference_pattern.sub(replace_reference, expression)
         try:
             tree = ast.parse(expression, mode="eval")
         except SyntaxError as exc:
