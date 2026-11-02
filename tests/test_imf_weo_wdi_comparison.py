@@ -90,6 +90,50 @@ def test_comparison_joins_via_game_identity_and_scales_billions(tmp_path, monkey
     assert report["side_effects"]["source_selection_policy_changed"] is False
 
 
+def test_signed_and_absolute_differences_are_distinct(tmp_path, monkeypatch):
+    csv_path, identity = _inputs(tmp_path, monkeypatch)
+
+    def api_with_larger_wdi_gdp(url):
+        response = _fake_api(url)
+        if urlparse(url).path.endswith("/NY.GDP.MKTP.CD"):
+            response[1][0]["value"] = "2100000000"
+        return response
+
+    report = compare.build_comparison(csv_path, identity, 2024, 2024, api_with_larger_wdi_gdp)
+    gdp = next(item for item in report["indicators"] if item["field_id"] == 15)
+    row = gdp["country_year_comparisons"][0]
+    assert row["signed_difference"] == -100_000_000
+    assert row["absolute_difference"] == 100_000_000
+    assert row["relative_difference_percent"] < 0
+    assert row["absolute_relative_difference_percent"] > 0
+    assert gdp["country_years_over_20_percent_difference"] == 0
+    assert gdp["calendar_year_sensitivity"]["matched_country_year_count"] == 1
+
+
+def test_fiscal_year_rows_are_excluded_from_calendar_sensitivity(tmp_path, monkeypatch):
+    csv_path, identity = _inputs(tmp_path, monkeypatch)
+    with csv_path.open(encoding="utf-8-sig", newline="") as stream:
+        rows = list(csv.DictReader(stream))
+    for row in rows:
+        if row["SERIES_CODE"] == "USA.NGDPD.A":
+            row["START_END_MONTHS_OF_REPORTING_YEAR"] = "April/March"
+    with csv_path.open("w", encoding="utf-8-sig", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+    monkeypatch.setattr(compare.imf, "EXPECTED", {
+        "csv": (hashlib.sha256(csv_path.read_bytes()).hexdigest(), csv_path.stat().st_size),
+    })
+
+    report = compare.build_comparison(csv_path, identity, 2024, 2024, _fake_api)
+    gdp = next(item for item in report["indicators"] if item["field_id"] == 15)
+    row = gdp["country_year_comparisons"][0]
+    assert row["imf_reporting_period_classification"] == "non_calendar_fiscal_year"
+    assert gdp["imf_reporting_period_counts"]["non_calendar_fiscal_year"] == 1
+    assert gdp["calendar_year_sensitivity"]["matched_country_year_count"] == 0
+    assert gdp["calendar_year_sensitivity"]["excluded_non_calendar_fiscal_year_count"] == 1
+
+
 def test_ppp_and_unemployment_status_are_not_inferred(tmp_path, monkeypatch):
     csv_path, identity = _inputs(tmp_path, monkeypatch)
     report = compare.build_comparison(csv_path, identity, 2024, 2024, _fake_api)
