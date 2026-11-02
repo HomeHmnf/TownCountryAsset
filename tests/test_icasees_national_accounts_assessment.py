@@ -25,6 +25,9 @@ def _workbook_fixture():
     workbook = Workbook()
     workbook.remove(workbook.active)
     revised_rows = [
+        ["IND1", "SECTEUR PRIMAIRE", "millions de F CFA", "Units", 422.807, 462.537, 475.988],
+        ["IND7", "SECTEUR SECONDAIRE", "millions de F CFA", "Units", 431.047, 431.564, 479.105],
+        ["IND20", "SECTEUR TERTIAIRE", "millions de F CFA", "Units", 1022.856, 1074.753, 1108.461],
         ["IND33", "TOTAL VAB", "millions de F CFA", "Units", 1876.710, 1968.854, 2063.554],
         ["IND34", "IMPÔTS ET TAXES SUR LES PRODUITS", "millions de F CFA", "Units", 76.215, 87.181, 86.068],
         ["IND35", "PRODUIT INTERIEUR BRUT", "millions de F CFA", "Units", 1952.925, 2056.035, 2149.622],
