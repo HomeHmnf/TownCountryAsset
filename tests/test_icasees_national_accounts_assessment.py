@@ -72,6 +72,17 @@ def test_extracts_old_and_revised_gdp_as_separate_series():
     assert checks["gdp_2019_overlap"]["relative_difference_percent"] == pytest.approx(36.38, abs=0.01)
 
 
+def test_gdp_row_lookup_matches_accented_french_label():
+    workbook = _workbook_fixture()
+    sheet = workbook["Donnée_SCN2008"]
+    for row in range(2, sheet.max_row + 1):
+        if sheet.cell(row, 13).value == "PRODUIT INTERIEUR BRUT":
+            sheet.cell(row, 13).value = "PRODUIT INTÉRIEUR BRUT"
+    series, _ = _extract_gdp_rows(workbook)
+    revised = [row for row in series if row["sheet"] == "Donnée_SCN2008" and row["series_block"] == "revised"]
+    assert len(revised) == 3
+
+
 def test_repeated_2019_header_does_not_replace_historical_value():
     series, _ = _extract_gdp_rows(_workbook_fixture())
     combined_old = [row for row in series if row["sheet"] == "Donnée_SCN2008"
