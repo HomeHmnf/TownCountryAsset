@@ -15,6 +15,7 @@ import json
 import math
 import re
 import sys
+import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -130,7 +131,9 @@ def verify_manifest(path: Path = MANIFEST) -> tuple[dict[str, Any], list[dict[st
 
 
 def _normal(value: Any) -> str:
-    return re.sub(r"\s+", " ", str(value or "")).strip().casefold()
+    text = unicodedata.normalize("NFKD", str(value or ""))
+    text = "".join(char for char in text if not unicodedata.combining(char))
+    return re.sub(r"\s+", " ", text).strip().casefold()
 
 
 def _number(value: Any) -> float | None:
