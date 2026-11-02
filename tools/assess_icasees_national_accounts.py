@@ -242,7 +242,7 @@ def _year_columns(sheet, header_row: int, start_col: int, end_col: int) -> dict[
             if isinstance((value := sheet.cell(header_row, col).value), int) and 1900 <= value <= 2100}
 
 
-def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def _extract_gdp_rows(workbook, cached_workbook=None) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     series: list[dict[str, Any]] = []
     checks: dict[str, Any] = {}
     for sheet_name in ("Donnee", "Donnée nouvelle"):
@@ -284,12 +284,13 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                            "unit_label": combined.cell(old_combined_row, 3).value,
                            "scale_label": combined.cell(old_combined_row, left_years[2013] - 1).value})
     right_years = _year_columns(combined, 1, right_label_col + 3, combined.max_column)
-    # The right-hand indicator names are external-workbook formulas (for example,
-    # =[1]PIB_courant!$B$34), not cached text. The two blocks share row alignment,
-    # so identify the corresponding indicators from the left-hand text labels.
-    right_gdp_row = _find_row(combined, 2, GDP_LABEL)
-    right_vab_row = _find_row(combined, 2, "TOTAL VAB")
-    right_tax_row = _find_row(combined, 2, "IMPÔTS ET TAXES SUR LES PRODUITS")
+    # Revised labels are external-workbook formulas in formula mode. Resolve their
+    # cached text from a parallel data_only workbook; revised aggregate rows are
+    # not aligned with historical labels (GDP/VAB/tax are rows 40/38/39).
+    cached_combined = (cached_workbook or workbook)[combined.title]
+    right_gdp_row = _find_row(cached_combined, right_label_col, GDP_LABEL)
+    right_vab_row = _find_row(cached_combined, right_label_col, "TOTAL VAB")
+    right_tax_row = _find_row(cached_combined, right_label_col, "IMPÔTS ET TAXES SUR LES PRODUITS")
     for year, col in sorted(right_years.items()):
         if year in (2019, 2020, 2021):
             gdp, vab, taxes = (_cell_number(combined, row, col)
@@ -348,6 +349,7 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
 
 def inspect_workbook(path: Path) -> dict[str, Any]:
     workbook = load_workbook(path, read_only=False, data_only=False)
+    cached_workbook = load_workbook(path, read_only=False, data_only=True)
     inventory, formula_cells = [], []
     for sheet in workbook.worksheets:
         inventory.append({"sheet": sheet.title, "rows": sheet.max_row, "columns": sheet.max_column,
@@ -357,7 +359,7 @@ def inspect_workbook(path: Path) -> dict[str, Any]:
             for cell in row:
                 if isinstance(cell.value, str) and cell.value.startswith("="):
                     formula_cells.append({"sheet": sheet.title, "cell": cell.coordinate, "formula": cell.value})
-    series, checks = _extract_gdp_rows(workbook)
+    series, checks = _extract_gdp_rows(workbook, cached_workbook=cached_workbook)
     metadata = []
     if "Metadonnées" in workbook.sheetnames:
         for row in workbook["Metadonnées"].iter_rows(min_row=1, max_col=2, values_only=True):
@@ -369,6 +371,7 @@ def inspect_workbook(path: Path) -> dict[str, Any]:
             if any(value is not None for value in row):
                 dataset_rows.append({"values": list(row)})
     workbook.close()
+    cached_workbook.close()
     return {"sheet_inventory": inventory, "formula_cells": formula_cells, "metadata": metadata,
             "dataset_sheet": dataset_rows, "gdp_series": series, "validation_checks": checks}
 
