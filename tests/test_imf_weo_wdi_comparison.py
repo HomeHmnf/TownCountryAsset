@@ -26,6 +26,13 @@ def _inputs(tmp_path, monkeypatch):
             "SCALE": "Billions" if code in {"NGDPD", "PPPGDP"} else "Units",
             "LATEST_ACTUAL_ANNUAL_DATA": "" if code == "PPPGDP" else "2024",
             "START_END_MONTHS_OF_REPORTING_YEAR": "January/December",
+            "REPORTING_PERIOD_TYPE": "",
+            "METHODOLOGY": "test methodology" if code == "LUR" else "",
+            "METHODOLOGY_NOTES": "country-specific note" if code == "LUR" else "",
+            "HISTORICAL_DATA_SOURCE": "National Statistics Office" if code == "LUR" else "",
+            "LABOR_SECTOR_EMPLOYMENT_TYPE": "National definition" if code == "LUR" else "",
+            "SHORT_SOURCE_CITATION": "IMF staff calculations" if code == "LUR" else "",
+            "COUNTRY_UPDATE_DATE": "9/24/2026" if code == "LUR" else "",
             "2024": "2" if code in {"NGDPD", "NGDPDPC", "PPPGDP"} else "3",
         })
     fields = list(rows[0])
@@ -64,6 +71,7 @@ def _fake_api(url):
         "NY.GDP.MKTP.PP.CD": "2000000000",
         "FP.CPI.TOTL.ZG": "3",
         "SL.UEM.TOTL.ZS": "3",
+        "SL.UEM.TOTL.NE.ZS": "1.5",
     }[code]
     return [{"pages": 1}, [{
         "country": {"id": "US", "value": "United States"},
@@ -142,6 +150,15 @@ def test_ppp_and_unemployment_status_are_not_inferred(tmp_path, monkeypatch):
     assert ppp["country_year_comparisons"][0]["imf_status_hint"] == "status_unclassified"
     assert lur["wdi_metadata"]["source_note"] == "definition note"
     assert lur["country_year_comparisons"][0]["wdi_status"] == "not_classified_by_this_comparison"
+    row = lur["country_year_comparisons"][0]
+    assert row["imf_unit"] is None
+    assert row["imf_methodology_notes"] == "country-specific note"
+    assert row["imf_historical_data_source"] == "National Statistics Office"
+    assert row["imf_labour_sector_employment_type"] == "National definition"
+    assert row["wdi_national_estimate_indicator"] == "SL.UEM.TOTL.NE.ZS"
+    assert row["wdi_national_estimate_value"] == 1.5
+    assert lur["wdi_national_estimate_metadata"]["indicator_code"] == "SL.UEM.TOTL.NE.ZS"
+    assert lur["wdi_national_estimate_matched_country_year_count"] == 1
 
 
 def test_report_writer_creates_machine_readable_and_csv_outputs(tmp_path, monkeypatch):
