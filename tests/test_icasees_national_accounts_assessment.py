@@ -133,3 +133,20 @@ def test_sector_and_duplicate_table_consistency_checks_pass():
         assert checks[f"revised_gdp_presentations_agree_{year}"] is True
     for year in range(2013, 2020):
         assert checks[f"historical_gdp_presentations_agree_{year}"] is True
+
+
+def test_simple_arithmetic_formula_is_evaluated_without_excel_cache():
+    workbook = _workbook_fixture()
+    sheet = workbook["Donnee"]
+    sheet["E7"] = "=E5+E6"
+    series, checks = _extract_gdp_rows(workbook)
+    row = next(item for item in series if item["sheet"] == "Donnee" and item["year"] == 2019)
+    assert row["value"] == pytest.approx(1952.925)
+    assert checks["Donnee_2019_gdp_equals_vab_plus_taxes"] is True
+
+
+def test_unsupported_formula_fails_explicitly():
+    workbook = _workbook_fixture()
+    workbook["Donnee"]["E7"] = "=SUM(E5:E6)"
+    with pytest.raises(IcaseesAssessmentError, match="Unsupported workbook formula"):
+        _extract_gdp_rows(workbook)
