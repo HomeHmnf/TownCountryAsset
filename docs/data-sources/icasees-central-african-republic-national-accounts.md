@@ -59,8 +59,12 @@ Do not assume that the two ranges can be concatenated without a break or that a 
 
 - Original workbook and two PDFs are present at the paths above.
 - Files were committed to Git in `ed62810037abdc2975a51b0677e3b3d7c6a57bdb`.
-- No ICASEES acquisition manifests have yet been added under `data_manifests/sources/`.
-- No provider-specific parser, workbook inventory, sheet-level validation, normalized observations, or checksum-based acquisition report has yet been produced.
+- A provider-specific read-only assessment CLI is implemented in `tools/assess_icasees_national_accounts.py`.
+- It reuses the central source registry and shared source-report bundle writer; it does not create a second registry or copy the committed source files.
+- The `manifest` command records a fingerprint manifest for the exact three committed files, pinned to the byte counts and SHA-256 values from the reviewed local inventory. It refuses to overwrite an existing manifest.
+- The `assess` command verifies all three fingerprints, inventories workbook sheets and formulas, extracts the historical and revised GDP series separately, checks GDP = total value added + product taxes, and extracts relevant text from both PDFs when pypdf is available.
+- The workbook parser treats the two 2019 columns in `Donnée_SCN2008` as distinct historical and revised blocks. It does not join sector classifications by indicator code or splice the series.
+- The workbook's unit/scale-label conflict remains unresolved until the official PDF evidence is reviewed. No normalized observations have been created.
 - No ICASEES observations have been imported into SQLite.
 - No source-selection policy, fallback, manual override, approval, or release promotion has been changed as a result of this acquisition.
 
