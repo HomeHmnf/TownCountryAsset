@@ -48,14 +48,16 @@ def _json(path: Path) -> dict[str, Any]:
     return value
 
 
-def _inside_root(path: Path) -> Path:
+def _inside_root(path: Path, *, directory: bool = False) -> Path:
     resolved = path.resolve()
     try:
         resolved.relative_to(ROOT.resolve())
     except ValueError as exc:
         raise ReleaseValidationError(f"Release evidence must be inside repository: {path}") from exc
-    if not resolved.is_file():
-        raise ReleaseValidationError(f"Release evidence file is missing: {resolved}")
+    valid = resolved.is_dir() if directory else resolved.is_file()
+    if not valid:
+        kind = "directory" if directory else "file"
+        raise ReleaseValidationError(f"Release evidence {kind} is missing: {resolved}")
     return resolved
 
 
@@ -104,7 +106,7 @@ def _load_evidence(source: str, report_path: Path) -> tuple[dict[str, Any], list
         raise ReleaseValidationError(
             f"Validation evidence is incomplete or not passing; missing={sorted(missing)}, non_pass={sorted(failed)}"
         )
-    candidate = _inside_root(Path(report["candidate_directory"]))
+    candidate = _inside_root(Path(report["candidate_directory"]), directory=True)
     manifest_path = _inside_root(candidate / "application_manifest.json")
     observations_path = _inside_root(candidate / "normalized_observations.json")
     manifest = _json(manifest_path)
