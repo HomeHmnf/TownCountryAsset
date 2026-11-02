@@ -84,12 +84,15 @@ def test_combined_sheet_uses_cached_revised_labels_and_distinct_rows():
         39: ("IMPÔTS ET TAXES SUR LES PRODUITS", [76.215, 87.181, 86.068]),
         40: ("PRODUIT INTERIEUR BRUT", [1952.925, 2056.035, 2149.622]),
     }
+    # Remove the fixture's original revised labels before modelling the
+    # external-link labels in the upper rows and cached aggregate labels below.
+    for row in range(2, 5):
+        cached.cell(row, 12).value = None
+        sheet.cell(row, 12).value = "=[1]PIB_courant!$B$34"
     for row, (label, values) in revised_rows.items():
         cached.cell(row, 12).value = label
         for offset, value in enumerate(values, start=15):
             sheet.cell(row, offset).value = value
-    for row in range(2, 5):
-        sheet.cell(row, 12).value = "=[1]PIB_courant!$B$34"
     series, checks = _extract_gdp_rows(workbook, cached_workbook=cached_workbook)
     revised = [row for row in series if row["sheet"] == "Donnée_SCN2008" and row["series_block"] == "revised"]
     assert len(revised) == 3
