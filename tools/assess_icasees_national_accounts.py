@@ -117,7 +117,8 @@ def verify_manifest(path: Path = MANIFEST) -> tuple[dict[str, Any], list[dict[st
             checks.append({"file_id": file_id, "path": definition["path"], "status": "missing"})
             continue
         digest, size = _sha256(path_on_disk), path_on_disk.stat().st_size
-        ok = digest == entry.get("sha256") and size == entry.get("byte_count")
+        ok = (digest == entry.get("sha256") == definition["expected_sha256"]
+              and size == entry.get("byte_count") == definition["expected_byte_count"])
         checks.append({"file_id": file_id, "path": definition["path"], "format": definition["format"],
                        "byte_count": size, "sha256": digest, "status": "valid" if ok else "fingerprint_mismatch"})
     if any(row["status"] != "valid" for row in checks):
@@ -212,6 +213,16 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
                            "scale_label": combined.cell(right_gdp_row, right_label_col + 2).value})
             checks[f"Donnée_SCN2008_{year}_gdp_equals_vab_plus_taxes"] = (
                 None not in (gdp, vab, taxes) and abs(gdp - vab - taxes) <= TOLERANCE)
+    revised_by_sheet = {
+        name: {row["year"]: row["value"] for row in series
+               if row["sheet"] == name and row["series_block"] == "revised"}
+        for name in ("Donnee", "Donnée nouvelle", "Donnée_SCN2008")
+    }
+    for year in (2019, 2020, 2021):
+        values = [revised_by_sheet[name].get(year) for name in revised_by_sheet]
+        checks[f"revised_gdp_presentations_agree_{year}"] = (
+            all(value is not None for value in values) and max(values) - min(values) <= TOLERANCE
+        )
     old_2019 = _number(old.cell(old_gdp_row, old_years[2019]).value)
     new_sheet = workbook["Donnée nouvelle"]
     new_gdp_row = _find_row(new_sheet, 2, GDP_LABEL)
