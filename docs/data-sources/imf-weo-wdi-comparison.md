@@ -82,7 +82,7 @@ The persistent field 15/16 outliers (Turkmenistan, Guinea and the Central Africa
 
 ## Targeted PPP GDP investigation
 
-Field 18 outliers (Guinea, Central African Republic and Zimbabwe) have been reviewed against ICP and country-specific national-accounts/currency evidence. Findings are documented in [`field-18-ppp-gdp-comparability-assessment.md`](field-18-ppp-gdp-comparability-assessment.md). For Guinea and CAR, most of the PPP GDP gap is inherited from the nominal GDP source-vintage difference; the implied PPP multipliers are much closer than the PPP GDP totals. Zimbabwe has an isolated WDI 2017 PPP GDP spike, and an IMF methodological paper documents a special desk-exchange-rate conversion of Zimbabwe's 2017 ICP PPP factor before applying it to WEO nominal GDP submitted in USD. Retain IMF WEO as priority; no source-policy, database, approval or release action follows.
+Field 18 outliers (Guinea, Central African Republic and Zimbabwe) have been reviewed against ICP and country-specific national-accounts/currency evidence. Findings are documented in [`field-18-ppp-gdp-comparability-assessment.md`](field-18-ppp-gdp-comparability-assessment.md). For Guinea and CAR, PPP GDP discrepancies are similar in scale to the nominal GDP discrepancies, consistent with underlying national-accounts source-vintage differences; a full decomposition of nominal GDP and PPP-factor effects remains outstanding. Zimbabwe has an isolated WDI 2017 PPP GDP spike, and an IMF methodological paper documents a special desk-exchange-rate conversion of Zimbabwe's 2017 ICP PPP factor before applying it to WEO nominal GDP submitted in USD. Retain IMF WEO as priority; no source-policy, database, approval or release action follows.
 
 ## Targeted inflation investigation
 
