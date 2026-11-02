@@ -1,0 +1,41 @@
+{
+  "source_id": "un_wpp",
+  "checked_at": "2026-11-02T06:58:37.608173+00:00",
+  "discovery_mode": "manual_review",
+  "latest_available": null,
+  "latest_validated": {
+    "release_id": "2024-main-demographic+2026-01-19-togo-update",
+    "provider_release_label": "2024-main-demographic+2026-01-19-togo-update",
+    "provider_published_at": null,
+    "provider_commit_timestamp": null,
+    "fetched_at": "2026-11-01T09:35:48.903303+00:00",
+    "discovered_at": null,
+    "acquired_at": "2026-11-01T09:35:48.903303+00:00",
+    "validated_at": "2026-11-02T06:58:37.608173+00:00",
+    "applied_at": null,
+    "status": "validated",
+    "snapshot_manifest": "generated/un_wpp_2026_candidate_20261101/application_manifest.json",
+    "notes": "Approved WP1.5 release validation; see approval artifact un-wpp-release-2026-11-02",
+    "approval_id": "un-wpp-release-2026-11-02",
+    "proposal_sha256": "c5669525ae33c4c5309d9db173bf88ead9ce6c3ff51d5ef79c9c675aad96cc8c"
+  },
+  "latest_applied": null,
+  "history": [
+    {
+      "release_id": "2024-main-demographic+2026-01-19-togo-update",
+      "provider_release_label": "2024-main-demographic+2026-01-19-togo-update",
+      "provider_published_at": null,
+      "provider_commit_timestamp": null,
+      "fetched_at": "2026-11-01T09:35:48.903303+00:00",
+      "discovered_at": null,
+      "acquired_at": "2026-11-01T09:35:48.903303+00:00",
+      "validated_at": "2026-11-02T06:58:37.608173+00:00",
+      "applied_at": null,
+      "status": "validated",
+      "snapshot_manifest": "generated/un_wpp_2026_candidate_20261101/application_manifest.json",
+      "notes": "Approved WP1.5 release validation; see approval artifact un-wpp-release-2026-11-02",
+      "approval_id": "un-wpp-release-2026-11-02",
+      "proposal_sha256": "c5669525ae33c4c5309d9db173bf88ead9ce6c3ff51d5ef79c9c675aad96cc8c"
+    }
+  ]
+}

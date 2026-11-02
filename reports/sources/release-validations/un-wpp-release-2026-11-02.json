@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "approval_id": "un-wpp-release-2026-11-02",
+  "source_id": "un_wpp",
+  "release_id": "2024-main-demographic+2026-01-19-togo-update",
+  "candidate_directory": "generated/un_wpp_2026_candidate_20261101",
+  "validation_report": "reports/database/town_country_asset/wp1-5/un_wpp/20261102T063815Z/validation_report.json",
+  "validation_result": "PASS",
+  "validation_checked_at": "2026-11-02T06:38:15.475809+00:00",
+  "validation_checks": {
+    "snapshot_fingerprints": "PASS",
+    "database_integrity": "PASS",
+    "candidate_field_coverage": "PASS",
+    "wpp_age_sex_population_semantics": "PASS",
+    "canonical_database_value_parity": "PASS",
+    "togo_supplement_provenance": "PASS",
+    "source_selection_resolver_compatibility": "PASS"
+  },
+  "resolver_eligibility": "simulated_in_memory_only",
+  "evidence": [
+    {
+      "label": "wp1_5_validation_report",
+      "path": "reports/database/town_country_asset/wp1-5/un_wpp/20261102T063815Z/validation_report.json",
+      "sha256": "43bbbc4376444b0956e39c96370fbbd63ff89f0200c7e4435771f3467f638e5f",
+      "byte_count": 3882
+    },
+    {
+      "label": "candidate_application_manifest",
+      "path": "generated/un_wpp_2026_candidate_20261101/application_manifest.json",
+      "sha256": "ea7d7ecba7d4a8af90155c5e28e92b6e86603c92bf9fe19c294399cd4c35e8d8",
+      "byte_count": 2642
+    },
+    {
+      "label": "normalized_observations",
+      "path": "generated/un_wpp_2026_candidate_20261101/normalized_observations.json",
+      "sha256": "5137edc0cdb89879bf5c502e59b0223905f677b6fffc6de1ff838ac86d4f7c3e",
+      "byte_count": 1575639
+    },
+    {
+      "label": "source_selection_policy",
+      "path": "config/source_selection.json",
+      "sha256": "8b9c63e6552ef9e8cf24149c627283a64369383428474b0469d0839b7f5736f7",
+      "byte_count": 19666
+    },
+    {
+      "label": "source_registry",
+      "path": "config/data_sources.json",
+      "sha256": "33a8bb87cc1e12bb9afe7efad1fd16a628d92c8a1fea067f8f6f7b1f120131b1",
+      "byte_count": 38780
+    },
+    {
+      "label": "snapshot_0_primary",
+      "path": "raw_data/sources/un_wpp/demographic_indicators_medium/2024-main-demographic/WPP2024_Demographic_Indicators_Medium.csv.gz",
+      "sha256": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
+      "byte_count": 16557272
+    },
+    {
+      "label": "snapshot_1_WPP 2024 age-sex main snapshot",
+      "path": "raw_data/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+      "sha256": "a04d7d1486a5eb2832cc812d599448f0a71e8ac9e1e7e6fa4066673d6a2487cd",
+      "byte_count": 29948947
+    },
+    {
+      "label": "snapshot_2_WPP 2026 Togo interim update",
+      "path": "raw_data/sources/un_wpp/interim_update_togo/2026-01-19-togo-update/WPP2024_CSV_files_update.zip",
+      "sha256": "eb7846bf5d937ee15060198e1130e770b885e58c24035b314966681ed929ca9f",
+      "byte_count": 943827
+    },
+    {
+      "label": "snapshot_3_upstream_manifest",
+      "path": "data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json",
+      "sha256": "46810eda3025762d6795766759df0b001c3e94b24e0520893a60217ab1d771de",
+      "byte_count": 1339
+    },
+    {
+      "label": "snapshot_4_upstream_manifest",
+      "path": "data_manifests/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex.json",
+      "sha256": "be17df63e34e58f5ed79ce3562969f5cc433b9f1543433e3e3e791e211cb3eea",
+      "byte_count": 1324
+    },
+    {
+      "label": "snapshot_5_upstream_manifest",
+      "path": "data_manifests/sources/un_wpp/interim_update_togo/2026-01-19-togo-update.json",
+      "sha256": "cdfa8764fe71fad30f7856a4d81d89b52fdb3208695061cf5aef1f637cdd4e4f",
+      "byte_count": 1250
+    }
+  ],
+  "created_at": "2026-11-02T06:55:53.644908+00:00",
+  "created_by": "project-owner",
+  "note": "Reviewed WPP source validation, immutable inputs, Togo supplement provenance, and resolver compatibility.",
+  "approval": {
+    "status": "approved",
+    "approved_at": "2026-11-02T06:57:08.928806+00:00",
+    "actor": "project-owner",
+    "note": "Approved after review of all seven validation checks and eleven fingerprinted evidence files."
+  },
+  "proposal_sha256": "c5669525ae33c4c5309d9db173bf88ead9ce6c3ff51d5ef79c9c675aad96cc8c"
+}
