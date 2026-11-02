@@ -265,7 +265,50 @@ uv run python -m tools.import_wp1_5 \
   --approval-id un-wpp-2026-11-01
 ```
 
-### Automation backlog
+### Approval-gated source release validation and promotion
+
+A provider release becomes eligible for normal source selection only after a separate release-validation proposal is reviewed and explicitly approved. This is distinct from the WP1.5 database-application approval: release validation changes source eligibility, not canonical database contents.
+
+The initial implementation is scoped to the UN WPP WP1.5 provider. Start from a completed, passing automated validation report:
+
+```fish
+uv run python -m tools.validate_wp1_5 --source un_wpp
+```
+
+Use the exact report path printed by that command to prepare an immutable release proposal:
+
+```fish
+uv run python -m tools.validate_source_release propose \
+  --source un_wpp \
+  --approval-id un-wpp-release-2026-11-02 \
+  --report reports/database/town_country_asset/wp1-5/un_wpp/<timestamp>/validation_report.json \
+  --actor project-owner \
+  --note "Reviewed WPP source validation and resolver compatibility evidence."
+```
+
+The proposal requires PASS results for the snapshot fingerprints, canonical database integrity, six-field coverage, WPP demographic semantics, canonical value parity, Togo supplement provenance, and source-selection resolver compatibility. It fingerprints the validation report, candidate manifest, normalized observations, source registry, selection policy, raw snapshots and upstream acquisition manifests. The proposal records that resolver release eligibility was simulated in memory; it does not represent an existing promotion.
+
+Inspect the proposal JSON and its SHA-256, then make the explicit decision:
+
+```fish
+uv run python -m tools.validate_source_release approve \
+  --approval-id un-wpp-release-2026-11-02 \
+  --actor project-owner \
+  --note "Approved the exact release-validation evidence."
+```
+
+To reject instead, use the `reject` subcommand with the same approval ID and a reason. A decision is single-use; a rejected or approved proposal cannot be decided again.
+
+Only after approval, promote the release:
+
+```fish
+uv run python -m tools.validate_source_release promote \
+  --approval-id un-wpp-release-2026-11-02
+```
+
+Promotion rechecks every evidence fingerprint and the PASS report before writing `reports/sources/releases/un_wpp.json`. It updates only `latest_validated` and release history; it does not change `latest_applied`, the source registry, or canonical SQLite data. The current implementation refuses to replace a different already-validated release; supersession requires a separately reviewed workflow. The source-selection resolver will then read this ledger state instead of requiring a simulated `release_states` mapping.
+
+## Automation backlog
 
 The current workflow is intentionally inspected one provider/application at a time. Future orchestration should automate repeatable mechanics without weakening the approval boundary:
 
