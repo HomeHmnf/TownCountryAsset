@@ -342,7 +342,7 @@ def _extract_gdp_rows(workbook, cached_workbook=None) -> tuple[list[dict[str, An
         for year, col in sorted(years.items()):
             parts = [_cell_number(sheet, row, col) for row in (primary, secondary, tertiary)]
             total_cell = sheet.cell(total_vab, col)
-            total = _number(total_cell.value, context=f"{sheet.title}!{total_cell.coordinate}")
+            total = _cell_number(sheet, total_cell.row, total_cell.column, cached_sheet=cached_workbook[sheet_name] if cached_workbook else None)
             checks[f"{sheet_name}_{year}_sector_vab_equals_total_vab"] = (
                 all(value is not None for value in parts) and total is not None
                 and abs(sum(parts) - total) <= TOLERANCE
