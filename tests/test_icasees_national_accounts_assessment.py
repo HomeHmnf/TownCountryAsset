@@ -88,14 +88,19 @@ def test_manifest_verification_rejects_changed_snapshot(tmp_path, monkeypatch):
     import tools.assess_icasees_national_accounts as module
 
     monkeypatch.setattr(module, "ROOT", tmp_path)
-    definitions = module.FILES
+    definitions = []
     entries = []
-    for item in definitions:
+    for original in module.FILES:
+        item = dict(original)
         path = tmp_path / item["path"]
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(("payload-" + item["file_id"]).encode())
+        item["expected_byte_count"] = path.stat().st_size
+        item["expected_sha256"] = module._sha256(path)
+        definitions.append(item)
         entries.append({**item, "repository_path": item["path"],
                         "byte_count": path.stat().st_size, "sha256": module._sha256(path)})
+    monkeypatch.setattr(module, "FILES", definitions)
     manifest = tmp_path / "manifest.json"
     manifest.write_text(json.dumps({"manifest_schema_version": 1, "source_id": module.SOURCE_ID,
                                     "files": entries}), encoding="utf-8")
