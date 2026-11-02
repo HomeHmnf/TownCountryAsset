@@ -210,15 +210,28 @@ def promote_release(approval_id: str) -> dict[str, Any]:
             f"Refusing to replace existing latest_validated release {current.get('release_id')!r}; "
             "a separate supersession decision is required"
         )
+    candidate_manifest_path = _inside_root(
+        ROOT / proposal["candidate_directory"] / "application_manifest.json"
+    )
+    candidate_manifest = _json(candidate_manifest_path)
+    if (
+        candidate_manifest.get("source_key") != source_id
+        or candidate_manifest.get("release") != proposal["release_id"]
+    ):
+        raise ReleaseValidationError("Candidate application manifest no longer matches the approved release")
+    acquired_at = candidate_manifest.get("retrieved_at")
+    if not isinstance(acquired_at, str) or not acquired_at.strip():
+        raise ReleaseValidationError("Candidate manifest has no valid retrieval timestamp")
+
     now = _now()
     entry = {
         "release_id": proposal["release_id"],
         "provider_release_label": proposal["release_id"],
         "provider_published_at": None,
         "provider_commit_timestamp": None,
-        "fetched_at": report.get("checked_at"),
-        "discovered_at": proposal["created_at"],
-        "acquired_at": report.get("checked_at"),
+        "fetched_at": acquired_at,
+        "discovered_at": None,
+        "acquired_at": acquired_at,
         "validated_at": now,
         "applied_at": current.get("applied_at") if isinstance(current, dict) else None,
         "status": "applied" if isinstance(current, dict) and current.get("status") == "applied" else "validated",
