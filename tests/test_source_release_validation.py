@@ -8,6 +8,16 @@ import pytest
 from tools import validate_source_release as release
 
 
+def test_inside_root_accepts_candidate_directory(tmp_path, monkeypatch):
+    monkeypatch.setattr(release, "ROOT", tmp_path)
+    candidate = tmp_path / "candidate"
+    candidate.mkdir()
+
+    assert release._inside_root(candidate, directory=True) == candidate
+    with pytest.raises(release.ReleaseValidationError, match="file is missing"):
+        release._inside_root(candidate)
+
+
 def test_proposal_digest_is_stable_across_decision(tmp_path, monkeypatch):
     monkeypatch.setattr(release, "PROPOSALS", tmp_path)
     proposal = {
