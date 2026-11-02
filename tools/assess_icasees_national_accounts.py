@@ -136,17 +136,22 @@ def _normal(value: Any) -> str:
     return re.sub(r"\s+", " ", text).strip().casefold()
 
 
-def _number(value: Any) -> float | None:
+def _number(value: Any, context: str | None = None) -> float | None:
+    location = f" at {context}" if context else ""
     if value is None or value == "":
         return None
     if isinstance(value, bool):
-        raise IcaseesAssessmentError("Boolean encountered where a numeric observation was expected")
+        raise IcaseesAssessmentError(
+            f"Boolean encountered where a numeric observation was expected{location}: {value!r}"
+        )
     try:
         number = float(value)
     except (TypeError, ValueError) as exc:
-        raise IcaseesAssessmentError(f"Non-numeric workbook observation: {value!r}") from exc
+        raise IcaseesAssessmentError(
+            f"Non-numeric workbook observation{location}: {value!r}"
+        ) from exc
     if not math.isfinite(number):
-        raise IcaseesAssessmentError(f"Non-finite workbook observation: {value!r}")
+        raise IcaseesAssessmentError(f"Non-finite workbook observation{location}: {value!r}")
     return number
 
 
@@ -155,7 +160,7 @@ def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> fl
     cell = sheet.cell(row, col)
     value = cell.value
     if not (isinstance(value, str) and value.startswith("=")):
-        return _number(value)
+        return _number(value, context=f"{sheet.title}!{cell.coordinate}")
     stack = set() if stack is None else stack
     if cell.coordinate in stack:
         raise IcaseesAssessmentError(f"Circular formula at {sheet.title}!{cell.coordinate}")
@@ -320,7 +325,8 @@ def _extract_gdp_rows(workbook, cached_workbook=None) -> tuple[list[dict[str, An
         total_vab = _find_row(sheet, 2, "TOTAL VAB")
         for year, col in sorted(years.items()):
             parts = [_cell_number(sheet, row, col) for row in (primary, secondary, tertiary)]
-            total = _number(sheet.cell(total_vab, col).value)
+            total_cell = sheet.cell(total_vab, col)
+            total = _number(total_cell.value, context=f"{sheet.title}!{total_cell.coordinate}")
             checks[f"{sheet_name}_{year}_sector_vab_equals_total_vab"] = (
                 all(value is not None for value in parts) and total is not None
                 and abs(sum(parts) - total) <= TOLERANCE
