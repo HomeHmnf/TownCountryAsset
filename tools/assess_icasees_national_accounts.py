@@ -223,6 +223,29 @@ def _extract_gdp_rows(workbook) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         checks[f"revised_gdp_presentations_agree_{year}"] = (
             all(value is not None for value in values) and max(values) - min(values) <= TOLERANCE
         )
+    for sheet_name in ("Donnee", "Donnée nouvelle"):
+        sheet = workbook[sheet_name]
+        years = _year_columns(sheet, 1, 1, sheet.max_column)
+        primary = _find_row(sheet, 2, "SECTEUR PRIMAIRE")
+        secondary = _find_row(sheet, 2, "SECTEUR SECONDAIRE")
+        tertiary = _find_row(sheet, 2, "SECTEUR TERTIAIRE")
+        total_vab = _find_row(sheet, 2, "TOTAL VAB")
+        for year, col in sorted(years.items()):
+            parts = [_number(sheet.cell(row, col).value) for row in (primary, secondary, tertiary)]
+            total = _number(sheet.cell(total_vab, col).value)
+            checks[f"{sheet_name}_{year}_sector_vab_equals_total_vab"] = (
+                all(value is not None for value in parts) and total is not None
+                and abs(sum(parts) - total) <= TOLERANCE
+            )
+    historical_by_sheet = {
+        name: {row["year"]: row["value"] for row in series if row["sheet"] == name}
+        for name in ("Donnee_2013-2019", "Donnée_SCN2008")
+    }
+    for year in range(2013, 2020):
+        left, combined_value = historical_by_sheet["Donnee_2013-2019"].get(year), historical_by_sheet["Donnée_SCN2008"].get(year)
+        checks[f"historical_gdp_presentations_agree_{year}"] = (
+            left is not None and combined_value is not None and abs(left - combined_value) <= TOLERANCE
+        )
     old_2019 = _number(old.cell(old_gdp_row, old_years[2019]).value)
     new_sheet = workbook["Donnée nouvelle"]
     new_gdp_row = _find_row(new_sheet, 2, GDP_LABEL)
