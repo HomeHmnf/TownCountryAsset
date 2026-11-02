@@ -201,6 +201,8 @@ def promote_release(approval_id: str) -> dict[str, Any]:
             "latest_available": None, "latest_validated": None, "latest_applied": None, "history": [],
         }
     current = ledger.get("latest_validated")
+    if isinstance(current, dict) and current.get("release_id") == proposal["release_id"] and current.get("approval_id") == approval_id:
+        raise ReleaseValidationError("This approved release proposal has already been promoted")
     if isinstance(current, dict) and current.get("release_id") != proposal["release_id"]:
         raise ReleaseValidationError(
             f"Refusing to replace existing latest_validated release {current.get('release_id')!r}; "
