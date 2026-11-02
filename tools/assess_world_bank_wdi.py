@@ -63,8 +63,10 @@ def fetch_indicator_metadata(code: str, get_json=_get_json) -> dict[str, Any]:
     if row.get("id") != code:
         raise AssessmentError(f"Indicator metadata identity mismatch for {code}")
     source = row.get("source") or {}
+    api_meta = payload[0] if isinstance(payload[0], dict) else {}
     return {
         "indicator_code": code,
+        "api_last_updated": api_meta.get("lastupdated"),
         "name": row.get("name"),
         "unit": row.get("unit"),
         "source_note": row.get("sourceNote"),
