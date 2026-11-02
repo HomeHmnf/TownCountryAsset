@@ -68,3 +68,17 @@ The utility is read-only. It does not:
 - write to canonical SQLite or import observations.
 
 Do not use this exploratory comparison report as an application artifact or as evidence of an approved fallback. Any future source-policy change remains a separate review and approval decision.
+
+
+## Targeted country discrepancy investigation
+
+After generating a comparison, run a read-only investigation against its CSV:
+
+```fish
+uv run python -m tools.investigate_imf_weo_wdi_discrepancies \
+  --input reports/sources/imf-wdi-comparison/<timestamp>/country_year_comparison.csv
+```
+
+The utility currently prioritizes a small, explicit shortlist: fields 15/16 (Turkmenistan, Guinea, Central African Republic), field 18 (Guinea, Central African Republic, Zimbabwe), field 20 (Tonga, Samoa, Palau), and field 21 (Bahrain, Moldova, Philippines). It emits JSON, Markdown and country-year CSV outputs with source values, signed/absolute differences, direction consistency, IMF status hints and reporting-period metadata.
+
+This is a prioritization and descriptive audit only. It does not fetch original provider records, revision histories, methodological notes beyond those already captured in the comparison, or independent corroboration. It must not infer which provider is correct or explain the cause of a discrepancy. Large relative differences with near-zero WDI denominators require particular caution; inspect absolute values and percentage-point differences for fields 20/21. No database, source registry, policy, approval or release action is performed.
