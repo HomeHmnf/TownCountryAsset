@@ -1,0 +1,1649 @@
+{
+  "schema_version": 1,
+  "dataset": "un_wpp",
+  "source_key": "un_wpp",
+  "mapping_policy": {
+    "review_basis": "Owner-approved exact/normalized M49 identity matches, verified against both WPP snapshots.",
+    "explicit_name_variants": "Held for separate review; not imported into this initial crosswalk.",
+    "unmatched_identities": "Held unless separately approved as a source-specific exception.",
+    "taiwan_exception": {
+      "game_id": "tc_98ab3dee1d554162b6bbd5dac6374fc8",
+      "source_id": "158",
+      "source_name": "China, Taiwan Province of China",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://population.un.org/wpp/",
+      "scope": "WPP source crosswalk only; no ISO/M49 registry assignment."
+    }
+  },
+  "review_approval": {
+    "status": "approved",
+    "approved_on": "2026-11-01",
+    "approver_role": "project_owner",
+    "approval_record": "docs/data-sources/un-wpp-crosswalk-review.md",
+    "scope": "UN WPP source crosswalk only; no global identity, ISO/M49 assignment, or SQLite application approval."
+  },
+  "mappings": [
+    {
+      "game_id": "tc_928d15fd89764353a6889f571bfd0a1c",
+      "source_id": "4",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Afghanistan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1",
+      "source_id": "8",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Albania",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e245d37005f843168d67b7b327ece7f9",
+      "source_id": "12",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Algeria",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ab146a31fa9243bc81a35e9cfaa1ed05",
+      "source_id": "16",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "American Samoa",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_224c06bfe0f04031b422bddc81ea3ce5",
+      "source_id": "20",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Andorra",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_fa43ff476d6b428fa8edb4dde1aa9d3f",
+      "source_id": "24",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Angola",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9221f2a3fd704847b66da16efa03c2b8",
+      "source_id": "28",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Antigua and Barbuda",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_b8c860bb8d404dcca918bad769e7ead7",
+      "source_id": "31",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Azerbaijan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2a29d5b72b294244a5de6db37118237a",
+      "source_id": "32",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Argentina",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_270a6ecb902d4ea1ac7373b3d1a3b2cc",
+      "source_id": "36",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Australia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_a0422e821c824e78bd95525b36155b65",
+      "source_id": "40",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Austria",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_38fd6c5cd2be45739f3be11bc4cab9c8",
+      "source_id": "48",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Bahrain",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_8169e562ece7475e960f78f231cb1ab7",
+      "source_id": "50",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Bangladesh",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f97b56c9c74845de8b41aa24ed12a47f",
+      "source_id": "51",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Armenia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_7a679c592eef40c58b7cdf58e6032bb5",
+      "source_id": "52",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Barbados",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f1cc713e923c4be48e176657a00469f0",
+      "source_id": "56",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Belgium",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d81e2d4c4b934f57a67f380b2fdaec9d",
+      "source_id": "60",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Bermuda",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_91f04a21215642aeb5da856a78dc9949",
+      "source_id": "64",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Bhutan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_0628271c897b49558f423321cbc48ce4",
+      "source_id": "70",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Bosnia and Herzegovina",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ca2bdd688a454bb8b6457c9448612669",
+      "source_id": "72",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Botswana",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4923336d91d94afc919d8a2b8a4ad415",
+      "source_id": "76",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Brazil",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d066174c4df546d1a410d386f363ee80",
+      "source_id": "84",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Belize",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_0ce7eb254c32428c88601905c0df8e87",
+      "source_id": "90",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Solomon Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f3832fd029cb445483c26654bddadfac",
+      "source_id": "92",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "British Virgin Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_523810acde564c1c907acd5befe575ab",
+      "source_id": "100",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Bulgaria",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_b4847e5d14f94efdbbd46d6467d90237",
+      "source_id": "104",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Myanmar",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4ac5b3c6b7774a05b4ceb5573c4a9d27",
+      "source_id": "108",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Burundi",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_6ebc90b251e14f70b8bf758d8008e839",
+      "source_id": "112",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Belarus",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f956986338e5418481784ba2d2781063",
+      "source_id": "116",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Cambodia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f5cd614ef03c414d8e98d87102df5c14",
+      "source_id": "120",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Cameroon",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ba9087366ba54d51932e88bf8a11616d",
+      "source_id": "124",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Canada",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d9d1737635ce4385a50c4307c2716832",
+      "source_id": "132",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Cabo Verde",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_19acfc8e1cf44c25aa753729115d60d6",
+      "source_id": "136",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Cayman Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "source_id": "140",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Central African Republic",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_5e47c88bebac452e953fc5dfa8b1ba06",
+      "source_id": "144",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Sri Lanka",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_1da2daf3a3d34a30b96100d643963f70",
+      "source_id": "148",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Chad",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4c51c695cb6e47d2aed2fb04c397bece",
+      "source_id": "152",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Chile",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_3349a0b8b7454088b11e917a24de3ad5",
+      "source_id": "156",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "China",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_98ab3dee1d554162b6bbd5dac6374fc8",
+      "source_id": "158",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://population.un.org/wpp/",
+      "source_name": "China, Taiwan Province of China",
+      "review_note": "Explicit owner-approved WPP-only exception: WPP LocID 158, Location 'China, Taiwan Province of China', ISO2 TW, ISO3 TWN. This does not assign or alter an ISO/M49 identity in the project registry."
+    },
+    {
+      "game_id": "tc_648b019cc83e486ab9fb8497386777a9",
+      "source_id": "170",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Colombia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_10dd5e9664664abf9eca33c250a74cdb",
+      "source_id": "174",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Comoros",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2763c19aa8734ce9aa8b17d8effb6645",
+      "source_id": "180",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Democratic Republic of the Congo",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d0017ca5d5084ceeaedc02b6d436fb39",
+      "source_id": "184",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Cook Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_79512b2eaf8f45b5b118130859ebdaaf",
+      "source_id": "188",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Costa Rica",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_fb4046d4910a4bf89f4a93810e2f4d8a",
+      "source_id": "191",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Croatia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_576e758e1fbb456a973d63c58222dc30",
+      "source_id": "192",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Cuba",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_3c148b1f7650455fa710ca87cf376728",
+      "source_id": "196",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Cyprus",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e43afc3a83a3458c833dac5644b7186a",
+      "source_id": "203",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Czechia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_874ae1f05e8c4d67a2c839095d760b72",
+      "source_id": "204",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Benin",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_11da440eb0704bd195fe0b11fa0890af",
+      "source_id": "208",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Denmark",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e5391af862dd490bb3a01fa80f4ac15e",
+      "source_id": "212",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Dominica",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ee04e01170f84b92afabbb40abdbd4e3",
+      "source_id": "214",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Dominican Republic",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2a54eb1caed54a2185a62cce0c2db6cb",
+      "source_id": "218",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Ecuador",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_471268dbb85845de93e546317686debb",
+      "source_id": "222",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "El Salvador",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_06d71df13c4f415fbf22a0147f19bc53",
+      "source_id": "226",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Equatorial Guinea",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_860d12ee66fc4fceb3faddbc92c87930",
+      "source_id": "231",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Ethiopia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f9d7128c5ef04c6f955f43f9bcc56a0c",
+      "source_id": "232",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Eritrea",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_383873de760147cd97dfac5ef5d60b08",
+      "source_id": "233",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Estonia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d608e7f9138e459ab3b96263618ae407",
+      "source_id": "234",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Faroe Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_8d67737674744dce8986565b98cbbb1f",
+      "source_id": "242",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Fiji",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_374e55a3eefe4a1a83fed6b64b5045f5",
+      "source_id": "246",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Finland",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_471ae6d7112b4537a7ae5ca1e6a816a5",
+      "source_id": "250",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "France",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2493e62a2f78442e8fd4b8c0f0ca847c",
+      "source_id": "258",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "French Polynesia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f4814b1a89384c4d93a92c19b301a814",
+      "source_id": "262",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Djibouti",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d59dfb6324524b07a32c87b73009e97f",
+      "source_id": "266",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Gabon",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_741bd244c1ec4961918565c4ed02c5c6",
+      "source_id": "268",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Georgia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a",
+      "source_id": "270",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Gambia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ff445b0a87494070bf868827de190acf",
+      "source_id": "276",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Germany",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f63061b714ce4390948838410758c016",
+      "source_id": "288",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Ghana",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c23a3cf00b1a4ebf97a70a4f41a7761d",
+      "source_id": "296",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Kiribati",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_dab67464d7ad44cdbf925450627e4186",
+      "source_id": "300",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Greece",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_cbf271e54b9c4e3fbaa93c291355f6f7",
+      "source_id": "304",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Greenland",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c5b3fecc12a94e85a7acddc70fa7a086",
+      "source_id": "308",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Grenada",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ff2aa3765a3d4ee4a6d0c0bd0fb61ddd",
+      "source_id": "316",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Guam",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9348779eba844ab2beb5bed00053b7c6",
+      "source_id": "320",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Guatemala",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "source_id": "324",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Guinea",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_893d4efa8ccf42af896949ffd7007fef",
+      "source_id": "328",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Guyana",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9ee610c6d55a4f4bbdbbb073b33628a2",
+      "source_id": "332",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Haiti",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_80c318b9217a4320beaad6b93eb74ac5",
+      "source_id": "340",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Honduras",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e3ede57c1b754a2dbd940335f9655f11",
+      "source_id": "348",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Hungary",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_861af4b9250e4e17a9d3f1f4e1ea33d4",
+      "source_id": "352",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Iceland",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_39ad5030b5f94f068d4a1528c60e5638",
+      "source_id": "356",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "India",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c40da0ac977b4201b8587ce04aa66f56",
+      "source_id": "360",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Indonesia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_5ee7b31f968941dca65e70519901915f",
+      "source_id": "368",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Iraq",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_16d6044d9abf4743821a6fb238942a22",
+      "source_id": "372",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Ireland",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_28952c75855947a7b31bb7509dc1fce1",
+      "source_id": "376",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Israel",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_1f3e0c90df4341f082ed90ecdd95fb10",
+      "source_id": "380",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Italy",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_bf02736242694622ae7c730beb0f0da6",
+      "source_id": "388",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Jamaica",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_8d0620ea475f498d9402134857882bf1",
+      "source_id": "392",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Japan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_feadffc011db4cf695df6c0997a003c8",
+      "source_id": "398",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Kazakhstan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_6e28258973b54dfeb5811c563cd0a2e8",
+      "source_id": "400",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Jordan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9f3dc962bf9744a5a3cdf1f7a1cbb159",
+      "source_id": "404",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Kenya",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_fa491c61ffa24dc3a21c6a6da7d39fad",
+      "source_id": "414",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Kuwait",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_130ca81b84d04b058e9301121b2b7802",
+      "source_id": "417",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Kyrgyzstan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_8466a0747d0b4d1a8c23feb70f7c6ed1",
+      "source_id": "422",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Lebanon",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c0fa4e9b8e984f59ba17beb7547c5811",
+      "source_id": "426",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Lesotho",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f161aef25a39413e8aef8c147e97b28a",
+      "source_id": "428",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Latvia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_40dc9d2e141343e98a4d0c762c578473",
+      "source_id": "430",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Liberia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_bb5622bab363429ca481c5476acc824c",
+      "source_id": "434",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Libya",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_a8bd42bd635b43289f3c26695dc58939",
+      "source_id": "438",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Liechtenstein",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_77de0a41c4d94d8388d6f0732438be81",
+      "source_id": "440",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Lithuania",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f4261f4507cd48858cdfb7e3bd0ae738",
+      "source_id": "442",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Luxembourg",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_7abbe0f9aa1346c7a9f69cc1027b4282",
+      "source_id": "450",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Madagascar",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ee1c1ac1ad5c4faf818070115133b174",
+      "source_id": "454",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Malawi",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_b21225f45c3b40509640603249110f89",
+      "source_id": "458",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Malaysia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_408d22fe5b894b4b947a0521ace1018a",
+      "source_id": "462",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Maldives",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_a3f73fd3bb6d4d7fb4ea31d433453bae",
+      "source_id": "466",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Mali",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f97b2223a2a84e53ac13614ddde1f602",
+      "source_id": "470",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Malta",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_17137c4e4fcc4fa58e32c924f08efcda",
+      "source_id": "478",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Mauritania",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c7b728ec16b94e35b05d96d14a253eec",
+      "source_id": "480",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Mauritius",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c6b830c3cba64d4883eac8cee7864cfd",
+      "source_id": "484",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Mexico",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_da92472e602c45c69d331812fa5193d8",
+      "source_id": "492",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Monaco",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d0fb202ca0aa4a868af6fa154ab84c30",
+      "source_id": "496",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Mongolia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_eb1de71332ef4db496cb76c95aa56cd4",
+      "source_id": "499",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Montenegro",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d",
+      "source_id": "500",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Montserrat",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_84dc0c18f03144bea337f6aacd50bf0f",
+      "source_id": "504",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Morocco",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2249b79a9c944a1c835b0cad2676e48d",
+      "source_id": "508",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Mozambique",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_22bd85ff61234a46a95506d105d5fee4",
+      "source_id": "512",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Oman",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_7379cdcc5c4848c181ace3144aeba70f",
+      "source_id": "516",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Namibia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_1c4ff3f2a8f04b43b0c28e830a9403ad",
+      "source_id": "524",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Nepal",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2d0dc3f3edb9467090ea74861dbc7b9e",
+      "source_id": "531",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Curaçao",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_8344feaf14da4684aaa8d4c263653778",
+      "source_id": "533",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Aruba",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e7d7320224a64229881b6b49ef1e74c3",
+      "source_id": "540",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "New Caledonia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_43c4be0a76ca43a2bb7e634de5a1f4f4",
+      "source_id": "548",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Vanuatu",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d4b67e03f0c04d9a87089f477e5fa669",
+      "source_id": "554",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "New Zealand",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2fdae8757e51402e9f67c428d2b79368",
+      "source_id": "558",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Nicaragua",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4d31375845614c2b91a71736069d4ab3",
+      "source_id": "562",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Niger",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_7a8158c93a934345a2ade9fd16ee4999",
+      "source_id": "566",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Nigeria",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4cb90152915543348c9a793599240eaa",
+      "source_id": "570",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Niue",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f4a6e15a05474af2b81c9524ed988d89",
+      "source_id": "578",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Norway",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_07747651759a40219ba3f4710fa6ab11",
+      "source_id": "580",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Northern Mariana Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f201b19690a04a8f903f9ea4cb0c7af4",
+      "source_id": "584",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Marshall Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_642fbe2581cf4b8c857d967717d1f1ef",
+      "source_id": "585",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Palau",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_0dc6216a94e34b44b27e42ed35fa6376",
+      "source_id": "586",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Pakistan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ba6cf14fa6224eb4a0b085b3ea1df6dc",
+      "source_id": "591",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Panama",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_82d51d964745422e8ed3a9109757d2ee",
+      "source_id": "598",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Papua New Guinea",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_3eb6dc12494541e793a8a5b68980f29f",
+      "source_id": "600",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Paraguay",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_a90d391a4a9a473b9074fc99cce11cb5",
+      "source_id": "604",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Peru",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_fc8f1a9536d342899526129acf15acd2",
+      "source_id": "608",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Philippines",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9865dd6a50c3458b98f5040f0cc76357",
+      "source_id": "616",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Poland",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_43ee3db974884a72bacf5f5519e2c145",
+      "source_id": "620",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Portugal",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_dc93b6caf7324df884ec2b070a5296b9",
+      "source_id": "624",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Guinea-Bissau",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_37f10315a18d4c3abf3486086b5822e1",
+      "source_id": "630",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Puerto Rico",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_13df99232f33400d9079316c041f066c",
+      "source_id": "634",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Qatar",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c41863f7cb4e4dccbbdf0a1296f9ee1c",
+      "source_id": "642",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Romania",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_7f3c6637070f4c42a40c1f5456ec4721",
+      "source_id": "646",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Rwanda",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e0f0ed8d4d284acd8b41435902f2a6cc",
+      "source_id": "652",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Saint Barthélemy",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9bd5e00f9fc944edbf2eb3097e413328",
+      "source_id": "654",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Saint Helena",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f22d58e7280f41f7a5a68fb03e1ab87e",
+      "source_id": "659",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Saint Kitts and Nevis",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_0b9688bbf4264477b023a0f2af180c2e",
+      "source_id": "660",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Anguilla",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_6629fdb92d05409f856d9030b63b1470",
+      "source_id": "662",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Saint Lucia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_5551c0cc249f4e4e9ea6d57a0dacd2d5",
+      "source_id": "666",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Saint Pierre and Miquelon",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_67290f5714c846f4a84d1f53c6fd495a",
+      "source_id": "670",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Saint Vincent and the Grenadines",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e4ea859bd6704c13912ad7f5cf19de41",
+      "source_id": "674",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "San Marino",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4a2ed326dc6047efa2e28926df0bc7f0",
+      "source_id": "678",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Sao Tome and Principe",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_86b0f7fcb4504f9b8dc1b60b42b16ea0",
+      "source_id": "682",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Saudi Arabia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_29ec74ae4e094053a930487b9ce602d1",
+      "source_id": "686",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Senegal",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_4bc377d3ea57485bac43c9b512587dbc",
+      "source_id": "690",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Seychelles",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_56e9d1977fa14da298ae125fbda1b63c",
+      "source_id": "694",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Sierra Leone",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_9d65e06bf97d417c8aa62742225ef5c9",
+      "source_id": "702",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Singapore",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_b3bea891d7114d148714d5e398ee06b1",
+      "source_id": "703",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Slovakia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_c0484640d9554c8285e92412bae25785",
+      "source_id": "705",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Slovenia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e82cc51b989841109d9e1a7f6a5d1727",
+      "source_id": "706",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Somalia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_dc6419869818416db051f50cbfd95036",
+      "source_id": "710",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "South Africa",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+      "source_id": "716",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Zimbabwe",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_21a70a0fbf1b43c292783397ce218239",
+      "source_id": "724",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Spain",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "source_id": "728",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "South Sudan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_b0ca3e0386b34603a6356b8ebc8b0565",
+      "source_id": "729",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Sudan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_3487eebc07114ff589974150237cae4f",
+      "source_id": "732",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Western Sahara",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_168a848021b84cc6a6c3fc320012a176",
+      "source_id": "740",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Suriname",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_fc2ad04f3c88446e91bd770190d6fe4c",
+      "source_id": "748",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Eswatini",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_d74b429fff544cf9bafeb459c4b3edd8",
+      "source_id": "752",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Sweden",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e693e8b799f94e7bb814e89bd46d886d",
+      "source_id": "756",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Switzerland",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_772e2ac5253c46e98b79cf5a6f19e9f5",
+      "source_id": "762",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Tajikistan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_fc12d0184fc7498f982ab8033ae64436",
+      "source_id": "764",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Thailand",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_06a09ff0e27b49e392ef2e88161023eb",
+      "source_id": "768",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Togo",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2c6f6c5486f04a87aa94277e67d6e51a",
+      "source_id": "776",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Tonga",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_1bd98a138f884dd4b4d9d1efbbf357b0",
+      "source_id": "780",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Trinidad and Tobago",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_3cbd960008724744b928265acc0638a4",
+      "source_id": "784",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "United Arab Emirates",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_1d1d2c1274384efa82f9591e1c069aba",
+      "source_id": "788",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Tunisia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_72de9a194d85404098bb741ae4ffc826",
+      "source_id": "795",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Turkmenistan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_ea6ba8b48782477bad74e946641a16ae",
+      "source_id": "796",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Turks and Caicos Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_47cd272cd9c9455185a13f6e69bd805c",
+      "source_id": "798",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Tuvalu",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_2bd67b30564b46b4b502a36decc333bf",
+      "source_id": "800",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Uganda",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_65f8a168b10143c2a596917c1fca3731",
+      "source_id": "804",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Ukraine",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_949bf877e3284f5c8a56cfc89bcafa90",
+      "source_id": "807",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "North Macedonia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_939f236600dd47a8bf850a7ff19dc047",
+      "source_id": "818",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Egypt",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_be9b1fd97db1475191612805ba7f9920",
+      "source_id": "831",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Guernsey",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_43796017cb7d4a279de2d9ed65c32c80",
+      "source_id": "832",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Jersey",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f94f97a8ffc24ef18872cadb5736ea2b",
+      "source_id": "833",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Isle of Man",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_0f4c47ec59434e46871845e474964499",
+      "source_id": "834",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "United Republic of Tanzania",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_f0a8b61c54a14d4089774716657e9433",
+      "source_id": "840",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "United States of America",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_504d6ccab85e4fbdad7ddd881dd6d87d",
+      "source_id": "850",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "United States Virgin Islands",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_3c920b9b9f324cb19ef9d4b6debf10ba",
+      "source_id": "854",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Burkina Faso",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e19506c4a1564ca085b73b9284fa6f56",
+      "source_id": "858",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Uruguay",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_5d951c36a4ad4471ae9b9037fe338d70",
+      "source_id": "860",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Uzbekistan",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_76082bd796c546d1ab76a7a8a3251369",
+      "source_id": "882",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Samoa",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e32ec835b247449084d1b535ebccf7f1",
+      "source_id": "887",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Yemen",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    },
+    {
+      "game_id": "tc_e75bc9ac62fa443c90b5529778f3b1af",
+      "source_id": "894",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+      "source_name": "Zambia",
+      "review_note": "Owner-approved M49 identifier correspondence; exact or normalized name reconciliation; LocID verified in both 2026 Medium WPP snapshots."
+    }
+  ],
+  "coverage_exceptions": [
+    {
+      "game_id": "tc_003dbd71493240f5bd22a52176868806",
+      "source_id": "574",
+      "m49_reference_name": "Norfolk Island",
+      "status": "source_not_covered",
+      "reason": "The official M49 identifier is not present in either 2026 Medium Country/Area WPP snapshot; no substitute identifier was inferred."
+    },
+    {
+      "game_id": "tc_73138c628d2a4509bad88f66deb5b27b",
+      "source_id": "86",
+      "m49_reference_name": "British Indian Ocean Territory",
+      "status": "source_not_covered",
+      "reason": "The official M49 identifier is not present in either 2026 Medium Country/Area WPP snapshot; no substitute identifier was inferred."
+    },
+    {
+      "game_id": "tc_c3c21e18d6e94254a4ca4a009530bac9",
+      "source_id": "10",
+      "m49_reference_name": "Antarctica",
+      "status": "source_not_covered",
+      "reason": "The official M49 identifier is not present in either 2026 Medium Country/Area WPP snapshot; no substitute identifier was inferred."
+    },
+    {
+      "game_id": "tc_e86aec8164734ab8be1b207a743e6ea4",
+      "source_id": "334",
+      "m49_reference_name": "Heard Island and McDonald Islands",
+      "status": "source_not_covered",
+      "reason": "The official M49 identifier is not present in either 2026 Medium Country/Area WPP snapshot; no substitute identifier was inferred."
+    }
+  ]
+}

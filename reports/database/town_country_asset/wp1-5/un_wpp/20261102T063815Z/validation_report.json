@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "source": "un_wpp",
+  "result": "PASS",
+  "checked_at": "2026-11-02T06:38:15.475809+00:00",
+  "candidate_directory": "/home/hmnf/Projects/Python/TownAndCountry/generated/un_wpp_2026_candidate_20261101",
+  "release": "2024-main-demographic+2026-01-19-togo-update",
+  "database_path": "/home/hmnf/Projects/Python/TownAndCountry/data/canonical/town_country_asset.sqlite",
+  "snapshots": [
+    {
+      "label": "primary",
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_wpp/demographic_indicators_medium/2024-main-demographic/WPP2024_Demographic_Indicators_Medium.csv.gz",
+      "sha256": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
+      "bytes": 16557272
+    },
+    {
+      "label": "WPP 2024 age-sex main snapshot",
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+      "sha256": "a04d7d1486a5eb2832cc812d599448f0a71e8ac9e1e7e6fa4066673d6a2487cd",
+      "bytes": 29948947
+    },
+    {
+      "label": "WPP 2026 Togo interim update",
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_wpp/interim_update_togo/2026-01-19-togo-update/WPP2024_CSV_files_update.zip",
+      "sha256": "eb7846bf5d937ee15060198e1130e770b885e58c24035b314966681ed929ca9f",
+      "bytes": 943827
+    },
+    {
+      "label": "upstream_manifest",
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json",
+      "sha256": "46810eda3025762d6795766759df0b001c3e94b24e0520893a60217ab1d771de",
+      "bytes": 1339
+    },
+    {
+      "label": "upstream_manifest",
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex.json",
+      "sha256": "be17df63e34e58f5ed79ce3562969f5cc433b9f1543433e3e3e791e211cb3eea",
+      "bytes": 1324
+    },
+    {
+      "label": "upstream_manifest",
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_wpp/interim_update_togo/2026-01-19-togo-update.json",
+      "sha256": "cdfa8764fe71fad30f7856a4d81d89b52fdb3208695061cf5aef1f637cdd4e4f",
+      "bytes": 1250
+    }
+  ],
+  "checks": [
+    {
+      "name": "snapshot_fingerprints",
+      "status": "PASS",
+      "detail": "6 immutable inputs verified"
+    },
+    {
+      "name": "database_integrity",
+      "status": "PASS",
+      "detail": "integrity_check=ok; foreign_key_check=0"
+    },
+    {
+      "name": "candidate_field_coverage",
+      "status": "PASS",
+      "detail": "199 countries; 1194 unique country-field rows; expected six fields per country"
+    },
+    {
+      "name": "wpp_age_sex_population_semantics",
+      "status": "PASS",
+      "detail": "age countries=199; max age-total delta=6.000; max age/sex delta=6.000; max sex-total delta=1.000"
+    },
+    {
+      "name": "canonical_database_value_parity",
+      "status": "PASS",
+      "detail": "Compared 1194 candidate country-field records against import_id=2; mismatches=0"
+    },
+    {
+      "name": "togo_supplement_provenance",
+      "status": "PASS",
+      "detail": "The Togo archive contains both source members used by the adapter: demographic indicators (fields 1, 2, 6, 13, 14) and age-sex data (field 12); all six Togo observations cite the archive."
+    },
+    {
+      "name": "source_selection_resolver_compatibility",
+      "status": "PASS",
+      "detail": "scalar resolutions=796; structured record/subfield resolutions=4577; mismatches=0; release eligibility simulated in memory only; no promotion."
+    }
+  ],
+  "exceptions": [],
+  "exception_rows": [],
+  "side_effects": {
+    "database_write": false,
+    "approval_created": false,
+    "application_performed": false,
+    "release_promoted": false
+  }
+}

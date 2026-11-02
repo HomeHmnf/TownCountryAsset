@@ -1,0 +1,2 @@
+severity,check,message
+WARNING,togo_supplement_provenance_review,Togo observations cite these source references: UN WPP 2024 2026-01-19-togo-update; https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip. Confirm each reference matches the actual source member supplying that field.

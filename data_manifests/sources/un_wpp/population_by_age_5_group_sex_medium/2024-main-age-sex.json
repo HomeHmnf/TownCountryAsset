@@ -1,0 +1,25 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "un_wpp",
+  "source_name": "UN World Population Prospects",
+  "download_id": "population_by_age_5_group_sex_medium",
+  "release": "2024-main-age-sex",
+  "release_kind": "edition_or_snapshot",
+  "release_discovery_mode": "manual_review",
+  "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+  "final_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+  "terms_url": "https://population.un.org/wpp/",
+  "attribution": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition.",
+  "license_status": "CC BY 3.0 IGO",
+  "retrieved_at": "2026-11-01T09:36:41.454075+00:00",
+  "filename": "WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+  "local_raw_path": "raw_data/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+  "content_type": "application/x-gzip",
+  "byte_count": 29948947,
+  "sha256": "a04d7d1486a5eb2832cc812d599448f0a71e8ac9e1e7e6fa4066673d6a2487cd",
+  "format": "gzip_csv",
+  "fields": [
+    12
+  ],
+  "validation_contract": {}
+}

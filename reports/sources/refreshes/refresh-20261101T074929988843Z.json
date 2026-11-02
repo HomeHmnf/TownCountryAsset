@@ -1,0 +1,40 @@
+{
+  "report_schema_version": 1,
+  "run_id": "20261101T074929988843Z",
+  "checked_at": "2026-11-01T07:49:29.988843+00:00",
+  "selection_policy": "latest_validated",
+  "dry_run": false,
+  "database_imported": false,
+  "source_count": 1,
+  "counts": {
+    "sources_manual_review_required": 0,
+    "sources_with_no_generic_download": 1
+  },
+  "sources": [
+    {
+      "source_id": "lipis_flag_icons",
+      "discovery_mode": "git_ref",
+      "discovery_automation": "implemented",
+      "discovery_status": "git_ref_discovery",
+      "downloads": [],
+      "git_ref": {
+        "release_id": "git-ac7e0eb3259eb62aa6100c435607e2fe03896a97",
+        "commit_timestamp": "2026-10-16T00:39:55Z",
+        "release_state_path": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/releases/lipis_flag_icons.json",
+        "detail": "Default-branch commit discovered; source archive acquisition and content validation remain separate"
+      }
+    }
+  ],
+  "limitations": [
+    "Rolling/current-reference discovery uses content fingerprints, not provider semantic release labels.",
+    "Only sources explicitly marked automation_status=implemented use their configured discovery adapter.",
+    "Acquired snapshots have passed only their registered response contract; source-specific semantic validation is still required.",
+    "latest_available is recorded in a separate release ledger; latest_validated and latest_applied are never promoted by refresh.",
+    "Git commit discovery records a commit identifier only; it does not acquire or validate the repository contents.",
+    "No canonical database import or approval is performed."
+  ],
+  "report_paths": {
+    "json": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/refreshes/refresh-20261101T074929988843Z.json",
+    "markdown": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/refreshes/refresh-20261101T074929988843Z.md"
+  }
+}

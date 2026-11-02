@@ -21,7 +21,7 @@ tc_73138c628d2a4509bad88f66deb5b27b,British Indian Ocean Territory,IOT,,IOT,exac
 tc_9bd5e00f9fc944edbf2eb3097e413328,Saint Helena,SHN,,SHN,exact_name,exact,,Saint Helena,654,SH,SHN,missing_existing,match,alpha3_only_agreement,same
 tc_0900903d1eb84838aae9c039c9fd0da2,Pitcairn Islands,PCN,,PCN,explicit_variant,explicit_variant,Plural display-name variant.,Pitcairn,612,PN,PCN,missing_existing,match,alpha3_only_agreement,same
 tc_0b9688bbf4264477b023a0f2af180c2e,Anguilla,AIA,,AIA,exact_name,exact,,Anguilla,660,AI,AIA,missing_existing,match,alpha3_only_agreement,same
-tc_815eb2563fde4a4cb077173220e2a533,Falkland Islands,FLK,,FLK,unmatched,not_compared,Reference includes the formal Malvinas name and article; verify entity scope.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_815eb2563fde4a4cb077173220e2a533,Falkland Islands,FLK,,FLK,explicit_variant,explicit_variant,"M49 formal label includes Malvinas; explicit display-name variant, with entity scope retained for review.",Falkland Islands (Malvinas),238,FK,FLK,missing_existing,match,alpha3_only_agreement,same
 tc_19acfc8e1cf44c25aa753729115d60d6,Cayman Islands,CYM,,CYM,exact_name,exact,,Cayman Islands,136,KY,CYM,missing_existing,match,alpha3_only_agreement,same
 tc_d81e2d4c4b934f57a67f380b2fdaec9d,Bermuda,BMU,,BMU,exact_name,exact,,Bermuda,060,BM,BMU,missing_existing,match,alpha3_only_agreement,same
 tc_f3832fd029cb445483c26654bddadfac,British Virgin Islands,VGB,,VGB,exact_name,exact,,British Virgin Islands,092,VG,VGB,missing_existing,match,alpha3_only_agreement,same
@@ -54,7 +54,7 @@ tc_12491d45eed544948b316c89f82a7ee7,South Sudan,SDS,,SSD,exact_name,exact,,South
 tc_b0ca3e0386b34603a6356b8ebc8b0565,Sudan,SDN,,SDN,exact_name,exact,,Sudan,729,SD,SDN,missing_existing,match,alpha3_only_agreement,same
 tc_5e47c88bebac452e953fc5dfa8b1ba06,Sri Lanka,LKA,,LKA,exact_name,exact,,Sri Lanka,144,LK,LKA,missing_existing,match,alpha3_only_agreement,same
 tc_21a70a0fbf1b43c292783397ce218239,Spain,ESP,,ESP,exact_name,exact,,Spain,724,ES,ESP,missing_existing,match,alpha3_only_agreement,same
-tc_cf8be733dbf44dd6b112e9fe12d2b19e,South Korea,KOR,,KOR,unmatched,not_compared,Common English name variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_cf8be733dbf44dd6b112e9fe12d2b19e,South Korea,KOR,,KOR,explicit_variant,explicit_variant,M49 formal country label differs from the common English name.,Republic of Korea,410,KR,KOR,missing_existing,match,alpha3_only_agreement,same
 tc_dc6419869818416db051f50cbfd95036,South Africa,ZAF,,ZAF,exact_name,exact,,South Africa,710,ZA,ZAF,missing_existing,match,alpha3_only_agreement,same
 tc_e82cc51b989841109d9e1a7f6a5d1727,Somalia,SOM,,SOM,exact_name,exact,,Somalia,706,SO,SOM,missing_existing,match,alpha3_only_agreement,same
 tc_9a78f2eebcc24906a5c67581c0c3895e,Somaliland,SOL,,,unmatched,not_compared,No ISO 3166-1 candidate is proposed by this alias map.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
@@ -88,25 +88,25 @@ tc_642fbe2581cf4b8c857d967717d1f1ef,Palau,PLW,,PLW,exact_name,exact,,Palau,585,P
 tc_0dc6216a94e34b44b27e42ed35fa6376,Pakistan,PAK,,PAK,exact_name,exact,,Pakistan,586,PK,PAK,missing_existing,match,alpha3_only_agreement,same
 tc_22bd85ff61234a46a95506d105d5fee4,Oman,OMN,,OMN,exact_name,exact,,Oman,512,OM,OMN,missing_existing,match,alpha3_only_agreement,same
 tc_f4a6e15a05474af2b81c9524ed988d89,Norway,NOR,NO,,exact_name,exact,,Norway,578,NO,NOR,match,missing_existing,alpha2_only_agreement,same
-tc_4a3793e49e5441ae94aeec78cc887021,North Korea,PRK,,PRK,unmatched,not_compared,Common English name variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_4a3793e49e5441ae94aeec78cc887021,North Korea,PRK,,PRK,explicit_variant,explicit_variant,M49 formal country label differs from the common English name.,Democratic People's Republic of Korea,408,KP,PRK,missing_existing,match,alpha3_only_agreement,same
 tc_7a8158c93a934345a2ade9fd16ee4999,Nigeria,NGA,,NGA,exact_name,exact,,Nigeria,566,NG,NGA,missing_existing,match,alpha3_only_agreement,same
 tc_4d31375845614c2b91a71736069d4ab3,Niger,NER,,NER,exact_name,exact,,Niger,562,NE,NER,missing_existing,match,alpha3_only_agreement,same
 tc_2fdae8757e51402e9f67c428d2b79368,Nicaragua,NIC,,NIC,exact_name,exact,,Nicaragua,558,NI,NIC,missing_existing,match,alpha3_only_agreement,same
 tc_d4b67e03f0c04d9a87089f477e5fa669,New Zealand,NZL,,NZL,exact_name,exact,,New Zealand,554,NZ,NZL,missing_existing,match,alpha3_only_agreement,same
 tc_4cb90152915543348c9a793599240eaa,Niue,NIU,,NIU,exact_name,exact,,Niue,570,NU,NIU,missing_existing,match,alpha3_only_agreement,same
 tc_d0017ca5d5084ceeaedc02b6d436fb39,Cook Islands,COK,,COK,exact_name,exact,,Cook Islands,184,CK,COK,missing_existing,match,alpha3_only_agreement,same
-tc_898b220cf53a425e9bac3630f2c17473,Netherlands,NLD,,NLD,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_898b220cf53a425e9bac3630f2c17473,Netherlands,NLD,,NLD,explicit_variant,explicit_variant,M49 formal country label differs from the registry display name.,Netherlands (Kingdom of the),528,NL,NLD,missing_existing,match,alpha3_only_agreement,same
 tc_8344feaf14da4684aaa8d4c263653778,Aruba,ABW,,ABW,exact_name,exact,,Aruba,533,AW,ABW,missing_existing,match,alpha3_only_agreement,same
 tc_2d0dc3f3edb9467090ea74861dbc7b9e,Curaçao,CUW,,CUW,exact_name,exact,,Curaçao,531,CW,CUW,missing_existing,match,alpha3_only_agreement,same
 tc_1c4ff3f2a8f04b43b0c28e830a9403ad,Nepal,NPL,,NPL,exact_name,exact,,Nepal,524,NP,NPL,missing_existing,match,alpha3_only_agreement,same
-tc_2722269bdef04648b655fe363650d565,Nauru,NRU,,NRU,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_2722269bdef04648b655fe363650d565,Nauru,NRU,,NRU,explicit_variant,explicit_variant,M49 uses the indigenous-language country name.,Naoero,520,NR,NRU,missing_existing,match,alpha3_only_agreement,same
 tc_7379cdcc5c4848c181ace3144aeba70f,Namibia,NAM,,NAM,exact_name,exact,,Namibia,516,NA,NAM,missing_existing,match,alpha3_only_agreement,same
 tc_2249b79a9c944a1c835b0cad2676e48d,Mozambique,MOZ,,MOZ,exact_name,exact,,Mozambique,508,MZ,MOZ,missing_existing,match,alpha3_only_agreement,same
 tc_84dc0c18f03144bea337f6aacd50bf0f,Morocco,MAR,,MAR,exact_name,exact,,Morocco,504,MA,MAR,missing_existing,match,alpha3_only_agreement,same
 tc_3487eebc07114ff589974150237cae4f,Western Sahara,SAH,,ESH,exact_name,exact,,Western Sahara,732,EH,ESH,missing_existing,match,alpha3_only_agreement,different
 tc_eb1de71332ef4db496cb76c95aa56cd4,Montenegro,MNE,,MNE,exact_name,exact,,Montenegro,499,ME,MNE,missing_existing,match,alpha3_only_agreement,same
 tc_d0fb202ca0aa4a868af6fa154ab84c30,Mongolia,MNG,,MNG,exact_name,exact,,Mongolia,496,MN,MNG,missing_existing,match,alpha3_only_agreement,same
-tc_96ea5c49288d40b0945401031405c2c8,Moldova,MDA,,MDA,unmatched,not_compared,Reference uses the formal name.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_96ea5c49288d40b0945401031405c2c8,Moldova,MDA,,MDA,explicit_variant,explicit_variant,M49 formal country label differs from the registry display name.,Republic of Moldova,498,MD,MDA,missing_existing,match,alpha3_only_agreement,same
 tc_da92472e602c45c69d331812fa5193d8,Monaco,MCO,,MCO,exact_name,exact,,Monaco,492,MC,MCO,missing_existing,match,alpha3_only_agreement,same
 tc_c6b830c3cba64d4883eac8cee7864cfd,Mexico,MEX,,MEX,exact_name,exact,,Mexico,484,MX,MEX,missing_existing,match,alpha3_only_agreement,same
 tc_c7b728ec16b94e35b05d96d14a253eec,Mauritius,MUS,,MUS,exact_name,exact,,Mauritius,480,MU,MUS,missing_existing,match,alpha3_only_agreement,same
@@ -138,7 +138,7 @@ tc_8d0620ea475f498d9402134857882bf1,Japan,JPN,,JPN,exact_name,exact,,Japan,392,J
 tc_bf02736242694622ae7c730beb0f0da6,Jamaica,JAM,,JAM,exact_name,exact,,Jamaica,388,JM,JAM,missing_existing,match,alpha3_only_agreement,same
 tc_1f3e0c90df4341f082ed90ecdd95fb10,Italy,ITA,,ITA,exact_name,exact,,Italy,380,IT,ITA,missing_existing,match,alpha3_only_agreement,same
 tc_28952c75855947a7b31bb7509dc1fce1,Israel,ISR,,ISR,exact_name,exact,,Israel,376,IL,ISR,missing_existing,match,alpha3_only_agreement,same
-tc_50c420df8b2c4c6eaae47d795f9a1ea2,Palestine,PSX,,PSE,unmatched,not_compared,Reference uses the formal name.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_50c420df8b2c4c6eaae47d795f9a1ea2,Palestine,PSX,,PSE,explicit_variant,explicit_variant,M49 formal label differs from the registry display name.,State of Palestine,275,PS,PSE,missing_existing,match,alpha3_only_agreement,different
 tc_16d6044d9abf4743821a6fb238942a22,Ireland,IRL,,IRL,exact_name,exact,,Ireland,372,IE,IRL,missing_existing,match,alpha3_only_agreement,same
 tc_5ee7b31f968941dca65e70519901915f,Iraq,IRQ,,IRQ,exact_name,exact,,Iraq,368,IQ,IRQ,missing_existing,match,alpha3_only_agreement,same
 tc_ddf21c4d378e4fc9bc3d5b4ba50890a2,Iran,IRN,,IRN,explicit_variant,explicit_variant,Reference uses the formal name.,Iran (Islamic Republic of),364,IR,IRN,missing_existing,match,alpha3_only_agreement,same
@@ -161,7 +161,7 @@ tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a,Gambia,GMB,,GMB,exact_name,exact,,Gambia,270
 tc_d59dfb6324524b07a32c87b73009e97f,Gabon,GAB,,GAB,exact_name,exact,,Gabon,266,GA,GAB,missing_existing,match,alpha3_only_agreement,same
 tc_471ae6d7112b4537a7ae5ca1e6a816a5,France,FRA,FR,,exact_name,exact,,France,250,FR,FRA,match,missing_existing,alpha2_only_agreement,same
 tc_5551c0cc249f4e4e9ea6d57a0dacd2d5,Saint Pierre and Miquelon,SPM,,SPM,exact_name,exact,,Saint Pierre and Miquelon,666,PM,SPM,missing_existing,match,alpha3_only_agreement,same
-tc_9f1be169ba5347ff81384c532820401b,Wallis and Futuna,WLF,,WLF,unmatched,not_compared,,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_9f1be169ba5347ff81384c532820401b,Wallis and Futuna,WLF,,WLF,explicit_variant,explicit_variant,M49 label includes the Islands suffix.,Wallis and Futuna Islands,876,WF,WLF,missing_existing,match,alpha3_only_agreement,same
 tc_cc0688860b8848ddb5f52395162d9b71,Saint Martin,MAF,,MAF,explicit_variant,explicit_variant,Reference identifies the French part explicitly; verify geometry/entity scope.,Saint Martin (French Part),663,MF,MAF,missing_existing,match,alpha3_only_agreement,same
 tc_e0f0ed8d4d284acd8b41435902f2a6cc,Saint Barthelemy,BLM,,BLM,exact_name,normalized_variation,,Saint Barthélemy,652,BL,BLM,missing_existing,match,alpha3_only_agreement,same
 tc_2493e62a2f78442e8fd4b8c0f0ca847c,French Polynesia,PYF,,PYF,exact_name,exact,,French Polynesia,258,PF,PYF,missing_existing,match,alpha3_only_agreement,same
@@ -195,8 +195,8 @@ tc_451d8109e28b45eaa6923dfcac9d1601,Republic of the Congo,COG,,COG,explicit_vari
 tc_10dd5e9664664abf9eca33c250a74cdb,Comoros,COM,,COM,exact_name,exact,,Comoros,174,KM,COM,missing_existing,match,alpha3_only_agreement,same
 tc_648b019cc83e486ab9fb8497386777a9,Colombia,COL,,COL,exact_name,exact,,Colombia,170,CO,COL,missing_existing,match,alpha3_only_agreement,same
 tc_3349a0b8b7454088b11e917a24de3ad5,China,CHN,,CHN,exact_name,exact,,China,156,CN,CHN,missing_existing,match,alpha3_only_agreement,same
-tc_f9a64d8c1e6342d2b1941833ff7588d0,Macao S.A.R,MAC,,MAC,unmatched,not_compared,Administrative-region suffix variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
-tc_394248a9960c4d28b4385210c82a0a0b,Hong Kong S.A.R.,HKG,,HKG,unmatched,not_compared,Administrative-region suffix variant.,,,,,not_compared,not_compared,unmatched_registry,not_comparable
+tc_f9a64d8c1e6342d2b1941833ff7588d0,Macao S.A.R,MAC,,MAC,explicit_variant,explicit_variant,M49 administrative-region label differs from the registry display name.,"China, Macao Special Administrative Region",446,MO,MAC,missing_existing,match,alpha3_only_agreement,same
+tc_394248a9960c4d28b4385210c82a0a0b,Hong Kong S.A.R.,HKG,,HKG,explicit_variant,explicit_variant,M49 administrative-region label differs from the registry display name.,"China, Hong Kong Special Administrative Region",344,HK,HKG,missing_existing,match,alpha3_only_agreement,same
 tc_4c51c695cb6e47d2aed2fb04c397bece,Chile,CHL,,CHL,exact_name,exact,,Chile,152,CL,CHL,missing_existing,match,alpha3_only_agreement,same
 tc_1da2daf3a3d34a30b96100d643963f70,Chad,TCD,,TCD,exact_name,exact,,Chad,148,TD,TCD,missing_existing,match,alpha3_only_agreement,same
 tc_9d80376a997845b6ba6bbc08d436a50d,Central African Republic,CAF,,CAF,exact_name,exact,,Central African Republic,140,CF,CAF,missing_existing,match,alpha3_only_agreement,same

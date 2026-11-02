@@ -1,0 +1,30 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "un_wpp",
+  "source_name": "UN World Population Prospects",
+  "download_id": "interim_update_togo",
+  "release": "2026-01-19-togo-update",
+  "release_kind": "supplement",
+  "release_discovery_mode": "manual_review",
+  "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip",
+  "final_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/WPP2024_CSV_files_update.zip",
+  "terms_url": "https://population.un.org/wpp/",
+  "attribution": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition.",
+  "license_status": "CC BY 3.0 IGO",
+  "retrieved_at": "2026-11-01T09:36:48.837890+00:00",
+  "filename": "WPP2024_CSV_files_update.zip",
+  "local_raw_path": "raw_data/sources/un_wpp/interim_update_togo/2026-01-19-togo-update/WPP2024_CSV_files_update.zip",
+  "content_type": "application/x-zip-compressed",
+  "byte_count": 943827,
+  "sha256": "eb7846bf5d937ee15060198e1130e770b885e58c24035b314966681ed929ca9f",
+  "format": "zip_csv_bundle",
+  "fields": [
+    1,
+    2,
+    6,
+    12,
+    13,
+    14
+  ],
+  "validation_contract": {}
+}

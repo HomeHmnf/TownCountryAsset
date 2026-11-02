@@ -1,0 +1,47 @@
+{
+  "manifest_schema_version": 1,
+  "work_package": "WP1.5",
+  "source_key": "un_wpp",
+  "release": "2024-main-demographic+2026-01-19-togo-update",
+  "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
+  "final_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz",
+  "retrieved_at": "2026-11-01T09:35:48.903303+00:00",
+  "local_raw_path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_wpp/demographic_indicators_medium/2024-main-demographic/WPP2024_Demographic_Indicators_Medium.csv.gz",
+  "byte_count": 16557272,
+  "sha256": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
+  "attribution": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition.",
+  "license_status": "CC BY 3.0 IGO",
+  "terms_url": "https://population.un.org/wpp/",
+  "additional_inputs": [
+    {
+      "label": "WPP 2024 age-sex main snapshot",
+      "local_raw_path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex/WPP2024_PopulationByAge5GroupSex_Medium.csv.gz",
+      "byte_count": 29948947,
+      "sha256": "a04d7d1486a5eb2832cc812d599448f0a71e8ac9e1e7e6fa4066673d6a2487cd"
+    },
+    {
+      "label": "WPP 2026 Togo interim update",
+      "local_raw_path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_wpp/interim_update_togo/2026-01-19-togo-update/WPP2024_CSV_files_update.zip",
+      "byte_count": 943827,
+      "sha256": "eb7846bf5d937ee15060198e1130e770b885e58c24035b314966681ed929ca9f"
+    }
+  ],
+  "upstream_manifests": [
+    {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json",
+      "sha256": "46810eda3025762d6795766759df0b001c3e94b24e0520893a60217ab1d771de"
+    },
+    {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex.json",
+      "sha256": "be17df63e34e58f5ed79ce3562969f5cc433b9f1543433e3e3e791e211cb3eea"
+    },
+    {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_wpp/interim_update_togo/2026-01-19-togo-update.json",
+      "sha256": "cdfa8764fe71fad30f7856a4d81d89b52fdb3208695061cf5aef1f637cdd4e4f"
+    }
+  ],
+  "adapter": "tools.sources.wpp",
+  "target_year": 2026,
+  "variant": "Medium",
+  "population_reference_date": "1 July"
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "source_id": "lipis_flag_icons",
+  "checked_at": "2026-11-01T07:49:29.987689+00:00",
+  "discovery_mode": "git_ref",
+  "latest_available": {
+    "release_id": "git-ac7e0eb3259eb62aa6100c435607e2fe03896a97",
+    "provider_release_label": "git-commit:ac7e0eb3259eb62aa6100c435607e2fe03896a97",
+    "provider_published_at": null,
+    "provider_commit_timestamp": "2026-10-16T00:39:55Z",
+    "discovered_at": "2026-11-01T07:49:29.987689+00:00",
+    "acquired_at": null,
+    "validated_at": null,
+    "applied_at": null,
+    "status": "discovered",
+    "snapshot_manifest": null,
+    "notes": "Discovered candidate release; provider-specific semantic validation is still required.",
+    "sha256": null,
+    "byte_count": null,
+    "content_type": "application/json",
+    "url": "https://github.com/lipis/flag-icons/commit/ac7e0eb3259eb62aa6100c435607e2fe03896a97"
+  },
+  "latest_validated": null,
+  "latest_applied": null,
+  "history": [
+    {
+      "release_id": "git-ac7e0eb3259eb62aa6100c435607e2fe03896a97",
+      "provider_release_label": "git-commit:ac7e0eb3259eb62aa6100c435607e2fe03896a97",
+      "provider_published_at": null,
+      "provider_commit_timestamp": "2026-10-16T00:39:55Z",
+      "discovered_at": "2026-11-01T07:49:29.987689+00:00",
+      "acquired_at": null,
+      "validated_at": null,
+      "applied_at": null,
+      "status": "discovered",
+      "snapshot_manifest": null,
+      "notes": "Discovered candidate release; provider-specific semantic validation is still required.",
+      "sha256": null,
+      "byte_count": null,
+      "content_type": "application/json",
+      "url": "https://github.com/lipis/flag-icons/commit/ac7e0eb3259eb62aa6100c435607e2fe03896a97"
+    }
+  ]
+}

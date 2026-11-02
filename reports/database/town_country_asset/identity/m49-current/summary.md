@@ -1,6 +1,6 @@
 # Identity reconciliation — UN M49
 
-- Generated at (UTC): 2026-11-01T06:28:38.192950+00:00
+- Generated at (UTC): 2026-11-01T06:40:27.732163+00:00
 - Reference: https://unstats.un.org/unsd/methodology/m49/overview
 - Raw snapshot SHA-256: b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb
 - Normalized reference SHA-256: 7575550969de58be3909e0c2290478a4331c5c13be123a1043214c73de929b74
@@ -15,10 +15,10 @@
 |---|---:|
 | Registry identities | 242 |
 | M49 reference rows | 248 |
-| Unique name matches | 225 |
-| Unmatched registry identities | 17 |
+| Unique name matches | 235 |
+| Unmatched registry identities | 7 |
 | Ambiguous registry identities | 0 |
-| Unmatched reference rows | 23 |
+| Unmatched reference rows | 13 |
 
 ## Name and code comparisons
 
@@ -26,10 +26,10 @@
 |---|---:|
 | Exact English-name matches | 199 |
 | Normalized name variations | 3 |
-| Explicit reviewed name variants | 23 |
+| Explicit reviewed name variants | 33 |
 | Alpha-2 agreements | 2 |
 | Alpha-2 mismatches | 0 |
-| Alpha-3 agreements | 223 |
+| Alpha-3 agreements | 233 |
 | Alpha-3 mismatches | 0 |
 
 ## Combined classifications
@@ -37,13 +37,13 @@
 | Classification | Count |
 |---|---:|
 | alpha2_only_agreement | 2 |
-| alpha3_only_agreement | 223 |
-| unmatched_registry | 17 |
+| alpha3_only_agreement | 233 |
+| unmatched_registry | 7 |
 
 ## Source identifier comparison (not an ISO conflict)
 
-- Source ID equals reference alpha-3: 222
-- Source ID differs from reference alpha-3: 3
+- Source ID equals reference alpha-3: 231
+- Source ID differs from reference alpha-3: 4
 
 A source identifier may happen to equal an ISO alpha-3 code. That coincidence is not independent evidence of an ISO assignment.
 

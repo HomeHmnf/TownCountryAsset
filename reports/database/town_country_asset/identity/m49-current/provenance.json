@@ -24,7 +24,181 @@
   "raw_snapshot": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_m49/country_area_overview_html/2026-10-current/m49-country-area-overview.html",
   "read_only": true,
   "report_type": "identity_reconciliation",
-  "retrieved_at_utc": "2026-11-01T06:28:38.192950+00:00",
+  "retrieved_at_utc": "2026-11-01T06:40:27.732163+00:00",
+  "reviewed_name_variants": {
+    "aland": {
+      "rationale": "Diacritic and abbreviated display-name variant.",
+      "reference_name": "Åland Islands"
+    },
+    "bahamas": {
+      "rationale": "Reference uses the formal name without the leading article.",
+      "reference_name": "Bahamas"
+    },
+    "bolivia": {
+      "rationale": "Reference uses the formal state name.",
+      "reference_name": "Bolivia, Plurinational State of"
+    },
+    "british virgin islands": {
+      "rationale": "Display-name variant.",
+      "reference_name": "Virgin Islands (British)"
+    },
+    "brunei": {
+      "rationale": "Reference uses the formal country name.",
+      "reference_name": "Brunei Darussalam"
+    },
+    "democratic republic of the congo": {
+      "rationale": "Word-order variant of the formal name.",
+      "reference_name": "Congo, Democratic Republic of the"
+    },
+    "east timor": {
+      "rationale": "Common English name variant.",
+      "reference_name": "Timor-Leste"
+    },
+    "falkland islands": {
+      "rationale": "M49 formal label includes Malvinas; explicit display-name variant, with entity scope retained for review.",
+      "reference_name": "Falkland Islands (Malvinas)"
+    },
+    "federated states of micronesia": {
+      "rationale": "Word-order variant of the formal name.",
+      "reference_name": "Micronesia, Federated States of"
+    },
+    "french southern and antarctic lands": {
+      "rationale": "Natural Earth display label differs from the ISO reference name; verify entity scope.",
+      "reference_name": "French Southern Territories"
+    },
+    "hong kong s a r": {
+      "rationale": "M49 administrative-region label differs from the registry display name.",
+      "reference_name": "China, Hong Kong Special Administrative Region"
+    },
+    "iran": {
+      "rationale": "Reference uses the formal name.",
+      "reference_name": "Iran, Islamic Republic of"
+    },
+    "ivory coast": {
+      "rationale": "Common English name variant.",
+      "reference_name": "Côte d'Ivoire"
+    },
+    "kosovo": {
+      "rationale": "No ISO 3166-1 candidate is proposed by this alias map.",
+      "reference_name": ""
+    },
+    "laos": {
+      "rationale": "Common English name variant.",
+      "reference_name": "Lao People's Democratic Republic"
+    },
+    "macao s a r": {
+      "rationale": "M49 administrative-region label differs from the registry display name.",
+      "reference_name": "China, Macao Special Administrative Region"
+    },
+    "moldova": {
+      "rationale": "M49 formal country label differs from the registry display name.",
+      "reference_name": "Republic of Moldova"
+    },
+    "nauru": {
+      "rationale": "M49 uses the indigenous-language country name.",
+      "reference_name": "Naoero"
+    },
+    "netherlands": {
+      "rationale": "M49 formal country label differs from the registry display name.",
+      "reference_name": "Netherlands (Kingdom of the)"
+    },
+    "north korea": {
+      "rationale": "M49 formal country label differs from the common English name.",
+      "reference_name": "Democratic People's Republic of Korea"
+    },
+    "northern cyprus": {
+      "rationale": "No ISO 3166-1 candidate is proposed by this alias map.",
+      "reference_name": ""
+    },
+    "palestine": {
+      "rationale": "M49 formal label differs from the registry display name.",
+      "reference_name": "State of Palestine"
+    },
+    "pitcairn islands": {
+      "rationale": "Plural display-name variant.",
+      "reference_name": "Pitcairn"
+    },
+    "republic of serbia": {
+      "rationale": "Display-name prefix variant.",
+      "reference_name": "Serbia"
+    },
+    "republic of the congo": {
+      "rationale": "Common country-name variant; verify entity distinction.",
+      "reference_name": "Congo"
+    },
+    "russia": {
+      "rationale": "Common English name variant.",
+      "reference_name": "Russian Federation"
+    },
+    "saint helena": {
+      "rationale": "Reference uses the extended territory name.",
+      "reference_name": "Saint Helena, Ascension and Tristan da Cunha"
+    },
+    "saint martin": {
+      "rationale": "Reference identifies the French part explicitly; verify geometry/entity scope.",
+      "reference_name": "Saint Martin (French part)"
+    },
+    "sint maarten": {
+      "rationale": "Reference explicitly identifies the Dutch part; verify geometry/entity scope.",
+      "reference_name": "Sint Maarten (Dutch part)"
+    },
+    "somaliland": {
+      "rationale": "No ISO 3166-1 candidate is proposed by this alias map.",
+      "reference_name": ""
+    },
+    "south georgia and the islands": {
+      "rationale": "Display-name variant; verify geometry/entity scope.",
+      "reference_name": "South Georgia and the South Sandwich Islands"
+    },
+    "south korea": {
+      "rationale": "M49 formal country label differs from the common English name.",
+      "reference_name": "Republic of Korea"
+    },
+    "syria": {
+      "rationale": "Common English name variant.",
+      "reference_name": "Syrian Arab Republic"
+    },
+    "taiwan": {
+      "rationale": "Reference uses its published formal label; assignment requires policy review.",
+      "reference_name": "Taiwan, Province of China"
+    },
+    "the bahamas": {
+      "rationale": "Reference omits the leading article.",
+      "reference_name": "Bahamas"
+    },
+    "turkey": {
+      "rationale": "Current reference spelling differs.",
+      "reference_name": "Türkiye"
+    },
+    "united kingdom": {
+      "rationale": "Reference uses the full formal name.",
+      "reference_name": "United Kingdom of Great Britain and Northern Ireland"
+    },
+    "united republic of tanzania": {
+      "rationale": "Word-order variant of the formal name.",
+      "reference_name": "Tanzania, United Republic of"
+    },
+    "united states virgin islands": {
+      "rationale": "Display-name variant; verify entity scope.",
+      "reference_name": "Virgin Islands (U.S.)"
+    },
+    "vatican": {
+      "rationale": "ISO reference identifies the Holy See; review entity-vs-display-label semantics.",
+      "reference_name": "Holy See"
+    },
+    "venezuela": {
+      "rationale": "Reference uses the formal name.",
+      "reference_name": "Venezuela, Bolivarian Republic of"
+    },
+    "vietnam": {
+      "rationale": "Current reference spelling differs from the registry display name.",
+      "reference_name": "Viet Nam"
+    },
+    "wallis and futuna": {
+      "rationale": "M49 label includes the Islands suffix.",
+      "reference_name": "Wallis and Futuna Islands"
+    }
+  },
   "schema_version": 1,
   "selected_table_id": "downloadTableEN",
   "source_manifest": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_m49/country_area_overview_html/2026-10-current.json",
@@ -33,31 +207,31 @@
   "summary": {
     "alpha2_matches": 2,
     "alpha2_mismatches": 0,
-    "alpha3_matches": 223,
+    "alpha3_matches": 233,
     "alpha3_mismatches": 0,
     "ambiguous_registry_count": 0,
     "code_pair_classifications": {
       "alpha2_only_agreement": 2,
-      "alpha3_only_agreement": 223,
-      "unmatched_registry": 17
+      "alpha3_only_agreement": 233,
+      "unmatched_registry": 7
     },
     "match_types": {
       "exact_name": 202,
-      "explicit_variant": 23,
-      "unmatched": 17
+      "explicit_variant": 33,
+      "unmatched": 7
     },
-    "matched_count": 225,
+    "matched_count": 235,
     "name_comparisons": {
       "exact": 199,
-      "explicit_variant": 23,
+      "explicit_variant": 33,
       "normalized_variation": 3,
-      "not_compared": 17
+      "not_compared": 7
     },
     "reference_count": 248,
     "registry_count": 242,
-    "source_id_alpha3_different": 3,
-    "source_id_alpha3_same": 222,
-    "unmatched_reference_count": 23,
-    "unmatched_registry_count": 17
+    "source_id_alpha3_different": 4,
+    "source_id_alpha3_same": 231,
+    "unmatched_reference_count": 13,
+    "unmatched_registry_count": 7
   }
 }

@@ -2,10 +2,10 @@
 
 - Registry records reviewed: 242
 - Reference rows: 248
-- Total ISO candidates proposed: 225
+- Total ISO candidates proposed: 235
 - Exact normalized-name matches: 202
-- Explicit reviewed name-variant matches: 23
-- No-match or missing-name records: 17
+- Explicit reviewed name-variant matches: 33
+- No-match or missing-name records: 7
 - Ambiguous reference matches: 0
 - Records already marked verified: 0
 - Reference file: `raw_data/iso/m49-iso-reference.csv`
@@ -38,7 +38,7 @@
 | tc_9bd5e00f9fc944edbf2eb3097e413328 | Saint Helena | SH | SHN | Saint Helena | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_0900903d1eb84838aae9c039c9fd0da2 | Pitcairn Islands | PN | PCN | Pitcairn | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_0b9688bbf4264477b023a0f2af180c2e | Anguilla | AI | AIA | Anguilla | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_815eb2563fde4a4cb077173220e2a533 | Falkland Islands |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_815eb2563fde4a4cb077173220e2a533 | Falkland Islands | FK | FLK | Falkland Islands (Malvinas) | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_19acfc8e1cf44c25aa753729115d60d6 | Cayman Islands | KY | CYM | Cayman Islands | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_d81e2d4c4b934f57a67f380b2fdaec9d | Bermuda | BM | BMU | Bermuda | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_f3832fd029cb445483c26654bddadfac | British Virgin Islands | VG | VGB | British Virgin Islands | exact normalized name | candidate: exact normalized English-name match; human verification required |
@@ -71,7 +71,7 @@
 | tc_b0ca3e0386b34603a6356b8ebc8b0565 | Sudan | SD | SDN | Sudan | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_5e47c88bebac452e953fc5dfa8b1ba06 | Sri Lanka | LK | LKA | Sri Lanka | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_21a70a0fbf1b43c292783397ce218239 | Spain | ES | ESP | Spain | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_cf8be733dbf44dd6b112e9fe12d2b19e | South Korea |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_cf8be733dbf44dd6b112e9fe12d2b19e | South Korea | KR | KOR | Republic of Korea | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_dc6419869818416db051f50cbfd95036 | South Africa | ZA | ZAF | South Africa | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_e82cc51b989841109d9e1a7f6a5d1727 | Somalia | SO | SOM | Somalia | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_9a78f2eebcc24906a5c67581c0c3895e | Somaliland |  |  |  | unmatched | review: no exact normalized English-name match |
@@ -105,25 +105,25 @@
 | tc_0dc6216a94e34b44b27e42ed35fa6376 | Pakistan | PK | PAK | Pakistan | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_22bd85ff61234a46a95506d105d5fee4 | Oman | OM | OMN | Oman | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_f4a6e15a05474af2b81c9524ed988d89 | Norway | NO | NOR | Norway | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_4a3793e49e5441ae94aeec78cc887021 | North Korea |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_4a3793e49e5441ae94aeec78cc887021 | North Korea | KP | PRK | Democratic People's Republic of Korea | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_7a8158c93a934345a2ade9fd16ee4999 | Nigeria | NG | NGA | Nigeria | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_4d31375845614c2b91a71736069d4ab3 | Niger | NE | NER | Niger | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_2fdae8757e51402e9f67c428d2b79368 | Nicaragua | NI | NIC | Nicaragua | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_d4b67e03f0c04d9a87089f477e5fa669 | New Zealand | NZ | NZL | New Zealand | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_4cb90152915543348c9a793599240eaa | Niue | NU | NIU | Niue | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_d0017ca5d5084ceeaedc02b6d436fb39 | Cook Islands | CK | COK | Cook Islands | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_898b220cf53a425e9bac3630f2c17473 | Netherlands |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_898b220cf53a425e9bac3630f2c17473 | Netherlands | NL | NLD | Netherlands (Kingdom of the) | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_8344feaf14da4684aaa8d4c263653778 | Aruba | AW | ABW | Aruba | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_2d0dc3f3edb9467090ea74861dbc7b9e | Curaçao | CW | CUW | Curaçao | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_1c4ff3f2a8f04b43b0c28e830a9403ad | Nepal | NP | NPL | Nepal | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_2722269bdef04648b655fe363650d565 | Nauru |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_2722269bdef04648b655fe363650d565 | Nauru | NR | NRU | Naoero | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_7379cdcc5c4848c181ace3144aeba70f | Namibia | NA | NAM | Namibia | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_2249b79a9c944a1c835b0cad2676e48d | Mozambique | MZ | MOZ | Mozambique | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_84dc0c18f03144bea337f6aacd50bf0f | Morocco | MA | MAR | Morocco | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_3487eebc07114ff589974150237cae4f | Western Sahara | EH | ESH | Western Sahara | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_eb1de71332ef4db496cb76c95aa56cd4 | Montenegro | ME | MNE | Montenegro | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_d0fb202ca0aa4a868af6fa154ab84c30 | Mongolia | MN | MNG | Mongolia | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_96ea5c49288d40b0945401031405c2c8 | Moldova |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_96ea5c49288d40b0945401031405c2c8 | Moldova | MD | MDA | Republic of Moldova | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_da92472e602c45c69d331812fa5193d8 | Monaco | MC | MCO | Monaco | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_c6b830c3cba64d4883eac8cee7864cfd | Mexico | MX | MEX | Mexico | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_c7b728ec16b94e35b05d96d14a253eec | Mauritius | MU | MUS | Mauritius | exact normalized name | candidate: exact normalized English-name match; human verification required |
@@ -155,7 +155,7 @@
 | tc_bf02736242694622ae7c730beb0f0da6 | Jamaica | JM | JAM | Jamaica | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_1f3e0c90df4341f082ed90ecdd95fb10 | Italy | IT | ITA | Italy | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_28952c75855947a7b31bb7509dc1fce1 | Israel | IL | ISR | Israel | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_50c420df8b2c4c6eaae47d795f9a1ea2 | Palestine |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_50c420df8b2c4c6eaae47d795f9a1ea2 | Palestine | PS | PSE | State of Palestine | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_16d6044d9abf4743821a6fb238942a22 | Ireland | IE | IRL | Ireland | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_5ee7b31f968941dca65e70519901915f | Iraq | IQ | IRQ | Iraq | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_ddf21c4d378e4fc9bc3d5b4ba50890a2 | Iran | IR | IRN | Iran (Islamic Republic of) | explicit name variant | candidate: explicit name-variant match; human verification required |
@@ -178,7 +178,7 @@
 | tc_d59dfb6324524b07a32c87b73009e97f | Gabon | GA | GAB | Gabon | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_471ae6d7112b4537a7ae5ca1e6a816a5 | France | FR | FRA | France | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_5551c0cc249f4e4e9ea6d57a0dacd2d5 | Saint Pierre and Miquelon | PM | SPM | Saint Pierre and Miquelon | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_9f1be169ba5347ff81384c532820401b | Wallis and Futuna |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_9f1be169ba5347ff81384c532820401b | Wallis and Futuna | WF | WLF | Wallis and Futuna Islands | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_cc0688860b8848ddb5f52395162d9b71 | Saint Martin | MF | MAF | Saint Martin (French Part) | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_e0f0ed8d4d284acd8b41435902f2a6cc | Saint Barthelemy | BL | BLM | Saint Barthélemy | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_2493e62a2f78442e8fd4b8c0f0ca847c | French Polynesia | PF | PYF | French Polynesia | exact normalized name | candidate: exact normalized English-name match; human verification required |
@@ -212,8 +212,8 @@
 | tc_10dd5e9664664abf9eca33c250a74cdb | Comoros | KM | COM | Comoros | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_648b019cc83e486ab9fb8497386777a9 | Colombia | CO | COL | Colombia | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_3349a0b8b7454088b11e917a24de3ad5 | China | CN | CHN | China | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_f9a64d8c1e6342d2b1941833ff7588d0 | Macao S.A.R |  |  |  | unmatched | review: no exact normalized English-name match |
-| tc_394248a9960c4d28b4385210c82a0a0b | Hong Kong S.A.R. |  |  |  | unmatched | review: no exact normalized English-name match |
+| tc_f9a64d8c1e6342d2b1941833ff7588d0 | Macao S.A.R | MO | MAC | China, Macao Special Administrative Region | explicit name variant | candidate: explicit name-variant match; human verification required |
+| tc_394248a9960c4d28b4385210c82a0a0b | Hong Kong S.A.R. | HK | HKG | China, Hong Kong Special Administrative Region | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_4c51c695cb6e47d2aed2fb04c397bece | Chile | CL | CHL | Chile | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_1da2daf3a3d34a30b96100d643963f70 | Chad | TD | TCD | Chad | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_9d80376a997845b6ba6bbc08d436a50d | Central African Republic | CF | CAF | Central African Republic | exact normalized name | candidate: exact normalized English-name match; human verification required |
@@ -272,7 +272,7 @@
 
 - Raw HTML snapshot: /home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_m49/country_area_overview_html/2026-10-current/m49-country-area-overview.html
 - Source manifest: /home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_m49/country_area_overview_html/2026-10-current.json
-- Parser provenance: raw_data/iso/m49-provenance-20261101T062838Z.json
+- Parser provenance: raw_data/iso/m49-provenance-20261101T064027Z.json
 - Raw SHA-256: b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb
 - M49 rows: 248
 - Rows without ISO codes (retained in provenance, not proposed): 0

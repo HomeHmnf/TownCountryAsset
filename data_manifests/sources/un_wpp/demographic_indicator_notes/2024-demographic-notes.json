@@ -1,0 +1,23 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "un_wpp",
+  "source_name": "UN World Population Prospects",
+  "download_id": "demographic_indicator_notes",
+  "release": "2024-demographic-notes",
+  "release_kind": "edition_or_snapshot",
+  "release_discovery_mode": "manual_review",
+  "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv",
+  "final_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_notes.csv",
+  "terms_url": "https://population.un.org/wpp/",
+  "attribution": "United Nations, Department of Economic and Social Affairs, Population Division (2024). World Population Prospects 2024, Online Edition.",
+  "license_status": "CC BY 3.0 IGO",
+  "retrieved_at": "2026-11-01T09:36:42.113428+00:00",
+  "filename": "WPP2024_Demographic_Indicators_notes.csv",
+  "local_raw_path": "raw_data/sources/un_wpp/demographic_indicator_notes/2024-demographic-notes/WPP2024_Demographic_Indicators_notes.csv",
+  "content_type": "application/vnd.ms-excel",
+  "byte_count": 4370,
+  "sha256": "c6063ba18b23e899c02bb7f9c78b6e410f25b30cb9d40b66eda032e1127bea49",
+  "format": "csv",
+  "fields": [],
+  "validation_contract": {}
+}
