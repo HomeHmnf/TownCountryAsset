@@ -11,8 +11,8 @@ def _row(field=15, country="Guinea", year=2015, imf=13.0, wdi=10.0):
     signed = imf - wdi
     relative = signed / wdi * 100
     return {
-        "field_id": str(field), "wdi_indicator": "NY.GDP.MKTP.CD",
-        "imf_indicator": "NGDPD", "game_id": "tc_123", "year": str(year),
+        "field_id": field, "wdi_indicator": "NY.GDP.MKTP.CD",
+        "imf_indicator": "NGDPD", "game_id": "tc_123", "year": year,
         "imf_country": country, "wdi_country": country, "imf_source_code": "GIN",
         "wdi_iso3": "GIN", "imf_value_canonical_unit": str(imf),
         "wdi_value_canonical_unit": str(wdi), "signed_difference": str(signed),
