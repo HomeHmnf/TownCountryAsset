@@ -887,6 +887,44 @@
         "latest_applied": null,
         "notes": "Implemented generic HTTPS content-fingerprint discovery. A changed fingerprint is recorded as latest_available only; provider publication dates and semantic editions are not inferred, and latest_validated remains separate."
       }
+    },
+    "bahrain_open_data": {
+      "name": "Bahrain Open Data Portal — unemployment (yearly)",
+      "homepage_url": "https://data.gov.bh/explore/dataset/03-unemployment-yearly/",
+      "domains": [
+        "labour",
+        "unemployment",
+        "national_statistics",
+        "review_evidence"
+      ],
+      "license_status": "public_domain_or_unverified",
+      "terms_url": "https://data.gov.bh/pages/faq/",
+      "attribution": "Bahrain Open Data Portal; dataset 03-unemployment-yearly",
+      "notes": "Official rolling dataset titled 'Bahraini Unemployed (15 years and above) and the Unemployment Rate by Sex (Yearly)'. Dedicated API acquisition stores the dataset metadata and all record pages as immutable JSON snapshots. It is diagnostic/reconciliation evidence for WP1.5 field 21, not an automatic replacement for IMF WEO and not an instruction to import or change source-selection policy. Portal FAQ describes open access and reuse; confirm applicable publication terms before redistribution.",
+      "acquisition_mode": "api",
+      "downloads": [],
+      "field_ids": [
+        21
+      ],
+      "api": {
+        "platform": "Opendatasoft Explore API v2.1",
+        "dataset_id": "03-unemployment-yearly",
+        "base_url": "https://data.gov.bh/api/explore/v2.1/catalog/datasets",
+        "metadata_path": "/{dataset_id}",
+        "records_path": "/{dataset_id}/records",
+        "page_size": 100,
+        "expected_description": "Bahraini Unemployed (15 years and above) and the Unemployment Rate by Sex (Yearly)",
+        "notes": "GET only. Retrieve metadata and records with pagination; preserve provider JSON responses without field renaming or value conversion."
+      },
+      "release_discovery": {
+        "mode": "rolling_url",
+        "provider_url": "https://data.gov.bh/explore/dataset/03-unemployment-yearly/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "The API exposes a rolling dataset and processing timestamps, not a stable semantic release. Each acquisition is a timestamped immutable observation snapshot; checksum changes do not imply a new statistical vintage."
+      }
     }
   },
   "release_management": {
