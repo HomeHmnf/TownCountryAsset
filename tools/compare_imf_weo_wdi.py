@@ -66,7 +66,7 @@ def _identity_by_code(path: Path) -> dict[str, str]:
 
 def read_imf_observations(
     csv_path: Path, identity_path: Path, start_year: int, end_year: int
-) -> dict[str, dict[tuple[str, int], dict[str, Any]]]:
+) -> tuple[dict[str, dict[tuple[str, int], dict[str, Any]]], dict[str, set[str]]]:
     imf.fingerprint(csv_path, imf.EXPECTED["csv"])
     code_to_game = _identity_by_code(identity_path)
     output: dict[str, dict[tuple[str, int], dict[str, Any]]] = {
