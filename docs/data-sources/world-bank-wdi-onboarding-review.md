@@ -84,3 +84,26 @@ Before adding downloads or an adapter:
 ## Current conclusion
 
 WDI is a technically suitable candidate for comparative macroeconomic observations and already serves the registered density/area fields. The five economic series above are plausible matches to WP1.5 fields, but their presence in WDI does not establish policy compatibility. The next work item is a read-only coverage and IMF-comparability assessment; no WDI data has been acquired or imported as part of this review.
+
+
+## Read-only coverage assessment implementation
+
+The first assessment utility is implemented at `tools/assess_world_bank_wdi.py`.
+
+Run it with:
+
+```fish
+uv run python -m tools.assess_world_bank_wdi
+```
+
+Optional period override:
+
+```fish
+uv run python -m tools.assess_world_bank_wdi --start-year 2015 --end-year 2025
+```
+
+The utility retrieves metadata and paginated annual observations for the five economic candidates and the three currently registered WDI indicators. It excludes World Bank aggregate regions from country coverage, records non-null observation years by ISO3, preserves indicator source notes and originating organizations, and writes JSON, Markdown and country-level CSV reports under `reports/sources/world-bank-wdi/<timestamp>/`.
+
+This is an online, read-only assessment, not immutable acquisition. It does not write raw snapshots, acquisition manifests, the source registry, the source-selection policy, release ledgers, or SQLite. It deliberately marks IMF WEO comparability as `not_assessed` until a versioned IMF comparison dataset is available. ISO3 coverage is not treated as a game identity crosswalk.
+
+Automated tests: `tests/test_world_bank_wdi_assessment.py`.
