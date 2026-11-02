@@ -158,6 +158,27 @@ def _cell_number(sheet, row: int, col: int, stack: set[str] | None = None) -> fl
         raise IcaseesAssessmentError(f"Circular formula at {sheet.title}!{cell.coordinate}")
     stack.add(cell.coordinate)
     try:
+        def replace_sum_range(match: re.Match[str]) -> str:
+            start_ref = f"{match.group(1)}{match.group(2)}"
+            end_ref = f"{match.group(3)}{match.group(4)}"
+            try:
+                cells = sheet[start_ref:end_ref]
+            except ValueError as exc:
+                raise IcaseesAssessmentError(
+                    f"Invalid SUM range in formula {sheet.title}!{cell.coordinate}: {value}"
+                ) from exc
+            total = 0.0
+            for row_cells in cells:
+                for ref_cell in row_cells:
+                    ref_value = _cell_number(sheet, ref_cell.row, ref_cell.column, stack)
+                    if ref_value is not None:
+                        total += ref_value
+            return repr(total)
+        expression = re.sub(
+            r"(?i)\bSUM\s*\(\s*\$?([A-Z]{1,3})\$?(\d+)\s*:\s*\$?([A-Z]{1,3})\$?(\d+)\s*\)",
+            replace_sum_range,
+            value[1:],
+        )
         reference_pattern = re.compile(r"(?<![A-Za-z0-9_])\$?([A-Z]{1,3})\$?(\d+)")
         def replace_reference(match: re.Match[str]) -> str:
             ref_cell = sheet[f"{match.group(1)}{match.group(2)}"]
