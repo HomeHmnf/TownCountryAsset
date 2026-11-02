@@ -73,6 +73,7 @@ def read_imf_observations(
         code: {} for code in PAIRS
     }
     seen_series: set[tuple[str, str]] = set()
+    unmatched_codes: dict[str, set[str]] = defaultdict(set)
     with csv_path.open("r", encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
         required = {"SERIES_CODE", "COUNTRY", "FREQUENCY", "UNIT", "SCALE", "LATEST_ACTUAL_ANNUAL_DATA"}
@@ -87,6 +88,7 @@ def read_imf_observations(
                 continue
             game_id = code_to_game.get(source_code)
             if not game_id:
+                unmatched_codes[indicator].add(source_code)
                 continue
             series_key = (indicator, source_code)
             if series_key in seen_series:
@@ -122,7 +124,7 @@ def read_imf_observations(
                     "status_hint": status,
                     "reporting_year_months": row.get("START_END_MONTHS_OF_REPORTING_YEAR") or None,
                 }
-    return output
+    return output, unmatched_codes
 
 
 def _percentile(values: list[float], fraction: float) -> float | None:
@@ -141,7 +143,7 @@ def build_comparison(
 ) -> dict[str, Any]:
     if start_year < 1900 or end_year < start_year or end_year > 2100:
         raise ComparisonError("Invalid comparison year range")
-    imf_data = read_imf_observations(csv_path, identity_path, start_year, end_year)
+    imf_data, unmatched_imf_codes = read_imf_observations(csv_path, identity_path, start_year, end_year)
     code_to_game = _identity_by_code(identity_path)
     country_regions = wdi.fetch_country_regions(get_json)
     indicators: list[dict[str, Any]] = []
@@ -151,6 +153,7 @@ def build_comparison(
         metadata = wdi.fetch_indicator_metadata(wdi_code, get_json)
         records = wdi.fetch_indicator_observations(wdi_code, start_year, end_year, get_json)
         wdi_values: dict[tuple[str, int], dict[str, Any]] = {}
+        unmatched_wdi_codes: set[str] = set()
         for row in records:
             source_code = row.get("countryiso3code")
             if not isinstance(source_code, str) or len(source_code) != 3:
@@ -162,6 +165,7 @@ def build_comparison(
                 continue
             game_id = code_to_game.get(source_code)
             if not game_id:
+                unmatched_wdi_codes.add(source_code)
                 continue
             try:
                 year = int(row.get("date"))
@@ -224,6 +228,8 @@ def build_comparison(
             "wdi_country_count": len({k[0] for k in wdi_values}),
             "matched_country_count": len({k[0] for k in shared}),
             "matched_country_year_count": len(shared),
+            "unmatched_imf_source_codes": sorted(unmatched_imf_codes[imf_code]),
+            "unmatched_wdi_iso3_codes": sorted(unmatched_wdi_codes),
             "imf_only_country_year_count": len(imf_only),
             "wdi_only_country_year_count": len(wdi_only),
             "mean_absolute_relative_difference_percent": statistics.mean(abs_pct) if abs_pct else None,
