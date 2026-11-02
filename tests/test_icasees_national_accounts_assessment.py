@@ -72,16 +72,29 @@ def test_extracts_old_and_revised_gdp_as_separate_series():
     assert checks["gdp_2019_overlap"]["relative_difference_percent"] == pytest.approx(36.38, abs=0.01)
 
 
-def test_combined_sheet_uses_left_labels_when_right_labels_are_external_formulas():
+def test_combined_sheet_uses_cached_revised_labels_and_distinct_rows():
     workbook = _workbook_fixture()
+    cached_workbook = _workbook_fixture()
     sheet = workbook["Donnée_SCN2008"]
-    for row in range(2, sheet.max_row + 1):
-        if sheet.cell(row, 13).value is not None:
-            sheet.cell(row, 13).value = "=[1]PIB_courant!$B$34"
-    series, _ = _extract_gdp_rows(workbook)
+    cached = cached_workbook["Donnée_SCN2008"]
+    # The real workbook's historical GDP row is 37, but revised aggregates are
+    # independently labelled in the cached right-hand block at rows 38-40.
+    revised_rows = {
+        38: ("TOTAL VAB", [1876.710, 1968.854, 2063.554]),
+        39: ("IMPÔTS ET TAXES SUR LES PRODUITS", [76.215, 87.181, 86.068]),
+        40: ("PRODUIT INTERIEUR BRUT", [1952.925, 2056.035, 2149.622]),
+    }
+    for row, (label, values) in revised_rows.items():
+        cached.cell(row, 12).value = label
+        for offset, value in enumerate(values, start=15):
+            sheet.cell(row, offset).value = value
+    for row in range(2, 5):
+        sheet.cell(row, 12).value = "=[1]PIB_courant!$B$34"
+    series, checks = _extract_gdp_rows(workbook, cached_workbook=cached_workbook)
     revised = [row for row in series if row["sheet"] == "Donnée_SCN2008" and row["series_block"] == "revised"]
     assert len(revised) == 3
     assert [row["value"] for row in revised] == pytest.approx([1952.925, 2056.035, 2149.622])
+    assert all(checks[f"Donnée_SCN2008_{year}_gdp_equals_vab_plus_taxes"] for year in (2019, 2020, 2021))
 
 
 def test_repeated_2019_header_does_not_replace_historical_value():
