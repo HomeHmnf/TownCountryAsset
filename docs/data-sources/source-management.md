@@ -280,3 +280,29 @@ The current workflow is intentionally inspected one provider/application at a ti
 - Keep release promotion separate from database application; never automatically promote merely because import succeeded.
 
 The orchestrator should expose separate `prepare`, `review`, `approve`, `apply` and `audit` states (or equivalent commands). A failed preflight must not invalidate or consume an otherwise valid approval unless one of its fingerprinted inputs has actually changed. Provider-specific adapters and domain importers remain responsible for their contracts; the orchestrator coordinates them and does not bypass them.
+
+
+## Automated WP1.5 candidate validation
+
+Run the provider validation suite with one stable command:
+
+```fish
+uv run python -m tools.validate_wp1_5 --source un_wpp
+```
+
+The validator discovers the newest complete candidate for the requested source by the candidate manifest retrieval timestamp. It rejects tied newest candidates and incomplete newest candidates rather than silently selecting an older run. It verifies the candidate manifest, normalized observation metadata, raw snapshot checksums and upstream acquisition-manifest fingerprints.
+
+The canonical database is mandatory and resolved from the project default at `data/canonical/town_country_asset.sqlite`. Validation opens it in SQLite read-only/query-only mode. Missing or inaccessible canonical databases and failed integrity/foreign-key checks stop the run.
+
+The shared runner is in `tools/wp1_5_validation.py`; provider semantic validators are registered in `tools/wp1_5_validators/`. The initial UN WPP validator checks six-field country coverage, duplicate country-field observations, projected 2026 status, units, all 21 ordered age bands, finite/non-negative age and sex counts, population reconciliation tolerances, absolute net-migration semantics, canonical database value parity when the candidate release has been applied, and Togo source-reference evidence for review.
+
+Reports are written to a unique UTC timestamp directory under:
+
+```text
+reports/database/town_country_asset/wp1-5/<source>/<timestamp>/
+  validation_report.json
+  validation_report.md
+  validation_exceptions.csv
+```
+
+The validator is read-only: it does not create approvals, import observations, update the canonical database, or promote a release. A warning means a review item remains; a failure returns a non-zero exit status. Add future provider validators through the registry in `tools/validate_wp1_5.py` and implement provider-specific rules behind the shared validator interface. Extend the shared runner for reusable checks rather than adding one-off audit commands.
