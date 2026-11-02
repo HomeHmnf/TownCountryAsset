@@ -68,12 +68,15 @@ def test_assessment_marks_imf_comparison_unassessed_and_has_no_side_effects():
             return [None, _metadata(code)]
         code = parsed.path.rsplit("/", 1)[-1]
         return [{"pages": 1}, [{
-            "country": {"id": "USA", "value": "United States", "region": {"value": "North America"}},
+            "country": {"id": "US", "value": "United States", "region": {"value": "North America"}},
+            "countryiso3code": "USA",
             "date": "2025", "value": "1.0",
         }]]
 
     report = wdi.build_assessment(2025, 2025, fake)
     assert report["indicator_count"] == 8
+    assert all(item["coverage"]["country_count"] == 1 for item in report["indicators"])
+    assert all(item["coverage"]["countries"][0]["iso3"] == "USA" for item in report["indicators"])
     assert report["imf_weo_comparison"]["status"] == "not_assessed"
     assert report["side_effects"]["immutable_snapshots_acquired"] is False
     assert report["side_effects"]["canonical_database_written"] is False
