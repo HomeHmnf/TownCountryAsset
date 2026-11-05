@@ -96,3 +96,20 @@ def test_tree_backfill_processes_all_pdfs_and_reports_failures(tmp_path, monkeyp
     report = pdf_text.extract_pdf_tree(raw, tmp_path / "derived")
     assert report["pdf_count"] == 2
     assert report["status_counts"] == {"text_extracted": 2}
+
+
+def test_image_only_pdf_is_recorded_without_claiming_ocr(tmp_path, monkeypatch):
+    source = tmp_path / "raw_data" / "scan.pdf"
+    fake_pdf(source)
+
+    class ImageOnlyReader:
+        def __init__(self, _path: str, strict: bool = True):
+            self.pages = [FakePage("")]
+            self.metadata = None
+
+    monkeypatch.setattr("pypdf.PdfReader", ImageOnlyReader, raising=False)
+    result = pdf_text.extract_pdf_text(source, tmp_path / "derived")
+    assert result["status"] == "no_embedded_text"
+    assert result["page_count"] == 1
+    assert result["pages_with_text"] == 0
+    assert result["pages"] == [""]
