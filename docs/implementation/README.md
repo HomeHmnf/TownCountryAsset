@@ -8,5 +8,6 @@
 - [Data-store separation Stage 1 design](data-store-separation-stage-1-design.md) — approved project DB foundation scope, relational model, connection/migration isolation, retention-state constraints and owner-run acceptance criteria.
 - [Project source catalogue registration audit](data-store-separation-source-catalogue-audit.md) — mapping of all 31 configured source keys and 92 URL records, with the idempotent synchronizer and completed Stage 1/2 validation evidence.
 - [Stage 2 dataset and acquisition-stream registration](data-store-separation-stage-2-dataset-registration.md) — five evidence-backed dataset identities, three approved stream boundaries, deferred WPP/ICASEES stream decisions and completed owner-run validation.
+- [Stage 3A manifest adapter and integrity audit](data-store-separation-stage-3a-manifest-audit.md) — read-only adapter for historical manifest variants and SHA-256/byte-count/path integrity verification; no acquisition registration or retention.
 
 These are implementation records, not the normative architecture contract. See [architecture](../architecture/README.md) for stable design rules and [feature documentation standard](../feature-documentation-standard.md) for new work.
