@@ -38,7 +38,7 @@ def test_project_connection_uses_safe_pragmas_and_migrates_only_project_schema(t
         assert current_schema_version(connection) == 0
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
-        assert apply_migrations(connection, PROJECT_MIGRATIONS_DIR) == 1
+        assert apply_migrations(connection, PROJECT_MIGRATIONS_DIR) == 2
         assert validate_database(connection) == []
         tables = {
             row[0]
@@ -56,16 +56,18 @@ def test_project_connection_uses_safe_pragmas_and_migrates_only_project_schema(t
             "acquisition_artifacts",
             "schema_migrations",
         } <= tables
+        source_columns = {row[1] for row in connection.execute("PRAGMA table_info(sources)")}
+        assert {"domains_json", "license_status", "attribution", "notes", "acquisition_mode", "release_discovery_json", "legacy_source_ids_json", "field_ids_json"} <= source_columns
         assert "countries" not in tables
     assert project_path.is_file()
     assert not game_path.exists()
 
 
 def test_project_migration_is_idempotent(project_database):
-    assert apply_migrations(project_database, PROJECT_MIGRATIONS_DIR) == 1
+    assert apply_migrations(project_database, PROJECT_MIGRATIONS_DIR) == 2
     assert project_database.execute(
         "SELECT COUNT(*) FROM schema_migrations"
-    ).fetchone()[0] == 1
+    ).fetchone()[0] == 2
 
 
 def test_project_schema_enforces_catalogue_relationships(project_database):
