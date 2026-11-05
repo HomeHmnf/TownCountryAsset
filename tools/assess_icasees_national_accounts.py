@@ -22,6 +22,7 @@ from typing import Any
 
 from openpyxl import load_workbook
 
+from tools import assess_imf_weo as imf_weo
 from tools.sources.registry import ROOT, SourceError, load_registry
 from tools.sources.reporting import write_source_report_bundle
 
@@ -37,6 +38,90 @@ FILES = [
 ]
 GDP_LABEL = "PRODUIT INTERIEUR BRUT"
 TOLERANCE = 1e-7
+WEO_GDP_SERIES_CODE = "CAF.NGDP.A"
+WEO_GDP_YEARS = (2019, 2020, 2021)
+
+
+def inspect_weo_gdp_reconciliation(
+    revised_gdp: dict[int, float], csv_path: Path = imf_weo.CSV_PATH
+) -> dict[str, Any]:
+    """Verify revised ICASEES GDP against the pinned IMF WEO national-currency series."""
+    fingerprint = imf_weo.fingerprint(csv_path, imf_weo.EXPECTED["csv"])
+    matches = []
+    with csv_path.open("r", encoding="utf-8-sig", newline="") as stream:
+        reader = csv.DictReader(stream)
+        required = {
+            "SERIES_CODE", "COUNTRY", "INDICATOR", "FREQUENCY", "UNIT", "SCALE",
+            "LATEST_ACTUAL_ANNUAL_DATA", "START_END_MONTHS_OF_REPORTING_YEAR",
+            *(str(year) for year in WEO_GDP_YEARS),
+        }
+        missing = required - set(reader.fieldnames or [])
+        if missing:
+            raise IcaseesAssessmentError(
+                f"IMF WEO CSV is missing reconciliation columns: {sorted(missing)}"
+            )
+        for row in reader:
+            if row.get("SERIES_CODE") == WEO_GDP_SERIES_CODE:
+                matches.append(row)
+    if len(matches) != 1:
+        raise IcaseesAssessmentError(
+            f"Expected one {WEO_GDP_SERIES_CODE} row in the pinned IMF WEO CSV; found {len(matches)}"
+        )
+    row = matches[0]
+    expected_metadata = {
+        "COUNTRY": "Central African Republic",
+        "INDICATOR": "Gross domestic product (GDP), Current prices, Domestic currency",
+        "FREQUENCY": "Annual",
+        "UNIT": "Domestic currency",
+        "SCALE": "Billions",
+        "LATEST_ACTUAL_ANNUAL_DATA": "2022",
+        "START_END_MONTHS_OF_REPORTING_YEAR": "January/December",
+    }
+    mismatches = {
+        key: {"expected": expected, "actual": row.get(key)}
+        for key, expected in expected_metadata.items()
+        if row.get(key) != expected
+    }
+    if mismatches:
+        raise IcaseesAssessmentError(
+            f"Unexpected IMF WEO metadata for {WEO_GDP_SERIES_CODE}: {mismatches}"
+        )
+    comparisons = []
+    for year in WEO_GDP_YEARS:
+        try:
+            weo_value = float(row[str(year)])
+        except (TypeError, ValueError) as exc:
+            raise IcaseesAssessmentError(
+                f"Invalid IMF WEO GDP value for {WEO_GDP_SERIES_CODE}/{year}: {row.get(str(year))!r}"
+            ) from exc
+        if not math.isfinite(weo_value) or year not in revised_gdp:
+            raise IcaseesAssessmentError(f"Missing or non-finite GDP value for {year}")
+        icasees_value = float(revised_gdp[year])
+        difference = icasees_value - weo_value
+        if abs(difference) > TOLERANCE:
+            raise IcaseesAssessmentError(
+                f"ICASEES revised GDP does not match IMF WEO {WEO_GDP_SERIES_CODE} in {year}: "
+                f"{icasees_value} vs {weo_value}"
+            )
+        comparisons.append({
+            "year": year,
+            "icasees_revised_gdp_billion_fcfa": icasees_value,
+            "imf_weo_gdp_billion_domestic_currency": weo_value,
+            "difference": difference,
+            "status": "exact_match_at_published_precision",
+        })
+    return {
+        "status": "pass",
+        "series_code": WEO_GDP_SERIES_CODE,
+        "series_metadata": expected_metadata,
+        "input_fingerprint": fingerprint,
+        "comparisons": comparisons,
+        "interpretation": (
+            "The revised ICASEES GDP values match the pinned IMF WEO national-currency "
+            "series at published precision. This corroborates GDP scale; it does not "
+            "establish independent compilation inputs or explain the historical/revised break."
+        ),
+    }
 
 
 class IcaseesAssessmentError(RuntimeError):
@@ -436,6 +521,11 @@ def build_assessment(manifest_path: Path = MANIFEST) -> dict[str, Any]:
     workbook = inspect_workbook(ROOT / workbook_file["path"])
     pdfs = inspect_pdfs(manifest)
     overlap = workbook["validation_checks"]["gdp_2019_overlap"]
+    revised_gdp = {
+        row["year"]: row["value"] for row in workbook["gdp_series"]
+        if row["series_block"] == "revised" and row["sheet"] == "Donnee"
+    }
+    weo_reconciliation = inspect_weo_gdp_reconciliation(revised_gdp)
     unit_labels = sorted({str(row.get("unit_label")) for row in workbook["gdp_series"]
                           if row.get("unit_label") is not None})
     boolean_checks = {key: value for key, value in workbook["validation_checks"].items()
@@ -445,8 +535,22 @@ def build_assessment(manifest_path: Path = MANIFEST) -> dict[str, Any]:
         "validation_status": validation_status, "boolean_validation_checks": boolean_checks,
         "recorded_manifest": str(manifest_path.relative_to(ROOT)), "source_license": source["license_status"],
         "attribution": source["attribution"], "file_integrity": integrity, "workbook": workbook,
-        "pdf_inspection": pdfs, "unit_assessment": {"observed_unit_labels": unit_labels, "status": "unresolved",
-        "reason": "Workbook data rows label the GDP and value-added observations as millions de F CFA, while the Dataset sheet describes current-price gross value added in billions de FCFA. This is a scale-label conflict affecting GDP components; no conversion is authorized until the official PDF evidence resolves it."},
+        "pdf_inspection": pdfs, "unit_assessment": {
+        "observed_unit_labels": unit_labels,
+        "status": "resolved_for_revised_gdp",
+        "canonical_unit": "billion FCFA",
+        "reason": (
+            "The definitive 2019-2021 accounts PDF reports GDP as 1,952,925, 2,056,035 "
+            "and 2,149,622 million FCFA, equivalent to 1,952.925, 2,056.035 and "
+            "2,149.622 billion FCFA. These equal the workbook revised GDP values and "
+            "the pinned IMF WEO CAF.NGDP.A series. The workbook observation label "
+            "'millions de F CFA' is inconsistent for GDP. This resolution is limited "
+            "to revised GDP and is not a blanket unit inference for other indicators."
+        ),
+        "pdf_evidence": "Definitive accounts publication, detailed GDP tables; see docs/data-sources/icasees/gdp-scale-and-weo-reconciliation.md",
+        "weo_reconciliation": weo_reconciliation,
+        },
+        "imf_weo_reconciliation": weo_reconciliation,
         "2019_overlap": overlap, "disposition": {"historical_and_revised_series_spliced": False,
         "normalized_observations_created": False, "source_selection_policy_changed": False,
         "canonical_database_written": False, "release_promoted": False}}
@@ -472,13 +576,14 @@ def write_assessment(report: dict[str, Any], output_root: Path = OUTPUT_ROOT) ->
             lines.append(f"- {name}: {'PASS' if value else 'FAIL'}")
     lines.extend(["", "## Unit and vintage caveats", "", report["unit_assessment"]["reason"],
         "Historical and revised 2019 observations remain separate; they are not concatenated or converted.",
+        f"IMF WEO {report['imf_weo_reconciliation']['series_code']} cross-check: PASS for 2019-2021.",
         "", "## PDF inspection", ""])
     for pdf in report["pdf_inspection"]:
         lines.append(f"- {pdf.get('file_id', 'PDF reader')}: {pdf['status']}; {pdf.get('page_count', 'n/a')} pages")
         for evidence in pdf.get("evidence_pages", []):
             lines.append(f"  - Page {evidence['page']}: {', '.join(evidence['terms'])}; {evidence['excerpt'][:350]}")
     lines.extend(["", "## Boundaries", "", "- Read-only assessment; not an import or approval.",
-        "- Unit labels require resolution from the official PDF evidence.",
+        "- Revised GDP scale is resolved as billion FCFA from the definitive PDF and exact WEO cross-check.",
         "- Indicator codes are not used to join historical and revised sector classifications."])
     paths = write_source_report_bundle(output_root, report_id=run_id, report_type="icasees_national_accounts",
         summary_markdown="\n".join(lines),
@@ -525,7 +630,8 @@ def main(argv: list[str] | None = None) -> int:
                 f"  Workbook sheets: {len(report['workbook']['sheet_inventory'])}",
                 f"  GDP 2019 historical/revised: {overlap['historical_value']} / {overlap['revised_value']}",
                 f"  2019 level difference: {overlap['relative_difference_percent']:.3f}%",
-                f"  Unit interpretation: {report['unit_assessment']['status']}",
+                f"  Unit interpretation: {report['unit_assessment']['status']} ({report['unit_assessment'].get('canonical_unit', 'scope-limited')})",
+                f"  IMF WEO cross-check: {report['imf_weo_reconciliation']['series_code']} 2019-2021 PASS",
                 f"  Structural validation: {report['validation_status']}", f"  Report: {directory}",
                 "  SQLite writes: none", "  Source policy changes: none"]))
         return 0 if report["validation_status"] == "pass" else 1
