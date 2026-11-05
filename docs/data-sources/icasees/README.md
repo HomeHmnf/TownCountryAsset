@@ -8,6 +8,10 @@ This folder separates the ICASEES source record into acquisition/provenance, wor
 - [Dataset and workbook structure](dataset-and-workbook-structure.md) — workbook sheets, series layout, indicator rows, formulas and parsing constraints.
 - [GDP scale and IMF WEO reconciliation](gdp-scale-and-weo-reconciliation.md) — definitive publication evidence, scale interpretation, exact WEO comparison and 2019 break.
 
+## Shared tooling
+
+- [Shared PDF text extraction](../../implementation/pdf-text-extraction.md) — common handling of PDF source snapshots; ICASEES uses this service rather than a local extractor.
+
 ## Separation of concerns
 
 - Acquisition establishes which bytes were obtained and their provenance.
