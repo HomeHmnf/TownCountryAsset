@@ -104,7 +104,7 @@ def _identity_country_rows(path: Path, code_to_game: dict[str, str]) -> list[dic
         countries.append({
             "game_id": game_id,
             "country_name": (record.get("names") or {}).get("en") or current_source_id or game_id,
-            "source_iso3": lookup_code,
+            "source_lookup_code": lookup_code,
             "identity_record_status": record.get("status"),
             "iso_assignment_status": iso.get("assignment_status"),
             "identity_mapping_status": mapping_status,
@@ -546,6 +546,18 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "- `candidate_matrix.csv` is a rectangular project-identity × field × year grid; missing observations are explicit, and identity verification remains separately flagged.",
         "- Identity rows are not considered approved unless both the identity record and ISO assignment are approved/verified; current proposals remain review-required.",
         "- No source-selection, release, approval, or database action is performed."])
+    matrix_summary = report["candidate_matrix_summary"]
+    lines.extend([
+        "",
+        "## Complete candidate matrix",
+        "",
+        f"- Rows: {matrix_summary['row_count']}",
+        f"- Project identities: {matrix_summary['country_count']}",
+        f"- Fields: {matrix_summary['field_count']}",
+        f"- Years per identity/field: {matrix_summary['year_count']}",
+        f"- Coverage states: {matrix_summary['coverage_status_counts']}",
+        f"- Identity mapping states: {matrix_summary['identity_mapping_status_counts']}",
+    ])
     (target / "assessment.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     rows = [row for item in report["indicators"] for row in item["country_year_comparisons"]]
     fields = list(rows[0]) if rows else [
@@ -563,7 +575,7 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
     ]
     matrix_rows = report.get("candidate_matrix", [])
     matrix_fields = list(matrix_rows[0]) if matrix_rows else [
-        "game_id", "country_name", "source_iso3", "identity_record_status",
+        "game_id", "country_name", "source_lookup_code", "identity_record_status",
         "iso_assignment_status", "identity_mapping_status", "field_id",
         "imf_indicator", "wdi_indicator", "year", "coverage_status",
         "imf_observation_present", "wdi_observation_present",
