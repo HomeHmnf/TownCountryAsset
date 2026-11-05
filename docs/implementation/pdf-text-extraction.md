@@ -77,7 +77,7 @@ Owner-run validation on 2026-11-05:
 - [x] `uv run --extra dev python -m pytest -v tests/test_pdf_text_extraction.py` — passed.
 - [x] `uv run --extra dev python -m pytest -v tests/test_source_registry.py tests/test_icasees_national_accounts_assessment.py` — **29 passed**. This includes automatic extraction during acquisition and preservation of the original PDF when extraction fails.
 - [x] `uv run python -m tools.sources.pdf_text` — completed successfully; `pdf_count: 3`, `text_extracted: 3`, no failures or `no_embedded_text` results.
-- [ ] Run the ICASEES assessment after the shared extraction change and verify that it reuses the generated sidecars while passing its structural and IMF WEO checks.
+- [x] `uv run python -m tools.assess_icasees_national_accounts assess` — passed after backfill; 3/3 source files fingerprinted, structural validation passed, and IMF `CAF.NGDP.A` 2019–2021 cross-check passed. Report: `reports/sources/icasees-national-accounts/20261105T071612Z`.
 - [ ] Verify original PDF fingerprints are unchanged and each text metadata file references the matching source and text hashes.
 
 ### Initial backfill result
