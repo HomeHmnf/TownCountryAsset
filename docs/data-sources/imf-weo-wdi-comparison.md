@@ -29,7 +29,22 @@ The default comparison period is 2015–2025. It can be changed explicitly:
 uv run python -m tools.compare_imf_weo_wdi --start-year 2015 --end-year 2025
 ```
 
-The tool writes `assessment.json`, `assessment.md` and `country_year_comparison.csv` beneath `reports/sources/imf-wdi-comparison/<UTC timestamp>/`.
+The tool writes `assessment.json`, `assessment.md`, `country_year_comparison.csv` and `candidate_matrix.csv` beneath `reports/sources/imf-wdi-comparison/<UTC timestamp>/`. The matched-pair CSV remains focused on numerical comparisons; the candidate matrix is the complete project-identity × field × year grid for the selected year range.
+
+## Complete candidate matrix
+
+`candidate_matrix.csv` contains one row for every identity-registry record × each of the five fields × each requested year, including countries with no observations in either provider. It records:
+- project `game_id`, country label and source ISO3/three-letter lookup code;
+- identity record status, ISO assignment status and a separate mapping disposition;
+- IMF and WDI observation-presence flags and canonical-unit values;
+- coverage state: `both_sources_present`, `imf_only`, `wdi_only` or `neither_source_present`;
+- IMF latest-actual hint and reporting-period metadata;
+- differences only when both provider observations exist;
+- `diagnostic_only_not_approved` semantic status.
+
+An identity is marked `mapped_verified` only when the registry record is approved and its ISO assignment is verified. Existing proposed/unverified identities remain visible as `mapped_review_required`; the comparison does not promote or repair them. Missing source codes and ambiguous code assignments remain explicit. Therefore, a populated comparison row does not itself establish an approved country identity.
+
+The matrix is a coverage and review instrument, not an import file. It does not classify WDI actual/estimate status, and the IMF `after_latest_actual` hint does not distinguish estimates from projections. PPPGDP remains unclassified because its WEO export has no latest-actual metadata. Field 20/21 reporting-period blanks remain unknown unless independently corroborated by the existing country investigations.
 
 ## Matching and normalization
 
