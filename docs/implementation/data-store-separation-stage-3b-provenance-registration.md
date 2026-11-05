@@ -53,7 +53,7 @@ The operation is transactional per event. It writes only to data/project/project
 |---|---|
 | Bahrain Open Data | Eligible: exact dataset ID and one registered rolling API stream. Existing Bahrain semantic validation/approval evidence is not reopened or downgraded; registration records byte integrity only. |
 | UN M49 | Eligible: exact dataset ID and one registered rolling reference-page stream. |
-| IMF WEO October 2026 | Deferred from manifest registration: no formal manifest exists. The manual acquisition note byte counts/checksums must first be reconciled with the currently tracked raw files, and the two artifact event timestamp relationship must be represented explicitly. Do not infer a shared exact acquisition timestamp from the CSV export timestamp. |
+| IMF WEO October 2026 | Deliberately excluded from manifest registration because no formal manifest exists. The later Stage 3C source-specific manual-bundle path uses the reconciled tracked files, exact fingerprints and date-precision evidence without inferring an acquisition time from the CSV export timestamp. |
 | ICASEES | Deferred: dataset and stream boundaries remain unresolved. |
 | UN WPP | Deferred: dataset identities exist but stream boundaries remain unresolved. |
 
@@ -112,4 +112,4 @@ The owner-run commands were:
     uv run python -m tools.register_project_acquisitions --dry-run
     uv run python -m tools.register_project_acquisitions
 
-Expected eligibility was confirmed: three Bahrain capture events and one UN M49 reference-page event. ICASEES and WPP remain deferred. IMF WEO is not part of the formal manifest inventory and still requires a separately evidenced manual bundle descriptor.
+Expected eligibility was confirmed: three Bahrain capture events and one UN M49 reference-page event. ICASEES and WPP remain deferred. IMF WEO remains outside the formal manifest inventory and is handled by the separate Stage 3C manual-bundle registration path.
