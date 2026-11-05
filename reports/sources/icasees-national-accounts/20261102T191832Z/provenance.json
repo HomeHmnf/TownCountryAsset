@@ -1,0 +1,748 @@
+{
+  "artifacts": {
+    "conflicts": "conflicts.csv",
+    "failures": "failures.csv",
+    "fallbacks": "fallbacks.csv",
+    "missing": "missing.csv",
+    "overrides": "overrides.csv",
+    "provenance": "provenance.json",
+    "records": "records.csv",
+    "release_changes": "release_changes.csv",
+    "summary": "summary.md"
+  },
+  "file_integrity": [
+    {
+      "byte_count": 59054,
+      "file_id": "national_accounts_dataset",
+      "format": "xlsx",
+      "path": "raw_data/sources/icasees/national_accounts_dataset/2026-07-16/11-Comptes nationaux_16-07-2026.xlsx",
+      "sha256": "7d6f764f1eba87c5df53ffedbbf0a90a48061098509cd67f9070501737b63dce",
+      "status": "valid"
+    },
+    {
+      "byte_count": 2071097,
+      "file_id": "definitive_accounts_2019_2021",
+      "format": "pdf",
+      "path": "raw_data/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf",
+      "sha256": "e419508a82e9d09421405880c7a8212376d60776cc809ed942241bd231e6d173",
+      "status": "valid"
+    },
+    {
+      "byte_count": 298873,
+      "file_id": "gdp_rebasing_memo_2019",
+      "format": "pdf",
+      "path": "raw_data/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf",
+      "sha256": "403bae60e88c7d8701bc0d1498228a6a49e96bc90cf2cdc4de6be8d451f29bc5",
+      "status": "valid"
+    }
+  ],
+  "manifest": "data_manifests/sources/icasees_national_accounts/manual_publication_bundle/2026-07-16.json",
+  "pdf_inspection": [
+    {
+      "evidence_pages": [
+        {
+          "excerpt": "i TABLE DES MATIERES LISTE DES TABLEAUX ............................................................................................................................... ii SIGLES ET ABREVIATIONS...................................................................................................................... iii AVANT-PROPOS .......................................................................................................................................... iv Résumé de l’analyse des comptes nationaux de la République Centrafricaine (base 2019, période 2019 – 2021) ............................................................................................................................................................... v INTRODUCTION ........................................................................................................................................... 1 APPROCHE METHODOLOGIQUE ........................................................................................................... 3 PREMIERE PARTIE : LE COMPTE DES BIENS ET SERVICES ......................................................... 4 1.1. Principaux agrégats macroéconomiques et indicateurs de p",
+          "page": 3,
+          "terms": [
+            "PIB",
+            "base 2019",
+            "millions"
+          ]
+        },
+        {
+          "excerpt": "ii LISTE DES TABLEAUX Tableau 1: Résumé des indicateurs et agrégats économiques de la nation ................................ ................................ ..................... 5 Tableau 2; Variation des principaux produits constituant le PIB (en volume, en valeur et en millions de FCFA) ............ 6 Tableau 3: Evolution de l’équilibre global des biens et services en (valeur, volume et en millions de FCFA) .................. 11 Tableau 4: Variation du PIB par branche d’activités en volume et en valeur (en million de FCFA) ................................ .... 13 Tableau 5: Variation des coûts facteurs de production dans le PIB hors droits de douane et autres impôts (en million de FCFA) ................................ ................................ ................................ ................................ ................................ ................................ ................... 17 Tableau 6: Part et contribution des principaux Produits dans le Produit Intérieur Brut (2019 -2021) ............................. 18 Tableau 7: Part et contribution des principales branches d’activités dans le PIB ................................ ...............................",
+          "page": 4,
+          "terms": [
+            "PIB",
+            "millions"
+          ]
+        },
+        {
+          "excerpt": "iii SIGLES ET ABREVIATIONS AFRISTAT Observatoire économique et statistique d’Afrique subsaharienne BCA Banque Centrale des États de l’Afrique Centrale BEA Banque des États de l’Afrique Centrale CA Compte(s) annuel(s) CB Compte(s) de branche CF Consommation finale CI Consommation intermédiaire DSF Déclarations Statistiques et Fiscales EBE Excédent Brut d’Exploitation EHCVM Enquête Harmonisée sur les Conditions de Vie des Ménages ENA Enquête Nationale Agricole ERE Équilibre Ressources-Emplois ERE Logiciel de compilation des comptes nationaux conforme au SCN 2008 FBC Formation Brute de Capital Fixe FCFA Franc de la Coopération Financière en Afrique Centrale HISWACA Harmonization and Improvement of Statistics in West Africa and Central Africa (Projet d’harmonisation et d’amélioration des statistiques en Afrique de l’Ouest et du Centre) ICASEES Institut Centrafricain des Statistiques et des Études Économiques et Sociales ISB Institutions Sans But Lucratif ISBLM Institutions Sans But Lucratif au Service des Ménages MBP6 Manuel de la Balance des Paiements et de la Position Extérieure Globale (6e édition) NAEMA Nomenclature des Activités des États Membres d’AFRISTAT NOPEMA Nomenclature des",
+          "page": 5,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "iv AVANT-PROPOS Les comptes nationaux constituent un instrument essentiel de mesure, d’analyse et de pilotage de l’économie nationale. Ils permettent de retracer de manière cohérente et intégrée l’ensemble des opérations économi ques réalisées par les différents agents, et d’offrir une vision globale des performances, des déséquilibres et des transformations structurelles de l’économie. Dans le cadre du renforcement du système statistique national, la République Centrafricaine s’est engagée dans un important processus de modernisation de sa comptabilité nationale, marqué par le passage au Système de Comptabilité Nationale 2008 (SCN 2008) et l’adoption de l’année de base 2019. Cette réforme, conduite par l’Institut Centrafricain des Statistiques et des Études Économiques et Sociales (ICASEES), avec l’appui de ses partenaires techniques et financiers, notamment la Banque mondiale à travers le Projet des Données Nécessaires à la Prise de Décision (PDNPD) et le projet HISWACA, vise à améliorer la qualité, la fiabilité et la comparabilité internationale des statistiques économiques produites. Le présent document s’inscrit dans cette dynamique. Il présente les résultats des comptes natio",
+          "page": 6,
+          "terms": [
+            "base 2019",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "v Résumé de l’analyse des comptes nationaux de la République Centrafricaine (base 2019, période 2019 – 2021) Les comptes nationaux de la République Centrafricaine, élaborés selon le Système de Comptabilité Nationale 2008 (SCN 2008) avec une nouvelle année de base 2019, offrent une représentation actualisé e de l’économie nationale sur la période 2019 –2021. Cette révision méthodologique, conduite par l’ICASEES avec l’appui de partenaires techniques et financiers, vise à améliorer la qualité, la cohérence et la comparabilité internationale des statistiques économiques. Sur le plan macroéconomique, le PIB nominal est passé de 1 952,9 milliards FCFA en 2019 à 2 149,6 milliards FCFA en 2021, soit une progression d’environ 10 %. La croissance réelle s’établit à 3,4 % en 2020 puis 1,6 % en 2021, traduisant un ralentissement progressif dans un contexte marqué par la pandémie de COVID-19, les contraintes sécuritaires et la faiblesse des échanges extérieurs. Le PIB par habitant connaît toutefois une légère baisse sur la période, indiquant une croissance insuffisante au regard de la dynamique démographique. L’économie centrafricaine reste dominée par le secteur primaire et les services. L’ag",
+          "page": 7,
+          "terms": [
+            "PIB",
+            "base 2019",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "1 INTRODUCTION Les comptes nationaux constituent un outil fondamental d’analyse et de pilotage de l’économie. Ils offrent, pour une période donnée, une représentation synthétique, cohérente et exhaustive de l’activité économique d’un pays en retraçant l’ensemble des opérations de production, de consommation, d’investissement, de revenu, d’épargne et de financement réalisées par les différents agents économiques. Leur élaboration permet de mesure r l’évolution des principaux agrégats macroéconomiques en valeur et en volume et d’apprécier ainsi les performances, les transformations structurelles et la résilience de l’économie nationale. La comptabilité nationale est élaborée conformément aux normes et recommandations internationales définies par la Commission statistique des Nations Unies. Ces normes fixent les concepts, les définitions, les nomenclatures, les méthodes d’évaluation et les cadres comptables nécessaires à la production de statistiques économiques harmonisées et comparables au niveau international. Le Système de Comptabilité Nationale 2008 (SCN 2008) constitue aujourd’hui la référence méthodologique en matière de compilation des comptes nationaux. Toutefois, afin de gar",
+          "page": 8,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "2 Consciente de ces enjeux, la République Centrafricaine a engagé, à travers l’Institut Centrafricain des Statistiques et des Études Économiques et Sociales (ICASEES), un vaste programme de modernisation de son système de comptabilité nationale. Avec l’appui de la Ban que mondiale à travers le Projet des Données Nécessaires à la Prise de Décision (PDNPD) ainsi que du projet HISWACA, des travaux approfondis de rénovation méthodologique et d’actualisation des sources statistiques ont été conduits afin d’assurer la migration des comptes nationaux du SCN 1993 vers le SCN 2008. Ces travaux ont abouti à l’adoption d’une nouvelle année de base fixée à 2019 et à la production des comptes nationaux conformément aux standards internationaux les plus récents. La République Centrafricaine dispose ainsi désormais d’une série cohérente de comptes nationaux en base 2019 couvrant les années 2019, 2020 et 2021. La présente publication s’inscrit dans cette dynamique de renforcement du système statistique national. Elle met à la disposition des pouvoirs publics, des partenaires techniques et financiers, des chercheurs, du secteur privé et de l’ensemble des utilisateurs de données économiques des info",
+          "page": 9,
+          "terms": [
+            "base 2019",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "3 APPROCHE METHODOLOGIQUE L’élaboration des comptes nationaux de la République Centrafricaine en base 2019 selon le Système de Comptabilité Nationale 2008 (SCN 2008) a suivi une démarche méthodologique structurée visant à améliorer la qualité, la couverture et la pertinence des statistiques économiques nationales. La première étape a consisté à élaborer un document de projet de rebasage inscrit dans le cadre de la Stratégie Nationale de Développement de la Statistique (SNDS). Ce document a permis de définir les orientations stratégiques, les objectifs, le chronogramme des activités, les besoins financiers ainsi que le dispositi f institutionnel de mise en œuvre. Il comprenait également un diagnostic du système statistique national et prenait en compte les recommandations internationales relatives au changement d’année de base. La deuxième étape a porté sur la révision des nomenclatures d’activités et de produits afin de mieux refléter la structure actuelle de l’économie nationale. Les nouvelles nomenclatures ont été élaborées conformément à la Nomenclature des Activités des États Membres d’AFRISTAT (NAEMA Révision 1) et à la Nomen clature des Produits des États Membres d’AFRISTAT (",
+          "page": 10,
+          "terms": [
+            "PIB",
+            "base 2019",
+            "SCN 2008",
+            "rebasage"
+          ]
+        },
+        {
+          "excerpt": "4 PREMIERE PARTIE : LE COMPTE DES BIENS ET SERVICES Cette première partie présente une analyse globale de l’économie centrafricaine sur la période 2019–2021 à travers les principaux agrégats macroéconomiques, la structure sectorielle du PIB et les équilibres entre l’offre et la demande. Elle met en évidence l’évolution du PIB en valeur et en volume, ainsi que les dynamiques de croissance qui en découlent. L’analyse s’appuie sur la décomposition du PIB par branches d’activités et par produits, permettant d’identifier les secteurs moteurs et ceux en ralentissement. Elle examine également la contribution des diffé rents secteurs (primaire, secondaire et tertiaire) à la formation de la richesse nationale. Une attention particulière est accordée à la structure de la demande intérieure (consommation, investissement) et aux échanges extérieurs, afin de comprendre les fa cteurs internes et externes qui influencent la croissance économique. Enfin, cette partie permet de mettre en évidence les principales caractéristiques structurelles de l’économie centrafricaine, notamment la prédominance du secteur primaire, la montée progressive des services et la faiblesse relative de l’industrie et de ",
+          "page": 11,
+          "terms": [
+            "PIB",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "5 Tableau 1: Résumé des indicateurs et agrégats économiques de la nation Indicateurs 2019 2020 2021 Superficie (en Km2) 623 000 623 000 623 000 Population totale 5 360 271 5 464 907 6 091 097 Population active occupée 3 155 720 3 219 704 3 591 979 PIB à prix courant (en millions de FCFA) 1 952 925 2 056 035 2 149 622 PIB à prix constant (en millions de FCFA) 1 952 925 2 019 521 2 088 958 Exportations (en millions de FCFA) 295 813 244 676 231 506 Importations (en millions de FCFA) 633 634 494 955 427 514 Revenu Disponible Brut (en millions de FCFA) 2 412 733 2 481 639 2 640 374 Epargne Nationale (en millions de FCFA) 509 405 473 293 610 105 Formation Brute de Capital Fixe (en millions de FCFA) 384 847 329 415 342 055 Taux de croissance réel (en %) 3,41% 3,44% Déflateur du PIB (en %) 100,00% 101,81% 102,90% Variation du déflateur du PIB (en %) 1,81% 1,08% PIB/ habitant (en FCFA) 364333 376225 352912 RNDB/habitant (en FCFA) 450114 454105 433481 Epargne Nationale/PIB (en %) 26,08 % 23,02 % 28,38% Taux d'investissement (en %) 19,71 % 16,02 % 15,91 % Taux de croissance de la FBCF (en %) -14,40 % 3,84 % Propension moyenne à exporter (en %) 15,15% 11,90 % 10,77 % Propension moyenne à impor",
+          "page": 12,
+          "terms": [
+            "PIB",
+            "millions"
+          ]
+        },
+        {
+          "excerpt": "6 1.2. Évolution du PIB en volume et en valeur ainsi que des principaux produits de l’économie de 2019 à 2021 Le PIB évolue globalement de manière modérée entre 2019 et 2021, passant de 1 952,9 à 2 149,6 milliards FCFA, soit une croiss ance nominale cumulée d’environ +10%. Sur le plan sectoriel, les produits agricoles restent dominants mais stagnent, avec une légère baisse en 2021 (269,9 milliard s FCFA contre 274,9 milliards en 2020). Les produits de l’élevage sont plus volatils, chutant à 11,8 milliards en 2021 après un pic de 14,2 milliards en 2020, traduisant une forte sensibilité aux conditions économiques et sanitaires. Les industries extractives connaissent une dynamique irrégulière, avec un recul à 31,0 milliards en 2021 après une baisse en 2020. Les produits alimentaires progressent régulièrement, atteignant 328,8 milliards en 2021, devenant un moteur industriel important. Les services (transport, hébergement, administration publique, santé, éducation) affichent une croissance soutenue, notamment le transport à 71,2 milliards et l’administration publique à 188,7 milliards en 2021. Le secteur de la construction reste important mais en ralen tissement relatif (265,8 à 230,0 ",
+          "page": 13,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards",
+            "millions"
+          ]
+        },
+        {
+          "excerpt": "7 Code SCN 2008 Produits PIB 2019 Frs 2019 Evolution en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolution en Volume (%) PIB 2021 Frs 2020 Evolution des Prix (%) PIB 2021 Frs 201 A02 PRODUITS DE L'ELEVAGE 12 770 97,21 12 414 114,15 14 171 71,15 10 083 116,82 11 779 A03 PRODUITS DE CHASSE, PÊCHE ET D’AQUACULTURE 47 118 101,89 48 007 121,51 58 331 100,98 58 903 100,71 59 324 A04 PRODUITS DE LA SYLVICULTURE ET DE L'EXPLOITATION FORESTIERE 98 498 101,35 99 831 103,39 103 211 99,54 102 734 93,25 95 797 B01 PRODUITS DES INDUSTRIES EXTRACTIVES 31 944 117,98 37 688 73,37 27 651 125,35 34 660 89,44 31 000 C01 PRODUITS ALIMENTAIRES 284 500 104,77 298 083 101,14 301 491 103,12 310 908 105,75 328 777 C02 BOISSONS ET TABAC 26 115 117,65 30 724 111,36 34 213 88,85 30 398 101,37 30 814 C03 ARTICLES DE TEXTILES, D'HABILLEMENT ET DE CUIR 42 877 102,02 43 742 107,99 47 239 68,47 32 343 99,95 32 328 C04 BOIS ET ARTICLES EN BOIS (HORS MEUBLES) 31 453 103,50 32 553 86,12 28 034 76,60 21 474 103,53 22 232 C05 PRODUITS DU RAFFINAGE PETROLIER ET DE LA COKEFACTION -31 931 149,73 -47 810 111,49 -53 305 30,59 -16 304 112,86 -18 401 C06 PRODUITS CHIMIQUES ET PHARMACEUTIQUES -1 79",
+          "page": 14,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "8 Code SCN 2008 Produits PIB 2019 Frs 2019 Evolution en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolution en Volume (%) PIB 2021 Frs 2020 Evolution des Prix (%) PIB 2021 Frs 201 C07 PRODUIT EN CAOUTCHOUC, EN PLASTIQUE ET MATERIAUX MINERAUX -13 502 95,35 -12 874 98,63 -12 698 88,79 -11 274 121,32 -13 678 C08 OUVRAGES EN MÉTAUX, TRAVAIL DES MÉTAUX 61 518 109,98 67 657 89,19 60 344 99,65 60 133 100,36 60 348 C09 PRODUITS FABRIQUES N.C.A, SERV. DE REPARATION ET INSTALLATION DE MACHINES ET MATERIELS 37 199 102,39 38 087 107,13 40 804 84,19 34 353 99,28 34 104 D00 ÉLECTRICITÉ, GAZ ET SUPPORTS ENERGETIQUES 4 315 89,78 3 874 106,32 4 119 112,19 4 621 104,05 4 808 E00 EAU DISTRIBUEE, SERVICE DE RESEAUX D’ASSAINISSEMENT ; GESTION DES DECHETS ET DE REMISE EN ETAT 17 681 101,96 18 027 110,06 19 841 98,99 19 640 94,93 18 645 F00 BATIMENTS ET OUVRAGES DE GENIE CIVIL 265 770 82,58 219 483 106,19 233 068 91,62 213 536 107,71 229 995 G00 SERVICE DE COMMERCE ET DE 3 165 47,36 1 499 130,02 1 949 190,05 3 704 110,39 4 089",
+          "page": 15,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "9 Code SCN 2008 Produits PIB 2019 Frs 2019 Evolution en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolution en Volume (%) PIB 2021 Frs 2020 Evolution des Prix (%) PIB 2021 Frs 201 REPARATION DE VEHICULE H00 SERVICE DE TRANSPORT ET ENTREPOSAGE 49 367 118,58 58 540 114,97 67 306 93,13 62 680 113,54 71 164 I00 SERVICE D'HEBERGEMENT ET RESTAURATION 252 851 103,66 262 108 100,39 263 123 111,22 292 657 105,97 310 127 J00 SERVICES D'INFORMATIONS ET DE COMMUNICATIONS 88 769 83,57 74 180 88,39 65 569 107,73 70 636 104,29 73 666 K00 SERVICES FINANCIERS ET D'ASSURANCES 15 211 114,11 17 358 96,98 16 833 89,10 14 998 105,17 15 774 L00 SERVICES IMMOBILIERS 99 226 98,50 97 734 112,70 110 150 99,13 109 188 102,90 112 356 M00 SERVICES SPECIALISES, SCIENTIFIQUES ET TECHNIQUES 501 96,41 483 100,21 484 -111,98 -542 107,20 -581 N00 SERVICES DE SOUTIEN ET DE BUREAU -14 586 106,30 -15 505 88,58 -13 735 108,32 -14 878 102,57 -15 260 O00 SERVICES D'ADMINISTRATION PUBLIQUE 147 155 121,05 178 135 101,45 180 713 99,66 180 105 104,75 188 667 P00 SERVICE D'ENSEIGNEMENT 41 358 153,22 63 370 98,83 62 627 99,73 62 461 105,55 65 929",
+          "page": 16,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "10 Code SCN 2008 Produits PIB 2019 Frs 2019 Evolution en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolution en Volume (%) PIB 2021 Frs 2020 Evolution des Prix (%) PIB 2021 Frs 201 Q00 SERVICES POUR LA SANTÉ HUMAINE ET L'ACTION SOCIALE 49 118 122,03 59 937 101,40 60 774 101,94 61 952 102,12 63 266 R00 AUTRES SERVICES COLLECTIFS ET PERSONNELS 36 345 101,79 36 994 104,68 38 725 95,36 36 927 103,21 38 114 T00 CORRECTION TERRITORIALE 0 0 0 0 0 PIB PRODUIT INTERIEUR BRUT 1 952 925 103,41 2 019 521 101,81 2 056 035 101,60 2 088 958 102,90 2 149 622",
+          "page": 17,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "11 1.3. Offre et demande 1.3.1. Évolution de l’équilibre global des biens et services en valeur et en volume (2019–2021) Le PIB à prix de 2019 s'est établi à 1 952, 9 milliards FCFA. L'évolution en volume a été de 3,41 % entre 2019 et 2020. En 2021, la croissance en volume s'est établie à 1,60 %. En valeur, le PIB est passé de 2 056 milliards FCFA en 2020 à 2 149,6 milliards en 2021. Les importations ont enregistré une variation en volume de -19,6 % en 2020. En 2021, cette variation s'est établ ie à -18,0 %. Le montant des importations s'élevait à 633,6 milliards de FCFA en 2019. Les exportations ont connu une évolution en volume de -15,5 % en 2020. En 2021, l'évolution des exportations en volume a été de -1,6 %. Cette évolution est essentiellement liée aux fluctuations des échanges extérieurs et à la dynamique de la demande intérieure. Cf. tableau 3 ci-dessous Le recul des importations traduit une contraction de la demande adressée au reste du monde, tandis que les exportations ont é té affectées par la baisse des cours mondiaux des matières premières. Tableau 3: Evolution de l’équilibre global des biens et services en (valeur, volume et en millions de FCFA) Code SCN 2008 Opératio",
+          "page": 18,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards",
+            "millions"
+          ]
+        },
+        {
+          "excerpt": "12 Code SCN 2008 Opérations PIB 2019 Frs 2019 Evolutio n en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolutio n en Volume (%) PIB 2021 Frs 2020 Evolutio n des Prix (%) PIB 2021 Frs 2021 0P3 Consommation Privée 1 712 492 0,26 1 717 021 2,92 1 762 416 -3,05 1 708 708 0,58 1 772 638 0P300B Autoconsommée 300 602 3,41 310 843 11,07 333 875 0,01 333 899 0,54 335 674 0P300A Commercialisée 1 411 890 -0,40 1 406 178 1,18 1 428 541 -3,76 1 374 809 0,59 1 436 964 OP3 Consommation Publique 190 771 27,92 244 036 28,91 245 930 0,12 246 231 4,76 257 631 P51 FBCF 384 847 -13,70 332 112 -14,40 329 415 -1,07 325 889 3,84 342 055 P51 Privée 224 163 -13,70 193 446 -14,40 191 875 1,53 194 806 6,56 204 469 P51 Publique 160 684 -13,70 138 666 -14,40 137 540 -4,69 131 083 0,03 137 586 P52 Variation des Stocks 2 594 -677,33 -14 976 -1 329,80 -31 901 -15,37 -26 999 -15,13 -27 074 P53 Acquisition objets de valeur 42 1 735,71 771 980,95 454 -28,85 323 -16,30 380 Total Dépense Nationale 3 512 506 -0,92 3 480 199 2,10 3 586 296 -3,52 3 460 024 1,32 3 633 494 0P6 Exportations 295 813 -15,45 250 105 -17,29 244 676 -1,62 240 715 -5,38 231 506 0P6001 Exportations des biens 200 067 -19,",
+          "page": 19,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "13 Tableau 4: Variation du PIB par branche d’activités en volume et en valeur (en million de FCFA) Cod e SCN 2008 Branches PIB 2019 Frs 2019 Evolutio n en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolutio n en PIB 2021 Frs 2020 Evolutio n des PIB 2021 Frs 201 A01 AGRICULTURE 280 496 111,60 313 036 100,09 313 325 102,46 321 041 98,50 316 226 A02 ELEVAGE 39 534 93,08 36 798 116,46 42 855 104,12 44 620 100,95 45 044 A03 CHASSE, PÊCHE ET AQUACULTURE 34 110 106,05 36 172 125 45 215 100,70 45 531 97,66 44 467 A04 SYLVICULTURE ET EXPLOITATION FORESTIERE 32 501 108,66 35 315 83,93 29 640 123,63 36 644 81,98 30 039 B01 ACTIVITÉS EXTRACTIVES 36 166 112,57 40 712 77,38 31 502 124,37 39 179 102,64 40 212 C01 FABRICATION DE PRODUITS ALIMENTAIRES 135 089 105,68 142 765 106,87 152 574 102,56 156 475 113,18 177 094 C02 FABRICATION DE BOISSONS ET TABAC 23 350 120,44 28 122 104,83 29 481 113,38 33 425 82,87 27 698 C03 FABRICATION DE TEXTILES, D'HABILLEMENT ET DE CUIR 21 329 92,28 19 682 112,75 22 191 102,89 22 832 104,82 23 933 C04 INDUSTRIE DU BOIS, PAPIER ET IMPRIMERIE ET REPRODUCTION D’ENREGISTREMENT 26 789 90,35 24 204 90,71 21 956 179,47 39 404 96,47 38 013 C05 RAF",
+          "page": 20,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "14 Cod e SCN 2008 Branches PIB 2019 Frs 2019 Evolutio n en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolutio n en PIB 2021 Frs 2020 Evolutio n des PIB 2021 Frs 201 PLASTIQUE ET FABRICATION DES MATERIAUX MINERAUX C08 METALLURGIE, FABRICATION DE MACHINES ET DE MATERIELS 1 193 107,54 1 283 88,85 1 140 92,46 1 054 104,84 1 105 C09 ACTIVITES DE FABRICATION N.C.A, REPARATION ET INSTALLATION DE MACHINES ET MATERIELS 19 045 98,78 18 813 109,02 20 510 138,36 28 377 91,92 26 084 D00 PRODUCTION ET DISTRIBUTION D'ELECTRICITE DE GAZ DE VAPEUR ET CLIMATISATION 4 250 105,34 4 477 100,20 4 486 122,76 5 507 102,45 5 642 E00 DISTRIBUTION D'EAU, RESEAUX D’ASSAINISSEMENT ; GESTION DES DECHETS ET ACTIVITES DE REMISE EN ETAT 12 709 114,78 14 588 111,52 16 269 81,44 13 249 110,02 14 576 F00 CONSTRUCTION 171 317 78,19 133 947 107,65 144 192 98,74 142 377 97,03 138 146 G00 COMMERCE DE GROS ET DETAIL ; REPARATION DE VEHICULES 238 205 93,53 222 788 99,68 222 080 87,85 195 096 96,12 187 531 H00 TRANSPORTS ET ENTREPOSAGE 116 079 104,10 120 844 112,50 135 944 115,76 157 365 116,36 183 114",
+          "page": 21,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "15 Cod e SCN 2008 Branches PIB 2019 Frs 2019 Evolutio n en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolutio n en PIB 2021 Frs 2020 Evolutio n des PIB 2021 Frs 201 I00 HEBERGEMENT ET RESTAURATION 182 234 105,65 192 536 97,71 188 131 83,83 157 715 113,36 178 791 J00 INFORMATIONS ET COMMUNICATIONS 97 740 92,44 90 348 93,73 84 685 105,14 89 040 101,15 90 060 K00 ACTIVITES FINANCIERES ET D'ASSURANCES 29 525 98,15 28 979 95,22 27 593 104,72 28 895 104,33 30 147 L00 ACTIVITES PROFESSIONNELLES SCIENTIFIQUES TECHNIQUES IMMOBILIERES ET D’APPUI 88 721 100,81 89 439 112,01 100 179 100,59 100 767 103,14 103 932 M00 ACTIVITÉS SPECIALISEES, SCIENTIFIQUES ET TECHNIQUES 2 361 98,64 2 329 97,98 2 282 40,45 923 178,98 1 652 N00 ACTIVITES DE SERVICES DE SOUTIEN ET DE BUREAU 6 439 105,39 6 786 96,05 6 518 100,37 6 542 105,35 6 892 O00 ACTIVITES D'ADMINISTRATION PUBLIQUE 108 121 122,46 132 402 100,15 132 601 100 132 599 105,15 139 424 P00 ENSEIGNEMENT 27 791 147,10 40 880 95,35 38 981 100,25 39 080 106,90 41 775 Q00 ACTIVITÉS POUR LA SANTÉ HUMAINE ET L'ACTION SOCIALE 35 744 118,60 42 393 100,32 42 527 100,44 42 716 101,88 43 519 R00 AUTRES ACTIVITES COLLECTIVES ET PERSONNE",
+          "page": 22,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "16 Cod e SCN 2008 Branches PIB 2019 Frs 2019 Evolutio n en Volume (%) PIB 2020 Frs 2019 Evolutio n des Prix (%) PIB 2020 Frs 2020 Evolutio n en PIB 2021 Frs 2020 Evolutio n des PIB 2021 Frs 201 0D2 IMPOTS SUR PRODUITS ET DROITS DE DOUANE 76 215 115,36 87 925 99,15 87 181 96,23 83 897 102,59 86 066 PIB PRODUIT INTERIEUR BRUT 1 952 925 103,41 2 019 521 101,81 2 056 035 101,60 2 088 958 102,90 2 149 620",
+          "page": 23,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "17 1.3.3. Évolution des coûts des facteurs de production dans le PIB de 2019 à 2021 La rémunération des salariés (salaires bruts) s'est élevée, passant de 337,9 milliards FCFA en 2019 à 357,3 milliards en 2020 et 355,6 milliards en 2021. Elle a enregistré une variation de 5,7 % en 2020. En 2021, cette variation s'est établie à -0,5 %. Les cotisations sociales ont évolué de 8,5 milliards FCFA en 2019 à 12,9 milliards FCFA en 2020 et 17,4 milliards FCFA en 2021. L'excédent brut d'exploitation (EBE) et le revenu mixte se sont élevés à 1 519,4 milliards FCFA en 2019, 1 591,2 milliards FCFA en 2020 et 1 666,8 milliards FCFA en 2021. Ces revenus ont enregistré des variations respectives de 4,7 % et 4,8 % sur les deux périodes. Au total, le PIB aux coûts des facteurs s'est établi à 1 8767 milliards FCFA en 2019, 1 968,8 milliards FCFA en 2020 et 2 060,7 milliards FCFA en 2021. Cf. tableau 5 ci-dessous La structure des coûts facteurs montre le poids prépondérant de l'excédent brut d'exploitation et du revenu mixte dans la formation du PIB, reflétant le caractère largement informel et agricole de l'économie centrafricaine. La rémunération des salariés représente une part relativement modest",
+          "page": 24,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "18 Les transports, l’enseignement et la santé contribuent positivement à la croissance, avec des hausses de contribution allant jusqu’à +1,44 point pour l’hébergement en 2021. À l’inverse, plusieurs branches industrielles (textile, bois, produits chimiques) affichent des contributions négatives ou volatiles, traduisant une fragilité structurelle du tissu industriel. Les produits extractifs restent faibles en poids (≈1,3% à 1,6% du PIB) mais deviennent légèrement plus contributifs en 2021. Cf. tableau 6 ci-dessous Globalement, la croissance du PIB est principalement tirée par les services et l’agroalimentaire, tandis que le secteur primaire reste important mais peu dynamique. L’industrie manufacturière apparaît globalement contrainte et peu contributive à la croissance. L’économie conserve ainsi une structure déséquilibrée, dominée par les services et l’agriculture, avec une industrialisation limitée. Tableau 6: Part et contribution des principaux Produits dans le Produit Intérieur Brut (2019 - 2021) Code SCN 2008 Produits Principaux biens et services en % du PIB Contribution des biens et services à la Formation du PIB 2019 2020 2021 2020 2021 A01 PRODUITS AGRICOLES 13,82 13,44 12,5",
+          "page": 25,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "20 I00 SERVICE D'HEBERGEMENT ET RESTAURATION 12,95 12,80 14,43 0,47 1,44 J00 SERVICES D'INFORMATIONS ET DE COMMUNICATIONS 4,55 3,19 3,43 -0,75 0,25 K00 SERVICES FINANCIERS ET D'ASSURANCES 0,78 0,82 0,73 0,11 -0,09 L00 SERVICES IMMOBILIERS 5,08 5,36 5,23 -0,08 -0,05 M00 SERVICES SPECIALISES, SCIENTIFIQUES ET TECHNIQUES 0,03 0,02 -0,03 0 -0,05 N00 SERVICES DE SOUTIEN ET DE BUREAU -0,75 -0,67 -0,71 -0,05 -0,06 O00 SERVICES D'ADMINISTRATION PUBLIQUE 7,54 8,79 8,78 1,59 -0,03 P00 SERVICE D'ENSEIGNEMENT 2,12 3,05 3,07 1,13 -0,01 Q00 SERVICES POUR LA SANTÉ HUMAINE ET L'ACTION SOCIALE 2,52 2,96 2,94 0,55 0,06 R00 AUTRES SERVICES COLLECTIFS ET PERSONNELS 1,86 1,88 1,77 0,03 -0,09 T00 CORRECTION TERRITORIALE 0 0 0 0 0 PIB Produit Intérieur Brut 100 100 100 3,41 1,60 1.3.5. Part et contribution des principales branches d’activités dans le PIB Entre 2019 et 2021, l’analyse par branches d’activités montre une économie dominée par le secteur primaire, en particulier l’agriculture, qui reste la première contribution au PIB (14,4 % à 14,7 %) avec un effet positif sur la croissance en 2020 (1,67 %) mais plus faible en 2021 (0,38 %). Les industries extractives restent modestes mais stables, avec une",
+          "page": 27,
+          "terms": [
+            "PIB"
+          ]
+        },
+        {
+          "excerpt": "21 croissance, traduisant une dynamique de transformation locale. À l’inverse, la construction recule fortement (8,77 % à 6,43 %) et devient un frein majeur à la croissance en 2020–2021. Le commerce connaît également une baisse marquée de son poids (12,2 % à 8,72 %) et contribue négativement à la croissance en 2021, ce qui traduit un ralentissement de l’activité commerciale. Les serv ices de transport et entreposage se démarquent positivement avec une forte progression (5,94 % à 8,52 %) et une contribution croissante à la croissance (+1,04 % en 2021). Cf. tableau 7 ci-dessous Les services publics (administration, éducation, santé) gagn ent en importance et soutiennent la croissance, notamment l’administration publique et l’enseignement. Globalement, l’économie reste tirée par les activités primaires et quelques services dynamiques, tandis que la construction et le commerce constituent l es principaux facteurs de ralentissement. Tableau 7: Part et contribution des principales branches d’activités dans le PIB Code SCN 2008 Branches Part des principales branches D’activités en % du PIB Contribution des Branches d'activités à la Formation du PIB 2019 2020 2021 2020 2021 A01 AGRICULTURE",
+          "page": 28,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "22 Code SCN 2008 Branches Part des principales branches D’activités en % du PIB Contribution des Branches d'activités à la Formation du PIB 2019 2020 2021 2020 2021 C05 RAFFINAGE PÉTROLIER, COKEFACTION 0 0 0 0 0 C06 FABRICATION DE PRODUITS CHIMIQUES ET PHARMACEUTIQUES 0,76 0,85 1,17 0,20 0,35 C07 TRAVAIL DU CAOUTCHOUC, DU PLASTIQUE ET FABRICATION DES MATERIAUX MINERAUX 0,06 0,06 0,08 0 0,02 C08 METALLURGIE, FABRICATION DE MACHINES ET DE MATERIELS 0,06 0,06 0,05 0 0 C09 ACTIVITES DE FABRICATION N.C.A, REPARATION ET INSTALLATION DE MACHINES ET MATERIELS 0,98 1 1,21 -0,01 0,38 D00 PRODUCTION ET DISTRIBUTION D'ELECTRICITE DE GAZ DE VAPEUR ET CLIMATISATION 0,22 0,22 0,26 0,01 0,05 E00 DISTRIBUTION D'EAU, RESEAUX D’ASSAINISSEMENT ; GESTION DES DECHETS ET ACTIVITES DE REMISE EN ETAT 0,65 0,79 0,68 0,10 -0,15 F00 CONSTRUCTION 8,77 7,01 6,43 -1,91 -0,09 G00 COMMERCE DE GROS ET DETAIL ; REPARATION DE VEHICULES 12,20 10,80 8,72 -0,79 -1,31 H00 TRANSPORTS ET ENTREPOSAGE 5,94 6,61 8,52 0,24 1,04",
+          "page": 29,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "23 Code SCN 2008 Branches Part des principales branches D’activités en % du PIB Contribution des Branches d'activités à la Formation du PIB 2019 2020 2021 2020 2021 I00 HEBERGEMENT ET RESTAURATION 9,33 9,15 8,32 0,53 -1,48 J00 INFORMATIONS ET COMMUNICATIONS 5 4,12 4,19 -0,38 0,21 K00 ACTIVITES FINANCIERES ET D'ASSURANCES 1,51 1,34 1,40 -0,03 0,06 L00 ACTIVITES PROFESSIONNELLES SCIENTIFIQUES TECHNIQUES IMMOBILIERES ET D’APPUI 4,54 4,87 4,83 0,04 0,03 M00 ACTIVITÉS SPECIALISEES, SCIENTIFIQUES ET TECHNIQUES 0,12 0,11 0,08 0 -0,07 N00 ACTIVITES DE SERVICES DE SOUTIEN ET DE BUREAU 0,33 0,32 0,32 0,02 0 O00 ACTIVITES D'ADMINISTRATION PUBLIQUE 5,54 6,45 6,49 1,24 0 P00 ENSEIGNEMENT 1,42 1,90 1,94 0,67 0 Q00 ACTIVITÉS POUR LA SANTÉ HUMAINE ET L'ACTION SOCIALE 1,83 2,07 2,02 0,34 0,01 R00 AUTRES ACTIVITES COLLECTIVES ET PERSONNELS 4,60 4,53 4,73 0,11 0,24 T00 CORRECTION TERRITORIALE 0 0 0 0 0 PIB aux coûts des facteurs 96,10 95,76 96 2,81 1,76 Impôts et droits de douane nets 3,90 4,24 4 0,60 -0,16 PIB PIB 100 100 100 3,41 1,60",
+          "page": 30,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "24 1.3.6. Compte global des biens et services et contribution à la formation du PIB (%). Les importations représentaient 25,2 % du PIB en 2019, 24,1 % en 2020 et 19,9 % en 2021, montrant une tendance baissière significative. Les ressources totales représentaient 184,7 % du PIB en 2019, 186,3 % en 2020 et 179,8 % en 2021. Les exportations de biens sont passées de 12,4 % du PIB en 2019 à 10,8 % en 2021. La Formation Brute de Capital Fixe (FBCF) s'est établie à 16,4 % du PIB en 2019, 16,0 % en 2020 et 15,9 % en 2021. Cf. tableau 8 ci-dessous Cette évolution traduit la contraction des échanges extérieurs au cours de la période. Le poids des importati ons dans le PIB a significativement diminué, passant de plus du quart à environ un cinquième, reflétant un ajustement structurel de la demande extérieure et une réduction de la dépendance aux importations. Tableau 8: Répartition du compte global de biens et services en % du PIB Code SCN 2008 Opérations Opération en % du PIB Contribution des branches d'activité à la formation du PIB 2019 2020 2021 2020 2021 0P7 Importations 25,23 24,07 19,89 -6,35 -4,33 0P7001 Importations des biens 16,95 15,79 14,69 -6,31 -1,48 0P7002 Importations des serv",
+          "page": 31,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "25 0P6 Exportations 172,33 174,4 169 -1,65 -6,14 0P6001 Exportations des biens 12,38 11,90 10,77 -2,34 -0,19 0P6002 Exportations des services 7,96 7,43 7,18 -2,02 0,72 Total des Emplois 4,43 4,47 3,59 -0,32 -0,91 1.3.7. Évolution de la structure de la valeur ajoutée selon les facteurs de production Entre 2019 et 2021, l’économie a connu une contraction progressive de ses échanges extérieurs, marquée par une baisse des importations de 25,2 % à 19,9 % du PIB et un recul des exportations de biens de 12,4 % à 10,8 % du PIB. Cette évolution traduit un ral entissement de l’ouverture économique et une diminution de la demande extérieure. La consommation privée, principal moteur de l’activité, a reculé de 85,0 % à 82,5 % du PIB, révélant un affaiblissement de la demande intérieure. Parallèlement, la FBCF a lé gèrement diminué de 16,4 % à 15,9 % du PIB, témoignant d’un niveau d’investissement insuffisant pour soutenir une croissance forte. La consommation publique est restée stable autour de 12 % du PIB, jouant un rôle de soutien limité. Cf. tableau 9 ci-dessous Tableau 9: Proportion des facteurs de production dans la Valeur Ajoutée Code SCN 2008 Facteurs de production Facteur de production",
+          "page": 32,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "26 1.3.8. Évolution de la production des principaux produits de l'économie et du PIB de 2019 à 2021 (en millions de FCFA L’analyse de la structure du PIB par produits entre 2019 et 2021 montre une forte domination des secteurs primaires et agroalimentaires. Les produits agricoles représentent environ 13,8 % du PIB en 2019, avec une valeur de 269 910 millions de FCFA, puis 276 243 millions en 2020 et 269 491 millions en 2021, traduisant une stabilité globale mais une légère baisse en fin de période. Les produits de l’élevage restent faibles (0,6 % du PIB environ), passan t de 12 770 millions en 2019 à 11 779 millions en 2021, ce qui confirme leur contribution limitée et volatile. Les produits de la sylviculture et exploitation forestière représentent une part importante du secteur primaire, avec 98 498 millions en 2019, 10 3 211 millions en 2020, puis 95 797 millions en 2021, soit une tendance légèrement baissière en fin de période. Les produits de la chasse, pêche et aquaculture progressent de 47 118 à 59 324 millions, indiquant une dynamique positive dans ce sous- secteur. Les produits alimentaires constituent le principal moteur industriel, passant de 284 500 millions (2019) à 30",
+          "page": 33,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "millions"
+          ]
+        },
+        {
+          "excerpt": "27 Code SCN 2008 PRODUITS 2019 2020 2021 B01 PRODUITS DES INDUSTRIES EXTRACTIVES 31 944 27 651 31 000 C01 PRODUITS ALIMENTAIRES 284 500 301 491 328 777 C02 BOISSONS ET TABAC 26 115 34 213 30 814 C03 ARTICLES DE TEXTILES, D'HABILLEMENT ET DE CUIR 42 877 47 239 32 328 C04 BOIS ET ARTICLES EN BOIS (HORS MEUBLES) 31 453 28 034 22 232 C05 PRODUITS DU RAFFINAGE PETROLIER ET DE LA COKEFACTION -31 931 -53 305 -18 401 C06 PRODUITS CHIMIQUES ET PHARMACEUTIQUES -1 790 18 760 24 948 C07 PRODUIT EN CAOUTCHOUC, EN PLASTIQUE ET MATERIAUX MINERAUX -13 502 -12 698 -13 678 C08 OUVRAGES EN MÉTAUX, TRAVAIL DES MÉTAUX 61 518 60 344 60 348 C09 PRODUITS FABRIQUES N.C.A, SERV. DE REPARATION ET INSTALLATION DE MACHINES ET MATERIELS 37 199 40 804 34 104 D00 ÉLECTRICITÉ, GAZ ET SUPPORTS ENERGETIQUES 4 315 4 119 4 808 E00 EAU DISTRIBUEE, SERVICE DE RESEAUX D’ASSAINISSEMENT ; GESTION DES DECHETS ET DE REMISE EN ETAT 17 681 19 841 18 645 F00 BATIMENTS ET OUVRAGES DE GENIE CIVIL 265 770 233 068 229 995 G00 SERVICE DE COMMERCE ET DE REPARATION DE VEHICULE 3 165 1 949 4 089 H00 SERVICE DE TRANSPORT ET ENTREPOSAGE 49 367 67 306 71 164 I00 SERVICE D'HEBERGEMENT ET RESTAURATION 252 851 263 123 310 127 J00 SERVICES D'",
+          "page": 34,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "28 Code SCN 2008 PRODUITS 2019 2020 2021 R00 AUTRES SERVICES COLLECTIFS ET PERSONNELS 36 345 38 725 38 114 T00 CORRECTION TERRITORIALE 0 0 0 PIB Produit Intérieur Brut 1 952 925 2 056 035 2 149 622 1.3.9. Structure et évolution de la contribution des principaux produits au PIB aux prix de l’année précédente (2019-2021) Entre 2019 et 2021, le PIB est passé de 1 952,9 à 2 149,6 milliards de FCFA, soit une hausse cumulée de 10,1 %, traduisant une reprise progressive de l'activité économique. La structure productive demeure fortement dominée par les secteurs primaire et tertiaire. Les produits agricoles ont maintenu un niveau élevé (269,5 milliards de FCFA en 2021), représentant environ 12,5 % du PIB, tandis que la sylviculture et l’exploitation forestière ont reculé de 98,5 à 95,8 milliards, reflétant une baisse de l’activité forestière. Les industries alimentaires affichent la progression la plus remarquable, passant de 284,5 à 328,8 milliards de FCFA (+15,6 %), témoignant d’un renforcement de la transformation locale. À l’inverse, le secteur de la construction a diminué de 265,8 à 230,0 milliards ( -13,5 %), signalant un ralentissement des investissements en infrastructures. Dans le",
+          "page": 35,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "29 Code SCN 2008 PRODUITS PIB 2019 Frs 2019 PIB 2020 Frs 2019 PIB 2021 Frs 2020 C03 ARTICLES DE TEXTILES, D'HABILLEMENT ET DE CUIR 42 877 43 742 32 343 C04 BOIS ET ARTICLES EN BOIS (HORS MEUBLES) 31 453 32 553 21 474 C05 PRODUITS DU RAFFINAGE PETROLIER ET DE LA COKEFACTION -31 931 -47 810 -16 304 C06 PRODUITS CHIMIQUES ET PHARMACEUTIQUES -1 790 20 327 28 475 C07 PRODUIT EN CAOUTCHOUC, EN PLASTIQUE ET MATERIAUX MINERAUX -13 502 -12 874 -11 274 C08 OUVRAGES EN MÉTAUX, TRAVAIL DES MÉTAUX 61 518 67 657 60 133 C09 PRODUITS FABRIQUES N.C.A, SERV. DE REPARATION ET INSTALLATION DE MACHINES ET MATERIELS 37 199 38 087 34 353 D00 ÉLECTRICITÉ, GAZ ET SUPPORTS ENERGETIQUES 4 315 3 874 4 621 E00 EAU DISTRIBUEE, SERVICE DE RESEAUX D’ASSAINISSEMENT ; GESTION DES DECHETS ET DE REMISE EN ETAT 17 681 18 027 19 640 F00 BATIMENTS ET OUVRAGES DE GENIE CIVIL 265 770 219 483 213 536 G00 SERVICE DE COMMERCE ET DE REPARATION DE VEHICULE 3 165 1 499 3 704 H00 SERVICE DE TRANSPORT ET ENTREPOSAGE 49 367 58 540 62 680 I00 SERVICE D'HEBERGEMENT ET RESTAURATION 252 851 262 108 292 657 J00 SERVICES D'INFORMATIONS ET DE COMMUNICATIONS 88 769 74 180 70 636 K00 SERVICES FINANCIERS ET D'ASSURANCES 15 211 17 358 14 998",
+          "page": 36,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "30 1.3.10. Évolution du PIB par branche d’activités en valeur de 2019 à 2021 Entre 2019 et 2021, le PIB est passé de 1 952,9 à 2 149,6 milliards de FCFA, soit une croissance cumulée de 10,1 %, soutenue principalement par les secteurs primaire et tertiaire. L’agriculture demeure la première branche productive avec 316,2 milliards de FCFA en 2021, suivie du commerce (187,5 milliards), du transport et entreposage (183,1 milliards) et de l’hébergement - restauration (178,8 milliards). Les branches les plus dynamiques sont les industries alimentaires (+31,1 %), les activités extractives (+11,2 %), les transports (+57,7 %) et l’administration publique (+28,9 %). À l’inverse, la construction recule de 171,3 à 138,1 milliards (-19,4 %) et le commerce de 238,2 à 187,5 milliards (-21,3 %), révélant un ralentissement de l’investissement et des échanges intérieurs. Cf. tableau 12 ci-dessous Tableau 12: Evolution du PIB par branche d'activités en valeur (en million de FCFA) Code SCN 2008 BRANCHES 2019 2020 2021 A01 AGRICULTURE 280 496 313 325 316 226 A02 ELEVAGE 39 534 42 855 45 044 A03 CHASSE, PÊCHE ET AQUACULTURE 34 110 45 215 44 467 A04 SYLVICULTURE ET EXPLOITATION FORESTIERE 32 501 29 640 3",
+          "page": 37,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "31 Code SCN 2008 BRANCHES 2019 2020 2021 E00 DISTRIBUTION D'EAU, RESEAUX D’ASSAINISSEMENT ; GESTION DES DECHETS ET ACTIVITES DE REMISE EN ETAT 12 709 16 269 14 576 F00 CONSTRUCTION 171 317 144 192 138 146 G00 COMMERCE DE GROS ET DETAIL ; REPARATION DE VEHICULES 238 205 222 080 187 531 H00 TRANSPORTS ET ENTREPOSAGE 116 079 135 944 183 114 I00 HEBERGEMENT ET RESTAURATION 182 234 188 131 178 791 J00 INFORMATIONS ET COMMUNICATIONS 97 740 84 685 90 060 K00 ACTIVITES FINANCIERES ET D'ASSURANCES 29 525 27 593 30 147 L00 ACTIVITES PROFESSIONNELLES SCIENTIFIQUES TECHNIQUES IMMOBILIERES ET D’APPUI 88 721 100 179 103 932 M00 ACTIVITÉS SPECIALISEES, SCIENTIFIQUES ET TECHNIQUES 2 361 2 282 1 652 N00 ACTIVITES DE SERVICES DE SOUTIEN ET DE BUREAU 6 439 6 518 6 892 O00 ACTIVITES D'ADMINISTRATION PUBLIQUE 108 121 132 601 139 424 P00 ENSEIGNEMENT 27 791 38 981 41 775 Q00 ACTIVITÉS POUR LA SANTÉ HUMAINE ET L'ACTION SOCIALE 35 744 42 527 43 519 R00 AUTRES ACTIVITES COLLECTIVES ET PERSONNELS 89 896 93 232 101 624 T00 CORRECTION TERRITORIALE 0 0 0 PIB PIB aux couts des facteurs 1 876 710 1 968 854 2 063 554 Impôts sur produits et droits de douane 76 215 87 181 86 066 PIB Produit Intérieur Brut 1 952 925",
+          "page": 38,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "32 soit une baisse de 24,4 %, tandis que la construction est passée de 269,8 milliards à 221,0 milliards avant de remonter à 280,4 milliards en 2021. Cf. tableau 13 ci-dessous Tableau 13: Evolution du PIB par branche d'activités aux prix de l’année précédente (en million de FCFA) Code SCN 2008 BRANCHES PIB 2019 Frs 2019 PIB 2020 Frs 2019 PIB 2021 Frs 2020 A01 AGRICULTURE 373 216 375 856 56 036 A02 ELEVAGE 55 393 51 935 58 718 A03 CHASSE, PÊCHE ET AQUACULTURE 46 774 47 951 116 449 A04 SYLVICULTURE ET EXPLOITATION FORESTIERE 108 018 116 060 57 404 B01 ACTIVITÉS EXTRACTIVES 57 770 63 547 382 792 C01 FABRICATION DE PRODUITS ALIMENTAIRES 349 003 353 529 55 232 C02 FABRICATION DE BOISSONS ET TABAC 49 202 53 037 45 295 C03 FABRICATION DE TEXTILES, D'HABILLEMENT ET DE CUIR 41 169 41 179 64 584 C04 INDUSTRIE DU BOIS, PAPIER ET IMPRIMERIE ET REPRODUCTION D’ENREGISTREMENT 64 070 65 174 0 C05 RAFFINAGE PÉTROLIER, COKEFACTION 0 0 34 379 C06 FABRICATION DE PRODUITS CHIMIQUES ET PHARMACEUTIQUES 32 381 36 110 2 977 C07 TRAVAIL DU CAOUTCHOUC, DU PLASTIQUE ET FABRICATION DES MATERIAUX MINERAUX 2 850 2 885 2 883 C08 METALLURGIE, FABRICATION DE MACHINES ET DE MATERIELS 2 986 3 008 41 380 C09 ACTIVITES",
+          "page": 39,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "33 Code SCN 2008 BRANCHES PIB 2019 Frs 2019 PIB 2020 Frs 2019 PIB 2021 Frs 2020 K00 ACTIVITES FINANCIERES ET D'ASSURANCES 41 086 40 049 120 248 L00 ACTIVITES PROFESSIONNELLES SCIENTIFIQUES TECHNIQUES IMMOBILIERES ET D’APPUI 108 209 108 478 4 254 M00 ACTIVITÉS SPECIALISEES, SCIENTIFIQUES ET TECHNIQUES 4 242 4 157 10 724 N00 ACTIVITES DE SERVICES DE SOUTIEN ET DE BUREAU 10 075 10 667 181 284 O00 ACTIVITES D'ADMINISTRATION PUBLIQUE 147 677 178 253 61 757 P00 ENSEIGNEMENT 40 273 62 322 62 415 Q00 ACTIVITÉS POUR LA SANTÉ HUMAINE ET L'ACTION SOCIALE 50 399 61 348 123 371 R00 AUTRES ACTIVITES COLLECTIVES ET PERSONNELS 117 100 119 883 0 T00 CORRECTION TERRITORIALE 0 0 0 PIB aux couts des facteurs 1 876 710 1 931 596 2 005 061 Impôts sur produits et droits de douane 30 091 87 925 83 897 Produit Intérieur Brut 1 906 801 2 019 521 2 088 958 1.3.12. Équilibre global des ressources et des emplois de l’économie de 2019 à 2021 Entre 2019 et 2021, le PIB nominal a progressé de 1 952,9 milliards à 2 149,6 milliards de FCFA, soit une hausse de 10,1 %, dans un contexte de croissance modérée des ressources totales, passées de 3 808,3 milliards à 3 865,0 milliards de FCFA (+1,5 %). Ce tte évolution a é",
+          "page": 40,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "34 Globalement, la croissance économique observée sur la période a davantage reposé sur la demande intérieure, notamment la consommation privée et publique, que sur l’investissement ou la contribution du commerce extérieur. Tableau 14: Equilibre global de la nation en valeur et en million de FCFA Code SCN 2008 2019 2020 2021 TOTAL RESSOURCES 3 808 319 3 830 972 3 865 000 TOTAL EMPLOIS 3 808 319 3 830 972 3 865 000 0P100A Pr PROD. March. Princ. 2 584 966 2 641 148 2 729 797 0P100B Pr PROD. Non March. Princ. 497 261 589 066 604 649 0P100A Sec PROD. March. Second. 14 190 15 722 12 435 0P100B Sec PROD. Non March. Second. 2 053 2 900 4 537 0P7 IMPORT CAF 633 634 494 955 427 514 0D2 IMPOT sur Import 28 443 27 954 31 292 0PM002 MARGE de transport 0 0 0 0PM001 MARGE de commerce 0 0 0 0D200C IMPOT sur export 1 648 1 006 816 IMPOT sur produit 9 576 21 455 18 480 0D3001 Subventions sur produits 0 0 1 0D200A TVA Non Déductible 36 548 36 766 35 479 0P2 CI Prix d'acquisition 1 221 760 1 279 982 1 287 864 0P300A DEPCF PM Prix d'acquisition 1 411 955 1 428 541 1 436 964 0P300B DEPCF PNM Ménages Prix d'acquisition 266 255 290 240 294 501 0P300B DEPCF PNM APU Prix d'acquisition 190 771 245 930 257 6",
+          "page": 41,
+          "terms": [
+            "PIB",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "35 Du côté de la demande, la consommation finale (CF ) des ménages demeure prépondérante malgré un léger recul de la composante marchande, qui passe de 1 412,0 milliards à 1 374,8 milliards de FCFA. La consommation publique non marchande augmente fortement, de 190,8 milliards à 246,2 milliards de FCFA, soutena nt l’activité économique. En revanche, la FBCF diminue de 384,8 milliards à 325,9 milliards de FCFA, indiquant un affaiblissement de l’investissement productif. Les importations réelles reculent de 633,6 milliards à 405,9 milliards de FCFA, tandis que les exportations passent de 295,8 milliards à 240,7 milliards de FCFA, reflétant une contraction des échanges extérieurs. Globalement, la croissance réelle observée sur la période a été davantage portée par la consommation publique et la production intérieure que par l’investissement et le commerce extérieur. Tableau 15: Equilibre global de la nation aux prix de l'année précédente et en million de FCFA Code opération 2019 2020 prix 2019 2021 prix 2020 TOTAL RESSOURCES 3 808 319 3 730 304 3 700 739 TOTAL EMPLOIS 3 808 319 3 730 302 3 700 739 0P100A Pr PROD. March. Princ. 2 584 966 2 550 912 2 606 067 0P100B Pr PROD. Non March. Pr",
+          "page": 42,
+          "terms": [
+            "PIB",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "36 1.3.14. Évolution en volume de l’équilibre global de la nation aux prix de l’année précédente de 2019 à 2021 L’évolution de l’équilibre global de la nation en volume révèle un ralentissement progressif de l’activité économique, avec une croissance réelle du PIB de 3,4 % en 2020 puis de 1,6 % en 2021. Cette croissance a été soutenue principalement par la productio n non marchande principale, qui a progressé de 13,4 % en 2020, traduisant l’expansion des services publics, avant de se stabiliser en 2021 (+0,1 %). En revanche, la production marchande principale a enregistré des baisses successives de 1,3 % en 2020 et 1,3 % en 2021, signalant un affaiblissement des activités productives marchandes. Les échanges extérieurs se sont fortement contractés, avec une baisse des importations de 19,6 % en 2020 et de 18,0 % en 2021, tandis que les exportations ont diminué de 15,5 % puis de 1,6 %. Du côté de la demande, la consommation finale marchande des ménages a légèrement reculé (-0,4 % puis -3,8 %), alors que la consommation publique non marchande a fortement progressé en 2020 (+27,9 %) avant de se stabiliser en 2021 (+0,1 %). La Formation Brute de Capital Fixe (FBCF) a diminué de 13,7 % e",
+          "page": 43,
+          "terms": [
+            "PIB"
+          ]
+        },
+        {
+          "excerpt": "37 DEPCF PNM IPSBL Prix d'acquisition 18,07 -7,22 FBCF Prix d'acquisition -13,69 -1,07 VS Finis Prix d'acquisition -22 110,4 -18,96 VS MAT 1ere Prix d'acquisition -5 294,2 EXPORT Prix d'acquisition -15,45 -1,62 PIB au prix constant de 2019 3,41 1,60",
+          "page": 44,
+          "terms": [
+            "PIB"
+          ]
+        },
+        {
+          "excerpt": "38 DEUXIEME PARTIE : LES COMPTES DES SECTEURS INSTITUTIONNELS Cette seconde partie est consacrée à l’analyse détaillée des comptes des secteurs institutionnels de l’économie centrafricaine sur la période 2019 –2021. Elle permet d’examiner le comportement économique des principaux agents, ménages, entreprises, administrations publiques, institutions financières et institutions sans but lucratif à travers leurs opérations de production, de répartition des revenus et d’utilisation des ressources. L’objectif est de mettre en évidence les dynamiques spécifiques propres à chaque secteur, notamment en termes de création de richesse, de productivité, d’emploi et de génération de revenus. Une attention particulière est portée au rôle prépondérant du secteur informel, ainsi qu’aux disparités entre secteurs formels et informels. Cette analyse permet également d’identifier les contributions respectives des différents secteurs institutionnels à la formation du PIB et de comprendre les déséquilibres structurels qui caractérisent l’économie nationale, notamment la faible formalisation de l’emploi et la prédominance des activités à faible productivité. Enfin, cette partie met en perspective les in",
+          "page": 45,
+          "terms": [
+            "PIB",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "39 Globalement, malgré un e croissance réelle positive du PIB, l’économie a été marquée par une réduction des échanges extérieurs et de l’investissement, la croissance étant principalement soutenue par la consommation publique et la production non marchande. Tableau 17: Equilibre global de la nation aux prix de 2019 en 000 000 de FCFA Code SCN 2008 2019 Indice de volume 2020 prix 2019 Indice volume 2021 prix 2019 TOTAL RESSOURCES 3 808 319 0,6649 2 532 011,9 0,9660 2 445 936,7 TOTAL EMPLOIS 3 808 319 0,6649 2 532 010,5 0,9660 2 445 935,4 0P100A Pr PROD. March. Princ. 2 584 966 0,9868 2 550 912 0,9867 2517 029,6 0P100B Pr PROD. Non March. Princ. 497 261 11,340 563 871 10,010 564 424,3 0P100A Sec PROD. March. Second. 14 190 11,574 16 423 0,6716 11 029,8 0P100B Sec PROD. Non March. Second. 2 053 0,7915 1 625 16,079 2 612,9 0P7 IMPORT CAF 633 634 0,8042 509 548 0,8201 417 876,6 0D2 IMPOT sur Import 28 443 0,9915 28 200 10,861 30 627,2 0PM002 MARGE de transport 0 0PM001 MARGE de commerce 0 0D200C IMPOT sur export 1 648 0,6359 1 048 0,8757 917,8 IMPOT sur produit 9 576 22,808 21 841 0,8582 18 743,3 0D3001 Subventions sur produits 0 0D200A TVA Non Déductible 36 548 10,079 36 836 0,9314 34",
+          "page": 46,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "40 Code SCN 2008 2019 Indice de volume 2020 prix 2019 Indice volume 2021 prix 2019 TOTAL RESSOURCES 3 808 319 0,6649 2 532 011,9 0,9660 2 445 936,7 TOTAL EMPLOIS 3 808 319 0,6649 2 532 010,5 0,9660 2 445 935,4 P5200A VS MAT 1ere Prix d'acquisition 0 0P6 EXPORT Prix d'acquisition 295 813 0,8455 250 105 0,9838 246 056,1 PIB PIB au prix constant de 2005 1 952 925 10,341 2 019 521 10,160 2 051 859,3",
+          "page": 47,
+          "terms": [
+            "PIB",
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "41 2.2. Les comptes de production et d'exploitation En 2019, l’économie est dominée par le secteur informel qui représente environ 1 966,7 milliards de FCFA de production marcha nde, soit près de 87 % du total, confirmant son poids central. La valeur ajoutée brute atteint 1 813,0 milliards de FCFA, dont environ 71 % proviennent de l’informel, ce qui en fait le principal créateur de richesse. Toutefois, la productivité y est très faible avec une valeur ajoutée par emploi de 0,54 %, contre 5,30 % dans le secteur form el estimé. Les administrations publiques affichent une productivité intermédiaire (4,55 de production par emploi). Le revenu d’exploitation total s’élève à 1 424,7 milliards de FCFA, dont près de 79 % générés par l’informel. L’emploi est majoritairement non salarié, dominé par les entrepreneurs individuels (1 562 682) et les aides familiaux (407 764). Le secteur formel reste limité mais plus productif et mieux structuré. Cf. tableau 17 ci-dessous Tableau 18: Les comptes de production et d’exploitation de l’économie nationale en 2019, en volume, valeur et en million de FCFA Code SCN 2008 Administrations Publiques DSF Formel estimé ISBL Informel Ménage TOTAL 0P100A Product",
+          "page": 48,
+          "terms": [
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "42 Code SCN 2008 Administrations Publiques DSF Formel estimé ISBL Informel Ménage TOTAL 0D1002002 Contributions sociales imputées des employeurs 489 489 0 0 0 0 978 0D200E Autres Impôts sur la production 0 0 877 0 212 0 1 089 0D3009 Subventions sur la production 0 0 0 0 0 0 0 B0A Revenu d'exploitation 46 592 46 592 130 424 7 973 1 121 265 71 861 1 424 707 AN1001 Actifs produits fixes 56 141 56 141 0 0 0 0 112 282 0E1001001 Salariés déclarés 40 459 40 459 16 227 10 691 0 0 107 836 0E1001002 Salariés non déclarés 0 0 8 177 9 166 211 158 13 672 242 173 0E1002001 Entrepreneurs individuels : Patrons 0 0 1 692 3 057 199 875 5 925 210 549 0E1002002 Entrepreneurs individuels pour compte propre 0 0 2 091 3 933 1 555 710 948 1 562 682 0E1003 Aides familiaux 0 0 87 1 363 406 314 0 407 764 Indicateurs d’activités P1/E1 Production par emploi 4,55 4,55 10,01 1,51 0,91 4,70 1,24 B1/E1 Valeur ajoutée par emploi 3,31 3,31 5,30 1,01 0,54 3,78 0,75 D11A/E111 Salaire moyen des salariés déclarés 1,68 1,68 0,58 1,77 1,71 D11B/E112 Salaire moyen des salariés non déclarés 0,93 0 0,79 0,43 0,82 P2/[P11->P13] Taux de consommation intermédiaire 0,27 0,27 0,47 0,33 0,40 0,19 0,39 BA/E1 Revenu d'exploitation p",
+          "page": 49,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "43 2.2.1. Comptes de production et d’exploitation de l’économie nationale par secteur institutionnel en 2020 En 2020, la production marchande principale s’élève à 2 584,97 milliards de FCFA, dont une contribution dominante du secteur informel estimée à 1 966,65 milliards, confirmant son rôle central dans la création de richesse. La production non marchande princi pale atteint 497,26 milliards, portée par les administrations publiques à hauteur de 238,11 milliards, ce qui traduit leur poids dans les services collectifs. La c onsommation intermédiaire totale est de 1 221,76 milliards de FCFA, représentant une part importante des coûts de production. La valeur ajoutée brute s’établit à 1 876,71 milliards de FCFA, dont 1 288,89 milliards (≈69 %) proviennent de l’informel, illustrant la domination structurelle de ce secteur. Cf. tableau 18 ci-dessous Les administrations p ubliques génèrent 172,57 milliards de valeur ajoutée, devant le s DSF pour les entreprises financières et non financières (197,82 milliards) et le formel estimé (149,71 milliards). Le revenu d’exploitation total atteint 1 519,45 milliards, largeme nt dominé par l’informel (1 121,27 milliards). L’emploi est majoritairem",
+          "page": 50,
+          "terms": [
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "44 Code SCN 2008 Opération Administrations Publiques DSF Formel estimé ISBL Informel Ménage TOTAL 0D100100A Salaires bruts des salariés déclarés 51 459 42 572 9 387 18 973 0 0 139 099 0D100100B Salaires bruts des salariés non déclarés 18 943 0 7 634 1 167 409 5 824 198 868 0D1002001 Contrib. soc. effec. à la charge des employeurs 6 128 4 207 1 390 1 541 0 0 8 011 0D1002002 Contributions sociales imputées des employeurs 210 13 0 0 0 0 502 0D200E Autres Impôts sur la production 32 9 694 877 0 212 0 10 783 0D3009 Subventions sur la production 0 0 0 0 0 0 0 B0A Revenu d'exploitation 95 793 141 332 130 424 7 973 1 121 265 71 861 1 519 447 AN1001 Actifs produits fixes 81 837 1 821 0 0 0 0 57 962 0E1001001 Salariés déclarés 43 063 14 074 16 227 10 691 0 0 81 451 0E1001002 Salariés non déclarés 0 0 8 177 9 166 211 158 13 672 242 173 0E1002001 Entrepreneurs individuels : Patrons 0 248 1 692 3 057 199 875 5 925 210 797 0E1002002 Entrepreneurs individuels pour compte propre 0 673 2 091 3 933 1 555 710 948 1 563 355 0E1003 Aides familiaux 0 72 87 1 363 406 314 0 407 836 Indicateurs d’activités P1/E1 Production par emploi 5,57 22,71 10,01 1,51 0,91 4,70 1,24 B1/E1 Valeur ajoutée par emploi 4,01",
+          "page": 51,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "45 Code SCN 2008 Opération Administrations Publiques DSF Formel estimé ISBL Informel Ménage TOTAL BA/[E12+E13] Revenu moyen des entrepreneurs 142,3 33,70 0,95 0,52 0,70 D12/D11A Taux de cotisation sociale 0,15 0,30 0,09 0,14 0,10 2.2.2. Comptes de production et d’exploitation de l’économie nationale par secteur institutionnel en 2021 En 2021, la production marchande principale atteint 2 729,8 milliards de FCFA, dont une contribution dominante du secteur inf ormel estimée à 2 115,6 milliards, confirmant sa place structurelle dans l’économie. La production non marchande principale s’élève à 604,6 milliards, avec 248,5 milliards réalisés par les administrations publiques, traduisant leur rôle central dans les services collectifs. La consommat ion intermédiaire totale est de 1 287,9 milliards, ce qui reflète un niveau important de coûts de production dans l’économie nationale. Cf. tableau 19 ci-dessous La valeur ajoutée brute atteint 2 063,6 milliards de FCFA, dont environ 1 472,9 milliards (≈71 %) générés par l’informel, con firmant la dépendance persistante à ce secteur. Les administrations publiques produisent 179,96 milliards de valeur ajoutée, devant le DSF (242,79 milliards) et l",
+          "page": 52,
+          "terms": [
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "46 Code SCN 2008 Administrations Publiques DSF Formel estimé ISBL Informel Ménage TOTAL 0P100B Production non marchande secondaire 0 3 386 0 1 151 0 0 4 537 0P2 Consommation Intermédiaire 70 434 187 383 70 835 16 243 938 085 4 884 1 287 864 B01 Valeur ajoutée brute 179 957 242 792 119 726 34 770 1 472 880 13 429 2 063 554 0D100100A Salaires bruts des salariés déclarés 46 901 53 844 5 331 16 400 546 0 123 022 0D100100B Salaires bruts des salariés non déclarés 20 067 3 7 257 0 139 859 9 226 176 412 0D1002001 Contrib. soc. effec. à la charge des employeurs 6 454 4 859 1 384 3 083 0 0 15 780 0D1002002 Contributions sociales imputées des employeurs 0 1 648 0 0 0 0 1 648 0D200E Autres Impôts sur la production 32 17 343 0 0 4 927 0 22 302 0D3009 Subventions sur la production 0 1 496 0 0 0 0 1 496 B0A Revenu d'exploitation 106 503 163 599 105 754 15 287 1 327 548 4 203 1 722 894 AN1001 Actifs produits fixes 0 0 0 0 0 0 0 0E1001001 Salariés déclarés 42 425 10 462 8 614 10 275 4 792 0 76 568 0E1001002 Salariés non déclarés 0 391 688 0 338 124 178 339 381 0E1002001 Entrepreneurs individuels : Patrons 0 299 0 0 207 448 0 207 747 0E1002002 Entrepreneurs individuels pour compte propre 0 77 0 0 1",
+          "page": 53,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "47 Code SCN 2008 Administrations Publiques DSF Formel estimé ISBL Informel Ménage TOTAL D11B/E112 Salaire moyen des salariés non déclarés 0,01 10,55 0,41 51,83 0,52 P2/[P11->P13] Taux de consommation intermédiaire 0,28 0,44 0,37 0,32 0,39 0,27 0,38 BA/E1 Revenu d'exploitation par emploi 2,51 14,55 11,37 1,19 0,51 23,61 0,65 BA/[E12+E13 ] Revenu moyen des entrepreneurs 421,6 0,59 0,77 D12/D11A Taux de cotisation sociale 0,15 0,62 0,16 0,30 0 0,23 2.3. Indicateurs par secteur institutionnel 2.3.1. Comptes de production et d’exploitation des Administrations publiques : évolution en volume, valeur et structure (2019–2021) Entre 2019 et 2021, les administrations publiques connaissent une progression globale de leur activité productive, avec une hausse de la production marchande principale de 1,28 milliard à 1,56 milliard de FCFA, so it une évolution positive malgré des fluctuations en volume. La production non marchande principale augmente fortement de 181,25 milliards à 248,52 milliards de FCFA, confirmant le rôle central de l’État dans la fourniture de services collectifs. La consom mation intermédiaire passe de 49,99 milliards à 70,43 milliards de FCFA, traduisant une hausse des coût",
+          "page": 54,
+          "terms": [
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "48 Tableau 21: Evolution des comptes de production d’exploitation des Administrations publiques en (million de FCFA, volume, valeur) Code SCN 2008 Opération 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 0P100A Production marchande principale 1 282 113,1 1 450 1,02 1 481 101,6 1 505 1,04 1 561 0P100B Production non marchande principale 181 249 130,4 236 329 1,01 238 109 100 238 227 1,04 248 518 0P100A Production marchande secondaire 522 26,2 137 1,24 170 12,4 21 14,86 312 0P100B Production non marchande secondaire 1 061 0 0 0 0 0 0P2 Consommation Intermédiaire 49 993 130,8 65 395 1,03 67 195 101 67 862 1,04 70 434 B01 Valeur ajoutée brute 134 121 128,6 172 521 1 172 565 99,6 171 891 1,05 179 957 0D100100 A Salaires bruts des salariés déclarés 68 167 129,9 88 543 0,58 51 459 99,4 51 148 0,92 46 901 0D100100B Salaires bruts des salariés non déclarés 18 000 11,7 2 100 9,02 18 943 99,6 18 875 1,06 20 067 0D1002001 Contrib. soc. effec. à la charge des employeurs 873 687,7 6 004 1,02 6 128 99,5 6 099 1,06 6 454 0D1002002 Contributions sociales imputées des employeurs 489 0 0 210 0 0 0 0D200E Autres Impôts sur la production 0 0 32 0 0 32 0D3009 Subventions sur la pro",
+          "page": 55,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "49 2.3.2. Évolution des comptes de production et d’exploitation des sociétés et quasi-sociétés (2019-2021) En 2021, les sociétés et quasi -sociétés enregistrent une production marchande principale de 598,4 milliards de FCFA, légèrement inférieure à celle de 2019 (602,9 milliards), traduisant une stagnation globale du secteur. Après une hausse en 2020, la production recule en volume en 2021 (indice 88,1 %), indiquant une contraction réelle de l’activité malgré des effets de prix modérés. La production non marchande reste marginale mais progresse légèrement de 9,05 à 9,69 milliards de FCFA sur la période. Cf. tableau 21 ci-dessous La consommation intermédiaire diminue de 277,6 milliards à 258,2 milliards de FCFA, ce qui traduit une réduction des coûts de production. La valeur ajoutée brute augmente toutefois légèrement de 347,5 milliards à 362,5 milliards de FCFA, soit une progression de +4,3 %, suggérant une amélioration relative de l’efficacité productive. Le revenu d’exploitation, en revanche, diminue de 271,8 milliards à 269,4 milliards de FCFA, montrant une stagnation de la rentabilité globale. Sur le plan de l’emploi, les effectifs salariés déclarés chutent fortement de 30 301 ",
+          "page": 56,
+          "terms": [
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "50 Code SCN 2008 Opération 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 0D100100A Salaires bruts des salariés déclarés 51 959 118,3 61 482 0,88 54 169 102,7 55 645 1,06 59 175 0D100100B Salaires bruts des salariés non déclarés 7 634 90,4 6 901 1,02 7 035 0,4 31 234,2 7 260 0D1002001 Contrib. soc. effec. à la charge des employeurs 5 597 107,8 6 035 0,85 5 109 72,8 3 721 1,68 6 243 0D1002002 Contributions sociales imputées des employeurs 13 13,08 170 0,04 6 0 0 1 648 0D200E Autres Impôts sur la production 10 571 0 0 7 271 0 0 17 343 0D3009 Subventions sur la production 0 0 34 0 0 1 496 B0A Revenu d'exploitation 271 756 104,3 283 366 1,07 303 488 91,6 278 038 0,97 269 353 AN1001 Actifs produits fixes 1 821 0 0 0 0 0 0E1001001 Salariés déclarés 30 301 179,8 54 475 1 54 475 39,6 21 569 0,88 19 076 0E1001002 Salariés non déclarés 8 177 55,5 4 537 1 4 537 23,8 1 079 1 1 079 0E1002001 Entrepreneurs individuels : Patrons 1 940 87,9 1 706 1 1 706 17,5 299 1 299 0E1002002 Entrepreneurs individuels pour compte propre 2 764 44,9 1 241 1 1 241 6,2 77 1 77 0E1003 Aides familiaux 159 14,5 23 1 23 52,2 12 1 12",
+          "page": 57,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "51 2.3.3. Comptes de production et d’exploitation des institutions sans but lucratif au service des ménages : évolution en volume, valeur et structure (2019–2021) Entre 2019 et 2021, les institutions sans but lucratif au service des ménages (ISBL) affichent une évolution globalement instable mais orientée à la hausse en valeur. La production marchande principale passe de 6,81 milliards à 6,48 milliards de FCFA, soit une légère baisse nominale, malgré une forte volatilité en volume (indice atteignant 458,6 en 2021, traduisant des ruptures statistiques ou des changements de base). La production non marchande principale augmente de 34,26 milliards à 41,18 milliards de FCFA, confirmant le rôle croissant des ISBL dans les services sociaux et communautaires. La consommation intermédiaire progresse de 14,06 milliards à 16,24 milliards de FCFA, avec un pic en 2020 (17,48 milliards), traduisant une intensification temporaire de l’activité. La valeur ajoutée brute augmente globalement de 28,49 milliards à 34,77 milliards d e FCFA, soit une hausse d’environ +22 %, malgré des fluctuations importantes en volume. Le revenu d’exploitation connaît une évolution irrégulière mais positive, passant d",
+          "page": 58,
+          "terms": [
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "52 Tableau 23: Evolution des comptes de production et d’exploitation des institutions sans but lucratif au service des ménages en (valeur, v olume et million de FCFA) Code SCN 2008 Opération 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 0P100A Production marchande principale 6 811 91,1 6 208 1,02 6 305 458,6 28 913 0,22 6 484 0P100B Production non marchande principale 34 256 118,6 40 617 1,08 43 699 92,5 40 415 1,02 41 175 0P100A Production marchande secondaire 487 99,8 486 1,06 516 304,5 1 571 1,40 2 203 0P100B Production non marchande secondaire 992 110,6 1 097 1,01 1 113 102,5 1 141 1,01 1 151 0P2 Consommation Intermédiaire 14 058 120,1 16 877 1,04 17 478 124,8 21 814 0,74 16 243 B01 Valeur ajoutée brute 28 488 110,7 31 531 1,08 34 155 147,1 50 226 0,69 34 770 0D100100A Salaires bruts des salariés déclarés 18 973 112,6 21 359 0,92 19 697 156,3 30 793 0,53 16 400 0D100100B Salaires bruts des salariés non déclarés 1 300 3 0,33 1 100 1 0 0 0D1002001 Contrib. soc. effec. à la charge des employeurs 1 541 121 1 864 0,76 1 418 70,9 1 005 3,07 3 083 0D1002002 Contributions sociales imputées des employeurs 0 0 0 0 0 0D200E Autres Impôts sur la production 0 0 0 0 0 ",
+          "page": 59,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "53 Code SCN 2008 Opération 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 0E1001002 Salariés non déclarés 9 166 0 0 0 0 0 0E1002001 Entrepreneurs individuels : Patrons 3 057 0 0 0 0 0 0E1002002 Entrepreneurs individuels pour compte propre 3 933 0 0 0 0 0 0E1003 Aides familiaux 1 363 16,35 22 286 1 22 286 11,4 2 532 1 2 532 2.3.4. Évolution des comptes de production et d’exploitation des ménages (2019-2021) Entre 2019 et 2021, les unités de production informelles enregistrent une augmentation significative de leur activité nominale, avec une production marchande principale passant d e 1 966,7 milliards à 2 115,6 milliards de FCFA, soit une hausse d’environ +7,6 %. La production non marchande progresse fortement de 183,6 milliards à 294,7 milliards de FCFA, traduisant un renforcement des activités de subsistance et des services informels. Cf. tableau 23 ci-dessous La consommation intermédiaire augmente de 861,3 milliards à 938,1 milliards de FCFA, indiquant une intensification des intran ts utilisés dans le secteur. La valeur ajoutée brute s’accroît de 1 288,9 milliards à 1 472,9 milliards de FCFA, soit une progression de +14,3 %, confirmant le rôle central du s",
+          "page": 60,
+          "terms": [
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "54 Tableau 24: Evolution du compte d’exploitation des unités de production informelles en (valeur, volume, million de FCFA) Code SCN 2008 Opération 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 0P100A Production marchande principale 1 966 651 96,9 1 904 818 1,03 1 952 989 101,1 1 975 445 1,07 2 115 587 0P100B Production non marchande principale 183 584 102,1 187 427 1,04 194 091 150,6 292 342 1,01 294 746 0P100A Production marchande secondaire 0 0 598 102,5 613 1,03 632 0P100B Production non marchande secondaire 0 0 0 0 0 0P2 Consommation Intermédiaire 861 349 98,4 847 438 1,01 854 478 106,5 910 320 1,03 938 085 B01 Valeur ajoutée brute 1 288 886 96,6 1 244 807 1,04 1 293 200 105 1 358 080 1,08 1 472 880 0D100100A Salaires bruts des salariés déclarés 0 67 43,36 2 905 18,8 547 1 546 0D100100B Salaires bruts des salariés non déclarés 167 409 101 169 077 0,81 137 772 93,9 129 403 1,08 139 859 0D1002001 Contrib. soc. effec. à la charge des employeurs 0 0 0 0 0 0D1002002 Contributions sociales imputées des employeurs 0 0 0 0 0 0D200E Autres Impôts sur la production 212 0 0 194 10,47 2 031 2,43 4 927 0D3009 Subventions sur la production 0 0 0 0 0 B0A Revenu d'explo",
+          "page": 61,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "55 Code SCN 2008 Opération 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 AN1001 Actifs produits fixes 0 0 0 0 0 0E1001001 Salariés déclarés 0 2 462 1 2 462 194,6 4 792 1 4 792 0E1001002 Salariés non déclarés 211 158 129,9 274 268 1 274 268 123,3 338 124 1 338 124 0E1002001 Entrepreneurs individuels : Patrons 199 875 101,9 203 581 1 203 581 101,9 207 448 1 207 448 0E1002002 Entrepreneurs individuels pour compte propre 1 555 710 101,9 1 584 553 1 1 584 553 101,9 1 614 659 1 1 614 659 0E1003 Aides familiaux 406 314 101,9 413 866 1 413 866 101,9 421 714 1 421 714 2.3.5. Comptes de production et d’exploitation des ménages : évolution en volume, valeur et structure (2019–2021) Le secteur des ménages (unités de production informelles) reste un pilier central de l’économie, avec une production marchand e principale globalement stable autour de 7,36 à 7,80 milliards FCFA (+5,9%) entre 2019 et 2021. La production non marchande principale connaît une forte hausse en 2020 (+17,1% en valeur) avant une chute marquée en 2021, traduisant une forte volatilité des activités non monétaires. La valeur ajoutée brute augmente de 77,7 à 91,8 milliards FCFA en 2020, puis recule fort",
+          "page": 62,
+          "terms": [
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "56 Tableau 25: Evolution des comptes de production et d’exploitation des ménages en (valeur, volume et million de FCFA) Code SCN 2008 Libellés 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 0P100A Production marchande principale 7 362 101,9 7 502 1,01 7 614 100 7 614 1,02 7 797 0P100B Production non marchande principale 89 124 102,1 90 961 1,15 104 495 9,4 9 823 1,07 10 516 0P100A Production marchande secondaire 0 0 0 0 0 0P100B Production non marchande secondaire 0 0 0 0 0 0P2 Consommation Intermédiaire 18 801 101,9 19 165 1,06 20 287 21,5 4 367 1,12 4 884 B01 Valeur ajoutée brute 77 685 102,1 79 298 1,16 91 822 14,2 13 070 1,03 13 429 0D100100A Salaires bruts des salariés déclarés 0 0 0 0 0 0D100100B Salaires bruts des salariés non déclarés 5 824 101,6 5 919 1,52 8 968 84,9 7 614 1,21 9 226 0D1002001 Contrib. soc. effec. à la charge des employeurs 0 0 0 0 0 0D1002002 Contributions sociales imputées des employeurs 0 0 0 0 0 0D200E Autres Impôts sur la production 0 0 0 0 0 0D3009 Subventions sur la production 0 0 0 0 0 B0A Revenu d'exploitation 71 861 102,1 73 379 1,13 82 854 6,6 5 456 0,77 4 203 AN1001 Actifs produits fixes 0 0 0 0 0 0E1001001 Salariés déclar",
+          "page": 63,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "57 Code SCN 2008 Libellés 2019 Volume 2020 prix 2019 Prix 2020 Volume 2021 prix 2020 Prix 2021 0E1001002 Salariés non déclarés 13 672 101,9 13 925 1 13 925 1,3 178 1 178 0E1002001 Entrepreneurs individuels : Patrons 5 925 101,9 6 035 1 6 035 0 0 0 0E1002002 Entrepreneurs individuels pour compte propre 948 101,9 966 1 966 0 0 0 0E1003 Aides familiaux 0 0 0 0 0",
+          "page": 64,
+          "terms": [
+            "SCN 2008"
+          ]
+        }
+      ],
+      "file_id": "definitive_accounts_2019_2021",
+      "metadata": {
+        "/Author": "DCNPE",
+        "/CreationDate": "D:20260730091107+02'00'",
+        "/Creator": "Microsoft® Word 2013",
+        "/ModDate": "D:20260730091107+02'00'",
+        "/Producer": "Microsoft® Word 2013"
+      },
+      "page_count": 65,
+      "path": "raw_data/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf",
+      "status": "text_extracted"
+    },
+    {
+      "evidence_pages": [
+        {
+          "excerpt": "Travaux de rebasage du Produit intérieur brut (PIB) de la République centrafricaine, base 2019 selon le Système de comptabilité nationale 2008 (SCN 2008) Aide-mémoire Mission conjointe d’examen des résultats par les partenaires techniques et les pairs (Union Africaine, Burkina Faso, Cameroun et Sénégal) Boali, du 13 au 18 février 2023 Février 2023",
+          "page": 1,
+          "terms": [
+            "PIB",
+            "base 2019",
+            "SCN 2008",
+            "rebasage"
+          ]
+        },
+        {
+          "excerpt": "2 1. Introduction Dans le cadre de la mise en œuvre des activités du Projet de Données Nécessaires à la Prise de Décision (PDNPD) financé par la Banque mondiale en République Centrafricaine, il a été prévu de réaliser plusieurs opérations de production statistique, dont la mise en œuvre du Système de comptabilité nationale (SCN) de 2008 et le rebasage des comptes nationaux. Dans le cadre des activités du rebasage, l’Institut Centrafricain des Statistiques et des Etudes Economiques et Sociales (ICASEES) a organisé une mission conjointe de revue de la nouvelle base des comptes nationaux par les pairs et les partenaires techniques. La mission s’est déroulée du 13 au 18 février 2023 à Boali Chutes (94 km de Bangui). Elle visait à analyser les résultats préliminaires de travaux de changement d’année de base des comptes nationaux, en étudiant notamment les sources de données utilisées, les méthodes mises en œuvre et les calculs effectués. Selon les termes de référence préparés par l’ICASEES, l’objectif principal de la mission était de contribuer à l’amélioration de la qualité des données économiques en général et des comptes nationaux en particulier, produites par la République Centrafri",
+          "page": 2,
+          "terms": [
+            "base 2019",
+            "SCN 2008",
+            "rebasage"
+          ]
+        },
+        {
+          "excerpt": "3 Pour améliorer la couverture des sources de données, la RCA a entrepris des opérations de collecte de données dont les principales sont l’Enquête nationale sur l’agriculture (ENA), l’Enquête harmonisée sur les conditions de vie des ménages (EHCVM), toutes deux réalisées en 2021. L’ENA a permis de couvrir les activités agricoles et l’EHCVM a permis d’estimer la consommation finale des ménages, l’estimation de l’autoconstruction, du loyer imputé ainsi qu’une partie des activités agro-pastorales et d’autres activités informelles non agricoles. D’autres enquêtes et études spécifiques ont également été réalisées dans le cadre du rebasage des comptes, en particulier l’étude sur la mesure de la production du portage d’eau par les ménages, l’enquête sur les professionnels du sexe, l’enquête sur les médias, l’enquête sur les marges de commerce et de transport, etc. Le changement de l’année de base a suscité l’adoption de nouvelles nomenclatures et des changements d’ordre méthodologiques. A ce titre la RCA a élaboré et adopté les nomenclatures suivantes :  les nomenclatures d’activité (NARCA) avec 307 branches et de produits (NOPRCA) avec 932 produits selon la CITI rev4, CPC rev2.1, NAEMA",
+          "page": 3,
+          "terms": [
+            "base 2019",
+            "SCN 2008",
+            "rebasage"
+          ]
+        },
+        {
+          "excerpt": "4 en compte avant la programmation du partage des résultats du rebasage des comptes avec les partenaires au niveau national. Par ailleurs, l’élaboration des comptes économiques intégrés a été entamée (TCEI) et devra être poursuivie pour l’année de base 2019. 3. Principales conclusions et recommandations de la mission Les principales conclusions de la mission sont les suivantes : a. Le Projet de Données Nécessaires à la Prise de Décision (PDNPD), financé par la Banque mondiale, a fourni un appui décisif aux travaux de rebasage des comptes nationaux de la République centrafricaine. b. La Coordination de ce projet, l’équipe des comptables nationaux ainsi que le Consultant international chargé de les assister, ont fourni un travail considérable pour mettre en place une nouvelle base de calcul du PIB et méritent d’être encouragés et félicités. c. Les experts saluent les efforts consentis pour la mobilisation des sources de données disponibles, la conduite et l’exploitation de nouvelles opérations de collectes, en particulier les opérations de grande envergure à savoir l’Enquête nationale agricole (ENA 2021) et l’Enquête harmonisée sur les conditions de vie des ménages (EHCVM). d. Toutef",
+          "page": 4,
+          "terms": [
+            "PIB",
+            "base 2019",
+            "SCN 2008",
+            "rebasage"
+          ]
+        },
+        {
+          "excerpt": "5 l. Engager les travaux de rétropolation des comptes nationaux le plus tôt que possible pour disposer d’une longue série pour les économistes / modélisateurs. m. Préparer la documentation sur les méthodes d’élaboration des comptes nationaux adoptées pour la mise en place de la nouvelle série des comptes nationaux. n. Assurer une production régulière et à jour des comptes nationaux. o. Prendre les dispositions nécessaires en vue d’assurer une production régulière des indicateurs conjoncturels d’activités qui sont très utiles pour l’élaboration des comptes nationaux en année courante. p. Mettre en place et maintenir à jour un répertoire d’entreprises à des fins statistiques pour, entre autres, mieux apprécier le degré de couverture des entreprises fournissant des données comptables. q. Mettre en œuvre les recommandations techniques formulées par la mission (Cf. à la section 4 infra.) A l’attention de la Banque mondiale et des autres institutions partenaires : r. Poursuivre l’accompagnement institutionnel et financier des travaux d’élaboration des comptes nationaux en vue de pérenniser les acquis. s. Appuyer le pays dans la conduite de grandes opérations statistiques pour une meilleu",
+          "page": 5,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "6  Calcul de la FBCF : faire attention à la valorisation des cessions d’actifs (tenir compte des plus ou moins-value de cession). Secteur informel  Réaliser des études monographiques ciblées notamment sur le secteur extractif.  Prévoir, à l’avenir, des enquêtes sur le secteur informel permettant, en sus de la production, de disposer d’informations sur les intrants et les autres charges des unités de production informelle (UPI). Marges de commerce  Déterminer des taux de marge de commerce par produit et par emploi (CI, CF, FBCF, …) : possibilité d’utiliser, par exemple, les taux de marge des grossistes ou demi- grossistes pour la FBCF et la CI, et ceux des détaillants pour la CF.  Redresser les taux de marges des produits périssables à la baisse en tenant compte des taux de perte entre l’achat et la revente de ces marchandises. Banque centrale  Utiliser la méthode des coûts de production pour estimer la production de la Banque centrale en incluant une estimation de la CCF.  S’inspirer de la méthode mise en œuvre par le Cameroun (pour l’année de base 2016) à des fins d’harmonisation méthodologique au sein des pays membres de la CEMAC. Banques commerciales  Prendre en compte l",
+          "page": 6,
+          "terms": [
+            "SCN 2008"
+          ]
+        },
+        {
+          "excerpt": "7  Tenir compte de la production marchande résiduelle (Pm) avant de calculer la production non marchande des ISBLSM (Pnm = P – Pm).  Déterminer les marges pour l’activité commerciale au lieu de prendre les ventes comme production. Education privée  Actualiser les coûts de scolarité du cycle du PCI 2017 avec l’évolution des prix des services d’éducation suivis dans l’Indice des prix à la consommation (IPC). Activités illégales  Pour l’activité des TS, estimer également la valeur de la production pour les rapports non protégés. Consommation finale des ménages  Prendre en compte les dons dans l’estimation de la consommation finale des ménages à partir de l’EHCM.  Evaluer la consommation finale en « produits en plastique, en caoutchouc et matériaux minéraux (C07) » dont la valeur est nulle dans les résultats préliminaires. Commerce extérieur  Calage à la Balance des paiements : essayer de cibler des produits spécifiques sur lesquels porter les corrections plutôt que de procéder à une correction sur tous les produits en proportion de leur valeur.  Pour les « produits en plastique, en caoutchouc et matériaux minéraux (C07) » et les « ouvrage en métaux et travail des métaux », vér",
+          "page": 7,
+          "terms": [
+            "base 2019",
+            "SCN 2008",
+            "milliards"
+          ]
+        },
+        {
+          "excerpt": "8  Entreprendre les travaux de rétropolation des comptes nationaux dans les meilleurs délais afin de reconstituer la série des années de comptes antérieures selon le SCN 2008. Pour accompagner ce processus, l’Union Africaine, à travers STATAFRIC, s’est engagée à apporter un appui financier à l’ICASEES pour : - la prise en charge de la formation des comptables nationaux sur le processus d’élaboration d’une année courante de comptes nationaux avec ERETES ; - la saisie des documents comptables des entreprises pour les exercices 2020 et 2021.",
+          "page": 8,
+          "terms": [
+            "SCN 2008"
+          ]
+        }
+      ],
+      "file_id": "gdp_rebasing_memo_2019",
+      "metadata": {
+        "/Author": "Mamadou Ngalgou KANE",
+        "/CreationDate": "D:20230306120945Z",
+        "/Creator": "Microsoft® Word 2013",
+        "/ModDate": "D:20260807130551+01'00'",
+        "/Producer": "Microsoft® Word 2013"
+      },
+      "page_count": 9,
+      "path": "raw_data/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf",
+      "status": "text_extracted"
+    }
+  ],
+  "report_id": "20261102T191832Z",
+  "report_schema_version": 1,
+  "report_type": "icasees_national_accounts",
+  "side_effects": {
+    "canonical_database_written": false,
+    "historical_and_revised_series_spliced": false,
+    "normalized_observations_created": false,
+    "release_promoted": false,
+    "source_selection_policy_changed": false
+  },
+  "snapshot_id": "manual_2026-07-16",
+  "source_id": "icasees_national_accounts",
+  "unit_assessment": {
+    "observed_unit_labels": [
+      "millions de F CFA"
+    ],
+    "reason": "Workbook data rows label the GDP and value-added observations as millions de F CFA, while the Dataset sheet describes current-price gross value added in billions de FCFA. This is a scale-label conflict affecting GDP components; no conversion is authorized until the official PDF evidence resolves it.",
+    "status": "unresolved"
+  },
+  "validation_checks": {
+    "Donnee_2019_gdp_equals_vab_plus_taxes": true,
+    "Donnee_2019_sector_vab_equals_total_vab": true,
+    "Donnee_2020_gdp_equals_vab_plus_taxes": true,
+    "Donnee_2020_sector_vab_equals_total_vab": true,
+    "Donnee_2021_gdp_equals_vab_plus_taxes": true,
+    "Donnee_2021_sector_vab_equals_total_vab": true,
+    "Donnée nouvelle_2019_gdp_equals_vab_plus_taxes": true,
+    "Donnée nouvelle_2019_sector_vab_equals_total_vab": true,
+    "Donnée nouvelle_2020_gdp_equals_vab_plus_taxes": true,
+    "Donnée nouvelle_2020_sector_vab_equals_total_vab": true,
+    "Donnée nouvelle_2021_gdp_equals_vab_plus_taxes": true,
+    "Donnée nouvelle_2021_sector_vab_equals_total_vab": true,
+    "Donnée_SCN2008_2019_gdp_equals_vab_plus_taxes": true,
+    "Donnée_SCN2008_2020_gdp_equals_vab_plus_taxes": true,
+    "Donnée_SCN2008_2021_gdp_equals_vab_plus_taxes": true,
+    "gdp_2019_overlap": {
+      "absolute_difference": 520.9337783937915,
+      "historical_value": 1431.9912216062085,
+      "relative_difference_percent": 36.37828015520099,
+      "revised_value": 1952.925
+    },
+    "historical_gdp_presentations_agree_2013": true,
+    "historical_gdp_presentations_agree_2014": true,
+    "historical_gdp_presentations_agree_2015": true,
+    "historical_gdp_presentations_agree_2016": true,
+    "historical_gdp_presentations_agree_2017": true,
+    "historical_gdp_presentations_agree_2018": true,
+    "historical_gdp_presentations_agree_2019": true,
+    "revised_gdp_presentations_agree_2019": true,
+    "revised_gdp_presentations_agree_2020": true,
+    "revised_gdp_presentations_agree_2021": true
+  },
+  "workbook_inventory": [
+    {
+      "columns": 2,
+      "freeze_panes": null,
+      "merged_ranges": 0,
+      "rows": 11,
+      "sheet": "Metadonnées"
+    },
+    {
+      "columns": 3,
+      "freeze_panes": null,
+      "merged_ranges": 0,
+      "rows": 6,
+      "sheet": "Dataset"
+    },
+    {
+      "columns": 4,
+      "freeze_panes": null,
+      "merged_ranges": 0,
+      "rows": 36,
+      "sheet": "Indicateur"
+    },
+    {
+      "columns": 7,
+      "freeze_panes": null,
+      "merged_ranges": 0,
+      "rows": 36,
+      "sheet": "Donnee"
+    },
+    {
+      "columns": 4,
+      "freeze_panes": null,
+      "merged_ranges": 0,
+      "rows": 36,
+      "sheet": "Indicateur_2005-2019"
+    },
+    {
+      "columns": 72,
+      "freeze_panes": "C1",
+      "merged_ranges": 0,
+      "rows": 36,
+      "sheet": "Donnee_2005-2019"
+    },
+    {
+      "columns": 64,
+      "freeze_panes": "BE1",
+      "merged_ranges": 0,
+      "rows": 36,
+      "sheet": "Donnee_2013-2019"
+    },
+    {
+      "columns": 7,
+      "freeze_panes": null,
+      "merged_ranges": 0,
+      "rows": 36,
+      "sheet": "Donnée nouvelle"
+    },
+    {
+      "columns": 71,
+      "freeze_panes": "C1",
+      "merged_ranges": 0,
+      "rows": 40,
+      "sheet": "Donnée_SCN2008"
+    }
+  ]
+}

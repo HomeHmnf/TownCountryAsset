@@ -1,0 +1,10 @@
+sheet,rows,columns,merged_ranges,freeze_panes
+Metadonnées,11,2,0,
+Dataset,6,3,0,
+Indicateur,36,4,0,
+Donnee,36,7,0,
+Indicateur_2005-2019,36,4,0,
+Donnee_2005-2019,36,72,0,C1
+Donnee_2013-2019,36,64,0,BE1
+Donnée nouvelle,36,7,0,
+Donnée_SCN2008,40,71,0,C1
