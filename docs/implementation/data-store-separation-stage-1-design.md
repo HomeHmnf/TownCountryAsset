@@ -92,11 +92,28 @@ Synchronize stable source identities and configured URLs with `uv run python -m 
 
 ## 8. Owner-run validation record
 
-**Validated locally by the repository owner on 2026-11-05.** The following focused command passed: `uv run --extra dev python -m pytest -v tests/test_project_database_schema.py tests/test_database_schema.py tests/test_application_approval.py` — 24 passed in 0.54 seconds.
+**Validated locally by the repository owner on 2026-11-05.** After the source-catalogue metadata migration and synchronizer were added, the owner pulled through commit `1350053b25d9fcb25dc3937e9b298f7691585cb5` and ran:
 
-The owner then ran `uv run python -m tools.migrate_project_database`; it created `data/project/project_data.sqlite`, advanced schema version 0 to 1, and reported successful SQLite integrity and foreign-key checks. The subsequent `git status --short --branch` showed the branch synchronized with origin and only the two pre-existing deletions of `data/canonical/town_country_asset.sqlite-shm` and `data/canonical/town_country_asset.sqlite-wal`. Those deletions were not staged or restored.
+```fish
+uv run --extra dev python -m pytest -v \
+    tests/test_project_database_schema.py \
+    tests/test_project_source_catalogue.py \
+    tests/test_database_schema.py \
+    tests/test_application_approval.py
+```
 
-This is owner-supplied local validation evidence; no broader test suite or production data migration is implied.
+Result: **28 passed in 0.83 seconds**. This includes the project schema and source-catalogue tests, the existing game database schema tests, and approval/application tests.
+
+The owner then ran:
+
+```fish
+uv run python -m tools.migrate_project_database
+uv run python -m tools.sync_project_source_catalogue
+```
+
+The existing project database upgraded from schema version 1 to 2. SQLite integrity and foreign-key checks passed. The synchronizer reported **31 sources** and **92 source URLs** synchronized. It explicitly reported that no datasets, acquisition streams, acquisitions or source-selection settings were changed.
+
+This is owner-supplied local validation evidence for the focused Stage 1 scope. It does not imply full-suite validation, dataset/stream registration, acquisition, retention, or production data migration.
 
 
 ## Schema version progression
