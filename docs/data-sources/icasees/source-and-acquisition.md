@@ -41,3 +41,8 @@ The project-wide source-management convention says raw snapshots are local/untra
 ## Intended analytical use
 
 The files were acquired to investigate Central African Republic GDP comparability, especially the previously observed differences between IMF WEO and World Bank WDI. The definitive accounts and rebasing memo provide methodological context; the workbook provides machine-readable series. See [dataset structure](dataset-and-workbook-structure.md) and [GDP reconciliation](gdp-scale-and-weo-reconciliation.md).
+
+
+## PDF text derivatives
+
+The two ICASEES PDF snapshots are processed by the shared project service documented in [shared PDF text extraction](../../implementation/pdf-text-extraction.md). Their original bytes remain in `raw_data/`; extracted page text and fingerprint metadata are stored under `derived_data/pdf_text/`. The ICASEES assessment reuses these derivatives rather than maintaining a provider-specific PDF extraction implementation. Text extraction does not OCR image-only pages.
