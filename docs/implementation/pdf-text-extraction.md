@@ -1,6 +1,6 @@
 # Feature: Shared automatic PDF text extraction
 
-> **Status:** Implemented; owner-run unit, integration and initial backfill checks passed  
+> **Status:** Implemented; owner-run unit, integration and tracked-output checks passed  
 > **Owner/work package:** Shared source-management infrastructure  
 > **Target branch:** work/compiler-hardening  
 > **Last updated:** 2026-11-05
@@ -59,7 +59,7 @@ Text extraction is limited to embedded text. A PDF with no extractable page text
 
 - Original raw PDF SHA-256 remains authoritative for source integrity.
 - Derived text has a separate SHA-256 and is not an original provider artifact.
-- Derived outputs are local generated artifacts under a Git-ignored path; they do not change source releases, source-selection policy, normalized observations or canonical SQLite.
+- Derived outputs are generated artifacts under `derived_data/pdf_text/` and are tracked in Git in this repository. They do not change source releases, source-selection policy, normalized observations or canonical SQLite.
 - Existing PDF paths and manifests are not rewritten by the backfill.
 
 ## Safety and operational boundaries
@@ -78,11 +78,11 @@ Owner-run validation on 2026-11-05:
 - [x] `uv run --extra dev python -m pytest -v tests/test_source_registry.py tests/test_icasees_national_accounts_assessment.py` — **29 passed**. This includes automatic extraction during acquisition and preservation of the original PDF when extraction fails.
 - [x] `uv run python -m tools.sources.pdf_text` — completed successfully; `pdf_count: 3`, `text_extracted: 3`, no failures or `no_embedded_text` results.
 - [x] `uv run python -m tools.assess_icasees_national_accounts assess` — passed after backfill; 3/3 source files fingerprinted, structural validation passed, and IMF `CAF.NGDP.A` 2019–2021 cross-check passed. Report: `reports/sources/icasees-national-accounts/20261105T071612Z`.
-- [ ] Verify original PDF fingerprints are unchanged and each text metadata file references the matching source and text hashes.
+- [x] Inspect the tracked derivative tree and all three metadata sidecars in GitHub. All three report `text_extracted`; page coverage is 9/9, 65/65 and 31/31 respectively. The two ICASEES source SHA-256 values match the committed ICASEES acquisition manifest. The metadata records a separate SHA-256 for each extracted text file; a local recomputation of all text hashes remains the final integrity check.
 
 ### Initial backfill result
 
-The first owner-run backfill scanned `/home/hmnf/Projects/Python/TownAndCountry/raw_data` and wrote to `/home/hmnf/Projects/Python/TownAndCountry/derived_data/pdf_text`. It found three PDFs and extracted embedded text from all three (`text_extracted: 3`). The command reported no extraction failures. The output root is generated/local and Git-ignored; it is not a replacement for the original PDFs or their tracked provenance manifests. The absolute paths above identify the reported local run; the repository-relative locations are `raw_data/` and `derived_data/pdf_text/`.
+The first owner-run backfill scanned `/home/hmnf/Projects/Python/TownAndCountry/raw_data` and wrote to `/home/hmnf/Projects/Python/TownAndCountry/derived_data/pdf_text`. It found three PDFs and extracted embedded text from all three (`text_extracted: 3`). The command reported no extraction failures. The output root contains generated derivatives that are tracked in Git; it is not a replacement for the original PDFs or their tracked provenance manifests. The absolute paths above identify the reported local run; the repository-relative locations are `raw_data/` and `derived_data/pdf_text/`.
 
 ## Documentation and related records
 
@@ -94,4 +94,4 @@ The first owner-run backfill scanned `/home/hmnf/Projects/Python/TownAndCountry/
 ## Open questions and next steps
 
 - Decide separately whether OCR is required for any scanned publications; current scope intentionally extracts embedded text only.
-- Consider CI enforcement for stale/missing derived PDF text only after the project decides whether generated derivatives should be tracked or remain local.
+- Add CI enforcement for stale/missing or fingerprint-mismatched tracked PDF text derivatives as a follow-up, if desired.
