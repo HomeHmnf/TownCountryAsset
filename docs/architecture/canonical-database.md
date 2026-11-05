@@ -2,6 +2,8 @@
 
 **Status:** WP1.1–WP1.4 implemented and locally validated by the owner. WP1.5 is in progress; schema v3 and candidate source contracts are committed but await owner-side validation. No consumer cutover is included.
 **Canonical local path:** `data/canonical/town_country_asset.sqlite`
+
+> **Architecture transition notice (2026-11-05):** This document describes the current, still-active schema and historical implementation. The owner has confirmed a target separation into a game-only database and a project source/research database, with two retained successful source versions per acquisition stream. The target is **not implemented**. See the [data-store separation plan](data-store-separation-plan.md); do not treat the current source-provenance columns/tables as the final game DB contract.
 **Schema versioning:** Local database ledger; migration SQL is version-controlled.
 
 ## Scope and authority
