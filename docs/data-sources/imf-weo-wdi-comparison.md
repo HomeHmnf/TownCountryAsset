@@ -128,3 +128,12 @@ uv run python -m tools.investigate_imf_weo_wdi_discrepancies \
 The utility currently prioritizes a small, explicit shortlist: fields 15/16 (Turkmenistan, Guinea, Central African Republic), field 18 (Guinea, Central African Republic, Zimbabwe), field 20 (Tonga, Samoa, Palau), and field 21 (Bahrain, Moldova, Philippines). It emits JSON, Markdown and country-year CSV outputs with source values, signed/absolute differences, direction consistency, IMF status hints and reporting-period metadata.
 
 This is a prioritization and descriptive audit only. It does not fetch original provider records, revision histories, methodological notes beyond those already captured in the comparison, or independent corroboration. It must not infer which provider is correct or explain the cause of a discrepancy. Large relative differences with near-zero WDI denominators require particular caution; inspect absolute values and percentage-point differences for fields 20/21. No database, source registry, policy, approval or release action is performed.
+
+
+## Consolidated semantic assessment (2026-11-05)
+
+The owner-run 2015–2025 comparison produced a complete 13,310-row candidate matrix for 242 project identities × five fields × 11 years, with 9,324 matched numerical observations. Coverage states are: both sources 9,324; IMF only 450; WDI only 1,354; neither 2,182. All 242 identity records remain proposed/unverified, so every row is correctly marked review-required; no identity promotion is implied. IMF code `WBG` and WDI codes `CHI`, `GIB` and `XKX` remain unresolved.
+
+The targeted follow-up analyzed 15 country/field groups and 165 observations without fetching new provider data. Its results have been consolidated with the existing national-source investigations in the [Stage 4 IMF WEO semantic assessment](../implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md). That assessment retains IMF WEO priority for all five fields and records the gates for national-account vintages (15/16), ICP/PPP construction (18), CPI annual reference periods (20), and unemployment units/population/methodology (21). Bahrain's documented field 21 disposition remains closed and unchanged.
+
+The comparison is not vintage-aligned: the IMF input is a fixed October 2026 export and WDI is a live API. No source policy, approval, release state, identity record or canonical database was changed. For the next review bundle, use [the temporary evidence workspace instructions](../../reports/workspaces/imf-weo-semantic-review/README.md).
