@@ -12,7 +12,7 @@ The definitive 2019–2021 accounts publication reports GDP in its detailed tabl
 
 The workbook's revised GDP values are 1,952.925, 2,056.035 and 2,149.622 in Donnee, Donnée nouvelle and the revised block of Donnée_SCN2008. The three workbook presentations agree year by year. These numeric values correspond to **billion FCFA**, not million FCFA. The observation-level label millions de F CFA is inconsistent with the numeric scale and detailed PDF tables; the dataset description's billion-FCFA scale is consistent.
 
-Do not multiply the workbook GDP values when using billion FCFA. To express them in million FCFA, multiply by 1,000. This conclusion is established for GDP only; it must not automatically be generalized to every workbook indicator.
+Do not multiply the workbook GDP values when using billion FCFA. To express them in million FCFA, multiply by 1,000. This conclusion is established for revised GDP only; it must not automatically be generalized to every workbook indicator.
 
 ## IMF WEO cross-check
 
@@ -33,6 +33,18 @@ The October 2026 WEO CSV contains Central African Republic annual national-curre
 The three annual values match exactly at the precision published in the WEO CSV. The WEO metadata identifies these years as preceding the series' latest-actual-year boundary (2022), rather than post-actual projections. This is a value and scale cross-check; it does not prove the two publications used independent underlying compilation inputs.
 
 The companion WEO series CAF.NGDPD.A is current-price GDP in US dollars, billions: 3.333 (2019), 3.577 (2020) and 3.879 (2021). It is not used for the exact reconciliation because it introduces exchange-rate conversion; the domestic-currency series is the direct comparison.
+
+## Automated reproducibility
+
+`tools/assess_icasees_national_accounts.py` now performs this cross-check during `assess`:
+
+- It reuses the October 2026 WEO CSV path and expected SHA-256/byte count recorded by `tools/assess_imf_weo.py`; the WEO snapshot fingerprint is verified before parsing.
+- It requires exactly one `CAF.NGDP.A` series and validates country, indicator label, annual frequency, domestic-currency unit, billion scale, January/December reporting period and latest actual year 2022.
+- It compares the ICASEES revised workbook GDP values in 2019–2021 against the WEO values with a numerical tolerance of 1e-7 billion FCFA.
+- Missing files, fingerprint changes, duplicate series, metadata drift, missing/non-finite values or any value mismatch fail the assessment.
+- The report records the WEO input fingerprint, metadata and year-by-year comparisons in `assessment.json` and the provenance bundle.
+
+This automated cross-check confirms consistency at the published precision. It does not establish independent compilation inputs. The definitive PDF remains the primary evidence for the GDP unit interpretation; the WEO row is corroborating evidence. The test suite covers exact matches, value mismatches and metadata mismatches.
 
 ## 2019 historical/revised break
 
