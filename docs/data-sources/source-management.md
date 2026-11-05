@@ -44,11 +44,27 @@ The generic manager acquires explicitly configured HTTPS resources, including do
 
 The Bahrain annual unemployment API has a dedicated provider adapter, `tools.sources.bahrain_unemployment`, because it is a paginated live API rather than a static download. It reads the `bahrain_open_data` contract from the central registry and writes timestamped raw JSON pages under `raw_data/sources/bahrain_open_data/unemployment_yearly/<UTC timestamp>/` with a checksum manifest under `data_manifests/sources/bahrain_open_data/unemployment_yearly/`. See [Bahrain annual unemployment data acquisition](bahrain-unemployment-data-acquisition.md). The adapter is acquisition-only and does not normalize observations or write to SQLite.
 
-The ICASEES Central African Republic national-accounts workbook and its two supporting PDFs are documented in [ICASEES national accounts](icasees-central-african-republic-national-accounts.md). The source is registered as `icasees_national_accounts` in `config/data_sources.json`, with manual release review and no generic download adapter. Because the three committed files use their existing publication-oriented paths, the dedicated `tools.assess_icasees_national_accounts` CLI records and verifies their checksums without relocating or downloading them. It reuses the central registry and shared source-report writer, inventories the workbook, extracts historical/revised GDP blocks, and inspects PDF text when run with pypdf. It does not promote a release or import observations. See the ICASEES source document for commands and the unresolved unit/scale-label issue.
+The ICASEES Central African Republic national-accounts workbook and its two supporting PDFs are documented in [ICASEES national accounts](icasees-central-african-republic-national-accounts.md). The source is registered as `icasees_national_accounts` in `config/data_sources.json`, with manual release review and no generic download adapter. Because the three committed files use their existing publication-oriented paths, the dedicated `tools.assess_icasees_national_accounts` CLI records and verifies their checksums without relocating or downloading them. It reuses the central registry and shared source-report writer, inventories the workbook, extracts historical/revised GDP blocks, and consumes the shared PDF text derivatives. It does not promote a release or import observations. See the ICASEES source document for commands and the unresolved unit/scale-label issue.
 
 API, Git, manual, subscription, and per-country evidence sources are centrally registered and their endpoint defaults are resolved from this registry, while their existing protocol-specific refreshers retain their specialized validation. Dedicated adapters can be added without changing the registry authority. The shared HTML table extractor is in `tools/sources/html_tables.py`; providers select tables by required headings and receive normalized row dictionaries. Provider adapters add domain-specific identifier, uniqueness, coverage, and semantic checks. The UNSD M49 adapter (`tools/sources/m49.py`) retains all source rows and region columns, while excluding rows without both ISO alpha codes from ISO candidate proposals. Partial or duplicate codes fail validation.
 
 Run the official M49 identity-review refresh with `uv run python -m tools.refresh_m49_iso_review`. It stores the original HTML, a full normalized JSON table retaining M49 codes and regional hierarchy, a normalized ISO candidate CSV, parser/version metadata, checksums, and rows lacking ISO codes; then generates the existing review-only proposal report. It does not change the identity registry or approve assignments. The third-party CSV workflow remains available separately. The M49 page is a rolling reference rather than a versioned file release; to intentionally recapture it, assign a new release identifier to its download entry in `config/data_sources.json` before acquisition. Existing snapshots are never overwritten.
+
+## Shared PDF text derivatives
+
+PDF extraction is a shared source-management behavior, not a provider-specific responsibility. When `acquire_one` receives a file whose content has a PDF signature, it automatically invokes `tools/sources/pdf_text.py` after the original bytes pass the generic response checks. The original PDF remains unchanged under `raw_data/`; embedded text and extraction metadata are written as derived artifacts under `derived_data/pdf_text/`, mirroring the source-relative path.
+
+Each derivative records the original PDF SHA-256, extracted-text SHA-256, page count, pages containing text, pypdf version and document metadata. Existing matching derivatives are reused; incomplete or mismatched derivatives are not overwritten. A PDF extraction failure is recorded in the source manifest without deleting or modifying the successfully acquired original PDF. The extraction is text-layer only: scanned/image-only pages are reported as `no_embedded_text`; OCR is not attempted.
+
+The shared backfill command creates derivatives for PDFs already present in the raw-data tree:
+
+```fish
+uv run python -m tools.sources.pdf_text
+```
+
+It is safe to rerun: matching source/text fingerprints are reused, not rewritten. The command reports failures and returns non-zero if any PDF could not be processed. New PDFs acquired through the shared manager need no separate command. Files manually copied into `raw_data/` outside the manager are not watched by the filesystem; run the backfill command after a manual batch, or invoke the shared extraction function from the relevant adapter.
+
+The ICASEES assessment now calls this same service and reads its page-level text output. It no longer implements a separate PDF extraction path.
 
 ## Pipeline integration
 
