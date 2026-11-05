@@ -64,6 +64,54 @@ def _identity_by_code(path: Path) -> dict[str, str]:
     return result
 
 
+def _identity_country_rows(path: Path, code_to_game: dict[str, str]) -> list[dict[str, Any]]:
+    """Return the full project identity universe with explicit ISO review state."""
+    try:
+        document = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ComparisonError(f"Cannot read identity registry: {exc}") from exc
+    records_by_code = imf.identity_index(path)
+    countries: list[dict[str, Any]] = []
+    seen_game_ids: set[str] = set()
+    for record in document.get("records", []):
+        game_id = record.get("game_id")
+        if not isinstance(game_id, str) or not game_id or game_id in seen_game_ids:
+            continue
+        seen_game_ids.add(game_id)
+        iso = record.get("iso") or {}
+        source = record.get("source") or {}
+        alpha3 = iso.get("alpha3")
+        current_source_id = source.get("current_source_id")
+        lookup_code = alpha3 if isinstance(alpha3, str) and re.fullmatch(r"[A-Z]{3}", alpha3) else (
+            current_source_id if isinstance(current_source_id, str) and re.fullmatch(r"[A-Z]{3}", current_source_id) else None
+        )
+        if lookup_code is None:
+            mapping_status = "missing_three_letter_source_code"
+        elif lookup_code not in code_to_game:
+            matching = records_by_code.get(lookup_code, [])
+            mapping_status = "ambiguous_source_code" if len({x.get("game_id") for x in matching}) > 1 else "unmatched_source_code"
+        elif code_to_game[lookup_code] != game_id:
+            mapping_status = "source_code_maps_to_different_game_id"
+        else:
+            mapping_status = (
+                "mapped_verified"
+                if record.get("status") == "approved"
+                and iso.get("assignment_status") == "verified"
+                and isinstance(alpha3, str)
+                and alpha3 == lookup_code
+                else "mapped_review_required"
+            )
+        countries.append({
+            "game_id": game_id,
+            "country_name": (record.get("names") or {}).get("en") or current_source_id or game_id,
+            "source_iso3": lookup_code,
+            "identity_record_status": record.get("status"),
+            "iso_assignment_status": iso.get("assignment_status"),
+            "identity_mapping_status": mapping_status,
+        })
+    return countries
+
+
 def read_imf_observations(
     csv_path: Path, identity_path: Path, start_year: int, end_year: int
 ) -> tuple[dict[str, dict[tuple[str, int], dict[str, Any]]], dict[str, set[str]]]:
@@ -179,9 +227,11 @@ def build_comparison(
         raise ComparisonError("Invalid comparison year range")
     imf_data, unmatched_imf_codes = read_imf_observations(csv_path, identity_path, start_year, end_year)
     code_to_game = _identity_by_code(identity_path)
+    identity_countries = _identity_country_rows(identity_path, code_to_game)
     country_regions = wdi.fetch_country_regions(get_json)
     indicators: list[dict[str, Any]] = []
     all_pairs: list[dict[str, Any]] = []
+    candidate_matrix: list[dict[str, Any]] = []
 
     for wdi_code, contract in PAIRS.items():
         metadata = wdi.fetch_indicator_metadata(wdi_code, get_json)
@@ -326,6 +376,52 @@ def build_comparison(
             "excluded_unknown_reporting_period_count": unknown_period_count,
         })
 
+        for country in identity_countries:
+            game_id = country["game_id"]
+            for year in range(start_year, end_year + 1):
+                key = (game_id, year)
+                imf_row = left.get(key)
+                wdi_row = wdi_values.get(key)
+                imf_present = imf_row is not None
+                wdi_present = wdi_row is not None
+                coverage_status = (
+                    "both_sources_present" if imf_present and wdi_present
+                    else "imf_only" if imf_present
+                    else "wdi_only" if wdi_present
+                    else "neither_source_present"
+                )
+                signed_difference = (
+                    imf_row["value"] - wdi_row["value"]
+                    if imf_present and wdi_present else None
+                )
+                relative_difference = (
+                    signed_difference / wdi_row["value"] * 100
+                    if signed_difference is not None and wdi_row["value"] != 0 else None
+                )
+                candidate_matrix.append({
+                    **country,
+                    "field_id": contract["field_id"],
+                    "imf_indicator": imf_code,
+                    "wdi_indicator": wdi_code,
+                    "year": year,
+                    "coverage_status": coverage_status,
+                    "imf_observation_present": imf_present,
+                    "wdi_observation_present": wdi_present,
+                    "imf_value_canonical_unit": imf_row["value"] if imf_present else None,
+                    "wdi_value_canonical_unit": wdi_row["value"] if wdi_present else None,
+                    "imf_status_hint": imf_row["status_hint"] if imf_present else "missing",
+                    "imf_latest_actual_annual_data": imf_row["latest_actual_annual_data"] if imf_present else None,
+                    "imf_reporting_year_months": imf_row["reporting_year_months"] if imf_present else None,
+                    "imf_reporting_period_classification": (
+                        _reporting_period_classification(imf_row["reporting_year_months"])
+                        if imf_present else "missing"
+                    ),
+                    "signed_difference": signed_difference,
+                    "absolute_difference": abs(signed_difference) if signed_difference is not None else None,
+                    "relative_difference_percent": relative_difference,
+                    "semantic_status": "diagnostic_only_not_approved",
+                })
+
         indicators.append({
             **contract, "wdi_indicator": wdi_code, "imf_indicator": imf_code,
             "wdi_metadata": metadata,
@@ -374,6 +470,21 @@ def build_comparison(
         "wdi_retrieval_model": "live_rolling_api_not_immutable_snapshot",
         "identity_join": "IMF source code and WDI ISO3 are mapped through the existing project identity registry to game_id; no new crosswalk assignments are made.",
         "indicators": indicators,
+        "candidate_matrix": candidate_matrix,
+        "candidate_matrix_summary": {
+            "row_count": len(candidate_matrix),
+            "country_count": len(identity_countries),
+            "field_count": len(PAIRS),
+            "year_count": end_year - start_year + 1,
+            "coverage_status_counts": {
+                status: sum(row["coverage_status"] == status for row in candidate_matrix)
+                for status in ("both_sources_present", "imf_only", "wdi_only", "neither_source_present")
+            },
+            "identity_mapping_status_counts": {
+                status: sum(row["identity_mapping_status"] == status for row in identity_countries)
+                for status in sorted({row["identity_mapping_status"] for row in identity_countries})
+            },
+        },
         "side_effects": {
             "immutable_snapshots_acquired": False, "source_registry_changed": False,
             "source_selection_policy_changed": False, "canonical_database_written": False,
@@ -386,7 +497,8 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     target = output_root / stamp
     target.mkdir(parents=True, exist_ok=False)
-    (target / "assessment.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    json_report = {key: value for key, value in report.items() if key != "candidate_matrix"}
+    (target / "assessment.json").write_text(json.dumps(json_report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     lines = [
         "# IMF WEO and World Bank WDI country-year comparison", "",
         f"- Checked: {report['checked_at']}",
@@ -431,6 +543,8 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "- For field 21, SL.UEM.TOTL.NE.ZS is included as a separate national-estimate diagnostic; it is not treated as interchangeable with the ILO-modelled SL.UEM.TOTL.ZS series.",
         "- Field 21 retains country-specific IMF WEO unit, source, employment-definition, methodology-note, latest-actual and update-date metadata. Blank metadata remains unknown, not inferred.",
         "- Fields 18, 20 and 21 require explicit definition review before a policy decision; PPP benchmark, CPI period convention and unemployment methodology/unit remain material caveats.",
+        "- `candidate_matrix.csv` is a rectangular project-identity × field × year grid; missing observations are explicit, and identity verification remains separately flagged.",
+        "- Identity rows are not considered approved unless both the identity record and ISO assignment are approved/verified; current proposals remain review-required.",
         "- No source-selection, release, approval, or database action is performed."])
     (target / "assessment.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     rows = [row for item in report["indicators"] for row in item["country_year_comparisons"]]
@@ -447,6 +561,22 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "imf_country_update_date", "wdi_national_estimate_indicator",
         "wdi_national_estimate_value", "wdi_national_estimate_country",
     ]
+    matrix_rows = report.get("candidate_matrix", [])
+    matrix_fields = list(matrix_rows[0]) if matrix_rows else [
+        "game_id", "country_name", "source_iso3", "identity_record_status",
+        "iso_assignment_status", "identity_mapping_status", "field_id",
+        "imf_indicator", "wdi_indicator", "year", "coverage_status",
+        "imf_observation_present", "wdi_observation_present",
+        "imf_value_canonical_unit", "wdi_value_canonical_unit",
+        "imf_status_hint", "imf_latest_actual_annual_data",
+        "imf_reporting_year_months", "imf_reporting_period_classification",
+        "signed_difference", "absolute_difference", "relative_difference_percent",
+        "semantic_status",
+    ]
+    with (target / "candidate_matrix.csv").open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=matrix_fields)
+        writer.writeheader()
+        writer.writerows(matrix_rows)
     with (target / "country_year_comparison.csv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()
@@ -469,6 +599,7 @@ def main(argv: list[str] | None = None) -> int:
     print(json.dumps({
         "assessment": report["assessment"], "indicators": len(report["indicators"]),
         "period": report["period"], "report_directory": str(target),
+        "candidate_matrix": report["candidate_matrix_summary"],
         "matched_country_years": {str(x["field_id"]): x["matched_country_year_count"] for x in report["indicators"]},
         "database_written": False, "policy_changed": False, "release_promoted": False,
     }, indent=2))
