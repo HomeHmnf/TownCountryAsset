@@ -59,6 +59,14 @@ def _artifact_paths(source_path: Path, output_root: Path) -> tuple[Path, Path]:
     return text_path, text_path.with_suffix(text_path.suffix + ".json")
 
 
+def _display_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT.resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def _pypdf_version() -> str:
     try:
         return version("pypdf")
@@ -98,9 +106,9 @@ def extract_pdf_text(
         return {
             **metadata,
             "status": metadata.get("status", "text_extracted"),
-            "source_path": str(source_path),
-            "text_path": str(text_path),
-            "metadata_path": str(metadata_path),
+            "source_path": _display_path(source_path),
+            "text_path": _display_path(text_path),
+            "metadata_path": _display_path(metadata_path),
             "pages": _read_pages(text),
             "reused": True,
         }
