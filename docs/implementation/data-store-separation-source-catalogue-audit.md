@@ -1,6 +1,6 @@
 # Project source catalogue registration audit
 
-**Status:** Read-only mapping audit; no source rows have been seeded.  
+**Status:** Mapping audit implemented as an idempotent project-catalogue synchronizer; owner-run seeding and validation pending.  
 **Registry inspected:** `config/data_sources.json`, Git blob `aad2ab57ed4b276ef19566515ad9463cf7a93d19` on `work/compiler-hardening`.  
 **Related design:** [Stage 1 project database foundation](data-store-separation-stage-1-design.md).
 
@@ -71,4 +71,4 @@ The three source entries without a homepage or terms URL are retained as source 
 
 ## 5. Disposition
 
-The stable source keys and existing URL metadata are sufficiently defined to register source identities without guessing publisher organisations. Dataset/stream registration requires the source-specific boundaries noted above. No database seeding, source-selection change, acquisition, validation, approval or retention operation was performed by this audit.
+The stable source keys and existing URL metadata are sufficiently defined to register source identities without guessing publisher organisations. `tools.sync_project_source_catalogue` now registers all 31 source keys and the 92 URL rows derivable from configured homepage, terms, release-discovery provider and download URLs. Dataset/stream registration requires the source-specific boundaries noted above. The synchronizer does not perform acquisition, source validation, approval, source-selection changes or retention.
