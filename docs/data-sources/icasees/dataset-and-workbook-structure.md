@@ -70,4 +70,4 @@ Observation-level rows label units as millions de F CFA, while the dataset descr
 
 ## Parser and assessment
 
-The read-only assessment tool is tools/assess_icasees_national_accounts.py. It verifies the immutable manifest, inventories sheets and formulas, extracts historical and revised GDP separately, checks arithmetic and duplicate presentations, and extracts relevant PDF text when pypdf is available. It does not import observations into SQLite or change source-selection policy.
+The read-only assessment tool is tools/assess_icasees_national_accounts.py. It verifies the immutable ICASEES manifest, inventories sheets and formulas, extracts historical and revised GDP separately, checks arithmetic and duplicate presentations, and extracts relevant PDF text when pypdf is available. It also verifies the pinned IMF WEO CSV and checks the revised GDP values against CAF.NGDP.A for 2019–2021. The GDP unit resolution is deliberately scoped to revised GDP; the parser preserves the source's unit labels and does not infer a universal scale for other indicators. It does not import observations into SQLite or change source-selection policy.
