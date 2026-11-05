@@ -1,6 +1,6 @@
 # Project dataset and acquisition-stream registration — Stage 2
 
-**Status:** Reviewed registry definitions and synchronizer implemented; owner-run validation pending.
+**Status:** Implemented and owner-validated on 2026-11-05.
 **Architecture contract:** [Data-store separation plan](../architecture/data-store-separation-plan.md)
 **Stage 0 findings:** [Stage 0 findings](data-store-separation-stage-0-findings.md)
 **Stage 1 foundation:** [Stage 1 design](data-store-separation-stage-1-design.md)
@@ -60,17 +60,17 @@ No source files or manifests are rewritten. No existing Bahrain decision is reop
 
 ## 5. Acceptance and owner validation
 
-Run the focused tests:
+Owner-run validation completed on 2026-11-05 after pulling branch work/compiler-hardening:
 
-```fish
-uv run --extra dev python -m pytest -v \
-    tests/test_project_dataset_catalogue.py \
-    tests/test_project_source_catalogue.py \
-    tests/test_project_database_schema.py \
-    tests/test_database_schema.py \
-    tests/test_application_approval.py
-```
+- Focused test command covering dataset catalogue, source catalogue, project schema, game schema and application approval: **31 passed in 0.91 seconds**.
+- `tools.sync_project_source_catalogue`: **31 sources** and **92 source URL records** synchronized.
+- `tools.sync_project_dataset_catalogue`: **5 datasets** and **3 acquisition streams** synchronized.
+- Direct project DB count query returned: sources 31; source_urls 92; datasets 5; acquisition_streams 3; acquisitions 0; acquisition_artifacts 0.
+- Both synchronizers reported no changes to source-selection settings. The dataset synchronizer also reported no acquisition, artifact, approval or retention operations.
+- No Game DB migration or canonical data migration was part of this validation.
 
-Then run both synchronizers in the sequence above. Confirm the dataset command reports 5 datasets and 3 streams. Inspect the resulting counts and ensure acquisitions and acquisition_artifacts remain zero in the newly seeded project DB (unless independently created by other already-approved work).
+The owner-supplied terminal output is the validation evidence. This confirms catalogue registration and schema/test compatibility; it is not evidence that the newly registered IMF or UN M49 data has been acquired or semantically validated. Bahrain's previously settled validation disposition remains unchanged.
 
-Owner-run results must be recorded here after the repository owner supplies terminal output. A successful catalogue sync is not acquisition or source validation.
+## 6. Exit criteria and next stage
+
+Stage 2 is complete. The next bounded stage should design and implement acquisition-manifest adapters and provenance registration for the supported existing manifest variants, without yet enforcing retention or moving canonical data. Preserve the Bahrain rolling manifests, UN M49 alternate manifest representation, WPP edition/supplement variants and ICASEES bundle evidence losslessly. ICASEES and WPP stream boundaries remain explicit gates for stream registration and retention enforcement.
