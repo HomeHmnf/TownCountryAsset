@@ -136,9 +136,9 @@ def extract_pdf_text(
         metadata = {
             "pdf_text_schema_version": 1,
             "status": "text_extracted" if any(pages) else "no_embedded_text",
-            "source_path": str(source_path),
+            "source_path": _display_path(source_path),
             "source_sha256": source_hash,
-            "text_path": str(text_path),
+            "text_path": _display_path(text_path),
             "text_sha256": sha256_file(text_path),
             "page_count": len(pages),
             "pages_with_text": sum(bool(page) for page in pages),
@@ -159,7 +159,7 @@ def extract_pdf_text(
 
     return {
         **metadata,
-        "metadata_path": str(metadata_path),
+        "metadata_path": _display_path(metadata_path),
         "pages": pages,
         "reused": False,
     }
