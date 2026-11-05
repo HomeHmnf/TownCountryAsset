@@ -1,6 +1,6 @@
 # ICASEES Central African Republic national accounts
 
-**Status:** Acquired and assessed for workbook structure and GDP comparability; no canonical database import or source-policy change.  
+**Status:** Acquired; workbook structure assessed; revised GDP scale resolved and mechanically cross-checked against the pinned October 2026 IMF WEO CSV. No canonical database import or source-policy change.  
 **Provider:** Institut Centrafricain des Statistiques et des Études Économiques et Sociales (ICASEES).  
 **Source ID:** icasees_national_accounts
 
@@ -22,12 +22,13 @@ This page is the entry point for the ICASEES source record. Detailed material is
 Commands from the repository root:
 
 ```fish
-uv run python -m tools.assess_icasees_national_accounts manifest
 uv run --with pypdf python -m tools.assess_icasees_national_accounts assess
 uv run --extra dev python -m pytest -v tests/test_icasees_national_accounts_assessment.py
 ```
 
-The manifest command fingerprints the already acquired files and does not download or copy them. The assessment command is read-only: it verifies fingerprints, inventories workbook structure, checks GDP arithmetic and duplicate presentations, extracts relevant PDF evidence and writes a report bundle. pypdf is supplied ephemerally for PDF text extraction; the project dependency list is unchanged.
+The assessment verifies the three ICASEES manifest fingerprints, inventories workbook structure, checks GDP arithmetic and duplicate presentations, and extracts relevant PDF text when pypdf is available. It also verifies the fingerprint of the pinned October 2026 IMF WEO CSV and checks the exact Central African Republic national-currency series `CAF.NGDP.A` for 2019–2021, including its country, indicator, annual frequency, domestic-currency unit, billion scale, January/December reporting period and 2022 latest-actual-year metadata. A missing, altered or metadata-inconsistent WEO input fails the assessment. The WEO comparison is a read-only corroboration, not evidence of independent source compilation.
+
+The CLI resolves the revised GDP scale as billion FCFA, while explicitly limiting that resolution to GDP. The workbook's observation-level unit label remains recorded as published and is not silently rewritten. The tool does not import observations into SQLite or change source-selection policy.
 
 ## Boundaries and next work
 
