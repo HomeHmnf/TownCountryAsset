@@ -1,6 +1,6 @@
 # Project source catalogue registration audit
 
-**Status:** Mapping audit, idempotent synchronizer, and owner-run Stage 1 validation complete. Dataset and stream registration remains a separate evidence-gated step.  
+**Status:** Mapping audit, idempotent synchronizer, and owner-run Stage 1/Stage 2 catalogue validation complete.  
 **Registry inspected:** `config/data_sources.json`, Git blob `aad2ab57ed4b276ef19566515ad9463cf7a93d19` on `work/compiler-hardening`.  
 **Related design:** [Stage 1 project database foundation](data-store-separation-stage-1-design.md).
 
@@ -73,15 +73,14 @@ The three source entries without a homepage or terms URL are retained as source 
 
 The stable source keys and existing URL metadata are sufficiently defined to register source identities without guessing publisher organisations. `tools.sync_project_source_catalogue` registers all 31 source keys and the 92 URL rows derivable from configured homepage, terms, release-discovery provider and download URLs. On 2026-11-05 the repository owner ran the synchronizer against the local project database and confirmed those exact counts after the focused 28-test suite passed. Dataset/stream registration remains a separate evidence-gated step and must respect the source-specific boundaries noted above. The synchronizer does not perform acquisition, source validation, approval, source-selection changes or retention.
 
-
 ## 6. Dataset and stream boundary follow-up
 
-A follow-up review of tracked manifests and source-domain documentation supports five dataset identities and three stream boundaries, now recorded in config/project_datasets.json and synchronized by tools.sync_project_dataset_catalogue:
+A follow-up review of tracked manifests and source-domain documentation supports five dataset identities and three stream boundaries, now recorded in `config/project_datasets.json` and synchronized by `tools.sync_project_dataset_catalogue`:
 
-- Bahrain Open Data: dataset 03-unemployment-yearly; one rolling API snapshot stream. The existing Bahrain validation disposition is reused without reopening it.
-- UN M49: dataset country_area_overview_html; one rolling current-reference page stream. Its alternate manifest representation is not rewritten.
-- IMF WEO: dataset world_economic_outlook; one manual vintage-bundle stream. The CSV and October 2026 Database Appendix are distinct artifact roles in the same vintage bundle. Formal manifest and semantic validation remain outstanding.
-- UN WPP: demographic_indicators_medium and population_by_age_5_group_sex_medium are registered as dataset identities only. No streams are registered because the approved combined application does not establish independent retention boundaries for the main edition and Togo supplement.
+- Bahrain Open Data: dataset `03-unemployment-yearly`; one rolling API snapshot stream. The existing Bahrain validation disposition is reused without reopening it.
+- UN M49: dataset `country_area_overview_html`; one rolling current-reference page stream. Its alternate manifest representation is not rewritten.
+- IMF WEO: dataset `world_economic_outlook`; one manual vintage-bundle stream. The CSV and October 2026 Database Appendix are distinct artifact roles in the same vintage bundle. Formal manifest and semantic validation remain outstanding.
+- UN WPP: `demographic_indicators_medium` and `population_by_age_5_group_sex_medium` are registered as dataset identities only. No streams are registered because the approved combined application does not establish independent retention boundaries for the main edition and Togo supplement.
 - ICASEES: no dataset or stream is registered yet. The tracked manifest groups three different publications; the dataset/stream boundary remains explicitly unresolved.
 
-See [Stage 2 dataset and stream registration](data-store-separation-stage-2-dataset-registration.md) for exact registration policy, synchronizer behaviour and owner-run validation instructions. Expected seed counts are five datasets and three streams; no acquisition or artifact rows are created.
+Owner-run Stage 2 validation on 2026-11-05 confirmed 31 passing tests, 5 datasets, 3 acquisition streams, and zero acquisition/artifact rows in the project DB. The source catalogue remained at 31 sources and 92 URL records. See [Stage 2 dataset and stream registration](data-store-separation-stage-2-dataset-registration.md) for the complete terminal evidence and the distinction between catalogue registration and actual acquisition/semantic validation.
