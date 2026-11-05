@@ -33,8 +33,8 @@ The tool writes `assessment.json`, `assessment.md`, `country_year_comparison.csv
 
 ## Complete candidate matrix
 
-`candidate_matrix.csv` contains one row for every identity-registry record × each of the five fields × each requested year, including countries with no observations in either provider. It records:
-- project `game_id`, country label and source ISO3/three-letter lookup code;
+`candidate_matrix.csv` contains one row for every unique project `game_id` in the identity registry × each of the five fields × each requested year, including identities with no observations in either provider. It records:
+- project `game_id`, country label and source lookup code (ISO3 where supplied);
 - identity record status, ISO assignment status and a separate mapping disposition;
 - IMF and WDI observation-presence flags and canonical-unit values;
 - coverage state: `both_sources_present`, `imf_only`, `wdi_only` or `neither_source_present`;
