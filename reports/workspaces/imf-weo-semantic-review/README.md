@@ -7,14 +7,14 @@ This directory is an evidence-staging area, not a canonical data location. Copy 
 Run this from the repository root in Fish:
 
 ```fish
-set workspace reports/workspaces/imf-weo-semantic-review
+set workspace reports/workspaces/imf-weo-semantic-review/(date -u +%Y%m%dT%H%M%SZ)
 mkdir -p $workspace
 cp -a reports/sources/imf-weo/20261105T101443Z $workspace/
 cp -a reports/sources/imf-wdi-comparison/20261105T103220Z $workspace/
 cp -a reports/sources/imf-wdi-discrepancy-investigation/20261105T104531Z $workspace/
 ```
 
-This copies the existing report outputs without modifying their originals. Re-running the command replaces no files; if a destination already exists, `cp` may create a nested timestamp directory. For a clean refresh, choose a new workspace name (for example, append a UTC timestamp) before copying.
+Each run creates a new UTC-timestamped bundle directory and copies the existing report outputs into it. The originals remain unchanged, and repeat runs do not overwrite earlier bundles.
 
 ## Add subsequent source-level review outputs
 
