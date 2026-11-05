@@ -1,6 +1,6 @@
 # Stage 3C — IMF WEO October 2026 manual acquisition registration
 
-**Status:** implementation committed; awaiting owner-run validation.  
+**Status:** implemented and owner-validated; IMF October 2026 manual acquisition registered in the Project DB.  
 **Architecture contract:** [Data-store separation plan](../architecture/data-store-separation-plan.md)  
 **Manual source evidence:** [IMF WEO October 2026 manual acquisition record](../data-sources/imf-weo-october-2026-manual-acquisition.md)  
 **Prerequisites:** Project DB schema v3, source/dataset/stream catalogue synchronized, and Stage 3B manifest-backed registration.
@@ -79,25 +79,16 @@ The new tests cover:
 - changed snapshot bytes fail without writing;
 - absent stream registration fails closed.
 
-Owner-run validation is pending. After pulling the implementation, run:
+Owner-run validation completed on 2026-11-05. The owner reported:
 
-    git pull --rebase --autostash origin work/compiler-hardening
+- Focused regression suite: **48 passed in 2.24s** across the nine test modules listed above.
+- Dry-run: exactly one event and two artifacts would be registered; zero errors; no writes.
+- Actual registration: one event registered as acquisition ID `5`, with two artifacts; status `acquired`, integrity `verified`; zero errors.
+- SQL verification: event key `manual:october_2026:2026-11-02`, provider release `october_2026`, acquisition year `2026`, date `2026-11-02`; one `dataset` CSV artifact (26,692,032 bytes; SHA-256 `a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d`) and one `supporting_document` PDF artifact (985,701 bytes; SHA-256 `cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a`).
+- Project DB `PRAGMA integrity_check`: `ok`; `PRAGMA foreign_key_check`: no rows.
+- Registration output explicitly reported `game_database_written=false` and `release_promoted=false`.
 
-    uv run --extra dev python -m pytest -v \
-        tests/test_imf_weo_manual_acquisition_registration.py \
-        tests/test_imf_weo_assessment.py \
-        tests/test_project_acquisition_registration.py \
-        tests/test_acquisition_manifest_audit.py \
-        tests/test_project_dataset_catalogue.py \
-        tests/test_project_source_catalogue.py \
-        tests/test_project_database_schema.py \
-        tests/test_database_schema.py \
-        tests/test_application_approval.py
-
-    uv run python -m tools.register_imf_weo_manual_acquisition --dry-run
-    uv run python -m tools.register_imf_weo_manual_acquisition
-
-Expected result: one IMF WEO acquisition event with two artifact rows; status `acquired`, integrity `verified`; no Game DB writes, semantic promotion or retention action. The exact acquisition ID will be determined by the owner's Project DB.
+This validates registration and byte-level integrity only. It does not validate indicator semantics, approve the release, or apply data to the Game DB.
 
 ## 7. Next gates
 
