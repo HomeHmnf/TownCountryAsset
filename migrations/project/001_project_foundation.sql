@@ -95,7 +95,7 @@ CREATE TABLE acquisitions (
 );
 CREATE INDEX ix_acquisitions_stream_status_time
     ON acquisitions(stream_id, status, acquired_at DESC, acquisition_id DESC);
-CREATE UNIQUE INDEX uq_acquisition_provider_release
+CREATE INDEX ix_acquisitions_stream_release
     ON acquisitions(stream_id, provider_release_id)
     WHERE provider_release_id IS NOT NULL;
 
