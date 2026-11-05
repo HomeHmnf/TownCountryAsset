@@ -43,7 +43,8 @@ Run the read-only command below from the repository root using Fish. It reports:
 It does not read or print source payload contents, and does not modify files or databases.
 
 ```fish
-uv run python - <<'PY'
+
+uv run python -c '
 from __future__ import annotations
 
 import json
@@ -55,6 +56,7 @@ root = Path.cwd()
 db_path = root / "data/canonical/town_country_asset.sqlite"
 print("REPOSITORY:", root)
 print("DATABASE_EXISTS:", db_path.is_file())
+
 if db_path.is_file():
     print("DATABASE_BYTES:", db_path.stat().st_size)
     con = sqlite3.connect(f"file:{db_path.as_posix()}?mode=ro", uri=True)
@@ -62,14 +64,16 @@ if db_path.is_file():
     print("SQLITE_VERSION:", sqlite3.sqlite_version)
     print("INTEGRITY_CHECK:", [r[0] for r in con.execute("PRAGMA integrity_check")])
     print("FOREIGN_KEY_CHECK:", [tuple(r) for r in con.execute("PRAGMA foreign_key_check")])
+
     tables = [
         r["name"] for r in con.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"
+            "SELECT name FROM sqlite_master WHERE type=\"table\" AND name NOT LIKE \"sqlite_%\" ORDER BY name"
         )
     ]
     print("TABLE_COUNT:", len(tables))
+
     for table in tables:
-        quoted = '"' + table.replace('"', '""') + '"'
+        quoted = "\"" + table.replace("\"", "\"\"") + "\""
         count = con.execute(f"SELECT COUNT(*) FROM {quoted}").fetchone()[0]
         columns = [dict(r) for r in con.execute(f"PRAGMA table_info({quoted})")]
         indexes = [dict(r) for r in con.execute(f"PRAGMA index_list({quoted})")]
@@ -81,11 +85,14 @@ if db_path.is_file():
             "indexes": indexes,
             "foreign_keys": foreign_keys,
         }, ensure_ascii=False))
-    migration_rows = con.execute(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name='schema_migrations'"
-    ).fetchone()
-    if migration_rows:
-        print("MIGRATIONS:", [dict(r) for r in con.execute("SELECT * FROM schema_migrations ORDER BY 1")])
+
+    if con.execute(
+        "SELECT 1 FROM sqlite_master WHERE type=\"table\" AND name=\"schema_migrations\""
+    ).fetchone():
+        print("MIGRATIONS:", [
+            dict(r) for r in con.execute("SELECT * FROM schema_migrations ORDER BY 1")
+        ])
+
     con.close()
 
 for rel in (
@@ -95,13 +102,16 @@ for rel in (
     "reports/sources",
 ):
     base = root / rel
+
     if not base.exists():
         print("FILESYSTEM:", json.dumps({"root": rel, "exists": False}))
         continue
+
     files = 0
     total_bytes = 0
     symlinks = 0
     extensions = Counter()
+
     for path in base.rglob("*"):
         if path.is_symlink():
             symlinks += 1
@@ -110,6 +120,7 @@ for rel in (
             files += 1
             total_bytes += path.stat().st_size
             extensions[path.suffix.lower() or "<no extension>"] += 1
+
     print("FILESYSTEM:", json.dumps({
         "root": rel,
         "exists": True,
@@ -121,9 +132,10 @@ for rel in (
 
 project_db = root / "data/project/project_data.sqlite"
 print("PROJECT_DATABASE_ALREADY_EXISTS:", project_db.exists())
-PY
+'
 
 git status --short --branch
+
 ```
 
 Paste the complete output. If it is too long, save it locally and paste it in sections, preserving all `TABLE:`, `FILESYSTEM:`, integrity and migration lines. Do not commit the output or database.

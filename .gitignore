@@ -9,20 +9,20 @@ __pycache__/
 # /raw_data/sources/
 # raw_data/
 # WP1.5 provider downloads are local snapshots; commit their manifests, not raw bytes.
-/raw_data/wp1_5/
+# /raw_data/wp1_5/
 # /derived_data/pdf_text/
 venv/
 build/
 dist/
 *.egg-info/
 .generated-tmp/
-sources/*
+# sources/*
 !sources/.gitkeep
 # generated/*
 # !generated/.gitkeep
 
 # Local canonical SQLite database and transient SQLite sidecars
-data/canonical/*.sqlite
-data/canonical/*.sqlite3
-*.sqlite-wal
-*.sqlite-shm
+# data/canonical/*.sqlite
+# data/canonical/*.sqlite3
+# *.sqlite-wal
+# *.sqlite-shm
