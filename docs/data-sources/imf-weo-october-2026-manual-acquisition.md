@@ -1,10 +1,10 @@
 # IMF WEO October 2026 manual acquisition record
 
-**Status:** manually downloaded local source snapshot; not yet parsed, semantically validated, release-approved, applied, or promoted  
+**Status:** manually acquired; repository-tracked files and recorded checksums reconciled; read-only coverage/identity assessment completed; semantic validation, WDI comparison, approval, application and promotion remain pending  
 **Provider:** International Monetary Fund (IMF), Research Department  
 **Dataset:** World Economic Outlook (WEO), October 2026 vintage  
 **Project source ID:** `imf_weo`  
-**Manual download date:** 2026-11-02  
+**Manual download date:** 2026-11-02 (date precision only; no exact acquisition time recorded)  
 **Local directory:** `raw_data/sources/imf_weo/october_2026/`
 
 ## Official source and download method
@@ -30,25 +30,43 @@ The following files were present in the local snapshot directory and SHA-256 che
 | `dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv` | CSV portal export | 26,692,032 | `a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d` |
 | `October 2026 WEO Database Appendix.pdf` | PDF documentation | 985,701 | `cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a` |
 
-The CSV filename embeds the portal export timestamp `2026-11-02T07:37:00.482492506Z` and dataset identifier/version string `IMF.RES_WEO_9.0.0`. These filename tokens are recorded as observed; the timestamp is the export-generation timestamp, not the WEO publication date or an independently verified dataset release timestamp.
+The CSV filename embeds the portal export timestamp `2026-11-02T07:37:00.482492506Z` and dataset identifier/version string `IMF.RES_WEO_9.0.0`. These filename tokens are recorded as observed; the timestamp is the export-generation timestamp, not the WEO publication date or an independently verified dataset acquisition timestamp.
 
 The delivered data file is CSV. Its extension and filename alone do **not** establish that its byte-level serialization is SDMX 3.0-CSV, nor do they establish whether it was generated from an SDMX 3.0 API response or the portal's static export path. Record its observed serialization as CSV until its header, columns, dimensions and metadata have been inspected. Do not label this file SDMX-ML or SDMX-JSON. The IMF separately documents SDMX 2.1 and SDMX 3.0 API availability.
 
-Raw files remain local and untracked under `raw_data/`. This document records their provenance and checksums; it does not replace a formal immutable acquisition manifest.
+Stage 0 repository inventory confirmed that both raw files are Git-tracked and that the committed Git blobs match the working-tree files. The recorded byte counts and SHA-256 values above were also reconciled by the read-only IMF assessor. The original files are retained unchanged. This document is the manual provenance record; it is not represented as a formal provider manifest.
+
+## Read-only coverage and identity assessment (2026-11-05)
+
+The owner ran:
+
+```fish
+uv run --extra dev python -m pytest -v tests/test_imf_weo_assessment.py
+uv run python -m tools.assess_imf_weo
+```
+
+Owner-reported result: **4 assessment tests passed**. The generated report covered five indicators over 1980–2031:
+
+| Field | Indicator | Concept |
+|---:|---|---|
+| 15 | NGDPD | GDP |
+| 16 | NGDPDPC | GDP per capita |
+| 18 | PPPGDP | GDP (PPP) |
+| 20 | PCPIPCH | Inflation |
+| 21 | LUR | Unemployment |
+
+This assessment is coverage and candidate-identity analysis, not semantic validation. Its output explicitly recorded:
+
+- WDI comparison: `not_assessed`;
+- immutable snapshot acquisition by the assessor: `false` (the assessor is read-only);
+- canonical database writes: `false`;
+- release promotion: `false`.
+
+The assessor preserves latest-actual metadata and reporting-year months, excludes non-ISO aggregate prefixes from country identity matching, and records unresolved limitations: PPPGDP has no latest-actual metadata; LUR has a blank unit; registry code matches do not approve ISO assignments; fiscal-year reporting periods are not coerced to calendar years; and missing annual values remain missing. These are review gates, not silently normalized values.
 
 ## Intended comparison scope
 
-The existing source registry assigns IMF WEO as the priority source for WP1.5 fields:
-
-| Field | Concept |
-|---:|---|
-| 15 | GDP |
-| 16 | GDP per capita |
-| 18 | GDP (PPP) |
-| 20 | Inflation |
-| 21 | Unemployment |
-
-The WEO candidate must be compared with the World Bank WDI candidates at indicator-definition level, not just by label. Preserve country/area versus country-group distinctions, annual reference year, unit/currency/price basis, methodology, vintage and latest-actual-year metadata.
+The existing source registry assigns IMF WEO as the priority source for WP1.5 fields 15, 16, 18, 20 and 21. The WEO candidate must be compared with the World Bank WDI candidates at indicator-definition level, not just by label. Preserve country/area versus country-group distinctions, annual reference year, unit/currency/price basis, methodology, vintage and latest-actual-year metadata.
 
 The IMF WEO CSV full-dataset download includes a `Latest Actual Annual Data` metadata field according to the official WEO FAQ. For country observations, years after that latest actual year are IMF staff estimates; a value of zero indicates the entire series is estimated. Actual values can still be revised in later vintages. Country-group data do not have the same per-country latest-actual-year metadata, so their status must not be inferred using the country rule.
 
@@ -63,16 +81,18 @@ Do not implement automated bulk downloading until the applicable IMF permission 
 
 ## Governance boundary and next actions
 
-This manual download:
+The manual acquisition and coverage assessment:
 
-- does not change `config/source_selection.json`;
-- does not add WDI fallback or change the five IMF priority assignments;
-- does not create or approve a source release;
-- does not normalize or import observations;
-- does not write to the canonical SQLite database;
-- does not promote a release to `latest_validated` or `latest_applied`.
+- do not change `config/source_selection.json`;
+- do not add WDI fallback or change the five IMF priority assignments;
+- do not approve semantic validity or mark a release as validated/retained;
+- do not normalize or import observations;
+- do not write to the canonical Game DB;
+- do not promote a release to `latest_validated` or `latest_applied`.
 
-Next, inspect the CSV structure and PDF appendix, identify the exact WEO series codes and definitions for the five fields, validate country and aggregate dimensions, and build a read-only comparison against WDI. Preserve the WEO vintage and actual/estimate/projection status. Formal manifest creation, source validation, approval, database application and release promotion remain separate steps.
+The Project DB manual-bundle registration is implemented separately in [Stage 3C](../implementation/data-store-separation-stage-3c-imf-manual-acquisition.md). It records the two artifacts as one October 2026 acquisition event, uses the documented calendar date (not a fabricated time), and records byte-integrity verification only. It does not create a formal manifest or claim semantic validation.
+
+Next, complete indicator-definition and unit verification, explicit country-code/alias review, and a normalized WDI country-year comparison. Then build the country × field completeness and candidate matrix. Only validated, approved observations may proceed through the existing guarded application workflow.
 
 ## Official references
 
