@@ -83,6 +83,14 @@ No raw source file is copied into the project database. The database records met
 - No acquisition, retention cleanup, source-selection, approval migration or game-runtime cutover is introduced.
 - Relevant architecture, implementation and operator documentation is updated with the code and tests.
 
-## 7. Operator command\n\nCreate or upgrade the local project DB with `uv run python -m tools.migrate_project_database`. The command targets only the project DB by default; `--database PATH` may be used for an isolated test copy. It applies only `migrations/project/` and reports SQLite integrity and foreign-key results.\n\n## 8. Owner-run validation record
+## 7. Operator command
 
-Validation is pending. The repository owner must run the documented focused tests and inspect git status locally. Assistant-side repository inspection is not a substitute for local validation.
+Create or upgrade the local project DB with `uv run python -m tools.migrate_project_database`. The command targets only the project DB by default; `--database PATH` may be used for an isolated test copy. It applies only `migrations/project/` and reports SQLite integrity and foreign-key results.
+
+## 8. Owner-run validation record
+
+**Validated locally by the repository owner on 2026-11-05.** The following focused command passed: `uv run --extra dev python -m pytest -v tests/test_project_database_schema.py tests/test_database_schema.py tests/test_application_approval.py` — 24 passed in 0.54 seconds.
+
+The owner then ran `uv run python -m tools.migrate_project_database`; it created `data/project/project_data.sqlite`, advanced schema version 0 to 1, and reported successful SQLite integrity and foreign-key checks. The subsequent `git status --short --branch` showed the branch synchronized with origin and only the two pre-existing deletions of `data/canonical/town_country_asset.sqlite-shm` and `data/canonical/town_country_asset.sqlite-wal`. Those deletions were not staged or restored.
+
+This is owner-supplied local validation evidence; no broader test suite or production data migration is implied.
