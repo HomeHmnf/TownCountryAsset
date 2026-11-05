@@ -158,3 +158,34 @@ def test_acquisition_does_not_recapture_same_release_from_legacy_path(tmp_path, 
 def test_release_discovery_contract_is_loaded(tmp_path):
     registry = load_registry(fixture(tmp_path))
     assert registry['sources']['sample']['release_discovery']['mode'] == 'manual_review'
+
+
+def test_pdf_acquisition_automatically_creates_shared_text_derivative(tmp_path, monkeypatch):
+    import tools.sources.registry as module
+
+    path = fixture(tmp_path)
+    registry = load_registry(path)
+    item = registry["sources"]["sample"]["downloads"][0]
+    payload = b"%PDF-1.4\\nminimal fixture"
+
+    class PdfResponse(Response):
+        headers = {"Content-Type": "application/pdf"}
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", lambda *a, **k: PdfResponse(payload))
+    monkeypatch.setattr(module.pdf_text, "is_pdf_file", lambda _path: True)
+    monkeypatch.setattr(module.pdf_text, "extract_pdf_text", lambda source, output: {
+        "status": "text_extracted",
+        "source_sha256": hashlib.sha256(payload).hexdigest(),
+        "text_sha256": "a" * 64,
+        "text_path": "derived_data/pdf_text/sample.pdf.txt",
+        "page_count": 1,
+        "pages_with_text": 1,
+        "extractor": "pypdf",
+        "extractor_version": "test",
+        "pages": ["extracted"],
+    })
+
+    meta = acquire_one(registry, "sample", item)
+    assert meta["derived_artifacts"]["pdf_text"]["status"] == "text_extracted"
+    assert meta["derived_artifacts"]["pdf_text"]["page_count"] == 1
+    assert inspect_snapshots(registry)[0]["status"] == "valid"
