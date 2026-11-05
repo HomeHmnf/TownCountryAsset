@@ -161,12 +161,32 @@ def test_ppp_and_unemployment_status_are_not_inferred(tmp_path, monkeypatch):
     assert lur["wdi_national_estimate_matched_country_year_count"] == 1
 
 
+def test_candidate_matrix_is_rectangular_and_marks_missing_and_unverified_identity(tmp_path, monkeypatch):
+    csv_path, identity = _inputs(tmp_path, monkeypatch)
+    report = compare.build_comparison(csv_path, identity, 2023, 2024, _fake_api)
+
+    assert report["candidate_matrix_summary"]["row_count"] == 10
+    assert report["candidate_matrix_summary"]["country_count"] == 1
+    assert report["candidate_matrix_summary"]["field_count"] == 5
+    assert report["candidate_matrix_summary"]["year_count"] == 2
+    rows = {(row["field_id"], row["year"]): row for row in report["candidate_matrix"]}
+    assert rows[(15, 2024)]["coverage_status"] == "both_sources_present"
+    assert rows[(15, 2023)]["coverage_status"] == "neither_source_present"
+    assert rows[(15, 2023)]["imf_value_canonical_unit"] is None
+    assert rows[(15, 2023)]["wdi_value_canonical_unit"] is None
+    assert rows[(15, 2024)]["identity_mapping_status"] == "mapped_review_required"
+    assert rows[(15, 2024)]["semantic_status"] == "diagnostic_only_not_approved"
+
+
 def test_report_writer_creates_machine_readable_and_csv_outputs(tmp_path, monkeypatch):
     csv_path, identity = _inputs(tmp_path, monkeypatch)
     report = compare.build_comparison(csv_path, identity, 2024, 2024, _fake_api)
     target = compare.write_reports(report, tmp_path / "reports")
     assert (target / "assessment.json").is_file()
     assert (target / "assessment.md").is_file()
+    assert (target / "candidate_matrix.csv").is_file()
+    matrix_text = (target / "candidate_matrix.csv").read_text()
+    assert "neither_source_present" not in matrix_text  # this fixture has only the 2024 comparison year
     text = (target / "country_year_comparison.csv").read_text()
     assert "tc_123" in text
     assert "NY.GDP.MKTP.CD" in text
