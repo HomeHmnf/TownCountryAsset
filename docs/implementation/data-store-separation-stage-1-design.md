@@ -97,3 +97,8 @@ Synchronize stable source identities and configured URLs with `uv run python -m 
 The owner then ran `uv run python -m tools.migrate_project_database`; it created `data/project/project_data.sqlite`, advanced schema version 0 to 1, and reported successful SQLite integrity and foreign-key checks. The subsequent `git status --short --branch` showed the branch synchronized with origin and only the two pre-existing deletions of `data/canonical/town_country_asset.sqlite-shm` and `data/canonical/town_country_asset.sqlite-wal`. Those deletions were not staged or restored.
 
 This is owner-supplied local validation evidence; no broader test suite or production data migration is implied.
+
+
+## Schema version progression
+
+The initial project foundation is migration 001 (schema version 1). Migration 002 adds explicit source-registry metadata fields without replacing the lossless source metadata JSON. A fresh project database therefore reaches schema version 2. Existing local version-1 databases upgrade transactionally to version 2 when `tools.migrate_project_database` runs. The schema tests assert version 2 and verify the added columns.
