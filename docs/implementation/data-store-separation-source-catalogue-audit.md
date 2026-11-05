@@ -72,3 +72,16 @@ The three source entries without a homepage or terms URL are retained as source 
 ## 5. Disposition
 
 The stable source keys and existing URL metadata are sufficiently defined to register source identities without guessing publisher organisations. `tools.sync_project_source_catalogue` registers all 31 source keys and the 92 URL rows derivable from configured homepage, terms, release-discovery provider and download URLs. On 2026-11-05 the repository owner ran the synchronizer against the local project database and confirmed those exact counts after the focused 28-test suite passed. Dataset/stream registration remains a separate evidence-gated step and must respect the source-specific boundaries noted above. The synchronizer does not perform acquisition, source validation, approval, source-selection changes or retention.
+
+
+## 6. Dataset and stream boundary follow-up
+
+A follow-up review of tracked manifests and source-domain documentation supports five dataset identities and three stream boundaries, now recorded in config/project_datasets.json and synchronized by tools.sync_project_dataset_catalogue:
+
+- Bahrain Open Data: dataset 03-unemployment-yearly; one rolling API snapshot stream. The existing Bahrain validation disposition is reused without reopening it.
+- UN M49: dataset country_area_overview_html; one rolling current-reference page stream. Its alternate manifest representation is not rewritten.
+- IMF WEO: dataset world_economic_outlook; one manual vintage-bundle stream. The CSV and October 2026 Database Appendix are distinct artifact roles in the same vintage bundle. Formal manifest and semantic validation remain outstanding.
+- UN WPP: demographic_indicators_medium and population_by_age_5_group_sex_medium are registered as dataset identities only. No streams are registered because the approved combined application does not establish independent retention boundaries for the main edition and Togo supplement.
+- ICASEES: no dataset or stream is registered yet. The tracked manifest groups three different publications; the dataset/stream boundary remains explicitly unresolved.
+
+See [Stage 2 dataset and stream registration](data-store-separation-stage-2-dataset-registration.md) for exact registration policy, synchronizer behaviour and owner-run validation instructions. Expected seed counts are five datasets and three streams; no acquisition or artifact rows are created.
