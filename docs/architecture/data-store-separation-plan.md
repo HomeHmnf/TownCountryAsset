@@ -1,6 +1,6 @@
 # Data-store separation and retention plan
 
-**Status:** Proposed architecture; owner decisions A–C confirmed on 2026-11-05. This document is a plan only. No schema, database, importer, source policy, or data files are changed by this proposal.
+**Status:** Approved architecture and implementation plan as of 2026-11-05. Stage 0 is approved; Stage 1 project-database foundation is authorized. No claim of implementation or local validation is implied.
 **Scope:** Separate game-facing data from source research and acquisition; retain exactly two successful source-data versions per acquisition stream; reorganise the Markdown knowledge base.
 **Current implementation:** `data/canonical/town_country_asset.sqlite`, schema v4, remains unchanged until this plan is verified and implementation begins.
 
@@ -160,12 +160,12 @@ Every implementation stage updates the relevant indexes and documents in the sam
 
 ## 7. Implementation sequence
 
-No implementation starts until the owner verifies this plan.
+The owner approved the architecture and Stage 0 findings on 2026-11-05. Implementation proceeds stage by stage within the approved boundaries; unresolved stream/consumer decisions remain gates for the later stages that depend on them.
 
 | Stage | Scope | Required documentation in the same stage |
 |---|---|---|
 | 0. Inventory and freeze contract | Inventory current DB schema/data, JSON registries, manifests, snapshots, reports, derived files, consumers and approval workflow. Produce a table/column/file disposition and baseline counts/checksums. No deletion. | Architecture plan, source-management rules, implementation checklist |
-| 1. Project DB foundation | Add project DB path, connection/migration framework, schema and integrity tests. Add source catalogue, typed URLs, datasets and two-version release model. | Project DB architecture, schema reference, CLI/config docs |
+| 1. Project DB foundation | Implement the approved Stage 1 design: isolated project DB connection/migrations, source catalogue, typed URLs, datasets, acquisition streams/versions and artifact metadata. No existing-row migration, retention cleanup, approval move or source-selection change. | [Stage 1 design and acceptance criteria](../implementation/data-store-separation-stage-1-design.md), project DB architecture, schema reference and CLI/config docs |
 | 2. Acquisition retention | Adapt generic and dedicated acquisition paths to version bundles, staging, validation-gated promotion, exact two-version cleanup, orphan audit and failure recovery. | Source-management and provider acquisition docs |
 | 3. Source observations and mappings | Move/implement source observations, crosswalks, field mappings, validation and pairwise comparison in project DB. Keep source-selection policy unchanged. | Data dictionary, source mapping, validation/comparability docs |
 | 4. Approval/application protocol | Move approvals/events to project DB and implement idempotent crash-safe apply/reconciliation into game DB. | Approval workflow and operator runbook |
@@ -212,4 +212,4 @@ The following requirements are confirmed:
 - Markdown remains the data dictionary and persistent human/AI project knowledge base.
 - Existing source-selection policy is not changed by this work.
 
-The plan is ready for owner review. Any requested correction should be made here before Stage 0 begins.
+The owner approved this plan on 2026-11-05. Stage 0 findings are recorded separately; Stage 1 may proceed under its documented scope.
