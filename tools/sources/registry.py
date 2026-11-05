@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
+from tools.sources import pdf_text
+
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "config" / "data_sources.json"
 SAFE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$")
@@ -198,6 +200,27 @@ def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
     except SourceError:
         raw.unlink(missing_ok=True)
         raise
+
+    pdf_text_artifact = None
+    if pdf_text.is_pdf_file(raw):
+        derived_root = registry.get("_root", ROOT) / registry.get("storage", {}).get(
+            "derived_root", "derived_data/pdf_text"
+        )
+        try:
+            extracted = pdf_text.extract_pdf_text(raw, derived_root)
+            pdf_text_artifact = {
+                key: extracted.get(key)
+                for key in (
+                    "status", "source_sha256", "text_sha256", "text_path",
+                    "page_count", "pages_with_text", "extractor", "extractor_version",
+                )
+                if extracted.get(key) is not None
+            }
+        except Exception as exc:
+            # The original acquisition remains immutable and available even when
+            # a PDF is encrypted, malformed, or contains unsupported structures.
+            pdf_text_artifact = {"status": "failed", "error": str(exc)}
+
     meta = {
         "manifest_schema_version": 1, "source_id": sid, "source_name": source["name"],
         "download_id": item["id"], "release": item["release"], "release_kind": item["release_kind"],
@@ -209,7 +232,8 @@ def acquire_one(registry, sid, item, timeout=60, expected_sha256=None):
         "local_raw_path": raw.relative_to(registry.get("_root", ROOT)).as_posix(),
         "content_type": content_type, "byte_count": size, "sha256": digest.hexdigest(),
         "format": item.get("format"), "fields": item.get("fields", []),
-        "validation_contract": item.get("validation", {})
+        "validation_contract": item.get("validation", {}),
+        "derived_artifacts": ({"pdf_text": pdf_text_artifact} if pdf_text_artifact else {})
     }
     try:
         manifest.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
