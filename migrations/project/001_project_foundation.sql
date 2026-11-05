@@ -86,7 +86,7 @@ CREATE TABLE acquisitions (
     acquired_at TEXT NOT NULL,
     provider_published_at TEXT,
     status TEXT NOT NULL DEFAULT 'candidate'
-        CHECK (status IN ('candidate', 'acquired', 'validated', 'retained', 'failed', 'rejected')),
+        CHECK (status IN ('candidate', 'acquired', 'validated', 'retained', 'superseded', 'failed', 'rejected')),
     acquisition_note TEXT,
     metadata_json TEXT NOT NULL DEFAULT '{}' CHECK (json_valid(metadata_json)),
     created_at TEXT NOT NULL,
