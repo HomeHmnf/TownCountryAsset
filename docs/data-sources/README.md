@@ -15,7 +15,7 @@ This section documents providers, acquisition, source-specific validation, relea
 ## Provider acquisition and validation
 
 - [Bahrain unemployment data acquisition](bahrain-unemployment-data-acquisition.md) — official API acquisition and immutable snapshots.
-- [ICASEES Central African Republic national accounts](icasees-central-african-republic-national-accounts.md) — official publications, workbook/PDF inventory, GDP scale resolution and WEO cross-check.
+- [ICASEES Central African Republic national accounts](icasees-central-african-republic-national-accounts.md) — source entry point; its [dedicated index](icasees/README.md) separates acquisition, workbook structure and GDP reconciliation.
 
 ## Comparability investigations
 
