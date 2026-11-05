@@ -83,6 +83,11 @@ def test_source_catalogue_sync_is_idempotent_and_updates_managed_urls(tmp_path):
     database_path = tmp_path / "project.sqlite"
 
     first = sync_source_catalogue(database_path=database_path, config_path=config_path)
+    with connect_project_database(database_path) as connection:
+        connection.execute(
+            "INSERT INTO source_urls(source_key, url_role, url, metadata_json, created_at) "
+            "VALUES ('sample_source', 'evidence', 'https://manual.example.test/evidence', '{\"managed_by\":\"manual\"}', 'now')"
+        )
     second = sync_source_catalogue(database_path=database_path, config_path=config_path)
     assert first == second == {"sources": 1, "source_urls": 4}
 
@@ -96,7 +101,10 @@ def test_source_catalogue_sync_is_idempotent_and_updates_managed_urls(tmp_path):
             "SELECT url FROM source_urls WHERE url_role='homepage'"
         ).fetchone()[0]
         assert homepage == "https://example.test/new-home"
-        assert connection.execute("SELECT COUNT(*) FROM source_urls").fetchone()[0] == 4
+        assert connection.execute("SELECT COUNT(*) FROM source_urls").fetchone()[0] == 5
+        assert connection.execute(
+            "SELECT COUNT(*) FROM source_urls WHERE url='https://manual.example.test/evidence'"
+        ).fetchone()[0] == 1
 
 
 def test_source_catalogue_sync_rolls_back_invalid_config(tmp_path):
