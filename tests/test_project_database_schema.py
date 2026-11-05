@@ -58,6 +58,8 @@ def test_project_connection_uses_safe_pragmas_and_migrates_only_project_schema(t
         } <= tables
         source_columns = {row[1] for row in connection.execute("PRAGMA table_info(sources)")}
         assert {"domains_json", "license_status", "attribution", "notes", "acquisition_mode", "release_discovery_json", "legacy_source_ids_json", "field_ids_json"} <= source_columns
+        acquisition_columns = {row[1] for row in connection.execute("PRAGMA table_info(acquisitions)")}
+        assert {"acquisition_event_key", "manifest_sha256", "integrity_status", "evidence_json"} <= acquisition_columns
         assert "countries" not in tables
     assert project_path.is_file()
     assert not game_path.exists()
