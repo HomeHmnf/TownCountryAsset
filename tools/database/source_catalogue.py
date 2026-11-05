@@ -118,7 +118,7 @@ def sync_source_catalogue(
                     field_ids_json=excluded.field_ids_json""",
                 (
                     source_key, name.strip(), source.get("notes"),
-                    source.get("acquisition_mode"), _json(source), timestamp, timestamp,
+                    None, _json(source), timestamp, timestamp,
                     _json(source.get("domains", [])), source.get("license_status"),
                     source.get("attribution"), source.get("notes"),
                     source.get("acquisition_mode"), _json(source.get("release_discovery", {})),
