@@ -1,6 +1,6 @@
 # Feature: Shared automatic PDF text extraction
 
-> **Status:** Implemented; awaiting owner-run local validation  
+> **Status:** Implemented; owner-run unit, integration and initial backfill checks passed  
 > **Owner/work package:** Shared source-management infrastructure  
 > **Target branch:** work/compiler-hardening  
 > **Last updated:** 2026-11-05
@@ -72,11 +72,17 @@ Text extraction is limited to embedded text. A PDF with no extractable page text
 
 ## Validation and acceptance criteria
 
-- [ ] `uv run --extra dev python -m pytest -v tests/test_pdf_text_extraction.py tests/test_source_registry.py tests/test_icasees_national_accounts_assessment.py`
-- [ ] `uv run python -m tools.sources.pdf_text` backfills current raw PDFs and reports extraction status.
-- [ ] `uv run --with pypdf python -m tools.assess_icasees_national_accounts assess` reuses/creates ICASEES sidecars and passes its structural/WEO checks.
-- [ ] Verify raw PDF fingerprints are unchanged and each text metadata file references the matching source and text hashes.
-- [ ] Owner-run local validation remains pending until command output is supplied.
+Owner-run validation on 2026-11-05:
+
+- [x] `uv run --extra dev python -m pytest -v tests/test_pdf_text_extraction.py` — passed.
+- [x] `uv run --extra dev python -m pytest -v tests/test_source_registry.py tests/test_icasees_national_accounts_assessment.py` — **29 passed**. This includes automatic extraction during acquisition and preservation of the original PDF when extraction fails.
+- [x] `uv run python -m tools.sources.pdf_text` — completed successfully; `pdf_count: 3`, `text_extracted: 3`, no failures or `no_embedded_text` results.
+- [ ] Run the ICASEES assessment after the shared extraction change and verify that it reuses the generated sidecars while passing its structural and IMF WEO checks.
+- [ ] Verify original PDF fingerprints are unchanged and each text metadata file references the matching source and text hashes.
+
+### Initial backfill result
+
+The first owner-run backfill scanned `/home/hmnf/Projects/Python/TownAndCountry/raw_data` and wrote to `/home/hmnf/Projects/Python/TownAndCountry/derived_data/pdf_text`. It found three PDFs and extracted embedded text from all three (`text_extracted: 3`). The command reported no extraction failures. The output root is generated/local and Git-ignored; it is not a replacement for the original PDFs or their tracked provenance manifests. The absolute paths above identify the reported local run; the repository-relative locations are `raw_data/` and `derived_data/pdf_text/`.
 
 ## Documentation and related records
 
