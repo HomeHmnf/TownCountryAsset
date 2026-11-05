@@ -1,6 +1,6 @@
 # Stage 3B — acquisition provenance registration design
 
-**Status:** Design approved; initial manifest-backed registration implemented in Stage 3B. Owner-run validation pending.  
+**Status:** Design implemented and owner-validated for manifest-backed registration; see the Stage 3B implementation record.  
 **Prerequisites:** Stage 1 Project DB foundation, Stage 2 catalogue registration, and owner-validated Stage 3A manifest audit.  
 **Architecture contract:** [Data-store separation plan](../architecture/data-store-separation-plan.md)  
 **Stage 3A evidence:** [Manifest adapter and integrity audit](data-store-separation-stage-3a-manifest-audit.md)
@@ -68,7 +68,7 @@ Proposed initial states:
 - Explicitly registered manual bundle: `acquired` only after all required bundle artifacts are present and verified.
 - Failed/incomplete future attempt: `failed` with an error record and no successful retained-version effect; detailed attempt/report retention needs separate policy.
 
-Byte integrity is not semantic validation. The already settled Bahrain validation disposition must be linked to the matching acquisition event using its existing assessment/approval evidence; do not rerun or downgrade it. If the current schema cannot represent that historical validation evidence without changing lifecycle state or inventing a report, add a reviewed evidence-link design before implementation.
+Byte integrity is not semantic validation. The already settled Bahrain validation disposition must not be rerun or downgraded. The initial registration implementation preserves that disposition operationally but does not yet create a relational link from the new acquisition IDs to the historical assessment/approval records. That evidence-link task remains open; do not claim it is complete.
 
 ICASEES and WPP stream boundaries remain unresolved. Their manifests can be parsed and integrity-audited, but acquisition registration requiring an `acquisition_streams` foreign key must be deferred until a valid stream mapping is approved. Do not create placeholder streams or attach these captures to unrelated streams.
 
@@ -127,7 +127,7 @@ No migration should be written until this schema review and the owner-approved f
 - One event key maps to at most one acquisition row.
 - All manifest and artifact source evidence is preserved losslessly.
 - Hashes and byte counts are verified at registration time.
-- Bahrain's distinct capture events remain distinct and link to existing validation evidence without reopening it.
+- Bahrain's distinct capture events remain distinct; the historical validation/approval evidence is not reopened or downgraded. A relational evidence link remains follow-up work.
 - No ICASEES/WPP acquisition rows are inserted while their stream boundaries remain unresolved.
 - IMF WEO is not registered until its manual bundle evidence is explicit.
 - Re-running registration is idempotent; changed evidence fails closed.
@@ -157,6 +157,6 @@ Migration 003 implements the initial event identity and integrity-evidence porti
 - Manifest-backed registration resolves manifest dataset_id before download_id, preventing Bahrain's download-folder key from being mistaken for the registered provider dataset ID.
 - Only datasets with exactly one active registered stream are eligible.
 
-The initial implementation registers eligible Bahrain and UN M49 events. ICASEES and WPP remain deferred. IMF WEO remains deferred until its manual acquisition record is reconciled against the tracked files and the bundle's event-time evidence is made explicit. No acquisition is marked semantically validated or retained.
+The owner validated the initial registration: four events and seven artifact rows were registered (three Bahrain captures and one UN M49 capture). ICASEES and WPP remain deferred. IMF WEO remains deferred until its manual acquisition record is reconciled against the tracked files and bundle event-time evidence is explicit. No acquisition is marked semantically validated or retained. The Bahrain historical-evidence relational link remains open.
 
 See [Stage 3B provenance registration implementation](data-store-separation-stage-3b-provenance-registration.md) for the command, tests and owner-run acceptance procedure.
