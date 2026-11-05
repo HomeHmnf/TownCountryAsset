@@ -46,7 +46,10 @@ def inspect_weo_gdp_reconciliation(
     revised_gdp: dict[int, float], csv_path: Path = imf_weo.CSV_PATH
 ) -> dict[str, Any]:
     """Verify revised ICASEES GDP against the pinned IMF WEO national-currency series."""
-    fingerprint = imf_weo.fingerprint(csv_path, imf_weo.EXPECTED["csv"])
+    try:
+        fingerprint = imf_weo.fingerprint(csv_path, imf_weo.EXPECTED["csv"])
+    except imf_weo.AssessmentError as exc:
+        raise IcaseesAssessmentError(f"IMF WEO reconciliation input is not the recorded snapshot: {exc}") from exc
     matches = []
     with csv_path.open("r", encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
