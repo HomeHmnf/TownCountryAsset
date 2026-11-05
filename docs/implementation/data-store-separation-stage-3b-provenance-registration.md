@@ -1,6 +1,6 @@
 # Stage 3B — acquisition provenance registration
 
-**Status:** Implemented; owner-run validation pending.  
+**Status:** Implemented and owner-validated on 2026-11-05.  
 **Architecture contract:** [Data-store separation plan](../architecture/data-store-separation-plan.md)  
 **Design record:** [Stage 3B provenance design](data-store-separation-stage-3b-provenance-design.md)  
 **Prerequisites:** Project DB schema v2, approved dataset/stream catalogue, and owner-validated Stage 3A manifest audit.
@@ -65,7 +65,25 @@ Registration marks byte integrity as verified and acquisition lifecycle state as
 
 No acquisition approval, application, retention, cleanup, source-selection or Game DB operation is performed. The existing approval/application workflow remains in its current location pending the separately designed cross-database state machine.
 
-## 6. Tests and owner validation
+## 6. Owner-run validation record (2026-11-05)
+
+The owner pulled branch commit `6ea81d6` and reported the following local results:
+
+- Focused regression suite: **41 passed in 1.52s**.
+- Project DB migration: schema version `2 -> 3`; SQLite integrity and foreign-key checks passed.
+- Source catalogue synchronization: 31 sources and 92 URLs.
+- Dataset catalogue synchronization: 5 datasets and 3 streams.
+- Manifest audit: 10 manifests, 15 artifacts, zero integrity errors.
+- Dry-run: four eligible events, six deferred manifests, zero errors.
+- Actual registration: four acquisitions registered as `acquired`, seven artifact rows, six deferred manifests, zero errors.
+
+Registered event IDs are 1–4: three distinct Bahrain rolling API captures and one UN M49 reference-page capture. The identical Bahrain artifact hashes did not collapse the three capture events. The six deferred manifests are the ICASEES bundle and five WPP manifests; they remain unregistered because exact dataset/stream mappings are not available.
+
+The command output did not report any Game DB writes, semantic validation promotion, approval, or retention operation. Acquisition status `acquired` and byte-integrity status `verified` must not be interpreted as semantic validation.
+
+**Evidence-link limitation:** the existing Bahrain semantic validation/approval disposition was not reopened or changed, but this registration output does not demonstrate a relational link from the new acquisition rows to that historical evidence. Linking historical assessments/approvals to acquisition IDs remains a follow-up provenance task; do not claim the link already exists.
+
+## 7. Tests and owner validation
 
 The new tests cover:
 - dry-run has no writes;
@@ -75,7 +93,7 @@ The new tests cover:
 - an unregistered stream is deferred without writes;
 - changed manifest evidence conflicts with the existing event.
 
-After pulling, run:
+The owner-run commands were:
 
     git pull --rebase --autostash origin work/compiler-hardening
 
@@ -94,4 +112,4 @@ After pulling, run:
     uv run python -m tools.register_project_acquisitions --dry-run
     uv run python -m tools.register_project_acquisitions
 
-Expected registration eligibility from the current tracked manifest set: three Bahrain capture events and one UN M49 reference-page event; ICASEES and WPP are deferred. IMF WEO is not part of the formal manifest inventory. Owner-run test and command output must be recorded before this stage is marked validated.
+Expected eligibility was confirmed: three Bahrain capture events and one UN M49 reference-page event. ICASEES and WPP remain deferred. IMF WEO is not part of the formal manifest inventory and still requires a separately evidenced manual bundle descriptor.
