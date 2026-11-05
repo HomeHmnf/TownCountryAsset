@@ -189,3 +189,28 @@ def test_pdf_acquisition_automatically_creates_shared_text_derivative(tmp_path, 
     assert meta["derived_artifacts"]["pdf_text"]["status"] == "text_extracted"
     assert meta["derived_artifacts"]["pdf_text"]["page_count"] == 1
     assert inspect_snapshots(registry)[0]["status"] == "valid"
+
+
+def test_pdf_text_failure_keeps_successfully_acquired_raw_pdf(tmp_path, monkeypatch):
+    import tools.sources.registry as module
+
+    path = fixture(tmp_path)
+    registry = load_registry(path)
+    item = registry["sources"]["sample"]["downloads"][0]
+    payload = b"%PDF-1.4\\ninvalid for extraction"
+
+    class PdfResponse(Response):
+        headers = {"Content-Type": "application/pdf"}
+
+    monkeypatch.setattr(module.urllib.request, "urlopen", lambda *a, **k: PdfResponse(payload))
+    monkeypatch.setattr(module.pdf_text, "is_pdf_file", lambda _path: True)
+
+    def fail_extraction(*_args, **_kwargs):
+        raise module.pdf_text.PdfTextError("fixture extraction failure")
+
+    monkeypatch.setattr(module.pdf_text, "extract_pdf_text", fail_extraction)
+    meta = acquire_one(registry, "sample", item)
+    raw = tmp_path / "raw" / "sample" / "dataset" / "v1" / "data.csv"
+    assert raw.read_bytes() == payload
+    assert meta["derived_artifacts"]["pdf_text"]["status"] == "failed"
+    assert inspect_snapshots(registry)[0]["status"] == "valid"
