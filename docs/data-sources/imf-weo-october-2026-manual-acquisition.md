@@ -1,6 +1,6 @@
 # IMF WEO October 2026 manual acquisition record
 
-**Status:** manually acquired; repository-tracked files and recorded checksums reconciled; read-only coverage/identity assessment completed; semantic validation, WDI comparison, approval, application and promotion remain pending  
+**Status:** manually acquired and registered in the Project DB (acquisition ID `5`, byte integrity verified); repository-tracked files and recorded checksums reconciled; read-only coverage/identity assessment completed; semantic validation, WDI comparison, approval, application and promotion remain pending  
 **Provider:** International Monetary Fund (IMF), Research Department  
 **Dataset:** World Economic Outlook (WEO), October 2026 vintage  
 **Project source ID:** `imf_weo`  
@@ -90,7 +90,7 @@ The manual acquisition and coverage assessment:
 - do not write to the canonical Game DB;
 - do not promote a release to `latest_validated` or `latest_applied`.
 
-The Project DB manual-bundle registration is implemented separately in [Stage 3C](../implementation/data-store-separation-stage-3c-imf-manual-acquisition.md). It records the two artifacts as one October 2026 acquisition event, uses the documented calendar date (not a fabricated time), and records byte-integrity verification only. It does not create a formal manifest or claim semantic validation.
+The Project DB manual-bundle registration is implemented separately in [Stage 3C](../implementation/data-store-separation-stage-3c-imf-manual-acquisition.md). Owner-run registration completed on 2026-11-05 as acquisition ID `5`, event key `manual:october_2026:2026-11-02`, with two artifact rows (`dataset` CSV and `supporting_document` PDF). The stored date is `2026-11-02` at day precision; the command verified both artifact byte counts and SHA-256 values. The owner also confirmed SQLite integrity `ok` and no foreign-key violations. Registration does not create a formal manifest or claim semantic validation; the event remains `acquired`, not `validated` or `retained`, and no Game DB write or release promotion occurred.
 
 Next, complete indicator-definition and unit verification, explicit country-code/alias review, and a normalized WDI country-year comparison. Then build the country × field completeness and candidate matrix. Only validated, approved observations may proceed through the existing guarded application workflow.
 
