@@ -2,6 +2,8 @@
 
 > Configuration authority and the project-wide configuration inventory are documented in [the configuration reference](../configuration-reference.md).
 
+> **Planned architecture transition (not yet implemented):** The approved direction is to move source/research records into a separate project database and retain only the two latest successfully acquired versions per source dataset/acquisition stream. Existing acquisition and immutable-snapshot behavior described below remains the active behavior until the staged migration is implemented and owner-validated. See the [data-store separation plan](../architecture/data-store-separation-plan.md).
+
 ## Purpose and authority
 
 `config/data_sources.json` is the single authoritative registry for external and local sources across the project. It covers WP1.5 providers and sources used by identity, geography, localization, flags, and asset refresh workflows. Domain contracts describe data requirements and refer to stable provider IDs; edition years belong in release identifiers and manifests, never in source IDs. Historical IDs are declared in `legacy_source_ids` and remain readable for existing snapshots; historical manifests and raw snapshot paths are not rewritten. The WP1.5 field contract (`config/wp1_5_data_sources.json`) therefore contains its approved 41 field definitions and references this registry.
