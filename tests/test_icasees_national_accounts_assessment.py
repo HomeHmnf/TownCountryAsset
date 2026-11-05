@@ -10,6 +10,7 @@ from tools.assess_icasees_national_accounts import (
     IcaseesAssessmentError,
     _cell_number,
     _extract_gdp_rows,
+    inspect_weo_gdp_reconciliation,
     verify_manifest,
 )
 
@@ -231,3 +232,74 @@ def test_external_formula_requires_a_cached_numeric_value():
     sheet["O2"] = "=[1]PIB_courant!C4/1000"
     with pytest.raises(IcaseesAssessmentError, match="requires a cached workbook value"):
         _cell_number(sheet, 2, 15)
+
+
+
+def _weo_reconciliation_csv(path, values=(1952.925, 2056.035, 2149.622), **overrides):
+    import csv
+
+    fields = [
+        "SERIES_CODE", "COUNTRY", "INDICATOR", "FREQUENCY", "UNIT", "SCALE",
+        "LATEST_ACTUAL_ANNUAL_DATA", "START_END_MONTHS_OF_REPORTING_YEAR",
+        "2019", "2020", "2021",
+    ]
+    row = {
+        "SERIES_CODE": "CAF.NGDP.A",
+        "COUNTRY": "Central African Republic",
+        "INDICATOR": "Gross domestic product (GDP), Current prices, Domestic currency",
+        "FREQUENCY": "Annual",
+        "UNIT": "Domestic currency",
+        "SCALE": "Billions",
+        "LATEST_ACTUAL_ANNUAL_DATA": "2022",
+        "START_END_MONTHS_OF_REPORTING_YEAR": "January/December",
+        "2019": str(values[0]),
+        "2020": str(values[1]),
+        "2021": str(values[2]),
+    }
+    row.update(overrides)
+    with path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=fields)
+        writer.writeheader()
+        writer.writerow(row)
+
+
+def test_weo_reconciliation_checks_pinned_metadata_and_exact_values(tmp_path, monkeypatch):
+    import tools.assess_icasees_national_accounts as module
+
+    path = tmp_path / "weo.csv"
+    _weo_reconciliation_csv(path)
+    monkeypatch.setattr(
+        module.imf_weo, "fingerprint",
+        lambda actual, expected: {"path": actual.name, "sha256": "fixture", "byte_count": actual.stat().st_size},
+    )
+    result = inspect_weo_gdp_reconciliation(
+        {2019: 1952.925, 2020: 2056.035, 2021: 2149.622}, path
+    )
+    assert result["status"] == "pass"
+    assert result["series_code"] == "CAF.NGDP.A"
+    assert [row["difference"] for row in result["comparisons"]] == [0.0, 0.0, 0.0]
+    assert all(row["status"] == "exact_match_at_published_precision" for row in result["comparisons"])
+
+
+def test_weo_reconciliation_rejects_value_mismatch(tmp_path, monkeypatch):
+    import tools.assess_icasees_national_accounts as module
+
+    path = tmp_path / "weo.csv"
+    _weo_reconciliation_csv(path, values=(1952.924, 2056.035, 2149.622))
+    monkeypatch.setattr(module.imf_weo, "fingerprint", lambda actual, expected: {})
+    with pytest.raises(IcaseesAssessmentError, match="does not match IMF WEO CAF.NGDP.A in 2019"):
+        inspect_weo_gdp_reconciliation(
+            {2019: 1952.925, 2020: 2056.035, 2021: 2149.622}, path
+        )
+
+
+def test_weo_reconciliation_rejects_metadata_mismatch(tmp_path, monkeypatch):
+    import tools.assess_icasees_national_accounts as module
+
+    path = tmp_path / "weo.csv"
+    _weo_reconciliation_csv(path, SCALE="Units")
+    monkeypatch.setattr(module.imf_weo, "fingerprint", lambda actual, expected: {})
+    with pytest.raises(IcaseesAssessmentError, match="Unexpected IMF WEO metadata"):
+        inspect_weo_gdp_reconciliation(
+            {2019: 1952.925, 2020: 2056.035, 2021: 2149.622}, path
+        )
