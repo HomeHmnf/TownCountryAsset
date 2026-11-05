@@ -1,6 +1,6 @@
 # Stage 3A — read-only acquisition-manifest adapter and integrity audit
 
-**Status:** Implemented; awaiting owner-run validation.  
+**Status:** Implemented and owner-validated on 2026-11-05.  
 **Scope:** Read existing tracked acquisition manifests and verify their referenced artifacts. This stage does not register acquisitions in SQLite.
 
 ## 1. Existing manifest variants
@@ -52,8 +52,18 @@ ICASEES remains one manifest bundle for audit purposes only; this does not decid
 
 ## 4. Owner validation
 
-Pending owner-run execution of the command and focused tests. Record exact test counts and audit summary here after the repository owner supplies terminal output.
+Owner-run validation completed on 2026-11-05:
+
+- Focused test suite covering manifest audit, dataset/source catalogue, project schema, game schema and approval workflow: **38 passed in 1.34 seconds**.
+- Repository manifest audit: **10 manifests**, all 10 valid.
+- Referenced artifacts: **15**, all present and verified.
+- Integrity errors: **0**.
+- The JSON audit output independently reported `status: ok`, `read_only: true`, `database_written: false` and `retention_applied: false`.
+- Bahrain's three rolling captures remain distinct manifest events even though their two artifact hashes repeat across captures.
+- The ICASEES bundle's three files, UN M49's top-level single artifact, and all five WPP manifests were successfully adapted and checked.
+
+The terminal output supplied by the repository owner is the validation evidence. This validates manifest structure and byte-level integrity only; it does not prove provider authenticity, semantic validity, acquisition approval or retention eligibility.
 
 ## 5. Exit criteria and next step
 
-Stage 3A is complete only after the owner confirms the focused tests and repository audit. Resolve every integrity error before acquisition registration. A clean audit permits the next design step: a lossless manifest-to-acquisition provenance mapping, including a formal treatment of the IMF WEO manual bundle. It does not itself create database acquisition records or settle the unresolved ICASEES/WPP stream boundaries.
+Stage 3A is complete. The next bounded stage is the Stage 3B provenance mapping design: define how each manifest and artifact maps losslessly into Project DB acquisition and artifact records, including explicit treatment of IMF WEO's unmanifested manual bundle. No acquisition rows should be written until this mapping, state transitions, idempotency key and unresolved stream boundaries have been reviewed. The audit itself does not create database acquisition records or settle the unresolved ICASEES/WPP stream boundaries.
