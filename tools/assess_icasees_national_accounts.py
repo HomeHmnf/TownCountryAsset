@@ -25,6 +25,7 @@ from openpyxl import load_workbook
 from tools import assess_imf_weo as imf_weo
 from tools.sources.registry import ROOT, SourceError, load_registry
 from tools.sources.reporting import write_source_report_bundle
+from tools.sources.pdf_text import extract_pdf_text
 
 SOURCE_ID = "icasees_national_accounts"
 MANIFEST = ROOT / "data_manifests/sources/icasees_national_accounts/manual_publication_bundle/2026-07-16.json"
@@ -487,26 +488,31 @@ def inspect_workbook(path: Path) -> dict[str, Any]:
 
 
 def inspect_pdfs(manifest: dict[str, Any]) -> list[dict[str, Any]]:
-    try:
-        from pypdf import PdfReader
-    except ImportError:
-        return [{"status": "not_inspected", "reason": "Install pypdf with uv add pypdf to enable PDF text extraction."}]
+    """Use the project-wide PDF text derivative service for ICASEES publications."""
     results = []
     terms = ("PIB", "base 2019", "SCN 2008", "rebasage", "milliards", "millions", "prix courants")
     for item in manifest["files"]:
         if item["format"] != "pdf":
             continue
-        reader = PdfReader(str(ROOT / item["path"]))
+        extracted = extract_pdf_text(ROOT / item["path"])
         evidence = []
-        for page_number, page in enumerate(reader.pages, start=1):
-            text = page.extract_text() or ""
-            found = [term for term in terms if _normal(term) in _normal(text)]
+        for page_number, page_text in enumerate(extracted.get("pages", []), start=1):
+            found = [term for term in terms if _normal(term) in _normal(page_text)]
             if found:
-                evidence.append({"page": page_number, "terms": found,
-                                 "excerpt": re.sub(r"\s+", " ", text).strip()[:1200]})
-        results.append({"file_id": item["file_id"], "path": item["path"], "status": "text_extracted",
-                        "page_count": len(reader.pages), "metadata": reader.metadata and
-                        {str(k): str(v) for k, v in reader.metadata.items()}, "evidence_pages": evidence})
+                evidence.append({
+                    "page": page_number,
+                    "terms": found,
+                    "excerpt": re.sub(r"\s+", " ", page_text).strip()[:1200],
+                })
+        results.append({
+            "file_id": item["file_id"],
+            "path": item["path"],
+            "status": extracted["status"],
+            "text_path": extracted.get("text_path"),
+            "page_count": extracted.get("page_count", 0),
+            "metadata": extracted.get("document_metadata", {}),
+            "evidence_pages": evidence,
+        })
     return results
 
 
