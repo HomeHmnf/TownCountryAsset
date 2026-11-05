@@ -1,14 +1,14 @@
 # Documentation index
 
-This directory is the documentation home for TownCountryAsset. Start here, then use the index for the relevant subject area.
+This directory is the documentation home for TownCountryAsset. Start with the [project context guide](PROJECT_CONTEXT.md), then use the subject index for the relevant topic.
 
 ## Subject indexes
 
 | Area | Index | Responsibility |
 |---|---|---|
-| Architecture | [Architecture](architecture/README.md) | Stable identities, canonical data model, database design and contracts |
+| Architecture | [Architecture](architecture/README.md) | Stable identities, data-store boundaries, database design and contracts |
 | Data sources | [Data sources](data-sources/README.md) | Providers, acquisition, validation, source selection and comparability |
-| Implementation | [Implementation](implementation/README.md) | Engineering implementation records, operational workflows and validation history |
+| Implementation | [Implementation](implementation/README.md) | Engineering implementation records, operational workflows and owner validation history |
 | Review | [Review](review/README.md) | Focused audits, investigations and review decisions |
 | Roadmap | [Roadmap](roadmap/README.md) | Feature plans, work packages, sequencing and acceptance criteria |
 
@@ -28,3 +28,4 @@ This directory is the documentation home for TownCountryAsset. Start here, then 
 5. New feature documents follow the feature documentation standard.
 6. Update the relevant index whenever a document is added, renamed, split or retired.
 7. Update documentation in the same implementation step as code, tests, configuration or operational changes.
+8. Keep [the project context guide](PROJECT_CONTEXT.md) concise and update it when architecture, workflow or project status changes; link to detailed documents instead of duplicating them.
