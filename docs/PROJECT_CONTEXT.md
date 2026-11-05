@@ -24,7 +24,7 @@ The owner has confirmed a target architecture with exactly two databases:
 
 Proposed project DB path: `data/project/project_data.sqlite`. Proposed game DB path remains `data/canonical/town_country_asset.sqlite` to avoid unnecessary path/consumer changes.
 
-**Important status distinction:** this is an approved design direction, not implemented behavior. Do not write code or change migrations until the owner verifies the complete plan. Follow the staged sequence and acceptance criteria in the [separation plan](architecture/data-store-separation-plan.md).
+**Important status distinction:** this is an approved design direction, not implemented behavior. Stage 0 read-only inventory is in progress; no schema, migration, retention or database code has been changed. See the [Stage 0 inventory procedure](implementation/data-store-separation-inventory.md) and the [separation plan](architecture/data-store-separation-plan.md).
 
 ## Source-version retention invariant
 
