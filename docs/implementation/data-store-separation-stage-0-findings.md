@@ -114,10 +114,10 @@ The Lipis flag-icons registry is only at discovered; its missing acquisition/val
 
 The Bahrain acquisition/validation disposition is accepted from the existing provider-specific documentation and assessment evidence. This consolidated inventory does not supersede that evidence. Identical hashes alone are not the basis for validation or retention eligibility.
 
-## 7. Unresolved items before Stage 1
+## 7. Open design gates for later stages
 
-1. Stream boundaries: confirm ICASEES bundle versus independent dataset streams; confirm UN WPP stream/bundle dependencies; formalize stable stream IDs for every source.
-3. Raw/derivative consumer map: finish exact runtime/tool/test references for the three unmanifested files and alternate ICASEES extraction; confirm whether any consumer depends on the legacy TXT.
+1. Stream boundaries: confirm ICASEES bundle versus independent dataset streams; confirm UN WPP stream/bundle dependencies; formalize stable stream IDs for every source before retention enforcement.
+2. Raw/derivative consumer map: finish exact runtime/tool/test references for the three unmanifested files and alternate ICASEES extraction; confirm whether any consumer depends on the legacy TXT.
 4. Table consumer completion: finish production/runtime versus test-only references, especially country_flags, country_attributes, country_geometries and import_runs.
 5. Run/report retention: specify retention for failed candidates, assessment runs, refresh logs and non-acquisition research evidence without conflating these with the two-version source policy.
 6. Manifest normalization: document and support current schema variants (Bahrain rolling, ICASEES manual bundle, UN M49 alternate representation, WPP edition/supplement).
@@ -130,4 +130,4 @@ The Bahrain acquisition/validation disposition is accepted from the existing pro
 
 The owner approved Stage 0 on 2026-11-05. The table/artifact disposition and retention constraints in this document are the accepted baseline. The Bahrain provider-specific validation disposition remains grounded in the existing Bahrain documentation and assessment evidence, which takes precedence over the earlier unresolved wording in this consolidated inventory.
 
-Stage 1 may begin within the approved plan. Remaining unresolved items are tracked as design/implementation gates: stream identity and manifest normalization must be settled before retention enforcement; consumer mapping must be complete before table retirement; run/report retention must be specified before cleanup; migration parity and cross-database recovery must be proven before cutover. No source-selection policy change is authorized.
+Stage 1 may begin within the approved plan and is scoped by [the Stage 1 design](data-store-separation-stage-1-design.md). Remaining unresolved items are tracked as design/implementation gates: stream identity and manifest normalization must be settled before retention enforcement; consumer mapping must be complete before table retirement; run/report retention must be specified before cleanup; migration parity and cross-database recovery must be proven before cutover. No source-selection policy change is authorized.
