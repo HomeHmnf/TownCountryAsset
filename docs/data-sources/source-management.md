@@ -12,7 +12,7 @@ Each source record can hold its homepage, domain, acquisition mode, direct downl
 
 - Raw snapshots: `raw_data/sources/<source-id>/<download-id>/<release>/<filename>` (local only; never commit raw source bytes).
 - Provenance manifests: `data_manifests/sources/<source-id>/<download-id>/<release>.json` (tracked).
-- Derived PDF text and metadata: `derived_data/pdf_text/` (local generated artifacts; ignored by Git).
+- Derived PDF text and metadata: `derived_data/pdf_text/` (generated artifacts tracked in Git).
 - Operational reports: `reports/sources/`.
 - Registry and domain contracts: tracked in Git.
 
@@ -79,7 +79,7 @@ Acquisition does not parse/import data into SQLite, alter country identity, appr
 
 License status is informational and does not block acquisition. Record whether terms are open, attribution-required, non-commercial, require commercial authorization, restrict redistribution, are proprietary/subscription, or remain unclear. Do not describe restricted or unverified material as open. License reporting does not grant rights; users must comply with source terms.
 
-Natural Earth is registered for geography/cartography only and is not an accepted source for WP1.5 statistics or classifications. Raw snapshots remain outside Git; manifests and source metadata are versioned. Review-only ISO, localization, and flag proposal workflows retain their existing human-review and approval safeguards.
+Natural Earth is registered for geography/cartography only and is not an accepted source for WP1.5 statistics or classifications. Raw snapshots remain outside Git under the normal source-storage policy; provenance manifests, source metadata and the PDF text derivatives under `derived_data/pdf_text/` are versioned. Review-only ISO, localization, and flag proposal workflows retain their existing human-review and approval safeguards.
 
 ## Shared database reports
 
