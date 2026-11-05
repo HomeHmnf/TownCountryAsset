@@ -101,3 +101,10 @@ Next, complete indicator-definition and unit verification, explicit country-code
 - IMF WEO Frequently Asked Questions: https://data.imf.org/en/Datasets/WEO/Frequently-Asked-Questions
 - IMF Data API documentation (SDMX 2.1 and SDMX 3.0): https://data.imf.org/en/Resource-Pages/IMF-API
 - IMF WEO Database Transition Guide: https://data.imf.org/-/media/iData/External-Storage/Documents/2C2B2F3E671A4B11ABE756E2441FD6F0/en/WEO-Database-Transition-Guide.pdf
+
+
+## Comparison and semantic assessment update (2026-11-05)
+
+The comparison and targeted discrepancy investigation are now complete as read-only diagnostics. The owner ran the comparison test group (15 tests passed) and generated the 2015–2025 candidate matrix and matched-pair output. The targeted investigation selected 15 country/field groups and 165 observations from that comparison; it did not fetch original provider records or change any database/policy state.
+
+The consolidated findings and remaining semantic gates are recorded in [Stage 4 — IMF WEO semantic assessment](../implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md) and [the IMF WEO/WDI comparison record](imf-weo-wdi-comparison.md). The assessment is not an approval: all five existing IMF WEO priority assignments remain unchanged; the WDI comparison remains live-vintage and diagnostic; no semantic validation, approval, retention, release promotion or Game DB write has occurred.
