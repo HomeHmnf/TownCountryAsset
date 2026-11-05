@@ -21,7 +21,8 @@ dist/
 # generated/*
 # !generated/.gitkeep
 
-# Local canonical SQLite database and transient SQLite sidecars
+# Local canonical and project SQLite databases and transient SQLite sidecars
+/data/project/*.sqlite*
 # data/canonical/*.sqlite
 # data/canonical/*.sqlite3
 # *.sqlite-wal
