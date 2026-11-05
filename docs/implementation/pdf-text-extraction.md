@@ -59,7 +59,7 @@ Text extraction is limited to embedded text. A PDF with no extractable page text
 
 - Original raw PDF SHA-256 remains authoritative for source integrity.
 - Derived text has a separate SHA-256 and is not an original provider artifact.
-- Derived outputs are local generated artifacts; they do not change source releases, source-selection policy, normalized observations or canonical SQLite.
+- Derived outputs are local generated artifacts under a Git-ignored path; they do not change source releases, source-selection policy, normalized observations or canonical SQLite.
 - Existing PDF paths and manifests are not rewritten by the backfill.
 
 ## Safety and operational boundaries
