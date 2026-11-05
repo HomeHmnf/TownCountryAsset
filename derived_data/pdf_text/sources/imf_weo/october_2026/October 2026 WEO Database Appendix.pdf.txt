@@ -1,0 +1,1836 @@
+--- PAGE 1 ---
+International Monetary Fund | October 2026  1 
+DATABASE APPENDIX 
+WORLD ECONOMIC OUTLOOK, OCTOBER 2026 
+The Database Appendix presents supplemental documentation about the World Economic Outlook 
+database. It comprises seven sections: Assumptions, Changes to the Database, Data Conventions, 
+Classification of Economies, Aggregation Methods, Country Data Documentation, and Changes to the 
+Database for Previous Editions. 
+The first section summarizes the assumptions underlying the estimates and projections in the database. The 
+second section briefly describes the changes to the database since the April 2026 World Economic Outlook 
+(WEO). The third section offers a general description of the data conventions in the WEO database. The 
+fourth section summarizes the classification of economies in the various groups presented in the WEO, and 
+the fifth section provides a general description of the methods used for calculating country group composites. 
+The sixth section presents selected key data documentation for each country. The seventh section describes the 
+changes to previous editions of the WEO database. 
+  
+Assumptions 
+A number of assumptions have been adopted for the projections presented in the World Economic Outlook 
+(WEO). It has been assumed that real effective exchange rates remained constant at their average levels during 
+July 31, 2026–August 28, 2026, except for those for the currencies participating in the European exchange rate 
+mechanism II, which are assumed to have remained constant in nominal terms relative to the euro; that 
+established policies of national authorities will be maintained (for specific assumptions about fiscal and 
+monetary policies for selected economies, see Box A1 in the WEO Online Statistical Appendix); that the average 
+price of oil will be $95.74 a barrel in 2026 and $87.39 a barrel in 2027; that the three-month government bond yield for 
+the United States will average 3.8 percent in 2026 and 4.3 percent in 2027, that for the euro area will average 
+2.3 percent in 2026 and 3.0 percent in 2027, and that for Japan will average 1.0 percent in 2026 and 1.4 percent 
+in 2027; and that the 10-year government bond yield for the United States will average 4.5 percent in 2026 and 4.6 
+percent in 2027, that for the euro area will average 3.1 percent in 2026 and 3.5 percent in 2027, and that for 
+Japan will average 2.6 percent in 2026 and 3.0 percent in 2027. These are, of course, working hypotheses rather 
+than forecasts, and the uncertainties surrounding them add to the margin of error that would, in any event, be 
+involved in the projections. 
+The estimates and projections are based on statistical information available through September 30, 2026, but 
+may not reflect the latest published data in all cases. For the date of the last data update for each economy, 
+please refer to the notes provided in the online WEO database. 
+Changes to the Database for October 2026 
+Nauru is now referred to as Naoero. 
+In June 2026, the Central African Republic National Statistical Agency (ICASEES) published rebased national 
+accounts that resulted in an upward revision of the nominal GDP for 2019 by 36.4 percent. The new accounts 
+replace the 2005 base year with 2019 as the new base year, implement the System of National Accounts 2008 
+(SNA 2008) instead of SNA 1993, and introduce revised national classifications aligned with international 
+statistical standards. The revision combines broader statistical coverage, drawing on the 2021 agricultural and
+
+--- PAGE 2 ---
+WORLD ECONOMIC OUTLOOK     
+2 International Monetary Fund | October 2026 
+household living conditions surveys as well as targeted sectoral studies, with updated compilation methods. 
+The structure of the economy changed markedly: services account for about 93 percent of the net upward 
+revision, with their estimated value added increasing by approximately 90 percent. Mining and construction 
+were also revised substantially upward, while agricultural and other primary activities were revised downward. 
+These revisions change the measured composition of the economy. 
+Changes to previous editions of the World Economic Database are listed in the final section of this document. 
+Data Conventions 
+Data and projections for 197 economies form the statistical basis of the WEO database. The data are 
+maintained jointly by the IMF’s Research Department and regional departments, with the latter regularly 
+updating country projections based on consistent global assumptions. 
+Although national statistical agencies are the ultimate providers of historical data and definitions, 
+international organizations are also involved in statistical issues, with the objective of harmonizing 
+methodologies for the compilation of national statistics, including analytical frameworks, concepts, definitions, 
+classifications, and valuation procedures used in the production of economic statistics. The WEO database 
+reflects information from both national source agencies and international organizations.  
+Most countries’ macroeconomic data as presented in the WEO conform broadly to the 2008 version of the 
+System of National Accounts (SNA 2008). The IMF’s sector statistical standards—the sixth edition of the Balance of 
+Payments and International Investment Position Manual (BPM6), the Monetary and Financial Statistics Manual and 
+Compilation Guide, and the Government Finance Statistics Manual 2014 (GFSM 2014)—have been aligned with the 
+SNA 2008. These standards reflect the IMF’s special interest in countries’ external positions, monetary 
+developments, financial sector stability, and public sector fiscal positions. The process of adapting country data 
+to the new standards begins in earnest when revised versions of the manuals are released. However, full 
+concordance with the most recent versions of the manuals is ultimately dependent on the provision by national 
+statistical compilers of revised country data; hence, the WEO estimates are only partly adapted to the most 
+recent versions of these manuals. Nonetheless, for many countries, conversion to the updated standards will 
+have only a small impact on major balances and aggregates. Many other countries have partly adopted the latest 
+standards and will continue implementation over a number of years.1  
+The fiscal gross and net debt data reported in the WEO are drawn from official data sources and IMF staff 
+estimates. While attempts are made to align data on gross and net debt with the definitions in the GFSM 2014, 
+because of data limitations or specific country circumstances, these data can sometimes deviate from the 
+formal definitions. Although every effort is made to ensure the WEO data are relevant and internationally 
+comparable, differences in both sectoral and instrument coverage mean that the data are not universally 
+comparable. As more information becomes available, changes in either data sources or instrument coverage 
+can give rise to data revisions that are sometimes substantial. For clarification on the deviations in sectoral or 
+instrument coverage, please refer to the metadata for the online WEO database. 
+The following conventions are used throughout the WEO: 
+• Domestic economy series are expressed in billions of national currency units 
+ 
+1Many countries are implementing the SNA 2008 or European System of National and Regional Accounts 2010, and a few countries use versions of the SNA older 
+than that from 1993. A similar adoption pattern is expected for the BPM6 and GFSM 2014. Please refer to the Country Information table below which lists the 
+statistical standards to which each country adheres.
+
+--- PAGE 3 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 3  
+• External accounts series are expressed in billions of U.S. dollars. 
+• "Billion" means a thousand million; "trillion" means a thousand billion. 
+• Missing data are indicated by "n/a". 
+• Blank row means that data is not available or not applicable. 
+• "/" means between years or months (for example, 2024/25) to indicate a fiscal or financial year. 
+• Shading differences are used to distinguish historical results from IMF staff projections. 
+• Minor discrepancies between sums of constituent figures and totals shown reflect rounding. 
+• Data refer to calendar years, except in the case of a few countries that use fiscal years. Please refer to 
+Online Table F in the WEO Online Statistical Appendix, which lists the economies with exceptional 
+reporting periods for national accounts and government finance data. 
+• For some countries, the figures for 2025 and earlier are based on estimates rather than actual outturns. 
+Please refer to the Country Information table below which lists the latest actual outturns for the indicators 
+in the national accounts, prices, government finance, and balance of payments indicators for each country. 
+• As used here, the terms “country” and “economy” do not in all cases refer to a territorial entity that is a 
+state as understood by international law and practice. As used here, the term also covers some territorial 
+entities that are not states but for which statistical data are maintained on a separate and independent basis. 
+• Composite data are provided for various groups of countries organized according to economic 
+characteristics or region. Unless noted otherwise, country group composites represent calculations based on 
+90 percent or more of the weighted group data. Please refer to the section on Data and Conventions in the 
+WEO Online Statistical Appendix for further information.
+
+--- PAGE 4 ---
+WORLD ECONOMIC OUTLOOK     
+4 International Monetary Fund | October 2026 
+Classification of Economies 
+The economy classification in the WEO divides the world into two major groups: advanced economies and 
+emerging and developing economies. Please refer to the introduction to the WEO's Online Statistical 
+Appendix for details. This classification is not based on strict criteria, economic or otherwise, and has evolved 
+over time. The objective is to facilitate analysis by providing a reasonably meaningful method of organizing 
+data. 
+Some economies remain outside the classification and therefore are not included in the analysis. Cuba and 
+the Democratic People’s Republic of Korea are examples of economies that are not IMF members, and the 
+IMF therefore does not monitor them. 
+ 
+Advanced Economies 
+ 
+Andorra 
+Australia 
+Austria 
+Belgium 
+Canada 
+Croatia 
+Cyprus 
+Czech Republic 
+Denmark 
+Estonia 
+Finland 
+France 
+Germany 
+Greece 
+Hong Kong SAR 
+Iceland 
+Ireland 
+Israel 
+Italy 
+Japan 
+Korea 
+Latvia 
+Liechtenstein 
+Lithuania 
+Luxembourg 
+Macao SAR 
+Malta 
+The Netherlands 
+New Zealand 
+Norway 
+Portugal 
+Puerto Rico 
+San Marino 
+Singapore 
+Slovak Republic 
+Slovenia 
+Spain 
+Sweden 
+Switzerland 
+Taiwan Province of China 
+United Kingdom 
+United States 
+ 
+ 
+ 
+Euro Area 
+Austria 
+Bulgaria 
+Belgium 
+Croatia 
+Cyprus 
+Estonia 
+Finland 
+France 
+Germany 
+Greece 
+Ireland 
+Italy 
+Latvia 
+Lithuania 
+Luxembourg 
+Malta 
+The Netherlands 
+Portugal 
+Slovak Republic 
+Slovenia 
+Spain 
+ 
+Major Advanced Economies (G7) 
+Canada 
+France 
+Germany 
+Italy 
+Japan 
+United Kingdom 
+United States
+
+--- PAGE 5 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 5  
+Other Advanced Economies 
+(Advanced Economies excluding G7 and Euro Area) 
+Andorra 
+Australia 
+Czech Republic 
+Denmark 
+Hong Kong SAR 
+Iceland 
+Israel 
+Korea 
+Liechtenstein 
+Macao SAR 
+New Zealand 
+Norway 
+Puerto Rico 
+San Marino 
+Singapore 
+Sweden 
+Switzerland 
+Taiwan Province of China 
+ 
+European Union 
+Austria 
+Belgium 
+Bulgaria 
+Croatia 
+Cyprus 
+Czech Republic 
+Denmark 
+Estonia 
+Finland 
+France 
+Germany 
+Greece 
+Hungary 
+Ireland 
+Italy 
+Latvia 
+Lithuania 
+Luxembourg 
+Malta 
+The Netherlands 
+Poland 
+Portugal 
+Romania 
+Slovak Republic 
+Slovenia 
+Spain 
+Sweden 
+ 
+ASEAN-5 
+Indonesia 
+Malaysia 
+Philippines  
+Singapore 
+Thailand
+
+--- PAGE 6 ---
+WORLD ECONOMIC OUTLOOK     
+6 International Monetary Fund | October 2026 
+Emerging and Developing Economies 
+Afghanistan 
+Albania 
+Algeria 
+Angola 
+Antigua and Barbuda 
+Argentina 
+Armenia 
+Aruba 
+Azerbaijan 
+The Bahamas 
+Bahrain 
+Bangladesh 
+Barbados 
+Belarus 
+Belize 
+Benin 
+Bhutan 
+Bolivia 
+Bosnia and Herzegovina 
+Botswana 
+Brazil 
+Brunei Darussalam 
+Burkina Faso 
+Burundi 
+Cabo Verde 
+Cambodia 
+Cameroon 
+Central African Republic 
+Chad 
+Chile 
+China 
+Colombia 
+Comoros 
+Democratic Republic 
+  of the Congo 
+Republic of Congo 
+Costa Rica 
+Côte d'Ivoire 
+Djibouti 
+Dominica 
+Dominican Republic 
+Ecuador 
+Egypt 
+El Salvador 
+Equatorial Guinea 
+Eritrea 
+Eswatini 
+Ethiopia 
+Fiji 
+Gabon 
+The Gambia 
+Georgia 
+Ghana 
+Grenada 
+Guatemala 
+Guinea 
+Guinea-Bissau 
+Guyana 
+Haiti 
+Honduras 
+Hungary 
+India 
+Indonesia 
+Iran 
+Iraq 
+Jamaica 
+Jordan 
+Kazakhstan 
+Kenya 
+Kiribati 
+Kosovo 
+Kuwait 
+Kyrgyz Republic 
+Lao P.D.R. 
+Lebanon 
+Lesotho 
+Liberia 
+Libya 
+Madagascar 
+Malawi 
+Malaysia 
+Maldives 
+Mali 
+Marshall Islands 
+Mauritania 
+Mauritius 
+Mexico 
+Micronesia 
+Moldova 
+Mongolia 
+Montenegro 
+Morocco 
+Mozambique 
+Myanmar 
+Namibia 
+Naoero 
+Nepal 
+Nicaragua 
+Niger 
+Nigeria 
+North Macedonia 
+Oman 
+Pakistan 
+Palau 
+Panama 
+Papua New Guinea  
+Paraguay 
+Peru 
+Philippines 
+Poland 
+Qatar 
+Romania 
+Russia 
+Rwanda 
+Samoa 
+São Tomé and Príncipe 
+Saudi Arabia 
+Senegal 
+Serbia 
+Seychelles 
+Sierra Leone 
+Solomon Islands 
+Somalia 
+South Africa 
+South Sudan 
+Sri Lanka 
+St. Kitts and Nevis 
+St. Lucia 
+St. Vincent and the 
+  Grenadines 
+Sudan 
+Suriname 
+Syria 
+Tajikistan 
+Tanzania 
+Thailand 
+Timor-Leste 
+Togo 
+Tonga 
+Trinidad and Tobago 
+Tunisia 
+Türkiye 
+Turkmenistan 
+Tuvalu 
+Uganda 
+Ukraine 
+United Arab Emirates 
+Uruguay 
+Uzbekistan 
+Vanuatu 
+Venezuela 
+Vietnam 
+West Bank and Gaza 
+Yemen 
+Zambia 
+Zimbabwe
+
+--- PAGE 7 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 7  
+ 
+ 
+Emerging and Developing Asia 
+Bangladesh 
+Bhutan 
+Brunei Darussalam 
+Cambodia 
+China 
+Fiji 
+India 
+Indonesia 
+Kiribati 
+Lao P.D.R. 
+Malaysia 
+Maldives 
+Marshall Islands 
+Micronesia 
+Mongolia  
+Myanmar 
+Naoero 
+Nepal 
+Palau 
+Papua New Guinea 
+Philippines 
+Samoa 
+Solomon Islands 
+Sri Lanka 
+Thailand 
+Timor-Leste 
+Tonga 
+Tuvalu 
+Vanuatu 
+Vietnam 
+ 
+Emerging and Developing Europe 
+Albania 
+Belarus 
+Bosnia and Herzegovina 
+Hungary 
+Kosovo 
+Moldova 
+Montenegro 
+North Macedonia 
+Poland 
+Romania 
+Russia 
+Serbia 
+Türkiye 
+Ukraine 
+ 
+Latin America and the Caribbean 
+Antigua and Barbuda 
+Argentina 
+Aruba 
+The Bahamas 
+Barbados 
+Belize 
+Bolivia 
+Brazil 
+Chile 
+Colombia 
+Costa Rica 
+Dominica 
+Dominican Republic 
+Ecuador 
+El Salvador 
+Grenada 
+Guatemala 
+Guyana 
+Haiti 
+Honduras 
+Jamaica 
+Mexico 
+Nicaragua 
+Panama 
+Paraguay 
+Peru 
+St. Kitts and Nevis 
+St. Lucia 
+St. Vincent and the 
+  Grenadines 
+Suriname 
+Trinidad and Tobago 
+Uruguay 
+Venezuela
+
+--- PAGE 8 ---
+WORLD ECONOMIC OUTLOOK     
+8 International Monetary Fund | October 2026 
+Middle East and Central Asia 
+Afghanistan 
+Algeria 
+Armenia 
+Azerbaijan 
+Bahrain 
+Djibouti 
+Egypt 
+Georgia 
+Iran 
+Iraq 
+Jordan  
+Kazakhstan 
+Kuwait 
+Kyrgyz Republic 
+Lebanon 
+Libya  
+Mauritania 
+Morocco 
+Oman 
+Pakistan 
+Qatar 
+Saudi Arabia 
+Somalia 
+Sudan 
+Syria 
+Tajikistan 
+Tunisia 
+Turkmenistan 
+United Arab Emirates 
+Uzbekistan 
+West Bank and Gaza 
+Yemen 
+ 
+Sub-Saharan Africa 
+Angola 
+Benin 
+Botswana 
+Burkina Faso 
+Burundi 
+Cabo Verde 
+Cameroon 
+Central African Republic 
+Chad 
+Comoros 
+Democratic Republic 
+  of the Congo 
+Republic of Congo 
+Côte d'Ivoire 
+Equatorial Guinea 
+Eritrea 
+Eswatini 
+Ethiopia 
+Gabon 
+The Gambia 
+Ghana 
+Guinea 
+Guinea-Bissau 
+Kenya 
+Lesotho 
+Liberia 
+Madagascar 
+Malawi 
+Mali 
+Mauritius 
+Mozambique 
+Namibia 
+Niger 
+Nigeria 
+Rwanda 
+São Tomé and Príncipe 
+Senegal 
+Seychelles 
+Sierra Leone 
+South Africa 
+South Sudan 
+Tanzania 
+Togo 
+Uganda 
+Zambia 
+Zimbabwe 
+ 
+Aggregation Methods 
+Composite data for country groups in the WEO are either sums or weighted averages of data for individual 
+countries. Unless noted otherwise, multiyear averages of growth rates are expressed as compound annual rates 
+of change.2 Arithmetically weighted averages are used for all data for the emerging market and developing 
+economies group—except data on inflation and money growth, for which geometric averages are used. The 
+following conventions apply: 
+Country group composites for exchange rates, interest rates, and growth rates of monetary aggregates are 
+weighted by GDP converted to US dollars at market exchange rates (averaged over the preceding three years) 
+as a share of group GDP. 
+ 
+2Averages for real GDP, inflation, GDP per capita, and commodity prices are calculated based on the compound annual rate of change, except in the case of the 
+unemployment rate, which is based on the simple arithmetic average.
+
+--- PAGE 9 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 9  
+Composites for other data relating to the domestic economy, whether growth rates or ratios, are weighted by 
+GDP valued at purchasing power parity as a share of total world or group GDP.3 For the aggregation of 
+inflation in advanced economies (and subgroups), annual rates are simple percent changes from the previous 
+years; for the aggregation of world inflation and inflation in emerging market and developing economies (and 
+subgroups), annual rates are based on logarithmic differences.  
+Composites for real GDP per capita in purchasing-power-parity terms are sums of individual country data after 
+conversion to international dollars in the years indicated. 
+Unless noted otherwise, composites for all sectors for the euro area are corrected for reporting discrepancies 
+in transactions within the area. Unadjusted annual GDP data are used for the euro area and for the majority of 
+individual countries, except Cyprus, Ireland, Portugal, and Spain, which report calendar-adjusted data. For data 
+prior to 1999, data aggregations apply 1995 European currency unit exchange rates. 
+Composites for fiscal data are sums of individual country data after conversion to US dollars at the average 
+market exchange rates in the years indicated. 
+Composite unemployment rates and employment growth are weighted by labor force as a share of group 
+labor force. 
+Composites relating to external sector statistics are sums of individual country data after conversion to US 
+dollars at the average market exchange rates in the years indicated for balance of payments data and at end-of-
+year market exchange rates for debt denominated in currencies other than US dollars.  
+Composites of changes in foreign trade volumes and prices, however, are arithmetic averages of percent 
+changes for individual countries weighted by the US dollar value of exports or imports as a share of total world 
+or group exports or imports (in the preceding year).  
+Unless noted otherwise, group composites are computed if 90 percent or more of the share of group weights 
+is represented. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+3See Box A2 in the Statistical Appendix of the October 2024 WEO for a summary of the revised purchasing-power-parity-based weights as well as Box 1.1 of the 
+October 2020 WEO, “Revised Purchasing Power Parity Weights” in the July 2014 WEO Update, Appendix 1.1 of the April 2008 WEO, Box A2 of the April 2004 
+WEO, Box A1 of the May 2000 WEO, and Annex IV of the May 1993 WEO. See also Anne-Marie Gulde and Marianne Schulze-Ghattas, “Purchasing Power Parity 
+Based Weights for the World Economic Outlook,” in Staff Studies for the World Economic Outlook (Washington, DC: International Monetary Fund, December 1993), 106–23.
+
+--- PAGE 10 ---
+WORLD ECONOMIC OUTLOOK     
+10 International Monetary Fund | October 2026 
+Country Data Documentation 
+   National Accounts  Prices (CPI) 
+ISO Code Country Currency 
+Historical Data 
+Source1 
+Latest Actual 
+Annual Data Base Year2 
+System of 
+National 
+Accounts 
+Use of Chain-
+Weighted 
+Methodology3  
+Historical 
+Data Source1 
+Latest Actual 
+Annual Data 
+AFG Afghanistan Afghan afghani NSO 2024/25 2016 SNA 2008    NSO 2025/26 
+ALB Albania Albanian lek IMF staff 2025 2020 ESA 2010 From 2020  NSO 2025 
+DZA Algeria Algerian dinar NSO 2024 2001 SNA 2008 From 2005  NSO 2025 
+AND Andorra Euro NSO 2025 2010 …   NSO 2025 
+AGO Angola Angolan kwanza NSO 2025 2015 ESA 1995   NSO 2025 
+ATG Antigua and Barbuda Eastern Caribbean dollar CB 2024 2018 SNA 1993   NSO 2025 
+ARG Argentina Argentine peso NSO 2025 2004 SNA 2008   NSO 2025 
+ARM Armenia Armenian dram NSO 2025 2005 SNA 2008   NSO 2025 
+ABW Aruba Aruban florin NSO 2023 2013 SNA 1993 From 2000  NSO 2025 
+AUS Australia Australian dollar NSO 2025 2023 SNA 2008 From 1980  NSO 2025 
+AUT Austria Euro NSO 2025 2020 ESA 2010 From 1995  NSO 2025 
+AZE Azerbaijan Azerbaijan manat NSO 2024 2005 SNA 2008 From 1994  NSO 2025 
+BHS The Bahamas Bahamian dollar NSO 2025 2018 SNA 2008   NSO 2025 
+BHR Bahrain Bahrain dinar NSO 2025 2010 SNA 2008   NSO 2025 
+BGD Bangladesh Bangladesh taka NSO 2025/26 2015/16 SNA 2008   Other 2025/26 
+BRB Barbados Barbados dollar NSO 2025 2023 SNA 2008   NSO 2025 
+BLR Belarus Belarusian ruble NSO 2025 2022 SNA 2008 From 2005  NSO 2025 
+BEL Belgium Euro CB 2025 2020 ESA 2010 From 1995  CB 2025 
+BLZ Belize Belize dollar NSO 2024 2014 SNA 2008   NSO 2025 
+BEN Benin CFA franc NSO 2025 2015 SNA 2008   NSO 2025 
+BTN Bhutan Bhutanese ngultrum NSO 2024/25 2016/17 SNA 2008   NSO 2025/26 
+BOL Bolivia Bolivian boliviano NSO 2025 2017 SNA 2008 From 2017  NSO 2025 
+BIH Bosnia and Herzegovina Bosnian convertible marka NSO 2025 2021 ESA 2010 From 2021  NSO 2025 
+BWA Botswana Botswana pula NSO 2024 2016 SNA 2008   NSO 2025 
+BRA Brazil Brazilian real NSO 2025 1995 SNA 2008   NSO 2025 
+BRN Brunei Darussalam Brunei dollar MEP 2025 2010 SNA 2008   MEP 2025 
+BGR Bulgaria Euro NSO 2025 2020 ESA 2010 From 2020  NSO 2025 
+BFA Burkina Faso CFA franc NSO 2025 2015 SNA 2008 From 2015  NSO 2025 
+BDI Burundi Burundi franc NSO 2025 2005 SNA 1993   NSO 2025 
+CPV Cabo Verde Cabo Verdean escudo NSO 2025 2015 SNA 2008 From 2011  NSO 2024 
+KHM Cambodia Cambodian riel NSO 2025 2014 SNA 1993   NSO 2025 
+CMR Cameroon CFA franc NSO 2025 2016 SNA 2008 From 2016  NSO 2025 
+CAN Canada Canadian dollar NSO 2025 2017 SNA 2008 From 1980  NSO 2025 
+CAF Central African Republic CFA franc NSO 2022 2019 SNA 2008   NSO 2025 
+TCD Chad CFA franc NSO 2024 2017 SNA 2008 From 2005  NSO 2025 
+CHL Chile Chilean peso CB 2025 2018 SNA 2008 From 2003  NSO 2025 
+CHN China Chinese yuan NSO 2025 2015 SNA 2008   NSO 2025 
+COL Colombia Colombian peso NSO 2025 2015 SNA 2008 From 2005  NSO 2025 
+COM Comoros Comorian franc NSO 2024 2007 SNA 1993   NSO 2025 
+COD Democratic Republic of 
+the Congo 
+Congolese franc NSO 2023 2005 SNA 1993 From 2005  NSO 2025 
+COG Republic of Congo CFA franc NSO 2022 2005 SNA 1993   NSO 2025 
+CRI Costa Rica Costa Rican colón CB 2025 2022 SNA 2008 From 2022  CB 2025 
+CIV Côte d'Ivoire CFA franc NSO 2024 2015 SNA 2008 From 2015  NSO 2024 
+HRV Croatia Euro NSO 2025 2021 ESA 2010   NSO 2025 
+CYP Cyprus Euro Other 2025 2020 ESA 2010 From 1995  Other 2025 
+CZE Czech Republic Czech koruna NSO 2025 2020 ESA 2010 From 1995  NSO 2025 
+DNK Denmark Danish krone NSO 2025 2020 ESA 2010 From 1980  NSO 2025 
+DJI Djibouti Djibouti franc NSO 2024 2013 SNA 2008   NSO 2025 
+DMA Dominica Eastern Caribbean dollar NSO 2024 2006 SNA 1993   NSO 2025 
+DOM Dominican Republic Dominican peso CB 2025 2018 SNA 2008 From 2018  CB 2025 
+ECU Ecuador US dollar CB 2025 2018 SNA 2008 From 2018  NSO 2025 
+EGY Egypt Egyptian pound MEP 2024/25 2021/22 SNA 2008   Other 2025/26 
+SLV El Salvador US dollar CB 2025 2014 SNA 2008 From 2005  NSO 2025 
+GNQ Equatorial Guinea CFA franc MEP 2025 2006 SNA 1993   MEP 2025 
+ERI Eritrea Eritrean nakfa Other 2019 2011 SNA 1993   Other 2019 
+EST Estonia Euro NSO 2025 2020 ESA 2010 From 1995  NSO 2025 
+SWZ Eswatini Swazi lilangeni NSO 2025 2019 SNA 2008   NSO 2025 
+ETH Ethiopia Ethiopian birr NSO 2024/25 2015/16 SNA 2008   NSO 2024/25 
+FJI Fiji Fijian dollar NSO 2025 2014 SNA 2008   NSO 2025 
+FIN Finland Euro NSO 2025 2015 ESA 2010 From 1980  NSO 2025 
+FRA France Euro NSO 2025 2020 ESA 2010 From 1980  NSO 2025 
+GAB Gabon CFA franc MEP 2025 2001 SNA 1993   NSO 2025 
+GMB The Gambia Gambian dalasi NSO 2023 2013 SNA 2008   NSO 2024 
+GEO Georgia Georgian lari NSO 2025 2019 SNA 2008 From 1996  NSO 2025 
+DEU Germany Euro NSO 2025 2020 ESA 2010 From 1991  NSO 2025 
+GHA Ghana Ghanaian cedi NSO 2025 2013 SNA 2008 From 2021  NSO 2025 
+GRC Greece Euro NSO 2025 2020 ESA 2010 From 1995  NSO 2025 
+GRD Grenada Eastern Caribbean dollar NSO 2025 2006 SNA 1993   NSO 2025 
+GTM Guatemala Guatemalan quetzal CB 2025 2013 SNA 2008 From 2001  NSO 2025 
+GIN Guinea Guinean franc NSO 2024 2019 SNA 2008 From 2019  NSO 2025 
+GNB Guinea-Bissau CFA franc NSO 2023 2015 SNA 2008 From 2015  NSO 2024 
+GUY Guyana Guyanese dollar NSO 2025 20126 SNA 1993   NSO 2025 
+HTI Haiti Haitian gourde NSO 2024/25 2011/12 SNA 2008   NSO 2024/25 
+HND Honduras Honduran lempira CB 2025 2000 SNA 1993   CB 2025 
+HKG Hong Kong SAR Hong Kong dollar NSO 2025 2024 SNA 2008 From 1980  NSO 2025 
+HUN Hungary Hungarian forint NSO 2025 2021 ESA 2010 From 2021  NSO 2025 
+ISL Iceland Icelandic króna NSO 2024 2020 ESA 2010 From 2020  NSO 2025 
+IND India Indian rupee NSO 2025/26 2022/23 SNA 2008   NSO 2025/26 
+IDN Indonesia Indonesian rupiah NSO 2025 2010 SNA 2008   NSO 2025 
+IRN Iran Iranian rial CB 2025/26 2021/22 SNA 2008   CB 2025/26
+
+--- PAGE 11 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 11  
+Country Data Documentation (continued) 
+  Government Finance  Balance Of Payments 
+ISO Code Country 
+Historical Data 
+Source1 
+Latest Actual 
+Annual Data 
+Statistics 
+Manual in Use 
+at Source 
+Subsectors 
+Coverage4 
+Accounting 
+Practice5 
+ 
+Historical 
+Data Source1 
+Latest Actual 
+Annual Data 
+Statistics 
+Manual in Use 
+at Source 
+AFG Afghanistan MoF 2025/26 2001 CG C  CB 2024/25 BPM 6 
+ALB Albania IMF staff 2025 1986 CG,LG,SS,MPC …  CB 2025 BPM 6 
+DZA Algeria MoF 2025 1986 CG C  CB 2025 BPM 6 
+AND Andorra NSO 2025 … CG,LG,SS C  NSO 2025 BPM 6 
+AGO Angola MoF 2025 2014 … Mixed  CB 2025 BPM 6 
+ATG Antigua and Barbuda MoF 2025 2001 CG Mixed  CB 2025 BPM 6 
+ARG Argentina MEP 2025 1986 CG,SG,SS C  NSO 2025 BPM 6 
+ARM Armenia MoF 2025 2001 CG C  CB 2025 BPM 6 
+ABW Aruba MoF 2024 2001 CG C  CB 2024 BPM 6 
+AUS Australia MoF 2025 2014 CG,SG,LG A  NSO 2025 BPM 6 
+AUT Austria NSO 2024 2014 CG,SG,LG,SS A  CB 2024 BPM 6 
+AZE Azerbaijan MoF 2025 2001 CG C  CB 2024 BPM 6 
+BHS The Bahamas MoF 2024/25 2014 CG C  CB 2025 BPM 6 
+BHR Bahrain MoF 2024 2001 CG C  CB 2025 BPM 6 
+BGD Bangladesh MoF 2025/26 2001 CG C  CB 2025/26 BPM 6 
+BRB Barbados MoF 2025/26 2001 CG C  CB 2025 BPM 6 
+BLR Belarus MoF 2025 2001 CG,LG,SS C  CB 2025 BPM 6 
+BEL Belgium CB 2025 ESA 2010 CG,SG,LG,SS A  CB 2025 BPM 6 
+BLZ Belize MoF 2025 1986 CG,MPC …  CB 2025 BPM 6 
+BEN Benin MoF 2025 1986 CG C  CB 2023 BPM 6 
+BTN Bhutan MoF 2024/25 1986 CG C  CB 2024/25 BPM 6 
+BOL Bolivia MoF 2025 2001 CG,LG,SS C  CB 2025 BPM 6 
+BIH Bosnia and Herzegovina MoF 2025 2014 CG,SG,LG,SS A  CB 2025 BPM 6 
+BWA Botswana MoF 2024/25 1986 CG C  CB 2025 BPM 6 
+BRA Brazil MoF 2025 2014 CG,SG,LG,SS Mixed  CB 2025 BPM 6 
+BRN Brunei Darussalam MoF 2025 1986 CG C  MoF 2025 BPM 6 
+BGR Bulgaria MoF 2025 2001 CG,LG,SS C  CB 2025 BPM 6 
+BFA Burkina Faso MoF 2025 2001 CG …  CB 2024 BPM 6 
+BDI Burundi MoF 2025 2001 CG Mixed  CB 2025 BPM 6 
+CPV Cabo Verde MoF 2024 2001 CG A  NSO 2024 BPM 6 
+KHM Cambodia MoF 2025 2001 CG,LG C  CB 2025 BPM 6 
+CMR Cameroon MoF 2025 2001 CG Mixed  MoF 2024 BPM 6 
+CAN Canada MoF 2025 2001 CG,SG,LG,SS A  NSO 2025 BPM 6 
+CAF Central African Republic MoF 2025 2001 CG C  CB 2023 BPM 6 
+TCD Chad MoF 2025 1986 CG Mixed  CB 2023 BPM 6 
+CHL Chile MoF 2025 2001 CG,LG A  CB 2025 BPM 6 
+CHN China MoF 2025 … CG,LG,SS C  GAD 2025 BPM 6 
+COL Colombia MoF 2025 2001 CG,SG,LG,SS …  CB 2025 BPM 6 
+COM Comoros MoF 2025 1986 CG Mixed  CB and IMF 
+staff 
+2024 BPM 5 
+COD Democratic Republic of the Congo MoF 2023 2001 CG,LG A  CB 2023 BPM 6 
+COG Republic of Congo MoF 2025 2001 CG A  CB 2022 BPM 6 
+CRI Costa Rica Other 2025 1986 CG,NFPC C  CB 2025 BPM 6 
+CIV Côte d'Ivoire MoF 2025 1986 CG A  NSO 2024 BPM 6 
+HRV Croatia MoF 2025 2014 CG,LG A  CB 2025 BPM 6 
+CYP Cyprus Other 2025 ESA 2010 CG,LG,SS A  CB 2025 BPM 6 
+CZE Czech Republic MoF 2025 2014 CG,LG,SS A  NSO 2025 BPM 6 
+DNK Denmark NSO 2025 2014 CG,LG,SS A  NSO 2025 BPM 6 
+DJI Djibouti MoF 2025 1986 CG A  CB 2025 BPM 6 
+DMA Dominica MoF 2025/26 1986 CG C  CB 2025 BPM 6 
+DOM Dominican Republic MoF 2025 2014 CG,LG,SS Mixed  CB 2025 BPM 6 
+ECU Ecuador MoF 2025 2014 CG,SG,LG,SS Mixed  CB 2025 BPM 6 
+EGY Egypt MoF 2024/25 … CG,LG,SS,NFPC C  CB 2024/25 BPM 5 
+SLV El Salvador Other 2025 1986 CG,LG,SS C  CB 2025 BPM 6 
+GNQ Equatorial Guinea MEP 2024 1986 CG C  CB 2023 BPM 5 
+ERI Eritrea Other 2019 2001 CG C  Other 2019 BPM 5 
+EST Estonia MoF 2025 … CG,LG,SS C  CB 2025 BPM 6 
+SWZ Eswatini MoF 2025/26 2001 CG C  CB 2025 BPM 6 
+ETH Ethiopia MoF 2024/25 1986 CG,SG,LG C  CB 2024/25 BPM 5 
+FJI Fiji MoF 2024/25 1986 CG C  CB 2025 BPM 6 
+FIN Finland MoF 2025 2014 CG,LG,SS A  NSO 2025 BPM 6 
+FRA France NSO 2025 2014 CG,LG,SS A  CB 2025 BPM 6 
+GAB Gabon MoF 2025 2001 CG A  IMF staff 2023 BPM 6 
+GMB The Gambia MoF 2023 1986 CG C  CB and IMF 
+staff 
+2023 BPM 6 
+GEO Georgia MoF 2025 2001 CG,LG C  CB 2025 BPM 6 
+DEU Germany NSO 2025 ESA 2010 CG,SG,LG,SS A  CB 2025 BPM 6 
+GHA Ghana MoF 2025 2014 CG Mixed  CB 2025 BPM 6 
+GRC Greece NSO 2025 ESA 2010 CG,LG,SS,SG A  CB 2025 BPM 6 
+GRD Grenada MoF 2025 … CG CB  NSO 2025 BPM 6 
+GTM Guatemala MoF 2025 2001 CG C  CB 2025 BPM 6 
+GIN Guinea MoF 2025 2014 CG C  CB 2025 BPM 6 
+GNB Guinea-Bissau MoF 2024 2001 CG CB  CB 2023 BPM 6 
+GUY Guyana MoF 2025 1986 CG,SS C  CB 2025 … 
+HTI Haiti MoF 2024/25 1986 CG C  CB 2024/25 BPM 5 
+HND Honduras MoF 2025 2014 CG,LG,SS Mixed  CB 2025 BPM 5 
+HKG Hong Kong SAR MoF 2025/26 2001 CG C  NSO 2025 BPM 6 
+HUN Hungary MEP 2025 ESA 2010 CG,LG,SS A  CB 2025 BPM 6 
+ISL Iceland NSO 2025 ESA 2010 CG,LG,SS A  CB 2025 BPM 6 
+IND India MoF 2024/25 2001 CG,SG C  CB 2025/26 BPM 6 
+IDN Indonesia MoF 2025 2014 CG,LG A  CB 2025 BPM 6 
+IRN Iran MoF 2024/25 2001 CG C  CB 2025/26 BPM 5
+
+--- PAGE 12 ---
+WORLD ECONOMIC OUTLOOK     
+12 International Monetary Fund | October 2026 
+Country Data Documentation (continued) 
+   National Accounts  Prices (CPI) 
+ISO Code Country Currency 
+Historical Data 
+Source1 
+Latest Actual 
+Annual Data Base Year2 
+System of 
+National 
+Accounts 
+Use of Chain-
+Weighted 
+Methodology3  
+Historical 
+Data Source1 
+Latest Actual 
+Annual Data 
+IRQ Iraq Iraqi dinar  NSO 2025 2007 …   NSO 2025 
+IRL Ireland Euro NSO 2025 2024 ESA 2010 From 1995  NSO 2025 
+ISR Israel Israeli new shekel NSO 2025 2020 SNA 2008 From 1995  NSO 2025 
+ITA Italy Euro NSO 2025 2020 ESA 2010 From 1980  NSO 2025 
+JAM Jamaica Jamaican dollar NSO 2025 2015 SNA 2008   NSO 2025 
+JPN Japan Japanese yen Other 2025 2020 SNA 2008 From 1980  Other 2025 
+JOR Jordan Jordanian dinar NSO 2025 2023 SNA 2008   NSO 2025 
+KAZ Kazakhstan Kazakhstani tenge NSO 2024 2005 SNA 1993 From 1994  NSO 2024 
+KEN Kenya Kenyan shilling NSO 2025 2016 SNA 2008   NSO 2025 
+KIR Kiribati Australian dollar NSO 2024 2019 SNA 2008   NSO 2025 
+KOR Korea South Korean won CB 2025 2020 SNA 2008 From before 1980  NSO 2025 
+UVK Kosovo Euro NSO 2025 2016 ESA 2010   NSO 2025 
+KWT Kuwait Kuwaiti dinar NSO 2025 2010 SNA 1993   NSO 2025 
+KGZ Kyrgyz Republic Kyrgyz som NSO 2025 2005 SNA 2008 From 2010  NSO 2025 
+LAO Lao P.D.R. Lao kip NSO 2025 2012 SNA 2008   NSO 2025 
+LVA Latvia Euro NSO 2025 2020 ESA 2010 From 1995  Other 2025 
+LBN Lebanon Lebanese pound NSO 2024 2019 SNA 2008 From 2019  NSO 2025 
+LSO Lesotho Lesotho loti NSO 2024/25 2012/13 SNA 2008   NSO 2025 
+LBR Liberia US dollar IMF staff 2025 2018 SNA 1993   Other 2025 
+LBY Libya Libyan dinar MEP 2019 2013 SNA 1993   NSO 2025 
+LIE Liechtenstein Swiss franc NSO 2023 2013 ESA 2010   NSO 2025 
+LTU Lithuania Euro NSO 2025 2021 ESA 2010 From 2005  NSO 2025 
+LUX Luxembourg Euro NSO 2025 2015 ESA 2010 From 1995  NSO 2025 
+MAC Macao SAR Macanese pataca NSO 2025 2023 SNA 2008 From 2023  NSO 2025 
+MDG Madagascar Malagasy ariary NSO 2025 2007 SNA 1993   NSO 2025 
+MWI Malawi Malawian kwacha NSO 2024 2017 SNA 2008   NSO 2025 
+MYS Malaysia Malaysian ringgit NSO 2025 2015 SNA 2008   NSO 2025 
+MDV Maldives Maldivian rufiyaa MoF 2025 2019 SNA 2008   CB 2025 
+MLI Mali CFA franc NSO 2024 2015 SNA 1993 From 2015  NSO 2025 
+MLT Malta Euro NSO 2025 2020 ESA 2010 From 2000  NSO 2025 
+MHL Marshall Islands US dollar NSO 2024/25 2014/15 SNA 2008   NSO 2024/25 
+MRT Mauritania New Mauritanian ouguiya NSO 2025 2014 SNA 2008 From 2014  NSO 2025 
+MUS Mauritius Mauritian rupee NSO 2025 2018 SNA 2008 From 1999  NSO 2025 
+MEX Mexico Mexican peso NSO 2025 2018 SNA 2008   NSO 2025 
+FSM Micronesia US dollar NSO 2024/25 2003/04 SNA 2008   NSO 2024/25 
+MDA Moldova Moldovan leu NSO 2025 1995 SNA 2008   NSO 2025 
+MNG Mongolia Mongolian tögrög   NSO 2025 2015 SNA 2008   NSO 2025 
+MNE Montenegro Euro NSO 2025 2006 ESA 2010   NSO 2025 
+MAR Morocco Moroccan dirham NSO 2025 2014 SNA 2008 From 2007  NSO 2025 
+MOZ Mozambique Mozambican metical NSO 2025 2019 SNA 2008   NSO 2025 
+MMR Myanmar Myanmar kyat Other 2021/22 2015/16 …   Other 2023/24 
+NAM Namibia Namibian dollar NSO 2025 2015 SNA 1993   NSO 2025 
+NRU Naoero Australian dollar Other 2020/21 2012/13 SNA 2008   NSO 2023/24 
+NPL Nepal Nepalese rupee NSO 2025/26 2010/11 SNA 2008   CB 2025/26 
+NLD The Netherlands Euro NSO 2025 2021 ESA 2010 From 1980  NSO 2025 
+NZL New Zealand New Zealand dollar NSO 2025 20096 SNA 2008 From 1987  IMF staff 2025 
+NIC Nicaragua Nicaraguan córdoba CB 2025 2006 SNA 2008 From 2006  CB 2025 
+NER Niger CFA franc NSO 2025 2015 SNA 2008   NSO 2025 
+NGA Nigeria Nigerian naira NSO 2025 2019 SNA 2008   NSO 2025 
+MKD North Macedonia Macedonian denar NSO 2025 2005 ESA 2010   NSO 2025 
+NOR Norway Norwegian krone NSO 2025 2023 ESA 2010 From 1980  NSO 2025 
+OMN Oman Omani rial NSO 2025 2018 SNA 2008   NSO 2025 
+PAK Pakistan Pakistan rupee NSO 2024/25 2015/16 SNA 2008 From 2016  NSO 2025/26 
+PLW Palau US dollar MoF 2024/25 2018/19 SNA 1993   MoF 2025 
+PAN Panama US dollar NSO 2025 2018 SNA 2008 From 2018  NSO 2025 
+PNG Papua New Guinea Papua New Guinea kina Other 2024 2013 SNA 2008   NSO 2025 
+PRY Paraguay Paraguayan guaraní CB 2025 2014 SNA 2008   CB 2025 
+PER Peru Peruvian sol CB 2025 2007 SNA 2008   CB 2025 
+PHL Philippines Philippine peso NSO 2025 2018 SNA 2008   NSO 2025 
+POL Poland Polish zloty NSO 2025 2020 ESA 2010 From 1995  NSO 2025 
+PRT Portugal Euro NSO 2025 2021 ESA 2010 From 1995  NSO 2025 
+PRI Puerto Rico US dollar NSO 2024/25 2016/17 …   NSO 2025 
+QAT Qatar Qatari riyal NSO 2025 2018 SNA 1993   NSO 2025 
+ROU Romania Romanian leu NSO 2025 2020 ESA 2010 From 2000  NSO 2025 
+RUS Russia Russian ruble NSO 2025 2021 SNA 2008 From 1995  NSO 2025 
+RWA Rwanda Rwandan franc NSO 2025 2024 SNA 2008   NSO 2025 
+WSM Samoa Samoan tala NSO 2024/25 2012/13 SNA 2008   NSO 2025/26 
+SMR San Marino Euro NSO 2023 2007 ESA 2010   NSO 2025 
+STP São Tomé and Príncipe São Tomé and Príncipe 
+dobra 
+NSO 2024 2008 SNA 1993   NSO 2025 
+SAU Saudi Arabia Saudi riyal NSO 2025 2023 SNA 2008 From 2024  NSO 2025 
+SEN Senegal CFA franc NSO 2025 2014 SNA 2008   NSO 2025 
+SRB Serbia Serbian dinar NSO 2025 2021 ESA 2010 From 2021  NSO 2025 
+SYC Seychelles Seychelles rupee NSO 2025 2014 SNA 2008   NSO 2025 
+SLE Sierra Leone Sierra Leonean leone NSO 2025 2018 SNA 2008 From 2010  NSO 2025 
+SGP Singapore Singapore dollar NSO 2025 2015 SNA 2008 From 2015  NSO 2025 
+SVK Slovak Republic Euro NSO 2025 2020 ESA 2010 From 1997  NSO 2025 
+SVN Slovenia Euro NSO 2025 2010 ESA 2010 From 2000  NSO 2025 
+SLB Solomon Islands Solomon Islands dollar NSO 2024 2012 SNA 1993   CB 2025 
+SOM Somalia US dollar NSO 2024 2022 SNA 2008   NSO 2024 
+ZAF South Africa South African rand NSO 2025 2015 SNA 2008   NSO 2025
+
+--- PAGE 13 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 13  
+Country Data Documentation (continued) 
+  Government Finance  Balance Of Payments 
+ISO Code Country 
+Historical Data 
+Source1 
+Latest Actual 
+Annual Data 
+Statistics 
+Manual in Use 
+at Source 
+Subsectors 
+Coverage4 
+Accounting 
+Practice5 
+ 
+Historical 
+Data Source1 
+Latest Actual 
+Annual Data 
+Statistics 
+Manual in Use 
+at Source 
+IRQ Iraq MoF 2025 2001 CG C  CB 2025 BPM 6 
+IRL Ireland MoF 2025 2001 CG,LG,SS A  NSO 2025 BPM 6 
+ISR Israel NSO 2025 2014 CG,LG,SS …  NSO 2025 BPM 6 
+ITA Italy NSO 2025 2001 CG,LG,SS A  CB 2025 BPM 6 
+JAM Jamaica MoF 2025/26 1986 CG C  CB 2025 BPM 6 
+JPN Japan Other 2024 2014 CG,LG,SS A  MoF 2025 BPM 6 
+JOR Jordan MoF 2025 2014 CG,SS,MPC C  CB 2025 BPM 6 
+KAZ Kazakhstan MoF 2024 2001 CG,LG C  CB 2024 BPM 6 
+KEN Kenya MoF 2025 2001 CG C  CB 2025 BPM 6 
+KIR Kiribati MoF 2024 1986 CG C  NSO 2025 BPM 6 
+KOR Korea MoF 2024 2014 CG,LG,SS A  CB 2025 BPM 6 
+UVK Kosovo MoF 2025 1986 CG,LG C  CB 2025 BPM 6 
+KWT Kuwait MoF 2024 2014 CG,SS Mixed  CB 2025 BPM 6 
+KGZ Kyrgyz Republic MoF 2025 … CG,LG,SS C  CB 2024 BPM 6 
+LAO Lao P.D.R. MoF 2025 2001 CG C  CB 2025 BPM 6 
+LVA Latvia MoF 2025 ESA 2010 CG,LG,SS C  CB 2025 BPM 6 
+LBN Lebanon MoF 2021 2001 CG C  CB 2025 BPM 5 
+LSO Lesotho MoF 2025/26 2014 CG,LG C  CB 2024/25 BPM 6 
+LBR Liberia MoF 2025 2001 CG A  CB 2025 BPM 5 
+LBY Libya CB 2025 1986 CG,SG,LG C  CB 2025 BPM 6 
+LIE Liechtenstein NSO 2024 2014 SG A  IMF staff 2022 BPM 6 
+LTU Lithuania MoF 2025 2014 CG,LG,SS A  CB 2025 BPM 6 
+LUX Luxembourg MoF 2025 2001 CG,LG,SS A  NSO 2025 BPM 6 
+MAC Macao SAR MoF 2024 2014 CG,SS C  NSO 2025 BPM 6 
+MDG Madagascar MoF 2025 1986 CG CB  CB 2025 BPM 6 
+MWI Malawi MoF 2025 2014 CG C  NSO 2024 BPM 6 
+MYS Malaysia MoF 2025 2001 CG,SG,LG C  NSO 2025 BPM 6 
+MDV Maldives MoF 2025 1986 CG C  CB 2025 BPM 6 
+MLI Mali MoF 2025 2001 CG …  CB 2024 BPM 6 
+MLT Malta Other 2025 2001 CG,SS A  NSO 2025 BPM 6 
+MHL Marshall Islands MoF 2024/25 2001 CG,LG,SS A  NSO 2024/25 BPM 6 
+MRT Mauritania MoF 2025 2014 CG C  CB 2025 BPM 6 
+MUS Mauritius MoF 2025 2001 CG,LG Mixed  CB 2024 BPM 6 
+MEX Mexico MoF 2025 2014 CG,SS,NFPC C  CB 2025 BPM 6 
+FSM Micronesia MoF 2023/24 2001 CG,SG A  NSO 2022/23 BPM 6 
+MDA Moldova MoF 2025 1986 CG,LG C  CB 2025 BPM 6 
+MNG Mongolia MoF 2025 2001 CG,SG,LG,SS Mixed  CB 2025 BPM 6 
+MNE Montenegro MoF 2025 1986 CG,LG,SS C  CB 2025 BPM 6 
+MAR Morocco MEP 2025 2001 CG A  GAD 2025 BPM 6 
+MOZ Mozambique MoF 2023 2001 CG,SG,LG …  CB 2022 BPM 6 
+MMR Myanmar Other 2019/20 2014 CG C  IMF staff 2021/22 BPM 6 
+NAM Namibia MoF 2025 2001 CG C  CB 2025 BPM 6 
+NRU Naoero MoF 2024/25 2001 CG C  IMF staff 2024/25 BPM 6 
+NPL Nepal MoF 2025/26 2001 CG C  CB 2025/26 BPM 6 
+NLD The Netherlands MoF 2025 2001 CG,LG,SS A  CB 2025 BPM 6 
+NZL New Zealand NSO 2025 2014 CG,LG A  NSO 2025 BPM 6 
+NIC Nicaragua MoF 2025 2001 CG,LG,SS C  CB 2025 BPM 6 
+NER Niger MoF 2025 1986 CG A  CB 2025 BPM 6 
+NGA Nigeria MoF 2025 2001 CG,SG,LG C  CB 2025 BPM 6 
+MKD North Macedonia MoF 2025 1986 CG,SG,SS C  CB 2025 BPM 6 
+NOR Norway Other 2025 2014 CG,LG,SS A  NSO 2025 BPM 6 
+OMN Oman MoF 2025 2001 CG C  CB 2025 BPM 6 
+PAK Pakistan MoF 2025/26 1986 CG,SG,LG C  CB 2025/26 BPM 6 
+PLW Palau MoF 2024/25 2001 CG A  MoF 2024/25 BPM 6 
+PAN Panama MoF 2025 … CG,SG,LG,SS C  NSO 2025 BPM 6 
+PNG Papua New Guinea MoF 2025 2014 CG C  CB 2025 BPM 6 
+PRY Paraguay MoF 2025 2001 CG,SG,LG,SS C  CB 2025 BPM 6 
+PER Peru MoF 2025 2001 CG,SG,LG,SS C  CB 2025 BPM 5 
+PHL Philippines MoF 2025 2014 CG,LG,SS C  CB 2025 BPM 6 
+POL Poland MoF 2025 ESA 2010 CG,LG,SS A  CB 2025 BPM 6 
+PRT Portugal NSO 2025 2001 CG,LG,SS A  CB 2025 BPM 6 
+PRI Puerto Rico Other 2023/24 2001 CG A  … … … 
+QAT Qatar MoF 2025 1986 CG C  CB 2025 BPM 6 
+ROU Romania MoF 2025 2014 CG,LG,SS C  CB 2025 BPM 6 
+RUS Russia MoF 2025 2014 CG,SG,SS …  CB 2025 BPM 6 
+RWA Rwanda MoF 2025/26 2014 CG …  CB 2025 BPM 6 
+WSM Samoa MoF 2025/26 2001 CG A  CB 2024/25 BPM 6 
+SMR San Marino MoF 2024 2001 CG A  NSO 2024 BPM 6 
+STP São Tomé and Príncipe MoF 2025 1986 CG Mixed  CB 2025 BPM 6 
+SAU Saudi Arabia MoF 2025 2014 CG C  CB 2025 BPM 6 
+SEN Senegal MoF 2025 2001 CG C  CB and IMF 
+staff 
+2024 BPM 6 
+SRB Serbia MoF 2025 2014 CG,SG,LG,SS C  CB 2025 BPM 6 
+SYC Seychelles MoF 2025 2001 CG,SS Mixed  CB 2025 BPM 6 
+SLE Sierra Leone MoF 2025 1986 CG C  CB 2025 BPM 6 
+SGP Singapore NSO 2024/25 2014 CG C  NSO 2025 BPM 6 
+SVK Slovak Republic MoF 2025 2001 CG,LG,SS A  CB 2025 BPM 6 
+SVN Slovenia MoF 2025 2001 CG,LG,SS A  CB 2025 BPM 6 
+SLB Solomon Islands CB 2024 2014 CG C  CB 2025 BPM 6 
+SOM Somalia MoF 2025 2001 CG C  CB 2023 BPM 5 
+ZAF South Africa MoF 2024/25 2001 CG,SG,SS C  CB 2025 BPM 6
+
+--- PAGE 14 ---
+WORLD ECONOMIC OUTLOOK     
+14 International Monetary Fund | October 2026 
+ 
+Country Data Documentation (continued) 
+   National Accounts  Prices (CPI) 
+ISO Code Country Currency 
+Historical Data 
+Source1 
+Latest Actual 
+Annual Data Base Year2 
+System of 
+National 
+Accounts 
+Use of Chain-
+Weighted 
+Methodology3  
+Historical 
+Data Source1 
+Latest Actual 
+Annual Data 
+SSD South Sudan South Sudanese pound IMF staff 2025 2010 SNA 1993   NSO 2025 
+ESP Spain Euro NSO 2025 2020 ESA 2010 From 1995  Other 2025 
+LKA Sri Lanka Sri Lankan rupee NSO 2025 2015 SNA 2008   NSO 2025 
+KNA St. Kitts and Nevis Eastern Caribbean dollar NSO 2025 2006 SNA 1993   NSO 2025 
+LCA St. Lucia Eastern Caribbean dollar NSO 2025 2018 SNA 2008   NSO 2025 
+VCT St. Vincent and the 
+Grenadines 
+Eastern Caribbean dollar NSO 2025 2018 SNA 1993   NSO 2025 
+ 
+SDN 
+Sudan Sudanese pound NSO 2019 1982 …   NSO 2025 
+SUR Suriname Surinamese dollar NSO 2025 2015 SNA 2008   NSO 2025 
+SWE Sweden Swedish krona NSO 2025 2025 ESA 2010 From 1993  NSO 2025 
+CHE Switzerland Swiss franc NSO 2025 2020 ESA 2010 From 1980  NSO 2025 
+SYR Syria Syrian pound NSO 2010 2000 SNA 1993   NSO 2011 
+TWN Taiwan Province of 
+China 
+New Taiwan dollar NSO 2025 2021 SNA 2008   NSO 2025 
+TJK Tajikistan Tajik somoni NSO 2025 1995 SNA 1993   NSO 2025 
+TZA Tanzania Tanzanian shilling NSO 2023 2015 SNA 2008   NSO 2023 
+THA Thailand Thai baht Other 2025 2002 SNA 1993 From 1993  MOC 2025 
+TLS Timor-Leste US dollar NSO 2024 2015 SNA 2008   NSO 2025 
+TGO Togo CFA franc NSO 2023 2016 SNA 2008   NSO 2025 
+TON Tonga Tongan pa’anga CB 2024/25 2016/17 SNA 2008   CB 2024/25 
+TTO Trinidad and Tobago Trinidad and Tobago dollar NSO 2025 2012 SNA 2008   NSO 2025 
+ 
+TUN 
+Tunisia Tunisian dinar NSO 2025 2015 SNA 2008 From 2009  NSO 2025 
+TUR Türkiye Turkish lira NSO 2025 2009 ESA 2010 From 2009  NSO 2025 
+TKM Turkmenistan New Turkmen manat IMF staff 2025 2023 SNA 2008 From 2007  NSO 2025 
+TUV Tuvalu Australian dollar Other 2025 2023 SNA 2008   Other 2025 
+UGA Uganda Ugandan shilling NSO 2025 2016 SNA 2008   NSO 2025 
+UKR Ukraine Ukrainian hryvnia NSO 2025 2021 SNA 2008 From 2005  NSO 2025 
+ARE United Arab Emirates U.A.E. dirham NSO 2025 2010 SNA 2008   NSO 2025 
+GBR United Kingdom British pound NSO 2025 2024 ESA 2010 From 1980  NSO 2025 
+USA United States US dollar NSO 2025 2017 SNA 2008 From 1980  NSO 2025 
+URY Uruguay Uruguayan peso CB 2025 2016 SNA 2008   NSO 2025 
+UZB Uzbekistan Uzbek som NSO 2025 2020 SNA 1993   NSO 2025 
+VUT Vanuatu Vanuatu vatu NSO 2024 2024 SNA 1993   NSO 2024 
+VEN Venezuela Venezuelan bolívar CB 2025 2007 SNA 1993   CB 2025 
+VNM Vietnam Vietnamese dong NSO 2025 2010 SNA 1993   NSO 2025 
+WBG West Bank and Gaza Israeli new shekel NSO 2025 2015 SNA 2008   NSO 2025 
+YEM Yemen Yemeni rial IMF staff 2024 2015 …   NSO 2025 
+ZMB Zambia Zambian kwacha NSO 2025 2010 SNA 2008   NSO 2025 
+ZWE Zimbabwe Zimbabwe gold NSO 2025 2025 SNA 2008   NSO 2025
+
+--- PAGE 15 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 15  
+ 
+ 
+Country Data Documentation (continued) 
+  Government Finance  Balance Of Payments 
+ISO Code Country 
+Historical Data 
+Source1 
+Latest Actual 
+Annual Data 
+Statistics 
+Manual in Use 
+at Source 
+Subsectors 
+Coverage4 
+Accounting 
+Practice5 
+ 
+Historical 
+Data Source1 
+Latest Actual 
+Annual Data 
+Statistics 
+Manual in Use 
+at Source 
+SSD South Sudan MoF 2025 2014 CG C  CB 2025 BPM 6 
+ESP Spain MoF 2025 ESA 2010 CG,SG,LG,SS A  CB 2025 BPM 6 
+LKA Sri Lanka MoF 2025 1986 CG C  CB 2025 BPM 6 
+KNA St. Kitts and Nevis MoF 2025 1986 CG,SG,LG C  CB 2025 BPM 6 
+LCA St. Lucia MoF 2025 1986 CG C  CB 2025 BPM 6 
+VCT St. Vincent and the Grenadines MoF 2025 2001 CG C  CB 2025 BPM 6 
+ 
+SDN 
+Sudan MoF 2021 2001 CG Mixed  CB 2021 BPM 6 
+SUR Suriname MoF 2025 1986 CG Mixed  CB 2025 BPM 6 
+SWE Sweden MoF 2025 2014 CG,LG,SS A  NSO 2025 BPM 6 
+CHE Switzerland MoF 2025 2001 CG,SG,LG,SS A  CB 2025 BPM 6 
+SYR Syria MoF 2009 1986 CG C  CB 2009 BPM 5 
+TWN Taiwan Province of China MoF 2025 2001 CG,LG C  CB 2025 BPM 6 
+TJK Tajikistan MoF 2025 1986 CG,LG,SS C  CB 2025 BPM 6 
+TZA Tanzania MoF 2023 1986 CG,LG C  CB 2023 BPM 6 
+THA Thailand MoF 2024/25 2014 CG,LG,SS A  CB 2025 BPM 6 
+TLS Timor-Leste MoF 2024 2001 CG C  CB 2024 BPM 6 
+TGO Togo MoF 2025 1986 CG C  CB 2024 BPM 6 
+TON Tonga MoF 2024/25 2014 CG C  CB 2023/24 BPM 6 
+TTO Trinidad and Tobago MoF 2024/25 1986 CG C  CB 2025 BPM 6 
+ 
+TUN 
+Tunisia MoF 2025 1986 CG C  CB 2025 BPM 6 
+TUR Türkiye MoF 2025 2001 CG,LG,SS A  CB 2025 BPM 6 
+TKM Turkmenistan MoF 2025 1986 CG,LG C  NSO 2025 BPM 6 
+TUV Tuvalu MoF 2025 … CG C  IMF staff 2023 BPM 6 
+UGA Uganda MoF 2025 2001 CG C  CB 2025 BPM 6 
+UKR Ukraine MoF 2025 2001 CG,LG,SS C  CB 2025 BPM 6 
+ARE United Arab Emirates MoF 2025 2014 CG,SG,SS Mixed  CB 2025 BPM 6 
+GBR United Kingdom NSO 2025 2014 CG,LG A  NSO 2025 BPM 6 
+USA United States Other 2025 2014 CG,SG,LG A  NSO 2025 BPM 6 
+URY Uruguay MoF 2025 1986 CG,LG,SS C  CB 2025 BPM 6 
+UZB Uzbekistan MoF 2025 2014 CG,SG,LG,SS C  CB 2025 BPM 6 
+VUT Vanuatu MoF 2025 2001 CG C  CB 2024 BPM 6 
+VEN Venezuela MoF 2017 2001 NFPC,other C  CB 2025 BPM 6 
+VNM Vietnam MoF 2025 2001 CG,SG,LG C  CB 2025 BPM 6 
+WBG West Bank and Gaza MoF 2025 2001 CG Mixed  NSO 2025 BPM 6 
+YEM Yemen MoF 2025 2001 CG,LG C  IMF staff 2024 BPM 6 
+ZMB Zambia MoF 2025 1986 CG C  CB 2024 BPM 6 
+ZWE Zimbabwe MoF 2025 1986 CG C  CB and MoF 2025 BPM 6 
+ 
+Note: BPM = Balance of Payments Manual; CFA = Communaute Financière Africaine (African Financial Community); CPI = consumer price index; ESA = European System of National Accounts; SAR = Special Administrative 
+Region; SNA = System of National Accounts. 
+1CB = central bank; GAD = General Administration Department; MEP = Ministry of Economy, Planning, Commerce, and/or Development; MoF = Ministry of Finance and/or Treasury; NSO = National Statistics Office. 
+2National accounts base year is the period with which other periods  are compared  and the period for which prices appear in the denominators  of the price relationships  used to calculate  the index. 
+3Use of chain-weighted  methodology  allows countries  to measure  GDP growth more accurately  by reducing  or eliminating  the downward  biases in volume series built on index numbers  that average volume components  using 
+weights from a  year in the  moderately distant past.  
+4CG = central government; LG = local government; MPC = monetary public corporation, including central bank; NFPC = nonfinancial public corporation; SG = state government; SS = social security fund. 
+5Accounting standard: A = accrual accounting; C = cash accounting; CB = commitments basis accounting; Mixed = combination of accrual and cash accounting. 
+6Base year deflator is  not equal to 100 because the nominal  GDP is not measured  in the same way as real GDP or the data are seasonally  adjusted.
+
+--- PAGE 16 ---
+WORLD ECONOMIC OUTLOOK     
+16 International Monetary Fund | October 2026 
+ 
+ 
+Country Data Documentation (continued) 
+ 
+Economies with Exceptional Reporting Periods 1 
+ National Accounts Government Finance 
+Afghanistan Apr/Mar Apr/Mar 
+The Bahamas  Jul/Jun 
+Bangladesh Jul/Jun Jul/Jun 
+Barbados  Apr/Mar 
+Bhutan Jul/Jun Jul/Jun 
+Botswana  Apr/Mar 
+Dominica  Jul/Jun 
+Egypt Jul/Jun Jul/Jun 
+Eswatini  Apr/Mar 
+Ethiopia Jul/Jun Jul/Jun 
+Fiji  Aug/Jul 
+Haiti Oct/Sep Oct/Sep 
+Hong Kong SAR  Apr/Mar 
+India Apr/Mar Apr/Mar 
+Iran Apr/Mar Apr/Mar 
+Jamaica  Apr/Mar 
+Lesotho Apr/Mar Apr/Mar 
+Marshall Islands Oct/Sep Oct/Sep 
+Mauritius  Jul/Jun 
+Micronesia Oct/Sep Oct/Sep 
+Myanmar Apr/Mar Apr/Mar 
+Naoero Jul/Jun Jul/Jun 
+Nepal Aug/Jul Aug/Jul 
+Pakistan Jul/Jun Jul/Jun 
+Palau Oct/Sep Oct/Sep 
+Puerto Rico Jul/Jun Jul/Jun 
+Samoa Jul/Jun Jul/Jun 
+Singapore  Apr/Mar 
+St. Lucia  Apr/Mar 
+Thailand  Oct/Sep 
+Tonga Jul/Jun Jul/Jun 
+Trinidad and Tobago  Oct/Sep 
+Note: SAR = Special Administrative Region 
+1Unless noted otherwise, all data refer to calendar years.
+
+--- PAGE 17 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 17  
+ 
+Changes to the Database for Previous Editions 
+April 2026 
+On January 1, 2026, Bulgaria became the 21st country to join the euro area. Data for Bulgaria are now 
+included in aggregates for the euro area and for advanced economies and relevant subgroups. 
+October 2025 
+Data for Liechtenstein have been added to the database and are included in the advanced economies group 
+composites. 
+For Nigeria, national accounts data have been revised and rebased, with 2019 as the new base year. This 
+replaces the 2010 benchmark and aligns national accounts statistics with updated international standards, 
+including the 2008 SNA, BPM6 and the GFSM 2014. The rebasing entailed broader sectoral and data coverage 
+capturing previously unrecorded activities such as the digital economy, parts of the informal economy 
+(particularly in the agriculture sector), pension and health insurance schemes, social insurance trust funds, 
+household firms, quarrying and other minerals and modular oil refining. Adding to dedicated sectoral studies, 
+the rebasing drew on more comprehensive data coverage of household and informal sector activity, including 
+from the National Business Sample Census and the Survey of Establishments, the National Agricultural Sample 
+Census and Survey, and the 2019 and 2023 Nigeria Living Standards Surveys. The rebasing exercise resulted in 
+an upward revision of the nominal GDP by 40.8 percent in 2019. 
+April 2025 
+For Bolivia, projections for 2027–30 have been omitted because of significant uncertainty regarding the 
+economic outlook. 
+For Ecuador, fiscal projections for 2025–30 are excluded from publication because of ongoing program 
+discussions. 
+October 2024 
+Following the recent release of the 2021 survey by the World Bank Group’s International Comparison 
+Program for new purchasing-power-parity benchmarks, the WEO’s estimates of purchasing-power-parity 
+weights and GDP valued at purchasing power parity have been updated. For more details, see Box A2. 
+For Bangladesh, fiscal year estimates of real GDP and purchasing-power-parity GDP are now used in 
+country group aggregates. 
+For Montenegro, historical data prior to 2023 for population and GDP per capita are excluded from 
+publication pending the final release of population estimates from the 2023 Census of Population, Households, 
+and Dwellings. 
+For Zimbabwe, the authorities have recently redenominated their national accounts statistics following the 
+introduction on April 5, 2024 of a new national currency, the Zimbabwe gold, replacing the Zimbabwe dollar. 
+The use of the Zimbabwe dollar ceased on April 30, 2024. 
+April 2024
+
+--- PAGE 18 ---
+WORLD ECONOMIC OUTLOOK     
+18 International Monetary Fund | October 2026 
+Ecuador’s fiscal sector projections are excluded from publication for 2024–29 because of ongoing program 
+discussions. 
+Vietnam has been removed from the Low-Income Developing Countries (LIDCs) group and added to the 
+Emerging Market and Middle-Income Economies (EMMIEs) group (featured in the WEO Report only). 
+For West Bank and Gaza, data for 2022-23 previously excluded from publication pending methodological 
+adjustments to statistical series are now included. Projections for 2024-29 are excluded from publication due to 
+the unusually high degree of uncertainty. 
+October 2023 
+Ecuador’s fiscal sector projections, which were previously omitted due to ongoing program discussions, are 
+now included. 
+Eritrea’s data and projections for 2020–28 are excluded from the database due to constraints in data 
+reporting. 
+Sri Lanka’s projections for 2023–28 are excluded from publication owing to ongoing discussions on 
+sovereign debt restructuring. 
+Ukraine’s projections for 2024–28, in line with the program’s baseline scenario, are now included. 
+For West Bank and Gaza, certain projections for 2022–28 are excluded from publication pending 
+methodological adjustments to statistical series. 
+April 2023 
+Beginning with the April 2023 WEO, ASEAN-5 comprises the five ASEAN (Association of Southeast Asian 
+Nations) founding member nations: Indonesia, Malaysia, the Philippines, Singapore, and Thailand. 
+On January 1, 2023, Croatia became the 20th country to join the euro area. Data for Croatia are now 
+included in aggregates for the euro area and for advanced economies and relevant subgroups. 
+For Ecuador, fiscal sector projections are excluded from publication for 2023–28 because of ongoing 
+program discussions. 
+For Iran, historical figures of nominal GDP in US dollars are computed using the official exchange rate up to 
+2017. From 2018 onward, the NIMA exchange rate, rather than the official exchange rate, is now used to 
+convert nominal rial GDP figures into US dollars. Staff assess that the NIMA rate better reflects the 
+transaction-value-weighted exchange rate in the economy over that period of time. 
+October 2022 
+For Algeria, starting with the October 2022 WEO, total government expenditure and net lending/borrowing 
+include net lending by the government, which mostly reflects support to the pension system and other public 
+sector entities. 
+Ecuador’s fiscal sector projections, which were previously omitted because of ongoing program review 
+discussions, are now included. 
+Tunisia’s forecast data, which were previously omitted because of ongoing technical discussions pending 
+potential program negotiations, are now included.
+
+--- PAGE 19 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 19  
+Turkey is now referred to as Türkiye. 
+For Sri Lanka, certain projections for 2023–27 are excluded from publication owing to ongoing discussions 
+on sovereign debt restructuring, following the recently reached staff-level agreement on an IMF-supported 
+program. 
+For Venezuela, following methodological upgrades, historical data have been revised from 2012 onward. 
+Nominal variables that were omitted from publication in the April 2022 WEO are now included. 
+April 2022 
+For Ecuador, fiscal sector projections are excluded from publication for 2022–27 because of ongoing 
+program review discussions. 
+Ethiopia’s forecast data, which were previously omitted due to an unusually high degree of uncertainty, are 
+now included. 
+Fiji’s fiscal data and forecasts are now presented on a fiscal year basis. 
+For Tunisia, projections are excluded from publication for 2023–27 because of ongoing technical discussions 
+pending potential program negotiations. 
+For Ukraine, all projections for 2022–27 except Real GDP are omitted due to an unusually high degree of 
+uncertainty. Real GDP is projected through 2022. 
+Venezuela redenominated its currency on October 1, 2021, by replacing 1,000,000 bolívares soberano (VES) 
+with 1 bolívar digital (VED). 
+For Zambia, general government net and gross debt projections for 2022-27 are omitted due to ongoing debt 
+restructuring. 
+Beginning with the April 2022 WEO, the interest rate assumptions are based on the three-month and ten-
+year government bond yields, which replace the London interbank offered rates. See the Assumptions section 
+of the WEO Statistical Appendix for more details. 
+October 2021 
+Data for Andorra have been added to the database and are included in the advanced economies group 
+composites. 
+April 2021 
+Starting with the April 2021 WEO, real GDP data and forecasts for New Zealand are reported on a 
+production basis rather than an expenditure basis. 
+October 2020 
+Following the recent release of the 2017 International Comparison Program (ICP) survey for new 
+purchasing-power-parity benchmarks, the WEO’s estimates of purchasing-power-parity weights and GDP 
+valued at purchasing power parity have been updated. For more details, see Box 1.1 of the October 2020 
+WEO. 
+Starting with the October 2020 WEO, data and forecasts for Bangladesh and Tonga are presented on a fiscal 
+year basis.
+
+--- PAGE 20 ---
+WORLD ECONOMIC OUTLOOK     
+20 International Monetary Fund | October 2026 
+Data for West Bank and Gaza are now included in the WEO. West Bank and Gaza is added to the Middle 
+East and Central Asia regional group. 
+April 2020 
+Due to the high level of uncertainty in current global economic conditions, the April 2020 WEO database 
+and statistical tables contain only these indicators: real GDP growth, consumer price index, current account 
+balance, unemployment, per capita GDP growth, and fiscal balance. Projections for these indicators are 
+provided only through 2021. 
+The Timorese authorities have revised the compilation methodology of GDP and, under the new 
+classification, oil and gas revenue before September 2019, which was previously classified as export in national 
+accounts, is now classified as primary income. 
+As of February 1, 2020 the United Kingdom is no longer part of the European Union. Data for the United 
+Kingdom are no longer included in the European Union composites. 
+October 2019 
+Mauritania redenominated its currency in January 2018 by replacing 10 old Mauritanian ouguiya (MRO) with 
+1 new Mauritanian ouguiya (MRU). Local currency data for Mauritania are expressed in the new currency 
+beginning with the October 2019 WEO database. 
+São Tomé and Príncipe redenominated its currency in January 2018 by replacing 1,000 old São Tomé and 
+Príncipe dobra (STD) with 1 new São Tomé and Príncipe dobra (STN). Local currency data for São Tomé and 
+Príncipe are expressed in the new currency beginning with the October 2019 WEO database. 
+Beginning with the October 2019 WEO, the regional group Commonwealth of Independent States (CIS) is 
+discontinued. Four of the CIS economies (Belarus, Moldova, Russia, and Ukraine) are added to the regional 
+group Emerging and Developing Europe. The remaining eight economies—Armenia, Azerbaijan, Georgia, 
+Kazakhstan, Kyrgyz Republic, Tajikistan, Turkmenistan, and Uzbekistan, which comprise the regional 
+subgroup Caucasus and Central Asia (CCA)—are combined with Middle East, North Africa, Afghanistan, and 
+Pakistan (MENAP) to form the new regional group Middle East and Central Asia (MECA). 
+April 2019 
+FYR Macedonia is now called North Macedonia. 
+In February 2019, Zimbabwe adopted a new local currency unit, the RTGS dollar, which has become the 
+official unit of account. Efforts are underway to revise and update all national accounts series to the new 
+RTGS dollar. Current data are based on IMF staff estimates of price and exchange rate developments in US 
+(and RTGS) dollars. Staff estimates of US dollar values may differ from authorities’ estimates. 
+October 2018 
+Argentina’s consumer prices, which were previously excluded from the group composites because of data 
+constraints, are now included starting from 2017 onward. 
+Data for Aruba are included in the data aggregated for the emerging market and developing economies. It is 
+classified as a member of the Latin America and Caribbean.
+
+--- PAGE 21 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 21  
+Egypt’s forecast data from which the nominal exchange rate assumptions are calculated that were previously 
+excluded because the nominal exchange rate was a market-sensitive issue, are now made public. 
+Swaziland is now called Eswatini. 
+Venezuela redenominated its currency on August 20, 2018, by replacing 100,000 bolívares Fuertes (VEF) 
+with 1 bolívar Soberano (VES). Local currency data, including the historical data, for Venezuela are expressed 
+in the new currency beginning with the October 2018 WEO database. 
+April 2018 
+In the April 2018 WEO, there has been a similar exercise as of October 2017 to improve the net debt data to 
+bring the data into better alignment with the definition of net debt in the IMF GFS Manual 2014 (GFSM 
+2014). 
+October 2017 
+Data for Somalia have been added to the database—enlarging the database to a total of 193 countries—and 
+are included in the emerging market and developing economies group composites. Somalia is classified as a 
+member of the Middle East and North Africa region. 
+Data for Gross Domestic Product per Capita, constant prices (purchasing power parity; 2011 international 
+dollars) have been added to the online database. 
+The October 2017 WEO database includes revisions to net and gross debt series for a number of countries. 
+The revisions result from work to better align assets and liabilities included in calculations of net debt to be 
+better aligned with the definition of net debt in the IMF GFS Manual 2014 (GFSM 2014). In particular, for a 
+number of countries, there are changes to the financial assets included in the calculation. For countries where 
+net debt has increased, this has typically been due to the previous inclusion of equity assets in net debt, (e.g. 
+Norway, Finland, Netherlands and Sweden) which have now been excluded. In some cases insufficient assets 
+were being included (e.g. Korea), and once additional financial assets were included this reduced net debt. 
+April 2017 
+From December 2016 to January 2017, the Economic and Social Research Institute (ESRI) of Japan’s 
+Cabinet Office released the results of the latest quinquennial benchmark year revision for the Japanese 
+National Accounts. This comprehensive revision consisted of (i) incorporating large-scale, detailed source 
+statistics, including the compilation of the 2011 Input-Output Tables; (ii) updating the reference year from 
+2005 to 2011; (iii) improving several estimation methodologies, including for measuring construction output; 
+and (iv) updating definitions and classifications, in particular, implementing the 2008 System of National 
+Accounts (2008 SNA). With this revision, the Japanese national accounts describe more accurately the 
+evolution of the economy. The most significant change resulted from the implementation of the 2008 SNA. 
+For instance, for the past three years (2013-15), the level of nominal GDP was revised upward by 5.0–6.3 
+percent, of which 4.3–4.8 percent was accounted for by the implementation of the 2008 SNA, including 
+capitalization of research and development. The increase in GDP for the most recent year (2015) resulted not 
+only from the benchmark year revision, but also from the incorporation of more detailed source statistics. Real 
+GDP growth rates were also revised retrospectively. The mean absolute revision for the past 21 years (1995–
+2015) was relatively modest (0.4 percentage point), while the growth rates for the past three years were revised 
+upward by 0.4–0.6 percentage point. The revisions of the annual rate of change of the GDP deflator were
+
+--- PAGE 22 ---
+WORLD ECONOMIC OUTLOOK     
+22 International Monetary Fund | October 2026 
+relatively limited, with a mean absolute revision of 0.1 percentage point, and do not change significantly the 
+evolution of prices previously published for Japan. 
+Nauru is the latest country added to the WEO data-base, expanding it to a total of 192 countries. Data for 
+Nauru are included in the emerging market and developing economies group composites. Nauru is classified as 
+a member of the Emerging and Developing Asia. 
+Belarus redenominated its currency by replacing 10,000 old Belarusian rubles with 1 new Belarusian ruble. 
+Local currency data for Belarus are expressed in the new currency starting with the April 2017 WEO database. 
+October 2016 
+No changes have been introduced for the October 2016 World Economic Outlook database. 
+April 2016 
+Data for Macao Special Administrative Region and the Commonwealth of Puerto Rico are included in data 
+aggregated for the advanced economies. Macao is a Special Administrative Region of China, and Puerto Rico is 
+a territory of the United States, but the WEO maintains statistical data for both economies on a separate and 
+independent basis. 
+Argentina’s and Venezuela’s consumer prices are excluded from all the WEO groups’ aggregates. 
+As in the October 2015 WEO, data for Syria are excluded from 2011 onward because of the ongoing conflict 
+and the related lack of data. 
+October 2015 
+Data for Lithuania are now included in the euro area aggregates, but they were excluded in the April 2015 
+WEO. 
+Projections for Greece are based on data available as of August 12, 2015 
+As in the April 2015 WEO, data for Syria are excluded from 2011 because of the ongoing conflict and 
+related lack of data. 
+Argentina’s consumer prices are excluded from Latin America and the Caribbean aggregates. 
+April 2015 
+On January 1, 2015, Lithuania became the 19th country to join the euro area. Data for Lithuania are not 
+included in the euro area aggregates because Eurostat has not fully released the consolidated data for the group, 
+but the data are included in the advanced economies and subgroups aggregated by the WEO. 
+As in the October 2014 WEO, data for Syria are excluded from 2011 onward because of the uncertain 
+political situation. 
+As in the October 2014 WEO, the consumer price projections for Argentina are excluded because of a 
+structural break in the data. Please refer to note 6 in Table A7 for further details. 
+Because of the ongoing IMF program with Pakistan, the series from which nominal exchange rate 
+assumptions are calculated are not made public—the nominal exchange rate is a market-sensitive issue in 
+Pakistan.
+
+--- PAGE 23 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 23  
+The series from which the nominal exchange rate assumptions are calculated are not made public for Egypt 
+because the nominal exchange rate is a market-sensitive issue in Egypt. 
+October 2014 
+The WEO has adopted the sixth edition of the Balance of Payments Manual and International Investment 
+Position Manual (BPM6). Notable changes include the following: (1) Merchanting has been reclassified from 
+services to exports of goods. (2) Manufacturing services on physical inputs owned by others (goods for 
+processing in the BPM5) and maintenance and repair services (repairs on goods in the BPM5) have been 
+reclassified from goods to services. (3) Migrants’ transfers have been removed from capital transfers in the 
+capital account because a change in ownership is no longer imputed. (4) Reverse investment in direct 
+investment has been reclassified so as to present assets and liabilities on a gross basis. (5) A separate financial 
+derivatives category is now included in the financial account, whereas previously it was a subitem under 
+portfolio investment. In addition, the conventional sign for increases in assets (and liabilities) within the 
+financial account is now positive, and balances are now computed as net acquisition of financial assets minus 
+net incurrence of financial liabilities. 
+With the adoption of the BPM6, the WEO online database now includes, where available, the current 
+account balance, imports of goods and services, exports of goods and services, financial account balance, net 
+direct investment, net portfolio investment, net financial derivatives, net other investment, and change in 
+reserves series for all country groups. Subsequently, the private financial flows series that were available in the 
+previous versions of the WEO online database have been removed. 
+Not all countries have converted to the BPM6 standard and a few still use versions older than the BPM5. 
+Historical data are subject to change when countries adopt the latest standard. During this transition period, 
+some country groups’ aggregates are not available.  Please refer to Table G in the WEO's Statistical Appendix, 
+which lists the Balance of Payments statistical standard for each country. 
+Following the recent release of the 2011 International Comparison Program (ICP) survey for new 
+purchasing-power-parity benchmarks, the WEO’s estimates of purchasing-power-parity weights and GDP 
+valued at purchasing power parity have been updated. For more detail, see “Revised Purchasing Power Parity 
+Weights” in the July 2014 WEO Update. 
+As in the April 2014 WEO, data for Syria are excluded from 2011 onward because of the uncertain political 
+situation. 
+Because of the ongoing IMF program with Pakistan, the series from which the nominal exchange rate 
+assumptions can be calculated are not made public, as the nominal exchange rate is a market-sensitive issue in 
+Pakistan. 
+Data for Latvia, which were previously excluded from the euro area aggregates because of data constraints, 
+are now included. 
+Projections for Ukraine, which were previously excluded because of the crisis, are once again included. 
+As in the April 2014 WEO, the consumer price projections for Argentina are excluded because of a 
+structural break in the data. Please refer to note 5 in Table A7 of the October 2014 WEO Statistical Appendix 
+for further details. 
+April 2014
+
+--- PAGE 24 ---
+WORLD ECONOMIC OUTLOOK     
+24 International Monetary Fund | October 2026 
+On January 1, 2014, Latvia became the 18th country to join the euro area. Data for Latvia are not included in 
+the euro area aggregates, because the database has not yet been converted to euros, but are included in data 
+aggregated for advanced economies. 
+Starting with the April 2014 WEO, the Central and Eastern Europe and Emerging Europe regions have been 
+renamed Emerging and Developing Europe. The Developing Asia region has been renamed Emerging and 
+Developing Asia. 
+Projections for Ukraine are excluded due to the ongoing crisis. 
+The consumer price projections for Argentina are excluded because of a structural break in the data. Please 
+refer to note 6 in Table A7 of the April 2014 WEO for further details. 
+Korea’s real GDP series is based on the reference year 2005. This does not reflect the revised national 
+accounts released on March 26, 2014, after the WEO was finalized for publication. These comprehensive 
+revisions include implementing the 2008 System of National Accounts and updating the reference year to 2010. 
+As a result of these revisions, real GDP growth in 2013 was revised up to 3 percent from 2.8 percent (which is 
+the figure included in Tables 2.3 and A2 of the April 2014 WEO). 
+Cape Verde is now called Cabo Verde. 
+As in the October 2013 WEO, data for Syria are excluded for 2011 onward because of the uncertain political 
+situation. 
+October 2013 
+On July 31, 2013, the U.S. Bureau of Economic Analysis released the Comprehensive Revision of the 
+National Income and Product Accounts (NIPA). The revision includes improvements in methodology and 
+data sources as well as significant changes in definitions and classifications. With this update, the accounts 
+more accurately portray the evolution of the economy. Most notably, expenditures on research and 
+development activities and for the creation of entertainment, literary, and artistic originals are now treated as 
+capital expenditures. Furthermore, the treatment of defined-benefit pension plans is switched from a cash basis 
+to an accrual basis. The revisions increase the level of GDP by 3.4 percent and boost the personal savings rate. 
+The revised data also show that the Great Recession was shallower and the recovery was stronger through the 
+first half of 2012, but also that cyclical weakness was greater during the past year. Overall, the revision does not 
+significantly change the IMF staff’s broad view on the U.S. economic outlook. 
+Starting with the July 2013 WEO Update, India's data and forecasts are presented on a fiscal year basis. 
+On July 1, 2013, Croatia became the 28th member state of the European Union. 
+Projections for Cyprus, which were excluded in April 2013 due to the crisis, are once again included. 
+As in the April 2013 World Economic Outlook, data for Syria are excluded for 2011 onward due to the 
+uncertain political situation. 
+Data for Palau are now included in the Developing Asia region. 
+Zambia redenominated its currency by replacing 1,000 old Zambian kwacha notes with 1 new Zambian 
+kwacha note. Local currency data for Zambia are expressed in the new currency starting with the October 2013 
+WEO database.
+
+--- PAGE 25 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 25  
+Starting with the October 2013 WEO, the Value of oil imports (TMGO) and Value of oil exports (TXGO) 
+countries’ data will no longer be available in the external WEO Database. 
+April 2013 
+Projections for Cyprus are excluded due to the ongoing crisis. 
+Mongolia is classified as Developing Asia (previously classified as a member of the Commonwealth of 
+Independent States). 
+Afghanistan and Pakistan, previously classified as Developing Asia, have been added to the Middle East and 
+North Africa (MENA) to create the Middle East, North Africa, Afghanistan, and Pakistan (MENAP) region. 
+The MENA aggregate (excluding Afghanistan and Pakistan) will be maintained. 
+Data for the Marshall Islands and Micronesia are now included in the Developing Asia region. 
+As in the October 2012 World Economic Outlook, data for Syria are excluded for 2011 onward due to the 
+uncertain political situation. 
+Starting with the April 2013 World Economic Outlook, the Newly Industrialized Asian Economies (NIEs) 
+grouping has been eliminated. 
+October 2012 
+For Cyprus, data reflect a passive scenario based on implementation of approved policies only. It is also 
+assumed that the government will be able to roll over its debt and finance its deficit at a reasonable cost over 
+the medium term and that banks will achieve adequate capitalization without government assistance. 
+Data for South Sudan are now included in the Emerging Market and Developing Economies classification 
+and more specifically, in the sub-Saharan Africa. 
+Data for San Marino are now included in the advanced economy classification. 
+As in the April 2012 World Economic Outlook, data for Syria are excluded for 2011 and later due to the 
+uncertain political situation. 
+Starting with the October 2012 World Economic Outlook, the label for the Emerging and Developing 
+Economies group is Emerging Market and Developing Economies. The member countries remain unchanged 
+with the exception of South Sudan as a new member of the group. 
+April 2012 
+As in the September 2011 World Economic Outlook, fiscal and external debt data for Libya are excluded for 
+2011 and later due to the uncertain political situation. 
+As in the September 2011 World Economic Outlook, Sudan's data for 2011 exclude South Sudan after July 9. 
+Projections for 2012 and onward pertain to the current Sudan. 
+Data for the Syrian Arab Republic are excluded for 2011 and onward due to the uncertain political situation. 
+September 2011 
+Data for Estonia are now included in the euro area.
+
+--- PAGE 26 ---
+WORLD ECONOMIC OUTLOOK     
+26 International Monetary Fund | October 2026 
+As in the April 2011 World Economic Outlook, WEO aggregated data exclude Libya for the projection years 
+due to the uncertain political situation. 
+For Sudan, the projections for 2011 and later exclude South Sudan. 
+April 2011 
+On January 1, 2011, Estonia became the 17th country to join the euro area. Data for Estonia are not 
+included in the euro area aggregates because the database has not yet been converted to Euros but are included 
+in data aggregated for advanced economies. 
+Investment, gross national savings, general government structural balance, export volume of goods are 
+services, export volume of goods, import volume of goods and services, import volume of goods, and the 
+value of exports and imports of oil, where available, are now published for all countries. 
+The country group composites for fiscal data are calculated as the sum of the U.S dollar values for the 
+relevant individual countries. This differs from the calculations in the October 2010 and earlier issues of the 
+World Economic Outlook, for which the composites were weighted by GDP valued at purchasing power 
+parities (PPPs) as a share of total world GDP. 
+Starting with the April 2011 World Economic Outlook, the data for Tuvalu are included in the emerging and 
+developing economy aggregates. 
+WEO aggregated data excludes Libya for projection years due to the uncertain political situation. 
+Except for GDP growth and inflation, projections for Côte d'Ivoire are not shown due to the uncertain 
+political situation. 
+October 2010 
+The emerging and developing economies' Western Hemisphere region has been renamed Latin America and 
+the Caribbean (LAC). 
+Country weights calculated as nominal GDP valued at purchasing-power-parity (PPP) exchange rates as a 
+share of total world GDP have been updated to reflect revisions to countries' historical GDP data and 
+projections. 
+Unless noted otherwise, group composites are computed if 90 percent or more of the share of group weights 
+is represented. 
+Data for Kosovo are included in the emerging and developing economies aggregates. 
+Unemployment rates and general government series for revenue, total expenditure, net lending/borrowing, 
+primary net lending/borrowing, gross debt, and net debt, where available, are now published for all countries. 
+The local currency data for Suriname are expressed in the new currency. In 2004, Suriname redenominated 
+its currency by replacing 1,000 Surinamese guilder with 1 Surinamese dollar. 
+April 2010 
+Algeria, Djibouti, Mauritania, Morocco, Sudan, and Tunisia, previously classified as members of the Africa 
+region, have been added to the former Middle East region to create the Middle East and North Africa 
+(MENA) region. Accordingly, the former Africa region is replaced by Sub-Saharan Africa (SSA).
+
+--- PAGE 27 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 27  
+Following the IMF's Government Finance Statistics Manual 2001, the government balance is now called net 
+lending(+)/borrowing(–), which is calculated as revenue minus expenditure. Not all countries have adopted the 
+new presentation; for those, net lending/borrowing is the previous calculation of total revenue and grants 
+minus total expenditure and net lending. 
+GDP corresponding to fiscal year has been added to the database. 
+Country weights calculated as nominal GDP valued at purchasing-power-parity (PPP) exchange rates as a 
+share of total world GDP are updated to reflect revisions to countries' GDP data. 
+Data for Kosovo are now included for GDP, consumer prices, and current account balance, but are omitted 
+from the country group composites because of data limitations. 
+Ghana redenominated its currency in July 2007 by replacing 10,000 cedis with 1 Ghana cedi. Local currency 
+data for Ghana are expressed in the new currency beginning with the April 2010 WEO database. 
+Mozambique redenominated its currency in July 2006 by replacing 1,000 old meticais with 1 new metical. 
+Local currency data for Mozambique are expressed in the new currency beginning with the April 2010 WEO 
+database. 
+Venezuela redenominated its currency in January 2008 by replacing 1,000 bolívares with 1 bolívar fuerte. 
+Local currency data for Venezuela are expressed in the new currency beginning with the April 2010 WEO 
+database. 
+October 2009 
+Starting with the October 2009 World Economic Outlook, the Islamic Republic of Afghanistan, Bosnia and 
+Herzegovina, Brunei Darussalam, Eritrea, Iraq, Liberia, Montenegro, Serbia, and Timor-Leste are included in 
+the regional and analytical group compositions. 
+Zimbabwe has been returned to the group compositions as a result of recent price stabilization, which 
+facilitates the measurement of macroeconomic variables and allows for cross-country data comparisons. 
+The Zimbabwe dollar ceased circulating in early 2009. Data are based on staff estimates of price and 
+exchange rate developments in U.S. dollars. 
+Georgia officially withdrew from the Commonwealth of Independent States on August 18, 2009, but is 
+included in the Commonwealth of Independent States group for reasons of geography and similarities in 
+economic structure. 
+Singapore now reports chain-weighted national account data. 
+Capital flows are now referred to as financial flows. 
+Government finance data and the output gap for G7 economies and the euro area group are shown through 
+2014. 
+April 2009 
+Country weights, calculated as nominal GDP at purchasing-power-parity exchange rates in percent of the 
+global GDP, have been updated to reflect revisions to nominal GDP.
+
+--- PAGE 28 ---
+WORLD ECONOMIC OUTLOOK     
+28 International Monetary Fund | October 2026 
+On January 1, 2009, Slovak Republic became the sixteenth country to join the euro area. Additionally, Czech 
+Republic and Slovak Republic are now included in the advanced economies group. 
+Data for Iraq are now included. 
+Guatemala, Israel, Korea, and Slovak Republic now report chain-weighted national accounts data. 
+On January 1, 2009, the Central Bank of Turkmenistan redenominated its currency by transforming 5,000 
+units of old manats into one unit of new manat. 
+October 2008 
+The following countries now report chain-weighted national accounts data: Bulgaria, Estonia, and Hong 
+Kong SAR. 
+April 2008 
+Country weights used to construct aggregate data for groups of countries were revised to incorporate 
+updated PPP exchange rates released by the World Bank. 
+Data is now available through 2013 for selected indicators. 
+On January 1, 2008, Cyprus and Malta joined the euro area. Additionally, Malta is now included in the 
+advanced economies group. 
+Data for the Republic of Montenegro are now included. 
+Other emerging market and developing countries has been renamed Emerging and developing economies. 
+ASEAN-5 replaces ASEAN-4 with the addition of Vietnam. 
+Zimbabwe has been excluded from aggregated country group data. 
+Commodity price indices have been revised, and are now constructed using updated weights based on 2002-
+04 world trade data and a new base year of 2005. Please see the Energy and Commodities Surveillance Unit 
+website for more details. 
+October 2007 
+Given recent trends, except for GDP in constant prices, it is not possible to forecast Zimbabwe's data with 
+any precision for 2008. For country group consistency, Zimbabwe's data are excluded from relevant aggregated 
+data. 
+Sudan redenominated its currency by transforming 100 units of Sudanese dinar into one unit of Sudanese 
+pound. 
+The following countries now report chain-weighted national accounts data: Cyprus, France, and Malta. 
+Data for end-of-period Consumer Price Index for all countries and Employment for advanced economies 
+have been added to the WEO database. 
+April 2007 
+On January 1, 2007, Slovenia became the 13th country to join the euro area, and is now included in the 
+advanced economy group.
+
+--- PAGE 29 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 29  
+Also on January 1, 2007, Bulgaria and Romania became members of the European Union, enlarging the 
+group to a total of 27 countries. 
+Netherlands Antilles has been excluded from the World Economic Outlook database following the decision 
+by its five constituent islands to abandon the federation and will cease to exist in July 2007. 
+The purchasing power parity (PPP) weights have been updated to reflect the most up-to-date PPP 
+conversion factor provided by the World Bank. 
+All Zimbabwe data in terms of national currency have been redenominated by a rate of 1:1,000. 
+September 2006 
+Data notes at the country, subject, and series levels are now made available for the WEO online database. 
+These notes can be view by either hovering the mouse over or clicking on the   icon. 
+Population projections are now included for all countries. 
+Data for Liberia are included. 
+Following the declaration of independence from Serbia by Montenegro, it has been determined that Serbia is 
+the continuing state of the former state union of "Serbia and Montenegro" and that Montenegro has seceded 
+as a new independent state. 
+Azerbaijan redenominated its currency by transforming 5,000 units of old manat (AZM) into one unit of new 
+manat (AZN). 
+April 2006 
+The country composition of the fuel-exporting group has been revised to reflect the periodic update of the 
+classification criteria. 
+The purchasing-power-parity (PPP) weights have been updated to reflect the most up-to-date PPP 
+conversion factor provided by the World Bank. 
+The primary commodity indices are included in the WEO database. 
+Romania redenominated its currency by transforming 10,000 units of old Lei into one unit of new Leu. 
+Turkey revalued its currency by dropping six zeros from the old Lira. The new Turkish Lira (Yeni Türk 
+Lirasi) became the new currency unit of Turkey. 
+September 2005 
+The country group composites for Savings and Investment are calculated as the sum of the U.S dollar values 
+for the relevant individual countries. This differs from the calculations in the April 2005 and earlier World 
+Economic Outlooks, where the composites were weighted by GDP valued at purchasing power parities (PPPs) 
+as a share of total world GDP. 
+The Malagasy franc replaced the ariary as Madagascar’s currency, on January 1, 2005. One Malagasy franc 
+was valued at 0.2 ariarys. 
+April 2005 
+Data for Afghanistan are included.
+
+--- PAGE 30 ---
+WORLD ECONOMIC OUTLOOK     
+30 International Monetary Fund | October 2026 
+The base year for time series expressed in index form has been re-indexed to 2000. 
+El Salvador currency has been changed to dollar. 
+London Interbank Offered Rate (LIBOR) series are included for euro area, Japan and the United states. 
+The purchasing power parity (PPP) weights have been updated to reflect the most up-to-date PPP 
+conversion factor provided by the World Bank. 
+September 2004 
+The European Union added 10 new member nations on May 1, 2004, enlarging the group to a total of 25 
+countries. The new members are Cyprus, Czech Republic, Estonia, Hungary, Latvia, Lithuania, Malta, Poland, 
+Slovak Republic, and Slovenia. 
+April 2004 
+The former three-way split of the world (advanced economies, developing countries, and countries in 
+transition) has been revised to classify countries into two categories: “advanced economies” and “other 
+emerging market and developing countries.” The analytical groups now comprise all countries from the former 
+developing and transition groups. See the introduction to the Statistical Appendix for additional details. 
+Turkey and Malta are now included in Central and Eastern Europe. 
+Timor-Leste, Dem. Rep. of is now included in the WEO database. 
+Current account balance projections are now included for all countries. 
+The purchasing power parity (PPP) weights have been updated to reflect the new price surveys using the new 
+benchmark year of 2000. See Box A2 for additional details. 
+September 2003 
+No changes were introduced. 
+April 2003 
+Growth and inflation projections for Serbia and Montenegro are included. 
+September 2002 
+Growth and inflation projections are included for all countries through 2003. 
+May 2002 
+Middle East, Malta, and Turkey is replaced by the title “Middle East and Turkey.” The country composition 
+remains the same. 
+December 2001 
+No changes were introduced. 
+October 2001 
+No changes were introduced. 
+May 2001
+
+--- PAGE 31 ---
+DATABASE  APPENDIX   
+International Monetary Fund | October 2026 31  
+Greece is included in the euro area. 
+Cyprus is included in Advanced Economies. It was previously included in Middle East and Europe under 
+Developing Countries. 
+Asia is replaced by the title Developing Asia. There is no difference in the composition of the group. 
+Middle East and Europe is replaced by the title Middle East and Turkey. Cyprus is no longer included in the 
+group. 
+Two new subgroups comprise Countries in Transition. Commonwealth of Independent States and Mongolia 
+replaces Trancaucasus and central Asia and the composition of Central and Eastern Europe has changed: the 
+group no longer includes Moldova and Ukraine. Please refer to the introduction to the Statistical Appendix for 
+details on WEO regional and analytical groups.

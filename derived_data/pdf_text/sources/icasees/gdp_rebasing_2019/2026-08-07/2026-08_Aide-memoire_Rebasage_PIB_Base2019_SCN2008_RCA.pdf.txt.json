@@ -1,0 +1,19 @@
+{
+  "document_metadata": {
+    "/Author": "Mamadou Ngalgou KANE",
+    "/CreationDate": "D:20230306120945Z",
+    "/Creator": "Microsoft® Word 2013",
+    "/ModDate": "D:20260807130551+01'00'",
+    "/Producer": "Microsoft® Word 2013"
+  },
+  "extractor": "pypdf",
+  "extractor_version": "6.21.4",
+  "page_count": 9,
+  "pages_with_text": 9,
+  "pdf_text_schema_version": 1,
+  "source_path": "raw_data/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf",
+  "source_sha256": "403bae60e88c7d8701bc0d1498228a6a49e96bc90cf2cdc4de6be8d451f29bc5",
+  "status": "text_extracted",
+  "text_path": "derived_data/pdf_text/sources/icasees/gdp_rebasing_2019/2026-08-07/2026-08_Aide-memoire_Rebasage_PIB_Base2019_SCN2008_RCA.pdf.txt",
+  "text_sha256": "eece4ed33b60f936f08c3f5df51b51375d816b4d5310a7b9cdc90b6530b25504"
+}

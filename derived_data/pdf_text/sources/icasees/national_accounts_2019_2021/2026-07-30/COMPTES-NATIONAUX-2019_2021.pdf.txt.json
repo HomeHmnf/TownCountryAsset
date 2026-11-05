@@ -1,0 +1,19 @@
+{
+  "document_metadata": {
+    "/Author": "DCNPE",
+    "/CreationDate": "D:20260730091107+02'00'",
+    "/Creator": "Microsoft® Word 2013",
+    "/ModDate": "D:20260730091107+02'00'",
+    "/Producer": "Microsoft® Word 2013"
+  },
+  "extractor": "pypdf",
+  "extractor_version": "6.21.4",
+  "page_count": 65,
+  "pages_with_text": 65,
+  "pdf_text_schema_version": 1,
+  "source_path": "raw_data/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf",
+  "source_sha256": "e419508a82e9d09421405880c7a8212376d60776cc809ed942241bd231e6d173",
+  "status": "text_extracted",
+  "text_path": "derived_data/pdf_text/sources/icasees/national_accounts_2019_2021/2026-07-30/COMPTES-NATIONAUX-2019_2021.pdf.txt",
+  "text_sha256": "6f3123089ecb6ae7bcfccdcd7a7bd4ce350ca8930bd48f6359424dd6676c930d"
+}

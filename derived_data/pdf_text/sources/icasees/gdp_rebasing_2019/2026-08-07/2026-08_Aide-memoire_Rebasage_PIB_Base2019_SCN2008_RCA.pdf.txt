@@ -1,0 +1,408 @@
+--- PAGE 1 ---
+Travaux de rebasage du Produit intérieur brut (PIB) de la République 
+centrafricaine, base 2019 selon le Système de comptabilité nationale 2008  
+(SCN 2008) 
+ 
+ 
+ 
+ 
+ 
+ 
+Aide-mémoire  
+Mission conjointe d’examen des résultats par les partenaires techniques et 
+les pairs 
+(Union Africaine, Burkina Faso, Cameroun et Sénégal) 
+ 
+ 
+ 
+Boali, du 13 au 18 février 2023 
+ 
+ 
+Février 2023
+
+--- PAGE 2 ---
+2 
+1. Introduction 
+Dans le cadre de la mise en œuvre des activités du Projet de Données Nécessaires à la Prise de 
+Décision (PDNPD) financé par la Banque mondiale en République Centrafricaine, il a été prévu 
+de réaliser plusieurs opérations de production statistique, dont la mise en œuvre du Système de 
+comptabilité nationale (SCN) de 2008 et le rebasage des comptes nationaux. Dans le cadre des 
+activités du rebasage, l’Institut Centrafricain des Statistiques et des Etudes Economiques et 
+Sociales (ICASEES) a organisé une mission conjointe de revue de la nouvelle base des comptes 
+nationaux par les pairs et les partenaires techniques. La mission s’est déroulée du 13 au 18 février 
+2023 à Boali Chutes (94 km de Bangui). Elle visait à analyser les résultats préliminaires de travaux 
+de changement d’année de base des comptes nationaux, en étudiant notamment les sources de 
+données utilisées, les méthodes mises en œuvre et les calculs effectués. 
+ 
+Selon les termes de référence préparés par l’ICASEES, l’objectif principal de la mission était de 
+contribuer à l’amélioration de la qualité des données économiques en général et des comptes 
+nationaux en particulier, produites par la République Centrafricaine. De manière spécifique, il 
+s’agissait de : 
+ apprécier le niveau de conformité des concepts et définitions utilisés dans les comptes de la 
+base 2019 avec les standards du SCN 2008; 
+ examiner la pertinence des nomenclatures nationales et de travail avec le logiciel ERETES ; 
+ analyser les différentes maquettes de traitement des données sources ; 
+ donner des appréciations sur les principaux résultats préliminaires des comptes nationaux ; 
+ relever les incohérences et insuffisances dans les comptes nationaux ; 
+ formuler des suggestions et des recommandations pour l’amélioration des travaux entrepris ; 
+ faire bénéficier de l’expérience des pairs aux comptables nationaux de la RCA. 
+ 
+Les partenaires ayant participé à cette mission conjointe sont l’Union Africaine (STATFRIC), les 
+experts, comptables nationaux du Burkina Faso, du Cameroun et du Sénégal. La liste complète des 
+personnes ayant participé à la mission figure à l’annexe 1. 
+ 
+La mission remercie l’ICASEES, notamment Monsieur Blaise Bienvenu ALI, Directeur Général, 
+ainsi que les équipes en charge des comptes nationaux et de la gestion administrative et financière 
+du projet, pour la chaleur de l’accueil, la parfaite organisation des travaux, la franchise des 
+discussions et l’atmosphère détendue dans laquelle a pu se dérouler la mission. 
+ 
+2. Le processus de rebasage 
+ 
+L’ancienne série des comptes nationaux de la République Centrafricaine (RCA) est établie sur la 
+base 2005, sous le SCN 1993. Cette série était devenue obsolète et mesurait insuffisamment les 
+changements structurels récents intervenus dans l’économie. La norme internationale 
+recommandant le changement des années de base idéalement tous les cinq (05) ans et au plus tous 
+les dix (10) ans, la RCA a mis à profit le projet de Données Nécessaires Pour la Prise de Décisions 
+(PDNPD), pour renouveler son année de base des comptes nationaux avec comme nouvelle année 
+de base, l’année 2019. Ce changement d’année de base a été l’occasion pour la RCA :  
+(i) d’adopter les nouvelles nomenclatures économiques internationales (ou leur 
+déclinaisons régionales) ; 
+(ii) de prendre en compte de nouvelles sources de données ; 
+(iii) d’améliorer les techniques d’élaboration des comptes ; 
+(iv) de mettre en œuvre les spécificités du plus récent système de comptabilité nationale 
+(le SCN 2008).
+
+--- PAGE 3 ---
+3 
+Pour améliorer la couverture des sources de données, la RCA a entrepris des opérations de collecte 
+de données dont les principales sont l’Enquête nationale sur l’agriculture (ENA), l’Enquête 
+harmonisée sur les conditions de vie des ménages (EHCVM),  toutes deux réalisées en 2021. 
+L’ENA a permis de couvrir les activités agricoles et l’EHCVM a permis d’estimer la 
+consommation finale des ménages, l’estimation de l’autoconstruction, du loyer imputé ainsi 
+qu’une partie des activités agro-pastorales et d’autres activités informelles non agricoles. D’autres 
+enquêtes et études spécifiques ont également été réalisées dans le cadre du rebasage des comptes, 
+en particulier l’étude sur la mesure de la production du portage d’eau par les ménages, l’enquête 
+sur les professionnels du sexe, l’enquête sur les médias, l’enquête sur les marges de commerce et 
+de transport, etc. 
+Le changement de l’année de base a suscité l’adoption de nouvelles nomenclatures et des 
+changements d’ordre méthodologiques. 
+A ce titre la RCA a élaboré et adopté les nomenclatures suivantes : 
+ les nomenclatures d’activité (NARCA) avec 307 branches et de produits (NOPRCA) avec 
+932 produits selon la CITI rev4, CPC rev2.1, NAEMA (rev1) et NOPEMA (rev1) ; 
+ les nomenclatures d’activités et de produits de travail sur ERETES comportant 30 branches 
+au niveau 1, 114 branches au niveau 2 et 221 produits au niveau 3. 
+Du point de vue méthodologique, le rebasage a permis d’estimer la production de la Direction 
+nationale de la Banque centrale des Etats d’Afrique centrale (BEAC), d’établir les comptes des 
+Institutions Sans But Lucratif au Service des Ménages (ISBLSM). 
+Les principaux changements méthodologiques apportés par la migration vers le SCN 2008 sont :  
+ le calcul et la ventilation du Service d’Intermédiation Financière Indirectement Mesuré 
+(SIFIM) ; 
+ l’estimation de la production non marchande de la Direction Nationale de la BCEAC de la 
+RCA ; 
+ le calcul de la production de l’assurance dommage à partir des indemnités ajustées ;  
+ le traitement de la recherche et développement en Formation Brute de Capital Fixe (FBCF); 
+ la prise en compte des dépenses d’armement dans la FBCF.  
+ 
+Par ailleurs, le rebasage a permis de prendre en compte certaines activités non mesurées dans les 
+anciennes séries de l’année de base 2005. Il s’agit notamment : 
+ 
+ l’évaluation de la production et de la portance d’eau par les ménages ;  
+ l’estimation de la production des professionnels du sexe ;  
+ la mesure des activités des médias ;  
+ la mesure des activités des motos-taxis. 
+ 
+Le rebasage des comptes nationaux de la RCA a été circonscrite dans un projet de rebasage adopté 
+en 2016 avec la Banque mondiale. Les travaux en amont avec la Banque mondiale ont porté sur : 
+ l’identification des statistiques essentielles pour l’élaboration et le suivi des politiques ;  
+ l’identification des activités menant à une professionnalisation et modernisation de 
+l’ICASEES ; 
+ le dispositif institutionnel du projet. 
+  
+Pour l’exécution des travaux inscrits dans le projet de rebasage des comptes, un consultant 
+international a été recruté pour appuyer le processus et assurer la formation continue des cadres de 
+l’ICASEES. 
+En termes de résultats, le tableau des ressources et des emplois (TRE) a été élaboré pour l’année 
+de base 2019. Les principales phases de traitement et les résultats ont été soumis à l’appréciation 
+des pairs et des recommandations ont été formulées. Ces recommandations devraient être prises
+
+--- PAGE 4 ---
+4 
+en compte avant la programmation du partage des résultats du rebasage des comptes avec les 
+partenaires au niveau national. Par ailleurs, l’élaboration des comptes économiques intégrés a été 
+entamée (TCEI) et devra être poursuivie pour l’année de base 2019. 
+  
+3. Principales conclusions et recommandations de la mission 
+ 
+Les principales conclusions de la mission sont les suivantes : 
+ 
+a. Le Projet de Données Nécessaires à la Prise de Décision (PDNPD), financé par la Banque 
+mondiale, a fourni un appui décisif aux travaux de rebasage des comptes nationaux de la 
+République centrafricaine. 
+b. La Coordination de ce projet, l’équipe des comptables nationaux ainsi que le Consultant 
+international chargé de les assister, ont fourni un travail considérable pour mettre en place 
+une nouvelle base de calcul du PIB et méritent d’être encouragés et félicités.  
+c. Les experts saluent les efforts consentis pour la mobilisation des sources de données 
+disponibles, la conduite et l’exploitation de nouvelles opérations de collectes, en particulier 
+les opérations de grande envergure à savoir l’Enquête nationale agricole (ENA 2021) et 
+l’Enquête harmonisée sur les conditions de vie des ménages (EHCVM). 
+d. Toutefois, les experts notent avec regret l’absence d’enquêtes de structure aussi bien auprès 
+des Unités de productions formelles que celles informelles. De tels types d’enquêtes  
+auraient permis de mieux évaluer les coûts de production détaillés par activité, notamment 
+les consommations intermédiaires. 
+e. L’ICASEES a identifié et mis en œuvre les changements du SCN 2008 pertinents pour la 
+République centrafricaine. Cependant, des limites ont été notées sur les méthodes de calcul 
+appliquées pour leur opérationnalisation. 
+f. Sur ce dernier point et sur les autres aspects purement technique, la mission a identifié un 
+certain nombre d’améliorations possibles qui ont fait l’objet d’autant de recommandations 
+(cf. section 4 de ce rapport). 
+ 
+Au vu de ces constatations, la mission et l’ICASEES se sont accordés sur la nécessité de mettre en 
+œuvre les recommandations générales suivantes : 
+ 
+Aux autorités de l’ICASEES : 
+g. Assurer que les comptables nationaux participent à la conception des enquêtes statistiques 
+utiles à l’élaboration des comptes nationaux de façon à ce que les résultats soient davantage 
+exploitables pour l’élaboration des comptes nationaux. En retour, impliquer les statisticiens 
+d’enquête dans le traitement des données d’enquêtes pour les besoins des comptes 
+nationaux. 
+h. Veiller à la prise en compte des coûts de production (intrants, autres consommables…) lors 
+des prochaines enquêtes nationales sur l’Agriculture ; 
+i. Assurer que l’ensemble de l’équipe soit bien formé à la comptabilité nationale et à 
+l’utilisation du module ERETES et qu’elle s’approprie pleinement des procédures 
+d’élaboration des comptes nationaux. 
+j. Tenir compte des enseignements des travaux de l’année de base pour réduire le détail des 
+nomenclatures d’activités et de produits, en tenant compte de la taille de l’équipe des 
+comptables nationaux ainsi que de l’importance économique ou stratégique des produits et 
+activités. 
+k. Procéder à l’élaboration de la première année courante 2020 pour s’assurer de la robustesse 
+des résultats de l’année de base avant la publication officielle. Tenir compte, à cette 
+occasion, de la spécificité de l’exercice 2020 marqué par la survenance de la pandémie à 
+COVID-19 et des restrictions sur les déplacements.
+
+--- PAGE 5 ---
+5 
+l. Engager les travaux de rétropolation des comptes nationaux le plus tôt que possible pour 
+disposer d’une longue série pour les économistes / modélisateurs. 
+m. Préparer la documentation sur les méthodes d’élaboration des comptes nationaux adoptées 
+pour la mise en place de la nouvelle série des comptes nationaux. 
+n. Assurer une production régulière et à jour des comptes nationaux. 
+o. Prendre les dispositions nécessaires en vue d’assurer une production régulière des 
+indicateurs conjoncturels d’activités qui sont très utiles pour l’élaboration des comptes 
+nationaux en année courante. 
+p. Mettre en place et maintenir à jour un répertoire d’entreprises à des fins statistiques pour, 
+entre autres, mieux apprécier le degré de couverture des entreprises fournissant des données 
+comptables. 
+q. Mettre en œuvre les recommandations techniques formulées par la mission (Cf. à la section 
+4 infra.) 
+ 
+A l’attention de la Banque mondiale et des autres institutions partenaires : 
+r. Poursuivre l’accompagnement institutionnel et financier des travaux d’élaboration des 
+comptes nationaux en vue de pérenniser les acquis. 
+s. Appuyer le pays dans la conduite de grandes opérations statistiques pour une meilleure 
+connaissance de la taille et de la structure de l’économie. 
+ 
+4. Liste minimum des points techniques à vérifier 
+ 
+Nomenclatures 
+ Prendre en compte les observations formulées sur les nomenclatures des produits et des 
+activités (cf. fichier Excel sur les nomenclatures). En particulier, séparer les « autres 
+services collectifs et personnels (R00)  » et la « correction territoriale » pour donner une 
+meilleure visibilité de cette dernière. 
+ 
+ Prendre en compte l’observation relative à la désagrégation de la production en trois (03) 
+sous-composantes (production marchande, production pour usage final propre, production 
+non marchande), conformément à la nomenclature des opérations du SCN 2008. 
+ 
+Secteur primaire 
+ Elevage 
+o Vérifier le niveau d’autoconsommation en produits de l’élevage qui semble faible : 
+est-ce que l’autoconsommation de lait brut, de volaille, de petits ruminants etc. est 
+bien prise en compte ? 
+o Les exportations de produits de l’élevage semblent relativement faibles (0,2% de la 
+production) : se rapprocher du Ministère chargé de l’élevage ou exploiter l’enquête 
+sur les flux transfrontaliers non enregistrés pour s’assurer de la bonne couverture 
+des exportations. En effet, l’exportation et les importations de bétail sont souvent 
+mal captées par les services de la Douanes. 
+ Sylviculture et exploitation forestière 
+o Vérifier le niveau d’autoconsommation de ces produits qui semble faible : la 
+production pour usage finale propre est souvent importante pour les produits de 
+cueillette et le bois de chauffe. 
+ 
+Sociétés non financières 
+ Corriger la production (isoler la production commerciale et celle des autres travaux et 
+services qui doivent être classées dans d’autres produits de la nomenclature pour les 
+entreprises industrielles et de construction).
+
+--- PAGE 6 ---
+6 
+ Calcul de la FBCF : faire attention à la valorisation des cessions d’actifs (tenir compte des 
+plus ou moins-value de cession). 
+ 
+Secteur informel 
+ Réaliser des études monographiques ciblées notamment sur le secteur extractif. 
+ Prévoir, à l’avenir, des enquêtes sur le secteur informel permettant, en sus de la production, 
+de disposer d’informations sur les intrants et les autres charges des unités de production 
+informelle (UPI). 
+ 
+Marges de commerce 
+ Déterminer des taux de marge de commerce par produit et par emploi (CI, CF, FBCF, 
+…) : possibilité d’utiliser, par exemple, les taux de marge des grossistes ou demi-
+grossistes pour la FBCF et la CI, et ceux des détaillants pour la CF. 
+ Redresser les taux de marges des produits périssables à la baisse en tenant compte des 
+taux de perte entre l’achat et la revente de ces marchandises. 
+Banque centrale 
+ Utiliser la méthode des coûts de production pour estimer la production de la Banque 
+centrale en incluant une estimation de la CCF. 
+ S’inspirer de la méthode mise en œuvre par le Cameroun (pour l’année de base 2016) à des 
+fins d’harmonisation méthodologique au sein des pays membres de la CEMAC. 
+ 
+Banques commerciales 
+ Prendre en compte les corrections proposées sur la codification de certaines opérations 
+(plus-value, gains de change, intérêts) et de certains produits (logiciels, services 
+informatiques…) (cf. fichier de traitement Excel). 
+ FBCF : à traiter comme avec les SNF. 
+ 
+Assurances : 
+ Distinguer la production de l’assurance vie et celle de l’assurance non vie. Le calcul des 
+indemnités ajustées, selon les recommandations du SCN 2008, doit uniquement porter sur 
+l’assurance non vie.  
+ Revoir le calcul de la production des services d’assurance en intégrant les suppléments de 
+prime. 
+ 
+Services d’Intermédiation Financière Indirectement Mesurés (SIFIM) 
+ Chercher des publications de la Banque centrale ou de la Commission bancaire permettant 
+de distinguer les crédits au secteur privé entre les SNF et les Ménages.  
+ Estimer ainsi la CF des ménages en SIFIM et leur CI en SIFIM pour les crédits au logement.  
+ Essayer de calculer le SIFIM sur les importations et éventuellement les exportations  
+(crédits commerciaux) : exploiter les données de la BDP (intérêts payés par le secteur 
+privé) et de la Position extérieure globale (PEG) (stocks de la dette commerciale) pour 
+calculer les intérêts purs (SCN 08) et les intérêts « apparents » afin de déduire le SIFIM. 
+ Prendre en compte le SIFIM consommé par les APU dans le calcul de leur production. 
+ 
+ISBLSM : 
+ Recalculer la production globale (P) des ISBLSM selon la méthode des coûts : CI + 
+Rémunération des salariés + CCF. Pour l’estimation de la CCF, à défaut de disposer d’une 
+série de données sur les investissements antérieurs des ISBLSM, l’estimer en se référant 
+aux comptes du Cameroun [environ 20% de (CI+Salaires)].
+
+--- PAGE 7 ---
+7 
+ 
+ Tenir compte de la production marchande résiduelle (Pm) avant de calculer la production 
+non marchande des ISBLSM (Pnm = P – Pm). 
+ 
+ Déterminer les marges pour l’activité commerciale au lieu de prendre les ventes comme 
+production. 
+ 
+Education privée 
+ Actualiser les coûts de scolarité du cycle du PCI 2017 avec l’évolution des prix des services 
+d’éducation suivis dans l’Indice des prix à la consommation (IPC). 
+ 
+Activités illégales 
+ Pour l’activité des TS, estimer également la valeur de la production pour les rapports non 
+protégés. 
+ 
+Consommation finale des ménages 
+ Prendre en compte les dons dans l’estimation de la consommation finale des ménages à 
+partir de l’EHCM. 
+ Evaluer la consommation finale en « produits en plastique, en caoutchouc et matériaux 
+minéraux (C07) » dont la valeur est nulle dans les résultats préliminaires. 
+ 
+Commerce extérieur 
+ Calage à la Balance des paiements : essayer de cibler des produits spécifiques sur lesquels 
+porter les corrections plutôt que de procéder à une correction sur tous les produits en 
+proportion de leur valeur. 
+ Pour les « produits en plastique, en caoutchouc et matériaux minéraux (C07) » et les 
+« ouvrage en métaux et travail des  métaux », vérifier le niveau des exportations qui sont 
+relativement élevées, en comparaison avec la valeur de la production. 
+ S’informer auprès de la Banque centrale sur l’explication du niveau élevé des exportations 
+de biens et services de l’ Administration publique (192 milliards de FCFA en 2019) afin 
+d’en faire un traitement approprié pour la comptabilité nationale. 
+ 
+Autres points 
+ Finaliser les travaux sur le Tableau des comptes économiques intégrés, au moins pour 
+l’année de base 2019. 
+ Finaliser les travaux de mise en place de la nouvelle maquette de saisie des DSF, en 
+prévoyant une saisie complète du bilan et des comptes résultats, au minimum. 
+ 
+5. Feuille de route pour la suite des travaux 
+Au terme de la mission, les pairs et l’ICASEES se sont aussi accordés sur les prochaines étapes 
+suivantes : 
+ Intégrer les observations de la Revue par les pairs et finaliser les comptes de l’année 
+de base 2019 au plus tard le 21 d’avril 2023. 
+ Organiser un atelier de partage des résultats préliminaires de l’année de base en fin 
+avril 2023. 
+ Réaliser les comptes définitifs de l’année courante 2020 (avec ERETES) et les 
+comptes provisoires de 2021 (méthode simplifiée avec Excel) d’ici la fin de l’année 
+2023. 
+ Diffuser officiellement la série des comptes 2019-2021 selon le SCN 2008 d’ici le 29 
+décembre 2023.
+
+--- PAGE 8 ---
+8 
+ Entreprendre les travaux de rétropolation des comptes nationaux dans les meilleurs 
+délais afin de reconstituer la série des années de comptes antérieures selon le SCN 
+2008. 
+Pour accompagner ce processus, l’Union Africaine, à travers STATAFRIC, s’est engagée à 
+apporter un appui financier à l’ICASEES pour : 
+- la prise en charge de la formation des comptables nationaux sur le processus d’élaboration 
+d’une année courante de comptes nationaux avec ERETES ; 
+- la saisie des documents comptables des entreprises pour les exercices 2020 et 2021.
+
+--- PAGE 9 ---
+9 
+ 
+ 
+ 
+Annexes 1 : Liste des participants 
+ 
+ 
+N° Noms et Prénoms  Structure Contact E-mail 
+1 Blaise Bienvenu ALI ICASEES 
+(Directeur 
+Général) 
++236 7226 3033 blaisebienvevua@gmail.com  
+2 Sylvestre BAZA 
+BAGUIMBI  
+Assistant du 
+Projet PDNPD 
++236 75506548 bazabanguimbi@yahoo.fr  
+3 Roger YELE ICASEES +236 7018 5839 Roger_Yele@yahoo.fr  
+4 Samson Bel-Aube 
+NOUGBODOHOUE  
+Union 
+Africaine 
++251 7669 26049 bel-auben@africa-union.org  
+5 KANE Mamadou 
+Ngalgou 
+ANSD/Sénégal +221 76 692 60 
+49 
+Mamadoungalgou.kane@ansd.sn 
+Ngalgou1@yahoo.fr  
+6 Brice KAMSU INS/Cameroun  Bricekago@yahoo.fr  
+7 Nézien BAWONO  INSD/ Burkina 
+Faso 
++226 6544 2169 bawomonezien@yahoo.fr  
+8 Hubert GBOSSA Consultant 
+international  
+ hubgbossa@yahoo.fr  
+9 Jesky Forwest 
+MOBEANG  
+ICASEES +236 7248 0133 Jforwest@yahoo.com  
+10 Prosper 
+NGUIPOUSSARA 
+ICASEES +236 7209 1979 Nguipossara.prosper@yahoo.fr  
+11 Félix NOUDJEO  ICASEES +236 7205 8938 noudjeofelix@gmail.com  
+12 Armand DANZI  ICASEES +236 7428 7229 armanddanzi@gmail.com  
+13 Théophile GBAMOU 
+ENDJIZAGO 
+ICASEES +236 7281 5237 gbamouendjizago@yahoo.fr  
+14 Sylvain NGAÏPORO  ICASEES +236 7214 4785 sngaiporo@gmail.com  
+15 Hugues Edgard 
+ZANGA-GOUMET 
+ICASEES +236 7585 3018 zangagoumet@gmail.com  
+16 Mathurin MAKANDA ICASEES +236 7553 5800 Mathurin_makanda@yahoo.fr  
+17 AMADOU 
+ABDOULAYE 
+ICASEES +236 75752312   
+18 Arsène GBARA  ICASEES

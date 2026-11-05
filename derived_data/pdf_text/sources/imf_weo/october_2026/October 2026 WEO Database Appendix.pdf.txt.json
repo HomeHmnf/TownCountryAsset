@@ -1,0 +1,23 @@
+{
+  "document_metadata": {
+    "/CreationDate": "D:20261004150926-04'00'",
+    "/MSIP_Label_0c07ed86-5dc5-4593-ad03-a8684b843815_ActionId": "06d79def-c64f-4fe5-bd51-475183d2195a",
+    "/MSIP_Label_0c07ed86-5dc5-4593-ad03-a8684b843815_ContentBits": "0",
+    "/MSIP_Label_0c07ed86-5dc5-4593-ad03-a8684b843815_Enabled": "true",
+    "/MSIP_Label_0c07ed86-5dc5-4593-ad03-a8684b843815_Method": "Standard",
+    "/MSIP_Label_0c07ed86-5dc5-4593-ad03-a8684b843815_Name": "0c07ed86-5dc5-4593-ad03-a8684b843815",
+    "/MSIP_Label_0c07ed86-5dc5-4593-ad03-a8684b843815_SetDate": "2023-08-16T12:54:22Z",
+    "/MSIP_Label_0c07ed86-5dc5-4593-ad03-a8684b843815_SiteId": "8085fa43-302e-45bd-b171-a6648c3b6be7",
+    "/ModDate": "D:20261004150926-04'00'"
+  },
+  "extractor": "pypdf",
+  "extractor_version": "6.21.4",
+  "page_count": 31,
+  "pages_with_text": 31,
+  "pdf_text_schema_version": 1,
+  "source_path": "raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf",
+  "source_sha256": "cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a",
+  "status": "text_extracted",
+  "text_path": "derived_data/pdf_text/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf.txt",
+  "text_sha256": "81b5b9d04f2c01924129301e128c8e557998d63fae2e06cb9ece7c39b1a1f88a"
+}
