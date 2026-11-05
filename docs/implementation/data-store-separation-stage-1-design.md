@@ -10,7 +10,7 @@ Create the independent project database at data/project/project_data.sqlite, wit
 
 The first schema establishes the stable source catalogue and acquisition-version model:
 
-- source organisations and stable source identities;
+- source organisations and stable source identities; source registry metadata is retained losslessly in `metadata_json` and promoted query fields (`domains_json`, `license_status`, `attribution`, `notes`, `acquisition_mode`, `release_discovery_json`, `legacy_source_ids_json`, `field_ids_json`);
 - typed source URLs (homepage, documentation, dataset page, API base, download, terms/licence and evidence);
 - stable dataset definitions;
 - acquisition streams, each representing one independently retained dataset/download/API capture unit;
@@ -76,16 +76,19 @@ No raw source file is copied into the project database. The database records met
 
 - The project DB is created at the approved path and has a distinct connection factory.
 - Project migrations are isolated from game migrations and maintain their own contiguous ledger.
-- The initial schema supports the source catalogue, typed URLs, datasets, streams, acquisitions and artifacts described above.
+- The schema supports the source catalogue, typed URLs, datasets, streams, acquisitions and artifacts described above.
+- The source synchronizer registers all 31 configured source keys and all 92 configured URL records without inventing publisher organisations or unresolved dataset/stream boundaries.
 - Database constraints prevent invalid relationships, duplicate stable keys and more than two retained acquisitions in one stream.
 - Tests prove that project DB setup does not create, migrate or modify the game DB.
 - Existing game DB schema remains v4 and all existing game DB files/rows are left untouched by Stage 1 commands.
 - No acquisition, retention cleanup, source-selection, approval migration or game-runtime cutover is introduced.
 - Relevant architecture, implementation and operator documentation is updated with the code and tests.
 
-## 7. Operator command
+## 7. Operator commands
 
 Create or upgrade the local project DB with `uv run python -m tools.migrate_project_database`. The command targets only the project DB by default; `--database PATH` may be used for an isolated test copy. It applies only `migrations/project/` and reports SQLite integrity and foreign-key results.
+
+Synchronize stable source identities and configured URLs with `uv run python -m tools.sync_project_source_catalogue`. Optional `--database PATH` and `--config PATH` arguments support isolated runs. The synchronizer upserts source records and replaces only URL rows it previously marked as managed by `config/data_sources.json`; manually managed URL rows are not deleted. It preserves the complete source object in `metadata_json`, fills explicit query fields, and does not assign publisher organisations, create datasets/streams/acquisitions, alter manifests, or change source-selection policy. Re-running the command is idempotent.
 
 ## 8. Owner-run validation record
 
