@@ -1,6 +1,6 @@
 # Stage 3B — acquisition provenance registration design
 
-**Status:** Design proposal; no schema or runtime changes in this stage.  
+**Status:** Design approved; initial manifest-backed registration implemented in Stage 3B. Owner-run validation pending.  
 **Prerequisites:** Stage 1 Project DB foundation, Stage 2 catalogue registration, and owner-validated Stage 3A manifest audit.  
 **Architecture contract:** [Data-store separation plan](../architecture/data-store-separation-plan.md)  
 **Stage 3A evidence:** [Manifest adapter and integrity audit](data-store-separation-stage-3a-manifest-audit.md)
@@ -144,3 +144,19 @@ No migration should be written until this schema review and the owner-approved f
 6. Add owner-run validation and reconcile counts against manifest inventory.
 
 Each substep must update this design/implementation documentation and preserve the no-retention/no-Game-DB boundary.
+
+
+## 12. Implemented schema decisions
+
+Migration 003 implements the initial event identity and integrity-evidence portion of this design:
+
+- Event uniqueness is enforced by (stream_id, acquisition_event_key), with the manifest's repository-relative path as the immutable event key.
+- The exact manifest bytes are fingerprinted in manifest_sha256.
+- integrity_status is independent of the acquisition lifecycle status.
+- evidence_json preserves the complete parsed manifest payload; acquisition_artifacts.metadata_json preserves each original artifact object.
+- Manifest-backed registration resolves manifest dataset_id before download_id, preventing Bahrain's download-folder key from being mistaken for the registered provider dataset ID.
+- Only datasets with exactly one active registered stream are eligible.
+
+The initial implementation registers eligible Bahrain and UN M49 events. ICASEES and WPP remain deferred. IMF WEO remains deferred until its manual acquisition record is reconciled against the tracked files and the bundle's event-time evidence is made explicit. No acquisition is marked semantically validated or retained.
+
+See [Stage 3B provenance registration implementation](data-store-separation-stage-3b-provenance-registration.md) for the command, tests and owner-run acceptance procedure.
