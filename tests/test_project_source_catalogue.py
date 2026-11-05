@@ -116,3 +116,28 @@ def test_source_catalogue_sync_rolls_back_invalid_config(tmp_path):
     with connect_project_database(database_path) as connection:
         assert connection.execute("SELECT COUNT(*) FROM sources").fetchone()[0] == 0
         assert connection.execute("SELECT COUNT(*) FROM source_urls").fetchone()[0] == 0
+
+
+def test_repository_source_registry_maps_all_stable_keys_and_configured_urls(tmp_path):
+    from tools.database.source_catalogue import DEFAULT_SOURCE_CONFIG_PATH
+
+    config = json.loads(DEFAULT_SOURCE_CONFIG_PATH.read_text(encoding="utf-8"))
+    expected_source_count = len(config["sources"])
+    expected_url_count = sum(
+        int(bool(source.get("homepage_url")))
+        + int(bool(source.get("terms_url")))
+        + int(bool((source.get("release_discovery") or {}).get("provider_url")))
+        + sum(bool(download.get("url")) for download in source.get("downloads", []))
+        for source in config["sources"].values()
+    )
+
+    result = sync_source_catalogue(
+        database_path=tmp_path / "project.sqlite",
+        config_path=DEFAULT_SOURCE_CONFIG_PATH,
+    )
+    assert result == {
+        "sources": expected_source_count,
+        "source_urls": expected_url_count,
+    }
+    assert expected_source_count == 31
+    assert expected_url_count == 92
