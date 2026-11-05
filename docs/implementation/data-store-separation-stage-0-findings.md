@@ -1,6 +1,6 @@
 # Data-store separation — Stage 0 findings
 
-**Status:** Evidence consolidated; owner review and Stage 1 approval pending. No schema, source-selection, retention, or filesystem changes have been made.
+**Status:** Stage 0 approved by the owner on 2026-11-05. No schema, source-selection, retention, or filesystem changes have been made.
 **Plan:** [Data-store separation plan](../architecture/data-store-separation-plan.md)
 **Inventory procedure:** [Stage 0 inventory](data-store-separation-inventory.md)
 **Target branch:** work/compiler-hardening
@@ -59,7 +59,7 @@ The raw source, manifest, derivative, and report inventories were owner-run. Git
 
 ### 3.2 Acquisition streams and release grouping
 
-- Bahrain Open Data uses the Opendatasoft API and has three timestamped rolling manifests. Captured payload hashes are identical across all three acquisitions. Identical hashes do not establish two distinct validated versions; inspect validation outcomes before counting them toward the two-version retention window.
+- Bahrain Open Data uses the Opendatasoft API and has three timestamped rolling manifests. The provider-specific acquisition/validation disposition was previously reviewed and corrected in the existing Bahrain source documentation and assessment evidence. That established disposition is accepted for this plan; it is not an unresolved Stage 0 question. Identical payload hashes remain separate capture evidence, but retention eligibility follows the documented validation outcomes—not hash uniqueness.
 - ICASEES has three related publication artifacts (national accounts workbook, national accounts 2019–2021 PDF, and GDP rebasing aide-memoire PDF) represented as a manual publication bundle. Preserve grouping for now; whether they form one retention stream or multiple independently versioned streams requires a source-domain decision.
 - UN WPP has distinct configured download IDs/streams for demographic indicators, age/sex population, demographic notes, location notes and the Togo supplement. The demographic dataset plus Togo supplement was used in the applied WP1.5 release. Do not collapse all WPP download IDs into one retention stream without confirming bundle semantics.
 - UN M49 manifest representation differs from the ordinary files/file-ID shape. Normalize manifest formats only after recording its actual artifact and role.
@@ -112,12 +112,11 @@ The Lipis flag-icons registry is only at discovered; its missing acquisition/val
 7. Stable source catalogue entries, URL roles, dataset definitions, field mappings and crosswalk definitions are not subject to acquisition retention.
 8. Repeated captures with identical content hashes remain distinct acquisition events/provenance records if they are distinct successful validated acquisitions; content blobs may be deduplicated separately.
 
-The inventory does not prove that the three Bahrain captures are validated successful versions. Their identical hashes must not be used to infer eligibility.
+The Bahrain acquisition/validation disposition is accepted from the existing provider-specific documentation and assessment evidence. This consolidated inventory does not supersede that evidence. Identical hashes alone are not the basis for validation or retention eligibility.
 
 ## 7. Unresolved items before Stage 1
 
 1. Stream boundaries: confirm ICASEES bundle versus independent dataset streams; confirm UN WPP stream/bundle dependencies; formalize stable stream IDs for every source.
-2. Bahrain validation: inspect all three acquisition outcomes and determine which qualify as successful validated versions.
 3. Raw/derivative consumer map: finish exact runtime/tool/test references for the three unmanifested files and alternate ICASEES extraction; confirm whether any consumer depends on the legacy TXT.
 4. Table consumer completion: finish production/runtime versus test-only references, especially country_flags, country_attributes, country_geometries and import_runs.
 5. Run/report retention: specify retention for failed candidates, assessment runs, refresh logs and non-acquisition research evidence without conflating these with the two-version source policy.
@@ -129,6 +128,6 @@ The inventory does not prove that the three Bahrain captures are validated succe
 
 ## 8. Stage 0 disposition
 
-The evidence establishes high-level table and artifact destinations, but unresolved items affect stream identity, retention eligibility and migration safety. This is a consolidated findings record, not authorization to begin schema implementation.
+The owner approved Stage 0 on 2026-11-05. The table/artifact disposition and retention constraints in this document are the accepted baseline. The Bahrain provider-specific validation disposition remains grounded in the existing Bahrain documentation and assessment evidence, which takes precedence over the earlier unresolved wording in this consolidated inventory.
 
-The owner should review the disposition matrix and unresolved items. Stage 1 can begin only after the remaining classification decisions are accepted and the migration/application protocol is sufficiently specified.
+Stage 1 may begin within the approved plan. Remaining unresolved items are tracked as design/implementation gates: stream identity and manifest normalization must be settled before retention enforcement; consumer mapping must be complete before table retirement; run/report retention must be specified before cleanup; migration parity and cross-database recovery must be proven before cutover. No source-selection policy change is authorized.
