@@ -78,7 +78,8 @@ Owner-run validation on 2026-11-05:
 - [x] `uv run --extra dev python -m pytest -v tests/test_source_registry.py tests/test_icasees_national_accounts_assessment.py` — **29 passed**. This includes automatic extraction during acquisition and preservation of the original PDF when extraction fails.
 - [x] `uv run python -m tools.sources.pdf_text` — completed successfully; `pdf_count: 3`, `text_extracted: 3`, no failures or `no_embedded_text` results.
 - [x] `uv run python -m tools.assess_icasees_national_accounts assess` — passed after backfill; 3/3 source files fingerprinted, structural validation passed, and IMF `CAF.NGDP.A` 2019–2021 cross-check passed. Report: `reports/sources/icasees-national-accounts/20261105T071612Z`.
-- [x] Inspect the tracked derivative tree and all three metadata sidecars in GitHub. All three report `text_extracted`; page coverage is 9/9, 65/65 and 31/31 respectively. The two ICASEES source SHA-256 values match the committed ICASEES acquisition manifest. The metadata records a separate SHA-256 for each extracted text file; a local recomputation of all text hashes remains the final integrity check.
+- [x] Inspect the tracked derivative tree and all three metadata sidecars. All three report `text_extracted`; page coverage is 9/9, 65/65 and 31/31 respectively. The two ICASEES source SHA-256 values match the committed ICASEES acquisition manifest.
+- [x] Owner-run local integrity check on 2026-11-05 recomputed source and extracted-text SHA-256 values for all three PDFs and verified that every `.txt` derivative is tracked in Git. All nine checks passed (three source hashes, three text hashes and three Git-tracking checks); command result: `PASS`.
 
 ### Initial backfill result
 
