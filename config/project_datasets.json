@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "description": "Reviewed dataset identities and independently justified acquisition streams for the project database. This registry does not describe acquisition events or authorize retention promotion.",
+  "datasets": [
+    {
+      "source_key": "bahrain_open_data",
+      "dataset_key": "03-unemployment-yearly",
+      "name": "Bahraini Unemployed (15 years and above) and the Unemployment Rate by Sex (Yearly)",
+      "description": "Bahrain Open Data Portal Opendatasoft dataset 03-unemployment-yearly. Dataset metadata and complete paginated records are captured together for each timestamped observation snapshot.",
+      "data_format": "json_api",
+      "frequency": "annual",
+      "metadata": {
+        "provider_dataset_id": "03-unemployment-yearly",
+        "platform": "Opendatasoft Explore API v2.1",
+        "dataset_page_url": "https://data.gov.bh/explore/dataset/03-unemployment-yearly/",
+        "api_base_url": "https://data.gov.bh/api/explore/v2.1/catalog/datasets",
+        "manifest_directory": "data_manifests/sources/bahrain_open_data/unemployment_yearly",
+        "validation_disposition": "Reuse the existing Bahrain unemployment assessment and approval evidence; do not reopen or infer disposition from matching hashes.",
+        "capture_unit": "One acquisition contains dataset_metadata.json and every records page for the same retrieval timestamp."
+      },
+      "streams": [
+        {
+          "stream_key": "rolling_api_snapshot",
+          "name": "Bahrain unemployment rolling API snapshots",
+          "acquisition_mode": "api",
+          "validation_contract": {
+            "manifest_directory": "data_manifests/sources/bahrain_open_data/unemployment_yearly",
+            "required_artifacts": ["dataset_metadata.json", "records_page_*"],
+            "pagination_complete": true,
+            "source_specific_validation": "Existing approved Bahrain assessment; reference its established disposition."
+          },
+          "metadata": {
+            "release_semantics": "Timestamped observation snapshot of a rolling provider dataset, not a semantic provider vintage.",
+            "evidence": "Three tracked manifests identify the same provider dataset and each include metadata plus its records page."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "un_m49",
+      "dataset_key": "country_area_overview_html",
+      "name": "UN M49 country and area overview",
+      "description": "United Nations Statistics Division country/area reference page containing M49 codes, ISO cross-references and regional hierarchy.",
+      "data_format": "html",
+      "frequency": "current_reference",
+      "metadata": {
+        "manifest_directory": "data_manifests/sources/un_m49/country_area_overview_html",
+        "provider_url": "https://unstats.un.org/unsd/methodology/m49/overview",
+        "validation_contract": {
+          "content_types": ["text/html"],
+          "required_text": ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code", "Global Code", "Region Name"]
+        },
+        "manifest_adapter_status": "The existing alternate manifest representation is preserved; this registration does not normalize it."
+      },
+      "streams": [
+        {
+          "stream_key": "rolling_reference_page",
+          "name": "UN M49 current reference page captures",
+          "acquisition_mode": "https_download",
+          "validation_contract": {
+            "content_types": ["text/html"],
+            "required_text": ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code", "Global Code", "Region Name"]
+          },
+          "metadata": {
+            "release_semantics": "Rolling current-reference page; changed content is a new candidate capture, not an inferred semantic edition.",
+            "evidence": "One tracked manifest defines a single page capture with a reusable content contract."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "imf_weo",
+      "dataset_key": "world_economic_outlook",
+      "name": "IMF World Economic Outlook database",
+      "description": "IMF WEO statistical database. The October 2026 CSV export and its vintage-specific Database Appendix are one manual acquisition bundle with distinct artifact roles.",
+      "data_format": "csv",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "October 2026",
+        "provider_dataset_version": "IMF.RES_WEO_9.0.0",
+        "manual_acquisition_document": "docs/data-sources/imf-weo-october-2026-manual-acquisition.md",
+        "raw_directory": "raw_data/sources/imf_weo/october_2026",
+        "statistical_artifact": "dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+        "supporting_artifact": "October 2026 WEO Database Appendix.pdf",
+        "acquisition_status": "Files are tracked and documented, but this registry entry does not claim formal manifest validation, semantic validation, approval, or application.",
+        "license_status": "unclear_or_unverified"
+      },
+      "streams": [
+        {
+          "stream_key": "manual_vintage_bundle",
+          "name": "IMF WEO manual vintage bundles",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": ["dataset", "supporting_document"],
+            "bundle_completeness": "CSV dataset and matching vintage Database Appendix must be associated with the same acquisition.",
+            "semantic_validation": "Separate source-specific WEO validation; not performed by catalogue registration."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified WEO vintage; repeated captures of a vintage remain distinct acquisition events.",
+            "evidence": "The manual acquisition record identifies both files as the October 2026 WEO database and appendix, with distinct roles.",
+            "open_gate": "Formal acquisition manifest and source-specific validation are still separate work."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "un_wpp",
+      "dataset_key": "demographic_indicators_medium",
+      "name": "WPP 2024 demographic indicators — medium variant",
+      "description": "UN World Population Prospects 2024 standard CSV demographic indicators, medium variant.",
+      "data_format": "gzip_csv",
+      "frequency": "annual",
+      "metadata": {
+        "provider_download_id": "demographic_indicators_medium",
+        "provider_release_label": "2024-main-demographic",
+        "manifest": "data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json",
+        "field_ids": [1, 2, 6, 13, 14],
+        "stream_registration": "deferred",
+        "stream_boundary_reason": "WPP main edition and supplementary materials have an approved combined application; independent retention boundaries have not yet been approved."
+      },
+      "streams": []
+    },
+    {
+      "source_key": "un_wpp",
+      "dataset_key": "population_by_age_5_group_sex_medium",
+      "name": "WPP 2024 population by age (5-year groups) and sex — medium variant",
+      "description": "UN World Population Prospects 2024 population by age group and sex, medium variant.",
+      "data_format": "gzip_csv",
+      "frequency": "annual",
+      "metadata": {
+        "provider_download_id": "population_by_age_5_group_sex_medium",
+        "provider_release_label": "2024-main-age-sex",
+        "manifest": "data_manifests/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex.json",
+        "field_ids": [12],
+        "stream_registration": "deferred",
+        "stream_boundary_reason": "WPP main edition and supplementary materials have an approved combined application; independent retention boundaries have not yet been approved."
+      },
+      "streams": []
+    }
+  ]
+}
