@@ -38,7 +38,7 @@ def test_project_connection_uses_safe_pragmas_and_migrates_only_project_schema(t
         assert current_schema_version(connection) == 0
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
-        assert apply_migrations(connection, PROJECT_MIGRATIONS_DIR) == 2
+        assert apply_migrations(connection, PROJECT_MIGRATIONS_DIR) == 3
         assert validate_database(connection) == []
         tables = {
             row[0]
@@ -64,10 +64,10 @@ def test_project_connection_uses_safe_pragmas_and_migrates_only_project_schema(t
 
 
 def test_project_migration_is_idempotent(project_database):
-    assert apply_migrations(project_database, PROJECT_MIGRATIONS_DIR) == 2
+    assert apply_migrations(project_database, PROJECT_MIGRATIONS_DIR) == 3
     assert project_database.execute(
         "SELECT COUNT(*) FROM schema_migrations"
-    ).fetchone()[0] == 2
+    ).fetchone()[0] == 3
 
 
 def test_project_schema_enforces_catalogue_relationships(project_database):
