@@ -6,7 +6,7 @@
 - [Data-store separation Stage 0 inventory](data-store-separation-inventory.md) — read-only baseline procedure for the current database, consumers, source configuration and source-related files.
 - [Data-store separation Stage 0 findings](data-store-separation-stage-0-findings.md) — approved owner-supplied database/filesystem evidence, table and artifact disposition, Bahrain validation reference, release lifecycle reconciliation and remaining design gates.
 - [Data-store separation Stage 1 design](data-store-separation-stage-1-design.md) — approved project DB foundation scope, relational model, connection/migration isolation, retention-state constraints and owner-run acceptance criteria.
-- [Project source catalogue registration audit](data-store-separation-source-catalogue-audit.md) — mapping of all 31 configured source keys and 92 URL records, with the idempotent synchronizer and unresolved dataset/stream registration boundaries.
-- [Stage 2 dataset and acquisition-stream registration](data-store-separation-stage-2-dataset-registration.md) — evidence-backed dataset identities and three approved stream boundaries, with deferred WPP/ICASEES stream decisions and owner-run acceptance criteria.
+- [Project source catalogue registration audit](data-store-separation-source-catalogue-audit.md) — mapping of all 31 configured source keys and 92 URL records, with the idempotent synchronizer and completed Stage 1/2 validation evidence.
+- [Stage 2 dataset and acquisition-stream registration](data-store-separation-stage-2-dataset-registration.md) — five evidence-backed dataset identities, three approved stream boundaries, deferred WPP/ICASEES stream decisions and completed owner-run validation.
 
 These are implementation records, not the normative architecture contract. See [architecture](../architecture/README.md) for stable design rules and [feature documentation standard](../feature-documentation-standard.md) for new work.
