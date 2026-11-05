@@ -83,6 +83,6 @@ No raw source file is copied into the project database. The database records met
 - No acquisition, retention cleanup, source-selection, approval migration or game-runtime cutover is introduced.
 - Relevant architecture, implementation and operator documentation is updated with the code and tests.
 
-## 7. Owner-run validation record
+## 7. Operator command\n\nCreate or upgrade the local project DB with `uv run python -m tools.migrate_project_database`. The command targets only the project DB by default; `--database PATH` may be used for an isolated test copy. It applies only `migrations/project/` and reports SQLite integrity and foreign-key results.\n\n## 8. Owner-run validation record
 
 Validation is pending. The repository owner must run the documented focused tests and inspect git status locally. Assistant-side repository inspection is not a substitute for local validation.
