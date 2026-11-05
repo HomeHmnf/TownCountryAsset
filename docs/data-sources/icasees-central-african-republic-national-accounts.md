@@ -86,6 +86,52 @@ uv run --extra dev python -m pytest -v tests/test_icasees_national_accounts_asse
 - Reports are written under `reports/sources/icasees-national-accounts/<run-id>/` with assessment JSON, Markdown summary, provenance, workbook inventory and GDP-series CSVs.
 - The generic `tools.manage_sources check` command only checks registry entries with generic `downloads`; ICASEES retains its publication-oriented paths and is verified by this dedicated validator. Its absence from the generic snapshot-check listing is expected.
 
+## GDP unit resolution and IMF WEO reconciliation
+
+### Definitive publication versus workbook scale
+
+The definitive 2019–2021 accounts publication reports GDP in its detailed tables as:
+
+| Year | Definitive accounts (million FCFA) | Equivalent (billion FCFA) |
+|---:|---:|---:|
+| 2019 | 1,952,925 | 1,952.925 |
+| 2020 | 2,056,035 | 2,056.035 |
+| 2021 | 2,149,622 | 2,149.622 |
+
+The workbook's revised GDP values are 1,952.925, 2,056.035 and 2,149.622 in each of `Donnee`, `Donnée nouvelle` and the revised block of `Donnée_SCN2008`. The three workbook presentations agree year by year. These values correspond to **billion FCFA**, not million FCFA. The workbook's observation-level unit label `millions de F CFA` is therefore inconsistent with the numeric scale and the detailed PDF tables; the dataset description's billion-FCFA scale is consistent.
+
+Do not multiply the workbook GDP values when using billion FCFA. To express them in million FCFA, multiply by 1,000. This conclusion is established for GDP; it must not automatically be generalized to every workbook indicator without its own unit evidence.
+
+### IMF WEO cross-check
+
+The October 2026 WEO CSV contains the Central African Republic annual national-currency series `CAF.NGDP.A`:
+
+- Indicator: Gross domestic product (GDP), Current prices, Domestic currency.
+- Unit: Domestic currency.
+- Scale: Billions.
+- Reporting year: January/December.
+- Latest actual annual data: 2022.
+
+| Year | ICASEES revised GDP (billion FCFA) | IMF `CAF.NGDP.A` (billion domestic currency) | Difference |
+|---:|---:|---:|---:|
+| 2019 | 1,952.925 | 1,952.925 | 0 |
+| 2020 | 2,056.035 | 2,056.035 | 0 |
+| 2021 | 2,149.622 | 2,149.622 | 0 |
+
+The three annual values match exactly at the precision published in the WEO CSV. The WEO metadata identifies these years as within the series' latest-actual-year boundary (2022), not post-actual projections. This provides an independent scale and value cross-check for the revised ICASEES GDP series.
+
+The companion WEO series `CAF.NGDPD.A` is current-price GDP in US dollars, billions: 3.333 (2019), 3.577 (2020) and 3.879 (2021). It is not used for the exact reconciliation because it introduces exchange-rate conversion; the domestic-currency series is the direct comparison.
+
+The exact match establishes consistency between the ICASEES revised GDP and this WEO vintage. It does not establish that the historical 2005–2019 series is continuous with the revised 2019–2021 series, nor does it independently validate all GDP components or other indicators.
+
+### 2019 historical/revised break
+
+The workbook's historical 2019 GDP remains 1,431.9912216 billion FCFA, while revised 2019 GDP is 1,952.925 billion FCFA, a 36.378% increase. The historical and revised observations are distinct series and must not be spliced. The WEO match corroborates the revised level; it does not explain or eliminate the methodological break.
+
+### Assessment boundary
+
+This reconciliation is a read-only analytical finding. It does not change source-selection policy, add a fallback or manual override, create normalized observations, approve a source release, promote a release, or write to SQLite. The ICASEES assessment CLI's unit-status output must be updated to reflect the evidence above before its next report is treated as current.
+
 ## Remaining analytical decisions
 
 1. Review the extracted evidence pages from the definitive accounts and rebasing memo to resolve the unit/scale conflict and document the 2019 base/revision methodology.
