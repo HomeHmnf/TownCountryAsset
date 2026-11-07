@@ -1,6 +1,6 @@
 # Data-store separation Stage 4B — WDI immutable API snapshot
 
-**Implementation status:** code, tests, source/dataset registry definitions and documentation committed; owner-run live capture and local validation pending  
+**Implementation status:** implemented, owner-run capture/audit/registration/comparison completed and locally validated  
 **Branch:** work/compiler-hardening  
 **Scope:** freeze the World Bank WDI responses used by the IMF WEO comparison for 2015–2025.
 
@@ -83,3 +83,37 @@ The World Bank dataset terms default to CC BY 4.0 for World Bank-produced datase
 The capture is a rolling API snapshot with a precise retrieval timestamp, request parameters and raw response hashes. It is not a provider vintage, and it does not make the WDI data vintage-aligned with the October 2026 IMF release. The comparison remains diagnostic, and actual/estimate status remains unknown unless explicit observation metadata supports a narrower classification.
 
 See [WDI snapshot acquisition](../data-sources/world-bank-wdi-snapshot-acquisition.md) and [Stage 4 IMF WEO semantic assessment](data-store-separation-stage-4-imf-weo-semantic-assessment.md).
+
+
+## 6. Owner-run capture and validation record (2026-11-07)
+
+Snapshot acquisition completed:
+
+- Snapshot ID: `api_snapshot_20261107T133112433299Z`
+- Retrieval timestamp: `2026-11-07T13:31:36.501505+00:00`
+- Manifest: `data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z.json`
+- Manifest SHA-256: `58075c28803955ca630db99da59b62084947141fa9b110a2fb3198aa1b0619be`
+- Manifest size: 33,182 bytes
+- Raw responses: 14 artifacts, 4,226,626 bytes
+- Country/region catalogue: 296 records
+- Six indicators captured; each has one observation page and 2,926 observation rows for 2015–2025.
+
+Manifest audit: one manifest, 14 artifacts, one valid manifest, zero errors; every declared byte count and SHA-256 matched. Audit was read-only.
+
+Registry and provenance:
+- Source catalogue: 31 sources and 92 URLs synchronized; no source changes were required.
+- Dataset catalogue: 6 datasets and 4 streams synchronized.
+- Project DB acquisition ID 6 registered with 14 artifacts, status `acquired`, integrity `verified`.
+- Project DB `PRAGMA integrity_check`: `ok`; `PRAGMA foreign_key_check`: no violations.
+- No Game DB write, source-selection change, approval or retention operation occurred.
+
+Frozen comparison:
+- Report: `reports/sources/imf-wdi-comparison/20261107T144614Z/`
+- Period: 2015–2025; 13,310 rows = 242 identities × 5 fields × 11 years.
+- Coverage: both sources 9,324; IMF only 450; WDI only 1,354; neither 2,182.
+- Compared with the 2026-11-05 live API matrix: no key, WDI value, IMF value, coverage, IMF status-hint or IMF reporting-period-classification changes.
+- WDI `obs_status` is blank in all 13,310 candidate rows. The 10,678 rows with WDI observations remain `not_classified_by_this_comparison`; 2,632 rows without a WDI observation are `missing`. Blank status does not establish actual data.
+
+Owner-run local validation: 19 focused tests passed; `compileall` completed without errors. The snapshot capture, audit, registry sync, provenance registration, database integrity checks and comparison all completed successfully.
+
+This confirms reproducibility of the captured values and coverage relative to the earlier live run. It does not establish provider vintage alignment, IMF–WDI semantic equivalence, or actual/estimate/projection status. The snapshot remains a timestamped rolling API capture, not a provider-declared vintage.
