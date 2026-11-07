@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -68,16 +69,38 @@ def _hash_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _request(url: str, timeout: int = 45) -> tuple[bytes, int, dict[str, str], str]:
+def _request(
+    url: str, timeout: int = 120, retries: int = 5, retry_delay: float = 2.0,
+) -> tuple[bytes, int, dict[str, str], str]:
+    """Fetch one API response with bounded retries for transient transport/server failures."""
+    if timeout < 1 or retries < 0 or retry_delay < 0:
+        raise SnapshotError("Invalid HTTP retry configuration")
     request = urllib.request.Request(url, headers={
         "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
         "Accept": "application/json",
     })
-    try:
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            return response.read(), int(response.status), dict(response.headers.items()), response.geturl()
-    except (OSError, urllib.error.URLError) as exc:
-        raise SnapshotError(f"Cannot retrieve {url}: {exc}") from exc
+    last_error: Exception | None = None
+    for attempt in range(retries + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                body = response.read()
+                status = int(response.status)
+                if status == 200 and body:
+                    return body, status, dict(response.headers.items()), response.geturl()
+                last_error = SnapshotError(f"Invalid HTTP response ({status}) or empty body")
+                if status not in (408, 425, 429) and status < 500:
+                    break
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code not in (408, 425, 429) and exc.code < 500:
+                break
+        except (OSError, urllib.error.URLError) as exc:
+            last_error = exc
+        if attempt < retries:
+            time.sleep(retry_delay * (2 ** attempt))
+    raise SnapshotError(
+        f"Cannot retrieve {url} after {retries + 1} attempt(s): {last_error}"
+    ) from last_error
 
 
 def _url(path: str, params: dict[str, str]) -> str:
@@ -470,14 +493,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--start-year", type=int, default=START_YEAR)
     parser.add_argument("--end-year", type=int, default=END_YEAR)
     parser.add_argument("--root", type=Path, default=ROOT)
-    parser.add_argument("--timeout", type=int, default=45)
+    parser.add_argument("--timeout", type=int, default=120)
+    parser.add_argument("--retries", type=int, default=5)
+    parser.add_argument("--retry-delay", type=float, default=2.0)
     args = parser.parse_args(argv)
-    if args.timeout < 1:
-        parser.error("--timeout must be positive")
+    if args.timeout < 1 or args.retries < 0 or args.retry_delay < 0:
+        parser.error("--timeout must be positive; --retries and --retry-delay must be non-negative")
     try:
         report = capture_snapshot(
             repository_root=args.root, start_year=args.start_year, end_year=args.end_year,
-            request_get=lambda url: _request(url, timeout=args.timeout),
+            request_get=lambda url: _request(
+                url, timeout=args.timeout, retries=args.retries, retry_delay=args.retry_delay,
+            ),
         )
     except (SnapshotError, OSError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
