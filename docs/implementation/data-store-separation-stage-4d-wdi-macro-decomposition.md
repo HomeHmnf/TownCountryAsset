@@ -45,7 +45,11 @@ The CSV retains the source inputs, derived values, relative/percentage-point dif
 - Every country identity remains subject to the separate identity-governance gate.
 - No source priority, country override, approval, release state or Game DB value is changed.
 
-## Owner-run validation
+## HTTP retry hardening
+
+The first owner acquisition attempt encountered a read timeout on an observation response; the proxychains attempt then encountered a TLS EOF while fetching indicator metadata. These are transport failures, not malformed-response or semantic-validation failures. The acquisition client now uses a 120-second per-request timeout and up to five retries for transient transport errors and HTTP 408/425/429/5xx responses, with exponential backoff starting at two seconds. Non-transient 4xx responses fail immediately. Retry controls are exposed as `--timeout`, `--retries` and `--retry-delay`. Failed attempts can leave partial raw directories without manifests; they are not valid acquisitions and must not be registered.
+
+## Owner-run validation## Owner-run validation
 
 Focused tests and compilation:
 
