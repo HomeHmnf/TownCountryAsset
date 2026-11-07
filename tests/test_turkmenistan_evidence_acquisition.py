@@ -134,3 +134,36 @@ def test_xml_and_pdf_signatures_are_not_interchangeable(tmp_path: Path) -> None:
     non_xml.write_bytes(b"%PDF-1.7\\nnot XML")
     with pytest.raises(ValueError, match="not an XML"):
         acquisition._validate(non_xml, "xml")
+
+
+def test_download_mode_resumes_without_overwriting_completed_acquisitions(
+    tmp_path: Path,
+) -> None:
+    for publication in acquisition.PUBLICATIONS:
+        _artifact(tmp_path / publication["raw_path"], publication["signature"])
+    first = acquisition.acquire_turkmenistan_evidence(
+        repository_root=tmp_path, use_existing=True
+    )
+    original_hashes = {
+        publication["dataset_id"]: acquisition._sha256(tmp_path / publication["raw_path"])
+        for publication in acquisition.PUBLICATIONS
+    }
+
+    resumed = acquisition.acquire_turkmenistan_evidence(repository_root=tmp_path)
+
+    assert resumed["acquisition_count"] == 0
+    assert resumed["skipped_existing_count"] == 5
+    assert len(resumed["skipped_existing"]) == 5
+    assert all(item["status"] == "already_acquired_verified" for item in resumed["skipped_existing"])
+    assert original_hashes == {
+        publication["dataset_id"]: acquisition._sha256(tmp_path / publication["raw_path"])
+        for publication in acquisition.PUBLICATIONS
+    }
+    assert all((tmp_path / item["manifest_path"]).is_file() for item in first["acquisitions"])
+
+
+def test_download_mode_refuses_unmanifested_existing_raw_artifact(tmp_path: Path) -> None:
+    publication = acquisition.PUBLICATIONS[0]
+    _artifact(tmp_path / publication["raw_path"], publication["signature"])
+    with pytest.raises(FileExistsError, match="without a manifest"):
+        acquisition.acquire_turkmenistan_evidence(repository_root=tmp_path)
