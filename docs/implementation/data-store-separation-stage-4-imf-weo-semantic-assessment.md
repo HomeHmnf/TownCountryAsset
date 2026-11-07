@@ -212,3 +212,26 @@ Interpretation:
 - CPI index growth reproduces the WDI inflation series where both index observations exist, but IMF differences remain subject to annual-period conventions and vintage alignment.
 
 These results do not change the field-level dispositions in sections 4–5, close the country identity gate, or support changing IMF source priorities. Full year-level details and interpretation caveats are recorded in [Stage 4D](data-store-separation-stage-4d-wdi-macro-decomposition.md).
+
+
+## 12. CAR and Guinea local-currency vintage reconciliation (2026-11-07)
+
+The expanded WDI snapshot and official national-accounts evidence materially narrow the field 15/16 country cases.
+
+### Guinea
+
+The WDI `NY.GDP.MKTP.CN` series matches the older INS/1993 SNA current-price GDP series at published rounding precision for 2018–2022. The June 2025 INS 2018-base SNA 2008 series is materially higher: 2018–2024 WDI local-currency GDP is 30.76–39.66% below the new INS values. The INS note identifies 2018–2020 as definitive and 2021–2024 as rapid estimates. The October 2025 MPCI publication reports a slightly different 2018 base-year figure, retained as a separate publication vintage. UNSD's January 2026 metadata identifies INS as the source for Guinea nominal GDP values in 2018–2024.
+
+For 2024, WDI and UNSD population are both 14,754,785, but WDI GDP per capita is US$1,694.95 versus UNSD US$2,473 and WEO US$2,487.36. This supports the GDP numerator vintage as the principal 2024 per-capita discrepancy. Do not extrapolate this denominator finding to every year without matching population references.
+
+### Central African Republic
+
+WDI current-LCU GDP is 33.36%, 34.86% and 35.08% below definitive ICASEES 2019-base SNA 2008 accounts in 2019–2021. ICASEES revised GDP matches IMF WEO `CAF.NGDP.A` exactly at published precision. WDI official and DEC alternative conversion factors are effectively identical in these years, so the difference is already present in the local-currency GDP numerator. WDI is not exactly equal to the separate historical 2019 workbook value (1,431.991 billion FCFA); do not claim an exact match to the historical series.
+
+Population also differs: ICASEES reports 5,360,271 / 5,464,907 / 6,091,097 in 2019–2021, compared with WDI 4,944,703 / 5,026,628 / 5,112,100. CAR field 16 therefore combines numerator vintage and population-denominator differences.
+
+### Updated disposition
+
+The strongest supported interpretation is a national-accounts vintage/compilation mismatch in the compared WDI nominal GDP levels for both CAR and Guinea, not an exchange-rate-factor choice. This materially narrows the original field 15/16 explanation, but does not establish the exact WDI source ingestion history, prove independent IMF compilation, close all population-denominator questions or authorize source-policy change. For field 18, these nominal GDP vintage differences explain part of the PPP gap, while ICP benchmark and PPP-factor construction remain unresolved.
+
+The official Guinea INS PDFs and legacy yearbook have been identified but are not yet captured in the repository or registered as a Project DB acquisition. Treat the current Guinea evidence as source-reviewed, not yet immutable-project-acquired. Full details: [Guinea national-accounts vintage reconciliation](../data-sources/guinea-national-accounts-vintage-reconciliation.md).
