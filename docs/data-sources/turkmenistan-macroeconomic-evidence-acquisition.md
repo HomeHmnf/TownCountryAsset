@@ -57,7 +57,7 @@ Raw artifacts remain local-only under the project storage policy. Manifests are 
 
 ## Validation and provenance status
 
-Owner-run tests, acquisition, manifest audit and Project DB registration are pending. No acquisition or semantic approval is implied by this design document.
+Owner-run validation and provenance registration are complete for three publications. Two IMF mission statements remain acquisition gaps because the official endpoints returned HTTP 403 from the acquisition environment. No statistical-content review, semantic approval, source-selection change, release promotion or Game DB write is implied.
 
 
 ### Resume and overwrite protection
@@ -74,3 +74,57 @@ The canonical IMF article landing page and its official `index.json` alternate b
 ### Batch failure handling
 
 A transport failure for one publication is recorded in the command's `failures` array with status `acquisition_failed_no_manifest`; the batch continues to later publications. The command exits non-zero if any publication failed, even when other publications were successfully acquired. This permits independent publications in the same batch to be captured without concealing an incomplete batch. A failed publication is not registered as an acquisition and does not create an empty or synthetic manifest.
+
+
+## Owner-run acquisition and provenance record (2026-11-07)
+
+The acquisition implementation was pulled and locally validated:
+
+- `tests/test_turkmenistan_evidence_acquisition.py`: 11 passed in 0.42s.
+- `compileall` for `tools/acquire_turkmenistan_evidence.py`: completed successfully.
+- A resumable batch run verified and skipped three prior captures, attempted both remaining IMF statements, and reported two isolated HTTP 403 failures. The batch returned non-zero because it was incomplete, while continuing through the final publication.
+- No raw artifact or manifest was created for either failed IMF statement.
+
+The read-only manifest audits completed with:
+
+| Source directory | Valid manifests | Artifacts | Integrity issues |
+|---|---:|---:|---:|
+| `turkmenistan_state_statistics` | 2 | 2 | 0 |
+| `imf_turkmenistan_research` | 1 | 1 | 0 |
+
+The three verified artifacts are:
+
+| Dataset | Manifest | Bytes | SHA-256 |
+|---|---|---:|---|
+| `gdp_statistical_shortcomings_wp_2023_207` | `20261107T213221877650+0330.json` | 902,324 | `34622422ded28dedf5ad71b361e7da345255a5c3a4a915cf7511a18ae8d62288` |
+| `national_accounts_methodology_2025` | `20261107T213531870303+0330.json` | 72,096 | `59e824dcaac8220cc2807e7c3979e2bd7753ca5e1899f0469893aa5d338b5999` |
+| `statistical_system_reform_2026` | `20261107T213532623607+0330.json` | 72,736 | `fcdfe60cc5a4eada462987c1f1bde069ff4d909c863a576e98d8f08f51a30abb` |
+
+Source and dataset catalogue synchronization was then owner-run successfully: 34 source records and 106 source URLs; 13 datasets and 11 acquisition streams. These synchronizations did not create acquisition records.
+
+## Repeatable processing workflow
+
+The workflow is consolidated in `tools/process_turkmenistan_evidence.py`. From the repository root:
+
+```fish
+uv run python -m tools.process_turkmenistan_evidence
+```
+
+The default command:
+
+1. audits both Turkmenistan source manifest directories;
+2. stops before any catalogue/database work if either audit fails;
+3. requires exactly the three expected manifests;
+4. idempotently synchronizes the source and dataset catalogues;
+5. runs registration preflight separately for each source directory;
+6. reports `ready_for_registration` only when all three manifests are eligible and there are no audit errors or deferred records.
+
+The default mode does not insert acquisition or artifact rows. Review its JSON output, then explicitly opt into Project DB provenance registration:
+
+```fish
+uv run python -m tools.process_turkmenistan_evidence --register
+```
+
+The `--register` mode repeats the audit, synchronization and dry-run gates before writing the three acquisition events and their artifacts to the Project DB. It never writes the Game DB, applies semantic approval, changes source selection, promotes releases or performs retention operations. It is deliberately specific to the two Turkmenistan source directories and the three expected manifest events; a changed batch requires review and a corresponding update to its acceptance test.
+
+The two IMF 403 failures remain visible gaps in both the acquisition result and this record. They are not treated as empty acquisitions, and the workflow does not substitute third-party republications.
