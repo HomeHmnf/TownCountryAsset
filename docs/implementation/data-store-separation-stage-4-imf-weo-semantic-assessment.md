@@ -153,7 +153,7 @@ The captured WDI `obs_status` field is blank for all 13,310 candidate rows. Of t
 2. **Close field-definition gates:** confirm field 21 IMF unit and source population; CPI annual convention; PPP benchmark/construction. The capture now preserves WDI observation-status metadata, but does not classify blank/unknown statuses.
 3. **Reconcile country cases:** CAR new national accounts (fields 15/16/18), Guinea national accounts (15/16/18), Turkmenistan conversion (15/16), Zimbabwe ICP (18), Tonga/Samoa/Palau period conventions (20), Moldova/Philippines source vintages (21). Bahrain remains closed.
 4. **Separate identity governance:** resolve 242 proposed/unverified identities and the explicit unmatched codes through the identity registry workflow; do not silently map.
-5. **Produce a semantic disposition matrix:** country × field × year with source vintage, identity approval, reference period, unit, method, status class, evidence links and explicit unknowns.
+5. **Produce a semantic disposition matrix — implementation complete, owner run pending:** `tools/build_imf_weo_wdi_semantic_disposition.py` now enriches every frozen candidate row with identity gate, field concept/method gate, period disposition, IMF/WDI status, existing country-case evidence and document links. The generated matrix remains diagnostic and not approved; see [Stage 4C](data-store-separation-stage-4c-semantic-disposition-matrix.md).
 6. **Only then** prepare a separate source-selection recommendation and approval artifact. Application remains gated by existing approval and transactional safeguards.
 
 ## 8. Evidence files and owner-run provenance
@@ -167,7 +167,7 @@ The targeted investigation contains 15 groups and 165 observations; it reads the
 
 The comparison tests passed (15 tests) and the earlier IMF assessment tests passed (4 tests). Stage 4B snapshot tests and related suites passed (19 tests), and `compileall` completed without errors. Owner-run capture completed for snapshot `api_snapshot_20261107T133112433299Z`: 14 artifacts, 4,226,626 bytes, 296 country catalogue records, six indicators, 2,926 observation rows per indicator. Manifest audit: 1 manifest, 14/14 artifacts valid, zero errors. Project DB acquisition ID 6 has status `acquired`, integrity `verified`, and 14 artifacts; SQLite integrity is `ok` and foreign-key violations are empty. Frozen comparison output is `reports/sources/imf-wdi-comparison/20261107T144614Z/`; candidate matrix is 13,310 rows and reproduces all tested values and coverage from the 2026-11-05 live run. These are owner-reported local results; repository inspection does not replace local validation.
 
-## 9. Governance and side-effect boundary
+## 9. Next execution batch\n\nStage 4C implements the structured disposition matrix over the frozen 2026-11-07 candidate matrix. Run its focused tests, generate the matrix, and inspect the country-case and identity counts. Then use the generated unresolved-gate summary to prioritize any remaining source evidence. Do not rerun the already-completed WDI capture or discrepancy investigation, and do not reopen Bahrain.\n\n## 10. Governance and side-effect boundary
 
 This assessment does not:
 - modify source-selection configuration or priority assignments;
