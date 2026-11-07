@@ -29,13 +29,13 @@ The WDI catalog describes annual national data with a displayed temporal coverag
 | 3 | population_density | WDI primary; derived fallback only under aligned-period/definition rules | Registered |
 | 33 | total_area | WDI primary | Registered |
 | 34 | land_area | WDI primary | Registered |
-| 15 | gdp | IMF WEO primary | Not registered |
-| 16 | gdp_per_capita | IMF WEO primary | Not registered |
-| 18 | gdp_ppp | IMF WEO primary | Not registered |
-| 20 | inflation | IMF WEO primary | Not registered |
-| 21 | unemployment | IMF WEO primary | Not registered |
+| 15 | gdp | IMF WEO primary | Registered for immutable diagnostic comparison only |
+| 16 | gdp_per_capita | IMF WEO primary | Registered for immutable diagnostic comparison only |
+| 18 | gdp_ppp | IMF WEO primary | Registered for immutable diagnostic comparison only |
+| 20 | inflation | IMF WEO primary | Registered for immutable diagnostic comparison only |
+| 21 | unemployment | IMF WEO primary | Registered for immutable diagnostic comparison only |
 
-The current registry has no WDI download definitions, no indicator-code catalogue, and no WDI-specific acquisition/normalization adapter.
+The Project DB catalogue now registers a bounded six-indicator diagnostic dataset and a rolling API snapshot stream. The snapshot adapter preserves raw response bytes and metadata; it does not normalize or approve observations. Existing WDI fields 3, 33 and 34 remain separately registered, and source-selection policy is unchanged.
 
 ## Candidate economic indicators
 
@@ -77,13 +77,13 @@ Before adding downloads or an adapter:
 2. Query annual observations over the intended project period and compute per-indicator coverage by ISO3 and by the reviewed game-identity crosswalk. Separate countries from regional/income aggregates.
 3. Record the actual latest non-null observation year per country and indicator. Do not use an API most-recent-value shortcut that silently mixes years as if they were one common reference period.
 4. Compare definitions and periods with IMF WEO for fields 15, 16, 18, 20 and 21. Identify actuals versus estimates, currency/PPP basis, inflation convention, unemployment methodology and release-vintage differences.
-5. Verify indicator-level licensing/third-party notes and determine a reproducible WDI release/snapshot identity. The API's rolling dataset and `lastupdated` metadata must be captured with the immutable response snapshots.
+5. Verify indicator-level licensing/third-party notes. The new snapshot adapter records API last-updated metadata and exact response fingerprints, but the capture remains a timestamped rolling API snapshot rather than a provider-declared vintage.
 6. Propose any registry and source-selection changes separately. Do not add WDI as a fallback or alter the approved 41-field policy merely because a similarly named series exists.
-7. Only after review, implement immutable acquisition, provider-specific parsing, normalization, crosswalk validation, coverage reports and source semantic tests. Keep release validation, database application and release promotion as separate approval-gated operations.
+7. Run the implemented immutable-response capture and owner-side integrity/registration checks. Then complete provider-specific semantic validation, normalization and identity crosswalk review. Keep release validation, database application and release promotion as separate approval-gated operations.
 
 ## Current conclusion
 
-WDI is a technically suitable candidate for comparative macroeconomic observations and already serves the registered density/area fields. The five economic series above are plausible matches to WP1.5 fields, but their presence in WDI does not establish policy compatibility. The next work item is a read-only coverage and IMF-comparability assessment; no WDI data has been acquired or imported as part of this review.
+WDI is a technically suitable candidate for comparative macroeconomic observations and already serves the registered density/area fields. The five economic series remain plausible comparands, not approved fallbacks. A byte-preserving snapshot acquisition tool and Project DB dataset/stream registration are now implemented; owner-run capture, manifest audit, provenance registration and frozen comparison remain pending. No WDI observation has been semantically approved or imported into the Game DB.
 
 
 ## Read-only coverage assessment implementation
@@ -111,4 +111,11 @@ Automated tests: `tests/test_world_bank_wdi_assessment.py`.
 
 ## IMF WEO comparative assessment
 
-A read-only country-year comparison utility is now documented in [`imf-weo-wdi-comparison.md`](imf-weo-wdi-comparison.md) and implemented at `tools/compare_imf_weo_wdi.py`. It compares the five candidate economic indicators through the existing identity registry, using the fixed October 2026 IMF CSV and live WDI API observations. The WDI API is rolling rather than an immutable release. The comparison does not change source policy, acquire snapshots, create approvals, or write to the canonical database. Run `uv run python -m tools.compare_imf_weo_wdi` from the repository root after the IMF manual snapshot is present.
+A read-only country-year comparison utility is documented in imf-weo-wdi-comparison.md and implemented at tools/compare_imf_weo_wdi.py. It compares the five candidate economic indicators through the existing identity registry, with the national unemployment estimate retained as separate diagnostic context. It supports both live WDI API exploration and an integrity-checked immutable response bundle through --wdi-snapshot-manifest. Use the snapshot mode for decision-grade comparison evidence; it does not change source policy, create approvals, or write to the Game DB.
+
+
+## Immutable API snapshot acquisition
+
+The capture and snapshot-backed comparison workflow is implemented in [World Bank WDI immutable API snapshot acquisition](world-bank-wdi-snapshot-acquisition.md). It captures source and country metadata, metadata for five primary comparison indicators plus the field-21 national-estimate diagnostic, and all observation pages for 2015–2025. Raw response bytes are stored locally; tracked manifests carry per-response SHA-256, byte count, request URL/parameters, response headers and pagination metadata.
+
+The source and dataset catalogues now register this as a rolling API snapshot stream. It is not a provider-declared WDI vintage, not a semantic approval, and not a source-selection change. Run the snapshot command, audit the manifest, register provenance in the Project DB, then pass the manifest to the comparison tool with --wdi-snapshot-manifest. Licensing remains marked unclear_or_unverified until indicator-level third-party restrictions are checked.

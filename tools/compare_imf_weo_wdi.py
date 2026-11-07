@@ -1,8 +1,8 @@
 """Read-only country-year comparison of IMF WEO and World Bank WDI.
 
-Uses the recorded October 2026 IMF CSV and live WDI API observations. The WDI
-API is rolling rather than an immutable release, so results are exploratory
-comparison evidence and are not suitable for approval or source promotion.
+Uses the recorded October 2026 IMF CSV and either live WDI API observations or
+an integrity-checked, byte-preserving WDI API snapshot. Results remain
+exploratory and are not suitable for approval or source promotion.
 """
 from __future__ import annotations
 
@@ -20,6 +20,7 @@ from typing import Any
 
 from tools import assess_imf_weo as imf
 from tools import assess_world_bank_wdi as wdi
+from tools import acquire_world_bank_wdi_snapshot as wdi_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "reports/sources/imf-wdi-comparison"
@@ -222,20 +223,51 @@ def build_comparison(
     start_year: int = START_YEAR,
     end_year: int = END_YEAR,
     get_json=wdi._get_json,
+    snapshot_manifest_path: Path | None = None,
 ) -> dict[str, Any]:
     if start_year < 1900 or end_year < start_year or end_year > 2100:
         raise ComparisonError("Invalid comparison year range")
     imf_data, unmatched_imf_codes = read_imf_observations(csv_path, identity_path, start_year, end_year)
     code_to_game = _identity_by_code(identity_path)
     identity_countries = _identity_country_rows(identity_path, code_to_game)
-    country_regions = wdi.fetch_country_regions(get_json)
+    snapshot = None
+    if snapshot_manifest_path is None:
+        country_regions = wdi.fetch_country_regions(get_json)
+    else:
+        snapshot = wdi_snapshot.load_snapshot(snapshot_manifest_path)
+        if snapshot["start_year"] != start_year or snapshot["end_year"] != end_year:
+            raise ComparisonError("WDI snapshot period does not match the requested comparison period")
+        country_regions = snapshot["country_regions"]
+
+    def fetch_metadata(code: str) -> dict[str, Any]:
+        if snapshot is None:
+            return wdi.fetch_indicator_metadata(code, get_json)
+        row = snapshot["indicator_metadata"][code]
+        api_meta = snapshot["indicator_metadata_api_metadata"][code]
+        source = row.get("source") or {}
+        return {
+            "indicator_code": code, "api_last_updated": api_meta.get("lastupdated"),
+            "name": row.get("name"), "unit": row.get("unit"),
+            "source_note": row.get("sourceNote"),
+            "source_organization": row.get("sourceOrganization"),
+            "source_id": source.get("id"), "source_name": source.get("value"),
+            "topics": [item.get("value") for item in row.get("topics", []) if item.get("value")],
+            "metadata_url": f"https://api.worldbank.org/v2/indicator/{code}?format=json",
+        }
+
+    def fetch_observations(code: str) -> list[dict[str, Any]]:
+        return (
+            snapshot["observations"][code] if snapshot is not None
+            else wdi.fetch_indicator_observations(code, start_year, end_year, get_json)
+        )
+
     indicators: list[dict[str, Any]] = []
     all_pairs: list[dict[str, Any]] = []
     candidate_matrix: list[dict[str, Any]] = []
 
     for wdi_code, contract in PAIRS.items():
-        metadata = wdi.fetch_indicator_metadata(wdi_code, get_json)
-        records = wdi.fetch_indicator_observations(wdi_code, start_year, end_year, get_json)
+        metadata = fetch_metadata(wdi_code)
+        records = fetch_observations(wdi_code)
         wdi_values: dict[tuple[str, int], dict[str, Any]] = {}
         unmatched_wdi_codes: set[str] = set()
         for row in records:
@@ -269,16 +301,15 @@ def build_comparison(
             wdi_values[key] = {
                 "value": value, "source_code": source_code,
                 "country_name": (row.get("country") or {}).get("value") or source_code,
+                "observation_status": row.get("obs_status") or None,
             }
 
         national_metadata = None
         national_values: dict[tuple[str, int], dict[str, Any]] = {}
         if contract["field_id"] == 21:
             national_code = "SL.UEM.TOTL.NE.ZS"
-            national_metadata = wdi.fetch_indicator_metadata(national_code, get_json)
-            national_records = wdi.fetch_indicator_observations(
-                national_code, start_year, end_year, get_json
-            )
+            national_metadata = fetch_metadata(national_code)
+            national_records = fetch_observations(national_code)
             for national_row in national_records:
                 national_iso3 = national_row.get("countryiso3code")
                 if not isinstance(national_iso3, str) or len(national_iso3) != 3:
@@ -305,6 +336,7 @@ def build_comparison(
                     "value": national_value,
                     "source_code": national_iso3,
                     "country_name": (national_row.get("country") or {}).get("value") or national_iso3,
+                    "observation_status": national_row.get("obs_status") or None,
                 }
 
         imf_code = contract["imf_code"]
@@ -340,7 +372,8 @@ def build_comparison(
                 "imf_latest_actual_annual_data": a["latest_actual_annual_data"],
                 "imf_reporting_year_months": reporting_period,
                 "imf_reporting_period_classification": _reporting_period_classification(reporting_period),
-                "wdi_status": "not_classified_by_this_comparison",
+                "wdi_status": ("forecast_per_wdi_obs_status" if b.get("observation_status") == "F" else "not_classified_by_this_comparison"),
+                "wdi_observation_status": b.get("observation_status"),
                 "imf_unit": a.get("imf_unit"),
                 "imf_scale": a.get("imf_scale"),
                 "imf_reporting_period_type": a.get("imf_reporting_period_type"),
@@ -409,6 +442,8 @@ def build_comparison(
                     "wdi_observation_present": wdi_present,
                     "imf_value_canonical_unit": imf_row["value"] if imf_present else None,
                     "wdi_value_canonical_unit": wdi_row["value"] if wdi_present else None,
+                    "wdi_observation_status": wdi_row.get("observation_status") if wdi_present else None,
+                    "wdi_status_classification": ("forecast_per_wdi_obs_status" if wdi_row.get("observation_status") == "F" else "not_classified_by_this_comparison") if wdi_present else "missing",
                     "imf_status_hint": imf_row["status_hint"] if imf_present else "missing",
                     "imf_latest_actual_annual_data": imf_row["latest_actual_annual_data"] if imf_present else None,
                     "imf_reporting_year_months": imf_row["reporting_year_months"] if imf_present else None,
@@ -454,20 +489,27 @@ def build_comparison(
                 "wdi_source_note": metadata.get("source_note"),
                 "wdi_api_last_updated": metadata.get("api_last_updated"),
                 "imf_status": "latest-actual metadata used only as a hint; fiscal-year labels and PPPGDP remain unclassified",
-                "vintage": "IMF October 2026 fixed CSV versus live rolling WDI API response; not vintage-aligned",
+                "vintage": ("IMF October 2026 fixed CSV versus immutable WDI API response snapshot; still not vintage-aligned" if snapshot is not None else "IMF October 2026 fixed CSV versus live rolling WDI API response; not vintage-aligned"),
             },
             "country_year_comparisons": comparisons,
         })
 
     return {
-        "schema_version": 3,
+        "schema_version": 4,
         "assessment": "imf_weo_world_bank_wdi_country_year_comparison",
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "period": {"start_year": start_year, "end_year": end_year},
         "imf_snapshot": imf.fingerprint(csv_path, imf.EXPECTED["csv"]),
         "identity_registry": imf.fingerprint(identity_path),
         "wdi_api_base": wdi.API,
-        "wdi_retrieval_model": "live_rolling_api_not_immutable_snapshot",
+        "wdi_retrieval_model": "immutable_api_response_snapshot" if snapshot is not None else "live_rolling_api_not_immutable_snapshot",
+        "wdi_snapshot": ({
+            "manifest_path": snapshot["manifest_path"].relative_to(imf.ROOT).as_posix(),
+            "manifest_sha256": snapshot["manifest_sha256"],
+            "manifest_byte_count": snapshot["manifest_byte_count"],
+            "snapshot_id": snapshot["manifest"].get("snapshot_id"),
+            "retrieved_at": snapshot["manifest"].get("retrieved_at"),
+        } if snapshot is not None else None),
         "identity_join": "IMF source code and WDI ISO3 are mapped through the existing project identity registry to game_id; no new crosswalk assignments are made.",
         "indicators": indicators,
         "candidate_matrix": candidate_matrix,
@@ -503,7 +545,9 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "# IMF WEO and World Bank WDI country-year comparison", "",
         f"- Checked: {report['checked_at']}",
         f"- Period: {report['period']['start_year']}–{report['period']['end_year']}",
-        "- Read-only; IMF snapshot fixed, WDI API live/rolling; no policy or database changes", "",
+        "- Read-only; no policy or database changes",
+        f"- WDI retrieval: {report['wdi_retrieval_model']}",
+        f"- WDI snapshot: {report['wdi_snapshot'] or 'not supplied (live API)'}", "",
         "| Field | IMF | WDI | Matched countries | Matched country-years | IMF-only years | WDI-only years | Median absolute difference |",
         "|---:|---|---|---:|---:|---:|---:|---:|",
     ]
@@ -539,7 +583,7 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "- IMF actual/estimate classification is only a hint from LATEST_ACTUAL_ANNUAL_DATA; fiscal-year labels and PPPGDP are unclassified.",
         "- The CSV reports signed_difference (IMF minus WDI), absolute_difference, signed relative_difference_percent, and absolute_relative_difference_percent separately.",
         "- Calendar-year sensitivity includes only IMF January/December reporting periods; fiscal-year and unknown-period observations are excluded without shifting year labels.",
-        "- WDI observation status is not inferred. WDI is retrieved live and may change between runs.",
+        "- WDI observation status is retained verbatim; only explicit API status F is labelled forecast. Other statuses remain unclassified. A live API run may change between runs.",
         "- For field 21, SL.UEM.TOTL.NE.ZS is included as a separate national-estimate diagnostic; it is not treated as interchangeable with the ILO-modelled SL.UEM.TOTL.ZS series.",
         "- Field 21 retains country-specific IMF WEO unit, source, employment-definition, methodology-note, latest-actual and update-date metadata. Blank metadata remains unknown, not inferred.",
         "- Fields 18, 20 and 21 require explicit definition review before a policy decision; PPP benchmark, CPI period convention and unemployment methodology/unit remain material caveats.",
@@ -566,7 +610,7 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "imf_value_canonical_unit", "wdi_value_canonical_unit",
         "signed_difference", "absolute_difference", "relative_difference_percent",
         "absolute_relative_difference_percent", "imf_status_hint",
-        "imf_latest_actual_annual_data", "imf_reporting_year_months", "wdi_status",
+        "imf_latest_actual_annual_data", "imf_reporting_year_months", "wdi_status", "wdi_observation_status",
         "imf_unit", "imf_scale", "imf_reporting_period_type", "imf_methodology",
         "imf_methodology_notes", "imf_historical_data_source",
         "imf_labour_sector_employment_type", "imf_short_source_citation",
@@ -580,7 +624,7 @@ def write_reports(report: dict[str, Any], output_root: Path = OUTPUT) -> Path:
         "imf_indicator", "wdi_indicator", "year", "coverage_status",
         "imf_observation_present", "wdi_observation_present",
         "imf_value_canonical_unit", "wdi_value_canonical_unit",
-        "imf_status_hint", "imf_latest_actual_annual_data",
+        "wdi_observation_status", "wdi_status_classification", "imf_status_hint", "imf_latest_actual_annual_data",
         "imf_reporting_year_months", "imf_reporting_period_classification",
         "signed_difference", "absolute_difference", "relative_difference_percent",
         "semantic_status",
@@ -601,17 +645,20 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--start-year", type=int, default=START_YEAR)
     parser.add_argument("--end-year", type=int, default=END_YEAR)
     parser.add_argument("--output-root", type=Path, default=OUTPUT)
+    parser.add_argument("--wdi-snapshot-manifest", type=Path, help="Use a previously captured and integrity-checked WDI API snapshot instead of live API calls.")
     args = parser.parse_args(argv)
     try:
-        report = build_comparison(start_year=args.start_year, end_year=args.end_year)
+        report = build_comparison(start_year=args.start_year, end_year=args.end_year, snapshot_manifest_path=args.wdi_snapshot_manifest)
         target = write_reports(report, args.output_root)
-    except (ComparisonError, imf.AssessmentError, wdi.AssessmentError, OSError) as exc:
+    except (ComparisonError, imf.AssessmentError, wdi.AssessmentError, wdi_snapshot.SnapshotError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
     print(json.dumps({
         "assessment": report["assessment"], "indicators": len(report["indicators"]),
         "period": report["period"], "report_directory": str(target),
         "candidate_matrix": report["candidate_matrix_summary"],
+        "wdi_retrieval_model": report["wdi_retrieval_model"],
+        "wdi_snapshot": report["wdi_snapshot"],
         "matched_country_years": {str(x["field_id"]): x["matched_country_year_count"] for x in report["indicators"]},
         "database_written": False, "policy_changed": False, "release_promoted": False,
     }, indent=2))

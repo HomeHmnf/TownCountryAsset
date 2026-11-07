@@ -101,7 +101,7 @@ def test_repository_dataset_registry_has_only_evidenced_streams(tmp_path):
         "datasets": len(config["datasets"]),
         "streams": sum(len(item.get("streams", [])) for item in config["datasets"]),
     }
-    assert counts == {"datasets": 5, "streams": 3}
+    assert counts == {"datasets": 6, "streams": 4}
     with connect_project_database(database) as connection:
         wpp = connection.execute(
             "SELECT COUNT(*) FROM datasets WHERE source_key='un_wpp'"

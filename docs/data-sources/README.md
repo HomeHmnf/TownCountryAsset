@@ -8,6 +8,7 @@ This section documents providers, acquisition, source-specific validation, relea
 - [Source selection](source-selection.md) — priority/fallback/custom-mixture policy and resolution rules.
 - [WP1.5 source coverage](wp1-5-sources.md) — the 41 selected data fields and provider coverage.
 - [World Bank WDI onboarding review](world-bank-wdi-onboarding-review.md) — indicator coverage and onboarding assessment.
+- [World Bank WDI immutable API snapshot acquisition](world-bank-wdi-snapshot-acquisition.md) — byte-preserving capture, manifest integrity, Project DB provenance registration and snapshot-backed comparison.
 - [IMF WEO October 2026 manual acquisition](imf-weo-october-2026-manual-acquisition.md) — immutable export provenance and metadata.
 - [IMF WEO coverage assessment](imf-weo-coverage-assessment.md) — series coverage and code assessment.
 - [UN WPP crosswalk review](un-wpp-crosswalk-review.md) — reviewed M49-to-project identity mapping.

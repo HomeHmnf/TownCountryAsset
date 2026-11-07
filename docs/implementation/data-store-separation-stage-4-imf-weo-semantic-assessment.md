@@ -133,7 +133,7 @@ The comparison does not classify WDI observations as actual or estimates. Nation
 No universal three-way status classification is currently supported:
 - IMF `LATEST_ACTUAL_ANNUAL_DATA` can identify an actual-data boundary for supported WEO country series; years after it are not automatically distinguishable as estimate versus projection.
 - PPPGDP has no latest-actual metadata in this export.
-- WDI actual/estimate status is not classified by the live API comparison.
+- The snapshot-backed comparison preserves WDI obs_status; only explicit API status F is labelled forecast. Blank and other statuses remain unclassified, so WDI actual/estimate status is not generally established.
 - National source publications can be preliminary or revised; that status must be sourced independently and retained with the country-year evidence.
 - Country groups and aggregates must not inherit country-level status rules.
 
@@ -141,20 +141,16 @@ Do not populate a definitive `actual | estimate | projection` field where source
 
 ## 6. Release-vintage and reproducibility limitation
 
-The comparison combines a fixed IMF October 2026 CSV export with live WDI API responses. WDI values or metadata may change between runs; `lastupdated` metadata is not an immutable observation snapshot. The current evidence is therefore not vintage-aligned.
+The existing comparison combines a fixed IMF October 2026 CSV export with live WDI API responses; those outputs remain the diagnostic baseline and are not vintage-aligned.
 
-Before a release-level compatibility decision:
-1. Acquire and register an immutable WDI snapshot for the exact indicators and country/year universe.
-2. Record retrieval time, API request parameters, response bytes and SHA-256 for every artifact/page.
-3. Re-run the comparison against the immutable snapshot and retain the same complete candidate matrix.
-4. Preserve source publication vintages and country-level revision notes where available.
+As of 2026-11-07, the byte-preserving WDI capture and snapshot-backed comparison tooling is implemented. It captures source/country/indicator metadata and all observation pages for the six-indicator 2015–2025 bundle, records per-response request metadata and SHA-256/byte counts, and can replay the comparison only after re-verifying every response. The workflow is documented in [World Bank WDI immutable API snapshot acquisition](../data-sources/world-bank-wdi-snapshot-acquisition.md). Owner-run capture, manifest audit, Project DB provenance registration and frozen comparison are still pending; no owner-side validation is claimed.
 
-This does not authorize automated downloading beyond the source's verified access/licensing terms.
+The snapshot remains a timestamped rolling API capture, not a provider-declared WDI vintage. It does not align the WDI source publication vintage with the IMF October 2026 release, and it does not authorize redistribution beyond verified dataset/indicator terms.
 
 ## 7. Remaining work, ordered by dependency
 
-1. **Freeze comparison inputs:** capture an immutable WDI vintage and preserve the current live-API run as a diagnostic baseline.
-2. **Close field-definition gates:** confirm field 21 IMF unit and source population; CPI annual convention; PPP benchmark/construction.
+1. **Freeze comparison inputs:** run the implemented WDI snapshot capture, audit every raw response, register its provenance in the Project DB, and rerun the comparison using the exact manifest. Preserve the live-API run as a diagnostic baseline.
+2. **Close field-definition gates:** confirm field 21 IMF unit and source population; CPI annual convention; PPP benchmark/construction. The capture now preserves WDI observation-status metadata, but does not classify blank/unknown statuses.
 3. **Reconcile country cases:** CAR new national accounts (fields 15/16/18), Guinea national accounts (15/16/18), Turkmenistan conversion (15/16), Zimbabwe ICP (18), Tonga/Samoa/Palau period conventions (20), Moldova/Philippines source vintages (21). Bahrain remains closed.
 4. **Separate identity governance:** resolve 242 proposed/unverified identities and the explicit unmatched codes through the identity registry workflow; do not silently map.
 5. **Produce a semantic disposition matrix:** country × field × year with source vintage, identity approval, reference period, unit, method, status class, evidence links and explicit unknowns.
@@ -163,6 +159,7 @@ This does not authorize automated downloading beyond the source's verified acces
 ## 8. Evidence files and owner-run provenance
 
 Comparison output: `reports/sources/imf-wdi-comparison/20261105T103220Z/`  
+WDI snapshot implementation: `tools/acquire_world_bank_wdi_snapshot.py`, `tests/test_world_bank_wdi_snapshot.py`, and `docs/data-sources/world-bank-wdi-snapshot-acquisition.md`.  
 Targeted investigation: `reports/sources/imf-wdi-discrepancy-investigation/20261105T104531Z/`  
 IMF assessment: `reports/sources/imf-weo/20261105T101443Z/`
 

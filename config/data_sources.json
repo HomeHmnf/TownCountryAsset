@@ -150,6 +150,7 @@
       "name": "World Bank World Development Indicators",
       "homepage_url": "https://databank.worldbank.org/source/world-development-indicators",
       "domains": [
+        "macroeconomy",
         "labour",
         "area",
         "internet",
@@ -157,24 +158,29 @@
         "inequality"
       ],
       "license_status": "unclear_or_unverified",
-      "terms_url": "https://databank.worldbank.org/source/world-development-indicators",
-      "attribution": null,
-      "notes": "Candidate secondary/alternative indicator source. Preserve indicator code, country coverage, reference year and dataset vintage.",
+      "terms_url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets",
+      "attribution": "World Bank Group, World Development Indicators; preserve indicator-level originating organisations and third-party notices.",
+      "notes": "Candidate secondary/alternative indicator source for macroeconomic, labour, area and other measures. Preserve indicator code, country coverage, reference year, WDI API response vintage and originating organisation. World Bank-produced datasets default to CC BY 4.0; indicator-specific third-party restrictions require review before redistribution.",
       "acquisition_mode": "manual_or_api",
       "downloads": [],
       "field_ids": [
         3,
+        15,
+        16,
+        18,
+        20,
+        21,
         33,
         34
       ],
       "release_discovery": {
         "mode": "manual_review",
         "provider_url": "https://databank.worldbank.org/source/world-development-indicators",
-        "automation_status": "not_implemented",
+        "automation_status": "api_snapshot_capture_implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
-        "notes": "Release discovery is manual until a provider-specific, testable discovery adapter is implemented."
+        "notes": "Timestamped WDI API snapshots are captured as rolling observations, not provider-declared release vintages. Latest available, validated and applied states remain separately governed."
       }
     },
     "ilostat": {

@@ -3,7 +3,7 @@
 **Status:** read-only comparative assessment utility; no source-policy decision  
 **Scope:** WP1.5 fields 15, 16, 18, 20 and 21  
 **IMF input:** fixed October 2026 WEO CSV snapshot recorded in `docs/data-sources/imf-weo-october-2026-manual-acquisition.md`  
-**WDI input:** live World Bank Indicators API v2 responses; not an immutable release
+**WDI input:** live World Bank Indicators API v2 by default, or an integrity-checked timestamped API snapshot using --wdi-snapshot-manifest; the snapshot is not a provider-declared release vintage
 
 ## Purpose and execution
 
@@ -31,6 +31,8 @@ uv run python -m tools.compare_imf_weo_wdi --start-year 2015 --end-year 2025
 
 The tool writes `assessment.json`, `assessment.md`, `country_year_comparison.csv` and `candidate_matrix.csv` beneath `reports/sources/imf-wdi-comparison/<UTC timestamp>/`. The matched-pair CSV remains focused on numerical comparisons; the candidate matrix is the complete project-identity × field × year grid for the selected year range.
 
+For a frozen comparison, first run the workflow in [WDI immutable API snapshot acquisition](world-bank-wdi-snapshot-acquisition.md), then pass the resulting manifest with --wdi-snapshot-manifest. The report records the manifest fingerprint and retrieval timestamp.
+
 ## Complete candidate matrix
 
 `candidate_matrix.csv` contains one row for every unique project `game_id` in the identity registry × each of the five fields × each requested year, including identities with no observations in either provider. It records:
@@ -44,7 +46,7 @@ The tool writes `assessment.json`, `assessment.md`, `country_year_comparison.csv
 
 An identity is marked `mapped_verified` only when the registry record is approved and its ISO assignment is verified. Existing proposed/unverified identities remain visible as `mapped_review_required`; the comparison does not promote or repair them. Missing source codes and ambiguous code assignments remain explicit. Therefore, a populated comparison row does not itself establish an approved country identity.
 
-The matrix is a coverage and review instrument, not an import file. It does not classify WDI actual/estimate status, and the IMF `after_latest_actual` hint does not distinguish estimates from projections. PPPGDP remains unclassified because its WEO export has no latest-actual metadata. Field 20/21 reporting-period blanks remain unknown unless independently corroborated by the existing country investigations.
+The matrix is a coverage and review instrument, not an import file. It preserves WDI observation status; only explicit API status F is labelled forecast, while blank/other statuses remain unclassified. The IMF `after_latest_actual` hint does not distinguish estimates from projections. PPPGDP remains unclassified because its WEO export has no latest-actual metadata. Field 20/21 reporting-period blanks remain unknown unless independently corroborated by the existing country investigations.
 
 ## Matching and normalization
 
@@ -53,6 +55,7 @@ The matrix is a coverage and review instrument, not an import file. It does not 
 - IMF GDP and PPP GDP are published in billions in this WEO export; the comparison multiplies those values by 1,000,000,000. GDP per capita and percentage values are not rescaled.
 - Only country-year pairs present and non-null in both sources are numerically compared.
 - The report separately counts IMF-only and WDI-only country-years and lists source codes that cannot be resolved through the existing registry.
+- The report retains WDI `obs_status` verbatim and labels only the documented explicit `F` status as forecast; all other values remain unclassified.
 - The CSV distinguishes `signed_difference` (IMF minus WDI), `absolute_difference`, signed `relative_difference_percent`, and `absolute_relative_difference_percent`. A zero WDI denominator produces a null relative difference rather than an infinite value.
 - Summary percentiles and threshold counts use absolute relative differences. The 5% and 20% markers are descriptive, not acceptance thresholds.
 - Each row classifies IMF reporting metadata as `calendar_year` only for the exact `January/December` value, `non_calendar_fiscal_year` when another reporting period is supplied, or `unknown` when blank.
@@ -60,7 +63,7 @@ The matrix is a coverage and review instrument, not an import file. It does not 
 
 ## Interpretation constraints
 
-This is not a like-for-like release-vintage comparison. The IMF input is a fixed October 2026 WEO export; WDI is retrieved from a rolling API and can change between runs. The WDI indicator metadata's API `lastupdated` value is retained where supplied, but that does not create an immutable snapshot.
+This is not a like-for-like release-vintage comparison. The IMF input is a fixed October 2026 WEO export. Live WDI mode uses a rolling API and can change between runs. Snapshot mode freezes the exact response bytes and metadata at retrieval time, but the capture remains a timestamped rolling API snapshot rather than a provider-declared WDI vintage; it is not automatically vintage-aligned with IMF. The WDI indicator metadata's API `lastupdated` value is retained where supplied.
 
 - **GDP and GDP per capita:** both are current-price US-dollar measures, but country reporting practices, revisions and release vintages can differ.
 - **GDP PPP:** the IMF WEO series refers to ICP benchmarks 2017–2021 and has no `LATEST_ACTUAL_ANNUAL_DATA` values in this export. Its actual/estimate/projected status is therefore unclassified. Confirm the PPP benchmark and time-series construction against WDI's indicator note before interpreting discrepancies.
@@ -137,3 +140,16 @@ The owner-run 2015–2025 comparison produced a complete 13,310-row candidate ma
 The targeted follow-up analyzed 15 country/field groups and 165 observations without fetching new provider data. Its results have been consolidated with the existing national-source investigations in the [Stage 4 IMF WEO semantic assessment](../implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md). That assessment retains IMF WEO priority for all five fields and records the gates for national-account vintages (15/16), ICP/PPP construction (18), CPI annual reference periods (20), and unemployment units/population/methodology (21). Bahrain's documented field 21 disposition remains closed and unchanged.
 
 The comparison is not vintage-aligned: the IMF input is a fixed October 2026 export and WDI is a live API. No source policy, approval, release state, identity record or canonical database was changed. For the next review bundle, use [the temporary evidence workspace instructions](../../reports/workspaces/imf-weo-semantic-review/README.md).
+
+
+## Immutable WDI snapshot mode
+
+The default command continues to retrieve live API responses for exploratory work. For reproducible comparison evidence, acquire a timestamped raw-response bundle and use its manifest:
+
+    uv run python -m tools.acquire_world_bank_wdi_snapshot --start-year 2015 --end-year 2025
+    set manifest (find data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators -type f -name '*.json' | sort | tail -n 1)
+    uv run python -m tools.compare_imf_weo_wdi --start-year 2015 --end-year 2025 --wdi-snapshot-manifest $manifest
+
+Snapshot mode verifies every artifact SHA-256 and byte count, checks all six captured indicator bundles and country metadata, and rejects incomplete pagination or a mismatched year range. It records the WDI manifest path/hash, snapshot ID and retrieval timestamp in the comparison report. It also preserves the raw WDI observation status; only an explicit F is labelled forecast. A blank status does not prove an observation is actual.
+
+The captured six-indicator bundle includes the five primary comparisons and SL.UEM.TOTL.NE.ZS as a separate field-21 national-estimate diagnostic. Snapshot capture and Project DB provenance registration do not semantically validate or approve any value. See the dedicated acquisition document for the exact audit, registration and test commands.

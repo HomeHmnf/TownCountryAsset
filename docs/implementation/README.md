@@ -15,4 +15,5 @@
 
 These are implementation records, not the normative architecture contract. See [architecture](../architecture/README.md) for stable design rules and [feature documentation standard](../feature-documentation-standard.md) for new work.
 - [Stage 4 IMF WEO semantic assessment](data-store-separation-stage-4-imf-weo-semantic-assessment.md) — consolidated five-field semantic disposition, country discrepancy evidence, coverage/identity limitations, outstanding vintage and metadata gates, and governance boundary.
+- [Stage 4B WDI immutable API snapshot](data-store-separation-stage-4b-wdi-snapshot.md) — byte-preserving WDI response capture, manifest fingerprints, rolling-stream registration and snapshot-backed IMF comparison; owner-run capture remains pending.
 - [Temporary IMF WEO semantic-review workspace](../../reports/workspaces/imf-weo-semantic-review/README.md) — Fish commands to collect the owner-run reports into a review bundle without modifying their originals.

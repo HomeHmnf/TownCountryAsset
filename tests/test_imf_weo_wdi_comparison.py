@@ -190,3 +190,64 @@ def test_report_writer_creates_machine_readable_and_csv_outputs(tmp_path, monkey
     text = (target / "country_year_comparison.csv").read_text()
     assert "tc_123" in text
     assert "NY.GDP.MKTP.CD" in text
+
+
+def test_comparison_uses_integrity_checked_snapshot_and_preserves_explicit_forecast_status(tmp_path, monkeypatch):
+    csv_path, identity = _inputs(tmp_path, monkeypatch)
+    manifest_path = tmp_path / "wdi-manifest.json"
+    manifest_path.write_text("{}", encoding="utf-8")
+    codes = list(compare.PAIRS) + ["SL.UEM.TOTL.NE.ZS"]
+    values = {
+        "NY.GDP.MKTP.CD": "2000000000",
+        "NY.GDP.PCAP.CD": "2",
+        "NY.GDP.MKTP.PP.CD": "2000000000",
+        "FP.CPI.TOTL.ZG": "3",
+        "SL.UEM.TOTL.ZS": "3",
+        "SL.UEM.TOTL.NE.ZS": "1.5",
+    }
+    metadata = {
+        code: {
+            "id": code, "name": f"Indicator {code}", "unit": "unit",
+            "sourceNote": "snapshot definition",
+            "sourceOrganization": "Originating body",
+            "source": {"id": "2", "value": "World Development Indicators"},
+            "topics": [],
+        }
+        for code in codes
+    }
+    snapshot_data = {
+        "start_year": 2024,
+        "end_year": 2024,
+        "manifest_path": manifest_path,
+        "manifest_sha256": "a" * 64,
+        "manifest_byte_count": 2,
+        "manifest": {"snapshot_id": "snapshot-test", "retrieved_at": "2026-11-07T12:00:00+00:00"},
+        "country_regions": {"USA": {"region_id": "NAC", "region_value": "North America"}},
+        "indicator_metadata": metadata,
+        "indicator_metadata_api_metadata": {code: {"lastupdated": "2026-10-01"} for code in codes},
+        "observations": {
+            code: [{
+                "country": {"id": "US", "value": "United States"},
+                "countryiso3code": "USA", "date": "2024", "value": values[code],
+                "obs_status": "F" if code == "SL.UEM.TOTL.ZS" else "",
+            }]
+            for code in codes
+        },
+    }
+    monkeypatch.setattr(compare.wdi_snapshot, "load_snapshot", lambda path: snapshot_data)
+
+    report = compare.build_comparison(
+        csv_path, identity, 2024, 2024, snapshot_manifest_path=manifest_path,
+    )
+    unemployment = next(item for item in report["indicators"] if item["field_id"] == 21)
+    row = unemployment["country_year_comparisons"][0]
+    matrix_row = next(item for item in report["candidate_matrix"] if item["field_id"] == 21)
+
+    assert report["wdi_retrieval_model"] == "immutable_api_response_snapshot"
+    assert report["wdi_snapshot"]["snapshot_id"] == "snapshot-test"
+    assert unemployment["wdi_metadata"]["source_note"] == "snapshot definition"
+    assert row["wdi_observation_status"] == "F"
+    assert row["wdi_status"] == "forecast_per_wdi_obs_status"
+    assert matrix_row["wdi_status_classification"] == "forecast_per_wdi_obs_status"
+    assert row["wdi_national_estimate_value"] == 1.5
+    assert report["side_effects"]["canonical_database_written"] is False
