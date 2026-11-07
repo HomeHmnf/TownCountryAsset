@@ -13,7 +13,11 @@ def _artifact(path: Path, kind: str) -> Path:
     payload = (
         b"%PDF-1.7\\nfixture"
         if kind == "pdf"
-        else b"<!doctype html><html><body>fixture</body></html>"
+        else (
+            b'<?xml version="1.0" encoding="UTF-8"?><article>fixture</article>'
+            if kind == "xml"
+            else b"<!doctype html><html><body>fixture</body></html>"
+        )
     )
     path.write_bytes(payload)
     return path
@@ -119,3 +123,12 @@ def test_download_tries_fallback_after_forbidden_primary_url(
     assert final_url == "https://publisher.example/fallback.pdf"
     assert content_type == "application/pdf"
     assert byte_count == destination.stat().st_size
+
+
+
+def test_xml_and_pdf_signatures_are_not_interchangeable(tmp_path: Path) -> None:
+    path = tmp_path / "wrong.xml"
+    path.write_bytes(b"<?xml version='1.0'?><article/>")
+    acquisition._validate(path, "xml")
+    with pytest.raises(ValueError, match="not an XML"):
+        acquisition._validate(tmp_path / "not-xml.pdf", "xml")
