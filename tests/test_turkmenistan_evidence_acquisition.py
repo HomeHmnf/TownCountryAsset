@@ -130,5 +130,7 @@ def test_xml_and_pdf_signatures_are_not_interchangeable(tmp_path: Path) -> None:
     path = tmp_path / "wrong.xml"
     path.write_bytes(b"<?xml version='1.0'?><article/>")
     acquisition._validate(path, "xml")
+    non_xml = tmp_path / "not-xml.pdf"
+    non_xml.write_bytes(b"%PDF-1.7\\nnot XML")
     with pytest.raises(ValueError, match="not an XML"):
-        acquisition._validate(tmp_path / "not-xml.pdf", "xml")
+        acquisition._validate(non_xml, "xml")
