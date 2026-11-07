@@ -23,7 +23,14 @@ PRIMARY_INDICATORS = (
     "FP.CPI.TOTL.ZG", "SL.UEM.TOTL.ZS",
 )
 DIAGNOSTIC_INDICATORS = ("SL.UEM.TOTL.NE.ZS",)
+# Supporting series allow arithmetic decomposition of GDP, PPP, population and CPI.
+# They remain diagnostic inputs and do not change the five primary comparison fields.
+SUPPORTING_INDICATORS = (
+    "NY.GDP.MKTP.CN", "PA.NUS.FCRF", "PA.NUS.ATLS",
+    "PA.NUS.PPP", "SP.POP.TOTL", "FP.CPI.TOTL",
+)
 INDICATORS = PRIMARY_INDICATORS + DIAGNOSTIC_INDICATORS
+CAPTURE_INDICATORS = INDICATORS + SUPPORTING_INDICATORS
 RAW_BASE = Path("raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators")
 MANIFEST_BASE = Path("data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators")
 REPORT_BASE = Path("reports/sources/world-bank-wdi-snapshot")
@@ -195,7 +202,7 @@ def capture_snapshot(
         raise SnapshotError("Country metadata catalogue is empty")
 
     indicator_summaries: dict[str, Any] = {}
-    for code in INDICATORS:
+    for code in CAPTURE_INDICATORS:
         params = {"format": "json"}
         artifact, body = _save_response(
             root, raw_dir, f"indicator_metadata_{code}.json",
@@ -269,7 +276,8 @@ def capture_snapshot(
             "world_bank_source_id": SOURCE_ID, "start_year": start_year, "end_year": end_year,
             "primary_indicators": list(PRIMARY_INDICATORS),
             "diagnostic_indicators": list(DIAGNOSTIC_INDICATORS),
-            "all_indicators": list(INDICATORS), "api_version": "v2",
+            "all_indicators": list(CAPTURE_INDICATORS),
+            "supporting_indicators": list(SUPPORTING_INDICATORS), "api_version": "v2",
             "observation_api_per_page": PER_PAGE,
             "country_catalogue_record_count": len(country_rows),
             "country_catalogue_page_count": country_page_count,
@@ -313,7 +321,8 @@ def capture_snapshot(
         "|---|---|---:|---:|---|",
     ]
     for code, item in indicator_summaries.items():
-        role = "primary" if code in PRIMARY_INDICATORS else "diagnostic"
+        role = ("primary" if code in PRIMARY_INDICATORS else
+                "diagnostic" if code in DIAGNOSTIC_INDICATORS else "supporting_decomposition")
         markdown.append(f"| {code} | {role} | {item['pages']} | {item['observation_rows']} | {item['api_last_updated'] or 'not supplied'} |")
     markdown.extend([
         "", "## Integrity and limitations", "",
@@ -426,11 +435,20 @@ def load_snapshot(manifest_path: str | Path, *, repository_root: str | Path = RO
                 country_regions[iso3] = {
                     "region_id": str(region.get("id") or "").strip().upper(),
                     "region_value": str(region.get("value") or "").strip(),
+                    "special_notes": str(row.get("specialNotes") or "").strip(),
+                    "income_level": str((row.get("incomeLevel") or {}).get("value") or "").strip(),
+                    "lending_type": str((row.get("lendingType") or {}).get("value") or "").strip(),
+                    "capital_city": str(row.get("capitalCity") or "").strip(),
                 }
     observations: dict[str, list[dict[str, Any]]] = {}
+    available_codes = set(indicator_metadata) & set(observation_pages)
     for code in INDICATORS:
-        if code not in indicator_metadata or code not in observation_pages:
-            raise SnapshotError(f"Snapshot is missing {code}")
+        if code not in available_codes:
+            raise SnapshotError(f"Snapshot is missing required indicator {code}")
+    for code in SUPPORTING_INDICATORS:
+        if (code in indicator_metadata) != (code in observation_pages):
+            raise SnapshotError(f"{code}: incomplete optional supporting indicator bundle")
+    for code in sorted(available_codes):
         pages = sorted(observation_pages[code], key=lambda x: x[0])
         expected = pages[0][1]
         if expected != len(pages) or [x[0] for x in pages] != list(range(1, expected + 1)) or any(x[1] != expected for x in pages):
