@@ -334,6 +334,208 @@
           }
         }
       ]
+    },
+    {
+      "source_key": "imf_turkmenistan_research",
+      "dataset_key": "gdp_statistical_shortcomings_wp_2023_207",
+      "name": "IMF Working Paper 2023/207 — Turkmenistan GDP statistical shortcomings",
+      "description": "IMF research paper on Turkmenistan GDP estimation, statistical shortcomings and parallel-market exchange-rate context.",
+      "data_format": "pdf",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "September 2023",
+        "provider_url": "https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023207-print-pdf.pdf",
+        "raw_artifact": "raw_data/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207/IMF_WP_2023_207_Turkmenistan_GDP.pdf",
+        "manifest_directory": "data_manifests/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207",
+        "capture_unit": "One identified publication per immutable acquisition event.",
+        "publication_date": "2023-09-29",
+        "statistical_role": "Analytical research; not an official national-accounts series."
+      },
+      "streams": [
+        {
+          "stream_key": "manual_publication",
+          "name": "IMF Working Paper 2023/207 — Turkmenistan GDP statistical shortcomings captures",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "required_artifacts": [
+              "IMF_WP_2023_207_Turkmenistan_GDP.pdf"
+            ],
+            "byte_integrity": [
+              "sha256",
+              "byte_count"
+            ],
+            "source_specific_validation": "Verify the captured document and assess its claims separately; provenance registration does not approve statistical values."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified publication; future releases and recaptures remain distinct events.",
+            "evidence": "Official provider publication URL and dated publication metadata; see the source-specific acquisition document."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "turkmenistan_state_statistics",
+      "dataset_key": "national_accounts_methodology_2025",
+      "name": "TurkmenStat national-accounts methodology notice (January 2025)",
+      "description": "Official notice describing phased modernization of national-accounts methods and statistical reporting.",
+      "data_format": "html",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "17 January 2025",
+        "provider_url": "https://editor.stat.gov.tm/en/news/204",
+        "raw_artifact": "raw_data/sources/turkmenistan_state_statistics/national_accounts_methodology_2025/TurkmenStat_national_accounts_methodology_2025-01-17.html",
+        "manifest_directory": "data_manifests/sources/turkmenistan_state_statistics/national_accounts_methodology_2025",
+        "capture_unit": "One identified publication per immutable acquisition event.",
+        "publication_date": "2025-01-17"
+      },
+      "streams": [
+        {
+          "stream_key": "manual_publication",
+          "name": "TurkmenStat national-accounts methodology notice (January 2025) captures",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "required_artifacts": [
+              "TurkmenStat_national_accounts_methodology_2025-01-17.html"
+            ],
+            "byte_integrity": [
+              "sha256",
+              "byte_count"
+            ],
+            "source_specific_validation": "Verify the captured document and assess its claims separately; provenance registration does not approve statistical values."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified publication; future releases and recaptures remain distinct events.",
+            "evidence": "Official provider publication URL and dated publication metadata; see the source-specific acquisition document."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "turkmenistan_state_statistics",
+      "dataset_key": "statistical_system_reform_2026",
+      "name": "TurkmenStat statistical-system reform notice (June 2026)",
+      "description": "Official notice describing World Bank technical assistance for national accounts under the 2025 SNA and ICP methodology.",
+      "data_format": "html",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "23 June 2026",
+        "provider_url": "https://editor.stat.gov.tm/en/news/359",
+        "raw_artifact": "raw_data/sources/turkmenistan_state_statistics/statistical_system_reform_2026/TurkmenStat_statistical_system_reform_2026-06-23.html",
+        "manifest_directory": "data_manifests/sources/turkmenistan_state_statistics/statistical_system_reform_2026",
+        "capture_unit": "One identified publication per immutable acquisition event.",
+        "publication_date": "2026-06-23"
+      },
+      "streams": [
+        {
+          "stream_key": "manual_publication",
+          "name": "TurkmenStat statistical-system reform notice (June 2026) captures",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "required_artifacts": [
+              "TurkmenStat_statistical_system_reform_2026-06-23.html"
+            ],
+            "byte_integrity": [
+              "sha256",
+              "byte_count"
+            ],
+            "source_specific_validation": "Verify the captured document and assess its claims separately; provenance registration does not approve statistical values."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified publication; future releases and recaptures remain distinct events.",
+            "evidence": "Official provider publication URL and dated publication metadata; see the source-specific acquisition document."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "imf_turkmenistan_research",
+      "dataset_key": "article_iv_mission_2025",
+      "name": "IMF Turkmenistan Article IV mission statement (June 2025)",
+      "description": "IMF staff mission statement covering exchange-rate unification, FX restrictions and statistical quality.",
+      "data_format": "html",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "10 June 2025",
+        "provider_url": "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission",
+        "raw_artifact": "raw_data/sources/imf_turkmenistan_research/article_iv_mission_2025/IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html",
+        "manifest_directory": "data_manifests/sources/imf_turkmenistan_research/article_iv_mission_2025",
+        "capture_unit": "One identified publication per immutable acquisition event.",
+        "publication_date": "2025-06-10"
+      },
+      "streams": [
+        {
+          "stream_key": "manual_publication",
+          "name": "IMF Turkmenistan Article IV mission statement (June 2025) captures",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "required_artifacts": [
+              "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html"
+            ],
+            "byte_integrity": [
+              "sha256",
+              "byte_count"
+            ],
+            "source_specific_validation": "Verify the captured document and assess its claims separately; provenance registration does not approve statistical values."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified publication; future releases and recaptures remain distinct events.",
+            "evidence": "Official provider publication URL and dated publication metadata; see the source-specific acquisition document."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "imf_turkmenistan_research",
+      "dataset_key": "article_iv_mission_2026",
+      "name": "IMF Turkmenistan Article IV mission statement (June 2026)",
+      "description": "IMF staff mission statement identifying official/parallel exchange-rate distortions and limitations in official GDP-growth estimates.",
+      "data_format": "html",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "22 June 2026",
+        "provider_url": "https://www.imf.org/en/news/articles/2026/06/22/pr26218-turkmenistan-imf-staff-completes-2026-article-iv-mission",
+        "raw_artifact": "raw_data/sources/imf_turkmenistan_research/article_iv_mission_2026/IMF_Turkmenistan_Article_IV_Mission_2026-06-22.html",
+        "manifest_directory": "data_manifests/sources/imf_turkmenistan_research/article_iv_mission_2026",
+        "capture_unit": "One identified publication per immutable acquisition event.",
+        "publication_date": "2026-06-22",
+        "statistical_role": "IMF staff assessment; not an approved Board report."
+      },
+      "streams": [
+        {
+          "stream_key": "manual_publication",
+          "name": "IMF Turkmenistan Article IV mission statement (June 2026) captures",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "required_artifacts": [
+              "IMF_Turkmenistan_Article_IV_Mission_2026-06-22.html"
+            ],
+            "byte_integrity": [
+              "sha256",
+              "byte_count"
+            ],
+            "source_specific_validation": "Verify the captured document and assess its claims separately; provenance registration does not approve statistical values."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified publication; future releases and recaptures remain distinct events.",
+            "evidence": "Official provider publication URL and dated publication metadata; see the source-specific acquisition document."
+          }
+        }
+      ]
     }
   ]
 }
