@@ -55,3 +55,27 @@ The owner must run these commands locally and provide the output before this sta
 ## Governance boundary
 
 The generated matrix is a structured review aid, not a semantic approval artifact. It must not be used to change field source priorities, create country overrides, promote identities, retain/promote a release, or apply observations to the Game DB. Those actions remain separately approval-gated.
+
+
+## Stage 4C.1 — year-bounded evidence and review queues
+
+The builder now adds `year_evidence_scope` and `year_evidence_note` to each country–field–year row. Country cases no longer imply that their evidence applies to every year in 2015–2025. Explicit scope ranges are bounded to the supporting assessment:
+
+- Bahrain field 21: official series covers 2016–2025; 2016 is a reference-period conflict and 2017–2025 exact official/WEO matches. 2015 remains outside the acquired official dataset. This is settled evidence and is not reopened.
+- CAR fields 15/16: ICASEES definitive 2019–2021 accounts and pinned WEO cross-check; population denominator remains open for field 16. Other years remain context only. CAR PPP factor decomposition remains open.
+- Guinea fields 15/16: 2018–2024 rebased national-accounts evidence; population denominator remains open for field 16. Other years remain context only. PPP factor decomposition remains open.
+- Turkmenistan fields 15/16: alternative conversion-factor warning is explicitly scoped to 2019–2025; the 2018 divergence onset remains unexplained.
+- Zimbabwe field 18: special IMF ICP-factor currency conversion evidence is scoped to 2017 only.
+- Samoa field 20: fiscal-year correspondence evidence for 2021–2024; 2025 residual remains open.
+- Tonga field 20: fiscal-year correspondence for 2022–2025, with CPI vintage still open.
+- Palau field 20: fiscal-year correspondence for 2023–2025.
+- Moldova field 21: NBS LFS corroboration for 2024–2025, retaining the redesign/break caveat.
+- Philippines field 21: PSA annual LFS corroboration for 2023–2025, retaining 2025 preliminary status.
+
+These scope labels are evidence classifications, not approvals and not a claim that each observation is directly interchangeable. The row retains its field-level semantic gate, source coverage, identity gate and observation-status uncertainty.
+
+The report now also writes:
+- `country_field_review_queue.csv` and `.json`: 242 × 5 country-field groups, with year-scope, coverage and status summaries;
+- `field_review_summary.json`: five field-level gate summaries.
+
+The queue is a review worklist, not a recommendation to change the selected source. Identity review remains a separate blocker for all 242 project identities. WDI actual/estimate status remains unclassified where the provider response does not explicitly supply it. No database, policy, approval or release state is changed.
