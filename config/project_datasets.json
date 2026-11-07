@@ -254,6 +254,86 @@
           }
         }
       ]
+    },
+    {
+      "source_key": "guinea_ins",
+      "dataset_key": "national_accounts_legacy_2023",
+      "name": "Guinea national accounts — legacy series in La Guinée en chiffres 2023",
+      "description": "INS yearbook containing historical national accounts on the legacy SNA 1993/2006-base series, retained separately from the revised 2018-base SNA 2008 accounts.",
+      "data_format": "pdf",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "2023 yearbook",
+        "provider_url": "https://www.stat-guinee.org/images/Documents/Publications/INS/annuelles/annuaire/La_Guinee_en_chiffre_2023.pdf",
+        "raw_artifact": "raw_data/sources/guinea_ins/national_accounts/legacy_2023/La_Guinee_en_chiffre_2023.pdf",
+        "manifest_directory": "data_manifests/sources/guinea_ins/national_accounts_legacy_2023",
+        "statistical_basis": "Legacy SNA 1993 / 2006 base as described in the source assessment.",
+        "capture_unit": "One official INS yearbook PDF per publication acquisition."
+      },
+      "streams": [
+        {
+          "stream_key": "manual_publication",
+          "name": "Guinea INS legacy national-accounts publication captures",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "required_artifacts": [
+              "La_Guinee_en_chiffre_2023.pdf"
+            ],
+            "byte_integrity": [
+              "sha256",
+              "byte_count"
+            ],
+            "source_specific_validation": "Verify PDF structure and inspect the national-accounts tables; registration does not validate statistical values."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified yearbook publication; later yearbooks or recaptures are separate events.",
+            "evidence": "Official INS yearbook URL; historical series is kept distinct from the 2018-base SNA 2008 publication."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "guinea_ins",
+      "dataset_key": "national_accounts_sna2008_2026",
+      "name": "Guinea national accounts — 2018-base SNA 2008 accounts (June 2026 note)",
+      "description": "INS note publishing definitive 2018-2020 and rapid 2021-2024 national accounts on the revised 2018 base under SNA 2008.",
+      "data_format": "pdf",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "June 2026",
+        "provider_url": "https://stat-guinee.org/images/Documents/Publications/INS/annuelles/CN/Note_analyse_des_comptes_nationaux_definitifs_et_rapides_2018_2024_VC.pdf",
+        "raw_artifact": "raw_data/sources/guinea_ins/national_accounts/sna2008_2026/Note_analyse_comptes_nationaux_2018_2024_June_2026.pdf",
+        "manifest_directory": "data_manifests/sources/guinea_ins/national_accounts_sna2008_2026",
+        "statistical_basis": "SNA 2008, 2018 base; 2018-2020 definitive and 2021-2024 rapid estimates according to the publication.",
+        "capture_unit": "One official INS national-accounts note PDF per publication acquisition."
+      },
+      "streams": [
+        {
+          "stream_key": "manual_publication",
+          "name": "Guinea INS revised national-accounts publication captures",
+          "acquisition_mode": "manual",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "required_artifacts": [
+              "Note_analyse_comptes_nationaux_2018_2024_June_2026.pdf"
+            ],
+            "byte_integrity": [
+              "sha256",
+              "byte_count"
+            ],
+            "source_specific_validation": "Verify PDF structure, publication vintage and definitive/rapid status; registration does not approve statistical values."
+          },
+          "metadata": {
+            "release_semantics": "One acquisition per identified revised national-accounts publication; future revisions remain separate events.",
+            "evidence": "Official INS June 2026 publication URL; kept separate from the legacy yearbook."
+          }
+        }
+      ]
     }
   ]
 }
