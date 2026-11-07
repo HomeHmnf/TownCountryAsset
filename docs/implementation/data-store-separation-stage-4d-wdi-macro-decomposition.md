@@ -1,6 +1,6 @@
 # Stage 4D — WDI macro-series decomposition
 
-**Status:** implementation committed; owner-run tests and new acquisition pending  
+**Status:** implementation, owner-run tests, expanded snapshot acquisition, manifest audit, Project DB registration and diagnostic assessment completed; semantic disposition remains diagnostic only  
 **Branch:** `work/compiler-hardening`  
 **Purpose:** add supporting WDI series and arithmetic diagnostics to isolate candidate GDP, PPP, population and CPI relationships without treating those relationships as proof of provider methodology.
 
@@ -117,3 +117,63 @@ The assessment writes a timestamped report under `reports/sources/wdi-macro-deco
 - World Bank, [GDP PPP conversion factor, PA.NUS.PPP](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/PA.NUS.PPP).
 - World Bank, [Consumer price index, FP.CPI.TOTL](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/FP.CPI.TOTL).
 - World Bank, [WDI API response metadata and observation status](https://datahelpdesk.worldbank.org/knowledgebase/articles/1886674-new-features-and-enhancements-in-the-v2-api).
+
+
+## Owner-run acquisition and assessment record (2026-11-07)
+
+The expanded 2014–2025 WDI capture and 2015–2025 decomposition completed successfully.
+
+| Property | Result |
+|---|---|
+| Snapshot ID | `api_snapshot_20261107T161129160851Z` |
+| Retrieved at | `2026-11-07T16:12:07.812622+00:00` |
+| Manifest | `data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T161129160851Z.json` |
+| Manifest SHA-256 | `8e91b8ce5269bb387374e3b653038af6a5fc7d65fb98a7f570f6e05f536e8bf5` |
+| Raw response artifacts | 26 |
+| Raw response bytes | 8,885,684 |
+| Country/region catalogue records | 296 |
+| Indicators | 12 (six comparison/diagnostic base indicators plus six supporting indicators) |
+| Observation rows | 3,192 per indicator for 2014–2025 |
+| Decomposition period | 2015–2025 |
+| Decomposition rows | 2,662 (242 identities × 11 years) |
+
+The read-only manifest audit examined both WDI manifests: two valid manifests, 40 artifacts, zero errors. The new snapshot was registered in the Project DB as acquisition ID 7 with 26 artifacts, status `acquired` and integrity status `verified`. The acquisition key is the manifest path; its stored manifest SHA-256 matches the value above. Project DB integrity returned `ok`; the foreign-key check returned no violations. The earlier six-indicator acquisition ID 6 was not overwritten.
+
+The decomposition report is `reports/sources/wdi-macro-decomposition/20261107T161349Z/`, containing `assessment.json`, `assessment.md` and `decomposition_matrix.csv`. It records the snapshot ID, retrieval timestamp and manifest hash. All 2,662 rows remain blocked by the separate identity-governance gate. This is not a calculation-failure count. The assessment fetched no additional source responses and wrote no database, approval, source-selection, release or Game DB state. The owner confirmed the focused tests and compilation passed after the retry-hardening correction; no aggregate test count is recorded here.
+
+### Arithmetic consistency findings
+
+Across the selected country-case rows, the WDI published values are reproduced by the corresponding captured inputs to floating-point precision where the inputs exist:
+
+- current-USD GDP aligns with current-LCU GDP divided by the DEC alternative conversion factor;
+- PPP GDP aligns with current-LCU GDP divided by the GDP PPP conversion factor;
+- GDP per capita aligns with current-USD GDP divided by total population;
+- WDI inflation aligns with CPI-index year-on-year growth where both years are present.
+
+Turkmenistan has no official exchange-rate observations in this capture; its current-USD arithmetic is reproduced using the DEC alternative factor. These identities demonstrate internal arithmetic consistency in the captured series, not proof of the provider's internal construction pipeline.
+
+### Country-case comparison against October 2026 IMF WEO
+
+The following differences are medians over the 11-year 2015–2025 comparison window. A negative value means WDI is below IMF WEO; a positive value means WDI is above it.
+
+| Country | WDI vs IMF nominal GDP | WDI vs IMF PPP GDP | WDI vs IMF GDP per capita | Additional finding |
+|---|---:|---:|---:|---|
+| Central African Republic | -34.07% | -34.98% | -34.65% | CPI median difference is 0.00 percentage points; common GDP-level gap persists across nominal and PPP measures. |
+| Guinea | -34.44% | -36.38% | -31.46% | CPI differences are close in much of 2016–2022 but widen in 2015 and 2023–2025; national-accounts vintage/rebasing remains a material gate. |
+| Turkmenistan | -35.57% | +0.95% | -41.79% | Official-rate series is absent; alternative conversion factor rises from 3.5 in 2015 to 5.48 in 2018, while the nominal USD gap widens. This is consistent with a conversion-factor issue but does not establish the WEO conversion method. |
+| Zimbabwe | -19.16% | -19.98% | -17.76% | Highly non-uniform: 2017 WDI is 64.54% above IMF nominal GDP and 151.39% above IMF PPP GDP; CPI comparison diverges sharply in 2022 and WDI inflation/index observations are absent for 2023–2025. |
+| Samoa | -0.01% | +14.45% | -3.99% | Nominal GDP aligns closely; PPP has a stable positive difference. CPI differences vary materially by year. |
+| Tonga | -0.08% | +12.76% | -4.64% | Nominal GDP aligns closely; PPP has a stable positive difference. CPI differences vary materially by year. |
+| Palau | +0.08% | +19.87% | -0.94% | Nominal GDP and GDP per capita align closely; PPP has a stable positive difference. |
+
+These case comparisons do not establish that the two providers use identical national-accounts vintages, population denominators, reporting periods or PPP benchmarks. In particular:
+
+- CAR and Guinea retain a large common nominal/PPP level gap; the arithmetic decomposition does not explain the underlying national-accounts level difference.
+- Turkmenistan's PPP comparison is much closer than its nominal USD comparison, making exchange-rate conversion a priority for further source-level investigation. The missing official-rate observations and alternative-factor series are evidence inputs, not proof of WEO's conversion.
+- Zimbabwe's 2017 outlier and later currency/conversion-factor changes require year-specific treatment; a single median conceals material breaks.
+- Samoa, Tonga and Palau show close nominal GDP but stable PPP-level differences, indicating that nominal USD conversion alone does not account for their PPP gaps.
+- CPI-index growth verifies the WDI inflation arithmetic where present, but differences from IMF WEO remain subject to period convention and vintage alignment.
+
+### Stage 4D disposition
+
+The decomposition narrows the remaining research questions but does not close the Stage 4 field gates. Keep IMF WEO source priority unchanged for fields 15, 16, 18 and 20. Field 21 remains outside this macro-series decomposition and its existing unit, population, reference-period and methodology gates remain open. No country identity was promoted; all identities remain review-required. No semantic approval, release promotion, retention action or Game DB write occurred.
