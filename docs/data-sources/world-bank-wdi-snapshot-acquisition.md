@@ -164,7 +164,7 @@ Owner-run focused validation passed 19 tests; `compileall` completed without err
 
 ## HTTP reliability and retry policy
 
-The capture command uses a 120-second per-request timeout and retries transient URL/transport failures and HTTP 408, 425, 429 and 5xx responses up to five times, with exponential backoff starting at two seconds. Non-transient client errors fail immediately. Override with `--timeout`, `--retries` and `--retry-delay` when diagnosing network conditions. A failed attempt can leave an incomplete, unmanifested timestamped raw directory; do not register it. A subsequent attempt receives a new snapshot ID and never overwrites that directory.
+The capture command uses a 120-second per-request timeout and retries transient URL/transport failures and HTTP 408, 425, 429 and 5xx responses up to five times, with exponential backoff starting at two seconds. Non-transient client errors fail immediately; failure messages report the number of requests actually made (so an immediate 404 reports one attempt, not the configured retry limit). A regression test verifies both immediate termination and the reported count. Override with `--timeout`, `--retries` and `--retry-delay` when diagnosing network conditions. A failed attempt can leave an incomplete, unmanifested timestamped raw directory; do not register it. A subsequent attempt receives a new snapshot ID and never overwrites that directory.
 
 For a constrained network, run the command as the normal repository owner. Root privileges are not required. A proxy can be used if it is already configured in the environment, but the tool does not configure or bypass TLS verification for proxies.
 
