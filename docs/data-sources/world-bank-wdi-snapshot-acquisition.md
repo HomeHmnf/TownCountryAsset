@@ -46,7 +46,7 @@ The tool captures and stores each raw JSON response byte-for-byte:
 - WDI source metadata (/sources/2);
 - all pages of the World Bank country/region catalogue;
 - metadata responses for all six indicators;
-- every paginated observation response for all six indicators, using the same annual date range and per_page=20000 request pattern as the comparison.
+- every paginated observation response for all configured primary, diagnostic and supporting indicators, using the same annual date range and per_page=20000 request pattern.
 
 For each response, the manifest records its request URL and parameters, final URL, HTTP status, response headers, retrieval timestamp, content type, byte count and SHA-256. It also records pagination counts, row counts, source identity, period and indicator summaries. A response is never rewritten or normalized before its raw bytes are fingerprinted.
 
@@ -160,3 +160,39 @@ Comparison with the 2026-11-05 live API run found identical row keys and zero ch
 The snapshot-backed matrix contains a blank WDI `obs_status` for all 13,310 rows. Of these, 10,678 rows contain WDI observations and remain `not_classified_by_this_comparison`; 2,632 rows have no WDI observation and are `missing`. No WDI observation is thereby established as actual, estimate or projection.
 
 Owner-run focused validation passed 19 tests; `compileall` completed without errors. The live capture, audit, synchronization, registration, database integrity checks and frozen comparison all completed successfully.
+
+
+## 9. Stage 4D supporting macro-decomposition indicators
+
+The snapshot capture profile now includes six supporting WDI indicators in addition to the original five primary comparison indicators and the field-21 national-estimate diagnostic:
+
+| Supporting indicator | Diagnostic purpose |
+|---|---|
+| `NY.GDP.MKTP.CN` | GDP at current prices in local currency |
+| `PA.NUS.FCRF` | Official exchange rate, LCU per US$ |
+| `PA.NUS.ATLS` | DEC alternative conversion factor, LCU per US$ |
+| `PA.NUS.PPP` | GDP PPP conversion factor, LCU per international dollar |
+| `SP.POP.TOTL` | Total population, for a GDP-per-capita arithmetic check |
+| `FP.CPI.TOTL` | Consumer price index, for an annual index-growth diagnostic |
+
+The World Bank metadata defines `PA.NUS.ATLS` as the DEC alternative conversion factor used in the Atlas method and notes that it may differ from the official rate where multiple/dual exchange rates or non-calendar national-account periods apply. Its presence does **not** prove that the current-USD GDP indicator uses that factor. The assessment reports both official-rate and alternative-factor arithmetic without assuming either is the provider's GDP conversion method. See the [WDI metadata for PA.NUS.ATLS](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/PA.NUS.ATLS).
+
+The read-only assessment `tools/assess_wdi_macro_decomposition.py` calculates, where all inputs exist:
+
+- local-currency GDP divided by the official exchange rate;
+- local-currency GDP divided by the DEC alternative conversion factor (diagnostic only);
+- local-currency GDP divided by the GDP PPP conversion factor;
+- current-USD GDP divided by total population;
+- year-on-year growth in the annual CPI index.
+
+It records the source inputs, indicator metadata, country special notes, raw observation-status values and IMF WEO observations alongside the calculations. Missing or zero denominators produce null derived values. It does not infer actual/estimate/projection status, identity validity, source methodology or canonical correctness.
+
+For the CPI calculation, the capture must include one lead-in year. Acquire 2014–2025 and assess 2015–2025:
+
+    uv run python -m tools.acquire_world_bank_wdi_snapshot --start-year 2014 --end-year 2025
+    set manifest (find data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators -type f -name '*.json' | sort | tail -n 1)
+    uv run python -m tools.assess_wdi_macro_decomposition --snapshot-manifest $manifest --start-year 2015 --end-year 2025
+
+Audit the manifest before registering its acquisition. Synchronize the updated dataset metadata, then register the manifest in the Project DB using the existing commands in section 4. The new capture is a distinct rolling-API acquisition; it does not overwrite or replace the already validated 2026-11-07 six-indicator snapshot or the frozen IMF–WDI comparison.
+
+The six supporting series are captured with their raw bytes and indicator metadata. They are not part of the five-field candidate comparison and do not change source-selection policy. The decomposition is diagnostic only: it cannot resolve provider-vintage alignment, identity governance, IMF actual/estimate/projection status, or country-specific national-accounts methodology by itself.
