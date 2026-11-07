@@ -79,3 +79,31 @@ The report now also writes:
 - `field_review_summary.json`: five field-level gate summaries.
 
 The queue is a review worklist, not a recommendation to change the selected source. Identity review remains a separate blocker for all 242 project identities. WDI actual/estimate status remains unclassified where the provider response does not explicitly supply it. No database, policy, approval or release state is changed.
+
+
+## Stage 4C.2 — decision-readiness assessment
+
+`tools/build_imf_weo_wdi_decision_readiness.py` consumes the year-scoped semantic matrix and produces a separate decision-readiness package:
+
+- `decision_readiness.json` and `.md`: global gates, five field decisions, blockers and next evidence actions;
+- `field_decision_queue.csv`: field-level readiness and current disposition;
+- `country_case_decision_queue.csv`: country-field evidence cases and explicitly bounded years.
+
+The current result is intentionally **not ready for source-policy change or canonical application**. All 242 identities remain review-required. The IMF October 2026 WEO input and timestamped WDI rolling-API capture are not provider-vintage aligned. Observation status is not complete: WDI status is unclassified in the capture, and IMF latest-actual metadata is not a projection classifier.
+
+Field dispositions remain:
+- Fields 15 and 16: qualified concept comparability, but national-account vintages/USD conversion and population denominator remain unresolved.
+- Field 18: PPP benchmark/factor and nominal-GDP construction are not demonstrated comparable; WEO actual status/reporting period remain unclassified.
+- Field 20: annual-average, fiscal/calendar-year and CPI-vintage alignment remain unresolved.
+- Field 21: WDI ILO-modelled and national-estimate products remain distinct from country-specific WEO series; IMF unit/reference population/period need review.
+
+The existing IMF WEO priority assignments remain unchanged. Country-specific corroboration is not promoted to a universal field equivalence or canonical override. Bahrain's settled 2016–2025 evidence is preserved and not reopened; other cases retain their bounded evidence ranges and stated caveats.
+
+Run:
+```fish
+uv run --extra dev python -m pytest -v tests/test_imf_weo_wdi_decision_readiness.py
+uv run python -m compileall -q tools/build_imf_weo_wdi_decision_readiness.py
+uv run python -m tools.build_imf_weo_wdi_decision_readiness --input reports/sources/imf-wdi-semantic-disposition/<semantic-run>/semantic_disposition_matrix.csv
+```
+
+This is a read-only assessment. It creates no approval, changes no source-selection policy, promotes no release, and writes neither SQLite database.
