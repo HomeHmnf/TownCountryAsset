@@ -25,10 +25,7 @@
           "acquisition_mode": "api",
           "validation_contract": {
             "manifest_directory": "data_manifests/sources/bahrain_open_data/unemployment_yearly",
-            "required_artifacts": [
-              "dataset_metadata.json",
-              "records_page_*"
-            ],
+            "required_artifacts": ["dataset_metadata.json", "records_page_*"],
             "pagination_complete": true,
             "source_specific_validation": "Existing approved Bahrain assessment; reference its established disposition."
           },
@@ -50,17 +47,8 @@
         "manifest_directory": "data_manifests/sources/un_m49/country_area_overview_html",
         "provider_url": "https://unstats.un.org/unsd/methodology/m49/overview",
         "validation_contract": {
-          "content_types": [
-            "text/html"
-          ],
-          "required_text": [
-            "Country or Area",
-            "M49 Code",
-            "ISO-alpha2 Code",
-            "ISO-alpha3 Code",
-            "Global Code",
-            "Region Name"
-          ]
+          "content_types": ["text/html"],
+          "required_text": ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code", "Global Code", "Region Name"]
         },
         "manifest_adapter_status": "The existing alternate manifest representation is preserved; this registration does not normalize it."
       },
@@ -70,17 +58,8 @@
           "name": "UN M49 current reference page captures",
           "acquisition_mode": "https_download",
           "validation_contract": {
-            "content_types": [
-              "text/html"
-            ],
-            "required_text": [
-              "Country or Area",
-              "M49 Code",
-              "ISO-alpha2 Code",
-              "ISO-alpha3 Code",
-              "Global Code",
-              "Region Name"
-            ]
+            "content_types": ["text/html"],
+            "required_text": ["Country or Area", "M49 Code", "ISO-alpha2 Code", "ISO-alpha3 Code", "Global Code", "Region Name"]
           },
           "metadata": {
             "release_semantics": "Rolling current-reference page; changed content is a new candidate capture, not an inferred semantic edition.",
@@ -112,10 +91,7 @@
           "name": "IMF WEO manual vintage bundles",
           "acquisition_mode": "manual",
           "validation_contract": {
-            "required_artifact_roles": [
-              "dataset",
-              "supporting_document"
-            ],
+            "required_artifact_roles": ["dataset", "supporting_document"],
             "bundle_completeness": "CSV dataset and matching vintage Database Appendix must be associated with the same acquisition.",
             "semantic_validation": "Separate source-specific WEO validation; not performed by catalogue registration."
           },
@@ -138,13 +114,7 @@
         "provider_download_id": "demographic_indicators_medium",
         "provider_release_label": "2024-main-demographic",
         "manifest": "data_manifests/sources/un_wpp/demographic_indicators_medium/2024-main-demographic.json",
-        "field_ids": [
-          1,
-          2,
-          6,
-          13,
-          14
-        ],
+        "field_ids": [1, 2, 6, 13, 14],
         "stream_registration": "deferred",
         "stream_boundary_reason": "WPP main edition and supplementary materials have an approved combined application; independent retention boundaries have not yet been approved."
       },
@@ -161,9 +131,7 @@
         "provider_download_id": "population_by_age_5_group_sex_medium",
         "provider_release_label": "2024-main-age-sex",
         "manifest": "data_manifests/sources/un_wpp/population_by_age_5_group_sex_medium/2024-main-age-sex.json",
-        "field_ids": [
-          12
-        ],
+        "field_ids": [12],
         "stream_registration": "deferred",
         "stream_boundary_reason": "WPP main edition and supplementary materials have an approved combined application; independent retention boundaries have not yet been approved."
       },
@@ -182,20 +150,9 @@
         "api_base_url": "https://api.worldbank.org/v2",
         "api_documentation_url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
         "terms_url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets",
-        "primary_indicator_codes": [
-          "NY.GDP.MKTP.CD",
-          "NY.GDP.PCAP.CD",
-          "NY.GDP.MKTP.PP.CD",
-          "FP.CPI.TOTL.ZG",
-          "SL.UEM.TOTL.ZS"
-        ],
-        "diagnostic_indicator_codes": [
-          "SL.UEM.TOTL.NE.ZS"
-        ],
-        "comparison_period": {
-          "start_year": 2015,
-          "end_year": 2025
-        },
+        "primary_indicator_codes": ["NY.GDP.MKTP.CD", "NY.GDP.PCAP.CD", "NY.GDP.MKTP.PP.CD", "FP.CPI.TOTL.ZG", "SL.UEM.TOTL.ZS"],
+        "diagnostic_indicator_codes": ["SL.UEM.TOTL.NE.ZS"],
+        "comparison_period": {"start_year": 2015, "end_year": 2025},
         "raw_directory": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators",
         "manifest_directory": "data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators",
         "acquisition_tool": "tools/acquire_world_bank_wdi_snapshot.py",
@@ -207,25 +164,10 @@
           "name": "WDI selected indicator rolling API snapshots",
           "acquisition_mode": "api",
           "validation_contract": {
-            "required_artifacts": [
-              "source_metadata.json",
-              "country_metadata_page_*",
-              "indicator_metadata_*",
-              "observations_*_page_*"
-            ],
-            "required_indicator_codes": [
-              "NY.GDP.MKTP.CD",
-              "NY.GDP.PCAP.CD",
-              "NY.GDP.MKTP.PP.CD",
-              "FP.CPI.TOTL.ZG",
-              "SL.UEM.TOTL.ZS",
-              "SL.UEM.TOTL.NE.ZS"
-            ],
+            "required_artifacts": ["source_metadata.json", "country_metadata_page_*", "indicator_metadata_*", "observations_*_page_*"],
+            "required_indicator_codes": ["NY.GDP.MKTP.CD", "NY.GDP.PCAP.CD", "NY.GDP.MKTP.PP.CD", "FP.CPI.TOTL.ZG", "SL.UEM.TOTL.ZS", "SL.UEM.TOTL.NE.ZS"],
             "complete_pagination": true,
-            "byte_integrity": [
-              "sha256",
-              "byte_count"
-            ],
+            "byte_integrity": ["sha256", "byte_count"],
             "year_range": "Must match the declared snapshot_scope",
             "semantic_validation": "Separate assessment; acquisition and provenance registration do not approve or apply observations."
           },
