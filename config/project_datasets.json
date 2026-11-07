@@ -386,7 +386,7 @@
       "frequency": "annual",
       "metadata": {
         "provider_release_label": "17 January 2025",
-        "provider_url": "https://editor.stat.gov.tm/en/news/204",
+        "provider_url": "https://www.stat.gov.tm/en/news/204",
         "raw_artifact": "raw_data/sources/turkmenistan_state_statistics/national_accounts_methodology_2025/TurkmenStat_national_accounts_methodology_2025-01-17.html",
         "manifest_directory": "data_manifests/sources/turkmenistan_state_statistics/national_accounts_methodology_2025",
         "capture_unit": "One identified publication per immutable acquisition event.",
@@ -426,7 +426,7 @@
       "frequency": "annual",
       "metadata": {
         "provider_release_label": "23 June 2026",
-        "provider_url": "https://editor.stat.gov.tm/en/news/359",
+        "provider_url": "https://www.stat.gov.tm/en/news/359",
         "raw_artifact": "raw_data/sources/turkmenistan_state_statistics/statistical_system_reform_2026/TurkmenStat_statistical_system_reform_2026-06-23.html",
         "manifest_directory": "data_manifests/sources/turkmenistan_state_statistics/statistical_system_reform_2026",
         "capture_unit": "One identified publication per immutable acquisition event.",
