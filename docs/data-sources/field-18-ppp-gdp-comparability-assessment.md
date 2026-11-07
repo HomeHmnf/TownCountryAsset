@@ -101,3 +101,13 @@ This is a read-only evidence assessment. It changes no source registry, source-s
 - ICASEES, [Comptes Nationaux définitifs 2019–2021](https://www.icasees.org/index.php/publications/tableau-de-bord/telecharger/comptes-nationaux-definitifs-2019-2021-de-la-republique-centrafricaine), published 30 July 2026, CC BY 4.0.
 - ICASEES, [GDP rebasing to 2019 base under SNA 2008](https://www.icasees.org/index.php/publications/tableau-de-bord/statistiques-structurelles/statistiques-economiques/comptes-nationaux/rebasage-du-pib-de-la-republique-centrafricaine-base-2019-scn-2008-aide-memoire-de-la-mission-conjointe-dexamen-des-resultats), published 7 August 2026.
 - IMF, [Central African Republic 2025 Article IV/ECF review](https://www.imf.org/en/Publications/CR/Issues/2025/06/04/Central-African-Republic-Third-and-Fourth-Reviews-Under-the-Extended-Credit-Facility-Arrangement-568185), historical status before the July 2026 ICASEES release.
+
+
+## Updated nominal-GDP decomposition context (2026-11-07)
+
+The expanded WDI snapshot now shows that the large Guinea and CAR PPP gaps coexist with material local-currency GDP level differences against revised national accounts:
+
+- **Guinea:** WDI current-LCU GDP for 2018–2022 reproduces the legacy INS/SCN 1993 series at published rounding precision. The new INS 2018-base SNA 2008 series is substantially higher. For 2024, the UNSD profile (sourced from INS for 2018–2024) reports GNF 311.077 trillion and US$36.465 billion, while WDI reports GNF 214.597 trillion and US$25.009 billion. This is a nominal national-accounts vintage issue before PPP conversion.
+- **CAR:** WDI current-LCU GDP is 33–35% below definitive ICASEES 2019–2021 GDP. The WDI official and DEC alternative conversion factors are effectively identical in those years, so the nominal level difference is already present before USD conversion.
+
+The WDI PPP series is arithmetically reproduced by current-LCU GDP divided by the WDI GDP PPP conversion factor. This confirms the WDI series' internal arithmetic only. It does not validate the PPP factor's benchmark, vintage, imputation or extrapolation method, nor does it show that the IMF uses the same nominal GDP input. For CAR and Guinea, the local-currency GDP vintage mismatch is a material component of the PPP discrepancy; a separate reconciliation of the PPP factor and benchmark remains necessary. The field 18 disposition therefore remains **not yet demonstrated comparable**, and IMF priority is unchanged.
