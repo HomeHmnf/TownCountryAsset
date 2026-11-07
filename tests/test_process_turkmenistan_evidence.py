@@ -107,3 +107,40 @@ def test_manifest_integrity_failure_stops_before_catalogue_sync(
     assert result["status"] == "blocked_manifest_integrity"
     assert calls == []
     assert result["project_database_written"] is False
+
+
+def test_explicit_registration_runs_only_after_complete_preflight(
+    tmp_path: Path, monkeypatch
+) -> None:
+    monkeypatch.setattr(process, "audit_manifests", _audit_ok)
+    monkeypatch.setattr(process, "sync_source_catalogue", lambda **kwargs: {})
+    monkeypatch.setattr(process, "sync_dataset_catalogue", lambda **kwargs: {})
+    calls = []
+
+    def register(**kwargs):
+        calls.append(kwargs["dry_run"])
+        count = 2 if "turkmenistan_state_statistics" in str(kwargs["manifest_dir"]) else 1
+        return {
+            "audit_status": "ok",
+            "registered": [
+                {"acquisition_id": count, "artifact_count": 1, "status": (
+                    "would_register_as_acquired" if kwargs["dry_run"] else "acquired"
+                )}
+            ] * count,
+            "unchanged": [],
+            "deferred": [],
+            "errors": [],
+            "dry_run": kwargs["dry_run"],
+        }
+
+    monkeypatch.setattr(process, "register_manifest_acquisitions", register)
+    result = process.process_turkmenistan_evidence(
+        repository_root=tmp_path, register=True
+    )
+
+    assert result["status"] == "registered"
+    assert result["eligible_count"] == 3
+    assert len(result["registered"]) == 3
+    assert calls == [True, True, False, False]
+    assert result["project_database_written"] is True
+    assert result["game_database_written"] is False
