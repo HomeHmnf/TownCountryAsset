@@ -164,3 +164,10 @@ The snapshot-backed comparison is in `reports/sources/imf-wdi-comparison/2026110
 The snapshot's WDI `obs_status` is blank for all 13,310 candidate rows. The 10,678 rows with a WDI observation are therefore `not_classified_by_this_comparison`; 2,632 rows without a WDI observation are `missing`. Blank observation status is not evidence of actual data. No actual/estimate/projection classification is inferred.
 
 This establishes reproducibility of the values and coverage between the two comparison runs. It does not make the rolling WDI API snapshot a provider-declared vintage, align it with the fixed IMF October 2026 vintage, or demonstrate semantic equivalence. Existing five-field source-selection priorities and all approval/application gates remain unchanged. See the [Stage 4 assessment](../implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md) and [WDI snapshot acquisition record](world-bank-wdi-snapshot-acquisition.md).
+
+
+## Semantic disposition matrix
+
+The read-only enrichment tool `tools/build_imf_weo_wdi_semantic_disposition.py` adds explicit identity, concept, period, methodology, observation-status, country-case, field-gate and evidence-document dispositions to every row of a frozen `candidate_matrix.csv`. It preserves the original values and coverage states. The tool's rules are documented in [Stage 4C semantic disposition matrix](../implementation/data-store-separation-stage-4c-semantic-disposition-matrix.md).
+
+The country-case register reuses existing evidence for CAR, Guinea, Turkmenistan, Zimbabwe, Samoa, Tonga, Palau, Bahrain, Moldova and the Philippines. It does not claim all years resolved. Bahrain's established disposition remains closed. Identity approval remains separate, WDI blank observation status remains unclassified, and all generated rows remain diagnostic/not approved.
