@@ -258,7 +258,21 @@ def acquire_turkmenistan_evidence(
                     f"Expected existing artifact: {publication['raw_path']}"
                 )
             _validate(raw, publication["signature"])
-            final_url = publication["url"]
+            final_url = (
+                publication.get("url_fallbacks", [publication["url"]])[0]
+                if publication["signature"] == "json"
+                else publication["url"]
+            )
+            if publication["signature"] == "json":
+                payload = json.loads(raw.read_text(encoding="utf-8"))
+                if (
+                    payload.get("title") != publication["expected_json_title"]
+                    or payload.get("publishDate") != publication["expected_json_publication_date"]
+                    or payload.get("sourceUrl") != publication["url"]
+                ):
+                    raise ValueError(
+                        f"Existing JSON publication identity does not match expected IMF record: {raw}"
+                    )
             content_type = {
                 "pdf": "application/pdf",
                 "html": "text/html",
