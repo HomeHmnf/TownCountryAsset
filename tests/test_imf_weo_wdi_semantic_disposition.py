@@ -39,6 +39,7 @@ def test_build_matrix_preserves_bahrain_settled_case_and_identity_gate(tmp_path:
     assert row["country_case_disposition"] == "settled_likely_reference_period_mismatch_do_not_reopen"
     assert row["identity_gate"] == "identity_review_required"
     assert row["semantic_disposition"] == "diagnostic_review_required_not_approved"
+    assert row["year_evidence_scope"] == "official_year_end_vs_annual_reference_period_conflict"
     assert summary["database_written"] is False
 
 
@@ -71,3 +72,42 @@ def test_write_outputs_creates_matrix_and_summary(tmp_path: Path) -> None:
     assert (target / "semantic_disposition_matrix.csv").is_file()
     assert (target / "assessment.md").is_file()
     assert json.loads((target / "assessment.json").read_text())["row_count"] == 1
+
+
+
+def test_year_scope_does_not_spread_bahrain_evidence_to_2015(tmp_path: Path) -> None:
+    source = tmp_path / "candidate.csv"
+    with source.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(_candidate()))
+        writer.writeheader()
+        writer.writerow(_candidate(year="2015"))
+    rows, _ = build_matrix(source)
+    assert rows[0]["year_evidence_scope"] == "case_context_only_no_year_specific_support"
+
+
+def test_year_scope_limits_zimbabwe_ppp_special_method_to_2017(tmp_path: Path) -> None:
+    source = tmp_path / "candidate.csv"
+    with source.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(_candidate()))
+        writer.writeheader()
+        writer.writerow(_candidate(country_name="Zimbabwe", field_id="18", year="2017"))
+        writer.writerow(_candidate(country_name="Zimbabwe", field_id="18", year="2018"))
+    rows, _ = build_matrix(source)
+    assert rows[0]["year_evidence_scope"] == "country_specific_icp_factor_conversion_documented"
+    assert rows[1]["year_evidence_scope"] == "case_context_only_no_year_specific_support"
+
+
+def test_review_queues_are_generated_separately(tmp_path: Path) -> None:
+    source = tmp_path / "candidate.csv"
+    with source.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(_candidate()))
+        writer.writeheader()
+        writer.writerow(_candidate())
+        writer.writerow(_candidate(game_id="zwe", country_name="Zimbabwe", field_id="18", year="2017"))
+    rows, summary = build_matrix(source)
+    assert len(summary["_country_queue"]) == 2
+    assert len(summary["_field_queue"]) == 2
+    target = write_outputs(rows, summary, tmp_path / "reports")
+    assert (target / "country_field_review_queue.json").is_file()
+    assert (target / "country_field_review_queue.csv").is_file()
+    assert (target / "field_review_summary.json").is_file()
