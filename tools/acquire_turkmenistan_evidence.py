@@ -243,6 +243,7 @@ def acquire_turkmenistan_evidence(
     root = Path(repository_root).resolve()
     results = []
     skipped = []
+    failures = []
     for publication in PUBLICATIONS:
         raw = root / publication["raw_path"]
         manifest_dir = root / publication["manifest_dir"]
@@ -274,9 +275,19 @@ def acquire_turkmenistan_evidence(
                 publication["url"],
                 *publication.get("url_fallbacks", []),
             ]
-            final_url, content_type, byte_count = _download(
-                candidate_urls, raw, publication["signature"], timeout, retries
-            )
+            try:
+                final_url, content_type, byte_count = _download(
+                    candidate_urls, raw, publication["signature"], timeout, retries
+                )
+            except RuntimeError as exc:
+                failures.append({
+                    "source_id": publication["source_id"],
+                    "dataset_id": publication["dataset_id"],
+                    "requested_url": publication["url"],
+                    "error": str(exc),
+                    "status": "acquisition_failed_no_manifest",
+                })
+                continue
             _validate(raw, publication["signature"])
             if publication["signature"] == "json":
                 payload = json.loads(raw.read_text(encoding="utf-8"))
@@ -354,6 +365,8 @@ def acquire_turkmenistan_evidence(
         "acquisitions": results,
         "skipped_existing_count": len(skipped),
         "skipped_existing": skipped,
+        "failure_count": len(failures),
+        "failures": failures,
         "project_database_written": False,
         "game_database_written": False,
         "semantic_validation": False,
@@ -368,17 +381,14 @@ def main() -> int:
     parser.add_argument("--timeout", type=float, default=120)
     parser.add_argument("--retries", type=int, default=3)
     args = parser.parse_args()
-    print(json.dumps(
-        acquire_turkmenistan_evidence(
-            repository_root=args.root,
-            use_existing=args.use_existing,
-            timeout=args.timeout,
-            retries=args.retries,
-        ),
-        ensure_ascii=False,
-        indent=2,
-    ))
-    return 0
+    result = acquire_turkmenistan_evidence(
+        repository_root=args.root,
+        use_existing=args.use_existing,
+        timeout=args.timeout,
+        retries=args.retries,
+    )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 1 if result["failure_count"] else 0
 
 
 if __name__ == "__main__":
