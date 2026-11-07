@@ -340,16 +340,17 @@
       "dataset_key": "gdp_statistical_shortcomings_wp_2023_207",
       "name": "IMF Working Paper 2023/207 — Turkmenistan GDP statistical shortcomings",
       "description": "IMF research paper on Turkmenistan GDP estimation, statistical shortcomings and parallel-market exchange-rate context.",
-      "data_format": "pdf",
+      "data_format": "xml",
       "frequency": "annual",
       "metadata": {
         "provider_release_label": "September 2023",
-        "provider_url": "https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023207-print-pdf.pdf",
-        "raw_artifact": "raw_data/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207/IMF_WP_2023_207_Turkmenistan_GDP.pdf",
+        "provider_url": "https://www.elibrary.imf.org/view/journals/001/2023/207/article-A001-en.xml",
+        "raw_artifact": "raw_data/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207/IMF_WP_2023_207_Turkmenistan_GDP.xml",
         "manifest_directory": "data_manifests/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207",
         "capture_unit": "One identified publication per immutable acquisition event.",
         "publication_date": "2023-09-29",
-        "statistical_role": "Analytical research; not an official national-accounts series."
+        "statistical_role": "Analytical research; not an official national-accounts series.",
+        "capture_format_note": "Full-text XML is retained because IMF media PDF endpoint returns HTTP 403 and eLibrary PDF endpoint returns HTTP 202 in this acquisition environment; XML is the official publisher full text."
       },
       "streams": [
         {
@@ -361,7 +362,7 @@
               "dataset"
             ],
             "required_artifacts": [
-              "IMF_WP_2023_207_Turkmenistan_GDP.pdf"
+              "IMF_WP_2023_207_Turkmenistan_GDP.xml"
             ],
             "byte_integrity": [
               "sha256",
