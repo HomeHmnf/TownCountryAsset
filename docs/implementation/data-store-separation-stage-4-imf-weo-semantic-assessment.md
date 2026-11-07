@@ -141,15 +141,15 @@ Do not populate a definitive `actual | estimate | projection` field where source
 
 ## 6. Release-vintage and reproducibility limitation
 
-The existing comparison combines a fixed IMF October 2026 CSV export with live WDI API responses; those outputs remain the diagnostic baseline and are not vintage-aligned.
+The original 2026-11-05 comparison combined the fixed IMF October 2026 CSV export with live WDI API responses. On 2026-11-07, an immutable response snapshot was captured and replayed. The snapshot remains a timestamped rolling API capture, not a provider-declared WDI vintage; it does not align the WDI source publication vintage with the IMF October 2026 release.
 
-As of 2026-11-07, the byte-preserving WDI capture and snapshot-backed comparison tooling is implemented. It captures source/country/indicator metadata and all observation pages for the six-indicator 2015–2025 bundle, records per-response request metadata and SHA-256/byte counts, and can replay the comparison only after re-verifying every response. The workflow is documented in [World Bank WDI immutable API snapshot acquisition](../data-sources/world-bank-wdi-snapshot-acquisition.md). Owner-run capture, manifest audit, Project DB provenance registration and frozen comparison are still pending; no owner-side validation is claimed.
+Owner-run capture, full manifest audit, Project DB provenance registration, database integrity checks and frozen comparison have now completed. The exact manifest, fingerprint and equivalence results are recorded in [World Bank WDI immutable API snapshot acquisition](../data-sources/world-bank-wdi-snapshot-acquisition.md). The snapshot reproduces all 13,310 candidate keys, WDI and IMF values, coverage states, IMF status hints and IMF reporting-period classifications from the 2026-11-05 live comparison. This confirms input-value stability across those two runs, not semantic equivalence between providers.
 
-The snapshot remains a timestamped rolling API capture, not a provider-declared WDI vintage. It does not align the WDI source publication vintage with the IMF October 2026 release, and it does not authorize redistribution beyond verified dataset/indicator terms.
+The captured WDI `obs_status` field is blank for all 13,310 candidate rows. Of these, 10,678 rows have a WDI observation but remain `not_classified_by_this_comparison`; 2,632 rows have no WDI observation and are classified `missing`. No WDI observation is thereby established as actual, estimate or projection. The snapshot does not authorize redistribution beyond verified dataset/indicator terms.
 
 ## 7. Remaining work, ordered by dependency
 
-1. **Freeze comparison inputs:** run the implemented WDI snapshot capture, audit every raw response, register its provenance in the Project DB, and rerun the comparison using the exact manifest. Preserve the live-API run as a diagnostic baseline.
+1. **Freeze comparison inputs — complete:** the 2026-11-07 WDI snapshot was captured, all 14 artifacts passed byte-count and SHA-256 audit, provenance was registered in the Project DB, and the frozen comparison reproduced the 2026-11-05 live-run values and coverage exactly. Preserve both reports and the manifest as the reproducibility evidence.
 2. **Close field-definition gates:** confirm field 21 IMF unit and source population; CPI annual convention; PPP benchmark/construction. The capture now preserves WDI observation-status metadata, but does not classify blank/unknown statuses.
 3. **Reconcile country cases:** CAR new national accounts (fields 15/16/18), Guinea national accounts (15/16/18), Turkmenistan conversion (15/16), Zimbabwe ICP (18), Tonga/Samoa/Palau period conventions (20), Moldova/Philippines source vintages (21). Bahrain remains closed.
 4. **Separate identity governance:** resolve 242 proposed/unverified identities and the explicit unmatched codes through the identity registry workflow; do not silently map.
@@ -158,14 +158,14 @@ The snapshot remains a timestamped rolling API capture, not a provider-declared 
 
 ## 8. Evidence files and owner-run provenance
 
-Comparison output: `reports/sources/imf-wdi-comparison/20261105T103220Z/`  
+Comparison outputs: `reports/sources/imf-wdi-comparison/20261105T103220Z/` (live API baseline) and `reports/sources/imf-wdi-comparison/20261107T144614Z/` (frozen snapshot replay).  
 WDI snapshot implementation: `tools/acquire_world_bank_wdi_snapshot.py`, `tests/test_world_bank_wdi_snapshot.py`, and `docs/data-sources/world-bank-wdi-snapshot-acquisition.md`.  
 Targeted investigation: `reports/sources/imf-wdi-discrepancy-investigation/20261105T104531Z/`  
 IMF assessment: `reports/sources/imf-weo/20261105T101443Z/`
 
 The targeted investigation contains 15 groups and 165 observations; it reads the comparison CSV only and fetches no new source data. Its output is descriptive evidence, not independent corroboration.
 
-The comparison tests passed (15 tests) and the user-run command completed. The earlier IMF assessment tests passed (4 tests). These are owner-reported local results; repository inspection does not replace local validation.
+The comparison tests passed (15 tests) and the earlier IMF assessment tests passed (4 tests). Stage 4B snapshot tests and related suites passed (19 tests), and `compileall` completed without errors. Owner-run capture completed for snapshot `api_snapshot_20261107T133112433299Z`: 14 artifacts, 4,226,626 bytes, 296 country catalogue records, six indicators, 2,926 observation rows per indicator. Manifest audit: 1 manifest, 14/14 artifacts valid, zero errors. Project DB acquisition ID 6 has status `acquired`, integrity `verified`, and 14 artifacts; SQLite integrity is `ok` and foreign-key violations are empty. Frozen comparison output is `reports/sources/imf-wdi-comparison/20261107T144614Z/`; candidate matrix is 13,310 rows and reproduces all tested values and coverage from the 2026-11-05 live run. These are owner-reported local results; repository inspection does not replace local validation.
 
 ## 9. Governance and side-effect boundary
 
