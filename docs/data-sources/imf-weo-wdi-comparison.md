@@ -153,3 +153,14 @@ The default command continues to retrieve live API responses for exploratory wor
 Snapshot mode verifies every artifact SHA-256 and byte count, checks all six captured indicator bundles and country metadata, and rejects incomplete pagination or a mismatched year range. It records the WDI manifest path/hash, snapshot ID and retrieval timestamp in the comparison report. It also preserves the raw WDI observation status; only an explicit F is labelled forecast. A blank status does not prove an observation is actual.
 
 The captured six-indicator bundle includes the five primary comparisons and SL.UEM.TOTL.NE.ZS as a separate field-21 national-estimate diagnostic. Snapshot capture and Project DB provenance registration do not semantically validate or approve any value. See the dedicated acquisition document for the exact audit, registration and test commands.
+
+
+## Frozen WDI comparison run (2026-11-07)
+
+The immutable WDI snapshot `api_snapshot_20261107T133112433299Z` was captured at `2026-11-07T13:31:36.501505+00:00`, audited successfully (14/14 response artifacts; zero errors), and registered in the Project DB as acquisition ID 6 with integrity status `verified`. The Project DB integrity check returned `ok` and its foreign-key check returned no violations.
+
+The snapshot-backed comparison is in `reports/sources/imf-wdi-comparison/20261107T144614Z/`. It produced the same 13,310 candidate keys and the same coverage counts as the 2026-11-05 live-API comparison: both sources 9,324; IMF only 450; WDI only 1,354; neither 2,182. A row-key comparison found zero additions or removals, and value-level comparison found zero changes in WDI values, IMF values, coverage states, IMF status hints or IMF reporting-period classifications.
+
+The snapshot's WDI `obs_status` is blank for all 13,310 candidate rows. The 10,678 rows with a WDI observation are therefore `not_classified_by_this_comparison`; 2,632 rows without a WDI observation are `missing`. Blank observation status is not evidence of actual data. No actual/estimate/projection classification is inferred.
+
+This establishes reproducibility of the values and coverage between the two comparison runs. It does not make the rolling WDI API snapshot a provider-declared vintage, align it with the fixed IMF October 2026 vintage, or demonstrate semantic equivalence. Existing five-field source-selection priorities and all approval/application gates remain unchanged. See the [Stage 4 assessment](../implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md) and [WDI snapshot acquisition record](world-bank-wdi-snapshot-acquisition.md).
