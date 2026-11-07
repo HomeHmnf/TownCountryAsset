@@ -36,6 +36,24 @@ uv run python -m tools.register_project_acquisitions --manifest-dir data_manifes
 Inspect both outputs, then omit --dry-run to register the two events and their
 artifacts in the Project DB. Registration records byte-level provenance only.
 
+## Completed capture (2026-11-07)
+
+The two previously manual downloads were captured with `--use-existing`, preserving
+filesystem modification time as the timestamp basis rather than claiming a verified
+HTTP retrieval time. The acquisition tool tests passed (4 tests), and the read-only
+manifest audit returned 2 valid manifests, 2 artifacts and 0 errors.
+
+| Dataset | Project acquisition ID | Artifact bytes | SHA-256 |
+|---|---:|---:|---|
+| `national_accounts_legacy_2023` | 8 | 643,328 | `5291a9e96909256a3f11952c33746a7685e640badabacc64477c371413acf75d` |
+| `national_accounts_sna2008_2026` | 9 | 697,616 | `c3535828150d9bedbbf29f3b766bc00e144e31967a0c3839073606c67ec8ebe0` |
+
+Both events were registered as `acquired` with `integrity_status=verified`.
+The Project DB integrity check returned `ok`; the foreign-key check returned no
+violations. Registration wrote provenance to the Project DB only. It did not
+validate statistical content, approve the sources, promote retention, or write
+to the Game DB.
+
 ## Safeguards
 
 - Each publication has its own dataset, stream, manifest and acquisition.
