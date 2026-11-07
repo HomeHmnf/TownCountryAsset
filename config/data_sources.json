@@ -1009,7 +1009,7 @@
     },
     "turkmenistan_state_statistics": {
       "name": "State Committee of Statistics of Turkmenistan (TurkmenStat)",
-      "homepage_url": "https://editor.stat.gov.tm/en",
+      "homepage_url": "https://www.stat.gov.tm/en",
       "domains": [
         "macroeconomy"
       ],
@@ -1023,7 +1023,7 @@
           "release": "turkmenstat-national-accounts-methodology-2025-01",
           "filename": "TurkmenStat_national_accounts_methodology_2025-01-17.html",
           "format": "html",
-          "url": "https://editor.stat.gov.tm/en/news/204",
+          "url": "https://www.stat.gov.tm/en/news/204",
           "fields": [
             15,
             16
@@ -1036,7 +1036,7 @@
           "release": "turkmenstat-statistical-system-reform-2026-06",
           "filename": "TurkmenStat_statistical_system_reform_2026-06-23.html",
           "format": "html",
-          "url": "https://editor.stat.gov.tm/en/news/359",
+          "url": "https://www.stat.gov.tm/en/news/359",
           "fields": [
             15,
             16,
@@ -1057,7 +1057,7 @@
       ],
       "release_discovery": {
         "mode": "manual_review",
-        "provider_url": "https://editor.stat.gov.tm/en",
+        "provider_url": "https://www.stat.gov.tm/en",
         "automation_status": "not_implemented",
         "latest_available": null,
         "latest_validated": null,
