@@ -24,10 +24,10 @@ PUBLICATIONS = (
             "https://www.elibrary.imf.org/downloadpdf/journals/001/2023/207/article-A001-en.pdf",
             "https://www.elibrary.imf.org/view/journals/001/2023/207/article-A001-en.xml",
         ],
-        "filename": "IMF_WP_2023_207_Turkmenistan_GDP.pdf",
-        "format": "pdf",
-        "signature": "pdf",
-        "raw_path": "raw_data/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207/IMF_WP_2023_207_Turkmenistan_GDP.pdf",
+        "filename": "IMF_WP_2023_207_Turkmenistan_GDP.xml",
+        "format": "xml",
+        "signature": "xml",
+        "raw_path": "raw_data/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207/IMF_WP_2023_207_Turkmenistan_GDP.xml",
         "manifest_dir": "data_manifests/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207",
     },
     {
@@ -97,6 +97,13 @@ def _validate(path: Path, signature: str) -> None:
         b"<html" in prefix or b"<!doctype html" in prefix
     ):
         raise ValueError(f"Response is not an HTML document: {path}")
+    if signature == "xml" and not (
+        prefix.startswith(b"<?xml")
+        or prefix.startswith(b"<!doctype html")
+        or b"<html" in prefix
+        or b"<article" in prefix
+    ):
+        raise ValueError(f"Response is not an XML document: {path}")
 
 
 def _download(
@@ -173,11 +180,11 @@ def acquire_turkmenistan_evidence(
                 )
             _validate(raw, publication["signature"])
             final_url = publication["url"]
-            content_type = (
-                "application/pdf"
-                if publication["format"] == "pdf"
-                else "text/html"
-            )
+            content_type = {
+                "pdf": "application/pdf",
+                "html": "text/html",
+                "xml": "application/xml",
+            }[publication["format"]]
             byte_count = raw.stat().st_size
             retrieved_at = datetime.fromtimestamp(
                 raw.stat().st_mtime
