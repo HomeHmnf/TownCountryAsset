@@ -10,7 +10,7 @@ This source-specific acquisition captures five primary research artifacts releva
 - IMF's 10 June 2025 Article IV mission statement.
 - IMF's 22 June 2026 Article IV mission statement.
 
-The notices and mission statements are retained as HTML captures; TurkmenStat URLs use the verified canonical `www.stat.gov.tm` host rather than the `editor` subdomain, whose TLS certificate failed hostname verification in the acquisition environment; the IMF working paper is retained as the publisher's full-text XML because the PDF endpoints did not provide a retrievable PDF in the acquisition environment. Each publication has its own dataset identity, acquisition stream and manifest. This avoids treating distinct publication vintages as one rolling bundle.
+The TurkmenStat notices and IMF June 2026 mission statement are retained as HTML captures. The IMF June 2025 statement is retained in the IMF site's structured JSON representation: the canonical article page exposes an official `index.json` alternate and bundle manifest. TurkmenStat URLs use the verified canonical `www.stat.gov.tm` host rather than the `editor` subdomain, whose TLS certificate failed hostname verification in the acquisition environment; the IMF working paper is retained as the publisher's full-text XML because the PDF endpoints did not provide a retrievable PDF in the acquisition environment. Each publication has its own dataset identity, acquisition stream and manifest. This avoids treating distinct publication vintages as one rolling bundle.
 
 ## Research relevance and limits
 
@@ -33,7 +33,7 @@ uv run python -m tools.acquire_turkmenistan_evidence
 For already downloaded artifacts, `--use-existing` verifies the file signatures and records filesystem modification time as the timestamp basis; it does not misrepresent that time as a verified HTTP retrieval time.
 
 The tool:
-- downloads the five official publication records over HTTPS; for IMF Working Paper 2023/207 it falls back to the official eLibrary full-text XML after the media PDF endpoint returns HTTP 403 and the eLibrary PDF endpoint returns HTTP 202;
+- downloads the five official publication records over HTTPS; for IMF Working Paper 2023/207 it falls back to the official eLibrary full-text XML after the media PDF endpoint returns HTTP 403 and the eLibrary PDF endpoint returns HTTP 202; for the June 2025 IMF mission statement it falls back from the canonical article page to the same article's official IMF `index.json` alternate, whose bundle manifest identifies it as the agent-facing structured representation;
 - uses a 120-second timeout and up to three retries for transient transport failures and selected transient HTTP statuses;
 - validates PDF, HTML or XML signatures as appropriate;
 - writes raw artifacts under `raw_data/sources/`;
@@ -50,7 +50,9 @@ Raw artifacts remain local-only under the project storage policy. Manifests are 
 - IMF Working Paper 2023/207 official eLibrary full text (XML): https://www.elibrary.imf.org/view/journals/001/2023/207/article-A001-en.xml
 - TurkmenStat, 17 January 2025: https://www.stat.gov.tm/en/news/204
 - TurkmenStat, 23 June 2026: https://www.stat.gov.tm/en/news/359
-- IMF, 10 June 2025: https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission
+- IMF, 10 June 2025 canonical article: https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission
+- IMF, 10 June 2025 structured JSON alternate: https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission/index.json
+- IMF, 10 June 2025 bundle manifest: https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission/bundle-manifest.json
 - IMF, 22 June 2026: https://www.imf.org/en/news/articles/2026/06/22/pr26218-turkmenistan-imf-staff-completes-2026-article-iv-mission
 
 ## Validation and provenance status
@@ -63,4 +65,7 @@ Owner-run tests, acquisition, manifest audit and Project DB registration are pen
 The automated acquisition command is resumable. Before downloading a publication, it checks the dataset manifest directory and existing raw artifact. If a prior manifest and raw artifact agree on source, dataset, relative path, SHA-256 and byte count, the publication is reported as `already_acquired_verified` and is not downloaded or overwritten. If a raw artifact exists without a manifest, or an existing manifest does not match the raw artifact, acquisition stops for that publication rather than overwriting evidence. This protects completed events when a later publication in the batch fails. The explicit `--use-existing` mode remains a separate manual integrity-capture path and does not imply an HTTP retrieval timestamp.
 
 
-The IMF June 2025 Article IV mission statement has an attributed fallback at Publicnow, which republishes IMF-issued content and identifies the IMF as publisher and Publicnow as distributor. If the IMF page returns an access error, the acquisition tool may capture this mirror; the manifest's `final_url` records the actual host, and the mirror must not be described as an IMF-hosted capture. The mirrored item states that the IMF published the content on 10 June 2025 and that it was distributed unedited and unaltered. This is a transport fallback, not a change in the publication's issuing institution.
+
+### IMF June 2025 structured representation and access fallback
+
+The canonical IMF article landing page returned HTTP 403 to the automated acquisition client, as did the attributed Publicnow republication. The IMF article page itself exposes an `index.json` alternate under its “Other formats” links. The official bundle manifest identifies this endpoint as the agent-facing structured JSON representation, records the same canonical source URL, title and publication date, and lists the JSON payload size. The acquisition therefore uses this same-host IMF endpoint as the fallback rather than a third-party mirror. The JSON is structurally validated and checked against the expected article title, canonical source URL and publication date before a manifest is written. The manifest records the canonical page as the requested URL and the JSON endpoint as the actual final URL. This is a format alternate of the same IMF publication, not a substitute publication or a third-party republication.
