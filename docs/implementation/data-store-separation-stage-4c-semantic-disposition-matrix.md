@@ -1,6 +1,6 @@
 # IMF WEO–WDI semantic disposition matrix builder
 
-**Status:** implementation committed; owner-run execution and validation pending  
+**Status:** implementation, owner-run execution and validation completed  
 **Branch:** work/compiler-hardening  
 **Purpose:** enrich the complete candidate matrix with explicit, evidence-bounded semantic dispositions.
 
@@ -110,3 +110,22 @@ This is a read-only assessment. It creates no approval, changes no source-select
 
 
 Stage 4C.2 report-writer hardening: the country-case CSV now serializes only its declared columns, converting the bounded-year list to a comma-separated value. Its regression test includes an actual country-case row, verifies the output header, and checks the serialized row. This specifically covers the runtime path that a no-case fixture cannot exercise.
+
+
+## Stage 4C.2 owner-run validation record (2026-11-07)
+
+The decision-readiness builder was run against the owner-generated semantic matrix:
+
+`reports/sources/imf-wdi-semantic-disposition/20261107T145725Z/semantic_disposition_matrix.csv`
+
+Owner-reported validation:
+- Focused test suite: **20 passed in 0.49s**.
+- `compileall`: completed successfully for the decision-readiness and semantic-disposition builders.
+- Decision-readiness report: `reports/sources/imf-wdi-decision-readiness/20261107T150434Z/`.
+- Matrix scope: 13,310 country-field-year rows, 242 project identities, five fields, 2015–2025.
+- All 13,310 rows remain `identity_review_required`; no country identity is promoted.
+- Decision: `not_ready_for_source_policy_change_or_canonical_application`.
+- Existing IMF WEO priority remains unchanged for fields 15, 16, 18, 20 and 21.
+- No approval, release promotion, Project DB write or Game DB write occurred.
+
+The field-specific blockers and bounded country evidence queues are recorded in the generated report. The owner-supplied terminal output is the validation evidence; repository changes alone are not owner-side validation.
