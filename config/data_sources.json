@@ -1006,6 +1006,137 @@
         "latest_applied": null,
         "notes": "Official INS national-accounts publication discovery is manual; preserve each distinct publication and statistical vintage."
       }
+    },
+    "turkmenistan_state_statistics": {
+      "name": "State Committee of Statistics of Turkmenistan (TurkmenStat)",
+      "homepage_url": "https://editor.stat.gov.tm/en",
+      "domains": [
+        "macroeconomy"
+      ],
+      "license_status": "unclear_or_unverified",
+      "attribution": "State Committee of Statistics of Turkmenistan.",
+      "notes": "Official statistical-methodology and national-accounts reform notices. Captured notices are contextual evidence, not numerical national-accounts datasets; retain publication dates and exact HTML bytes.",
+      "acquisition_mode": "manual",
+      "downloads": [
+        {
+          "id": "national_accounts_methodology_2025",
+          "release": "turkmenstat-national-accounts-methodology-2025-01",
+          "filename": "TurkmenStat_national_accounts_methodology_2025-01-17.html",
+          "format": "html",
+          "url": "https://editor.stat.gov.tm/en/news/204",
+          "fields": [
+            15,
+            16
+          ],
+          "scope": "17 January 2025 notice on phased national-accounts methodology modernization.",
+          "release_kind": "edition_or_snapshot"
+        },
+        {
+          "id": "statistical_system_reform_2026",
+          "release": "turkmenstat-statistical-system-reform-2026-06",
+          "filename": "TurkmenStat_statistical_system_reform_2026-06-23.html",
+          "format": "html",
+          "url": "https://editor.stat.gov.tm/en/news/359",
+          "fields": [
+            15,
+            16,
+            18,
+            20,
+            21
+          ],
+          "scope": "23 June 2026 notice on World Bank technical assistance, 2025 SNA and ICP methodology.",
+          "release_kind": "edition_or_snapshot"
+        }
+      ],
+      "field_ids": [
+        15,
+        16,
+        18,
+        20,
+        21
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://editor.stat.gov.tm/en",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Official publication discovery remains manual; notices are preserved as dated contextual evidence."
+      }
+    },
+    "imf_turkmenistan_research": {
+      "name": "International Monetary Fund — Turkmenistan analytical publications",
+      "homepage_url": "https://www.imf.org/en/countries/tkm",
+      "domains": [
+        "macroeconomy"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.imf.org/en/about/copyright-and-terms",
+      "attribution": "International Monetary Fund.",
+      "notes": "Country-specific analytical research and Article IV mission statements used to investigate exchange-rate distortions, GDP methodology and statistical quality. These documents are not IMF WEO database vintages.",
+      "acquisition_mode": "manual",
+      "downloads": [
+        {
+          "id": "gdp_statistical_shortcomings_wp_2023_207",
+          "release": "imf-wp-2023-207",
+          "filename": "IMF_WP_2023_207_Turkmenistan_GDP.pdf",
+          "format": "pdf",
+          "url": "https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023207-print-pdf.pdf",
+          "fields": [
+            15,
+            16
+          ],
+          "scope": "IMF Working Paper 2023/207, Turkmenistan GDP methodology, exchange-rate and alternative-estimation research.",
+          "release_kind": "edition_or_snapshot"
+        },
+        {
+          "id": "article_iv_mission_2025",
+          "release": "imf-turkmenistan-article-iv-mission-2025-06",
+          "filename": "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html",
+          "format": "html",
+          "url": "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission",
+          "fields": [
+            15,
+            16,
+            20
+          ],
+          "scope": "10 June 2025 IMF staff mission statement; exchange-rate policy, statistics and macroeconomic tables.",
+          "release_kind": "edition_or_snapshot"
+        },
+        {
+          "id": "article_iv_mission_2026",
+          "release": "imf-turkmenistan-article-iv-mission-2026-06",
+          "filename": "IMF_Turkmenistan_Article_IV_Mission_2026-06-22.html",
+          "format": "html",
+          "url": "https://www.imf.org/en/news/articles/2026/06/22/pr26218-turkmenistan-imf-staff-completes-2026-article-iv-mission",
+          "fields": [
+            15,
+            16,
+            18,
+            20,
+            21
+          ],
+          "scope": "22 June 2026 IMF staff mission statement; official/parallel exchange-rate gap and staff GDP-estimate caveat.",
+          "release_kind": "edition_or_snapshot"
+        }
+      ],
+      "field_ids": [
+        15,
+        16,
+        18,
+        20,
+        21
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.imf.org/en/countries/tkm",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Country-specific IMF research and mission statements are acquired as distinct publications; not part of the WEO statistical vintage."
+      }
     }
   },
   "release_management": {
