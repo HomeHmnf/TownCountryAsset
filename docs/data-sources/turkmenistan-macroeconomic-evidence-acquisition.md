@@ -128,3 +128,18 @@ uv run python -m tools.process_turkmenistan_evidence --register
 The `--register` mode repeats the audit, synchronization and dry-run gates before writing the three acquisition events and their artifacts to the Project DB. It never writes the Game DB, applies semantic approval, changes source selection, promotes releases or performs retention operations. It is deliberately specific to the two Turkmenistan source directories and the three expected manifest events; a changed batch requires review and a corresponding update to its acceptance test.
 
 The two IMF 403 failures remain visible gaps in both the acquisition result and this record. They are not treated as empty acquisitions, and the workflow does not substitute third-party republications.
+
+
+The orchestration layer is covered by `tests/test_process_turkmenistan_evidence.py`. Before using it locally, run:
+
+```fish
+uv run python -m pytest -v \
+    tests/test_turkmenistan_evidence_acquisition.py \
+    tests/test_process_turkmenistan_evidence.py
+
+uv run python -m compileall -q \
+    tools/acquire_turkmenistan_evidence.py \
+    tools/process_turkmenistan_evidence.py
+```
+
+Then run the default preflight command and inspect its JSON result. It must report `ready_for_registration`, three eligible manifests, zero deferred items and zero errors. The explicit `--register` command is a separate Project DB write and should only be run after that preflight is reviewed. Local owner validation of the new orchestrator is pending.
