@@ -33,7 +33,7 @@ uv run python -m tools.acquire_turkmenistan_evidence
 For already downloaded artifacts, `--use-existing` verifies the file signatures and records filesystem modification time as the timestamp basis; it does not misrepresent that time as a verified HTTP retrieval time.
 
 The tool:
-- downloads the five official publication records over HTTPS; for IMF Working Paper 2023/207 it falls back to the official eLibrary full-text XML after the media PDF endpoint returns HTTP 403 and the eLibrary PDF endpoint returns HTTP 202; for the June 2025 IMF mission statement it falls back from the canonical article page to the same article's official IMF `index.json` alternate, whose bundle manifest identifies it as the agent-facing structured representation;
+- downloads the five official publication records over HTTPS; for IMF Working Paper 2023/207 it falls back to the official eLibrary full-text XML after the media PDF endpoint returns HTTP 403 and the eLibrary PDF endpoint returns HTTP 202; for the June 2025 IMF mission statement it attempts the same article's official IMF `index.json` alternate, whose bundle manifest identifies it as the agent-facing structured representation; both canonical and JSON endpoints currently return HTTP 403 to the acquisition client.
 - uses a 120-second timeout and up to three retries for transient transport failures and selected transient HTTP statuses;
 - validates PDF, HTML or XML signatures as appropriate;
 - writes raw artifacts under `raw_data/sources/`;
@@ -68,4 +68,9 @@ The automated acquisition command is resumable. Before downloading a publication
 
 ### IMF June 2025 structured representation and access fallback
 
-The canonical IMF article landing page returned HTTP 403 to the automated acquisition client, as did the attributed Publicnow republication. The IMF article page itself exposes an `index.json` alternate under its “Other formats” links. The official bundle manifest identifies this endpoint as the agent-facing structured JSON representation, records the same canonical source URL, title and publication date, and lists the JSON payload size. The acquisition therefore uses this same-host IMF endpoint as the fallback rather than a third-party mirror. The JSON is structurally validated and checked against the expected article title, canonical source URL and publication date before a manifest is written. The manifest records the canonical page as the requested URL and the JSON endpoint as the actual final URL. This is a format alternate of the same IMF publication, not a substitute publication or a third-party republication.
+The canonical IMF article landing page and its official `index.json` alternate both returned HTTP 403 to the automated acquisition client. The JSON alternate remains configured because it is the same-host structured representation, but neither endpoint is currently retrievable from this environment. The attributed Publicnow republication also returned HTTP 403 and is not configured as a fallback. The June 2025 statement therefore remains an acquisition gap: no raw artifact or manifest is created, and no third-party copy is substituted. The IMF publication remains independently discoverable through the official IMF page and search-indexed content. A future manual capture must preserve its actual retrieval timestamp basis and URL; content found in a search result is not treated as a captured source artifact.
+
+
+### Batch failure handling
+
+A transport failure for one publication is recorded in the command's `failures` array with status `acquisition_failed_no_manifest`; the batch continues to later publications. The command exits non-zero if any publication failed, even when other publications were successfully acquired. This permits independent publications in the same batch to be captured without concealing an incomplete batch. A failed publication is not registered as an acquisition and does not create an empty or synthetic manifest.
