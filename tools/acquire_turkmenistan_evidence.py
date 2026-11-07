@@ -60,6 +60,9 @@ PUBLICATIONS = (
         "release": "imf-turkmenistan-article-iv-mission-2025-06",
         "publication_date": "2025-06-10",
         "url": "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission",
+        "url_fallbacks": [
+            "https://ebs.publicnow.com/view/E1D49A6C7C27EB1B1D3DDFC0C6AB7FEDB825EB8E",
+        ],
         "filename": "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html",
         "format": "html",
         "signature": "html",
