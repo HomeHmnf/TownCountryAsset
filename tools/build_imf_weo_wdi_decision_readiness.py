@@ -257,7 +257,7 @@ def write_report(result: dict[str, Any], output_root: Path) -> Path:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()
         for item in result["country_case_assessments"]:
-            writer.writerow({**item, "years_with_bounded_evidence": ",".join(map(str, item["years_with_bounded_evidence"]))})
+            writer.writerow({key: (",".join(map(str, item[key])) if key == "years_with_bounded_evidence" else item[key]) for key in fields})
     return target
 
 
