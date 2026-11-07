@@ -462,12 +462,12 @@
       "dataset_key": "article_iv_mission_2025",
       "name": "IMF Turkmenistan Article IV mission statement (June 2025)",
       "description": "IMF staff mission statement covering exchange-rate unification, FX restrictions and statistical quality.",
-      "data_format": "html",
+      "data_format": "json",
       "frequency": "annual",
       "metadata": {
         "provider_release_label": "10 June 2025",
         "provider_url": "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission",
-        "raw_artifact": "raw_data/sources/imf_turkmenistan_research/article_iv_mission_2025/IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html",
+        "raw_artifact": "raw_data/sources/imf_turkmenistan_research/article_iv_mission_2025/IMF_Turkmenistan_Article_IV_Mission_2025-06-10.json",
         "manifest_directory": "data_manifests/sources/imf_turkmenistan_research/article_iv_mission_2025",
         "capture_unit": "One identified publication per immutable acquisition event.",
         "publication_date": "2025-06-10"
@@ -482,7 +482,7 @@
               "dataset"
             ],
             "required_artifacts": [
-              "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html"
+              "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.json"
             ],
             "byte_integrity": [
               "sha256",
