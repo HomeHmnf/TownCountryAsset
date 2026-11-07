@@ -106,7 +106,10 @@ def test_review_queues_are_generated_separately(tmp_path: Path) -> None:
         writer.writerow(_candidate(game_id="zwe", country_name="Zimbabwe", field_id="18", year="2017"))
     rows, summary = build_matrix(source)
     assert len(summary["_country_queue"]) == 2
-    assert len(summary["_field_queue"]) == 2
+    assert len(summary["_field_queue"]) == 5
+    assert {item["field_id"] for item in summary["_field_queue"]} == {"15", "16", "18", "20", "21"}
+    assert sum(item["row_count"] for item in summary["_field_queue"]) == 2
+    assert all(item["row_count"] == 0 for item in summary["_field_queue"] if item["field_id"] in {"15", "16", "20"})
     target = write_outputs(rows, summary, tmp_path / "reports")
     assert (target / "country_field_review_queue.json").is_file()
     assert (target / "country_field_review_queue.csv").is_file()
