@@ -73,3 +73,49 @@ def test_existing_manifest_is_never_overwritten(tmp_path: Path) -> None:
         acquisition.acquire_turkmenistan_evidence(
             repository_root=tmp_path, use_existing=True
         )
+
+
+def test_download_tries_fallback_after_forbidden_primary_url(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from io import BytesIO
+    from urllib.error import HTTPError
+    from email.message import Message
+
+    calls: list[str] = []
+
+    class Response:
+        status = 200
+        headers = Message()
+        def __enter__(self):
+            self.headers["Content-Type"] = "application/pdf"
+            return self
+        def __exit__(self, *args):
+            return False
+        def read(self):
+            return b"%PDF-1.7\\nvalid fixture"
+        def geturl(self):
+            return "https://publisher.example/fallback.pdf"
+
+    def fake_urlopen(request, timeout):
+        calls.append(request.full_url)
+        if len(calls) == 1:
+            raise HTTPError(request.full_url, 403, "Forbidden", {}, None)
+        return Response()
+
+    monkeypatch.setattr(acquisition, "urlopen", fake_urlopen)
+    destination = tmp_path / "paper.pdf"
+    final_url, content_type, byte_count = acquisition._download(
+        ["https://imf.example/blocked.pdf", "https://elibrary.example/paper.pdf"],
+        destination,
+        "pdf",
+        1,
+        0,
+    )
+    assert calls == [
+        "https://imf.example/blocked.pdf",
+        "https://elibrary.example/paper.pdf",
+    ]
+    assert final_url == "https://publisher.example/fallback.pdf"
+    assert content_type == "application/pdf"
+    assert byte_count == destination.stat().st_size
