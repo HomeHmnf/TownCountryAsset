@@ -204,3 +204,33 @@ def test_imf_mission_statement_uses_official_json_alternate_and_validates_identi
     invalid.write_text('{"title":"wrong"}', encoding="utf-8")
     with pytest.raises(ValueError, match="expected IMF publication structure"):
         acquisition._validate(invalid, "json")
+
+
+def test_batch_continues_after_one_publication_transport_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    failed_id = "article_iv_mission_2025"
+
+    def fake_download(urls, destination, signature, timeout, retries):
+        if failed_id in str(destination):
+            raise RuntimeError("All publisher URL candidates failed: HTTP 403")
+        _artifact(destination, signature)
+        return urls[0], "application/json" if signature == "json" else "text/html", destination.stat().st_size
+
+    monkeypatch.setattr(acquisition, "_download", fake_download)
+    result = acquisition.acquire_turkmenistan_evidence(repository_root=tmp_path)
+
+    assert result["failure_count"] == 1
+    assert result["failures"][0]["dataset_id"] == failed_id
+    assert result["failures"][0]["status"] == "acquisition_failed_no_manifest"
+    assert result["acquisition_count"] == 4
+    assert any(
+        item["dataset_id"] == "article_iv_mission_2026"
+        for item in result["acquisitions"]
+    )
+    failed_publication = next(
+        item for item in acquisition.PUBLICATIONS
+        if item["dataset_id"] == failed_id
+    )
+    assert not (tmp_path / failed_publication["raw_path"]).exists()
+    assert not list((tmp_path / failed_publication["manifest_dir"]).glob("*.json")) if (tmp_path / failed_publication["manifest_dir"]).exists() else True
