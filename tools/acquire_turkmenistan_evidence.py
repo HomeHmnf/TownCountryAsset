@@ -239,7 +239,7 @@ def acquire_turkmenistan_evidence(
             },
         }
         manifest_path.write_text(
-            json.dumps(manifest, ensure_ascii=False, indent=2) + "\\n",
+            json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
         results.append({
