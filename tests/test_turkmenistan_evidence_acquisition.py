@@ -16,7 +16,11 @@ def _artifact(path: Path, kind: str) -> Path:
         else (
             b'<?xml version="1.0" encoding="UTF-8"?><article>fixture</article>'
             if kind == "xml"
-            else b"<!doctype html><html><body>fixture</body></html>"
+            else (
+                b'{"title":"fixture","publishDate":"2025-06-10","sourceUrl":"https://example.org","sections":[]}'
+                if kind == "json"
+                else b"<!doctype html><html><body>fixture</body></html>"
+            )
         )
     )
     path.write_bytes(payload)
@@ -167,3 +171,36 @@ def test_download_mode_refuses_unmanifested_existing_raw_artifact(tmp_path: Path
     _artifact(tmp_path / publication["raw_path"], publication["signature"])
     with pytest.raises(FileExistsError, match="without a manifest"):
         acquisition.acquire_turkmenistan_evidence(repository_root=tmp_path)
+
+
+def test_imf_mission_statement_uses_official_json_alternate_and_validates_identity(
+    tmp_path: Path,
+) -> None:
+    publication = next(
+        item for item in acquisition.PUBLICATIONS
+        if item["dataset_id"] == "article_iv_mission_2025"
+    )
+    assert publication["url"].startswith("https://www.imf.org/")
+    assert publication["url_fallbacks"] == [
+        "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission/index.json"
+    ]
+    assert publication["signature"] == "json"
+    assert publication["format"] == "json"
+    assert publication["raw_path"].endswith(".json")
+
+    valid = tmp_path / "valid.json"
+    valid.write_text(
+        json.dumps({
+            "title": publication["expected_json_title"],
+            "publishDate": publication["expected_json_publication_date"],
+            "sourceUrl": publication["url"],
+            "sections": [],
+        }),
+        encoding="utf-8",
+    )
+    acquisition._validate(valid, "json")
+
+    invalid = tmp_path / "invalid.json"
+    invalid.write_text('{"title":"wrong"}', encoding="utf-8")
+    with pytest.raises(ValueError, match="expected IMF publication structure"):
+        acquisition._validate(invalid, "json")
