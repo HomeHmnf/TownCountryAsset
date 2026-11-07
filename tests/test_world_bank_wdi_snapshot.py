@@ -130,3 +130,60 @@ def test_loader_rejects_incomplete_optional_supporting_bundle(tmp_path):
     manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
     with pytest.raises(snapshot.SnapshotError, match="incomplete optional supporting indicator bundle"):
         snapshot.load_snapshot(manifest_path, repository_root=tmp_path)
+
+
+
+def test_http_request_retries_transient_transport_errors(monkeypatch):
+    attempts = []
+    sleeps = []
+
+    class Response:
+        status = 200
+        headers = {"Content-Type": "application/json"}
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def read(self):
+            return b'{"ok":true}'
+
+        def geturl(self):
+            return "https://api.worldbank.org/final"
+
+    def urlopen(request, timeout):
+        attempts.append((request.full_url, timeout))
+        if len(attempts) < 3:
+            raise TimeoutError("temporary read timeout")
+        return Response()
+
+    monkeypatch.setattr(snapshot.urllib.request, "urlopen", urlopen)
+    monkeypatch.setattr(snapshot.time, "sleep", sleeps.append)
+    body, status, headers, final_url = snapshot._request(
+        "https://api.worldbank.org/test", timeout=90, retries=4, retry_delay=0.5,
+    )
+    assert body == b'{"ok":true}'
+    assert status == 200
+    assert headers["Content-Type"] == "application/json"
+    assert final_url == "https://api.worldbank.org/final"
+    assert len(attempts) == 3
+    assert all(timeout == 90 for _, timeout in attempts)
+    assert sleeps == [0.5, 1.0]
+
+
+def test_http_request_does_not_retry_non_transient_client_errors(monkeypatch):
+    attempts = []
+
+    def urlopen(request, timeout):
+        attempts.append(request.full_url)
+        raise snapshot.urllib.error.HTTPError(
+            request.full_url, 404, "Not found", {}, None,
+        )
+
+    monkeypatch.setattr(snapshot.urllib.request, "urlopen", urlopen)
+    monkeypatch.setattr(snapshot.time, "sleep", lambda _: None)
+    with pytest.raises(snapshot.SnapshotError, match="after 1 attempt"):
+        snapshot._request("https://api.worldbank.org/missing", retries=5)
+    assert len(attempts) == 1
