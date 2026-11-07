@@ -954,6 +954,58 @@
         "latest_applied": null,
         "notes": "Publication catalogue and manual downloadable files; no automated release-discovery or acquisition adapter is configured."
       }
+    },
+    "guinea_ins": {
+      "name": "Guinea National Institute of Statistics (INS)",
+      "homepage_url": "https://stat-guinee.org/",
+      "domains": [
+        "macroeconomy"
+      ],
+      "license_status": "unclear_or_unverified",
+      "attribution": "Institut National de la Statistique (INS), République de Guinée.",
+      "notes": "National accounts publications. Preserve legacy SNA 1993/2006-base series separately from the revised SNA 2008/2018-base series; publication/release dates and statistical reference periods are distinct. The June 2026 note supersedes neither the historical publication nor its captured artifact.",
+      "acquisition_mode": "manual",
+      "downloads": [
+        {
+          "id": "national_accounts_legacy_2023",
+          "release": "2023-yearbook-legacy-sna1993",
+          "filename": "La_Guinee_en_chiffre_2023.pdf",
+          "format": "pdf",
+          "url": "https://www.stat-guinee.org/images/Documents/Publications/INS/annuelles/annuaire/La_Guinee_en_chiffre_2023.pdf",
+          "fields": [
+            15,
+            16
+          ],
+          "scope": "Historical national accounts series published in the 2023 statistical yearbook; retain as legacy SNA 1993/2006-base evidence.",
+          "release_kind": "edition_or_snapshot"
+        },
+        {
+          "id": "national_accounts_sna2008_2026",
+          "release": "june-2026-sna2008-2018-base-accounts",
+          "filename": "Note_analyse_comptes_nationaux_2018_2024_June_2026.pdf",
+          "format": "pdf",
+          "url": "https://stat-guinee.org/images/Documents/Publications/INS/annuelles/CN/Note_analyse_des_comptes_nationaux_definitifs_et_rapides_2018_2024_VC.pdf",
+          "fields": [
+            15,
+            16
+          ],
+          "scope": "2018-base SNA 2008 national accounts; 2018-2020 definitive and 2021-2024 rapid estimates as identified by the publication.",
+          "release_kind": "edition_or_snapshot"
+        }
+      ],
+      "field_ids": [
+        15,
+        16
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://stat-guinee.org/",
+        "automation_status": "not_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Official INS national-accounts publication discovery is manual; preserve each distinct publication and statistical vintage."
+      }
     }
   },
   "release_management": {
