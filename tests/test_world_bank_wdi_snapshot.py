@@ -101,3 +101,32 @@ def test_capture_rejects_non_wdi_indicator_metadata(tmp_path):
             repository_root=tmp_path, start_year=2024, end_year=2024,
             retrieved_at="2026-11-07T12:00:00Z", request_get=wrong_source,
         )
+
+
+
+def test_loader_remains_compatible_with_historical_six_indicator_snapshots(tmp_path, monkeypatch):
+    monkeypatch.setattr(snapshot, "SUPPORTING_INDICATORS", ())
+    monkeypatch.setattr(snapshot, "CAPTURE_INDICATORS", snapshot.INDICATORS)
+    report = snapshot.capture_snapshot(
+        repository_root=tmp_path, start_year=2024, end_year=2024,
+        retrieved_at="2026-11-07T12:00:00Z", request_get=_fake_request,
+    )
+    loaded = snapshot.load_snapshot(tmp_path / report["manifest_path"], repository_root=tmp_path)
+    assert set(loaded["observations"]) == set(snapshot.INDICATORS)
+    assert not set(snapshot.SUPPORTING_INDICATORS) & set(loaded["observations"])
+
+
+def test_loader_rejects_incomplete_optional_supporting_bundle(tmp_path):
+    report = snapshot.capture_snapshot(
+        repository_root=tmp_path, start_year=2024, end_year=2024,
+        retrieved_at="2026-11-07T12:00:00Z", request_get=_fake_request,
+    )
+    manifest_path = tmp_path / report["manifest_path"]
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["files"] = [
+        item for item in manifest["files"]
+        if not item["filename"].startswith("observations_PA.NUS.PPP_")
+    ]
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(snapshot.SnapshotError, match="incomplete optional supporting indicator bundle"):
+        snapshot.load_snapshot(manifest_path, repository_root=tmp_path)
