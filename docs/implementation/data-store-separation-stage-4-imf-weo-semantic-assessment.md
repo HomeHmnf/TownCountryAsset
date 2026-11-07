@@ -153,8 +153,9 @@ The captured WDI `obs_status` field is blank for all 13,310 candidate rows. Of t
 2. **Close field-definition gates:** confirm field 21 IMF unit and source population; CPI annual convention; PPP benchmark/construction. The capture now preserves WDI observation-status metadata, but does not classify blank/unknown statuses.
 3. **Reconcile country cases:** CAR new national accounts (fields 15/16/18), Guinea national accounts (15/16/18), Turkmenistan conversion (15/16), Zimbabwe ICP (18), Tonga/Samoa/Palau period conventions (20), Moldova/Philippines source vintages (21). Bahrain remains closed.
 4. **Separate identity governance:** resolve 242 proposed/unverified identities and the explicit unmatched codes through the identity registry workflow; do not silently map.
-5. **Produce a semantic disposition matrix — implementation complete, owner run pending:** `tools/build_imf_weo_wdi_semantic_disposition.py` now enriches every frozen candidate row with identity gate, field concept/method gate, period disposition, IMF/WDI status, existing country-case evidence and document links. The generated matrix remains diagnostic and not approved; see [Stage 4C](data-store-separation-stage-4c-semantic-disposition-matrix.md).
-6. **Only then** prepare a separate source-selection recommendation and approval artifact. Application remains gated by existing approval and transactional safeguards.
+5. **Semantic disposition and decision readiness — complete and owner-validated:** Stage 4C generated the 13,310-row year-scoped semantic matrix, separate review queues and decision-readiness package. The focused owner-run suite passed 20 tests; the report concluded `not_ready_for_source_policy_change_or_canonical_application`. All 242 identities remain review-required; see [Stage 4C](data-store-separation-stage-4c-semantic-disposition-matrix.md).
+6. **Supporting macro decomposition — implementation committed, owner run pending:** Stage 4D extends future WDI captures with local-currency GDP, official/alternative exchange rates, PPP conversion factor, population and CPI index, then produces read-only arithmetic diagnostics. It does not replace the frozen six-indicator comparison; see [Stage 4D](data-store-separation-stage-4d-wdi-macro-decomposition.md).
+7. **Only after evidence and identity gates close** prepare a separate source-selection recommendation and approval artifact. Application remains gated by existing approval and transactional safeguards.
 
 ## 8. Evidence files and owner-run provenance
 
@@ -178,3 +179,6 @@ This assessment does not:
 - promote country identities or ISO assignments.
 
 The October 2026 WEO acquisition remains acquired with byte integrity verified, not semantically approved. No Game DB write has occurred.
+
+
+Stage 4C.2 owner-run decision-readiness validation (2026-11-07): 20 tests passed in 0.49s; `compileall` completed; report generated at `reports/sources/imf-wdi-decision-readiness/20261107T150434Z/`. It records 13,310 rows, 242 identities, all identities review-required, and no readiness for source-policy change or canonical application. No approval, policy change, release promotion or database write occurred.
