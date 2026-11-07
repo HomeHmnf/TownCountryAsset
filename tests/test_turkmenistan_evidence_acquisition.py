@@ -234,3 +234,22 @@ def test_batch_continues_after_one_publication_transport_failure(
     )
     assert not (tmp_path / failed_publication["raw_path"]).exists()
     assert not list((tmp_path / failed_publication["manifest_dir"]).glob("*.json")) if (tmp_path / failed_publication["manifest_dir"]).exists() else True
+
+
+def test_manual_imf_json_capture_checks_publication_identity(tmp_path: Path) -> None:
+    for publication in acquisition.PUBLICATIONS:
+        artifact = _artifact(tmp_path / publication["raw_path"], publication["signature"])
+        if publication["signature"] == "json":
+            artifact.write_text(
+                json.dumps({
+                    "title": "A different IMF publication",
+                    "publishDate": publication["expected_json_publication_date"],
+                    "sourceUrl": publication["url"],
+                    "sections": [],
+                }),
+                encoding="utf-8",
+            )
+    with pytest.raises(ValueError, match="Existing JSON publication identity"):
+        acquisition.acquire_turkmenistan_evidence(
+            repository_root=tmp_path, use_existing=True
+        )
