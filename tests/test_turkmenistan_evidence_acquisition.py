@@ -17,7 +17,7 @@ def _artifact(path: Path, kind: str) -> Path:
             b'<?xml version="1.0" encoding="UTF-8"?><article>fixture</article>'
             if kind == "xml"
             else (
-                b'{"title":"fixture","publishDate":"2025-06-10","sourceUrl":"https://example.org","sections":[]}'
+                b'{"title":"IMF Staff Completes 2025 Article IV Mission to Turkmenistan","publishDate":"2025-06-10","sourceUrl":"https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission","sections":[]}'
                 if kind == "json"
                 else b"<!doctype html><html><body>fixture</body></html>"
             )
