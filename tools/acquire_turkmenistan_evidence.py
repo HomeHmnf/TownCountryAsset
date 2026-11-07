@@ -161,6 +161,56 @@ def _download(
 
 
 
+def _completed_acquisition(
+    root: Path, publication: dict[str, Any], raw: Path, manifest_dir: Path
+) -> dict[str, Any] | None:
+    """Return a verified prior event; never reuse a mutable raw path blindly."""
+    manifests = sorted(manifest_dir.glob("*.json")) if manifest_dir.exists() else []
+    if not manifests:
+        if raw.exists():
+            raise FileExistsError(
+                f"Raw artifact exists without a manifest; refusing to overwrite: {raw}"
+            )
+        return None
+    if not raw.is_file():
+        raise FileNotFoundError(
+            f"Existing acquisition manifest has no raw artifact: {publication['raw_path']}"
+        )
+    _validate(raw, publication["signature"])
+    digest = _sha256(raw)
+    byte_count = raw.stat().st_size
+    verified: list[dict[str, Any]] = []
+    for path in manifests:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        files = payload.get("files", [])
+        if (
+            payload.get("source_id") != publication["source_id"]
+            or payload.get("download_id") != publication["dataset_id"]
+            or len(files) != 1
+            or files[0].get("local_raw_path") != publication["raw_path"]
+            or files[0].get("sha256") != digest
+            or files[0].get("byte_count") != byte_count
+        ):
+            raise ValueError(
+                f"Existing manifest does not match current raw artifact: {path}"
+            )
+        verified.append({
+            "manifest_path": path.relative_to(root).as_posix(),
+            "retrieved_at": payload.get("retrieved_at"),
+            "timestamp_basis": payload.get("retrieval_timestamp_basis"),
+            "byte_count": byte_count,
+            "sha256": digest,
+            "final_url": files[0].get("final_url"),
+        })
+    return {
+        "source_id": publication["source_id"],
+        "dataset_id": publication["dataset_id"],
+        "raw_path": publication["raw_path"],
+        "existing_acquisitions": verified,
+        "status": "already_acquired_verified",
+    }
+
+
 def acquire_turkmenistan_evidence(
     *,
     repository_root: str | Path = REPOSITORY_ROOT,
@@ -170,9 +220,15 @@ def acquire_turkmenistan_evidence(
 ) -> dict[str, Any]:
     root = Path(repository_root).resolve()
     results = []
+    skipped = []
     for publication in PUBLICATIONS:
         raw = root / publication["raw_path"]
         manifest_dir = root / publication["manifest_dir"]
+        if not use_existing:
+            prior = _completed_acquisition(root, publication, raw, manifest_dir)
+            if prior is not None:
+                skipped.append(prior)
+                continue
         if use_existing:
             if not raw.is_file():
                 raise FileNotFoundError(
@@ -263,6 +319,8 @@ def acquire_turkmenistan_evidence(
     return {
         "acquisition_count": len(results),
         "acquisitions": results,
+        "skipped_existing_count": len(skipped),
+        "skipped_existing": skipped,
         "project_database_written": False,
         "game_database_written": False,
         "semantic_validation": False,
