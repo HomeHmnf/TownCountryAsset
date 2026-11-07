@@ -10,7 +10,7 @@ This source-specific acquisition captures five primary research artifacts releva
 - IMF's 10 June 2025 Article IV mission statement.
 - IMF's 22 June 2026 Article IV mission statement.
 
-The notices and mission statements are retained as HTML captures; the IMF working paper is retained as PDF. Each publication has its own dataset identity, acquisition stream and manifest. This avoids treating distinct publication vintages as one rolling bundle.
+The notices and mission statements are retained as HTML captures; the IMF working paper is retained as the publisher's full-text XML because the PDF endpoints did not provide a retrievable PDF in the acquisition environment. Each publication has its own dataset identity, acquisition stream and manifest. This avoids treating distinct publication vintages as one rolling bundle.
 
 ## Research relevance and limits
 
@@ -33,9 +33,9 @@ uv run python -m tools.acquire_turkmenistan_evidence
 For already downloaded artifacts, `--use-existing` verifies the file signatures and records filesystem modification time as the timestamp basis; it does not misrepresent that time as a verified HTTP retrieval time.
 
 The tool:
-- downloads the five fixed official publication URLs over HTTPS;
+- downloads the five official publication records over HTTPS; for IMF Working Paper 2023/207 it falls back to the official eLibrary full-text XML after the media PDF endpoint returns HTTP 403 and the eLibrary PDF endpoint returns HTTP 202;
 - uses a 120-second timeout and up to three retries for transient transport failures and selected transient HTTP statuses;
-- validates PDF or HTML signatures;
+- validates PDF, HTML or XML signatures as appropriate;
 - writes raw artifacts under `raw_data/sources/`;
 - writes one immutable timestamped manifest per publication under `data_manifests/sources/`;
 - records URL, final URL, content type, byte count, SHA-256, publication date and retrieval timestamp basis;
@@ -46,7 +46,8 @@ Raw artifacts remain local-only under the project storage policy. Manifests are 
 
 ## Source references
 
-- IMF Working Paper 2023/207: https://www.imf.org/en/publications/wp/issues/2023/09/29/reassessing-gdp-growth-in-countries-with-statistical-shortcomings-a-case-study-on-539482
+- IMF Working Paper 2023/207 publication record: https://www.imf.org/en/publications/wp/issues/2023/09/29/reassessing-gdp-growth-in-countries-with-statistical-shortcomings-a-case-study-on-539482
+- IMF Working Paper 2023/207 official eLibrary full text (XML): https://www.elibrary.imf.org/view/journals/001/2023/207/article-A001-en.xml
 - TurkmenStat, 17 January 2025: https://editor.stat.gov.tm/en/news/204
 - TurkmenStat, 23 June 2026: https://editor.stat.gov.tm/en/news/359
 - IMF, 10 June 2025: https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission
