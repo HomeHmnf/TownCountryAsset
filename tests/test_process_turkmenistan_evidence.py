@@ -5,7 +5,8 @@ from pathlib import Path
 from tools import process_turkmenistan_evidence as process
 
 
-def _audit_ok(root: Path, manifest_dir: Path) -> dict:
+def _audit_ok(*, repository_root: Path, manifest_dir: Path) -> dict:
+    del repository_root
     is_state = "turkmenistan_state_statistics" in manifest_dir.as_posix()
     return {
         "status": "ok",
