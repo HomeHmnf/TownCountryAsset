@@ -56,3 +56,8 @@ Raw artifacts remain local-only under the project storage policy. Manifests are 
 ## Validation and provenance status
 
 Owner-run tests, acquisition, manifest audit and Project DB registration are pending. No acquisition or semantic approval is implied by this design document.
+
+
+### Resume and overwrite protection
+
+The automated acquisition command is resumable. Before downloading a publication, it checks the dataset manifest directory and existing raw artifact. If a prior manifest and raw artifact agree on source, dataset, relative path, SHA-256 and byte count, the publication is reported as `already_acquired_verified` and is not downloaded or overwritten. If a raw artifact exists without a manifest, or an existing manifest does not match the raw artifact, acquisition stops for that publication rather than overwriting evidence. This protects completed events when a later publication in the batch fails. The explicit `--use-existing` mode remains a separate manual integrity-capture path and does not imply an HTTP retrieval timestamp.
