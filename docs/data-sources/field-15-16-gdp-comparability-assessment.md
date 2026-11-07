@@ -164,3 +164,28 @@ The population comparison remains a separate issue. ICASEES's definitive account
 - Guinea MPCI, [Cadrage macroéconomique 2024](https://mpci.gov.gn/index.php/cadrage-macroeconomique-2024-le-ministre-ismael-nabe-met-laccent-sur-la-transformation-structurelle-et-la-credibilite-internationale-de-la-guinee/), 9 October 2025.
 - UNSD, [Guinea National Accounts country profile](https://unstats.un.org/unsd/snaama/CountryProfile?ccode=324) and [GDP source metadata](https://unstats.un.org/unsd/snaama/Metadata/?countrycode=324&groupid=101), January 2026 upload.
 - ICASEES, [Comptes Nationaux définitifs 2019–2021](https://icasees.org/index.php/actualites/394-les-comptes-nationaux-2019-2021-de-la-republique-centrafricaine-officiellement-publies), 30 July 2026.
+
+
+### Turkmenistan — 7 November 2026 WDI snapshot decomposition
+
+The expanded WDI snapshot retrieved on 7 November 2026 provides a complete 2015–2025 arithmetic decomposition for Turkmenistan. Reported current-USD GDP is reproduced by dividing WDI current-LCU GDP by the DEC alternative conversion factor in all 11 years. The WDI official exchange-rate indicator is missing for every year in this capture. This verifies the arithmetic construction in the captured observations; it does not establish the factor's original source or imply that it is a parallel-market exchange rate.
+
+| Year | WDI current LCU GDP (bn TMT) | DEC factor (TMT/USD) | WDI current USD GDP (bn) | IMF WEO current USD GDP (bn) | WDI relative to WEO |
+|---:|---:|---:|---:|---:|---:|
+| 2015 | 125.299 | 3.5000 | 35.800 | 35.800 | 0.00% |
+| 2016 | 126.593 | 3.8000 | 33.314 | 36.180 | -7.92% |
+| 2017 | 132.742 | 3.9800 | 33.352 | 37.926 | -12.06% |
+| 2018 | 142.679 | 5.4800 | 26.036 | 40.762 | -36.13% |
+| 2019 | 157.410 | 5.3000 | 29.700 | 44.974 | -33.96% |
+| 2020 | 159.092 | 5.8168 | 27.351 | 45.455 | -39.83% |
+| 2021 | 173.170 | 6.5759 | 26.334 | 49.477 | -46.77% |
+| 2022 | 203.947 | 5.4264 | 37.584 | 56.677 | -33.69% |
+| 2023 | 211.704 | 5.4255 | 39.020 | 62.814 | -37.88% |
+| 2024 | 240.363 | 5.4320 | 44.249 | 68.675 | -35.57% |
+| 2025 | 270.893 | 5.4365 | 49.829 | 77.398 | -35.62% |
+
+The 2017–2018 DEC factor jump (3.98 to 5.48) coincides with the sharp WDI/WEO divergence. It is not explained by the WDI country metadata's stated 2019–2025 alternative-factor period alone. The IMF 2023 working paper documents that the official rate remained 3.5 TMT/USD from 2015 while parallel-market rates diverged sharply, but it treats those observations as directional indicators rather than official statistics. Do not equate the DEC factor with the parallel-market rate without direct source documentation.
+
+TurkmenStat's January 2025 notice reports phased national-accounts methodology modernization. Its June 2026 notice describes World Bank technical assistance for national accounts under the 2025 SNA and ICP methodology. The IMF June 2025 and June 2026 mission statements identify exchange-rate unification and statistical quality as material issues; the June 2026 statement says the official GDP-growth narrative is difficult to reconcile with other available data and that IMF staff use their own GDP estimates. These statements strengthen the case for a source-vintage and methodology investigation but do not numerically reconcile WDI and WEO.
+
+**Disposition:** preserve the WDI arithmetic, missing official FX observations, 2018 factor break, and WEO gap as separate evidence. No source-selection change, identity approval, semantic approval, or canonical application follows. See [Turkmenistan macroeconomic evidence acquisition](turkmenistan-macroeconomic-evidence-acquisition.md) for the five-publication capture plan.
