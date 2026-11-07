@@ -17,7 +17,7 @@ The original frozen comparison remains unchanged. Stage 4D extends future WDI sn
 | `SP.POP.TOTL` | Total population |
 | `FP.CPI.TOTL` | Consumer price index |
 
-The six original comparison/diagnostic indicators remain the required base set. The snapshot loader accepts both the historical six-indicator capture and the expanded profile; when any supporting indicator is present, its metadata and complete observation bundle must both be present. Existing snapshots are not rewritten.
+The six original comparison/diagnostic indicators remain the required base set. The snapshot loader accepts both the historical six-indicator capture and the expanded profile; when any supporting indicator is present, its metadata and complete observation bundle must both be present. Existing snapshots are not rewritten. This batch adds no new unemployment series and does not resolve field 21's IMF unit, population or methodology gate.
 
 The expanded capture stores all 12 indicator metadata and observation responses, raw-byte fingerprints, request metadata, pagination, retrieval timestamps and country metadata. Country metadata now also exposes the provider's special notes, income level, lending type and capital city to the diagnostic assessment while retaining the original raw response.
 
