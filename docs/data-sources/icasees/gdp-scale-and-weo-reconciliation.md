@@ -67,3 +67,14 @@ The memo also records measurement limitations and recommendations for completing
 ## Disposition
 
 This is a read-only analytical finding. It does not create normalized observations, approve or promote a source release, change source-selection policy, or write to canonical SQLite. Any future ICASEES import requires the shared acquisition, validation, approval and transactional application lifecycle.
+
+
+## WDI local-currency comparison (2026-11-07)
+
+The expanded WDI snapshot provides current-price GDP in local currency. For 2019–2021, the WDI values are 1,301.485, 1,339.228 and 1,395.476 billion FCFA. Compared with the definitive ICASEES values of 1,952.925, 2,056.035 and 2,149.622 billion FCFA, WDI is 33.36%, 34.86% and 35.08% lower respectively.
+
+The WDI official exchange rate and DEC alternative conversion factor are effectively identical for these years. Consequently, the WDI/IMF USD-level difference is already present in the local-currency GDP numerator; it is not explained by choosing between the two captured conversion factors. The ICASEES revised values also match IMF WEO `CAF.NGDP.A` exactly at published precision.
+
+Do not describe WDI as reproducing the ICASEES historical 2019 workbook series: the historical workbook value is 1,431.991 billion FCFA, not the WDI 1,301.485 billion. The evidence supports a WDI national-accounts vintage/compilation mismatch against the definitive revised series, but does not identify the precise WDI source vintage or prove the independent compilation lineage of the exact WEO match.
+
+The ICASEES definitive accounts report population of 5,360,271, 5,464,907 and 6,091,097 for 2019–2021, while WDI `SP.POP.TOTL` reports 4,944,703, 5,026,628 and 5,112,100. Field 16 therefore has both numerator and population-denominator differences; it must not be treated as a pure GDP-level comparison.
