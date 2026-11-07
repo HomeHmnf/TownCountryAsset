@@ -1,0 +1,524 @@
+{
+  "assessment": "imf_weo_wdi_decision_readiness",
+  "input": "reports/sources/imf-wdi-semantic-disposition/20261107T145725Z/semantic_disposition_matrix.csv",
+  "row_count": 13310,
+  "country_count": 242,
+  "identity_gate_counts": {
+    "identity_review_required": 13310
+  },
+  "global_gates": [
+    {
+      "gate": "country_identity",
+      "status": "blocking",
+      "finding": "Every one of the 242 project identities is still mapped_review_required; no row has verified identity mapping.",
+      "action": "Resolve country identity and ISO assignment through the separate identity-governance process before any country-level canonical application."
+    },
+    {
+      "gate": "source_vintage",
+      "status": "blocking",
+      "finding": "The IMF input is the fixed October 2026 WEO export; the WDI input is a timestamped capture of the rolling API, not a provider-declared vintage.",
+      "action": "Retain snapshot provenance and acquire aligned provider vintages where possible; do not describe the comparison as vintage-aligned."
+    },
+    {
+      "gate": "observation_status",
+      "status": "blocking_for_status_sensitive_use",
+      "finding": "WDI provides no explicit observation status in this capture; IMF latest-actual metadata is only a boundary hint and does not classify later years as projections.",
+      "action": "Preserve unclassified/missing states; obtain explicit source status or country-specific evidence before classifying actual, estimate or projection."
+    },
+    {
+      "gate": "approval_and_application",
+      "status": "not_started_by_design",
+      "finding": "No semantic approval, source-selection change, release promotion or Game DB write has been made.",
+      "action": "After blockers close, prepare a separate evidence-backed approval artifact; do not bypass the existing approval/application gate."
+    }
+  ],
+  "field_assessments": [
+    {
+      "field_id": "15",
+      "row_count": 2662,
+      "country_count": 242,
+      "coverage_counts": {
+        "both_sources_present": 2087,
+        "imf_only": 52,
+        "neither_source_present": 355,
+        "wdi_only": 168
+      },
+      "imf_status_counts": {
+        "actual_per_weo_metadata": 1872,
+        "after_latest_actual": 58,
+        "missing": 523,
+        "status_unclassified": 209
+      },
+      "wdi_status_counts": {
+        "no_wdi_observation": 407,
+        "wdi_actual_estimate_status_not_established": 2255
+      },
+      "year_evidence_scope_counts": {
+        "alternative_conversion_factor_period_documented": 7,
+        "case_context_only_no_year_specific_support": 16,
+        "no_country_case_year_scope": 2629,
+        "primary_national_accounts_and_weo_crosscheck": 3,
+        "rebased_national_accounts_vintage_corroboration": 7
+      },
+      "concept": "Qualified comparability: nominal GDP, current USD.",
+      "current_disposition": "Retain existing IMF WEO priority; do not promote WDI.",
+      "readiness": "blocked_semantic_and_identity_gates",
+      "blockers": [
+        "IMF October 2026 and WDI rolling-API snapshot are not provider-vintage aligned.",
+        "National-accounts compilation, revision vintage and USD conversion are not reconciled country by country.",
+        "CAR, Guinea and Turkmenistan have material documented cases with remaining year-level gaps."
+      ],
+      "next_actions": [
+        "Acquire or identify an immutable WDI provider vintage aligned to the WEO release, if available.",
+        "Reconstruct source national-accounts levels and USD conversion for the material country cases.",
+        "Resolve the 2018 Turkmenistan divergence onset and CAR post-2021/other-year series lineage."
+      ],
+      "evidence": "docs/data-sources/field-15-16-gdp-comparability-assessment.md"
+    },
+    {
+      "field_id": "16",
+      "row_count": 2662,
+      "country_count": 242,
+      "coverage_counts": {
+        "both_sources_present": 2080,
+        "imf_only": 52,
+        "neither_source_present": 355,
+        "wdi_only": 175
+      },
+      "imf_status_counts": {
+        "actual_per_weo_metadata": 1865,
+        "after_latest_actual": 58,
+        "missing": 530,
+        "status_unclassified": 209
+      },
+      "wdi_status_counts": {
+        "no_wdi_observation": 407,
+        "wdi_actual_estimate_status_not_established": 2255
+      },
+      "year_evidence_scope_counts": {
+        "case_context_only_no_year_specific_support": 16,
+        "exchange_rate_warning_population_denominator_open": 7,
+        "gdp_evidence_population_denominator_open": 3,
+        "gdp_rebase_population_denominator_open": 7,
+        "no_country_case_year_scope": 2629
+      },
+      "concept": "Qualified comparability: nominal GDP per capita.",
+      "current_disposition": "Retain existing IMF WEO priority; do not promote WDI.",
+      "readiness": "blocked_semantic_and_identity_gates",
+      "blockers": [
+        "All field 15 numerator-vintage and USD-conversion issues also apply.",
+        "Population denominator vintage, reference date and universe are not independently reconstructed."
+      ],
+      "next_actions": [
+        "Complete the field 15 GDP numerator reconciliation.",
+        "Acquire matching population series and reconstruct both providers' denominators by year."
+      ],
+      "evidence": "docs/data-sources/field-15-16-gdp-comparability-assessment.md"
+    },
+    {
+      "field_id": "18",
+      "row_count": 2662,
+      "country_count": 242,
+      "coverage_counts": {
+        "both_sources_present": 2062,
+        "imf_only": 77,
+        "neither_source_present": 428,
+        "wdi_only": 95
+      },
+      "imf_status_counts": {
+        "missing": 523,
+        "status_unclassified": 2139
+      },
+      "wdi_status_counts": {
+        "no_wdi_observation": 505,
+        "wdi_actual_estimate_status_not_established": 2157
+      },
+      "year_evidence_scope_counts": {
+        "case_context_only_no_year_specific_support": 32,
+        "country_specific_icp_factor_conversion_documented": 1,
+        "no_country_case_year_scope": 2629
+      },
+      "concept": "Not demonstrated comparable: current PPP international dollars.",
+      "current_disposition": "Retain existing IMF WEO priority; do not promote WDI.",
+      "readiness": "blocked_semantic_and_identity_gates",
+      "blockers": [
+        "ICP benchmark, linking/extrapolation and nominal-GDP input pipelines are not decomposed.",
+        "IMF PPPGDP has no latest-actual metadata or reporting-period classification in the acquired WEO export.",
+        "Zimbabwe's 2017 special conversion is documented but exact October 2026 WEO and current WDI record-level factors remain unverified."
+      ],
+      "next_actions": [
+        "Acquire immutable ICP 2017/2021 benchmark records and relevant PPP time series.",
+        "Reconstruct provider-implied PPP factors and underlying nominal GDP by country-year.",
+        "Keep actual/estimate status and reporting period unclassified until explicit evidence is available."
+      ],
+      "evidence": "docs/data-sources/field-18-ppp-gdp-comparability-assessment.md"
+    },
+    {
+      "field_id": "20",
+      "row_count": 2662,
+      "country_count": 242,
+      "coverage_counts": {
+        "both_sources_present": 1951,
+        "imf_only": 186,
+        "neither_source_present": 497,
+        "wdi_only": 28
+      },
+      "imf_status_counts": {
+        "actual_per_weo_metadata": 1952,
+        "after_latest_actual": 9,
+        "missing": 525,
+        "status_unclassified": 176
+      },
+      "wdi_status_counts": {
+        "no_wdi_observation": 683,
+        "wdi_actual_estimate_status_not_established": 1979
+      },
+      "year_evidence_scope_counts": {
+        "case_context_only_no_year_specific_support": 21,
+        "fiscal_year_correspondence_supported": 7,
+        "fiscal_year_correspondence_supported_vintage_open": 4,
+        "no_country_case_year_scope": 2629,
+        "residual_discrepancy_open": 1
+      },
+      "concept": "Not demonstrated comparable: annual CPI inflation.",
+      "current_disposition": "Retain existing IMF WEO priority; do not promote WDI.",
+      "readiness": "blocked_semantic_and_identity_gates",
+      "blockers": [
+        "Period-average versus end-period definitions and calendar versus fiscal-year windows require explicit alignment.",
+        "WEO reporting-period metadata is blank for the compared CPI observations.",
+        "Samoa 2025 residual and earlier Tonga/Palau years remain unresolved; CPI revisions/vintages differ."
+      ],
+      "next_actions": [
+        "Acquire immutable WDI/IFS observations and exact country-year national/IMF fiscal-year tables.",
+        "Record period start/end, annual-average or end-period convention, CPI basket and revision vintage.",
+        "Resolve Samoa 2025 and the earlier Tonga/Palau observations before any full-period reconciliation."
+      ],
+      "evidence": "docs/data-sources/field-20-inflation-comparability-assessment.md"
+    },
+    {
+      "field_id": "21",
+      "row_count": 2662,
+      "country_count": 242,
+      "coverage_counts": {
+        "both_sources_present": 1144,
+        "imf_only": 83,
+        "neither_source_present": 547,
+        "wdi_only": 888
+      },
+      "imf_status_counts": {
+        "actual_per_weo_metadata": 1149,
+        "after_latest_actual": 37,
+        "missing": 1435,
+        "status_unclassified": 41
+      },
+      "wdi_status_counts": {
+        "no_wdi_observation": 630,
+        "wdi_actual_estimate_status_not_established": 2032
+      },
+      "year_evidence_scope_counts": {
+        "case_context_only_no_year_specific_support": 18,
+        "national_lfs_corroborates_weo": 1,
+        "national_lfs_corroborates_weo_break_in_series": 1,
+        "no_country_case_year_scope": 2629,
+        "official_total_rate_exactly_matches_weo": 9,
+        "official_year_end_vs_annual_reference_period_conflict": 1,
+        "psa_annual_lfs_corroborates_weo_2025_preliminary": 3
+      },
+      "concept": "Generally non-equivalent products: IMF country-desk/national series versus WDI ILO modelled estimates.",
+      "current_disposition": "Retain existing IMF WEO priority; do not promote WDI modelled or national-estimate series.",
+      "readiness": "blocked_semantic_and_identity_gates",
+      "blockers": [
+        "IMF LUR unit is blank in the acquired WEO export; reference population and period need country-level verification.",
+        "WDI modelled ILO estimates and WDI national estimates are distinct products, neither automatically interchangeable with WEO.",
+        "WDI observation status is unclassified for all present observations in this snapshot."
+      ],
+      "next_actions": [
+        "Establish IMF LUR unit, reference population and annual aggregation for each country.",
+        "Keep modelled and national-estimate WDI indicators separate in any future comparison.",
+        "Use country-specific national-source corroboration only within its documented years and preserve survey redesign/preliminary flags."
+      ],
+      "evidence": "docs/data-sources/field-21-unemployment-comparability-assessment.md"
+    }
+  ],
+  "country_case_assessments": [
+    {
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "country": "Guinea",
+      "field_id": "15",
+      "case_id": "guinea_sna2008_2018_base_rebasing",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 4,
+        "rebased_national_accounts_vintage_corroboration": 7
+      },
+      "years_with_bounded_evidence": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "country": "Guinea",
+      "field_id": "16",
+      "case_id": "guinea_gdp_population_denominator",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 4,
+        "gdp_rebase_population_denominator_open": 7
+      },
+      "years_with_bounded_evidence": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "country": "Guinea",
+      "field_id": "18",
+      "case_id": "guinea_ppp_decomposition",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 11
+      },
+      "years_with_bounded_evidence": [],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+      "country": "Zimbabwe",
+      "field_id": "18",
+      "case_id": "zimbabwe_icp_2017_benchmark",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 10,
+        "country_specific_icp_factor_conversion_documented": 1
+      },
+      "years_with_bounded_evidence": [
+        2017
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_2c6f6c5486f04a87aa94277e67d6e51a",
+      "country": "Tonga",
+      "field_id": "20",
+      "case_id": "tonga_fiscal_year_july_start_and_cpi_rebase",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 7,
+        "fiscal_year_correspondence_supported_vintage_open": 4
+      },
+      "years_with_bounded_evidence": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_38fd6c5cd2be45739f3be11bc4cab9c8",
+      "country": "Bahrain",
+      "field_id": "21",
+      "case_id": "bahrain_reference_period_settled",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 1,
+        "official_total_rate_exactly_matches_weo": 9,
+        "official_year_end_vs_annual_reference_period_conflict": 1
+      },
+      "years_with_bounded_evidence": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_642fbe2581cf4b8c857d967717d1f1ef",
+      "country": "Palau",
+      "field_id": "20",
+      "case_id": "palau_fiscal_year_september_end",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 8,
+        "fiscal_year_correspondence_supported": 3
+      },
+      "years_with_bounded_evidence": [
+        2023,
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_72de9a194d85404098bb741ae4ffc826",
+      "country": "Turkmenistan",
+      "field_id": "15",
+      "case_id": "turkmenistan_exchange_rate_regime",
+      "year_scopes": {
+        "alternative_conversion_factor_period_documented": 7,
+        "case_context_only_no_year_specific_support": 4
+      },
+      "years_with_bounded_evidence": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_72de9a194d85404098bb741ae4ffc826",
+      "country": "Turkmenistan",
+      "field_id": "16",
+      "case_id": "turkmenistan_gdp_population_denominator",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 4,
+        "exchange_rate_warning_population_denominator_open": 7
+      },
+      "years_with_bounded_evidence": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_76082bd796c546d1ab76a7a8a3251369",
+      "country": "Samoa",
+      "field_id": "20",
+      "case_id": "samoa_fiscal_year_july_june",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 6,
+        "fiscal_year_correspondence_supported": 4,
+        "residual_discrepancy_open": 1
+      },
+      "years_with_bounded_evidence": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_96ea5c49288d40b0945401031405c2c8",
+      "country": "Moldova",
+      "field_id": "21",
+      "case_id": "moldova_2025_lfs_redesign",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 9,
+        "national_lfs_corroborates_weo": 1,
+        "national_lfs_corroborates_weo_break_in_series": 1
+      },
+      "years_with_bounded_evidence": [
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "country": "Central African Republic",
+      "field_id": "15",
+      "case_id": "car_national_accounts_rebasing",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 8,
+        "primary_national_accounts_and_weo_crosscheck": 3
+      },
+      "years_with_bounded_evidence": [
+        2019,
+        2020,
+        2021
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "country": "Central African Republic",
+      "field_id": "16",
+      "case_id": "car_gdp_population_denominator",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 8,
+        "gdp_evidence_population_denominator_open": 3
+      },
+      "years_with_bounded_evidence": [
+        2019,
+        2020,
+        2021
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "country": "Central African Republic",
+      "field_id": "18",
+      "case_id": "car_ppp_decomposition",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 11
+      },
+      "years_with_bounded_evidence": [],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    },
+    {
+      "game_id": "tc_fc8f1a9536d342899526129acf15acd2",
+      "country": "Philippines",
+      "field_id": "21",
+      "case_id": "philippines_annualized_lfs",
+      "year_scopes": {
+        "case_context_only_no_year_specific_support": 8,
+        "psa_annual_lfs_corroborates_weo_2025_preliminary": 3
+      },
+      "years_with_bounded_evidence": [
+        2023,
+        2024,
+        2025
+      ],
+      "identity_gate": "blocking",
+      "status": "evidence_context_or_bounded_corroboration_not_semantic_approval"
+    }
+  ],
+  "decision": "not_ready_for_source_policy_change_or_canonical_application",
+  "current_source_priority": "existing IMF WEO priority assignments remain unchanged for fields 15, 16, 18, 20 and 21",
+  "approval_created": false,
+  "policy_changed": false,
+  "release_promoted": false,
+  "project_database_written": false,
+  "game_database_written": false,
+  "report_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-wdi-decision-readiness/20261107T150434Z"
+}

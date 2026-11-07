@@ -1,0 +1,6 @@
+field_id,row_count,country_count,readiness,concept,current_disposition,evidence
+15,2662,242,blocked_semantic_and_identity_gates,"Qualified comparability: nominal GDP, current USD.",Retain existing IMF WEO priority; do not promote WDI.,docs/data-sources/field-15-16-gdp-comparability-assessment.md
+16,2662,242,blocked_semantic_and_identity_gates,Qualified comparability: nominal GDP per capita.,Retain existing IMF WEO priority; do not promote WDI.,docs/data-sources/field-15-16-gdp-comparability-assessment.md
+18,2662,242,blocked_semantic_and_identity_gates,Not demonstrated comparable: current PPP international dollars.,Retain existing IMF WEO priority; do not promote WDI.,docs/data-sources/field-18-ppp-gdp-comparability-assessment.md
+20,2662,242,blocked_semantic_and_identity_gates,Not demonstrated comparable: annual CPI inflation.,Retain existing IMF WEO priority; do not promote WDI.,docs/data-sources/field-20-inflation-comparability-assessment.md
+21,2662,242,blocked_semantic_and_identity_gates,Generally non-equivalent products: IMF country-desk/national series versus WDI ILO modelled estimates.,Retain existing IMF WEO priority; do not promote WDI modelled or national-estimate series.,docs/data-sources/field-21-unemployment-comparability-assessment.md

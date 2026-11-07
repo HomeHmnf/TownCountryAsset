@@ -1,0 +1,115 @@
+{
+  "assessment": "world_bank_wdi_immutable_api_snapshot_acquisition",
+  "snapshot_id": "api_snapshot_20261107T161129160851Z",
+  "retrieved_at": "2026-11-07T16:12:07.812622+00:00",
+  "manifest_path": "data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T161129160851Z.json",
+  "artifact_count": 26,
+  "artifact_bytes": 8885684,
+  "country_catalogue_record_count": 296,
+  "period": {
+    "start_year": 2014,
+    "end_year": 2025
+  },
+  "indicators": {
+    "NY.GDP.MKTP.CD": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "GDP (current US$)",
+      "source_organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)"
+    },
+    "NY.GDP.PCAP.CD": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "GDP per capita (current US$)",
+      "source_organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)"
+    },
+    "NY.GDP.MKTP.PP.CD": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "GDP, PPP (current international $)",
+      "source_organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, note: This information is for ICP’s PPPs utilized in WDI, publisher: International Comparison Program (ICP), date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat, date accessed: Periodical update;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-https://data-explorer.oecd.org/, publisher: OECD, date accessed: Periodical update;\nStaff estimates, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nWorld Economic Outlook database, International Monetary Fund (IMF)"
+    },
+    "FP.CPI.TOTL.ZG": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Inflation, consumer prices (annual %)",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF)"
+    },
+    "SL.UEM.TOTL.ZS": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Unemployment, total (% of total labor force) (modeled ILO estimate)",
+      "source_organization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: January 17, 2026"
+    },
+    "SL.UEM.TOTL.NE.ZS": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Unemployment, total (% of total labor force) (national estimate)",
+      "source_organization": "Labour Force Statistics database (LFS), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: September 28, 2026"
+    },
+    "NY.GDP.MKTP.CN": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "GDP (current LCU)",
+      "source_organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)"
+    },
+    "PA.NUS.FCRF": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Official exchange rate (LCU per US$, period average)",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF)"
+    },
+    "PA.NUS.ATLS": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "DEC alternative conversion factor (LCU per US$)",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF);\nStaff estimates, World Bank (WB)"
+    },
+    "PA.NUS.PPP": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "PPP conversion factor, GDP (LCU per international $)",
+      "source_organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, publisher: International Comparison Program, type: International statistical program, date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat, type: International statistical program;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-https://data-explorer.oecd.org/, publisher: OECD"
+    },
+    "SP.POP.TOTL": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Population, total",
+      "source_organization": "World Population Prospects, United Nations (UN), uri: https://population.un.org/wpp/, publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), uri: https://unstats.un.org/home/nso_sites/, publisher: National Statistical Offices;\nEurostat: Demographic Statistics, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/data/database?node_code=earn_ses_monthly, publisher: Eurostat;\nPopulation and Vital Statistics Report (various years), United Nations (UN), uri: https://unstats.un.org, publisher: UN Statistics Division"
+    },
+    "FP.CPI.TOTL": {
+      "pages": 1,
+      "observation_rows": 3192,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Consumer price index (2010 = 100)",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF)"
+    }
+  },
+  "source_last_updated": null,
+  "licensing": {
+    "default": "CC BY 4.0 for World Bank-produced datasets",
+    "exception": "Third-party indicator exceptions require indicator-level review before redistribution.",
+    "terms_url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets"
+  },
+  "side_effects": {
+    "raw_snapshot_acquired": true,
+    "manifest_written": true,
+    "project_database_written": false,
+    "game_database_written": false,
+    "semantic_validation_performed": false,
+    "approval_created": false,
+    "source_selection_changed": false,
+    "retention_applied": false
+  }
+}

@@ -1,0 +1,680 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "world_bank_wdi",
+  "source_name": "World Bank World Development Indicators",
+  "download_id": "wdi_selected_macro_indicators",
+  "dataset_id": "wdi_selected_macro_indicators",
+  "release": "api_snapshot_20261107T133112433299Z",
+  "snapshot_id": "api_snapshot_20261107T133112433299Z",
+  "release_kind": "rolling_api_snapshot",
+  "release_discovery_mode": "api_capture",
+  "source_url": "https://api.worldbank.org/v2",
+  "final_url": "https://api.worldbank.org/v2",
+  "api_documentation_url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
+  "terms_url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets",
+  "attribution": "World Bank Group, World Development Indicators; indicator-level originating organisations and source notes are retained in the captured metadata.",
+  "license_status": "CC BY 4.0 default for World Bank-produced datasets; indicator-specific third-party exceptions require review.",
+  "retrieved_at": "2026-11-07T13:31:36.501505+00:00",
+  "capture_started_at": "2026-11-07T13:31:12.433299+00:00",
+  "snapshot_scope": {
+    "world_bank_source_id": "2",
+    "start_year": 2015,
+    "end_year": 2025,
+    "primary_indicators": [
+      "NY.GDP.MKTP.CD",
+      "NY.GDP.PCAP.CD",
+      "NY.GDP.MKTP.PP.CD",
+      "FP.CPI.TOTL.ZG",
+      "SL.UEM.TOTL.ZS"
+    ],
+    "diagnostic_indicators": [
+      "SL.UEM.TOTL.NE.ZS"
+    ],
+    "all_indicators": [
+      "NY.GDP.MKTP.CD",
+      "NY.GDP.PCAP.CD",
+      "NY.GDP.MKTP.PP.CD",
+      "FP.CPI.TOTL.ZG",
+      "SL.UEM.TOTL.ZS",
+      "SL.UEM.TOTL.NE.ZS"
+    ],
+    "api_version": "v2",
+    "observation_api_per_page": 20000,
+    "country_catalogue_record_count": 296,
+    "country_catalogue_page_count": 1,
+    "observation_status": "Preserved verbatim in raw API rows; not interpreted by this capture."
+  },
+  "indicator_summaries": {
+    "NY.GDP.MKTP.CD": {
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "GDP (current US$)",
+      "source_organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)"
+    },
+    "NY.GDP.PCAP.CD": {
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "GDP per capita (current US$)",
+      "source_organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)"
+    },
+    "NY.GDP.MKTP.PP.CD": {
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "GDP, PPP (current international $)",
+      "source_organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, note: This information is for ICP’s PPPs utilized in WDI, publisher: International Comparison Program (ICP), date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat, date accessed: Periodical update;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-https://data-explorer.oecd.org/, publisher: OECD, date accessed: Periodical update;\nStaff estimates, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nWorld Economic Outlook database, International Monetary Fund (IMF)"
+    },
+    "FP.CPI.TOTL.ZG": {
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Inflation, consumer prices (annual %)",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF)"
+    },
+    "SL.UEM.TOTL.ZS": {
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Unemployment, total (% of total labor force) (modeled ILO estimate)",
+      "source_organization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: January 17, 2026"
+    },
+    "SL.UEM.TOTL.NE.ZS": {
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-10-08",
+      "indicator_name": "Unemployment, total (% of total labor force) (national estimate)",
+      "source_organization": "Labour Force Statistics database (LFS), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: September 28, 2026"
+    }
+  },
+  "files": [
+    {
+      "filename": "source_metadata.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/source_metadata.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 236,
+      "sha256": "26d3ed8cf01ffed2995a9997940398bf5a287a1ee595fad75983f877d2805bba",
+      "url": "https://api.worldbank.org/v2/sources/2?format=json",
+      "final_url": "https://api.worldbank.org/v2/sources/2?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:18.100338+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:17 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=TEii7Lf8At5mgbldxlxVgwptE7S40qCB8Yt6igRfwgg-1794058277.9220963-1.0.1.1-GvsAf6E5CRAAarNWLum4BfyBjwGtA0itCOqN.ff1cy0; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb28d0947dccd-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "13799",
+        "Cache-Control": "public, max-age=84827",
+        "Expires": "Sun, 08 Nov 2026 13:05:04 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 09:15:05 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "country_metadata_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/country_metadata_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 113954,
+      "sha256": "c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce",
+      "url": "https://api.worldbank.org/v2/country?format=json&per_page=400&page=1",
+      "final_url": "https://api.worldbank.org/v2/country?format=json&per_page=400&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:18.856913+00:00",
+      "request_parameters": {
+        "format": "json",
+        "per_page": "400",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:18 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=oWoL5q7Agom59iST1Krn6uSi.T8HYezML3tEQfDU4zI-1794058278.446969-1.0.1.1-l85r8dr9ZiFCUI.iq6zkXQSdh.bCIkOYWqUEEuelyWI; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2904dd9d2ee-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "60787",
+        "Cache-Control": "public, max-age=33354",
+        "Expires": "Sat, 07 Nov 2026 22:47:12 GMT",
+        "Last-Modified": "Fri, 06 Nov 2026 05:54:04 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 296
+    },
+    {
+      "filename": "indicator_metadata_NY.GDP.MKTP.CD.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/indicator_metadata_NY.GDP.MKTP.CD.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 938,
+      "sha256": "51cec1e144a5bad8d92238630c0a305e20116e86d34ad95c7c315ed166255b28",
+      "url": "https://api.worldbank.org/v2/indicator/NY.GDP.MKTP.CD?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/NY.GDP.MKTP.CD?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:19.324872+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:19 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=Wgi9AYYXaGM_qjicDH1e9gn5adensZBBtMjOC6CK5OU-1794058279.2161133-1.0.1.1-cG_Lk71wmtFiM7.wRNmG5cMLNWfvIRblFHAOFSw7b2o; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2951f1cd2a0-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "67554",
+        "Cache-Control": "public, max-age=64765",
+        "Expires": "Sun, 08 Nov 2026 07:30:44 GMT",
+        "Last-Modified": "Fri, 06 Nov 2026 12:44:50 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_NY.GDP.MKTP.CD_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/observations_NY.GDP.MKTP.CD_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 619241,
+      "sha256": "bf8f0e0157412ff9f85f1906a4d2424ced8bdec6b736c10f231284e34c2dcc49",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:21.360287+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:20 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=AsiIJZLIdklAsTJ_eTbHx7A9.zbkCJ8Hfh9ZxxXfJ4o-1794058279.7356756-1.0.1.1-w.NeyI1oYMLTh8ya6n0LZDZ_jqL7dRgfnyARs9XbJ2o; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2985db407ed-FRA",
+        "CF-Cache-Status": "MISS",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 08 Nov 2026 13:31:20 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 13:31:20 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    },
+    {
+      "filename": "indicator_metadata_NY.GDP.PCAP.CD.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/indicator_metadata_NY.GDP.PCAP.CD.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 1044,
+      "sha256": "96520c3a22b1f9da1c7456349a6e70b1643db88d427671faced17cb8b9eaf907",
+      "url": "https://api.worldbank.org/v2/indicator/NY.GDP.PCAP.CD?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/NY.GDP.PCAP.CD?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:21.871336+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:21 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=Y09rKhb3JtdVfAnZzDWzD_MSjC5OWuH5N.wYqinilXI-1794058281.7368314-1.0.1.1-hdAfZZnHqHhb.sJB5ikCIkIVmsegC638ub0AgFxBzE0; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2a4de0abba1-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "68215",
+        "Cache-Control": "public, max-age=79878",
+        "Expires": "Sun, 08 Nov 2026 11:42:39 GMT",
+        "Last-Modified": "Fri, 06 Nov 2026 16:45:44 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_NY.GDP.PCAP.CD_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/observations_NY.GDP.PCAP.CD_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 652675,
+      "sha256": "b44b0d8d8752c6c8a5626d3aeec0951d5ce81adb5bfecc7534965152096c82e3",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.CD?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:23.877077+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:22 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=kqX6Mz9_Ne9XqVSlN8vpnR4GKp6NZk9TB3G.hVCFi8A-1794058282.2250369-1.0.1.1-5dcL0J3k.1ADhOjEYQ9xvUJcbdJzwAwqVLhuQ5fi8ps; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2a7e983dc9c-FRA",
+        "CF-Cache-Status": "MISS",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 08 Nov 2026 13:31:22 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 13:31:22 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    },
+    {
+      "filename": "indicator_metadata_NY.GDP.MKTP.PP.CD.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/indicator_metadata_NY.GDP.MKTP.PP.CD.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 2624,
+      "sha256": "e0a12d757d047f4a581238ccf5b79d606fc829fcf9b40c4808f951ec1d6b8ee1",
+      "url": "https://api.worldbank.org/v2/indicator/NY.GDP.MKTP.PP.CD?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/NY.GDP.MKTP.PP.CD?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:25.359529+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:25 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=brBQ_QJVrJJv.vfRzrC6M7d7qaViMwXHgUZMbP7xkRg-1794058285.2574484-1.0.1.1-35YfGuLO73TM.PRhmrqC_.a1AzRce_T9wlrjdyudZ3E; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2badfc0dbf7-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "64378",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 08 Nov 2026 13:31:25 GMT",
+        "Last-Modified": "Fri, 06 Nov 2026 19:38:27 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_NY.GDP.MKTP.PP.CD_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/observations_NY.GDP.MKTP.PP.CD_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 677704,
+      "sha256": "29817fdfcaae33fb990243d89bfdec8cad6624455572995c632347c0523b3637",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.PP.CD?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.PP.CD?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:27.734776+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:26 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=fABCnfnjck1XbJNZUzCaDOywuEqdh1eb7pA0tIdehsE-1794058285.6869369-1.0.1.1-QOPI2qwPRCoXpZyJ8hBsOC6XKlm3d0NeoBmcHfXrCL0; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2bd8caad371-FRA",
+        "CF-Cache-Status": "MISS",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 08 Nov 2026 13:31:26 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 13:31:26 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    },
+    {
+      "filename": "indicator_metadata_FP.CPI.TOTL.ZG.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/indicator_metadata_FP.CPI.TOTL.ZG.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 632,
+      "sha256": "df9371a3b6c01e55a3f28991e62e1b1ebbe0cd2a7da94456be9938c7a2962233",
+      "url": "https://api.worldbank.org/v2/indicator/FP.CPI.TOTL.ZG?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/FP.CPI.TOTL.ZG?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:28.248202+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:28 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=dhRGlvOf0_nzvR15sMX__TogUKad2DrgwtrdKkIgyp8-1794058288.1482952-1.0.1.1-_JNuSWmrfLkPPXOwCu292D52tm3hRWULFvAhypqJhb4; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2cce946d246-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "47901",
+        "Cache-Control": "public, max-age=35823",
+        "Expires": "Sat, 07 Nov 2026 23:28:31 GMT",
+        "Last-Modified": "Fri, 06 Nov 2026 10:10:09 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_FP.CPI.TOTL.ZG_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/observations_FP.CPI.TOTL.ZG_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 676288,
+      "sha256": "c497783ed58220dd77d9eea3bb41ddd38630e43df236dbe902aa0cd20915befd",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:30.878736+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:28 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=F3L0KevZZxl_hhxg1kLUYMua5z5Ie1J1aWmJLNKlJNk-1794058288.5505397-1.0.1.1-KWOtRpxzCcTT75RxDIsNeTNs2SCRG9liyKPnOfyCLb4; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2cf6b5b705f-FRA",
+        "CF-Cache-Status": "MISS",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 08 Nov 2026 13:31:28 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 13:31:28 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    },
+    {
+      "filename": "indicator_metadata_SL.UEM.TOTL.ZS.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/indicator_metadata_SL.UEM.TOTL.ZS.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 670,
+      "sha256": "3ae370ed4bebba092338e94334c35add71490324ee57f1dfe81885dade51f52f",
+      "url": "https://api.worldbank.org/v2/indicator/SL.UEM.TOTL.ZS?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/SL.UEM.TOTL.ZS?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:31.432710+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:31 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=q96xFYcvLqsdbAgG3BPg1ScHOEsO2BJMyI.54HcQHo8-1794058291.294258-1.0.1.1-wYi_bM77Q8jpENhBBk.hC4voWF9XCG8wqgDeMB1WAHk; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2e09a14d8dd-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "1598",
+        "Cache-Control": "public, max-age=59363",
+        "Expires": "Sun, 08 Nov 2026 06:00:54 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 05:34:15 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_SL.UEM.TOTL.ZS_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/observations_SL.UEM.TOTL.ZS_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 741903,
+      "sha256": "640c72f512f15dec2175de49e46639eacb87b2849c682624f9b3d5a043aa22bd",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:33.540297+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:32 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=wjy2WZhVwQUrwcmrCLhzI7f.Yz8cQOIqgIBDI.3Cn98-1794058291.7566087-1.0.1.1-efUvwmktwgwEDDIHu40agyf8VjSnYLxVl.gGywFLgg4; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2e37f3fd9d7-FRA",
+        "CF-Cache-Status": "MISS",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 08 Nov 2026 13:31:32 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 13:31:32 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    },
+    {
+      "filename": "indicator_metadata_SL.UEM.TOTL.NE.ZS.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/indicator_metadata_SL.UEM.TOTL.NE.ZS.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 701,
+      "sha256": "5ab7c7bcda09099ea269d2fc24bd1db4dfe22bfabe05684758c54a99ca3005dd",
+      "url": "https://api.worldbank.org/v2/indicator/SL.UEM.TOTL.NE.ZS?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/SL.UEM.TOTL.NE.ZS?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:34.192568+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:34 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=wt5VbUEGi.gdvy05quea1FwDQW536QrW8to_phbABRw-1794058293.989311-1.0.1.1-a7zntnQtbJ7EdniRsxwMSdN5gJe_qTmYeo6615pokuU; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2f16c9fdc80-FRA",
+        "CF-Cache-Status": "EXPIRED",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=25043",
+        "Expires": "Sat, 07 Nov 2026 20:28:57 GMT",
+        "Last-Modified": "Fri, 06 Nov 2026 20:28:57 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_SL.UEM.TOTL.NE.ZS_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T133112433299Z/observations_SL.UEM.TOTL.NE.ZS_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 738016,
+      "sha256": "0def78107cfdde5d89f2b75f9175f5f6f40bcafa2b29b2bf2c326691e673db97",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.NE.ZS?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.NE.ZS?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-07T13:31:36.477336+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 07 Nov 2026 13:31:35 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=1myD21bz5rTJ9OpKxon0jMDGu0OJSf_5TjEnl_U1hLM-1794058294.676128-1.0.1.1-fC4FfhhMSYnQ.K1NO78eNle4mtWcWNuJfgOQnQ2po6w; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a56cb2f5ba068f3e-FRA",
+        "CF-Cache-Status": "MISS",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 08 Nov 2026 13:31:35 GMT",
+        "Last-Modified": "Sat, 07 Nov 2026 13:31:35 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-Snapshot/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "assessment": "imf_weo_wdi_semantic_disposition_matrix",
+  "input": "reports/sources/imf-wdi-comparison/20261107T144614Z/candidate_matrix.csv",
+  "row_count": 13310,
+  "country_count": 242,
+  "field_counts": {
+    "15": 2662,
+    "16": 2662,
+    "18": 2662,
+    "20": 2662,
+    "21": 2662
+  },
+  "identity_gate_counts": {
+    "identity_review_required": 13310
+  },
+  "semantic_disposition_counts": {
+    "diagnostic_review_required_not_approved": 13310
+  },
+  "country_case_counts": {
+    "bahrain_reference_period_settled": 11,
+    "car_gdp_population_denominator": 11,
+    "car_national_accounts_rebasing": 11,
+    "car_ppp_decomposition": 11,
+    "guinea_gdp_population_denominator": 11,
+    "guinea_ppp_decomposition": 11,
+    "guinea_sna2008_2018_base_rebasing": 11,
+    "moldova_2025_lfs_redesign": 11,
+    "no_specific_country_case_recorded": 13145,
+    "palau_fiscal_year_september_end": 11,
+    "philippines_annualized_lfs": 11,
+    "samoa_fiscal_year_july_june": 11,
+    "tonga_fiscal_year_july_start_and_cpi_rebase": 11,
+    "turkmenistan_exchange_rate_regime": 11,
+    "turkmenistan_gdp_population_denominator": 11,
+    "zimbabwe_icp_2017_benchmark": 11
+  },
+  "wdi_observation_status_counts": {
+    "no_wdi_observation": 2632,
+    "wdi_actual_estimate_status_not_established": 10678
+  },
+  "imf_status_hint_counts": {
+    "actual_per_weo_metadata": 6838,
+    "after_latest_actual": 162,
+    "missing": 3536,
+    "status_unclassified": 2774
+  },
+  "database_written": false,
+  "policy_changed": false,
+  "approval_created": false,
+  "release_promoted": false,
+  "game_database_written": false,
+  "report_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-wdi-semantic-disposition/20261107T145318Z"
+}

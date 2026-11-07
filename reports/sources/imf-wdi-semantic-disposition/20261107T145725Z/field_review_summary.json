@@ -1,0 +1,160 @@
+[
+  {
+    "field_id": "15",
+    "row_count": 2662,
+    "coverage_counts": {
+      "both_sources_present": 2087,
+      "imf_only": 52,
+      "neither_source_present": 355,
+      "wdi_only": 168
+    },
+    "identity_gate_counts": {
+      "identity_review_required": 2662
+    },
+    "imf_status_counts": {
+      "actual_per_weo_metadata": 1872,
+      "after_latest_actual": 58,
+      "missing": 523,
+      "status_unclassified": 209
+    },
+    "wdi_status_counts": {
+      "no_wdi_observation": 407,
+      "wdi_actual_estimate_status_not_established": 2255
+    },
+    "year_evidence_scope_counts": {
+      "alternative_conversion_factor_period_documented": 7,
+      "case_context_only_no_year_specific_support": 16,
+      "no_country_case_year_scope": 2629,
+      "primary_national_accounts_and_weo_crosscheck": 3,
+      "rebased_national_accounts_vintage_corroboration": 7
+    },
+    "required_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+    "review_status": "field_semantics_open_not_approved"
+  },
+  {
+    "field_id": "16",
+    "row_count": 2662,
+    "coverage_counts": {
+      "both_sources_present": 2080,
+      "imf_only": 52,
+      "neither_source_present": 355,
+      "wdi_only": 175
+    },
+    "identity_gate_counts": {
+      "identity_review_required": 2662
+    },
+    "imf_status_counts": {
+      "actual_per_weo_metadata": 1865,
+      "after_latest_actual": 58,
+      "missing": 530,
+      "status_unclassified": 209
+    },
+    "wdi_status_counts": {
+      "no_wdi_observation": 407,
+      "wdi_actual_estimate_status_not_established": 2255
+    },
+    "year_evidence_scope_counts": {
+      "case_context_only_no_year_specific_support": 16,
+      "exchange_rate_warning_population_denominator_open": 7,
+      "gdp_evidence_population_denominator_open": 3,
+      "gdp_rebase_population_denominator_open": 7,
+      "no_country_case_year_scope": 2629
+    },
+    "required_gate": "reconcile_gdp_numerator_population_denominator_and_population_universe",
+    "review_status": "field_semantics_open_not_approved"
+  },
+  {
+    "field_id": "18",
+    "row_count": 2662,
+    "coverage_counts": {
+      "both_sources_present": 2062,
+      "imf_only": 77,
+      "neither_source_present": 428,
+      "wdi_only": 95
+    },
+    "identity_gate_counts": {
+      "identity_review_required": 2662
+    },
+    "imf_status_counts": {
+      "missing": 523,
+      "status_unclassified": 2139
+    },
+    "wdi_status_counts": {
+      "no_wdi_observation": 505,
+      "wdi_actual_estimate_status_not_established": 2157
+    },
+    "year_evidence_scope_counts": {
+      "case_context_only_no_year_specific_support": 32,
+      "country_specific_icp_factor_conversion_documented": 1,
+      "no_country_case_year_scope": 2629
+    },
+    "required_gate": "reconcile_icp_benchmark_ppp_factor_and_nominal_gdp_input",
+    "review_status": "field_semantics_open_not_approved"
+  },
+  {
+    "field_id": "20",
+    "row_count": 2662,
+    "coverage_counts": {
+      "both_sources_present": 1951,
+      "imf_only": 186,
+      "neither_source_present": 497,
+      "wdi_only": 28
+    },
+    "identity_gate_counts": {
+      "identity_review_required": 2662
+    },
+    "imf_status_counts": {
+      "actual_per_weo_metadata": 1952,
+      "after_latest_actual": 9,
+      "missing": 525,
+      "status_unclassified": 176
+    },
+    "wdi_status_counts": {
+      "no_wdi_observation": 683,
+      "wdi_actual_estimate_status_not_established": 1979
+    },
+    "year_evidence_scope_counts": {
+      "case_context_only_no_year_specific_support": 21,
+      "fiscal_year_correspondence_supported": 7,
+      "fiscal_year_correspondence_supported_vintage_open": 4,
+      "no_country_case_year_scope": 2629,
+      "residual_discrepancy_open": 1
+    },
+    "required_gate": "confirm_provider_reference_period_and_annual_average_convention",
+    "review_status": "field_semantics_open_not_approved"
+  },
+  {
+    "field_id": "21",
+    "row_count": 2662,
+    "coverage_counts": {
+      "both_sources_present": 1144,
+      "imf_only": 83,
+      "neither_source_present": 547,
+      "wdi_only": 888
+    },
+    "identity_gate_counts": {
+      "identity_review_required": 2662
+    },
+    "imf_status_counts": {
+      "actual_per_weo_metadata": 1149,
+      "after_latest_actual": 37,
+      "missing": 1435,
+      "status_unclassified": 41
+    },
+    "wdi_status_counts": {
+      "no_wdi_observation": 630,
+      "wdi_actual_estimate_status_not_established": 2032
+    },
+    "year_evidence_scope_counts": {
+      "case_context_only_no_year_specific_support": 18,
+      "national_lfs_corroborates_weo": 1,
+      "national_lfs_corroborates_weo_break_in_series": 1,
+      "no_country_case_year_scope": 2629,
+      "official_total_rate_exactly_matches_weo": 9,
+      "official_year_end_vs_annual_reference_period_conflict": 1,
+      "psa_annual_lfs_corroborates_weo_2025_preliminary": 3
+    },
+    "required_gate": "confirm_imf_unit_population_reference_period_and_method",
+    "review_status": "field_semantics_open_not_approved"
+  }
+]

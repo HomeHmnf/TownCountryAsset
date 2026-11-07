@@ -1,0 +1,78 @@
+{
+  "assessment": "wdi_macro_series_decomposition",
+  "row_count": 2662,
+  "country_count": 242,
+  "period": {
+    "start_year": 2015,
+    "end_year": 2025
+  },
+  "snapshot_id": "api_snapshot_20261107T161129160851Z",
+  "snapshot_retrieved_at": "2026-11-07T16:12:07.812622+00:00",
+  "snapshot_manifest_sha256": "8e91b8ce5269bb387374e3b653038af6a5fc7d65fb98a7f570f6e05f536e8bf5",
+  "supporting_indicators": {
+    "NY.GDP.MKTP.CN": {
+      "name": "GDP (current LCU)",
+      "unit": "",
+      "source_note": "Gross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. This indicator is expressed in current prices, meaning no adjustment has been made to account for price changes over time. This series is expressed in local currency units.",
+      "source_organization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+      "api_last_updated": null
+    },
+    "PA.NUS.FCRF": {
+      "name": "Official exchange rate (LCU per US$, period average)",
+      "unit": "",
+      "source_note": "Official exchange rate refers to the exchange rate determined by national authorities or to the rate determined in the legally sanctioned exchange market. This indicator represents the ratio of Local Currency Units relative to United States dollars.This indicator is derived as an average over the reference period.",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF)",
+      "api_last_updated": null
+    },
+    "PA.NUS.ATLS": {
+      "name": "DEC alternative conversion factor (LCU per US$)",
+      "unit": "",
+      "source_note": "The DEC alternative conversion factor is the underlying annual exchange rate (the price of one country’s currency in relation to another country's currency) used for the World Bank Atlas method. As a rule, it is the official exchange rate reported in the IMF's International Financial Statistics. Exceptions arise where further refinements are made by World Bank staff. It is expressed in local currency units per U.S. dollar.",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF);\nStaff estimates, World Bank (WB)",
+      "api_last_updated": null
+    },
+    "PA.NUS.PPP": {
+      "name": "PPP conversion factor, GDP (LCU per international $)",
+      "unit": "",
+      "source_note": "The purchasing power parity (PPP) conversion factor is a currency conversion factor and a spatial price deflator. PPPs convert different currencies to a common currency and, in the process of conversion, equalize their purchasing power by eliminating the differences in price levels between countries, thereby allowing volume or output comparisons of gross domestic product (GDP) and its expenditure components. This conversion factor is for the level of GDP and the base currency is the US dollar.",
+      "source_organization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, publisher: International Comparison Program, type: International statistical program, date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat, type: International statistical program;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-https://data-explorer.oecd.org/, publisher: OECD",
+      "api_last_updated": null
+    },
+    "SP.POP.TOTL": {
+      "name": "Population, total",
+      "unit": "",
+      "source_note": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+      "source_organization": "World Population Prospects, United Nations (UN), uri: https://population.un.org/wpp/, publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), uri: https://unstats.un.org/home/nso_sites/, publisher: National Statistical Offices;\nEurostat: Demographic Statistics, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/data/database?node_code=earn_ses_monthly, publisher: Eurostat;\nPopulation and Vital Statistics Report (various years), United Nations (UN), uri: https://unstats.un.org, publisher: UN Statistics Division",
+      "api_last_updated": null
+    },
+    "FP.CPI.TOTL": {
+      "name": "Consumer price index (2010 = 100)",
+      "unit": "",
+      "source_note": "Index of the prices of consumption goods and services, as compared to a certain reference period (2010=100).",
+      "source_organization": "International Financial Statistics database, International Monetary Fund (IMF)",
+      "api_last_updated": null
+    }
+  },
+  "identity_gate_counts": {
+    "blocking": 2662
+  },
+  "side_effects": {
+    "source_data_fetched": false,
+    "database_written": false,
+    "source_selection_changed": false,
+    "approval_created": false,
+    "release_promoted": false,
+    "game_database_written": false
+  },
+  "limitations": [
+    "WDI arithmetic relationships are diagnostics, not proof of the provider's internal construction pipeline.",
+    "PA.NUS.ATLS is the DEC alternative conversion factor used in the Atlas method; its presence does not prove it converts NY.GDP.MKTP.CD.",
+    "Official exchange rates, alternative conversion factors and PPP factors may use different reference periods and vintages from national accounts.",
+    "Population division is an arithmetic check; the reference date and population universe may differ from the GDP-per-capita denominator.",
+    "CPI-index year-on-year growth is a diagnostic only; the annual index convention and inflation-series source vintage require confirmation.",
+    "All identity mappings remain subject to the separate country-identity governance gate.",
+    "The WDI capture is a rolling API snapshot, not a provider-declared vintage aligned to the October 2026 IMF WEO export.",
+    "Observation status is preserved verbatim and not interpreted as actual, estimate or projection."
+  ],
+  "report_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/wdi-macro-decomposition/20261107T161349Z"
+}
