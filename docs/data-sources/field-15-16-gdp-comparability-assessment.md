@@ -113,3 +113,54 @@ Any future source-policy change requires immutable, vintage-aligned source snaps
 - World Bank, [GDP (current US$), Central African Republic](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=CF).
 - World Bank, [Why do countries revise their national accounts?](https://datahelpdesk.worldbank.org/knowledgebase/articles/680284-why-do-countries-revise-their-national-accounts).
 - IMF, [WEO Frequently Asked Questions](https://www.imf.org/en/publications/weo/frequently-asked-questions), country-specific historical revisions and staff-estimate methodology.
+
+
+## Updated local-currency vintage reconciliation (2026-11-07)
+
+The expanded WDI snapshot adds the supporting series `NY.GDP.MKTP.CN`, `PA.NUS.FCRF`, `PA.NUS.ATLS` and `SP.POP.TOTL`. This moves the CAR and Guinea cases beyond a comparison of USD-converted values: the national-currency GDP numerator can now be compared directly with the latest official national-accounts publications.
+
+### Guinea — legacy WDI local-currency series identified
+
+The WDI current-LCU GDP observations in the 2026-11-07 snapshot reproduce the older INS/SCN 1993 series published in the INS annual yearbook `La Guinée en chiffres 2023` at the reported billion-GNF precision:
+
+| Year | WDI current LCU (billion GNF) | Older INS/SCN 1993 value (billion GNF) | INS 2018-base SNA 2008 value (billion GNF) | New INS value status |
+|---:|---:|---:|---:|---|
+| 2018 | 106,845.292 | 106,845 | 161,539 | definitive |
+| 2019 | 123,457.571 | 123,458 | 188,309 | definitive |
+| 2020 | 134,759.514 | 134,760 | 223,341 | definitive |
+| 2021 | 159,336.611 | 159,337 | 249,164 | estimate |
+| 2022 | 170,314.011 | 170,314 | 266,366 | estimate |
+| 2023 | 190,703.769 | — | 294,158 | estimate |
+| 2024 | 214,597.272 | — | 309,937 | estimate |
+
+The June 2025 INS note states that the 2018-base accounts migrate to SNA 2008 and raise 2018 GDP from 106,845.3 to 161,539 billion GNF (51.2%), principally through wider activity coverage and improved methods. The 2018–2020 accounts are definitive; 2021–2024 are rapid estimates. The October 2025 MPCI macroeconomic framework separately reports a revised 2018 base-year GDP of 161,766.5 billion GNF (+51.4%). Preserve this as a later official value/vintage rather than silently merging it with the June 2025 table.
+
+The WDI current-LCU observations exactly follow the older 2018–2022 INS series to the published rounding precision. For 2023–2024 they also remain materially below the new INS rapid estimates. This is direct evidence that the compared WDI current-LCU series has not incorporated the 2018-base SNA 2008 level consistently.
+
+The UNSD National Accounts country profile (January 2026 upload) independently identifies INS as the source for Guinea GDP nominal values in 2018–2024. Its 2024 profile reports GNF 311.077 trillion / US$36.465 billion and GDP per capita US$2,473. The WDI snapshot reports GNF 214.597 trillion / US$25.009 billion and US$1,694.95 per capita; October 2026 WEO reports US$38.348 billion and US$2,487.36 per capita. The WDI population observation (14,754,785) matches the UNSD profile population for 2024. Thus the 2024 GDP-per-capita gap is not explained by the population denominator in this comparison; the GDP numerator vintage is the principal identified issue. UNSD and WEO are close but not identical, and their different publication vintages must remain visible.
+
+The WDI USD values are reproduced by current-LCU GDP divided by the DEC alternative conversion factor. For 2018–2020, the official and alternative factors are effectively identical in the capture. This confirms arithmetic, not a causal FX explanation: the old level is already present in local-currency GDP before dollar conversion.
+
+### Central African Republic — revised local-currency accounts isolate the level break
+
+The 2026-11-07 WDI snapshot reports current-LCU GDP of 1,301.485, 1,339.228 and 1,395.476 billion FCFA in 2019–2021. The definitive ICASEES 2019-base SNA 2008 accounts report 1,952.925, 2,056.035 and 2,149.622 billion FCFA respectively. WDI is therefore 33.36%, 34.86% and 35.08% below the definitive accounts in local currency. The ICASEES revised values match the October 2026 IMF WEO `CAF.NGDP.A` series exactly at published precision.
+
+The WDI official exchange-rate and DEC alternative-factor observations are effectively identical for these three years. Therefore, the persistent WDI/IMF USD gap is not explained by choosing between those two captured conversion factors: it is already present in the local-currency GDP numerator. This is stronger evidence of a national-accounts source/vintage mismatch than the earlier USD-only comparison. It does not establish which WDI source vintage or compilation inputs generated the lower numerator. The workbook's separate historical 2019 value (1,431.991 billion FCFA) is not identical to WDI's 1,301.485 billion; do not claim WDI exactly reproduces the ICASEES historical series.
+
+The population comparison remains a separate issue. ICASEES's definitive accounts publication reports population of 5,360,271, 5,464,907 and 6,091,097 for 2019–2021, while the WDI snapshot has 4,944,703, 5,026,628 and 5,112,100. GDP-per-capita differences therefore combine a numerator vintage break and a population denominator difference. The WEO per-capita values must not be treated as a simple validation of ICASEES population.
+
+### Updated disposition
+
+- **Guinea field 15:** the compared WDI current-LCU series is demonstrably the legacy INS/SCN 1993 level for 2018–2022 and remains materially below the 2018-base SNA 2008 INS series through 2024. This strongly supports a WDI national-accounts vintage mismatch as the main explanation for the nominal GDP gap. The exact WDI provider vintage/ingestion history is still not established.
+- **Guinea field 16:** for 2024, WDI and UNSD population match exactly, while WDI GDP and per-capita GDP are materially lower. The numerator vintage explains the principal discrepancy in that year. Earlier-year population and status should still be checked before generalizing.
+- **CAR field 15:** the revised ICASEES local-currency accounts and WEO match exactly for 2019–2021; WDI local-currency GDP remains 33–35% lower. The difference exists before FX conversion and is a national-accounts vintage/compilation issue, not an official-versus-DEC conversion-factor choice.
+- **CAR field 16:** both numerator and population denominator differ between WDI and ICASEES; the per-capita gap cannot be attributed to GDP alone.
+- Keep IMF WEO priority unchanged. These are source-vintage findings, not source approvals, and do not establish that WEO is universally correct for all years.
+
+### Primary source references added
+
+- INS Guinea, [Note d’analyse des comptes nationaux définitifs 2018–2020 et rapides 2021–2024](https://www.stat-guinee.org/images/Documents/Publications/INS/annuelles/CN/Note_danalyse_des_comptes_nationaux_definitifs_2018_2020_et_rapides_2021_2024.pdf), June 2025.
+- INS Guinea, [La Guinée en chiffres 2023](https://www.stat-guinee.org/images/Documents/Publications/INS/annuelles/annuaire/La_Guinee_en_chiffre_2023.pdf), legacy national-accounts series.
+- Guinea MPCI, [Cadrage macroéconomique 2024](https://mpci.gov.gn/index.php/cadrage-macroeconomique-2024-le-ministre-ismael-nabe-met-laccent-sur-la-transformation-structurelle-et-la-credibilite-internationale-de-la-guinee/), 9 October 2025.
+- UNSD, [Guinea National Accounts country profile](https://unstats.un.org/unsd/snaama/CountryProfile?ccode=324) and [GDP source metadata](https://unstats.un.org/unsd/snaama/Metadata/?countrycode=324&groupid=101), January 2026 upload.
+- ICASEES, [Comptes Nationaux définitifs 2019–2021](https://icasees.org/index.php/actualites/394-les-comptes-nationaux-2019-2021-de-la-republique-centrafricaine-officiellement-publies), 30 July 2026.
