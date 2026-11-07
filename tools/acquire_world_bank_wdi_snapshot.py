@@ -80,7 +80,9 @@ def _request(
         "Accept": "application/json",
     })
     last_error: Exception | None = None
+    attempts_made = 0
     for attempt in range(retries + 1):
+        attempts_made = attempt + 1
         try:
             with urllib.request.urlopen(request, timeout=timeout) as response:
                 body = response.read()
@@ -99,7 +101,7 @@ def _request(
         if attempt < retries:
             time.sleep(retry_delay * (2 ** attempt))
     raise SnapshotError(
-        f"Cannot retrieve {url} after {retries + 1} attempt(s): {last_error}"
+        f"Cannot retrieve {url} after {attempts_made} attempt(s): {last_error}"
     ) from last_error
 
 
