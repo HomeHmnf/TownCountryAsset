@@ -1093,9 +1093,9 @@
         {
           "id": "article_iv_mission_2025",
           "release": "imf-turkmenistan-article-iv-mission-2025-06",
-          "filename": "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html",
-          "format": "html",
-          "url": "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission",
+          "filename": "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.json",
+          "format": "json",
+          "url": "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission/index.json",
           "fields": [
             15,
             16,
