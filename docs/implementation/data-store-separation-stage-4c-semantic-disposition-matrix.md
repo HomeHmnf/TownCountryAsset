@@ -107,3 +107,6 @@ uv run python -m tools.build_imf_weo_wdi_decision_readiness --input reports/sour
 ```
 
 This is a read-only assessment. It creates no approval, changes no source-selection policy, promotes no release, and writes neither SQLite database.
+
+
+Stage 4C.2 report-writer hardening: the country-case CSV now serializes only its declared columns, converting the bounded-year list to a comma-separated value. Its regression test includes an actual country-case row, verifies the output header, and checks the serialized row. This specifically covers the runtime path that a no-case fixture cannot exercise.
