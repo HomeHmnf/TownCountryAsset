@@ -10,7 +10,7 @@ This source-specific acquisition captures five primary research artifacts releva
 - IMF's 10 June 2025 Article IV mission statement.
 - IMF's 22 June 2026 Article IV mission statement.
 
-The notices and mission statements are retained as HTML captures; the IMF working paper is retained as the publisher's full-text XML because the PDF endpoints did not provide a retrievable PDF in the acquisition environment. Each publication has its own dataset identity, acquisition stream and manifest. This avoids treating distinct publication vintages as one rolling bundle.
+The notices and mission statements are retained as HTML captures; TurkmenStat URLs use the verified canonical `www.stat.gov.tm` host rather than the `editor` subdomain, whose TLS certificate failed hostname verification in the acquisition environment; the IMF working paper is retained as the publisher's full-text XML because the PDF endpoints did not provide a retrievable PDF in the acquisition environment. Each publication has its own dataset identity, acquisition stream and manifest. This avoids treating distinct publication vintages as one rolling bundle.
 
 ## Research relevance and limits
 
@@ -48,8 +48,8 @@ Raw artifacts remain local-only under the project storage policy. Manifests are 
 
 - IMF Working Paper 2023/207 publication record: https://www.imf.org/en/publications/wp/issues/2023/09/29/reassessing-gdp-growth-in-countries-with-statistical-shortcomings-a-case-study-on-539482
 - IMF Working Paper 2023/207 official eLibrary full text (XML): https://www.elibrary.imf.org/view/journals/001/2023/207/article-A001-en.xml
-- TurkmenStat, 17 January 2025: https://editor.stat.gov.tm/en/news/204
-- TurkmenStat, 23 June 2026: https://editor.stat.gov.tm/en/news/359
+- TurkmenStat, 17 January 2025: https://www.stat.gov.tm/en/news/204
+- TurkmenStat, 23 June 2026: https://www.stat.gov.tm/en/news/359
 - IMF, 10 June 2025: https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission
 - IMF, 22 June 2026: https://www.imf.org/en/news/articles/2026/06/22/pr26218-turkmenistan-imf-staff-completes-2026-article-iv-mission
 
