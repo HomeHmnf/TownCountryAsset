@@ -29,7 +29,7 @@ This registration is not a fallback or primary-source assignment for fields 15, 
 
 The national-estimate series is retained as diagnostic context only. It is not a substitute for the ILO-modelled series and is not used as the primary field-21 comparison.
 
-The capture period is deliberately bounded to 2015–2025 to reproduce the existing IMF–WDI comparison. Expanding the period or adding indicators requires a new snapshot scope, not mutation of an existing snapshot.
+The original comparison capture is bounded to 2015–2025. The expanded Stage 4D capture starts in 2014 to provide the lead-in observation required for 2015 CPI-index growth diagnostics; its comparison/decomposition window remains 2015–2025. Expanding the period or adding indicators requires a new snapshot scope, not mutation of an existing snapshot.
 
 ## 3. Capture contents and integrity
 
@@ -45,7 +45,7 @@ The tool captures and stores each raw JSON response byte-for-byte:
 
 - WDI source metadata (/sources/2);
 - all pages of the World Bank country/region catalogue;
-- metadata responses for all six indicators;
+- metadata responses for all configured indicators;
 - every paginated observation response for all configured primary, diagnostic and supporting indicators, using the same annual date range and per_page=20000 request pattern.
 
 For each response, the manifest records its request URL and parameters, final URL, HTTP status, response headers, retrieval timestamp, content type, byte count and SHA-256. It also records pagination counts, row counts, source identity, period and indicator summaries. A response is never rewritten or normalized before its raw bytes are fingerprinted.
@@ -202,3 +202,28 @@ For the CPI calculation, the capture must include one lead-in year. Acquire 2014
 Audit the manifest before registering its acquisition. Synchronize the updated dataset metadata, then register the manifest in the Project DB using the existing commands in section 4. The new capture is a distinct rolling-API acquisition; it does not overwrite or replace the already validated 2026-11-07 six-indicator snapshot or the frozen IMF–WDI comparison.
 
 The six supporting series are captured with their raw bytes and indicator metadata. They are not part of the five-field candidate comparison and do not change source-selection policy. The decomposition is diagnostic only: it cannot resolve provider-vintage alignment, identity governance, IMF actual/estimate/projection status, or country-specific national-accounts methodology by itself.
+
+
+### 9.1 Completed owner-run expanded snapshot and decomposition (2026-11-07)
+
+The expanded capture added the six supporting indicators and included 2014 as the CPI-index lead-in year.
+
+| Property | Result |
+|---|---|
+| Snapshot ID | `api_snapshot_20261107T161129160851Z` |
+| Retrieved at | `2026-11-07T16:12:07.812622+00:00` |
+| Manifest | `data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators/api_snapshot_20261107T161129160851Z.json` |
+| Manifest SHA-256 | `8e91b8ce5269bb387374e3b653038af6a5fc7d65fb98a7f570f6e05f536e8bf5` |
+| Raw response artifacts | 26 |
+| Raw response bytes | 8,885,684 |
+| Country/region catalogue records | 296 |
+| Indicator metadata/observation bundles | 12 |
+| Observation rows | 3,192 per indicator, 2014–2025 |
+
+The read-only audit covered both the original six-indicator snapshot and the expanded snapshot: two valid manifests, 40 artifacts and zero errors. Project dataset synchronization reported six datasets and four acquisition streams. The expanded snapshot was registered as Project DB acquisition ID 7 with 26 artifacts, status `acquired` and integrity `verified`; acquisition ID 6 remains unchanged. Project DB integrity returned `ok`, and the foreign-key check returned no violations.
+
+The read-only decomposition report is `reports/sources/wdi-macro-decomposition/20261107T161349Z/`. It contains 2,662 rows for 242 identities across 2015–2025. The manifest hash and retrieval timestamp are embedded in the assessment. All 2,662 rows remain blocked by the separate identity-governance gate; this is not a calculation-failure count. No new source responses were fetched by the assessment, and no database, source-selection, approval, release or Game DB state was changed.
+
+The case-level arithmetic diagnostics reproduce the corresponding WDI GDP, PPP GDP, GDP-per-capita and CPI inflation values to floating-point precision where their inputs exist. They do not prove provider methodology. Median WDI-minus-IMF relative differences for nominal GDP / PPP GDP / GDP per capita respectively were: Central African Republic -34.07% / -34.98% / -34.65%; Guinea -34.44% / -36.38% / -31.46%; Turkmenistan -35.57% / +0.95% / -41.79%; Zimbabwe -19.16% / -19.98% / -17.76%; Samoa -0.01% / +14.45% / -3.99%; Tonga -0.08% / +12.76% / -4.64%; Palau +0.08% / +19.87% / -0.94%. Zimbabwe's 2017 result is a major outlier; Turkmenistan has no official exchange-rate observations; Samoa, Tonga and Palau show close nominal GDP but stable positive PPP differences. See [Stage 4D WDI macro-series decomposition](../implementation/data-store-separation-stage-4d-wdi-macro-decomposition.md) for year-level caveats and the complete interpretation boundary.
+
+No semantic approval, identity promotion, source-priority change, retention action or Game DB write occurred.
