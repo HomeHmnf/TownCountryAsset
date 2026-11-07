@@ -18,7 +18,7 @@ This section documents providers, acquisition, source-specific validation, relea
 - [Bahrain unemployment data acquisition](bahrain-unemployment-data-acquisition.md) — official API acquisition and immutable snapshots.
 - [ICASEES Central African Republic national accounts](icasees-central-african-republic-national-accounts.md) — source entry point; its [dedicated index](icasees/README.md) separates acquisition, workbook structure and GDP reconciliation.
 - [Guinea national-accounts vintage reconciliation](guinea-national-accounts-vintage-reconciliation.md) — legacy 1993 SNA versus 2018-base SNA 2008, WDI/IMF/UNSD comparison and source-acquisition targets.\n- [Guinea INS national-accounts acquisition](guinea-ins-national-accounts-acquisition.md) — repeatable official-PDF download, timestamped manifests, integrity audit and Project DB provenance registration.
-- [Turkmenistan macroeconomic evidence acquisition](turkmenistan-macroeconomic-evidence-acquisition.md) — five IMF/TurkmenStat research and methodology publications, automated capture, immutable manifests and provenance registration.
+- [Turkmenistan macroeconomic evidence acquisition](turkmenistan-macroeconomic-evidence-acquisition.md) — five IMF/TurkmenStat research and methodology publications, three verified captures, two documented IMF access gaps, and a guarded end-to-end Project DB provenance workflow.
 
 ## Comparability investigations
 
