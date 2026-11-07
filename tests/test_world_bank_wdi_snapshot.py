@@ -17,7 +17,7 @@ def _fake_request(url):
         ]]
     elif parsed.path.endswith("/country"):
         payload = [{"page": 1, "pages": 1, "total": 2}, [
-            {"id": "USA", "name": "United States", "region": {"id": "NAC", "value": "North America"}},
+            {"id": "USA", "name": "United States", "region": {"id": "NAC", "value": "North America"}, "specialNotes": "Country metadata note", "incomeLevel": {"value": "High income"}},
             {"id": "WLD", "name": "World", "region": {"id": "NA", "value": "Aggregates"}},
         ]]
     elif "/country/all/indicator/" in parsed.path:
@@ -48,10 +48,14 @@ def test_capture_and_load_preserve_complete_immutable_response_bundle(tmp_path):
         retrieved_at="2026-11-07T12:00:00Z", request_get=_fake_request,
     )
     loaded = snapshot.load_snapshot(tmp_path / report["manifest_path"], repository_root=tmp_path)
-    assert report["artifact_count"] == 14
+    assert report["artifact_count"] == 26
     assert report["side_effects"]["project_database_written"] is False
     assert loaded["start_year"] == 2024 and loaded["end_year"] == 2024
-    assert set(loaded["observations"]) == set(snapshot.INDICATORS)
+    assert set(loaded["observations"]) == set(snapshot.CAPTURE_INDICATORS)
+    assert "PA.NUS.ATLS" in loaded["observations"]
+    assert loaded["indicator_metadata"]["PA.NUS.PPP"]["sourceOrganization"] == "Originating body"
+    assert loaded["country_regions"]["USA"]["special_notes"] == "Country metadata note"
+    assert loaded["country_regions"]["USA"]["income_level"] == "High income"
     assert loaded["observations"]["NY.GDP.MKTP.CD"][0]["value"] == "123.5"
     assert loaded["observations"]["SL.UEM.TOTL.ZS"][0]["obs_status"] == "F"
     assert loaded["indicator_metadata"]["NY.GDP.MKTP.CD"]["sourceOrganization"] == "Originating body"
