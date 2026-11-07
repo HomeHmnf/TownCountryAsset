@@ -20,7 +20,7 @@ def _rows() -> list[dict[str, str]]:
             "imf_observation_status": "actual_per_weo_metadata",
             "wdi_observation_status": "wdi_actual_estimate_status_not_established",
             "year_evidence_scope": "no_country_case_year_scope",
-            "country_case_id": "no_specific_country_case_recorded",
+            "country_case_id": ("bahrain_reference_period_settled" if field_id == "21" else "no_specific_country_case_recorded"),
         })
     return rows
 
@@ -57,4 +57,12 @@ def test_report_writes_machine_and_human_decision_queues(tmp_path: Path) -> None
     assert payload["decision"] == "not_ready_for_source_policy_change_or_canonical_application"
     assert (target / "decision_readiness.md").is_file()
     assert (target / "field_decision_queue.csv").is_file()
-    assert (target / "country_case_decision_queue.csv").is_file()
+    case_queue = target / "country_case_decision_queue.csv"
+    assert case_queue.is_file()
+    with case_queue.open(encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream)
+        assert "year_scopes" not in (reader.fieldnames or [])
+        case_rows = list(reader)
+    assert len(case_rows) == 1
+    assert case_rows[0]["case_id"] == "bahrain_reference_period_settled"
+    assert case_rows[0]["years_with_bounded_evidence"] == ""
