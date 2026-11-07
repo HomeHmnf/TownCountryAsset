@@ -108,7 +108,7 @@ The assessment writes a timestamped report under `reports/sources/wdi-macro-deco
 
 ## Source metadata references
 
-- World Bank, [GDP (current LCU), NY.GDP.MKTP.CN](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/viewall).
+- World Bank, [GDP (current LCU), NY.GDP.MKTP.CN](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/NY.GDP.MKTP.CN).
 - World Bank, [DEC alternative conversion factor, PA.NUS.ATLS](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/PA.NUS.ATLS).
 - World Bank, [GDP PPP conversion factor, PA.NUS.PPP](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/PA.NUS.PPP).
 - World Bank, [Consumer price index, FP.CPI.TOTL](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/FP.CPI.TOTL).
