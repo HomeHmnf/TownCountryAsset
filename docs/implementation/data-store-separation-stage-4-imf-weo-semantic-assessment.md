@@ -1,8 +1,8 @@
 # Stage 4 — IMF WEO semantic assessment and evidence workspace
 
-**Assessment date:** 2026-11-05  
+**Assessment date:** 2026-11-07  
 **Scope:** WP1.5 fields 15, 16, 18, 20 and 21; IMF WEO October 2026 compared with World Bank WDI and country-level primary evidence.  
-**Status:** consolidated diagnostic assessment; not a semantic approval, release validation, or source-selection decision.
+**Status:** consolidated diagnostic assessment; Stage 4C decision-readiness and Stage 4D macro-series decomposition are owner-validated; not a semantic approval, release validation, or source-selection decision.
 
 ## 1. Executive disposition
 
@@ -154,7 +154,7 @@ The captured WDI `obs_status` field is blank for all 13,310 candidate rows. Of t
 3. **Reconcile country cases:** CAR new national accounts (fields 15/16/18), Guinea national accounts (15/16/18), Turkmenistan conversion (15/16), Zimbabwe ICP (18), Tonga/Samoa/Palau period conventions (20), Moldova/Philippines source vintages (21). Bahrain remains closed.
 4. **Separate identity governance:** resolve 242 proposed/unverified identities and the explicit unmatched codes through the identity registry workflow; do not silently map.
 5. **Semantic disposition and decision readiness — complete and owner-validated:** Stage 4C generated the 13,310-row year-scoped semantic matrix, separate review queues and decision-readiness package. The focused owner-run suite passed 20 tests; the report concluded `not_ready_for_source_policy_change_or_canonical_application`. All 242 identities remain review-required; see [Stage 4C](data-store-separation-stage-4c-semantic-disposition-matrix.md).
-6. **Supporting macro decomposition — implementation committed, owner run pending:** Stage 4D extends future WDI captures with local-currency GDP, official/alternative exchange rates, PPP conversion factor, population and CPI index, then produces read-only arithmetic diagnostics. It does not replace the frozen six-indicator comparison; see [Stage 4D](data-store-separation-stage-4d-wdi-macro-decomposition.md).
+6. **Supporting macro decomposition — complete and owner-validated:** Stage 4D captured six supporting WDI indicators, audited and registered the expanded snapshot, and produced read-only arithmetic diagnostics for 242 identities across 2015–2025. The findings narrow but do not close the GDP, PPP or CPI gates; see [Stage 4D](data-store-separation-stage-4d-wdi-macro-decomposition.md).
 7. **Only after evidence and identity gates close** prepare a separate source-selection recommendation and approval artifact. Application remains gated by existing approval and transactional safeguards.
 
 ## 8. Evidence files and owner-run provenance
@@ -182,3 +182,33 @@ The October 2026 WEO acquisition remains acquired with byte integrity verified, 
 
 
 Stage 4C.2 owner-run decision-readiness validation (2026-11-07): 20 tests passed in 0.49s; `compileall` completed; report generated at `reports/sources/imf-wdi-decision-readiness/20261107T150434Z/`. It records 13,310 rows, 242 identities, all identities review-required, and no readiness for source-policy change or canonical application. No approval, policy change, release promotion or database write occurred.
+
+
+## 11. Stage 4D macro-decomposition evidence (2026-11-07)
+
+The expanded WDI snapshot `api_snapshot_20261107T161129160851Z` was captured for 2014–2025, with 12 indicator bundles, 26 raw response artifacts (8,885,684 bytes), 296 country/region catalogue records and 3,192 observations per indicator. Its manifest SHA-256 is `8e91b8ce5269bb387374e3b653038af6a5fc7d65fb98a7f570f6e05f536e8bf5`. The read-only audit covered both WDI snapshots: two valid manifests, 40 artifacts, zero errors. Project DB acquisition ID 7 contains 26 artifacts, status `acquired`, integrity `verified`; the Project DB integrity check returned `ok` and the foreign-key check returned no violations.
+
+The decomposition report `reports/sources/wdi-macro-decomposition/20261107T161349Z/` covers 2,662 country-year rows (242 identities × 11 years, 2015–2025). All 2,662 rows remain blocked by the identity gate; this is not a calculation-failure count. The assessment performed no additional source fetch and no database, source-selection, approval, release or Game DB write.
+
+The captured arithmetic reproduces the WDI GDP current-USD, PPP GDP, GDP-per-capita and CPI inflation values from the corresponding support inputs to floating-point precision where observations exist. This establishes internal arithmetic consistency, not the providers' exact construction pipeline.
+
+Median relative differences (WDI vs October 2026 IMF WEO) across 2015–2025:
+
+| Country | Nominal GDP | PPP GDP | GDP per capita |
+|---|---:|---:|---:|
+| Central African Republic | -34.07% | -34.98% | -34.65% |
+| Guinea | -34.44% | -36.38% | -31.46% |
+| Turkmenistan | -35.57% | +0.95% | -41.79% |
+| Zimbabwe | -19.16% | -19.98% | -17.76% |
+| Samoa | -0.01% | +14.45% | -3.99% |
+| Tonga | -0.08% | +12.76% | -4.64% |
+| Palau | +0.08% | +19.87% | -0.94% |
+
+Interpretation:
+- CAR and Guinea retain broad nominal/PPP level differences; the captured conversion identities do not explain the national-accounts level gap.
+- Turkmenistan's PPP values are much closer than nominal USD GDP, while the official exchange-rate series is absent and the DEC alternative factor changes materially. Conversion basis is a priority for primary-source reconciliation, not a confirmed cause.
+- Zimbabwe has a pronounced 2017 outlier (WDI +64.54% nominal GDP and +151.39% PPP versus IMF) and subsequent currency/conversion changes. Its 2022 CPI comparison diverges sharply; WDI CPI index/inflation observations are absent for 2023–2025.
+- Samoa, Tonga and Palau have close nominal GDP comparisons but persistent positive WDI PPP differences, indicating that nominal USD conversion alone does not explain their PPP gaps.
+- CPI index growth reproduces the WDI inflation series where both index observations exist, but IMF differences remain subject to annual-period conventions and vintage alignment.
+
+These results do not change the field-level dispositions in sections 4–5, close the country identity gate, or support changing IMF source priorities. Full year-level details and interpretation caveats are recorded in [Stage 4D](data-store-separation-stage-4d-wdi-macro-decomposition.md).
