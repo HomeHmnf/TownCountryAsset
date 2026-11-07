@@ -61,12 +61,14 @@ PUBLICATIONS = (
         "publication_date": "2025-06-10",
         "url": "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission",
         "url_fallbacks": [
-            "https://ebs.publicnow.com/view/E1D49A6C7C27EB1B1D3DDFC0C6AB7FEDB825EB8E",
+            "https://www.imf.org/en/news/articles/2025/06/10/pr-25190-turkmenistan-imf-completes-2025-article-iv-mission/index.json",
         ],
-        "filename": "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html",
-        "format": "html",
-        "signature": "html",
-        "raw_path": "raw_data/sources/imf_turkmenistan_research/article_iv_mission_2025/IMF_Turkmenistan_Article_IV_Mission_2025-06-10.html",
+        "filename": "IMF_Turkmenistan_Article_IV_Mission_2025-06-10.json",
+        "format": "json",
+        "signature": "json",
+        "expected_json_title": "IMF Staff Completes 2025 Article IV Mission to Turkmenistan",
+        "expected_json_publication_date": "2025-06-10",
+        "raw_path": "raw_data/sources/imf_turkmenistan_research/article_iv_mission_2025/IMF_Turkmenistan_Article_IV_Mission_2025-06-10.json",
         "manifest_dir": "data_manifests/sources/imf_turkmenistan_research/article_iv_mission_2025",
     },
     {
@@ -107,6 +109,15 @@ def _validate(path: Path, signature: str) -> None:
         or b"<article" in prefix
     ):
         raise ValueError(f"Response is not an XML document: {path}")
+    if signature == "json":
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Response is not valid JSON: {path}") from exc
+        if not isinstance(payload, dict) or not {
+            "title", "publishDate", "sourceUrl", "sections"
+        }.issubset(payload):
+            raise ValueError(f"JSON response lacks expected IMF publication structure: {path}")
 
 
 def _download(
@@ -180,6 +191,14 @@ def _completed_acquisition(
             f"Existing acquisition manifest has no raw artifact: {publication['raw_path']}"
         )
     _validate(raw, publication["signature"])
+    if publication["signature"] == "json":
+        payload = json.loads(raw.read_text(encoding="utf-8"))
+        if (
+            payload.get("title") != publication["expected_json_title"]
+            or payload.get("publishDate") != publication["expected_json_publication_date"]
+            or payload.get("sourceUrl") != publication["url"]
+        ):
+            raise ValueError(f"Existing JSON artifact has unexpected publication identity: {raw}")
     digest = _sha256(raw)
     byte_count = raw.stat().st_size
     verified: list[dict[str, Any]] = []
@@ -243,6 +262,7 @@ def acquire_turkmenistan_evidence(
                 "pdf": "application/pdf",
                 "html": "text/html",
                 "xml": "application/xml",
+                "json": "application/json",
             }[publication["format"]]
             byte_count = raw.stat().st_size
             retrieved_at = datetime.fromtimestamp(
@@ -258,6 +278,16 @@ def acquire_turkmenistan_evidence(
                 candidate_urls, raw, publication["signature"], timeout, retries
             )
             _validate(raw, publication["signature"])
+            if publication["signature"] == "json":
+                payload = json.loads(raw.read_text(encoding="utf-8"))
+                if (
+                    payload.get("title") != publication["expected_json_title"]
+                    or payload.get("publishDate") != publication["expected_json_publication_date"]
+                    or payload.get("sourceUrl") != publication["url"]
+                ):
+                    raise ValueError(
+                        f"JSON publication identity does not match expected IMF record: {raw}"
+                    )
             retrieved_at = datetime.now().astimezone().isoformat()
             timestamp_basis = "acquisition_tool_download_completion"
 
