@@ -142,4 +142,25 @@ uv run python -m compileall -q \
     tools/process_turkmenistan_evidence.py
 ```
 
-Then run the default preflight command and inspect its JSON result. It must report `ready_for_registration`, three eligible manifests, zero deferred items and zero errors. The explicit `--register` command is a separate Project DB write and should only be run after that preflight is reviewed. Local owner validation of the new orchestrator is pending.
+Then run the default preflight command and inspect its JSON result. It must report `ready_for_registration`, three eligible manifests, zero deferred items and zero errors. The explicit `--register` command is a separate Project DB write and should only be run after that preflight is reviewed. Local owner validation of the orchestrator and successful Project DB registration are recorded below.
+
+
+## Owner-run orchestration and registration (2026-11-08)
+
+The owner pulled the orchestrator and test correction, then ran the focused suite:
+
+- `tests/test_turkmenistan_evidence_acquisition.py` and `tests/test_process_turkmenistan_evidence.py`: **15 passed**.
+- The default processing command returned `ready_for_registration`.
+- Both source manifest audits passed: two TurkmenStat manifests/two artifacts and one IMF research manifest/one artifact; zero integrity errors.
+- Catalogue synchronization reported 34 sources/106 URLs and 13 datasets/11 streams.
+- Registration preflight found exactly three eligible events, zero deferred entries and zero errors. The preflight itself wrote no acquisition rows.
+
+The owner then ran the explicit `--register` command. It returned `status: registered` and created these Project DB provenance records:
+
+| Acquisition ID | Dataset | Artifacts | Lifecycle status |
+|---:|---|---:|---|
+| 10 | `national_accounts_methodology_2025` | 1 | `acquired` |
+| 11 | `statistical_system_reform_2026` | 1 | `acquired` |
+| 12 | `gdp_statistical_shortcomings_wp_2023_207` | 1 | `acquired` |
+
+The command reported `project_database_written: true` and `game_database_written: false`. This confirms registration of the three audited capture events and their artifacts, not statistical extraction, semantic validation, identity approval, source-selection change, release promotion or retention. The two IMF Article IV mission statements remain unacquired because their official endpoints returned HTTP 403; they have no raw artifacts, manifests or acquisition rows.
