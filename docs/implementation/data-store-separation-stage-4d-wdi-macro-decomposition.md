@@ -221,3 +221,12 @@ The guarded Turkmenistan processing workflow passed its owner-run tests (15 pass
 - ID 12: `gdp_statistical_shortcomings_wp_2023_207`, one artifact, status `acquired`.
 
 The workflow reported Project DB written and Game DB not written. This is provenance registration only; the Turkmenistan conversion-factor interpretation remains unresolved, and no identity, semantic or source-policy gate is approved. The two IMF Article IV statements remain acquisition gaps after HTTP 403 responses. See [Turkmenistan acquisition and provenance workflow](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md).
+
+
+### Turkmenistan nominal-GDP conversion reconciliation (2026-11-08)
+
+The country-specific analysis materially narrows the Turkmenistan field 15 gap. WDI current-USD GDP is reconstructed from WDI current-LCU GDP and the DEC alternative conversion factor in all 11 years. WDI current-LCU GDP divided by 3.5 TMT/USD reconstructs October 2026 WEO current-USD GDP to displayed precision in 2015–2021 and 2024–2025. The implied factor differs in 2022 (3.5984) and 2023 (3.3703), leaving residuals of +2.81% and -3.70% relative to WEO when the WDI LCU numerator is converted at 3.5. The displayed ratios use rounded values; the decomposition tool now emits an exact-value IMF-implied conversion-factor column for the next owner-run report.
+
+The IMF 2023 working paper states that the official rate remained 3.5 from 2015 and describes a parallel-market rate reaching about 38 in April 2021. The WDI DEC factor peaked at 6.5759 in 2021; it is not the official rate or the paper's cited parallel-market rate. The DEC factor's provider-specific construction remains unknown. The paper's combined deflator concerns real-GDP estimation and is not proof of the WEO nominal-USD conversion procedure.
+
+TurkmenStat's January 2025 notice establishes phased modernization of national-accounts methods/software, while the June 2026 notice describes 2026–2027 planned assistance for ICP, 2025 SNA national accounts and digital surveys. Neither notice gives a numerical historical GDP bridge. Field 16 population and field 18 PPP/ICP remain separate gates. See [Turkmenistan GDP conversion-basis reconciliation](../data-sources/turkmenistan-gdp-conversion-reconciliation.md).
