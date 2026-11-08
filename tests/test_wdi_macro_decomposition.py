@@ -102,6 +102,7 @@ def test_decomposition_keeps_missing_or_zero_denominators_uncomputed():
     )
     row = result["rows"][0]
     assert row["wdi_gdp_current_usd_implied_official_fx"] is None
+    assert row["imf_ngdpd_implied_conversion_factor_lcu_per_usd"] is None
     assert row["wdi_gdp_per_capita_implied_from_usd_and_population"] is None
 
 
