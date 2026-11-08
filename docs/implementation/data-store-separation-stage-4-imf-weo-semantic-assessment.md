@@ -262,3 +262,14 @@ The October 2026 WEO export contains both `TKM.NGDP.A` (current-price GDP in dom
 The cause of the 2022–2023 numerator differences remains unresolved. Source vintage, revision, compilation and timing explanations are hypotheses only. The earlier WDI-LCU/WEO-USD implied factors of 3.5984 and 3.3703 combined different domestic-currency numerators and should not be interpreted as WEO conversion rates. The WEO series' own implied rate is approximately 3.5 in both years.
 
 This refines Turkmenistan's field-15 diagnostic disposition only. Field-16 population, field-18 PPP/ICP, identity approval, semantic approval and source selection remain separate gates. IMF WEO priority remains unchanged; no canonical application or Game DB write is authorized. See [Turkmenistan GDP conversion-basis reconciliation](../data-sources/turkmenistan-gdp-conversion-reconciliation.md).
+
+
+## Turkmenistan country-case reconciliation update (2026-11-08)
+
+The Turkmenistan investigation now has direct year-by-year evidence for the three related macro fields.
+
+- **Field 15:** WEO's own domestic-currency and current-USD series imply approximately 3.5 TMT/USD in all years 2015–2025. WDI and WEO local-currency GDP agree to displayed precision or within 0.03% in nine years; 2022 and 2023 differ by +2.811% and −3.704% respectively (WDI relative to WEO). These residuals are in the GDP numerators, not WEO FX conversion.
+- **Field 16:** WDI population exceeds WEO by 7.79% in 2015 and 14.05% in 2025. The 2022 census and WPP 2024 revision evidence support the higher WDI level, but WEO's exact national population source lineage remains unverified. WEO 2025 population remains projection status.
+- **Field 18:** PPP GDP is nearly identical through 2021, then WDI exceeds WEO by 2.767% in 2022, 4.749% in 2023, 7.568% in 2024 and 10.579% in 2025. The decomposition attributes 2022 mainly to the domestic-GDP numerator, 2023 to both numerator and PPP-factor differences, and 2024–2025 to PPP-factor differences while local-currency GDP agrees.
+
+The exact post-2021 national-account/deflator/PPP vintage responsible for the factor divergence remains unknown. General IMF and World Bank methodology descriptions do not establish the country-specific inputs. Retain the existing IMF priority; all identity and semantic approval gates remain unchanged. The evidence is diagnostic only and creates no approval, release promotion, source-selection change, database write or Game DB application.
