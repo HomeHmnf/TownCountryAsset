@@ -111,3 +111,30 @@ The expanded WDI snapshot now shows that the large Guinea and CAR PPP gaps coexi
 - **CAR:** WDI current-LCU GDP is 33–35% below definitive ICASEES 2019–2021 GDP. The WDI official and DEC alternative conversion factors are effectively identical in those years, so the nominal level difference is already present before USD conversion.
 
 The WDI PPP series is arithmetically reproduced by current-LCU GDP divided by the WDI GDP PPP conversion factor. This confirms the WDI series' internal arithmetic only. It does not validate the PPP factor's benchmark, vintage, imputation or extrapolation method, nor does it show that the IMF uses the same nominal GDP input. For CAR and Guinea, the local-currency GDP vintage mismatch is a material component of the PPP discrepancy; a separate reconciliation of the PPP factor and benchmark remains necessary. The field 18 disposition therefore remains **not yet demonstrated comparable**, and IMF priority is unchanged.
+
+
+## Turkmenistan — direct PPP-factor decomposition (2026-11-08)
+
+The expanded WDI snapshot and October 2026 WEO CSV now permit a year-by-year decomposition of Turkmenistan's PPP GDP difference.
+
+| Year | WDI vs WEO PPP GDP | Main observed component |
+|---:|---:|---|
+| 2015 | +1.668% | Small difference |
+| 2016 | +0.952% | Small difference |
+| 2017 | 0.000% | Agreement |
+| 2018 | +0.008% | Agreement at displayed precision |
+| 2019 | approximately 0.000% | Agreement |
+| 2020 | 0.000% | Agreement |
+| 2021 | approximately 0.000% | Agreement |
+| 2022 | +2.767% | Domestic-currency GDP numerator; displayed PPP factors both 1.554 |
+| 2023 | +4.749% | Both numerator and PPP factor |
+| 2024 | +7.568% | PPP factor; local-currency GDP agrees |
+| 2025 | +10.579% | PPP factor; local-currency GDP agrees |
+
+WDI PPP GDP is arithmetically reproduced by WDI current-LCU GDP divided by PA.NUS.PPP. WEO reported PPP GDP is broadly consistent with its own current-LCU GDP divided by TKM.PPPEX.A, subject to small residuals because the WEO factor is displayed to three decimal places. Those rounding residuals (approximately 0.01–0.04 billion international dollars) are not separate substantive discrepancies.
+
+For 2022, WDI current-LCU GDP is 203.947bn TMT versus WEO 198.371bn, while displayed PPP factors are both 1.554. For 2023, WDI current-LCU GDP is lower (211.704bn versus 219.848bn), but its PPP factor is also lower (1.463334 versus 1.592), more than offsetting the lower numerator. In 2024–2025, local-currency GDP agrees at displayed precision while PPP factors diverge (1.525358 vs 1.641; 1.573152 vs 1.740).
+
+The IMF WEO FAQ describes its PPP rates as based on ICP 2017–2021 benchmarks and extended backwards and forwards using relative GDP-deflator growth. World Bank documentation describes benchmark interpolation/extrapolation and warns that ICP and WDI GDP, population and exchange-rate inputs can differ by source vintage or methodology. These general methods do not establish the exact Turkmenistan national-account, benchmark or deflator inputs used in either captured series.
+
+**Disposition:** Turkmenistan PPP GDP is effectively aligned through 2021. The post-2021 divergence separates into a 2022–2023 nominal-GDP numerator component and a 2023–2025 PPP-factor component. This does not establish which factor is preferable or the precise source of the divergence. Retain IMF WEO priority and keep field 18 open pending country-specific benchmark/deflator evidence and the existing identity/semantic approval gates. See [Turkmenistan GDP conversion-basis reconciliation](turkmenistan-gdp-conversion-reconciliation.md).
