@@ -135,6 +135,8 @@ def assess_snapshot(
                 "imf_pppgdp_current_international_dollars": (imf_data.get("PPPGDP", {}).get((game_id, year)) or {}).get("value"),
                 "imf_pcpipch_percent": (imf_data.get("PCPIPCH", {}).get((game_id, year)) or {}).get("value"),
             }
+            imf_ngdpd = _number(imf_values["imf_ngdpd_current_usd"])
+            imf_implied_conversion_factor = _ratio(gdp_lcu, imf_ngdpd)
             row = {
                 "game_id": game_id, "country_name": country.get("country_name"),
                 "source_lookup_code": iso3, "identity_mapping_status": country.get("identity_mapping_status"),
@@ -154,6 +156,7 @@ def assess_snapshot(
                 "wdi_inflation_annual_percent_reported": current["FP.CPI.TOTL.ZG"],
                 "wdi_gdp_current_usd_implied_official_fx": official_implied,
                 "wdi_gdp_current_usd_implied_alternative_factor": alternative_implied,
+                "imf_ngdpd_implied_conversion_factor_lcu_per_usd": imf_implied_conversion_factor,
                 "wdi_gdp_current_ppp_implied_from_lcu": ppp_implied,
                 "wdi_gdp_per_capita_implied_from_usd_and_population": per_capita_implied,
                 "wdi_cpi_index_yoy_percent_diagnostic": cpi_yoy,
