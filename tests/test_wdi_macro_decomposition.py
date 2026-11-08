@@ -76,6 +76,7 @@ def test_decomposition_reconstructs_wdi_arithmetic_without_approving_identity():
     assert result["row_count"] == 1
     assert row["wdi_gdp_current_usd_implied_official_fx"] == 100
     assert row["wdi_gdp_current_usd_implied_alternative_factor"] == 50
+    assert row["imf_ngdpd_implied_conversion_factor_lcu_per_usd"] == pytest.approx(200 / 120)
     assert row["wdi_gdp_current_ppp_implied_from_lcu"] == 40
     assert row["wdi_gdp_per_capita_implied_from_usd_and_population"] == 10
     assert row["wdi_cpi_index_yoy_percent_diagnostic"] == pytest.approx(10)
