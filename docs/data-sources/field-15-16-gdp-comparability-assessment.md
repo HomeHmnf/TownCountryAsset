@@ -200,3 +200,27 @@ The IMF Working Paper 2023/207 documents an official rate of 3.5 since 2015 and 
 TurkmenStat's January 2025 notice reports phased national-accounts modernization and implementation of updated methodological documents/software. Its June 2026 notice describes planned 2026–2027 World Bank assistance for ICP methodology, 2025 SNA national accounts/GDP and digital household/labour surveys. Neither notice supplies a numeric back-series bridge.
 
 **Disposition:** revise the Turkmenistan field 15 case from a generic unresolved GDP-level gap to a conversion-basis explanation for nine years plus explicit 2022–2023 residuals. Exact WEO numerator lineage and DEC factor provenance remain unverified. Field 16 remains open pending year-specific population-denominator comparison; field 18 remains open pending ICP/PPP factor and benchmark evidence. IMF priority is unchanged. Full evidence and follow-up steps: [Turkmenistan GDP conversion-basis reconciliation](turkmenistan-gdp-conversion-reconciliation.md).
+
+## Turkmenistan direct domestic-currency comparison (2026-11-08)
+
+The October 2026 IMF WEO export contains `TKM.NGDP.A` (current-price GDP in domestic currency, billions of TMT) as well as `TKM.NGDPD.A` (current-price GDP in US dollars). Comparing these series directly with WDI `NY.GDP.MKTP.CN` resolves the prior uncertainty about whether the 2022–2023 residuals arise in the local-currency numerator.
+
+| Year | WDI current LCU (bn TMT) | WEO current LCU (bn TMT) | WDI minus WEO (%) | WEO implied TMT/USD |
+|---:|---:|---:|---:|---:|
+| 2015 | 125.299 | 125.299 | +0.000% | 3.499972 |
+| 2016 | 126.593 | 126.630 | -0.029% | 3.500000 |
+| 2017 | 132.742 | 132.742 | +0.000% | 3.500026 |
+| 2018 | 142.679 | 142.667 | +0.008% | 3.500000 |
+| 2019 | 157.410 | 157.410 | +0.000% | 3.500022 |
+| 2020 | 159.092 | 159.092 | +0.000% | 3.499989 |
+| 2021 | 173.170 | 173.170 | +0.000% | 3.500010 |
+| 2022 | 203.947 | 198.371 | +2.811% | 3.500026 |
+| 2023 | 211.704 | 219.848 | -3.704% | 3.499984 |
+| 2024 | 240.363 | 240.363 | +0.000% | 3.500007 |
+| 2025 | 270.893 | 270.893 | +0.000% | 3.500000 |
+
+WEO's domestic-currency and USD series imply approximately 3.5 TMT/USD throughout 2015–2025. WDI and WEO domestic-currency GDP agree to displayed precision or within 0.03% in nine years. In 2022 WDI is 2.811% higher than WEO; in 2023 it is 3.704% lower. These two differences therefore exist before USD conversion and cannot be attributed to a different WEO exchange-rate factor.
+
+The reason for the 2022–2023 local-currency differences is not established. Potential vintage, revision, compilation or timing explanations remain hypotheses, not findings. The WDI current-USD values continue to reproduce arithmetically from WDI local-currency GDP divided by the DEC factor; this does not establish the full WDI compilation method or identify DEC as a parallel-market rate.
+
+This direct series comparison supersedes the earlier statement that WEO local-currency GDP had not yet been retrieved. It narrows the field-15 case but does not resolve field 16 population denominator comparability, field 18 PPP/ICP comparability, identity approval or source selection. The fixed October 2026 WEO release and timestamped rolling WDI API snapshot are not provider-vintage aligned. IMF WEO priority remains unchanged.
