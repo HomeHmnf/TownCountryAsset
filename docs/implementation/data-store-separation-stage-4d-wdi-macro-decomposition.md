@@ -210,3 +210,14 @@ The Turkmenistan follow-up is scoped to five dated publications: IMF Working Pap
 ### Turkmenistan primary-evidence capture status (2026-11-07)
 
 Three of the five scoped publications have now been captured and passed owner-run manifest integrity audit: IMF Working Paper 2023/207 (XML), TurkmenStat's January 2025 notice (HTML), and TurkmenStat's June 2026 notice (HTML). Both IMF Article IV mission-statement endpoints returned HTTP 403; no raw files or manifests were created for those two publications. The source catalogue now contains 34 sources/106 URLs and the dataset catalogue 13 datasets/11 streams. These syncs created no acquisition rows. The guarded processing orchestrator and remaining Project DB registration gate are documented in [Turkmenistan evidence acquisition](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md). This is evidence capture/provenance work only; it does not resolve the conversion-factor interpretation or change the Stage 4 field dispositions.
+
+
+### Turkmenistan evidence provenance registration (2026-11-08)
+
+The guarded Turkmenistan processing workflow passed its owner-run tests (15 passed across the acquisition and orchestration suites), both manifest audits, and the three-event registration preflight. The explicit registration run created Project DB acquisition IDs 10–12:
+
+- ID 10: `national_accounts_methodology_2025`, one artifact, status `acquired`.
+- ID 11: `statistical_system_reform_2026`, one artifact, status `acquired`.
+- ID 12: `gdp_statistical_shortcomings_wp_2023_207`, one artifact, status `acquired`.
+
+The workflow reported Project DB written and Game DB not written. This is provenance registration only; the Turkmenistan conversion-factor interpretation remains unresolved, and no identity, semantic or source-policy gate is approved. The two IMF Article IV statements remain acquisition gaps after HTTP 403 responses. See [Turkmenistan acquisition and provenance workflow](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md).
