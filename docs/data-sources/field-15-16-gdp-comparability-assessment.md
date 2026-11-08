@@ -91,7 +91,7 @@ For all three countries, the IMF/WDI comparison uses the same year labels and ca
 2. Do not promote WDI GDP or GDP per capita to priority/fallback on the basis of this comparison.
 3. Do not create country-specific manual overrides from these investigations.
 4. For Guinea, preserve the 2018-base SNA 2008 rebasing evidence and the INS/UNSD corroboration; investigate the exact WDI vintage before any future substitution.
-5. For Turkmenistan, preserve the 2019–2025 dual-exchange-rate warning and the unresolved 2018 onset.
+5. For Turkmenistan, preserve the distinction between WDI's DEC-factor arithmetic and WEO's approximately 3.5 TMT/USD conversion. Direct domestic-currency comparison isolates additional unresolved WDI/WEO numerator differences in 2022–2023; do not describe these as WEO conversion-factor deviations. The 2018 onset and DEC factor provenance remain source-methodology questions.
 6. For CAR, preserve the unresolved national-accounts vintage/compilation gap; do not treat the 2017 7% revision as a sufficient explanation.
 7. Keep GDP and GDP-per-capita source status and population provenance distinct. Do not infer actual status from a country-level GDP series alone.
 
