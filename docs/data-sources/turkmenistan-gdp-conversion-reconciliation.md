@@ -150,3 +150,31 @@ No identity approval, semantic approval, source-selection change, release promot
 - TurkmenStat, [The national statistical system of Turkmenistan is being improved](https://www.stat.gov.tm/en/news/359), 23 June 2026.
 - World Bank, [GDP (current US$), Turkmenistan](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=TM), including its general source/coverage metadata.
 - UN Statistics Division, [System of National Accounts 2025](https://unstats.un.org/unsd/econstats/national-accounts/sna2025), adopted by the UN Statistical Commission in 2025.
+
+## 6. Direct WEO domestic-currency reconciliation (2026-11-08)
+
+The October 2026 WEO CSV contains both `TKM.NGDP.A` (GDP at current prices, domestic currency, billions of TMT) and `TKM.NGDPD.A` (GDP at current prices, US dollars, billions). This directly tests the previously unresolved WEO local-currency numerator.
+
+| Year | WDI current LCU (bn TMT) | WEO current LCU (bn TMT) | WDI minus WEO (%) | WEO current USD (bn) | WEO implied TMT/USD |
+|---:|---:|---:|---:|---:|---:|
+| 2015 | 125.299 | 125.299 | +0.000% | 35.800 | 3.499972 |
+| 2016 | 126.593 | 126.630 | -0.029% | 36.180 | 3.500000 |
+| 2017 | 132.742 | 132.742 | +0.000% | 37.926 | 3.500026 |
+| 2018 | 142.679 | 142.667 | +0.008% | 40.762 | 3.500000 |
+| 2019 | 157.410 | 157.410 | +0.000% | 44.974 | 3.500022 |
+| 2020 | 159.092 | 159.092 | +0.000% | 45.455 | 3.499989 |
+| 2021 | 173.170 | 173.170 | +0.000% | 49.477 | 3.500010 |
+| 2022 | 203.947 | 198.371 | +2.811% | 56.677 | 3.500026 |
+| 2023 | 211.704 | 219.848 | -3.704% | 62.814 | 3.499984 |
+| 2024 | 240.363 | 240.363 | +0.000% | 68.675 | 3.500007 |
+| 2025 | 270.893 | 270.893 | +0.000% | 77.398 | 3.500000 |
+
+The WEO domestic-currency and USD series imply approximately 3.5 TMT/USD in every year. The small 2016 and 2018 local-currency differences are below 0.03% and are consistent with displayed precision/rounding. The two material local-currency discrepancies are 2022 (+2.811% WDI relative to WEO) and 2023 (-3.704%).
+
+**Revised conclusion:** the 2022–2023 residuals are not explained by a different WEO exchange-rate conversion. They are already present in the two providers' domestic-currency GDP numerators. In the other nine years the local-currency series agree to displayed precision or within 0.03%. The earlier statement that the WEO local-currency numerator had not been retrieved is superseded by this direct comparison.
+
+The reason for the 2022–2023 numerator differences remains unknown. The available evidence does not distinguish among source-vintage/revision differences, national-accounts compilation changes, timing/reference-period differences or other provider-specific inputs. No particular explanation should be asserted without a dated national source bridge or provider methodology evidence.
+
+This finding strengthens the separation of two mechanisms: (a) the broad WDI/WEO current-USD level difference in years where local-currency GDP agrees is associated arithmetically with the different conversion factors; and (b) 2022–2023 contain additional, oppositely signed domestic-currency numerator differences. WDI's current-USD arithmetic remains reproduced by its DEC factor, but this does not prove the full provider compilation process or establish DEC as the parallel-market rate.
+
+The October 2026 WEO export is the captured fixed release; WDI remains a timestamped rolling-API snapshot rather than a provider-declared vintage. The comparison therefore establishes differences between these captured series, not a fully vintage-aligned statistical reconciliation. Field 16 population denominators and field 18 PPP construction remain separate gates. No identity, semantic, source-selection or canonical-data approval follows from this diagnostic.
