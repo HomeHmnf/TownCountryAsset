@@ -178,3 +178,69 @@ The reason for the 2022–2023 numerator differences remains unknown. The availa
 This finding strengthens the separation of two mechanisms: (a) the broad WDI/WEO current-USD level difference in years where local-currency GDP agrees is associated arithmetically with the different conversion factors; and (b) 2022–2023 contain additional, oppositely signed domestic-currency numerator differences. WDI's current-USD arithmetic remains reproduced by its DEC factor, but this does not prove the full provider compilation process or establish DEC as the parallel-market rate.
 
 The October 2026 WEO export is the captured fixed release; WDI remains a timestamped rolling-API snapshot rather than a provider-declared vintage. The comparison therefore establishes differences between these captured series, not a fully vintage-aligned statistical reconciliation. Field 16 population denominators and field 18 PPP construction remain separate gates. No identity, semantic, source-selection or canonical-data approval follows from this diagnostic.
+
+
+## 7. Field 16 population-denominator reconciliation (2026-11-08)
+
+The October 2026 WEO CSV contains TKM.LP.A (annual population, millions). Its values agree, within the precision of the published series, with population implied independently by WEO current-USD GDP divided by WEO GDP per capita. This is an internal consistency check, not independent population validation.
+
+| Year | WDI population | WEO population (m) | WEO implied persons | WDI above WEO |
+|---:|---:|---:|---:|---:|
+| 2015 | 6,215,770 | 5.766 | 5,766,491 | 7.791% |
+| 2016 | 6,360,041 | 5.869 | 5,868,561 | 8.375% |
+| 2017 | 6,507,061 | 5.968 | 5,968,343 | 9.026% |
+| 2018 | 6,655,524 | 6.065 | 6,065,062 | 9.735% |
+| 2019 | 6,803,944 | 6.158 | 6,158,380 | 10.483% |
+| 2020 | 6,949,912 | 6.250 | 6,250,457 | 11.190% |
+| 2021 | 7,092,043 | 6.342 | 6,341,837 | 11.829% |
+| 2022 | 7,230,193 | 6.431 | 6,430,721 | 12.432% |
+| 2023 | 7,364,438 | 6.516 | 6,516,130 | 13.019% |
+| 2024 | 7,494,498 | 6.598 | 6,598,069 | 13.586% |
+| 2025 | 7,618,847 | 6.680 | 6,679,994 | 14.055% |
+
+The WEO metadata identifies TKM.LP.A as annual population in millions, with latest actual annual data 2024, country update date 25 September 2026, and historical data source “Turkmenistan authorities”. Its methodology note says pre-2009 data cannot currently be confirmed by national sources. The 2025 value must therefore remain projection-status, not actual. The metadata does not identify the precise national publication, population concept or revision vintage behind the series.
+
+WDI SP.POP.TOTL describes total population using a de facto concept: all residents regardless of legal status or citizenship, with midyear estimates. Its general source-organization metadata lists several providers and does not establish the specific lineage of the Turkmenistan observations. WDI observation-status strings are blank in the captured snapshot; do not infer actual status from that blank.
+
+The official 2022 Turkmenistan census reports 7,057,841 people as of 17 December 2022. The UN Population Division portal independently records 7,057,844 and classifies the census as de facto. WDI's 2022 midyear estimate of 7,230,193 is 2.44% above the census count; WEO's 6.431 million is 8.88% below it. The reference dates are not aligned, so this is corroborative context rather than a direct same-date error test.
+
+The UN World Population Prospects 2024 revision identifies Turkmenistan as a major revision case: its 2023 population estimate was revised upward by 848,000 (13%) relative to WPP 2022, incorporating 2022 census evidence and indicating substantially more net in-migration over the 1995–2022/23 period than previously estimated. Historical estimates back to 1950 were revised. The captured WDI series is consistent with the higher revised population level and the census evidence; the WEO series is materially lower. However, the exact WEO population lineage is not verified, so it must not be labelled as WPP 2022 or any other specific revision without direct evidence.
+
+**Field 16 conclusion:** population is a material, independent component of the Turkmenistan GDP-per-capita discrepancy. WDI is more consistent with the 2022 census and WPP 2024 upward revision than the captured WEO series, but exact WEO source lineage and date/concept alignment remain unresolved. Combined with the field-15 numerator reconciliation, this establishes that field 16 cannot be explained by GDP conversion alone.
+
+## 8. Field 18 PPP/ICP reconciliation (2026-11-08)
+
+The captured WDI PPP GDP is arithmetically reproduced by current-LCU GDP divided by PA.NUS.PPP for every year 2015–2025. The October 2026 WEO export contains TKM.PPPEX.A (domestic currency per international dollar) and TKM.PPPGDP.A (current PPP GDP). The WEO PPP GDP is broadly consistent with its own domestic-currency GDP and PPP factor, subject to small differences caused by displayed source precision.
+
+| Year | WDI PPP factor | WDI PPP GDP (bn intl$) | WEO PPP factor | WEO PPP GDP (bn intl$) | WDI vs WEO PPP GDP |
+|---:|---:|---:|---:|---:|---:|
+| 2015 | 1.585414 | 79.032 | 1.612 | 77.736 | +1.668% |
+| 2016 | 1.540666 | 82.168 | 1.556 | 81.393 | +0.952% |
+| 2017 | 1.536306 | 86.403 | 1.536 | 86.403 | 0.000% |
+| 2018 | 1.491996 | 95.630 | 1.492 | 95.622 | +0.008% |
+| 2019 | 1.503330 | 104.708 | 1.503 | 104.708 | approximately 0.000% |
+| 2020 | 1.529004 | 104.049 | 1.529 | 104.049 | 0.000% |
+| 2021 | 1.501704 | 115.316 | 1.502 | 115.316 | approximately 0.000% |
+| 2022 | 1.554252 | 131.219 | 1.554 | 127.686 | +2.767% |
+| 2023 | 1.463334 | 144.672 | 1.592 | 138.113 | +4.749% |
+| 2024 | 1.525358 | 157.578 | 1.641 | 146.491 | +7.568% |
+| 2025 | 1.573152 | 172.198 | 1.740 | 155.724 | +10.579% |
+
+The direct arithmetic decomposition identifies distinct periods:
+
+- **2015–2016:** small PPP GDP differences (1.668% and 0.952%).
+- **2017–2021:** PPP GDP agrees at displayed precision or within 0.008%; conversion factors also agree at displayed precision. Do not interpret tiny differences in rounded factors as meaningful methodological divergence.
+- **2022:** WDI current-LCU GDP is 203.947bn TMT versus WEO 198.371bn, while both displayed PPP factors are 1.554. The PPP GDP gap is principally the domestic-currency GDP numerator difference already identified in field 15.
+- **2023:** WDI current-LCU GDP is lower (211.704bn versus 219.848bn), but its PPP factor is also lower (1.463334 versus 1.592); the lower factor more than offsets the lower numerator, leaving WDI PPP GDP higher.
+- **2024–2025:** current-LCU GDP agrees at displayed precision, while PPP factors diverge (1.525358 vs 1.641; 1.573152 vs 1.740). The PPP GDP gap is therefore attributable to the conversion-factor difference in these years.
+- **2023** contains both numerator and factor effects.
+
+The WEO PPP factor is displayed to three decimal places in the captured CSV. Reconstructing PPP GDP from displayed domestic-currency GDP divided by that rounded factor yields small differences (roughly 0.01–0.04bn) from the reported PPP GDP. Do not treat these rounding residuals as separate economic discrepancies.
+
+The IMF WEO FAQ describes its PPP rates as based on ICP 2017–2021 benchmarks, extended backwards and forwards using growth in relative GDP deflators. The World Bank describes its WDI PPP series as using ICP benchmark years, interpolation between benchmarks and extrapolation outside them using relative inflation/deflator movements. World Bank ICP guidance also warns that ICP and WDI GDP, population and exchange-rate inputs can differ because ICP receives national inputs directly and they can differ by vintage or methodology. These are general provider methodologies; the exact Turkmenistan national-account and deflator inputs used for each captured year have not been established.
+
+**Field 18 conclusion:** the WDI/WEO PPP comparison is effectively aligned through 2021, with small early differences. Divergence after 2021 separates into a 2022–2023 nominal GDP numerator component and an increasingly material 2023–2025 PPP-factor component. This does not establish which provider's PPP factor is preferable or identify the exact benchmark, deflator or vintage causing the post-2021 difference. The TurkmenStat June 2026 notice describes planned ICP and 2025 SNA technical assistance, not a completed new benchmark. Keep field 18 open and retain IMF WEO priority pending the separate approval process.
+
+### Field 15–18 governance disposition
+
+The field 15 domestic-currency comparison, field 16 population reconstruction and field 18 PPP decomposition are diagnostic country-case evidence only. They do not verify the country identity, establish complete vintage alignment, approve semantic equivalence, change source-selection policy, promote a release, or authorize canonical application. The WDI capture is a timestamped rolling-API snapshot, not a provider-declared vintage; the IMF input is the fixed October 2026 WEO release.
