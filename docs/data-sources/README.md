@@ -17,15 +17,16 @@ This section documents providers, acquisition, source-specific validation, relea
 
 - [Bahrain unemployment data acquisition](bahrain-unemployment-data-acquisition.md) — official API acquisition and immutable snapshots.
 - [ICASEES Central African Republic national accounts](icasees-central-african-republic-national-accounts.md) — source entry point; its [dedicated index](icasees/README.md) separates acquisition, workbook structure and GDP reconciliation.
-- [Guinea national-accounts vintage reconciliation](guinea-national-accounts-vintage-reconciliation.md) — legacy 1993 SNA versus 2018-base SNA 2008, WDI/IMF/UNSD comparison and source-acquisition targets.\n- [Guinea INS national-accounts acquisition](guinea-ins-national-accounts-acquisition.md) — repeatable official-PDF download, timestamped manifests, integrity audit and Project DB provenance registration.
+- [Guinea national-accounts vintage reconciliation](guinea-national-accounts-vintage-reconciliation.md) — legacy 1993 SNA versus 2018-base SNA 2008, WDI/IMF/UNSD comparison and source-acquisition targets.
+- [Guinea INS national-accounts acquisition](guinea-ins-national-accounts-acquisition.md) — repeatable official-PDF download, timestamped manifests, integrity audit and Project DB provenance registration.
 - [Turkmenistan macroeconomic evidence acquisition](turkmenistan-macroeconomic-evidence-acquisition.md) — five IMF/TurkmenStat research and methodology publications, three verified captures, two documented IMF access gaps, and a guarded end-to-end Project DB provenance workflow.
-- [Turkmenistan GDP conversion-basis reconciliation](turkmenistan-gdp-conversion-reconciliation.md) — WDI/IMF WEO nominal-GDP arithmetic, official/DEC/parallel-rate distinctions, 2022–2023 residuals and national-accounts modernization evidence.
+- [Turkmenistan GDP conversion-basis reconciliation](turkmenistan-gdp-conversion-reconciliation.md) — WDI/IMF WEO GDP numerator and conversion arithmetic, field-16 population denominator, field-18 PPP/ICP decomposition, 2022–2023 residuals and national-accounts modernization evidence.
 
 ## Comparability investigations
 
 - [IMF WEO–WDI comparison](imf-weo-wdi-comparison.md) — shared country-year comparison method and diagnostic constraints.
 - [Field 15/16 GDP comparability](field-15-16-gdp-comparability-assessment.md) — nominal GDP and GDP per capita.
-- [Field 18 PPP GDP comparability](field-18-ppp-gdp-comparability-assessment.md) — PPP GDP and ICP methodology.
+- [Field 18 PPP GDP comparability](field-18-ppp-gdp-comparability-assessment.md) — PPP GDP and ICP methodology, including the Turkmenistan year-by-year PPP-factor decomposition.
 - [Field 20 inflation comparability](field-20-inflation-comparability-assessment.md) — annual-average, fiscal-year and calendar-year issues.
 - [Field 21 unemployment comparability](field-21-unemployment-comparability-assessment.md) — modeled versus national estimates and country definitions.
 - [Bahrain unemployment series assessment](bahrain-unemployment-series-assessment.md) — country-level evidence and reference-period interpretation.
