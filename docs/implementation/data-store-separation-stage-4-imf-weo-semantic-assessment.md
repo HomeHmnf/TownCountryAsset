@@ -240,3 +240,10 @@ The official Guinea INS legacy yearbook and June 2026 SNA 2008 accounts have now
 ## Turkmenistan follow-up evidence capture status (2026-11-07)
 
 The five-publication research batch now has three immutable, audited captures: IMF Working Paper 2023/207 and TurkmenStat notices dated 17 January 2025 and 23 June 2026. Both IMF Article IV mission-statement endpoints returned HTTP 403 in the acquisition environment and remain explicit acquisition gaps; no third-party copy was substituted. The owner-run manifest audits found three valid manifests and three matching artifacts with zero integrity issues. Source and dataset catalogue synchronization completed (34 sources/106 URLs; 13 datasets/11 streams), but the acquisition events have not yet been registered by the new guarded workflow. No statistical-content approval, identity promotion, source-selection change, release promotion or Game DB write occurred. See [Turkmenistan acquisition and provenance workflow](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md).
+
+
+## Turkmenistan evidence registration update (2026-11-08)
+
+The Turkmenistan follow-up research batch now has three audited and registered Project DB acquisition events: ID 10 (`national_accounts_methodology_2025`), ID 11 (`statistical_system_reform_2026`) and ID 12 (`gdp_statistical_shortcomings_wp_2023_207`), each with one artifact and lifecycle status `acquired`. The owner-run guarded workflow passed 15 focused tests, both source-manifest audits, and a three-event preflight with zero deferred entries or errors. The registration command reported no Game DB write.
+
+This does not close the Turkmenistan field 15/16 conversion-factor question, classify the DEC factor as a parallel-market rate, validate WEO/WDI semantic comparability, approve country identity, or change source priority. The two IMF Article IV mission statements remain unacquired due to official-endpoint HTTP 403 responses. See [Turkmenistan acquisition and provenance record](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md).
