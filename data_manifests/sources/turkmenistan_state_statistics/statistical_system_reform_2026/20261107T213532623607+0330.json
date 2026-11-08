@@ -1,0 +1,31 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "turkmenistan_state_statistics",
+  "download_id": "statistical_system_reform_2026",
+  "release": "turkmenstat-statistical-system-reform-2026-06",
+  "release_kind": "edition_or_snapshot",
+  "publication_date": "2026-06-23",
+  "retrieved_at": "2026-11-07T21:35:32.623607+03:30",
+  "retrieval_timestamp_basis": "acquisition_tool_download_completion",
+  "acquisition_method": "automated_https_download",
+  "files": [
+    {
+      "file_id": "TurkmenStat_statistical_system_reform_2026-06-23.html",
+      "filename": "TurkmenStat_statistical_system_reform_2026-06-23.html",
+      "local_raw_path": "raw_data/sources/turkmenistan_state_statistics/statistical_system_reform_2026/TurkmenStat_statistical_system_reform_2026-06-23.html",
+      "url": "https://www.stat.gov.tm/en/news/359",
+      "requested_url": "https://www.stat.gov.tm/en/news/359",
+      "final_url": "https://www.stat.gov.tm/en/news/359",
+      "content_type": "text/html",
+      "format": "html",
+      "byte_count": 72736,
+      "sha256": "fcdfe60cc5a4eada462987c1f1bde069ff4d909c863a576e98d8f08f51a30abb"
+    }
+  ],
+  "validation": {
+    "format_signature_verified": true,
+    "byte_count_verified": true,
+    "sha256_calculated": true,
+    "statistical_content_reviewed": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "guinea_ins",
+  "download_id": "national_accounts_sna2008_2026",
+  "release": "june-2026-sna2008-2018-base-accounts",
+  "release_kind": "edition_or_snapshot",
+  "publication_date": "2026-06",
+  "retrieved_at": "2026-11-07T20:56:48.196817+03:30",
+  "retrieval_timestamp_basis": "filesystem_mtime_existing_manual_download",
+  "acquisition_method": "existing_file_integrity_capture",
+  "files": [
+    {
+      "file_id": "Note_analyse_comptes_nationaux_2018_2024_June_2026.pdf",
+      "filename": "Note_analyse_comptes_nationaux_2018_2024_June_2026.pdf",
+      "local_raw_path": "raw_data/sources/guinea_ins/national_accounts/sna2008_2026/Note_analyse_comptes_nationaux_2018_2024_June_2026.pdf",
+      "url": "https://stat-guinee.org/images/Documents/Publications/INS/annuelles/CN/Note_analyse_des_comptes_nationaux_definitifs_et_rapides_2018_2024_VC.pdf",
+      "final_url": "https://stat-guinee.org/images/Documents/Publications/INS/annuelles/CN/Note_analyse_des_comptes_nationaux_definitifs_et_rapides_2018_2024_VC.pdf",
+      "content_type": "application/pdf",
+      "format": "pdf",
+      "byte_count": 697616,
+      "sha256": "c3535828150d9bedbbf29f3b766bc00e144e31967a0c3839073606c67ec8ebe0"
+    }
+  ],
+  "validation": {
+    "pdf_signature_verified": true,
+    "byte_count_verified": true,
+    "sha256_calculated": true,
+    "statistical_content_reviewed": false
+  }
+}

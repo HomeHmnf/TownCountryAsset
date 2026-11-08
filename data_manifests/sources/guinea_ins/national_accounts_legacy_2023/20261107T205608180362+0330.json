@@ -1,0 +1,30 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "guinea_ins",
+  "download_id": "national_accounts_legacy_2023",
+  "release": "2023-yearbook-legacy-sna1993",
+  "release_kind": "edition_or_snapshot",
+  "publication_date": "2023",
+  "retrieved_at": "2026-11-07T20:56:08.180362+03:30",
+  "retrieval_timestamp_basis": "filesystem_mtime_existing_manual_download",
+  "acquisition_method": "existing_file_integrity_capture",
+  "files": [
+    {
+      "file_id": "La_Guinee_en_chiffre_2023.pdf",
+      "filename": "La_Guinee_en_chiffre_2023.pdf",
+      "local_raw_path": "raw_data/sources/guinea_ins/national_accounts/legacy_2023/La_Guinee_en_chiffre_2023.pdf",
+      "url": "https://www.stat-guinee.org/images/Documents/Publications/INS/annuelles/annuaire/La_Guinee_en_chiffre_2023.pdf",
+      "final_url": "https://www.stat-guinee.org/images/Documents/Publications/INS/annuelles/annuaire/La_Guinee_en_chiffre_2023.pdf",
+      "content_type": "application/pdf",
+      "format": "pdf",
+      "byte_count": 643328,
+      "sha256": "5291a9e96909256a3f11952c33746a7685e640badabacc64477c371413acf75d"
+    }
+  ],
+  "validation": {
+    "pdf_signature_verified": true,
+    "byte_count_verified": true,
+    "sha256_calculated": true,
+    "statistical_content_reviewed": false
+  }
+}

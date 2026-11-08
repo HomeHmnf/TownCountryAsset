@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="öz ygtyýarlyklarynyň çäklerinde halkara guramalary we beýleki döwletleriň milli statistika gulluklary bilen statistika babatda hyzmatdaşlygy amala aşyrmak, halkara guramalarynda statistika işiniň meseleleri boýunça Türkmenistanyň bähbitlerine wekilçilik etmek.">
+    <meta name="keywords" content="Türkmenistanyň Statistika baradaky döwlet komiteti, TürkmenStat, Государственный комитет Туркменистана по статистике, ТуркменСтат, statistika, turkmenistan, Statistics Turkmenistan, Статистика Туркменистана, stat, stattkm, статистика, ткм стат, статткм, ткмстат">
+    <meta name="csrf-token" content="yAXPs4S4ETs2xRgdRjkgzeS7cnKzCQj3jG6XdKAh">
+    <link rel="icon" type="image/png" href="https://www.stat.gov.tm/img/nav1.png" />
+    <title>State Committee of Turkmenistan on Statistics</title>
+
+    <link rel="stylesheet" href="https://www.stat.gov.tm/css/style.min.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/css/core.min.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/css/font.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/css/iconfont.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/panel/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/bootstrap/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/css/my_style.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/css/tabler-icons/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://www.stat.gov.tm/css/tabler-icons/tabler-icons.min.css" />
+<style>
+    .img-div{
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    a.img-hover:hover .img-scale{
+        transform: scale(1.07);
+        transition: 0.3s ease;
+    }
+
+    a.img-hover .img-scale{
+        border-radius: 6px;
+        max-height: 200px;
+        object-fit: cover;
+        transition: 0.3s ease;
+    }
+</style>
+
+    <style>
+        .main{
+            min-height: calc(100vh - 10rem); /* 10rem is for footer hight */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #footer {
+            height: 10rem;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="main">
+        <style>
+  .menu-btn {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 15;
+    overflow: hidden;
+  }
+
+  .menu-btn span {
+    width: 25px;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    transition: all 0.5s;
+    margin-right: 10px;
+  }
+
+  .menu-btn span:nth-of-type(2) {
+    top: calc(50% - 5px);
+  }
+
+  .menu-btn span:nth-of-type(3) {
+    top: calc(50% + 5px);
+  }
+
+  .menu {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+
+  .menu.active {
+    transform: translateX(0);
+  }
+
+  .menu li {
+    list-style-type: none;
+  }
+
+  .menu-btn.active span:nth-of-type(1) {
+    display: none;
+  }
+
+  .menu-btn.active span:nth-of-type(2) {
+    top: 50%;
+    transform: translate(-50%, 0%) rotate(45deg);
+  }
+
+  .menu-btn.active span:nth-of-type(3) {
+    top: 50%;
+    transform: translate(-50%, 0%) rotate(-45deg);
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .search-box.openSearch {
+    display: block;
+  }
+
+</style>
+
+<nav class="d-none d-lg-block bg-white">
+  <div class="container">
+    <div class="d-flex justify-content-between pt-3">
+      <a href="https://www.stat.gov.tm/en" class="text-dark">
+        <div class="d-flex align-items-center">
+          <img class="img-fluid me-3" style="width: 85px!important; height: 85px!important;"
+               src="https://www.stat.gov.tm/img/nav1.png" alt="">
+          <div class="row">
+            <div class="col-8 h4 text-uppercase fw-bolder">
+              State Committee of Turkmenistan on Statistics            </div>
+          </div>
+        </div>
+      </a>
+
+      <div class="d-flex align-items-center justify-content-end">
+        <p class="col-6 h4 text-uppercase text-end fw-bolder">
+          INDEPENDENT NEUTRAL TURKMENISTAN IS THE HOMELAND OF PURPOSEFUL WINGED HORSES
+        </p>
+        <img class="img-fluid ms-3" style="width: 85px!important; height: 85px!important;" src="/storage/yearSlug/MhDJBH9u366xg0hX.jpg" alt="">
+      </div>
+    </div>
+  </div>
+  <div style="background-color: #e4f5ff !important;" class="container d-flex align-items-center nav-div position-relative mt-3">
+    <div id="nav-item-div" class="d-flex align-items-center">
+      <a href="https://www.stat.gov.tm/en"
+         class="py-3 px-3 ps-0 my-nav-item fw-bold ">Main page</a>
+      <a href="https://www.stat.gov.tm/en/about-us"
+         class="py-3 px-3 my-nav-item fw-bold ">About committee</a>
+      <a target="_blank" href="https://sdg.stat.gov.tm" class="py-3 px-3 my-nav-item fw-bold"
+         title="Sustainable Development Goals">
+        <svg width="24" height="24" viewBox="0 0 53 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_321_8744)">
+        <path d="M26.1785 15.5291V4C23.1801 4.03153 20.21 4.58481 17.4014 5.63506L21.5663 16.3885C23.0469 15.8536 24.6047 15.5633 26.1785 15.5291Z" fill="#183668"/>
+        <path d="M20.9738 16.6206L20.903 16.4307L16.8089 5.86719C14.0258 6.98265 11.4585 8.57505 9.22266 10.5728L16.9892 19.0925C18.1732 18.056 19.5193 17.221 20.9738 16.6206Z" fill="#02558B"/>
+        <path d="M16.5227 19.5229L8.74978 11C6.55655 13.0459 4.73369 15.4556 3.36182 18.1228L11.0511 21.9562L13.6839 23.2662C14.4177 21.8706 15.3769 20.6059 16.5227 19.5229Z" fill="#5DBB46"/>
+        <path d="M3.07838 18.6973C1.77137 21.3958 0.945723 24.3019 0.638672 27.2845L12.1227 28.3499C12.3003 26.7871 12.7353 25.2645 13.4101 23.8438L3.07838 18.6973Z" fill="#007DBC"/>
+        <path d="M40.8809 28.3499L52.3617 27.2845C52.0547 24.3019 51.229 21.3958 49.922 18.6973L45.6767 20.8119L39.5967 23.8374C40.271 25.2603 40.7049 26.7851 40.8809 28.3499Z" fill="#C31F33"/>
+        <path d="M35.4643 5.98267L35.5994 5.63506C32.7907 4.58519 29.8207 4.03193 26.8223 4V15.5291C28.3961 15.5633 29.9539 15.8536 31.4345 16.3885L35.4643 5.98267Z" fill="#EB1C2D"/>
+        <path d="M39.3136 23.2629L46.8001 19.5358L49.639 18.1228C48.2668 15.4558 46.444 13.0461 44.251 11L36.478 19.5229C37.6209 20.6066 38.5787 21.87 39.3136 23.2629Z" fill="#279B48"/>
+        <path d="M12.0157 29.9991C12.0157 29.6548 12.0157 29.3136 12.0479 28.9821L1.32989 27.9907L0.567083 27.9199C0.512366 28.6151 0.483398 29.3136 0.483398 29.9991C0.485383 32.3006 0.79166 34.5918 1.39427 36.813L3.1806 36.3205L12.4921 33.6716C12.1774 32.4727 12.0173 31.2386 12.0157 29.9991Z" fill="#48773E"/>
+        <path d="M36.0147 19.0925L43.7813 10.5728C41.5452 8.57532 38.978 6.98294 36.195 5.86719L32.7285 14.8085L32.0269 16.6206C33.4828 17.2202 34.8301 18.0553 36.0147 19.0925Z" fill="#D3A029"/>
+        <path d="M34.3892 42.1372L40.4595 51.9412C42.9893 50.3315 45.2216 48.2963 47.0576 45.9256L37.8556 38.9766C36.8806 40.2125 35.7096 41.2802 34.3892 42.1372Z" fill="#FDB816"/>
+        <path d="M47.4439 45.4176C49.2252 43.0047 50.5735 40.3004 51.4286 37.4257L40.3404 34.2715C39.8734 35.7706 39.1657 37.1837 38.2451 38.4557L47.4439 45.4176Z" fill="#00AED9"/>
+        <path d="M49.9703 28.1452L40.9388 28.9821C40.9613 29.3039 40.9742 29.6548 40.9742 29.9991C40.9738 31.2326 40.8181 32.461 40.5107 33.6555L51.6053 36.813C52.2049 34.5914 52.5079 32.3002 52.5065 29.9991C52.5065 29.3136 52.4776 28.6151 52.4228 27.9199L49.9703 28.1452Z" fill="#EF402B"/>
+        <path d="M29.4736 44.1677L31.5947 55.5069C34.5346 54.924 37.3509 53.8349 39.9181 52.2883L36.3776 46.5688L33.8477 42.4844C32.4924 43.2826 31.0144 43.8514 29.4736 44.1677Z" fill="#8F1838"/>
+        <path d="M19.1523 42.4727L13.082 52.2798C15.6499 53.8275 18.4674 54.9166 21.4086 55.4984L23.2368 45.7074L23.5264 44.1592C21.9855 43.8418 20.5075 43.2719 19.1523 42.4727Z" fill="#E11484"/>
+        <path d="M12.66 34.2715L1.56543 37.4257C2.42049 40.3004 3.76878 43.0047 5.55008 45.4176L12.3864 40.2678L14.7553 38.4782C13.8305 37.2006 13.1226 35.7793 12.66 34.2715Z" fill="#CF8D2A"/>
+        <path d="M15.1444 38.9766L13.3967 40.2962L5.94238 45.9256C7.77839 48.2963 10.0107 50.3315 12.5406 51.9412L14.0823 49.4499L18.6109 42.1372C17.2913 41.2791 16.1205 40.2115 15.1444 38.9766Z" fill="#F99D26"/>
+        <path d="M24.154 44.2832L22.0361 55.6321C24.9919 56.1374 28.012 56.1374 30.9678 55.6321L28.8467 44.2929C27.2923 44.544 25.7074 44.5407 24.154 44.2832Z" fill="#F36D25"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_321_8744">
+            <rect width="52.0064" height="52" fill="white" transform="translate(0.49707 4)"/>
+        </clipPath>
+    </defs>
+</svg>
+SDG</a>
+      <a href="https://www.stat.gov.tm/en/population-census"
+         class="py-3 px-3 my-nav-item fw-bold ">Population census</a>
+      <a href="https://www.stat.gov.tm/en/contact-us"
+         class="py-3 px-3 my-nav-item fw-bold ">Contact us</a>
+      <div class="dropdown" id="hover-dropdown">
+        <button class="py-3 px-3 my-nav-item nav-item-font fw-bold btn dropdown-toggle" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+          For respondents        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" style="font-size: 16px!important;"
+                 href="https://www.stat.gov.tm/en/forms/index?group=reports">Reporting form</a></li>
+          <li><a class="dropdown-item" style="font-size: 16px!important;"
+                 href="https://www.stat.gov.tm/en/forms/index?group=laws">Regulations</a></li>
+          <li><a class="dropdown-item" style="font-size: 16px!important;"
+                 href="https://www.stat.gov.tm/en/forms/index?group=classificators">Classifiers</a></li>
+          <li><a class="dropdown-item" style="font-size: 16px!important;"
+                 href="https://sbr.stat.gov.tm" target="_blank">Electronic services</a></li>
+          <li><a class="dropdown-item" style="font-size: 16px!important;"
+                 href="https://www.stat.gov.tm/en/news?group=notification">Announcements</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="search-input" class="d-none col-10">
+      <form action="https://www.stat.gov.tm/en/search" id="search-id-form">
+        <input type="text" class="col-12 search-input form-control" name="search" id="search-id"
+               placeholder="Search">
+      </form>
+    </div>
+
+    <div class="col py-3 px-0 d-flex justify-content-end align-items-center search-div">
+      <a href="#" id="search" class=" search my-nav-item fw-bold">
+        <div id="search-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_878_8818)">
+        <path d="M3 10C3 10.9193 3.18106 11.8295 3.53284 12.6788C3.88463 13.5281 4.40024 14.2997 5.05025 14.9497C5.70026 15.5998 6.47194 16.1154 7.32122 16.4672C8.1705 16.8189 9.08075 17 10 17C10.9193 17 11.8295 16.8189 12.6788 16.4672C13.5281 16.1154 14.2997 15.5998 14.9497 14.9497C15.5998 14.2997 16.1154 13.5281 16.4672 12.6788C16.8189 11.8295 17 10.9193 17 10C17 9.08075 16.8189 8.1705 16.4672 7.32122C16.1154 6.47194 15.5998 5.70026 14.9497 5.05025C14.2997 4.40024 13.5281 3.88463 12.6788 3.53284C11.8295 3.18106 10.9193 3 10 3C9.08075 3 8.1705 3.18106 7.32122 3.53284C6.47194 3.88463 5.70026 4.40024 5.05025 5.05025C4.40024 5.70026 3.88463 6.47194 3.53284 7.32122C3.18106 8.1705 3 9.08075 3 10Z" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 21L15 15" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_878_8818">
+            <rect width="24" height="24" fill="white"/>
+        </clipPath>
+    </defs>
+</svg>
+        </div>
+        <div id="cross-icon" class="not-active d-none">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_554_260)">
+        <path d="M18 6L6 18" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_554_260">
+            <rect width="24" height="24" fill="white"/>
+        </clipPath>
+    </defs>
+</svg>
+        </div>
+      </a>
+    </div>
+
+    <div class="ms-3 d-flex justify-content-end align-items-center">
+      <a class="mx-1" href="https://www.stat.gov.tm/tk/news/359">
+        <img src="https://www.stat.gov.tm/css/flags/tm.svg" style="height:22px;" class="img-fluid border p-0" alt="">
+      </a>
+
+      <a class="mx-1" href="https://www.stat.gov.tm/ru/news/359">
+        <img src="https://www.stat.gov.tm/css/flags/ru.svg" style="height:22px;" class="img-fluid border p-0" alt="">
+      </a>
+
+      <a class="mx-1" href="https://www.stat.gov.tm/en/news/359">
+        <img src="https://www.stat.gov.tm/css/flags/en.svg" style="height:22px;" class="img-fluid border p-0" alt="">
+      </a>
+    </div>
+  </div>
+</nav>
+
+<nav class="d-block d-lg-none bg-white">
+  <div class="container pt-3">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <a href="https://www.stat.gov.tm/en">
+          <img class="img-fluid me-3"
+               src="https://www.stat.gov.tm/img/nav1.png" alt="" style="width: 60px;">
+        </a>
+      </div>
+      <div class="h6 text-uppercase fw-bolder text-center">
+        State Committee of Turkmenistan on Statistics      </div>
+      <div>
+        <img class="img-fluid"
+             src="/storage/yearSlug/MhDJBH9u366xg0hX.jpg" alt="" style="width: 70px;">
+      </div>
+    </div>
+
+    <hr class="mb-0">
+
+    <div class="d-flex align-items-center">
+      <div>
+        <button class="d-block d-lg-none navbr-toggler border-0 rounded-0 bg-white" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <header class="d-block d-lg-none mx-auto">
+            <div class="d-flex align-items-center justify-content-center">
+              <div class="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </header>
+        </button>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <div class="py-3 px-1 d-flex justify-content-center align-items-center search-div">
+          <div class="search-box row justify-content-center align-items-center">
+            <form action="https://www.stat.gov.tm/en/search" id="search-id-form">
+              <input type="text" class="col-11 search-input form-control" name="search" id="search-id"
+                     placeholder="Search">
+            </form>
+          </div>
+
+          <a href="#" id="search2" class="search my-nav-item fw-bold search2 ps-2 py-2">
+            <div id="search-icon2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_878_8818)">
+        <path d="M3 10C3 10.9193 3.18106 11.8295 3.53284 12.6788C3.88463 13.5281 4.40024 14.2997 5.05025 14.9497C5.70026 15.5998 6.47194 16.1154 7.32122 16.4672C8.1705 16.8189 9.08075 17 10 17C10.9193 17 11.8295 16.8189 12.6788 16.4672C13.5281 16.1154 14.2997 15.5998 14.9497 14.9497C15.5998 14.2997 16.1154 13.5281 16.4672 12.6788C16.8189 11.8295 17 10.9193 17 10C17 9.08075 16.8189 8.1705 16.4672 7.32122C16.1154 6.47194 15.5998 5.70026 14.9497 5.05025C14.2997 4.40024 13.5281 3.88463 12.6788 3.53284C11.8295 3.18106 10.9193 3 10 3C9.08075 3 8.1705 3.18106 7.32122 3.53284C6.47194 3.88463 5.70026 4.40024 5.05025 5.05025C4.40024 5.70026 3.88463 6.47194 3.53284 7.32122C3.18106 8.1705 3 9.08075 3 10Z" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M21 21L15 15" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_878_8818">
+            <rect width="24" height="24" fill="white"/>
+        </clipPath>
+    </defs>
+</svg>
+            </div>
+            <div id="cross-icon2" class="not-active d-none">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_554_260)">
+        <path d="M18 6L6 18" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke="#006EB5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_554_260">
+            <rect width="24" height="24" fill="white"/>
+        </clipPath>
+    </defs>
+</svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav align-items-center mb-2 mb-lg-0">
+        <li class="d-flex align-items-center nav-item pe-0 pe-lg-5 pb-2">
+          <div class="pb-2">
+            <a href="https://www.stat.gov.tm/en"
+               class="ps-2 my-nav-item fw-bold h3 fw-normal ">Main page</a>
+          </div>
+        </li>
+        <li class="d-flex align-items-center nav-item pe-0 pe-lg-5 pb-2">
+          <div class="pb-2">
+            <a href="https://www.stat.gov.tm/en/about-us"
+               class="ps-2 my-nav-item fw-bold h3 fw-normal ">About committee</a>
+          </div>
+        </li>
+        <li class="d-flex align-items-center nav-item pe-0 pe-lg-5 pb-2">
+          <div class="pb-2">
+            <a target="_blank" href="https://sbr.stat.gov.tm" target="_blank"
+               class="ps-2 my-nav-item fw-bold h3 fw-normal">Electronic reports</a>
+          </div>
+        </li>
+        <li class="d-flex align-items-center nav-item pe-0 pe-lg-5 pb-2">
+          <div class="pb-2">
+            <a target="_blank" href="https://sdg.stat.gov.tm" class="ps-2 my-nav-item fw-bold h3 fw-normal"
+               title="Sustainable Development Goals">
+              <svg width="24" height="24" viewBox="0 0 53 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_321_8744)">
+        <path d="M26.1785 15.5291V4C23.1801 4.03153 20.21 4.58481 17.4014 5.63506L21.5663 16.3885C23.0469 15.8536 24.6047 15.5633 26.1785 15.5291Z" fill="#183668"/>
+        <path d="M20.9738 16.6206L20.903 16.4307L16.8089 5.86719C14.0258 6.98265 11.4585 8.57505 9.22266 10.5728L16.9892 19.0925C18.1732 18.056 19.5193 17.221 20.9738 16.6206Z" fill="#02558B"/>
+        <path d="M16.5227 19.5229L8.74978 11C6.55655 13.0459 4.73369 15.4556 3.36182 18.1228L11.0511 21.9562L13.6839 23.2662C14.4177 21.8706 15.3769 20.6059 16.5227 19.5229Z" fill="#5DBB46"/>
+        <path d="M3.07838 18.6973C1.77137 21.3958 0.945723 24.3019 0.638672 27.2845L12.1227 28.3499C12.3003 26.7871 12.7353 25.2645 13.4101 23.8438L3.07838 18.6973Z" fill="#007DBC"/>
+        <path d="M40.8809 28.3499L52.3617 27.2845C52.0547 24.3019 51.229 21.3958 49.922 18.6973L45.6767 20.8119L39.5967 23.8374C40.271 25.2603 40.7049 26.7851 40.8809 28.3499Z" fill="#C31F33"/>
+        <path d="M35.4643 5.98267L35.5994 5.63506C32.7907 4.58519 29.8207 4.03193 26.8223 4V15.5291C28.3961 15.5633 29.9539 15.8536 31.4345 16.3885L35.4643 5.98267Z" fill="#EB1C2D"/>
+        <path d="M39.3136 23.2629L46.8001 19.5358L49.639 18.1228C48.2668 15.4558 46.444 13.0461 44.251 11L36.478 19.5229C37.6209 20.6066 38.5787 21.87 39.3136 23.2629Z" fill="#279B48"/>
+        <path d="M12.0157 29.9991C12.0157 29.6548 12.0157 29.3136 12.0479 28.9821L1.32989 27.9907L0.567083 27.9199C0.512366 28.6151 0.483398 29.3136 0.483398 29.9991C0.485383 32.3006 0.79166 34.5918 1.39427 36.813L3.1806 36.3205L12.4921 33.6716C12.1774 32.4727 12.0173 31.2386 12.0157 29.9991Z" fill="#48773E"/>
+        <path d="M36.0147 19.0925L43.7813 10.5728C41.5452 8.57532 38.978 6.98294 36.195 5.86719L32.7285 14.8085L32.0269 16.6206C33.4828 17.2202 34.8301 18.0553 36.0147 19.0925Z" fill="#D3A029"/>
+        <path d="M34.3892 42.1372L40.4595 51.9412C42.9893 50.3315 45.2216 48.2963 47.0576 45.9256L37.8556 38.9766C36.8806 40.2125 35.7096 41.2802 34.3892 42.1372Z" fill="#FDB816"/>
+        <path d="M47.4439 45.4176C49.2252 43.0047 50.5735 40.3004 51.4286 37.4257L40.3404 34.2715C39.8734 35.7706 39.1657 37.1837 38.2451 38.4557L47.4439 45.4176Z" fill="#00AED9"/>
+        <path d="M49.9703 28.1452L40.9388 28.9821C40.9613 29.3039 40.9742 29.6548 40.9742 29.9991C40.9738 31.2326 40.8181 32.461 40.5107 33.6555L51.6053 36.813C52.2049 34.5914 52.5079 32.3002 52.5065 29.9991C52.5065 29.3136 52.4776 28.6151 52.4228 27.9199L49.9703 28.1452Z" fill="#EF402B"/>
+        <path d="M29.4736 44.1677L31.5947 55.5069C34.5346 54.924 37.3509 53.8349 39.9181 52.2883L36.3776 46.5688L33.8477 42.4844C32.4924 43.2826 31.0144 43.8514 29.4736 44.1677Z" fill="#8F1838"/>
+        <path d="M19.1523 42.4727L13.082 52.2798C15.6499 53.8275 18.4674 54.9166 21.4086 55.4984L23.2368 45.7074L23.5264 44.1592C21.9855 43.8418 20.5075 43.2719 19.1523 42.4727Z" fill="#E11484"/>
+        <path d="M12.66 34.2715L1.56543 37.4257C2.42049 40.3004 3.76878 43.0047 5.55008 45.4176L12.3864 40.2678L14.7553 38.4782C13.8305 37.2006 13.1226 35.7793 12.66 34.2715Z" fill="#CF8D2A"/>
+        <path d="M15.1444 38.9766L13.3967 40.2962L5.94238 45.9256C7.77839 48.2963 10.0107 50.3315 12.5406 51.9412L14.0823 49.4499L18.6109 42.1372C17.2913 41.2791 16.1205 40.2115 15.1444 38.9766Z" fill="#F99D26"/>
+        <path d="M24.154 44.2832L22.0361 55.6321C24.9919 56.1374 28.012 56.1374 30.9678 55.6321L28.8467 44.2929C27.2923 44.544 25.7074 44.5407 24.154 44.2832Z" fill="#F36D25"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_321_8744">
+            <rect width="52.0064" height="52" fill="white" transform="translate(0.49707 4)"/>
+        </clipPath>
+    </defs>
+</svg>
+SDG</a>
+          </div>
+        </li>
+        <li class="d-flex align-items-center nav-item pe-0 pe-lg-5 pb-2">
+          <div class="pb-2">
+            <a href="https://www.stat.gov.tm/en/population-census"
+               class="ps-2 my-nav-item fw-bold h3 fw-normal ">Population census</a>
+          </div>
+        </li>
+        <li class="d-flex align-items-center nav-item pe-0 pe-lg-5 pb-2">
+          <div class="pb-2">
+            <a target="_blank" href="https://e.gov.tm/" class="ps-2 my-nav-item fw-bold h3 fw-normal">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 70 69.389">
+    <image id="logo" width="100%" height="100%" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOUAAADjCAYAAAB6kNMLAAABN2lDQ1BBZG9iZSBSR0IgKDE5OTgpAAAokZWPv0rDUBSHvxtFxaFWCOLgcCdRUGzVwYxJW4ogWKtDkq1JQ5ViEm6uf/oQjm4dXNx9AidHwUHxCXwDxamDQ4QMBYvf9J3fORzOAaNi152GUYbzWKt205Gu58vZF2aYAoBOmKV2q3UAECdxxBjf7wiA10277jTG+38yH6ZKAyNguxtlIYgK0L/SqQYxBMygn2oQD4CpTto1EE9AqZf7G1AKcv8ASsr1fBBfgNlzPR+MOcAMcl8BTB1da4Bakg7UWe9Uy6plWdLuJkEkjweZjs4zuR+HiUoT1dFRF8jvA2AxH2w3HblWtay99X/+PRHX82Vun0cIQCw9F1lBeKEuf1UYO5PrYsdwGQ7vYXpUZLs3cLcBC7dFtlqF8hY8Dn8AwMZP/fNTP8gAAAAJcEhZcwAACxMAAAsTAQCanBgAAATtaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzE0OCA3OS4xNjQwMzYsIDIwMTkvMDgvMTMtMDE6MDY6NTcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyMS4xIChXaW5kb3dzKSIgeG1wOkNyZWF0ZURhdGU9IjIwMjEtMDQtMTdUMTA6NTg6NTArMDU6MDAiIHhtcDpNb2RpZnlEYXRlPSIyMDIxLTA4LTA0VDEwOjE5OjM0KzA1OjAwIiB4bXA6TWV0YWRhdGFEYXRlPSIyMDIxLTA4LTA0VDEwOjE5OjM0KzA1OjAwIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4OTdhMmJkOS0zMmFkLWZhNGQtYjhhYS0zYTIzMTk2Njc0YzAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODk3YTJiZDktMzJhZC1mYTRkLWI4YWEtM2EyMzE5NjY3NGMwIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6ODk3YTJiZDktMzJhZC1mYTRkLWI4YWEtM2EyMzE5NjY3NGMwIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo4OTdhMmJkOS0zMmFkLWZhNGQtYjhhYS0zYTIzMTk2Njc0YzAiIHN0RXZ0OndoZW49IjIwMjEtMDQtMTdUMTA6NTg6NTArMDU6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCAyMS4xIChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7FThZjAABddklEQVR4nO29ffgmVXkmeDvdkRBUXD9QNBM3wcEgamvHtJIxagjs9oiBBMxEZYITAtnW1jSos0lAYOgR1FEIKF72RPEDQ3SSDBN12O0NDIliRHDSoUfAhNWJxMswyRInfnChbrP3/lFV5zyfp6reX/3oxnBM6FMf534+zn3Xc6rqfd/fw0jiofZQe6gdOO0f7W8H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"/>
+</svg>
+ Electronic reports</a>
+          </div>
+        </li>
+        <li class="d-flex align-items-center nav-item pe-0 pe-lg-5">
+          <div class="pb-2">
+            <a href="https://www.stat.gov.tm/en/contact-us"
+               class="ps-2 my-nav-item fw-bold h3 fw-normal ">Contact us</a>
+          </div>
+        </li>
+        <div class="d-flex justify-content-end align-items-center">
+          <a class="mx-1" href="https://www.stat.gov.tm/tk/news/359">
+            <img src="https://www.stat.gov.tm/css/flags/tm.svg" style="height:22px;" class="img-fluid border p-0" alt="">
+          </a>
+
+          <a class="mx-1" href="https://www.stat.gov.tm/ru/news/359">
+            <img src="https://www.stat.gov.tm/css/flags/ru.svg" style="height:22px;" class="img-fluid border p-0" alt="">
+          </a>
+
+          <a class="mx-1" href="https://www.stat.gov.tm/en/news/359">
+            <img src="https://www.stat.gov.tm/css/flags/en.svg" style="height:22px;" class="img-fluid border p-0" alt="">
+          </a>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  let menuBtn = document.querySelector('.menu-btn');
+  let menu = document.querySelector('.menu');
+  menuBtn.addEventListener('click', function () {
+    menuBtn.classList.toggle('active');
+    menu.classList.toggle('active');
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchIcon2 = document.getElementById("search2");
+    const searchBox = document.querySelector(".search-box");
+
+    searchIcon2.addEventListener("click", () => {
+      searchBox.classList.toggle("openSearch");
+    });
+  });
+
+  document.getElementById('search-id').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      document.getElementById('search-id-form').submit();
+    }
+  });
+</script>
+        <div class="container-md pb-4">
+    <nav aria-label="breadcrumb" class="pt-4 pb-3">
+        <ol class="breadcrumb fw-bold">
+            <li class=""><a href="https://www.stat.gov.tm/en">Main page</a> <i class="ti ti-chevron-right mx-2"></i></li>
+            <li class="" aria-current="page">News</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col-12 col-lg-9">
+            <div class="bg-white" style="padding: 24px; border-radius: 16px;">
+                                    <div>
+                      <img src="/storage/news/V4Jo0Lx7bPuGFNef.jpg" alt="" class="w-100" style="border-radius: 10px;">
+                    </div>
+                                <div class="py-3" style="line-height: 140%; font-weight: 600; font-size: 26px;">
+                    THE NATIONAL STATISTICAL SYSTEM OF TURKMENISTAN IS BEING IMPROVED
+                </div>
+                <div class="d-flex align-items-center">
+                    <div>
+                        23 June <i class="ti ti-point"></i> 2026
+                    </div>
+                    <div class="h5 fw-normal ps-4">
+                        <i class="ti ti-eye mx-1"></i> 2969
+                    </div>
+                </div>
+                <div class="pt-3" style="font-size: 18px; line-height: 160%; text-indent: 30px; text-align: justify">
+                    <p><i><strong>The State Committee of Statistics of Turkmenistan has signed an Agreement with the World Bank Group (International Bank for Reconstruction and Development) on the provision of a reimbursable advisory services on basis to improve the country's statistical system.</strong></i></p><p>During working visits to our country in 2026, delegations led by the World Bank Regional Director for Central Asia held consultations on the development of the national statistical system. Following these meetings, the World Bank Group (International Bank for Reconstruction and Development) proposed that the State Committee of Statistics of Turkmenistan enter into an Agreement on the provision of reimbursable advisory services for cooperation in 2026–2027.</p><p>This Agreement provides for activities and work to provide technical assistance in the area of ​​methodology for participation in the International Comparison Program, strengthening capacity in the area of ​​the system of national accounts and calculation of gross domestic product in accordance with the international statistical standard SNA 2025 adopted in March 2025 in New York at the 56th session of the UN Statistical Commission, as well as to expand experience in the area of ​​collecting data on household and labor force surveys based on a digital questionnaire using the “Survey Solutions” (CAPI) software platform.</p><p>As part of technical assistance to improve the methodology of the International Comparison Program, with the active assistance of international experts, specialized operational guidelines and sample lists of goods and services will be developed for the accurate collection of price data, and training will be provided to TurkmenStat specialists on the methodology for calculating purchasing power parities and compiling national accounts in accordance with the 2025 SNA.</p><p>Training sessions for statistical specialists and a pilot survey will also be conducted to transition from paper-based records to modern computer-assisted personal interviewing (CAPI) for households and the labor force.</p><p>Successful implementation of the project will contribute to improving the methodology for calculating gross domestic product in line with international practice (2025&nbsp;SNA), increasing the reliability of the national statistical system, and accurately presenting macroeconomic indicators to the global community.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 pt-3 pt-lg-0">
+            <div class="bg-white" style="padding: 16px; border-radius: 10px;">
+                <div class="pb-3" style="font-size: 20px; font-weight: 700">
+                    Other innovations                </div>
+                                <a href="https://www.stat.gov.tm/en/news/312" class="text-dark img-hover">
+                    <div class="mb-3">
+                                                    <div class="pb-3 img-div">
+                              <img src="/storage/news/u03FTjDsN3I0L5G5.jpg" class="img-fluid w-100 img-scale">
+                            </div>
+                                                <div class="d-inline p-1" style="background-color: rgba(50, 166, 69, 0.08); color: #006EB5; border-radius: 4px;">
+                              10 Dec 2025
+                          </div>
+                        <div class="pt-2 limit-ln" style="--line: 2; font-size: 16px; font-weight: 600;">Презентация статистической публикации «Перепись населения 2022: Положение детей в Туркменистане»</div>
+                    </div>
+                </a>
+                                <a href="https://www.stat.gov.tm/en/news/235" class="text-dark img-hover">
+                    <div class="mb-3">
+                                                    <div class="pb-3 img-div">
+                              <img src="/storage/news/bqQwTXhE56e7cMOW.jpg" class="img-fluid w-100 img-scale">
+                            </div>
+                                                <div class="d-inline p-1" style="background-color: rgba(50, 166, 69, 0.08); color: #006EB5; border-radius: 4px;">
+                              03 Apr 2025
+                          </div>
+                        <div class="pt-2 limit-ln" style="--line: 2; font-size: 16px; font-weight: 600;">Туркменская делегация приняла участи е в работе Регионального Форума по Устойчивому Развитию</div>
+                    </div>
+                </a>
+                                <a href="https://www.stat.gov.tm/en/news/204" class="text-dark img-hover">
+                    <div class="mb-3">
+                                                    <div class="pb-3 img-div">
+                              <img src="/storage/news/OxmkPsOL7sDcHSn5.jpg" class="img-fluid w-100 img-scale">
+                            </div>
+                                                <div class="d-inline p-1" style="background-color: rgba(50, 166, 69, 0.08); color: #006EB5; border-radius: 4px;">
+                              17 Jan 2025
+                          </div>
+                        <div class="pt-2 limit-ln" style="--line: 2; font-size: 16px; font-weight: 600;">NATIONAL ACCOUNTS IN STATISTICS ARE IMPROVED</div>
+                    </div>
+                </a>
+                            </div>
+        </div>
+    </div>
+</div>
+        <div class="mt-auto" id="footer">
+            <footer class="d-none d-lg-block bg-white pt-5 pb-2 mt-auto">
+    <div class="container position-relative">
+        <div class="d-flex">
+            <div class="col-6">
+                <div class="col-9">
+                    <p class="h3 fw-bold">State Committee of Turkmenistan on Statistics</p>
+                    <div class="mt-4">
+                        <p class="footer-label">Address</p>
+                        <p class="fw-bolder">744000, Ashgabat, Archabil avenue, 100</p>
+                    </div>
+                    <div class="d-flex mt-3">
+                        <div class="me-4">
+                            <p class="footer-color">Email</p>
+                            <p class="fw-bolder">turkmenstat@stat.gov.tm</p>
+                        </div>
+                        <div class="">
+                            <p class="footer-color">Phone number</p>
+                            <p class="fw-bolder">39-27-44</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <div class="col-8 d-flex justify-content-end mt-3">
+                    <div class="col-6 d-flex justify-content-end">
+                        <div>
+                            <a href="https://www.stat.gov.tm/en/about-us"
+                               class="footer-link mb-3 ">About committee</a>
+                            <a href="https://www.stat.gov.tm/en/population-census"
+                               class="footer-link mb-3 ">Population census</a>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <div>
+
+                            <a target="_blank" href="https://sdg.stat.gov.tm"
+                               class="footer-link mb-3">SDG</a>
+                            <a href="https://www.stat.gov.tm/en/contact-us"
+                               class="footer-link mb-3 ">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex align-items-center mb-3 mt-2">
+            <div class="col-6" style="color: #333333">© <span id="year"></span> year. All rights reserved</div>
+            <div class="col-6 text-end pe-5">
+                <a href="#" class="btn btn-icon top-btn" style="display: none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 15L12 9L6 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="d-block d-lg-none bg-white pt-4 pb-1 mt-auto">
+    <div class="container position-relative" style="padding-left: 30px;">
+        <div class="row">
+            <div class="col-9 pb-3">
+                <div class="h3 fw-bold">
+                    State Committee of Turkmenistan on Statistics                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div>
+                Address            </div>
+            <div class="fw-bolder">
+                744000, Ashgabat, Archabil avenue, 100            </div>
+        </div>
+
+        <div class="row justify-content-between mb-3">
+            <div class="col-6">
+                <div>
+                    Email
+                </div>
+                <div class="fw-bolder">
+                    turkmenstat@stat.gov.tm
+                </div>
+            </div>
+            <div class="col-5">
+                <div>
+                    Phone number                </div>
+                <div class="fw-bolder">
+                    39-27-44
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-between pt-1">
+            <div class="col-6">
+                <div>
+                    <a href="https://www.stat.gov.tm/en/about-us"
+                       class="footer-link mb-3 d-inline ">About committee</a>
+                </div>
+                <div>
+                    <a href="https://www.stat.gov.tm/en/population-census"
+                       class="footer-link mb-3 d-inline ">Population census</a>
+                </div>
+            </div>
+            <div class="col-5">
+                <div>
+                    <a target="_blank" href="https://sdg.stat.gov.tm"
+                       class="footer-link mb-3 d-inline">SDG</a>
+                </div>
+                <div>
+                    <a href="https://www.stat.gov.tm/en/contact-us"
+                       class="footer-link mb-3 d-inline ">Contact us</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex align-items-center mb-3 mt-2">
+            <div class="col-8">
+                <div style="color: #333333">© <span id="year"></span> All rights reserved</div>
+            </div>
+            <div class="col-4 text-end pe-5">
+                <a href="#" class="btn btn-icon top-btn" style="display: none">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 15L12 9L6 15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let year = new Date().getFullYear();
+        document.getElementById('year').innerText = year;
+    });
+</script>
+        </div>
+    </div>
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8BPSJWX9TN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8BPSJWX9TN');
+    </script>
+
+    <script src="https://www.stat.gov.tm/js/core.min.js"></script>
+    <script src="https://www.stat.gov.tm/js/script.js"></script>
+    <script src="https://www.stat.gov.tm/js/highcharts.min.js"></script>
+
+        <script>
+        $(document).ready(function() {
+            btnDisplay();
+            $(window).on('scroll', btnDisplay);
+
+            function btnDisplay() {
+                if ($(window).scrollTop() > 280) {
+                    $('.top-btn').css('display', 'inline-flex');
+                } else {
+                    $('.top-btn').css('display', 'none');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

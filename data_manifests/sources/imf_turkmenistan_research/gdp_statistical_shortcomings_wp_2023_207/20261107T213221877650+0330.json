@@ -1,0 +1,31 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "imf_turkmenistan_research",
+  "download_id": "gdp_statistical_shortcomings_wp_2023_207",
+  "release": "imf-wp-2023-207",
+  "release_kind": "edition_or_snapshot",
+  "publication_date": "2023-09-29",
+  "retrieved_at": "2026-11-07T21:32:21.877650+03:30",
+  "retrieval_timestamp_basis": "acquisition_tool_download_completion",
+  "acquisition_method": "automated_https_download",
+  "files": [
+    {
+      "file_id": "IMF_WP_2023_207_Turkmenistan_GDP.xml",
+      "filename": "IMF_WP_2023_207_Turkmenistan_GDP.xml",
+      "local_raw_path": "raw_data/sources/imf_turkmenistan_research/gdp_statistical_shortcomings_wp_2023_207/IMF_WP_2023_207_Turkmenistan_GDP.xml",
+      "url": "https://www.elibrary.imf.org/view/journals/001/2023/207/article-A001-en.xml",
+      "requested_url": "https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023207-print-pdf.pdf",
+      "final_url": "https://www.elibrary.imf.org/view/journals/001/2023/207/article-A001-en.xml",
+      "content_type": "text/html",
+      "format": "xml",
+      "byte_count": 902324,
+      "sha256": "34622422ded28dedf5ad71b361e7da345255a5c3a4a915cf7511a18ae8d62288"
+    }
+  ],
+  "validation": {
+    "format_signature_verified": true,
+    "byte_count_verified": true,
+    "sha256_calculated": true,
+    "statistical_content_reviewed": false
+  }
+}

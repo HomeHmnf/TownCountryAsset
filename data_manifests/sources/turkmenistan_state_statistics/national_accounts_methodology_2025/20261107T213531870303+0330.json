@@ -1,0 +1,31 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "turkmenistan_state_statistics",
+  "download_id": "national_accounts_methodology_2025",
+  "release": "turkmenstat-national-accounts-methodology-2025-01",
+  "release_kind": "edition_or_snapshot",
+  "publication_date": "2025-01-17",
+  "retrieved_at": "2026-11-07T21:35:31.870303+03:30",
+  "retrieval_timestamp_basis": "acquisition_tool_download_completion",
+  "acquisition_method": "automated_https_download",
+  "files": [
+    {
+      "file_id": "TurkmenStat_national_accounts_methodology_2025-01-17.html",
+      "filename": "TurkmenStat_national_accounts_methodology_2025-01-17.html",
+      "local_raw_path": "raw_data/sources/turkmenistan_state_statistics/national_accounts_methodology_2025/TurkmenStat_national_accounts_methodology_2025-01-17.html",
+      "url": "https://www.stat.gov.tm/en/news/204",
+      "requested_url": "https://www.stat.gov.tm/en/news/204",
+      "final_url": "https://www.stat.gov.tm/en/news/204",
+      "content_type": "text/html",
+      "format": "html",
+      "byte_count": 72096,
+      "sha256": "59e824dcaac8220cc2807e7c3979e2bd7753ca5e1899f0469893aa5d338b5999"
+    }
+  ],
+  "validation": {
+    "format_signature_verified": true,
+    "byte_count_verified": true,
+    "sha256_calculated": true,
+    "statistical_content_reviewed": false
+  }
+}
