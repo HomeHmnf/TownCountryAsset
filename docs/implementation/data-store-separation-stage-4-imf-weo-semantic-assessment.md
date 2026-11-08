@@ -247,3 +247,10 @@ The five-publication research batch now has three immutable, audited captures: I
 The Turkmenistan follow-up research batch now has three audited and registered Project DB acquisition events: ID 10 (`national_accounts_methodology_2025`), ID 11 (`statistical_system_reform_2026`) and ID 12 (`gdp_statistical_shortcomings_wp_2023_207`), each with one artifact and lifecycle status `acquired`. The owner-run guarded workflow passed 15 focused tests, both source-manifest audits, and a three-event preflight with zero deferred entries or errors. The registration command reported no Game DB write.
 
 This does not close the Turkmenistan field 15/16 conversion-factor question, classify the DEC factor as a parallel-market rate, validate WEO/WDI semantic comparability, approve country identity, or change source priority. The two IMF Article IV mission statements remain unacquired due to official-endpoint HTTP 403 responses. See [Turkmenistan acquisition and provenance record](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md).
+
+
+## Turkmenistan field 15 reassessment (2026-11-08)
+
+The captured WDI/October 2026 WEO comparison now supports a conversion-basis explanation for nine of eleven years: WDI current-LCU GDP divided by 3.5 TMT/USD reproduces WEO nominal GDP in 2015–2021 and 2024–2025, while WDI's published current-USD GDP follows its DEC alternative conversion factor. The implied WEO conversion factor is not 3.5 in 2022–2023, which remain unresolved residual years. The IMF working paper documents the 3.5 official rate and a much higher indicative parallel-market rate; the DEC factor must not be described as the parallel-market rate.
+
+TurkmenStat's 2025 and 2026 notices establish ongoing modernization and planned 2026–2027 technical assistance, not a completed numeric back-series revision. Field 16 population and field 18 ICP/PPP comparability remain open. This is a diagnostic country-case refinement only; no source priority, identity or semantic approval changed. See [Turkmenistan GDP conversion-basis reconciliation](../data-sources/turkmenistan-gdp-conversion-reconciliation.md).
