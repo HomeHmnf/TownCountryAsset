@@ -93,7 +93,7 @@ def _curl_download(url: str, destination: Path, *, timeout: float, retries: int,
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary = destination.with_name(destination.name + ".part")
     command = ["curl", "-fL", "--silent", "--show-error", "--retry", str(retries),
-               "--retry-all-errors", "--connect-timeout", "30", "--max-time", str(int(timeout)),
+               "--retry-connrefused", "--connect-timeout", "30", "--max-time", str(int(timeout)),
                "--output", str(temporary), "--write-out", "%{url_effective}\n%{content_type}\n%{http_code}"]
     if socks5_proxy:
         command[1:1] = ["--socks5-hostname", socks5_proxy]
