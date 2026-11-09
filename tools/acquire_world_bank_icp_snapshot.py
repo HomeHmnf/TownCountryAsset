@@ -154,6 +154,12 @@ def acquire_snapshot(*, repository_root: str | Path = ROOT,
         if not resource_id:
             raise ICPSnapshotError(f"Resource row {index} has no resource identifier")
         title = str(resource.get("title") or resource.get("name") or f"resource_{index}")
+        resource_format = str(resource.get("format") or "").strip().upper()
+        if resource_format in {"API", "DATABANK", "HTML"} or not resource_format:
+            skipped_resources.append({"resource_unique_id": resource_id, "title": title,
+                                      "format": resource.get("format"),
+                                      "reason": "catalogue navigation/API reference, not a downloadable file"})
+            continue
         extension = Path(title).suffix.lower()
         filename = _safe_name(title, f"resource_{index:03d}{extension}")
         url = f"{API}/resources/{urllib.parse.quote(resource_id, safe='')}/download"
@@ -171,6 +177,7 @@ def acquire_snapshot(*, repository_root: str | Path = ROOT,
                 raise ICPSnapshotError(f"Catalog rejected resource {resource_id}: {error_payload}")
         target = raw_dir / "resources" / f"{index:03d}_{filename}"
         _write_exclusive(target, body)
+        downloaded_resources += 1
         artifacts.append({
             "artifact_role": "data_resource", "resource_unique_id": resource_id,
             "title": title, "format": resource.get("format"),
@@ -194,6 +201,7 @@ def acquire_snapshot(*, repository_root: str | Path = ROOT,
             "provider_claims": "See retained dataset metadata and official ICP release page.",
         },
         "files": artifacts,
+        "non_file_resources_skipped": skipped_resources,
     }
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     with manifest_path.open("x", encoding="utf-8", newline="\n") as stream:
