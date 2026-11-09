@@ -335,9 +335,9 @@ def acquire_export(*, repository_root: str | Path = ROOT,
     completed = datetime.now(timezone.utc)
     manifest = {
         "manifest_schema_version": 1,
-        "source_id": "world_bank_wdi",
+        "source_id": "world_bank_icp",
         "dataset_id": "world_bank_icp_databank_saved_report",
-        "release": "saved_report_export",
+        "release": "icp_2021_saved_report",
         "export_id": export_id,
         "report_url": report_url,
         "final_report_url": final_page_url,
