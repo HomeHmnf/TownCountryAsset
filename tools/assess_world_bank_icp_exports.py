@@ -23,6 +23,7 @@ REPORT_ROOT = Path("reports/sources/world-bank-icp")
 COUNTRY_NAMES = {"country", "country name", "economy", "economy name"}
 COUNTRY_CODES = {"country code", "economy code", "iso3", "iso alpha 3", "country iso3"}
 YEARS = {"time", "year", "reference year", "time code"}
+TIME_CODES = {"time code", "year code"}
 CLASS_NAMES = {"classification", "classification name"}
 CLASS_CODES = {"classification code"}
 SERIES_NAMES = {"series", "indicator", "indicator name", "series name"}
@@ -102,10 +103,10 @@ def cell(row: list[Any], index: int | None) -> Any:
 
 def indicator_header(header: str) -> tuple[str, str]:
     value = header.strip()
-    match = re.match(r"^([^:]+):\s*(.*?)\s*\[([^]]+)\]\s*$", value)
+    match = re.match(r"^([^:]+):\\s*(.*?)\\s*\\[([^]]+)\\]\\s*$", value)
     if match:
         return match.group(1).strip(), match.group(2).strip()
-    match = re.match(r"^(.*?)\s*\[([^]]+)\]\s*$", value)
+    match = re.match(r"^(.*?)\\s*\\[([^]]+)\\]\\s*$", value)
     if match:
         return match.group(2).strip(), match.group(1).strip()
     return value, value
@@ -116,6 +117,7 @@ def extract_rows(headers: list[str], rows: list[list[Any]], *, path: Path,
     country_i = column_index(headers, COUNTRY_NAMES)
     code_i = column_index(headers, COUNTRY_CODES)
     year_i = column_index(headers, YEARS)
+    time_code_i = column_index(headers, TIME_CODES)
     class_i = column_index(headers, CLASS_NAMES)
     class_code_i = column_index(headers, CLASS_CODES)
     series_i = column_index(headers, SERIES_NAMES)
@@ -123,7 +125,7 @@ def extract_rows(headers: list[str], rows: list[list[Any]], *, path: Path,
     value_i = column_index(headers, VALUES)
     if country_i is None or year_i is None:
         return []
-    base = {i for i in (country_i, code_i, year_i, class_i, class_code_i,
+    base = {i for i in (country_i, code_i, year_i, time_code_i, class_i, class_code_i,
                         series_i, series_code_i, value_i) if i is not None}
     output: list[dict[str, Any]] = []
     wide_indicators = [
@@ -248,7 +250,7 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     }
     with (report_dir / "assessment.json").open("x", encoding="utf-8") as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
-        stream.write("\n")
+        stream.write("\\n")
     return result
 
 
