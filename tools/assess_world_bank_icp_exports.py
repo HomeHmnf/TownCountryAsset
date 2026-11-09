@@ -63,7 +63,7 @@ def read_csv(path: Path) -> Iterable[tuple[str, list[str], list[list[Any]]]]:
         sample = stream.read(8192)
         stream.seek(0)
         try:
-            dialect = csv.Sniffer().sniff(sample, delimiters=",;\\t|")
+            dialect = csv.Sniffer().sniff(sample, delimiters=",;\t|")
         except csv.Error:
             dialect = csv.excel
         rows = csv.reader(stream, dialect)
@@ -104,10 +104,10 @@ def cell(row: list[Any], index: int | None) -> Any:
 
 def indicator_header(header: str) -> tuple[str, str]:
     value = header.strip()
-    match = re.match(r"^([^:]+):\\s*(.*?)\\s*\\[([^]]+)\\]\\s*$", value)
+    match = re.match(r"^([^:]+):\s*(.*?)\s*\[([^]]+)\]\s*$", value)
     if match:
         return match.group(1).strip(), match.group(2).strip()
-    match = re.match(r"^(.*?)\\s*\\[([^]]+)\\]\\s*$", value)
+    match = re.match(r"^(.*?)\s*\[([^]]+)\]\s*$", value)
     if match:
         return match.group(2).strip(), match.group(1).strip()
     return value, value
@@ -251,7 +251,7 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     }
     with (report_dir / "assessment.json").open("x", encoding="utf-8") as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
-        stream.write("\\n")
+        stream.write("\n")
     return result
 
 
