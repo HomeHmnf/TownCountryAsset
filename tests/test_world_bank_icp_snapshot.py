@@ -83,7 +83,7 @@ def test_rejects_wrong_dataset_identity(tmp_path):
 
 
 def test_refuses_existing_snapshot(tmp_path):
-    raw = tmp_path / "raw_data/sources/world_bank_icp/icp_2021_cycle/icp_20261109T000000000000Z"
+    raw = tmp_path / "raw_data/sources/world_bank_icp/icp_2021_cycle/icp_2021_20261109T000000000000Z"
     raw.mkdir(parents=True)
     with pytest.raises(ICPSnapshotError, match="already exists"):
         acquire_snapshot(repository_root=tmp_path,
