@@ -40,8 +40,9 @@ def process_zimbabwe_national_accounts(*, repository_root: str | Path = REPOSITO
             or eligible != EXPECTED_MANIFEST_COUNT):
         return {"status":"blocked_registration_preflight","audit":summary,
                 "catalogue_sync":{"sources":sources,"datasets":datasets},
+                "catalogue_sync_performed":True,
                 "registration_preflight":preflight,"eligible_count":eligible,
-                "project_database_written":False,"game_database_written":False}
+                "project_database_written":True,"game_database_written":False}
     registered = []
     if register:
         result = register_manifest_acquisitions(database_path=database_path, repository_root=root,
@@ -51,8 +52,9 @@ def process_zimbabwe_national_accounts(*, repository_root: str | Path = REPOSITO
         registered = result["registered"]
     return {"status":"registered" if register else "ready_for_registration","audit":summary,
             "catalogue_sync":{"sources":sources,"datasets":datasets},
+            "catalogue_sync_performed":True,
             "registration_preflight":preflight,"eligible_count":eligible,"registered":registered,
-            "project_database_written":bool(register and registered),"game_database_written":False}
+            "project_database_written":True,"game_database_written":False}
 
 
 def main() -> int:
