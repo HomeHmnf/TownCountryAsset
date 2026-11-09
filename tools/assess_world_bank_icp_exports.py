@@ -40,7 +40,7 @@ def norm(value: Any) -> str:
 
 
 def year_value(value: Any) -> int | None:
-    match = re.search(r"(?:19|20)\\d{2}", str(value or ""))
+    match = re.search(r"(?:19|20)\d{2}", str(value or ""))
     return int(match.group()) if match else None
 
 
@@ -102,10 +102,10 @@ def cell(row: list[Any], index: int | None) -> Any:
 
 def indicator_header(header: str) -> tuple[str, str]:
     value = header.strip()
-    match = re.match(r"^([^:]+):\\s*(.*?)\\s*\\[([^]]+)\\]\\s*$", value)
+    match = re.match(r"^([^:]+):\s*(.*?)\s*\[([^]]+)\]\s*$", value)
     if match:
         return match.group(1).strip(), match.group(2).strip()
-    match = re.match(r"^(.*?)\\s*\\[([^]]+)\\]\\s*$", value)
+    match = re.match(r"^(.*?)\s*\[([^]]+)\]\s*$", value)
     if match:
         return match.group(2).strip(), match.group(1).strip()
     return value, value
