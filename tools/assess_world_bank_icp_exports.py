@@ -24,6 +24,7 @@ COUNTRY_NAMES = {"country", "country name", "economy", "economy name"}
 COUNTRY_CODES = {"country code", "economy code", "iso3", "iso alpha 3", "country iso3"}
 YEARS = {"time", "year", "reference year", "time code"}
 TIME_CODES = {"time code", "year code"}
+TIME_CODES = {"time code", "year code"}
 CLASS_NAMES = {"classification", "classification name"}
 CLASS_CODES = {"classification code"}
 SERIES_NAMES = {"series", "indicator", "indicator name", "series name"}
