@@ -606,6 +606,44 @@
           }
         }
       ]
+    },
+    {
+      "source_key": "world_bank_wdi",
+      "dataset_key": "icp_2021_cycle",
+      "name": "International Comparison Program 2021 cycle",
+      "description": "World Bank ICP 2021-cycle public dataset, including revised 2017 and 2021 benchmark results, annual PPP series 2017–2021 and extrapolated GDP PPPs 2022–2023.",
+      "data_format": "api_bundle",
+      "frequency": "benchmark_and_annual",
+      "metadata": {
+        "provider_dataset_id": "0066092",
+        "catalogue_url": "https://datacatalog.worldbank.org/search/dataset/0066092/international-comparison-program-2021",
+        "api_base_url": "https://ddh-openapi.worldbank.org",
+        "data_page_url": "https://www.worldbank.org/en/programs/icp/data",
+        "manifest_directory": "data_manifests/sources/world_bank_icp/icp_2021_cycle",
+        "raw_directory": "raw_data/sources/world_bank_icp/icp_2021_cycle",
+        "release_semantics": "May 2024 ICP 2021-cycle publication; revised 2017 values are distinct from original ICP 2017 publication."
+      },
+      "streams": [
+        {
+          "stream_key": "icp_2021_release",
+          "name": "ICP 2021-cycle release bundle",
+          "acquisition_mode": "api",
+          "validation_contract": {
+            "manifest_directory": "data_manifests/sources/world_bank_icp/icp_2021_cycle",
+            "required_artifacts": [
+              "dataset_metadata.json",
+              "resource_listing_page_*",
+              "data_resource"
+            ],
+            "complete_resource_listing": true,
+            "sha256_required": true
+          },
+          "metadata": {
+            "release_date": "2024-05",
+            "release_semantics": "One complete Data Catalog release bundle per timestamped capture."
+          }
+        }
+      ]
     }
   ]
 }
