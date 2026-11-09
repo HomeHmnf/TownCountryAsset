@@ -148,7 +148,7 @@ def acquire_snapshot(*, repository_root: str | Path = ROOT,
     if expected_count is not None and len(rows) != expected_count:
         raise ICPSnapshotError(f"Incomplete resource listing: captured {len(rows)} of {expected_count}")
     if not rows:
-        raise ICPSnapshotError("ICP dataset exposes no downloadable resources")
+        raise ICPSnapshotError("ICP dataset exposes no catalogue resources")
     skipped_resources: list[dict[str, Any]] = []\n    downloaded_resources = 0\n    for index, resource in enumerate(rows, start=1):
         resource_id = str(resource.get("resource_unique_id") or resource.get("id") or "").strip()
         if not resource_id:
