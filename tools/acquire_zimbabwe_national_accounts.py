@@ -48,7 +48,7 @@ def _validate(path: Path, signature: str) -> None:
         if prefix != XLS_SIGNATURE:
             raise ValueError(f"Response is not an OLE XLS workbook: {path}")
     elif signature == "xlsx":
-        if not prefix.startswith(b"PK\\x03\\x04"):
+        if not prefix.startswith(b"PK\x03\x04"):
             raise ValueError(f"Response is not an OOXML ZIP workbook: {path}")
         try:
             with zipfile.ZipFile(path) as archive:
@@ -95,7 +95,7 @@ def _curl_download(url: str, destination: Path, *, timeout: float, retries: int,
     temporary = destination.with_name(destination.name + ".part")
     command = ["curl", "-fL", "--silent", "--show-error", "--retry", str(retries),
                "--retry-all-errors", "--connect-timeout", "30", "--max-time", str(int(timeout)),
-               "--output", str(temporary), "--write-out", "%{url_effective}\\n%{content_type}\\n%{http_code}"]
+               "--output", str(temporary), "--write-out", "%{url_effective}\n%{content_type}\n%{http_code}"]
     if socks5_proxy:
         command[1:1] = ["--socks5-hostname", socks5_proxy]
     command.append(url)
@@ -153,7 +153,7 @@ def acquire_zimbabwe_national_accounts(*, repository_root: str | Path = REPOSITO
                            "byte_count_verified": True, "sha256_calculated": True,
                            "statistical_content_reviewed": False},
         }
-        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         acquired.append({"dataset_id": publication["dataset_id"], "raw_path": publication["raw_path"],
                          "manifest_path": manifest_path.relative_to(root).as_posix(),
                          "retrieved_at": retrieved_at, "byte_count": byte_count,
