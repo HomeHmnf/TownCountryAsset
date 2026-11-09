@@ -162,7 +162,7 @@ def extract_series_metadata(headers: list[str], rows: list[list[Any]], *,
         # original wide-export header.
         code = str(cell(row, 0) or "").strip()
         description = str(cell(row, 1) or "").strip()
-        if not re.fullmatch(r"\\d{4,}", code) or not description:
+        if not re.fullmatch(r"\d{4,}", code) or not description:
             continue
         result.append({
             "source_release": source_release,
