@@ -1,0 +1,32 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "zimstat",
+  "download_id": "gdp_tables_2019_2024",
+  "release": "revised-gdp-tables-2019-2024-june-2025",
+  "release_kind": "edition_or_snapshot",
+  "publication_date": "2025-06-27",
+  "retrieved_at": "2026-11-09T10:41:05.290555+03:30",
+  "retrieval_timestamp_basis": "acquisition_tool_download_completion",
+  "acquisition_method": "automated_https_download",
+  "files": [
+    {
+      "file_id": "GDP_Tables_2019_2024_June.xlsx",
+      "filename": "GDP_Tables_2019_2024_June.xlsx",
+      "local_raw_path": "raw_data/sources/zimstat/gdp_tables_2019_2024/GDP_Tables_2019_2024_June.xlsx",
+      "url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/2025/GDP_Tables_2019_2024_June.xlsx",
+      "requested_url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/2025/GDP_Tables_2019_2024_June.xlsx",
+      "final_url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/2025/GDP_Tables_2019_2024_June.xlsx",
+      "content_type": "application/octet-stream",
+      "format": "xlsx",
+      "byte_count": 180072,
+      "sha256": "9b644a75ab1b48ff33cb5dc4a4754aec921d9fc15b976245154e5330833959bf"
+    }
+  ],
+  "validation": {
+    "format_signature_verified": true,
+    "workbook_container_integrity_verified": true,
+    "byte_count_verified": true,
+    "sha256_calculated": true,
+    "statistical_content_reviewed": false
+  }
+}

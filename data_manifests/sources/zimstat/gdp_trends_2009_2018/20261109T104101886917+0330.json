@@ -1,0 +1,32 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "zimstat",
+  "download_id": "gdp_trends_2009_2018",
+  "release": "gdp-trends-2009-2018",
+  "release_kind": "edition_or_snapshot",
+  "publication_date": "2019",
+  "retrieved_at": "2026-11-09T10:41:01.886917+03:30",
+  "retrieval_timestamp_basis": "acquisition_tool_download_completion",
+  "acquisition_method": "automated_https_download",
+  "files": [
+    {
+      "file_id": "GDP_Trends_2009to2018.xls",
+      "filename": "GDP_Trends_2009to2018.xls",
+      "local_raw_path": "raw_data/sources/zimstat/gdp_trends_2009_2018/GDP_Trends_2009to2018.xls",
+      "url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/Publications/GDP_Trends_2009to2018.xls",
+      "requested_url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/Publications/GDP_Trends_2009to2018.xls",
+      "final_url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/Publications/GDP_Trends_2009to2018.xls",
+      "content_type": "application/vnd.ms-excel",
+      "format": "xls",
+      "byte_count": 317952,
+      "sha256": "6286f5c2a0f8c6e4e636b883ed206c51be80c0f877ba5317b903a5071ca3cde6"
+    }
+  ],
+  "validation": {
+    "format_signature_verified": true,
+    "workbook_container_integrity_verified": false,
+    "byte_count_verified": true,
+    "sha256_calculated": true,
+    "statistical_content_reviewed": false
+  }
+}
