@@ -56,3 +56,24 @@ def test_long_export_keeps_missing_rows_out_of_latest_selection(tmp_path):
         latest = list(csv.DictReader(stream))
     assert len(latest) == 1
     assert latest[0]["year"] == "2017"
+
+
+
+def test_cp1252_databank_csv_is_decoded_without_losing_country_names(tmp_path):
+    raw = tmp_path / "raw_data/sources/world_bank_icp/manual_exports"
+    raw.mkdir(parents=True)
+    path = raw / "windows_1252.csv"
+    path.write_bytes(
+        "Country Name,Country Code,Time,Classification Code,"
+        "1000000:GROSS DOMESTIC PRODUCT [1000000]\r\n"
+        "Côte d’Ivoire,CIV,2021,PPPGlob,0.55\r\n".encode("cp1252")
+    )
+
+    result = inspect(tmp_path)
+    report = tmp_path / "reports/sources/world-bank-icp" / result["report_id"]
+    with (report / "observations_long.csv").open(encoding="utf-8", newline="") as stream:
+        rows = list(csv.DictReader(stream))
+    assert len(rows) == 1
+    assert rows[0]["country_name"] == "Côte d’Ivoire"
+    assert rows[0]["value"] == "0.55"
+    assert rows[0]["sheet"] == "csv (cp1252)"
