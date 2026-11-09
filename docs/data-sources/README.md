@@ -20,6 +20,7 @@ This section documents providers, acquisition, source-specific validation, relea
 - [Guinea national-accounts vintage reconciliation](guinea-national-accounts-vintage-reconciliation.md) — legacy 1993 SNA versus 2018-base SNA 2008, WDI/IMF/UNSD comparison and source-acquisition targets.
 - [Guinea INS national-accounts acquisition](guinea-ins-national-accounts-acquisition.md) — repeatable official-PDF download, timestamped manifests, integrity audit and Project DB provenance registration.
 - [ZIMSTAT national-accounts workbook acquisition](zimbabwe-national-accounts-acquisition.md) — separate, resumable acquisition of the 2009–2018 XLS and revised 2019–2024 XLSX workbooks, including SOCKS5 support and Project DB registration gates.
+- [Zimbabwe national-accounts reconciliation](zimbabwe-national-accounts-reconciliation.md) — 2023 GDP revision, historical ZWL redenomination reconciliation, 2024 real GDP growth cross-check, and unresolved 2015–2018 USD and PPP discrepancies.
 - [Turkmenistan macroeconomic evidence acquisition](turkmenistan-macroeconomic-evidence-acquisition.md) — five IMF/TurkmenStat research and methodology publications, three verified captures, two documented IMF access gaps, and a guarded end-to-end Project DB provenance workflow.
 - [Turkmenistan GDP conversion-basis reconciliation](turkmenistan-gdp-conversion-reconciliation.md) — WDI/IMF WEO GDP numerator and conversion arithmetic, field-16 population denominator, field-18 PPP/ICP decomposition, 2022–2023 residuals and national-accounts modernization evidence.
 
