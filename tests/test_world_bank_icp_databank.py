@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-import csv
 import io
 import json
 import urllib.parse
 import zipfile
 from datetime import datetime, timezone
-from pathlib import Path
 
 from tools import acquire_world_bank_icp_databank as databank
 
@@ -37,8 +35,8 @@ class FakeOpener:
         self.archive = io.BytesIO()
         with zipfile.ZipFile(self.archive, "w", zipfile.ZIP_DEFLATED) as zipped:
             zipped.writestr("Data_Extract.csv",
-                            "Country Name,Country Code,Time,Time Code,GDP\\n"
-                            "Zimbabwe,ZWE,2017,YR2017,0.4894120097\\n")
+                            "Country Name,Country Code,Time,Time Code,GDP\n"
+                            "Zimbabwe,ZWE,2017,YR2017,0.4894120097\n")
         self.archive_bytes = self.archive.getvalue()
 
     def open(self, request, timeout=120):
@@ -54,10 +52,8 @@ class FakeOpener:
             ).encode()
             return FakeResponse(page, url, "text/html")
         if url.endswith(databank.DIMENSION_ENDPOINT):
-            selection = urllib.parse.parse_qs(data.decode())
             payload = json.loads(data.decode())
             control = payload["controlid"]
-            hierarchy = payload["hierarchy"]
             member = {
                 "Country": ("[Country].[List].&[ZWE]", "Zimbabwe"),
                 "Classification": ("[Classification].[List].&[PPPGlob]", "PPP"),
