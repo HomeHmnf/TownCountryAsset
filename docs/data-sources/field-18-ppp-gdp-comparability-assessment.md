@@ -138,3 +138,38 @@ For 2022, WDI current-LCU GDP is 203.947bn TMT versus WEO 198.371bn, while displ
 The IMF WEO FAQ describes its PPP rates as based on ICP 2017–2021 benchmarks and extended backwards and forwards using relative GDP-deflator growth. World Bank documentation describes benchmark interpolation/extrapolation and warns that ICP and WDI GDP, population and exchange-rate inputs can differ by source vintage or methodology. These general methods do not establish the exact Turkmenistan national-account, benchmark or deflator inputs used in either captured series.
 
 **Disposition:** Turkmenistan PPP GDP is effectively aligned through 2021. The post-2021 divergence separates into a 2022–2023 nominal-GDP numerator component and a 2023–2025 PPP-factor component. This does not establish which factor is preferable or the precise source of the divergence. Retain IMF WEO priority and keep field 18 open pending country-specific benchmark/deflator evidence and the existing identity/semantic approval gates. See [Turkmenistan GDP conversion-basis reconciliation](turkmenistan-gdp-conversion-reconciliation.md).
+
+
+
+## Zimbabwe — ZIMSTAT national accounts and WDI PPP arithmetic (2026-11-09)
+
+The two ZIMSTAT workbooks have now been acquired and registered as Project DB acquisition events 13 and 14. Their statistical contents have been reviewed for selected national-accounts series. The newer June 2025 workbook provides revised current-price ZWL GDP for 2019–2023 and current-price ZWG GDP for 2023–2024, alongside constant-price tables.
+
+### Nominal GDP numerator evidence
+
+The revised ZIMSTAT current-price ZWL GDP for 2019–2023, divided by the 2,498.7242 ZWL:1 ZiG redenomination factor described in the October 2026 WEO country metadata, reproduces WDI current-LCU GDP to published precision. The 2023 ZIMSTAT current-price ZWG GDP also agrees with WDI current-LCU GDP at approximately ZWG 67.559bn. For 2024, ZIMSTAT reports approximately ZWG 822.938bn versus WDI approximately ZWG 822.593bn (about -0.042%). This provides strong country-specific corroboration of the nominal LCU basis for 2019–2024; it does not validate PPP conversion factors or establish a PPP bridge.
+
+The 2009–2018 workbook labels the main current-price GDP series in US dollars and separately reports RTGS-dollar figures for 2017–2018. ZIMSTAT's main USD GDP values for 2015–2016 are close to WDI current-USD GDP (about 0.05% difference). WDI current-USD GDP for 2017–2018 differs materially from the main USD figures and does not simply match the separate RTGS columns. The exact lineage of WDI nominal GDP for 2017–2018 remains unresolved.
+
+### WDI internal PPP arithmetic discontinuity, 2015–2018
+
+The expanded WDI API snapshot confirms that for 2015–2018, dividing WDI current-LCU GDP by WDI PA.NUS.PPP does not reproduce WDI NY.GDP.MKTP.PP.CD. Instead, reported PPP GDP divided by that quotient is the same factor, approximately **1.5279091214**, in all four years. From 2019 through 2025, the identity reproduces to floating-point precision.
+
+This is a reproducible relationship among the captured WDI observations, not an inference from the comparison matrix. It establishes a break in the arithmetic relationship across the 2018/2019 boundary. It does **not** establish whether the cause is a currency-unit convention, a historical source adjustment, a benchmark treatment, or a provider-side series construction issue. Do not silently apply the reciprocal or the 2,498.7242 redenomination factor to "correct" the observations.
+
+The WDI 2017 PPP GDP observation (about US$159.33bn) is especially discontinuous relative to WDI 2016 (about US$62.42bn) and 2018 (about US$60.03bn), and is far above the October 2026 WEO 2017 value (about US$63.379bn). The 2015–2018 constant ratio noted above is a separate arithmetic clue; it does not by itself explain the isolated 2017 spike.
+
+### Real GDP evidence is not a PPP conversion bridge
+
+ZIMSTAT's revised constant-price production and expenditure tables agree on market-price real GDP growth for 2020–2023 (-7.81695%, +8.46802%, +6.13926%, and +5.33673%). For 2024, production and expenditure tables report 1.742381% growth and the income approach reports 1.742395%. These are useful national-accounts cross-checks, but constant-price growth rates do not identify the ICP benchmark PPP factor or explain the WDI/WEO current-PPP GDP difference.
+
+### Disposition and remaining evidence
+
+1. The 2019–2024 nominal LCU basis is substantially corroborated against ZIMSTAT; the 2017–2018 USD/RTGS lineage remains open.
+2. The WDI 2015–2018 PPP arithmetic ratio is confirmed as 1.5279091214, but its cause is unknown. Preserve the original observations.
+3. The 2017 WDI PPP GDP spike remains unresolved; do not label the observation erroneous on arithmetic alone.
+4. The IMF's March 2021 quota-data paper documents a special conversion of Zimbabwe's 2017 ICP PPP factor from local currency to USD using IMF desk-supplied exchange-rate data before applying it to WEO nominal GDP submitted in USD. This establishes a historical IMF-specific treatment, not necessarily the exact October 2026 implementation.
+5. Direct country-level ICP 2017 and revised ICP 2017/2021 benchmark records, including their currency units, participation/imputation status and source-vintage inputs, are still required to explain the WDI 2015–2018 ratio and 2017 discontinuity.
+6. Retain IMF WEO field-18 priority and do not promote WDI as a fallback on this evidence.
+
+The ZIMSTAT acquisition and country reconciliation are documented in [Zimbabwe national-accounts reconciliation](zimbabwe-national-accounts-reconciliation.md). No source-selection, approval, release-promotion, canonical database or Game DB state is changed by this update.
