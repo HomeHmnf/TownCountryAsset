@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import io
 import re
 import sys
 from collections import defaultdict
@@ -23,7 +24,6 @@ REPORT_ROOT = Path("reports/sources/world-bank-icp")
 COUNTRY_NAMES = {"country", "country name", "economy", "economy name"}
 COUNTRY_CODES = {"country code", "economy code", "iso3", "iso alpha 3", "country iso3"}
 YEARS = {"time", "year", "reference year", "time code"}
-TIME_CODES = {"time code", "year code"}
 TIME_CODES = {"time code", "year code"}
 CLASS_NAMES = {"classification", "classification name"}
 CLASS_CODES = {"classification code"}
@@ -58,20 +58,38 @@ def numeric(value: Any) -> float | None:
         return None
 
 
+def decode_csv(path: Path) -> tuple[str, str]:
+    """Decode a DataBank CSV with deterministic, strict encoding fallbacks."""
+    raw = path.read_bytes()
+    if raw.startswith((b"\\xff\\xfe", b"\\xfe\\xff")):
+        return raw.decode("utf-16"), "utf-16"
+    if raw.startswith(b"\\xef\\xbb\\xbf"):
+        return raw.decode("utf-8-sig"), "utf-8-sig"
+    try:
+        return raw.decode("utf-8"), "utf-8"
+    except UnicodeDecodeError:
+        # DataBank CSV exports can contain Windows-1252 punctuation.
+        try:
+            return raw.decode("cp1252"), "cp1252"
+        except UnicodeDecodeError:
+            return raw.decode("latin-1"), "latin-1"
+
+
 def read_csv(path: Path) -> Iterable[tuple[str, list[str], list[list[Any]]]]:
-    with path.open("r", encoding="utf-8-sig", newline="") as stream:
-        sample = stream.read(8192)
-        stream.seek(0)
-        try:
-            dialect = csv.Sniffer().sniff(sample, delimiters=",;\t|")
-        except csv.Error:
-            dialect = csv.excel
-        rows = csv.reader(stream, dialect)
-        try:
-            header = next(rows)
-        except StopIteration:
-            return
-        yield "csv", header, [row for row in rows]
+    text, encoding = decode_csv(path)
+    stream = io.StringIO(text, newline="")
+    sample = stream.read(8192)
+    stream.seek(0)
+    try:
+        dialect = csv.Sniffer().sniff(sample, delimiters=",;\\t|")
+    except csv.Error:
+        dialect = csv.excel
+    rows = csv.reader(stream, dialect)
+    try:
+        header = next(rows)
+    except StopIteration:
+        return
+    yield f"csv ({encoding})", header, [row for row in rows]
 
 
 def read_xlsx(path: Path) -> Iterable[tuple[str, list[str], list[list[Any]]]]:
