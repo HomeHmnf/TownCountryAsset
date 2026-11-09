@@ -23,17 +23,31 @@ Official entry points:
 - ICP 2021 Data Catalog ID: 0066092
 - ICP 2017 Data Catalog ID: 0038406
 
-## Acquisition boundary
+## Automated DataBank saved-report export
 
-The Data Catalog API's resource records include website and DataBank navigation references as well as machine-readable resources. Only actual downloadable file resources may be fetched from a `/download` endpoint. A website or DataBank reference is not a file; attempting to download it as one produces HTTP 400.
+The DataBank browser workflow has now been reproduced programmatically for the saved ICP-Annual-PPPs report:
 
-DataBank supports Excel, CSV, tab-delimited text and metadata exports. DataBank exports must retain the report URL, selected dimensions, export format, retrieval timestamp and file hash. Do not silently substitute a preview page or a limited saved report for a full-country/full-indicator export.
+- Report: https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs
+- Tool: tools.acquire_world_bank_icp_databank
+- Command:
 
-The existing `tools.acquire_world_bank_icp_snapshot` captures the ICP 2021 Data Catalog metadata/resource listing. Its prior all-resources-as-files behaviour is not a valid acquisition contract. Until the DataBank export request is reproducibly automated and tested, manually exported full DataBank tables may be placed under:
+```fish
+uv run python -m tools.acquire_world_bank_icp_databank
+```
 
-`raw_data/sources/world_bank_icp/<cycle>/`
+The tool creates a cookie-backed session, reads the report's cube ID and selected dimension counts, retrieves the selected Country, Classification, Series and Time members, and registers the same hdnSelectVars payload used by the DataBank page. It requests the full-range CSV export using the case-sensitive down-radio=csv parameter, follows the returned FileDownloadHandler descriptor in the same session, validates the ZIP CRC, and extracts CSV members while preserving the original ZIP.
 
-Preserve each export as an immutable file and record its report URL, selected dimensions, release/vintage, retrieval timestamp, byte count and SHA-256 in its manifest. Do not overwrite previous captures.
+The timestamped manifest records the report URL, cube ID, selected dimension members, export settings, DataBank descriptor, request URLs, byte counts and SHA-256 fingerprints. Raw archives and extracted CSV members are retained under raw_data/sources/world_bank_icp/databank_exports/; manifests are under data_manifests/sources/world_bank_icp/databank_exports/; acquisition reports are under reports/sources/world-bank-icp/.
+
+The automated saved report is a proven export path, **not yet a complete multi-cycle acquisition**. This report contains one classification, six series and the report's selected 2017–2023 time range. It does not replace discovery and export of every detailed table, original benchmark cycle, revised benchmark, metadata/status table or annual series required by the project. Do not treat its coverage as the entire ICP catalogue.
+
+Run through proxychains when the local network requires the configured SOCKS proxy. The tool itself uses the standard-library cookie-aware urllib opener and does not configure a proxy.
+
+## Data Catalog resource boundary
+
+The Data Catalog API's resource records include website and DataBank navigation references as well as machine-readable resources. Only actual downloadable file resources may be fetched from a /download endpoint. A website or DataBank reference is not a file; attempting to download it as one produces HTTP 400.
+
+The existing tools.acquire_world_bank_icp_snapshot captures the ICP 2021 Data Catalog metadata/resource listing and downloads only resources explicitly identified as file formats. DataBank exports are a separate authenticated workflow and must retain the report URL, selected dimensions, export format, retrieval timestamp and file hash. Do not silently substitute a preview page or a limited saved report for a full-country/full-indicator export.
 
 ## Inspection
 
@@ -43,18 +57,18 @@ Run:
 uv run python -m tools.assess_world_bank_icp_exports
 ```
 
-The inspector scans CSV and XLSX files under `raw_data/sources/world_bank_icp/` and recognizes both:
+The inspector scans CSV and XLSX files under raw_data/sources/world_bank_icp/ and recognizes both:
 
 - wide DataBank exports, with one column per indicator; and
 - long exports, with one indicator/value per row.
 
-It creates timestamped reports under `reports/sources/world-bank-icp/`:
+It creates timestamped reports under reports/sources/world-bank-icp/:
 
-- `observations_long.csv`: all extracted rows, including missing values;
-- `latest_available_by_country_indicator.csv`: latest non-missing value independently by country, classification and indicator;
-- `coverage_by_country_indicator.csv`: first/latest available year, count and observed years.
+- observations_long.csv: all extracted rows, including missing values;
+- latest_available_by_country_indicator.csv: latest non-missing value independently by country, classification and indicator;
+- coverage_by_country_indicator.csv: first/latest available year, count and observed years.
 
-CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. Structural DataBank fields such as `Time Code` are excluded from wide-format indicator detection. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
+CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. Structural DataBank fields such as Time Code are excluded from wide-format indicator detection. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
 
 ## Interpretation requirements
 
@@ -69,12 +83,12 @@ Keep separate:
 
 The ICP 2021 publication provides 2021 benchmark results, revised 2017, annual PPP series 2017–2021 and extrapolated GDP PPPs for 2022–2023. WDI's later annual PPP series are a separate extrapolated statistical series, not new ICP benchmark cycles. Do not label WDI years after 2023 as new ICP benchmark observations.
 
-No source-selection change, approval, Project DB write, Game DB write or canonical data promotion is performed by inspection.
+No source-selection change, approval, Project DB write, Game DB write or canonical data promotion is performed by acquisition or inspection.
 
 ## Validation
 
 ```fish
-uv run python -m pytest -v tests/test_world_bank_icp_exports.py
+uv run python -m pytest -v tests/test_world_bank_icp_databank.py tests/test_world_bank_icp_exports.py tests/test_world_bank_icp_snapshot.py
 uv run python -m compileall -q tools
 ```
 
