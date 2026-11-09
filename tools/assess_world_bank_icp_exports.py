@@ -131,8 +131,51 @@ def indicator_header(header: str) -> tuple[str, str]:
     return value, value
 
 
+def source_release_for(path: Path) -> str:
+    """Return the source release identity encoded by the acquisition path."""
+    parts = path.parts
+    for part in parts:
+        match = re.fullmatch(r"icp_(20\\d{2})_cycle", part)
+        if match:
+            return f"icp_{match.group(1)}_cycle"
+    if "databank_exports" in parts:
+        return "icp_2021_saved_report"
+    return "unclassified_source_release"
+
+
+def is_series_metadata_file(path: Path) -> bool:
+    return "series" in norm(path.stem) and "metadata" in norm(path.stem)
+
+
+def extract_series_metadata(headers: list[str], rows: list[list[Any]], *,
+                            path: Path, source_release: str) -> list[dict[str, Any]]:
+    name_i = column_index(headers, CLASS_NAMES)
+    description_i = column_index(headers, CLASS_CODES)
+    country_i = column_index(headers, COUNTRY_NAMES)
+    year_i = column_index(headers, YEARS)
+    if name_i is None or description_i is None:
+        return []
+    result = []
+    for row_number, row in enumerate(rows, start=2):
+        if str(cell(row, country_i) or "").strip() or year_value(cell(row, year_i)):
+            continue
+        code = str(cell(row, name_i) or "").strip()
+        description = str(cell(row, description_i) or "").strip()
+        if not re.fullmatch(r"\\d{4,}", code) or not description:
+            continue
+        result.append({
+            "source_release": source_release,
+            "source_file": path.as_posix(),
+            "indicator_code": code,
+            "indicator_name": "",
+            "indicator_definition": description,
+            "source_row": row_number,
+        })
+    return result
+
+
 def extract_rows(headers: list[str], rows: list[list[Any]], *, path: Path,
-                 sheet: str) -> list[dict[str, Any]]:
+                 sheet: str, source_release: str) -> list[dict[str, Any]]:
     country_i = column_index(headers, COUNTRY_NAMES)
     code_i = column_index(headers, COUNTRY_CODES)
     year_i = column_index(headers, YEARS)
@@ -157,6 +200,7 @@ def extract_rows(headers: list[str], rows: list[list[Any]], *, path: Path,
         if not country or year is None:
             continue
         common = {
+            "source_release": source_release,
             "country_name": country,
             "country_code": str(cell(row, code_i) or "").strip(),
             "year": year,
@@ -194,24 +238,38 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     observations: list[dict[str, Any]] = []
     inspected: list[dict[str, Any]] = []
     unsupported: list[str] = []
+    series_metadata: list[dict[str, Any]] = []
     for path in files:
+        relative_path = path.relative_to(root)
+        release = source_release_for(relative_path)
         readers = read_csv(path) if path.suffix.lower() == ".csv" else read_xlsx(path)
         file_count = 0
+        metadata_count = 0
         for sheet, headers, rows in readers:
-            extracted = extract_rows(headers, rows, path=path.relative_to(root), sheet=sheet)
+            if is_series_metadata_file(path):
+                extracted_metadata = extract_series_metadata(
+                    headers, rows, path=relative_path, source_release=release)
+                series_metadata.extend(extracted_metadata)
+                metadata_count += len(extracted_metadata)
+                continue
+            extracted = extract_rows(headers, rows, path=relative_path, sheet=sheet,
+                                     source_release=release)
             observations.extend(extracted)
             file_count += len(extracted)
-        if file_count:
-            inspected.append({"path": path.relative_to(root).as_posix(),
-                              "observation_rows": file_count})
+        if file_count or metadata_count:
+            inspected.append({"path": relative_path.as_posix(),
+                              "artifact_role": "series_metadata" if metadata_count else "observations",
+                              "observation_rows": file_count,
+                              "series_metadata_rows": metadata_count})
         else:
-            unsupported.append(path.relative_to(root).as_posix())
+            unsupported.append(relative_path.as_posix())
     if not observations:
         raise ICPAssessmentError("No recognizable country/year/indicator observations found")
     coverage: dict[tuple[str, str, str], set[int]] = defaultdict(set)
     latest_year: dict[tuple[str, str, str], int] = {}
     for item in observations:
-        key = (item["country_code"] or item["country_name"],
+        key = (item["source_release"],
+               item["country_code"] or item["country_name"],
                item["classification_code"] or item["classification_name"],
                item["indicator_code"] or item["indicator_name"])
         if item["value"] is not None:
@@ -228,8 +286,9 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             latest_rows.append(item)
     coverage_rows = []
     for key, years in sorted(coverage.items()):
-        coverage_rows.append({"country_code_or_name": key[0],
-            "classification_code_or_name": key[1], "indicator_code": key[2],
+        coverage_rows.append({"source_release": key[0],
+            "country_code_or_name": key[1],
+            "classification_code_or_name": key[2], "indicator_code": key[3],
             "first_available_year": min(years), "latest_available_year": max(years),
             "available_year_count": len(years),
             "observed_years": ";".join(map(str, sorted(years)))})
@@ -247,10 +306,16 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     write_csv("latest_available_by_country_indicator.csv", latest_rows, observation_fields)
     write_csv("coverage_by_country_indicator.csv", coverage_rows,
               list(coverage_rows[0]) if coverage_rows else [])
+    metadata_fields = list(series_metadata[0]) if series_metadata else [
+        "source_release", "source_file", "indicator_code", "indicator_name",
+        "indicator_definition", "source_row"]
+    write_csv("series_metadata.csv", series_metadata, metadata_fields)
     result = {
         "assessment": "world_bank_icp_multicycle_export_inspection",
         "report_id": report_id,
         "observation_count_including_missing": len(observations),
+        "series_metadata_definition_count": len(series_metadata),
+        "source_release_count": len({item["source_release"] for item in observations}),
         "latest_available_series_count": len(latest_rows),
         "coverage_group_count": len(coverage_rows),
         "input_files_inspected": inspected,
@@ -262,6 +327,7 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             "observations": (report_dir / "observations_long.csv").relative_to(root).as_posix(),
             "latest_available": (report_dir / "latest_available_by_country_indicator.csv").relative_to(root).as_posix(),
             "coverage": (report_dir / "coverage_by_country_indicator.csv").relative_to(root).as_posix(),
+            "series_metadata": (report_dir / "series_metadata.csv").relative_to(root).as_posix(),
         },
         "side_effects": {"raw_data_written": False, "project_database_written": False,
                          "game_database_written": False, "approval_created": False,
