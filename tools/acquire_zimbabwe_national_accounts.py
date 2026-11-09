@@ -5,7 +5,6 @@ import argparse
 import hashlib
 import json
 import subprocess
-import time
 import zipfile
 from datetime import datetime
 from pathlib import Path
@@ -127,6 +126,7 @@ def acquire_zimbabwe_national_accounts(*, repository_root: str | Path = REPOSITO
             _validate(raw, publication["signature"])
         except (RuntimeError, ValueError, OSError) as exc:
             raw.with_name(raw.name + ".part").unlink(missing_ok=True)
+            raw.unlink(missing_ok=True)
             failures.append({"dataset_id": publication["dataset_id"], "requested_url": publication["url"],
                              "error": str(exc), "status": "acquisition_failed_no_manifest"})
             continue
