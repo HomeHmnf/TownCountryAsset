@@ -53,7 +53,7 @@ After reviewing a clean \`ready_for_registration\` result, explicitly register b
 uv run python -m tools.process_zimbabwe_national_accounts --register
 \`\`\`
 
-The processing command requires exactly two clean manifests and two eligible dataset/stream mappings. It never writes the Game DB and does not approve or apply statistical values.
+The processing command requires exactly two clean manifests and two eligible dataset/stream mappings. It synchronizes the source and dataset catalogues in the Project DB before registration preflight; its output therefore reports `project_database_written: true` even without `--register`. The `--register` flag additionally inserts the acquisition and artifact provenance records. It never writes the Game DB and does not approve or apply statistical values.
 
 ## Source references
 
