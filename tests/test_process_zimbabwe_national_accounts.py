@@ -20,7 +20,8 @@ def test_clean_two_manifest_preflight_does_not_register(tmp_path: Path, monkeypa
     assert result["status"]=="ready_for_registration"
     assert result["eligible_count"]==2
     assert len(calls)==1 and calls[0]["dry_run"] is True
-    assert result["project_database_written"] is False
+    assert result["catalogue_sync_performed"] is True
+    assert result["project_database_written"] is True
     assert result["game_database_written"] is False
 
 
