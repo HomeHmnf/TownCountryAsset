@@ -96,3 +96,23 @@ def test_rejects_naive_timestamp(tmp_path):
         acquire_snapshot(repository_root=tmp_path,
                          retrieved_at=datetime(2026, 11, 9),
                          request_get=lambda *a, **k: (_ for _ in ()).throw(AssertionError()))
+
+
+
+def test_catalogue_navigation_resources_are_retained_as_skipped_not_downloaded(tmp_path):
+    resources = [
+        {"resource_unique_id": "DRWEB", "title": "ICP Website", "format": None},
+        {"resource_unique_id": "DRDB", "title": "Databank Access", "format": "DATABANK"},
+        {"resource_unique_id": "DRAPI", "title": "ICP API", "format": "API"},
+    ]
+    get, calls = fake_get_factory(tmp_path, resources=resources)
+    result = acquire_snapshot(
+        repository_root=tmp_path,
+        retrieved_at=datetime(2026, 11, 10, tzinfo=timezone.utc),
+        request_get=get,
+    )
+    manifest = json.loads((tmp_path / result["manifest_path"]).read_text())
+    assert result["downloaded_file_resource_count"] == 0
+    assert result["non_file_resource_count"] == 3
+    assert len(manifest["non_file_resources_skipped"]) == 3
+    assert not any(url.endswith("/download") for url in calls)
