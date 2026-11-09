@@ -9,9 +9,9 @@ Official entry points:
 - ICP data page: https://www.worldbank.org/en/programs/icp/data
 - Data Catalog record: https://datacatalog.worldbank.org/search/dataset/0066092/international-comparison-program-2021
 - Public Data Catalog API: https://ddh-openapi.worldbank.org/docs/index.html
-- Dataset identifier: `0066092`
+- Dataset identifier: 0066092
 
-## Acquisition
+## Data Catalog acquisition
 
 Run:
 
@@ -27,7 +27,11 @@ uv run python -m tools.acquire_world_bank_icp_snapshot --timeout 120 --retries 5
 
 Raw files are written under `raw_data/sources/world_bank_icp/icp_2021_cycle/`, manifests under `data_manifests/sources/world_bank_icp/icp_2021_cycle/`, and acquisition reports under `reports/sources/world-bank-icp/`.
 
-## Scope and limitations\n\nThis capture is only the ICP 2021-cycle catalogue bundle. It is not a multi-cycle DataBank export and does not, by itself, acquire the original 2005, 2011 or 2017 datasets. See [multi-cycle acquisition and inspection](world-bank-icp-multicycle-acquisition.md) for the wider cycle scope and local export inspector.
+## DataBank exports
+
+The Data Catalog resource listing and DataBank report exports are separate acquisition channels. For the currently verified saved report, use `tools.acquire_world_bank_icp_databank`; its scope and limitations are documented in [ICP multi-cycle acquisition and inspection](world-bank-icp-multicycle-acquisition.md). That saved report is not a substitute for the complete ICP 2021 detailed tables or other benchmark cycles.
+
+## Scope and limitations
 
 - This is a byte-preserving acquisition of the Data Catalog's published ICP 2021-cycle dataset, not a claim that the API resource files are a particular original-vintage workbook until their metadata and contents are inspected.
 - The capture includes the revised 2017 results supplied in the 2021 cycle. It does not substitute those for the original 2017 cycle.
@@ -39,6 +43,7 @@ Raw files are written under `raw_data/sources/world_bank_icp/icp_2021_cycle/`, m
 ## Diagnostic follow-through
 
 After acquisition, inspect the manifest and raw resource formats. The next assessment should isolate Zimbabwe's GDP PPP conversion factor, GDP in local currency, PPP GDP in international dollars, price-level index, and any participation/imputation or currency-unit metadata for:
+
 1. original ICP 2017;
 2. revised ICP 2017 as published in the ICP 2021 cycle;
 3. ICP 2021;
