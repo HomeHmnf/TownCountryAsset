@@ -105,6 +105,8 @@ def test_acquires_saved_report_csv_archive_and_extracts_members(tmp_path, monkey
     assert zipfile.is_zipfile(archive)
     assert extracted.read_text(encoding="utf-8").startswith("Country Name,Country Code")
     assert manifest["fileinfo_descriptor"].startswith("filename=")
+    assert manifest["source_id"] == "world_bank_icp"
+    assert manifest["release"] == "icp_2021_saved_report"
     assert any(url.endswith(databank.SELECTION_ENDPOINT) for url, _, _ in fake.calls)
 
 
