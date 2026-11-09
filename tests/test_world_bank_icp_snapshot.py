@@ -63,7 +63,7 @@ def test_rejects_partial_resource_listing(tmp_path):
             body = json.dumps({"count": 2, "data": [{"resource_unique_id": "DR1"}]}).encode()
             return body, 200, {"Content-Type": "application/json"}, url
         return get(url, **kwargs)
-    with pytest.raises(ICPSnapshotError, match="paginated"):
+    with pytest.raises(ICPSnapshotError, match="Incomplete resource listing"):
         acquire_snapshot(repository_root=tmp_path,
                          retrieved_at=datetime(2026, 11, 9, tzinfo=timezone.utc),
                          request_get=partial)
