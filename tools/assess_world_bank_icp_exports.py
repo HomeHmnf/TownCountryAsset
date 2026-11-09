@@ -187,17 +187,31 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             unsupported.append(path.relative_to(root).as_posix())
     if not observations:
         raise ICPAssessmentError("No recognizable country/year/indicator observations found")
-    latest: dict[tuple[str, str, str, str], dict[str, Any]] = {}
     coverage: dict[tuple[str, str, str], set[int]] = defaultdict(set)
+    latest_year: dict[tuple[str, str, str], int] = {}
     for item in observations:
         key = (item["country_code"] or item["country_name"],
                item["classification_code"] or item["classification_name"],
-               item["indicator_code"], item["indicator_name"])
+               item["indicator_code"] or item["indicator_name"])
         if item["value"] is not None:
-            coverage[key[:3]].add(item["year"])
-            previous = latest.get(key)
-            if previous is None or item["year"] > previous["year"]:
-                latest[key] = item
+            coverage[key].add(item["year"])
+            latest_year[key] = max(latest_year.get(key, item["year"]), item["year"])
+    # Preserve every source-vintage row tied at the latest year. Original and
+    # revised benchmarks must never overwrite one another.
+    latest_rows = []
+    for item in observations:
+        key = (item["country_code"] or item["country_name"],
+               item["classification_code"] or item["classification_name"],
+               item["indicator_code"] or item["indicator_name"])
+        if item["value"] is not None and item["year"] == latest_year.get(key):
+            latest_rows.append(item)
+    coverage_rows = []
+    for key, years in sorted(coverage.items()):
+        coverage_rows.append({"country_code_or_name": key[0],
+            "classification_code_or_name": key[1], "indicator_code": key[2],
+            "first_available_year": min(years), "latest_available_year": max(years),
+            "available_year_count": len(years),
+            "observed_years": ";".join(map(str, sorted(years)))})
     stamp = retrieved_at or datetime.now(timezone.utc)
     report_id = "inspection_" + stamp.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     report_dir = root / REPORT_ROOT / report_id
@@ -228,7 +242,7 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "coverage_group_count": len(coverage_rows),
         "input_files_inspected": inspected,
         "input_files_unrecognized": unsupported,
-        "latest_value_rule": "latest non-missing observation independently by country, classification and indicator",
+        "latest_value_rule": "latest non-missing year independently by country, classification and indicator; all tied source-vintage records are retained",
         "missing_values": "preserved in observations_long.csv; excluded only from latest-value selection",
         "imputation_rule": "no imputation, interpolation, extrapolation or carry-forward performed",
         "outputs": {
