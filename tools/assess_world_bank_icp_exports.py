@@ -256,7 +256,7 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     }
     with (report_dir / "assessment.json").open("x", encoding="utf-8") as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
-        stream.write("\\n")
+        stream.write("\n")
     return result
 
 
