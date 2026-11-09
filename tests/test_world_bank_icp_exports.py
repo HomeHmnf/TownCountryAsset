@@ -35,7 +35,7 @@ def test_wide_databank_export_selects_latest_per_country_and_indicator(tmp_path)
     zwe_aic = next(row for row in latest if row["country_code"] == "ZWE"
                    and row["indicator_code"] == "9020000")
     assert zwe_gdp["year"] == "2021"
-    assert zwe_gdp["value"] == 0.62
+    assert zwe_gdp["value"] == "0.62"
     assert zwe_aic["year"] == "2017"
     assert result["observation_count_including_missing"] == 6
 
