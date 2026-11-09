@@ -9,7 +9,8 @@ This section documents providers, acquisition, source-specific validation, relea
 - [WP1.5 source coverage](wp1-5-sources.md) — the 41 selected data fields and provider coverage.
 - [World Bank WDI onboarding review](world-bank-wdi-onboarding-review.md) — indicator coverage and onboarding assessment.
 - [World Bank WDI immutable API snapshot acquisition](world-bank-wdi-snapshot-acquisition.md) — byte-preserving capture, manifest integrity, Project DB provenance registration and snapshot-backed comparison.
-- [World Bank ICP multi-cycle acquisition and inspection](world-bank-icp-multicycle-acquisition.md) — original 2005/2011/2017 and revised 2017/2021 releases, export inspection, missingness and country-indicator-specific latest coverage.\n- [World Bank ICP 2021 release acquisition](world-bank-icp-2021-acquisition.md) — initial Data Catalog API capture and known resource-download limitations.
+- [World Bank ICP multi-cycle acquisition and inspection](world-bank-icp-multicycle-acquisition.md) — original and revised benchmark cycles, automated DataBank saved-report export, export inspection, missingness and country-indicator-specific latest coverage.
+- [World Bank ICP 2021 release acquisition](world-bank-icp-2021-acquisition.md) — initial Data Catalog API capture and known resource-download limitations.
 - [IMF WEO October 2026 manual acquisition](imf-weo-october-2026-manual-acquisition.md) — immutable export provenance and metadata.
 - [IMF WEO coverage assessment](imf-weo-coverage-assessment.md) — series coverage and code assessment.
 - [UN WPP crosswalk review](un-wpp-crosswalk-review.md) — reviewed M49-to-project identity mapping.
