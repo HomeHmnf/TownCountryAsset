@@ -537,6 +537,75 @@
           }
         }
       ]
+    },
+    {
+      "source_key": "zimstat",
+      "dataset_key": "gdp_trends_2009_2018",
+      "name": "ZIMSTAT GDP Trends 2009 to 2018",
+      "description": "Official ZIMSTAT historical national-accounts workbook covering 2009–2018; retain the workbook's currency columns, units and publication vintage.",
+      "data_format": "xls",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "GDP Trends 2009 to 2018 (2019 publication)",
+        "provider_url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/Publications/GDP_Trends_2009to2018.xls",
+        "manifest_directory": "data_manifests/sources/zimstat/gdp_trends_2009_2018",
+        "raw_artifact": "raw_data/sources/zimstat/gdp_trends_2009_2018/GDP_Trends_2009to2018.xls",
+        "workbook_period": "2009-2018",
+        "capture_unit": "One immutable workbook per acquisition event.",
+        "semantic_status": "acquired_not_semantically_validated"
+      },
+      "streams": [
+        {
+          "stream_key": "official_workbook",
+          "name": "ZIMSTAT GDP Trends 2009–2018 workbook captures",
+          "acquisition_mode": "https_download",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "file_signature": "OLE compound document (legacy XLS)",
+            "semantic_validation": "Separate workbook extraction and currency/series reconciliation."
+          },
+          "metadata": {
+            "release_semantics": "Each identified publication capture is a distinct acquisition event; never overwrite an earlier capture."
+          }
+        }
+      ]
+    },
+    {
+      "source_key": "zimstat",
+      "dataset_key": "gdp_tables_2019_2024",
+      "name": "ZIMSTAT revised GDP tables 2019 to 2024",
+      "description": "Official ZIMSTAT revised annual GDP tables for 2019–2024, June 2025 workbook; retain separately from the 2009–2018 publication.",
+      "data_format": "xlsx",
+      "frequency": "annual",
+      "metadata": {
+        "provider_release_label": "Revised Annual 2023 GDP and 2024 Annual GDP — June 2025",
+        "provider_url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/2025/GDP_Tables_2019_2024_June.xlsx",
+        "manifest_directory": "data_manifests/sources/zimstat/gdp_tables_2019_2024",
+        "raw_artifact": "raw_data/sources/zimstat/gdp_tables_2019_2024/GDP_Tables_2019_2024_June.xlsx",
+        "workbook_period": "2019-2024",
+        "publication_date": "2025-06-27",
+        "capture_unit": "One immutable workbook per acquisition event.",
+        "semantic_status": "acquired_not_semantically_validated"
+      },
+      "streams": [
+        {
+          "stream_key": "official_workbook",
+          "name": "ZIMSTAT revised GDP tables 2019–2024 workbook captures",
+          "acquisition_mode": "https_download",
+          "validation_contract": {
+            "required_artifact_roles": [
+              "dataset"
+            ],
+            "file_signature": "ZIP OOXML workbook with xl/workbook.xml",
+            "semantic_validation": "Separate workbook extraction and currency/series reconciliation."
+          },
+          "metadata": {
+            "release_semantics": "Each identified publication capture is a distinct acquisition event; never overwrite an earlier capture."
+          }
+        }
+      ]
     }
   ]
 }
