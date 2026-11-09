@@ -217,14 +217,6 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     report_dir = root / REPORT_ROOT / report_id
     report_dir.mkdir(parents=True, exist_ok=False)
     observation_fields = list(observations[0])
-    latest_rows = list(latest.values())
-    coverage_rows = []
-    for key, years in sorted(coverage.items()):
-        coverage_rows.append({"country_code_or_name": key[0],
-            "classification_code_or_name": key[1], "indicator_code": key[2],
-            "first_available_year": min(years), "latest_available_year": max(years),
-            "available_year_count": len(years),
-            "observed_years": ";".join(map(str, sorted(years)))})
     def write_csv(name: str, rows: list[dict[str, Any]], fields: list[str]) -> None:
         with (report_dir / name).open("w", encoding="utf-8", newline="") as stream:
             writer = csv.DictWriter(stream, fieldnames=fields, extrasaction="ignore")
