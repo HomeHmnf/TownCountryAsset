@@ -19,7 +19,7 @@ Run:
 uv run python -m tools.acquire_world_bank_icp_snapshot
 ```
 
-The tool retrieves dataset metadata and the dataset's complete resource listing through the World Bank Data Catalog API, then downloads every listed resource. It preserves response bytes, request/final URLs, HTTP status, content type, byte count and SHA-256 in a timestamped manifest. It refuses partial resource listings and existing output paths. Network retries are bounded and configurable:
+The tool retrieves dataset metadata and the complete resource listing through the World Bank Data Catalog API. It downloads only resources explicitly identified as file formats and records website, DataBank and API navigation references as skipped catalogue resources; these are not files and must not be requested through the resource download endpoint. It preserves response bytes, request/final URLs, HTTP status, content type, byte count and SHA-256 in a timestamped manifest. It refuses partial resource listings and existing output paths. Network retries are bounded and configurable:
 
 ```fish
 uv run python -m tools.acquire_world_bank_icp_snapshot --timeout 120 --retries 5 --retry-delay 2
@@ -27,7 +27,7 @@ uv run python -m tools.acquire_world_bank_icp_snapshot --timeout 120 --retries 5
 
 Raw files are written under `raw_data/sources/world_bank_icp/icp_2021_cycle/`, manifests under `data_manifests/sources/world_bank_icp/icp_2021_cycle/`, and acquisition reports under `reports/sources/world-bank-icp/`.
 
-## Scope and limitations
+## Scope and limitations\n\nThis capture is only the ICP 2021-cycle catalogue bundle. It is not a multi-cycle DataBank export and does not, by itself, acquire the original 2005, 2011 or 2017 datasets. See [multi-cycle acquisition and inspection](world-bank-icp-multicycle-acquisition.md) for the wider cycle scope and local export inspector.
 
 - This is a byte-preserving acquisition of the Data Catalog's published ICP 2021-cycle dataset, not a claim that the API resource files are a particular original-vintage workbook until their metadata and contents are inspected.
 - The capture includes the revised 2017 results supplied in the 2021 cycle. It does not substitute those for the original 2017 cycle.
