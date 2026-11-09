@@ -1,0 +1,881 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "world_bank_wdi",
+  "dataset_id": "world_bank_icp_databank_saved_report",
+  "release": "saved_report_export",
+  "export_id": "databank_20261109T180637192513Z",
+  "report_url": "https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs",
+  "final_report_url": "https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs",
+  "report_page": {
+    "url": "https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs",
+    "final_url": "https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "byte_count": 484502,
+    "sha256": "ba0b1b3b3bc1e8fda77a0b1b44c9a82fafc06bc75f836a0ad0ac053843e36b6e"
+  },
+  "cube_id": "3869",
+  "dimension_endpoint": "https://databank.worldbank.org/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+  "selection_endpoint": "https://databank.worldbank.org/AjaxDownload/SelectVariableHandler.ashx",
+  "fileinfo_endpoint": "https://databank.worldbank.org/AjaxDownload/FileInfoHandler.ashx",
+  "filedownload_endpoint": "https://databank.worldbank.org/AjaxDownload/FileDownloadHandler.ashx",
+  "retrieved_at": "2026-11-09T18:06:58.241394+00:00",
+  "export_format": "CSV",
+  "export_range": "full",
+  "data_format": "Table",
+  "variable_format": "Both",
+  "missing_value_token": "..",
+  "dimensions": [
+    {
+      "control_id": "Country",
+      "hierarchy": "[Country].[List]",
+      "selected_count": 184,
+      "selected_members": [
+        {
+          "unique_name": "[Country].[List].&[EAB]",
+          "display_name": "East Asia & Pacific (Benchmark)"
+        },
+        {
+          "unique_name": "[Country].[List].&[AUS]",
+          "display_name": "Australia"
+        },
+        {
+          "unique_name": "[Country].[List].&[BRN]",
+          "display_name": "Brunei Darussalam"
+        },
+        {
+          "unique_name": "[Country].[List].&[KHM]",
+          "display_name": "Cambodia"
+        },
+        {
+          "unique_name": "[Country].[List].&[CHN]",
+          "display_name": "China"
+        },
+        {
+          "unique_name": "[Country].[List].&[FJI]",
+          "display_name": "Fiji"
+        },
+        {
+          "unique_name": "[Country].[List].&[HKG]",
+          "display_name": "Hong Kong SAR, China"
+        },
+        {
+          "unique_name": "[Country].[List].&[IDN]",
+          "display_name": "Indonesia"
+        },
+        {
+          "unique_name": "[Country].[List].&[JPN]",
+          "display_name": "Japan"
+        },
+        {
+          "unique_name": "[Country].[List].&[KOR]",
+          "display_name": "Korea, Rep."
+        },
+        {
+          "unique_name": "[Country].[List].&[LAO]",
+          "display_name": "Lao PDR"
+        },
+        {
+          "unique_name": "[Country].[List].&[MYS]",
+          "display_name": "Malaysia"
+        },
+        {
+          "unique_name": "[Country].[List].&[MNG]",
+          "display_name": "Mongolia"
+        },
+        {
+          "unique_name": "[Country].[List].&[NZL]",
+          "display_name": "New Zealand"
+        },
+        {
+          "unique_name": "[Country].[List].&[PHL]",
+          "display_name": "Philippines"
+        },
+        {
+          "unique_name": "[Country].[List].&[SGP]",
+          "display_name": "Singapore"
+        },
+        {
+          "unique_name": "[Country].[List].&[TWN]",
+          "display_name": "Taiwan, China"
+        },
+        {
+          "unique_name": "[Country].[List].&[THA]",
+          "display_name": "Thailand"
+        },
+        {
+          "unique_name": "[Country].[List].&[VNM]",
+          "display_name": "Viet Nam"
+        },
+        {
+          "unique_name": "[Country].[List].&[ECB]",
+          "display_name": "Europe & Central Asia (Benchmark)"
+        },
+        {
+          "unique_name": "[Country].[List].&[ALB]",
+          "display_name": "Albania"
+        },
+        {
+          "unique_name": "[Country].[List].&[ARM]",
+          "display_name": "Armenia"
+        },
+        {
+          "unique_name": "[Country].[List].&[AUT]",
+          "display_name": "Austria"
+        },
+        {
+          "unique_name": "[Country].[List].&[AZE]",
+          "display_name": "Azerbaijan"
+        },
+        {
+          "unique_name": "[Country].[List].&[BLR]",
+          "display_name": "Belarus"
+        },
+        {
+          "unique_name": "[Country].[List].&[BEL]",
+          "display_name": "Belgium"
+        },
+        {
+          "unique_name": "[Country].[List].&[BIH]",
+          "display_name": "Bosnia and Herzegovina"
+        },
+        {
+          "unique_name": "[Country].[List].&[BGR]",
+          "display_name": "Bulgaria"
+        },
+        {
+          "unique_name": "[Country].[List].&[HRV]",
+          "display_name": "Croatia"
+        },
+        {
+          "unique_name": "[Country].[List].&[CYP]",
+          "display_name": "Cyprus"
+        },
+        {
+          "unique_name": "[Country].[List].&[CZE]",
+          "display_name": "Czechia"
+        },
+        {
+          "unique_name": "[Country].[List].&[DNK]",
+          "display_name": "Denmark"
+        },
+        {
+          "unique_name": "[Country].[List].&[EST]",
+          "display_name": "Estonia"
+        },
+        {
+          "unique_name": "[Country].[List].&[FIN]",
+          "display_name": "Finland"
+        },
+        {
+          "unique_name": "[Country].[List].&[FRA]",
+          "display_name": "France"
+        },
+        {
+          "unique_name": "[Country].[List].&[GEO]",
+          "display_name": "Georgia"
+        },
+        {
+          "unique_name": "[Country].[List].&[DEU]",
+          "display_name": "Germany"
+        },
+        {
+          "unique_name": "[Country].[List].&[GRC]",
+          "display_name": "Greece"
+        },
+        {
+          "unique_name": "[Country].[List].&[HUN]",
+          "display_name": "Hungary"
+        },
+        {
+          "unique_name": "[Country].[List].&[ISL]",
+          "display_name": "Iceland"
+        },
+        {
+          "unique_name": "[Country].[List].&[IRL]",
+          "display_name": "Ireland"
+        },
+        {
+          "unique_name": "[Country].[List].&[ITA]",
+          "display_name": "Italy"
+        },
+        {
+          "unique_name": "[Country].[List].&[KAZ]",
+          "display_name": "Kazakhstan"
+        },
+        {
+          "unique_name": "[Country].[List].&[XKX]",
+          "display_name": "Kosovo"
+        },
+        {
+          "unique_name": "[Country].[List].&[KGZ]",
+          "display_name": "Kyrgyz Republic"
+        },
+        {
+          "unique_name": "[Country].[List].&[LVA]",
+          "display_name": "Latvia"
+        },
+        {
+          "unique_name": "[Country].[List].&[LTU]",
+          "display_name": "Lithuania"
+        },
+        {
+          "unique_name": "[Country].[List].&[LUX]",
+          "display_name": "Luxembourg"
+        },
+        {
+          "unique_name": "[Country].[List].&[MDA]",
+          "display_name": "Moldova"
+        },
+        {
+          "unique_name": "[Country].[List].&[MNE]",
+          "display_name": "Montenegro"
+        },
+        {
+          "unique_name": "[Country].[List].&[NLD]",
+          "display_name": "Netherlands"
+        },
+        {
+          "unique_name": "[Country].[List].&[MKD]",
+          "display_name": "North Macedonia"
+        },
+        {
+          "unique_name": "[Country].[List].&[NOR]",
+          "display_name": "Norway"
+        },
+        {
+          "unique_name": "[Country].[List].&[POL]",
+          "display_name": "Poland"
+        },
+        {
+          "unique_name": "[Country].[List].&[PRT]",
+          "display_name": "Portugal"
+        },
+        {
+          "unique_name": "[Country].[List].&[ROU]",
+          "display_name": "Romania"
+        },
+        {
+          "unique_name": "[Country].[List].&[RUT]",
+          "display_name": "Russian Federation"
+        },
+        {
+          "unique_name": "[Country].[List].&[SRB]",
+          "display_name": "Serbia"
+        },
+        {
+          "unique_name": "[Country].[List].&[SVK]",
+          "display_name": "Slovak Republic"
+        },
+        {
+          "unique_name": "[Country].[List].&[SVN]",
+          "display_name": "Slovenia"
+        },
+        {
+          "unique_name": "[Country].[List].&[ESP]",
+          "display_name": "Spain"
+        },
+        {
+          "unique_name": "[Country].[List].&[SWE]",
+          "display_name": "Sweden"
+        },
+        {
+          "unique_name": "[Country].[List].&[CHE]",
+          "display_name": "Switzerland"
+        },
+        {
+          "unique_name": "[Country].[List].&[TJK]",
+          "display_name": "Tajikistan"
+        },
+        {
+          "unique_name": "[Country].[List].&[TUR]",
+          "display_name": "Turkiye"
+        },
+        {
+          "unique_name": "[Country].[List].&[UKR]",
+          "display_name": "Ukraine"
+        },
+        {
+          "unique_name": "[Country].[List].&[GBR]",
+          "display_name": "United Kingdom"
+        },
+        {
+          "unique_name": "[Country].[List].&[UZB]",
+          "display_name": "Uzbekistan"
+        },
+        {
+          "unique_name": "[Country].[List].&[LCB]",
+          "display_name": "Latin America & Caribbean (Benchmark)"
+        },
+        {
+          "unique_name": "[Country].[List].&[AIA]",
+          "display_name": "Anguilla"
+        },
+        {
+          "unique_name": "[Country].[List].&[ATG]",
+          "display_name": "Antigua and Barbuda"
+        },
+        {
+          "unique_name": "[Country].[List].&[ARG]",
+          "display_name": "Argentina"
+        },
+        {
+          "unique_name": "[Country].[List].&[ABW]",
+          "display_name": "Aruba"
+        },
+        {
+          "unique_name": "[Country].[List].&[BLZ]",
+          "display_name": "Belize"
+        },
+        {
+          "unique_name": "[Country].[List].&[BOL]",
+          "display_name": "Bolivia"
+        },
+        {
+          "unique_name": "[Country].[List].&[BON]",
+          "display_name": "Bonaire"
+        },
+        {
+          "unique_name": "[Country].[List].&[BRA]",
+          "display_name": "Brazil"
+        },
+        {
+          "unique_name": "[Country].[List].&[VGB]",
+          "display_name": "British Virgin Islands"
+        },
+        {
+          "unique_name": "[Country].[List].&[CYM]",
+          "display_name": "Cayman Islands"
+        },
+        {
+          "unique_name": "[Country].[List].&[CHL]",
+          "display_name": "Chile"
+        },
+        {
+          "unique_name": "[Country].[List].&[COL]",
+          "display_name": "Colombia"
+        },
+        {
+          "unique_name": "[Country].[List].&[CRI]",
+          "display_name": "Costa Rica"
+        },
+        {
+          "unique_name": "[Country].[List].&[CUW]",
+          "display_name": "Curacao"
+        },
+        {
+          "unique_name": "[Country].[List].&[DMA]",
+          "display_name": "Dominica"
+        },
+        {
+          "unique_name": "[Country].[List].&[DOM]",
+          "display_name": "Dominican Republic"
+        },
+        {
+          "unique_name": "[Country].[List].&[ECU]",
+          "display_name": "Ecuador"
+        },
+        {
+          "unique_name": "[Country].[List].&[SLV]",
+          "display_name": "El Salvador"
+        },
+        {
+          "unique_name": "[Country].[List].&[GRD]",
+          "display_name": "Grenada"
+        },
+        {
+          "unique_name": "[Country].[List].&[GTM]",
+          "display_name": "Guatemala"
+        },
+        {
+          "unique_name": "[Country].[List].&[GUY]",
+          "display_name": "Guyana"
+        },
+        {
+          "unique_name": "[Country].[List].&[HND]",
+          "display_name": "Honduras"
+        },
+        {
+          "unique_name": "[Country].[List].&[JAM]",
+          "display_name": "Jamaica"
+        },
+        {
+          "unique_name": "[Country].[List].&[MEX]",
+          "display_name": "Mexico"
+        },
+        {
+          "unique_name": "[Country].[List].&[MSR]",
+          "display_name": "Montserrat"
+        },
+        {
+          "unique_name": "[Country].[List].&[NIC]",
+          "display_name": "Nicaragua"
+        },
+        {
+          "unique_name": "[Country].[List].&[PAN]",
+          "display_name": "Panama"
+        },
+        {
+          "unique_name": "[Country].[List].&[PRY]",
+          "display_name": "Paraguay"
+        },
+        {
+          "unique_name": "[Country].[List].&[PER]",
+          "display_name": "Peru"
+        },
+        {
+          "unique_name": "[Country].[List].&[KNA]",
+          "display_name": "St. Kitts and Nevis"
+        },
+        {
+          "unique_name": "[Country].[List].&[LCA]",
+          "display_name": "St. Lucia"
+        },
+        {
+          "unique_name": "[Country].[List].&[VCT]",
+          "display_name": "St. Vincent and the Grenadines"
+        },
+        {
+          "unique_name": "[Country].[List].&[SUR]",
+          "display_name": "Suriname"
+        },
+        {
+          "unique_name": "[Country].[List].&[TTO]",
+          "display_name": "Trinidad and Tobago"
+        },
+        {
+          "unique_name": "[Country].[List].&[URY]",
+          "display_name": "Uruguay"
+        },
+        {
+          "unique_name": "[Country].[List].&[MEB]",
+          "display_name": "Middle East & North Africa (Benchmark)"
+        },
+        {
+          "unique_name": "[Country].[List].&[DZA]",
+          "display_name": "Algeria"
+        },
+        {
+          "unique_name": "[Country].[List].&[BHR]",
+          "display_name": "Bahrain"
+        },
+        {
+          "unique_name": "[Country].[List].&[DJI]",
+          "display_name": "Djibouti"
+        },
+        {
+          "unique_name": "[Country].[List].&[EGY]",
+          "display_name": "Egypt, Arab Rep."
+        },
+        {
+          "unique_name": "[Country].[List].&[IRQ]",
+          "display_name": "Iraq"
+        },
+        {
+          "unique_name": "[Country].[List].&[ISR]",
+          "display_name": "Israel"
+        },
+        {
+          "unique_name": "[Country].[List].&[JOR]",
+          "display_name": "Jordan"
+        },
+        {
+          "unique_name": "[Country].[List].&[KWT]",
+          "display_name": "Kuwait"
+        },
+        {
+          "unique_name": "[Country].[List].&[LBN]",
+          "display_name": "Lebanon"
+        },
+        {
+          "unique_name": "[Country].[List].&[MLT]",
+          "display_name": "Malta"
+        },
+        {
+          "unique_name": "[Country].[List].&[MAR]",
+          "display_name": "Morocco"
+        },
+        {
+          "unique_name": "[Country].[List].&[OMN]",
+          "display_name": "Oman"
+        },
+        {
+          "unique_name": "[Country].[List].&[QAT]",
+          "display_name": "Qatar"
+        },
+        {
+          "unique_name": "[Country].[List].&[SAU]",
+          "display_name": "Saudi Arabia"
+        },
+        {
+          "unique_name": "[Country].[List].&[SYR]",
+          "display_name": "Syrian Arab Republic"
+        },
+        {
+          "unique_name": "[Country].[List].&[TUN]",
+          "display_name": "Tunisia"
+        },
+        {
+          "unique_name": "[Country].[List].&[ARE]",
+          "display_name": "United Arab Emirates"
+        },
+        {
+          "unique_name": "[Country].[List].&[PSE]",
+          "display_name": "West Bank and Gaza"
+        },
+        {
+          "unique_name": "[Country].[List].&[NAB]",
+          "display_name": "North America (Benchmark)"
+        },
+        {
+          "unique_name": "[Country].[List].&[BMU]",
+          "display_name": "Bermuda"
+        },
+        {
+          "unique_name": "[Country].[List].&[CAN]",
+          "display_name": "Canada"
+        },
+        {
+          "unique_name": "[Country].[List].&[USA]",
+          "display_name": "United States"
+        },
+        {
+          "unique_name": "[Country].[List].&[SAB]",
+          "display_name": "South Asia (Benchmark)"
+        },
+        {
+          "unique_name": "[Country].[List].&[BGD]",
+          "display_name": "Bangladesh"
+        },
+        {
+          "unique_name": "[Country].[List].&[BTN]",
+          "display_name": "Bhutan"
+        },
+        {
+          "unique_name": "[Country].[List].&[IND]",
+          "display_name": "India"
+        },
+        {
+          "unique_name": "[Country].[List].&[MDV]",
+          "display_name": "Maldives"
+        },
+        {
+          "unique_name": "[Country].[List].&[NPL]",
+          "display_name": "Nepal"
+        },
+        {
+          "unique_name": "[Country].[List].&[PAK]",
+          "display_name": "Pakistan"
+        },
+        {
+          "unique_name": "[Country].[List].&[LKA]",
+          "display_name": "Sri Lanka"
+        },
+        {
+          "unique_name": "[Country].[List].&[SSB]",
+          "display_name": "Sub-Saharan Africa (Benchmark)"
+        },
+        {
+          "unique_name": "[Country].[List].&[AGO]",
+          "display_name": "Angola"
+        },
+        {
+          "unique_name": "[Country].[List].&[BEN]",
+          "display_name": "Benin"
+        },
+        {
+          "unique_name": "[Country].[List].&[BWA]",
+          "display_name": "Botswana"
+        },
+        {
+          "unique_name": "[Country].[List].&[BFA]",
+          "display_name": "Burkina Faso"
+        },
+        {
+          "unique_name": "[Country].[List].&[BDI]",
+          "display_name": "Burundi"
+        },
+        {
+          "unique_name": "[Country].[List].&[CPV]",
+          "display_name": "Cabo Verde"
+        },
+        {
+          "unique_name": "[Country].[List].&[CMR]",
+          "display_name": "Cameroon"
+        },
+        {
+          "unique_name": "[Country].[List].&[CAF]",
+          "display_name": "Central African Republic"
+        },
+        {
+          "unique_name": "[Country].[List].&[TCD]",
+          "display_name": "Chad"
+        },
+        {
+          "unique_name": "[Country].[List].&[COM]",
+          "display_name": "Comoros"
+        },
+        {
+          "unique_name": "[Country].[List].&[COD]",
+          "display_name": "Congo, Dem. Rep."
+        },
+        {
+          "unique_name": "[Country].[List].&[COG]",
+          "display_name": "Congo, Rep."
+        },
+        {
+          "unique_name": "[Country].[List].&[CIV]",
+          "display_name": "Cote d'Ivoire"
+        },
+        {
+          "unique_name": "[Country].[List].&[GNQ]",
+          "display_name": "Equatorial Guinea"
+        },
+        {
+          "unique_name": "[Country].[List].&[SWZ]",
+          "display_name": "Eswatini"
+        },
+        {
+          "unique_name": "[Country].[List].&[ETH]",
+          "display_name": "Ethiopia"
+        },
+        {
+          "unique_name": "[Country].[List].&[GAB]",
+          "display_name": "Gabon"
+        },
+        {
+          "unique_name": "[Country].[List].&[GMB]",
+          "display_name": "Gambia, The"
+        },
+        {
+          "unique_name": "[Country].[List].&[GHA]",
+          "display_name": "Ghana"
+        },
+        {
+          "unique_name": "[Country].[List].&[GIN]",
+          "display_name": "Guinea"
+        },
+        {
+          "unique_name": "[Country].[List].&[GNB]",
+          "display_name": "Guinea-Bissau"
+        },
+        {
+          "unique_name": "[Country].[List].&[KEN]",
+          "display_name": "Kenya"
+        },
+        {
+          "unique_name": "[Country].[List].&[LSO]",
+          "display_name": "Lesotho"
+        },
+        {
+          "unique_name": "[Country].[List].&[LBR]",
+          "display_name": "Liberia"
+        },
+        {
+          "unique_name": "[Country].[List].&[MDG]",
+          "display_name": "Madagascar"
+        },
+        {
+          "unique_name": "[Country].[List].&[MWI]",
+          "display_name": "Malawi"
+        },
+        {
+          "unique_name": "[Country].[List].&[MLI]",
+          "display_name": "Mali"
+        },
+        {
+          "unique_name": "[Country].[List].&[MRT]",
+          "display_name": "Mauritania"
+        },
+        {
+          "unique_name": "[Country].[List].&[MUS]",
+          "display_name": "Mauritius"
+        },
+        {
+          "unique_name": "[Country].[List].&[MOZ]",
+          "display_name": "Mozambique"
+        },
+        {
+          "unique_name": "[Country].[List].&[NAM]",
+          "display_name": "Namibia"
+        },
+        {
+          "unique_name": "[Country].[List].&[NER]",
+          "display_name": "Niger"
+        },
+        {
+          "unique_name": "[Country].[List].&[NGA]",
+          "display_name": "Nigeria"
+        },
+        {
+          "unique_name": "[Country].[List].&[RWA]",
+          "display_name": "Rwanda"
+        },
+        {
+          "unique_name": "[Country].[List].&[STP]",
+          "display_name": "Sao Tome and Principe"
+        },
+        {
+          "unique_name": "[Country].[List].&[SEN]",
+          "display_name": "Senegal"
+        },
+        {
+          "unique_name": "[Country].[List].&[SYC]",
+          "display_name": "Seychelles"
+        },
+        {
+          "unique_name": "[Country].[List].&[SLE]",
+          "display_name": "Sierra Leone"
+        },
+        {
+          "unique_name": "[Country].[List].&[SOM]",
+          "display_name": "Somalia"
+        },
+        {
+          "unique_name": "[Country].[List].&[ZAF]",
+          "display_name": "South Africa"
+        },
+        {
+          "unique_name": "[Country].[List].&[SSD]",
+          "display_name": "South Sudan"
+        },
+        {
+          "unique_name": "[Country].[List].&[SDN]",
+          "display_name": "Sudan"
+        },
+        {
+          "unique_name": "[Country].[List].&[TZA]",
+          "display_name": "Tanzania"
+        },
+        {
+          "unique_name": "[Country].[List].&[TGO]",
+          "display_name": "Togo"
+        },
+        {
+          "unique_name": "[Country].[List].&[UGA]",
+          "display_name": "Uganda"
+        },
+        {
+          "unique_name": "[Country].[List].&[ZMB]",
+          "display_name": "Zambia"
+        },
+        {
+          "unique_name": "[Country].[List].&[ZWE]",
+          "display_name": "Zimbabwe"
+        },
+        {
+          "unique_name": "[Country].[List].&[WLD]",
+          "display_name": "WORLD (Benchmark)"
+        }
+      ]
+    },
+    {
+      "control_id": "Classification",
+      "hierarchy": "[Classification].[List]",
+      "selected_count": 1,
+      "selected_members": [
+        {
+          "unique_name": "[Classification].[List].&[PPPGlob]",
+          "display_name": "Purchasing power parity (PPP) (US$ = 1)"
+        }
+      ]
+    },
+    {
+      "control_id": "Series",
+      "hierarchy": "[Series].[List]",
+      "selected_count": 6,
+      "selected_members": [
+        {
+          "unique_name": "[Series].[List].&[1000000]",
+          "display_name": "1000000:GROSS DOMESTIC PRODUCT"
+        },
+        {
+          "unique_name": "[Series].[List].&[9020000]",
+          "display_name": "9020000:ACTUAL INDIVIDUAL CONSUMPTION"
+        },
+        {
+          "unique_name": "[Series].[List].&[9100000]",
+          "display_name": "9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE"
+        },
+        {
+          "unique_name": "[Series].[List].&[9270000]",
+          "display_name": "9270000:GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE"
+        },
+        {
+          "unique_name": "[Series].[List].&[1501000]",
+          "display_name": "1501000:GROSS FIXED CAPITAL FORMATION"
+        },
+        {
+          "unique_name": "[Series].[List].&[9250000]",
+          "display_name": "9250000:DOMESTIC ABSORPTION"
+        }
+      ]
+    },
+    {
+      "control_id": "Time",
+      "hierarchy": "[Time].[List]",
+      "selected_count": 7,
+      "selected_members": [
+        {
+          "unique_name": "[Time].[List].&[YR2017]",
+          "display_name": "2017"
+        },
+        {
+          "unique_name": "[Time].[List].&[YR2018]",
+          "display_name": "2018"
+        },
+        {
+          "unique_name": "[Time].[List].&[YR2019]",
+          "display_name": "2019"
+        },
+        {
+          "unique_name": "[Time].[List].&[YR2020]",
+          "display_name": "2020"
+        },
+        {
+          "unique_name": "[Time].[List].&[YR2021]",
+          "display_name": "2021"
+        },
+        {
+          "unique_name": "[Time].[List].&[YR2022]",
+          "display_name": "2022"
+        },
+        {
+          "unique_name": "[Time].[List].&[YR2023]",
+          "display_name": "2023"
+        }
+      ]
+    }
+  ],
+  "selected_variable_registration_http_status": 200,
+  "fileinfo_descriptor": "filename=P_2b726266-8ffe-433e-8660-44d6ad860f0a.zip&filetype=CSV&language=en&displayfile=P_ICP-Annual-PPPs.zip",
+  "files": [
+    {
+      "artifact_role": "original_export_archive",
+      "local_raw_path": "raw_data/sources/world_bank_icp/databank_exports/databank_20261109T180637192513Z/databank_export.zip",
+      "source_filename": "P_2b726266-8ffe-433e-8660-44d6ad860f0a.zip",
+      "url": "https://databank.worldbank.org/AjaxDownload/FileDownloadHandler.ashx?filename=P_2b726266-8ffe-433e-8660-44d6ad860f0a.zip&filetype=CSV&language=en&displayfile=P_ICP-Annual-PPPs.zip",
+      "final_url": "https://databank.worldbank.org/AjaxDownload/FileDownloadHandler.ashx?filename=P_2b726266-8ffe-433e-8660-44d6ad860f0a.zip&filetype=CSV&language=en&displayfile=P_ICP-Annual-PPPs.zip",
+      "http_status": 200,
+      "content_type": "application/octet-stream",
+      "byte_count": 107272,
+      "sha256": "4a2d0bb28e2dd322eaa3d3f268fda97c57998e77c9a3b0e7965cb51310654e9f"
+    },
+    {
+      "artifact_role": "extracted_csv_member",
+      "archive_member": "2b726266-8ffe-433e-8660-44d6ad860f0a_Data.csv",
+      "derived_from": "raw_data/sources/world_bank_icp/databank_exports/databank_20261109T180637192513Z/databank_export.zip",
+      "local_raw_path": "raw_data/sources/world_bank_icp/databank_exports/databank_20261109T180637192513Z/contents/2b726266-8ffe-433e-8660-44d6ad860f0a_Data.csv",
+      "byte_count": 194133,
+      "sha256": "3a9f662212daf751fb7badb45ef53e083f9a0fc5bb0a21eadd52035534dcd3bd"
+    },
+    {
+      "artifact_role": "extracted_csv_member",
+      "archive_member": "2b726266-8ffe-433e-8660-44d6ad860f0a_Series - Metadata.csv",
+      "derived_from": "raw_data/sources/world_bank_icp/databank_exports/databank_20261109T180637192513Z/databank_export.zip",
+      "local_raw_path": "raw_data/sources/world_bank_icp/databank_exports/databank_20261109T180637192513Z/contents/2b726266-8ffe-433e-8660-44d6ad860f0a_Series_-_Metadata.csv",
+      "byte_count": 195700,
+      "sha256": "fe5ee5e3f159db7a7e202fd6b95311db9a42dbaa783d33927cba5f20c64f3487"
+    }
+  ]
+}

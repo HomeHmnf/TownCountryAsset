@@ -1,0 +1,25 @@
+{
+  "assessment": "world_bank_icp_databank_saved_report_acquisition",
+  "export_id": "databank_20261109T180637192513Z",
+  "manifest_path": "data_manifests/sources/world_bank_icp/databank_exports/databank_20261109T180637192513Z.json",
+  "selected_dimension_counts": {
+    "Country": 184,
+    "Classification": 1,
+    "Series": 6,
+    "Time": 7
+  },
+  "archive_bytes": 107272,
+  "csv_member_count": 2,
+  "artifact_count": 3,
+  "retrieved_at": "2026-11-09T18:06:58.241394+00:00",
+  "side_effects": {
+    "raw_export_acquired": true,
+    "manifest_written": true,
+    "project_database_written": false,
+    "game_database_written": false,
+    "semantic_validation_performed": false,
+    "approval_created": false,
+    "source_selection_changed": false,
+    "retention_applied": false
+  }
+}
