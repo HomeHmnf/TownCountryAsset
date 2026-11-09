@@ -68,7 +68,7 @@ It creates timestamped reports under reports/sources/world-bank-icp/:
 - latest_available_by_country_indicator.csv: latest non-missing value independently by country, classification and indicator;
 - coverage_by_country_indicator.csv: first/latest available year, count and observed years.
 
-CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. Structural DataBank fields such as Time Code are excluded from wide-format indicator detection. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
+CSV input decoding detects UTF-8/UTF-8 BOM and UTF-16 BOM, then uses strict Windows-1252 and Latin-1 fallbacks for legacy DataBank exports; the detected encoding is recorded in the sheet/source label. Structural DataBank fields such as Time Code are excluded from wide-format indicator detection. CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
 
 ## Interpretation requirements
 
