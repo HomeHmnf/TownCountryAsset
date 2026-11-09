@@ -122,3 +122,32 @@ def test_databank_series_metadata_is_not_counted_as_observations_and_releases_ar
     assert result["observation_count_including_missing"] == 2
     assert result["series_metadata_definition_count"] == 1
     assert result["source_release_count"] == 1
+
+
+
+def test_latest_selection_is_scoped_to_source_release(tmp_path):
+    headers = [
+        "Classification Name", "Classification Code", "Time", "Time Code",
+        "Country Name", "Country Code",
+        "1000000:GROSS DOMESTIC PRODUCT [1000000]",
+    ]
+    for release_dir, year, value in [
+        ("icp_2017_cycle/export", 2017, "0.48"),
+        ("icp_2021_cycle/export", 2021, "0.54"),
+    ]:
+        raw = tmp_path / "raw_data/sources/world_bank_icp" / release_dir
+        raw.mkdir(parents=True)
+        with (raw / "data.csv").open("w", newline="", encoding="utf-8") as stream:
+            writer = csv.writer(stream)
+            writer.writerow(headers)
+            writer.writerow(["PPP", "PPPGlob", year, f"YR{year}", "Zimbabwe", "ZWE", value])
+
+    result = inspect(tmp_path)
+    report = tmp_path / "reports/sources/world-bank-icp" / result["report_id"]
+    with (report / "latest_available_by_country_indicator.csv").open(encoding="utf-8") as stream:
+        latest = list(csv.DictReader(stream))
+    assert len(latest) == 2
+    assert {(row["source_release"], row["year"], row["value"]) for row in latest} == {
+        ("icp_2017_cycle", "2017", "0.48"),
+        ("icp_2021_cycle", "2021", "0.54"),
+    }
