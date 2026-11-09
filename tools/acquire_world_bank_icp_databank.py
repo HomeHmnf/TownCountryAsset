@@ -11,7 +11,6 @@ import argparse
 import hashlib
 import html
 import json
-import re
 import sys
 import time
 import urllib.error
@@ -156,15 +155,21 @@ def _page_metadata(page: bytes) -> tuple[str, dict[str, int]]:
         raise DataBankExportError("Saved report page does not expose hdnCubeID")
     expected: dict[str, int] = {}
     adobe = parser.values.get("hdnAbobeText", "")
-    if adobe:
-        try:
-            payload = json.loads(html.unescape(adobe))
-            dimensions = payload.get("Dimensions", {})
-            if isinstance(dimensions, dict):
-                expected = {str(name): len(values) for name, values in dimensions.items()
-                            if isinstance(values, list)}
-        except (json.JSONDecodeError, AttributeError, TypeError):
-            expected = {}
+    if not adobe:
+        raise DataBankExportError("Saved report page does not expose hdnAbobeText dimension metadata")
+    try:
+        payload = json.loads(html.unescape(adobe))
+        dimensions = payload.get("Dimensions", {})
+        if isinstance(dimensions, dict):
+            expected = {str(name): len(values) for name, values in dimensions.items()
+                        if isinstance(values, list)}
+    except (json.JSONDecodeError, AttributeError, TypeError) as exc:
+        raise DataBankExportError("Saved report hdnAbobeText is not valid dimension JSON") from exc
+    missing = [name for name, _ in DIMENSIONS if expected.get(name, 0) < 1]
+    if missing:
+        raise DataBankExportError(
+            "Saved report dimension metadata is incomplete: " + ", ".join(missing)
+        )
     return cube_id, expected
 
 
@@ -336,7 +341,16 @@ def acquire_export(*, repository_root: str | Path = ROOT,
         "export_id": export_id,
         "report_url": report_url,
         "final_report_url": final_page_url,
+        "report_page": {
+            "url": report_url, "final_url": final_page_url,
+            "http_status": status, "content_type": page_headers.get("Content-Type", ""),
+            "byte_count": len(page), "sha256": _sha256(page),
+        },
         "cube_id": cube_id,
+        "dimension_endpoint": AJAX_BASE + DIMENSION_ENDPOINT,
+        "selection_endpoint": AJAX_BASE + SELECTION_ENDPOINT,
+        "fileinfo_endpoint": AJAX_BASE + FILEINFO_ENDPOINT,
+        "filedownload_endpoint": AJAX_BASE + FILEDOWNLOAD_ENDPOINT,
         "retrieved_at": completed.isoformat(),
         "export_format": "CSV",
         "export_range": "full",
