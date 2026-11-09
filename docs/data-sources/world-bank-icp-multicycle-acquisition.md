@@ -25,7 +25,7 @@ Official entry points:
 
 ## Automated DataBank saved-report export
 
-The DataBank browser workflow has now been reproduced programmatically for the saved ICP-Annual-PPPs report:
+The DataBank browser workflow has been reproduced through a successful FileInfoHandler export response for the saved ICP-Annual-PPPs report. The repository tool now implements the complete archive download, ZIP validation and CSV extraction sequence; those final steps still require owner-run validation against the live service:
 
 - Report: https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs
 - Tool: tools.acquire_world_bank_icp_databank
@@ -37,11 +37,11 @@ uv run python -m tools.acquire_world_bank_icp_databank
 
 The tool creates a cookie-backed session, reads the report's cube ID and selected dimension counts, retrieves the selected Country, Classification, Series and Time members, and registers the same hdnSelectVars payload used by the DataBank page. It requests the full-range CSV export using the case-sensitive down-radio=csv parameter, follows the returned FileDownloadHandler descriptor in the same session, validates the ZIP CRC, and extracts CSV members while preserving the original ZIP.
 
-The timestamped manifest records the report URL, cube ID, selected dimension members, export settings, DataBank descriptor, request URLs, byte counts and SHA-256 fingerprints. Raw archives and extracted CSV members are retained under raw_data/sources/world_bank_icp/databank_exports/; manifests are under data_manifests/sources/world_bank_icp/databank_exports/; acquisition reports are under reports/sources/world-bank-icp/.
+The timestamped manifest records the report URL and response fingerprint, cube ID, selected dimension members, export settings, DataBank descriptor, endpoint URLs, archive and extracted-member byte counts and SHA-256 fingerprints. Raw archives and extracted CSV members are retained under raw_data/sources/world_bank_icp/databank_exports/; manifests are under data_manifests/sources/world_bank_icp/databank_exports/; acquisition reports are under reports/sources/world-bank-icp/.
 
 The automated saved report is a proven export path, **not yet a complete multi-cycle acquisition**. This report contains one classification, six series and the report's selected 2017–2023 time range. It does not replace discovery and export of every detailed table, original benchmark cycle, revised benchmark, metadata/status table or annual series required by the project. Do not treat its coverage as the entire ICP catalogue.
 
-Run through proxychains when the local network requires the configured SOCKS proxy. The tool itself uses the standard-library cookie-aware urllib opener and does not configure a proxy.
+Run through proxychains when the local network requires the configured SOCKS proxy. The tool itself uses the standard-library cookie-aware urllib opener and does not configure a proxy. The saved-report selection structure is intentionally explicit and must not be assumed to fit other ICP reports without discovering their own dimensions and hierarchy definitions.
 
 ## Data Catalog resource boundary
 
