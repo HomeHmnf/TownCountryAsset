@@ -149,7 +149,7 @@ def acquire_snapshot(*, repository_root: str | Path = ROOT,
         raise ICPSnapshotError(f"Incomplete resource listing: captured {len(rows)} of {expected_count}")
     if not rows:
         raise ICPSnapshotError("ICP dataset exposes no downloadable resources")
-    for index, resource in enumerate(rows, start=1):
+    skipped_resources: list[dict[str, Any]] = []\n    downloaded_resources = 0\n    for index, resource in enumerate(rows, start=1):
         resource_id = str(resource.get("resource_unique_id") or resource.get("id") or "").strip()
         if not resource_id:
             raise ICPSnapshotError(f"Resource row {index} has no resource identifier")
@@ -203,7 +203,7 @@ def acquire_snapshot(*, repository_root: str | Path = ROOT,
         "assessment": "world_bank_icp_2021_release_acquisition",
         "snapshot_id": snapshot_id, "manifest_path": manifest_path.relative_to(root).as_posix(),
         "artifact_count": len(artifacts), "artifact_bytes": sum(x["byte_count"] for x in artifacts),
-        "resource_count": len(rows), "retrieved_at": completed.isoformat(),
+        "resource_count": len(rows), "downloaded_file_resource_count": downloaded_resources,\n        "non_file_resource_count": len(skipped_resources), "retrieved_at": completed.isoformat(),
         "side_effects": {"raw_snapshot_acquired": True, "manifest_written": True,
                          "project_database_written": False, "game_database_written": False,
                          "semantic_validation_performed": False, "approval_created": False,
