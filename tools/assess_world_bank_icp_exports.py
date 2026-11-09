@@ -135,7 +135,7 @@ def source_release_for(path: Path) -> str:
     """Return the source release identity encoded by the acquisition path."""
     parts = path.parts
     for part in parts:
-        match = re.fullmatch(r"icp_(20\\d{2})_cycle", part)
+        match = re.fullmatch(r"icp_(20\d{2})_cycle", part)
         if match:
             return f"icp_{match.group(1)}_cycle"
     if "databank_exports" in parts:
@@ -149,18 +149,19 @@ def is_series_metadata_file(path: Path) -> bool:
 
 def extract_series_metadata(headers: list[str], rows: list[list[Any]], *,
                             path: Path, source_release: str) -> list[dict[str, Any]]:
-    name_i = column_index(headers, CLASS_NAMES)
-    description_i = column_index(headers, CLASS_CODES)
     country_i = column_index(headers, COUNTRY_NAMES)
     year_i = column_index(headers, YEARS)
-    if name_i is None or description_i is None:
+    if len(headers) < 2:
         return []
     result = []
     for row_number, row in enumerate(rows, start=2):
         if str(cell(row, country_i) or "").strip() or year_value(cell(row, year_i)):
             continue
-        code = str(cell(row, name_i) or "").strip()
-        description = str(cell(row, description_i) or "").strip()
+        # DataBank appends a small two-column Code / Indicator Name
+        # dictionary after the repeated observation block, under the same
+        # original wide-export header.
+        code = str(cell(row, 0) or "").strip()
+        description = str(cell(row, 1) or "").strip()
         if not re.fullmatch(r"\\d{4,}", code) or not description:
             continue
         result.append({
@@ -279,7 +280,8 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     # revised benchmarks must never overwrite one another.
     latest_rows = []
     for item in observations:
-        key = (item["country_code"] or item["country_name"],
+        key = (item["source_release"],
+               item["country_code"] or item["country_name"],
                item["classification_code"] or item["classification_name"],
                item["indicator_code"] or item["indicator_name"])
         if item["value"] is not None and item["year"] == latest_year.get(key):
