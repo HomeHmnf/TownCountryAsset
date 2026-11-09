@@ -77,3 +77,48 @@ def test_cp1252_databank_csv_is_decoded_without_losing_country_names(tmp_path):
     assert rows[0]["country_name"] == "Côte d’Ivoire"
     assert rows[0]["value"] == "0.55"
     assert rows[0]["sheet"] == "csv (cp1252)"
+
+
+
+def test_databank_series_metadata_is_not_counted_as_observations_and_releases_are_separate(tmp_path):
+    raw = tmp_path / "raw_data/sources/world_bank_icp/databank_exports/export_1/contents"
+    raw.mkdir(parents=True)
+    headers = [
+        "Classification Name", "Classification Code", "Time", "Time Code",
+        "Country Name", "Country Code",
+        "1000000:GROSS DOMESTIC PRODUCT [1000000]",
+    ]
+    observations = [
+        ["Purchasing power parity", "PPPGlob", 2017, "YR2017", "Zimbabwe", "ZWE", "0.49"],
+        ["Purchasing power parity", "PPPGlob", 2021, "YR2021", "Zimbabwe", "ZWE", "0.54"],
+        ["", "", "", "", "", "", ""],
+        ["Data from database: ICP 2021", "", "", "", "", "", ""],
+        ["Last Updated: 08/04/2024", "", "", "", "", "", ""],
+    ]
+    data_path = raw / "sample_Data.csv"
+    with data_path.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(headers)
+        writer.writerows(observations)
+    metadata_path = raw / "sample_Series_-_Metadata.csv"
+    with metadata_path.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(headers)
+        writer.writerows(observations)
+        writer.writerow(["Code", "Indicator Name", "", "", "", "", ""])
+        writer.writerow(["1000000", "GDP definition", "", "", "", "", ""])
+
+    result = inspect(tmp_path)
+    report = tmp_path / "reports/sources/world-bank-icp" / result["report_id"]
+    with (report / "observations_long.csv").open(encoding="utf-8") as stream:
+        rows = list(csv.DictReader(stream))
+    with (report / "series_metadata.csv").open(encoding="utf-8") as stream:
+        definitions = list(csv.DictReader(stream))
+    assert len(rows) == 2
+    assert {row["source_release"] for row in rows} == {"icp_2021_saved_report"}
+    assert len(definitions) == 1
+    assert definitions[0]["indicator_code"] == "1000000"
+    assert definitions[0]["indicator_definition"] == "GDP definition"
+    assert result["observation_count_including_missing"] == 2
+    assert result["series_metadata_definition_count"] == 1
+    assert result["source_release_count"] == 1
