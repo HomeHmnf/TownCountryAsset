@@ -118,19 +118,35 @@ def acquire_snapshot(*, repository_root: str | Path = ROOT,
     artifacts.append({"artifact_role": "dataset_metadata",
                       "local_raw_path": metadata_path.relative_to(root).as_posix(), **metadata})
 
-    resources_url = f"{API}/resources?{urllib.parse.urlencode({'dataset_unique_id': DATASET_ID, 'top': 100, 'skip': 0})}"
-    resources_payload, resource_meta = _json_request(resources_url, get, timeout, retries, retry_delay)
-    rows = resources_payload.get("data")
-    if not isinstance(rows, list):
-        raise ICPSnapshotError("Catalog resource listing has no data array")
-    count = resources_payload.get("count")
-    if isinstance(count, int) and count > len(rows):
-        raise ICPSnapshotError(f"Resource listing is paginated ({len(rows)} of {count}); refusing partial capture")
-    resource_path = raw_dir / "resource_listing.json"
-    _write_exclusive(resource_path, resource_meta.pop("body"))
-    artifacts.append({"artifact_role": "resource_listing",
-                      "local_raw_path": resource_path.relative_to(root).as_posix(), **resource_meta})
-
+    rows: list[dict[str, Any]] = []
+    skip = 0
+    page_number = 1
+    expected_count: int | None = None
+    while True:
+        resources_url = f"{API}/resources?{urllib.parse.urlencode({'dataset_unique_id': DATASET_ID, 'top': 100, 'skip': skip})}"
+        resources_payload, resource_meta = _json_request(resources_url, get, timeout, retries, retry_delay)
+        page_rows = resources_payload.get("data")
+        if not isinstance(page_rows, list):
+            raise ICPSnapshotError("Catalog resource listing has no data array")
+        count = resources_payload.get("count")
+        if isinstance(count, int):
+            if expected_count is not None and count != expected_count:
+                raise ICPSnapshotError("Resource listing count changed during pagination")
+            expected_count = count
+        page_path = raw_dir / f"resource_listing_page_{page_number:03d}.json"
+        _write_exclusive(page_path, resource_meta.pop("body"))
+        artifacts.append({"artifact_role": "resource_listing",
+                          "page_number": page_number,
+                          "local_raw_path": page_path.relative_to(root).as_posix(), **resource_meta})
+        rows.extend(page_rows)
+        if not page_rows or len(page_rows) < 100:
+            break
+        skip += len(page_rows)
+        page_number += 1
+        if page_number > 100:
+            raise ICPSnapshotError("Resource listing exceeds the 10,000-row safety limit")
+    if expected_count is not None and len(rows) != expected_count:
+        raise ICPSnapshotError(f"Incomplete resource listing: captured {len(rows)} of {expected_count}")
     if not rows:
         raise ICPSnapshotError("ICP dataset exposes no downloadable resources")
     for index, resource in enumerate(rows, start=1):
