@@ -25,7 +25,7 @@ Official entry points:
 
 ## Automated DataBank saved-report export
 
-The DataBank browser workflow has been reproduced through a successful FileInfoHandler export response for the saved ICP-Annual-PPPs report. The repository tool now implements the complete archive download, ZIP validation and CSV extraction sequence; those final steps still require owner-run validation against the live service:
+The DataBank browser workflow has been live-validated end to end for the saved ICP-Annual-PPPs report. The owner-run acquisition on 2026-11-09 downloaded a 107,272-byte ZIP, validated its CRC, and extracted two CSV members (one observation export and one series-metadata export).
 
 - Report: https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs
 - Tool: tools.acquire_world_bank_icp_databank
@@ -68,7 +68,7 @@ It creates timestamped reports under reports/sources/world-bank-icp/:
 - latest_available_by_country_indicator.csv: latest non-missing value independently by country, classification and indicator;
 - coverage_by_country_indicator.csv: first/latest available year, count and observed years.
 
-CSV input decoding detects UTF-8/UTF-8 BOM and UTF-16 BOM, then uses strict Windows-1252 and Latin-1 fallbacks for legacy DataBank exports; the detected encoding is recorded in the sheet/source label. Structural DataBank fields such as Time Code are excluded from wide-format indicator detection. CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
+CSV input decoding detects UTF-8/UTF-8 BOM and UTF-16 BOM, then uses strict Windows-1252 and Latin-1 fallbacks for legacy DataBank exports; the detected encoding is recorded in the sheet/source label. The DataBank `Series_-_Metadata.csv` member repeats the complete observation table before appending indicator definitions; the inspector treats it as a metadata artifact and does not ingest its repeated observations. Empty/footer rows (including `Data from database` and `Last Updated`) are excluded because they lack a country and reference year. Structural DataBank fields such as Time Code are excluded from wide-format indicator detection. Source-release identity is derived from the acquisition directory (`icp_YYYY_cycle` or `icp_2021_saved_report`) and is part of every latest-value and coverage key, preventing different ICP vintages from being collapsed. CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
 
 ## Interpretation requirements
 
