@@ -1137,6 +1137,62 @@
         "latest_applied": null,
         "notes": "Country-specific IMF research and mission statements are acquired as distinct publications; not part of the WEO statistical vintage."
       }
+    },
+    "zimstat": {
+      "name": "Zimbabwe National Statistics Agency (ZIMSTAT)",
+      "homepage_url": "https://www.zimstat.co.zw/national-accounts/",
+      "domains": [
+        "macroeconomy"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.zimstat.co.zw/",
+      "attribution": "Zimbabwe National Statistics Agency (ZIMSTAT)",
+      "notes": "Official national-accounts publications. Preserve distinct publication vintages and currency presentations; do not splice historical series without explicit bridge evidence.",
+      "acquisition_mode": "https_download",
+      "downloads": [
+        {
+          "id": "gdp_trends_2009_2018",
+          "release": "gdp-trends-2009-2018",
+          "filename": "GDP_Trends_2009to2018.xls",
+          "format": "xls",
+          "url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/Publications/GDP_Trends_2009to2018.xls",
+          "fields": [
+            15,
+            16,
+            18
+          ],
+          "scope": "Historical GDP tables, 2009–2018; preserve the workbook's distinct currency columns and stated units.",
+          "release_kind": "edition_or_snapshot"
+        },
+        {
+          "id": "gdp_tables_2019_2024",
+          "release": "revised-gdp-tables-2019-2024-june-2025",
+          "filename": "GDP_Tables_2019_2024_June.xlsx",
+          "format": "xlsx",
+          "url": "https://www.zimstat.co.zw/wp-content/uploads/Macro/NationalAccounts/2025/GDP_Tables_2019_2024_June.xlsx",
+          "fields": [
+            15,
+            16,
+            18
+          ],
+          "scope": "Revised annual GDP tables for 2019–2024, June 2025 publication; distinct from the 2009–2018 workbook.",
+          "release_kind": "edition_or_snapshot"
+        }
+      ],
+      "field_ids": [
+        15,
+        16,
+        18
+      ],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.zimstat.co.zw/national-accounts/",
+        "automation_status": "two_publication_downloads_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Acquisition captures two explicitly identified workbooks; newer publications require a reviewed catalogue/tool update rather than inferred URL generation."
+      }
     }
   },
   "release_management": {
