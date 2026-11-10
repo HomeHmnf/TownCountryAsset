@@ -128,8 +128,8 @@ def test_country_metadata_reader_handles_delimited_metadata_and_common_headers(t
     raw = tmp_path / "raw_data/sources/world_bank_icp/icp_2017_cycle/acquisition/contents"
     raw.mkdir(parents=True)
     (raw / "ICP_2017_Country-Metadata.csv").write_text(
-        "ISO3 Code;Economy;Long Name\\nZWE;Zimbabwe;Zimbabwe\\n"
-        "CPV;Cabo Verde;Cabo Verde\\nSWZ;Eswatini;Eswatini\\n",
+        "ISO3 Code;Economy;Long Name\nZWE;Zimbabwe;Zimbabwe\n"
+        "CPV;Cabo Verde;Cabo Verde\nSWZ;Eswatini;Eswatini\n",
         encoding="utf-8",
     )
     index = country_name_index(tmp_path)
