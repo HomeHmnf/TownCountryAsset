@@ -94,7 +94,7 @@ def number(value: Any) -> float | None:
         return None
 
 def column_code(value: Any) -> str | None:
-    match = re.fullmatch(r"\s*\(?\s*(\d{1,2})\s*\)?\s*", str(value or ""))
+    match = re.fullmatch(r"\s*\(?\s*(\d{1,2})\s*\)?\s*[a-z]?\s*", str(value or ""), re.I)
     return match.group(1).zfill(2) if match else None
 
 def canonical_aggregate(value: Any) -> str:
