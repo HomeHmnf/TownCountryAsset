@@ -129,6 +129,88 @@ The workbook is counted as a recognized source artifact and its
 `icp_2011_cycle` release contributes to the release inventory even though it
 does not add annual observation rows. The original workbook remains unchanged.
 
+### ICP 2011 semantic extraction and cross-release benchmark comparison
+
+The structural workbook inventory is now supplemented by a separate semantic
+assessment command:
+
+```fish
+uv run python -m tools.assess_world_bank_icp_benchmarks
+```
+
+The assessment reads the acquired original 2011 workbook and the latest
+timestamped ICP export-inspection report. It emits:
+
+- `icp_2011_workbook_semantic_observations.csv`: table-specific row/column
+  observations for R1–R7, D1–D10 and S1–S2, retaining the workbook sheet,
+  source cell, row, column code, original column-heading path, raw value,
+  parsed value, reference year, measure family and unit;
+- `benchmark_comparisons.csv`: only explicitly aligned benchmark comparisons;
+- `benchmark_coverage.csv`: source-release/year/country/classification/indicator
+  coverage with reported and missing counts and benchmark-role labels;
+- `assessment.json`: extraction counts, comparison counts, interpretation
+  rules and side-effect declaration.
+
+The table dictionary follows the official ICP 2011 result-table descriptions.
+R1–R7 identify GDP, actual individual consumption, household individual
+consumption, individual consumption by government, collective consumption by
+government, gross fixed capital formation and domestic absorption. D1–D10
+remain separate measure families: national-currency expenditure, expenditure
+shares, PPP conversion factors, real expenditure, real-expenditure shares,
+real expenditure per capita, per-capita indices, price-level indices, nominal
+expenditure and nominal expenditure per capita. S1 and S2 remain supplementary
+tables for Pacific Islands and estimated nonbenchmark economies. Summary
+column codes retain their published column-specific measure and unit labels;
+detailed-table category headings are retained from the workbook's own merged
+and multi-row headings.
+
+Country identity is deliberately conservative: a workbook economy receives an
+ISO3 code only when its normalized name uniquely matches a source-reported
+ICP 2017 country-metadata long name. No alias, historical name, region or total
+is silently mapped. Unmatched labels remain in the semantic extract for review.
+The reference year is the workbook's 2011 benchmark year. Missing cells remain
+explicit missing records whenever the source row contains reported values.
+
+Two comparison paths are currently implemented:
+
+1. Original 2011 workbook D3 PPP factors versus the ICP 2017-cycle 2011
+   `PPPGlob` observations. A pair is emitted only for the same exact country
+   code and recognized aggregate (GDP, AIC, household consumption, individual
+   government consumption, collective government consumption, GFCF or
+   domestic absorption). Both values are in US dollars per unit of national
+   currency.
+2. Original ICP 2017 benchmark versus revised ICP 2017 benchmark in the ICP
+   2021 saved-report export. A pair is emitted only for an exact country,
+   classification-code and indicator-code match at 2017.
+
+The coverage output labels the ICP 2017-cycle 2011 and 2017 benchmark years,
+and the ICP 2021-cycle 2017 and 2021 benchmark years. It labels 2018–2020 as
+interpolation and 2022–2023 as GDP PPP extrapolation only for GDP; other
+annual-series roles are not inferred. These labels describe the published ICP
+2021 cycle and do not manufacture observations or fill missing years.
+
+The comparison command uses the most recent `inspection_*/observations_long.csv`
+report. Run `tools.assess_world_bank_icp_exports` first after acquiring new
+exports. The present comparison scope is limited to the releases actually
+captured: original ICP 2011 workbook, ICP 2017 archive and the six-series
+ICP 2021 saved report. It does not claim ICP 2005 or every ICP 2021 detailed
+table has been acquired. A missing pair means no exact match was available; it
+is not evidence of zero or of an unchanged value.
+
+No Project DB or Game DB writes, approvals, source-selection changes, canonical
+promotion, imputation, interpolation or extrapolation are performed by this
+assessment. Its CSVs are research outputs and remain outside the production
+data path.
+
+Official table/release references:
+- ICP 2011 DataBank description and classification scope:
+  https://databank.worldbank.org/source/international-comparison-program-%28ICP%29-2011
+- World Bank ICP data page, including the distinction between original 2017
+  results and the 2017 revision in the 2021 cycle:
+  https://www.worldbank.org/en/programs/icp/data
+- World Bank ICP 2011 results announcement:
+  https://blogs.worldbank.org/en/opendata/full-set-international-comparison-program011-results-now-available
+
 ## Data Catalog resource boundary
 
 The Data Catalog API's resource records include website and DataBank navigation references as well as machine-readable resources. Only actual downloadable file resources may be fetched from a /download endpoint. A website or DataBank reference is not a file; attempting to download it as one produces HTTP 400.
