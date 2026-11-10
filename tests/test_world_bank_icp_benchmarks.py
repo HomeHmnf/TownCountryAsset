@@ -127,6 +127,10 @@ def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
         encoding="utf-8", newline=""
     ) as stream:
         semantic = list(csv.DictReader(stream))
+    with (report / "benchmark_comparison_coverage.csv").open(
+        encoding="utf-8", newline=""
+    ) as stream:
+        comparison_coverage = list(csv.DictReader(stream))
 
     original_2011 = [row for row in comparisons
                      if row["comparison_type"] == "original_2011_vs_revised_2011"]
@@ -149,6 +153,10 @@ def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
     assert result["original_2017_vs_revised_2017_comparison_count"] == 1
     assert any(row["country_identity_status"] == "no_exact_country_name_match"
                for row in semantic)
+    assert any(row["match_status"] == "country_identity_unresolved"
+               for row in comparison_coverage)
+    assert any(row["match_status"] == "matched"
+               for row in comparison_coverage)
 
 
 
