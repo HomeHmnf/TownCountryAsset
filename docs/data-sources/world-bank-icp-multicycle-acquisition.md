@@ -177,8 +177,8 @@ Two comparison paths are currently implemented:
    `PPPGlob` observations. A pair is emitted only for the same exact country
    code and recognized aggregate (GDP, AIC, household consumption, individual
    government consumption, collective government consumption, GFCF or
-   domestic absorption). Both values are in US dollars per unit of national
-   currency.
+   domestic absorption). Both values are local currency units per international
+dollar (US$=1), consistent with the ICP/WDI PPP conversion-factor unit.
 2. Original ICP 2017 benchmark versus revised ICP 2017 benchmark in the ICP
    2021 saved-report export. A pair is emitted only for an exact country,
    classification-code and indicator-code match at 2017.
@@ -210,6 +210,11 @@ Official table/release references:
   https://www.worldbank.org/en/programs/icp/data
 - World Bank ICP 2011 results announcement:
   https://blogs.worldbank.org/en/opendata/full-set-international-comparison-program011-results-now-available
+- ICP 2011 global report, including summary result table units:
+  https://pubdocs.worldbank.org/en/142181487105157824/ICP-2011-report.pdf
+- World Bank WDI PPP conversion-factor metadata, defining the unit as local
+  currency units per international dollar:
+  https://databank.worldbank.org/metadataglossary/world-development-indicators/series/PA.NUS.PPP
 
 ## Data Catalog resource boundary
 
