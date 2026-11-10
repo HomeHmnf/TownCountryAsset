@@ -257,7 +257,11 @@ def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]]) 
                             "source_row": row_no,
                             "source_column": code_columns[next(c for c, v in code_columns.items() if v == code)],
                             "source_cell": sheet.cell(row_no, next(c for c, v in code_columns.items() if v == code)).coordinate,
-                            "aggregate_key": canonical_aggregate(measure_name + " " + header),
+                            "aggregate_key": (
+                                canonical_aggregate(definition["name"])
+                                if definition["family"] == "summary_results"
+                                else canonical_aggregate(measure_name + " " + header)
+                            ),
                             "direct_ppp_comparison_candidate": table_id == "D3" and not (is_total or is_region),
                         })
     finally:
