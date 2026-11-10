@@ -154,6 +154,8 @@ timestamped ICP export-inspection report. It emits:
 - `assessment.json`: extraction counts, comparison counts, interpretation
   rules and side-effect declaration.
 
+The extractor locates R/D/S table identifiers as standalone tokens anywhere in descriptive worksheet titles (for example, `Detailed results - D3 PPPs`), rather than assuming the identifier is the first title character. The structural workbook inventory uses the same rule so both reports agree on table identity.
+
 The table dictionary follows the official ICP 2011 result-table descriptions.
 R1–R7 identify GDP, actual individual consumption, household individual
 consumption, individual consumption by government, collective consumption by
