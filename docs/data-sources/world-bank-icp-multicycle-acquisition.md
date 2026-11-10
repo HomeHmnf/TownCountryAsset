@@ -43,6 +43,32 @@ The automated saved report is a proven export path, **not yet a complete multi-c
 
 Run through proxychains when the local network requires the configured SOCKS proxy. The tool itself uses the standard-library cookie-aware urllib opener and does not configure a proxy. The saved-report selection structure is intentionally explicit and must not be assumed to fit other ICP reports without discovering their own dimensions and hierarchy definitions.
 
+
+## Official ICP 2017 archive acquisition
+
+The official ICP 2017 Data Catalog dataset (ID `0038406`) exposes a complete CSV archive at:
+
+- Archive: https://databankfiles.worldbank.org/public/ddpext_download/ICP_2017_csv.zip
+- Catalogue: https://datacatalog.worldbank.org/search/dataset/0038406
+
+The archive was independently inspected on 2026-11-10. It returned HTTP 200, 2,353,815 bytes, SHA-256 `ba91db66c3975aed7a0e5dc5c3b27ea1b5c130b08762a8568fb68a857307c8e2`, and passed ZIP CRC validation. It contains exactly three CSV members:
+
+- `ICP_2017_Data.csv` (138,042 observation rows plus header; wide annual columns 2011–2017);
+- `ICP_2017_Country-Metadata.csv` (214 metadata rows plus header);
+- `ICP_2017_Series-Metadata.csv` (20 metadata rows plus header).
+
+The data export contains 224 distinct country codes, 16 populated classification codes plus one blank classification value, and 48 series codes. Zimbabwe has 619 rows spanning 16 populated classifications and 47 series. These are source-structure counts, not a claim that all countries or all series are participating or fully observed. Country metadata identifies Zimbabwe as full-participation in both ICP 2011 and ICP 2017, USD currency unit, and 2008 SNA.
+
+Acquisition is implemented by `tools.acquire_world_bank_icp_archive`:
+
+```fish
+uv run python -m tools.acquire_world_bank_icp_archive
+```
+
+The tool downloads the provider ZIP, checks the archive signature and CRC, requires the three named members, preserves the original ZIP and extracted CSVs, and records byte counts and SHA-256 hashes in a timestamped manifest. It writes only raw acquisition artifacts, a manifest and an assessment report. It does not parse or approve observations, write either database, alter source selection, or apply retention.
+
+**Interpretation boundary:** the 2011–2017 columns alone do not identify each observation as a benchmark, revised benchmark, interpolation or extrapolation. Keep the entire archive under the distinct `icp_2017_cycle` release identity. Do not merge its 2017 observations with the ICP 2021 cycle's revised 2017 benchmark. The series metadata member contains 20 notes, not a complete dictionary for all 48 series; use the observation file's series code/name columns as the complete observed series catalogue. The next inspector enhancement must recognize this wide-year/one-series-per-row layout and retain missing values and country metadata without inferring unreported values.
+
 ## Data Catalog resource boundary
 
 The Data Catalog API's resource records include website and DataBank navigation references as well as machine-readable resources. Only actual downloadable file resources may be fetched from a /download endpoint. A website or DataBank reference is not a file; attempting to download it as one produces HTTP 400.
