@@ -164,6 +164,10 @@ column codes retain their published column-specific measure and unit labels;
 detailed-table category headings are retained from the workbook's own merged
 and multi-row headings.
 
+The semantic assessment reports which of the 19 expected R/D/S tables were
+recognized. It fails closed if no semantic data rows can be decoded; a partial
+table inventory is reported rather than silently treated as complete.
+
 Country identity is deliberately conservative: a workbook economy receives an
 ISO3 code only when its normalized name uniquely matches a source-reported
 ICP 2017 country-metadata long name. No alias, historical name, region or total
