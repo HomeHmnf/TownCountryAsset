@@ -4,7 +4,12 @@ import csv
 
 from openpyxl import Workbook
 
-from tools.assess_world_bank_icp_benchmarks import compare, extract_workbook_semantics, country_name_index
+from tools.assess_world_bank_icp_benchmarks import (
+    benchmark_role,
+    compare,
+    extract_workbook_semantics,
+    country_name_index,
+)
 
 
 def _fixture(root):
@@ -143,3 +148,21 @@ def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
     assert result["original_2017_vs_revised_2017_comparison_count"] == 1
     assert any(row["country_identity_status"] == "no_exact_country_name_match"
                for row in semantic)
+
+
+
+def test_benchmark_roles_do_not_mislabel_non_gdp_extrapolations():
+    assert benchmark_role("icp_2017_cycle", 2011) == "revised_2011_benchmark"
+    assert benchmark_role("icp_2017_cycle", 2017) == "original_2017_benchmark"
+    assert benchmark_role(
+        "icp_2021_saved_report", 2018, "GROSS DOMESTIC PRODUCT"
+    ) == "interpolation_per_ICP_2021_publication"
+    assert benchmark_role(
+        "icp_2021_saved_report", 2021, "GROSS DOMESTIC PRODUCT"
+    ) == "2021_benchmark"
+    assert benchmark_role(
+        "icp_2021_saved_report", 2022, "GROSS DOMESTIC PRODUCT"
+    ) == "GDP_PPP_extrapolation_per_ICP_2021_publication"
+    assert benchmark_role(
+        "icp_2021_saved_report", 2022, "ACTUAL INDIVIDUAL CONSUMPTION"
+    ) == "annual_series_role_not_inferred"
