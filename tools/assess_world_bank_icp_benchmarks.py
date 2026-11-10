@@ -315,13 +315,36 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             revised_2011[(item["country_code"], aggregate)] = item
 
     comparisons: list[dict[str, Any]] = []
-    d3_rows = [r for r in semantic_rows if r["table_id"] == "D3" and r["value"] is not None]
+    comparison_coverage: list[dict[str, Any]] = []
+    d3_rows = [r for r in semantic_rows if r["table_id"] == "D3"]
+    matched_2011_keys: set[tuple[str, str]] = set()
     for item in d3_rows:
-        if not item["country_code"] or not item["aggregate_key"]:
+        if not item["country_code"]:
+            match_status = "country_identity_unresolved"
+            revised = None
+        elif not item["aggregate_key"]:
+            match_status = "aggregate_identity_unresolved"
+            revised = None
+        else:
+            revised = revised_2011.get((item["country_code"], item["aggregate_key"]))
+            match_status = "matched" if revised is not None and item["value"] is not None else (
+                "missing_original_2011_value" if item["value"] is None else
+                "missing_revised_2011_observation"
+            )
+        comparison_coverage.append({
+            "comparison_type": "original_2011_vs_revised_2011",
+            "country_code": item["country_code"],
+            "country_name": item["country_name_raw"],
+            "aggregate_key": item["aggregate_key"],
+            "classification_code": "PPPGlob",
+            "indicator_code": revised.get("indicator_code", "") if revised else "",
+            "match_status": match_status,
+            "source_a_value": item["value"],
+            "source_b_value": revised.get("value", "") if revised else "",
+        })
+        if not item["country_code"] or not item["aggregate_key"] or revised is None or item["value"] is None:
             continue
-        revised = revised_2011.get((item["country_code"], item["aggregate_key"]))
-        if revised is None:
-            continue
+        matched_2011_keys.add((item["country_code"], item["aggregate_key"]))
         old_value = float(item["value"])
         new_value = float(revised["value"])
         comparisons.append({
@@ -350,6 +373,17 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             "source_b_row": revised.get("source_row", ""),
         })
 
+    for key, revised in revised_2011.items():
+        if key not in matched_2011_keys:
+            comparison_coverage.append({
+                "comparison_type": "original_2011_vs_revised_2011",
+                "country_code": key[0], "country_name": revised.get("country_name", ""),
+                "aggregate_key": key[1], "classification_code": "PPPGlob",
+                "indicator_code": revised.get("indicator_code", ""),
+                "match_status": "missing_original_2011_observation",
+                "source_a_value": "", "source_b_value": revised.get("value", ""),
+            })
+
     # Original 2017 benchmark versus revised 2017 benchmark, using exact source keys.
     original_2017: dict[tuple[str, str, str], dict[str, str]] = {}
     revised_2017: dict[tuple[str, str, str], dict[str, str]] = {}
@@ -362,8 +396,26 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             original_2017[key] = item
         elif item.get("source_release") == "icp_2021_saved_report":
             revised_2017[key] = item
-    for key in sorted(set(original_2017) & set(revised_2017)):
-        old, new = original_2017[key], revised_2017[key]
+    for key in sorted(set(original_2017) | set(revised_2017)):
+        old = original_2017.get(key)
+        new = revised_2017.get(key)
+        match_status = "matched" if old is not None and new is not None else (
+            "missing_original_2017_observation" if old is None else
+            "missing_revised_2017_observation"
+        )
+        comparison_coverage.append({
+            "comparison_type": "original_2017_vs_revised_2017",
+            "country_code": key[0],
+            "country_name": (old or new or {}).get("country_name", ""),
+            "aggregate_key": canonical_aggregate((old or new or {}).get("indicator_name", "")),
+            "classification_code": key[1],
+            "indicator_code": key[2],
+            "match_status": match_status,
+            "source_a_value": old.get("value", "") if old else "",
+            "source_b_value": new.get("value", "") if new else "",
+        })
+        if old is None or new is None:
+            continue
         old_value, new_value = float(old["value"]), float(new["value"])
         comparisons.append({
             "comparison_type": "original_2017_vs_revised_2017",
@@ -438,8 +490,13 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "source_release", "year", "benchmark_role", "country_code_or_name",
         "classification_code", "indicator_code", "indicator_name",
         "reported_observation_count", "missing_observation_count"]
+    comparison_coverage_fields = list(comparison_coverage[0]) if comparison_coverage else [
+        "comparison_type", "country_code", "country_name", "aggregate_key",
+        "classification_code", "indicator_code", "match_status",
+        "source_a_value", "source_b_value"]
     write_csv("icp_2011_workbook_semantic_observations.csv", semantic_rows, semantic_fields)
     write_csv("benchmark_comparisons.csv", comparisons, comparison_fields)
+    write_csv("benchmark_comparison_coverage.csv", comparison_coverage, comparison_coverage_fields)
     write_csv("benchmark_coverage.csv", coverage_rows, coverage_fields)
 
     result = {
@@ -465,6 +522,7 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "outputs": {
             "workbook_semantic_observations": (report_dir / "icp_2011_workbook_semantic_observations.csv").relative_to(root).as_posix(),
             "benchmark_comparisons": (report_dir / "benchmark_comparisons.csv").relative_to(root).as_posix(),
+            "benchmark_comparison_coverage": (report_dir / "benchmark_comparison_coverage.csv").relative_to(root).as_posix(),
             "benchmark_coverage": (report_dir / "benchmark_coverage.csv").relative_to(root).as_posix(),
         },
         "interpretation": {
