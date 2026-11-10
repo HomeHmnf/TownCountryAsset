@@ -323,13 +323,15 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             unsupported.append(relative_path.as_posix())
     if not observations:
         raise ICPAssessmentError("No recognizable country/year/indicator observations found")
-    definitions = {(item["source_release"], item["indicator_code"]): item["indicator_definition"]
-                   for item in series_metadata}
-    series_metadata = list(observed_series.values()) + series_metadata
+    series_catalogue = dict(observed_series)
     for item in series_metadata:
-        if not item["indicator_definition"]:
-            item["indicator_definition"] = definitions.get(
-                (item["source_release"], item["indicator_code"]), "")
+        key = (item["source_release"], item["indicator_code"] or item["indicator_name"])
+        if key in series_catalogue:
+            if item["indicator_definition"]:
+                series_catalogue[key]["indicator_definition"] = item["indicator_definition"]
+        else:
+            series_catalogue[key] = item
+    series_metadata = list(series_catalogue.values())
     coverage: dict[tuple[str, str, str], set[int]] = defaultdict(set)
     latest_year: dict[tuple[str, str, str], int] = {}
     for item in observations:
