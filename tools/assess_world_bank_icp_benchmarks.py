@@ -388,7 +388,7 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     original_2017: dict[tuple[str, str, str], dict[str, str]] = {}
     revised_2017: dict[tuple[str, str, str], dict[str, str]] = {}
     for item in observations:
-        if item.get("year") != "2017" or not item.get("country_code") or not item.get("value"):
+        if item.get("year") != "2017" or not item.get("country_code"):
             continue
         key = (item["country_code"], item.get("classification_code", ""),
                item.get("indicator_code", ""))
@@ -399,9 +399,12 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     for key in sorted(set(original_2017) | set(revised_2017)):
         old = original_2017.get(key)
         new = revised_2017.get(key)
-        match_status = "matched" if old is not None and new is not None else (
+        match_status = (
             "missing_original_2017_observation" if old is None else
-            "missing_revised_2017_observation"
+            "missing_revised_2017_observation" if new is None else
+            "missing_original_2017_value" if not old.get("value") else
+            "missing_revised_2017_value" if not new.get("value") else
+            "matched"
         )
         comparison_coverage.append({
             "comparison_type": "original_2017_vs_revised_2017",
@@ -414,7 +417,7 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             "source_a_value": old.get("value", "") if old else "",
             "source_b_value": new.get("value", "") if new else "",
         })
-        if old is None or new is None:
+        if old is None or new is None or not old.get("value") or not new.get("value"):
             continue
         old_value, new_value = float(old["value"]), float(new["value"])
         comparisons.append({
