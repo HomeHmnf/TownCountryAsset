@@ -9,6 +9,7 @@ from tools.assess_world_bank_icp_benchmarks import (
     compare,
     extract_workbook_semantics,
     country_name_index,
+    column_code,
 )
 
 
@@ -166,3 +167,10 @@ def test_benchmark_roles_do_not_mislabel_non_gdp_extrapolations():
     assert benchmark_role(
         "icp_2021_saved_report", 2022, "ACTUAL INDIVIDUAL CONSUMPTION"
     ) == "annual_series_role_not_inferred"
+
+
+
+def test_column_code_parser_accepts_published_footnote_markers():
+    assert column_code("(00)") == "00"
+    assert column_code("(13)b") == "13"
+    assert column_code("(10)a") == "10"
