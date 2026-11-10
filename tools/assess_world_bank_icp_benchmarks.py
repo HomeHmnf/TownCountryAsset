@@ -23,6 +23,7 @@ from tools.assess_world_bank_icp_exports import (
     decode_csv,
     is_icp2011_original_workbook,
     norm,
+    read_csv,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -102,6 +103,7 @@ def canonical_aggregate(value: Any) -> str:
     aliases = (
         ("gross domestic product", "GDP"),
         ("actual individual consumption", "AIC"),
+        ("household and npish consumption", "HOUSEHOLD_CONSUMPTION"),
         ("individual consumption expenditure by households", "HOUSEHOLD_CONSUMPTION"),
         ("individual consumption expenditure by government", "GOVERNMENT_INDIVIDUAL_CONSUMPTION"),
         ("collective consumption expenditure by government", "GOVERNMENT_COLLECTIVE_CONSUMPTION"),
@@ -137,25 +139,58 @@ def benchmark_role(release: str, year: int, indicator_name: str = "") -> str:
         return "annual_series_role_not_inferred"
     return "role_not_inferred"
 
+# Workbook spellings that differ from common ICP country-metadata labels.
+# An alias is accepted only when its target is present as one unique source-
+# reported metadata name; no ISO3 code is assigned from this table alone.
+COUNTRY_NAME_ALIAS_TARGETS = {
+    "egypt arab rep a": ("egypt arab rep", "egypt arab republic"),
+    "sudanb": ("sudan",),
+    "russian federationd": ("russian federation",),
+    "cape verde": ("cabo verde",),
+    "swaziland": ("eswatini",),
+    "gambia the": ("gambia",),
+}
+
+
 def country_name_index(root: Path) -> dict[str, list[str]]:
+    """Index source-reported country names using the inspector's CSV dialect reader."""
     index: dict[str, list[str]] = defaultdict(list)
     for path in sorted((root / RAW_ROOT).rglob("*.csv")):
         if "country" not in norm(path.stem) or "metadata" not in norm(path.stem):
             continue
-        text, _ = decode_csv(path)
-        reader = csv.reader(text.splitlines())
-        headers = next(reader, [])
-        positions = {norm(name): i for i, name in enumerate(headers)}
-        code_i = next((positions[k] for k in ("code", "country code") if k in positions), None)
-        name_i = next((positions[k] for k in ("long name", "country name", "name") if k in positions), None)
-        if code_i is None or name_i is None:
-            continue
-        for row in reader:
-            if code_i < len(row) and name_i < len(row):
-                code, name = row[code_i].strip(), row[name_i].strip()
-                key = normalized_name(name)
-                if code and key and code not in index[key]:
-                    index[key].append(code)
+        # read_csv detects comma, semicolon, tab and pipe delimiters. Using a
+        # default comma reader here silently collapsed non-comma metadata rows.
+        for _sheet, headers, rows in read_csv(path):
+            positions = {norm(name): i for i, name in enumerate(headers)}
+            code_i = next((positions[k] for k in (
+                "code", "country code", "economy code", "iso3", "iso3 code",
+                "iso alpha 3", "country iso3",
+            ) if k in positions), None)
+            name_keys = (
+                "long name", "country name", "economy name", "economy",
+                "name", "short name", "country",
+            )
+            name_indices = [positions[k] for k in name_keys if k in positions]
+            if code_i is None or not name_indices:
+                continue
+            for row in rows:
+                if code_i >= len(row):
+                    continue
+                code = str(row[code_i] or "").strip().upper()
+                if not code:
+                    continue
+                for name_i in name_indices:
+                    if name_i >= len(row):
+                        continue
+                    key = normalized_name(row[name_i])
+                    if key and code not in index[key]:
+                        index[key].append(code)
+    # Add only explicit, reviewable workbook-to-metadata aliases, and only
+    # where the metadata target resolves to one code.
+    for alias, targets in COUNTRY_NAME_ALIAS_TARGETS.items():
+        codes = {code for target in targets for code in index.get(target, [])}
+        if len(codes) == 1:
+            index[alias] = [next(iter(codes))]
     return index
 
 def _merged_value(sheet: Any, row: int, col: int, merged_ranges: list[Any]) -> Any:
@@ -226,7 +261,9 @@ def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]],
                     country_code = matches[0] if len(matches) == 1 and not (is_total or is_region) else ""
                     identity_status = (
                         "aggregate_or_region" if is_total or is_region else
-                        "exact_unique_country_name_match" if len(matches) == 1 else
+                        "exact_unique_country_name_match" if len(matches) == 1
+                        and entity_norm not in COUNTRY_NAME_ALIAS_TARGETS else
+                        "explicit_country_name_alias_match" if len(matches) == 1 else
                         "ambiguous_exact_country_name" if len(matches) > 1 else
                         "no_exact_country_name_match"
                     )
@@ -396,16 +433,49 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             original_2017[key] = item
         elif item.get("source_release") == "icp_2021_saved_report":
             revised_2017[key] = item
+    original_scope = {
+        "countries": {item.get("country_code", "") for item in observations
+                      if item.get("source_release") == "icp_2017_cycle"},
+        "classifications": {item.get("classification_code", "") for item in observations
+                            if item.get("source_release") == "icp_2017_cycle"},
+        "indicators": {item.get("indicator_code", "") for item in observations
+                       if item.get("source_release") == "icp_2017_cycle"},
+    }
+    revised_scope = {
+        "countries": {item.get("country_code", "") for item in observations
+                      if item.get("source_release") == "icp_2021_saved_report"},
+        "classifications": {item.get("classification_code", "") for item in observations
+                            if item.get("source_release") == "icp_2021_saved_report"},
+        "indicators": {item.get("indicator_code", "") for item in observations
+                       if item.get("source_release") == "icp_2021_saved_report"},
+    }
     for key in sorted(set(original_2017) | set(revised_2017)):
         old = original_2017.get(key)
         new = revised_2017.get(key)
-        match_status = (
-            "missing_original_2017_observation" if old is None else
-            "missing_revised_2017_observation" if new is None else
-            "missing_original_2017_value" if not old.get("value") else
-            "missing_revised_2017_value" if not new.get("value") else
-            "matched"
-        )
+        if old is None:
+            if key[0] not in original_scope["countries"]:
+                match_status = "country_not_in_original_export_scope"
+            elif key[1] not in original_scope["classifications"]:
+                match_status = "classification_not_in_original_export_scope"
+            elif key[2] not in original_scope["indicators"]:
+                match_status = "indicator_not_in_original_export_scope"
+            else:
+                match_status = "no_original_2017_observation_in_selected_scope"
+        elif new is None:
+            if key[0] not in revised_scope["countries"]:
+                match_status = "country_not_in_revised_export_scope"
+            elif key[1] not in revised_scope["classifications"]:
+                match_status = "classification_not_in_revised_export_scope"
+            elif key[2] not in revised_scope["indicators"]:
+                match_status = "indicator_not_in_revised_export_scope"
+            else:
+                match_status = "no_revised_2017_observation_in_selected_scope"
+        elif not old.get("value"):
+            match_status = "missing_original_2017_value"
+        elif not new.get("value"):
+            match_status = "missing_revised_2017_value"
+        else:
+            match_status = "matched"
         comparison_coverage.append({
             "comparison_type": "original_2017_vs_revised_2017",
             "country_code": key[0],
@@ -528,6 +598,10 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "comparison_coverage_unmatched_count": sum(
             row["match_status"] != "matched" for row in comparison_coverage
         ),
+        "comparison_coverage_status_counts": {
+            status: sum(row["match_status"] == status for row in comparison_coverage)
+            for status in sorted({row["match_status"] for row in comparison_coverage})
+        },
         "inspection_observations_source": inspection_path.relative_to(root).as_posix(),
         "outputs": {
             "workbook_semantic_observations": (report_dir / "icp_2011_workbook_semantic_observations.csv").relative_to(root).as_posix(),
@@ -536,12 +610,12 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             "benchmark_coverage": (report_dir / "benchmark_coverage.csv").relative_to(root).as_posix(),
         },
         "interpretation": {
-            "country_identity": "only unique exact normalized name matches to ICP 2017 country metadata receive a code; aliases are not inferred",
+            "country_identity": "unique exact normalized matches across source-reported country metadata name fields receive a code; a small explicit workbook-name alias list is applied only when its target resolves to one unique metadata code",
             "2011_comparison": "original workbook D3 PPP factors compared only with ICP 2017-cycle 2011 PPPGlob observations for the same country and aggregate",
             "2017_comparison": "original and revised 2017 values compared only on exact country, classification and indicator code keys",
             "annual_roles": "only roles explicitly documented for ICP 2021 are assigned; other annual-series roles remain unclassified",
             "units": "table and column units remain explicit; unlike measures are not compared",
-            "missingness": "missing values remain in semantic extracts and coverage; comparisons require two reported values",
+            "missingness": "missing values remain in semantic extracts and coverage; comparisons require two reported values; 2017 coverage distinguishes country, classification and indicator exclusions from absent observations inside the selected export scope",
         },
         "side_effects": {
             "raw_data_written": False, "project_database_written": False,
