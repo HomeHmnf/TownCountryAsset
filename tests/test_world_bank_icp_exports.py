@@ -230,7 +230,7 @@ def test_original_icp2011_workbook_is_inspected_without_false_observation_harmon
     detail = workbook.create_sheet("D3 PPPs")
     detail.append(["Country", "Measure", "Unit", "Value"])
     detail.append(["Zimbabwe", "GDP", "US dollars per unit", 0.51])
-    detail.append(["Example", "GDP", "US dollars per unit", None])
+    detail.append(["Example", "GDP", None, "US dollars per unit"])
     supplementary = workbook.create_sheet("S1 Supplementary")
     supplementary.append(["Notes", "Source"])
     supplementary.append(["Published table", "ICP 2011"])
