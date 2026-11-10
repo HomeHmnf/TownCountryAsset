@@ -67,7 +67,7 @@ uv run python -m tools.acquire_world_bank_icp_archive
 
 The tool downloads the provider ZIP, checks the archive signature and CRC, requires the three named members, preserves the original ZIP and extracted CSVs, and records byte counts and SHA-256 hashes in a timestamped manifest. It writes only raw acquisition artifacts, a manifest and an assessment report. It does not parse or approve observations, write either database, alter source selection, or apply retention.
 
-**Interpretation boundary:** the 2011–2017 columns alone do not identify each observation as a benchmark, revised benchmark, interpolation or extrapolation. Keep the entire archive under the distinct `icp_2017_cycle` release identity. Do not merge its 2017 observations with the ICP 2021 cycle's revised 2017 benchmark. The series metadata member contains 20 notes, not a complete dictionary for all 48 series; use the observation file's series code/name columns as the complete observed series catalogue. The next inspector enhancement must recognize this wide-year/one-series-per-row layout and retain missing values and country metadata without inferring unreported values.
+**Interpretation boundary:** the 2011–2017 columns alone do not identify each observation as a benchmark, revised benchmark, interpolation or extrapolation. Keep the entire archive under the distinct `icp_2017_cycle` release identity. Do not merge its 2017 observations with the ICP 2021 cycle's revised 2017 benchmark. The series metadata member contains 20 notes, not a complete dictionary for all 48 series; use the observation file's series code/name columns as the complete observed series catalogue. The inspector recognizes this wide-year/one-series-per-row layout and retains missing values, the observed series catalogue and country metadata without inferring unreported values.
 
 ## Data Catalog resource boundary
 
@@ -83,17 +83,21 @@ Run:
 uv run python -m tools.assess_world_bank_icp_exports
 ```
 
-The inspector scans CSV and XLSX files under raw_data/sources/world_bank_icp/ and recognizes both:
+The inspector scans CSV and XLSX files under raw_data/sources/world_bank_icp/ and recognizes:
 
-- wide DataBank exports, with one column per indicator; and
-- long exports, with one indicator/value per row.
+- wide DataBank exports, with one column per indicator;
+- long exports, with one indicator/value per row; and
+- the official ICP 2017 archive's one-row-per-country/classification/series layout, with separate annual value columns for 2011–2017.
+
+For the ICP 2017 archive, each annual column is expanded into a separate observation while retaining the original year-column name, source row, country, classification, series code/name and release identity. Blank and `..` cells remain explicit missing observations; they do not enter latest-nonmissing selection. The country metadata CSV is retained in a separate `country_metadata.csv` report, and the observed series code/name catalogue is included in `series_metadata.csv`. Definitions from the provider's smaller series-metadata member are joined by release and indicator code where available. This does not infer benchmark/interpolation/extrapolation status or participation status from a missing observation.
 
 It creates timestamped reports under reports/sources/world-bank-icp/:
 
 - observations_long.csv: all extracted rows, including missing values;
 - latest_available_by_country_indicator.csv: latest non-missing value independently by country, classification and indicator;
 - coverage_by_country_indicator.csv: first/latest available year, count and observed years;
-- series_metadata.csv: indicator codes and definitions appended to the DataBank metadata member.
+- series_metadata.csv: observed indicator codes/names plus provider definitions where available;
+- country_metadata.csv: source-reported country metadata rows, kept separate from observations.
 
 CSV input decoding detects UTF-8/UTF-8 BOM and UTF-16 BOM, then uses strict Windows-1252 and Latin-1 fallbacks for legacy DataBank exports; the detected encoding is recorded in the sheet/source label. The DataBank `Series_-_Metadata.csv` member repeats the complete observation table before appending a two-column `Code` / `Indicator Name` dictionary; the inspector treats it as a metadata artifact, skips the repeated observations, and extracts the trailing indicator definitions into `series_metadata.csv`. Empty/footer rows (including `Data from database` and `Last Updated`) are excluded because they lack a country and reference year. Structural DataBank fields such as Time Code are excluded from wide-format indicator detection. Source-release identity is derived from the acquisition directory (`icp_YYYY_cycle` or `icp_2021_saved_report`) and is part of every latest-value and coverage key, preventing different ICP vintages from being collapsed. Latest-value selection uses the same release/country/classification/indicator key as the coverage calculation. CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
 
