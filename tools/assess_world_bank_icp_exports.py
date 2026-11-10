@@ -186,45 +186,80 @@ def extract_rows(headers: list[str], rows: list[list[Any]], *, path: Path,
     series_i = column_index(headers, SERIES_NAMES)
     series_code_i = column_index(headers, SERIES_CODES)
     value_i = column_index(headers, VALUES)
-    if country_i is None or year_i is None:
+    year_columns = [(i, int(str(header).strip())) for i, header in enumerate(headers)
+                    if re.fullmatch(r"(?:19|20)\d{2}", str(header).strip())]
+    wide_year_layout = year_i is None and bool(year_columns)
+    if country_i is None or (year_i is None and not wide_year_layout):
         return []
     base = {i for i in (country_i, code_i, year_i, time_code_i, class_i, class_code_i,
                         series_i, series_code_i, value_i) if i is not None}
-    output: list[dict[str, Any]] = []
     wide_indicators = [
         (i, *indicator_header(str(header)))
         for i, header in enumerate(headers) if i not in base and str(header).strip()
     ]
+    output: list[dict[str, Any]] = []
     for row_number, row in enumerate(rows, start=2):
         country = str(cell(row, country_i) or "").strip()
-        year = year_value(cell(row, year_i))
-        if not country or year is None:
+        if not country:
             continue
         common = {
             "source_release": source_release,
             "country_name": country,
             "country_code": str(cell(row, code_i) or "").strip(),
-            "year": year,
             "classification_name": str(cell(row, class_i) or "").strip(),
             "classification_code": str(cell(row, class_code_i) or "").strip(),
             "source_file": path.as_posix(),
             "sheet": sheet,
             "source_row": row_number,
         }
-        if series_i is not None and value_i is not None:
-            value = numeric(cell(row, value_i))
-            output.append({**common,
-                "indicator_code": str(cell(row, series_code_i) or "").strip(),
-                "indicator_name": str(cell(row, series_i) or "").strip(),
-                "value": value,
-                "observation_status": "missing" if value is None else "reported_value"})
-        else:
-            for index, indicator_code, indicator_name in wide_indicators:
+        if wide_year_layout:
+            series_code = str(cell(row, series_code_i) or "").strip()
+            series_name = str(cell(row, series_i) or "").strip()
+            if not series_code and not series_name:
+                continue
+            for index, year in year_columns:
                 value = numeric(cell(row, index))
-                output.append({**common, "indicator_code": indicator_code,
-                    "indicator_name": indicator_name, "value": value,
+                output.append({**common, "year": year,
+                    "source_year_column": str(headers[index]),
+                    "indicator_code": series_code,
+                    "indicator_name": series_name,
+                    "value": value,
                     "observation_status": "missing" if value is None else "reported_value"})
+        else:
+            year = year_value(cell(row, year_i))
+            if year is None:
+                continue
+            common["year"] = year
+            common["source_year_column"] = str(cell(row, time_code_i) or "")
+            if series_i is not None and value_i is not None:
+                value = numeric(cell(row, value_i))
+                output.append({**common,
+                    "indicator_code": str(cell(row, series_code_i) or "").strip(),
+                    "indicator_name": str(cell(row, series_i) or "").strip(),
+                    "value": value,
+                    "observation_status": "missing" if value is None else "reported_value"})
+            else:
+                for index, indicator_code, indicator_name in wide_indicators:
+                    value = numeric(cell(row, index))
+                    output.append({**common, "indicator_code": indicator_code,
+                        "indicator_name": indicator_name, "value": value,
+                        "observation_status": "missing" if value is None else "reported_value"})
     return output
+
+
+def extract_country_metadata(headers: list[str], rows: list[list[Any]], *,
+                             path: Path, source_release: str) -> list[dict[str, Any]]:
+    result = []
+    for row_number, row in enumerate(rows, start=2):
+        if not any(str(value or "").strip() for value in row):
+            continue
+        record = {"source_release": source_release, "source_file": path.as_posix(),
+                  "source_row": row_number}
+        for index, header in enumerate(headers):
+            key = norm(header).replace(" ", "_") or f"column_{index + 1}"
+            record[key] = cell(row, index)
+        result.append(record)
+    return result
 
 
 def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> dict[str, Any]:
@@ -240,6 +275,8 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     inspected: list[dict[str, Any]] = []
     unsupported: list[str] = []
     series_metadata: list[dict[str, Any]] = []
+    country_metadata: list[dict[str, Any]] = []
+    observed_series: dict[tuple[str, str], dict[str, Any]] = {}
     for path in files:
         relative_path = path.relative_to(root)
         release = source_release_for(relative_path)
@@ -247,6 +284,12 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         file_count = 0
         metadata_count = 0
         for sheet, headers, rows in readers:
+            if "country" in norm(path.stem) and "metadata" in norm(path.stem):
+                extracted_countries = extract_country_metadata(
+                    headers, rows, path=relative_path, source_release=release)
+                country_metadata.extend(extracted_countries)
+                metadata_count += len(extracted_countries)
+                continue
             if is_series_metadata_file(path):
                 extracted_metadata = extract_series_metadata(
                     headers, rows, path=relative_path, source_release=release)
@@ -257,6 +300,14 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
                                      source_release=release)
             observations.extend(extracted)
             file_count += len(extracted)
+            for item in extracted:
+                code = str(item.get("indicator_code") or "").strip()
+                name = str(item.get("indicator_name") or "").strip()
+                if code or name:
+                    observed_series[(release, code or name)] = {
+                        "source_release": release, "source_file": relative_path.as_posix(),
+                        "indicator_code": code, "indicator_name": name,
+                        "indicator_definition": "", "source_row": item["source_row"]}
         if file_count or metadata_count:
             inspected.append({"path": relative_path.as_posix(),
                               "artifact_role": "series_metadata" if metadata_count else "observations",
@@ -266,6 +317,13 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             unsupported.append(relative_path.as_posix())
     if not observations:
         raise ICPAssessmentError("No recognizable country/year/indicator observations found")
+    definitions = {(item["source_release"], item["indicator_code"]): item["indicator_definition"]
+                   for item in series_metadata}
+    series_metadata = list(observed_series.values()) + series_metadata
+    for item in series_metadata:
+        if not item["indicator_definition"]:
+            item["indicator_definition"] = definitions.get(
+                (item["source_release"], item["indicator_code"]), "")
     coverage: dict[tuple[str, str, str], set[int]] = defaultdict(set)
     latest_year: dict[tuple[str, str, str], int] = {}
     for item in observations:
@@ -312,11 +370,16 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "source_release", "source_file", "indicator_code", "indicator_name",
         "indicator_definition", "source_row"]
     write_csv("series_metadata.csv", series_metadata, metadata_fields)
+    country_fields = list(country_metadata[0]) if country_metadata else [
+        "source_release", "source_file", "source_row"]
+    write_csv("country_metadata.csv", country_metadata, country_fields)
     result = {
         "assessment": "world_bank_icp_multicycle_export_inspection",
         "report_id": report_id,
         "observation_count_including_missing": len(observations),
-        "series_metadata_definition_count": len(series_metadata),
+        "series_metadata_definition_count": sum(bool(item["indicator_definition"]) for item in series_metadata),
+        "observed_series_count": len(observed_series),
+        "country_metadata_row_count": len(country_metadata),
         "source_release_count": len({item["source_release"] for item in observations}),
         "latest_available_series_count": len(latest_rows),
         "coverage_group_count": len(coverage_rows),
@@ -330,6 +393,7 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             "latest_available": (report_dir / "latest_available_by_country_indicator.csv").relative_to(root).as_posix(),
             "coverage": (report_dir / "coverage_by_country_indicator.csv").relative_to(root).as_posix(),
             "series_metadata": (report_dir / "series_metadata.csv").relative_to(root).as_posix(),
+            "country_metadata": (report_dir / "country_metadata.csv").relative_to(root).as_posix(),
         },
         "side_effects": {"raw_data_written": False, "project_database_written": False,
                          "game_database_written": False, "approval_created": False,
