@@ -262,6 +262,95 @@ def extract_country_metadata(headers: list[str], rows: list[list[Any]], *,
     return result
 
 
+
+def is_icp2011_original_workbook(path: Path) -> bool:
+    """Identify the specifically acquired original ICP 2011 results workbook."""
+    return (path.suffix.lower() == ".xlsx"
+            and path.name == "2011-International-Comparison-Program-results.xlsx"
+            and "icp_2011_cycle" in path.parts)
+
+
+def inspect_icp2011_workbook(path: Path, *, relative_path: Path,
+                             source_release: str) -> tuple[list[dict[str, Any]],
+                                                            list[dict[str, Any]],
+                                                            list[dict[str, Any]]]:
+    """Capture the original ICP 2011 workbook's sheet and cell structure.
+
+    The 23 R/D/S tables have heterogeneous measures and units. Until each table's
+    row/column semantics are mapped from its own labels, this function deliberately
+    preserves source cells rather than manufacturing harmonized observations.
+    """
+    try:
+        from openpyxl import load_workbook
+    except ImportError as exc:
+        raise ICPAssessmentError("Install the project's Excel dependencies to inspect XLSX exports") from exc
+    workbook = load_workbook(path, read_only=False, data_only=False)
+    inventory: list[dict[str, Any]] = []
+    cells: list[dict[str, Any]] = []
+    rows_out: list[dict[str, Any]] = []
+    try:
+        for sheet in workbook.worksheets:
+            match = re.match(r"^\\s*([RDS])\\s*0*(\\d+)\\b", sheet.title, re.IGNORECASE)
+            table_prefix = match.group(1).upper() if match else ""
+            table_number = int(match.group(2)) if match else None
+            table_id = f"{table_prefix}{table_number}" if match else ""
+            table_category = {
+                "R": "summary_results", "D": "detailed_results",
+                "S": "supplementary_results",
+            }.get(table_prefix, "unclassified_sheet")
+            nonempty_count = 0
+            last_row = 0
+            last_column = 0
+            for row_number in range(1, sheet.max_row + 1):
+                values = [sheet.cell(row_number, col).value
+                          for col in range(1, sheet.max_column + 1)]
+                if not any(value is not None for value in values):
+                    continue
+                last_row = row_number
+                last_column = max((i + 1 for i, value in enumerate(values)
+                                   if value is not None), default=0)
+                nonempty_count += sum(value is not None for value in values)
+                rows_out.append({
+                    "source_release": source_release,
+                    "source_file": relative_path.as_posix(),
+                    "sheet": sheet.title, "table_id": table_id,
+                    "table_category": table_category, "source_row": row_number,
+                    "row_values_json": json.dumps(values[:last_column],
+                                                   ensure_ascii=False, default=str),
+                })
+                for column_number, value in enumerate(values, start=1):
+                    if value is None:
+                        continue
+                    coordinate = sheet.cell(row_number, column_number).coordinate
+                    cells.append({
+                        "source_release": source_release,
+                        "source_file": relative_path.as_posix(),
+                        "sheet": sheet.title, "table_id": table_id,
+                        "table_category": table_category,
+                        "cell": coordinate, "source_row": row_number,
+                        "source_column": column_number,
+                        "column_letter": sheet.cell(row_number, column_number).column_letter,
+                        "value": value.isoformat() if hasattr(value, "isoformat") else value,
+                        "cell_data_type": sheet.cell(row_number, column_number).data_type,
+                        "number_format": sheet.cell(row_number, column_number).number_format,
+                    })
+            inventory.append({
+                "source_release": source_release,
+                "source_file": relative_path.as_posix(),
+                "sheet": sheet.title, "table_id": table_id,
+                "table_category": table_category,
+                "max_row": sheet.max_row, "max_column": sheet.max_column,
+                "last_nonempty_row": last_row, "last_nonempty_column": last_column,
+                "nonempty_cell_count": nonempty_count,
+                "merged_range_count": len(sheet.merged_cells.ranges),
+            })
+    finally:
+        workbook.close()
+    if not inventory:
+        raise ICPAssessmentError(f"Original ICP 2011 workbook has no worksheets: {path}")
+    return inventory, cells, rows_out
+
+
 def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> dict[str, Any]:
     root = Path(root).resolve()
     raw_root = root / RAW_ROOT
@@ -277,9 +366,27 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     series_metadata: list[dict[str, Any]] = []
     country_metadata: list[dict[str, Any]] = []
     observed_series: dict[tuple[str, str], dict[str, Any]] = {}
+    workbook_inventory: list[dict[str, Any]] = []
+    workbook_cells: list[dict[str, Any]] = []
+    workbook_rows: list[dict[str, Any]] = []
     for path in files:
         relative_path = path.relative_to(root)
         release = source_release_for(relative_path)
+        if is_icp2011_original_workbook(relative_path):
+            inventory, cells, table_rows = inspect_icp2011_workbook(
+                path, relative_path=relative_path, source_release=release)
+            workbook_inventory.extend(inventory)
+            workbook_cells.extend(cells)
+            workbook_rows.extend(table_rows)
+            inspected.append({
+                "path": relative_path.as_posix(),
+                "artifact_role": "original_benchmark_workbook_structure",
+                "observation_rows": 0,
+                "metadata_rows": len(inventory),
+                "workbook_nonempty_cells": len(cells),
+                "workbook_nonempty_rows": len(table_rows),
+            })
+            continue
         readers = read_csv(path) if path.suffix.lower() == ".csv" else read_xlsx(path)
         file_count = 0
         metadata_count = 0
@@ -321,8 +428,8 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
                               "metadata_rows": metadata_count})
         else:
             unsupported.append(relative_path.as_posix())
-    if not observations:
-        raise ICPAssessmentError("No recognizable country/year/indicator observations found")
+    if not observations and not workbook_inventory:
+        raise ICPAssessmentError("No recognizable country/year/indicator observations or supported ICP 2011 workbook found")
     series_catalogue = dict(observed_series)
     for item in series_metadata:
         key = (item["source_release"], item["indicator_code"] or item["indicator_name"])
@@ -381,6 +488,20 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     country_fields = list(country_metadata[0]) if country_metadata else [
         "source_release", "source_file", "source_row"]
     write_csv("country_metadata.csv", country_metadata, country_fields)
+    workbook_inventory_fields = list(workbook_inventory[0]) if workbook_inventory else [
+        "source_release", "source_file", "sheet", "table_id", "table_category",
+        "max_row", "max_column", "last_nonempty_row", "last_nonempty_column",
+        "nonempty_cell_count", "merged_range_count"]
+    workbook_cell_fields = list(workbook_cells[0]) if workbook_cells else [
+        "source_release", "source_file", "sheet", "table_id", "table_category",
+        "cell", "source_row", "source_column", "column_letter", "value",
+        "cell_data_type", "number_format"]
+    workbook_row_fields = list(workbook_rows[0]) if workbook_rows else [
+        "source_release", "source_file", "sheet", "table_id", "table_category",
+        "source_row", "row_values_json"]
+    write_csv("icp_2011_workbook_sheets.csv", workbook_inventory, workbook_inventory_fields)
+    write_csv("icp_2011_workbook_cells.csv", workbook_cells, workbook_cell_fields)
+    write_csv("icp_2011_workbook_rows.csv", workbook_rows, workbook_row_fields)
     result = {
         "assessment": "world_bank_icp_multicycle_export_inspection",
         "report_id": report_id,
@@ -388,7 +509,11 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "series_metadata_definition_count": sum(bool(item["indicator_definition"]) for item in series_metadata),
         "observed_series_count": len(observed_series),
         "country_metadata_row_count": len(country_metadata),
-        "source_release_count": len({item["source_release"] for item in observations}),
+        "source_release_count": len({item["source_release"] for item in observations}
+                                    | {item["source_release"] for item in workbook_inventory}),
+        "icp_2011_workbook_sheet_count": len(workbook_inventory),
+        "icp_2011_workbook_nonempty_cell_count": len(workbook_cells),
+        "icp_2011_workbook_nonempty_row_count": len(workbook_rows),
         "latest_available_series_count": len(latest_rows),
         "coverage_group_count": len(coverage_rows),
         "input_files_inspected": inspected,
@@ -402,6 +527,9 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             "coverage": (report_dir / "coverage_by_country_indicator.csv").relative_to(root).as_posix(),
             "series_metadata": (report_dir / "series_metadata.csv").relative_to(root).as_posix(),
             "country_metadata": (report_dir / "country_metadata.csv").relative_to(root).as_posix(),
+            "icp_2011_workbook_sheets": (report_dir / "icp_2011_workbook_sheets.csv").relative_to(root).as_posix(),
+            "icp_2011_workbook_cells": (report_dir / "icp_2011_workbook_cells.csv").relative_to(root).as_posix(),
+            "icp_2011_workbook_rows": (report_dir / "icp_2011_workbook_rows.csv").relative_to(root).as_posix(),
         },
         "side_effects": {"raw_data_written": False, "project_database_written": False,
                          "game_database_written": False, "approval_created": False,
