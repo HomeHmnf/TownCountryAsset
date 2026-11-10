@@ -107,6 +107,7 @@ def test_extracts_table_specific_measures_and_only_exact_country_names(tmp_path)
     summary = next(row for row in rows if row["table_id"] == "R1")
     assert summary["measure_name"] == "Expenditure based on PPPs"
     assert summary["unit"] == "US dollars, billions"
+    assert summary["aggregate_key"] == "GDP"
     assert summary["reference_year"] == 2011
 
 
