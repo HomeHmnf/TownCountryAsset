@@ -19,7 +19,7 @@ def _fixture(root):
     workbook_dir.mkdir(parents=True)
     workbook = Workbook()
     sheet = workbook.active
-    sheet.title = "D3 PPPs"
+    sheet.title = "Detailed results - D3 PPPs"
     sheet["A1"] = "TABLE D3 DETAILED RESULT: PPPs"
     sheet["A2"] = "Economy"
     sheet["B2"] = "Gross domestic product"
