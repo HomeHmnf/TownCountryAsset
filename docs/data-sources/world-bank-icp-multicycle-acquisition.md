@@ -146,6 +146,9 @@ timestamped ICP export-inspection report. It emits:
   source cell, row, column code, original column-heading path, raw value,
   parsed value, reference year, measure family and unit;
 - `benchmark_comparisons.csv`: only explicitly aligned benchmark comparisons;
+- `benchmark_comparison_coverage.csv`: country/aggregate or exact
+  country/classification/indicator match statuses, including unresolved identity
+  and missing-source/value gaps;
 - `benchmark_coverage.csv`: source-release/year/country/classification/indicator
   coverage with reported and missing counts and benchmark-role labels;
 - `assessment.json`: extraction counts, comparison counts, interpretation
