@@ -29,7 +29,8 @@ def fake_get_factory(body=None):
     calls = []
     def fake_get(url, **kwargs):
         calls.append(url)
-        return body or make_archive(), 200, {"Content-Type": "application/zip"}, url
+        payload = make_archive(body) if isinstance(body, dict) else (body or make_archive())
+        return payload, 200, {"Content-Type": "application/zip"}, url
     return fake_get, calls
 
 
