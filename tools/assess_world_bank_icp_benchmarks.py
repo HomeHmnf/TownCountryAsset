@@ -521,6 +521,13 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "original_2017_vs_revised_2017_comparison_count": sum(
             row["comparison_type"] == "original_2017_vs_revised_2017" for row in comparisons),
         "comparison_count": len(comparisons),
+        "comparison_coverage_row_count": len(comparison_coverage),
+        "comparison_coverage_matched_count": sum(
+            row["match_status"] == "matched" for row in comparison_coverage
+        ),
+        "comparison_coverage_unmatched_count": sum(
+            row["match_status"] != "matched" for row in comparison_coverage
+        ),
         "inspection_observations_source": inspection_path.relative_to(root).as_posix(),
         "outputs": {
             "workbook_semantic_observations": (report_dir / "icp_2011_workbook_semantic_observations.csv").relative_to(root).as_posix(),
