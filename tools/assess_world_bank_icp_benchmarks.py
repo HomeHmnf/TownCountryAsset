@@ -295,6 +295,10 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         workbook_paths[0], country_index,
         source_file=workbook_paths[0].relative_to(root).as_posix(),
     )
+    if not semantic_rows:
+        raise ICPAssessmentError(
+            "No semantic table rows were recognized; inspect workbook column-code rows before comparison"
+        )
     inspection_path, observations = latest_inspection_observations(root)
 
     # Original ICP 2011 D3 PPP factors versus the ICP 2017 cycle's revised 2011 PPP factors.
@@ -443,6 +447,9 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "report_id": report_id,
         "workbook_semantic_observation_count": len(semantic_rows),
         "workbook_table_count": len({row["table_id"] for row in semantic_rows}),
+        "workbook_missing_expected_tables": sorted(
+            set(TABLES) - {row["table_id"] for row in semantic_rows}
+        ),
         "workbook_exact_country_name_match_count": sum(
             row["country_identity_status"] == "exact_unique_country_name_match"
             for row in semantic_rows),
