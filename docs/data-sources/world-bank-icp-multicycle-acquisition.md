@@ -182,7 +182,7 @@ Two comparison paths are currently implemented:
    code and recognized aggregate (GDP, AIC, household consumption, individual
    government consumption, collective government consumption, GFCF or
    domestic absorption). Both values are local currency units per international
-dollar (US$=1), consistent with the ICP/WDI PPP conversion-factor unit.
+   dollar (US$=1), consistent with the ICP/WDI PPP conversion-factor unit.
 2. Original ICP 2017 benchmark versus revised ICP 2017 benchmark in the ICP
    2021 saved-report export. A pair is emitted only for an exact country,
    classification-code and indicator-code match at 2017.
