@@ -178,8 +178,10 @@ def _header_path(sheet: Any, code_row: int, col: int, merged_ranges: list[Any]) 
             parts.append(label)
     return " | ".join(parts)
 
-def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]]) -> list[dict[str, Any]]:
+def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]],
+                               source_file: str | None = None) -> list[dict[str, Any]]:
     workbook = load_workbook(path, read_only=False, data_only=True)
+    source_path = source_file or path.name
     output: list[dict[str, Any]] = []
     try:
         for sheet in workbook.worksheets:
@@ -236,7 +238,7 @@ def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]]) 
                         parsed = number(raw_value)
                         output.append({
                             "source_release": "icp_2011_cycle",
-                            "source_file": path.as_posix(),
+                            "source_file": source_path,
                             "sheet": sheet.title,
                             "table_id": table_id,
                             "table_name": definition["name"],
@@ -285,7 +287,10 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     if len(workbook_paths) != 1:
         raise ICPAssessmentError(f"Expected one original ICP 2011 workbook, found {len(workbook_paths)}")
     country_index = country_name_index(root)
-    semantic_rows = extract_workbook_semantics(workbook_paths[0], country_index)
+    semantic_rows = extract_workbook_semantics(
+        workbook_paths[0], country_index,
+        source_file=workbook_paths[0].relative_to(root).as_posix(),
+    )
     inspection_path, observations = latest_inspection_observations(root)
 
     # Original ICP 2011 D3 PPP factors versus the ICP 2017 cycle's revised 2011 PPP factors.
