@@ -233,8 +233,8 @@ def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]],
                     for code, raw_value in row_values.items():
                         summary = SUMMARY_COLUMN_DEFINITIONS.get(code)
                         header = header_paths.get(code, "")
-                        measure_name = summary[0] if definition["family"] == "summary_results" and summary else header
-                        unit = summary[1] if definition["family"] == "summary_results" and summary else definition["unit"]
+                        measure_name = summary[0] if definition["family"] in {"summary_results", "supplementary_results"} and summary else header
+                        unit = summary[1] if definition["family"] in {"summary_results", "supplementary_results"} and summary else definition["unit"]
                         if code == "16" and table_id.startswith("R"):
                             unit = "national currency units, billions"
                         elif code == "16" and table_id == "S1":
