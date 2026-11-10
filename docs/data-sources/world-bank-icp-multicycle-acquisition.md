@@ -101,7 +101,8 @@ table structure in three additional report files:
   cell count and merged-range count;
 - `icp_2011_workbook_rows.csv`: one record per non-empty worksheet row, with
   the row's ordered cell values serialized as JSON (including interior blank
-  cells);
+  cells, preserving their original column positions—for example, a blank C cell
+  remains `null` when D contains a value);
 - `icp_2011_workbook_cells.csv`: one record per non-empty cell, retaining
   sheet, table, coordinate, row/column, cell data type and number format.
 
