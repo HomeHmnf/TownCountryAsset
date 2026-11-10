@@ -213,3 +213,55 @@ def test_icp_2017_archive_wide_year_rows_preserve_missing_and_metadata(tmp_path)
     assert countries[0]["currency_unit"] == "USD"
     assert result["country_metadata_row_count"] == 1
     assert result["observed_series_count"] == 1
+
+
+
+def test_original_icp2011_workbook_is_inspected_without_false_observation_harmonization(tmp_path):
+    from openpyxl import Workbook
+    import json
+
+    base = tmp_path / "raw_data/sources/world_bank_icp/icp_2011_cycle/acquisition"
+    base.mkdir(parents=True)
+    workbook = Workbook()
+    summary = workbook.active
+    summary.title = "R1 Summary"
+    summary.append(["Country", "GDP PPP", "GDP PLI"])
+    summary.append(["Zimbabwe", 0.52, 85.4])
+    detail = workbook.create_sheet("D3 PPPs")
+    detail.append(["Country", "Measure", "Unit", "Value"])
+    detail.append(["Zimbabwe", "GDP", "US dollars per unit", 0.51])
+    detail.append(["Example", "GDP", "US dollars per unit", None])
+    supplementary = workbook.create_sheet("S1 Supplementary")
+    supplementary.append(["Notes", "Source"])
+    supplementary.append(["Published table", "ICP 2011"])
+    path = base / "2011-International-Comparison-Program-results.xlsx"
+    workbook.save(path)
+    workbook.close()
+
+    result = inspect(tmp_path)
+    report = tmp_path / "reports/sources/world-bank-icp" / result["report_id"]
+    with (report / "icp_2011_workbook_sheets.csv").open(encoding="utf-8", newline="") as stream:
+        sheets = list(csv.DictReader(stream))
+    with (report / "icp_2011_workbook_cells.csv").open(encoding="utf-8", newline="") as stream:
+        cells = list(csv.DictReader(stream))
+    with (report / "icp_2011_workbook_rows.csv").open(encoding="utf-8", newline="") as stream:
+        rows = list(csv.DictReader(stream))
+
+    assert {row["source_release"] for row in sheets} == {"icp_2011_cycle"}
+    assert [(row["sheet"], row["table_id"], row["table_category"]) for row in sheets] == [
+        ("R1 Summary", "R1", "summary_results"),
+        ("D3 PPPs", "D3", "detailed_results"),
+        ("S1 Supplementary", "S1", "supplementary_results"),
+    ]
+    assert any(row["cell"] == "C2" and row["value"] == "85.4" for row in cells)
+    detail_row = next(row for row in rows if row["sheet"] == "D3 PPPs" and row["source_row"] == "3")
+    assert json.loads(detail_row["row_values_json"]) == [
+        "Example", "GDP", "US dollars per unit", None
+    ]
+    assert result["icp_2011_workbook_sheet_count"] == 3
+    assert result["icp_2011_workbook_nonempty_cell_count"] == len(cells)
+    assert result["observation_count_including_missing"] == 0
+    assert result["source_release_count"] == 1
+    assert "icp_2011_cycle" in {
+        row["source_release"] for row in sheets
+    }
