@@ -256,7 +256,7 @@ def test_original_icp2011_workbook_is_inspected_without_false_observation_harmon
     assert any(row["cell"] == "C2" and row["value"] == "85.4" for row in cells)
     detail_row = next(row for row in rows if row["sheet"] == "D3 PPPs" and row["source_row"] == "3")
     assert json.loads(detail_row["row_values_json"]) == [
-        "Example", "GDP", "US dollars per unit", None
+        "Example", "GDP", None, "US dollars per unit"
     ]
     assert result["icp_2011_workbook_sheet_count"] == 3
     assert result["icp_2011_workbook_nonempty_cell_count"] == len(cells)
