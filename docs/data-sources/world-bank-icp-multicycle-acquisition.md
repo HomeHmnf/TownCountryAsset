@@ -69,6 +69,25 @@ The tool downloads the provider ZIP, checks the archive signature and CRC, requi
 
 **Interpretation boundary:** the 2011–2017 columns alone do not identify each observation as a benchmark, revised benchmark, interpolation or extrapolation. Keep the entire archive under the distinct `icp_2017_cycle` release identity. Do not merge its 2017 observations with the ICP 2021 cycle's revised 2017 benchmark. The series metadata member contains 20 notes, not a complete dictionary for all 48 series; use the observation file's series code/name columns as the complete observed series catalogue. The inspector recognizes this wide-year/one-series-per-row layout and retains missing values, the observed series catalogue and country metadata without inferring unreported values.
 
+
+## Official ICP 2011 workbook acquisition
+
+The official ICP data page links the original 2011 results workbook:
+https://pubdocs.worldbank.org/en/108821487172249299/2011-International-Comparison-Program-results.xlsx
+
+The workbook is a distinct original 2011 release. It is not the revised 2011 series published as part of the ICP 2017 cycle. Acquire it with:
+
+```fish
+uv run python -m tools.acquire_world_bank_icp_2011_workbook
+```
+
+The acquisition preserves the provider workbook byte-for-byte and records the official source URL, retrieval time, HTTP response metadata, byte count and SHA-256 in a release-scoped manifest. It does not transform workbook sheets, infer missing observations, write either database, approve data, alter source selection or apply retention. The existing ICP export inspector reads XLSX sheets and reports their source release independently.
+
+The original ICP 2011 DataBank source is also available at:
+https://databank.worldbank.org/source/international-comparison-program-%28ICP%29-2011
+
+Its published description reports 199 participating economies plus estimates for 15 non-participating economies, 26 analytical classifications, and multiple PPP, expenditure-share, nominal/PPP expenditure, per-capita and price-level indicators. These catalogue counts describe the source, not the completeness of any particular exported selection. Full DataBank extraction remains a separate acquisition task; do not treat the workbook as proof that every detailed DataBank series has been captured.
+
 ## Data Catalog resource boundary
 
 The Data Catalog API's resource records include website and DataBank navigation references as well as machine-readable resources. Only actual downloadable file resources may be fetched from a /download endpoint. A website or DataBank reference is not a file; attempting to download it as one produces HTTP 400.
