@@ -79,11 +79,18 @@ def _fixture(root):
             "source_row": "4",
         },
         {
+            "source_release": "icp_2017_cycle", "country_name": "Zimbabwe",
+            "country_code": "ZWE", "classification_code": "PPPGlob",
+            "indicator_code": "9020000", "indicator_name": "ACTUAL INDIVIDUAL CONSUMPTION",
+            "year": "2017", "value": "0.45", "source_file": "icp2017.csv",
+            "source_row": "5",
+        },
+        {
             "source_release": "icp_2021_saved_report", "country_name": "Zimbabwe",
             "country_code": "ZWE", "classification_code": "PPPGlob",
             "indicator_code": "1000000", "indicator_name": "GROSS DOMESTIC PRODUCT",
             "year": "2017", "value": "0.55", "source_file": "icp2021.csv",
-            "source_row": "5",
+            "source_row": "6",
         },
     ]
     with (inspection / "observations_long.csv").open("w", encoding="utf-8", newline="") as stream:
