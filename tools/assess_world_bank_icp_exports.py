@@ -471,7 +471,7 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
     report_id = "inspection_" + stamp.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     report_dir = root / REPORT_ROOT / report_id
     report_dir.mkdir(parents=True, exist_ok=False)
-    observation_fields = list(observations[0])
+    observation_fields = list(observations[0]) if observations else [\n        "source_release", "country_name", "country_code", "classification_name",\n        "classification_code", "source_file", "sheet", "source_row", "year",\n        "source_year_column", "indicator_code", "indicator_name", "value",\n        "observation_status"]
     def write_csv(name: str, rows: list[dict[str, Any]], fields: list[str]) -> None:
         with (report_dir / name).open("w", encoding="utf-8", newline="") as stream:
             writer = csv.DictWriter(stream, fieldnames=fields, extrasaction="ignore")
