@@ -105,6 +105,12 @@ table structure in three additional report files:
 - `icp_2011_workbook_cells.csv`: one record per non-empty cell, retaining
   sheet, table, coordinate, row/column, cell data type and number format.
 
+
+The sheet-title classifier accepts optional whitespace and zero-padded numeric
+identifiers after the R, D or S prefix (for example, `R1 Summary`,
+`D03` or `S2 Supplementary`). Unrecognized sheet titles remain inventoried
+under `unclassified_sheet`; they are never silently assigned a table number.
+
 This is a structural extraction, **not yet a semantic conversion into the
 common annual observations table**. The workbook's R1–R7 summary, D1–D10
 detailed and S1–S2 supplementary tables contain heterogeneous measures and
