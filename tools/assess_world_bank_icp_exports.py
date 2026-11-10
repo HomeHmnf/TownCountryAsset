@@ -309,10 +309,16 @@ def inspect(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
                         "indicator_code": code, "indicator_name": name,
                         "indicator_definition": "", "source_row": item["source_row"]}
         if file_count or metadata_count:
+            if "country" in norm(path.stem) and "metadata" in norm(path.stem):
+                artifact_role = "country_metadata"
+            elif is_series_metadata_file(path):
+                artifact_role = "series_metadata"
+            else:
+                artifact_role = "observations"
             inspected.append({"path": relative_path.as_posix(),
-                              "artifact_role": "series_metadata" if metadata_count else "observations",
+                              "artifact_role": artifact_role,
                               "observation_rows": file_count,
-                              "series_metadata_rows": metadata_count})
+                              "metadata_rows": metadata_count})
         else:
             unsupported.append(relative_path.as_posix())
     if not observations:
