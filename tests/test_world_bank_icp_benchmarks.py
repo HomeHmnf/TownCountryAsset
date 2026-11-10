@@ -117,6 +117,20 @@ def test_extracts_table_specific_measures_and_only_exact_country_names(tmp_path)
     assert summary["reference_year"] == 2011
 
 
+def test_country_metadata_reader_handles_delimited_metadata_and_common_headers(tmp_path):
+    raw = tmp_path / "raw_data/sources/world_bank_icp/icp_2017_cycle/acquisition/contents"
+    raw.mkdir(parents=True)
+    (raw / "ICP_2017_Country-Metadata.csv").write_text(
+        "ISO3 Code;Economy;Long Name\\nZWE;Zimbabwe;Zimbabwe\\n"
+        "CPV;Cabo Verde;Cabo Verde\\nSWZ;Eswatini;Eswatini\\n",
+        encoding="utf-8",
+    )
+    index = country_name_index(tmp_path)
+    assert index["zimbabwe"] == ["ZWE"]
+    assert index["cape verde"] == ["CPV"]
+    assert index["swaziland"] == ["SWZ"]
+
+
 def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
     _fixture(tmp_path)
     result = compare(tmp_path)
@@ -156,6 +170,8 @@ def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
     assert any(row["match_status"] == "country_identity_unresolved"
                for row in comparison_coverage)
     assert any(row["match_status"] == "matched"
+               for row in comparison_coverage)
+    assert any(row["match_status"] == "indicator_not_in_revised_export_scope"
                for row in comparison_coverage)
 
 
