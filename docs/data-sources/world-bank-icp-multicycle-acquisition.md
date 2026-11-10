@@ -173,10 +173,17 @@ The semantic assessment reports which of the 19 expected R/D/S tables were
 recognized. It fails closed if no semantic data rows can be decoded; a partial
 table inventory is reported rather than silently treated as complete.
 
-Country identity is deliberately conservative: a workbook economy receives an
-ISO3 code only when its normalized name uniquely matches a source-reported
-ICP 2017 country-metadata long name. No alias, historical name, region or total
-is silently mapped. Unmatched labels remain in the semantic extract for review.
+Country identity is deliberately conservative. The matcher uses the
+inspector's delimiter-aware CSV reader and checks the source-reported country
+code plus available long-name, country-name and economy-name fields. This avoids
+silently treating a semicolon/tab-delimited metadata file as a single-column CSV.
+A workbook economy receives an ISO3 code only on a unique normalized match.
+A small explicit alias table covers known workbook spelling/footnote variants
+(such as Sudan's footnote suffix and Cape Verde/Swaziland naming); an alias is
+accepted only when its target name resolves to exactly one code in the captured
+metadata. Alias matches are labelled separately from exact matches. No region
+or total is mapped to a country. Unmatched labels remain in the semantic
+extract for review.
 The reference year is the workbook's 2011 benchmark year. Missing cells remain
 explicit missing records whenever the source row contains reported values.
 
@@ -191,6 +198,17 @@ Two comparison paths are currently implemented:
 2. Original ICP 2017 benchmark versus revised ICP 2017 benchmark in the ICP
    2021 saved-report export. A pair is emitted only for an exact country,
    classification-code and indicator-code match at 2017.
+
+The 2017 comparison coverage also distinguishes a country, classification
+or indicator that is outside the captured saved-report selection from a
+missing observation inside that selection. The current ICP 2021 saved report
+contains only six series and one classification; its unmatched count is
+therefore not a global ICP missing-data rate. Statuses such as
+`indicator_not_in_revised_export_scope` and
+`classification_not_in_revised_export_scope` identify selection boundaries,
+while `missing_revised_2017_value` identifies an explicit missing source row.
+These scope diagnostics describe the captured export only and do not imply
+that the wider ICP catalogue lacks the series.
 
 The coverage output labels the ICP 2017-cycle 2011 and 2017 benchmark years,
 and the ICP 2021-cycle 2017 and 2021 benchmark years. It labels 2018–2020 as
