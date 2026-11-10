@@ -374,19 +374,21 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
             "source_b_row": new.get("source_row", ""),
         })
 
-    coverage_counts: dict[tuple[str, int, str, str, str], dict[str, int]] = {}
+    coverage_counts: dict[tuple[str, int, str, str, str, str], dict[str, int]] = {}
     for item in observations:
         release = item.get("source_release", "")
         year = int(item["year"]) if item.get("year", "").isdigit() else 0
         key = (release, year, item.get("country_code") or item.get("country_name", ""),
-               item.get("classification_code", ""), item.get("indicator_code", ""))
+               item.get("classification_code", ""), item.get("indicator_code", ""),
+               item.get("indicator_name", ""))
         counts = coverage_counts.setdefault(key, {"reported": 0, "missing": 0})
         counts["missing" if not item.get("value") else "reported"] += 1
     coverage_rows = [{
         "source_release": key[0], "year": key[1],
-        "benchmark_role": benchmark_role(key[0], key[1], ""),
+        "benchmark_role": benchmark_role(key[0], key[1], key[5]),
         "country_code_or_name": key[2], "classification_code": key[3],
-        "indicator_code": key[4], "reported_observation_count": counts["reported"],
+        "indicator_code": key[4], "indicator_name": key[5],
+        "reported_observation_count": counts["reported"],
         "missing_observation_count": counts["missing"],
     } for key, counts in sorted(coverage_counts.items())]
 
@@ -417,8 +419,8 @@ def compare(root: str | Path = ROOT, retrieved_at: datetime | None = None) -> di
         "source_a_sheet", "source_a_cell", "source_b_file", "source_b_row"]
     coverage_fields = list(coverage_rows[0]) if coverage_rows else [
         "source_release", "year", "benchmark_role", "country_code_or_name",
-        "classification_code", "indicator_code", "reported_observation_count",
-        "missing_observation_count"]
+        "classification_code", "indicator_code", "indicator_name",
+        "reported_observation_count", "missing_observation_count"]
     write_csv("icp_2011_workbook_semantic_observations.csv", semantic_rows, semantic_fields)
     write_csv("benchmark_comparisons.csv", comparisons, comparison_fields)
     write_csv("benchmark_coverage.csv", coverage_rows, coverage_fields)
