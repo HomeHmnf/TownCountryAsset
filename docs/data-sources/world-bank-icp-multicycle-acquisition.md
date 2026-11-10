@@ -88,6 +88,40 @@ https://databank.worldbank.org/source/international-comparison-program-%28ICP%29
 
 Its published description reports 199 participating economies plus estimates for 15 non-participating economies, 26 analytical classifications, and multiple PPP, expenditure-share, nominal/PPP expenditure, per-capita and price-level indicators. These catalogue counts describe the source, not the completeness of any particular exported selection. Full DataBank extraction remains a separate acquisition task; do not treat the workbook as proof that every detailed DataBank series has been captured.
 
+
+### Original ICP 2011 workbook structural inspection
+
+The inspector now recognizes the specifically acquired
+`2011-International-Comparison-Program-results.xlsx` under
+`icp_2011_cycle`. It inventories every worksheet and preserves the original
+table structure in three additional report files:
+
+- `icp_2011_workbook_sheets.csv`: worksheet name, R/D/S table identifier and
+  category (summary, detailed or supplementary), used dimensions, non-empty
+  cell count and merged-range count;
+- `icp_2011_workbook_rows.csv`: one record per non-empty worksheet row, with
+  the row's ordered cell values serialized as JSON (including interior blank
+  cells);
+- `icp_2011_workbook_cells.csv`: one record per non-empty cell, retaining
+  sheet, table, coordinate, row/column, cell data type and number format.
+
+This is a structural extraction, **not yet a semantic conversion into the
+common annual observations table**. The workbook's R1–R7 summary, D1–D10
+detailed and S1–S2 supplementary tables contain heterogeneous measures and
+units (including national-currency expenditures, PPPs, PLIs, expenditure
+shares and real/nominal expenditure measures). A cell value cannot safely be
+assigned a common indicator, country identity, reference year or unit from
+its position alone. The inspector therefore does not infer those semantics,
+convert units, map country aliases, treat region aggregates as countries, or
+add workbook values to latest-year/coverage selection. Source labels, units,
+blank cells and table layout remain recoverable from the row/cell outputs.
+A future table-specific mapping must be validated against the published
+headings and footnotes before any of these values enter harmonized observations.
+
+The workbook is counted as a recognized source artifact and its
+`icp_2011_cycle` release contributes to the release inventory even though it
+does not add annual observation rows. The original workbook remains unchanged.
+
 ## Data Catalog resource boundary
 
 The Data Catalog API's resource records include website and DataBank navigation references as well as machine-readable resources. Only actual downloadable file resources may be fetched from a /download endpoint. A website or DataBank reference is not a file; attempting to download it as one produces HTTP 400.
@@ -106,7 +140,8 @@ The inspector scans CSV and XLSX files under raw_data/sources/world_bank_icp/ an
 
 - wide DataBank exports, with one column per indicator;
 - long exports, with one indicator/value per row; and
-- the official ICP 2017 archive's one-row-per-country/classification/series layout, with separate annual value columns for 2011–2017.
+- the official ICP 2017 archive's one-row-per-country/classification/series layout, with separate annual value columns for 2011–2017; and
+- the original ICP 2011 workbook's heterogeneous R/D/S tables, preserved as sheet inventory, row arrays and cell-level structure (not harmonized observations).
 
 For the ICP 2017 archive, each annual column is expanded into a separate observation while retaining the original year-column name, source row, country, classification, series code/name and release identity. Blank and `..` cells remain explicit missing observations; they do not enter latest-nonmissing selection. The country metadata CSV is retained in a separate `country_metadata.csv` report, and the observed series code/name catalogue is included in `series_metadata.csv`. Definitions from the provider's smaller series-metadata member are joined by release and indicator code where available. This does not infer benchmark/interpolation/extrapolation status or participation status from a missing observation.
 
@@ -116,7 +151,8 @@ It creates timestamped reports under reports/sources/world-bank-icp/:
 - latest_available_by_country_indicator.csv: latest non-missing value independently by country, classification and indicator;
 - coverage_by_country_indicator.csv: first/latest available year, count and observed years;
 - series_metadata.csv: observed indicator codes/names plus provider definitions where available;
-- country_metadata.csv: source-reported country metadata rows, kept separate from observations.
+- country_metadata.csv: source-reported country metadata rows, kept separate from observations;
+- icp_2011_workbook_sheets.csv, icp_2011_workbook_rows.csv and icp_2011_workbook_cells.csv: structural extracts of the original ICP 2011 workbook, kept separate from annual observations and latest-value coverage.
 
 CSV input decoding detects UTF-8/UTF-8 BOM and UTF-16 BOM, then uses strict Windows-1252 and Latin-1 fallbacks for legacy DataBank exports; the detected encoding is recorded in the sheet/source label. The DataBank `Series_-_Metadata.csv` member repeats the complete observation table before appending a two-column `Code` / `Indicator Name` dictionary; the inspector treats it as a metadata artifact, skips the repeated observations, and extracts the trailing indicator definitions into `series_metadata.csv`. Empty/footer rows (including `Data from database` and `Last Updated`) are excluded because they lack a country and reference year. Structural DataBank fields such as Time Code are excluded from wide-format indicator detection. Source-release identity is derived from the acquisition directory (`icp_YYYY_cycle` or `icp_2021_saved_report`) and is part of every latest-value and coverage key, preventing different ICP vintages from being collapsed. Latest-value selection uses the same release/country/classification/indicator key as the coverage calculation. CSV report fields, including numeric observations, are serialized as text; downstream numeric comparisons should parse the value field explicitly. The latest-value rule is observation-based, not a common global cutoff. Missing observations remain visible. No zeros, carry-forward values, interpolation, extrapolation or imputation are created by this inspector. Published imputed observations must be identified from the source's own status metadata and must not be confused with missing observations.
 
