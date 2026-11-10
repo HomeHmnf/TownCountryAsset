@@ -172,13 +172,13 @@ def test_icp_2017_archive_wide_year_rows_preserve_missing_and_metadata(tmp_path)
 
     country_path = base / "ICP_2017_Country-Metadata.csv"
     country_path.write_text(
-        "Code,Long Name,ICP Participation,Currency Unit,System of National Accounts\\n"
-        "ZWE,Zimbabwe,Full participation,USD,2008 SNA\\n",
+        "Code,Long Name,ICP Participation,Currency Unit,System of National Accounts\n"
+        "ZWE,Zimbabwe,Full participation,USD,2008 SNA\n",
         encoding="utf-8",
     )
     series_path = base / "ICP_2017_Series-Metadata.csv"
     series_path.write_text(
-        "Code,Indicator Name\\n1000000,GDP definition note\\n",
+        "Code,Indicator Name\n1000000,GDP definition note\n",
         encoding="utf-8",
     )
 
