@@ -93,7 +93,7 @@ def test_extracts_table_specific_measures_and_only_exact_country_names(tmp_path)
 
     gdp = next(row for row in rows if row["table_id"] == "D3" and row["column_code"] == "01")
     assert gdp["table_family"] == "ppp_conversion_factor"
-    assert gdp["unit"] == "US dollars per unit of national currency"
+    assert gdp["unit"] == "local currency units per international dollar (US$=1)"
     assert gdp["aggregate_key"] == "GDP"
     assert gdp["country_code"] == "ZWE"
     assert gdp["country_identity_status"] == "exact_unique_country_name_match"
