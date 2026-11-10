@@ -169,9 +169,9 @@ def acquire_archive(*, repository_root: str | Path = ROOT,
         "files": artifacts,
     }
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
-    with manifest_path.open("x", encoding="utf-8", newline="\\n") as stream:
+    with manifest_path.open("x", encoding="utf-8", newline="\n") as stream:
         json.dump(manifest, stream, ensure_ascii=False, indent=2)
-        stream.write("\\n")
+        stream.write("\n")
     report = {
         "assessment": "world_bank_icp_2017_archive_acquisition",
         "acquisition_id": acquisition_id,
@@ -192,7 +192,7 @@ def acquire_archive(*, repository_root: str | Path = ROOT,
     report_dir.mkdir(parents=True, exist_ok=False)
     with (report_dir / "assessment.json").open("x", encoding="utf-8") as stream:
         json.dump(report, stream, ensure_ascii=False, indent=2)
-        stream.write("\\n")
+        stream.write("\n")
     return report
 
 
