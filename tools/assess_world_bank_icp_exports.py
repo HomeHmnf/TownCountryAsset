@@ -290,7 +290,7 @@ def inspect_icp2011_workbook(path: Path, *, relative_path: Path,
     rows_out: list[dict[str, Any]] = []
     try:
         for sheet in workbook.worksheets:
-            match = re.match(r"^\\s*([RDS])\\s*0*(\\d+)\\b", sheet.title, re.IGNORECASE)
+            match = re.match(r"^\s*([RDS])\s*0*(\d+)\b", sheet.title, re.IGNORECASE)
             table_prefix = match.group(1).upper() if match else ""
             table_number = int(match.group(2)) if match else None
             table_id = f"{table_prefix}{table_number}" if match else ""
