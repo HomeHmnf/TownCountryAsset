@@ -115,7 +115,7 @@ No source-selection change, approval, Project DB write, Game DB write or canonic
 ## Validation
 
 ```fish
-uv run python -m pytest -v tests/test_world_bank_icp_databank.py tests/test_world_bank_icp_exports.py tests/test_world_bank_icp_snapshot.py
+uv run python -m pytest -v tests/test_world_bank_icp_archive.py tests/test_world_bank_icp_databank.py tests/test_world_bank_icp_exports.py tests/test_world_bank_icp_snapshot.py
 uv run python -m compileall -q tools
 ```
 
