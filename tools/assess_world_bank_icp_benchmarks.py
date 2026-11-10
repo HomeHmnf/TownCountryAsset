@@ -235,6 +235,10 @@ def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]],
                         header = header_paths.get(code, "")
                         measure_name = summary[0] if definition["family"] == "summary_results" and summary else header
                         unit = summary[1] if definition["family"] == "summary_results" and summary else definition["unit"]
+                        if code == "16" and table_id.startswith("R"):
+                            unit = "national currency units, billions"
+                        elif code == "16" and table_id == "S1":
+                            unit = "national currency units, millions"
                         parsed = number(raw_value)
                         output.append({
                             "source_release": "icp_2011_cycle",
