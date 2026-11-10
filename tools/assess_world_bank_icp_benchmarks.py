@@ -185,7 +185,7 @@ def extract_workbook_semantics(path: Path, country_index: dict[str, list[str]],
     output: list[dict[str, Any]] = []
     try:
         for sheet in workbook.worksheets:
-            match = re.match(r"^\s*([RDS])\s*0*(\d+)\b", sheet.title, re.I)
+            match = re.search(r"\b([RDS])\s*0*(\d+)\b", sheet.title, re.I)
             if not match:
                 continue
             table_id = f"{match.group(1).upper()}{int(match.group(2))}"
