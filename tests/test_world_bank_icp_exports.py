@@ -151,3 +151,65 @@ def test_latest_selection_is_scoped_to_source_release(tmp_path):
         ("icp_2017_cycle", "2017", "0.48"),
         ("icp_2021_cycle", "2021", "0.54"),
     }
+
+
+def test_icp_2017_archive_wide_year_rows_preserve_missing_and_metadata(tmp_path):
+    base = tmp_path / "raw_data/sources/world_bank_icp/icp_2017_cycle/acquisition/contents"
+    base.mkdir(parents=True)
+    data_path = base / "ICP_2017_Data.csv"
+    headers = [
+        "Country Name", "Country Code", "Classification Name", "Classification Code",
+        "Series Name", "Series Code", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
+    ]
+    with data_path.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(headers)
+        writer.writerow([
+            "Zimbabwe", "ZWE", "Expenditure (PPP)", "PPPGlob",
+            "GROSS DOMESTIC PRODUCT", "1000000",
+            "0.52", "..", "0.55", "", "0.54", "0.52", "0.51",
+        ])
+
+    country_path = base / "ICP_2017_Country-Metadata.csv"
+    country_path.write_text(
+        "Code,Long Name,ICP Participation,Currency Unit,System of National Accounts\\n"
+        "ZWE,Zimbabwe,Full participation,USD,2008 SNA\\n",
+        encoding="utf-8",
+    )
+    series_path = base / "ICP_2017_Series-Metadata.csv"
+    series_path.write_text(
+        "Code,Indicator Name\\n1000000,GDP definition note\\n",
+        encoding="utf-8",
+    )
+
+    result = inspect(tmp_path)
+    report = tmp_path / "reports/sources/world-bank-icp" / result["report_id"]
+    with (report / "observations_long.csv").open(encoding="utf-8", newline="") as stream:
+        observations = list(csv.DictReader(stream))
+    with (report / "latest_available_by_country_indicator.csv").open(
+        encoding="utf-8", newline=""
+    ) as stream:
+        latest = list(csv.DictReader(stream))
+    with (report / "series_metadata.csv").open(encoding="utf-8", newline="") as stream:
+        series = list(csv.DictReader(stream))
+    with (report / "country_metadata.csv").open(encoding="utf-8", newline="") as stream:
+        countries = list(csv.DictReader(stream))
+
+    assert len(observations) == 7
+    assert {row["source_release"] for row in observations} == {"icp_2017_cycle"}
+    assert [row["year"] for row in observations] == [
+        "2011", "2012", "2013", "2014", "2015", "2016", "2017"
+    ]
+    assert observations[1]["value"] == ""
+    assert observations[1]["observation_status"] == "missing"
+    assert len(latest) == 1
+    assert latest[0]["year"] == "2017"
+    assert latest[0]["indicator_name"] == "GROSS DOMESTIC PRODUCT"
+    assert len(series) == 1
+    assert series[0]["indicator_name"] == "GROSS DOMESTIC PRODUCT"
+    assert series[0]["indicator_definition"] == "GDP definition note"
+    assert len(countries) == 1
+    assert countries[0]["code"] == "ZWE"
+    assert countries[0]["currency_unit"] == "USD"
+    assert result["country_metadata_row_count"] == 1
+    assert result["observed_series_count"] == 1
