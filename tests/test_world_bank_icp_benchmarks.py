@@ -137,6 +137,17 @@ def test_country_metadata_reader_handles_delimited_metadata_and_common_headers(t
     assert index["cape verde"] == ["CPV"]
     assert index["swaziland"] == ["SWZ"]
 
+def test_country_metadata_table_name_resolves_workbook_short_name(tmp_path):
+    raw = tmp_path / "raw_data/sources/world_bank_icp/icp_2017_cycle/acquisition/contents"
+    raw.mkdir(parents=True)
+    (raw / "ICP_2017_Country-Metadata.csv").write_text(
+        "Code,Long Name,Table Name\\nZWE,Republic of Zimbabwe,Zimbabwe\\n",
+        encoding="utf-8",
+    )
+    index = country_name_index(tmp_path)
+    assert index["republic of zimbabwe"] == ["ZWE"]
+    assert index["zimbabwe"] == ["ZWE"]
+
 
 def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
     _fixture(tmp_path)
