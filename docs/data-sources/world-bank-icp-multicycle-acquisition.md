@@ -175,7 +175,7 @@ table inventory is reported rather than silently treated as complete.
 
 Country identity is deliberately conservative. The matcher uses the
 inspector's delimiter-aware CSV reader and checks the source-reported country
-code plus available long-name, country-name and economy-name fields. This avoids
+code plus available long-name, country-name, economy-name and provider `Table Name` fields. The latter is important when the original ICP 2011 workbook uses a short display name (for example, `Zimbabwe`) while the ICP 2017 metadata long name is `Republic of Zimbabwe`; both source-published names resolve to the same ISO3 code. The source label and match status remain preserved in semantic observations. This avoids
 silently treating a semicolon/tab-delimited metadata file as a single-column CSV.
 A workbook economy receives an ISO3 code only on a unique normalized match.
 A small explicit alias table covers known workbook spelling/footnote variants
