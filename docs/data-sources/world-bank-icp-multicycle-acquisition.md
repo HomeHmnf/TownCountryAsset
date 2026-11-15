@@ -191,13 +191,22 @@ Two comparison paths are currently implemented:
 
 1. Original 2011 workbook D3 PPP factors versus the ICP 2017-cycle 2011
    `PPPGlob` observations. A pair is emitted only for the same exact country
-   code and recognized aggregate (GDP, AIC, household consumption, individual
-   government consumption, collective government consumption, GFCF or
-   domestic absorption). Both values are local currency units per international
-   dollar (US$=1), consistent with the ICP/WDI PPP conversion-factor unit.
+   code and recognized aggregate (GDP, AIC, total household consumption,
+   individual government consumption, collective government consumption,
+   GFCF or domestic absorption). The D3 measure “Individual consumption
+   expenditure by households without housing” is retained as
+   `HOUSEHOLD_CONSUMPTION_EX_HOUSING` but is not matched to the total
+   household-consumption indicator. This prevents a subset measure from being
+   compared with the revised benchmark's total household aggregate. Both
+   compared values are local currency units per international dollar (US$=1),
+   consistent with the ICP/WDI PPP conversion-factor unit.
 2. Original ICP 2017 benchmark versus revised ICP 2017 benchmark in the ICP
    2021 saved-report export. A pair is emitted only for an exact country,
-   classification-code and indicator-code match at 2017.
+   classification-code and indicator-code match at 2017. The source labels
+   “Households and NPISHs final consumption expenditure” and “General
+   government final consumption expenditure” receive distinct canonical
+   aggregate labels; government consumption is not conflated with the
+   2011 individual/collective government split.
 
 The 2017 comparison coverage also distinguishes a country, classification
 or indicator that is outside the captured saved-report selection from a
