@@ -10,6 +10,7 @@ from tools.assess_world_bank_icp_benchmarks import (
     extract_workbook_semantics,
     country_name_index,
     column_code,
+    canonical_aggregate,
 )
 
 
@@ -24,15 +25,23 @@ def _fixture(root):
     sheet["A2"] = "Economy"
     sheet["B2"] = "Gross domestic product"
     sheet["C2"] = "Actual individual consumption"
+    sheet["D2"] = "Individual consumption expenditure by households"
+    sheet["E2"] = "Individual consumption expenditure by households without housing"
     sheet["A3"] = "(00)"
     sheet["B3"] = "(01)"
     sheet["C3"] = "(02)"
+    sheet["D3"] = "(03)"
+    sheet["E3"] = "(04)"
     sheet["A4"] = "Zimbabwe"
     sheet["B4"] = 0.50
     sheet["C4"] = 0.40
+    sheet["D4"] = 0.60
+    sheet["E4"] = 0.58
     sheet["A5"] = "Unmapped Economy"
     sheet["B5"] = 0.60
     sheet["C5"] = 0.45
+    sheet["D5"] = 0.65
+    sheet["E5"] = 0.62
 
     summary = workbook.create_sheet("R1 GDP")
     summary["A1"] = "TABLE R1 SUMMARY RESULT: GDP"
@@ -74,6 +83,14 @@ def _fixture(root):
         {
             "source_release": "icp_2017_cycle", "country_name": "Zimbabwe",
             "country_code": "ZWE", "classification_code": "PPPGlob",
+            "indicator_code": "9260000",
+            "indicator_name": "INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS",
+            "year": "2011", "value": "0.59", "source_file": "icp2017.csv",
+            "source_row": "3a",
+        },
+        {
+            "source_release": "icp_2017_cycle", "country_name": "Zimbabwe",
+            "country_code": "ZWE", "classification_code": "PPPGlob",
             "indicator_code": "1000000", "indicator_name": "GROSS DOMESTIC PRODUCT",
             "year": "2017", "value": "0.51", "source_file": "icp2017.csv",
             "source_row": "4",
@@ -86,11 +103,43 @@ def _fixture(root):
             "source_row": "5",
         },
         {
+            "source_release": "icp_2017_cycle", "country_name": "Zimbabwe",
+            "country_code": "ZWE", "classification_code": "PPPGlob",
+            "indicator_code": "9100000",
+            "indicator_name": "HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE",
+            "year": "2017", "value": "0.48", "source_file": "icp2017.csv",
+            "source_row": "7",
+        },
+        {
+            "source_release": "icp_2017_cycle", "country_name": "Zimbabwe",
+            "country_code": "ZWE", "classification_code": "PPPGlob",
+            "indicator_code": "9270000",
+            "indicator_name": "GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE",
+            "year": "2017", "value": "0.40", "source_file": "icp2017.csv",
+            "source_row": "8",
+        },
+        {
             "source_release": "icp_2021_saved_report", "country_name": "Zimbabwe",
             "country_code": "ZWE", "classification_code": "PPPGlob",
             "indicator_code": "1000000", "indicator_name": "GROSS DOMESTIC PRODUCT",
             "year": "2017", "value": "0.55", "source_file": "icp2021.csv",
             "source_row": "6",
+        },
+        {
+            "source_release": "icp_2021_saved_report", "country_name": "Zimbabwe",
+            "country_code": "ZWE", "classification_code": "PPPGlob",
+            "indicator_code": "9100000",
+            "indicator_name": "HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE",
+            "year": "2017", "value": "0.46", "source_file": "icp2021.csv",
+            "source_row": "9",
+        },
+        {
+            "source_release": "icp_2021_saved_report", "country_name": "Zimbabwe",
+            "country_code": "ZWE", "classification_code": "PPPGlob",
+            "indicator_code": "9270000",
+            "indicator_name": "GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE",
+            "year": "2017", "value": "0.39", "source_file": "icp2021.csv",
+            "source_row": "10",
         },
     ]
     with (inspection / "observations_long.csv").open("w", encoding="utf-8", newline="") as stream:
@@ -112,6 +161,13 @@ def test_extracts_table_specific_measures_and_only_exact_country_names(tmp_path)
     assert gdp["country_identity_status"] == "exact_unique_country_name_match"
     assert gdp["value"] == 0.5
     assert gdp["direct_ppp_comparison_candidate"] is True
+
+    household_total = next(row for row in rows if row["table_id"] == "D3"
+                           and row["column_code"] == "03")
+    household_ex_housing = next(row for row in rows if row["table_id"] == "D3"
+                                and row["column_code"] == "04")
+    assert household_total["aggregate_key"] == "HOUSEHOLD_CONSUMPTION"
+    assert household_ex_housing["aggregate_key"] == "HOUSEHOLD_CONSUMPTION_EX_HOUSING"
 
     unmatched = next(row for row in rows if row["country_name_raw"] == "Unmapped Economy")
     assert unmatched["country_code"] == ""
@@ -166,7 +222,12 @@ def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
 
     original_2011 = [row for row in comparisons
                      if row["comparison_type"] == "original_2011_vs_revised_2011"]
-    assert len(original_2011) == 2
+    assert len(original_2011) == 3
+    household = next(row for row in original_2011
+                     if row["aggregate_key"] == "HOUSEHOLD_CONSUMPTION")
+    assert household["source_a_cell"] == "D4"
+    assert household["source_b_value"] == "0.59"
+    assert not any(row["source_a_cell"] == "E4" for row in original_2011)
     gdp = next(row for row in original_2011 if row["aggregate_key"] == "GDP")
     assert gdp["country_code"] == "ZWE"
     assert float(gdp["source_a_value"]) == 0.5
@@ -175,14 +236,19 @@ def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
 
     revised_2017 = [row for row in comparisons
                     if row["comparison_type"] == "original_2017_vs_revised_2017"]
-    assert len(revised_2017) == 1
-    assert revised_2017[0]["source_a_role"] == "original_2017_benchmark"
-    assert revised_2017[0]["source_b_role"] == "revised_2017_benchmark"
-    assert float(revised_2017[0]["source_b_value"]) == 0.55
+    assert len(revised_2017) == 3
+    gdp_2017 = next(row for row in revised_2017 if row["indicator_code"] == "1000000")
+    assert gdp_2017["source_a_role"] == "original_2017_benchmark"
+    assert gdp_2017["source_b_role"] == "revised_2017_benchmark"
+    assert float(gdp_2017["source_b_value"]) == 0.55
+    household_npish = next(row for row in revised_2017 if row["indicator_code"] == "9100000")
+    government = next(row for row in revised_2017 if row["indicator_code"] == "9270000")
+    assert household_npish["aggregate_key"] == "HOUSEHOLD_NPISH_CONSUMPTION"
+    assert government["aggregate_key"] == "GOVERNMENT_CONSUMPTION"
 
     assert result["workbook_table_count"] == 2
-    assert result["original_2011_vs_revised_2011_comparison_count"] == 2
-    assert result["original_2017_vs_revised_2017_comparison_count"] == 1
+    assert result["original_2011_vs_revised_2011_comparison_count"] == 3
+    assert result["original_2017_vs_revised_2017_comparison_count"] == 3
     assert any(row["country_identity_status"] == "no_exact_country_name_match"
                for row in semantic)
     assert any(row["match_status"] == "country_identity_unresolved"
@@ -192,6 +258,18 @@ def test_compares_original_and_revised_2011_and_2017_benchmarks(tmp_path):
     assert any(row["match_status"] == "indicator_not_in_revised_export_scope"
                for row in comparison_coverage)
 
+
+
+def test_canonical_aggregate_keeps_distinct_consumption_concepts():
+    assert canonical_aggregate(
+        "Individual consumption expenditure by households without housing"
+    ) == "HOUSEHOLD_CONSUMPTION_EX_HOUSING"
+    assert canonical_aggregate(
+        "HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE"
+    ) == "HOUSEHOLD_NPISH_CONSUMPTION"
+    assert canonical_aggregate(
+        "GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE"
+    ) == "GOVERNMENT_CONSUMPTION"
 
 
 def test_benchmark_roles_do_not_mislabel_non_gdp_extrapolations():
