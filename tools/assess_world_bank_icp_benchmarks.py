@@ -101,9 +101,14 @@ def column_code(value: Any) -> str | None:
 def canonical_aggregate(value: Any) -> str:
     text = normalized_name(value)
     aliases = (
+        ("individual consumption expenditure by households without housing",
+         "HOUSEHOLD_CONSUMPTION_EX_HOUSING"),
+        ("households and npish final consumption expenditure",
+         "HOUSEHOLD_NPISH_CONSUMPTION"),
+        ("household and npish consumption", "HOUSEHOLD_NPISH_CONSUMPTION"),
+        ("general government final consumption expenditure", "GOVERNMENT_CONSUMPTION"),
         ("gross domestic product", "GDP"),
         ("actual individual consumption", "AIC"),
-        ("household and npish consumption", "HOUSEHOLD_CONSUMPTION"),
         ("individual consumption expenditure by households", "HOUSEHOLD_CONSUMPTION"),
         ("individual consumption expenditure by government", "GOVERNMENT_INDIVIDUAL_CONSUMPTION"),
         ("collective consumption expenditure by government", "GOVERNMENT_COLLECTIVE_CONSUMPTION"),
