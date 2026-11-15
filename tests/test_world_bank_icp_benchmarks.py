@@ -141,7 +141,7 @@ def test_country_metadata_table_name_resolves_workbook_short_name(tmp_path):
     raw = tmp_path / "raw_data/sources/world_bank_icp/icp_2017_cycle/acquisition/contents"
     raw.mkdir(parents=True)
     (raw / "ICP_2017_Country-Metadata.csv").write_text(
-        "Code,Long Name,Table Name\\nZWE,Republic of Zimbabwe,Zimbabwe\\n",
+        "Code,Long Name,Table Name\nZWE,Republic of Zimbabwe,Zimbabwe\n",
         encoding="utf-8",
     )
     index = country_name_index(tmp_path)
