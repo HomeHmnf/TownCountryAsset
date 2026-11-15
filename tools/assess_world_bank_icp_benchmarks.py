@@ -168,7 +168,7 @@ def country_name_index(root: Path) -> dict[str, list[str]]:
             ) if k in positions), None)
             name_keys = (
                 "long name", "country name", "economy name", "economy",
-                "name", "short name", "country",
+                "name", "short name", "country", "table name",
             )
             name_indices = [positions[k] for k in name_keys if k in positions]
             if code_i is None or not name_indices:
