@@ -1,0 +1,32 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "world_bank_icp",
+  "dataset_id": "world_bank_icp_2011_original_results",
+  "release": "icp_2011_cycle",
+  "release_kind": "original_benchmark_release",
+  "release_semantics": "Original ICP 2011 results workbook; distinct from revised 2011 results in the ICP 2017 cycle.",
+  "acquisition_id": "icp_2011_workbook_20261110T075056134920Z",
+  "source_url": "https://pubdocs.worldbank.org/en/108821487172249299/2011-International-Comparison-Program-results.xlsx",
+  "catalogue_url": "https://www.worldbank.org/en/programs/icp/data",
+  "retrieved_at": "2026-11-10T07:51:06.872966+00:00",
+  "http_status": 200,
+  "final_url": "https://thedocs.worldbank.org/en/doc/108821487172249299-0050022017/original/2011InternationalComparisonProgramresults.xlsx",
+  "archive_byte_count": 2990141,
+  "archive_sha256": "c97f525bdb4f0208f414f8f020964dcbb7e0161d82c545b214faf16acdc1f5b4",
+  "xlsx_package_validation": "passed",
+  "files": [
+    {
+      "artifact_role": "original_provider_workbook",
+      "local_raw_path": "raw_data/sources/world_bank_icp/icp_2011_cycle/icp_2011_workbook_20261110T075056134920Z/2011-International-Comparison-Program-results.xlsx",
+      "source_filename": "2011-International-Comparison-Program-results.xlsx",
+      "url": "https://pubdocs.worldbank.org/en/108821487172249299/2011-International-Comparison-Program-results.xlsx",
+      "final_url": "https://thedocs.worldbank.org/en/doc/108821487172249299-0050022017/original/2011InternationalComparisonProgramresults.xlsx",
+      "http_status": 200,
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "byte_count": 2990141,
+      "sha256": "c97f525bdb4f0208f414f8f020964dcbb7e0161d82c545b214faf16acdc1f5b4",
+      "xlsx_package_validation": "passed"
+    }
+  ],
+  "interpretation_status": "Not assessed; source workbook structure and series semantics require inspection."
+}

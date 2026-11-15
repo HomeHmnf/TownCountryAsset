@@ -28,3 +28,6 @@ dist/
 # data/canonical/*.sqlite3
 # *.sqlite-wal
 # *.sqlite-shm
+
+# Generated World Bank ICP inspection reports (reproducible locally)
+/reports/sources/world-bank-icp/

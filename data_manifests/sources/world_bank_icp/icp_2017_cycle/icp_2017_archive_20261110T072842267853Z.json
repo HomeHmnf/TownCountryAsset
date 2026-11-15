@@ -1,0 +1,74 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "world_bank_icp",
+  "dataset_id": "0038406",
+  "release": "icp_2017_cycle",
+  "release_kind": "edition_or_snapshot",
+  "release_semantics": "Official ICP 2017 cycle archive; contains 2011-2017 annual observations and source metadata. Original/revised benchmark and annual-series status require separate interpretation.",
+  "provider_dataset_id": "0038406",
+  "acquisition_id": "icp_2017_archive_20261110T072842267853Z",
+  "source_url": "https://databankfiles.worldbank.org/public/ddpext_download/ICP_2017_csv.zip",
+  "catalogue_url": "https://datacatalog.worldbank.org/search/dataset/0038406",
+  "retrieved_at": "2026-11-10T07:28:49.297644+00:00",
+  "http_status": 200,
+  "final_url": "https://databankfiles.worldbank.org/public/ddpext_download/ICP_2017_csv.zip",
+  "archive_byte_count": 2353815,
+  "archive_sha256": "ba91db66c3975aed7a0e5dc5c3b27ea1b5c130b08762a8568fb68a857307c8e2",
+  "zip_crc_validation": "passed",
+  "required_members": [
+    "ICP_2017_Data.csv",
+    "ICP_2017_Country-Metadata.csv",
+    "ICP_2017_Series-Metadata.csv"
+  ],
+  "capture_scope": {
+    "observation_year_columns": [
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017
+    ],
+    "includes_country_metadata": true,
+    "includes_series_metadata": true,
+    "interpretation_status": "Not assessed; do not infer benchmark/interpolation status from year columns alone."
+  },
+  "files": [
+    {
+      "artifact_role": "original_export_archive",
+      "local_raw_path": "raw_data/sources/world_bank_icp/icp_2017_cycle/icp_2017_archive_20261110T072842267853Z/ICP_2017_csv.zip",
+      "source_filename": "ICP_2017_csv.zip",
+      "url": "https://databankfiles.worldbank.org/public/ddpext_download/ICP_2017_csv.zip",
+      "final_url": "https://databankfiles.worldbank.org/public/ddpext_download/ICP_2017_csv.zip",
+      "http_status": 200,
+      "content_type": "application/x-zip-compressed",
+      "byte_count": 2353815,
+      "sha256": "ba91db66c3975aed7a0e5dc5c3b27ea1b5c130b08762a8568fb68a857307c8e2"
+    },
+    {
+      "artifact_role": "observations",
+      "archive_member": "ICP_2017_Data.csv",
+      "derived_from": "raw_data/sources/world_bank_icp/icp_2017_cycle/icp_2017_archive_20261110T072842267853Z/ICP_2017_csv.zip",
+      "local_raw_path": "raw_data/sources/world_bank_icp/icp_2017_cycle/icp_2017_archive_20261110T072842267853Z/contents/ICP_2017_Data.csv",
+      "byte_count": 20427296,
+      "sha256": "d66e198b8c8594db1dc35cfeaa3cb00a0f7ba9d53d8f07a09fb5d7121d17eb4b"
+    },
+    {
+      "artifact_role": "country_metadata",
+      "archive_member": "ICP_2017_Country-Metadata.csv",
+      "derived_from": "raw_data/sources/world_bank_icp/icp_2017_cycle/icp_2017_archive_20261110T072842267853Z/ICP_2017_csv.zip",
+      "local_raw_path": "raw_data/sources/world_bank_icp/icp_2017_cycle/icp_2017_archive_20261110T072842267853Z/contents/ICP_2017_Country-Metadata.csv",
+      "byte_count": 368670,
+      "sha256": "2b1acf445951a5a20e930fd6174f538535eef186d294338d3b0e853ef747409a"
+    },
+    {
+      "artifact_role": "series_metadata",
+      "archive_member": "ICP_2017_Series-Metadata.csv",
+      "derived_from": "raw_data/sources/world_bank_icp/icp_2017_cycle/icp_2017_archive_20261110T072842267853Z/ICP_2017_csv.zip",
+      "local_raw_path": "raw_data/sources/world_bank_icp/icp_2017_cycle/icp_2017_archive_20261110T072842267853Z/contents/ICP_2017_Series-Metadata.csv",
+      "byte_count": 2647,
+      "sha256": "81af9d153dfc20c36ea30d052b35c834222fa8b1c414492e5653a097fbeeb232"
+    }
+  ]
+}
