@@ -203,10 +203,12 @@ Two comparison paths are currently implemented:
 2. Original ICP 2017 benchmark versus revised ICP 2017 benchmark in the ICP
    2021 saved-report export. A pair is emitted only for an exact country,
    classification-code and indicator-code match at 2017. The source labels
-   “Households and NPISHs final consumption expenditure” and “General
-   government final consumption expenditure” receive distinct canonical
-   aggregate labels; government consumption is not conflated with the
-   2011 individual/collective government split.
+   “Households and NPISHs final consumption expenditure” (series `9100000`)
+   and “General government final consumption expenditure” (series `9270000`)
+   receive distinct canonical aggregate labels. The NPISHs spelling and the
+   archive’s code-prefixed series label are both recognized. Government
+   consumption is not conflated with the 2011 individual/collective government
+   split.
 
 The 2017 comparison coverage also distinguishes a country, classification
 or indicator that is outside the captured saved-report selection from a
