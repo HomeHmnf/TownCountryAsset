@@ -268,6 +268,9 @@ def test_canonical_aggregate_keeps_distinct_consumption_concepts():
         "HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE"
     ) == "HOUSEHOLD_NPISH_CONSUMPTION"
     assert canonical_aggregate(
+        "9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE"
+    ) == "HOUSEHOLD_NPISH_CONSUMPTION"
+    assert canonical_aggregate(
         "GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE"
     ) == "GOVERNMENT_CONSUMPTION"
 
