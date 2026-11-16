@@ -103,6 +103,8 @@ def canonical_aggregate(value: Any) -> str:
     aliases = (
         ("individual consumption expenditure by households without housing",
          "HOUSEHOLD_CONSUMPTION_EX_HOUSING"),
+        ("households and npishs final consumption expenditure",
+         "HOUSEHOLD_NPISH_CONSUMPTION"),
         ("households and npish final consumption expenditure",
          "HOUSEHOLD_NPISH_CONSUMPTION"),
         ("household and npish consumption", "HOUSEHOLD_NPISH_CONSUMPTION"),
