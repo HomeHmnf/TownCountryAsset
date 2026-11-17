@@ -42,6 +42,18 @@ def _number(value: Any) -> float | None:
         return None
     return result if math.isfinite(result) else None
 
+def _is_usd_unit(unit: Any) -> bool:
+    """Return whether a WEO NGDP unit is explicitly denominated in US dollars."""
+    normalized = " ".join(str(unit or "").casefold().replace(".", "").replace(",", "").split())
+    return normalized in {"us dollar", "us dollars", "united states dollar", "united states dollars", "usd"}
+
+
+def _weo_ngdp_local_currency_value(item: dict[str, Any]) -> float | None:
+    """Do not treat WEO NGDP reported in US dollars as local-currency GDP."""
+    if _is_usd_unit(item.get("NGDP_unit", "")):
+        return None
+    return _number(item.get("NGDP"))
+
 
 def _latest_file(pattern: str, directory: Path, label: str) -> Path:
     candidates = sorted(directory.glob(pattern))
@@ -272,7 +284,10 @@ def assess(
         wdi_factor = wdi_item.get("PA.NUS.PPP")
         wdi_ppp_gdp = wdi_item.get("NY.GDP.MKTP.PP.CD")
         wdi_lcu_gdp = wdi_item.get("NY.GDP.MKTP.CN")
-        weo_lcu_gdp = weo_item.get("NGDP")
+        weo_ngdp_source_value = _number(weo_item.get("NGDP"))
+        weo_ngdp_unit = weo_item.get("NGDP_unit", "")
+        weo_ngdp_is_usd = _is_usd_unit(weo_ngdp_unit)
+        weo_lcu_gdp = _weo_ngdp_local_currency_value(weo_item)
         weo_ppp_gdp = weo_item.get("PPPGDP")
         weo_implied_factor = (
             weo_lcu_gdp / weo_ppp_gdp
@@ -307,6 +322,12 @@ def assess(
                 if wdi_ppp_gdp is not None and wdi_implied_ppp_gdp not in (None, 0) else None
             ),
             "weo_ngdp_current_lcu": weo_lcu_gdp,
+            "weo_ngdp_source_value": weo_ngdp_source_value,
+            "weo_ngdp_unit_basis": (
+                "us_dollars_not_lcu" if weo_ngdp_is_usd
+                else "non_usd_unit_lcu_candidate" if weo_ngdp_source_value is not None
+                else "missing_or_unclassified"
+            ),
             "weo_pppgdp_current_intl_dollars_source_scale": weo_ppp_gdp,
             "weo_pppgdp_scale_multiplier_to_units": weo_ppp_multiplier,
             "weo_pppgdp_current_intl_dollars_absolute": weo_ppp_gdp_absolute,
