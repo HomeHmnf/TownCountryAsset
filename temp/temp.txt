@@ -1,710 +1,1219 @@
 
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening ?1                                                                                           󰌠 3.14.10  19:07:58
-❯ rg -n -i -C 4 'loadAvailableList|loadSelectedList|data-hierarchy|hierarchy|availableView|panel-title|dimensionId|data-value' /tmp/icp2005.html
-400-    <div class="panel-group" id="nonMetadataReportVariables">
-401-
-402-<div class="panel panel-default">
-403-    <div class="panel-heading">
-404:        <h4 class="panel-title pull-left main-title-panel">
-405-            <a id="databaseLink" title="Database List" data-toggle="collapse" data-parent="#nonMetadataReportVariables"
-406-                href="#selectedDimension_DBList" class="collapsed pull-left expandPanel" onclick="loadDatabaseList(this)">
-407-                <span class="caret"></span>
-408-                Database</a>
---
-440-                <div class="row">
-441-                    <div class=" col-md-12">
-442-                        <div class="variableListWrapper">
-443-                            <div class="additionalTools">
-444:                                <div class="availableViewTools">
-445-                                <div class="pull-left">
-446-                                <span class="db-preview-text">Database preview</span>
-447-                                <div class="btn-group" data-toggle="buttons" id="btnDBPreview">
-448-                                    <label class="btn">
---
-504-                            </div>
-505-                            <div class="clearfix">
-506-                            </div>
-507-                            <div class="variableList">
-508:                                <ul class="variableTable availableView" id="tbl_DBList" data-type="D" data-text="Database"
-509:                                    data-value="DBList">
-510-                                </ul>
-511-                                <ul class="variableTable selectedView" id="tbl_sel_DBList">
-512-                                </ul>
-513-                            </div>
---
-526-
-527-
-528-<div class="panel panel-default" id="panel_Country">
-529-    <div class="panel-heading">
-530:        <h4 class="panel-title pull-left main-title-panel">
-531-            <a data-toggle="collapse" data-parent="#nonMetadataReportVariables" href="#selectedDimension_Country"
-532-                title="Country" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Country', '[Country].[List]', this)">
-533-                <span class="caret"></span>
-534-                Country
---
-537-        <div class="statsWrapper">
-538-            <div class="statsInner">
-539-                <div class="toggleSelectionViews stats pull-right">
-540-                    <div class="element statName">
-541:                        <a href="javascript:void(0)" class="showAvailable " title="Available Country  Variables." onclick="loadAvailableList('Country', '[Country].[List]', this)">Available</a></div>
-542-                    <div class="element availableCount">&nbsp;
-543-                    </div>
-544-                    <div class="element">
-545-                        |</div>
-546-                    <div class="element statName">
-547:                        <a href="javascript:void(0)" class="showSelected" title="Selected Country  Variables." onclick="loadSelectedList('Country', '[Country].[List]', this)">Selected</a></div>
-548-                    <div class="selectionCount element forDimension" title=" Country"  >
-549-                        195
-550-                    </div>
-551-                </div>
---
-573-
-574-                                    <div class="nonclassification" id="showCountryAggOption_Country">
-575-                                        <div class="btn-group" data-toggle="buttons" >
-576-
-577:                                            <label class="btn showCountryAggOption active" data-value="All" controlId="Country">
-578-                                                <input type="radio" name="showCountryAggOption" id="showAll_Country" checked="checked">
-579-                                                All
-580-                                            </label>
-581:                                            <label class="btn showCountryAggOption" data-value="Countries" controlId="Country">
-582-                                                <input type="radio" name="showCountryAggOption" id="showCountries_Country" checked="checked">
-583-                                                Countries
-584-                                            </label>
-585:                                            <label class="btn showCountryAggOption" data-value="Aggregates" controlId="Country">
-586-                                                <input type="radio" name="showCountryAggOption" id="showAggregate_Country">
-587-                                                Aggregates
-588-                                            </label>
-589-                                        </div>
-590-                                    </div>
-591-
-592-                                   <div class="dispNone classification" id="CtryAgg_Classification_Country">
-593-                                        <div class="btn-group" data-toggle="buttons">
-594:                                            <label data-customlink="sf:body" data-text="Classification Filter - All" class="btn CtryAgg_Classification active" data-value="All">
-595-                                                <input type="radio" name="CtryAgg_Classification" id="Ctry_Classification_Country" checked="checked">
-596-                                                All
-597-                                            </label>
-598:                                            <label data-customlink="sf:body" data-text="Classification Filter - Countries" class="btn CtryAgg_Classification" data-value="Countries">
-599-                                                <input type="radio" name="CtryAgg_Classification" id="Ctry_Classification_Country">
-600-                                                Countries
-601-                                            </label>
-602:                                            <label data-customlink="sf:body" data-text="Classification Filter - Aggregates" class="btn CtryAgg_Classification" data-value="Aggregates">
-603-                                                <input type="radio" name="CtryAgg_Classification" id="Agg_Classification_Country">
-604-                                                Aggregates
-605-                                            </label>
-606-                                        </div>
---
-614-
-615-
-616-                                    <div class="clearfix"></div>
-617-                                    <div class="additionalTools">
-618:                                        <div class="availableViewTools">
-619-                                            <div class="pull-left mB5">
-620-                                                <div class="btn-group pull-left">
-621-                                                    <a data-text="Select All Country" class="btn selectAll btn-default" title="Select all">
-622-                                                        <span class="sprite icon-tick"></span>
---
-655-                                                        <div class="filterWrapper">
-656-                                                            <a data-customlink="sf:body" data-text="Filter Country" class="btn btn-xs toggleFilter btn-default" title="Filter" id="toggleFilter_Country"><span class="sprite icon-filter">
-657-                                                            </span> <span class="text">Filter</span> <span class="caret"></span></a>
-658-                                                            <div class="filterTree" id="_filterTree_Country">
-659:                                                                <div class='hierarchy' id="hierarchy_Country">
-660-                                                                    <span>
-661:                                                                        Hierarchy</span>
-662:                                                                    <select id="ddlDimHierarchy_Country" class="dimension-hierarchy dimension-hierarchy-Country"
-663-                                                                        data-type="Country">
-664-                                                                    </select>
-665-                                                                </div>
-666-                                                                <div class='tree'>
---
-718-                                    </div>
-719-
-720-                                    <div class="clearfix"></div>
-721-                                    <div class="variableList">
-722:                                        <ul class="variableTable availableView table-dimension-C" id="tbl_Country" data-type="C" data-text="Country" data-value="Country">
-723-                                        </ul>
-724:                                        <div class ="SubnationalAvailableView" data-type="C" data-text="Country" data-value="Country">
-725-                                        </div>
-726:                                        <ul class="variableTable selectedView" id="tbl_sel_Country" data-type="C" data-text="Country" data-value="Country" >
-727-                                        </ul>
-728-                                    </div>
-729-
-730-                                    <div class="clearfix"></div>
---
-866-</div>
-867-
-868-<div class="panel panel-default" id="panel_Classification">
-869-    <div class="panel-heading">
-870:        <h4 class="panel-title pull-left main-title-panel">
-871-            <a data-toggle="collapse" data-parent="#nonMetadataReportVariables" href="#selectedDimension_Classification"
-872-                title="Classification" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Classification', '[Classification].[List]', this)">
-873-                <span class="caret"></span>
-874-                Classification
---
-877-        <div class="statsWrapper">
-878-            <div class="statsInner">
-879-                <div class="toggleSelectionViews stats pull-right">
-880-                    <div class="element statName">
-881:                        <a href="javascript:void(0)" class="showAvailable " title="Available Classification  Variables." onclick="loadAvailableList('Classification', '[Classification].[List]', this)">Available</a></div>
-882-                    <div class="element availableCount">&nbsp;
-883-                    </div>
-884-                    <div class="element">
-885-                        |</div>
-886-                    <div class="element statName">
-887:                        <a href="javascript:void(0)" class="showSelected" title="Selected Classification  Variables." onclick="loadSelectedList('Classification', '[Classification].[List]', this)">Selected</a></div>
-888-                    <div class="selectionCount element forDimension" title=" Classification"  >
-889-                        16
-890-                    </div>
-891-                </div>
---
-913-
-914-                                    <div class="nonclassification" id="showCountryAggOption_Classification">
-915-                                        <div class="btn-group" data-toggle="buttons" >
-916-
-917:                                            <label class="btn showCountryAggOption active" data-value="All" controlId="Classification">
-918-                                                <input type="radio" name="showCountryAggOption" id="showAll_Classification" checked="checked">
-919-                                                All
-920-                                            </label>
-921:                                            <label class="btn showCountryAggOption" data-value="Countries" controlId="Classification">
-922-                                                <input type="radio" name="showCountryAggOption" id="showCountries_Classification" checked="checked">
-923-                                                Countries
-924-                                            </label>
-925:                                            <label class="btn showCountryAggOption" data-value="Aggregates" controlId="Classification">
-926-                                                <input type="radio" name="showCountryAggOption" id="showAggregate_Classification">
-927-                                                Aggregates
-928-                                            </label>
-929-                                        </div>
-930-                                    </div>
-931-
-932-                                   <div class="dispNone classification" id="CtryAgg_Classification_Classification">
-933-                                        <div class="btn-group" data-toggle="buttons">
-934:                                            <label data-customlink="sf:body" data-text="Classification Filter - All" class="btn CtryAgg_Classification active" data-value="All">
-935-                                                <input type="radio" name="CtryAgg_Classification" id="Ctry_Classification_Classification" checked="checked">
-936-                                                All
-937-                                            </label>
-938:                                            <label data-customlink="sf:body" data-text="Classification Filter - Countries" class="btn CtryAgg_Classification" data-value="Countries">
-939-                                                <input type="radio" name="CtryAgg_Classification" id="Ctry_Classification_Classification">
-940-                                                Countries
-941-                                            </label>
-942:                                            <label data-customlink="sf:body" data-text="Classification Filter - Aggregates" class="btn CtryAgg_Classification" data-value="Aggregates">
-943-                                                <input type="radio" name="CtryAgg_Classification" id="Agg_Classification_Classification">
-944-                                                Aggregates
-945-                                            </label>
-946-                                        </div>
---
-954-
-955-
-956-                                    <div class="clearfix"></div>
-957-                                    <div class="additionalTools">
-958:                                        <div class="availableViewTools">
-959-                                            <div class="pull-left mB5">
-960-                                                <div class="btn-group pull-left">
-961-                                                    <a data-text="Select All Classification" class="btn selectAll btn-default" title="Select all">
-962-                                                        <span class="sprite icon-tick"></span>
---
-995-                                                        <div class="filterWrapper">
-996-                                                            <a data-customlink="sf:body" data-text="Filter Classification" class="btn btn-xs toggleFilter btn-default" title="Filter" id="toggleFilter_Classification"><span class="sprite icon-filter">
-997-                                                            </span> <span class="text">Filter</span> <span class="caret"></span></a>
-998-                                                            <div class="filterTree" id="_filterTree_Classification">
-999:                                                                <div class='hierarchy' id="hierarchy_Classification">
-1000-                                                                    <span>
-1001:                                                                        Hierarchy</span>
-1002:                                                                    <select id="ddlDimHierarchy_Classification" class="dimension-hierarchy dimension-hierarchy-Classification"
-1003-                                                                        data-type="Classification">
-1004-                                                                    </select>
-1005-                                                                </div>
-1006-                                                                <div class='tree'>
---
-1058-                                    </div>
-1059-
-1060-                                    <div class="clearfix"></div>
-1061-                                    <div class="variableList">
-1062:                                        <ul class="variableTable availableView table-dimension-N" id="tbl_Classification" data-type="N" data-text="Classification" data-value="Classification">
-1063-                                        </ul>
-1064:                                        <div class ="SubnationalAvailableView" data-type="N" data-text="Classification" data-value="Classification">
-1065-                                        </div>
-1066:                                        <ul class="variableTable selectedView" id="tbl_sel_Classification" data-type="N" data-text="Classification" data-value="Classification" >
-1067-                                        </ul>
-1068-                                    </div>
-1069-
-1070-                                    <div class="clearfix"></div>
---
-1094-</div>
-1095-
-1096-<div class="panel panel-default" id="panel_Series">
-1097-    <div class="panel-heading">
-1098:        <h4 class="panel-title pull-left main-title-panel">
-1099-            <a data-toggle="collapse" data-parent="#nonMetadataReportVariables" href="#selectedDimension_Series"
-1100-                title="Series" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Series', '[Series].[List]', this)">
-1101-                <span class="caret"></span>
-1102-                Series
---
-1105-        <div class="statsWrapper">
-1106-            <div class="statsInner">
-1107-                <div class="toggleSelectionViews stats pull-right">
-1108-                    <div class="element statName">
-1109:                        <a href="javascript:void(0)" class="showAvailable " title="Available Series  Variables." onclick="loadAvailableList('Series', '[Series].[List]', this)">Available</a></div>
-1110-                    <div class="element availableCount">&nbsp;
-1111-                    </div>
-1112-                    <div class="element">
-1113-                        |</div>
-1114-                    <div class="element statName">
-1115:                        <a href="javascript:void(0)" class="showSelected" title="Selected Series  Variables." onclick="loadSelectedList('Series', '[Series].[List]', this)">Selected</a></div>
-1116-                    <div class="selectionCount element forDimension" title=" Series"  >
-1117-                        47
-1118-                    </div>
-1119-                </div>
---
-1141-
-1142-                                    <div class="nonclassification" id="showCountryAggOption_Series">
-1143-                                        <div class="btn-group" data-toggle="buttons" >
-1144-
-1145:                                            <label class="btn showCountryAggOption active" data-value="All" controlId="Series">
-1146-                                                <input type="radio" name="showCountryAggOption" id="showAll_Series" checked="checked">
-1147-                                                All
-1148-                                            </label>
-1149:                                            <label class="btn showCountryAggOption" data-value="Countries" controlId="Series">
-1150-                                                <input type="radio" name="showCountryAggOption" id="showCountries_Series" checked="checked">
-1151-                                                Countries
-1152-                                            </label>
-1153:                                            <label class="btn showCountryAggOption" data-value="Aggregates" controlId="Series">
-1154-                                                <input type="radio" name="showCountryAggOption" id="showAggregate_Series">
-1155-                                                Aggregates
-1156-                                            </label>
-1157-                                        </div>
-1158-                                    </div>
-1159-
-1160-                                   <div class="dispNone classification" id="CtryAgg_Classification_Series">
-1161-                                        <div class="btn-group" data-toggle="buttons">
-1162:                                            <label data-customlink="sf:body" data-text="Classification Filter - All" class="btn CtryAgg_Classification active" data-value="All">
-1163-                                                <input type="radio" name="CtryAgg_Classification" id="Ctry_Classification_Series" checked="checked">
-1164-                                                All
-1165-                                            </label>
-1166:                                            <label data-customlink="sf:body" data-text="Classification Filter - Countries" class="btn CtryAgg_Classification" data-value="Countries">
-1167-                                                <input type="radio" name="CtryAgg_Classification" id="Ctry_Classification_Series">
-1168-                                                Countries
-1169-                                            </label>
-1170:                                            <label data-customlink="sf:body" data-text="Classification Filter - Aggregates" class="btn CtryAgg_Classification" data-value="Aggregates">
-1171-                                                <input type="radio" name="CtryAgg_Classification" id="Agg_Classification_Series">
-1172-                                                Aggregates
-1173-                                            </label>
-1174-                                        </div>
---
-1182-
-1183-
-1184-                                    <div class="clearfix"></div>
-1185-                                    <div class="additionalTools">
-1186:                                        <div class="availableViewTools">
-1187-                                            <div class="pull-left mB5">
-1188-                                                <div class="btn-group pull-left">
-1189-                                                    <a data-text="Select All Series" class="btn selectAll btn-default" title="Select all">
-1190-                                                        <span class="sprite icon-tick"></span>
---
-1223-                                                        <div class="filterWrapper">
-1224-                                                            <a data-customlink="sf:body" data-text="Filter Series" class="btn btn-xs toggleFilter btn-default" title="Filter" id="toggleFilter_Series"><span class="sprite icon-filter">
-1225-                                                            </span> <span class="text">Filter</span> <span class="caret"></span></a>
-1226-                                                            <div class="filterTree" id="_filterTree_Series">
-1227:                                                                <div class='hierarchy' id="hierarchy_Series">
-1228-                                                                    <span>
-1229:                                                                        Hierarchy</span>
-1230:                                                                    <select id="ddlDimHierarchy_Series" class="dimension-hierarchy dimension-hierarchy-Series"
-1231-                                                                        data-type="Series">
-1232-                                                                    </select>
-1233-                                                                </div>
-1234-                                                                <div class='tree'>
---
-1286-                                    </div>
-1287-
-1288-                                    <div class="clearfix"></div>
-1289-                                    <div class="variableList">
-1290:                                        <ul class="variableTable availableView table-dimension-S" id="tbl_Series" data-type="S" data-text="Series" data-value="Series">
-1291-                                        </ul>
-1292:                                        <div class ="SubnationalAvailableView" data-type="S" data-text="Series" data-value="Series">
-1293-                                        </div>
-1294:                                        <ul class="variableTable selectedView" id="tbl_sel_Series" data-type="S" data-text="Series" data-value="Series" >
-1295-                                        </ul>
-1296-                                    </div>
-1297-
-1298-                                    <div class="clearfix"></div>
---
-1393-</div>
-1394-<div class="clearfix"></div>
-1395-<div class="panel-group customGroup dispNone" id="aggRuleTxt">
-1396-    <div class="panel panel-default">
-1397:        <h4 class="panel-title" style="display: none">
-1398-            Aggregation Rule</h4>
-1399-        <p  style="display: none">
-1400-            <em>Defines the methodologies to be used when deriving custom aggregates. These rules
-1401-                apply only to custom country groups you have created! </em><a href="#aggregationRule"
---
-1641-</div>
-1642-
-1643-<div class="panel panel-default" id="panel_Time">
-1644-    <div class="panel-heading">
-1645:        <h4 class="panel-title pull-left main-title-panel">
-1646-            <a data-text="Time" title="Time" data-toggle="collapse" data-parent="#nonMetadataReportVariables"
-1647-                href="#selectedDimension_Time" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Time', '[Time].[List]', this)">
-1648-                <span class="caret"></span>
-1649-                Time</a>
-1650-        </h4>
-1651-        <div class="statsWrapper">
-1652-            <div class="statsInner">
-1653-                <div class="pull-right panel-heading stats toggleSelectionViews">
-1654:                    <div class="element panel-title statName">
-1655-                        <a href="javascript:void(0)" class="showAvailable" title="Available Time"
-1656:                            onclick="loadAvailableList('Time', '[Time].[List]', this)">
-1657-                            Available</a></div>
-1658-                    <div class="availableCount element">
-1659-                        &nbsp;
-1660-                    </div>
-1661-                    <div class="element">
-1662-                        |</div>
-1663-                    <div class="element statName">
-1664-                        <a href="javascript:void(0)" class="showSelected" title="Selected Time"
-1665:                            onclick="loadSelectedList('Time', '[Time].[List]', this)">
-1666-                            Selected</a></div>
-1667-                    <div class="selectionCount element forDimension" title=" Time">
-1668-                        1
-1669-                    </div>
---
-1699-                        </p>
-1700-                        <div id="slider-range" data-source="Time" target-id="#tbl_Time">
-1701-                        </div>
-1702-                            <div class="additionalTools">
-1703:                                <div class="availableViewTools">
-1704-                                      <div class="pull-left mB5">
-1705-                                                <div class="btn-group pull-left">
-1706-                                                    <a data-text="Select All Time" class="btn selectAll btn-default" title="Select all">
-1707-
---
-1738-                                                        <div class="filterWrapper">
-1739-                                                            <a data-customlink="sf:body" data-text="Filter Time" class="btn btn-xs toggleFilter btn-default" title="Filter" id="toggleFilter_Time"><span class="sprite icon-filter">
-1740-                                                            </span> <span class="text">Filter</span> <span class="caret"></span></a>
-1741-                                                            <div class="filterTree" id="_filterTree_Time">
-1742:                                                                <div class='hierarchy' id="hierarchy_Time">
-1743-                                                                    <span>
-1744:                                                                        Hierarchy</span>
-1745:                                                                    <select id="ddlDimHierarchy_Time" class="dimension-hierarchy dimension-hierarchy-Time"
-1746-                                                                        data-type="Time">
-1747-                                                                    </select>
-1748-                                                                </div>
-1749-                                                                <div class='tree'>
---
-1821-                                                No variables selected</p>
-1822-                                        </div>
-1823-                                    </div>
-1824-                                    <div class="variableList" id="timedimvariableList">
-1825:                                        <ul class="variableTable availableView table-dimension-T" id="tbl_Time"
-1826:                                            data-type="T" data-text="Time" data-value="Time">
-1827-                                        </ul>
-1828-                                        <ul class="variableTable selectedView" id="tbl_sel_Time" data-type="T"
-1829:                                            data-text="Time" data-value="Time">
-1830-                                        </ul>
-1831-                                    </div>
-1832-                                    <div class="variableList" style="display:none" id="hfvariableList">
-1833-                                        <div class="tabcontent" id="hfyear">
-1834:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Year"
-1835:                                                data-type="T" data-text="Time" data-value="Time">
-1836-                                            </ul>
-1837-                                        </div>
-1838-                                        <div class="tabcontent" id="hfquater">
-1839:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Quater"
-1840:                                                data-type="T" data-text="Time" data-value="Time">
-1841-                                            </ul>
-1842-                                        </div>
-1843-                                        <div class="tabcontent" id="hfmonth">
-1844:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Month"
-1845:                                                data-type="T" data-text="Time" data-value="Time">
-1846-                                            </ul>
-1847-                                        </div>
-1848-                                        <div class="tabcontent" id="hfweek">
-1849:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Week"
-1850:                                                data-type="T" data-text="Time" data-value="Time">
-1851-                                            </ul>
-1852-                                        </div>
-1853-                                        <div class="tabcontent" id="hfday">
-1854:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Day"
-1855:                                                data-type="T" data-text="Time" data-value="Time">
-1856-                                            </ul>
-1857-                                        </div>
-1858-                                    </div>
-1859-                                </div>
---
-2131-
-2132-
-2133-<div class="panel panel-default" id="metadataReportVariables">
-2134-    <div class="panel-heading">
-2135:        <h4 class="panel-title pull-left main-title-panel">
-2136-            <a  data-toggle="collapse" data-parent="#nonMetadataReportVariables" href="#metadataAttributes" class="collapsed">
-2137-                <span class="caret"></span>
-2138-                Metadata Attributes</a>
-2139-        </h4>
---
-2167-
-2168-                                    <div class="clearfix">
-2169-                                    </div>
-2170-
-2171:                                    <div class="availableViewTools">
-2172-                                        <div class="btn-group pull-left" >
-2173-                                            <a  data-text="Select All Metadata" class="btn selectAll_Meta btn-default" title="Select all">
-2174-                                                <span class="sprite icon-tick"></span>
-2175-                                                <span class="text">Select all</span>
---
-2252-                                </div>
-2253-                                <div class="clearfix">
-2254-                                </div>
-2255-                                <div class="variableList">
-2256:                                    <ul class="variableTable availableView" id="metadataAttrTable">
-2257-                                    </ul>
-2258-                                    <ul class="variableTable selectedView" id="tbl_sel_MetaAttr">
-2259-                                    </ul>
-2260-                                </div>
---
-2283-
-2284-
-2285-    <div class="panel panel-default">
-2286-        <div class="panel-heading">
-2287:            <h4 class="panel-title">
-2288-                <a data-toggle="collapse" data-parent="#tableOptionsAccordion" href="#tableOrientationOption"><span class="caret"></span>Orientation</a>
-2289-            </h4>
-2290-        </div>
-2291-        <div id="tableOrientationOption" class="panel-collapse collapse in">
---
-2354-
-2355-
-2356-    <div class="panel panel-default">
-2357-        <div class="panel-heading">
-2358:            <h4 class="panel-title">
-2359-                <a data-toggle="collapse" data-parent="#tableOptionsAccordion" href="#tableDisplayOption"
-2360-                    class="collapsed"><span class="caret"></span>Display</a>
-2361-            </h4>
-2362-        </div>
---
-2401-
-2402-
-2403-    <div class="panel panel-default">
-2404-        <div class="panel-heading">
-2405:            <h4 class="panel-title">
-2406-                <a data-toggle="collapse" data-parent="#tableOptionsAccordion" href="#tableFormatNumberOption"
-2407-                    class="collapsed"><span class="caret"></span>Format Numbers</a>
-2408-            </h4>
-2409-        </div>
---
-2459-                <!--Format Series -->
-2460-                 <hr />
-2461-                <div class="panel-group customGroup" id="formatSeriesPanel">
-2462-                    <div class="panel panel-default">
-2463:                        <h4 class="panel-title">
-2464-                            Format series</h4>
-2465-                        <div class="panel-heading">
-2466-                            <a data-toggle="collapse" data-parent="#formatSeriesPanel" href="#formatSeries" class="collapsed btn btn-xs btn-default"
-2467-                                id="btnFormatSeries">Define format<span class="caret"></span></a>
---
-2480-
-2481-
-2482-    <div class="panel panel-default">
-2483-        <div class="panel-heading">
-2484:            <h4 class="panel-title">
-2485-                <a data-toggle="collapse" data-parent="#tableOptionsAccordion" href="#tableHeaderFooterOption"
-2486-                    class="collapsed"><span class="caret"></span>Table Header & Footer</a>
-2487-            </h4>
-2488-        </div>
---
-2514-
-2515-
-2516-    <div class="panel panel-default">
-2517-        <div class="panel-heading">
-2518:            <h4 class="panel-title">
-2519-                <a data-toggle="collapse" data-parent="#tableOptionsAccordion" href="#tableAdvancedOptions"
-2520-                    class="collapsed"><span class="caret"></span>Advanced options</a>
-2521-            </h4>
-2522-        </div>
---
-2524-            <div class="panel-body">
-2525-                <div class="row controls">
-2526-                    <div class="col-md-12">
-2527-                        <label class="wadv pull-left">
-2528:                            Hierarchy</label>
-2529:                        <select id="ddlTableHierarchy" class="w100">
-2530-                            <option value="NONE">None</option>
-2531-                            <option value="ROW">Row</option>
-2532-                            <option value="COLUMN">Column</option>
-2533-                            <option value="BOTH">Both</option>
---
-2582-
-2583-                <hr />
-2584-                <div class="panel-group customGroup" id="comparatorReportPanel">
-2585-                    <div class="panel panel-default">
-2586:                        <h4 class="panel-title">
-2587-                            Comparator Report</h4>
-2588-                        <div class="panel-heading">
-2589-                            <a id="btnComparatorReport" data-toggle="collapse" data-parent="#comparatorReportPanel"
-2590-                                href="#comparatorReport" class="collapsed btn btn-xs btn-default">Select Variables
---
-2600-                </div>
-2601-                <hr />
-2602-                <div class="panel-group customGroup" id="hideColumnPanel">
-2603-                    <div class="panel panel-default">
-2604:                        <h4 class="panel-title">
-2605-                            Hide Columns</h4>
-2606-                        <div class="panel-heading">
-2607-                            <a id="btnHideColumns" data-toggle="collapse" data-parent="#hideColumnPanel" href="#hideColumns"
-2608-                                class="collapsed btn btn-xs btn-default">Choose columns to hide <span class="caret">
---
-2632-
-2633-
-2634-<div class="panel panel-default">
-2635-    <div class="panel-heading">
-2636:        <h4 class="panel-title">
-2637-            <a data-toggle="collapse" href="#tableTemplateOption"><span class="caret"></span>Template</a>
-2638-        </h4>
-2639-    </div>
-2640-    <div id="tableTemplateOption" class="panel-collapse collapse in">
---
-2711-<div class="tab-pane" id="embed">
-2712-    <div class="panel-group" id="embedOptionsAccordion">
-2713-        <div class="panel panel-default">
-2714-            <div class="panel-heading">
-2715:                <h4 class="panel-title pull-left">
-2716-                    <a data-toggle="collapse" data-parent="#embedOptionsAccordion" href="#embedDimensions"><span class="caret"></span>
-2717-                        Embed Dimensions</a>
-2718-                </h4>
-2719-                <div class="clearfix">
---
-2772-            </div>
-2773-        </div>
-2774-        <div class="panel panel-default">
-2775-            <div class="panel-heading">
-2776:                <h4 class="panel-title pull-left">
-2777-                    <a data-toggle="collapse" data-parent="#embedOptionsAccordion" href="#embedElements"
-2778-                        class="collapsed"><span class="caret"></span>Choose Elements to Display</a>
-2779-                </h4>
-2780-                <div class="clearfix">
---
-2867-            </div>
-2868-        </div>
-2869-        <div class="panel panel-default" id="availableThemes">
-2870-            <div class="panel-heading">
-2871:                <h4 class="panel-title pull-left">
-2872-                    <a data-toggle="collapse" data-parent="#embedOptionsAccordion" href="#embedThemes"
-2873-                        class="collapsed"><span class="caret"></span>Toolbar Themes</a>
-2874-                </h4>
-2875-                <div class="clearfix">
---
-2892-            </div>
-2893-        </div>
-2894-        <div class="panel panel-default">
-2895-            <div class="panel-heading">
-2896:                <h4 class="panel-title pull-left">
-2897-                    <a data-toggle="collapse" data-parent="#embedOptionsAccordion" href="#embedCanvasOptions"
-2898-                        class="collapsed"><span class="caret"></span>Canvas Options</a>
-2899-                </h4>
-2900-                <div class="clearfix">
---
-2926-            </div>
-2927-        </div>
-2928-        <div class="panel panel-default">
-2929-            <div class="panel-heading">
-2930:                <h4 class="panel-title pull-left">
-2931-                    <a data-toggle="collapse" data-parent="#embedOptionsAccordion" href="#embedTitleDesc"
-2932-                        class="collapsed"><span class="caret"></span>Title & Description</a>
-2933-                </h4>
-2934-                <div class="clearfix">
---
-3141-            </div>
-3142-        </div>
-3143-        <div class="panel panel-default">
-3144-            <div class="panel-heading">
-3145:                <h4 class="panel-title pull-left">
-3146-                    <a data-toggle="collapse" data-parent="#embedOptionsAccordion" href="#embedIframecode" class="collapsed"><span class="caret"></span>Embed Code</a>
-3147-                </h4>
-3148-                <div class="clearfix">
-3149-                </div>
---
-3960-            <input type="hidden" name="hdnReportID" id="hdnReportID" value="121005" />
-3961-            <input type="hidden" name="hdnReportDetails" id="hdnReportDetails" value="{&quot;ReportType&quot;:&quot;TABLE&quot;,&quot;ReportID&quot;:&quot;121005&quot;,&quot;ReportName&quot;:&quot;ICP_2005&quot;,&quot;ReportDesc&quot;:&quot;Full ICP 2005 dataset&quot;,&quot;ShareReport&quot;:true,&quot;Snapshot&quot;:false,&quot;ReportLabelID&quot;:&quot;92&quot;,&quot;ReportLabelName&quot;:null,&quot;ReportURL&quot;:&quot;ICP_2005/id/4129804e&quot;}" />
-3962-            <input type="hidden" name="hdnReportURL" id="hdnReportURL" value="ICP_2005/id/4129804e" />
-3963-            <input type="hidden" name="hdnReportOptionsNew" id="hdnReportOptionsNew" />
-3964:            <input type="hidden" name="hdnReportOptionsCur" id="hdnReportOptionsCur" value="{&quot;IsOrientationTemplate&quot;:false,&quot;SelectedOrientation&quot;:&quot;&quot;,&quot;OrientationCustom&quot;:[{&quot;dimensionId&quot;:&quot;Country&quot;,&quot;dimensionAxis&quot;:&quot;0&quot;},{&quot;dimensionId&quot;:&quot;Classification&quot;,&quot;dimensionAxis&quot;:&quot;2&quot;},{&quot;dimensionId&quot;:&quot;Series&quot;,&quot;dimensionAxis&quot;:&quot;1&quot;},{&quot;dimensionId&quot;:&quot;Time&quot;,&quot;dimensionAxis&quot;:&quot;0&quot;}],&quot;NoOfRowsPerPage&quot;:&quot;50&quot;,&quot;ShowNotes&quot;:true,&quot;EmptyFormat&quot;:&quot;..&quot;,&quot;ReportLevelScale&quot;:true,&quot;Scale&quot;:&quot;1&quot;,&quot;Precision&quot;:&quot;0.0&quot;,&quot;ThousandSeparator&quot;:true,&quot;ReportHeader&quot;:&quot;&quot;,&quot;ReportFooter&quot;:&quot;&quot;,&quot;AdvancedOptions&quot;:{&quot;Hierarchy&quot;:&quot;NONE&quot;,&quot;RolloverDirection&quot;:&quot;none&quot;,&quot;RolloverInterval&quot;:null,&quot;HideEmptyRow&quot;:false,&quot;HideEmptyColumn&quot;:false},&quot;ReportNotes&quot;:&quot;&quot;}" />
-3965-            <input type="hidden" name="hdnSelectVars" id="hdnSelectVars" />
-3966-            <input type="hidden" name="hdnSelectMetaAttrib" id="hdnSelectMetaAttrib" />
-3967-            <input type="hidden" name="hdnChartOptions" id="hdnChartOptions" />
-3968-            <input type="hidden" name="hdnDimensionDetails" id="hdnDimensionDetails" />
+    ~/Projects/Python/TownAndCountry   work/compiler-hardening ?1                                                                                           󰌠 3.14.10  19:22:45
+❯ rg -n -i -C 28 \
+          'function loadDimensionList|loadDimensionList\s*=|function initSelectVariables|initSelectVariables\s*=|GetDimensionJSON|gbl_array_data|dimdata\.DH|controlid.*hierarchy' \
+          /tmp/icp2005_selectvariable.js /tmp/icp2005_reportcommon.js \
+          > /tmp/icp2005_dimension_flow.txt
 
-
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening !1 ?1                                                                                  3s  󰌠 3.14.10  19:08:16
-❯ rg -n -i 'gbl_array_data|gbl_array_member_selected|selectvariable|report.*init|dimension' /tmp/icp2005.html
-38:    <link href="/styles/reports/selectvariable.css"  rel="stylesheet" />
-39:    <link href="/styles/reports/selectvariableIE.css" rel="stylesheet" />
-76:        var gbl_select_variables_url = '/AjaxDownload/SelectVariableHandler.ashx';
-106:        var gbl_msg_dimenion_selection="Please select the dimension members for all dimensions to proceed further.";
-168:        var searchdata = '{"searchTerm":"","searchResults":0,"searchFilters":"","pagination":0,"searchType":"selectvariables","sortBy":"alphabetical","section":"editreports"}';
-406:                href="#selectedDimension_DBList" class="collapsed pull-left expandPanel" onclick="loadDatabaseList(this)">
-435:    <div id="selectedDimension_DBList" class="panel-collapse selectedDimensionPanel  collapse">
-531:            <a data-toggle="collapse" data-parent="#nonMetadataReportVariables" href="#selectedDimension_Country"
-532:                title="Country" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Country', '[Country].[List]', this)">
-548:                    <div class="selectionCount element forDimension" title=" Country"  >
-559:    <div id="selectedDimension_Country" class="panel-collapse collapse selectedDimensionPanel">
-564:                <div class="dimensionHolder">
-565:                    <div class="dimensionHolderInner">
-662:                                                                    <select id="ddlDimHierarchy_Country" class="dimension-hierarchy dimension-hierarchy-Country"
-676:                                                        data-target="#zoomView" target_panel="#panel_Country" destination_panel="#selectedDimension_Country">
-710:                                                        data-target="#zoomView" target_panel="#panel_Country" destination_panel="#selectedDimension_Country">
-722:                                        <ul class="variableTable availableView table-dimension-C" id="tbl_Country" data-type="C" data-text="Country" data-value="Country">
-861:            destination_panel="#selectedDimension_Country" onclick="loadDimensionList('Country', '[Country].[List]', this)" parent-li="#li_hidden_Country">
-871:            <a data-toggle="collapse" data-parent="#nonMetadataReportVariables" href="#selectedDimension_Classification"
-872:                title="Classification" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Classification', '[Classification].[List]', this)">
-888:                    <div class="selectionCount element forDimension" title=" Classification"  >
-899:    <div id="selectedDimension_Classification" class="panel-collapse collapse selectedDimensionPanel">
-904:                <div class="dimensionHolder">
-905:                    <div class="dimensionHolderInner">
-1002:                                                                    <select id="ddlDimHierarchy_Classification" class="dimension-hierarchy dimension-hierarchy-Classification"
-1016:                                                        data-target="#zoomView" target_panel="#panel_Classification" destination_panel="#selectedDimension_Classification">
-1050:                                                        data-target="#zoomView" target_panel="#panel_Classification" destination_panel="#selectedDimension_Classification">
-1062:                                        <ul class="variableTable availableView table-dimension-N" id="tbl_Classification" data-type="N" data-text="Classification" data-value="Classification">
-1089:            destination_panel="#selectedDimension_Classification" onclick="loadDimensionList('Classification', '[Classification].[List]', this)" parent-li="#li_hidden_Classification">
-1099:            <a data-toggle="collapse" data-parent="#nonMetadataReportVariables" href="#selectedDimension_Series"
-1100:                title="Series" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Series', '[Series].[List]', this)">
-1116:                    <div class="selectionCount element forDimension" title=" Series"  >
-1127:    <div id="selectedDimension_Series" class="panel-collapse collapse selectedDimensionPanel">
-1132:                <div class="dimensionHolder">
-1133:                    <div class="dimensionHolderInner">
-1230:                                                                    <select id="ddlDimHierarchy_Series" class="dimension-hierarchy dimension-hierarchy-Series"
-1244:                                                        data-target="#zoomView" target_panel="#panel_Series" destination_panel="#selectedDimension_Series">
-1278:                                                        data-target="#zoomView" target_panel="#panel_Series" destination_panel="#selectedDimension_Series">
-1290:                                        <ul class="variableTable availableView table-dimension-S" id="tbl_Series" data-type="S" data-text="Series" data-value="Series">
-1636:            destination_panel="#selectedDimension_Series" onclick="loadDimensionList('Series', '[Series].[List]', this)" parent-li="#li_hidden_Series">
-1647:                href="#selectedDimension_Time" class="collapsed pull-left expandPanel" onclick="loadDimensionList('Time', '[Time].[List]', this)">
-1667:                    <div class="selectionCount element forDimension" title=" Time">
-1678:    <div id="selectedDimension_Time" class="panel-collapse collapse selectedDimensionTime selectedDimensionPanel">
-1682:              <div class="dimensionHolder">
-1683:                       <div class="dimensionHolderInner" id="rowTimeDim">
-1745:                                                                    <select id="ddlDimHierarchy_Time" class="dimension-hierarchy dimension-hierarchy-Time"
-1759:            destination_panel="#selectedDimension_Time" destination_type="T">
-1813:                                                        data-target="#zoomView" target_panel="#panel_Time" destination_panel="#selectedDimension_Time" destination_type="T">
-1825:                                        <ul class="variableTable availableView table-dimension-T" id="tbl_Time"
-1834:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Year"
-1839:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Quater"
-1844:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Month"
-1849:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Week"
-1854:                                            <ul class="variableTable availableView table-dimension-T" id="tbl_Time_Day"
-2035:            destination_panel="#selectedDimension_Time" onclick="loadDimensionList('Time', '[Time].[List]', this)" destination_type="T">
-2158:    <div id="metadataAttributes" class="panel-collapse collapse selectedDimensionTime selectedDimensionPanel">
-2160:            <div class="dimensionHolder">
-2161:                <div class="dimensionHolderInner" id="metadataDimInner">
-2716:                    <a data-toggle="collapse" data-parent="#embedOptionsAccordion" href="#embedDimensions"><span class="caret"></span>
-2717:                        Embed Dimensions</a>
-2724:            <div id="embedDimensions" class="panel-collapse collapse in">
-2732:                            <div class="btn-group" data-toggle="buttons" id="divEmbedDimensions">
-2789:                            <input type="checkbox" value="" id="chkDimensionDpDwn" checked="checked" />
-2790:                           Dimension Dropdown
-2793:                    <div class="checkbox" id="divMetadataDimensionDpDwn" style="display: none;">
-2795:                            <input type="checkbox" value="" id="chkMetadataDimensionDpDwn" checked="checked" />
-3302:                    <ul class="list-unstyled list-inline" id="ul-addMoreDimension">
-3511:                                Please select variables from each of the following dimensions to view a report. You can select from left panel or by clicking the links above.
-3514:                                    <ul id="availableDimensions" class="mT10">
-3964:            <input type="hidden" name="hdnReportOptionsCur" id="hdnReportOptionsCur" value="{&quot;IsOrientationTemplate&quot;:false,&quot;SelectedOrientation&quot;:&quot;&quot;,&quot;OrientationCustom&quot;:[{&quot;dimensionId&quot;:&quot;Country&quot;,&quot;dimensionAxis&quot;:&quot;0&quot;},{&quot;dimensionId&quot;:&quot;Classification&quot;,&quot;dimensionAxis&quot;:&quot;2&quot;},{&quot;dimensionId&quot;:&quot;Series&quot;,&quot;dimensionAxis&quot;:&quot;1&quot;},{&quot;dimensionId&quot;:&quot;Time&quot;,&quot;dimensionAxis&quot;:&quot;0&quot;}],&quot;NoOfRowsPerPage&quot;:&quot;50&quot;,&quot;ShowNotes&quot;:true,&quot;EmptyFormat&quot;:&quot;..&quot;,&quot;ReportLevelScale&quot;:true,&quot;Scale&quot;:&quot;1&quot;,&quot;Precision&quot;:&quot;0.0&quot;,&quot;ThousandSeparator&quot;:true,&quot;ReportHeader&quot;:&quot;&quot;,&quot;ReportFooter&quot;:&quot;&quot;,&quot;AdvancedOptions&quot;:{&quot;Hierarchy&quot;:&quot;NONE&quot;,&quot;RolloverDirection&quot;:&quot;none&quot;,&quot;RolloverInterval&quot;:null,&quot;HideEmptyRow&quot;:false,&quot;HideEmptyColumn&quot;:false},&quot;ReportNotes&quot;:&quot;&quot;}" />
-3968:            <input type="hidden" name="hdnDimensionDetails" id="hdnDimensionDetails" />
-3973:            <input type="hidden" name="hdnAbobeText" id="hdnAbobeText" value="{&quot;databaseName&quot;:&quot;International Comparison Program (ICP) 2005&quot;,&quot;Dimensions&quot;:{&quot;Country&quot;:[&quot;Afghanistan&quot;,&quot;AFRICA&quot;,&quot;Albania&quot;,&quot;Algeria&quot;,&quot;Angola&quot;,&quot;Antigua and Barbuda&quot;,&quot;Argentina&quot;,&quot;Armenia&quot;,&quot;ASIA AND THE PACIFIC&quot;,&quot;Australia&quot;,&quot;Austria&quot;,&quot;Azerbaijan&quot;,&quot;Bahamas, The&quot;,&quot;Bahrain&quot;,&quot;Bangladesh&quot;,&quot;Barbados&quot;,&quot;Belarus&quot;,&quot;Belgium&quot;,&quot;Belize&quot;,&quot;Benin&quot;,&quot;Bhutan&quot;,&quot;Bolivia&quot;,&quot;Bosnia and Herzegovina&quot;,&quot;Botswana&quot;,&quot;Brazil&quot;,&quot;Brunei Darussalam&quot;,&quot;Bulgaria&quot;,&quot;Burkina Faso&quot;,&quot;Burundi&quot;,&quot;Cabo Verde&quot;,&quot;Cambodia&quot;,&quot;Cameroon&quot;,&quot;Canada&quot;,&quot;Central African Republic&quot;,&quot;Chad&quot;,&quot;Chile&quot;,&quot;China&quot;,&quot;CIS&quot;,&quot;Colombia&quot;,&quot;Comoros&quot;,&quot;Congo, Dem. Rep.&quot;,&quot;Congo, Rep.&quot;,&quot;Costa Rica&quot;,&quot;Cote d\u0027Ivoire&quot;,&quot;Croatia&quot;,&quot;Cyprus&quot;,&quot;Czech Republic&quot;,&quot;Denmark&quot;,&quot;Djibouti&quot;,&quot;Dominica&quot;,&quot;Dominican Republic&quot;,&quot;Ecuador&quot;,&quot;Egypt, Arab Rep. (AFR)&quot;,&quot;El Salvador&quot;,&quot;Equatorial Guinea&quot;,&quot;Eritrea&quot;,&quot;Estonia&quot;,&quot;Eswatini&quot;,&quot;Ethiopia&quot;,&quot;EUROSTAT-OECD&quot;,&quot;Fiji&quot;,&quot;Finland&quot;,&quot;France&quot;,&quot;Gabon&quot;,&quot;Gambia, The&quot;,&quot;Georgia&quot;,&quot;Germany&quot;,&quot;Ghana&quot;,&quot;Greece&quot;,&quot;Grenada&quot;,&quot;Guatemala&quot;,&quot;Guinea&quot;,&quot;Guinea-Bissau&quot;,&quot;Guyana&quot;,&quot;Haiti&quot;,&quot;Honduras&quot;,&quot;Hong Kong, China&quot;,&quot;Hungary&quot;,&quot;Iceland&quot;,&quot;India&quot;,&quot;Indonesia&quot;,&quot;Iran, Islamic Rep.&quot;,&quot;Iraq&quot;,&quot;Ireland&quot;,&quot;Israel&quot;,&quot;Italy&quot;,&quot;Jamaica&quot;,&quot;Japan&quot;,&quot;Jordan&quot;,&quot;Kazakhstan&quot;,&quot;Kenya&quot;,&quot;Kiribati&quot;,&quot;Korea, Rep.&quot;,&quot;Kuwait&quot;,&quot;Kyrgyz Republic&quot;,&quot;Lao PDR&quot;,&quot;Latvia&quot;,&quot;Lebanon&quot;,&quot;Lesotho&quot;,&quot;Liberia&quot;,&quot;Libya&quot;,&quot;Lithuania&quot;,&quot;Luxembourg&quot;,&quot;Macao, China&quot;,&quot;Madagascar&quot;,&quot;Malawi&quot;,&quot;Malaysia&quot;,&quot;Maldives&quot;,&quot;Mali&quot;,&quot;Malta&quot;,&quot;Marshall Islands&quot;,&quot;Mauritania&quot;,&quot;Mauritius&quot;,&quot;Mexico&quot;,&quot;Micronesia, Fed. Sts.&quot;,&quot;Moldova&quot;,&quot;Mongolia&quot;,&quot;Montenegro&quot;,&quot;Morocco&quot;,&quot;Mozambique&quot;,&quot;Myanmar&quot;,&quot;Namibia&quot;,&quot;Nepal&quot;,&quot;Netherlands&quot;,&quot;New Zealand&quot;,&quot;Nicaragua&quot;,&quot;Niger&quot;,&quot;Nigeria&quot;,&quot;North Macedonia&quot;,&quot;Norway&quot;,&quot;Oman&quot;,&quot;Pakistan&quot;,&quot;Palau&quot;,&quot;Panama&quot;,&quot;Papua New Guinea&quot;,&quot;Paraguay&quot;,&quot;Peru&quot;,&quot;Philippines&quot;,&quot;Poland&quot;,&quot;Portugal&quot;,&quot;Qatar&quot;,&quot;Romania&quot;,&quot;Russian Federation (EUO)&quot;,&quot;Rwanda&quot;,&quot;Samoa&quot;,&quot;San Marino&quot;,&quot;Sao Tome and Principe&quot;,&quot;Saudi Arabia&quot;,&quot;Senegal&quot;,&quot;Serbia&quot;,&quot;Seychelles&quot;,&quot;Sierra Leone&quot;,&quot;Singapore&quot;,&quot;Slovak Republic&quot;,&quot;Slovenia&quot;,&quot;Solomon Islands&quot;,&quot;Somalia&quot;,&quot;South Africa&quot;,&quot;SOUTH AMERICA&quot;,&quot;Spain&quot;,&quot;Sri Lanka&quot;,&quot;St. Kitts and Nevis&quot;,&quot;St. Lucia&quot;,&quot;St. Vincent and the Grenadines&quot;,&quot;Sudan&quot;,&quot;Suriname&quot;,&quot;Sweden&quot;,&quot;Switzerland&quot;,&quot;Syrian Arab Republic&quot;,&quot;Taiwan, China&quot;,&quot;Tajikistan&quot;,&quot;Tanzania&quot;,&quot;Thailand&quot;,&quot;Timor-Leste&quot;,&quot;Togo&quot;,&quot;Tonga&quot;,&quot;Trinidad and Tobago&quot;,&quot;Tunisia&quot;,&quot;Turkey&quot;,&quot;Turkmenistan&quot;,&quot;Uganda&quot;,&quot;Ukraine&quot;,&quot;United Arab Emirates&quot;,&quot;United Kingdom&quot;,&quot;United States&quot;,&quot;Uruguay&quot;,&quot;Uzbekistan&quot;,&quot;Vanuatu&quot;,&quot;Venezuela, RB&quot;,&quot;Vietnam&quot;,&quot;WESTERN ASIA&quot;,&quot;WORLD&quot;,&quot;Yemen, Rep.&quot;,&quot;Zambia&quot;,&quot;Zimbabwe&quot;],&quot;Classification&quot;:[&quot;Exchange Rates&quot;,&quot;Expenditure shares (GDP = 100)&quot;,&quot;Expenditures (billion LCU)&quot;,&quot;Global PPPs&quot;,&quot;Index of nominal expenditures per capita (United States  = 100)&quot;,&quot;Index of nominal expenditures per capita (world = 100)&quot;,&quot;Index of real expenditures per capita (United States  = 100)&quot;,&quot;Index of real expenditures per capita (world = 100)&quot;,&quot;Nominal expenditures (billion U.S. dollars)&quot;,&quot;Nominal expenditures per capita (U.S. dollars)&quot;,&quot;Nominal expenditures: country and regional shares (world = 100)&quot;,&quot;Population&quot;,&quot;Price level index (world = 100)&quot;,&quot;Real expenditures (billion U.S. dollars)&quot;,&quot;Real expenditures per capita (U.S. dollars)&quot;,&quot;Real expenditures: country and regional shares (world = 100)&quot;],&quot;Series&quot;:[&quot;100000:GROSS DOMESTIC PRODUCT&quot;,&quot;110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS&quot;,&quot;110100:FOOD AND NON-ALCOHOLIC BEVERAGES&quot;,&quot;110110:FOOD&quot;,&quot;110111:Bread and cereals (Class)&quot;,&quot;110112:Meat (Class)&quot;,&quot;110113:Fish and seafood (Class)&quot;,&quot;110114:Milk, cheese and eggs (Class)&quot;,&quot;110115:Oils and fats (Class)&quot;,&quot;110116:Fruit (Class)&quot;,&quot;110117:Vegetables (Class)&quot;,&quot;110118:Sugar, jam, honey, chocolate and confectionery (Class)&quot;,&quot;110119:Food products nec (Class)&quot;,&quot;110120:NON-ALCOHOLIC BEVERAGES&quot;,&quot;110200:ALCOHOL BEVERAGES, TOBACCO AND NARCOTICS&quot;,&quot;110210:ALCOHOL BEVERAGES&quot;,&quot;110220:TOBACCO&quot;,&quot;110300:CLOTHING AND FOOTWEAR&quot;,&quot;110400:HOUSING, WATER, ELECTRICITY, GAS, AND OTHER FUELS&quot;,&quot;110500:FURNISHING, HOUSEHOLD EQUIPMENT AND ROUTINE MAINTENANCE OF THE HOUSE&quot;,&quot;110600:HEALTH - HHC (Category)&quot;,&quot;110700:TRANSPORT&quot;,&quot;110710:PURCHASE OF VEHICLES&quot;,&quot;110730:TRANSPORT SERVICES&quot;,&quot;110800:COMMUNICATION&quot;,&quot;111100:RESTAURANTS AND HOTELS&quot;,&quot;111300:BALANCE OF EXPENDITURES OF RESIDENTS ABROAD AND EXPENDITURES OF NON-RESIDENTS IN THE ECONOMIC TERRITORY&quot;,&quot;130000:INDIVIDUAL CONSUMPTION EXPENDITURE BY GOVERNMENT&quot;,&quot;140000:COLLECTIVE CONSUMPTION EXPENDITURE BY GOVERNMENT&quot;,&quot;150000:GROSS FIXED CAPITAL FORMATION&quot;,&quot;150100:MACHINERY AND EQUIPMENT&quot;,&quot;150200:CONSTRUCTION&quot;,&quot;150300:OTHER PRODUCTS&quot;,&quot;160100:CHANGES IN INVENTORIES&quot;,&quot;160200:ACQUISITIONS LESS DISPOSALS OF VALUABLES&quot;,&quot;170000:BALANCE OF EXPORTS AND IMPORTS&quot;,&quot;9020000:ACTUAL INDIVIDUAL CONSUMPTION (Analytical Category)&quot;,&quot;9060000:ACTUAL HOUSING, WATER, ELECTRICITY, GAS AND OTHER FUELS&quot;,&quot;9080000:HEALTH (Analytical Category)&quot;,&quot;9110000:ACTUAL RECREATION AND CULTURE&quot;,&quot;9120000:EDUCATION (Analytical Category)&quot;,&quot;9140000:ACTUAL MISCELLANEOUS GOODS AND SERVICES&quot;,&quot;9250000:DOMESTIC ABSORPTION&quot;,&quot;9260000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS WITHOUT HOUSING&quot;,&quot;SP.EXCHG.RATE.ICP:Exchange Rate Value&quot;,&quot;SP.POP.TOTL.ICP.ZS:Population shares (World=100)&quot;,&quot;SP.POP.TOTL.ICP:Population&quot;],&quot;Time&quot;:[&quot;2005&quot;]}}" />
-3997:    <script type="text/javascript" src="/scripts/reports/selectvariable.js"></script>
-4002:    <script type="text/javascript" src="/scripts/reports/selectvariableadvanced.js"></script>
-4078:            initSelectVariables();
+  cat /tmp/icp2005_dimension_flow.txt
+/tmp/icp2005_selectvariable.js-7-//    endtime = endtime.toDateString() + " " + endtime.toLocaleTimeString();
+/tmp/icp2005_selectvariable.js-8-
+/tmp/icp2005_selectvariable.js-9-//    $.ajax({
+/tmp/icp2005_selectvariable.js-10-//        type: "POST",
+/tmp/icp2005_selectvariable.js-11-//        async: true,
+/tmp/icp2005_selectvariable.js-12-//        url: gbl_report_methods + "/TimeLogger",
+/tmp/icp2005_selectvariable.js-13-//        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-14-//        data: "{item: '" + item + "', starttime: '" + starttime + "', endtime: '" + endtime + "'}",
+/tmp/icp2005_selectvariable.js-15-//        dataType: "json",
+/tmp/icp2005_selectvariable.js-16-//        success: function (data) {
+/tmp/icp2005_selectvariable.js-17-//            console.log(starttime + " -> " + endtime + " : " + data.d);
+/tmp/icp2005_selectvariable.js-18-//        },
+/tmp/icp2005_selectvariable.js-19-//        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-20-//            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-21-//        }
+/tmp/icp2005_selectvariable.js-22-//    });
+/tmp/icp2005_selectvariable.js-23-//}
+/tmp/icp2005_selectvariable.js-24-
+/tmp/icp2005_selectvariable.js-25-var selectionItemStr = "<li>  <input type='checkbox' checked='checked' class='chkSelectElement' id='selected_";
+/tmp/icp2005_selectvariable.js-26-
+/tmp/icp2005_selectvariable.js-27-var oldList = "";
+/tmp/icp2005_selectvariable.js-28-
+/tmp/icp2005_selectvariable.js-29-var customIndicatorLi = "<li class='selected'> <a href='javascript:void(0)' onclick='viewMetaData(this)'><span class='metadataIcon sprite icon-info'></span></a>  <span class='glyphicon glyphicon-plus-sign plusIcon'></span> <input type='checkbox' checked='checked' class='chkSelectElement' id='select_";
+/tmp/icp2005_selectvariable.js-30-var customIndicatorLiMiddle = "</span>  <a href='javascript:void(0)'  class='editLnk'";
+/tmp/icp2005_selectvariable.js-31-var customIndicatorLiTail = ">Edit</a></li>";
+/tmp/icp2005_selectvariable.js-32-
+/tmp/icp2005_selectvariable.js-33-var agentWidth = 0;
+/tmp/icp2005_selectvariable.js-34-
+/tmp/icp2005_selectvariable.js:35:var gbl_array_data = {};
+/tmp/icp2005_selectvariable.js-36-var gbl_high_freequencyenabled;
+/tmp/icp2005_selectvariable.js-37-var gbl_high_frequency_array_data = {};
+/tmp/icp2005_selectvariable.js-38-var gbl_time_control_Id;
+/tmp/icp2005_selectvariable.js-39-var gbl_time_target_Id;
+/tmp/icp2005_selectvariable.js-40-var gbl_array_member_list = {};
+/tmp/icp2005_selectvariable.js-41-var gbl_array_member_selected = {};
+/tmp/icp2005_selectvariable.js-42-var gblselectionChanged = {};
+/tmp/icp2005_selectvariable.js-43-var gbl_array_member_selected_clone = {};
+/tmp/icp2005_selectvariable.js-44-var gbl_array_book_attributes;
+/tmp/icp2005_selectvariable.js-45-var threshold = 3000;
+/tmp/icp2005_selectvariable.js-46-var gbl_subnationalHierarchy;
+/tmp/icp2005_selectvariable.js-47-var gbl_start_var = 1;
+/tmp/icp2005_selectvariable.js-48-var gbl_end_var = threshold;
+/tmp/icp2005_selectvariable.js-49-var gbl_remove_search = false;
+/tmp/icp2005_selectvariable.js-50-var gbl_display_list = {};
+/tmp/icp2005_selectvariable.js-51-var gbl_hierarchy = '';
+/tmp/icp2005_selectvariable.js-52-
+/tmp/icp2005_selectvariable.js-53-var startText = "";
+/tmp/icp2005_selectvariable.js-54-var endText = "";
+/tmp/icp2005_selectvariable.js-55-
+/tmp/icp2005_selectvariable.js-56-var gbl_start_var_time = 1;
+/tmp/icp2005_selectvariable.js-57-var gbl_end_var_time = threshold;
+/tmp/icp2005_selectvariable.js-58-var gbl_selected_time_dim_tab;
+/tmp/icp2005_selectvariable.js-59-var timeDimArray = [];
+/tmp/icp2005_selectvariable.js-60-var liCounter = 0;
+/tmp/icp2005_selectvariable.js-61-var timePaging = false;
+/tmp/icp2005_selectvariable.js-62-var isdownloadlimit = false;
+/tmp/icp2005_selectvariable.js-63-var gbl_SubnationalFilter = false;
+/tmp/icp2005_selectvariable.js-64-var gbl_SubnationalLevelData = [];
+/tmp/icp2005_selectvariable.js-65-var gbl_subnationalTotalCount = 0;
+/tmp/icp2005_selectvariable.js-66-
+/tmp/icp2005_selectvariable.js-67-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-68-/********************************************Initialization for select variable********************************************************************/
+/tmp/icp2005_selectvariable.js-69-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js:70:function initSelectVariables() {
+/tmp/icp2005_selectvariable.js-71-    initMetadataView();
+/tmp/icp2005_selectvariable.js-72-}
+/tmp/icp2005_selectvariable.js-73-
+/tmp/icp2005_selectvariable.js-74-$(document).ready(function () {
+/tmp/icp2005_selectvariable.js-75-    moveAddMoreLinksToRHS();
+/tmp/icp2005_selectvariable.js-76-    initMetadataView();
+/tmp/icp2005_selectvariable.js-77-
+/tmp/icp2005_selectvariable.js-78-    initSearch();
+/tmp/icp2005_selectvariable.js-79-
+/tmp/icp2005_selectvariable.js-80-    initJumpToList();
+/tmp/icp2005_selectvariable.js-81-    initSelectAll();
+/tmp/icp2005_selectvariable.js-82-    initSelectMembers();
+/tmp/icp2005_selectvariable.js-83-    setIframeDimension();
+/tmp/icp2005_selectvariable.js-84-
+/tmp/icp2005_selectvariable.js-85-    initCustomPeriodSettings();
+/tmp/icp2005_selectvariable.js-86-    if(gbl_HasIndicatorUnit)
+/tmp/icp2005_selectvariable.js-87-    initBookAttributes();
+/tmp/icp2005_selectvariable.js-88-
+/tmp/icp2005_selectvariable.js-89-    $(document).resize(function () {
+/tmp/icp2005_selectvariable.js-90-        if ($(document).width < 1024) {
+/tmp/icp2005_selectvariable.js-91-            $("body").css({ "width": "1024px", "overflow-x": "auto" });
+/tmp/icp2005_selectvariable.js-92-        }
+/tmp/icp2005_selectvariable.js-93-    });
+/tmp/icp2005_selectvariable.js-94-    triggerClickOnEnter();
+/tmp/icp2005_selectvariable.js-95-
+/tmp/icp2005_selectvariable.js-96-    $("#btnMapRegion").off('click');
+/tmp/icp2005_selectvariable.js-97-    $("#btnMapRegion").on('click', function () {
+/tmp/icp2005_selectvariable.js-98-        buildSelectFilter('Region');
+--
+/tmp/icp2005_selectvariable.js-349-        if ($(obj).parents(".panel").attr('id') == 'zoomModalHeader')
+/tmp/icp2005_selectvariable.js-350-            totalSelection = parseInt(totalSelection * obj.textContent || obj.innerText);
+/tmp/icp2005_selectvariable.js-351-        if (controlid == null) return;
+/tmp/icp2005_selectvariable.js-352-        controlid = controlid.replace('tbl_sel_', '');
+/tmp/icp2005_selectvariable.js-353-        if (controlid == 'MetaAttr' || controlid == 'DBList') return;
+/tmp/icp2005_selectvariable.js-354-
+/tmp/icp2005_selectvariable.js-355-        totalSelection = parseInt(totalSelection * obj.textContent || obj.innerText);
+/tmp/icp2005_selectvariable.js-356-    });
+/tmp/icp2005_selectvariable.js-357-    if (totalSelection > gbl_report_Cell_Limit) {
+/tmp/icp2005_selectvariable.js-358-        if (!gbl_common_internal && totalSelection > gbl_download_Cell_Limit) {
+/tmp/icp2005_selectvariable.js-359-            $(".downloadMsg").text(gbl_msg_report_Download_Limit.replace('__', totalSelection));
+/tmp/icp2005_selectvariable.js-360-            isdownloadlimit = true;
+/tmp/icp2005_selectvariable.js-361-            $(".downloadMsg").removeClass("topRightDisplay");
+/tmp/icp2005_selectvariable.js-362-        }
+/tmp/icp2005_selectvariable.js-363-        else {
+/tmp/icp2005_selectvariable.js-364-            $(".downloadMsg").text(gbl_msg_report_Cell_Limit.replace('__', totalSelection));
+/tmp/icp2005_selectvariable.js-365-            $(".downloadMsg").addClass("topRightDisplay");
+/tmp/icp2005_selectvariable.js-366-        }
+/tmp/icp2005_selectvariable.js-367-        return true;
+/tmp/icp2005_selectvariable.js-368-    }
+/tmp/icp2005_selectvariable.js-369-    else
+/tmp/icp2005_selectvariable.js-370-        return false;
+/tmp/icp2005_selectvariable.js-371-}
+/tmp/icp2005_selectvariable.js-372-
+/tmp/icp2005_selectvariable.js-373-
+/tmp/icp2005_selectvariable.js-374-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-375-/********************************************Dimension Listing Functions***************************************************************************/
+/tmp/icp2005_selectvariable.js-376-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js:377:function loadAvailableList(controlid, hierarchy, obj) {
+/tmp/icp2005_selectvariable.js-378-    //debugger;
+/tmp/icp2005_selectvariable.js-379-    var dimtype;
+/tmp/icp2005_selectvariable.js-380-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
+/tmp/icp2005_selectvariable.js-381-
+/tmp/icp2005_selectvariable.js:382:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-383-
+/tmp/icp2005_selectvariable.js-384-    if (dimdata != null)
+/tmp/icp2005_selectvariable.js-385-        dimtype = dimdata.DT;
+/tmp/icp2005_selectvariable.js-386-    else {
+/tmp/icp2005_selectvariable.js-387-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
+/tmp/icp2005_selectvariable.js-388-            dimtype = "T";
+/tmp/icp2005_selectvariable.js-389-    }
+/tmp/icp2005_selectvariable.js-390-
+/tmp/icp2005_selectvariable.js-391-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-392-        $('#highfreequencytab').show();
+/tmp/icp2005_selectvariable.js-393-        $('#lblSlider').show();
+/tmp/icp2005_selectvariable.js-394-        $('div#slider-range').show();
+/tmp/icp2005_selectvariable.js-395-    }
+/tmp/icp2005_selectvariable.js:396:    loadDimensionList(controlid, hierarchy, dimobj);
+/tmp/icp2005_selectvariable.js-397-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-398-        document.getElementById("hfAnualTab").click();
+/tmp/icp2005_selectvariable.js-399-    }
+/tmp/icp2005_selectvariable.js-400-}
+/tmp/icp2005_selectvariable.js-401-
+/tmp/icp2005_selectvariable.js:402:function loadSelectedList(controlid, hierarchy, obj) {
+/tmp/icp2005_selectvariable.js-403-    //debugger;
+/tmp/icp2005_selectvariable.js-404-    var dimtype;
+/tmp/icp2005_selectvariable.js-405-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
+/tmp/icp2005_selectvariable.js-406-
+/tmp/icp2005_selectvariable.js:407:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-408-
+/tmp/icp2005_selectvariable.js-409-    if (dimdata != null)
+/tmp/icp2005_selectvariable.js-410-        dimtype = dimdata.DT;
+/tmp/icp2005_selectvariable.js-411-    else {
+/tmp/icp2005_selectvariable.js-412-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
+/tmp/icp2005_selectvariable.js-413-            dimtype = "T";
+/tmp/icp2005_selectvariable.js-414-    }
+/tmp/icp2005_selectvariable.js-415-
+/tmp/icp2005_selectvariable.js-416-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-417-        $('#highfreequencytab').hide();
+/tmp/icp2005_selectvariable.js-418-        $('#lblSlider').hide();
+/tmp/icp2005_selectvariable.js-419-        $('div#slider-range').hide();
+/tmp/icp2005_selectvariable.js-420-    }
+/tmp/icp2005_selectvariable.js:421:    loadDimensionList(controlid, hierarchy, dimobj);
+/tmp/icp2005_selectvariable.js-422-}
+/tmp/icp2005_selectvariable.js-423-
+/tmp/icp2005_selectvariable.js:424:function loadDimensionList(controlid, hierarchy, obj) {
+/tmp/icp2005_selectvariable.js-425-    var dimtype;
+/tmp/icp2005_selectvariable.js-426-
+/tmp/icp2005_selectvariable.js-427-    if (obj != null && !$(obj).hasClass('collapsed') && !$(obj).hasClass('addMoreRHS')) {
+/tmp/icp2005_selectvariable.js-428-        $(obj).parents('.panel-heading').find('.toggleSelectionViews a').removeClass('active');
+/tmp/icp2005_selectvariable.js-429-        return;
+/tmp/icp2005_selectvariable.js-430-    }
+/tmp/icp2005_selectvariable.js-431-
+/tmp/icp2005_selectvariable.js-432-    $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-433-
+/tmp/icp2005_selectvariable.js:434:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-435-
+/tmp/icp2005_selectvariable.js-436-    if (dimdata != null)
+/tmp/icp2005_selectvariable.js-437-        dimtype = dimdata.DT;
+/tmp/icp2005_selectvariable.js-438-    else {
+/tmp/icp2005_selectvariable.js-439-        if (obj != null && ((obj.innerText != null && obj.innerText.trim() == "Time") || obj.title == "Add Time"))
+/tmp/icp2005_selectvariable.js-440-            dimtype = "T";
+/tmp/icp2005_selectvariable.js-441-        else
+/tmp/icp2005_selectvariable.js-442-            dimtype = $("#tbl_" + controlid).attr("data-type");
+/tmp/icp2005_selectvariable.js-443-    }
+/tmp/icp2005_selectvariable.js-444-
+/tmp/icp2005_selectvariable.js-445-    TrackFeature("Variables->" + getPanelHeading(obj));
+/tmp/icp2005_selectvariable.js-446-
+/tmp/icp2005_selectvariable.js-447-    if (dimdata == null) {
+/tmp/icp2005_selectvariable.js:448:        gbl_array_data[controlid + '_' + hierarchy] = 'Loading'; //to avoid double loading
+/tmp/icp2005_selectvariable.js-449-
+/tmp/icp2005_selectvariable.js-450-        if ($('#hdnSubnationalPagination').val() && $('#hdnSubnationalPagination').val().trim().toUpperCase() == "Y")
+/tmp/icp2005_selectvariable.js-451-            gbl_subnational_pagination = true;
+/tmp/icp2005_selectvariable.js-452-        else
+/tmp/icp2005_selectvariable.js-453-            gbl_subnational_pagination = false;
+/tmp/icp2005_selectvariable.js-454-
+/tmp/icp2005_selectvariable.js-455-        if ($('#hdnSubnationalSingleView').val() && $('#hdnSubnationalSingleView').val().trim().toUpperCase() == "Y")
+/tmp/icp2005_selectvariable.js-456-            gbl_subnational_singleView = true;
+/tmp/icp2005_selectvariable.js-457-        else
+/tmp/icp2005_selectvariable.js-458-            gbl_subnational_singleView = false;
+/tmp/icp2005_selectvariable.js-459-
+/tmp/icp2005_selectvariable.js-460-
+/tmp/icp2005_selectvariable.js-461-        var starttime = new Date();
+/tmp/icp2005_selectvariable.js-462-        var ajaxData;
+/tmp/icp2005_selectvariable.js-463-        var ajaxUrl;
+/tmp/icp2005_selectvariable.js-464-        if (gbl_subnational_pagination && gbl_CubeIsSubnational && dimtype === "C") {
+/tmp/icp2005_selectvariable.js-465-            gbl_subnationalHierarchy = hierarchy;
+/tmp/icp2005_selectvariable.js-466-            ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
+/tmp/icp2005_selectvariable.js:467:            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: 0, parentcode: '',filtername:'',searchkey:''}";
+/tmp/icp2005_selectvariable.js-468-        }
+/tmp/icp2005_selectvariable.js-469-        else{
+/tmp/icp2005_selectvariable.js:470:            ajaxUrl = gbl_report_methods + "/GetDimensionJSON";
+/tmp/icp2005_selectvariable.js:471:            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "'}";
+/tmp/icp2005_selectvariable.js-472-        }
+/tmp/icp2005_selectvariable.js-473-        $.ajax({
+/tmp/icp2005_selectvariable.js-474-            type: "POST",
+/tmp/icp2005_selectvariable.js-475-            async: true,
+/tmp/icp2005_selectvariable.js-476-            url: ajaxUrl,
+/tmp/icp2005_selectvariable.js-477-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-478-            data: ajaxData,
+/tmp/icp2005_selectvariable.js-479-            dataType: "json",
+/tmp/icp2005_selectvariable.js-480-            success: function (data) {
+/tmp/icp2005_selectvariable.js-481-                dimtype = data.d.DT;
+/tmp/icp2005_selectvariable.js-482-
+/tmp/icp2005_selectvariable.js-483-                if (dimtype == "T") {
+/tmp/icp2005_selectvariable.js-484-                    gbl_time_control_Id = controlid;
+/tmp/icp2005_selectvariable.js-485-                    gbl_time_target_Id = "#tbl_" + controlid;
+/tmp/icp2005_selectvariable.js-486-                }
+/tmp/icp2005_selectvariable.js-487-
+/tmp/icp2005_selectvariable.js-488-                if (data.d !== null) {
+/tmp/icp2005_selectvariable.js-489-                    if (dimtype === "C") {
+/tmp/icp2005_selectvariable.js-490-                        gbl_SubnationalFilter = data.d.SubNationalEnabled;
+/tmp/icp2005_selectvariable.js-491-                        if (gbl_SubnationalFilter) {
+/tmp/icp2005_selectvariable.js-492-                            if (gbl_subnational_pagination && data.d.LevelCount.length > 0)
+/tmp/icp2005_selectvariable.js-493-                            {
+/tmp/icp2005_selectvariable.js-494-                                gbl_subnationalTotalCount = data.d.LevelCount.reduce((a, b) => a + b, 0);
+/tmp/icp2005_selectvariable.js-495-                            }
+/tmp/icp2005_selectvariable.js-496-                            if(gbl_subnational_pagination)
+/tmp/icp2005_selectvariable.js:497:                                $('.dimension-hierarchy-' + controlid).attr('disabled', "disabled");// Need only list hierarchy in case of subnational Pagination
+/tmp/icp2005_selectvariable.js-498-
+/tmp/icp2005_selectvariable.js:499:                            showSubnationals(controlid, data.d, hierarchy);
+/tmp/icp2005_selectvariable.js-500-                        }
+/tmp/icp2005_selectvariable.js-501-                    }
+/tmp/icp2005_selectvariable.js-502-                    if (data.d.HighFrequencyEnabled === true && dimtype === "T") {
+/tmp/icp2005_selectvariable.js-503-                        gbl_high_freequencyenabled = true;
+/tmp/icp2005_selectvariable.js-504-                        gbl_high_frequency_array_data = data.d.HighFrequencyMembers;
+/tmp/icp2005_selectvariable.js-505-                        $('.customPagination').hide();
+/tmp/icp2005_selectvariable.js:506:                        gbl_array_data[controlid + '_' + hierarchy] = data.d;
+/tmp/icp2005_selectvariable.js-507-
+/tmp/icp2005_selectvariable.js-508-                        GenerateHFControls();
+/tmp/icp2005_selectvariable.js-509-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["A"] != null) {
+/tmp/icp2005_selectvariable.js-510-                            $('#hfAnualTab').show();
+/tmp/icp2005_selectvariable.js-511-                            controlid = gbl_time_control_Id + "_Year";
+/tmp/icp2005_selectvariable.js:512:                            createDimensionList(controlid, hierarchy, true, true, "A");
+/tmp/icp2005_selectvariable.js-513-                        }
+/tmp/icp2005_selectvariable.js-514-
+/tmp/icp2005_selectvariable.js-515-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["Q"] != null) {
+/tmp/icp2005_selectvariable.js-516-                            $('#hfQuarterlyTab').show();
+/tmp/icp2005_selectvariable.js-517-                            controlid = gbl_time_control_Id + "_Quater";
+/tmp/icp2005_selectvariable.js:518:                            createDimensionList(controlid, hierarchy, true, true, "Q");
+/tmp/icp2005_selectvariable.js-519-                        }
+/tmp/icp2005_selectvariable.js-520-
+/tmp/icp2005_selectvariable.js-521-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["M"] != null) {
+/tmp/icp2005_selectvariable.js-522-                            $('#hfMonthlyTab').show();
+/tmp/icp2005_selectvariable.js-523-                            controlid = gbl_time_control_Id + "_Month";
+/tmp/icp2005_selectvariable.js:524:                            createDimensionList(controlid, hierarchy, true, true, "M");
+/tmp/icp2005_selectvariable.js-525-                        }
+/tmp/icp2005_selectvariable.js-526-
+/tmp/icp2005_selectvariable.js-527-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["W"] != null) {
+/tmp/icp2005_selectvariable.js-528-                            $('#hfWeeklyTab').show();
+/tmp/icp2005_selectvariable.js-529-                            controlid = gbl_time_control_Id + "_Week";
+/tmp/icp2005_selectvariable.js:530:                            createDimensionList(controlid, hierarchy, true, true, "W");
+/tmp/icp2005_selectvariable.js-531-                        }
+/tmp/icp2005_selectvariable.js-532-
+/tmp/icp2005_selectvariable.js-533-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["D"] != null) {
+/tmp/icp2005_selectvariable.js-534-                            $('#hfDailyTab').show();
+/tmp/icp2005_selectvariable.js-535-                            controlid = gbl_time_control_Id + "_Day";
+/tmp/icp2005_selectvariable.js:536:                            createDimensionList(controlid, hierarchy, true, true, "D");
+/tmp/icp2005_selectvariable.js-537-                        }
+/tmp/icp2005_selectvariable.js-538-                        SetDefaultTab(data.d.HighFrequencyMembers);
+/tmp/icp2005_selectvariable.js-539-                        LoadCustomTime(data.d.Members);
+/tmp/icp2005_selectvariable.js-540-                    }
+/tmp/icp2005_selectvariable.js-541-                    else {
+/tmp/icp2005_selectvariable.js-542-                        $('#timedimvariableList ul.availableView').show();
+/tmp/icp2005_selectvariable.js-543-                        $('#hfvariableList').hide();
+/tmp/icp2005_selectvariable.js-544-                        $('#HighFequencyFilter').hide();
+/tmp/icp2005_selectvariable.js-545-                        if (data.d.HighFrequencyEnabled == true)
+/tmp/icp2005_selectvariable.js-546-                            gbl_high_freequencyenabled = true;
+/tmp/icp2005_selectvariable.js:547:                        gbl_array_data[controlid + '_' + hierarchy] = data.d;
+/tmp/icp2005_selectvariable.js:548:                        createDimensionList(controlid, hierarchy, true);
+/tmp/icp2005_selectvariable.js-549-                    }
+/tmp/icp2005_selectvariable.js-550-                }
+/tmp/icp2005_selectvariable.js-551-                $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-552-                initDragDrop();
+/tmp/icp2005_selectvariable.js-553-            },
+/tmp/icp2005_selectvariable.js-554-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js:555:                gbl_array_data[controlid + '_' + hierarchy] = null;
+/tmp/icp2005_selectvariable.js-556-                $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-557-                window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-558-            }
+/tmp/icp2005_selectvariable.js-559-        });
+/tmp/icp2005_selectvariable.js-560-    }
+/tmp/icp2005_selectvariable.js-561-    else {
+/tmp/icp2005_selectvariable.js-562-        if (gbl_high_freequencyenabled == true && dimtype == "T") {
+/tmp/icp2005_selectvariable.js-563-            $('#hfvariableList').show();
+/tmp/icp2005_selectvariable.js-564-            $('#HighFequencyFilter').show();
+/tmp/icp2005_selectvariable.js-565-            SetDefaultTab(dimdata.HighFrequencyMembers);
+/tmp/icp2005_selectvariable.js-566-            LoadCustomTime(dimdata.Members);
+/tmp/icp2005_selectvariable.js-567-        }
+/tmp/icp2005_selectvariable.js-568-        else if (gbl_high_freequencyenabled == true && dimtype == "C") {
+/tmp/icp2005_selectvariable.js-569-            $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').show();
+/tmp/icp2005_selectvariable.js-570-            $('#newSelection_' + controlid + ' .SubnationalAvailableView').show();
+/tmp/icp2005_selectvariable.js-571-
+/tmp/icp2005_selectvariable.js-572-            $('#All').show();
+/tmp/icp2005_selectvariable.js-573-            $("#All").css("width", "465px");
+/tmp/icp2005_selectvariable.js-574-        }
+/tmp/icp2005_selectvariable.js-575-        else if (gbl_SubnationalFilter && dimtype == "C") {
+/tmp/icp2005_selectvariable.js-576-            //if (!dimdata.CL)
+/tmp/icp2005_selectvariable.js-577-                $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').show();
+/tmp/icp2005_selectvariable.js-578-            $('#newSelection_' + controlid + ' .SubnationalAvailableView').show();
+/tmp/icp2005_selectvariable.js-579-        }
+/tmp/icp2005_selectvariable.js-580-
+/tmp/icp2005_selectvariable.js-581-        if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
+/tmp/icp2005_selectvariable.js:582:            dimdata = gbl_array_data[gbl_time_control_Id + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-583-        else
+/tmp/icp2005_selectvariable.js:584:            dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-585-
+/tmp/icp2005_selectvariable.js-586-        if (obj == null)
+/tmp/icp2005_selectvariable.js:587:            createDimensionList(controlid, hierarchy, true);//if we call the function from filter then only we need to repopulate
+/tmp/icp2005_selectvariable.js-588-        else if (dimdata.HasDimensionFiltering && dimdata.Parentdimension != null && gblselectionChanged[dimdata.Parentdimension]) {
+/tmp/icp2005_selectvariable.js-589-            gblselectionChanged[dimdata.Parentdimension] = false;
+/tmp/icp2005_selectvariable.js:590:            createDimensionList(controlid, hierarchy, true);
+/tmp/icp2005_selectvariable.js-591-        }
+/tmp/icp2005_selectvariable.js-592-
+/tmp/icp2005_selectvariable.js-593-        $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-594-    }
+/tmp/icp2005_selectvariable.js-595-}
+/tmp/icp2005_selectvariable.js-596-
+/tmp/icp2005_selectvariable.js:597:function LoadSubNationalChildren(controlid, hierarchy, level, parentcode,searchKey,filterNames)
+/tmp/icp2005_selectvariable.js-598-{
+/tmp/icp2005_selectvariable.js-599-    $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-600-    var subNatdata = {};
+/tmp/icp2005_selectvariable.js-601-    var ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
+/tmp/icp2005_selectvariable.js:602:    var ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: " + level + ", parentcode: '" + parentcode + "',filtername:'" + filterNames+ "', searchkey:'" + searchKey + "'}";
+/tmp/icp2005_selectvariable.js-603-    $.ajax({
+/tmp/icp2005_selectvariable.js-604-        type: "POST",
+/tmp/icp2005_selectvariable.js-605-        async: false,
+/tmp/icp2005_selectvariable.js-606-        url: ajaxUrl,
+/tmp/icp2005_selectvariable.js-607-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-608-        data: ajaxData,
+/tmp/icp2005_selectvariable.js-609-        dataType: "json",
+/tmp/icp2005_selectvariable.js-610-        success: function (data) {
+/tmp/icp2005_selectvariable.js-611-            if (data && data.d && data.d.Members)
+/tmp/icp2005_selectvariable.js-612-                subNatdata = data.d.Members;
+/tmp/icp2005_selectvariable.js-613-            $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-614-        },
+/tmp/icp2005_selectvariable.js-615-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js:616:            gbl_array_data[controlid + '_' + hierarchy] = null;
+/tmp/icp2005_selectvariable.js-617-            $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-618-            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-619-        }
+/tmp/icp2005_selectvariable.js-620-    });
+/tmp/icp2005_selectvariable.js-621-    return subNatdata;
+/tmp/icp2005_selectvariable.js-622-}
+/tmp/icp2005_selectvariable.js-623-
+/tmp/icp2005_selectvariable.js-624-function SetDefaultTab(hfData)
+/tmp/icp2005_selectvariable.js-625-{
+/tmp/icp2005_selectvariable.js-626-    if (hfData != null && hfData["A"] != null) {
+/tmp/icp2005_selectvariable.js-627-        document.getElementById("hfAnualTab").click();
+/tmp/icp2005_selectvariable.js-628-    }
+/tmp/icp2005_selectvariable.js-629-    else if (hfData != null && hfData["Q"] != null) {
+/tmp/icp2005_selectvariable.js-630-        document.getElementById("hfQuarterlyTab").click();
+/tmp/icp2005_selectvariable.js-631-    }
+/tmp/icp2005_selectvariable.js-632-    else if (hfData != null && hfData["M"] != null) {
+/tmp/icp2005_selectvariable.js-633-        document.getElementById("hfMonthlyTab").click();
+/tmp/icp2005_selectvariable.js-634-    }
+/tmp/icp2005_selectvariable.js-635-    else if (hfData != null && hfData["W"] != null) {
+/tmp/icp2005_selectvariable.js-636-        document.getElementById("hfWeeklyTab").click();
+/tmp/icp2005_selectvariable.js-637-    }
+/tmp/icp2005_selectvariable.js-638-    else if (hfData != null && hfData["D"] != null) {
+/tmp/icp2005_selectvariable.js-639-        document.getElementById("hfDailyTab").click();
+/tmp/icp2005_selectvariable.js-640-    }
+/tmp/icp2005_selectvariable.js-641-
+/tmp/icp2005_selectvariable.js-642-}
+/tmp/icp2005_selectvariable.js-643-
+/tmp/icp2005_selectvariable.js-644-function GenerateHFControls() {
+--
+/tmp/icp2005_selectvariable.js-863-{
+/tmp/icp2005_selectvariable.js-864-    var memDetails = [];
+/tmp/icp2005_selectvariable.js-865-    var dimFound = false;
+/tmp/icp2005_selectvariable.js-866-    for (var i = 0; i < obj.length; i++)
+/tmp/icp2005_selectvariable.js-867-    {
+/tmp/icp2005_selectvariable.js-868-        if (obj[i].controlid == controlId + "_Year" || obj[i].controlid == controlId + "_Month" || obj[i].controlid == controlId + "_Quater" ||
+/tmp/icp2005_selectvariable.js-869-            obj[i].controlid == controlId + "_Week" || obj[i].controlid == controlId + "_Day")
+/tmp/icp2005_selectvariable.js-870-        {
+/tmp/icp2005_selectvariable.js-871-            memDetails = memDetails.concat(obj[i].memberdetails);
+/tmp/icp2005_selectvariable.js-872-            delete obj[i];
+/tmp/icp2005_selectvariable.js-873-        }
+/tmp/icp2005_selectvariable.js-874-    }
+/tmp/icp2005_selectvariable.js-875-
+/tmp/icp2005_selectvariable.js-876-    for (var i = 0; i < obj.length; i++) {
+/tmp/icp2005_selectvariable.js-877-        if (obj[i] !=null && obj[i].controlid == controlId) {
+/tmp/icp2005_selectvariable.js-878-            obj[i].memberdetails = memDetails;
+/tmp/icp2005_selectvariable.js-879-            dimFound = true;
+/tmp/icp2005_selectvariable.js-880-        }
+/tmp/icp2005_selectvariable.js-881-    }
+/tmp/icp2005_selectvariable.js-882-
+/tmp/icp2005_selectvariable.js-883-    if (!dimFound)
+/tmp/icp2005_selectvariable.js-884-    {
+/tmp/icp2005_selectvariable.js-885-        obj.push({ controlid: controlId, memberdetails: memDetails, aggregationruleall: null });
+/tmp/icp2005_selectvariable.js-886-    }
+/tmp/icp2005_selectvariable.js-887-
+/tmp/icp2005_selectvariable.js-888-    return obj
+/tmp/icp2005_selectvariable.js-889-}
+/tmp/icp2005_selectvariable.js-890-
+/tmp/icp2005_selectvariable.js:891:function createDimensionList(controlid, hierarchy, showPlusIcon,highFrequency,memberType) {
+/tmp/icp2005_selectvariable.js-892-    var targetId = "#tbl_" + controlid;
+/tmp/icp2005_selectvariable.js-893-    var dimdata;
+/tmp/icp2005_selectvariable.js-894-
+/tmp/icp2005_selectvariable.js-895-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
+/tmp/icp2005_selectvariable.js:896:        dimdata = Object.assign({}, gbl_array_data[gbl_time_control_Id + '_' + hierarchy]);
+/tmp/icp2005_selectvariable.js-897-    else
+/tmp/icp2005_selectvariable.js:898:        dimdata = Object.assign({}, gbl_array_data[controlid + '_' + hierarchy]);
+/tmp/icp2005_selectvariable.js-899-
+/tmp/icp2005_selectvariable.js-900-    if (dimdata == null) return;
+/tmp/icp2005_selectvariable.js-901-
+/tmp/icp2005_selectvariable.js-902-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T") {
+/tmp/icp2005_selectvariable.js-903-        if (gbl_array_member_selected[gbl_time_control_Id] == null) {
+/tmp/icp2005_selectvariable.js-904-            gbl_array_member_selected[gbl_time_control_Id] = dimdata.Sel;   //GetFilteredSelectedResult(dimdata.Sel, memberType);
+/tmp/icp2005_selectvariable.js-905-            GenarateAdobeDimensions(gbl_time_control_Id);
+/tmp/icp2005_selectvariable.js-906-            gbl_array_member_selected_clone[gbl_time_control_Id] = jQuery.extend(true, {}, dimdata.Sel);
+/tmp/icp2005_selectvariable.js-907-        }
+/tmp/icp2005_selectvariable.js-908-    }
+/tmp/icp2005_selectvariable.js-909-    else {
+/tmp/icp2005_selectvariable.js-910-        if (gbl_array_member_selected[controlid] == null) {
+/tmp/icp2005_selectvariable.js-911-            gbl_array_member_selected[controlid] = dimdata.Sel;
+/tmp/icp2005_selectvariable.js-912-            GenarateAdobeDimensions(controlid);
+/tmp/icp2005_selectvariable.js-913-            gbl_array_member_selected_clone[controlid] = jQuery.extend(true, {}, dimdata.Sel);
+/tmp/icp2005_selectvariable.js-914-        }
+/tmp/icp2005_selectvariable.js-915-    }
+/tmp/icp2005_selectvariable.js-916-
+/tmp/icp2005_selectvariable.js-917-    if (dimdata.HasDimensionFiltering && dimdata.Parentdimension != null)
+/tmp/icp2005_selectvariable.js:918:        dimdata.Members = FilterParentCodes(controlid, hierarchy);// filter based on parent dimension
+/tmp/icp2005_selectvariable.js-919-
+/tmp/icp2005_selectvariable.js:920:    initFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata);
+/tmp/icp2005_selectvariable.js-921-    if (dimdata.CL && dimdata.Levels != null && dimdata.CHL.length > 0) {
+/tmp/icp2005_selectvariable.js:922:        loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
+/tmp/icp2005_selectvariable.js-923-    }
+/tmp/icp2005_selectvariable.js-924-    else {
+/tmp/icp2005_selectvariable.js:925:        loadFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.Levels);
+/tmp/icp2005_selectvariable.js-926-    }
+/tmp/icp2005_selectvariable.js-927-
+/tmp/icp2005_selectvariable.js-928-    if (dimdata.CL) {
+/tmp/icp2005_selectvariable.js-929-
+/tmp/icp2005_selectvariable.js-930-        var allMemberList;
+/tmp/icp2005_selectvariable.js-931-        if (dimdata.Aggr != null)
+/tmp/icp2005_selectvariable.js-932-            allMemberList = $.merge($.merge([], dimdata.Members), dimdata.Aggr);
+/tmp/icp2005_selectvariable.js-933-        else
+/tmp/icp2005_selectvariable.js-934-            allMemberList = dimdata.Members;
+/tmp/icp2005_selectvariable.js-935-
+/tmp/icp2005_selectvariable.js-936-        var allJTL;
+/tmp/icp2005_selectvariable.js-937-        if (dimdata.JTLA != null)
+/tmp/icp2005_selectvariable.js-938-            allJTL = $.merge($.merge([], dimdata.JTL), dimdata.JTLA);
+/tmp/icp2005_selectvariable.js-939-        else
+/tmp/icp2005_selectvariable.js-940-            allJTL = dimdata.JTL;
+/tmp/icp2005_selectvariable.js-941-
+/tmp/icp2005_selectvariable.js-942-        if (!(dimdata.DT == "C" && gbl_SubnationalFilter))
+/tmp/icp2005_selectvariable.js-943-        {
+/tmp/icp2005_selectvariable.js-944-            sortAllSelectedItems($("#tbl_" + controlid), true);
+/tmp/icp2005_selectvariable.js-945-            loadDimMembers(controlid, targetId, showPlusIcon, allMemberList, allJTL, false);
+/tmp/icp2005_selectvariable.js-946-        }
+/tmp/icp2005_selectvariable.js-947-        else {
+/tmp/icp2005_selectvariable.js-948-            loadDimMembers(controlid, targetId, showPlusIcon, allMemberList, allJTL, false);
+/tmp/icp2005_selectvariable.js-949-            var subnationalid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Aggregates']";
+/tmp/icp2005_selectvariable.js-950-            if ($(subnationalid)) $(subnationalid).text("Subnational");
+/tmp/icp2005_selectvariable.js-951-        }
+/tmp/icp2005_selectvariable.js-952-    }
+/tmp/icp2005_selectvariable.js-953-    else {
+--
+/tmp/icp2005_selectvariable.js-957-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["A"], dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-958-                    break;
+/tmp/icp2005_selectvariable.js-959-                case "Q":
+/tmp/icp2005_selectvariable.js-960-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["Q"], dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-961-                    break;
+/tmp/icp2005_selectvariable.js-962-                case "M":
+/tmp/icp2005_selectvariable.js-963-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["M"], dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-964-                    break;
+/tmp/icp2005_selectvariable.js-965-                case "W":
+/tmp/icp2005_selectvariable.js-966-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["W"], dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-967-                    break;
+/tmp/icp2005_selectvariable.js-968-                case "D":
+/tmp/icp2005_selectvariable.js-969-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["D"], dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-970-                    break;
+/tmp/icp2005_selectvariable.js-971-            }
+/tmp/icp2005_selectvariable.js-972-        }
+/tmp/icp2005_selectvariable.js-973-        else
+/tmp/icp2005_selectvariable.js-974-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-975-
+/tmp/icp2005_selectvariable.js-976-    }
+/tmp/icp2005_selectvariable.js-977-
+/tmp/icp2005_selectvariable.js-978-    getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-979-
+/tmp/icp2005_selectvariable.js-980-    //For the auto selection of all members
+/tmp/icp2005_selectvariable.js-981-    if (dimdata.AutoSelect && (dimdata.Sel == null || Object.keys(dimdata.Sel).length == 0))
+/tmp/icp2005_selectvariable.js-982-        getAutoSelect(controlid, targetId);
+/tmp/icp2005_selectvariable.js-983-}
+/tmp/icp2005_selectvariable.js-984-
+/tmp/icp2005_selectvariable.js:985:function FilterParentCodes(controlid, hierarchy)
+/tmp/icp2005_selectvariable.js-986-{
+/tmp/icp2005_selectvariable.js-987-    var parentdim,selectedParentDimension, dimensiondata;
+/tmp/icp2005_selectvariable.js-988-    var selectedDimensionCode = [], filteredmembers = [], parentdimList = [], dimension = [];
+/tmp/icp2005_selectvariable.js-989-
+/tmp/icp2005_selectvariable.js-990-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
+/tmp/icp2005_selectvariable.js:991:        dimensiondata = gbl_array_data[gbl_time_control_Id + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-992-    else
+/tmp/icp2005_selectvariable.js:993:        dimensiondata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-994-
+/tmp/icp2005_selectvariable.js-995-    selectedParentDimension = gbl_array_member_selected[dimensiondata.Parentdimension];
+/tmp/icp2005_selectvariable.js-996-    if (selectedParentDimension != null && Object.keys(selectedParentDimension).length > 0) {
+/tmp/icp2005_selectvariable.js-997-        var selecteddimensionKeys = Object.keys(selectedParentDimension);
+/tmp/icp2005_selectvariable.js-998-        for (var i = 0; i < selecteddimensionKeys.length; i++) {
+/tmp/icp2005_selectvariable.js-999-            dimension = selecteddimensionKeys[i].split('&');
+/tmp/icp2005_selectvariable.js-1000-            if (dimension !== null && dimension.length > 1 ) {
+/tmp/icp2005_selectvariable.js-1001-                dimension = dimension[1].slice(1, -1); // Removing  [] from dimension code
+/tmp/icp2005_selectvariable.js-1002-                selectedDimensionCode.push(dimension);// create an array of selected dimenion codes
+/tmp/icp2005_selectvariable.js-1003-            }
+/tmp/icp2005_selectvariable.js-1004-        }
+/tmp/icp2005_selectvariable.js-1005-
+/tmp/icp2005_selectvariable.js-1006-        if (selectedDimensionCode.length > 0)
+/tmp/icp2005_selectvariable.js-1007-        {
+/tmp/icp2005_selectvariable.js-1008-            for (var j = 0; j < dimensiondata.Members.length; j++)
+/tmp/icp2005_selectvariable.js-1009-            {
+/tmp/icp2005_selectvariable.js-1010-                parentdim = dimensiondata.Members[j].ParentMember;
+/tmp/icp2005_selectvariable.js-1011-                if (parentdim != null) {
+/tmp/icp2005_selectvariable.js-1012-                    parentdimList = parentdim.split(',');
+/tmp/icp2005_selectvariable.js-1013-                    if (parentdimList != null && parentdimList.length > 0 && parentdimList.some(item => item != null && selectedDimensionCode.includes(item.trim())))
+/tmp/icp2005_selectvariable.js-1014-                        filteredmembers.push(dimensiondata.Members[j]);
+/tmp/icp2005_selectvariable.js-1015-                }
+/tmp/icp2005_selectvariable.js-1016-            }
+/tmp/icp2005_selectvariable.js-1017-            return filteredmembers;
+/tmp/icp2005_selectvariable.js-1018-        }
+/tmp/icp2005_selectvariable.js-1019-    }
+/tmp/icp2005_selectvariable.js-1020-
+/tmp/icp2005_selectvariable.js-1021-    return dimensiondata.Members;// if there is no filtering, return the actual data itself
+--
+/tmp/icp2005_selectvariable.js-1997-    }
+/tmp/icp2005_selectvariable.js-1998-    else {
+/tmp/icp2005_selectvariable.js-1999-        var isDimensionSelected = 0;
+/tmp/icp2005_selectvariable.js-2000-        $(".selectionCountRHS").each(function () {
+/tmp/icp2005_selectvariable.js-2001-            var val = eval($(this).text());
+/tmp/icp2005_selectvariable.js-2002-            if (val == null || val < 1 || val == '') {
+/tmp/icp2005_selectvariable.js-2003-                isDimensionSelected++;
+/tmp/icp2005_selectvariable.js-2004-            }
+/tmp/icp2005_selectvariable.js-2005-        });
+/tmp/icp2005_selectvariable.js-2006-
+/tmp/icp2005_selectvariable.js-2007-        if (isDimensionSelected > 0) {
+/tmp/icp2005_selectvariable.js-2008-            $("#applyChangesNoPreview").addClass("disabled");
+/tmp/icp2005_selectvariable.js-2009-        }
+/tmp/icp2005_selectvariable.js-2010-        else {
+/tmp/icp2005_selectvariable.js-2011-            $("#applyChangesNoPreview").removeClass("disabled");
+/tmp/icp2005_selectvariable.js-2012-            $(".allDimSelected.noPreview").show();
+/tmp/icp2005_selectvariable.js-2013-            $(".dimSelected.noPreview").hide();
+/tmp/icp2005_selectvariable.js-2014-        }
+/tmp/icp2005_selectvariable.js-2015-    }
+/tmp/icp2005_selectvariable.js-2016-
+/tmp/icp2005_selectvariable.js-2017-    if ($(".downloadMsg").is(":visible")) {
+/tmp/icp2005_selectvariable.js-2018-        $(".downloadMsg").hide();
+/tmp/icp2005_selectvariable.js-2019-    }
+/tmp/icp2005_selectvariable.js-2020-}
+/tmp/icp2005_selectvariable.js-2021-
+/tmp/icp2005_selectvariable.js-2022-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-2023-/********************************************Filter related functions******************************************************************************/
+/tmp/icp2005_selectvariable.js-2024-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js:2025:function initFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata) {
+/tmp/icp2005_selectvariable.js-2026-    //for classification
+/tmp/icp2005_selectvariable.js-2027-    if (dimdata.CL) {
+/tmp/icp2005_selectvariable.js:2028:        initClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata);
+/tmp/icp2005_selectvariable.js-2029-
+/tmp/icp2005_selectvariable.js-2030-        if ($("#tbl_" + controlid).attr("data-type") == "C") {
+/tmp/icp2005_selectvariable.js-2031-            $("#showCountryAggOption_" + controlid).hide(); //NONCLASSIFICATION
+/tmp/icp2005_selectvariable.js-2032-            if (!gbl_SubnationalFilter) $("#CtryAgg_Classification_" + controlid).show(); //Classification
+/tmp/icp2005_selectvariable.js-2033-        }
+/tmp/icp2005_selectvariable.js-2034-    }
+/tmp/icp2005_selectvariable.js-2035-    else {
+/tmp/icp2005_selectvariable.js-2036-        if ($("#tbl_" + controlid).attr("data-type") == "C") {
+/tmp/icp2005_selectvariable.js-2037-            $("#showCountryAggOption_" + controlid).show(); //NONCLASSIFICATION
+/tmp/icp2005_selectvariable.js-2038-            $("#CtryAgg_Classification_" + controlid).hide(); //Classification
+/tmp/icp2005_selectvariable.js-2039-        }
+/tmp/icp2005_selectvariable.js-2040-        if ($('.dimension-hierarchy-' + controlid + ' option').length <= 0) {
+/tmp/icp2005_selectvariable.js-2041-            if (dimdata.Hier != null && Object.keys(dimdata.Hier).length > 0) {
+/tmp/icp2005_selectvariable.js-2042-                $.each(dimdata.Hier, function (key, val) {
+/tmp/icp2005_selectvariable.js-2043-                    $('.dimension-hierarchy-' + controlid).append('<option value="' + key + '">' + val + '</option>');
+/tmp/icp2005_selectvariable.js-2044-                });
+/tmp/icp2005_selectvariable.js:2045:                $('.dimension-hierarchy-' + controlid).val(dimdata.DH);
+/tmp/icp2005_selectvariable.js-2046-            }
+/tmp/icp2005_selectvariable.js-2047-            else
+/tmp/icp2005_selectvariable.js:2048:                $('.dimension-hierarchy-' + controlid).append('<option value="' + dimdata.DH + '">' + dimdata.DH + '</option>'); //default hierarchy
+/tmp/icp2005_selectvariable.js-2049-        }
+/tmp/icp2005_selectvariable.js-2050-
+/tmp/icp2005_selectvariable.js:2051:        if ($('.dimension-hierarchy-' + controlid + ' option').length <= 1) $("#hierarchy_" + controlid).hide();
+/tmp/icp2005_selectvariable.js-2052-        $('.dimension-hierarchy-' + controlid).off('change');
+/tmp/icp2005_selectvariable.js-2053-        $('.dimension-hierarchy-' + controlid).on('change', function () {
+/tmp/icp2005_selectvariable.js-2054-            loadDimensionList(controlid, $(this).val(), null);
+/tmp/icp2005_selectvariable.js-2055-            $(".showCountryAggOption").removeClass("active");
+/tmp/icp2005_selectvariable.js-2056-            $(".showCountryAggOption[data-value='All']").addClass("active");
+/tmp/icp2005_selectvariable.js-2057-        });
+/tmp/icp2005_selectvariable.js-2058-    }
+/tmp/icp2005_selectvariable.js-2059-}
+/tmp/icp2005_selectvariable.js-2060-
+/tmp/icp2005_selectvariable.js:2061:function loadFilter(controlid, hierarchy, targetId, showPlusIcon, levels) {
+/tmp/icp2005_selectvariable.js-2062-    var hierarchylist = '';
+/tmp/icp2005_selectvariable.js-2063-    var isdblist = controlid == "DBList";
+/tmp/icp2005_selectvariable.js-2064-    if (levels == null) return;
+/tmp/icp2005_selectvariable.js-2065-
+/tmp/icp2005_selectvariable.js-2066-    $.each(levels, function (index, value) {
+/tmp/icp2005_selectvariable.js-2067-        hierarchylist += getFilterList(index, value, isdblist, controlid);
+/tmp/icp2005_selectvariable.js-2068-    });
+/tmp/icp2005_selectvariable.js-2069-
+/tmp/icp2005_selectvariable.js-2070-    if ($("#tbl_" + controlid).attr("data-type") == "C") {
+/tmp/icp2005_selectvariable.js-2071-        if (hierarchylist.indexOf("filter-check-aggregates") < 1) {
+/tmp/icp2005_selectvariable.js-2072-            $("#showCountryAggOption_" + controlid).hide(); //NONCLASSIFICATION
+/tmp/icp2005_selectvariable.js-2073-            $("#CtryAgg_Classification_" + controlid).hide(); //Classification
+/tmp/icp2005_selectvariable.js-2074-        }
+/tmp/icp2005_selectvariable.js-2075-    }
+/tmp/icp2005_selectvariable.js-2076-
+/tmp/icp2005_selectvariable.js-2077-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T") {
+/tmp/icp2005_selectvariable.js-2078-        $('#lstFilterItems_' + gbl_time_control_Id).html(hierarchylist);
+/tmp/icp2005_selectvariable.js-2079-    }
+/tmp/icp2005_selectvariable.js-2080-    else {
+/tmp/icp2005_selectvariable.js:2081:        $('#lstFilterItems_' + controlid).html(hierarchylist);
+/tmp/icp2005_selectvariable.js-2082-    }
+/tmp/icp2005_selectvariable.js-2083-
+/tmp/icp2005_selectvariable.js-2084-    setTimeout(function () {
+/tmp/icp2005_selectvariable.js-2085-        if ($('#lstFilterItems_' + controlid).find("li.show").length == 0) {
+/tmp/icp2005_selectvariable.js:2086:            $('#lstFilterItems_' + controlid).prepend("<em>This hierarchy has no sub-levels.</em>");
+/tmp/icp2005_selectvariable.js-2087-
+/tmp/icp2005_selectvariable.js-2088-        }
+/tmp/icp2005_selectvariable.js-2089-    }, 100);
+/tmp/icp2005_selectvariable.js-2090-
+/tmp/icp2005_selectvariable.js-2091-    $('.filter-check').on('click', function () {
+/tmp/icp2005_selectvariable.js-2092-        $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-2093-        var anySelected = false;
+/tmp/icp2005_selectvariable.js-2094-        var allselected;
+/tmp/icp2005_selectvariable.js-2095-        var filtermembers;
+/tmp/icp2005_selectvariable.js-2096-        var availableCount;
+/tmp/icp2005_selectvariable.js-2097-        var dimdata;
+/tmp/icp2005_selectvariable.js-2098-        var dataName;
+/tmp/icp2005_selectvariable.js-2099-        var dimtype = $(targetId).attr('data-type');
+/tmp/icp2005_selectvariable.js-2100-        if (gbl_high_freequencyenabled && dimtype === "T") {
+/tmp/icp2005_selectvariable.js-2101-            controlid = gbl_time_control_Id;
+/tmp/icp2005_selectvariable.js-2102-        }
+/tmp/icp2005_selectvariable.js-2103-
+/tmp/icp2005_selectvariable.js:2104:        dimdata = Object.assign({}, gbl_array_data[controlid + '_' + hierarchy]);
+/tmp/icp2005_selectvariable.js-2105-
+/tmp/icp2005_selectvariable.js-2106-        if (dimdata.HasDimensionFiltering && dimdata.Parentdimension != null)
+/tmp/icp2005_selectvariable.js:2107:            dimdata.Members = FilterParentCodes(controlid, hierarchy);// filter based on parent dimension
+/tmp/icp2005_selectvariable.js-2108-
+/tmp/icp2005_selectvariable.js-2109-        if (gbl_high_freequencyenabled && dimtype == "T") {
+/tmp/icp2005_selectvariable.js-2110-            allselected = $('#lstFilterItems_' + gbl_time_control_Id + ' .filter-check:checked').map(function (i, opt) {
+/tmp/icp2005_selectvariable.js-2111-                return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level') };
+/tmp/icp2005_selectvariable.js-2112-            }).toArray();
+/tmp/icp2005_selectvariable.js-2113-            filtermembers = GetHighFrequencyDataSource();
+/tmp/icp2005_selectvariable.js-2114-        }
+/tmp/icp2005_selectvariable.js-2115-        else {
+/tmp/icp2005_selectvariable.js-2116-            if (gbl_SubnationalFilter && dimtype == 'C') {
+/tmp/icp2005_selectvariable.js-2117-                allselected = $('#lstFilterItems_' + controlid + ' .filter-check:checked').map(function (i, opt) {
+/tmp/icp2005_selectvariable.js-2118-                    if ($(opt).attr('data-level') !== "1") {
+/tmp/icp2005_selectvariable.js-2119-                        dataName = $(opt).parent('li')[0].innerText;
+/tmp/icp2005_selectvariable.js-2120-                    }
+/tmp/icp2005_selectvariable.js-2121-                    return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level'), dataname: dataName  };
+/tmp/icp2005_selectvariable.js-2122-                }).toArray();
+/tmp/icp2005_selectvariable.js-2123-            } else {
+/tmp/icp2005_selectvariable.js-2124-                allselected = $('#lstFilterItems_' + controlid + ' .filter-check:checked').map(function (i, opt) {
+/tmp/icp2005_selectvariable.js-2125-                    return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level') };
+/tmp/icp2005_selectvariable.js-2126-                }).toArray();
+/tmp/icp2005_selectvariable.js-2127-            }
+/tmp/icp2005_selectvariable.js-2128-            filtermembers = dimdata.Members;
+/tmp/icp2005_selectvariable.js-2129-        }
+/tmp/icp2005_selectvariable.js-2130-
+/tmp/icp2005_selectvariable.js-2131-        var jumptolist = dimdata.JTL;
+/tmp/icp2005_selectvariable.js-2132-
+/tmp/icp2005_selectvariable.js-2133-        if (allselected.length > 0) {
+/tmp/icp2005_selectvariable.js-2134-            if (gbl_subnational_pagination && gbl_SubnationalFilter && dimtype === 'C') {
+/tmp/icp2005_selectvariable.js-2135-                anySelected = true;
+/tmp/icp2005_selectvariable.js-2136-                var parentcodes = '';
+/tmp/icp2005_selectvariable.js-2137-                var dataLevel = null;
+/tmp/icp2005_selectvariable.js-2138-                var dataValue;
+/tmp/icp2005_selectvariable.js-2139-                for (var i = 0; i < allselected.length; i++) {
+/tmp/icp2005_selectvariable.js-2140-                    if (allselected[i].dataname && allselected[i].dataname.trim() !== '')
+/tmp/icp2005_selectvariable.js-2141-                        parentcodes = parentcodes + allselected[i].dataname + "~";
+/tmp/icp2005_selectvariable.js-2142-                    //dataValue = allselected[i].datavalue ? allselected[i].datavalue.split('.')[0] : 0;
+/tmp/icp2005_selectvariable.js-2143-                    //dataValue = dataValue - 1;
+/tmp/icp2005_selectvariable.js-2144-                    //if (dataValue > dataLevel)
+/tmp/icp2005_selectvariable.js-2145-                    //    dataLevel = dataValue;
+/tmp/icp2005_selectvariable.js-2146-                }
+/tmp/icp2005_selectvariable.js-2147-                if (parentcodes.length > 0)
+/tmp/icp2005_selectvariable.js-2148-                    parentcodes = parentcodes.substring(0, parentcodes.length - 1);
+/tmp/icp2005_selectvariable.js-2149-                else
+/tmp/icp2005_selectvariable.js-2150-                    dataLevel = 0;
+/tmp/icp2005_selectvariable.js-2151-
+/tmp/icp2005_selectvariable.js-2152-                var filtermembers2 = [];
+/tmp/icp2005_selectvariable.js:2153:                var filterOutput = LoadSubNationalChildren(controlid, hierarchy, dataLevel, "", "", parentcodes);
+/tmp/icp2005_selectvariable.js-2154-                filtermembers2 = fillHierarchy(filterOutput);
+/tmp/icp2005_selectvariable.js-2155-                if (filterOutput.length > 0)
+/tmp/icp2005_selectvariable.js-2156-                    filtermembers = OrderSubnationalData(filterOutput.concat(filtermembers2));
+/tmp/icp2005_selectvariable.js-2157-            }
+/tmp/icp2005_selectvariable.js-2158-            else {
+/tmp/icp2005_selectvariable.js-2159-                if (gbl_SubnationalFilter && dimtype == 'C') {
+/tmp/icp2005_selectvariable.js-2160-                    filtermembers = $.grep(filtermembers, function (n, i) {
+/tmp/icp2005_selectvariable.js-2161-                        return getSubnationalFilterSelected(allselected, n);
+/tmp/icp2005_selectvariable.js-2162-                    });
+/tmp/icp2005_selectvariable.js-2163-                    if (filtermembers.length > 0)
+/tmp/icp2005_selectvariable.js-2164-                        FindSubnationalParents(filtermembers, dimdata.Members);
+/tmp/icp2005_selectvariable.js-2165-                }
+/tmp/icp2005_selectvariable.js-2166-                else {
+/tmp/icp2005_selectvariable.js-2167-                    filtermembers = $.grep(filtermembers, function (n, i) {
+/tmp/icp2005_selectvariable.js-2168-                        return getFilterSelected(allselected, n, isdblist, controlid);
+/tmp/icp2005_selectvariable.js-2169-                    });
+/tmp/icp2005_selectvariable.js-2170-                }
+/tmp/icp2005_selectvariable.js-2171-            }
+/tmp/icp2005_selectvariable.js-2172-            jumptolist = $(filtermembers).map(function (i, opt) { return opt.JTC; });
+/tmp/icp2005_selectvariable.js-2173-            jumptolist = $.unique(jumptolist);
+/tmp/icp2005_selectvariable.js-2174-        }
+/tmp/icp2005_selectvariable.js-2175-
+/tmp/icp2005_selectvariable.js-2176-        if (gbl_high_freequencyenabled && dimtype == 'T') {
+/tmp/icp2005_selectvariable.js-2177-            controlid = GetHighFrequencyControlId(gbl_time_control_Id);
+/tmp/icp2005_selectvariable.js-2178-            targetId = GetHighFrequencyTargetId(gbl_time_target_Id);
+/tmp/icp2005_selectvariable.js-2179-        }
+/tmp/icp2005_selectvariable.js-2180-
+/tmp/icp2005_selectvariable.js-2181-        loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, anySelected);
+--
+/tmp/icp2005_selectvariable.js-2291-            break;
+/tmp/icp2005_selectvariable.js-2292-        default:
+/tmp/icp2005_selectvariable.js-2293-            if (value.HN !== "NULL" && value.HN !== null)
+/tmp/icp2005_selectvariable.js-2294-                hierarchylist += '<input type="checkbox" class="selector filter-check" data-value="' + value.HID + '" data-level="' + value.LN + '" />' + value.HN;
+/tmp/icp2005_selectvariable.js-2295-            break;
+/tmp/icp2005_selectvariable.js-2296-    }
+/tmp/icp2005_selectvariable.js-2297-
+/tmp/icp2005_selectvariable.js-2298-    if (value.LV.length > 0) {
+/tmp/icp2005_selectvariable.js-2299-        hierarchylist += '<ul class="childNodes level' + value.LN + '">';
+/tmp/icp2005_selectvariable.js-2300-        $.each(value.LV, function (index1, value1) {
+/tmp/icp2005_selectvariable.js-2301-            hierarchylist += getFilterList(index1, value1, isdblist, controlid);
+/tmp/icp2005_selectvariable.js-2302-        });
+/tmp/icp2005_selectvariable.js-2303-        hierarchylist += '</ul>';
+/tmp/icp2005_selectvariable.js-2304-    }
+/tmp/icp2005_selectvariable.js-2305-
+/tmp/icp2005_selectvariable.js-2306-    hierarchylist += '</li>';
+/tmp/icp2005_selectvariable.js-2307-
+/tmp/icp2005_selectvariable.js-2308-    return hierarchylist;
+/tmp/icp2005_selectvariable.js-2309-}
+/tmp/icp2005_selectvariable.js-2310-
+/tmp/icp2005_selectvariable.js-2311-function loadSelectFilterItems(obj) {
+/tmp/icp2005_selectvariable.js-2312-    //debugger;
+/tmp/icp2005_selectvariable.js-2313-
+/tmp/icp2005_selectvariable.js-2314-    var allselected = $('#divMapRegion .select-filter-check:checked, #divMapIncome .select-filter-check:checked').map(function (i, opt) {
+/tmp/icp2005_selectvariable.js-2315-        return { datavalue: $(opt).attr('value'), filtertype: $(opt).attr('filter-type') };
+/tmp/icp2005_selectvariable.js-2316-    }).toArray();
+/tmp/icp2005_selectvariable.js-2317-
+/tmp/icp2005_selectvariable.js-2318-    var controlid = $('#divMapRegion').attr('data-type');
+/tmp/icp2005_selectvariable.js:2319:    var dimdatakeys = $.grep(Object.keys(gbl_array_data), function (n, i) {
+/tmp/icp2005_selectvariable.js-2320-        if (n.indexOf(controlid + '_') == 0) return true;
+/tmp/icp2005_selectvariable.js-2321-    });
+/tmp/icp2005_selectvariable.js:2322:    var dimdata = (dimdatakeys.length > 0 ? gbl_array_data[dimdatakeys[0]] : null);
+/tmp/icp2005_selectvariable.js-2323-
+/tmp/icp2005_selectvariable.js-2324-    if (allselected.length > 0 && dimdata != null) {
+/tmp/icp2005_selectvariable.js-2325-        var filtermembers = dimdata.Members;
+/tmp/icp2005_selectvariable.js-2326-
+/tmp/icp2005_selectvariable.js-2327-        filtermembers = $.grep(filtermembers, function (n, i) {
+/tmp/icp2005_selectvariable.js-2328-            return getSelectFilterSelected(allselected, n);
+/tmp/icp2005_selectvariable.js-2329-        });
+/tmp/icp2005_selectvariable.js-2330-
+/tmp/icp2005_selectvariable.js-2331-        $(obj).parents(".panel").find(".selectedView li").remove();
+/tmp/icp2005_selectvariable.js-2332-        $(obj).parents(".panel").find(".availableView li .chkSelectElement").prop("checked", false);
+/tmp/icp2005_selectvariable.js-2333-        $(obj).parents(".panel").find(".availableView li").removeClass("selected");
+/tmp/icp2005_selectvariable.js-2334-
+/tmp/icp2005_selectvariable.js-2335-        var controlid = $(obj).parents(".panel").find(".selectedView").attr('data-value');
+/tmp/icp2005_selectvariable.js-2336-        var targetId = "#tbl_" + controlid;
+/tmp/icp2005_selectvariable.js-2337-
+/tmp/icp2005_selectvariable.js-2338-        var selectedMembers = {};
+/tmp/icp2005_selectvariable.js-2339-        var html = '';
+/tmp/icp2005_selectvariable.js-2340-        $.each(filtermembers, function (ind, val) {
+/tmp/icp2005_selectvariable.js-2341-            selectedMembers[val.ID] = { displayname: val.Name, custom: false };
+/tmp/icp2005_selectvariable.js-2342-            html += "<li class='selected' uniqueId='" + val.ID + "'><span class='glyphicon glyphicon-plus-sign plusIcon' title=''> </span><span class='deleteIcon glyphicon glyphicon-remove-circle' title='Remove from selection'></span><span class='value'>" + val.Name + "</span></li>";
+/tmp/icp2005_selectvariable.js-2343-
+/tmp/icp2005_selectvariable.js-2344-            $(obj).parents(".panel").find(".availableView li[uniqueid='" + val.ID + "']").addClass("selected").find('.chkSelectElement').prop('checked', true);
+/tmp/icp2005_selectvariable.js-2345-        });
+/tmp/icp2005_selectvariable.js-2346-        $(obj).parents(".panel").find(".selectedView").append(html);
+/tmp/icp2005_selectvariable.js-2347-        gbl_array_member_selected[controlid] = selectedMembers;
+/tmp/icp2005_selectvariable.js-2348-        GenarateAdobeDimensions(controlid);
+/tmp/icp2005_selectvariable.js-2349-        getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-2350-    }
+/tmp/icp2005_selectvariable.js-2351-}
+/tmp/icp2005_selectvariable.js-2352-
+/tmp/icp2005_selectvariable.js-2353-function getSelectFilterSelected(allselected, member) {
+/tmp/icp2005_selectvariable.js-2354-    for (var index = 0; index < allselected.length; index++) {
+/tmp/icp2005_selectvariable.js-2355-        var filterindex = (allselected[index].filtertype == 'Region' ? 0 : (allselected[index].filtertype == 'Income' ? 1 : -1));
+/tmp/icp2005_selectvariable.js-2356-
+/tmp/icp2005_selectvariable.js-2357-        if (filterindex >= 0 && member.HLS != null && member.HLS[filterindex] == allselected[index].datavalue) return true;
+/tmp/icp2005_selectvariable.js-2358-    }
+/tmp/icp2005_selectvariable.js-2359-}
+/tmp/icp2005_selectvariable.js-2360-
+/tmp/icp2005_selectvariable.js-2361-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-2362-/********************************************Classification related functions**********************************************************************/
+/tmp/icp2005_selectvariable.js-2363-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js:2364:function initClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata) {
+/tmp/icp2005_selectvariable.js-2365-    if ($('.dimension-hierarchy-' + controlid + ' option').length <= 0) {
+/tmp/icp2005_selectvariable.js-2366-        $.each(dimdata.Levels, function (index, value) {
+/tmp/icp2005_selectvariable.js-2367-            $('.dimension-hierarchy-' + controlid).append('<option value="' + value.HID + '">' + value.HN + '</option>');
+/tmp/icp2005_selectvariable.js-2368-        });
+/tmp/icp2005_selectvariable.js-2369-    }
+/tmp/icp2005_selectvariable.js-2370-    $("#hierarchy_" + controlid).hide();
+/tmp/icp2005_selectvariable.js-2371-    $(".CtryAgg_Classification").click(function () {
+/tmp/icp2005_selectvariable.js-2372-        var dataValue = $(this).attr("data-value");
+/tmp/icp2005_selectvariable.js-2373-        var genChkSelector = $("#lstFilterItems_" + controlid);
+/tmp/icp2005_selectvariable.js-2374-        if (dataValue == "All") {
+/tmp/icp2005_selectvariable.js-2375-            if (dimdata.DT == "C" && gbl_SubnationalFilter) {
+/tmp/icp2005_selectvariable.js-2376-                var AggregatesToggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Aggregates']";
+/tmp/icp2005_selectvariable.js-2377-                if ($(AggregatesToggleid)) $(AggregatesToggleid).removeClass('active');
+/tmp/icp2005_selectvariable.js-2378-            }
+/tmp/icp2005_selectvariable.js-2379-            var allMemberList;
+/tmp/icp2005_selectvariable.js-2380-            if (dimdata.Aggr != null)
+/tmp/icp2005_selectvariable.js-2381-                allMemberList = $.merge($.merge([], dimdata.Members), dimdata.Aggr);
+/tmp/icp2005_selectvariable.js-2382-            else
+/tmp/icp2005_selectvariable.js-2383-                allMemberList = dimdata.Members;
+/tmp/icp2005_selectvariable.js-2384-
+/tmp/icp2005_selectvariable.js-2385-            var allJTL;
+/tmp/icp2005_selectvariable.js-2386-            if (dimdata.JTLA != null)
+/tmp/icp2005_selectvariable.js-2387-                allJTL = $.merge($.merge([], dimdata.JTL), dimdata.JTLA);
+/tmp/icp2005_selectvariable.js-2388-            else
+/tmp/icp2005_selectvariable.js-2389-                allJTL = dimdata.JTL;
+/tmp/icp2005_selectvariable.js-2390-
+/tmp/icp2005_selectvariable.js-2391-            loadDimMembers(controlid, targetId, showPlusIcon, allMemberList, allJTL, false);
+/tmp/icp2005_selectvariable.js-2392-            getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-2393-
+/tmp/icp2005_selectvariable.js-2394-            if (dimdata.Levels != null && dimdata.CHL.length > 0)
+/tmp/icp2005_selectvariable.js:2395:                loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
+/tmp/icp2005_selectvariable.js-2396-
+/tmp/icp2005_selectvariable.js-2397-            $("#toggleFilter_" + controlid).attr("disabled", false);
+/tmp/icp2005_selectvariable.js-2398-            if (!(dimdata.DT == "C" && gbl_SubnationalFilter))
+/tmp/icp2005_selectvariable.js-2399-                sortAllSelectedItems($("#tbl_" + controlid), true);
+/tmp/icp2005_selectvariable.js-2400-            $("#_filterTree_" + controlid).removeClass("disabled");
+/tmp/icp2005_selectvariable.js-2401-            TrackFeature('Variables->Country->Classification->All');
+/tmp/icp2005_selectvariable.js-2402-        }
+/tmp/icp2005_selectvariable.js-2403-        else if (dataValue == "Countries") {
+/tmp/icp2005_selectvariable.js-2404-            if (dimdata.DT == "C" && gbl_SubnationalFilter) {
+/tmp/icp2005_selectvariable.js-2405-                var AggregatesToggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Aggregates']";
+/tmp/icp2005_selectvariable.js-2406-                if ($(AggregatesToggleid)) $(AggregatesToggleid).removeClass('active');
+/tmp/icp2005_selectvariable.js-2407-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, null, false);
+/tmp/icp2005_selectvariable.js-2408-            }
+/tmp/icp2005_selectvariable.js-2409-            else {
+/tmp/icp2005_selectvariable.js-2410-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-2411-                getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-2412-
+/tmp/icp2005_selectvariable.js-2413-                if (dimdata.Levels != null && dimdata.CHL.length > 0)
+/tmp/icp2005_selectvariable.js:2414:                    loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
+/tmp/icp2005_selectvariable.js-2415-
+/tmp/icp2005_selectvariable.js-2416-                $("#toggleFilter_" + controlid).attr("disabled", false);
+/tmp/icp2005_selectvariable.js-2417-                $("#_filterTree_" + controlid).removeClass("disabled");
+/tmp/icp2005_selectvariable.js-2418-            }
+/tmp/icp2005_selectvariable.js-2419-            TrackFeature('Variables->Country->Classification->Countries');
+/tmp/icp2005_selectvariable.js-2420-        }
+/tmp/icp2005_selectvariable.js-2421-        else {
+/tmp/icp2005_selectvariable.js-2422-            if (dimdata.DT == "C" && gbl_SubnationalFilter) {
+/tmp/icp2005_selectvariable.js-2423-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, null, false);
+/tmp/icp2005_selectvariable.js-2424-                var countrytoggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Countries']";
+/tmp/icp2005_selectvariable.js-2425-                var alltoggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='All']";
+/tmp/icp2005_selectvariable.js-2426-                if ($(countrytoggleid)) $(countrytoggleid).removeClass('active');
+/tmp/icp2005_selectvariable.js-2427-                if ($(alltoggleid)) $(alltoggleid).removeClass('active');
+/tmp/icp2005_selectvariable.js-2428-                sortAllSelectedItems($("#tbl_" + controlid), true);
+/tmp/icp2005_selectvariable.js-2429-            } else {
+/tmp/icp2005_selectvariable.js-2430-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Aggr, dimdata.JTLA, false);
+/tmp/icp2005_selectvariable.js-2431-                getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-2432-
+/tmp/icp2005_selectvariable.js-2433-                if (dimdata.Levels != null && dimdata.CHL.length > 0)
+/tmp/icp2005_selectvariable.js:2434:                    loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
+/tmp/icp2005_selectvariable.js-2435-
+/tmp/icp2005_selectvariable.js-2436-                $("#toggleFilter_" + controlid).attr("disabled", true);
+/tmp/icp2005_selectvariable.js-2437-                $("#_filterTree_" + controlid).addClass("disabled");
+/tmp/icp2005_selectvariable.js-2438-            }
+/tmp/icp2005_selectvariable.js-2439-            TrackFeature('Variables->Country->Classification->Aggregates');
+/tmp/icp2005_selectvariable.js-2440-        }
+/tmp/icp2005_selectvariable.js-2441-        $("#filterResults_" + controlid).hide();
+/tmp/icp2005_selectvariable.js-2442-        $("#hierarchy_" + controlid).hide();
+/tmp/icp2005_selectvariable.js-2443-    });
+/tmp/icp2005_selectvariable.js-2444-}
+/tmp/icp2005_selectvariable.js-2445-
+/tmp/icp2005_selectvariable.js:2446:function loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, levels) {
+/tmp/icp2005_selectvariable.js-2447-    var hierarchylist = '';
+/tmp/icp2005_selectvariable.js-2448-    $.each(levels, function (index, value) {
+/tmp/icp2005_selectvariable.js-2449-        hierarchylist += getClassificationFilterList(index, value);
+/tmp/icp2005_selectvariable.js-2450-    });
+/tmp/icp2005_selectvariable.js-2451-
+/tmp/icp2005_selectvariable.js:2452:    $('#lstFilterItems_' + controlid).html(hierarchylist);
+/tmp/icp2005_selectvariable.js-2453-    $('.filter-check').on('click', function () {
+/tmp/icp2005_selectvariable.js-2454-        var anySelected = false;
+/tmp/icp2005_selectvariable.js-2455-        $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-2456-        var allselected = $('#lstFilterItems_' + controlid + ' .filter-check:checked').map(function (i, opt) {
+/tmp/icp2005_selectvariable.js-2457-            return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level'), parentindex: $(opt).parent().parent().closest('li').attr('data-index') };
+/tmp/icp2005_selectvariable.js-2458-        }).toArray();
+/tmp/icp2005_selectvariable.js-2459-
+/tmp/icp2005_selectvariable.js-2460-        var dimdata;
+/tmp/icp2005_selectvariable.js-2461-        if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
+/tmp/icp2005_selectvariable.js:2462:            dimdata = gbl_array_data[gbl_time_control_Id + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-2463-        else
+/tmp/icp2005_selectvariable.js:2464:            dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-2465-
+/tmp/icp2005_selectvariable.js-2466-        var filtermembers = dimdata.Members;
+/tmp/icp2005_selectvariable.js-2467-        var jumptolist = dimdata.JTL;
+/tmp/icp2005_selectvariable.js-2468-        if (allselected.length > 0) {
+/tmp/icp2005_selectvariable.js-2469-            anySelected = true;
+/tmp/icp2005_selectvariable.js-2470-            var filtermembersall = dimdata.Members;
+/tmp/icp2005_selectvariable.js-2471-            filtermembers = $.grep(filtermembersall, function (n, i) {
+/tmp/icp2005_selectvariable.js-2472-                return getClassificationSelected(allselected, n);
+/tmp/icp2005_selectvariable.js-2473-            });
+/tmp/icp2005_selectvariable.js-2474-            jumptolist = $(filtermembers).map(function (i, opt) { return opt.JTC; });
+/tmp/icp2005_selectvariable.js-2475-            jumptolist = $.unique(jumptolist);
+/tmp/icp2005_selectvariable.js-2476-        }
+/tmp/icp2005_selectvariable.js-2477-
+/tmp/icp2005_selectvariable.js-2478-        if (gbl_SubnationalFilter && $('#tbl_' + controlid).attr('data-type') == "C") {
+/tmp/icp2005_selectvariable.js-2479-            if (filtermembers.length > 0)
+/tmp/icp2005_selectvariable.js-2480-                FindSubnationalParents(filtermembers, dimdata.Members);
+/tmp/icp2005_selectvariable.js-2481-            loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, anySelected);
+/tmp/icp2005_selectvariable.js-2482-        }
+/tmp/icp2005_selectvariable.js-2483-        else
+/tmp/icp2005_selectvariable.js-2484-            loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, false);
+/tmp/icp2005_selectvariable.js-2485-
+/tmp/icp2005_selectvariable.js-2486-        $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-2487-        $(this).parents(".panel").find(".searchInput").val("");
+/tmp/icp2005_selectvariable.js-2488-        $(this).parents(".panel").find(".searchResults").hide();
+/tmp/icp2005_selectvariable.js-2489-        if (allselected.length > 0)
+/tmp/icp2005_selectvariable.js-2490-            $(this).parents(".panel").find(".filterResults").show();
+/tmp/icp2005_selectvariable.js-2491-        else
+/tmp/icp2005_selectvariable.js-2492-            $(this).parents(".panel").find(".filterResults").hide();
+--
+/tmp/icp2005_selectvariable.js-2739-        }
+/tmp/icp2005_selectvariable.js-2740-        TrackFeature("Variables->" + getPanelHeading(this) + "->RemoveFilter");
+/tmp/icp2005_selectvariable.js-2741-    });
+/tmp/icp2005_selectvariable.js-2742-    initPagination();
+/tmp/icp2005_selectvariable.js-2743-}
+/tmp/icp2005_selectvariable.js-2744-
+/tmp/icp2005_selectvariable.js-2745-function invokeSearch(controlid, inputId, dataSource, targetId, showPlusIcon) {
+/tmp/icp2005_selectvariable.js-2746-
+/tmp/icp2005_selectvariable.js-2747-    gbl_start_var = 1;
+/tmp/icp2005_selectvariable.js-2748-    gbl_end_var = threshold;
+/tmp/icp2005_selectvariable.js-2749-    var keyword = $(inputId).val().trim();
+/tmp/icp2005_selectvariable.js-2750-
+/tmp/icp2005_selectvariable.js-2751-    if (keyword == "") {
+/tmp/icp2005_selectvariable.js-2752-        $(inputId).focus();
+/tmp/icp2005_selectvariable.js-2753-    }
+/tmp/icp2005_selectvariable.js-2754-    else {
+/tmp/icp2005_selectvariable.js-2755-        var filtermembers = searchRecordsSV(dataSource, keyword, 'Name');
+/tmp/icp2005_selectvariable.js-2756-        var jumptolist = $(filtermembers).map(function (i, opt) { return opt.JTC; });
+/tmp/icp2005_selectvariable.js-2757-        jumptolist = $.unique(jumptolist);
+/tmp/icp2005_selectvariable.js-2758-        filtermembers.sort(function (a, b) {
+/tmp/icp2005_selectvariable.js-2759-            var compA = $(a).attr('JTC');
+/tmp/icp2005_selectvariable.js-2760-            var compB = $(b).attr('JTC');
+/tmp/icp2005_selectvariable.js-2761-            return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+/tmp/icp2005_selectvariable.js-2762-        });
+/tmp/icp2005_selectvariable.js-2763-
+/tmp/icp2005_selectvariable.js-2764-        if (gbl_SubnationalFilter && $('#tbl_' + controlid).attr('data-type') === "C") {
+/tmp/icp2005_selectvariable.js-2765-            if (gbl_subnational_pagination) {
+/tmp/icp2005_selectvariable.js-2766-                var parentList = [];
+/tmp/icp2005_selectvariable.js:2767:                filtermembers = LoadSubNationalChildren(controlid, gbl_subnationalHierarchy, null, "", keyword,"");
+/tmp/icp2005_selectvariable.js-2768-                parentList = fillHierarchy(filtermembers);
+/tmp/icp2005_selectvariable.js-2769-                if (filtermembers.length > 0) {
+/tmp/icp2005_selectvariable.js-2770-                    filtermembers = filtermembers.concat(parentList);
+/tmp/icp2005_selectvariable.js-2771-                }
+/tmp/icp2005_selectvariable.js-2772-                filtermembers.sort(function (a, b) {
+/tmp/icp2005_selectvariable.js-2773-                    var compA = $(a).attr('JTC');
+/tmp/icp2005_selectvariable.js-2774-                    var compB = $(b).attr('JTC');
+/tmp/icp2005_selectvariable.js-2775-                    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+/tmp/icp2005_selectvariable.js-2776-                });
+/tmp/icp2005_selectvariable.js-2777-            }
+/tmp/icp2005_selectvariable.js-2778-            else {
+/tmp/icp2005_selectvariable.js-2779-                filtermembers = FindSubNationalChilds(dataSource, filtermembers);
+/tmp/icp2005_selectvariable.js-2780-                FindSubnationalParents(filtermembers, dataSource);
+/tmp/icp2005_selectvariable.js-2781-            }
+/tmp/icp2005_selectvariable.js-2782-        }
+/tmp/icp2005_selectvariable.js-2783-
+/tmp/icp2005_selectvariable.js-2784-        loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, true);
+/tmp/icp2005_selectvariable.js-2785-        $(targetId).parents(".panel").find(".searchResults").show();
+/tmp/icp2005_selectvariable.js-2786-    }
+/tmp/icp2005_selectvariable.js-2787-}
+/tmp/icp2005_selectvariable.js-2788-
+/tmp/icp2005_selectvariable.js-2789-function searchRecordsSV(records, filterKeyword, filterParameter) {
+/tmp/icp2005_selectvariable.js-2790-    var filter_or_operator = 1;
+/tmp/icp2005_selectvariable.js-2791-    var filterValue = filterKeyword.split(" ");
+/tmp/icp2005_selectvariable.js-2792-    var filteredRows = [];
+/tmp/icp2005_selectvariable.js-2793-
+/tmp/icp2005_selectvariable.js-2794-    for (var i = 0; i < filterValue.length; i++) {
+/tmp/icp2005_selectvariable.js-2795-        var filterGroup = new $.jqx.filter();
+--
+/tmp/icp2005_selectvariable.js-3099-
+/tmp/icp2005_selectvariable.js-3100-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-3101-/********************************************Database Listing functions********************************************************************************/
+/tmp/icp2005_selectvariable.js-3102-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-3103-function loadSelectedDBList(obj) {
+/tmp/icp2005_selectvariable.js-3104-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
+/tmp/icp2005_selectvariable.js-3105-    loadDatabaseList(dimobj);
+/tmp/icp2005_selectvariable.js-3106-}
+/tmp/icp2005_selectvariable.js-3107-
+/tmp/icp2005_selectvariable.js-3108-function loadAvailableDBList(obj) {
+/tmp/icp2005_selectvariable.js-3109-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
+/tmp/icp2005_selectvariable.js-3110-    loadDatabaseList(dimobj);
+/tmp/icp2005_selectvariable.js-3111-}
+/tmp/icp2005_selectvariable.js-3112-
+/tmp/icp2005_selectvariable.js-3113-function loadDatabaseList(obj) {
+/tmp/icp2005_selectvariable.js-3114-    //debugger;
+/tmp/icp2005_selectvariable.js-3115-    if (obj != null && !$(obj).hasClass('collapsed')) {
+/tmp/icp2005_selectvariable.js-3116-        $(obj).parents('.panel-heading').find('.toggleSelectionViews a').removeClass('active');
+/tmp/icp2005_selectvariable.js-3117-        return;
+/tmp/icp2005_selectvariable.js-3118-    }
+/tmp/icp2005_selectvariable.js-3119-
+/tmp/icp2005_selectvariable.js-3120-    TrackFeature("Variables->Database");
+/tmp/icp2005_selectvariable.js-3121-
+/tmp/icp2005_selectvariable.js-3122-    $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-3123-
+/tmp/icp2005_selectvariable.js-3124-    var controlid = "DBList";
+/tmp/icp2005_selectvariable.js-3125-    var hierarchy = "All";
+/tmp/icp2005_selectvariable.js-3126-
+/tmp/icp2005_selectvariable.js:3127:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-3128-    if (dimdata == null) {
+/tmp/icp2005_selectvariable.js:3129:        gbl_array_data[controlid + '_' + hierarchy] = 'Loading'; //to avoid double loading
+/tmp/icp2005_selectvariable.js-3130-        var starttime = new Date();
+/tmp/icp2005_selectvariable.js-3131-
+/tmp/icp2005_selectvariable.js-3132-        $.ajax({
+/tmp/icp2005_selectvariable.js-3133-            type: "POST",
+/tmp/icp2005_selectvariable.js-3134-            async: true,
+/tmp/icp2005_selectvariable.js-3135-            url: gbl_report_methods + "/GetDatabaseListJSON",
+/tmp/icp2005_selectvariable.js-3136-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3137-            data: "{}",
+/tmp/icp2005_selectvariable.js-3138-            dataType: "json",
+/tmp/icp2005_selectvariable.js-3139-            success: function (data) {
+/tmp/icp2005_selectvariable.js-3140-                //debugger;
+/tmp/icp2005_selectvariable.js:3141:                gbl_array_data[controlid + '_' + hierarchy] = data.d;
+/tmp/icp2005_selectvariable.js-3142-
+/tmp/icp2005_selectvariable.js:3143:                createDatabaseList(controlid, hierarchy);
+/tmp/icp2005_selectvariable.js-3144-
+/tmp/icp2005_selectvariable.js:3145:                //logTimeConsumed(controlid + "_" + hierarchy, starttime);
+/tmp/icp2005_selectvariable.js-3146-
+/tmp/icp2005_selectvariable.js-3147-                $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-3148-                initDragDrop();
+/tmp/icp2005_selectvariable.js-3149-            },
+/tmp/icp2005_selectvariable.js-3150-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js:3151:                gbl_array_data[controlid + '_' + hierarchy] = null;
+/tmp/icp2005_selectvariable.js-3152-                $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-3153-                //alert(errorThrown);
+/tmp/icp2005_selectvariable.js-3154-                window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-3155-            }
+/tmp/icp2005_selectvariable.js-3156-        });
+/tmp/icp2005_selectvariable.js-3157-    }
+/tmp/icp2005_selectvariable.js-3158-    else {
+/tmp/icp2005_selectvariable.js:3159:        if (obj == null) createDatabaseList(controlid, hierarchy); //if we call the function from filter then only we need to repopulate
+/tmp/icp2005_selectvariable.js-3160-
+/tmp/icp2005_selectvariable.js-3161-        $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-3162-    }
+/tmp/icp2005_selectvariable.js-3163-}
+/tmp/icp2005_selectvariable.js-3164-
+/tmp/icp2005_selectvariable.js:3165:function createDatabaseList(controlid, hierarchy) {
+/tmp/icp2005_selectvariable.js-3166-    var targetId = "#tbl_" + controlid;
+/tmp/icp2005_selectvariable.js-3167-    //debugger;
+/tmp/icp2005_selectvariable.js-3168-
+/tmp/icp2005_selectvariable.js:3169:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-3170-    if (dimdata == null) return;
+/tmp/icp2005_selectvariable.js-3171-
+/tmp/icp2005_selectvariable.js-3172-    if (gbl_array_member_selected[controlid] == null) {
+/tmp/icp2005_selectvariable.js-3173-        gbl_array_member_selected[controlid] = dimdata.Sel;
+/tmp/icp2005_selectvariable.js-3174-        GenarateAdobeDimensions(controlid);
+/tmp/icp2005_selectvariable.js-3175-    }
+/tmp/icp2005_selectvariable.js-3176-
+/tmp/icp2005_selectvariable.js:3177:    loadFilter(controlid, hierarchy, targetId, false, dimdata.Levels);
+/tmp/icp2005_selectvariable.js-3178-    loadDimMembers(controlid, targetId, false, dimdata.Members, dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-3179-    getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-3180-}
+/tmp/icp2005_selectvariable.js-3181-
+/tmp/icp2005_selectvariable.js-3182-
+/tmp/icp2005_selectvariable.js-3183-function loadDatabaseDetails(CubeId,IsPublic) {
+/tmp/icp2005_selectvariable.js-3184-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_selectvariable.js-3185-    $("#dbMetadata div.modal-body").html(loadingtext);
+/tmp/icp2005_selectvariable.js-3186-
+/tmp/icp2005_selectvariable.js-3187-
+/tmp/icp2005_selectvariable.js-3188-    $.ajax({
+/tmp/icp2005_selectvariable.js-3189-        type: "POST",
+/tmp/icp2005_selectvariable.js-3190-        url: gbl_report_methods + "/PopulateDatabaseDetails",
+/tmp/icp2005_selectvariable.js-3191-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3192-        data: "{cubeid:'" + CubeId + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_selectvariable.js-3193-        dataType: "json",
+/tmp/icp2005_selectvariable.js-3194-        success: function (data) {
+/tmp/icp2005_selectvariable.js-3195-            if (data.d === null || data.d === '') return;
+/tmp/icp2005_selectvariable.js-3196-            data.d = data.d.replace(/&lt;/g, "<");
+/tmp/icp2005_selectvariable.js-3197-            data.d = data.d.replace(/&gt;/g, ">");
+/tmp/icp2005_selectvariable.js-3198-            $("#dbMetadata div.modal-body").html(data.d);
+/tmp/icp2005_selectvariable.js-3199-
+/tmp/icp2005_selectvariable.js-3200-        },
+/tmp/icp2005_selectvariable.js-3201-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-3202-            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-3203-        }
+/tmp/icp2005_selectvariable.js-3204-    });
+/tmp/icp2005_selectvariable.js-3205-}
+--
+/tmp/icp2005_selectvariable.js-4757-    //        alert();
+/tmp/icp2005_selectvariable.js-4758-
+/tmp/icp2005_selectvariable.js-4759-    //    });
+/tmp/icp2005_selectvariable.js-4760-
+/tmp/icp2005_selectvariable.js-4761-}
+/tmp/icp2005_selectvariable.js-4762-function gridRenderingSettings() {
+/tmp/icp2005_selectvariable.js-4763-
+/tmp/icp2005_selectvariable.js-4764-
+/tmp/icp2005_selectvariable.js-4765-
+/tmp/icp2005_selectvariable.js-4766-
+/tmp/icp2005_selectvariable.js-4767-    $(".dxgvTable_GridDefaultTheme tr:first-child").show();
+/tmp/icp2005_selectvariable.js-4768-
+/tmp/icp2005_selectvariable.js-4769-
+/tmp/icp2005_selectvariable.js-4770-
+/tmp/icp2005_selectvariable.js-4771-
+/tmp/icp2005_selectvariable.js-4772-    if (gbl_common_culture == "ar") {
+/tmp/icp2005_selectvariable.js-4773-        $(".dxgvFCSD").scrollLeft("0");
+/tmp/icp2005_selectvariable.js-4774-    }
+/tmp/icp2005_selectvariable.js-4775-
+/tmp/icp2005_selectvariable.js-4776-    else {
+/tmp/icp2005_selectvariable.js-4777-        $(".dxgvFCSD").scrollLeft($(".dxgvFCSD div").width());
+/tmp/icp2005_selectvariable.js-4778-
+/tmp/icp2005_selectvariable.js-4779-    }
+/tmp/icp2005_selectvariable.js-4780-
+/tmp/icp2005_selectvariable.js-4781-}
+/tmp/icp2005_selectvariable.js-4782-
+/tmp/icp2005_selectvariable.js-4783-/************************Code for Sub-national Poverty database **************/
+/tmp/icp2005_selectvariable.js-4784-
+/tmp/icp2005_selectvariable.js:4785:function showSubnationals(controlid, data, hierarchy) {
+/tmp/icp2005_selectvariable.js-4786-    $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').show();
+/tmp/icp2005_selectvariable.js-4787-    $("#CtryAgg_Classification_" + controlid).hide();
+/tmp/icp2005_selectvariable.js-4788-    $('.SubnationalAvailableView').show();
+/tmp/icp2005_selectvariable.js-4789-
+/tmp/icp2005_selectvariable.js:4790:    CreateSubNationalTabs(data.Members, controlid, data.Levels, hierarchy);
+/tmp/icp2005_selectvariable.js-4791-
+/tmp/icp2005_selectvariable.js-4792-    $("body").on("click", ".SubnationalAvailableView li span.bookunit", function () {
+/tmp/icp2005_selectvariable.js-4793-        var dataType = $(this).parents(".panel").find('ul.selectedView').attr('data-type');
+/tmp/icp2005_selectvariable.js-4794-        var expandElement = $($(this).parent('li')).children('span.caret-n');
+/tmp/icp2005_selectvariable.js-4795-        if (expandElement !== null && dataType === "C" && gbl_SubnationalFilter) {
+/tmp/icp2005_selectvariable.js:4796:            ShowSubnationalList(expandElement, controlid,hierarchy);
+/tmp/icp2005_selectvariable.js-4797-        }
+/tmp/icp2005_selectvariable.js-4798-    });
+/tmp/icp2005_selectvariable.js-4799-
+/tmp/icp2005_selectvariable.js-4800-    $("body").on("click", ".caret-n", function () {
+/tmp/icp2005_selectvariable.js-4801-        var dataType = $(this).parents(".panel").find('ul.selectedView').attr('data-type');
+/tmp/icp2005_selectvariable.js-4802-        if (dataType = "C" && gbl_SubnationalFilter) {
+/tmp/icp2005_selectvariable.js:4803:            ShowSubnationalList($(this), controlid, hierarchy);
+/tmp/icp2005_selectvariable.js-4804-        }
+/tmp/icp2005_selectvariable.js-4805-        else {
+/tmp/icp2005_selectvariable.js-4806-            var nationalCode = $(this).parents(".national").attr("parent");
+/tmp/icp2005_selectvariable.js-4807-            $(this).toggleClass("caret-n-open");
+/tmp/icp2005_selectvariable.js-4808-            $(".subnational[child='" + nationalCode + "']").toggle();
+/tmp/icp2005_selectvariable.js-4809-            $(this).parents(".national").find(".nationalName").toggle();
+/tmp/icp2005_selectvariable.js-4810-        }
+/tmp/icp2005_selectvariable.js-4811-    });
+/tmp/icp2005_selectvariable.js-4812-
+/tmp/icp2005_selectvariable.js-4813-    $("body").on("click", ".selectAllSub", function () {
+/tmp/icp2005_selectvariable.js-4814-        var nationalCode = $(this).parents(".national").attr("parent");
+/tmp/icp2005_selectvariable.js-4815-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").prop("checked", false);
+/tmp/icp2005_selectvariable.js-4816-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").trigger("click");
+/tmp/icp2005_selectvariable.js-4817-        $(this).parents(".national").find(".chkSelectElement").prop("checked", false);
+/tmp/icp2005_selectvariable.js-4818-        $(this).parents(".national").find(".chkSelectElement").trigger("click");
+/tmp/icp2005_selectvariable.js-4819-        if (!($(this).parents(".national").find(".closed").hasClass("caret-n-open"))) {
+/tmp/icp2005_selectvariable.js-4820-            $(this).parents(".national").find(".closed").trigger("click");
+/tmp/icp2005_selectvariable.js-4821-        }
+/tmp/icp2005_selectvariable.js-4822-    });
+/tmp/icp2005_selectvariable.js-4823-
+/tmp/icp2005_selectvariable.js-4824-    $("body").on("click", ".unselectAllSub", function () {
+/tmp/icp2005_selectvariable.js-4825-        var nationalCode = $(this).parents(".national").attr("parent");
+/tmp/icp2005_selectvariable.js-4826-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").prop("checked", true);
+/tmp/icp2005_selectvariable.js-4827-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").trigger("click");
+/tmp/icp2005_selectvariable.js-4828-        $(this).parents(".national").find(".chkSelectElement").prop("checked", true);
+/tmp/icp2005_selectvariable.js-4829-        $(this).parents(".national").find(".chkSelectElement").trigger("click");
+/tmp/icp2005_selectvariable.js-4830-        if (!($(this).parents(".national").find(".closed").hasClass("caret-n-open"))) {
+/tmp/icp2005_selectvariable.js-4831-            $(this).parents(".national").find(".closed").trigger("click");
+/tmp/icp2005_selectvariable.js-4832-        }
+/tmp/icp2005_selectvariable.js-4833-    });
+/tmp/icp2005_selectvariable.js-4834-}
+/tmp/icp2005_selectvariable.js-4835-
+/tmp/icp2005_selectvariable.js:4836:function CreateSubNationalTabs(data, controlid, Levels, hierarchy) {
+/tmp/icp2005_selectvariable.js-4837-    var category;
+/tmp/icp2005_selectvariable.js-4838-    //var level = Math.max.apply(Math, data.map(function (o) { return o.Level; }));
+/tmp/icp2005_selectvariable.js-4839-    var btnhtml = "<div class='btn-group' data-toggle='buttons'>";
+/tmp/icp2005_selectvariable.js-4840-    var tabContentHtml = "<div id='All' class='tabcontent'></div >";
+/tmp/icp2005_selectvariable.js-4841-    if (gbl_subnational_singleView) { // Render both ALL tab and element container for subnational. But the tab will be hidden
+/tmp/icp2005_selectvariable.js-4842-        btnhtml += "<label style='display:none' data-customlink='sf:body' level= 'All' id = 'defaultSubnationalTab' onclick=\"openSubNationalTab(event, 'All', '" + hierarchy + "')\" class='btn active'>";
+/tmp/icp2005_selectvariable.js-4843-        btnhtml += "<input type='radio' id='defaultOpen' checked='checked' />All</label>";
+/tmp/icp2005_selectvariable.js-4844-        tabContentHtml += "<div id='Level_0' class='tabcontent'></div >";
+/tmp/icp2005_selectvariable.js-4845-        btnhtml += "</div>";
+/tmp/icp2005_selectvariable.js-4846-    }
+/tmp/icp2005_selectvariable.js-4847-    else {
+/tmp/icp2005_selectvariable.js-4848-        btnhtml += "<label data-customlink='sf:body' level= 'All' id = 'defaultSubnationalTab' onclick=\"openSubNationalTab(event, 'All', '" + hierarchy + "')\" class='btn active'>";
+/tmp/icp2005_selectvariable.js-4849-        btnhtml += "<input type='radio' id='defaultOpen' checked='checked' />All</label>";
+/tmp/icp2005_selectvariable.js-4850-        for (var i = 0; i < Levels.length; i++) {
+/tmp/icp2005_selectvariable.js-4851-            category = Levels[i].HN;
+/tmp/icp2005_selectvariable.js-4852-            if (category === null || category.trim() === "" || category.trim().toUpperCase() === "NULL") {
+/tmp/icp2005_selectvariable.js-4853-                category = "Level " + (i);
+/tmp/icp2005_selectvariable.js-4854-            }
+/tmp/icp2005_selectvariable.js-4855-            btnhtml += "<label data-customlink='sf:body' level='Level_" + i + "' onclick=\"openSubNationalTab(event, 'Level_" + i + "', '" + hierarchy + "')\" class='btn'>";
+/tmp/icp2005_selectvariable.js-4856-            btnhtml += "<input type='radio' checked='checked'/>" + category + "</label >";
+/tmp/icp2005_selectvariable.js-4857-            tabContentHtml += "<div id='Level_" + i + "' class='tabcontent'></div >";
+/tmp/icp2005_selectvariable.js-4858-        }
+/tmp/icp2005_selectvariable.js-4859-        btnhtml += "</div>";
+/tmp/icp2005_selectvariable.js-4860-    }
+/tmp/icp2005_selectvariable.js-4861-    $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').html(btnhtml);
+/tmp/icp2005_selectvariable.js-4862-    $('#newSelection_' + controlid + ' .SubnationalAvailableView').html(tabContentHtml);
+/tmp/icp2005_selectvariable.js-4863-}
+/tmp/icp2005_selectvariable.js-4864-/************************Code for Sub-national Poverty database **************/
