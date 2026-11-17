@@ -26,7 +26,6 @@ WDI_MANIFESTS = Path("data_manifests/sources/world_bank_wdi/wdi_selected_macro_i
 OUTPUT = ROOT / "reports/sources/annual-ppp-lineage"
 WEO_CSV = imf.CSV_PATH
 IDENTITY = imf.IDENTITY
-IDENTITY = imf.IDENTITY
 
 
 class LineageError(RuntimeError):
@@ -79,6 +78,8 @@ def _load_weo(path: Path, allowed_country_codes: set[str] | None = None) -> dict
                 continue
             code = parts[0]
             if len(code) != 3 or not code.isalpha():
+                continue
+            if allowed_country_codes is not None and code not in allowed_country_codes:
                 continue
             for year_text in row:
                 if not (len(year_text) == 4 and year_text.isdigit()):
@@ -152,7 +153,8 @@ def assess(
     snapshot = wdi_snapshot.load_snapshot(manifest, repository_root=root)
     if snapshot["start_year"] > 2014 or snapshot["end_year"] < 2015:
         raise LineageError("WDI snapshot must include the annual PPP comparison period and 2014 start")
-    weo = _load_weo(Path(weo_csv))
+    weo_country_codes = set(imf.identity_index(IDENTITY))
+    weo = _load_weo(Path(weo_csv), allowed_country_codes=weo_country_codes)
     icp_rows = _load_icp_rows(inspection, benchmark_report)
 
     lineage_rows = list(icp_rows)
@@ -160,14 +162,15 @@ def assess(
     for code in ("PA.NUS.PPP", "NY.GDP.MKTP.PP.CD", "NY.GDP.MKTP.CN"):
         if code not in snapshot["observations"]:
             raise LineageError(f"WDI snapshot is missing required indicator {code}")
-    country_names = {
-        code: item.get("name", "") for code, item in snapshot["indicator_metadata"].items()
-    }
     for code in ("PA.NUS.PPP", "NY.GDP.MKTP.PP.CD", "NY.GDP.MKTP.CN"):
         for item in snapshot["observations"][code]:
             iso3 = item.get("countryiso3code")
             year = _number(item.get("date"))
             if not isinstance(iso3, str) or len(iso3) != 3 or year is None:
+                continue
+            region = snapshot["country_regions"].get(iso3)
+            if (region is None or region.get("region_id") == "NA"
+                    or region.get("region_value", "").casefold() == "aggregates"):
                 continue
             key = (iso3, int(year))
             target = wdi_index.setdefault(key, {"country_name": item.get("country", {}).get("value", "")})
