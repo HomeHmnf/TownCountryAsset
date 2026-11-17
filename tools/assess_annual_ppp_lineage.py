@@ -213,6 +213,14 @@ def assess(
             weo_lcu_gdp / weo_ppp_gdp
             if weo_lcu_gdp is not None and weo_ppp_gdp not in (None, 0) else None
         )
+        weo_ppp_scale = str(weo_item.get("PPPGDP_scale", "")).strip().casefold()
+        weo_ppp_multiplier = 1_000_000_000 if weo_ppp_scale == "billions" else (
+            1 if weo_ppp_scale in {"units", "unit"} else None
+        )
+        weo_ppp_gdp_absolute = (
+            weo_ppp_gdp * weo_ppp_multiplier
+            if weo_ppp_gdp is not None and weo_ppp_multiplier is not None else None
+        )
         wdi_implied_ppp_gdp = (
             wdi_lcu_gdp / wdi_factor
             if wdi_lcu_gdp is not None and wdi_factor not in (None, 0) else None
@@ -234,7 +242,17 @@ def assess(
                 if wdi_ppp_gdp is not None and wdi_implied_ppp_gdp not in (None, 0) else None
             ),
             "weo_ngdp_current_lcu": weo_lcu_gdp,
-            "weo_pppgdp_current_intl_dollars": weo_ppp_gdp,
+            "weo_pppgdp_current_intl_dollars_source_scale": weo_ppp_gdp,
+            "weo_pppgdp_scale_multiplier_to_units": weo_ppp_multiplier,
+            "weo_pppgdp_current_intl_dollars_absolute": weo_ppp_gdp_absolute,
+            "wdi_to_weo_pppgdp_ratio_arithmetic_only": (
+                wdi_ppp_gdp / weo_ppp_gdp_absolute
+                if wdi_ppp_gdp is not None and weo_ppp_gdp_absolute not in (None, 0) else None
+            ),
+            "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": (
+                (wdi_ppp_gdp / weo_ppp_gdp_absolute - 1) * 100
+                if wdi_ppp_gdp is not None and weo_ppp_gdp_absolute not in (None, 0) else None
+            ),
             "weo_ngdp_unit": weo_item.get("NGDP_unit", ""),
             "weo_ngdp_scale": weo_item.get("NGDP_scale", ""),
             "weo_pppgdp_unit": weo_item.get("PPPGDP_unit", ""),
@@ -285,6 +303,7 @@ def assess(
         "year_range": {"minimum": min(years) if years else None, "maximum": max(years) if years else None},
         "source_coverage": {
             "icp_releases": dict(sorted(Counter(row["source_release"] for row in icp_rows).items())),
+            "not_captured_icp_releases": ["icp_2005_cycle"],
             "wdi_snapshot_id": snapshot["manifest"].get("snapshot_id"),
             "wdi_snapshot_retrieved_at": snapshot["manifest"].get("retrieved_at"),
             "wdi_snapshot_manifest_sha256": snapshot.get("manifest_sha256"),
@@ -295,10 +314,11 @@ def assess(
             "ICP original and revised benchmark releases remain distinct. Annual roles are assigned only where the ICP publication explicitly documents them.",
             "ICP 2017 archive years other than its original 2017 and revised 2011 benchmark roles remain unclassified; year columns alone do not prove interpolation or extrapolation.",
             "WDI PA.NUS.PPP is a rolling annual API series. Its observation-level benchmark/interpolation/extrapolation lineage is not supplied by this capture.",
-            "WEO PPPGDP is reported current-PPP GDP. NGDP divided by PPPGDP is a derived arithmetic factor, not the provider's PPPEX field or a published conversion-factor series.",
+            "WEO PPPGDP is reported current-PPP GDP. Where its source scale is Billions, it is rescaled to absolute international dollars before the WDI/WEO PPP-GDP arithmetic comparison. NGDP divided by PPPGDP is a derived arithmetic factor, not the provider's PPPEX field or a published conversion-factor series.",
             "WEO PPPEX is not used because its captured precision is rounded and unsuitable for exact factor reconciliation.",
             "Numerical WDI/WEO factor ratios are diagnostics only; currency redenomination, national-accounts vintage and reference-unit compatibility remain unverified.",
             "ICP PPP factor values are retained per source release and not normalized across currency denominations or vintages.",
+            "The original ICP 2005 release is not present in the captured inputs and is not represented as zero or missing country observations.",
             "No source observations are filled, interpolated, extrapolated or imputed by this assessment.",
         ],
         "side_effects": {
