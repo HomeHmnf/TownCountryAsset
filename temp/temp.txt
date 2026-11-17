@@ -2627,3 +2627,1099 @@
 /tmp/icp2005_selectvariable.js-4981-
 /tmp/icp2005_selectvariable.js-4982-        $('#hdnAbobeText').val(JSON.stringify(adobeDim));
 /tmp/icp2005_selectvariable.js-4983-        CreateAdobeText(adobeDim);
+/tmp/icp2005_reportcommon.js-21-    else panelheading = "Heading";
+/tmp/icp2005_reportcommon.js-22-
+/tmp/icp2005_reportcommon.js-23-    return panelheading;
+/tmp/icp2005_reportcommon.js-24-}
+/tmp/icp2005_reportcommon.js-25-
+/tmp/icp2005_reportcommon.js-26-function TrackFeature(featureName) {
+/tmp/icp2005_reportcommon.js-27-    try {
+/tmp/icp2005_reportcommon.js-28-        setTimeout(function () {
+/tmp/icp2005_reportcommon.js-29-            console.log(featureName);
+/tmp/icp2005_reportcommon.js-30-
+/tmp/icp2005_reportcommon.js-31-            $.ajax({
+/tmp/icp2005_reportcommon.js-32-                type: "POST",
+/tmp/icp2005_reportcommon.js:33:                url: gbl_report_methods + "/TrackFeature",
+/tmp/icp2005_reportcommon.js-34-                contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-35-                data: "{Page: 'Report' ,Feature: '" + featureName + "'}",
+/tmp/icp2005_reportcommon.js-36-                dataType: "json",
+/tmp/icp2005_reportcommon.js-37-                success: function (data) {
+/tmp/icp2005_reportcommon.js-38-                    if (data.d == false) console.log('Feature tracking failed.');
+/tmp/icp2005_reportcommon.js-39-                },
+/tmp/icp2005_reportcommon.js-40-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-41-                    console.error("Error occcured while traking " + featureName)
+/tmp/icp2005_reportcommon.js-42-                }
+/tmp/icp2005_reportcommon.js-43-            });
+/tmp/icp2005_reportcommon.js-44-        }, 0);
+/tmp/icp2005_reportcommon.js-45-    }
+--
+/tmp/icp2005_reportcommon.js-971-            return false;
+/tmp/icp2005_reportcommon.js-972-        }
+/tmp/icp2005_reportcommon.js-973-    }
+/tmp/icp2005_reportcommon.js-974-    gbl_subnat_loadextent = true;
+/tmp/icp2005_reportcommon.js-975-
+/tmp/icp2005_reportcommon.js-976-    return true;
+/tmp/icp2005_reportcommon.js-977-}
+/tmp/icp2005_reportcommon.js-978-
+/tmp/icp2005_reportcommon.js-979-function hasnesteddimension() {
+/tmp/icp2005_reportcommon.js-980-    var hasnesting = false;
+/tmp/icp2005_reportcommon.js-981-    $.ajax({
+/tmp/icp2005_reportcommon.js-982-        type: "POST",
+/tmp/icp2005_reportcommon.js:983:        url: gbl_report_methods + "/HasNestedDimension",
+/tmp/icp2005_reportcommon.js-984-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-985-        data: "{lang: '" + gbl_common_culture + "'}",
+/tmp/icp2005_reportcommon.js-986-        async: false,
+/tmp/icp2005_reportcommon.js-987-        dataType: "json",
+/tmp/icp2005_reportcommon.js-988-        success: function (data) {
+/tmp/icp2005_reportcommon.js-989-            if (data.d != '') {
+/tmp/icp2005_reportcommon.js-990-                alert(data.d);
+/tmp/icp2005_reportcommon.js-991-                hasnesting = true;
+/tmp/icp2005_reportcommon.js-992-            }
+/tmp/icp2005_reportcommon.js-993-        },
+/tmp/icp2005_reportcommon.js-994-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-995-            window.location.href = "ddperror.aspx";
+/tmp/icp2005_reportcommon.js-996-        }
+/tmp/icp2005_reportcommon.js-997-    });
+/tmp/icp2005_reportcommon.js-998-
+/tmp/icp2005_reportcommon.js-999-    return hasnesting;
+/tmp/icp2005_reportcommon.js-1000-}
+/tmp/icp2005_reportcommon.js-1001-
+/tmp/icp2005_reportcommon.js-1002-function onClearSelections() {
+/tmp/icp2005_reportcommon.js-1003-    var confirmClear = confirm(gbl_msg_clear_selection);
+/tmp/icp2005_reportcommon.js-1004-    if (confirmClear) {
+/tmp/icp2005_reportcommon.js-1005-        $.ajax({
+/tmp/icp2005_reportcommon.js-1006-            type: "POST",
+/tmp/icp2005_reportcommon.js:1007:            url: gbl_report_methods + "/ClearSelections",
+/tmp/icp2005_reportcommon.js-1008-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1009-            data: "",
+/tmp/icp2005_reportcommon.js-1010-            dataType: "json",
+/tmp/icp2005_reportcommon.js-1011-            success: function (data) {
+/tmp/icp2005_reportcommon.js-1012-                if (data.d == '')
+/tmp/icp2005_reportcommon.js-1013-                    clearselections(false);
+/tmp/icp2005_reportcommon.js-1014-                else
+/tmp/icp2005_reportcommon.js-1015-                    alert(data.d);
+/tmp/icp2005_reportcommon.js-1016-            },
+/tmp/icp2005_reportcommon.js-1017-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-1018-                window.location.href = "ddperror.aspx";
+/tmp/icp2005_reportcommon.js-1019-            }
+--
+/tmp/icp2005_reportcommon.js-1070-            $('.selectedView').each(function (index, obj) {
+/tmp/icp2005_reportcommon.js-1071-                var controlid = obj.id.replace('tbl_sel_', '');
+/tmp/icp2005_reportcommon.js-1072-                if (controlid == 'MetaAttr' || controlid == 'DBList') return;
+/tmp/icp2005_reportcommon.js-1073-
+/tmp/icp2005_reportcommon.js-1074-                var selectedmembers = gbl_array_member_selected[controlid];
+/tmp/icp2005_reportcommon.js-1075-                if (selectedmembers == null || Object.keys(selectedmembers).length <= 0) hasclearedall = true;
+/tmp/icp2005_reportcommon.js-1076-            });
+/tmp/icp2005_reportcommon.js-1077-        
+/tmp/icp2005_reportcommon.js-1078-
+/tmp/icp2005_reportcommon.js-1079-        if (!hasclearedall && !fromapplydim) {
+/tmp/icp2005_reportcommon.js-1080-            $.ajax({
+/tmp/icp2005_reportcommon.js-1081-                type: "POST",
+/tmp/icp2005_reportcommon.js:1082:                url: gbl_report_methods + "/HasReportSelections",
+/tmp/icp2005_reportcommon.js-1083-                contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1084-                data: "",
+/tmp/icp2005_reportcommon.js-1085-                async: false,
+/tmp/icp2005_reportcommon.js-1086-                dataType: "json",
+/tmp/icp2005_reportcommon.js-1087-                success: function (data) {
+/tmp/icp2005_reportcommon.js-1088-                    if (data.d == '')
+/tmp/icp2005_reportcommon.js-1089-                        gbl_clear_selections = false;
+/tmp/icp2005_reportcommon.js-1090-                    else
+/tmp/icp2005_reportcommon.js-1091-                        hasclearedall = true;
+/tmp/icp2005_reportcommon.js-1092-                },
+/tmp/icp2005_reportcommon.js-1093-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-1094-                    window.location.href = "ddperror.aspx";
+--
+/tmp/icp2005_reportcommon.js-1234-            break;
+/tmp/icp2005_reportcommon.js-1235-    }
+/tmp/icp2005_reportcommon.js-1236-}
+/tmp/icp2005_reportcommon.js-1237-
+/tmp/icp2005_reportcommon.js-1238-
+/tmp/icp2005_reportcommon.js-1239-function loadReportLabels() {
+/tmp/icp2005_reportcommon.js-1240-    if ($('#dpSelectLabel').val().trim() == 'select') {
+/tmp/icp2005_reportcommon.js-1241-        $('#report-loading').fadeIn(100);
+/tmp/icp2005_reportcommon.js-1242-
+/tmp/icp2005_reportcommon.js-1243-        $('#dpSelectLabel').html('<option>Loading...</option>'); ;
+/tmp/icp2005_reportcommon.js-1244-        $.ajax({
+/tmp/icp2005_reportcommon.js-1245-            type: "POST",
+/tmp/icp2005_reportcommon.js:1246:            url: gbl_report_methods + "/GetReportLabels",
+/tmp/icp2005_reportcommon.js-1247-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1248-            async: false,
+/tmp/icp2005_reportcommon.js-1249-            data: "",
+/tmp/icp2005_reportcommon.js-1250-            dataType: "json",
+/tmp/icp2005_reportcommon.js-1251-            success: function (data) {
+/tmp/icp2005_reportcommon.js-1252-                $('#dpSelectLabel').html('');
+/tmp/icp2005_reportcommon.js-1253-                if (data.d != '') {
+/tmp/icp2005_reportcommon.js-1254-                    var arrdataset = data.d.split('|');
+/tmp/icp2005_reportcommon.js-1255-
+/tmp/icp2005_reportcommon.js-1256-                    $ctl_label = $('#dpSelectLabel');
+/tmp/icp2005_reportcommon.js-1257-                    if (arrdataset.length >= 1) {
+/tmp/icp2005_reportcommon.js-1258-                        $.each(arrdataset, function (index, item) {
+--
+/tmp/icp2005_reportcommon.js-1409-            };
+/tmp/icp2005_reportcommon.js-1410-        }
+/tmp/icp2005_reportcommon.js-1411-    }
+/tmp/icp2005_reportcommon.js-1412-
+/tmp/icp2005_reportcommon.js-1413-    if (reportoptions == '') {
+/tmp/icp2005_reportcommon.js-1414-        //Nothing to do
+/tmp/icp2005_reportcommon.js-1415-    }
+/tmp/icp2005_reportcommon.js-1416-    else
+/tmp/icp2005_reportcommon.js-1417-        reportoptions = JSON.stringify(reportoptions);
+/tmp/icp2005_reportcommon.js-1418-
+/tmp/icp2005_reportcommon.js-1419-    $.ajax({
+/tmp/icp2005_reportcommon.js-1420-        type: "POST",
+/tmp/icp2005_reportcommon.js:1421:        url: gbl_report_methods + "/SaveReport",
+/tmp/icp2005_reportcommon.js-1422-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1423-        data: "{reportid: '" + reportid + "', reporttype: '" + reporttype + "', reporttitle: '" + reporttitle + "', reportdescription: '" + reportdescription +
+/tmp/icp2005_reportcommon.js-1424-                "', sharereport: " + sharereport + ", snapshot: " + snapshot + ", newfolder: " + newfolder + ", labelid: " + labelid +
+/tmp/icp2005_reportcommon.js-1425-                ", labeltext: '" + labeltext + "', reportoptions: '" + reportoptions + "', ChangeTableNumber: " + ChangeTableNumber +
+/tmp/icp2005_reportcommon.js-1426-                ", ConfirmUnPublish: " + ConfirmUnPublish + ", createReview: " + createReview + " }",
+/tmp/icp2005_reportcommon.js-1427-        dataType: "json",
+/tmp/icp2005_reportcommon.js-1428-        success: function (data) {            
+/tmp/icp2005_reportcommon.js-1429-            if (data.d.IsWDIPublish && !data.d.confirmTableNoChange){
+/tmp/icp2005_reportcommon.js-1430-                var change = confirm("WDI Table number already exists. Do you want to overwrite the Table number?");
+/tmp/icp2005_reportcommon.js-1431-                 if(change == true){
+/tmp/icp2005_reportcommon.js-1432-                     saveReport(true, false, false, false);
+/tmp/icp2005_reportcommon.js-1433-                 }
+--
+/tmp/icp2005_reportcommon.js-1653-
+/tmp/icp2005_reportcommon.js-1654-    return '';
+/tmp/icp2005_reportcommon.js-1655-}
+/tmp/icp2005_reportcommon.js-1656-
+/tmp/icp2005_reportcommon.js-1657-function loadMetaData(Name, Code, Type) {
+/tmp/icp2005_reportcommon.js-1658-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_reportcommon.js-1659-    $("#divMetadataCtl div.modal-body").html(loadingtext);
+/tmp/icp2005_reportcommon.js-1660-    $('#divMetadataCtl').attr("selection", "report");
+/tmp/icp2005_reportcommon.js-1661-    AnalyticsControlClick('editreports:metadata', Name + '>' + Code + '>' + Type);
+/tmp/icp2005_reportcommon.js-1662-
+/tmp/icp2005_reportcommon.js-1663-    $.ajax({
+/tmp/icp2005_reportcommon.js-1664-        type: "POST",
+/tmp/icp2005_reportcommon.js:1665:        url: gbl_report_methods + "/PopulateMetaDataJSON",
+/tmp/icp2005_reportcommon.js-1666-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1667-        data: "{name:'" + Name.replace(/\'/g, "%27") + "', code:'" + Code + "', dimensiontype:'" + Type + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_reportcommon.js-1668-        dataType: "json",
+/tmp/icp2005_reportcommon.js-1669-        success: function (data) {
+/tmp/icp2005_reportcommon.js-1670-            if (data.d == null || data.d == '') return;
+/tmp/icp2005_reportcommon.js-1671-
+/tmp/icp2005_reportcommon.js-1672-            $("#divMetadataCtl div.modal-body").html(data.d);
+/tmp/icp2005_reportcommon.js-1673-            $('#gdp-meta-data-rpt').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_reportcommon.js-1674-            $('#gdp-meta-data-rpt #metadata-specific-data').css('max-height', '').css('overflow', '');
+/tmp/icp2005_reportcommon.js-1675-            $('#divMetadataCtl .btn-meta-download').show();
+/tmp/icp2005_reportcommon.js-1676-
+/tmp/icp2005_reportcommon.js-1677-            gbl_download_name = Name;
+--
+/tmp/icp2005_reportcommon.js-1686-}
+/tmp/icp2005_reportcommon.js-1687-
+/tmp/icp2005_reportcommon.js-1688-function loadFootNotes(Code, MRVYearValue) {
+/tmp/icp2005_reportcommon.js-1689-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_reportcommon.js-1690-    $("#divMetadataCtl div.modal-body").html(loadingtext);
+/tmp/icp2005_reportcommon.js-1691-    $('#lblMetadataLabel').html("Footnotes");
+/tmp/icp2005_reportcommon.js-1692-
+/tmp/icp2005_reportcommon.js-1693-    AnalyticsControlClick('editreports:footnote', Code + ':' + MRVYearValue);
+/tmp/icp2005_reportcommon.js-1694-    TrackFeature('Load Footnotes->' + Code);
+/tmp/icp2005_reportcommon.js-1695-    if (Code != null && Code.trim() != "") {
+/tmp/icp2005_reportcommon.js-1696-        $.ajax({
+/tmp/icp2005_reportcommon.js-1697-            type: "POST",
+/tmp/icp2005_reportcommon.js:1698:            url: gbl_report_methods + "/PopulateFootNotesJSON",
+/tmp/icp2005_reportcommon.js-1699-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1700-            data: "{code:'" + Code + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_reportcommon.js-1701-            dataType: "json",
+/tmp/icp2005_reportcommon.js-1702-            success: function (data) {
+/tmp/icp2005_reportcommon.js-1703-                if (data.d == null || data.d == '') return;
+/tmp/icp2005_reportcommon.js-1704-
+/tmp/icp2005_reportcommon.js-1705-                $("#divMetadataCtl div.modal-body").html(data.d);
+/tmp/icp2005_reportcommon.js-1706-                if (MRVYearValue != '') $("#gdp-meta-data-rpt").prepend('Data are for : ' + MRVYearValue);
+/tmp/icp2005_reportcommon.js-1707-
+/tmp/icp2005_reportcommon.js-1708-                $('#gdp-meta-data-rpt').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_reportcommon.js-1709-                $('#divMetadataCtl .btn-meta-download').hide();
+/tmp/icp2005_reportcommon.js-1710-            },
+--
+/tmp/icp2005_selectvariable.js-1-////function needs to be removed later
+/tmp/icp2005_selectvariable.js-2-//function logTimeConsumed(item, starttime) {
+/tmp/icp2005_selectvariable.js-3-//    var endtime = new Date();
+/tmp/icp2005_selectvariable.js-4-
+/tmp/icp2005_selectvariable.js-5-//    //debugger;
+/tmp/icp2005_selectvariable.js-6-//    starttime = starttime.toDateString() + " " + starttime.toLocaleTimeString();
+/tmp/icp2005_selectvariable.js-7-//    endtime = endtime.toDateString() + " " + endtime.toLocaleTimeString();
+/tmp/icp2005_selectvariable.js-8-
+/tmp/icp2005_selectvariable.js-9-//    $.ajax({
+/tmp/icp2005_selectvariable.js-10-//        type: "POST",
+/tmp/icp2005_selectvariable.js-11-//        async: true,
+/tmp/icp2005_selectvariable.js:12://        url: gbl_report_methods + "/TimeLogger",
+/tmp/icp2005_selectvariable.js-13-//        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-14-//        data: "{item: '" + item + "', starttime: '" + starttime + "', endtime: '" + endtime + "'}",
+/tmp/icp2005_selectvariable.js-15-//        dataType: "json",
+/tmp/icp2005_selectvariable.js-16-//        success: function (data) {
+/tmp/icp2005_selectvariable.js-17-//            console.log(starttime + " -> " + endtime + " : " + data.d);
+/tmp/icp2005_selectvariable.js-18-//        },
+/tmp/icp2005_selectvariable.js-19-//        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-20-//            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-21-//        }
+/tmp/icp2005_selectvariable.js-22-//    });
+/tmp/icp2005_selectvariable.js-23-//}
+/tmp/icp2005_selectvariable.js-24-
+--
+/tmp/icp2005_selectvariable.js-165-
+/tmp/icp2005_selectvariable.js-166-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-167-/********************************************Dimension Apply changes*******************************************************************************/
+/tmp/icp2005_selectvariable.js-168-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-169-function doAjaxPostbackVariables(reporttype) {
+/tmp/icp2005_selectvariable.js-170-    //debugger;
+/tmp/icp2005_selectvariable.js-171-    var dimensiondetails = $('#hdnSelectVars').val().replace(/'/g, "\\'");
+/tmp/icp2005_selectvariable.js-172-    var newdimensiondetails = null;
+/tmp/icp2005_selectvariable.js-173-
+/tmp/icp2005_selectvariable.js-174-    $.ajax({
+/tmp/icp2005_selectvariable.js-175-        type: "POST",
+/tmp/icp2005_selectvariable.js-176-        async: false, //keep this false for now. we need to do some operations after the apply changes based on the result
+/tmp/icp2005_selectvariable.js:177:        url: gbl_report_methods + "/SetDimensionMembers",
+/tmp/icp2005_selectvariable.js-178-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-179-        data: "{reporttype: '" + reporttype + "', dimensiondetails: '" + dimensiondetails + "'}",
+/tmp/icp2005_selectvariable.js-180-        dataType: "json",
+/tmp/icp2005_selectvariable.js-181-        success: function (data) {
+/tmp/icp2005_selectvariable.js-182-            newdimensiondetails = data.d;
+/tmp/icp2005_selectvariable.js-183-        },
+/tmp/icp2005_selectvariable.js-184-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-185-            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-186-        }
+/tmp/icp2005_selectvariable.js-187-    });
+/tmp/icp2005_selectvariable.js-188-
+/tmp/icp2005_selectvariable.js-189-    return newdimensiondetails;
+--
+/tmp/icp2005_selectvariable.js-384-    if (dimdata != null)
+/tmp/icp2005_selectvariable.js-385-        dimtype = dimdata.DT;
+/tmp/icp2005_selectvariable.js-386-    else {
+/tmp/icp2005_selectvariable.js-387-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
+/tmp/icp2005_selectvariable.js-388-            dimtype = "T";
+/tmp/icp2005_selectvariable.js-389-    }
+/tmp/icp2005_selectvariable.js-390-
+/tmp/icp2005_selectvariable.js-391-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-392-        $('#highfreequencytab').show();
+/tmp/icp2005_selectvariable.js-393-        $('#lblSlider').show();
+/tmp/icp2005_selectvariable.js-394-        $('div#slider-range').show();
+/tmp/icp2005_selectvariable.js-395-    }
+/tmp/icp2005_selectvariable.js:396:    loadDimensionList(controlid, hierarchy, dimobj);
+/tmp/icp2005_selectvariable.js-397-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-398-        document.getElementById("hfAnualTab").click();
+/tmp/icp2005_selectvariable.js-399-    }
+/tmp/icp2005_selectvariable.js-400-}
+/tmp/icp2005_selectvariable.js-401-
+/tmp/icp2005_selectvariable.js-402-function loadSelectedList(controlid, hierarchy, obj) {
+/tmp/icp2005_selectvariable.js-403-    //debugger;    
+/tmp/icp2005_selectvariable.js-404-    var dimtype;
+/tmp/icp2005_selectvariable.js-405-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
+/tmp/icp2005_selectvariable.js-406-    
+/tmp/icp2005_selectvariable.js-407-    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-408-
+/tmp/icp2005_selectvariable.js-409-    if (dimdata != null)
+/tmp/icp2005_selectvariable.js-410-        dimtype = dimdata.DT;
+/tmp/icp2005_selectvariable.js-411-    else {
+/tmp/icp2005_selectvariable.js-412-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
+/tmp/icp2005_selectvariable.js-413-            dimtype = "T";
+/tmp/icp2005_selectvariable.js-414-    }
+/tmp/icp2005_selectvariable.js-415-
+/tmp/icp2005_selectvariable.js-416-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-417-        $('#highfreequencytab').hide();
+/tmp/icp2005_selectvariable.js-418-        $('#lblSlider').hide();
+/tmp/icp2005_selectvariable.js-419-        $('div#slider-range').hide();
+/tmp/icp2005_selectvariable.js-420-    }
+/tmp/icp2005_selectvariable.js:421:    loadDimensionList(controlid, hierarchy, dimobj);
+/tmp/icp2005_selectvariable.js-422-}
+/tmp/icp2005_selectvariable.js-423-
+/tmp/icp2005_selectvariable.js:424:function loadDimensionList(controlid, hierarchy, obj) {
+/tmp/icp2005_selectvariable.js-425-    var dimtype;    
+/tmp/icp2005_selectvariable.js-426-
+/tmp/icp2005_selectvariable.js-427-    if (obj != null && !$(obj).hasClass('collapsed') && !$(obj).hasClass('addMoreRHS')) {
+/tmp/icp2005_selectvariable.js-428-        $(obj).parents('.panel-heading').find('.toggleSelectionViews a').removeClass('active');
+/tmp/icp2005_selectvariable.js-429-        return;
+/tmp/icp2005_selectvariable.js-430-    }    
+/tmp/icp2005_selectvariable.js-431-
+/tmp/icp2005_selectvariable.js-432-    $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-433-
+/tmp/icp2005_selectvariable.js-434-    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-435-
+/tmp/icp2005_selectvariable.js-436-    if (dimdata != null)
+--
+/tmp/icp2005_selectvariable.js-454-
+/tmp/icp2005_selectvariable.js-455-        if ($('#hdnSubnationalSingleView').val() && $('#hdnSubnationalSingleView').val().trim().toUpperCase() == "Y")
+/tmp/icp2005_selectvariable.js-456-            gbl_subnational_singleView = true;
+/tmp/icp2005_selectvariable.js-457-        else
+/tmp/icp2005_selectvariable.js-458-            gbl_subnational_singleView = false;
+/tmp/icp2005_selectvariable.js-459-        
+/tmp/icp2005_selectvariable.js-460-
+/tmp/icp2005_selectvariable.js-461-        var starttime = new Date();
+/tmp/icp2005_selectvariable.js-462-        var ajaxData;
+/tmp/icp2005_selectvariable.js-463-        var ajaxUrl;
+/tmp/icp2005_selectvariable.js-464-        if (gbl_subnational_pagination && gbl_CubeIsSubnational && dimtype === "C") {           
+/tmp/icp2005_selectvariable.js-465-            gbl_subnationalHierarchy = hierarchy;
+/tmp/icp2005_selectvariable.js:466:            ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
+/tmp/icp2005_selectvariable.js-467-            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: 0, parentcode: '',filtername:'',searchkey:''}";
+/tmp/icp2005_selectvariable.js-468-        }
+/tmp/icp2005_selectvariable.js-469-        else{
+/tmp/icp2005_selectvariable.js:470:            ajaxUrl = gbl_report_methods + "/GetDimensionJSON";
+/tmp/icp2005_selectvariable.js-471-            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "'}";
+/tmp/icp2005_selectvariable.js-472-        }
+/tmp/icp2005_selectvariable.js-473-        $.ajax({
+/tmp/icp2005_selectvariable.js-474-            type: "POST",
+/tmp/icp2005_selectvariable.js-475-            async: true,
+/tmp/icp2005_selectvariable.js-476-            url: ajaxUrl,
+/tmp/icp2005_selectvariable.js-477-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-478-            data: ajaxData,
+/tmp/icp2005_selectvariable.js-479-            dataType: "json",
+/tmp/icp2005_selectvariable.js-480-            success: function (data) {
+/tmp/icp2005_selectvariable.js-481-                dimtype = data.d.DT;
+/tmp/icp2005_selectvariable.js-482-
+--
+/tmp/icp2005_selectvariable.js-589-            gblselectionChanged[dimdata.Parentdimension] = false;
+/tmp/icp2005_selectvariable.js-590-            createDimensionList(controlid, hierarchy, true);
+/tmp/icp2005_selectvariable.js-591-        }
+/tmp/icp2005_selectvariable.js-592-
+/tmp/icp2005_selectvariable.js-593-        $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-594-    }
+/tmp/icp2005_selectvariable.js-595-}
+/tmp/icp2005_selectvariable.js-596-
+/tmp/icp2005_selectvariable.js-597-function LoadSubNationalChildren(controlid, hierarchy, level, parentcode,searchKey,filterNames)
+/tmp/icp2005_selectvariable.js-598-{
+/tmp/icp2005_selectvariable.js-599-    $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-600-    var subNatdata = {};
+/tmp/icp2005_selectvariable.js:601:    var ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
+/tmp/icp2005_selectvariable.js-602-    var ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: " + level + ", parentcode: '" + parentcode + "',filtername:'" + filterNames+ "', searchkey:'" + searchKey + "'}";
+/tmp/icp2005_selectvariable.js-603-    $.ajax({
+/tmp/icp2005_selectvariable.js-604-        type: "POST",
+/tmp/icp2005_selectvariable.js-605-        async: false,
+/tmp/icp2005_selectvariable.js-606-        url: ajaxUrl,
+/tmp/icp2005_selectvariable.js-607-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-608-        data: ajaxData,
+/tmp/icp2005_selectvariable.js-609-        dataType: "json",
+/tmp/icp2005_selectvariable.js-610-        success: function (data) {
+/tmp/icp2005_selectvariable.js-611-            if (data && data.d && data.d.Members)
+/tmp/icp2005_selectvariable.js-612-                subNatdata = data.d.Members;
+/tmp/icp2005_selectvariable.js-613-            $('#report-loading').hide();
+--
+/tmp/icp2005_selectvariable.js-2042-                $.each(dimdata.Hier, function (key, val) {
+/tmp/icp2005_selectvariable.js-2043-                    $('.dimension-hierarchy-' + controlid).append('<option value="' + key + '">' + val + '</option>');
+/tmp/icp2005_selectvariable.js-2044-                });
+/tmp/icp2005_selectvariable.js-2045-                $('.dimension-hierarchy-' + controlid).val(dimdata.DH);
+/tmp/icp2005_selectvariable.js-2046-            }
+/tmp/icp2005_selectvariable.js-2047-            else
+/tmp/icp2005_selectvariable.js-2048-                $('.dimension-hierarchy-' + controlid).append('<option value="' + dimdata.DH + '">' + dimdata.DH + '</option>'); //default hierarchy
+/tmp/icp2005_selectvariable.js-2049-        }
+/tmp/icp2005_selectvariable.js-2050-
+/tmp/icp2005_selectvariable.js-2051-        if ($('.dimension-hierarchy-' + controlid + ' option').length <= 1) $("#hierarchy_" + controlid).hide();
+/tmp/icp2005_selectvariable.js-2052-        $('.dimension-hierarchy-' + controlid).off('change');
+/tmp/icp2005_selectvariable.js-2053-        $('.dimension-hierarchy-' + controlid).on('change', function () {            
+/tmp/icp2005_selectvariable.js:2054:            loadDimensionList(controlid, $(this).val(), null);
+/tmp/icp2005_selectvariable.js-2055-            $(".showCountryAggOption").removeClass("active");
+/tmp/icp2005_selectvariable.js-2056-            $(".showCountryAggOption[data-value='All']").addClass("active");
+/tmp/icp2005_selectvariable.js-2057-        });
+/tmp/icp2005_selectvariable.js-2058-    }
+/tmp/icp2005_selectvariable.js-2059-}
+/tmp/icp2005_selectvariable.js-2060-
+/tmp/icp2005_selectvariable.js-2061-function loadFilter(controlid, hierarchy, targetId, showPlusIcon, levels) {
+/tmp/icp2005_selectvariable.js-2062-    var hierarchylist = '';
+/tmp/icp2005_selectvariable.js-2063-    var isdblist = controlid == "DBList";
+/tmp/icp2005_selectvariable.js-2064-    if (levels == null) return;
+/tmp/icp2005_selectvariable.js-2065-    
+/tmp/icp2005_selectvariable.js-2066-    $.each(levels, function (index, value) {
+--
+/tmp/icp2005_selectvariable.js-3061-        }
+/tmp/icp2005_selectvariable.js-3062-    });
+/tmp/icp2005_selectvariable.js-3063-}
+/tmp/icp2005_selectvariable.js-3064-
+/tmp/icp2005_selectvariable.js-3065-
+/tmp/icp2005_selectvariable.js-3066-function loadMetaDataVariable(Name, Code, DimType, DimName) {
+/tmp/icp2005_selectvariable.js-3067-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_selectvariable.js-3068-    $("#divMetadataCtl div.modal-body").html(loadingtext);
+/tmp/icp2005_selectvariable.js-3069-    $('#divMetadataCtl').attr("selection", "variable");
+/tmp/icp2005_selectvariable.js-3070-    var cubeid = $('#hdnCubeID').val();
+/tmp/icp2005_selectvariable.js-3071-    $.ajax({
+/tmp/icp2005_selectvariable.js-3072-        type: "POST",
+/tmp/icp2005_selectvariable.js:3073:        url: gbl_report_methods + "/PopulateMetaDataJSON_SV",
+/tmp/icp2005_selectvariable.js-3074-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3075-        data: "{cubeid: '" + cubeid + "', name:'" + Name.replace(/\'/g, "%27") + "', code:'" + Code + "', dimensiontype:'" + DimType + "', dimensionname: '" + DimName + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_selectvariable.js-3076-        dataType: "json",
+/tmp/icp2005_selectvariable.js-3077-        success: function (data) {
+/tmp/icp2005_selectvariable.js-3078-            if (data.d == null || data.d == '') return;
+/tmp/icp2005_selectvariable.js-3079-            
+/tmp/icp2005_selectvariable.js-3080-            $("#divMetadataCtl div.modal-body").html(data.d);
+/tmp/icp2005_selectvariable.js-3081-            if ($('#gdp-meta-data-rpt').length > 0)
+/tmp/icp2005_selectvariable.js-3082-                $('#gdp-meta-data-rpt').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_selectvariable.js-3083-            else {
+/tmp/icp2005_selectvariable.js-3084-                $('#gdp-meta-data').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_selectvariable.js-3085-                $('#gdp-meta-data #metadata-specific-data').css('max-height', '').css('overflow', '');
+--
+/tmp/icp2005_selectvariable.js-3123-
+/tmp/icp2005_selectvariable.js-3124-    var controlid = "DBList";
+/tmp/icp2005_selectvariable.js-3125-    var hierarchy = "All";
+/tmp/icp2005_selectvariable.js-3126-
+/tmp/icp2005_selectvariable.js-3127-    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-3128-    if (dimdata == null) {
+/tmp/icp2005_selectvariable.js-3129-        gbl_array_data[controlid + '_' + hierarchy] = 'Loading'; //to avoid double loading
+/tmp/icp2005_selectvariable.js-3130-        var starttime = new Date();
+/tmp/icp2005_selectvariable.js-3131-
+/tmp/icp2005_selectvariable.js-3132-        $.ajax({
+/tmp/icp2005_selectvariable.js-3133-            type: "POST",
+/tmp/icp2005_selectvariable.js-3134-            async: true,
+/tmp/icp2005_selectvariable.js:3135:            url: gbl_report_methods + "/GetDatabaseListJSON",
+/tmp/icp2005_selectvariable.js-3136-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3137-            data: "{}",
+/tmp/icp2005_selectvariable.js-3138-            dataType: "json",
+/tmp/icp2005_selectvariable.js-3139-            success: function (data) {
+/tmp/icp2005_selectvariable.js-3140-                //debugger;
+/tmp/icp2005_selectvariable.js-3141-                gbl_array_data[controlid + '_' + hierarchy] = data.d;
+/tmp/icp2005_selectvariable.js-3142-
+/tmp/icp2005_selectvariable.js-3143-                createDatabaseList(controlid, hierarchy);
+/tmp/icp2005_selectvariable.js-3144-
+/tmp/icp2005_selectvariable.js-3145-                //logTimeConsumed(controlid + "_" + hierarchy, starttime);
+/tmp/icp2005_selectvariable.js-3146-
+/tmp/icp2005_selectvariable.js-3147-                $('#report-loading').hide();
+--
+/tmp/icp2005_selectvariable.js-3178-    loadDimMembers(controlid, targetId, false, dimdata.Members, dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-3179-    getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-3180-}
+/tmp/icp2005_selectvariable.js-3181-
+/tmp/icp2005_selectvariable.js-3182-
+/tmp/icp2005_selectvariable.js-3183-function loadDatabaseDetails(CubeId,IsPublic) {
+/tmp/icp2005_selectvariable.js-3184-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_selectvariable.js-3185-    $("#dbMetadata div.modal-body").html(loadingtext);
+/tmp/icp2005_selectvariable.js-3186-
+/tmp/icp2005_selectvariable.js-3187-
+/tmp/icp2005_selectvariable.js-3188-    $.ajax({
+/tmp/icp2005_selectvariable.js-3189-        type: "POST",
+/tmp/icp2005_selectvariable.js:3190:        url: gbl_report_methods + "/PopulateDatabaseDetails",
+/tmp/icp2005_selectvariable.js-3191-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3192-        data: "{cubeid:'" + CubeId + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_selectvariable.js-3193-        dataType: "json",
+/tmp/icp2005_selectvariable.js-3194-        success: function (data) {
+/tmp/icp2005_selectvariable.js-3195-            if (data.d === null || data.d === '') return;           
+/tmp/icp2005_selectvariable.js-3196-            data.d = data.d.replace(/&lt;/g, "<");
+/tmp/icp2005_selectvariable.js-3197-            data.d = data.d.replace(/&gt;/g, ">");
+/tmp/icp2005_selectvariable.js-3198-            $("#dbMetadata div.modal-body").html(data.d);
+/tmp/icp2005_selectvariable.js-3199-
+/tmp/icp2005_selectvariable.js-3200-        },
+/tmp/icp2005_selectvariable.js-3201-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-3202-            window.location.href = gbl_error_file;
+--
+/tmp/icp2005_selectvariable.js-3288-
+/tmp/icp2005_selectvariable.js-3289-        var period_totalperiod = $('#selDynPeriodTotal').val();
+/tmp/icp2005_selectvariable.js-3290-        var period_latestperiod = $('#selDynPeriodLatest').val();
+/tmp/icp2005_selectvariable.js-3291-
+/tmp/icp2005_selectvariable.js-3292-        obj_period_details['totalperiod'] = period_totalperiod;
+/tmp/icp2005_selectvariable.js-3293-        obj_period_details['latestperiod'] = period_latestperiod;
+/tmp/icp2005_selectvariable.js-3294-
+/tmp/icp2005_selectvariable.js-3295-        $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-3296-        var ajaxresult = false;
+/tmp/icp2005_selectvariable.js-3297-        $.ajax({
+/tmp/icp2005_selectvariable.js-3298-            type: "POST",
+/tmp/icp2005_selectvariable.js-3299-            async: false,
+/tmp/icp2005_selectvariable.js:3300:            url: gbl_report_methods + "/PopulateDynamicYears",
+/tmp/icp2005_selectvariable.js-3301-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3302-            data: "{controlid: '" + controlid + "', totalperiods: '" + period_totalperiod + "', latestperiods: '" + period_latestperiod + "'}",
+/tmp/icp2005_selectvariable.js-3303-            dataType: "json",
+/tmp/icp2005_selectvariable.js-3304-            success: function (data) {
+/tmp/icp2005_selectvariable.js-3305-                obj_period_details['periods'] = data.d;
+/tmp/icp2005_selectvariable.js-3306-                //debugger;
+/tmp/icp2005_selectvariable.js-3307-
+/tmp/icp2005_selectvariable.js-3308-                $tblavailable = $("#tbl_" + controlid);
+/tmp/icp2005_selectvariable.js-3309-
+/tmp/icp2005_selectvariable.js-3310-                //removing the existing dynamic period in case of edit
+/tmp/icp2005_selectvariable.js-3311-                if (obj_period_old != null && obj_period_old.customdefinition != null && obj_period_old.customdefinition.periods != null) {
+/tmp/icp2005_selectvariable.js-3312-                    $.each(obj_period_old.customdefinition.periods, function (index, obj) {
+--
+/tmp/icp2005_selectvariable.js-4859-        btnhtml += "</div>";
+/tmp/icp2005_selectvariable.js-4860-    }
+/tmp/icp2005_selectvariable.js-4861-    $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').html(btnhtml);
+/tmp/icp2005_selectvariable.js-4862-    $('#newSelection_' + controlid + ' .SubnationalAvailableView').html(tabContentHtml);
+/tmp/icp2005_selectvariable.js-4863-}
+/tmp/icp2005_selectvariable.js-4864-/************************Code for Sub-national Poverty database **************/
+/tmp/icp2005_selectvariable.js-4865-
+/tmp/icp2005_selectvariable.js-4866-
+/tmp/icp2005_selectvariable.js-4867-function initBookAttributes() {
+/tmp/icp2005_selectvariable.js-4868-    $.ajax({
+/tmp/icp2005_selectvariable.js-4869-        type: "POST",
+/tmp/icp2005_selectvariable.js-4870-        async: true,
+/tmp/icp2005_selectvariable.js:4871:        url: gbl_report_methods + "/PopulateBookAttributesJSON",
+/tmp/icp2005_selectvariable.js-4872-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-4873-        data: "{}",
+/tmp/icp2005_selectvariable.js-4874-        dataType: "json",
+/tmp/icp2005_selectvariable.js-4875-        success: function (data) {
+/tmp/icp2005_selectvariable.js-4876-            gbl_array_book_attributes = eval(data.d);
+/tmp/icp2005_selectvariable.js-4877-            
+/tmp/icp2005_selectvariable.js-4878-        },
+/tmp/icp2005_selectvariable.js-4879-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-4880-            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-4881-        }
+/tmp/icp2005_selectvariable.js-4882-    });
+/tmp/icp2005_selectvariable.js-4883-}
+--
+/tmp/icp2005_selectvariable.js-4888-    var selectedUniqueIdArray = [];
+/tmp/icp2005_selectvariable.js-4889-    var controlid = $('.variableTable.selectedView[data-type="S"]').attr('data-value')
+/tmp/icp2005_selectvariable.js-4890-    var targetId = "#tbl_" + controlid;
+/tmp/icp2005_selectvariable.js-4891-    $(targetId).parent().find(".selectedView li").each(function (i, n) {
+/tmp/icp2005_selectvariable.js-4892-        selectedUniqueIdArray.push($(n).attr('uniqueid'));
+/tmp/icp2005_selectvariable.js-4893-    });
+/tmp/icp2005_selectvariable.js-4894-
+/tmp/icp2005_selectvariable.js-4895-    if (selectedUniqueIdArray.length == 0) {
+/tmp/icp2005_selectvariable.js-4896-
+/tmp/icp2005_selectvariable.js-4897-        $.ajax({
+/tmp/icp2005_selectvariable.js-4898-            type: "POST",
+/tmp/icp2005_selectvariable.js-4899-            async: false,
+/tmp/icp2005_selectvariable.js:4900:            url: gbl_report_methods + "/PopulateSelectedIndicatorsJSON",
+/tmp/icp2005_selectvariable.js-4901-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-4902-            data: "{}",
+/tmp/icp2005_selectvariable.js-4903-            dataType: "json",
+/tmp/icp2005_selectvariable.js-4904-            success: function (data) {
+/tmp/icp2005_selectvariable.js-4905-                var selectedIndicators = eval(data.d);
+/tmp/icp2005_selectvariable.js-4906-                for (var prop in selectedIndicators) {
+/tmp/icp2005_selectvariable.js-4907-                    selectedUniqueIdArray.push(selectedIndicators[prop].uniquename);
+/tmp/icp2005_selectvariable.js-4908-                }
+/tmp/icp2005_selectvariable.js-4909-            }
+/tmp/icp2005_selectvariable.js-4910-
+/tmp/icp2005_selectvariable.js-4911-        });
+/tmp/icp2005_selectvariable.js-4912-    }
+/tmp/icp2005_reportcommon.js-21-    else panelheading = "Heading";
+/tmp/icp2005_reportcommon.js-22-
+/tmp/icp2005_reportcommon.js-23-    return panelheading;
+/tmp/icp2005_reportcommon.js-24-}
+/tmp/icp2005_reportcommon.js-25-
+/tmp/icp2005_reportcommon.js-26-function TrackFeature(featureName) {
+/tmp/icp2005_reportcommon.js-27-    try {
+/tmp/icp2005_reportcommon.js-28-        setTimeout(function () {
+/tmp/icp2005_reportcommon.js-29-            console.log(featureName);
+/tmp/icp2005_reportcommon.js-30-
+/tmp/icp2005_reportcommon.js-31-            $.ajax({
+/tmp/icp2005_reportcommon.js-32-                type: "POST",
+/tmp/icp2005_reportcommon.js:33:                url: gbl_report_methods + "/TrackFeature",
+/tmp/icp2005_reportcommon.js-34-                contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-35-                data: "{Page: 'Report' ,Feature: '" + featureName + "'}",
+/tmp/icp2005_reportcommon.js-36-                dataType: "json",
+/tmp/icp2005_reportcommon.js-37-                success: function (data) {
+/tmp/icp2005_reportcommon.js-38-                    if (data.d == false) console.log('Feature tracking failed.');
+/tmp/icp2005_reportcommon.js-39-                },
+/tmp/icp2005_reportcommon.js-40-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-41-                    console.error("Error occcured while traking " + featureName)
+/tmp/icp2005_reportcommon.js-42-                }
+/tmp/icp2005_reportcommon.js-43-            });
+/tmp/icp2005_reportcommon.js-44-        }, 0);
+/tmp/icp2005_reportcommon.js-45-    }
+--
+/tmp/icp2005_reportcommon.js-971-            return false;
+/tmp/icp2005_reportcommon.js-972-        }
+/tmp/icp2005_reportcommon.js-973-    }
+/tmp/icp2005_reportcommon.js-974-    gbl_subnat_loadextent = true;
+/tmp/icp2005_reportcommon.js-975-
+/tmp/icp2005_reportcommon.js-976-    return true;
+/tmp/icp2005_reportcommon.js-977-}
+/tmp/icp2005_reportcommon.js-978-
+/tmp/icp2005_reportcommon.js-979-function hasnesteddimension() {
+/tmp/icp2005_reportcommon.js-980-    var hasnesting = false;
+/tmp/icp2005_reportcommon.js-981-    $.ajax({
+/tmp/icp2005_reportcommon.js-982-        type: "POST",
+/tmp/icp2005_reportcommon.js:983:        url: gbl_report_methods + "/HasNestedDimension",
+/tmp/icp2005_reportcommon.js-984-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-985-        data: "{lang: '" + gbl_common_culture + "'}",
+/tmp/icp2005_reportcommon.js-986-        async: false,
+/tmp/icp2005_reportcommon.js-987-        dataType: "json",
+/tmp/icp2005_reportcommon.js-988-        success: function (data) {
+/tmp/icp2005_reportcommon.js-989-            if (data.d != '') {
+/tmp/icp2005_reportcommon.js-990-                alert(data.d);
+/tmp/icp2005_reportcommon.js-991-                hasnesting = true;
+/tmp/icp2005_reportcommon.js-992-            }
+/tmp/icp2005_reportcommon.js-993-        },
+/tmp/icp2005_reportcommon.js-994-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-995-            window.location.href = "ddperror.aspx";
+/tmp/icp2005_reportcommon.js-996-        }
+/tmp/icp2005_reportcommon.js-997-    });
+/tmp/icp2005_reportcommon.js-998-
+/tmp/icp2005_reportcommon.js-999-    return hasnesting;
+/tmp/icp2005_reportcommon.js-1000-}
+/tmp/icp2005_reportcommon.js-1001-
+/tmp/icp2005_reportcommon.js-1002-function onClearSelections() {
+/tmp/icp2005_reportcommon.js-1003-    var confirmClear = confirm(gbl_msg_clear_selection);
+/tmp/icp2005_reportcommon.js-1004-    if (confirmClear) {
+/tmp/icp2005_reportcommon.js-1005-        $.ajax({
+/tmp/icp2005_reportcommon.js-1006-            type: "POST",
+/tmp/icp2005_reportcommon.js:1007:            url: gbl_report_methods + "/ClearSelections",
+/tmp/icp2005_reportcommon.js-1008-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1009-            data: "",
+/tmp/icp2005_reportcommon.js-1010-            dataType: "json",
+/tmp/icp2005_reportcommon.js-1011-            success: function (data) {
+/tmp/icp2005_reportcommon.js-1012-                if (data.d == '')
+/tmp/icp2005_reportcommon.js-1013-                    clearselections(false);
+/tmp/icp2005_reportcommon.js-1014-                else
+/tmp/icp2005_reportcommon.js-1015-                    alert(data.d);
+/tmp/icp2005_reportcommon.js-1016-            },
+/tmp/icp2005_reportcommon.js-1017-            error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-1018-                window.location.href = "ddperror.aspx";
+/tmp/icp2005_reportcommon.js-1019-            }
+--
+/tmp/icp2005_reportcommon.js-1070-            $('.selectedView').each(function (index, obj) {
+/tmp/icp2005_reportcommon.js-1071-                var controlid = obj.id.replace('tbl_sel_', '');
+/tmp/icp2005_reportcommon.js-1072-                if (controlid == 'MetaAttr' || controlid == 'DBList') return;
+/tmp/icp2005_reportcommon.js-1073-
+/tmp/icp2005_reportcommon.js-1074-                var selectedmembers = gbl_array_member_selected[controlid];
+/tmp/icp2005_reportcommon.js-1075-                if (selectedmembers == null || Object.keys(selectedmembers).length <= 0) hasclearedall = true;
+/tmp/icp2005_reportcommon.js-1076-            });
+/tmp/icp2005_reportcommon.js-1077-        
+/tmp/icp2005_reportcommon.js-1078-
+/tmp/icp2005_reportcommon.js-1079-        if (!hasclearedall && !fromapplydim) {
+/tmp/icp2005_reportcommon.js-1080-            $.ajax({
+/tmp/icp2005_reportcommon.js-1081-                type: "POST",
+/tmp/icp2005_reportcommon.js:1082:                url: gbl_report_methods + "/HasReportSelections",
+/tmp/icp2005_reportcommon.js-1083-                contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1084-                data: "",
+/tmp/icp2005_reportcommon.js-1085-                async: false,
+/tmp/icp2005_reportcommon.js-1086-                dataType: "json",
+/tmp/icp2005_reportcommon.js-1087-                success: function (data) {
+/tmp/icp2005_reportcommon.js-1088-                    if (data.d == '')
+/tmp/icp2005_reportcommon.js-1089-                        gbl_clear_selections = false;
+/tmp/icp2005_reportcommon.js-1090-                    else
+/tmp/icp2005_reportcommon.js-1091-                        hasclearedall = true;
+/tmp/icp2005_reportcommon.js-1092-                },
+/tmp/icp2005_reportcommon.js-1093-                error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_reportcommon.js-1094-                    window.location.href = "ddperror.aspx";
+--
+/tmp/icp2005_reportcommon.js-1234-            break;
+/tmp/icp2005_reportcommon.js-1235-    }
+/tmp/icp2005_reportcommon.js-1236-}
+/tmp/icp2005_reportcommon.js-1237-
+/tmp/icp2005_reportcommon.js-1238-
+/tmp/icp2005_reportcommon.js-1239-function loadReportLabels() {
+/tmp/icp2005_reportcommon.js-1240-    if ($('#dpSelectLabel').val().trim() == 'select') {
+/tmp/icp2005_reportcommon.js-1241-        $('#report-loading').fadeIn(100);
+/tmp/icp2005_reportcommon.js-1242-
+/tmp/icp2005_reportcommon.js-1243-        $('#dpSelectLabel').html('<option>Loading...</option>'); ;
+/tmp/icp2005_reportcommon.js-1244-        $.ajax({
+/tmp/icp2005_reportcommon.js-1245-            type: "POST",
+/tmp/icp2005_reportcommon.js:1246:            url: gbl_report_methods + "/GetReportLabels",
+/tmp/icp2005_reportcommon.js-1247-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1248-            async: false,
+/tmp/icp2005_reportcommon.js-1249-            data: "",
+/tmp/icp2005_reportcommon.js-1250-            dataType: "json",
+/tmp/icp2005_reportcommon.js-1251-            success: function (data) {
+/tmp/icp2005_reportcommon.js-1252-                $('#dpSelectLabel').html('');
+/tmp/icp2005_reportcommon.js-1253-                if (data.d != '') {
+/tmp/icp2005_reportcommon.js-1254-                    var arrdataset = data.d.split('|');
+/tmp/icp2005_reportcommon.js-1255-
+/tmp/icp2005_reportcommon.js-1256-                    $ctl_label = $('#dpSelectLabel');
+/tmp/icp2005_reportcommon.js-1257-                    if (arrdataset.length >= 1) {
+/tmp/icp2005_reportcommon.js-1258-                        $.each(arrdataset, function (index, item) {
+--
+/tmp/icp2005_reportcommon.js-1409-            };
+/tmp/icp2005_reportcommon.js-1410-        }
+/tmp/icp2005_reportcommon.js-1411-    }
+/tmp/icp2005_reportcommon.js-1412-
+/tmp/icp2005_reportcommon.js-1413-    if (reportoptions == '') {
+/tmp/icp2005_reportcommon.js-1414-        //Nothing to do
+/tmp/icp2005_reportcommon.js-1415-    }
+/tmp/icp2005_reportcommon.js-1416-    else
+/tmp/icp2005_reportcommon.js-1417-        reportoptions = JSON.stringify(reportoptions);
+/tmp/icp2005_reportcommon.js-1418-
+/tmp/icp2005_reportcommon.js-1419-    $.ajax({
+/tmp/icp2005_reportcommon.js-1420-        type: "POST",
+/tmp/icp2005_reportcommon.js:1421:        url: gbl_report_methods + "/SaveReport",
+/tmp/icp2005_reportcommon.js-1422-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1423-        data: "{reportid: '" + reportid + "', reporttype: '" + reporttype + "', reporttitle: '" + reporttitle + "', reportdescription: '" + reportdescription +
+/tmp/icp2005_reportcommon.js-1424-                "', sharereport: " + sharereport + ", snapshot: " + snapshot + ", newfolder: " + newfolder + ", labelid: " + labelid +
+/tmp/icp2005_reportcommon.js-1425-                ", labeltext: '" + labeltext + "', reportoptions: '" + reportoptions + "', ChangeTableNumber: " + ChangeTableNumber +
+/tmp/icp2005_reportcommon.js-1426-                ", ConfirmUnPublish: " + ConfirmUnPublish + ", createReview: " + createReview + " }",
+/tmp/icp2005_reportcommon.js-1427-        dataType: "json",
+/tmp/icp2005_reportcommon.js-1428-        success: function (data) {            
+/tmp/icp2005_reportcommon.js-1429-            if (data.d.IsWDIPublish && !data.d.confirmTableNoChange){
+/tmp/icp2005_reportcommon.js-1430-                var change = confirm("WDI Table number already exists. Do you want to overwrite the Table number?");
+/tmp/icp2005_reportcommon.js-1431-                 if(change == true){
+/tmp/icp2005_reportcommon.js-1432-                     saveReport(true, false, false, false);
+/tmp/icp2005_reportcommon.js-1433-                 }
+--
+/tmp/icp2005_reportcommon.js-1653-
+/tmp/icp2005_reportcommon.js-1654-    return '';
+/tmp/icp2005_reportcommon.js-1655-}
+/tmp/icp2005_reportcommon.js-1656-
+/tmp/icp2005_reportcommon.js-1657-function loadMetaData(Name, Code, Type) {
+/tmp/icp2005_reportcommon.js-1658-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_reportcommon.js-1659-    $("#divMetadataCtl div.modal-body").html(loadingtext);
+/tmp/icp2005_reportcommon.js-1660-    $('#divMetadataCtl').attr("selection", "report");
+/tmp/icp2005_reportcommon.js-1661-    AnalyticsControlClick('editreports:metadata', Name + '>' + Code + '>' + Type);
+/tmp/icp2005_reportcommon.js-1662-
+/tmp/icp2005_reportcommon.js-1663-    $.ajax({
+/tmp/icp2005_reportcommon.js-1664-        type: "POST",
+/tmp/icp2005_reportcommon.js:1665:        url: gbl_report_methods + "/PopulateMetaDataJSON",
+/tmp/icp2005_reportcommon.js-1666-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1667-        data: "{name:'" + Name.replace(/\'/g, "%27") + "', code:'" + Code + "', dimensiontype:'" + Type + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_reportcommon.js-1668-        dataType: "json",
+/tmp/icp2005_reportcommon.js-1669-        success: function (data) {
+/tmp/icp2005_reportcommon.js-1670-            if (data.d == null || data.d == '') return;
+/tmp/icp2005_reportcommon.js-1671-
+/tmp/icp2005_reportcommon.js-1672-            $("#divMetadataCtl div.modal-body").html(data.d);
+/tmp/icp2005_reportcommon.js-1673-            $('#gdp-meta-data-rpt').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_reportcommon.js-1674-            $('#gdp-meta-data-rpt #metadata-specific-data').css('max-height', '').css('overflow', '');
+/tmp/icp2005_reportcommon.js-1675-            $('#divMetadataCtl .btn-meta-download').show();
+/tmp/icp2005_reportcommon.js-1676-
+/tmp/icp2005_reportcommon.js-1677-            gbl_download_name = Name;
+--
+/tmp/icp2005_reportcommon.js-1686-}
+/tmp/icp2005_reportcommon.js-1687-
+/tmp/icp2005_reportcommon.js-1688-function loadFootNotes(Code, MRVYearValue) {
+/tmp/icp2005_reportcommon.js-1689-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_reportcommon.js-1690-    $("#divMetadataCtl div.modal-body").html(loadingtext);
+/tmp/icp2005_reportcommon.js-1691-    $('#lblMetadataLabel').html("Footnotes");
+/tmp/icp2005_reportcommon.js-1692-
+/tmp/icp2005_reportcommon.js-1693-    AnalyticsControlClick('editreports:footnote', Code + ':' + MRVYearValue);
+/tmp/icp2005_reportcommon.js-1694-    TrackFeature('Load Footnotes->' + Code);
+/tmp/icp2005_reportcommon.js-1695-    if (Code != null && Code.trim() != "") {
+/tmp/icp2005_reportcommon.js-1696-        $.ajax({
+/tmp/icp2005_reportcommon.js-1697-            type: "POST",
+/tmp/icp2005_reportcommon.js:1698:            url: gbl_report_methods + "/PopulateFootNotesJSON",
+/tmp/icp2005_reportcommon.js-1699-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_reportcommon.js-1700-            data: "{code:'" + Code + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_reportcommon.js-1701-            dataType: "json",
+/tmp/icp2005_reportcommon.js-1702-            success: function (data) {
+/tmp/icp2005_reportcommon.js-1703-                if (data.d == null || data.d == '') return;
+/tmp/icp2005_reportcommon.js-1704-
+/tmp/icp2005_reportcommon.js-1705-                $("#divMetadataCtl div.modal-body").html(data.d);
+/tmp/icp2005_reportcommon.js-1706-                if (MRVYearValue != '') $("#gdp-meta-data-rpt").prepend('Data are for : ' + MRVYearValue);
+/tmp/icp2005_reportcommon.js-1707-
+/tmp/icp2005_reportcommon.js-1708-                $('#gdp-meta-data-rpt').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_reportcommon.js-1709-                $('#divMetadataCtl .btn-meta-download').hide();
+/tmp/icp2005_reportcommon.js-1710-            },
+--
+/tmp/icp2005_selectvariable.js-1-////function needs to be removed later
+/tmp/icp2005_selectvariable.js-2-//function logTimeConsumed(item, starttime) {
+/tmp/icp2005_selectvariable.js-3-//    var endtime = new Date();
+/tmp/icp2005_selectvariable.js-4-
+/tmp/icp2005_selectvariable.js-5-//    //debugger;
+/tmp/icp2005_selectvariable.js-6-//    starttime = starttime.toDateString() + " " + starttime.toLocaleTimeString();
+/tmp/icp2005_selectvariable.js-7-//    endtime = endtime.toDateString() + " " + endtime.toLocaleTimeString();
+/tmp/icp2005_selectvariable.js-8-
+/tmp/icp2005_selectvariable.js-9-//    $.ajax({
+/tmp/icp2005_selectvariable.js-10-//        type: "POST",
+/tmp/icp2005_selectvariable.js-11-//        async: true,
+/tmp/icp2005_selectvariable.js:12://        url: gbl_report_methods + "/TimeLogger",
+/tmp/icp2005_selectvariable.js-13-//        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-14-//        data: "{item: '" + item + "', starttime: '" + starttime + "', endtime: '" + endtime + "'}",
+/tmp/icp2005_selectvariable.js-15-//        dataType: "json",
+/tmp/icp2005_selectvariable.js-16-//        success: function (data) {
+/tmp/icp2005_selectvariable.js-17-//            console.log(starttime + " -> " + endtime + " : " + data.d);
+/tmp/icp2005_selectvariable.js-18-//        },
+/tmp/icp2005_selectvariable.js-19-//        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-20-//            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-21-//        }
+/tmp/icp2005_selectvariable.js-22-//    });
+/tmp/icp2005_selectvariable.js-23-//}
+/tmp/icp2005_selectvariable.js-24-
+--
+/tmp/icp2005_selectvariable.js-165-
+/tmp/icp2005_selectvariable.js-166-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-167-/********************************************Dimension Apply changes*******************************************************************************/
+/tmp/icp2005_selectvariable.js-168-/**************************************************************************************************************************************************/
+/tmp/icp2005_selectvariable.js-169-function doAjaxPostbackVariables(reporttype) {
+/tmp/icp2005_selectvariable.js-170-    //debugger;
+/tmp/icp2005_selectvariable.js-171-    var dimensiondetails = $('#hdnSelectVars').val().replace(/'/g, "\\'");
+/tmp/icp2005_selectvariable.js-172-    var newdimensiondetails = null;
+/tmp/icp2005_selectvariable.js-173-
+/tmp/icp2005_selectvariable.js-174-    $.ajax({
+/tmp/icp2005_selectvariable.js-175-        type: "POST",
+/tmp/icp2005_selectvariable.js-176-        async: false, //keep this false for now. we need to do some operations after the apply changes based on the result
+/tmp/icp2005_selectvariable.js:177:        url: gbl_report_methods + "/SetDimensionMembers",
+/tmp/icp2005_selectvariable.js-178-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-179-        data: "{reporttype: '" + reporttype + "', dimensiondetails: '" + dimensiondetails + "'}",
+/tmp/icp2005_selectvariable.js-180-        dataType: "json",
+/tmp/icp2005_selectvariable.js-181-        success: function (data) {
+/tmp/icp2005_selectvariable.js-182-            newdimensiondetails = data.d;
+/tmp/icp2005_selectvariable.js-183-        },
+/tmp/icp2005_selectvariable.js-184-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-185-            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-186-        }
+/tmp/icp2005_selectvariable.js-187-    });
+/tmp/icp2005_selectvariable.js-188-
+/tmp/icp2005_selectvariable.js-189-    return newdimensiondetails;
+--
+/tmp/icp2005_selectvariable.js-384-    if (dimdata != null)
+/tmp/icp2005_selectvariable.js-385-        dimtype = dimdata.DT;
+/tmp/icp2005_selectvariable.js-386-    else {
+/tmp/icp2005_selectvariable.js-387-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
+/tmp/icp2005_selectvariable.js-388-            dimtype = "T";
+/tmp/icp2005_selectvariable.js-389-    }
+/tmp/icp2005_selectvariable.js-390-
+/tmp/icp2005_selectvariable.js-391-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-392-        $('#highfreequencytab').show();
+/tmp/icp2005_selectvariable.js-393-        $('#lblSlider').show();
+/tmp/icp2005_selectvariable.js-394-        $('div#slider-range').show();
+/tmp/icp2005_selectvariable.js-395-    }
+/tmp/icp2005_selectvariable.js:396:    loadDimensionList(controlid, hierarchy, dimobj);
+/tmp/icp2005_selectvariable.js-397-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-398-        document.getElementById("hfAnualTab").click();
+/tmp/icp2005_selectvariable.js-399-    }
+/tmp/icp2005_selectvariable.js-400-}
+/tmp/icp2005_selectvariable.js-401-
+/tmp/icp2005_selectvariable.js-402-function loadSelectedList(controlid, hierarchy, obj) {
+/tmp/icp2005_selectvariable.js-403-    //debugger;    
+/tmp/icp2005_selectvariable.js-404-    var dimtype;
+/tmp/icp2005_selectvariable.js-405-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
+/tmp/icp2005_selectvariable.js-406-    
+/tmp/icp2005_selectvariable.js-407-    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-408-
+/tmp/icp2005_selectvariable.js-409-    if (dimdata != null)
+/tmp/icp2005_selectvariable.js-410-        dimtype = dimdata.DT;
+/tmp/icp2005_selectvariable.js-411-    else {
+/tmp/icp2005_selectvariable.js-412-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
+/tmp/icp2005_selectvariable.js-413-            dimtype = "T";
+/tmp/icp2005_selectvariable.js-414-    }
+/tmp/icp2005_selectvariable.js-415-
+/tmp/icp2005_selectvariable.js-416-    if(gbl_high_freequencyenabled && dimtype == "T"){
+/tmp/icp2005_selectvariable.js-417-        $('#highfreequencytab').hide();
+/tmp/icp2005_selectvariable.js-418-        $('#lblSlider').hide();
+/tmp/icp2005_selectvariable.js-419-        $('div#slider-range').hide();
+/tmp/icp2005_selectvariable.js-420-    }
+/tmp/icp2005_selectvariable.js:421:    loadDimensionList(controlid, hierarchy, dimobj);
+/tmp/icp2005_selectvariable.js-422-}
+/tmp/icp2005_selectvariable.js-423-
+/tmp/icp2005_selectvariable.js:424:function loadDimensionList(controlid, hierarchy, obj) {
+/tmp/icp2005_selectvariable.js-425-    var dimtype;    
+/tmp/icp2005_selectvariable.js-426-
+/tmp/icp2005_selectvariable.js-427-    if (obj != null && !$(obj).hasClass('collapsed') && !$(obj).hasClass('addMoreRHS')) {
+/tmp/icp2005_selectvariable.js-428-        $(obj).parents('.panel-heading').find('.toggleSelectionViews a').removeClass('active');
+/tmp/icp2005_selectvariable.js-429-        return;
+/tmp/icp2005_selectvariable.js-430-    }    
+/tmp/icp2005_selectvariable.js-431-
+/tmp/icp2005_selectvariable.js-432-    $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-433-
+/tmp/icp2005_selectvariable.js-434-    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-435-
+/tmp/icp2005_selectvariable.js-436-    if (dimdata != null)
+--
+/tmp/icp2005_selectvariable.js-454-
+/tmp/icp2005_selectvariable.js-455-        if ($('#hdnSubnationalSingleView').val() && $('#hdnSubnationalSingleView').val().trim().toUpperCase() == "Y")
+/tmp/icp2005_selectvariable.js-456-            gbl_subnational_singleView = true;
+/tmp/icp2005_selectvariable.js-457-        else
+/tmp/icp2005_selectvariable.js-458-            gbl_subnational_singleView = false;
+/tmp/icp2005_selectvariable.js-459-        
+/tmp/icp2005_selectvariable.js-460-
+/tmp/icp2005_selectvariable.js-461-        var starttime = new Date();
+/tmp/icp2005_selectvariable.js-462-        var ajaxData;
+/tmp/icp2005_selectvariable.js-463-        var ajaxUrl;
+/tmp/icp2005_selectvariable.js-464-        if (gbl_subnational_pagination && gbl_CubeIsSubnational && dimtype === "C") {           
+/tmp/icp2005_selectvariable.js-465-            gbl_subnationalHierarchy = hierarchy;
+/tmp/icp2005_selectvariable.js:466:            ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
+/tmp/icp2005_selectvariable.js-467-            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: 0, parentcode: '',filtername:'',searchkey:''}";
+/tmp/icp2005_selectvariable.js-468-        }
+/tmp/icp2005_selectvariable.js-469-        else{
+/tmp/icp2005_selectvariable.js:470:            ajaxUrl = gbl_report_methods + "/GetDimensionJSON";
+/tmp/icp2005_selectvariable.js-471-            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "'}";
+/tmp/icp2005_selectvariable.js-472-        }
+/tmp/icp2005_selectvariable.js-473-        $.ajax({
+/tmp/icp2005_selectvariable.js-474-            type: "POST",
+/tmp/icp2005_selectvariable.js-475-            async: true,
+/tmp/icp2005_selectvariable.js-476-            url: ajaxUrl,
+/tmp/icp2005_selectvariable.js-477-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-478-            data: ajaxData,
+/tmp/icp2005_selectvariable.js-479-            dataType: "json",
+/tmp/icp2005_selectvariable.js-480-            success: function (data) {
+/tmp/icp2005_selectvariable.js-481-                dimtype = data.d.DT;
+/tmp/icp2005_selectvariable.js-482-
+--
+/tmp/icp2005_selectvariable.js-589-            gblselectionChanged[dimdata.Parentdimension] = false;
+/tmp/icp2005_selectvariable.js-590-            createDimensionList(controlid, hierarchy, true);
+/tmp/icp2005_selectvariable.js-591-        }
+/tmp/icp2005_selectvariable.js-592-
+/tmp/icp2005_selectvariable.js-593-        $('#report-loading').hide();
+/tmp/icp2005_selectvariable.js-594-    }
+/tmp/icp2005_selectvariable.js-595-}
+/tmp/icp2005_selectvariable.js-596-
+/tmp/icp2005_selectvariable.js-597-function LoadSubNationalChildren(controlid, hierarchy, level, parentcode,searchKey,filterNames)
+/tmp/icp2005_selectvariable.js-598-{
+/tmp/icp2005_selectvariable.js-599-    $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-600-    var subNatdata = {};
+/tmp/icp2005_selectvariable.js:601:    var ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
+/tmp/icp2005_selectvariable.js-602-    var ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: " + level + ", parentcode: '" + parentcode + "',filtername:'" + filterNames+ "', searchkey:'" + searchKey + "'}";
+/tmp/icp2005_selectvariable.js-603-    $.ajax({
+/tmp/icp2005_selectvariable.js-604-        type: "POST",
+/tmp/icp2005_selectvariable.js-605-        async: false,
+/tmp/icp2005_selectvariable.js-606-        url: ajaxUrl,
+/tmp/icp2005_selectvariable.js-607-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-608-        data: ajaxData,
+/tmp/icp2005_selectvariable.js-609-        dataType: "json",
+/tmp/icp2005_selectvariable.js-610-        success: function (data) {
+/tmp/icp2005_selectvariable.js-611-            if (data && data.d && data.d.Members)
+/tmp/icp2005_selectvariable.js-612-                subNatdata = data.d.Members;
+/tmp/icp2005_selectvariable.js-613-            $('#report-loading').hide();
+--
+/tmp/icp2005_selectvariable.js-2042-                $.each(dimdata.Hier, function (key, val) {
+/tmp/icp2005_selectvariable.js-2043-                    $('.dimension-hierarchy-' + controlid).append('<option value="' + key + '">' + val + '</option>');
+/tmp/icp2005_selectvariable.js-2044-                });
+/tmp/icp2005_selectvariable.js-2045-                $('.dimension-hierarchy-' + controlid).val(dimdata.DH);
+/tmp/icp2005_selectvariable.js-2046-            }
+/tmp/icp2005_selectvariable.js-2047-            else
+/tmp/icp2005_selectvariable.js-2048-                $('.dimension-hierarchy-' + controlid).append('<option value="' + dimdata.DH + '">' + dimdata.DH + '</option>'); //default hierarchy
+/tmp/icp2005_selectvariable.js-2049-        }
+/tmp/icp2005_selectvariable.js-2050-
+/tmp/icp2005_selectvariable.js-2051-        if ($('.dimension-hierarchy-' + controlid + ' option').length <= 1) $("#hierarchy_" + controlid).hide();
+/tmp/icp2005_selectvariable.js-2052-        $('.dimension-hierarchy-' + controlid).off('change');
+/tmp/icp2005_selectvariable.js-2053-        $('.dimension-hierarchy-' + controlid).on('change', function () {            
+/tmp/icp2005_selectvariable.js:2054:            loadDimensionList(controlid, $(this).val(), null);
+/tmp/icp2005_selectvariable.js-2055-            $(".showCountryAggOption").removeClass("active");
+/tmp/icp2005_selectvariable.js-2056-            $(".showCountryAggOption[data-value='All']").addClass("active");
+/tmp/icp2005_selectvariable.js-2057-        });
+/tmp/icp2005_selectvariable.js-2058-    }
+/tmp/icp2005_selectvariable.js-2059-}
+/tmp/icp2005_selectvariable.js-2060-
+/tmp/icp2005_selectvariable.js-2061-function loadFilter(controlid, hierarchy, targetId, showPlusIcon, levels) {
+/tmp/icp2005_selectvariable.js-2062-    var hierarchylist = '';
+/tmp/icp2005_selectvariable.js-2063-    var isdblist = controlid == "DBList";
+/tmp/icp2005_selectvariable.js-2064-    if (levels == null) return;
+/tmp/icp2005_selectvariable.js-2065-    
+/tmp/icp2005_selectvariable.js-2066-    $.each(levels, function (index, value) {
+--
+/tmp/icp2005_selectvariable.js-3061-        }
+/tmp/icp2005_selectvariable.js-3062-    });
+/tmp/icp2005_selectvariable.js-3063-}
+/tmp/icp2005_selectvariable.js-3064-
+/tmp/icp2005_selectvariable.js-3065-
+/tmp/icp2005_selectvariable.js-3066-function loadMetaDataVariable(Name, Code, DimType, DimName) {
+/tmp/icp2005_selectvariable.js-3067-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_selectvariable.js-3068-    $("#divMetadataCtl div.modal-body").html(loadingtext);
+/tmp/icp2005_selectvariable.js-3069-    $('#divMetadataCtl').attr("selection", "variable");
+/tmp/icp2005_selectvariable.js-3070-    var cubeid = $('#hdnCubeID').val();
+/tmp/icp2005_selectvariable.js-3071-    $.ajax({
+/tmp/icp2005_selectvariable.js-3072-        type: "POST",
+/tmp/icp2005_selectvariable.js:3073:        url: gbl_report_methods + "/PopulateMetaDataJSON_SV",
+/tmp/icp2005_selectvariable.js-3074-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3075-        data: "{cubeid: '" + cubeid + "', name:'" + Name.replace(/\'/g, "%27") + "', code:'" + Code + "', dimensiontype:'" + DimType + "', dimensionname: '" + DimName + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_selectvariable.js-3076-        dataType: "json",
+/tmp/icp2005_selectvariable.js-3077-        success: function (data) {
+/tmp/icp2005_selectvariable.js-3078-            if (data.d == null || data.d == '') return;
+/tmp/icp2005_selectvariable.js-3079-            
+/tmp/icp2005_selectvariable.js-3080-            $("#divMetadataCtl div.modal-body").html(data.d);
+/tmp/icp2005_selectvariable.js-3081-            if ($('#gdp-meta-data-rpt').length > 0)
+/tmp/icp2005_selectvariable.js-3082-                $('#gdp-meta-data-rpt').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_selectvariable.js-3083-            else {
+/tmp/icp2005_selectvariable.js-3084-                $('#gdp-meta-data').css('max-height', Math.round($(window).height() * 0.5) + 'px').css('overflow', 'auto');
+/tmp/icp2005_selectvariable.js-3085-                $('#gdp-meta-data #metadata-specific-data').css('max-height', '').css('overflow', '');
+--
+/tmp/icp2005_selectvariable.js-3123-
+/tmp/icp2005_selectvariable.js-3124-    var controlid = "DBList";
+/tmp/icp2005_selectvariable.js-3125-    var hierarchy = "All";
+/tmp/icp2005_selectvariable.js-3126-
+/tmp/icp2005_selectvariable.js-3127-    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
+/tmp/icp2005_selectvariable.js-3128-    if (dimdata == null) {
+/tmp/icp2005_selectvariable.js-3129-        gbl_array_data[controlid + '_' + hierarchy] = 'Loading'; //to avoid double loading
+/tmp/icp2005_selectvariable.js-3130-        var starttime = new Date();
+/tmp/icp2005_selectvariable.js-3131-
+/tmp/icp2005_selectvariable.js-3132-        $.ajax({
+/tmp/icp2005_selectvariable.js-3133-            type: "POST",
+/tmp/icp2005_selectvariable.js-3134-            async: true,
+/tmp/icp2005_selectvariable.js:3135:            url: gbl_report_methods + "/GetDatabaseListJSON",
+/tmp/icp2005_selectvariable.js-3136-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3137-            data: "{}",
+/tmp/icp2005_selectvariable.js-3138-            dataType: "json",
+/tmp/icp2005_selectvariable.js-3139-            success: function (data) {
+/tmp/icp2005_selectvariable.js-3140-                //debugger;
+/tmp/icp2005_selectvariable.js-3141-                gbl_array_data[controlid + '_' + hierarchy] = data.d;
+/tmp/icp2005_selectvariable.js-3142-
+/tmp/icp2005_selectvariable.js-3143-                createDatabaseList(controlid, hierarchy);
+/tmp/icp2005_selectvariable.js-3144-
+/tmp/icp2005_selectvariable.js-3145-                //logTimeConsumed(controlid + "_" + hierarchy, starttime);
+/tmp/icp2005_selectvariable.js-3146-
+/tmp/icp2005_selectvariable.js-3147-                $('#report-loading').hide();
+--
+/tmp/icp2005_selectvariable.js-3178-    loadDimMembers(controlid, targetId, false, dimdata.Members, dimdata.JTL, false);
+/tmp/icp2005_selectvariable.js-3179-    getSelectedMembers(controlid, targetId);
+/tmp/icp2005_selectvariable.js-3180-}
+/tmp/icp2005_selectvariable.js-3181-
+/tmp/icp2005_selectvariable.js-3182-
+/tmp/icp2005_selectvariable.js-3183-function loadDatabaseDetails(CubeId,IsPublic) {
+/tmp/icp2005_selectvariable.js-3184-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
+/tmp/icp2005_selectvariable.js-3185-    $("#dbMetadata div.modal-body").html(loadingtext);
+/tmp/icp2005_selectvariable.js-3186-
+/tmp/icp2005_selectvariable.js-3187-
+/tmp/icp2005_selectvariable.js-3188-    $.ajax({
+/tmp/icp2005_selectvariable.js-3189-        type: "POST",
+/tmp/icp2005_selectvariable.js:3190:        url: gbl_report_methods + "/PopulateDatabaseDetails",
+/tmp/icp2005_selectvariable.js-3191-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3192-        data: "{cubeid:'" + CubeId + "', lang:'" + gbl_common_culture + "'}",
+/tmp/icp2005_selectvariable.js-3193-        dataType: "json",
+/tmp/icp2005_selectvariable.js-3194-        success: function (data) {
+/tmp/icp2005_selectvariable.js-3195-            if (data.d === null || data.d === '') return;           
+/tmp/icp2005_selectvariable.js-3196-            data.d = data.d.replace(/&lt;/g, "<");
+/tmp/icp2005_selectvariable.js-3197-            data.d = data.d.replace(/&gt;/g, ">");
+/tmp/icp2005_selectvariable.js-3198-            $("#dbMetadata div.modal-body").html(data.d);
+/tmp/icp2005_selectvariable.js-3199-
+/tmp/icp2005_selectvariable.js-3200-        },
+/tmp/icp2005_selectvariable.js-3201-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-3202-            window.location.href = gbl_error_file;
+--
+/tmp/icp2005_selectvariable.js-3288-
+/tmp/icp2005_selectvariable.js-3289-        var period_totalperiod = $('#selDynPeriodTotal').val();
+/tmp/icp2005_selectvariable.js-3290-        var period_latestperiod = $('#selDynPeriodLatest').val();
+/tmp/icp2005_selectvariable.js-3291-
+/tmp/icp2005_selectvariable.js-3292-        obj_period_details['totalperiod'] = period_totalperiod;
+/tmp/icp2005_selectvariable.js-3293-        obj_period_details['latestperiod'] = period_latestperiod;
+/tmp/icp2005_selectvariable.js-3294-
+/tmp/icp2005_selectvariable.js-3295-        $('#report-loading').show();
+/tmp/icp2005_selectvariable.js-3296-        var ajaxresult = false;
+/tmp/icp2005_selectvariable.js-3297-        $.ajax({
+/tmp/icp2005_selectvariable.js-3298-            type: "POST",
+/tmp/icp2005_selectvariable.js-3299-            async: false,
+/tmp/icp2005_selectvariable.js:3300:            url: gbl_report_methods + "/PopulateDynamicYears",
+/tmp/icp2005_selectvariable.js-3301-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-3302-            data: "{controlid: '" + controlid + "', totalperiods: '" + period_totalperiod + "', latestperiods: '" + period_latestperiod + "'}",
+/tmp/icp2005_selectvariable.js-3303-            dataType: "json",
+/tmp/icp2005_selectvariable.js-3304-            success: function (data) {
+/tmp/icp2005_selectvariable.js-3305-                obj_period_details['periods'] = data.d;
+/tmp/icp2005_selectvariable.js-3306-                //debugger;
+/tmp/icp2005_selectvariable.js-3307-
+/tmp/icp2005_selectvariable.js-3308-                $tblavailable = $("#tbl_" + controlid);
+/tmp/icp2005_selectvariable.js-3309-
+/tmp/icp2005_selectvariable.js-3310-                //removing the existing dynamic period in case of edit
+/tmp/icp2005_selectvariable.js-3311-                if (obj_period_old != null && obj_period_old.customdefinition != null && obj_period_old.customdefinition.periods != null) {
+/tmp/icp2005_selectvariable.js-3312-                    $.each(obj_period_old.customdefinition.periods, function (index, obj) {
+--
+/tmp/icp2005_selectvariable.js-4859-        btnhtml += "</div>";
+/tmp/icp2005_selectvariable.js-4860-    }
+/tmp/icp2005_selectvariable.js-4861-    $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').html(btnhtml);
+/tmp/icp2005_selectvariable.js-4862-    $('#newSelection_' + controlid + ' .SubnationalAvailableView').html(tabContentHtml);
+/tmp/icp2005_selectvariable.js-4863-}
+/tmp/icp2005_selectvariable.js-4864-/************************Code for Sub-national Poverty database **************/
+/tmp/icp2005_selectvariable.js-4865-
+/tmp/icp2005_selectvariable.js-4866-
+/tmp/icp2005_selectvariable.js-4867-function initBookAttributes() {
+/tmp/icp2005_selectvariable.js-4868-    $.ajax({
+/tmp/icp2005_selectvariable.js-4869-        type: "POST",
+/tmp/icp2005_selectvariable.js-4870-        async: true,
+/tmp/icp2005_selectvariable.js:4871:        url: gbl_report_methods + "/PopulateBookAttributesJSON",
+/tmp/icp2005_selectvariable.js-4872-        contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-4873-        data: "{}",
+/tmp/icp2005_selectvariable.js-4874-        dataType: "json",
+/tmp/icp2005_selectvariable.js-4875-        success: function (data) {
+/tmp/icp2005_selectvariable.js-4876-            gbl_array_book_attributes = eval(data.d);
+/tmp/icp2005_selectvariable.js-4877-            
+/tmp/icp2005_selectvariable.js-4878-        },
+/tmp/icp2005_selectvariable.js-4879-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+/tmp/icp2005_selectvariable.js-4880-            window.location.href = gbl_error_file;
+/tmp/icp2005_selectvariable.js-4881-        }
+/tmp/icp2005_selectvariable.js-4882-    });
+/tmp/icp2005_selectvariable.js-4883-}
+--
+/tmp/icp2005_selectvariable.js-4888-    var selectedUniqueIdArray = [];
+/tmp/icp2005_selectvariable.js-4889-    var controlid = $('.variableTable.selectedView[data-type="S"]').attr('data-value')
+/tmp/icp2005_selectvariable.js-4890-    var targetId = "#tbl_" + controlid;
+/tmp/icp2005_selectvariable.js-4891-    $(targetId).parent().find(".selectedView li").each(function (i, n) {
+/tmp/icp2005_selectvariable.js-4892-        selectedUniqueIdArray.push($(n).attr('uniqueid'));
+/tmp/icp2005_selectvariable.js-4893-    });
+/tmp/icp2005_selectvariable.js-4894-
+/tmp/icp2005_selectvariable.js-4895-    if (selectedUniqueIdArray.length == 0) {
+/tmp/icp2005_selectvariable.js-4896-
+/tmp/icp2005_selectvariable.js-4897-        $.ajax({
+/tmp/icp2005_selectvariable.js-4898-            type: "POST",
+/tmp/icp2005_selectvariable.js-4899-            async: false,
+/tmp/icp2005_selectvariable.js:4900:            url: gbl_report_methods + "/PopulateSelectedIndicatorsJSON",
+/tmp/icp2005_selectvariable.js-4901-            contentType: "application/json; charset=utf-8",
+/tmp/icp2005_selectvariable.js-4902-            data: "{}",
+/tmp/icp2005_selectvariable.js-4903-            dataType: "json",
+/tmp/icp2005_selectvariable.js-4904-            success: function (data) {
+/tmp/icp2005_selectvariable.js-4905-                var selectedIndicators = eval(data.d);
+/tmp/icp2005_selectvariable.js-4906-                for (var prop in selectedIndicators) {
+/tmp/icp2005_selectvariable.js-4907-                    selectedUniqueIdArray.push(selectedIndicators[prop].uniquename);
+/tmp/icp2005_selectvariable.js-4908-                }
+/tmp/icp2005_selectvariable.js-4909-            }
+/tmp/icp2005_selectvariable.js-4910-
+/tmp/icp2005_selectvariable.js-4911-        });
+/tmp/icp2005_selectvariable.js-4912-    }
