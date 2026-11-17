@@ -73,13 +73,13 @@ def test_weo_loader_keeps_ngdp_and_pppgdp_distinct_and_ignores_aggregates(tmp_pa
     path = tmp_path / "weo.csv"
     _write(path, [
         {"SERIES_CODE": "ZWE.NGDP.A", "COUNTRY": "Zimbabwe", "UNIT": "Zimbabwe dollar",
-         "SCALE": "Billions", "2015": "11", "2016": "12"},
+         "SCALE": "Billions", "2015": "11", "2016": "12", "2017": "13"},
         {"SERIES_CODE": "ZWE.PPPGDP.A", "COUNTRY": "Zimbabwe", "UNIT": "Purchasing power parity; billions of international dollars",
-         "SCALE": "Billions", "2015": "22", "2016": "24"},
+         "SCALE": "Billions", "2015": "22", "2016": "24", "2017": ""},
         {"SERIES_CODE": "ZWE.PPPEX.A", "COUNTRY": "Zimbabwe", "UNIT": "National currency per dollar",
-         "SCALE": "Units", "2015": "0.123", "2016": "0.124"},
+         "SCALE": "Units", "2015": "0.123", "2016": "0.124", "2017": "0.125"},
         {"SERIES_CODE": "WLD.NGDP.A", "COUNTRY": "World", "UNIT": "US dollar",
-         "SCALE": "Billions", "2015": "100", "2016": "110"},
+         "SCALE": "Billions", "2015": "100", "2016": "110", "2017": "120"},
     ])
     monkeypatch.setattr(lineage.imf, "fingerprint", lambda *_args, **_kwargs: {})
     result = lineage._load_weo(path, allowed_country_codes={"ZWE"})
@@ -88,4 +88,6 @@ def test_weo_loader_keeps_ngdp_and_pppgdp_distinct_and_ignores_aggregates(tmp_pa
     assert result[("ZWE", 2015)]["PPPGDP"] == 22
     assert result[("ZWE", 2015)]["PPPGDP_scale"] == "Billions"
     assert ("WLD", 2015) not in result
+    assert result[("ZWE", 2017)]["PPPGDP_present"] is True
+    assert result[("ZWE", 2017)]["PPPGDP"] is None
     assert ("ZWE", 2015) in result and "PPPEX" not in result[("ZWE", 2015)]
