@@ -313,3 +313,28 @@ uv run python -m tools.assess_world_bank_icp_benchmarks
 ```
 
 Owner-run terminal output is the validation authority.
+
+
+## Annual PPP lineage assessment across ICP, WDI and IMF WEO
+
+Run the read-only country/year lineage assessment after refreshing the ICP export inspection and benchmark assessment and after acquiring the required WDI API snapshot:
+
+```fish
+uv run python -m tools.assess_world_bank_icp_exports
+uv run python -m tools.assess_world_bank_icp_benchmarks
+uv run python -m tools.assess_annual_ppp_lineage
+```
+
+The assessment selects the latest timestamped ICP inspection and semantic benchmark reports, verifies the WDI snapshot manifest and every referenced raw response through the existing snapshot loader, and fingerprints the fixed October 2026 IMF WEO CSV. An alternate WDI manifest can be supplied with `--wdi-manifest`; source inputs are not fetched or modified by this assessment.
+
+Outputs are written under `reports/sources/annual-ppp-lineage/`:
+
+- `annual_ppp_lineage.csv`: source/release-specific ICP GDP PPP factors, WDI annual PPP conversion factors and current-PPP GDP, WEO current-PPP GDP, and a separately identified WEO NGDP/PPPGDP derived factor. Country, year, source release, lineage role, unit, source file/row and observation status are retained.
+- `country_year_diagnostics.csv`: WDI reported PPP GDP versus the LCU/PPP-factor arithmetic reconstruction, and WDI factors versus the WEO-implied factor. Ratios are explicitly arithmetic diagnostics, not assertions of semantic equivalence.
+- `assessment.json` and `assessment.md`: input fingerprints, source coverage, interpretation limits, side-effect declaration and a Zimbabwe diagnostic table.
+
+The original 2011 workbook D3 GDP factor, ICP 2017-cycle revised 2011 and original 2017 values, and ICP 2021-cycle revised 2017, 2021 benchmark, documented 2018–2020 interpolation and documented 2022–2023 GDP PPP extrapolation remain distinct rows. ICP 2017 archive years outside its explicit benchmark roles remain unclassified. The ICP 2021 saved-report export is still limited to its captured selection; absence from that export is not treated as global source missingness.
+
+WDI `PA.NUS.PPP` remains a rolling annual API series. This capture does not provide observation-level benchmark/interpolation/extrapolation lineage, so the tool does not infer it. WEO `PPPGDP` is retained as reported current-PPP GDP; WEO `NGDP / PPPGDP` is separately marked as a derived arithmetic factor. The rounded WEO `PPPEX` field is not used for precise reconciliation. ICP factors are not normalized across release currency denominations. Cross-source factor ratios remain flagged for currency denomination, redenomination, national-accounts vintage and reference-unit review.
+
+This assessment does not fetch new source data, write raw data or manifests, write either database, create approvals, change source selection, promote canonical data, impute observations, or apply retention. It does not assert that the WDI/WEO arithmetic gap is explained until the underlying currency and benchmark lineage is evidenced.
