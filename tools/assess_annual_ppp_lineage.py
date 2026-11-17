@@ -153,7 +153,15 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
         diffs = [float(r["wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only"]) for r in rows if r.get("wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only") not in (None, "")]
         ratios = [(int(r["year"]), float(r["wdi_factor_to_weo_implied_factor_ratio_arithmetic_only"])) for r in rows if r.get("wdi_factor_to_weo_implied_factor_ratio_arithmetic_only") not in (None, "")]
         mismatches = [v for v in arithmetic if abs(v - 1.0) > 0.005]
+        gap_years = [int(r["year"]) for r in rows if r.get("wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only") not in (None, "") and abs(float(r["wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only"])) >= 5.0]
         large_gaps = [v for v in diffs if abs(v) >= 5.0]
+        longest_gap_run = 0
+        current_gap_run = 0
+        previous_gap_year = None
+        for gap_year in gap_years:
+            current_gap_run = current_gap_run + 1 if previous_gap_year == gap_year - 1 else 1
+            longest_gap_run = max(longest_gap_run, current_gap_run)
+            previous_gap_year = gap_year
         ratio_values = [v for _, v in ratios]
         ratio_median = median(ratio_values) if ratio_values else None
         ratio_mad = median([abs(v - ratio_median) for v in ratio_values]) if ratio_values else None
@@ -161,7 +169,7 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
         breaks = [year for (py, pv), (year, cv) in zip(ratios, ratios[1:]) if year == py + 1 and pv != 0 and abs(cv / pv - 1) > 0.25]
         flags: list[str] = []
         if mismatches: flags.append("wdi_ppp_gdp_arithmetic_mismatch")
-        if len(large_gaps) >= 3: flags.append("persistent_wdi_weo_ppp_gdp_gap")
+        if longest_gap_run >= 3: flags.append("persistent_wdi_weo_ppp_gdp_gap")
         if len(ratio_values) >= 3 and relative_mad is not None and relative_mad <= 0.01: flags.append("stable_wdi_weo_factor_ratio")
         if breaks: flags.append("large_factor_ratio_break")
         output.append({
@@ -173,6 +181,7 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
             "wdi_weo_pppgdp_median_difference_percent_arithmetic_only": median(diffs) if diffs else None,
             "wdi_weo_pppgdp_median_absolute_difference_percent": median([abs(v) for v in diffs]) if diffs else None,
             "wdi_weo_pppgdp_years_with_absolute_gap_at_least_5_percent": len(large_gaps),
+            "longest_consecutive_years_with_absolute_gap_at_least_5_percent": longest_gap_run,
             "factor_ratio_overlap_year_count": len(ratio_values),
             "wdi_to_weo_factor_ratio_median_arithmetic_only": ratio_median,
             "wdi_to_weo_factor_ratio_relative_mad": relative_mad,
@@ -184,7 +193,7 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
 def assess(
     *, repository_root: str | Path = ROOT, wdi_manifest: str | Path | None = None,
     weo_csv: str | Path = WEO_CSV,
-) -> dict[str, Any]:
+) -> tuple[dict[str, Any], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     root = Path(repository_root).resolve()
     inspection = _latest_file("inspection_*/observations_long.csv", root / ICP_INSPECTION,
                               "ICP export-inspection observation file").parent
@@ -427,6 +436,18 @@ def write_report(result: dict[str, Any], lineage_rows: list[dict[str, Any]],
             fmt(row["weo_implied_ppp_factor_lcu_per_intl_dollar"]),
             fmt(row["wdi_factor_to_weo_implied_factor_ratio_arithmetic_only"]),
         ]) + " |")
+    flagged = [row for row in country_screen_rows if row["screen_flags"] != "no_screen_flag"]
+    flagged.sort(key=lambda row: (-float(row["maximum_wdi_arithmetic_ratio_deviation_percent"] or 0), -int(row["wdi_weo_pppgdp_years_with_absolute_gap_at_least_5_percent"]), row["country_code"]))
+    lines += ["", "## Global country screening", "",
+              f"- Countries screened: {len(country_screen_rows)}",
+              "- Flags are triage signals only; cross-source semantic comparability is not established.", "",
+              "| Country | WDI arithmetic mismatches | Maximum arithmetic deviation (%) | Median absolute WDI/WEO PPP-GDP gap (%) | Factor-ratio years | Flags |",
+              "|---|---:|---:|---:|---:|---|"]
+    for row in flagged[:25]:
+        fmt = lambda value: "" if value is None else f"{float(value):.3f}"
+        country_label = str(row["country_name"]) + " (" + str(row["country_code"]) + ")"
+        cells = [country_label, str(row["wdi_arithmetic_mismatch_year_count"]), fmt(row["maximum_wdi_arithmetic_ratio_deviation_percent"]), fmt(row["wdi_weo_pppgdp_median_absolute_difference_percent"]), str(row["factor_ratio_overlap_year_count"]), row["screen_flags"]]
+        lines.append("| " + " | ".join(cells) + " |")
     lines += ["", "## Interpretation limits", ""] + [f"- {item}" for item in result["interpretation"]]
     lines += ["", "## Side effects", "", "- No raw source files or manifests written.",
               "- No Project DB or Game DB writes; no approval, source-selection, promotion or retention.", ""]
