@@ -1,524 +1,123 @@
+WROTE /tmp/icp-dimension-results.txt
 
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening ?1                                                                                           󰌠 3.14.10  19:26:00
-❯
-  set proxy socks5h://127.0.0.1:10808
-  set base https://databank.worldbank.org
-  mkdir -p /tmp/icp-diagnostic
+========== icp2005 ==========
+PAGE 200 https://databank.worldbank.org/id/4129804e
 
-  for release in 2005 2021
-      if test "$release" = 2005
-          set report_url "$base/id/4129804e"
-          set cube 1009
-      else
-          set report_url "$base/id/1da9d9a2?Report_Name=ICP-Annual-PPPs"
-          set cube 3869
-      end
+--- Country ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:02:34 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff5e35e9babfe-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Set-Cookie': 'ExceptionOperationID=0703fd6b0c7c66fc9624703df6a72e53; path=/; secure; HttpOnly', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+DT = None
+DH = None
+Hier = None
+Sel = None
+Members = None
+Levels = None
+ARA = None
+Aggr = None
+DimensionType = None
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":null,"Members":null,"JTL":null,"DT":null,"AutoSelect":false,"Aggr":null,"JTLA":null,"DH":null,"CL":false,"Hier":null,"CHL":null,"Sel":null,"ARA":null,"HighFrequencyEnabled":false,"SubNationalEnabled":false,"DimensionType":null,"HighFrequencyMembers":null,"LevelNames":null,"LevelCount":null,"Parentdimension":null,"HasDimensionFiltering":false}}
 
-      curl --proxy $proxy -fSL --retry 2 --retry-all-errors \
-                  --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' \
-                  -c /tmp/icp-diagnostic/$release.cookies \
-                  -b /tmp/icp-diagnostic/$release.cookies \
-                  -D /tmp/icp-diagnostic/$release.page.headers \
-                  "$report_url" \
-                  -o /tmp/icp-diagnostic/$release.html
+--- Classification ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:02:34 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff5e7bf8fd370-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+DT = 'N'
+DH = '[Classification].[List]'
+Hier COUNT 1 SAMPLE [["[Classification].[List]", "List"]]
+Sel COUNT 16 SAMPLE [["[Classification].[List].&[EXR]", {"displayname": "Exchange Rates", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Classification].[List].&[ZS]", {"displayname": "Expenditure shares (GDP = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Classification].[List].&[CN]", {"displayname": "Expenditures (billion LCU)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Classification].[List].&[PPPGlob]", {"displayname": "Global PPPs", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}]]
+Members COUNT 16 SAMPLE [{"Code": "EXR", "Name": "Exchange Rates", "ParentMember": null, "ID": "[Classification].[List].&[EXR]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "ZS", "Name": "Expenditure shares (GDP = 100)", "ParentMember": null, "ID": "[Classification].[List].&[ZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "CN", "Name": "Expenditures (billion LCU)", "ParentMember": null, "ID": "[Classification].[List].&[CN]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PPPGlob", "Name": "Global PPPs", "ParentMember": null, "ID": "[Classification].[List].&[PPPGlob]", "JTC": "G", "ParentDimMember": null, "HLS": [], "SM": false}]
+Levels COUNT 0 SAMPLE []
+ARA = None
+Aggr = None
+DimensionType = 'N'
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":[],"Members":[{"Code":"EXR","Name":"Exchange Rates","ParentMember":null,"ID":"[Classification].[List].\u0026[EXR]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"ZS","Name":"Expenditure shares (GDP = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[ZS]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"CN","Name":"Expenditures (billion LCU)","ParentMember":null,"ID":"[Classification].[List].\u0026[CN]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PPPGlob","Name":"Global PPPs","ParentMember":null,"ID":"[Classification].[List].\u0026[PPPGlob]","JTC":"G","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.CD.IX.US","Name":"Index of nominal expenditures per capita (United States  = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.CD.IX.US]","JTC":"I","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.CD.IX.WL","Name":"Index of nominal expenditures per capita (world = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.CD.IX.WL]","JTC":"I","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.PP.IX.US","Name":"Index of real expenditures per capita (United States  = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.PP.IX.US]","JTC":"I","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.PP.IX.WL","Name":"Index of real expenditures per capita (world = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.PP.IX.WL]","JTC":"I","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"CD","Name":"Nominal expenditures (billion U.S. dollars)","ParentMember":null,"ID":"[Classification].[List].\u0026[CD]","JTC":"N","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.CD","Name":"Nominal expenditures per capita (U.S. dollars)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.CD]","JTC":"N","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"CD.ZS","Name":"Nominal expenditures: country and regional shares (world = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[CD.ZS]","JTC":"N","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"POP","Name":"Population","ParentMember":null,"ID":"[Classification].[List].\u0026[POP]","JTC":"P","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PX.WL","Name":"Price level index (world = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PX.WL]","JTC":"P","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PP.CD","Name":"Real expenditures (billion U.S. dollars)","ParentMember":null,"ID":"[Classification].[List].\u0026[PP.CD]","JTC":"R","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.PP","Name":"Real expenditures per capita (U.S. dollars)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.PP]","JTC":"R","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PP.CD.ZS","Name":"Real expenditures: country and regional shares (world = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PP.CD.ZS]","JTC":"R","ParentDimMember":null,"HLS":[],"SM":false}],"JTL":["E","G","I","N","P","R"],"DT":"N","AutoSelect":false,"Aggr":null,"JTLA":null,"DH":"[Classification].[List]","CL":false,"Hier":{"[Classification].[List]":"List"},"CHL":null,"Sel":{"[Classification].[List].\u0026[EXR]":{"displayname":"Exchange Rates","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[ZS]":{"displayname":"Expenditure shares (GDP = 100)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[CN]":{"displayname":"Expenditures (billion LCU)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[PPPGlob]":{"displayname":"Global PPPs","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[PCAP.CD.IX.US]":{"displayname":"Index of nominal expenditures per capita (United States  = 100)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[PCAP.CD.IX.WL]":{"displayname":"Index of nominal expenditures per capita (world = 100)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[PCAP.PP.IX.US]":{"displayname":"Index of real expenditures per capita (United States  = 100)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[PCAP.PP.IX.WL]":{"displayname":"Index of real expenditures per capita (world = 100)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[CD]":{"displayname":"Nominal expenditures (billion U.S. dollars)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""},"[Classification].[List].\u0026[PCAP.CD]":{"displayname":"Nominal expenditures per capita (U.S. dollars)","custo
 
-      for dim in Country Classification Series Time
-          curl --proxy $proxy -sS --max-time 90 -A 'Mozilla/5.0' \
-                          -b /tmp/icp-diagnostic/$release.cookies \
-                          -H 'Content-Type: application/json; charset=utf-8' \
-                          -H 'Accept: application/json, text/javascript, */*; q=0.01' \
-                          -H 'X-Requested-With: XMLHttpRequest' \
-                          -H 'Origin: https://databank.worldbank.org' \
-                          -H "Referer: $report_url" \
-                          --data-raw "{\"cubeid\":\"$cube\",\"controlid\":\"$dim\",\"hierarchy\":\"[$dim].[List]\"}" \
-                          -D /tmp/icp-diagnostic/$release-$dim.headers \
-                          "$base/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON" \
-                          -o /tmp/icp-diagnostic/$release-$dim.json
-      end
-  end
+--- Series ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:02:35 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff5eb59c4199e-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+DT = 'S'
+DH = '[Series].[List]'
+Hier COUNT 1 SAMPLE [["[Series].[List]", "List"]]
+Sel COUNT 47 SAMPLE [["[Series].[List].&[100000]", {"displayname": "100000:GROSS DOMESTIC PRODUCT", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Series].[List].&[110000]", {"displayname": "110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Series].[List].&[110100]", {"displayname": "110100:FOOD AND NON-ALCOHOLIC BEVERAGES", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Series].[List].&[110110]", {"displayname": "110110:FOOD", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}]]
+Members COUNT 47 SAMPLE [{"Code": "100000", "Name": "100000:GROSS DOMESTIC PRODUCT", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[100000]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["2"], "SM": false}, {"Code": "110000", "Name": "110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[110000]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["2"], "SM": false}, {"Code": "110100", "Name": "110100:FOOD AND NON-ALCOHOLIC BEVERAGES", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[110100]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["3"], "SM": false}, {"Code": "110110", "Name": "110110:FOOD", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS", "ID": "[Series].[List].&[110110]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS", "HLS": ["4"], "SM": false}]
+Levels COUNT 9 SAMPLE [{"LN": 1, "HN": "AnalyticalCategory", "UID": "[Series].[List].&[AnalyticalCategory]", "HID": "1", "LV": []}, {"LN": 1, "HN": "b_MainAggregate", "UID": "[Series].[List].&[b_MainAggregate]", "HID": "2", "LV": []}, {"LN": 1, "HN": "c_Category", "UID": "[Series].[List].&[c_Category]", "HID": "3", "LV": []}, {"LN": 1, "HN": "d_Group", "UID": "[Series].[List].&[d_Group]", "HID": "4", "LV": []}]
+ARA = None
+Aggr = None
+DimensionType = 'S'
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":[{"LN":1,"HN":"AnalyticalCategory","UID":"[Series].[List].\u0026[AnalyticalCategory]","HID":"1","LV":[]},{"LN":1,"HN":"b_MainAggregate","UID":"[Series].[List].\u0026[b_MainAggregate]","HID":"2","LV":[]},{"LN":1,"HN":"c_Category","UID":"[Series].[List].\u0026[c_Category]","HID":"3","LV":[]},{"LN":1,"HN":"d_Group","UID":"[Series].[List].\u0026[d_Group]","HID":"4","LV":[]},{"LN":1,"HN":"e_Class","UID":"[Series].[List].\u0026[e_Class]","HID":"5","LV":[]},{"LN":1,"HN":"k_Non-hierarchical","UID":"[Series].[List].\u0026[k_Non-hierarchical]","HID":"6","LV":[]},{"LN":1,"HN":"m_ExchangeRate","UID":"[Series].[List].\u0026[m_ExchangeRate]","HID":"7","LV":[]},{"LN":1,"HN":"n_Population","UID":"[Series].[List].\u0026[n_Population]","HID":"8","LV":[]},{"LN":1,"HN":"p_DerivedAggregates","UID":"[Series].[List].\u0026[p_DerivedAggregates]","HID":"9","LV":[]}],"Members":[{"Code":"100000","Name":"100000:GROSS DOMESTIC PRODUCT","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS","ID":"[Series].[List].\u0026[100000]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS","HLS":["2"],"SM":false},{"Code":"110000","Name":"110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS","ID":"[Series].[List].\u0026[110000]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS","HLS":["2"],"SM":false},{"Code":"110100","Name":"110100:FOOD AND NON-ALCOHOLIC BEVERAGES","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS","ID":"[Series].[List].\u0026[110100]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS","HLS":["3"],"SM":false},{"Code":"110110","Name":"110110:FOOD","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","ID":"[Series].[List].\u0026[110110]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","HLS":["4"],"SM":false},{"Code":"110111","Name":"110111:Bread and cereals (Class)","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","ID":"[Series].[List].\u0026[110111]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","HLS":["5"],"SM":false},{"Code":"110112","Name":"110112:Meat (Class)","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","ID":"[Series].[List].\u0026[110112]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","HLS":["5"],"SM":false},{"Code":"110113","Name":"110113:Fish and seafood (Class)","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","ID":"[Series].[List].\u0026[110113]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","HLS":["5"],"SM":false},{"Code":"110114","Name":"110114:Milk, cheese and eggs (Class)","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","ID":"[Series].[List].\u0026[110114]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","HLS":["5"],"SM":false},{"Code":"110115","Name":"110115:Oils and fats (Class)","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","ID":"[Series].[List].\u0026[110115]","JTC":"1","ParentDimMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS","HLS":["5"],"SM":false},{"Code":"110116","Name":"110116:Fruit (Class)","ParentMember":"CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, P
 
-  uv run python -c '
-  import json
-  from pathlib import Path
-  p=Path("/tmp/icp-diagnostic")
-  for f in sorted(p.glob("*.headers")):
-      print("\n===== HEADERS",f.name,"=====")
-      print(f.read_text(errors="replace")[:5000])
-  for f in sorted(p.glob("*.json")):
-      print("\n===== BODY",f.name,"=====")
-      try:
-          d=json.loads(f.read_text(errors="replace")).get("d") or {}
-          print("keys:",sorted(d))
-          for k in ("DT","DH","Hier","Sel","Members","Levels","ARA","Aggr","DimensionType"):
-              v=d.get(k)
-              print(k, "=", json.dumps(v,ensure_ascii=False)[:1800])
-      except Exception as e:
-          print("JSON ERROR:",e)
-          print(f.read_text(errors="replace")[:3000])
-  for release in ("2005","2021"):
-      html=(p/f"{release}.html").read_text(errors="replace")
-      print("\n===== PAGE",release,"=====")
-      for key in ("hdnCubeID","hdnReportType","hdnReportID","hdnReportURL","hdnReportOptionsCur","hdnDimensionDetails","hdnSelectVars","hdnMetadataSelections","hdnAbobeText"):
-          import re,html as H
-          m=re.search(r"<input\b(?=[^>]*\bid=[\"\\\']"+key+r"[\"\\\'])[^>]*>",html,re.I)
-          if m:
-              print(key, H.unescape(m.group(0))[:3500])
-      print("scripts:")
-      for s in re.findall(r"<script[^>]+src=[\"\\\']([^\"\\\']+)",html,re.I):
-          print(s)
-  '
+--- Time ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:02:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff5ef6f4c18df-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Set-Cookie': 'ExceptionOperationID=682db14128cc444821767f06c53ab1b6; path=/; secure; HttpOnly', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+DT = None
+DH = None
+Hier = None
+Sel = None
+Members = None
+Levels = None
+ARA = None
+Aggr = None
+DimensionType = None
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":null,"Members":null,"JTL":null,"DT":null,"AutoSelect":false,"Aggr":null,"JTLA":null,"DH":null,"CL":false,"Hier":null,"CHL":null,"Sel":null,"ARA":null,"HighFrequencyEnabled":false,"SubNationalEnabled":false,"DimensionType":null,"HighFrequencyMembers":null,"LevelNames":null,"LevelCount":null,"Parentdimension":null,"HasDimensionFiltering":false}}
+COOKIE NAMES [('databank.worldbank.orgCORS', 'databank.worldbank.org', '/'), ('databank.worldbank.org', 'databank.worldbank.org', '/'), ('ASP.NET_SessionId', 'databank.worldbank.org', '/'), ('ExceptionOperationID', 'databank.worldbank.org', '/'), ('ARRAffinity', '.databank.worldbank.org', '/'), ('ARRAffinitySameSite', '.databank.worldbank.org', '/'), ('__cf_bm', '.worldbank.org', '/'), ('_cfuvid', '.worldbank.org', '/')]
 
-  uv run python -c '
-  import json,urllib.request,http.cookiejar
-  from pathlib import Path
-  p=Path("/tmp/icp-diagnostic")
-  for release,cube,url in (
-      ("2005","1009","https://databank.worldbank.org/id/4129804e"),
-      ("2021","3869","https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs"),
-  ):
-      print("\n===== PYTHON REQUEST",release,"=====")
-      jar=http.cookiejar.CookieJar()
-      opener=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
-      req=urllib.request.Request(url,headers={"User-Agent":"TownCountryAsset/1.0"})
-      with opener.open(req,timeout=90) as r:
-          print("PAGE STATUS",r.status,"URL",r.geturl())
-          r.read()
-      payload=json.dumps({"cubeid":cube,"controlid":"Country","hierarchy":"[Country].[List]"}).encode()
-      req=urllib.request.Request(
-          "https://databank.worldbank.org/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
-          data=payload,
-          headers={
-              "User-Agent":"TownCountryAsset/1.0",
-              "Content-Type":"application/json; charset=utf-8",
-              "Accept":"application/json, text/javascript, */*; q=0.01",
-          },
-      )
-      try:
-          with opener.open(req,timeout=90) as r:
-              body=r.read().decode("utf-8","replace")
-              print("DIM STATUS",r.status,"HEADERS",dict(r.headers))
-              print("BODY",body[:3000])
-      except Exception as e:
-          print("DIM ERROR",repr(e))
-  '
+========== icp2021 ==========
+PAGE 200 https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs
 
-  tar -czf /tmp/icp-diagnostic.tar.gz -C /tmp icp-diagnostic
-  ls -lh /tmp/icp-diagnostic.tar.gz
+--- Country ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:02:59 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff60949f3b32c-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+DT = 'C'
+DH = '[Country].[List]'
+Hier COUNT 3 SAMPLE [["[Country].[List]", "List"], ["[Country].[Participation]", "Participation"], ["[Country].[Region]", "Region"]]
+Sel COUNT 184 SAMPLE [["[Country].[List].&[EAB]", {"displayname": "East Asia & Pacific (Benchmark)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Country].[List].&[AUS]", {"displayname": "Australia", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Country].[List].&[BRN]", {"displayname": "Brunei Darussalam", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Country].[List].&[KHM]", {"displayname": "Cambodia", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}]]
+Members COUNT 207 SAMPLE [{"Code": "AFG", "Name": "Afghanistan", "ParentMember": null, "ID": "[Country].[List].&[AFG]", "JTC": "A", "ParentDimMember": null, "HLS": [], "SM": true}, {"Code": "ALB", "Name": "Albania", "ParentMember": null, "ID": "[Country].[List].&[ALB]", "JTC": "A", "ParentDimMember": null, "HLS": [], "SM": true}, {"Code": "DZA", "Name": "Algeria", "ParentMember": null, "ID": "[Country].[List].&[DZA]", "JTC": "A", "ParentDimMember": null, "HLS": [], "SM": true}, {"Code": "AND", "Name": "Andorra", "ParentMember": null, "ID": "[Country].[List].&[AND]", "JTC": "A", "ParentDimMember": null, "HLS": [], "SM": true}]
+Levels COUNT 0 SAMPLE []
+ARA = None
+Aggr = None
+DimensionType = 'C'
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":[],"Members":[{"Code":"AFG","Name":"Afghanistan","ParentMember":null,"ID":"[Country].[List].\u0026[AFG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ALB","Name":"Albania","ParentMember":null,"ID":"[Country].[List].\u0026[ALB]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"DZA","Name":"Algeria","ParentMember":null,"ID":"[Country].[List].\u0026[DZA]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AND","Name":"Andorra","ParentMember":null,"ID":"[Country].[List].\u0026[AND]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AGO","Name":"Angola","ParentMember":null,"ID":"[Country].[List].\u0026[AGO]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AIA","Name":"Anguilla","ParentMember":null,"ID":"[Country].[List].\u0026[AIA]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ATG","Name":"Antigua and Barbuda","ParentMember":null,"ID":"[Country].[List].\u0026[ATG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ARG","Name":"Argentina","ParentMember":null,"ID":"[Country].[List].\u0026[ARG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ARM","Name":"Armenia","ParentMember":null,"ID":"[Country].[List].\u0026[ARM]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ABW","Name":"Aruba","ParentMember":null,"ID":"[Country].[List].\u0026[ABW]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AUS","Name":"Australia","ParentMember":null,"ID":"[Country].[List].\u0026[AUS]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AUT","Name":"Austria","ParentMember":null,"ID":"[Country].[List].\u0026[AUT]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AZE","Name":"Azerbaijan","ParentMember":null,"ID":"[Country].[List].\u0026[AZE]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BHS","Name":"Bahamas, The","ParentMember":null,"ID":"[Country].[List].\u0026[BHS]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BHR","Name":"Bahrain","ParentMember":null,"ID":"[Country].[List].\u0026[BHR]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BGD","Name":"Bangladesh","ParentMember":null,"ID":"[Country].[List].\u0026[BGD]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BRB","Name":"Barbados","ParentMember":null,"ID":"[Country].[List].\u0026[BRB]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BLR","Name":"Belarus","ParentMember":null,"ID":"[Country].[List].\u0026[BLR]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BEL","Name":"Belgium","ParentMember":null,"ID":"[Country].[List].\u0026[BEL]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BLZ","Name":"Belize","ParentMember":null,"ID":"[Country].[List].\u0026[BLZ]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BEN","Name":"Benin","ParentMember":null,"ID":"[Country].[List].\u0026[BEN]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BMU","Name":"Bermuda","ParentMember":null,"ID":"[Country].[List].\u0026[BMU]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BTN","Name":"Bhutan","ParentMember":null,"ID":"[Country].[List].\u0026[BTN]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BOL","Name":"Bolivia","ParentMember":null,"ID":"[Country].[List].\u0026[BOL]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BON","Name":"Bonaire","ParentMember":null,"ID":"[Country].[List].\u0026[BON]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BIH","Name":"Bosnia and Herzegovina","ParentMember":null,"ID":"[Country].[List].\u0026[BIH]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BWA","Name":"Botswana","ParentMember":null,"ID":"[Country].[List].\u0026[BWA]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BRA","Name":"Brazil","ParentMember":null,"ID":"[Country].[List].\u0026[BRA]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"VGB","Name":"British Virgin Islands","ParentMember":null,"ID":"[Country].[List].\u0026[VGB]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BRN","Name":"Brunei Darussalam","ParentMember":null,"ID":"[Country].[List].\u0026[BRN]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BGR","Name":"Bulgaria","ParentMember":null,"ID":"[Country].[List].\u0026[BGR]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BFA","Name":"Burkina Faso","ParentMember":null,"ID":"[Country].[List].\u0026[BFA]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BDI","Name":"Burundi","ParentMember":null,"ID":"[Country].[List].\u0026[BDI]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"CPV","Name":"Cabo Verde","ParentMember":null,"ID":"[Country].[List].\u0026[CPV]","JTC":"C","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"KHM","Name":"Cambodia","ParentMember":null,"ID":"[Country].[List].\u0026[KHM]","JTC"
 
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-100 265.1k   0 265.1k   0      0  91341      0           00:02          75525
-  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
-                                 Dload  Upload  Total   Spent   Left   Speed
-100 278.3k   0 278.3k   0      0  83018      0           00:03         105.5k
+--- Classification ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:02:59 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff6839bb51901-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'Content-Security-Policy-Report-Only': "script-src 'unsafe-inline' 'unsafe-eval'; connect-src 'none'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=rro.sLHuSLNNO9IytLXG4_QdrUb6mzHPdVl8KyymyuA-1794931379.780362-1.0.1.1-A5jW1ATmxO3vplFYjyNhc9cGhhiwuOz9mfmvMz9y7jk20O.YZvLJoofeKiNDF9VYWehJcDVEEzCxIP0p6K3z4tfdG5FGrV_ExXCIojgMheCBtJdkbTBSXzh2rMd4C5lsWFW3NZtrbwJ15.o9dx8vzpRYWVSafed1wp6_7DE6.7BOovlbkyvNfzuqufhDn_qA; report-to cf-csp-endpoint", 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE', 'X-XSS-Protection': '1; mode=block', 'Report-To': '{"group":"cf-csp-endpoint","max_age":86400,"endpoints":[{"url":"https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=rro.sLHuSLNNO9IytLXG4_QdrUb6mzHPdVl8KyymyuA-1794931379.780362-1.0.1.1-A5jW1ATmxO3vplFYjyNhc9cGhhiwuOz9mfmvMz9y7jk20O.YZvLJoofeKiNDF9VYWehJcDVEEzCxIP0p6K3z4tfdG5FGrV_ExXCIojgMheCBtJdkbTBSXzh2rMd4C5lsWFW3NZtrbwJ15.o9dx8vzpRYWVSafed1wp6_7DE6.7BOovlbkyvNfzuqufhDn_qA"}]}', 'Reporting-Endpoints': 'cf-csp-endpoint="https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=rro.sLHuSLNNO9IytLXG4_QdrUb6mzHPdVl8KyymyuA-1794931379.780362-1.0.1.1-A5jW1ATmxO3vplFYjyNhc9cGhhiwuOz9mfmvMz9y7jk20O.YZvLJoofeKiNDF9VYWehJcDVEEzCxIP0p6K3z4tfdG5FGrV_ExXCIojgMheCBtJdkbTBSXzh2rMd4C5lsWFW3NZtrbwJ15.o9dx8vzpRYWVSafed1wp6_7DE6.7BOovlbkyvNfzuqufhDn_qA"'}
+DT = 'N'
+DH = '[Classification].[List]'
+Hier COUNT 1 SAMPLE [["[Classification].[List]", "List"]]
+Sel COUNT 1 SAMPLE [["[Classification].[List].&[PPPGlob]", {"displayname": "Purchasing power parity (PPP) (US$ = 1)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}]]
+Members COUNT 17 SAMPLE [{"Code": "CN", "Name": "Expenditure (local currency units, billions)", "ParentMember": null, "ID": "[Classification].[List].&[CN]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "AICZS", "Name": "Expenditure component share of AIC (AIC = 100%)", "ParentMember": null, "ID": "[Classification].[List].&[AICZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "ZS", "Name": "Expenditure component share of GDP (GDP = 100%)", "ParentMember": null, "ID": "[Classification].[List].&[ZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.US", "Name": "Expenditure per capita index, market exchange rate-based (United States= 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.US]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}]
+Levels COUNT 0 SAMPLE []
+ARA = None
+Aggr = None
+DimensionType = 'CL'
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":[],"Members":[{"Code":"CN","Name":"Expenditure (local currency units, billions)","ParentMember":null,"ID":"[Classification].[List].\u0026[CN]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"AICZS","Name":"Expenditure component share of AIC (AIC = 100%)","ParentMember":null,"ID":"[Classification].[List].\u0026[AICZS]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"ZS","Name":"Expenditure component share of GDP (GDP = 100%)","ParentMember":null,"ID":"[Classification].[List].\u0026[ZS]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.CD.IX.US","Name":"Expenditure per capita index, market exchange rate-based (United States= 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.CD.IX.US]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.CD.IX.WL","Name":"Expenditure per capita index, market exchange rate-based (World = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.CD.IX.WL]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.PP.IX.US","Name":"Expenditure per capita index, PPP-based (United States = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.PP.IX.US]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.PP.IX.WL","Name":"Expenditure per capita index, PPP-based (World = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.PP.IX.WL]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.CD","Name":"Expenditure per capita, market exchange rate-based (US$)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.CD]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PCAP.PP","Name":"Expenditure per capita, PPP-based (US$)","ParentMember":null,"ID":"[Classification].[List].\u0026[PCAP.PP]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"CD","Name":"Expenditure, market exchange rate-based (US$, billions)","ParentMember":null,"ID":"[Classification].[List].\u0026[CD]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PP.CD","Name":"Expenditure, PPP-based (US$, billions)","ParentMember":null,"ID":"[Classification].[List].\u0026[PP.CD]","JTC":"E","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"EXR","Name":"Market exchange rate (US$ = 1)","ParentMember":null,"ID":"[Classification].[List].\u0026[EXR]","JTC":"M","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"POP","Name":"Population","ParentMember":null,"ID":"[Classification].[List].\u0026[POP]","JTC":"P","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PX.WL","Name":"Price level index (World = 100)","ParentMember":null,"ID":"[Classification].[List].\u0026[PX.WL]","JTC":"P","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PPPGlob","Name":"Purchasing power parity (PPP) (US$ = 1)","ParentMember":null,"ID":"[Classification].[List].\u0026[PPPGlob]","JTC":"P","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"CD.ZS","Name":"Share of global expenditure, market exchange rate-based (World = 100%)","ParentMember":null,"ID":"[Classification].[List].\u0026[CD.ZS]","JTC":"S","ParentDimMember":null,"HLS":[],"SM":false},{"Code":"PP.CD.ZS","Name":"Share of global expenditure, PPP-based (World = 100%)","ParentMember":null,"ID":"[Classification].[List].\u0026[PP.CD.ZS]","JTC":"S","ParentDimMember":null,"HLS":[],"SM":false}],"JTL":["E","M","P","S"],"DT":"N","AutoSelect":false,"Aggr":null,"JTLA":null,"DH":"[Classification].[List]","CL":false,"Hier":{"[Classification].[List]":"List"},"CHL":null,"Sel":{"[Classification].[List].\u0026[PPPGlob]":{"displayname":"Purchasing power parity (PPP) (US$ = 1)","custom":false,"customdefinition":null,"AggregationRule":null,"MemberType":""}},"ARA":null,"HighFrequencyEnabled":false,"SubNationalEnabled":false,"DimensionType":"CL","HighFrequencyMembers":null,"LevelNames":null,"LevelCount":null,"Parentdimension":null,"HasDimensionFiltering":true}}
 
-===== HEADERS 2005-Classification.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:07 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfec745bca1799-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
+--- Series ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:03:00 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff6875b54d28a-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+DT = 'S'
+DH = '[Series].[List]'
+Hier COUNT 1 SAMPLE [["[Series].[List]", "List"]]
+Sel COUNT 6 SAMPLE [["[Series].[List].&[1000000]", {"displayname": "1000000:GROSS DOMESTIC PRODUCT", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Series].[List].&[9020000]", {"displayname": "9020000:ACTUAL INDIVIDUAL CONSUMPTION", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Series].[List].&[9100000]", {"displayname": "9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}], ["[Series].[List].&[9270000]", {"displayname": "9270000:GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}]]
+Members COUNT 48 SAMPLE [{"Code": "1000000", "Name": "1000000:GROSS DOMESTIC PRODUCT", "ParentMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1000000]", "JTC": "1", "ParentDimMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["1"], "SM": true}, {"Code": "1101000", "Name": "1101000:FOOD AND NON-ALCOHOLIC BEVERAGES", "ParentMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1101000]", "JTC": "1", "ParentDimMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["3"], "SM": true}, {"Code": "1101100", "Name": "1101100:FOOD", "ParentMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1101100]", "JTC": "1", "ParentDimMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["4"], "SM": true}, {"Code": "1101110", "Name": "1101110:Bread and cereals", "ParentMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1101110]", "JTC": "1", "ParentDimMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["5"], "SM": true}]
+Levels COUNT 9 SAMPLE [{"LN": 1, "HN": "a_GDP", "UID": "[Series].[List].&[a_GDP]", "HID": "1", "LV": []}, {"LN": 1, "HN": "b_MainAggregate", "UID": "[Series].[List].&[b_MainAggregate]", "HID": "2", "LV": []}, {"LN": 1, "HN": "c_Category", "UID": "[Series].[List].&[c_Category]", "HID": "3", "LV": []}, {"LN": 1, "HN": "d_Group", "UID": "[Series].[List].&[d_Group]", "HID": "4", "LV": []}]
+ARA = None
+Aggr = None
+DimensionType = 'S'
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":[{"LN":1,"HN":"a_GDP","UID":"[Series].[List].\u0026[a_GDP]","HID":"1","LV":[]},{"LN":1,"HN":"b_MainAggregate","UID":"[Series].[List].\u0026[b_MainAggregate]","HID":"2","LV":[]},{"LN":1,"HN":"c_Category","UID":"[Series].[List].\u0026[c_Category]","HID":"3","LV":[]},{"LN":1,"HN":"d_Group","UID":"[Series].[List].\u0026[d_Group]","HID":"4","LV":[]},{"LN":1,"HN":"e_Class","UID":"[Series].[List].\u0026[e_Class]","HID":"5","LV":[]},{"LN":1,"HN":"k_Non-hierarchical","UID":"[Series].[List].\u0026[k_Non-hierarchical]","HID":"6","LV":[]},{"LN":1,"HN":"m_ExchangeRate","UID":"[Series].[List].\u0026[m_ExchangeRate]","HID":"7","LV":[]},{"LN":1,"HN":"n_Population","UID":"[Series].[List].\u0026[n_Population]","HID":"8","LV":[]},{"LN":1,"HN":"p_DerivedAggregates","UID":"[Series].[List].\u0026[p_DerivedAggregates]","HID":"9","LV":[]}],"Members":[{"Code":"1000000","Name":"1000000:GROSS DOMESTIC PRODUCT","ParentMember":"CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","ID":"[Series].[List].\u0026[1000000]","JTC":"1","ParentDimMember":"CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","HLS":["1"],"SM":true},{"Code":"1101000","Name":"1101000:FOOD AND NON-ALCOHOLIC BEVERAGES","ParentMember":"CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","ID":"[Series].[List].\u0026[1101000]","JTC":"1","ParentDimMember":"CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","HLS":["3"],"SM":true},{"Code":"1101100","Name":"1101100:FOOD","ParentMember":"CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","ID":"[Series].[List].\u0026[1101100]","JTC":"1","ParentDimMember":"CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","HLS":["4"],"SM":true},{"Code":"1101110","Name":"1101110:Bread and cereals","ParentMember":"CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","ID":"[Series].[List].\u0026[1101110]","JTC":"1","ParentDimMember":"CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","HLS":["5"],"SM":true},{"Code":"1101120","Name":"1101120:Meat","ParentMember":"CD.ZS, AICZS, CD, CPI, CPIW, EXP, CN, DEF, PPPReg, PX.WL, EXPK, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","ID":"[Series].[List].\u0026[1101120]","JTC":"1","ParentDimMember":"CD.ZS, AICZS, CD, CPI, CPIW, EXP, CN, DEF, PPPReg, PX.WL, EXPK, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP","HLS":["5"],"SM":true},{"Code":"1101130","Name":"1101130:Fish and seafood","ParentMember":"CD.ZS, AICZS, CD, CPI, CPIW, EXP, CN, DEF, PPPReg, PX.WL, EXPK, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.PP, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PPPRegAlt04","ID":"[Series].[List].\u0026[1101130]","JTC":"1","ParentDimMember":"CD.ZS, AICZS, CD, CPI, CPIW, EXP, CN, DEF, PPPReg, PX.WL, EXPK, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.PP, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PPPRegAlt04","HLS":["5"],"SM":true},{"Code":"1101140","Name":"1101140:Milk, cheese and eggs","ParentMember":"CD.ZS, AICZS, CD, CPI, CPIW, CN, DEF, PPPReg, PX.WL, EXPK, EXP, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.PP, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt03, PCAP.CD.IX.US, PP.CD.ZS, PPPRegAlt02, PPPRegAlt04","ID":"[Series].[List].\u
 
+--- Time ---
+STATUS 200
+HEADERS {'Date': 'Tue, 17 Nov 2026 16:03:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bff68c4fa55d90-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Set-Cookie': 'ExceptionOperationID=7cbd6b251391badfed94eea87b2056b6; path=/; secure; HttpOnly', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+DT = None
+DH = None
+Hier = None
+Sel = None
+Members = None
+Levels = None
+ARA = None
+Aggr = None
+DimensionType = None
+RAW {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":null,"Members":null,"JTL":null,"DT":null,"AutoSelect":false,"Aggr":null,"JTLA":null,"DH":null,"CL":false,"Hier":null,"CHL":null,"Sel":null,"ARA":null,"HighFrequencyEnabled":false,"SubNationalEnabled":false,"DimensionType":null,"HighFrequencyMembers":null,"LevelNames":null,"LevelCount":null,"Parentdimension":null,"HasDimensionFiltering":false}}
+COOKIE NAMES [('databank.worldbank.orgCORS', 'databank.worldbank.org', '/'), ('databank.worldbank.org', 'databank.worldbank.org', '/'), ('ASP.NET_SessionId', 'databank.worldbank.org', '/'), ('ExceptionOperationID', 'databank.worldbank.org', '/'), ('ARRAffinity', '.databank.worldbank.org', '/'), ('ARRAffinitySameSite', '.databank.worldbank.org', '/'), ('__cf_bm', '.worldbank.org', '/'), ('_cfuvid', '.worldbank.org', '/')]
 
-
-===== HEADERS 2005-Country.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:06 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfec6a3b5f0d63-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-set-cookie: ExceptionOperationID=7e6270f6bad6302fc65d58bcaa80ffeb; path=/; secure; HttpOnly
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
-
-
-
-===== HEADERS 2005-Series.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:09 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfec7dfb841916-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
-
-
-
-===== HEADERS 2005-Time.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:11 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfec88980f98c8-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-set-cookie: ExceptionOperationID=dc7fecb32fb486c6ff727225a014f28b; path=/; secure; HttpOnly
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
-
-
-
-===== HEADERS 2005.page.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:03 GMT
-content-type: text/html; charset=utf-8
-set-cookie: databank.worldbank.orgCORS=8bfd4f960fc4477dbc9991ad557f4317; Path=/; SameSite=None; Secure
-set-cookie: databank.worldbank.org=8bfd4f960fc4477dbc9991ad557f4317; Path=/
-set-cookie: ASP.NET_SessionId=fyoa5xedm2zhn2ugu5j2pywd; path=/; secure; HttpOnly; SameSite=Lax
-set-cookie: ExceptionOperationID=6ed7b05917a4b307a3a9af8360ea389a; path=/; secure; HttpOnly
-set-cookie: ARRAffinity=68684045b6f67894fddd7c62f3ba5f363c3d53ed896664c0df0e95751fa52bff;Path=/;HttpOnly;Secure;Domain=databank.worldbank.org
-set-cookie: ARRAffinitySameSite=68684045b6f67894fddd7c62f3ba5f363c3d53ed896664c0df0e95751fa52bff;Path=/;HttpOnly;SameSite=None;Secure;Domain=databank.worldbank.org
-set-cookie: __cf_bm=6UBT_4NRwGNz0e2Tknmm8BOjC8sKCRfuZGP3PARGzw8-1794930963.4753933-1.0.1.1-D.4KAQcF0VvK8oWLDDoNBnl2HoWirwkLj_rraS6ZYD_SBGlhGObM_jNuJr77x1YpXtfM5l2oMhdtluCH.uKTHzr3UtSgZGlLwpUPIpX9XVdx_vvt62k344o8_Phg4asq; HttpOnly; SameSite=None; Partitioned; Secure; Path=/; Domain=worldbank.org; Expires=Tue, 17 Nov 2026 16:26:03 GMT
-set-cookie: _cfuvid=kNHXuEhr04Fm2TrhOLbW5jh5_rt7rDO7a2CfW8Vg4hI-1794930963.4753933-1.0.1.1-Ceve3YqDYPuVfz4YP49PCBf64qOYT_iI3VA738CACp4; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org
-cf-ray: a5bfec59be1553f7-ATL
-cf-cache-status: BYPASS
-x-ua-compatible: IE=EDGE
-cache-control: private,no-cache, no-store
-server: cloudflare
-x-xss-protection: 1; mode=block
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: accept-encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-
-
-
-===== HEADERS 2021-Classification.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:16 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfecacdac17da3-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
-
-
-
-===== HEADERS 2021-Country.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:15 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfeca619b271fc-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-set-cookie: ExceptionOperationID=c0c1120c91766e615ffc89b1f9b0f933; path=/; secure; HttpOnly
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
-
-
-
-===== HEADERS 2021-Series.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:18 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfecb70dad317a-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
-
-
-
-===== HEADERS 2021-Time.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:19 GMT
-content-type: application/json; charset=utf-8
-cf-ray: a5bfecbe28b2c36f-ATL
-cf-cache-status: DYNAMIC
-cache-control: private, max-age=0,no-cache, no-store
-x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
-server: cloudflare
-set-cookie: ExceptionOperationID=f6955d7c25ed00b36081ac8342cbfa98; path=/; secure; HttpOnly
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: Accept-Encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-x-xss-protection: 1; mode=block
-
-
-
-===== HEADERS 2021.page.headers =====
-HTTP/2 200
-date: Tue, 17 Nov 2026 15:56:13 GMT
-content-type: text/html; charset=utf-8
-set-cookie: databank.worldbank.orgCORS=8bfd4f960fc4477dbc9991ad557f4317; Path=/; SameSite=None; Secure
-set-cookie: databank.worldbank.org=8bfd4f960fc4477dbc9991ad557f4317; Path=/
-set-cookie: ASP.NET_SessionId=ug5drf4zqd1rghw5vzjwr3du; path=/; secure; HttpOnly; SameSite=Lax
-set-cookie: ExceptionOperationID=b878d2e13a020c1ecff845b73804eb23; path=/; secure; HttpOnly
-set-cookie: ARRAffinity=a71c093f38ae9c878e705a1c9e1a4165425143b6381b49453d9ce277e967e1d8;Path=/;HttpOnly;Secure;Domain=databank.worldbank.org
-set-cookie: ARRAffinitySameSite=a71c093f38ae9c878e705a1c9e1a4165425143b6381b49453d9ce277e967e1d8;Path=/;HttpOnly;SameSite=None;Secure;Domain=databank.worldbank.org
-set-cookie: __cf_bm=lPPN9LuVgROxvujJTBHnTeLERwSWCEkmXBFnd0SxgMU-1794930972.4954178-1.0.1.1-7YQ3Zmu536vQ1dzBKyqCCy9ZVrbLIb1wOg56os3dyDXlKuPMPTiYWSs1G1G3nsvRGrwsRZfIwxtoMeqIwTjynuEGMzeTe6zH.pXSJ4mDt5mnfZU8_5X4y9HDP0OYhFTq; HttpOnly; SameSite=None; Partitioned; Secure; Path=/; Domain=worldbank.org; Expires=Tue, 17 Nov 2026 16:26:13 GMT
-set-cookie: _cfuvid=1IpLs1Z9dog4E9HbX3hfCtRJJVr6_XfX2yEp3MRfOMM-1794930972.4954178-1.0.1.1-R09XCD3teOCxDswLB4ybUXPEVg_aIma.qDQgWyFl16I; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org
-cf-ray: a5bfec921dbe7314-ATL
-cf-cache-status: BYPASS
-cache-control: private,no-cache, no-store
-server: cloudflare
-x-xss-protection: 1; mode=block
-strict-transport-security: max-age=31536000;includeSubDomains
-vary: accept-encoding
-access-control-expose-headers: Request-Context
-request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
-x-aspnet-version: 4.0.30319
-x-content-type-options: nosniff
-x-powered-by: ASP.NET
-x-ua-compatible: IE=EDGE
-
-
-
-===== BODY 2005-Classification.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = "N"
-DH = "[Classification].[List]"
-Hier = {"[Classification].[List]": "List"}
-Sel = {"[Classification].[List].&[EXR]": {"displayname": "Exchange Rates", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[ZS]": {"displayname": "Expenditure shares (GDP = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[CN]": {"displayname": "Expenditures (billion LCU)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PPPGlob]": {"displayname": "Global PPPs", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.CD.IX.US]": {"displayname": "Index of nominal expenditures per capita (United States  = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.CD.IX.WL]": {"displayname": "Index of nominal expenditures per capita (world = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.PP.IX.US]": {"displayname": "Index of real expenditures per capita (United States  = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.PP.IX.WL]": {"displayname": "Index of real expenditures per capita (world = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[CD]": {"displayname": "Nominal expenditures (billion U.S. dollars)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.CD]": {"displayname": "Nominal expenditures per capita (U.S. dollars)", "custom": false, "customdefinitio
-Members = [{"Code": "EXR", "Name": "Exchange Rates", "ParentMember": null, "ID": "[Classification].[List].&[EXR]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "ZS", "Name": "Expenditure shares (GDP = 100)", "ParentMember": null, "ID": "[Classification].[List].&[ZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "CN", "Name": "Expenditures (billion LCU)", "ParentMember": null, "ID": "[Classification].[List].&[CN]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PPPGlob", "Name": "Global PPPs", "ParentMember": null, "ID": "[Classification].[List].&[PPPGlob]", "JTC": "G", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.US", "Name": "Index of nominal expenditures per capita (United States  = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.US]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.WL", "Name": "Index of nominal expenditures per capita (world = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.WL]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.US", "Name": "Index of real expenditures per capita (United States  = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.US]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.WL", "Name": "Index of real expenditures per capita (world = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.WL]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "CD", "Name": "Nominal expenditures (billion U.S. dollars)", "ParentMember": null, "ID": "[Classification].[List].&[CD]", "JTC": "N", "ParentDimMember": null, "HLS": [], "SM": false
-Levels = []
-ARA = null
-Aggr = null
-DimensionType = "N"
-
-===== BODY 2005-Country.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = null
-DH = null
-Hier = null
-Sel = null
-Members = null
-Levels = null
-ARA = null
-Aggr = null
-DimensionType = null
-
-===== BODY 2005-Series.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = "S"
-DH = "[Series].[List]"
-Hier = {"[Series].[List]": "List"}
-Sel = {"[Series].[List].&[100000]": {"displayname": "100000:GROSS DOMESTIC PRODUCT", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110000]": {"displayname": "110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110100]": {"displayname": "110100:FOOD AND NON-ALCOHOLIC BEVERAGES", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110110]": {"displayname": "110110:FOOD", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110111]": {"displayname": "110111:Bread and cereals (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110112]": {"displayname": "110112:Meat (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110113]": {"displayname": "110113:Fish and seafood (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110114]": {"displayname": "110114:Milk, cheese and eggs (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110115]": {"displayname": "110115:Oils and fats (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110116]": {"displayname": "110116:Fruit (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110117]": {"displayname": "110117:Vegetables (Class)", "custom": false, "customdefinition": null, "AggregationRule": nul
-Members = [{"Code": "100000", "Name": "100000:GROSS DOMESTIC PRODUCT", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[100000]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["2"], "SM": false}, {"Code": "110000", "Name": "110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[110000]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["2"], "SM": false}, {"Code": "110100", "Name": "110100:FOOD AND NON-ALCOHOLIC BEVERAGES", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[110100]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["3"], "SM": false}, {"Code": "110110", "Name": "110110:FOOD", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS", "ID": "[Series].[List].&[110110]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS", "HLS": ["4"
-Levels = [{"LN": 1, "HN": "AnalyticalCategory", "UID": "[Series].[List].&[AnalyticalCategory]", "HID": "1", "LV": []}, {"LN": 1, "HN": "b_MainAggregate", "UID": "[Series].[List].&[b_MainAggregate]", "HID": "2", "LV": []}, {"LN": 1, "HN": "c_Category", "UID": "[Series].[List].&[c_Category]", "HID": "3", "LV": []}, {"LN": 1, "HN": "d_Group", "UID": "[Series].[List].&[d_Group]", "HID": "4", "LV": []}, {"LN": 1, "HN": "e_Class", "UID": "[Series].[List].&[e_Class]", "HID": "5", "LV": []}, {"LN": 1, "HN": "k_Non-hierarchical", "UID": "[Series].[List].&[k_Non-hierarchical]", "HID": "6", "LV": []}, {"LN": 1, "HN": "m_ExchangeRate", "UID": "[Series].[List].&[m_ExchangeRate]", "HID": "7", "LV": []}, {"LN": 1, "HN": "n_Population", "UID": "[Series].[List].&[n_Population]", "HID": "8", "LV": []}, {"LN": 1, "HN": "p_DerivedAggregates", "UID": "[Series].[List].&[p_DerivedAggregates]", "HID": "9", "LV": []}]
-ARA = null
-Aggr = null
-DimensionType = "S"
-
-===== BODY 2005-Time.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = null
-DH = null
-Hier = null
-Sel = null
-Members = null
-Levels = null
-ARA = null
-Aggr = null
-DimensionType = null
-
-===== BODY 2021-Classification.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = "N"
-DH = "[Classification].[List]"
-Hier = {"[Classification].[List]": "List"}
-Sel = {"[Classification].[List].&[PPPGlob]": {"displayname": "Purchasing power parity (PPP) (US$ = 1)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}}
-Members = [{"Code": "CN", "Name": "Expenditure (local currency units, billions)", "ParentMember": null, "ID": "[Classification].[List].&[CN]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "AICZS", "Name": "Expenditure component share of AIC (AIC = 100%)", "ParentMember": null, "ID": "[Classification].[List].&[AICZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "ZS", "Name": "Expenditure component share of GDP (GDP = 100%)", "ParentMember": null, "ID": "[Classification].[List].&[ZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.US", "Name": "Expenditure per capita index, market exchange rate-based (United States= 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.US]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.WL", "Name": "Expenditure per capita index, market exchange rate-based (World = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.WL]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.US", "Name": "Expenditure per capita index, PPP-based (United States = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.US]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.WL", "Name": "Expenditure per capita index, PPP-based (World = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.WL]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD", "Name": "Expenditure per capita, market exchange rate-based (US$)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP", "Name": "Expenditure
-Levels = []
-ARA = null
-Aggr = null
-DimensionType = "CL"
-
-===== BODY 2021-Country.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = null
-DH = null
-Hier = null
-Sel = null
-Members = null
-Levels = null
-ARA = null
-Aggr = null
-DimensionType = null
-
-===== BODY 2021-Series.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = "S"
-DH = "[Series].[List]"
-Hier = {"[Series].[List]": "List"}
-Sel = {"[Series].[List].&[1000000]": {"displayname": "1000000:GROSS DOMESTIC PRODUCT", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9020000]": {"displayname": "9020000:ACTUAL INDIVIDUAL CONSUMPTION", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9100000]": {"displayname": "9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9270000]": {"displayname": "9270000:GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[1501000]": {"displayname": "1501000:GROSS FIXED CAPITAL FORMATION", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9250000]": {"displayname": "9250000:DOMESTIC ABSORPTION", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}}
-Members = [{"Code": "1000000", "Name": "1000000:GROSS DOMESTIC PRODUCT", "ParentMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1000000]", "JTC": "1", "ParentDimMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["1"], "SM": true}, {"Code": "1101000", "Name": "1101000:FOOD AND NON-ALCOHOLIC BEVERAGES", "ParentMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1101000]", "JTC": "1", "ParentDimMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["3"], "SM": true}, {"Code": "1101100", "Name": "1101100:FOOD", "ParentMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1101100]", "JTC": "1", "ParentDimMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPReg
-Levels = [{"LN": 1, "HN": "a_GDP", "UID": "[Series].[List].&[a_GDP]", "HID": "1", "LV": []}, {"LN": 1, "HN": "b_MainAggregate", "UID": "[Series].[List].&[b_MainAggregate]", "HID": "2", "LV": []}, {"LN": 1, "HN": "c_Category", "UID": "[Series].[List].&[c_Category]", "HID": "3", "LV": []}, {"LN": 1, "HN": "d_Group", "UID": "[Series].[List].&[d_Group]", "HID": "4", "LV": []}, {"LN": 1, "HN": "e_Class", "UID": "[Series].[List].&[e_Class]", "HID": "5", "LV": []}, {"LN": 1, "HN": "k_Non-hierarchical", "UID": "[Series].[List].&[k_Non-hierarchical]", "HID": "6", "LV": []}, {"LN": 1, "HN": "m_ExchangeRate", "UID": "[Series].[List].&[m_ExchangeRate]", "HID": "7", "LV": []}, {"LN": 1, "HN": "n_Population", "UID": "[Series].[List].&[n_Population]", "HID": "8", "LV": []}, {"LN": 1, "HN": "p_DerivedAggregates", "UID": "[Series].[List].&[p_DerivedAggregates]", "HID": "9", "LV": []}]
-ARA = null
-Aggr = null
-DimensionType = "S"
-
-===== BODY 2021-Time.json =====
-keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
-DT = null
-DH = null
-Hier = null
-Sel = null
-Members = null
-Levels = null
-ARA = null
-Aggr = null
-DimensionType = null
-
-===== PAGE 2005 =====
-hdnCubeID <input type="hidden" name="hdnCubeID" id="hdnCubeID" value="1009" />
-hdnReportType <input type="hidden" name="hdnReportType" id="hdnReportType" value="TABLE" />
-hdnReportID <input type="hidden" name="hdnReportID" id="hdnReportID" value="121005" />
-hdnReportURL <input type="hidden" name="hdnReportURL" id="hdnReportURL" value="ICP_2005/id/4129804e" />
-hdnReportOptionsCur <input type="hidden" name="hdnReportOptionsCur" id="hdnReportOptionsCur" value="{"IsOrientationTemplate":false,"SelectedOrientation":"","OrientationCustom":[{"dimensionId":"Country","dimensionAxis":"0"},{"dimensionId":"Classification","dimensionAxis":"2"},{"dimensionId":"Series","dimensionAxis":"1"},{"dimensionId":"Time","dimensionAxis":"0"}],"NoOfRowsPerPage":"50","ShowNotes":true,"EmptyFormat":"..","ReportLevelScale":true,"Scale":"1","Precision":"0.0","ThousandSeparator":true,"ReportHeader":"","ReportFooter":"","AdvancedOptions":{"Hierarchy":"NONE","RolloverDirection":"none","RolloverInterval":null,"HideEmptyRow":false,"HideEmptyColumn":false},"ReportNotes":""}" />
-hdnDimensionDetails <input type="hidden" name="hdnDimensionDetails" id="hdnDimensionDetails" />
-hdnSelectVars <input type="hidden" name="hdnSelectVars" id="hdnSelectVars" />
-hdnMetadataSelections <input type="hidden" name="hdnMetadataSelections" id="hdnMetadataSelections" />
-hdnAbobeText <input type="hidden" name="hdnAbobeText" id="hdnAbobeText" value="{"databaseName":"International Comparison Program (ICP) 2005","Dimensions":{"Country":["Afghanistan","AFRICA","Albania","Algeria","Angola","Antigua and Barbuda","Argentina","Armenia","ASIA AND THE PACIFIC","Australia","Austria","Azerbaijan","Bahamas, The","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","CIS","Colombia","Comoros","Congo, Dem. Rep.","Congo, Rep.","Costa Rica","Cote d\u0027Ivoire","Croatia","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt, Arab Rep. (AFR)","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","EUROSTAT-OECD","Fiji","Finland","France","Gabon","Gambia, The","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hong Kong, China","Hungary","Iceland","India","Indonesia","Iran, Islamic Rep.","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Rep.","Kuwait","Kyrgyz Republic","Lao PDR","Latvia","Lebanon","Lesotho","Liberia","Libya","Lithuania","Luxembourg","Macao, China","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia, Fed. Sts.","Moldova","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russian Federation (EUO)","Rwanda","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovak Republic","Slovenia","Solomon Islands","Somalia","South Africa","SOUTH AMERICA","Spain","Sri Lanka","St. Kitts and Nevis","St. Lucia","St. Vincent and the Grenadines","Sudan","Suriname","Sweden","Switzerland","Syrian Arab Republic","Taiwan, China","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela, RB","Vietnam","WESTERN ASIA","WORLD","Yemen, Rep.","Zambia","Zimbabwe"],"Classification":["Exchange Rates","Expenditure shares (GDP = 100)","Expenditures (billion LCU)","Global PPPs","Index of nominal expenditures per capita (United States  = 100)","Index of nominal expenditures per capita (world = 100)","Index of real expenditures per capita (United States  = 100)","Index of real expenditures per capita (world = 100)","Nominal expenditures (billion U.S. dollars)","Nominal expenditures per capita (U.S. dollars)","Nominal expenditures: country and regional shares (world = 100)","Population","Price level index (world = 100)","Real expenditures (billion U.S. dollars)","Real expenditures per capita (U.S. dollars)","Real expenditures: country and regional shares (world = 100)"],"Series":["100000:GROSS DOMESTIC PRODUCT","110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS","110100:FOOD AND NON-ALCOHOLIC BEVERAGES","110110:FOOD","110111:Bread and cereals (Class)","110112:Meat (Class)","110113:Fish and seafood (Class)",
-scripts:
-/js/appdynamics.js
-//script.crazyegg.com/pages/scripts/0058/1350.js
-https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js
-https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js
-https://assets.adobedtm.com/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js
-/WebResource.axd?d=393I9IlCM-ogyKs8Hd44dV1rcqpxUnf5H44tKzwISJGiDKh0ditDkmXtgCEO2EBjYC1NHStZFDv6PBmomMymBjZskflkGRAIGbp5gmBilds1&amp;t=639256397503738887
-/ScriptResource.axd?d=AALOUbU4Dy97IA6xs5Hcw4X_3p0ibfav5J8GkqLh6BbzPzvXiBAnsgNZA1RrvIy3Cq24Vv0mT4-0kFgmLmvABOnhUI0YWIq1ZhBpByOsfO1tbR7qzitMMnOOu-sS2aCfvrYTNmI24HhiFUf2YM3cd2wojXk4geRddjzgVXBu4qHNnssTgxV-lcjShS7DKY_50&amp;t=ffffffffa1bf0f7b
-/ScriptResource.axd?d=4P9Uvi0O8EDMt76T88pXW8vg_c1ZTEFN6M0EjArAsjwpjR1CWOdErMSvNQXCR7Z-hH8RCLJlBUcy6rv1dztwjrXUezATyvBQersA_tcP-cth8l5bdDE4Rb0VUJb4WWEC5d0FV4pzcpnGgnH1-5uHOd32fp56pvSu_dMCRszGj5viffOTZAf7-j-vfr4wyIjd0&amp;t=ffffffffa1bf0f7b
-/DXR.axd?r=1_11,1_12,1_252,1_23,1_64,1_13,1_14,1_15,1_48,1_17,1_9,1_24,1_33,1_34-xTVOx
-/scripts/reports/plugins/jquery-v1.11.1.js
-/scripts/reports/plugins/jquery-ui-v1.10.3.js
-/scripts/reports/plugins/jquery.deprecated.js
-/scripts/reports/plugins/bootstrap.js
-/scripts/reports/plugins/bootstrap-select.min.js
-/scripts/reports/plugins/jqx-all.js
-/scripts/reports/plugins/jquery.sortcontent.js
-/scripts/reports/plugins/jpicker.min.js
-/scripts/reports/plugins/bootstrap-switch.js
-/scripts/reports/selectvariable.js
-/scripts/reports/SubnationalData.js
-/scripts/reports/reportcommon.js
-/scripts/reports/embedOptions.js
-/scripts/reports/selectvariableadvanced.js
-/js/wb_feedback.js
-/scripts/reports/tableoptions.js
-/scripts/reports/tablecustomstyles.js
-
-===== PAGE 2021 =====
-hdnCubeID <input type="hidden" name="hdnCubeID" id="hdnCubeID" value="3869" />
-hdnReportType <input type="hidden" name="hdnReportType" id="hdnReportType" value="TABLE" />
-hdnReportID <input type="hidden" name="hdnReportID" id="hdnReportID" value="153709" />
-hdnReportURL <input type="hidden" name="hdnReportURL" id="hdnReportURL" value="ICP-Annual-PPPs/id/1da9d9a2" />
-hdnReportOptionsCur <input type="hidden" name="hdnReportOptionsCur" id="hdnReportOptionsCur" value="{"IsOrientationTemplate":false,"SelectedOrientation":"","OrientationCustom":[{"dimensionId":"Country","dimensionAxis":"1"},{"dimensionId":"Classification","dimensionAxis":"2"},{"dimensionId":"Series","dimensionAxis":"0"},{"dimensionId":"Time","dimensionAxis":"2"}],"NoOfRowsPerPage":"250","ShowNotes":true,"EmptyFormat":"..","ReportLevelScale":true,"Scale":"1","Precision":"0.000","ThousandSeparator":true,"ReportHeader":"*The figures in this table have been rounded for presentation purposes. Data with greater precision can be obtained from the World Bank\u0027s DataBank - ICP 2021 database by clicking on the following link: https://databank.worldbank.org/source/icp-2021/.","ReportFooter":"","AdvancedOptions":{"Hierarchy":"NONE","RolloverDirection":"none","RolloverInterval":null,"HideEmptyRow":false,"HideEmptyColumn":false},"ReportNotes":"Results from the International Comparison Program (Benchmark) 2021 cycle include data for the new reference year 2021, revised data for the previous reference year 2017, and purchasing power parities (PPPs) time series for 2018 to 2020. 2021 results are available for 176 participating economies and their aggregate regions. They cover 45 expenditure headings and provide several indicators for each heading, including PPPs, national accounts expenditures in PPP and nominal terms, and price level indices. Imputed results are available for an additional 19 economies that did not participate in the ICP 2021 cycle. Revised 2017 results are available for 178 participating economies and cover 44 expenditure headings and several indicators, including PPPs, national accounts expenditures in PPP and nominal terms, and price level indices. Additionally, imputed results are available for 17 economies that did not participate in the ICP 2017 cycle. Annual PPPs are available for 2017 to 2021 and cover 6 major expenditure headings. 2022-2023 GDP PPP series are also provided beyond the most recent ICP benchmark based on the standard extrapolation approach. PPPs are statistical estimates and should be treated as approximations of true values, subject to sampling, measurement, and classification errors. They should not be used as indicators of currency under- or overvaluation. ICP Results are based on data supplied by participating economies to the global and regional implementing agencies, and produced in accordance with ICP methodology. Results are not deemed to be national official statistics. The standard ICP methodology between the two most recent 2017 and 2021 ICP cycles has been maintained. However, in ICP 2021, the Commonwealth of Independent States (CIS) region was linked through the standard global core list approach, unlike in ICP 2017, when the CIS region was linked through the Russian Federation, which participated in both the OECD and CIS comparisons. For ICP 2017, the Russian Federation results are based on the OECD comparison, and for ICP 2021, they are based on the CIS comparison. Furthermore, the Asia and Pacific region moved to the standard ICP approach for estimating housing PPPs based on rental and volume data during the ICP 2021 cycle. The standard approach was utilized for the revised ICP 2017 results and ICP 2021 results, both at the regional and global levels, instead of the previously utilized reference volume approach. 1/ PPPs are statistical estimates and should be treated as approximations of true values, subject to sa
-hdnDimensionDetails <input type="hidden" name="hdnDimensionDetails" id="hdnDimensionDetails" />
-hdnSelectVars <input type="hidden" name="hdnSelectVars" id="hdnSelectVars" />
-hdnMetadataSelections <input type="hidden" name="hdnMetadataSelections" id="hdnMetadataSelections" />
-hdnAbobeText <input type="hidden" name="hdnAbobeText" id="hdnAbobeText" value="{"databaseName":"ICP 2021","Dimensions":{"Country":["East Asia \u0026 Pacific (Benchmark)","Australia","Brunei Darussalam","Cambodia","China","Fiji","Hong Kong SAR, China","Indonesia","Japan","Korea, Rep.","Lao PDR","Malaysia","Mongolia","New Zealand","Philippines","Singapore","Taiwan, China","Thailand","Viet Nam","Europe \u0026 Central Asia (Benchmark)","Albania","Armenia","Austria","Azerbaijan","Belarus","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Cyprus","Czechia","Denmark","Estonia","Finland","France","Georgia","Germany","Greece","Hungary","Iceland","Ireland","Italy","Kazakhstan","Kosovo","Kyrgyz Republic","Latvia","Lithuania","Luxembourg","Moldova","Montenegro","Netherlands","North Macedonia","Norway","Poland","Portugal","Romania","Russian Federation","Serbia","Slovak Republic","Slovenia","Spain","Sweden","Switzerland","Tajikistan","Turkiye","Ukraine","United Kingdom","Uzbekistan","Latin America \u0026 Caribbean (Benchmark)","Anguilla","Antigua and Barbuda","Argentina","Aruba","Belize","Bolivia","Bonaire","Brazil","British Virgin Islands","Cayman Islands","Chile","Colombia","Costa Rica","Curacao","Dominica","Dominican Republic","Ecuador","El Salvador","Grenada","Guatemala","Guyana","Honduras","Jamaica","Mexico","Montserrat","Nicaragua","Panama","Paraguay","Peru","St. Kitts and Nevis","St. Lucia","St. Vincent and the Grenadines","Suriname","Trinidad and Tobago","Uruguay","Middle East \u0026 North Africa (Benchmark)","Algeria","Bahrain","Djibouti","Egypt, Arab Rep.","Iraq","Israel","Jordan","Kuwait","Lebanon","Malta","Morocco","Oman","Qatar","Saudi Arabia","Syrian Arab Republic","Tunisia","United Arab Emirates","West Bank and Gaza","North America (Benchmark)","Bermuda","Canada","United States","South Asia (Benchmark)","Bangladesh","Bhutan","India","Maldives","Nepal","Pakistan","Sri Lanka","Sub-Saharan Africa (Benchmark)","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde","Cameroon","Central African Republic","Chad","Comoros","Congo, Dem. Rep.","Congo, Rep.","Cote d\u0027Ivoire","Equatorial Guinea","Eswatini","Ethiopia","Gabon","Gambia, The","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Madagascar","Malawi","Mali","Mauritania","Mauritius","Mozambique","Namibia","Niger","Nigeria","Rwanda","Sao Tome and Principe","Senegal","Seychelles","Sierra Leone","Somalia","South Africa","South Sudan","Sudan","Tanzania","Togo","Uganda","Zambia","Zimbabwe","WORLD (Benchmark)"],"Classification":["Purchasing power parity (PPP) (US$ = 1)"],"Series":["1000000:GROSS DOMESTIC PRODUCT","9020000:ACTUAL INDIVIDUAL CONSUMPTION","9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE","9270000:GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE","1501000:GROSS FIXED CAPITAL FORMATION","9250000:DOMESTIC ABSORPTION"],"Time":["2017","2018","2019","2020","2021","2022","2023"]}}" />
-scripts:
-/js/appdynamics.js
-//script.crazyegg.com/pages/scripts/0058/1350.js
-https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js
-https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js
-https://assets.adobedtm.com/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js
-/WebResource.axd?d=393I9IlCM-ogyKs8Hd44dV1rcqpxUnf5H44tKzwISJGiDKh0ditDkmXtgCEO2EBjYC1NHStZFDv6PBmomMymBjZskflkGRAIGbp5gmBilds1&amp;t=639256397503738887
-/ScriptResource.axd?d=AALOUbU4Dy97IA6xs5Hcw4X_3p0ibfav5J8GkqLh6BbzPzvXiBAnsgNZA1RrvIy3Cq24Vv0mT4-0kFgmLmvABOnhUI0YWIq1ZhBpByOsfO1tbR7qzitMMnOOu-sS2aCfvrYTNmI24HhiFUf2YM3cd2wojXk4geRddjzgVXBu4qHNnssTgxV-lcjShS7DKY_50&amp;t=ffffffffa1bf0f7b
-/ScriptResource.axd?d=4P9Uvi0O8EDMt76T88pXW8vg_c1ZTEFN6M0EjArAsjwpjR1CWOdErMSvNQXCR7Z-hH8RCLJlBUcy6rv1dztwjrXUezATyvBQersA_tcP-cth8l5bdDE4Rb0VUJb4WWEC5d0FV4pzcpnGgnH1-5uHOd32fp56pvSu_dMCRszGj5viffOTZAf7-j-vfr4wyIjd0&amp;t=ffffffffa1bf0f7b
-/DXR.axd?r=1_11,1_12,1_252,1_23,1_64,1_13,1_14,1_15,1_48,1_17,1_9,1_24,1_33,1_34-xTVOx
-/scripts/reports/plugins/jquery-v1.11.1.js
-/scripts/reports/plugins/jquery-ui-v1.10.3.js
-/scripts/reports/plugins/jquery.deprecated.js
-/scripts/reports/plugins/bootstrap.js
-/scripts/reports/plugins/bootstrap-select.min.js
-/scripts/reports/plugins/jqx-all.js
-/scripts/reports/plugins/jquery.sortcontent.js
-/scripts/reports/plugins/jpicker.min.js
-/scripts/reports/plugins/bootstrap-switch.js
-/scripts/reports/selectvariable.js
-/scripts/reports/SubnationalData.js
-/scripts/reports/reportcommon.js
-/scripts/reports/embedOptions.js
-/scripts/reports/selectvariableadvanced.js
-/js/wb_feedback.js
-/scripts/reports/tableoptions.js
-/scripts/reports/tablecustomstyles.js
-
-===== PYTHON REQUEST 2005 =====
-PAGE STATUS 200 URL https://databank.worldbank.org/id/4129804e
-DIM STATUS 200 HEADERS {'Date': 'Tue, 17 Nov 2026 15:56:28 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bfecf5ad45383c-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Set-Cookie': 'ExceptionOperationID=123c9e623eda22e95f819fd2146d08e1; path=/; secure; HttpOnly', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
-BODY {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":null,"Members":null,"JTL":null,"DT":null,"AutoSelect":false,"Aggr":null,"JTLA":null,"DH":null,"CL":false,"Hier":null,"CHL":null,"Sel":null,"ARA":null,"HighFrequencyEnabled":false,"SubNationalEnabled":false,"DimensionType":null,"HighFrequencyMembers":null,"LevelNames":null,"LevelCount":null,"Parentdimension":null,"HasDimensionFiltering":false}}
-
-===== PYTHON REQUEST 2021 =====
-PAGE STATUS 200 URL https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs
-DIM STATUS 200 HEADERS {'Date': 'Tue, 17 Nov 2026 15:56:49 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bfed098eb0f8b2-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
-BODY {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":[],"Members":[{"Code":"AFG","Name":"Afghanistan","ParentMember":null,"ID":"[Country].[List].\u0026[AFG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ALB","Name":"Albania","ParentMember":null,"ID":"[Country].[List].\u0026[ALB]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"DZA","Name":"Algeria","ParentMember":null,"ID":"[Country].[List].\u0026[DZA]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AND","Name":"Andorra","ParentMember":null,"ID":"[Country].[List].\u0026[AND]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AGO","Name":"Angola","ParentMember":null,"ID":"[Country].[List].\u0026[AGO]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AIA","Name":"Anguilla","ParentMember":null,"ID":"[Country].[List].\u0026[AIA]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ATG","Name":"Antigua and Barbuda","ParentMember":null,"ID":"[Country].[List].\u0026[ATG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ARG","Name":"Argentina","ParentMember":null,"ID":"[Country].[List].\u0026[ARG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ARM","Name":"Armenia","ParentMember":null,"ID":"[Country].[List].\u0026[ARM]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ABW","Name":"Aruba","ParentMember":null,"ID":"[Country].[List].\u0026[ABW]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AUS","Name":"Australia","ParentMember":null,"ID":"[Country].[List].\u0026[AUS]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AUT","Name":"Austria","ParentMember":null,"ID":"[Country].[List].\u0026[AUT]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AZE","Name":"Azerbaijan","ParentMember":null,"ID":"[Country].[List].\u0026[AZE]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BHS","Name":"Bahamas, The","ParentMember":null,"ID":"[Country].[List].\u0026[BHS]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BHR","Name":"Bahrain","ParentMember":null,"ID":"[Country].[List].\u0026[BHR]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BGD","Name":"Bangladesh","ParentMember":null,"ID":"[Country].[List].\u0026[BGD]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BRB","Name":"Barbados","ParentMember":null,"ID":"[Country].[List].\u0026[BRB]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BLR","Name":"Belarus","ParentMember":null,"ID":"[Country].[List].\u0026[BLR]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BEL","Name":"Belgium","ParentMember":null,"ID":"[Country].[List].\u0026[BEL]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BLZ","Name":"Belize","ParentMember":null,"ID":"[Country].[List].\u0026[BLZ]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BEN","Name":"Benin","ParentMember":null,"ID":"[Country].[List].\u0026[BEN]","JTC":"B","Par
--rw-r--r-- 1 hmnf hmnf 100K Nov 17 19:26 /tmp/icp-diagnostic.tar.gz
+?? reports/sources/annual-ppp-lineage/
