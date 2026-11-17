@@ -48,9 +48,22 @@ def _is_usd_unit(unit: Any) -> bool:
     return normalized in {"us dollar", "us dollars", "united states dollar", "united states dollars", "usd"}
 
 
-def _weo_ngdp_local_currency_value(item: dict[str, Any]) -> float | None:
-    """Do not treat WEO NGDP reported in US dollars as local-currency GDP."""
+def _weo_ngdp_is_usd(item: dict[str, Any]) -> bool:
+    """Resolve explicit USD labels and documented country-specific domestic-currency cases."""
     if _is_usd_unit(item.get("NGDP_unit", "")):
+        return True
+    # WEO's generic "Domestic currency" label does not identify the currency.
+    # Somalia's national accounts are denominated in USD, confirmed by SNBS's
+    # 2025 GDP publication; its WEO NGDP series therefore is not Somali-shilling GDP.
+    return (
+        str(item.get("country_code", "")).upper() == "SOM"
+        and str(item.get("NGDP_unit", "")).strip().casefold() == "domestic currency"
+    )
+
+
+def _weo_ngdp_local_currency_value(item: dict[str, Any]) -> float | None:
+    """Return NGDP only when the evidence supports treating it as local-currency GDP."""
+    if _weo_ngdp_is_usd(item):
         return None
     return _number(item.get("NGDP"))
 
@@ -286,7 +299,7 @@ def assess(
         wdi_lcu_gdp = wdi_item.get("NY.GDP.MKTP.CN")
         weo_ngdp_source_value = _number(weo_item.get("NGDP"))
         weo_ngdp_unit = weo_item.get("NGDP_unit", "")
-        weo_ngdp_is_usd = _is_usd_unit(weo_ngdp_unit)
+        weo_ngdp_is_usd = _weo_ngdp_is_usd(weo_item)
         weo_lcu_gdp = _weo_ngdp_local_currency_value(weo_item)
         weo_ppp_gdp = weo_item.get("PPPGDP")
         weo_implied_factor = (
@@ -324,7 +337,8 @@ def assess(
             "weo_ngdp_current_lcu": weo_lcu_gdp,
             "weo_ngdp_source_value": weo_ngdp_source_value,
             "weo_ngdp_unit_basis": (
-                "us_dollars_not_lcu" if weo_ngdp_is_usd
+                "us_dollars_not_lcu" if _is_usd_unit(weo_ngdp_unit)
+                else "usd_domestic_currency_confirmed_not_lcu" if weo_ngdp_is_usd
                 else "non_usd_unit_lcu_candidate" if weo_ngdp_source_value is not None
                 else "missing_or_unclassified"
             ),
