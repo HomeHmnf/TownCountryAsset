@@ -1,5 +1,4 @@
-
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening ?1                                                                                           󰌠 3.14.10  18:53:18
+    ~/Projects/Python/TownAndCountry   work/compiler-hardening ?1                                                                                           󰌠 3.14.10  19:05:46
 ❯ set base 'https://databank.worldbank.org/scripts/reports'
   for f in selectvariable.js reportcommon.js selectvariableadvanced.js
       curl --proxy socks5h://127.0.0.1:10808 -fSL --retry 3 --retry-all-errors --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' "$base/$f" -o "/tmp/icp2005_$f"
@@ -8,117 +7,13 @@
   rg -n -C 8 'GetDimensionJSON|hdnCubeID|hierarchy|controlid|memberdetails|aggregationruleall' /tmp/icp2005_selectvariable.js /tmp/icp2005_reportcommon.js /tmp/icp2005_selectvariableadvanced.js
   % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
                                  Dload  Upload  Total   Spent   Left   Speed
-100 208.6k   0 208.6k   0      0  51836      0           00:04              0
+100 208.6k   0 208.6k   0      0 118.0k      0           00:01         155.4k
   % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
                                  Dload  Upload  Total   Spent   Left   Speed
-100 126.2k   0 126.2k   0      0  31967      0           00:04              0
+100 126.2k   0 126.2k   0      0  71278      0           00:01         100.1k
   % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
                                  Dload  Upload  Total   Spent   Left   Speed
-100  19581   0  19581   0      0   4839      0           00:04              0
-/tmp/icp2005_reportcommon.js
-101-
-102-     $('.cancelChangesDim').off('click');
-103-     $('.cancelChangesDim').on('click', function () {
-104-         //debugger;
-105-         document.getElementById('selModifyText').innerHTML = gbl_common_labels.Reports_Label_Selection_Modified;
-106-         $.each(gbl_array_member_selected_clone, function (key, val) {
-107-             //debugger;
-108-
-109:             var controlid = key;
-110:             var targetId = "#tbl_" + controlid;
-111-
-112-             $(targetId).parent().find(".selectedView").html('');
-113:             gbl_array_member_selected[controlid] = jQuery.extend(true, {}, val);
-114:             GenarateAdobeDimensions(controlid);
-115-
-116:             $('#tbl_' + controlid).find('li.selected').removeClass('selected');
-117:             $('#tbl_' + controlid).find('.chkSelectElement').prop({ checked: false });
-118:             var memberselected = gbl_array_member_selected[controlid];
-119-             $.each(memberselected, function (key, val) {
-120-                 if (!val.iscustom) {
-121:                     var $item = $('#tbl_' + controlid).find("li[uniqueid='" + key + "']");
-122-
-123-                     $item.addClass('selected');
-124-                     $item.find('input').prop({ checked: true });
-125-                 }
-126-             });
-127-
-128:             getSelectedMembers(controlid, targetId);
-129-         });
-130-
-131-
-132-         var rpttype = $('#hdnReportType').val().toUpperCase();
-133-         switch (rpttype) {
-134-             case 'TABLE':
-135-                 setTableOptions();
-136-
---
-956-    if (hasclearedallselections(false)) {
-957-        return false;
-958-    }
-959-    if (obj.id == 'lnkChart') {
-960-        if (hasnesteddimension()) {
-961-            return false;
-962-        }
-963-        var isPageSeries=false;
-964:        var controlid = $('.variableTable.selectedView[data-type="S"]').attr('data-value')
-965-        if ($('.page-ddl').attr('id') != null) {
-966:            if ($('.page-ddl').attr('id').indexOf(controlid) >= 0)
-967-                isPageSeries = true;
-968-        }
-969-        if (gbl_HasIndicatorUnit && !isPageSeries && !validateBookUnits()) {
-970-            $(".confirmationTxt").show();
-971-            return false;
-972-        }
-973-    }
-974-    gbl_subnat_loadextent = true;
---
-1029-var gbl_clear_selections = false;
-1030-function clearselections(initialload) {
-1031-    gbl_clear_selections = true;
-1032-
-1033-    if (!initialload) {
-1034-        gbl_array_member_selected = {};
-1035-
-1036-        $('.selectedView').each(function (index, obj) {
-1037:            var controlid = obj.id.replace('tbl_sel_', '');
-1038:            if (controlid == 'MetaAttr' || controlid == 'DBList') return;
-1039-
-1040:            $('#panel_' + controlid + " .selectionCount").html('&nbsp;');
-1041:            $('#tbl_sel_' + controlid).html('');
-1042:            $('#tbl_' + controlid + ' li.selected input').prop({ checked: false });
-1043:            $('#tbl_' + controlid + ' li.selected').removeClass('selected');
-1044:            if (gbl_high_freequencyenabled == true && $('#tbl_' + controlid).attr('data-type') == "T") {
-1045-                $('#hfvariableList div.tabcontent ul.availableView' + ' li.selected input').prop({ checked: false });
-1046-                $('#hfvariableList div.tabcontent ul.availableView' + ' li.selected').removeClass('selected');
-1047-            }
-1048-            //debugger;
-1049-        });
-1050-
-1051-        $(".selectionCountRHS").text("");
-1052-    }
---
-1063-}
-1064-
-1065-function hasclearedallselections(fromapplydim) {
-1066-    //debugger;
-1067-
-1068-    if (gbl_clear_selections) {
-1069-        var hasclearedall = false;
-1070-            $('.selectedView').each(function (index, obj) {
-1071:                var controlid = obj.id.replace('tbl_sel_', '');
-1072:                if (controlid == 'MetaAttr' || controlid == 'DBList') return;
-1073-
-1074:                var selectedmembers = gbl_array_member_selected[controlid];
-1075-                if (selectedmembers == null || Object.keys(selectedmembers).length <= 0) hasclearedall = true;
-1076-            });
-1077-
-1078-
-1079-        if (!hasclearedall && !fromapplydim) {
-1080-            $.ajax({
-1081-                type: "POST",
-1082-                url: gbl_report_methods + "/HasReportSelections",
-
+100  19581   0  19581   0      0  14547      0           00:01              0
 /tmp/icp2005_selectvariableadvanced.js
 88-        if ($(this).parents(".panel").find(".customGroupElements li[uniqueid='" + uniqueid + "']").length <= 0) {
 89-            var item = "<li uniqueid='" + uniqueid + "' " + (formulaname != null ? "formulaname='" + formulaname + "' " : "") + "><a href='javascript:void(0)' onclick='deleteItem(this)' ><span class='glyphicon glyphicon-remove-circle'></span></a>" + $(this).siblings(".value").text() + "</li>";
@@ -369,6 +264,110 @@
 447-            window.location.href = gbl_error_file;
 448-        }
 449-    });
+
+/tmp/icp2005_reportcommon.js
+101-
+102-     $('.cancelChangesDim').off('click');
+103-     $('.cancelChangesDim').on('click', function () {
+104-         //debugger;
+105-         document.getElementById('selModifyText').innerHTML = gbl_common_labels.Reports_Label_Selection_Modified;
+106-         $.each(gbl_array_member_selected_clone, function (key, val) {
+107-             //debugger;
+108-
+109:             var controlid = key;
+110:             var targetId = "#tbl_" + controlid;
+111-
+112-             $(targetId).parent().find(".selectedView").html('');
+113:             gbl_array_member_selected[controlid] = jQuery.extend(true, {}, val);
+114:             GenarateAdobeDimensions(controlid);
+115-
+116:             $('#tbl_' + controlid).find('li.selected').removeClass('selected');
+117:             $('#tbl_' + controlid).find('.chkSelectElement').prop({ checked: false });
+118:             var memberselected = gbl_array_member_selected[controlid];
+119-             $.each(memberselected, function (key, val) {
+120-                 if (!val.iscustom) {
+121:                     var $item = $('#tbl_' + controlid).find("li[uniqueid='" + key + "']");
+122-
+123-                     $item.addClass('selected');
+124-                     $item.find('input').prop({ checked: true });
+125-                 }
+126-             });
+127-
+128:             getSelectedMembers(controlid, targetId);
+129-         });
+130-
+131-
+132-         var rpttype = $('#hdnReportType').val().toUpperCase();
+133-         switch (rpttype) {
+134-             case 'TABLE':
+135-                 setTableOptions();
+136-
+--
+956-    if (hasclearedallselections(false)) {
+957-        return false;
+958-    }
+959-    if (obj.id == 'lnkChart') {
+960-        if (hasnesteddimension()) {
+961-            return false;
+962-        }
+963-        var isPageSeries=false;
+964:        var controlid = $('.variableTable.selectedView[data-type="S"]').attr('data-value')
+965-        if ($('.page-ddl').attr('id') != null) {
+966:            if ($('.page-ddl').attr('id').indexOf(controlid) >= 0)
+967-                isPageSeries = true;
+968-        }
+969-        if (gbl_HasIndicatorUnit && !isPageSeries && !validateBookUnits()) {
+970-            $(".confirmationTxt").show();
+971-            return false;
+972-        }
+973-    }
+974-    gbl_subnat_loadextent = true;
+--
+1029-var gbl_clear_selections = false;
+1030-function clearselections(initialload) {
+1031-    gbl_clear_selections = true;
+1032-
+1033-    if (!initialload) {
+1034-        gbl_array_member_selected = {};
+1035-
+1036-        $('.selectedView').each(function (index, obj) {
+1037:            var controlid = obj.id.replace('tbl_sel_', '');
+1038:            if (controlid == 'MetaAttr' || controlid == 'DBList') return;
+1039-
+1040:            $('#panel_' + controlid + " .selectionCount").html('&nbsp;');
+1041:            $('#tbl_sel_' + controlid).html('');
+1042:            $('#tbl_' + controlid + ' li.selected input').prop({ checked: false });
+1043:            $('#tbl_' + controlid + ' li.selected').removeClass('selected');
+1044:            if (gbl_high_freequencyenabled == true && $('#tbl_' + controlid).attr('data-type') == "T") {
+1045-                $('#hfvariableList div.tabcontent ul.availableView' + ' li.selected input').prop({ checked: false });
+1046-                $('#hfvariableList div.tabcontent ul.availableView' + ' li.selected').removeClass('selected');
+1047-            }
+1048-            //debugger;
+1049-        });
+1050-
+1051-        $(".selectionCountRHS").text("");
+1052-    }
+--
+1063-}
+1064-
+1065-function hasclearedallselections(fromapplydim) {
+1066-    //debugger;
+1067-
+1068-    if (gbl_clear_selections) {
+1069-        var hasclearedall = false;
+1070-            $('.selectedView').each(function (index, obj) {
+1071:                var controlid = obj.id.replace('tbl_sel_', '');
+1072:                if (controlid == 'MetaAttr' || controlid == 'DBList') return;
+1073-
+1074:                var selectedmembers = gbl_array_member_selected[controlid];
+1075-                if (selectedmembers == null || Object.keys(selectedmembers).length <= 0) hasclearedall = true;
+1076-            });
+1077-
+1078-
+1079-        if (!hasclearedall && !fromapplydim) {
+1080-            $.ajax({
+1081-                type: "POST",
+1082-                url: gbl_report_methods + "/HasReportSelections",
 
 /tmp/icp2005_selectvariable.js
 43-var gbl_array_member_selected_clone = {};
