@@ -152,6 +152,7 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
         arithmetic = [float(r["wdi_ppp_gdp_arithmetic_ratio_reported_to_implied"]) for r in rows if r.get("wdi_ppp_gdp_arithmetic_ratio_reported_to_implied") not in (None, "")]
         diffs = [float(r["wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only"]) for r in rows if r.get("wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only") not in (None, "")]
         ratios = [(int(r["year"]), float(r["wdi_factor_to_weo_implied_factor_ratio_arithmetic_only"])) for r in rows if r.get("wdi_factor_to_weo_implied_factor_ratio_arithmetic_only") not in (None, "")]
+        mismatch_years = [int(r["year"]) for r in rows if r.get("wdi_ppp_gdp_arithmetic_ratio_reported_to_implied") not in (None, "") and abs(float(r["wdi_ppp_gdp_arithmetic_ratio_reported_to_implied"]) - 1.0) > 0.005]
         mismatches = [v for v in arithmetic if abs(v - 1.0) > 0.005]
         gap_years = [int(r["year"]) for r in rows if r.get("wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only") not in (None, "") and abs(float(r["wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only"])) >= 5.0]
         large_gaps = [v for v in diffs if abs(v) >= 5.0]
@@ -180,6 +181,7 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
             "country_code": code, "country_name": next((r.get("country_name") for r in rows if r.get("country_name")), ""),
             "diagnostic_year_count": len(rows), "wdi_arithmetic_overlap_year_count": len(arithmetic),
             "wdi_arithmetic_mismatch_year_count": len(mismatches),
+            "wdi_arithmetic_mismatch_years": ";".join(str(y) for y in mismatch_years),
             "maximum_wdi_arithmetic_ratio_deviation_percent": max((abs(v - 1) * 100 for v in arithmetic), default=None),
             "wdi_weo_pppgdp_overlap_year_count": len(diffs),
             "wdi_weo_pppgdp_median_difference_percent_arithmetic_only": median(diffs) if diffs else None,
