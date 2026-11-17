@@ -208,10 +208,16 @@ def _post_form(opener: urllib.request.OpenerDirector, url: str,
 
 def acquire_export(*, repository_root: str | Path = ROOT,
                    report_url: str = DEFAULT_REPORT_URL,
+                   release_key: str = "icp_2021_saved_report",
+                   dataset_id: str = "world_bank_icp_databank_saved_report",
                    retrieved_at: datetime | None = None, timeout: int = 120,
                    retries: int = 5, retry_delay: float = 2.0) -> dict[str, Any]:
     if timeout < 1 or retries < 0 or retry_delay < 0:
         raise ValueError("Invalid timeout or retry configuration")
+    if not release_key or any(ch not in "abcdefghijklmnopqrstuvwxyz0123456789_-" for ch in release_key):
+        raise ValueError("release_key must be a lowercase identifier")
+    if not dataset_id.strip():
+        raise ValueError("dataset_id must be non-empty")
     stamp = retrieved_at or datetime.now(timezone.utc)
     if stamp.tzinfo is None or stamp.utcoffset() is None:
         raise ValueError("retrieved_at must be timezone-aware")
@@ -336,8 +342,8 @@ def acquire_export(*, repository_root: str | Path = ROOT,
     manifest = {
         "manifest_schema_version": 1,
         "source_id": "world_bank_icp",
-        "dataset_id": "world_bank_icp_databank_saved_report",
-        "release": "icp_2021_saved_report",
+        "dataset_id": dataset_id,
+        "release": release_key,
         "export_id": export_id,
         "report_url": report_url,
         "final_report_url": final_page_url,
@@ -395,6 +401,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--report-url", default=DEFAULT_REPORT_URL)
+    parser.add_argument("--release-key", default="icp_2021_saved_report")
+    parser.add_argument("--dataset-id", default="world_bank_icp_databank_saved_report")
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--retries", type=int, default=5)
     parser.add_argument("--retry-delay", type=float, default=2.0)
@@ -402,6 +410,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         result = acquire_export(
             repository_root=args.root, report_url=args.report_url,
+            release_key=args.release_key, dataset_id=args.dataset_id,
             timeout=args.timeout, retries=args.retries, retry_delay=args.retry_delay,
         )
     except (DataBankExportError, OSError, ValueError) as exc:
