@@ -116,12 +116,27 @@ def test_global_country_screen_flags_arithmetic_gaps_stable_ratios_and_breaks():
          "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.5279,
          "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": 4.0,
          "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.4},
+        {"country_code": "CCC", "country_name": "Example C", "year": 2018,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.0,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": 0.1,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.0001},
+        {"country_code": "CCC", "country_name": "Example C", "year": 2019,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.0,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": 0.2,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.0002},
+        {"country_code": "CCC", "country_name": "Example C", "year": 2020,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.0,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": 0.1,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.0001},
     ]
     result = lineage.build_country_screen(rows)
     by_code = {row["country_code"]: row for row in result}
 
-    assert by_code["AAA"]["screen_flags"] == "persistent_wdi_weo_ppp_gdp_gap;stable_wdi_weo_factor_ratio"
+    assert by_code["AAA"]["screen_flags"] == "persistent_wdi_weo_ppp_gdp_gap;stable_wdi_weo_factor_ratio_away_from_unity"
+    assert by_code["AAA"]["wdi_weo_pppgdp_gap_years_at_least_5_percent"] == "2018;2019;2020"
     assert by_code["AAA"]["wdi_arithmetic_mismatch_year_count"] == 0
     assert by_code["BBB"]["wdi_arithmetic_mismatch_year_count"] == 2
     assert "wdi_ppp_gdp_arithmetic_mismatch" in by_code["BBB"]["screen_flags"]
     assert "large_factor_ratio_break" in by_code["BBB"]["screen_flags"]
+    assert "stable_wdi_weo_factor_ratio_away_from_unity" not in by_code["BBB"]["screen_flags"]
+    assert by_code["CCC"]["screen_flags"] == "no_screen_flag"
