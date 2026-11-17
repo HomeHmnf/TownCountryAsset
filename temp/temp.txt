@@ -1,1219 +1,524 @@
 
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening ?1                                                                                           󰌠 3.14.10  19:22:45
-❯ rg -n -i -C 28 \
-          'function loadDimensionList|loadDimensionList\s*=|function initSelectVariables|initSelectVariables\s*=|GetDimensionJSON|gbl_array_data|dimdata\.DH|controlid.*hierarchy' \
-          /tmp/icp2005_selectvariable.js /tmp/icp2005_reportcommon.js \
-          > /tmp/icp2005_dimension_flow.txt
+    ~/Projects/Python/TownAndCountry   work/compiler-hardening ?1                                                                                           󰌠 3.14.10  19:26:00
+❯
+  set proxy socks5h://127.0.0.1:10808
+  set base https://databank.worldbank.org
+  mkdir -p /tmp/icp-diagnostic
 
-  cat /tmp/icp2005_dimension_flow.txt
-/tmp/icp2005_selectvariable.js-7-//    endtime = endtime.toDateString() + " " + endtime.toLocaleTimeString();
-/tmp/icp2005_selectvariable.js-8-
-/tmp/icp2005_selectvariable.js-9-//    $.ajax({
-/tmp/icp2005_selectvariable.js-10-//        type: "POST",
-/tmp/icp2005_selectvariable.js-11-//        async: true,
-/tmp/icp2005_selectvariable.js-12-//        url: gbl_report_methods + "/TimeLogger",
-/tmp/icp2005_selectvariable.js-13-//        contentType: "application/json; charset=utf-8",
-/tmp/icp2005_selectvariable.js-14-//        data: "{item: '" + item + "', starttime: '" + starttime + "', endtime: '" + endtime + "'}",
-/tmp/icp2005_selectvariable.js-15-//        dataType: "json",
-/tmp/icp2005_selectvariable.js-16-//        success: function (data) {
-/tmp/icp2005_selectvariable.js-17-//            console.log(starttime + " -> " + endtime + " : " + data.d);
-/tmp/icp2005_selectvariable.js-18-//        },
-/tmp/icp2005_selectvariable.js-19-//        error: function (XMLHttpRequest, textStatus, errorThrown) {
-/tmp/icp2005_selectvariable.js-20-//            window.location.href = gbl_error_file;
-/tmp/icp2005_selectvariable.js-21-//        }
-/tmp/icp2005_selectvariable.js-22-//    });
-/tmp/icp2005_selectvariable.js-23-//}
-/tmp/icp2005_selectvariable.js-24-
-/tmp/icp2005_selectvariable.js-25-var selectionItemStr = "<li>  <input type='checkbox' checked='checked' class='chkSelectElement' id='selected_";
-/tmp/icp2005_selectvariable.js-26-
-/tmp/icp2005_selectvariable.js-27-var oldList = "";
-/tmp/icp2005_selectvariable.js-28-
-/tmp/icp2005_selectvariable.js-29-var customIndicatorLi = "<li class='selected'> <a href='javascript:void(0)' onclick='viewMetaData(this)'><span class='metadataIcon sprite icon-info'></span></a>  <span class='glyphicon glyphicon-plus-sign plusIcon'></span> <input type='checkbox' checked='checked' class='chkSelectElement' id='select_";
-/tmp/icp2005_selectvariable.js-30-var customIndicatorLiMiddle = "</span>  <a href='javascript:void(0)'  class='editLnk'";
-/tmp/icp2005_selectvariable.js-31-var customIndicatorLiTail = ">Edit</a></li>";
-/tmp/icp2005_selectvariable.js-32-
-/tmp/icp2005_selectvariable.js-33-var agentWidth = 0;
-/tmp/icp2005_selectvariable.js-34-
-/tmp/icp2005_selectvariable.js:35:var gbl_array_data = {};
-/tmp/icp2005_selectvariable.js-36-var gbl_high_freequencyenabled;
-/tmp/icp2005_selectvariable.js-37-var gbl_high_frequency_array_data = {};
-/tmp/icp2005_selectvariable.js-38-var gbl_time_control_Id;
-/tmp/icp2005_selectvariable.js-39-var gbl_time_target_Id;
-/tmp/icp2005_selectvariable.js-40-var gbl_array_member_list = {};
-/tmp/icp2005_selectvariable.js-41-var gbl_array_member_selected = {};
-/tmp/icp2005_selectvariable.js-42-var gblselectionChanged = {};
-/tmp/icp2005_selectvariable.js-43-var gbl_array_member_selected_clone = {};
-/tmp/icp2005_selectvariable.js-44-var gbl_array_book_attributes;
-/tmp/icp2005_selectvariable.js-45-var threshold = 3000;
-/tmp/icp2005_selectvariable.js-46-var gbl_subnationalHierarchy;
-/tmp/icp2005_selectvariable.js-47-var gbl_start_var = 1;
-/tmp/icp2005_selectvariable.js-48-var gbl_end_var = threshold;
-/tmp/icp2005_selectvariable.js-49-var gbl_remove_search = false;
-/tmp/icp2005_selectvariable.js-50-var gbl_display_list = {};
-/tmp/icp2005_selectvariable.js-51-var gbl_hierarchy = '';
-/tmp/icp2005_selectvariable.js-52-
-/tmp/icp2005_selectvariable.js-53-var startText = "";
-/tmp/icp2005_selectvariable.js-54-var endText = "";
-/tmp/icp2005_selectvariable.js-55-
-/tmp/icp2005_selectvariable.js-56-var gbl_start_var_time = 1;
-/tmp/icp2005_selectvariable.js-57-var gbl_end_var_time = threshold;
-/tmp/icp2005_selectvariable.js-58-var gbl_selected_time_dim_tab;
-/tmp/icp2005_selectvariable.js-59-var timeDimArray = [];
-/tmp/icp2005_selectvariable.js-60-var liCounter = 0;
-/tmp/icp2005_selectvariable.js-61-var timePaging = false;
-/tmp/icp2005_selectvariable.js-62-var isdownloadlimit = false;
-/tmp/icp2005_selectvariable.js-63-var gbl_SubnationalFilter = false;
-/tmp/icp2005_selectvariable.js-64-var gbl_SubnationalLevelData = [];
-/tmp/icp2005_selectvariable.js-65-var gbl_subnationalTotalCount = 0;
-/tmp/icp2005_selectvariable.js-66-
-/tmp/icp2005_selectvariable.js-67-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js-68-/********************************************Initialization for select variable********************************************************************/
-/tmp/icp2005_selectvariable.js-69-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js:70:function initSelectVariables() {
-/tmp/icp2005_selectvariable.js-71-    initMetadataView();
-/tmp/icp2005_selectvariable.js-72-}
-/tmp/icp2005_selectvariable.js-73-
-/tmp/icp2005_selectvariable.js-74-$(document).ready(function () {
-/tmp/icp2005_selectvariable.js-75-    moveAddMoreLinksToRHS();
-/tmp/icp2005_selectvariable.js-76-    initMetadataView();
-/tmp/icp2005_selectvariable.js-77-
-/tmp/icp2005_selectvariable.js-78-    initSearch();
-/tmp/icp2005_selectvariable.js-79-
-/tmp/icp2005_selectvariable.js-80-    initJumpToList();
-/tmp/icp2005_selectvariable.js-81-    initSelectAll();
-/tmp/icp2005_selectvariable.js-82-    initSelectMembers();
-/tmp/icp2005_selectvariable.js-83-    setIframeDimension();
-/tmp/icp2005_selectvariable.js-84-
-/tmp/icp2005_selectvariable.js-85-    initCustomPeriodSettings();
-/tmp/icp2005_selectvariable.js-86-    if(gbl_HasIndicatorUnit)
-/tmp/icp2005_selectvariable.js-87-    initBookAttributes();
-/tmp/icp2005_selectvariable.js-88-
-/tmp/icp2005_selectvariable.js-89-    $(document).resize(function () {
-/tmp/icp2005_selectvariable.js-90-        if ($(document).width < 1024) {
-/tmp/icp2005_selectvariable.js-91-            $("body").css({ "width": "1024px", "overflow-x": "auto" });
-/tmp/icp2005_selectvariable.js-92-        }
-/tmp/icp2005_selectvariable.js-93-    });
-/tmp/icp2005_selectvariable.js-94-    triggerClickOnEnter();
-/tmp/icp2005_selectvariable.js-95-
-/tmp/icp2005_selectvariable.js-96-    $("#btnMapRegion").off('click');
-/tmp/icp2005_selectvariable.js-97-    $("#btnMapRegion").on('click', function () {
-/tmp/icp2005_selectvariable.js-98-        buildSelectFilter('Region');
---
-/tmp/icp2005_selectvariable.js-349-        if ($(obj).parents(".panel").attr('id') == 'zoomModalHeader')
-/tmp/icp2005_selectvariable.js-350-            totalSelection = parseInt(totalSelection * obj.textContent || obj.innerText);
-/tmp/icp2005_selectvariable.js-351-        if (controlid == null) return;
-/tmp/icp2005_selectvariable.js-352-        controlid = controlid.replace('tbl_sel_', '');
-/tmp/icp2005_selectvariable.js-353-        if (controlid == 'MetaAttr' || controlid == 'DBList') return;
-/tmp/icp2005_selectvariable.js-354-
-/tmp/icp2005_selectvariable.js-355-        totalSelection = parseInt(totalSelection * obj.textContent || obj.innerText);
-/tmp/icp2005_selectvariable.js-356-    });
-/tmp/icp2005_selectvariable.js-357-    if (totalSelection > gbl_report_Cell_Limit) {
-/tmp/icp2005_selectvariable.js-358-        if (!gbl_common_internal && totalSelection > gbl_download_Cell_Limit) {
-/tmp/icp2005_selectvariable.js-359-            $(".downloadMsg").text(gbl_msg_report_Download_Limit.replace('__', totalSelection));
-/tmp/icp2005_selectvariable.js-360-            isdownloadlimit = true;
-/tmp/icp2005_selectvariable.js-361-            $(".downloadMsg").removeClass("topRightDisplay");
-/tmp/icp2005_selectvariable.js-362-        }
-/tmp/icp2005_selectvariable.js-363-        else {
-/tmp/icp2005_selectvariable.js-364-            $(".downloadMsg").text(gbl_msg_report_Cell_Limit.replace('__', totalSelection));
-/tmp/icp2005_selectvariable.js-365-            $(".downloadMsg").addClass("topRightDisplay");
-/tmp/icp2005_selectvariable.js-366-        }
-/tmp/icp2005_selectvariable.js-367-        return true;
-/tmp/icp2005_selectvariable.js-368-    }
-/tmp/icp2005_selectvariable.js-369-    else
-/tmp/icp2005_selectvariable.js-370-        return false;
-/tmp/icp2005_selectvariable.js-371-}
-/tmp/icp2005_selectvariable.js-372-
-/tmp/icp2005_selectvariable.js-373-
-/tmp/icp2005_selectvariable.js-374-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js-375-/********************************************Dimension Listing Functions***************************************************************************/
-/tmp/icp2005_selectvariable.js-376-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js:377:function loadAvailableList(controlid, hierarchy, obj) {
-/tmp/icp2005_selectvariable.js-378-    //debugger;
-/tmp/icp2005_selectvariable.js-379-    var dimtype;
-/tmp/icp2005_selectvariable.js-380-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
-/tmp/icp2005_selectvariable.js-381-
-/tmp/icp2005_selectvariable.js:382:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-383-
-/tmp/icp2005_selectvariable.js-384-    if (dimdata != null)
-/tmp/icp2005_selectvariable.js-385-        dimtype = dimdata.DT;
-/tmp/icp2005_selectvariable.js-386-    else {
-/tmp/icp2005_selectvariable.js-387-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
-/tmp/icp2005_selectvariable.js-388-            dimtype = "T";
-/tmp/icp2005_selectvariable.js-389-    }
-/tmp/icp2005_selectvariable.js-390-
-/tmp/icp2005_selectvariable.js-391-    if(gbl_high_freequencyenabled && dimtype == "T"){
-/tmp/icp2005_selectvariable.js-392-        $('#highfreequencytab').show();
-/tmp/icp2005_selectvariable.js-393-        $('#lblSlider').show();
-/tmp/icp2005_selectvariable.js-394-        $('div#slider-range').show();
-/tmp/icp2005_selectvariable.js-395-    }
-/tmp/icp2005_selectvariable.js:396:    loadDimensionList(controlid, hierarchy, dimobj);
-/tmp/icp2005_selectvariable.js-397-    if(gbl_high_freequencyenabled && dimtype == "T"){
-/tmp/icp2005_selectvariable.js-398-        document.getElementById("hfAnualTab").click();
-/tmp/icp2005_selectvariable.js-399-    }
-/tmp/icp2005_selectvariable.js-400-}
-/tmp/icp2005_selectvariable.js-401-
-/tmp/icp2005_selectvariable.js:402:function loadSelectedList(controlid, hierarchy, obj) {
-/tmp/icp2005_selectvariable.js-403-    //debugger;
-/tmp/icp2005_selectvariable.js-404-    var dimtype;
-/tmp/icp2005_selectvariable.js-405-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
-/tmp/icp2005_selectvariable.js-406-
-/tmp/icp2005_selectvariable.js:407:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-408-
-/tmp/icp2005_selectvariable.js-409-    if (dimdata != null)
-/tmp/icp2005_selectvariable.js-410-        dimtype = dimdata.DT;
-/tmp/icp2005_selectvariable.js-411-    else {
-/tmp/icp2005_selectvariable.js-412-        if (dimobj != null && ((dimobj.innerText != null && dimobj.innerText.trim() == "Time") || dimobj.title == "Add Time"))
-/tmp/icp2005_selectvariable.js-413-            dimtype = "T";
-/tmp/icp2005_selectvariable.js-414-    }
-/tmp/icp2005_selectvariable.js-415-
-/tmp/icp2005_selectvariable.js-416-    if(gbl_high_freequencyenabled && dimtype == "T"){
-/tmp/icp2005_selectvariable.js-417-        $('#highfreequencytab').hide();
-/tmp/icp2005_selectvariable.js-418-        $('#lblSlider').hide();
-/tmp/icp2005_selectvariable.js-419-        $('div#slider-range').hide();
-/tmp/icp2005_selectvariable.js-420-    }
-/tmp/icp2005_selectvariable.js:421:    loadDimensionList(controlid, hierarchy, dimobj);
-/tmp/icp2005_selectvariable.js-422-}
-/tmp/icp2005_selectvariable.js-423-
-/tmp/icp2005_selectvariable.js:424:function loadDimensionList(controlid, hierarchy, obj) {
-/tmp/icp2005_selectvariable.js-425-    var dimtype;
-/tmp/icp2005_selectvariable.js-426-
-/tmp/icp2005_selectvariable.js-427-    if (obj != null && !$(obj).hasClass('collapsed') && !$(obj).hasClass('addMoreRHS')) {
-/tmp/icp2005_selectvariable.js-428-        $(obj).parents('.panel-heading').find('.toggleSelectionViews a').removeClass('active');
-/tmp/icp2005_selectvariable.js-429-        return;
-/tmp/icp2005_selectvariable.js-430-    }
-/tmp/icp2005_selectvariable.js-431-
-/tmp/icp2005_selectvariable.js-432-    $('#report-loading').show();
-/tmp/icp2005_selectvariable.js-433-
-/tmp/icp2005_selectvariable.js:434:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-435-
-/tmp/icp2005_selectvariable.js-436-    if (dimdata != null)
-/tmp/icp2005_selectvariable.js-437-        dimtype = dimdata.DT;
-/tmp/icp2005_selectvariable.js-438-    else {
-/tmp/icp2005_selectvariable.js-439-        if (obj != null && ((obj.innerText != null && obj.innerText.trim() == "Time") || obj.title == "Add Time"))
-/tmp/icp2005_selectvariable.js-440-            dimtype = "T";
-/tmp/icp2005_selectvariable.js-441-        else
-/tmp/icp2005_selectvariable.js-442-            dimtype = $("#tbl_" + controlid).attr("data-type");
-/tmp/icp2005_selectvariable.js-443-    }
-/tmp/icp2005_selectvariable.js-444-
-/tmp/icp2005_selectvariable.js-445-    TrackFeature("Variables->" + getPanelHeading(obj));
-/tmp/icp2005_selectvariable.js-446-
-/tmp/icp2005_selectvariable.js-447-    if (dimdata == null) {
-/tmp/icp2005_selectvariable.js:448:        gbl_array_data[controlid + '_' + hierarchy] = 'Loading'; //to avoid double loading
-/tmp/icp2005_selectvariable.js-449-
-/tmp/icp2005_selectvariable.js-450-        if ($('#hdnSubnationalPagination').val() && $('#hdnSubnationalPagination').val().trim().toUpperCase() == "Y")
-/tmp/icp2005_selectvariable.js-451-            gbl_subnational_pagination = true;
-/tmp/icp2005_selectvariable.js-452-        else
-/tmp/icp2005_selectvariable.js-453-            gbl_subnational_pagination = false;
-/tmp/icp2005_selectvariable.js-454-
-/tmp/icp2005_selectvariable.js-455-        if ($('#hdnSubnationalSingleView').val() && $('#hdnSubnationalSingleView').val().trim().toUpperCase() == "Y")
-/tmp/icp2005_selectvariable.js-456-            gbl_subnational_singleView = true;
-/tmp/icp2005_selectvariable.js-457-        else
-/tmp/icp2005_selectvariable.js-458-            gbl_subnational_singleView = false;
-/tmp/icp2005_selectvariable.js-459-
-/tmp/icp2005_selectvariable.js-460-
-/tmp/icp2005_selectvariable.js-461-        var starttime = new Date();
-/tmp/icp2005_selectvariable.js-462-        var ajaxData;
-/tmp/icp2005_selectvariable.js-463-        var ajaxUrl;
-/tmp/icp2005_selectvariable.js-464-        if (gbl_subnational_pagination && gbl_CubeIsSubnational && dimtype === "C") {
-/tmp/icp2005_selectvariable.js-465-            gbl_subnationalHierarchy = hierarchy;
-/tmp/icp2005_selectvariable.js-466-            ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
-/tmp/icp2005_selectvariable.js:467:            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: 0, parentcode: '',filtername:'',searchkey:''}";
-/tmp/icp2005_selectvariable.js-468-        }
-/tmp/icp2005_selectvariable.js-469-        else{
-/tmp/icp2005_selectvariable.js:470:            ajaxUrl = gbl_report_methods + "/GetDimensionJSON";
-/tmp/icp2005_selectvariable.js:471:            ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "'}";
-/tmp/icp2005_selectvariable.js-472-        }
-/tmp/icp2005_selectvariable.js-473-        $.ajax({
-/tmp/icp2005_selectvariable.js-474-            type: "POST",
-/tmp/icp2005_selectvariable.js-475-            async: true,
-/tmp/icp2005_selectvariable.js-476-            url: ajaxUrl,
-/tmp/icp2005_selectvariable.js-477-            contentType: "application/json; charset=utf-8",
-/tmp/icp2005_selectvariable.js-478-            data: ajaxData,
-/tmp/icp2005_selectvariable.js-479-            dataType: "json",
-/tmp/icp2005_selectvariable.js-480-            success: function (data) {
-/tmp/icp2005_selectvariable.js-481-                dimtype = data.d.DT;
-/tmp/icp2005_selectvariable.js-482-
-/tmp/icp2005_selectvariable.js-483-                if (dimtype == "T") {
-/tmp/icp2005_selectvariable.js-484-                    gbl_time_control_Id = controlid;
-/tmp/icp2005_selectvariable.js-485-                    gbl_time_target_Id = "#tbl_" + controlid;
-/tmp/icp2005_selectvariable.js-486-                }
-/tmp/icp2005_selectvariable.js-487-
-/tmp/icp2005_selectvariable.js-488-                if (data.d !== null) {
-/tmp/icp2005_selectvariable.js-489-                    if (dimtype === "C") {
-/tmp/icp2005_selectvariable.js-490-                        gbl_SubnationalFilter = data.d.SubNationalEnabled;
-/tmp/icp2005_selectvariable.js-491-                        if (gbl_SubnationalFilter) {
-/tmp/icp2005_selectvariable.js-492-                            if (gbl_subnational_pagination && data.d.LevelCount.length > 0)
-/tmp/icp2005_selectvariable.js-493-                            {
-/tmp/icp2005_selectvariable.js-494-                                gbl_subnationalTotalCount = data.d.LevelCount.reduce((a, b) => a + b, 0);
-/tmp/icp2005_selectvariable.js-495-                            }
-/tmp/icp2005_selectvariable.js-496-                            if(gbl_subnational_pagination)
-/tmp/icp2005_selectvariable.js:497:                                $('.dimension-hierarchy-' + controlid).attr('disabled', "disabled");// Need only list hierarchy in case of subnational Pagination
-/tmp/icp2005_selectvariable.js-498-
-/tmp/icp2005_selectvariable.js:499:                            showSubnationals(controlid, data.d, hierarchy);
-/tmp/icp2005_selectvariable.js-500-                        }
-/tmp/icp2005_selectvariable.js-501-                    }
-/tmp/icp2005_selectvariable.js-502-                    if (data.d.HighFrequencyEnabled === true && dimtype === "T") {
-/tmp/icp2005_selectvariable.js-503-                        gbl_high_freequencyenabled = true;
-/tmp/icp2005_selectvariable.js-504-                        gbl_high_frequency_array_data = data.d.HighFrequencyMembers;
-/tmp/icp2005_selectvariable.js-505-                        $('.customPagination').hide();
-/tmp/icp2005_selectvariable.js:506:                        gbl_array_data[controlid + '_' + hierarchy] = data.d;
-/tmp/icp2005_selectvariable.js-507-
-/tmp/icp2005_selectvariable.js-508-                        GenerateHFControls();
-/tmp/icp2005_selectvariable.js-509-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["A"] != null) {
-/tmp/icp2005_selectvariable.js-510-                            $('#hfAnualTab').show();
-/tmp/icp2005_selectvariable.js-511-                            controlid = gbl_time_control_Id + "_Year";
-/tmp/icp2005_selectvariable.js:512:                            createDimensionList(controlid, hierarchy, true, true, "A");
-/tmp/icp2005_selectvariable.js-513-                        }
-/tmp/icp2005_selectvariable.js-514-
-/tmp/icp2005_selectvariable.js-515-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["Q"] != null) {
-/tmp/icp2005_selectvariable.js-516-                            $('#hfQuarterlyTab').show();
-/tmp/icp2005_selectvariable.js-517-                            controlid = gbl_time_control_Id + "_Quater";
-/tmp/icp2005_selectvariable.js:518:                            createDimensionList(controlid, hierarchy, true, true, "Q");
-/tmp/icp2005_selectvariable.js-519-                        }
-/tmp/icp2005_selectvariable.js-520-
-/tmp/icp2005_selectvariable.js-521-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["M"] != null) {
-/tmp/icp2005_selectvariable.js-522-                            $('#hfMonthlyTab').show();
-/tmp/icp2005_selectvariable.js-523-                            controlid = gbl_time_control_Id + "_Month";
-/tmp/icp2005_selectvariable.js:524:                            createDimensionList(controlid, hierarchy, true, true, "M");
-/tmp/icp2005_selectvariable.js-525-                        }
-/tmp/icp2005_selectvariable.js-526-
-/tmp/icp2005_selectvariable.js-527-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["W"] != null) {
-/tmp/icp2005_selectvariable.js-528-                            $('#hfWeeklyTab').show();
-/tmp/icp2005_selectvariable.js-529-                            controlid = gbl_time_control_Id + "_Week";
-/tmp/icp2005_selectvariable.js:530:                            createDimensionList(controlid, hierarchy, true, true, "W");
-/tmp/icp2005_selectvariable.js-531-                        }
-/tmp/icp2005_selectvariable.js-532-
-/tmp/icp2005_selectvariable.js-533-                        if (data.d.HighFrequencyMembers != null && data.d.HighFrequencyMembers["D"] != null) {
-/tmp/icp2005_selectvariable.js-534-                            $('#hfDailyTab').show();
-/tmp/icp2005_selectvariable.js-535-                            controlid = gbl_time_control_Id + "_Day";
-/tmp/icp2005_selectvariable.js:536:                            createDimensionList(controlid, hierarchy, true, true, "D");
-/tmp/icp2005_selectvariable.js-537-                        }
-/tmp/icp2005_selectvariable.js-538-                        SetDefaultTab(data.d.HighFrequencyMembers);
-/tmp/icp2005_selectvariable.js-539-                        LoadCustomTime(data.d.Members);
-/tmp/icp2005_selectvariable.js-540-                    }
-/tmp/icp2005_selectvariable.js-541-                    else {
-/tmp/icp2005_selectvariable.js-542-                        $('#timedimvariableList ul.availableView').show();
-/tmp/icp2005_selectvariable.js-543-                        $('#hfvariableList').hide();
-/tmp/icp2005_selectvariable.js-544-                        $('#HighFequencyFilter').hide();
-/tmp/icp2005_selectvariable.js-545-                        if (data.d.HighFrequencyEnabled == true)
-/tmp/icp2005_selectvariable.js-546-                            gbl_high_freequencyenabled = true;
-/tmp/icp2005_selectvariable.js:547:                        gbl_array_data[controlid + '_' + hierarchy] = data.d;
-/tmp/icp2005_selectvariable.js:548:                        createDimensionList(controlid, hierarchy, true);
-/tmp/icp2005_selectvariable.js-549-                    }
-/tmp/icp2005_selectvariable.js-550-                }
-/tmp/icp2005_selectvariable.js-551-                $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-552-                initDragDrop();
-/tmp/icp2005_selectvariable.js-553-            },
-/tmp/icp2005_selectvariable.js-554-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-/tmp/icp2005_selectvariable.js:555:                gbl_array_data[controlid + '_' + hierarchy] = null;
-/tmp/icp2005_selectvariable.js-556-                $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-557-                window.location.href = gbl_error_file;
-/tmp/icp2005_selectvariable.js-558-            }
-/tmp/icp2005_selectvariable.js-559-        });
-/tmp/icp2005_selectvariable.js-560-    }
-/tmp/icp2005_selectvariable.js-561-    else {
-/tmp/icp2005_selectvariable.js-562-        if (gbl_high_freequencyenabled == true && dimtype == "T") {
-/tmp/icp2005_selectvariable.js-563-            $('#hfvariableList').show();
-/tmp/icp2005_selectvariable.js-564-            $('#HighFequencyFilter').show();
-/tmp/icp2005_selectvariable.js-565-            SetDefaultTab(dimdata.HighFrequencyMembers);
-/tmp/icp2005_selectvariable.js-566-            LoadCustomTime(dimdata.Members);
-/tmp/icp2005_selectvariable.js-567-        }
-/tmp/icp2005_selectvariable.js-568-        else if (gbl_high_freequencyenabled == true && dimtype == "C") {
-/tmp/icp2005_selectvariable.js-569-            $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').show();
-/tmp/icp2005_selectvariable.js-570-            $('#newSelection_' + controlid + ' .SubnationalAvailableView').show();
-/tmp/icp2005_selectvariable.js-571-
-/tmp/icp2005_selectvariable.js-572-            $('#All').show();
-/tmp/icp2005_selectvariable.js-573-            $("#All").css("width", "465px");
-/tmp/icp2005_selectvariable.js-574-        }
-/tmp/icp2005_selectvariable.js-575-        else if (gbl_SubnationalFilter && dimtype == "C") {
-/tmp/icp2005_selectvariable.js-576-            //if (!dimdata.CL)
-/tmp/icp2005_selectvariable.js-577-                $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').show();
-/tmp/icp2005_selectvariable.js-578-            $('#newSelection_' + controlid + ' .SubnationalAvailableView').show();
-/tmp/icp2005_selectvariable.js-579-        }
-/tmp/icp2005_selectvariable.js-580-
-/tmp/icp2005_selectvariable.js-581-        if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
-/tmp/icp2005_selectvariable.js:582:            dimdata = gbl_array_data[gbl_time_control_Id + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-583-        else
-/tmp/icp2005_selectvariable.js:584:            dimdata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-585-
-/tmp/icp2005_selectvariable.js-586-        if (obj == null)
-/tmp/icp2005_selectvariable.js:587:            createDimensionList(controlid, hierarchy, true);//if we call the function from filter then only we need to repopulate
-/tmp/icp2005_selectvariable.js-588-        else if (dimdata.HasDimensionFiltering && dimdata.Parentdimension != null && gblselectionChanged[dimdata.Parentdimension]) {
-/tmp/icp2005_selectvariable.js-589-            gblselectionChanged[dimdata.Parentdimension] = false;
-/tmp/icp2005_selectvariable.js:590:            createDimensionList(controlid, hierarchy, true);
-/tmp/icp2005_selectvariable.js-591-        }
-/tmp/icp2005_selectvariable.js-592-
-/tmp/icp2005_selectvariable.js-593-        $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-594-    }
-/tmp/icp2005_selectvariable.js-595-}
-/tmp/icp2005_selectvariable.js-596-
-/tmp/icp2005_selectvariable.js:597:function LoadSubNationalChildren(controlid, hierarchy, level, parentcode,searchKey,filterNames)
-/tmp/icp2005_selectvariable.js-598-{
-/tmp/icp2005_selectvariable.js-599-    $('#report-loading').show();
-/tmp/icp2005_selectvariable.js-600-    var subNatdata = {};
-/tmp/icp2005_selectvariable.js-601-    var ajaxUrl = gbl_report_methods + "/GetDimensionByLevelJSON";
-/tmp/icp2005_selectvariable.js:602:    var ajaxData = "{cubeid: '" + $('#hdnCubeID').val() + "', controlid: '" + controlid + "', hierarchy: '" + hierarchy + "', level: " + level + ", parentcode: '" + parentcode + "',filtername:'" + filterNames+ "', searchkey:'" + searchKey + "'}";
-/tmp/icp2005_selectvariable.js-603-    $.ajax({
-/tmp/icp2005_selectvariable.js-604-        type: "POST",
-/tmp/icp2005_selectvariable.js-605-        async: false,
-/tmp/icp2005_selectvariable.js-606-        url: ajaxUrl,
-/tmp/icp2005_selectvariable.js-607-        contentType: "application/json; charset=utf-8",
-/tmp/icp2005_selectvariable.js-608-        data: ajaxData,
-/tmp/icp2005_selectvariable.js-609-        dataType: "json",
-/tmp/icp2005_selectvariable.js-610-        success: function (data) {
-/tmp/icp2005_selectvariable.js-611-            if (data && data.d && data.d.Members)
-/tmp/icp2005_selectvariable.js-612-                subNatdata = data.d.Members;
-/tmp/icp2005_selectvariable.js-613-            $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-614-        },
-/tmp/icp2005_selectvariable.js-615-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-/tmp/icp2005_selectvariable.js:616:            gbl_array_data[controlid + '_' + hierarchy] = null;
-/tmp/icp2005_selectvariable.js-617-            $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-618-            window.location.href = gbl_error_file;
-/tmp/icp2005_selectvariable.js-619-        }
-/tmp/icp2005_selectvariable.js-620-    });
-/tmp/icp2005_selectvariable.js-621-    return subNatdata;
-/tmp/icp2005_selectvariable.js-622-}
-/tmp/icp2005_selectvariable.js-623-
-/tmp/icp2005_selectvariable.js-624-function SetDefaultTab(hfData)
-/tmp/icp2005_selectvariable.js-625-{
-/tmp/icp2005_selectvariable.js-626-    if (hfData != null && hfData["A"] != null) {
-/tmp/icp2005_selectvariable.js-627-        document.getElementById("hfAnualTab").click();
-/tmp/icp2005_selectvariable.js-628-    }
-/tmp/icp2005_selectvariable.js-629-    else if (hfData != null && hfData["Q"] != null) {
-/tmp/icp2005_selectvariable.js-630-        document.getElementById("hfQuarterlyTab").click();
-/tmp/icp2005_selectvariable.js-631-    }
-/tmp/icp2005_selectvariable.js-632-    else if (hfData != null && hfData["M"] != null) {
-/tmp/icp2005_selectvariable.js-633-        document.getElementById("hfMonthlyTab").click();
-/tmp/icp2005_selectvariable.js-634-    }
-/tmp/icp2005_selectvariable.js-635-    else if (hfData != null && hfData["W"] != null) {
-/tmp/icp2005_selectvariable.js-636-        document.getElementById("hfWeeklyTab").click();
-/tmp/icp2005_selectvariable.js-637-    }
-/tmp/icp2005_selectvariable.js-638-    else if (hfData != null && hfData["D"] != null) {
-/tmp/icp2005_selectvariable.js-639-        document.getElementById("hfDailyTab").click();
-/tmp/icp2005_selectvariable.js-640-    }
-/tmp/icp2005_selectvariable.js-641-
-/tmp/icp2005_selectvariable.js-642-}
-/tmp/icp2005_selectvariable.js-643-
-/tmp/icp2005_selectvariable.js-644-function GenerateHFControls() {
---
-/tmp/icp2005_selectvariable.js-863-{
-/tmp/icp2005_selectvariable.js-864-    var memDetails = [];
-/tmp/icp2005_selectvariable.js-865-    var dimFound = false;
-/tmp/icp2005_selectvariable.js-866-    for (var i = 0; i < obj.length; i++)
-/tmp/icp2005_selectvariable.js-867-    {
-/tmp/icp2005_selectvariable.js-868-        if (obj[i].controlid == controlId + "_Year" || obj[i].controlid == controlId + "_Month" || obj[i].controlid == controlId + "_Quater" ||
-/tmp/icp2005_selectvariable.js-869-            obj[i].controlid == controlId + "_Week" || obj[i].controlid == controlId + "_Day")
-/tmp/icp2005_selectvariable.js-870-        {
-/tmp/icp2005_selectvariable.js-871-            memDetails = memDetails.concat(obj[i].memberdetails);
-/tmp/icp2005_selectvariable.js-872-            delete obj[i];
-/tmp/icp2005_selectvariable.js-873-        }
-/tmp/icp2005_selectvariable.js-874-    }
-/tmp/icp2005_selectvariable.js-875-
-/tmp/icp2005_selectvariable.js-876-    for (var i = 0; i < obj.length; i++) {
-/tmp/icp2005_selectvariable.js-877-        if (obj[i] !=null && obj[i].controlid == controlId) {
-/tmp/icp2005_selectvariable.js-878-            obj[i].memberdetails = memDetails;
-/tmp/icp2005_selectvariable.js-879-            dimFound = true;
-/tmp/icp2005_selectvariable.js-880-        }
-/tmp/icp2005_selectvariable.js-881-    }
-/tmp/icp2005_selectvariable.js-882-
-/tmp/icp2005_selectvariable.js-883-    if (!dimFound)
-/tmp/icp2005_selectvariable.js-884-    {
-/tmp/icp2005_selectvariable.js-885-        obj.push({ controlid: controlId, memberdetails: memDetails, aggregationruleall: null });
-/tmp/icp2005_selectvariable.js-886-    }
-/tmp/icp2005_selectvariable.js-887-
-/tmp/icp2005_selectvariable.js-888-    return obj
-/tmp/icp2005_selectvariable.js-889-}
-/tmp/icp2005_selectvariable.js-890-
-/tmp/icp2005_selectvariable.js:891:function createDimensionList(controlid, hierarchy, showPlusIcon,highFrequency,memberType) {
-/tmp/icp2005_selectvariable.js-892-    var targetId = "#tbl_" + controlid;
-/tmp/icp2005_selectvariable.js-893-    var dimdata;
-/tmp/icp2005_selectvariable.js-894-
-/tmp/icp2005_selectvariable.js-895-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
-/tmp/icp2005_selectvariable.js:896:        dimdata = Object.assign({}, gbl_array_data[gbl_time_control_Id + '_' + hierarchy]);
-/tmp/icp2005_selectvariable.js-897-    else
-/tmp/icp2005_selectvariable.js:898:        dimdata = Object.assign({}, gbl_array_data[controlid + '_' + hierarchy]);
-/tmp/icp2005_selectvariable.js-899-
-/tmp/icp2005_selectvariable.js-900-    if (dimdata == null) return;
-/tmp/icp2005_selectvariable.js-901-
-/tmp/icp2005_selectvariable.js-902-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T") {
-/tmp/icp2005_selectvariable.js-903-        if (gbl_array_member_selected[gbl_time_control_Id] == null) {
-/tmp/icp2005_selectvariable.js-904-            gbl_array_member_selected[gbl_time_control_Id] = dimdata.Sel;   //GetFilteredSelectedResult(dimdata.Sel, memberType);
-/tmp/icp2005_selectvariable.js-905-            GenarateAdobeDimensions(gbl_time_control_Id);
-/tmp/icp2005_selectvariable.js-906-            gbl_array_member_selected_clone[gbl_time_control_Id] = jQuery.extend(true, {}, dimdata.Sel);
-/tmp/icp2005_selectvariable.js-907-        }
-/tmp/icp2005_selectvariable.js-908-    }
-/tmp/icp2005_selectvariable.js-909-    else {
-/tmp/icp2005_selectvariable.js-910-        if (gbl_array_member_selected[controlid] == null) {
-/tmp/icp2005_selectvariable.js-911-            gbl_array_member_selected[controlid] = dimdata.Sel;
-/tmp/icp2005_selectvariable.js-912-            GenarateAdobeDimensions(controlid);
-/tmp/icp2005_selectvariable.js-913-            gbl_array_member_selected_clone[controlid] = jQuery.extend(true, {}, dimdata.Sel);
-/tmp/icp2005_selectvariable.js-914-        }
-/tmp/icp2005_selectvariable.js-915-    }
-/tmp/icp2005_selectvariable.js-916-
-/tmp/icp2005_selectvariable.js-917-    if (dimdata.HasDimensionFiltering && dimdata.Parentdimension != null)
-/tmp/icp2005_selectvariable.js:918:        dimdata.Members = FilterParentCodes(controlid, hierarchy);// filter based on parent dimension
-/tmp/icp2005_selectvariable.js-919-
-/tmp/icp2005_selectvariable.js:920:    initFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata);
-/tmp/icp2005_selectvariable.js-921-    if (dimdata.CL && dimdata.Levels != null && dimdata.CHL.length > 0) {
-/tmp/icp2005_selectvariable.js:922:        loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
-/tmp/icp2005_selectvariable.js-923-    }
-/tmp/icp2005_selectvariable.js-924-    else {
-/tmp/icp2005_selectvariable.js:925:        loadFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.Levels);
-/tmp/icp2005_selectvariable.js-926-    }
-/tmp/icp2005_selectvariable.js-927-
-/tmp/icp2005_selectvariable.js-928-    if (dimdata.CL) {
-/tmp/icp2005_selectvariable.js-929-
-/tmp/icp2005_selectvariable.js-930-        var allMemberList;
-/tmp/icp2005_selectvariable.js-931-        if (dimdata.Aggr != null)
-/tmp/icp2005_selectvariable.js-932-            allMemberList = $.merge($.merge([], dimdata.Members), dimdata.Aggr);
-/tmp/icp2005_selectvariable.js-933-        else
-/tmp/icp2005_selectvariable.js-934-            allMemberList = dimdata.Members;
-/tmp/icp2005_selectvariable.js-935-
-/tmp/icp2005_selectvariable.js-936-        var allJTL;
-/tmp/icp2005_selectvariable.js-937-        if (dimdata.JTLA != null)
-/tmp/icp2005_selectvariable.js-938-            allJTL = $.merge($.merge([], dimdata.JTL), dimdata.JTLA);
-/tmp/icp2005_selectvariable.js-939-        else
-/tmp/icp2005_selectvariable.js-940-            allJTL = dimdata.JTL;
-/tmp/icp2005_selectvariable.js-941-
-/tmp/icp2005_selectvariable.js-942-        if (!(dimdata.DT == "C" && gbl_SubnationalFilter))
-/tmp/icp2005_selectvariable.js-943-        {
-/tmp/icp2005_selectvariable.js-944-            sortAllSelectedItems($("#tbl_" + controlid), true);
-/tmp/icp2005_selectvariable.js-945-            loadDimMembers(controlid, targetId, showPlusIcon, allMemberList, allJTL, false);
-/tmp/icp2005_selectvariable.js-946-        }
-/tmp/icp2005_selectvariable.js-947-        else {
-/tmp/icp2005_selectvariable.js-948-            loadDimMembers(controlid, targetId, showPlusIcon, allMemberList, allJTL, false);
-/tmp/icp2005_selectvariable.js-949-            var subnationalid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Aggregates']";
-/tmp/icp2005_selectvariable.js-950-            if ($(subnationalid)) $(subnationalid).text("Subnational");
-/tmp/icp2005_selectvariable.js-951-        }
-/tmp/icp2005_selectvariable.js-952-    }
-/tmp/icp2005_selectvariable.js-953-    else {
---
-/tmp/icp2005_selectvariable.js-957-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["A"], dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-958-                    break;
-/tmp/icp2005_selectvariable.js-959-                case "Q":
-/tmp/icp2005_selectvariable.js-960-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["Q"], dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-961-                    break;
-/tmp/icp2005_selectvariable.js-962-                case "M":
-/tmp/icp2005_selectvariable.js-963-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["M"], dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-964-                    break;
-/tmp/icp2005_selectvariable.js-965-                case "W":
-/tmp/icp2005_selectvariable.js-966-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["W"], dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-967-                    break;
-/tmp/icp2005_selectvariable.js-968-                case "D":
-/tmp/icp2005_selectvariable.js-969-                    loadDimMembers(controlid, "#tbl_" + controlid, showPlusIcon, dimdata.HighFrequencyMembers["D"], dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-970-                    break;
-/tmp/icp2005_selectvariable.js-971-            }
-/tmp/icp2005_selectvariable.js-972-        }
-/tmp/icp2005_selectvariable.js-973-        else
-/tmp/icp2005_selectvariable.js-974-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-975-
-/tmp/icp2005_selectvariable.js-976-    }
-/tmp/icp2005_selectvariable.js-977-
-/tmp/icp2005_selectvariable.js-978-    getSelectedMembers(controlid, targetId);
-/tmp/icp2005_selectvariable.js-979-
-/tmp/icp2005_selectvariable.js-980-    //For the auto selection of all members
-/tmp/icp2005_selectvariable.js-981-    if (dimdata.AutoSelect && (dimdata.Sel == null || Object.keys(dimdata.Sel).length == 0))
-/tmp/icp2005_selectvariable.js-982-        getAutoSelect(controlid, targetId);
-/tmp/icp2005_selectvariable.js-983-}
-/tmp/icp2005_selectvariable.js-984-
-/tmp/icp2005_selectvariable.js:985:function FilterParentCodes(controlid, hierarchy)
-/tmp/icp2005_selectvariable.js-986-{
-/tmp/icp2005_selectvariable.js-987-    var parentdim,selectedParentDimension, dimensiondata;
-/tmp/icp2005_selectvariable.js-988-    var selectedDimensionCode = [], filteredmembers = [], parentdimList = [], dimension = [];
-/tmp/icp2005_selectvariable.js-989-
-/tmp/icp2005_selectvariable.js-990-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
-/tmp/icp2005_selectvariable.js:991:        dimensiondata = gbl_array_data[gbl_time_control_Id + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-992-    else
-/tmp/icp2005_selectvariable.js:993:        dimensiondata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-994-
-/tmp/icp2005_selectvariable.js-995-    selectedParentDimension = gbl_array_member_selected[dimensiondata.Parentdimension];
-/tmp/icp2005_selectvariable.js-996-    if (selectedParentDimension != null && Object.keys(selectedParentDimension).length > 0) {
-/tmp/icp2005_selectvariable.js-997-        var selecteddimensionKeys = Object.keys(selectedParentDimension);
-/tmp/icp2005_selectvariable.js-998-        for (var i = 0; i < selecteddimensionKeys.length; i++) {
-/tmp/icp2005_selectvariable.js-999-            dimension = selecteddimensionKeys[i].split('&');
-/tmp/icp2005_selectvariable.js-1000-            if (dimension !== null && dimension.length > 1 ) {
-/tmp/icp2005_selectvariable.js-1001-                dimension = dimension[1].slice(1, -1); // Removing  [] from dimension code
-/tmp/icp2005_selectvariable.js-1002-                selectedDimensionCode.push(dimension);// create an array of selected dimenion codes
-/tmp/icp2005_selectvariable.js-1003-            }
-/tmp/icp2005_selectvariable.js-1004-        }
-/tmp/icp2005_selectvariable.js-1005-
-/tmp/icp2005_selectvariable.js-1006-        if (selectedDimensionCode.length > 0)
-/tmp/icp2005_selectvariable.js-1007-        {
-/tmp/icp2005_selectvariable.js-1008-            for (var j = 0; j < dimensiondata.Members.length; j++)
-/tmp/icp2005_selectvariable.js-1009-            {
-/tmp/icp2005_selectvariable.js-1010-                parentdim = dimensiondata.Members[j].ParentMember;
-/tmp/icp2005_selectvariable.js-1011-                if (parentdim != null) {
-/tmp/icp2005_selectvariable.js-1012-                    parentdimList = parentdim.split(',');
-/tmp/icp2005_selectvariable.js-1013-                    if (parentdimList != null && parentdimList.length > 0 && parentdimList.some(item => item != null && selectedDimensionCode.includes(item.trim())))
-/tmp/icp2005_selectvariable.js-1014-                        filteredmembers.push(dimensiondata.Members[j]);
-/tmp/icp2005_selectvariable.js-1015-                }
-/tmp/icp2005_selectvariable.js-1016-            }
-/tmp/icp2005_selectvariable.js-1017-            return filteredmembers;
-/tmp/icp2005_selectvariable.js-1018-        }
-/tmp/icp2005_selectvariable.js-1019-    }
-/tmp/icp2005_selectvariable.js-1020-
-/tmp/icp2005_selectvariable.js-1021-    return dimensiondata.Members;// if there is no filtering, return the actual data itself
---
-/tmp/icp2005_selectvariable.js-1997-    }
-/tmp/icp2005_selectvariable.js-1998-    else {
-/tmp/icp2005_selectvariable.js-1999-        var isDimensionSelected = 0;
-/tmp/icp2005_selectvariable.js-2000-        $(".selectionCountRHS").each(function () {
-/tmp/icp2005_selectvariable.js-2001-            var val = eval($(this).text());
-/tmp/icp2005_selectvariable.js-2002-            if (val == null || val < 1 || val == '') {
-/tmp/icp2005_selectvariable.js-2003-                isDimensionSelected++;
-/tmp/icp2005_selectvariable.js-2004-            }
-/tmp/icp2005_selectvariable.js-2005-        });
-/tmp/icp2005_selectvariable.js-2006-
-/tmp/icp2005_selectvariable.js-2007-        if (isDimensionSelected > 0) {
-/tmp/icp2005_selectvariable.js-2008-            $("#applyChangesNoPreview").addClass("disabled");
-/tmp/icp2005_selectvariable.js-2009-        }
-/tmp/icp2005_selectvariable.js-2010-        else {
-/tmp/icp2005_selectvariable.js-2011-            $("#applyChangesNoPreview").removeClass("disabled");
-/tmp/icp2005_selectvariable.js-2012-            $(".allDimSelected.noPreview").show();
-/tmp/icp2005_selectvariable.js-2013-            $(".dimSelected.noPreview").hide();
-/tmp/icp2005_selectvariable.js-2014-        }
-/tmp/icp2005_selectvariable.js-2015-    }
-/tmp/icp2005_selectvariable.js-2016-
-/tmp/icp2005_selectvariable.js-2017-    if ($(".downloadMsg").is(":visible")) {
-/tmp/icp2005_selectvariable.js-2018-        $(".downloadMsg").hide();
-/tmp/icp2005_selectvariable.js-2019-    }
-/tmp/icp2005_selectvariable.js-2020-}
-/tmp/icp2005_selectvariable.js-2021-
-/tmp/icp2005_selectvariable.js-2022-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js-2023-/********************************************Filter related functions******************************************************************************/
-/tmp/icp2005_selectvariable.js-2024-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js:2025:function initFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata) {
-/tmp/icp2005_selectvariable.js-2026-    //for classification
-/tmp/icp2005_selectvariable.js-2027-    if (dimdata.CL) {
-/tmp/icp2005_selectvariable.js:2028:        initClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata);
-/tmp/icp2005_selectvariable.js-2029-
-/tmp/icp2005_selectvariable.js-2030-        if ($("#tbl_" + controlid).attr("data-type") == "C") {
-/tmp/icp2005_selectvariable.js-2031-            $("#showCountryAggOption_" + controlid).hide(); //NONCLASSIFICATION
-/tmp/icp2005_selectvariable.js-2032-            if (!gbl_SubnationalFilter) $("#CtryAgg_Classification_" + controlid).show(); //Classification
-/tmp/icp2005_selectvariable.js-2033-        }
-/tmp/icp2005_selectvariable.js-2034-    }
-/tmp/icp2005_selectvariable.js-2035-    else {
-/tmp/icp2005_selectvariable.js-2036-        if ($("#tbl_" + controlid).attr("data-type") == "C") {
-/tmp/icp2005_selectvariable.js-2037-            $("#showCountryAggOption_" + controlid).show(); //NONCLASSIFICATION
-/tmp/icp2005_selectvariable.js-2038-            $("#CtryAgg_Classification_" + controlid).hide(); //Classification
-/tmp/icp2005_selectvariable.js-2039-        }
-/tmp/icp2005_selectvariable.js-2040-        if ($('.dimension-hierarchy-' + controlid + ' option').length <= 0) {
-/tmp/icp2005_selectvariable.js-2041-            if (dimdata.Hier != null && Object.keys(dimdata.Hier).length > 0) {
-/tmp/icp2005_selectvariable.js-2042-                $.each(dimdata.Hier, function (key, val) {
-/tmp/icp2005_selectvariable.js-2043-                    $('.dimension-hierarchy-' + controlid).append('<option value="' + key + '">' + val + '</option>');
-/tmp/icp2005_selectvariable.js-2044-                });
-/tmp/icp2005_selectvariable.js:2045:                $('.dimension-hierarchy-' + controlid).val(dimdata.DH);
-/tmp/icp2005_selectvariable.js-2046-            }
-/tmp/icp2005_selectvariable.js-2047-            else
-/tmp/icp2005_selectvariable.js:2048:                $('.dimension-hierarchy-' + controlid).append('<option value="' + dimdata.DH + '">' + dimdata.DH + '</option>'); //default hierarchy
-/tmp/icp2005_selectvariable.js-2049-        }
-/tmp/icp2005_selectvariable.js-2050-
-/tmp/icp2005_selectvariable.js:2051:        if ($('.dimension-hierarchy-' + controlid + ' option').length <= 1) $("#hierarchy_" + controlid).hide();
-/tmp/icp2005_selectvariable.js-2052-        $('.dimension-hierarchy-' + controlid).off('change');
-/tmp/icp2005_selectvariable.js-2053-        $('.dimension-hierarchy-' + controlid).on('change', function () {
-/tmp/icp2005_selectvariable.js-2054-            loadDimensionList(controlid, $(this).val(), null);
-/tmp/icp2005_selectvariable.js-2055-            $(".showCountryAggOption").removeClass("active");
-/tmp/icp2005_selectvariable.js-2056-            $(".showCountryAggOption[data-value='All']").addClass("active");
-/tmp/icp2005_selectvariable.js-2057-        });
-/tmp/icp2005_selectvariable.js-2058-    }
-/tmp/icp2005_selectvariable.js-2059-}
-/tmp/icp2005_selectvariable.js-2060-
-/tmp/icp2005_selectvariable.js:2061:function loadFilter(controlid, hierarchy, targetId, showPlusIcon, levels) {
-/tmp/icp2005_selectvariable.js-2062-    var hierarchylist = '';
-/tmp/icp2005_selectvariable.js-2063-    var isdblist = controlid == "DBList";
-/tmp/icp2005_selectvariable.js-2064-    if (levels == null) return;
-/tmp/icp2005_selectvariable.js-2065-
-/tmp/icp2005_selectvariable.js-2066-    $.each(levels, function (index, value) {
-/tmp/icp2005_selectvariable.js-2067-        hierarchylist += getFilterList(index, value, isdblist, controlid);
-/tmp/icp2005_selectvariable.js-2068-    });
-/tmp/icp2005_selectvariable.js-2069-
-/tmp/icp2005_selectvariable.js-2070-    if ($("#tbl_" + controlid).attr("data-type") == "C") {
-/tmp/icp2005_selectvariable.js-2071-        if (hierarchylist.indexOf("filter-check-aggregates") < 1) {
-/tmp/icp2005_selectvariable.js-2072-            $("#showCountryAggOption_" + controlid).hide(); //NONCLASSIFICATION
-/tmp/icp2005_selectvariable.js-2073-            $("#CtryAgg_Classification_" + controlid).hide(); //Classification
-/tmp/icp2005_selectvariable.js-2074-        }
-/tmp/icp2005_selectvariable.js-2075-    }
-/tmp/icp2005_selectvariable.js-2076-
-/tmp/icp2005_selectvariable.js-2077-    if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T") {
-/tmp/icp2005_selectvariable.js-2078-        $('#lstFilterItems_' + gbl_time_control_Id).html(hierarchylist);
-/tmp/icp2005_selectvariable.js-2079-    }
-/tmp/icp2005_selectvariable.js-2080-    else {
-/tmp/icp2005_selectvariable.js:2081:        $('#lstFilterItems_' + controlid).html(hierarchylist);
-/tmp/icp2005_selectvariable.js-2082-    }
-/tmp/icp2005_selectvariable.js-2083-
-/tmp/icp2005_selectvariable.js-2084-    setTimeout(function () {
-/tmp/icp2005_selectvariable.js-2085-        if ($('#lstFilterItems_' + controlid).find("li.show").length == 0) {
-/tmp/icp2005_selectvariable.js:2086:            $('#lstFilterItems_' + controlid).prepend("<em>This hierarchy has no sub-levels.</em>");
-/tmp/icp2005_selectvariable.js-2087-
-/tmp/icp2005_selectvariable.js-2088-        }
-/tmp/icp2005_selectvariable.js-2089-    }, 100);
-/tmp/icp2005_selectvariable.js-2090-
-/tmp/icp2005_selectvariable.js-2091-    $('.filter-check').on('click', function () {
-/tmp/icp2005_selectvariable.js-2092-        $('#report-loading').show();
-/tmp/icp2005_selectvariable.js-2093-        var anySelected = false;
-/tmp/icp2005_selectvariable.js-2094-        var allselected;
-/tmp/icp2005_selectvariable.js-2095-        var filtermembers;
-/tmp/icp2005_selectvariable.js-2096-        var availableCount;
-/tmp/icp2005_selectvariable.js-2097-        var dimdata;
-/tmp/icp2005_selectvariable.js-2098-        var dataName;
-/tmp/icp2005_selectvariable.js-2099-        var dimtype = $(targetId).attr('data-type');
-/tmp/icp2005_selectvariable.js-2100-        if (gbl_high_freequencyenabled && dimtype === "T") {
-/tmp/icp2005_selectvariable.js-2101-            controlid = gbl_time_control_Id;
-/tmp/icp2005_selectvariable.js-2102-        }
-/tmp/icp2005_selectvariable.js-2103-
-/tmp/icp2005_selectvariable.js:2104:        dimdata = Object.assign({}, gbl_array_data[controlid + '_' + hierarchy]);
-/tmp/icp2005_selectvariable.js-2105-
-/tmp/icp2005_selectvariable.js-2106-        if (dimdata.HasDimensionFiltering && dimdata.Parentdimension != null)
-/tmp/icp2005_selectvariable.js:2107:            dimdata.Members = FilterParentCodes(controlid, hierarchy);// filter based on parent dimension
-/tmp/icp2005_selectvariable.js-2108-
-/tmp/icp2005_selectvariable.js-2109-        if (gbl_high_freequencyenabled && dimtype == "T") {
-/tmp/icp2005_selectvariable.js-2110-            allselected = $('#lstFilterItems_' + gbl_time_control_Id + ' .filter-check:checked').map(function (i, opt) {
-/tmp/icp2005_selectvariable.js-2111-                return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level') };
-/tmp/icp2005_selectvariable.js-2112-            }).toArray();
-/tmp/icp2005_selectvariable.js-2113-            filtermembers = GetHighFrequencyDataSource();
-/tmp/icp2005_selectvariable.js-2114-        }
-/tmp/icp2005_selectvariable.js-2115-        else {
-/tmp/icp2005_selectvariable.js-2116-            if (gbl_SubnationalFilter && dimtype == 'C') {
-/tmp/icp2005_selectvariable.js-2117-                allselected = $('#lstFilterItems_' + controlid + ' .filter-check:checked').map(function (i, opt) {
-/tmp/icp2005_selectvariable.js-2118-                    if ($(opt).attr('data-level') !== "1") {
-/tmp/icp2005_selectvariable.js-2119-                        dataName = $(opt).parent('li')[0].innerText;
-/tmp/icp2005_selectvariable.js-2120-                    }
-/tmp/icp2005_selectvariable.js-2121-                    return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level'), dataname: dataName  };
-/tmp/icp2005_selectvariable.js-2122-                }).toArray();
-/tmp/icp2005_selectvariable.js-2123-            } else {
-/tmp/icp2005_selectvariable.js-2124-                allselected = $('#lstFilterItems_' + controlid + ' .filter-check:checked').map(function (i, opt) {
-/tmp/icp2005_selectvariable.js-2125-                    return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level') };
-/tmp/icp2005_selectvariable.js-2126-                }).toArray();
-/tmp/icp2005_selectvariable.js-2127-            }
-/tmp/icp2005_selectvariable.js-2128-            filtermembers = dimdata.Members;
-/tmp/icp2005_selectvariable.js-2129-        }
-/tmp/icp2005_selectvariable.js-2130-
-/tmp/icp2005_selectvariable.js-2131-        var jumptolist = dimdata.JTL;
-/tmp/icp2005_selectvariable.js-2132-
-/tmp/icp2005_selectvariable.js-2133-        if (allselected.length > 0) {
-/tmp/icp2005_selectvariable.js-2134-            if (gbl_subnational_pagination && gbl_SubnationalFilter && dimtype === 'C') {
-/tmp/icp2005_selectvariable.js-2135-                anySelected = true;
-/tmp/icp2005_selectvariable.js-2136-                var parentcodes = '';
-/tmp/icp2005_selectvariable.js-2137-                var dataLevel = null;
-/tmp/icp2005_selectvariable.js-2138-                var dataValue;
-/tmp/icp2005_selectvariable.js-2139-                for (var i = 0; i < allselected.length; i++) {
-/tmp/icp2005_selectvariable.js-2140-                    if (allselected[i].dataname && allselected[i].dataname.trim() !== '')
-/tmp/icp2005_selectvariable.js-2141-                        parentcodes = parentcodes + allselected[i].dataname + "~";
-/tmp/icp2005_selectvariable.js-2142-                    //dataValue = allselected[i].datavalue ? allselected[i].datavalue.split('.')[0] : 0;
-/tmp/icp2005_selectvariable.js-2143-                    //dataValue = dataValue - 1;
-/tmp/icp2005_selectvariable.js-2144-                    //if (dataValue > dataLevel)
-/tmp/icp2005_selectvariable.js-2145-                    //    dataLevel = dataValue;
-/tmp/icp2005_selectvariable.js-2146-                }
-/tmp/icp2005_selectvariable.js-2147-                if (parentcodes.length > 0)
-/tmp/icp2005_selectvariable.js-2148-                    parentcodes = parentcodes.substring(0, parentcodes.length - 1);
-/tmp/icp2005_selectvariable.js-2149-                else
-/tmp/icp2005_selectvariable.js-2150-                    dataLevel = 0;
-/tmp/icp2005_selectvariable.js-2151-
-/tmp/icp2005_selectvariable.js-2152-                var filtermembers2 = [];
-/tmp/icp2005_selectvariable.js:2153:                var filterOutput = LoadSubNationalChildren(controlid, hierarchy, dataLevel, "", "", parentcodes);
-/tmp/icp2005_selectvariable.js-2154-                filtermembers2 = fillHierarchy(filterOutput);
-/tmp/icp2005_selectvariable.js-2155-                if (filterOutput.length > 0)
-/tmp/icp2005_selectvariable.js-2156-                    filtermembers = OrderSubnationalData(filterOutput.concat(filtermembers2));
-/tmp/icp2005_selectvariable.js-2157-            }
-/tmp/icp2005_selectvariable.js-2158-            else {
-/tmp/icp2005_selectvariable.js-2159-                if (gbl_SubnationalFilter && dimtype == 'C') {
-/tmp/icp2005_selectvariable.js-2160-                    filtermembers = $.grep(filtermembers, function (n, i) {
-/tmp/icp2005_selectvariable.js-2161-                        return getSubnationalFilterSelected(allselected, n);
-/tmp/icp2005_selectvariable.js-2162-                    });
-/tmp/icp2005_selectvariable.js-2163-                    if (filtermembers.length > 0)
-/tmp/icp2005_selectvariable.js-2164-                        FindSubnationalParents(filtermembers, dimdata.Members);
-/tmp/icp2005_selectvariable.js-2165-                }
-/tmp/icp2005_selectvariable.js-2166-                else {
-/tmp/icp2005_selectvariable.js-2167-                    filtermembers = $.grep(filtermembers, function (n, i) {
-/tmp/icp2005_selectvariable.js-2168-                        return getFilterSelected(allselected, n, isdblist, controlid);
-/tmp/icp2005_selectvariable.js-2169-                    });
-/tmp/icp2005_selectvariable.js-2170-                }
-/tmp/icp2005_selectvariable.js-2171-            }
-/tmp/icp2005_selectvariable.js-2172-            jumptolist = $(filtermembers).map(function (i, opt) { return opt.JTC; });
-/tmp/icp2005_selectvariable.js-2173-            jumptolist = $.unique(jumptolist);
-/tmp/icp2005_selectvariable.js-2174-        }
-/tmp/icp2005_selectvariable.js-2175-
-/tmp/icp2005_selectvariable.js-2176-        if (gbl_high_freequencyenabled && dimtype == 'T') {
-/tmp/icp2005_selectvariable.js-2177-            controlid = GetHighFrequencyControlId(gbl_time_control_Id);
-/tmp/icp2005_selectvariable.js-2178-            targetId = GetHighFrequencyTargetId(gbl_time_target_Id);
-/tmp/icp2005_selectvariable.js-2179-        }
-/tmp/icp2005_selectvariable.js-2180-
-/tmp/icp2005_selectvariable.js-2181-        loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, anySelected);
---
-/tmp/icp2005_selectvariable.js-2291-            break;
-/tmp/icp2005_selectvariable.js-2292-        default:
-/tmp/icp2005_selectvariable.js-2293-            if (value.HN !== "NULL" && value.HN !== null)
-/tmp/icp2005_selectvariable.js-2294-                hierarchylist += '<input type="checkbox" class="selector filter-check" data-value="' + value.HID + '" data-level="' + value.LN + '" />' + value.HN;
-/tmp/icp2005_selectvariable.js-2295-            break;
-/tmp/icp2005_selectvariable.js-2296-    }
-/tmp/icp2005_selectvariable.js-2297-
-/tmp/icp2005_selectvariable.js-2298-    if (value.LV.length > 0) {
-/tmp/icp2005_selectvariable.js-2299-        hierarchylist += '<ul class="childNodes level' + value.LN + '">';
-/tmp/icp2005_selectvariable.js-2300-        $.each(value.LV, function (index1, value1) {
-/tmp/icp2005_selectvariable.js-2301-            hierarchylist += getFilterList(index1, value1, isdblist, controlid);
-/tmp/icp2005_selectvariable.js-2302-        });
-/tmp/icp2005_selectvariable.js-2303-        hierarchylist += '</ul>';
-/tmp/icp2005_selectvariable.js-2304-    }
-/tmp/icp2005_selectvariable.js-2305-
-/tmp/icp2005_selectvariable.js-2306-    hierarchylist += '</li>';
-/tmp/icp2005_selectvariable.js-2307-
-/tmp/icp2005_selectvariable.js-2308-    return hierarchylist;
-/tmp/icp2005_selectvariable.js-2309-}
-/tmp/icp2005_selectvariable.js-2310-
-/tmp/icp2005_selectvariable.js-2311-function loadSelectFilterItems(obj) {
-/tmp/icp2005_selectvariable.js-2312-    //debugger;
-/tmp/icp2005_selectvariable.js-2313-
-/tmp/icp2005_selectvariable.js-2314-    var allselected = $('#divMapRegion .select-filter-check:checked, #divMapIncome .select-filter-check:checked').map(function (i, opt) {
-/tmp/icp2005_selectvariable.js-2315-        return { datavalue: $(opt).attr('value'), filtertype: $(opt).attr('filter-type') };
-/tmp/icp2005_selectvariable.js-2316-    }).toArray();
-/tmp/icp2005_selectvariable.js-2317-
-/tmp/icp2005_selectvariable.js-2318-    var controlid = $('#divMapRegion').attr('data-type');
-/tmp/icp2005_selectvariable.js:2319:    var dimdatakeys = $.grep(Object.keys(gbl_array_data), function (n, i) {
-/tmp/icp2005_selectvariable.js-2320-        if (n.indexOf(controlid + '_') == 0) return true;
-/tmp/icp2005_selectvariable.js-2321-    });
-/tmp/icp2005_selectvariable.js:2322:    var dimdata = (dimdatakeys.length > 0 ? gbl_array_data[dimdatakeys[0]] : null);
-/tmp/icp2005_selectvariable.js-2323-
-/tmp/icp2005_selectvariable.js-2324-    if (allselected.length > 0 && dimdata != null) {
-/tmp/icp2005_selectvariable.js-2325-        var filtermembers = dimdata.Members;
-/tmp/icp2005_selectvariable.js-2326-
-/tmp/icp2005_selectvariable.js-2327-        filtermembers = $.grep(filtermembers, function (n, i) {
-/tmp/icp2005_selectvariable.js-2328-            return getSelectFilterSelected(allselected, n);
-/tmp/icp2005_selectvariable.js-2329-        });
-/tmp/icp2005_selectvariable.js-2330-
-/tmp/icp2005_selectvariable.js-2331-        $(obj).parents(".panel").find(".selectedView li").remove();
-/tmp/icp2005_selectvariable.js-2332-        $(obj).parents(".panel").find(".availableView li .chkSelectElement").prop("checked", false);
-/tmp/icp2005_selectvariable.js-2333-        $(obj).parents(".panel").find(".availableView li").removeClass("selected");
-/tmp/icp2005_selectvariable.js-2334-
-/tmp/icp2005_selectvariable.js-2335-        var controlid = $(obj).parents(".panel").find(".selectedView").attr('data-value');
-/tmp/icp2005_selectvariable.js-2336-        var targetId = "#tbl_" + controlid;
-/tmp/icp2005_selectvariable.js-2337-
-/tmp/icp2005_selectvariable.js-2338-        var selectedMembers = {};
-/tmp/icp2005_selectvariable.js-2339-        var html = '';
-/tmp/icp2005_selectvariable.js-2340-        $.each(filtermembers, function (ind, val) {
-/tmp/icp2005_selectvariable.js-2341-            selectedMembers[val.ID] = { displayname: val.Name, custom: false };
-/tmp/icp2005_selectvariable.js-2342-            html += "<li class='selected' uniqueId='" + val.ID + "'><span class='glyphicon glyphicon-plus-sign plusIcon' title=''> </span><span class='deleteIcon glyphicon glyphicon-remove-circle' title='Remove from selection'></span><span class='value'>" + val.Name + "</span></li>";
-/tmp/icp2005_selectvariable.js-2343-
-/tmp/icp2005_selectvariable.js-2344-            $(obj).parents(".panel").find(".availableView li[uniqueid='" + val.ID + "']").addClass("selected").find('.chkSelectElement').prop('checked', true);
-/tmp/icp2005_selectvariable.js-2345-        });
-/tmp/icp2005_selectvariable.js-2346-        $(obj).parents(".panel").find(".selectedView").append(html);
-/tmp/icp2005_selectvariable.js-2347-        gbl_array_member_selected[controlid] = selectedMembers;
-/tmp/icp2005_selectvariable.js-2348-        GenarateAdobeDimensions(controlid);
-/tmp/icp2005_selectvariable.js-2349-        getSelectedMembers(controlid, targetId);
-/tmp/icp2005_selectvariable.js-2350-    }
-/tmp/icp2005_selectvariable.js-2351-}
-/tmp/icp2005_selectvariable.js-2352-
-/tmp/icp2005_selectvariable.js-2353-function getSelectFilterSelected(allselected, member) {
-/tmp/icp2005_selectvariable.js-2354-    for (var index = 0; index < allselected.length; index++) {
-/tmp/icp2005_selectvariable.js-2355-        var filterindex = (allselected[index].filtertype == 'Region' ? 0 : (allselected[index].filtertype == 'Income' ? 1 : -1));
-/tmp/icp2005_selectvariable.js-2356-
-/tmp/icp2005_selectvariable.js-2357-        if (filterindex >= 0 && member.HLS != null && member.HLS[filterindex] == allselected[index].datavalue) return true;
-/tmp/icp2005_selectvariable.js-2358-    }
-/tmp/icp2005_selectvariable.js-2359-}
-/tmp/icp2005_selectvariable.js-2360-
-/tmp/icp2005_selectvariable.js-2361-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js-2362-/********************************************Classification related functions**********************************************************************/
-/tmp/icp2005_selectvariable.js-2363-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js:2364:function initClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata) {
-/tmp/icp2005_selectvariable.js-2365-    if ($('.dimension-hierarchy-' + controlid + ' option').length <= 0) {
-/tmp/icp2005_selectvariable.js-2366-        $.each(dimdata.Levels, function (index, value) {
-/tmp/icp2005_selectvariable.js-2367-            $('.dimension-hierarchy-' + controlid).append('<option value="' + value.HID + '">' + value.HN + '</option>');
-/tmp/icp2005_selectvariable.js-2368-        });
-/tmp/icp2005_selectvariable.js-2369-    }
-/tmp/icp2005_selectvariable.js-2370-    $("#hierarchy_" + controlid).hide();
-/tmp/icp2005_selectvariable.js-2371-    $(".CtryAgg_Classification").click(function () {
-/tmp/icp2005_selectvariable.js-2372-        var dataValue = $(this).attr("data-value");
-/tmp/icp2005_selectvariable.js-2373-        var genChkSelector = $("#lstFilterItems_" + controlid);
-/tmp/icp2005_selectvariable.js-2374-        if (dataValue == "All") {
-/tmp/icp2005_selectvariable.js-2375-            if (dimdata.DT == "C" && gbl_SubnationalFilter) {
-/tmp/icp2005_selectvariable.js-2376-                var AggregatesToggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Aggregates']";
-/tmp/icp2005_selectvariable.js-2377-                if ($(AggregatesToggleid)) $(AggregatesToggleid).removeClass('active');
-/tmp/icp2005_selectvariable.js-2378-            }
-/tmp/icp2005_selectvariable.js-2379-            var allMemberList;
-/tmp/icp2005_selectvariable.js-2380-            if (dimdata.Aggr != null)
-/tmp/icp2005_selectvariable.js-2381-                allMemberList = $.merge($.merge([], dimdata.Members), dimdata.Aggr);
-/tmp/icp2005_selectvariable.js-2382-            else
-/tmp/icp2005_selectvariable.js-2383-                allMemberList = dimdata.Members;
-/tmp/icp2005_selectvariable.js-2384-
-/tmp/icp2005_selectvariable.js-2385-            var allJTL;
-/tmp/icp2005_selectvariable.js-2386-            if (dimdata.JTLA != null)
-/tmp/icp2005_selectvariable.js-2387-                allJTL = $.merge($.merge([], dimdata.JTL), dimdata.JTLA);
-/tmp/icp2005_selectvariable.js-2388-            else
-/tmp/icp2005_selectvariable.js-2389-                allJTL = dimdata.JTL;
-/tmp/icp2005_selectvariable.js-2390-
-/tmp/icp2005_selectvariable.js-2391-            loadDimMembers(controlid, targetId, showPlusIcon, allMemberList, allJTL, false);
-/tmp/icp2005_selectvariable.js-2392-            getSelectedMembers(controlid, targetId);
-/tmp/icp2005_selectvariable.js-2393-
-/tmp/icp2005_selectvariable.js-2394-            if (dimdata.Levels != null && dimdata.CHL.length > 0)
-/tmp/icp2005_selectvariable.js:2395:                loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
-/tmp/icp2005_selectvariable.js-2396-
-/tmp/icp2005_selectvariable.js-2397-            $("#toggleFilter_" + controlid).attr("disabled", false);
-/tmp/icp2005_selectvariable.js-2398-            if (!(dimdata.DT == "C" && gbl_SubnationalFilter))
-/tmp/icp2005_selectvariable.js-2399-                sortAllSelectedItems($("#tbl_" + controlid), true);
-/tmp/icp2005_selectvariable.js-2400-            $("#_filterTree_" + controlid).removeClass("disabled");
-/tmp/icp2005_selectvariable.js-2401-            TrackFeature('Variables->Country->Classification->All');
-/tmp/icp2005_selectvariable.js-2402-        }
-/tmp/icp2005_selectvariable.js-2403-        else if (dataValue == "Countries") {
-/tmp/icp2005_selectvariable.js-2404-            if (dimdata.DT == "C" && gbl_SubnationalFilter) {
-/tmp/icp2005_selectvariable.js-2405-                var AggregatesToggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Aggregates']";
-/tmp/icp2005_selectvariable.js-2406-                if ($(AggregatesToggleid)) $(AggregatesToggleid).removeClass('active');
-/tmp/icp2005_selectvariable.js-2407-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, null, false);
-/tmp/icp2005_selectvariable.js-2408-            }
-/tmp/icp2005_selectvariable.js-2409-            else {
-/tmp/icp2005_selectvariable.js-2410-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-2411-                getSelectedMembers(controlid, targetId);
-/tmp/icp2005_selectvariable.js-2412-
-/tmp/icp2005_selectvariable.js-2413-                if (dimdata.Levels != null && dimdata.CHL.length > 0)
-/tmp/icp2005_selectvariable.js:2414:                    loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
-/tmp/icp2005_selectvariable.js-2415-
-/tmp/icp2005_selectvariable.js-2416-                $("#toggleFilter_" + controlid).attr("disabled", false);
-/tmp/icp2005_selectvariable.js-2417-                $("#_filterTree_" + controlid).removeClass("disabled");
-/tmp/icp2005_selectvariable.js-2418-            }
-/tmp/icp2005_selectvariable.js-2419-            TrackFeature('Variables->Country->Classification->Countries');
-/tmp/icp2005_selectvariable.js-2420-        }
-/tmp/icp2005_selectvariable.js-2421-        else {
-/tmp/icp2005_selectvariable.js-2422-            if (dimdata.DT == "C" && gbl_SubnationalFilter) {
-/tmp/icp2005_selectvariable.js-2423-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Members, null, false);
-/tmp/icp2005_selectvariable.js-2424-                var countrytoggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='Countries']";
-/tmp/icp2005_selectvariable.js-2425-                var alltoggleid = "div#CtryAgg_Classification_" + controlid + " label.CtryAgg_Classification[data-value='All']";
-/tmp/icp2005_selectvariable.js-2426-                if ($(countrytoggleid)) $(countrytoggleid).removeClass('active');
-/tmp/icp2005_selectvariable.js-2427-                if ($(alltoggleid)) $(alltoggleid).removeClass('active');
-/tmp/icp2005_selectvariable.js-2428-                sortAllSelectedItems($("#tbl_" + controlid), true);
-/tmp/icp2005_selectvariable.js-2429-            } else {
-/tmp/icp2005_selectvariable.js-2430-                loadDimMembers(controlid, targetId, showPlusIcon, dimdata.Aggr, dimdata.JTLA, false);
-/tmp/icp2005_selectvariable.js-2431-                getSelectedMembers(controlid, targetId);
-/tmp/icp2005_selectvariable.js-2432-
-/tmp/icp2005_selectvariable.js-2433-                if (dimdata.Levels != null && dimdata.CHL.length > 0)
-/tmp/icp2005_selectvariable.js:2434:                    loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, dimdata.CHL);
-/tmp/icp2005_selectvariable.js-2435-
-/tmp/icp2005_selectvariable.js-2436-                $("#toggleFilter_" + controlid).attr("disabled", true);
-/tmp/icp2005_selectvariable.js-2437-                $("#_filterTree_" + controlid).addClass("disabled");
-/tmp/icp2005_selectvariable.js-2438-            }
-/tmp/icp2005_selectvariable.js-2439-            TrackFeature('Variables->Country->Classification->Aggregates');
-/tmp/icp2005_selectvariable.js-2440-        }
-/tmp/icp2005_selectvariable.js-2441-        $("#filterResults_" + controlid).hide();
-/tmp/icp2005_selectvariable.js-2442-        $("#hierarchy_" + controlid).hide();
-/tmp/icp2005_selectvariable.js-2443-    });
-/tmp/icp2005_selectvariable.js-2444-}
-/tmp/icp2005_selectvariable.js-2445-
-/tmp/icp2005_selectvariable.js:2446:function loadClassificationFilter(controlid, hierarchy, targetId, showPlusIcon, levels) {
-/tmp/icp2005_selectvariable.js-2447-    var hierarchylist = '';
-/tmp/icp2005_selectvariable.js-2448-    $.each(levels, function (index, value) {
-/tmp/icp2005_selectvariable.js-2449-        hierarchylist += getClassificationFilterList(index, value);
-/tmp/icp2005_selectvariable.js-2450-    });
-/tmp/icp2005_selectvariable.js-2451-
-/tmp/icp2005_selectvariable.js:2452:    $('#lstFilterItems_' + controlid).html(hierarchylist);
-/tmp/icp2005_selectvariable.js-2453-    $('.filter-check').on('click', function () {
-/tmp/icp2005_selectvariable.js-2454-        var anySelected = false;
-/tmp/icp2005_selectvariable.js-2455-        $('#report-loading').show();
-/tmp/icp2005_selectvariable.js-2456-        var allselected = $('#lstFilterItems_' + controlid + ' .filter-check:checked').map(function (i, opt) {
-/tmp/icp2005_selectvariable.js-2457-            return { datavalue: $(opt).attr('data-value'), datalevel: $(opt).attr('data-level'), parentindex: $(opt).parent().parent().closest('li').attr('data-index') };
-/tmp/icp2005_selectvariable.js-2458-        }).toArray();
-/tmp/icp2005_selectvariable.js-2459-
-/tmp/icp2005_selectvariable.js-2460-        var dimdata;
-/tmp/icp2005_selectvariable.js-2461-        if (gbl_high_freequencyenabled && $('#tbl_' + controlid).attr('data-type') == "T")
-/tmp/icp2005_selectvariable.js:2462:            dimdata = gbl_array_data[gbl_time_control_Id + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-2463-        else
-/tmp/icp2005_selectvariable.js:2464:            dimdata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-2465-
-/tmp/icp2005_selectvariable.js-2466-        var filtermembers = dimdata.Members;
-/tmp/icp2005_selectvariable.js-2467-        var jumptolist = dimdata.JTL;
-/tmp/icp2005_selectvariable.js-2468-        if (allselected.length > 0) {
-/tmp/icp2005_selectvariable.js-2469-            anySelected = true;
-/tmp/icp2005_selectvariable.js-2470-            var filtermembersall = dimdata.Members;
-/tmp/icp2005_selectvariable.js-2471-            filtermembers = $.grep(filtermembersall, function (n, i) {
-/tmp/icp2005_selectvariable.js-2472-                return getClassificationSelected(allselected, n);
-/tmp/icp2005_selectvariable.js-2473-            });
-/tmp/icp2005_selectvariable.js-2474-            jumptolist = $(filtermembers).map(function (i, opt) { return opt.JTC; });
-/tmp/icp2005_selectvariable.js-2475-            jumptolist = $.unique(jumptolist);
-/tmp/icp2005_selectvariable.js-2476-        }
-/tmp/icp2005_selectvariable.js-2477-
-/tmp/icp2005_selectvariable.js-2478-        if (gbl_SubnationalFilter && $('#tbl_' + controlid).attr('data-type') == "C") {
-/tmp/icp2005_selectvariable.js-2479-            if (filtermembers.length > 0)
-/tmp/icp2005_selectvariable.js-2480-                FindSubnationalParents(filtermembers, dimdata.Members);
-/tmp/icp2005_selectvariable.js-2481-            loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, anySelected);
-/tmp/icp2005_selectvariable.js-2482-        }
-/tmp/icp2005_selectvariable.js-2483-        else
-/tmp/icp2005_selectvariable.js-2484-            loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, false);
-/tmp/icp2005_selectvariable.js-2485-
-/tmp/icp2005_selectvariable.js-2486-        $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-2487-        $(this).parents(".panel").find(".searchInput").val("");
-/tmp/icp2005_selectvariable.js-2488-        $(this).parents(".panel").find(".searchResults").hide();
-/tmp/icp2005_selectvariable.js-2489-        if (allselected.length > 0)
-/tmp/icp2005_selectvariable.js-2490-            $(this).parents(".panel").find(".filterResults").show();
-/tmp/icp2005_selectvariable.js-2491-        else
-/tmp/icp2005_selectvariable.js-2492-            $(this).parents(".panel").find(".filterResults").hide();
---
-/tmp/icp2005_selectvariable.js-2739-        }
-/tmp/icp2005_selectvariable.js-2740-        TrackFeature("Variables->" + getPanelHeading(this) + "->RemoveFilter");
-/tmp/icp2005_selectvariable.js-2741-    });
-/tmp/icp2005_selectvariable.js-2742-    initPagination();
-/tmp/icp2005_selectvariable.js-2743-}
-/tmp/icp2005_selectvariable.js-2744-
-/tmp/icp2005_selectvariable.js-2745-function invokeSearch(controlid, inputId, dataSource, targetId, showPlusIcon) {
-/tmp/icp2005_selectvariable.js-2746-
-/tmp/icp2005_selectvariable.js-2747-    gbl_start_var = 1;
-/tmp/icp2005_selectvariable.js-2748-    gbl_end_var = threshold;
-/tmp/icp2005_selectvariable.js-2749-    var keyword = $(inputId).val().trim();
-/tmp/icp2005_selectvariable.js-2750-
-/tmp/icp2005_selectvariable.js-2751-    if (keyword == "") {
-/tmp/icp2005_selectvariable.js-2752-        $(inputId).focus();
-/tmp/icp2005_selectvariable.js-2753-    }
-/tmp/icp2005_selectvariable.js-2754-    else {
-/tmp/icp2005_selectvariable.js-2755-        var filtermembers = searchRecordsSV(dataSource, keyword, 'Name');
-/tmp/icp2005_selectvariable.js-2756-        var jumptolist = $(filtermembers).map(function (i, opt) { return opt.JTC; });
-/tmp/icp2005_selectvariable.js-2757-        jumptolist = $.unique(jumptolist);
-/tmp/icp2005_selectvariable.js-2758-        filtermembers.sort(function (a, b) {
-/tmp/icp2005_selectvariable.js-2759-            var compA = $(a).attr('JTC');
-/tmp/icp2005_selectvariable.js-2760-            var compB = $(b).attr('JTC');
-/tmp/icp2005_selectvariable.js-2761-            return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-/tmp/icp2005_selectvariable.js-2762-        });
-/tmp/icp2005_selectvariable.js-2763-
-/tmp/icp2005_selectvariable.js-2764-        if (gbl_SubnationalFilter && $('#tbl_' + controlid).attr('data-type') === "C") {
-/tmp/icp2005_selectvariable.js-2765-            if (gbl_subnational_pagination) {
-/tmp/icp2005_selectvariable.js-2766-                var parentList = [];
-/tmp/icp2005_selectvariable.js:2767:                filtermembers = LoadSubNationalChildren(controlid, gbl_subnationalHierarchy, null, "", keyword,"");
-/tmp/icp2005_selectvariable.js-2768-                parentList = fillHierarchy(filtermembers);
-/tmp/icp2005_selectvariable.js-2769-                if (filtermembers.length > 0) {
-/tmp/icp2005_selectvariable.js-2770-                    filtermembers = filtermembers.concat(parentList);
-/tmp/icp2005_selectvariable.js-2771-                }
-/tmp/icp2005_selectvariable.js-2772-                filtermembers.sort(function (a, b) {
-/tmp/icp2005_selectvariable.js-2773-                    var compA = $(a).attr('JTC');
-/tmp/icp2005_selectvariable.js-2774-                    var compB = $(b).attr('JTC');
-/tmp/icp2005_selectvariable.js-2775-                    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-/tmp/icp2005_selectvariable.js-2776-                });
-/tmp/icp2005_selectvariable.js-2777-            }
-/tmp/icp2005_selectvariable.js-2778-            else {
-/tmp/icp2005_selectvariable.js-2779-                filtermembers = FindSubNationalChilds(dataSource, filtermembers);
-/tmp/icp2005_selectvariable.js-2780-                FindSubnationalParents(filtermembers, dataSource);
-/tmp/icp2005_selectvariable.js-2781-            }
-/tmp/icp2005_selectvariable.js-2782-        }
-/tmp/icp2005_selectvariable.js-2783-
-/tmp/icp2005_selectvariable.js-2784-        loadDimMembers(controlid, targetId, showPlusIcon, filtermembers, jumptolist, true);
-/tmp/icp2005_selectvariable.js-2785-        $(targetId).parents(".panel").find(".searchResults").show();
-/tmp/icp2005_selectvariable.js-2786-    }
-/tmp/icp2005_selectvariable.js-2787-}
-/tmp/icp2005_selectvariable.js-2788-
-/tmp/icp2005_selectvariable.js-2789-function searchRecordsSV(records, filterKeyword, filterParameter) {
-/tmp/icp2005_selectvariable.js-2790-    var filter_or_operator = 1;
-/tmp/icp2005_selectvariable.js-2791-    var filterValue = filterKeyword.split(" ");
-/tmp/icp2005_selectvariable.js-2792-    var filteredRows = [];
-/tmp/icp2005_selectvariable.js-2793-
-/tmp/icp2005_selectvariable.js-2794-    for (var i = 0; i < filterValue.length; i++) {
-/tmp/icp2005_selectvariable.js-2795-        var filterGroup = new $.jqx.filter();
---
-/tmp/icp2005_selectvariable.js-3099-
-/tmp/icp2005_selectvariable.js-3100-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js-3101-/********************************************Database Listing functions********************************************************************************/
-/tmp/icp2005_selectvariable.js-3102-/**************************************************************************************************************************************************/
-/tmp/icp2005_selectvariable.js-3103-function loadSelectedDBList(obj) {
-/tmp/icp2005_selectvariable.js-3104-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
-/tmp/icp2005_selectvariable.js-3105-    loadDatabaseList(dimobj);
-/tmp/icp2005_selectvariable.js-3106-}
-/tmp/icp2005_selectvariable.js-3107-
-/tmp/icp2005_selectvariable.js-3108-function loadAvailableDBList(obj) {
-/tmp/icp2005_selectvariable.js-3109-    var dimobj = $(obj).parents('.panel-heading').find('.panel-title a')[0];
-/tmp/icp2005_selectvariable.js-3110-    loadDatabaseList(dimobj);
-/tmp/icp2005_selectvariable.js-3111-}
-/tmp/icp2005_selectvariable.js-3112-
-/tmp/icp2005_selectvariable.js-3113-function loadDatabaseList(obj) {
-/tmp/icp2005_selectvariable.js-3114-    //debugger;
-/tmp/icp2005_selectvariable.js-3115-    if (obj != null && !$(obj).hasClass('collapsed')) {
-/tmp/icp2005_selectvariable.js-3116-        $(obj).parents('.panel-heading').find('.toggleSelectionViews a').removeClass('active');
-/tmp/icp2005_selectvariable.js-3117-        return;
-/tmp/icp2005_selectvariable.js-3118-    }
-/tmp/icp2005_selectvariable.js-3119-
-/tmp/icp2005_selectvariable.js-3120-    TrackFeature("Variables->Database");
-/tmp/icp2005_selectvariable.js-3121-
-/tmp/icp2005_selectvariable.js-3122-    $('#report-loading').show();
-/tmp/icp2005_selectvariable.js-3123-
-/tmp/icp2005_selectvariable.js-3124-    var controlid = "DBList";
-/tmp/icp2005_selectvariable.js-3125-    var hierarchy = "All";
-/tmp/icp2005_selectvariable.js-3126-
-/tmp/icp2005_selectvariable.js:3127:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-3128-    if (dimdata == null) {
-/tmp/icp2005_selectvariable.js:3129:        gbl_array_data[controlid + '_' + hierarchy] = 'Loading'; //to avoid double loading
-/tmp/icp2005_selectvariable.js-3130-        var starttime = new Date();
-/tmp/icp2005_selectvariable.js-3131-
-/tmp/icp2005_selectvariable.js-3132-        $.ajax({
-/tmp/icp2005_selectvariable.js-3133-            type: "POST",
-/tmp/icp2005_selectvariable.js-3134-            async: true,
-/tmp/icp2005_selectvariable.js-3135-            url: gbl_report_methods + "/GetDatabaseListJSON",
-/tmp/icp2005_selectvariable.js-3136-            contentType: "application/json; charset=utf-8",
-/tmp/icp2005_selectvariable.js-3137-            data: "{}",
-/tmp/icp2005_selectvariable.js-3138-            dataType: "json",
-/tmp/icp2005_selectvariable.js-3139-            success: function (data) {
-/tmp/icp2005_selectvariable.js-3140-                //debugger;
-/tmp/icp2005_selectvariable.js:3141:                gbl_array_data[controlid + '_' + hierarchy] = data.d;
-/tmp/icp2005_selectvariable.js-3142-
-/tmp/icp2005_selectvariable.js:3143:                createDatabaseList(controlid, hierarchy);
-/tmp/icp2005_selectvariable.js-3144-
-/tmp/icp2005_selectvariable.js:3145:                //logTimeConsumed(controlid + "_" + hierarchy, starttime);
-/tmp/icp2005_selectvariable.js-3146-
-/tmp/icp2005_selectvariable.js-3147-                $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-3148-                initDragDrop();
-/tmp/icp2005_selectvariable.js-3149-            },
-/tmp/icp2005_selectvariable.js-3150-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-/tmp/icp2005_selectvariable.js:3151:                gbl_array_data[controlid + '_' + hierarchy] = null;
-/tmp/icp2005_selectvariable.js-3152-                $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-3153-                //alert(errorThrown);
-/tmp/icp2005_selectvariable.js-3154-                window.location.href = gbl_error_file;
-/tmp/icp2005_selectvariable.js-3155-            }
-/tmp/icp2005_selectvariable.js-3156-        });
-/tmp/icp2005_selectvariable.js-3157-    }
-/tmp/icp2005_selectvariable.js-3158-    else {
-/tmp/icp2005_selectvariable.js:3159:        if (obj == null) createDatabaseList(controlid, hierarchy); //if we call the function from filter then only we need to repopulate
-/tmp/icp2005_selectvariable.js-3160-
-/tmp/icp2005_selectvariable.js-3161-        $('#report-loading').hide();
-/tmp/icp2005_selectvariable.js-3162-    }
-/tmp/icp2005_selectvariable.js-3163-}
-/tmp/icp2005_selectvariable.js-3164-
-/tmp/icp2005_selectvariable.js:3165:function createDatabaseList(controlid, hierarchy) {
-/tmp/icp2005_selectvariable.js-3166-    var targetId = "#tbl_" + controlid;
-/tmp/icp2005_selectvariable.js-3167-    //debugger;
-/tmp/icp2005_selectvariable.js-3168-
-/tmp/icp2005_selectvariable.js:3169:    var dimdata = gbl_array_data[controlid + '_' + hierarchy];
-/tmp/icp2005_selectvariable.js-3170-    if (dimdata == null) return;
-/tmp/icp2005_selectvariable.js-3171-
-/tmp/icp2005_selectvariable.js-3172-    if (gbl_array_member_selected[controlid] == null) {
-/tmp/icp2005_selectvariable.js-3173-        gbl_array_member_selected[controlid] = dimdata.Sel;
-/tmp/icp2005_selectvariable.js-3174-        GenarateAdobeDimensions(controlid);
-/tmp/icp2005_selectvariable.js-3175-    }
-/tmp/icp2005_selectvariable.js-3176-
-/tmp/icp2005_selectvariable.js:3177:    loadFilter(controlid, hierarchy, targetId, false, dimdata.Levels);
-/tmp/icp2005_selectvariable.js-3178-    loadDimMembers(controlid, targetId, false, dimdata.Members, dimdata.JTL, false);
-/tmp/icp2005_selectvariable.js-3179-    getSelectedMembers(controlid, targetId);
-/tmp/icp2005_selectvariable.js-3180-}
-/tmp/icp2005_selectvariable.js-3181-
-/tmp/icp2005_selectvariable.js-3182-
-/tmp/icp2005_selectvariable.js-3183-function loadDatabaseDetails(CubeId,IsPublic) {
-/tmp/icp2005_selectvariable.js-3184-    var loadingtext = '<div style="width: 100%; text-align: center;">' + $('#report-loading').html() + '<div>';
-/tmp/icp2005_selectvariable.js-3185-    $("#dbMetadata div.modal-body").html(loadingtext);
-/tmp/icp2005_selectvariable.js-3186-
-/tmp/icp2005_selectvariable.js-3187-
-/tmp/icp2005_selectvariable.js-3188-    $.ajax({
-/tmp/icp2005_selectvariable.js-3189-        type: "POST",
-/tmp/icp2005_selectvariable.js-3190-        url: gbl_report_methods + "/PopulateDatabaseDetails",
-/tmp/icp2005_selectvariable.js-3191-        contentType: "application/json; charset=utf-8",
-/tmp/icp2005_selectvariable.js-3192-        data: "{cubeid:'" + CubeId + "', lang:'" + gbl_common_culture + "'}",
-/tmp/icp2005_selectvariable.js-3193-        dataType: "json",
-/tmp/icp2005_selectvariable.js-3194-        success: function (data) {
-/tmp/icp2005_selectvariable.js-3195-            if (data.d === null || data.d === '') return;
-/tmp/icp2005_selectvariable.js-3196-            data.d = data.d.replace(/&lt;/g, "<");
-/tmp/icp2005_selectvariable.js-3197-            data.d = data.d.replace(/&gt;/g, ">");
-/tmp/icp2005_selectvariable.js-3198-            $("#dbMetadata div.modal-body").html(data.d);
-/tmp/icp2005_selectvariable.js-3199-
-/tmp/icp2005_selectvariable.js-3200-        },
-/tmp/icp2005_selectvariable.js-3201-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-/tmp/icp2005_selectvariable.js-3202-            window.location.href = gbl_error_file;
-/tmp/icp2005_selectvariable.js-3203-        }
-/tmp/icp2005_selectvariable.js-3204-    });
-/tmp/icp2005_selectvariable.js-3205-}
---
-/tmp/icp2005_selectvariable.js-4757-    //        alert();
-/tmp/icp2005_selectvariable.js-4758-
-/tmp/icp2005_selectvariable.js-4759-    //    });
-/tmp/icp2005_selectvariable.js-4760-
-/tmp/icp2005_selectvariable.js-4761-}
-/tmp/icp2005_selectvariable.js-4762-function gridRenderingSettings() {
-/tmp/icp2005_selectvariable.js-4763-
-/tmp/icp2005_selectvariable.js-4764-
-/tmp/icp2005_selectvariable.js-4765-
-/tmp/icp2005_selectvariable.js-4766-
-/tmp/icp2005_selectvariable.js-4767-    $(".dxgvTable_GridDefaultTheme tr:first-child").show();
-/tmp/icp2005_selectvariable.js-4768-
-/tmp/icp2005_selectvariable.js-4769-
-/tmp/icp2005_selectvariable.js-4770-
-/tmp/icp2005_selectvariable.js-4771-
-/tmp/icp2005_selectvariable.js-4772-    if (gbl_common_culture == "ar") {
-/tmp/icp2005_selectvariable.js-4773-        $(".dxgvFCSD").scrollLeft("0");
-/tmp/icp2005_selectvariable.js-4774-    }
-/tmp/icp2005_selectvariable.js-4775-
-/tmp/icp2005_selectvariable.js-4776-    else {
-/tmp/icp2005_selectvariable.js-4777-        $(".dxgvFCSD").scrollLeft($(".dxgvFCSD div").width());
-/tmp/icp2005_selectvariable.js-4778-
-/tmp/icp2005_selectvariable.js-4779-    }
-/tmp/icp2005_selectvariable.js-4780-
-/tmp/icp2005_selectvariable.js-4781-}
-/tmp/icp2005_selectvariable.js-4782-
-/tmp/icp2005_selectvariable.js-4783-/************************Code for Sub-national Poverty database **************/
-/tmp/icp2005_selectvariable.js-4784-
-/tmp/icp2005_selectvariable.js:4785:function showSubnationals(controlid, data, hierarchy) {
-/tmp/icp2005_selectvariable.js-4786-    $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').show();
-/tmp/icp2005_selectvariable.js-4787-    $("#CtryAgg_Classification_" + controlid).hide();
-/tmp/icp2005_selectvariable.js-4788-    $('.SubnationalAvailableView').show();
-/tmp/icp2005_selectvariable.js-4789-
-/tmp/icp2005_selectvariable.js:4790:    CreateSubNationalTabs(data.Members, controlid, data.Levels, hierarchy);
-/tmp/icp2005_selectvariable.js-4791-
-/tmp/icp2005_selectvariable.js-4792-    $("body").on("click", ".SubnationalAvailableView li span.bookunit", function () {
-/tmp/icp2005_selectvariable.js-4793-        var dataType = $(this).parents(".panel").find('ul.selectedView').attr('data-type');
-/tmp/icp2005_selectvariable.js-4794-        var expandElement = $($(this).parent('li')).children('span.caret-n');
-/tmp/icp2005_selectvariable.js-4795-        if (expandElement !== null && dataType === "C" && gbl_SubnationalFilter) {
-/tmp/icp2005_selectvariable.js:4796:            ShowSubnationalList(expandElement, controlid,hierarchy);
-/tmp/icp2005_selectvariable.js-4797-        }
-/tmp/icp2005_selectvariable.js-4798-    });
-/tmp/icp2005_selectvariable.js-4799-
-/tmp/icp2005_selectvariable.js-4800-    $("body").on("click", ".caret-n", function () {
-/tmp/icp2005_selectvariable.js-4801-        var dataType = $(this).parents(".panel").find('ul.selectedView').attr('data-type');
-/tmp/icp2005_selectvariable.js-4802-        if (dataType = "C" && gbl_SubnationalFilter) {
-/tmp/icp2005_selectvariable.js:4803:            ShowSubnationalList($(this), controlid, hierarchy);
-/tmp/icp2005_selectvariable.js-4804-        }
-/tmp/icp2005_selectvariable.js-4805-        else {
-/tmp/icp2005_selectvariable.js-4806-            var nationalCode = $(this).parents(".national").attr("parent");
-/tmp/icp2005_selectvariable.js-4807-            $(this).toggleClass("caret-n-open");
-/tmp/icp2005_selectvariable.js-4808-            $(".subnational[child='" + nationalCode + "']").toggle();
-/tmp/icp2005_selectvariable.js-4809-            $(this).parents(".national").find(".nationalName").toggle();
-/tmp/icp2005_selectvariable.js-4810-        }
-/tmp/icp2005_selectvariable.js-4811-    });
-/tmp/icp2005_selectvariable.js-4812-
-/tmp/icp2005_selectvariable.js-4813-    $("body").on("click", ".selectAllSub", function () {
-/tmp/icp2005_selectvariable.js-4814-        var nationalCode = $(this).parents(".national").attr("parent");
-/tmp/icp2005_selectvariable.js-4815-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").prop("checked", false);
-/tmp/icp2005_selectvariable.js-4816-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").trigger("click");
-/tmp/icp2005_selectvariable.js-4817-        $(this).parents(".national").find(".chkSelectElement").prop("checked", false);
-/tmp/icp2005_selectvariable.js-4818-        $(this).parents(".national").find(".chkSelectElement").trigger("click");
-/tmp/icp2005_selectvariable.js-4819-        if (!($(this).parents(".national").find(".closed").hasClass("caret-n-open"))) {
-/tmp/icp2005_selectvariable.js-4820-            $(this).parents(".national").find(".closed").trigger("click");
-/tmp/icp2005_selectvariable.js-4821-        }
-/tmp/icp2005_selectvariable.js-4822-    });
-/tmp/icp2005_selectvariable.js-4823-
-/tmp/icp2005_selectvariable.js-4824-    $("body").on("click", ".unselectAllSub", function () {
-/tmp/icp2005_selectvariable.js-4825-        var nationalCode = $(this).parents(".national").attr("parent");
-/tmp/icp2005_selectvariable.js-4826-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").prop("checked", true);
-/tmp/icp2005_selectvariable.js-4827-        $(".subnational[child='" + nationalCode + "']").find(".chkSelectElement").trigger("click");
-/tmp/icp2005_selectvariable.js-4828-        $(this).parents(".national").find(".chkSelectElement").prop("checked", true);
-/tmp/icp2005_selectvariable.js-4829-        $(this).parents(".national").find(".chkSelectElement").trigger("click");
-/tmp/icp2005_selectvariable.js-4830-        if (!($(this).parents(".national").find(".closed").hasClass("caret-n-open"))) {
-/tmp/icp2005_selectvariable.js-4831-            $(this).parents(".national").find(".closed").trigger("click");
-/tmp/icp2005_selectvariable.js-4832-        }
-/tmp/icp2005_selectvariable.js-4833-    });
-/tmp/icp2005_selectvariable.js-4834-}
-/tmp/icp2005_selectvariable.js-4835-
-/tmp/icp2005_selectvariable.js:4836:function CreateSubNationalTabs(data, controlid, Levels, hierarchy) {
-/tmp/icp2005_selectvariable.js-4837-    var category;
-/tmp/icp2005_selectvariable.js-4838-    //var level = Math.max.apply(Math, data.map(function (o) { return o.Level; }));
-/tmp/icp2005_selectvariable.js-4839-    var btnhtml = "<div class='btn-group' data-toggle='buttons'>";
-/tmp/icp2005_selectvariable.js-4840-    var tabContentHtml = "<div id='All' class='tabcontent'></div >";
-/tmp/icp2005_selectvariable.js-4841-    if (gbl_subnational_singleView) { // Render both ALL tab and element container for subnational. But the tab will be hidden
-/tmp/icp2005_selectvariable.js-4842-        btnhtml += "<label style='display:none' data-customlink='sf:body' level= 'All' id = 'defaultSubnationalTab' onclick=\"openSubNationalTab(event, 'All', '" + hierarchy + "')\" class='btn active'>";
-/tmp/icp2005_selectvariable.js-4843-        btnhtml += "<input type='radio' id='defaultOpen' checked='checked' />All</label>";
-/tmp/icp2005_selectvariable.js-4844-        tabContentHtml += "<div id='Level_0' class='tabcontent'></div >";
-/tmp/icp2005_selectvariable.js-4845-        btnhtml += "</div>";
-/tmp/icp2005_selectvariable.js-4846-    }
-/tmp/icp2005_selectvariable.js-4847-    else {
-/tmp/icp2005_selectvariable.js-4848-        btnhtml += "<label data-customlink='sf:body' level= 'All' id = 'defaultSubnationalTab' onclick=\"openSubNationalTab(event, 'All', '" + hierarchy + "')\" class='btn active'>";
-/tmp/icp2005_selectvariable.js-4849-        btnhtml += "<input type='radio' id='defaultOpen' checked='checked' />All</label>";
-/tmp/icp2005_selectvariable.js-4850-        for (var i = 0; i < Levels.length; i++) {
-/tmp/icp2005_selectvariable.js-4851-            category = Levels[i].HN;
-/tmp/icp2005_selectvariable.js-4852-            if (category === null || category.trim() === "" || category.trim().toUpperCase() === "NULL") {
-/tmp/icp2005_selectvariable.js-4853-                category = "Level " + (i);
-/tmp/icp2005_selectvariable.js-4854-            }
-/tmp/icp2005_selectvariable.js-4855-            btnhtml += "<label data-customlink='sf:body' level='Level_" + i + "' onclick=\"openSubNationalTab(event, 'Level_" + i + "', '" + hierarchy + "')\" class='btn'>";
-/tmp/icp2005_selectvariable.js-4856-            btnhtml += "<input type='radio' checked='checked'/>" + category + "</label >";
-/tmp/icp2005_selectvariable.js-4857-            tabContentHtml += "<div id='Level_" + i + "' class='tabcontent'></div >";
-/tmp/icp2005_selectvariable.js-4858-        }
-/tmp/icp2005_selectvariable.js-4859-        btnhtml += "</div>";
-/tmp/icp2005_selectvariable.js-4860-    }
-/tmp/icp2005_selectvariable.js-4861-    $('#newSelection_' + controlid + ' #SubNAtionalButtonGrp').html(btnhtml);
-/tmp/icp2005_selectvariable.js-4862-    $('#newSelection_' + controlid + ' .SubnationalAvailableView').html(tabContentHtml);
-/tmp/icp2005_selectvariable.js-4863-}
-/tmp/icp2005_selectvariable.js-4864-/************************Code for Sub-national Poverty database **************/
+  for release in 2005 2021
+      if test "$release" = 2005
+          set report_url "$base/id/4129804e"
+          set cube 1009
+      else
+          set report_url "$base/id/1da9d9a2?Report_Name=ICP-Annual-PPPs"
+          set cube 3869
+      end
+
+      curl --proxy $proxy -fSL --retry 2 --retry-all-errors \
+                  --connect-timeout 20 --max-time 120 -A 'Mozilla/5.0' \
+                  -c /tmp/icp-diagnostic/$release.cookies \
+                  -b /tmp/icp-diagnostic/$release.cookies \
+                  -D /tmp/icp-diagnostic/$release.page.headers \
+                  "$report_url" \
+                  -o /tmp/icp-diagnostic/$release.html
+
+      for dim in Country Classification Series Time
+          curl --proxy $proxy -sS --max-time 90 -A 'Mozilla/5.0' \
+                          -b /tmp/icp-diagnostic/$release.cookies \
+                          -H 'Content-Type: application/json; charset=utf-8' \
+                          -H 'Accept: application/json, text/javascript, */*; q=0.01' \
+                          -H 'X-Requested-With: XMLHttpRequest' \
+                          -H 'Origin: https://databank.worldbank.org' \
+                          -H "Referer: $report_url" \
+                          --data-raw "{\"cubeid\":\"$cube\",\"controlid\":\"$dim\",\"hierarchy\":\"[$dim].[List]\"}" \
+                          -D /tmp/icp-diagnostic/$release-$dim.headers \
+                          "$base/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON" \
+                          -o /tmp/icp-diagnostic/$release-$dim.json
+      end
+  end
+
+  uv run python -c '
+  import json
+  from pathlib import Path
+  p=Path("/tmp/icp-diagnostic")
+  for f in sorted(p.glob("*.headers")):
+      print("\n===== HEADERS",f.name,"=====")
+      print(f.read_text(errors="replace")[:5000])
+  for f in sorted(p.glob("*.json")):
+      print("\n===== BODY",f.name,"=====")
+      try:
+          d=json.loads(f.read_text(errors="replace")).get("d") or {}
+          print("keys:",sorted(d))
+          for k in ("DT","DH","Hier","Sel","Members","Levels","ARA","Aggr","DimensionType"):
+              v=d.get(k)
+              print(k, "=", json.dumps(v,ensure_ascii=False)[:1800])
+      except Exception as e:
+          print("JSON ERROR:",e)
+          print(f.read_text(errors="replace")[:3000])
+  for release in ("2005","2021"):
+      html=(p/f"{release}.html").read_text(errors="replace")
+      print("\n===== PAGE",release,"=====")
+      for key in ("hdnCubeID","hdnReportType","hdnReportID","hdnReportURL","hdnReportOptionsCur","hdnDimensionDetails","hdnSelectVars","hdnMetadataSelections","hdnAbobeText"):
+          import re,html as H
+          m=re.search(r"<input\b(?=[^>]*\bid=[\"\\\']"+key+r"[\"\\\'])[^>]*>",html,re.I)
+          if m:
+              print(key, H.unescape(m.group(0))[:3500])
+      print("scripts:")
+      for s in re.findall(r"<script[^>]+src=[\"\\\']([^\"\\\']+)",html,re.I):
+          print(s)
+  '
+
+  uv run python -c '
+  import json,urllib.request,http.cookiejar
+  from pathlib import Path
+  p=Path("/tmp/icp-diagnostic")
+  for release,cube,url in (
+      ("2005","1009","https://databank.worldbank.org/id/4129804e"),
+      ("2021","3869","https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs"),
+  ):
+      print("\n===== PYTHON REQUEST",release,"=====")
+      jar=http.cookiejar.CookieJar()
+      opener=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+      req=urllib.request.Request(url,headers={"User-Agent":"TownCountryAsset/1.0"})
+      with opener.open(req,timeout=90) as r:
+          print("PAGE STATUS",r.status,"URL",r.geturl())
+          r.read()
+      payload=json.dumps({"cubeid":cube,"controlid":"Country","hierarchy":"[Country].[List]"}).encode()
+      req=urllib.request.Request(
+          "https://databank.worldbank.org/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+          data=payload,
+          headers={
+              "User-Agent":"TownCountryAsset/1.0",
+              "Content-Type":"application/json; charset=utf-8",
+              "Accept":"application/json, text/javascript, */*; q=0.01",
+          },
+      )
+      try:
+          with opener.open(req,timeout=90) as r:
+              body=r.read().decode("utf-8","replace")
+              print("DIM STATUS",r.status,"HEADERS",dict(r.headers))
+              print("BODY",body[:3000])
+      except Exception as e:
+          print("DIM ERROR",repr(e))
+  '
+
+  tar -czf /tmp/icp-diagnostic.tar.gz -C /tmp icp-diagnostic
+  ls -lh /tmp/icp-diagnostic.tar.gz
+
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+100 265.1k   0 265.1k   0      0  91341      0           00:02          75525
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+100 278.3k   0 278.3k   0      0  83018      0           00:03         105.5k
+
+===== HEADERS 2005-Classification.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:07 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfec745bca1799-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2005-Country.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:06 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfec6a3b5f0d63-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+set-cookie: ExceptionOperationID=7e6270f6bad6302fc65d58bcaa80ffeb; path=/; secure; HttpOnly
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2005-Series.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:09 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfec7dfb841916-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2005-Time.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:11 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfec88980f98c8-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+set-cookie: ExceptionOperationID=dc7fecb32fb486c6ff727225a014f28b; path=/; secure; HttpOnly
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2005.page.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:03 GMT
+content-type: text/html; charset=utf-8
+set-cookie: databank.worldbank.orgCORS=8bfd4f960fc4477dbc9991ad557f4317; Path=/; SameSite=None; Secure
+set-cookie: databank.worldbank.org=8bfd4f960fc4477dbc9991ad557f4317; Path=/
+set-cookie: ASP.NET_SessionId=fyoa5xedm2zhn2ugu5j2pywd; path=/; secure; HttpOnly; SameSite=Lax
+set-cookie: ExceptionOperationID=6ed7b05917a4b307a3a9af8360ea389a; path=/; secure; HttpOnly
+set-cookie: ARRAffinity=68684045b6f67894fddd7c62f3ba5f363c3d53ed896664c0df0e95751fa52bff;Path=/;HttpOnly;Secure;Domain=databank.worldbank.org
+set-cookie: ARRAffinitySameSite=68684045b6f67894fddd7c62f3ba5f363c3d53ed896664c0df0e95751fa52bff;Path=/;HttpOnly;SameSite=None;Secure;Domain=databank.worldbank.org
+set-cookie: __cf_bm=6UBT_4NRwGNz0e2Tknmm8BOjC8sKCRfuZGP3PARGzw8-1794930963.4753933-1.0.1.1-D.4KAQcF0VvK8oWLDDoNBnl2HoWirwkLj_rraS6ZYD_SBGlhGObM_jNuJr77x1YpXtfM5l2oMhdtluCH.uKTHzr3UtSgZGlLwpUPIpX9XVdx_vvt62k344o8_Phg4asq; HttpOnly; SameSite=None; Partitioned; Secure; Path=/; Domain=worldbank.org; Expires=Tue, 17 Nov 2026 16:26:03 GMT
+set-cookie: _cfuvid=kNHXuEhr04Fm2TrhOLbW5jh5_rt7rDO7a2CfW8Vg4hI-1794930963.4753933-1.0.1.1-Ceve3YqDYPuVfz4YP49PCBf64qOYT_iI3VA738CACp4; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org
+cf-ray: a5bfec59be1553f7-ATL
+cf-cache-status: BYPASS
+x-ua-compatible: IE=EDGE
+cache-control: private,no-cache, no-store
+server: cloudflare
+x-xss-protection: 1; mode=block
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: accept-encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+
+
+
+===== HEADERS 2021-Classification.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:16 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfecacdac17da3-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2021-Country.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:15 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfeca619b271fc-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+set-cookie: ExceptionOperationID=c0c1120c91766e615ffc89b1f9b0f933; path=/; secure; HttpOnly
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2021-Series.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:18 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfecb70dad317a-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2021-Time.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:19 GMT
+content-type: application/json; charset=utf-8
+cf-ray: a5bfecbe28b2c36f-ATL
+cf-cache-status: DYNAMIC
+cache-control: private, max-age=0,no-cache, no-store
+x-ms-middleware-request-id: 00000000-0000-0000-0000-000000000000
+server: cloudflare
+set-cookie: ExceptionOperationID=f6955d7c25ed00b36081ac8342cbfa98; path=/; secure; HttpOnly
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: Accept-Encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+x-xss-protection: 1; mode=block
+
+
+
+===== HEADERS 2021.page.headers =====
+HTTP/2 200
+date: Tue, 17 Nov 2026 15:56:13 GMT
+content-type: text/html; charset=utf-8
+set-cookie: databank.worldbank.orgCORS=8bfd4f960fc4477dbc9991ad557f4317; Path=/; SameSite=None; Secure
+set-cookie: databank.worldbank.org=8bfd4f960fc4477dbc9991ad557f4317; Path=/
+set-cookie: ASP.NET_SessionId=ug5drf4zqd1rghw5vzjwr3du; path=/; secure; HttpOnly; SameSite=Lax
+set-cookie: ExceptionOperationID=b878d2e13a020c1ecff845b73804eb23; path=/; secure; HttpOnly
+set-cookie: ARRAffinity=a71c093f38ae9c878e705a1c9e1a4165425143b6381b49453d9ce277e967e1d8;Path=/;HttpOnly;Secure;Domain=databank.worldbank.org
+set-cookie: ARRAffinitySameSite=a71c093f38ae9c878e705a1c9e1a4165425143b6381b49453d9ce277e967e1d8;Path=/;HttpOnly;SameSite=None;Secure;Domain=databank.worldbank.org
+set-cookie: __cf_bm=lPPN9LuVgROxvujJTBHnTeLERwSWCEkmXBFnd0SxgMU-1794930972.4954178-1.0.1.1-7YQ3Zmu536vQ1dzBKyqCCy9ZVrbLIb1wOg56os3dyDXlKuPMPTiYWSs1G1G3nsvRGrwsRZfIwxtoMeqIwTjynuEGMzeTe6zH.pXSJ4mDt5mnfZU8_5X4y9HDP0OYhFTq; HttpOnly; SameSite=None; Partitioned; Secure; Path=/; Domain=worldbank.org; Expires=Tue, 17 Nov 2026 16:26:13 GMT
+set-cookie: _cfuvid=1IpLs1Z9dog4E9HbX3hfCtRJJVr6_XfX2yEp3MRfOMM-1794930972.4954178-1.0.1.1-R09XCD3teOCxDswLB4ybUXPEVg_aIma.qDQgWyFl16I; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org
+cf-ray: a5bfec921dbe7314-ATL
+cf-cache-status: BYPASS
+cache-control: private,no-cache, no-store
+server: cloudflare
+x-xss-protection: 1; mode=block
+strict-transport-security: max-age=31536000;includeSubDomains
+vary: accept-encoding
+access-control-expose-headers: Request-Context
+request-context: appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047
+x-aspnet-version: 4.0.30319
+x-content-type-options: nosniff
+x-powered-by: ASP.NET
+x-ua-compatible: IE=EDGE
+
+
+
+===== BODY 2005-Classification.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = "N"
+DH = "[Classification].[List]"
+Hier = {"[Classification].[List]": "List"}
+Sel = {"[Classification].[List].&[EXR]": {"displayname": "Exchange Rates", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[ZS]": {"displayname": "Expenditure shares (GDP = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[CN]": {"displayname": "Expenditures (billion LCU)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PPPGlob]": {"displayname": "Global PPPs", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.CD.IX.US]": {"displayname": "Index of nominal expenditures per capita (United States  = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.CD.IX.WL]": {"displayname": "Index of nominal expenditures per capita (world = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.PP.IX.US]": {"displayname": "Index of real expenditures per capita (United States  = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.PP.IX.WL]": {"displayname": "Index of real expenditures per capita (world = 100)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[CD]": {"displayname": "Nominal expenditures (billion U.S. dollars)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Classification].[List].&[PCAP.CD]": {"displayname": "Nominal expenditures per capita (U.S. dollars)", "custom": false, "customdefinitio
+Members = [{"Code": "EXR", "Name": "Exchange Rates", "ParentMember": null, "ID": "[Classification].[List].&[EXR]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "ZS", "Name": "Expenditure shares (GDP = 100)", "ParentMember": null, "ID": "[Classification].[List].&[ZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "CN", "Name": "Expenditures (billion LCU)", "ParentMember": null, "ID": "[Classification].[List].&[CN]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PPPGlob", "Name": "Global PPPs", "ParentMember": null, "ID": "[Classification].[List].&[PPPGlob]", "JTC": "G", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.US", "Name": "Index of nominal expenditures per capita (United States  = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.US]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.WL", "Name": "Index of nominal expenditures per capita (world = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.WL]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.US", "Name": "Index of real expenditures per capita (United States  = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.US]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.WL", "Name": "Index of real expenditures per capita (world = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.WL]", "JTC": "I", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "CD", "Name": "Nominal expenditures (billion U.S. dollars)", "ParentMember": null, "ID": "[Classification].[List].&[CD]", "JTC": "N", "ParentDimMember": null, "HLS": [], "SM": false
+Levels = []
+ARA = null
+Aggr = null
+DimensionType = "N"
+
+===== BODY 2005-Country.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = null
+DH = null
+Hier = null
+Sel = null
+Members = null
+Levels = null
+ARA = null
+Aggr = null
+DimensionType = null
+
+===== BODY 2005-Series.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = "S"
+DH = "[Series].[List]"
+Hier = {"[Series].[List]": "List"}
+Sel = {"[Series].[List].&[100000]": {"displayname": "100000:GROSS DOMESTIC PRODUCT", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110000]": {"displayname": "110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110100]": {"displayname": "110100:FOOD AND NON-ALCOHOLIC BEVERAGES", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110110]": {"displayname": "110110:FOOD", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110111]": {"displayname": "110111:Bread and cereals (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110112]": {"displayname": "110112:Meat (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110113]": {"displayname": "110113:Fish and seafood (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110114]": {"displayname": "110114:Milk, cheese and eggs (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110115]": {"displayname": "110115:Oils and fats (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110116]": {"displayname": "110116:Fruit (Class)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[110117]": {"displayname": "110117:Vegetables (Class)", "custom": false, "customdefinition": null, "AggregationRule": nul
+Members = [{"Code": "100000", "Name": "100000:GROSS DOMESTIC PRODUCT", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[100000]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["2"], "SM": false}, {"Code": "110000", "Name": "110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[110000]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["2"], "SM": false}, {"Code": "110100", "Name": "110100:FOOD AND NON-ALCOHOLIC BEVERAGES", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "ID": "[Series].[List].&[110100]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PPPGlob, PX.WL, ZS", "HLS": ["3"], "SM": false}, {"Code": "110110", "Name": "110110:FOOD", "ParentMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS", "ID": "[Series].[List].&[110110]", "JTC": "1", "ParentDimMember": "CD, CD.ZS, CN, EXP, PCAP.CD, PCAP.CD.IX.US, PCAP.CD.IX.WL, PCAP.PP, PCAP.PP.IX.US, PCAP.PP.IX.WL, PP.CD, PP.CD.ZS, PPP, PX.WL, ZS", "HLS": ["4"
+Levels = [{"LN": 1, "HN": "AnalyticalCategory", "UID": "[Series].[List].&[AnalyticalCategory]", "HID": "1", "LV": []}, {"LN": 1, "HN": "b_MainAggregate", "UID": "[Series].[List].&[b_MainAggregate]", "HID": "2", "LV": []}, {"LN": 1, "HN": "c_Category", "UID": "[Series].[List].&[c_Category]", "HID": "3", "LV": []}, {"LN": 1, "HN": "d_Group", "UID": "[Series].[List].&[d_Group]", "HID": "4", "LV": []}, {"LN": 1, "HN": "e_Class", "UID": "[Series].[List].&[e_Class]", "HID": "5", "LV": []}, {"LN": 1, "HN": "k_Non-hierarchical", "UID": "[Series].[List].&[k_Non-hierarchical]", "HID": "6", "LV": []}, {"LN": 1, "HN": "m_ExchangeRate", "UID": "[Series].[List].&[m_ExchangeRate]", "HID": "7", "LV": []}, {"LN": 1, "HN": "n_Population", "UID": "[Series].[List].&[n_Population]", "HID": "8", "LV": []}, {"LN": 1, "HN": "p_DerivedAggregates", "UID": "[Series].[List].&[p_DerivedAggregates]", "HID": "9", "LV": []}]
+ARA = null
+Aggr = null
+DimensionType = "S"
+
+===== BODY 2005-Time.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = null
+DH = null
+Hier = null
+Sel = null
+Members = null
+Levels = null
+ARA = null
+Aggr = null
+DimensionType = null
+
+===== BODY 2021-Classification.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = "N"
+DH = "[Classification].[List]"
+Hier = {"[Classification].[List]": "List"}
+Sel = {"[Classification].[List].&[PPPGlob]": {"displayname": "Purchasing power parity (PPP) (US$ = 1)", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}}
+Members = [{"Code": "CN", "Name": "Expenditure (local currency units, billions)", "ParentMember": null, "ID": "[Classification].[List].&[CN]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "AICZS", "Name": "Expenditure component share of AIC (AIC = 100%)", "ParentMember": null, "ID": "[Classification].[List].&[AICZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "ZS", "Name": "Expenditure component share of GDP (GDP = 100%)", "ParentMember": null, "ID": "[Classification].[List].&[ZS]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.US", "Name": "Expenditure per capita index, market exchange rate-based (United States= 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.US]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD.IX.WL", "Name": "Expenditure per capita index, market exchange rate-based (World = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD.IX.WL]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.US", "Name": "Expenditure per capita index, PPP-based (United States = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.US]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP.IX.WL", "Name": "Expenditure per capita index, PPP-based (World = 100)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.PP.IX.WL]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.CD", "Name": "Expenditure per capita, market exchange rate-based (US$)", "ParentMember": null, "ID": "[Classification].[List].&[PCAP.CD]", "JTC": "E", "ParentDimMember": null, "HLS": [], "SM": false}, {"Code": "PCAP.PP", "Name": "Expenditure
+Levels = []
+ARA = null
+Aggr = null
+DimensionType = "CL"
+
+===== BODY 2021-Country.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = null
+DH = null
+Hier = null
+Sel = null
+Members = null
+Levels = null
+ARA = null
+Aggr = null
+DimensionType = null
+
+===== BODY 2021-Series.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = "S"
+DH = "[Series].[List]"
+Hier = {"[Series].[List]": "List"}
+Sel = {"[Series].[List].&[1000000]": {"displayname": "1000000:GROSS DOMESTIC PRODUCT", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9020000]": {"displayname": "9020000:ACTUAL INDIVIDUAL CONSUMPTION", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9100000]": {"displayname": "9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9270000]": {"displayname": "9270000:GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[1501000]": {"displayname": "1501000:GROSS FIXED CAPITAL FORMATION", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}, "[Series].[List].&[9250000]": {"displayname": "9250000:DOMESTIC ABSORPTION", "custom": false, "customdefinition": null, "AggregationRule": null, "MemberType": ""}}
+Members = [{"Code": "1000000", "Name": "1000000:GROSS DOMESTIC PRODUCT", "ParentMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1000000]", "JTC": "1", "ParentDimMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["1"], "SM": true}, {"Code": "1101000", "Name": "1101000:FOOD AND NON-ALCOHOLIC BEVERAGES", "ParentMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1101000]", "JTC": "1", "ParentDimMember": "CD.ZS, AICZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "HLS": ["3"], "SM": true}, {"Code": "1101100", "Name": "1101100:FOOD", "ParentMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPRegAlt05, PCAP.PP.IX.US, PPPRegAlt04, PX.WL, PPPRegAlt03, PP.CD.ZS, PPPRegAlt02, PCAP.PP", "ID": "[Series].[List].&[1101100]", "JTC": "1", "ParentDimMember": "CD.ZS, CD, CPI, EXPK, CPIW, CN, DEF, EXP, PPPReg, PCAP.CD.IX.US, PCAP.CD.IX.WL, PPPGlob, PPPRegAlt01, PCAP.CD, PP.CD, ZS, PCAP.PP.IX.WL, PPPReg
+Levels = [{"LN": 1, "HN": "a_GDP", "UID": "[Series].[List].&[a_GDP]", "HID": "1", "LV": []}, {"LN": 1, "HN": "b_MainAggregate", "UID": "[Series].[List].&[b_MainAggregate]", "HID": "2", "LV": []}, {"LN": 1, "HN": "c_Category", "UID": "[Series].[List].&[c_Category]", "HID": "3", "LV": []}, {"LN": 1, "HN": "d_Group", "UID": "[Series].[List].&[d_Group]", "HID": "4", "LV": []}, {"LN": 1, "HN": "e_Class", "UID": "[Series].[List].&[e_Class]", "HID": "5", "LV": []}, {"LN": 1, "HN": "k_Non-hierarchical", "UID": "[Series].[List].&[k_Non-hierarchical]", "HID": "6", "LV": []}, {"LN": 1, "HN": "m_ExchangeRate", "UID": "[Series].[List].&[m_ExchangeRate]", "HID": "7", "LV": []}, {"LN": 1, "HN": "n_Population", "UID": "[Series].[List].&[n_Population]", "HID": "8", "LV": []}, {"LN": 1, "HN": "p_DerivedAggregates", "UID": "[Series].[List].&[p_DerivedAggregates]", "HID": "9", "LV": []}]
+ARA = null
+Aggr = null
+DimensionType = "S"
+
+===== BODY 2021-Time.json =====
+keys: ['ARA', 'Aggr', 'AutoSelect', 'CHL', 'CL', 'DH', 'DT', 'DimensionType', 'HasDimensionFiltering', 'Hier', 'HighFrequencyEnabled', 'HighFrequencyMembers', 'JTL', 'JTLA', 'LevelCount', 'LevelNames', 'Levels', 'Members', 'Parentdimension', 'Sel', 'SubNationalEnabled', '__type']
+DT = null
+DH = null
+Hier = null
+Sel = null
+Members = null
+Levels = null
+ARA = null
+Aggr = null
+DimensionType = null
+
+===== PAGE 2005 =====
+hdnCubeID <input type="hidden" name="hdnCubeID" id="hdnCubeID" value="1009" />
+hdnReportType <input type="hidden" name="hdnReportType" id="hdnReportType" value="TABLE" />
+hdnReportID <input type="hidden" name="hdnReportID" id="hdnReportID" value="121005" />
+hdnReportURL <input type="hidden" name="hdnReportURL" id="hdnReportURL" value="ICP_2005/id/4129804e" />
+hdnReportOptionsCur <input type="hidden" name="hdnReportOptionsCur" id="hdnReportOptionsCur" value="{"IsOrientationTemplate":false,"SelectedOrientation":"","OrientationCustom":[{"dimensionId":"Country","dimensionAxis":"0"},{"dimensionId":"Classification","dimensionAxis":"2"},{"dimensionId":"Series","dimensionAxis":"1"},{"dimensionId":"Time","dimensionAxis":"0"}],"NoOfRowsPerPage":"50","ShowNotes":true,"EmptyFormat":"..","ReportLevelScale":true,"Scale":"1","Precision":"0.0","ThousandSeparator":true,"ReportHeader":"","ReportFooter":"","AdvancedOptions":{"Hierarchy":"NONE","RolloverDirection":"none","RolloverInterval":null,"HideEmptyRow":false,"HideEmptyColumn":false},"ReportNotes":""}" />
+hdnDimensionDetails <input type="hidden" name="hdnDimensionDetails" id="hdnDimensionDetails" />
+hdnSelectVars <input type="hidden" name="hdnSelectVars" id="hdnSelectVars" />
+hdnMetadataSelections <input type="hidden" name="hdnMetadataSelections" id="hdnMetadataSelections" />
+hdnAbobeText <input type="hidden" name="hdnAbobeText" id="hdnAbobeText" value="{"databaseName":"International Comparison Program (ICP) 2005","Dimensions":{"Country":["Afghanistan","AFRICA","Albania","Algeria","Angola","Antigua and Barbuda","Argentina","Armenia","ASIA AND THE PACIFIC","Australia","Austria","Azerbaijan","Bahamas, The","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei Darussalam","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","CIS","Colombia","Comoros","Congo, Dem. Rep.","Congo, Rep.","Costa Rica","Cote d\u0027Ivoire","Croatia","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt, Arab Rep. (AFR)","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","EUROSTAT-OECD","Fiji","Finland","France","Gabon","Gambia, The","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hong Kong, China","Hungary","Iceland","India","Indonesia","Iran, Islamic Rep.","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, Rep.","Kuwait","Kyrgyz Republic","Lao PDR","Latvia","Lebanon","Lesotho","Liberia","Libya","Lithuania","Luxembourg","Macao, China","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia, Fed. Sts.","Moldova","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Macedonia","Norway","Oman","Pakistan","Palau","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russian Federation (EUO)","Rwanda","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovak Republic","Slovenia","Solomon Islands","Somalia","South Africa","SOUTH AMERICA","Spain","Sri Lanka","St. Kitts and Nevis","St. Lucia","St. Vincent and the Grenadines","Sudan","Suriname","Sweden","Switzerland","Syrian Arab Republic","Taiwan, China","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela, RB","Vietnam","WESTERN ASIA","WORLD","Yemen, Rep.","Zambia","Zimbabwe"],"Classification":["Exchange Rates","Expenditure shares (GDP = 100)","Expenditures (billion LCU)","Global PPPs","Index of nominal expenditures per capita (United States  = 100)","Index of nominal expenditures per capita (world = 100)","Index of real expenditures per capita (United States  = 100)","Index of real expenditures per capita (world = 100)","Nominal expenditures (billion U.S. dollars)","Nominal expenditures per capita (U.S. dollars)","Nominal expenditures: country and regional shares (world = 100)","Population","Price level index (world = 100)","Real expenditures (billion U.S. dollars)","Real expenditures per capita (U.S. dollars)","Real expenditures: country and regional shares (world = 100)"],"Series":["100000:GROSS DOMESTIC PRODUCT","110000:INDIVIDUAL CONSUMPTION EXPENDITURE BY HOUSEHOLDS","110100:FOOD AND NON-ALCOHOLIC BEVERAGES","110110:FOOD","110111:Bread and cereals (Class)","110112:Meat (Class)","110113:Fish and seafood (Class)",
+scripts:
+/js/appdynamics.js
+//script.crazyegg.com/pages/scripts/0058/1350.js
+https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js
+https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js
+https://assets.adobedtm.com/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js
+/WebResource.axd?d=393I9IlCM-ogyKs8Hd44dV1rcqpxUnf5H44tKzwISJGiDKh0ditDkmXtgCEO2EBjYC1NHStZFDv6PBmomMymBjZskflkGRAIGbp5gmBilds1&amp;t=639256397503738887
+/ScriptResource.axd?d=AALOUbU4Dy97IA6xs5Hcw4X_3p0ibfav5J8GkqLh6BbzPzvXiBAnsgNZA1RrvIy3Cq24Vv0mT4-0kFgmLmvABOnhUI0YWIq1ZhBpByOsfO1tbR7qzitMMnOOu-sS2aCfvrYTNmI24HhiFUf2YM3cd2wojXk4geRddjzgVXBu4qHNnssTgxV-lcjShS7DKY_50&amp;t=ffffffffa1bf0f7b
+/ScriptResource.axd?d=4P9Uvi0O8EDMt76T88pXW8vg_c1ZTEFN6M0EjArAsjwpjR1CWOdErMSvNQXCR7Z-hH8RCLJlBUcy6rv1dztwjrXUezATyvBQersA_tcP-cth8l5bdDE4Rb0VUJb4WWEC5d0FV4pzcpnGgnH1-5uHOd32fp56pvSu_dMCRszGj5viffOTZAf7-j-vfr4wyIjd0&amp;t=ffffffffa1bf0f7b
+/DXR.axd?r=1_11,1_12,1_252,1_23,1_64,1_13,1_14,1_15,1_48,1_17,1_9,1_24,1_33,1_34-xTVOx
+/scripts/reports/plugins/jquery-v1.11.1.js
+/scripts/reports/plugins/jquery-ui-v1.10.3.js
+/scripts/reports/plugins/jquery.deprecated.js
+/scripts/reports/plugins/bootstrap.js
+/scripts/reports/plugins/bootstrap-select.min.js
+/scripts/reports/plugins/jqx-all.js
+/scripts/reports/plugins/jquery.sortcontent.js
+/scripts/reports/plugins/jpicker.min.js
+/scripts/reports/plugins/bootstrap-switch.js
+/scripts/reports/selectvariable.js
+/scripts/reports/SubnationalData.js
+/scripts/reports/reportcommon.js
+/scripts/reports/embedOptions.js
+/scripts/reports/selectvariableadvanced.js
+/js/wb_feedback.js
+/scripts/reports/tableoptions.js
+/scripts/reports/tablecustomstyles.js
+
+===== PAGE 2021 =====
+hdnCubeID <input type="hidden" name="hdnCubeID" id="hdnCubeID" value="3869" />
+hdnReportType <input type="hidden" name="hdnReportType" id="hdnReportType" value="TABLE" />
+hdnReportID <input type="hidden" name="hdnReportID" id="hdnReportID" value="153709" />
+hdnReportURL <input type="hidden" name="hdnReportURL" id="hdnReportURL" value="ICP-Annual-PPPs/id/1da9d9a2" />
+hdnReportOptionsCur <input type="hidden" name="hdnReportOptionsCur" id="hdnReportOptionsCur" value="{"IsOrientationTemplate":false,"SelectedOrientation":"","OrientationCustom":[{"dimensionId":"Country","dimensionAxis":"1"},{"dimensionId":"Classification","dimensionAxis":"2"},{"dimensionId":"Series","dimensionAxis":"0"},{"dimensionId":"Time","dimensionAxis":"2"}],"NoOfRowsPerPage":"250","ShowNotes":true,"EmptyFormat":"..","ReportLevelScale":true,"Scale":"1","Precision":"0.000","ThousandSeparator":true,"ReportHeader":"*The figures in this table have been rounded for presentation purposes. Data with greater precision can be obtained from the World Bank\u0027s DataBank - ICP 2021 database by clicking on the following link: https://databank.worldbank.org/source/icp-2021/.","ReportFooter":"","AdvancedOptions":{"Hierarchy":"NONE","RolloverDirection":"none","RolloverInterval":null,"HideEmptyRow":false,"HideEmptyColumn":false},"ReportNotes":"Results from the International Comparison Program (Benchmark) 2021 cycle include data for the new reference year 2021, revised data for the previous reference year 2017, and purchasing power parities (PPPs) time series for 2018 to 2020. 2021 results are available for 176 participating economies and their aggregate regions. They cover 45 expenditure headings and provide several indicators for each heading, including PPPs, national accounts expenditures in PPP and nominal terms, and price level indices. Imputed results are available for an additional 19 economies that did not participate in the ICP 2021 cycle. Revised 2017 results are available for 178 participating economies and cover 44 expenditure headings and several indicators, including PPPs, national accounts expenditures in PPP and nominal terms, and price level indices. Additionally, imputed results are available for 17 economies that did not participate in the ICP 2017 cycle. Annual PPPs are available for 2017 to 2021 and cover 6 major expenditure headings. 2022-2023 GDP PPP series are also provided beyond the most recent ICP benchmark based on the standard extrapolation approach. PPPs are statistical estimates and should be treated as approximations of true values, subject to sampling, measurement, and classification errors. They should not be used as indicators of currency under- or overvaluation. ICP Results are based on data supplied by participating economies to the global and regional implementing agencies, and produced in accordance with ICP methodology. Results are not deemed to be national official statistics. The standard ICP methodology between the two most recent 2017 and 2021 ICP cycles has been maintained. However, in ICP 2021, the Commonwealth of Independent States (CIS) region was linked through the standard global core list approach, unlike in ICP 2017, when the CIS region was linked through the Russian Federation, which participated in both the OECD and CIS comparisons. For ICP 2017, the Russian Federation results are based on the OECD comparison, and for ICP 2021, they are based on the CIS comparison. Furthermore, the Asia and Pacific region moved to the standard ICP approach for estimating housing PPPs based on rental and volume data during the ICP 2021 cycle. The standard approach was utilized for the revised ICP 2017 results and ICP 2021 results, both at the regional and global levels, instead of the previously utilized reference volume approach. 1/ PPPs are statistical estimates and should be treated as approximations of true values, subject to sa
+hdnDimensionDetails <input type="hidden" name="hdnDimensionDetails" id="hdnDimensionDetails" />
+hdnSelectVars <input type="hidden" name="hdnSelectVars" id="hdnSelectVars" />
+hdnMetadataSelections <input type="hidden" name="hdnMetadataSelections" id="hdnMetadataSelections" />
+hdnAbobeText <input type="hidden" name="hdnAbobeText" id="hdnAbobeText" value="{"databaseName":"ICP 2021","Dimensions":{"Country":["East Asia \u0026 Pacific (Benchmark)","Australia","Brunei Darussalam","Cambodia","China","Fiji","Hong Kong SAR, China","Indonesia","Japan","Korea, Rep.","Lao PDR","Malaysia","Mongolia","New Zealand","Philippines","Singapore","Taiwan, China","Thailand","Viet Nam","Europe \u0026 Central Asia (Benchmark)","Albania","Armenia","Austria","Azerbaijan","Belarus","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Cyprus","Czechia","Denmark","Estonia","Finland","France","Georgia","Germany","Greece","Hungary","Iceland","Ireland","Italy","Kazakhstan","Kosovo","Kyrgyz Republic","Latvia","Lithuania","Luxembourg","Moldova","Montenegro","Netherlands","North Macedonia","Norway","Poland","Portugal","Romania","Russian Federation","Serbia","Slovak Republic","Slovenia","Spain","Sweden","Switzerland","Tajikistan","Turkiye","Ukraine","United Kingdom","Uzbekistan","Latin America \u0026 Caribbean (Benchmark)","Anguilla","Antigua and Barbuda","Argentina","Aruba","Belize","Bolivia","Bonaire","Brazil","British Virgin Islands","Cayman Islands","Chile","Colombia","Costa Rica","Curacao","Dominica","Dominican Republic","Ecuador","El Salvador","Grenada","Guatemala","Guyana","Honduras","Jamaica","Mexico","Montserrat","Nicaragua","Panama","Paraguay","Peru","St. Kitts and Nevis","St. Lucia","St. Vincent and the Grenadines","Suriname","Trinidad and Tobago","Uruguay","Middle East \u0026 North Africa (Benchmark)","Algeria","Bahrain","Djibouti","Egypt, Arab Rep.","Iraq","Israel","Jordan","Kuwait","Lebanon","Malta","Morocco","Oman","Qatar","Saudi Arabia","Syrian Arab Republic","Tunisia","United Arab Emirates","West Bank and Gaza","North America (Benchmark)","Bermuda","Canada","United States","South Asia (Benchmark)","Bangladesh","Bhutan","India","Maldives","Nepal","Pakistan","Sri Lanka","Sub-Saharan Africa (Benchmark)","Angola","Benin","Botswana","Burkina Faso","Burundi","Cabo Verde","Cameroon","Central African Republic","Chad","Comoros","Congo, Dem. Rep.","Congo, Rep.","Cote d\u0027Ivoire","Equatorial Guinea","Eswatini","Ethiopia","Gabon","Gambia, The","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Madagascar","Malawi","Mali","Mauritania","Mauritius","Mozambique","Namibia","Niger","Nigeria","Rwanda","Sao Tome and Principe","Senegal","Seychelles","Sierra Leone","Somalia","South Africa","South Sudan","Sudan","Tanzania","Togo","Uganda","Zambia","Zimbabwe","WORLD (Benchmark)"],"Classification":["Purchasing power parity (PPP) (US$ = 1)"],"Series":["1000000:GROSS DOMESTIC PRODUCT","9020000:ACTUAL INDIVIDUAL CONSUMPTION","9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE","9270000:GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE","1501000:GROSS FIXED CAPITAL FORMATION","9250000:DOMESTIC ABSORPTION"],"Time":["2017","2018","2019","2020","2021","2022","2023"]}}" />
+scripts:
+/js/appdynamics.js
+//script.crazyegg.com/pages/scripts/0058/1350.js
+https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js
+https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js
+https://assets.adobedtm.com/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js
+/WebResource.axd?d=393I9IlCM-ogyKs8Hd44dV1rcqpxUnf5H44tKzwISJGiDKh0ditDkmXtgCEO2EBjYC1NHStZFDv6PBmomMymBjZskflkGRAIGbp5gmBilds1&amp;t=639256397503738887
+/ScriptResource.axd?d=AALOUbU4Dy97IA6xs5Hcw4X_3p0ibfav5J8GkqLh6BbzPzvXiBAnsgNZA1RrvIy3Cq24Vv0mT4-0kFgmLmvABOnhUI0YWIq1ZhBpByOsfO1tbR7qzitMMnOOu-sS2aCfvrYTNmI24HhiFUf2YM3cd2wojXk4geRddjzgVXBu4qHNnssTgxV-lcjShS7DKY_50&amp;t=ffffffffa1bf0f7b
+/ScriptResource.axd?d=4P9Uvi0O8EDMt76T88pXW8vg_c1ZTEFN6M0EjArAsjwpjR1CWOdErMSvNQXCR7Z-hH8RCLJlBUcy6rv1dztwjrXUezATyvBQersA_tcP-cth8l5bdDE4Rb0VUJb4WWEC5d0FV4pzcpnGgnH1-5uHOd32fp56pvSu_dMCRszGj5viffOTZAf7-j-vfr4wyIjd0&amp;t=ffffffffa1bf0f7b
+/DXR.axd?r=1_11,1_12,1_252,1_23,1_64,1_13,1_14,1_15,1_48,1_17,1_9,1_24,1_33,1_34-xTVOx
+/scripts/reports/plugins/jquery-v1.11.1.js
+/scripts/reports/plugins/jquery-ui-v1.10.3.js
+/scripts/reports/plugins/jquery.deprecated.js
+/scripts/reports/plugins/bootstrap.js
+/scripts/reports/plugins/bootstrap-select.min.js
+/scripts/reports/plugins/jqx-all.js
+/scripts/reports/plugins/jquery.sortcontent.js
+/scripts/reports/plugins/jpicker.min.js
+/scripts/reports/plugins/bootstrap-switch.js
+/scripts/reports/selectvariable.js
+/scripts/reports/SubnationalData.js
+/scripts/reports/reportcommon.js
+/scripts/reports/embedOptions.js
+/scripts/reports/selectvariableadvanced.js
+/js/wb_feedback.js
+/scripts/reports/tableoptions.js
+/scripts/reports/tablecustomstyles.js
+
+===== PYTHON REQUEST 2005 =====
+PAGE STATUS 200 URL https://databank.worldbank.org/id/4129804e
+DIM STATUS 200 HEADERS {'Date': 'Tue, 17 Nov 2026 15:56:28 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bfecf5ad45383c-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Set-Cookie': 'ExceptionOperationID=123c9e623eda22e95f819fd2146d08e1; path=/; secure; HttpOnly', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+BODY {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":null,"Members":null,"JTL":null,"DT":null,"AutoSelect":false,"Aggr":null,"JTLA":null,"DH":null,"CL":false,"Hier":null,"CHL":null,"Sel":null,"ARA":null,"HighFrequencyEnabled":false,"SubNationalEnabled":false,"DimensionType":null,"HighFrequencyMembers":null,"LevelNames":null,"LevelCount":null,"Parentdimension":null,"HasDimensionFiltering":false}}
+
+===== PYTHON REQUEST 2021 =====
+PAGE STATUS 200 URL https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs
+DIM STATUS 200 HEADERS {'Date': 'Tue, 17 Nov 2026 15:56:49 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'close', 'CF-Ray': 'a5bfed098eb0f8b2-FRA', 'CF-Cache-Status': 'DYNAMIC', 'Cache-Control': 'private, max-age=0,no-cache, no-store', 'X-XSS-Protection': '1; mode=block', 'Server': 'cloudflare', 'Strict-Transport-Security': 'max-age=31536000;includeSubDomains', 'Vary': 'Accept-Encoding', 'Access-Control-Expose-Headers': 'Request-Context', 'Request-Context': 'appId=cid-v1:160388bd-377d-400a-bfb5-4b6a67df9047', 'X-AspNet-Version': '4.0.30319', 'X-Content-Type-Options': 'nosniff', 'X-Powered-By': 'ASP.NET', 'X-UA-Compatible': 'IE=EDGE'}
+BODY {"d":{"__type":"DDPNavigationNew.MemberListJSON","Levels":[],"Members":[{"Code":"AFG","Name":"Afghanistan","ParentMember":null,"ID":"[Country].[List].\u0026[AFG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ALB","Name":"Albania","ParentMember":null,"ID":"[Country].[List].\u0026[ALB]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"DZA","Name":"Algeria","ParentMember":null,"ID":"[Country].[List].\u0026[DZA]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AND","Name":"Andorra","ParentMember":null,"ID":"[Country].[List].\u0026[AND]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AGO","Name":"Angola","ParentMember":null,"ID":"[Country].[List].\u0026[AGO]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AIA","Name":"Anguilla","ParentMember":null,"ID":"[Country].[List].\u0026[AIA]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ATG","Name":"Antigua and Barbuda","ParentMember":null,"ID":"[Country].[List].\u0026[ATG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ARG","Name":"Argentina","ParentMember":null,"ID":"[Country].[List].\u0026[ARG]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ARM","Name":"Armenia","ParentMember":null,"ID":"[Country].[List].\u0026[ARM]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"ABW","Name":"Aruba","ParentMember":null,"ID":"[Country].[List].\u0026[ABW]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AUS","Name":"Australia","ParentMember":null,"ID":"[Country].[List].\u0026[AUS]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AUT","Name":"Austria","ParentMember":null,"ID":"[Country].[List].\u0026[AUT]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"AZE","Name":"Azerbaijan","ParentMember":null,"ID":"[Country].[List].\u0026[AZE]","JTC":"A","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BHS","Name":"Bahamas, The","ParentMember":null,"ID":"[Country].[List].\u0026[BHS]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BHR","Name":"Bahrain","ParentMember":null,"ID":"[Country].[List].\u0026[BHR]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BGD","Name":"Bangladesh","ParentMember":null,"ID":"[Country].[List].\u0026[BGD]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BRB","Name":"Barbados","ParentMember":null,"ID":"[Country].[List].\u0026[BRB]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BLR","Name":"Belarus","ParentMember":null,"ID":"[Country].[List].\u0026[BLR]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BEL","Name":"Belgium","ParentMember":null,"ID":"[Country].[List].\u0026[BEL]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BLZ","Name":"Belize","ParentMember":null,"ID":"[Country].[List].\u0026[BLZ]","JTC":"B","ParentDimMember":null,"HLS":[],"SM":true},{"Code":"BEN","Name":"Benin","ParentMember":null,"ID":"[Country].[List].\u0026[BEN]","JTC":"B","Par
+-rw-r--r-- 1 hmnf hmnf 100K Nov 17 19:26 /tmp/icp-diagnostic.tar.gz
