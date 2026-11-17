@@ -135,3 +135,20 @@ def test_selected_variables_matches_databank_payload_contract():
         "customdefinition": None,
         "AggregationRule": None,
     }
+
+
+def test_acquisition_accepts_a_distinct_historical_release_identity(tmp_path, monkeypatch):
+    fake = FakeOpener()
+    monkeypatch.setattr(databank.urllib.request, "build_opener", lambda *args: fake)
+    result = databank.acquire_export(
+        repository_root=tmp_path,
+        report_url="https://databank.worldbank.org/id/4129804e",
+        release_key="icp_2005_cycle",
+        dataset_id="world_bank_icp_2005_databank",
+        retrieved_at=datetime(2026, 11, 10, tzinfo=timezone.utc),
+        retries=0,
+    )
+    manifest = json.loads((tmp_path / result["manifest_path"]).read_text(encoding="utf-8"))
+    assert manifest["report_url"].endswith("/id/4129804e")
+    assert manifest["release"] == "icp_2005_cycle"
+    assert manifest["dataset_id"] == "world_bank_icp_2005_databank"
