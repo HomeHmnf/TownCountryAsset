@@ -91,3 +91,37 @@ def test_weo_loader_keeps_ngdp_and_pppgdp_distinct_and_ignores_aggregates(tmp_pa
     assert result[("ZWE", 2017)]["PPPGDP_present"] is True
     assert result[("ZWE", 2017)]["PPPGDP"] is None
     assert ("ZWE", 2015) in result and "PPPEX" not in result[("ZWE", 2015)]
+
+
+
+def test_global_country_screen_flags_arithmetic_gaps_stable_ratios_and_breaks():
+    rows = [
+        {"country_code": "AAA", "country_name": "Example A", "year": 2018,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.0,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": -20.0,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.25},
+        {"country_code": "AAA", "country_name": "Example A", "year": 2019,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.0,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": -21.0,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.26},
+        {"country_code": "AAA", "country_name": "Example A", "year": 2020,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.0,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": -20.5,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.25},
+        {"country_code": "BBB", "country_name": "Example B", "year": 2018,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.5279,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": 3.0,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 0.9},
+        {"country_code": "BBB", "country_name": "Example B", "year": 2019,
+         "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": 1.5279,
+         "wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only": 4.0,
+         "wdi_factor_to_weo_implied_factor_ratio_arithmetic_only": 1.4},
+    ]
+    result = lineage.build_country_screen(rows)
+    by_code = {row["country_code"]: row for row in result}
+
+    assert by_code["AAA"]["screen_flags"] == "persistent_wdi_weo_ppp_gdp_gap;stable_wdi_weo_factor_ratio"
+    assert by_code["AAA"]["wdi_arithmetic_mismatch_year_count"] == 0
+    assert by_code["BBB"]["wdi_arithmetic_mismatch_year_count"] == 2
+    assert "wdi_ppp_gdp_arithmetic_mismatch" in by_code["BBB"]["screen_flags"]
+    assert "large_factor_ratio_break" in by_code["BBB"]["screen_flags"]
