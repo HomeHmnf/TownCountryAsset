@@ -364,7 +364,7 @@ def write_report(result: dict[str, Any], lineage_rows: list[dict[str, Any]],
         "- Read-only; no source selection, approval, database or canonical-data changes.", "",
         "## Zimbabwe diagnostic", "",
         "| Year | WDI PPP factor | WDI PPP GDP reported | WDI PPP GDP from LCU/factor | WEO PPP GDP | WDI/WEO PPP GDP difference | WEO implied factor | WDI/WEO factor ratio (arithmetic only) |",
-        "|---:|---:|---:|---:|---:|---:|",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in zw:
         fmt = lambda value: "" if value is None else f"{value:.10g}"
