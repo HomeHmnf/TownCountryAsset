@@ -170,7 +170,11 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
         flags: list[str] = []
         if mismatches: flags.append("wdi_ppp_gdp_arithmetic_mismatch")
         if longest_gap_run >= 3: flags.append("persistent_wdi_weo_ppp_gdp_gap")
-        if len(ratio_values) >= 3 and relative_mad is not None and relative_mad <= 0.01: flags.append("stable_wdi_weo_factor_ratio")
+        ratio_deviation_percent = abs(ratio_median - 1.0) * 100 if ratio_median is not None else None
+        if (len(ratio_values) >= 3 and not breaks and relative_mad is not None
+                and relative_mad <= 0.01 and ratio_deviation_percent is not None
+                and ratio_deviation_percent > 1.0):
+            flags.append("stable_wdi_weo_factor_ratio_away_from_unity")
         if breaks: flags.append("large_factor_ratio_break")
         output.append({
             "country_code": code, "country_name": next((r.get("country_name") for r in rows if r.get("country_name")), ""),
@@ -181,9 +185,11 @@ def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str
             "wdi_weo_pppgdp_median_difference_percent_arithmetic_only": median(diffs) if diffs else None,
             "wdi_weo_pppgdp_median_absolute_difference_percent": median([abs(v) for v in diffs]) if diffs else None,
             "wdi_weo_pppgdp_years_with_absolute_gap_at_least_5_percent": len(large_gaps),
+            "wdi_weo_pppgdp_gap_years_at_least_5_percent": ";".join(str(y) for y in gap_years),
             "longest_consecutive_years_with_absolute_gap_at_least_5_percent": longest_gap_run,
             "factor_ratio_overlap_year_count": len(ratio_values),
             "wdi_to_weo_factor_ratio_median_arithmetic_only": ratio_median,
+            "wdi_to_weo_factor_ratio_deviation_from_unity_percent": ratio_deviation_percent,
             "wdi_to_weo_factor_ratio_relative_mad": relative_mad,
             "factor_ratio_break_years": ";".join(str(y) for y in breaks),
             "screen_flags": ";".join(flags) if flags else "no_screen_flag",
@@ -354,13 +360,14 @@ def assess(
     countries = {row["country_code"] for row in lineage_rows}
     years = [row["year"] for row in lineage_rows]
     flag_counts = Counter(flag for row in country_screen_rows for flag in row["screen_flags"].split(";") if flag != "no_screen_flag")
+    unique_flagged_country_count = sum(row["screen_flags"] != "no_screen_flag" for row in country_screen_rows)
     return {
         "assessment": "annual_ppp_lineage_across_icp_wdi_imf_weo",
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "country_count": len(countries),
         "lineage_row_count": len(lineage_rows),
         "country_year_diagnostic_row_count": len(diagnostic_rows),
-        "global_country_screen": {"country_count": len(country_screen_rows), "screen_flag_country_counts": dict(sorted(flag_counts.items())), "thresholds": {"wdi_arithmetic_identity_tolerance_percent": 0.5, "persistent_wdi_weo_ppp_gdp_gap_percent": 5.0, "stable_factor_ratio_relative_mad_percent": 1.0, "factor_ratio_year_over_year_break_percent": 25.0, "minimum_years_for_persistent_or_stable_flags": 3}},
+        "global_country_screen": {"country_count": len(country_screen_rows), "unique_flagged_country_count": unique_flagged_country_count, "screen_flag_country_counts": dict(sorted(flag_counts.items())), "thresholds": {"wdi_arithmetic_identity_tolerance_percent": 0.5, "persistent_wdi_weo_ppp_gdp_gap_percent": 5.0, "stable_factor_ratio_relative_mad_percent": 1.0, "stable_factor_ratio_minimum_deviation_from_unity_percent": 1.0, "factor_ratio_year_over_year_break_percent": 25.0, "minimum_years_for_persistent_or_stable_flags": 3}},
         "year_range": {"minimum": min(years) if years else None, "maximum": max(years) if years else None},
         "source_coverage": {
             "icp_releases": dict(sorted(Counter(row["source_release"] for row in icp_rows).items())),
@@ -440,6 +447,8 @@ def write_report(result: dict[str, Any], lineage_rows: list[dict[str, Any]],
     flagged.sort(key=lambda row: (-float(row["maximum_wdi_arithmetic_ratio_deviation_percent"] or 0), -int(row["wdi_weo_pppgdp_years_with_absolute_gap_at_least_5_percent"]), row["country_code"]))
     lines += ["", "## Global country screening", "",
               f"- Countries screened: {len(country_screen_rows)}",
+              f"- Unique countries with at least one flag: {result['global_country_screen']['unique_flagged_country_count']}",
+              f"- Flag counts (overlapping): {result['global_country_screen']['screen_flag_country_counts']}",
               "- Flags are triage signals only; cross-source semantic comparability is not established.", "",
               "| Country | WDI arithmetic mismatches | Maximum arithmetic deviation (%) | Median absolute WDI/WEO PPP-GDP gap (%) | Factor-ratio years | Flags |",
               "|---|---:|---:|---:|---:|---|"]
