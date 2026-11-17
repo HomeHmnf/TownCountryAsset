@@ -112,7 +112,7 @@ def _load_weo(path: Path, allowed_country_codes: set[str] | None = None) -> dict
                     continue
                 value = _number(row.get(year_text))
                 key = (code, int(year_text))
-                item = output.setdefault(key, {"country_name": row.get("COUNTRY", "")})
+                item = output.setdefault(key, {"country_code": code, "country_name": row.get("COUNTRY", "")})
                 item[parts[1]] = value
                 item[f"{parts[1]}_present"] = True
                 item[f"{parts[1]}_unit"] = row.get("UNIT", "")
