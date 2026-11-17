@@ -82,7 +82,7 @@ def test_weo_loader_keeps_ngdp_and_pppgdp_distinct_and_ignores_aggregates(tmp_pa
          "SCALE": "Billions", "2015": "100", "2016": "110"},
     ])
     monkeypatch.setattr(lineage.imf, "fingerprint", lambda *_args, **_kwargs: {})
-    result = lineage._load_weo(path)
+    result = lineage._load_weo(path, allowed_country_codes={"ZWE"})
 
     assert result[("ZWE", 2015)]["NGDP"] == 11
     assert result[("ZWE", 2015)]["PPPGDP"] == 22
