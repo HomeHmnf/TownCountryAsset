@@ -88,6 +88,7 @@ def _load_weo(path: Path, allowed_country_codes: set[str] | None = None) -> dict
                 key = (code, int(year_text))
                 item = output.setdefault(key, {"country_name": row.get("COUNTRY", "")})
                 item[parts[1]] = value
+                item[f"{parts[1]}_present"] = True
                 item[f"{parts[1]}_unit"] = row.get("UNIT", "")
                 item[f"{parts[1]}_scale"] = row.get("SCALE", "")
                 item[f"{parts[1]}_series_code"] = row.get("SERIES_CODE", "")
@@ -175,9 +176,10 @@ def assess(
             key = (iso3, int(year))
             target = wdi_index.setdefault(key, {"country_name": item.get("country", {}).get("value", "")})
             target[code] = _number(item.get("value"))
+            target[f"{code}_present"] = True
             target[f"{code}_status"] = item.get("obs_status", "")
     for (code, year), item in sorted(wdi_index.items()):
-        if item.get("PA.NUS.PPP") is not None:
+        if item.get("PA.NUS.PPP_present"):
             lineage_rows.append({
                 "country_code": code, "country_name": item.get("country_name", ""), "year": year,
                 "source": "WDI", "source_release": snapshot["manifest"].get("snapshot_id", ""),
@@ -186,10 +188,11 @@ def assess(
                 "unit": snapshot["indicator_metadata"]["PA.NUS.PPP"].get("unit", "LCU per international dollar"),
                 "source_file": snapshot["manifest_path"].relative_to(root).as_posix(),
                 "source_row": "", "classification_code": "", "indicator_code": "PA.NUS.PPP",
-                "observation_status": item.get("PA.NUS.PPP_status", ""),
+                "observation_status": ("missing_source_value" if item.get("PA.NUS.PPP") is None
+                                       else item.get("PA.NUS.PPP_status") or "reported_value"),
                 "comparability_status": "WDI_source_metadata_unit; benchmark_or_extrapolation_role_not_observation_level",
             })
-        if item.get("NY.GDP.MKTP.PP.CD") is not None:
+        if item.get("NY.GDP.MKTP.PP.CD_present"):
             lineage_rows.append({
                 "country_code": code, "country_name": item.get("country_name", ""), "year": year,
                 "source": "WDI", "source_release": snapshot["manifest"].get("snapshot_id", ""),
@@ -198,7 +201,8 @@ def assess(
                 "unit": snapshot["indicator_metadata"]["NY.GDP.MKTP.PP.CD"].get("unit", ""),
                 "source_file": snapshot["manifest_path"].relative_to(root).as_posix(),
                 "source_row": "", "classification_code": "", "indicator_code": "NY.GDP.MKTP.PP.CD",
-                "observation_status": item.get("NY.GDP.MKTP.PP.CD_status", ""),
+                "observation_status": ("missing_source_value" if item.get("NY.GDP.MKTP.PP.CD") is None
+                                       else item.get("NY.GDP.MKTP.PP.CD_status") or "reported_value"),
                 "comparability_status": "reported_WDI_PPP_GDP_not_a_conversion_factor",
             })
 
@@ -269,7 +273,7 @@ def assess(
             "wdi_snapshot_id": snapshot["manifest"].get("snapshot_id"),
             "weo_release": "imf_weo_october_2026",
         })
-        if weo_ppp_gdp is not None:
+        if weo_item.get("PPPGDP_present"):
             lineage_rows.append({
                 "country_code": code, "country_name": diagnostic_rows[-1]["country_name"], "year": year,
                 "source": "IMF_WEO", "source_release": "imf_weo_october_2026",
@@ -278,7 +282,8 @@ def assess(
                 "unit": "current international dollars; source scale " + str(weo_item.get("PPPGDP_scale", "")),
                 "source_file": Path(weo_csv).resolve().relative_to(root).as_posix(),
                 "source_row": "", "classification_code": "", "indicator_code": "PPPGDP",
-                "observation_status": "source_value; actual_estimate_projection_status_unclassified",
+                "observation_status": ("missing_source_value" if weo_ppp_gdp is None
+                                       else "source_value; actual_estimate_projection_status_unclassified"),
                 "comparability_status": "WEO_PPPGDP_reported_value; not a direct ICP factor",
             })
         if weo_implied_factor is not None:
