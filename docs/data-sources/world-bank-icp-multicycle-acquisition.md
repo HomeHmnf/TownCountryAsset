@@ -70,6 +70,27 @@ The tool downloads the provider ZIP, checks the archive signature and CRC, requi
 **Interpretation boundary:** the 2011–2017 columns alone do not identify each observation as a benchmark, revised benchmark, interpolation or extrapolation. Keep the entire archive under the distinct `icp_2017_cycle` release identity. Do not merge its 2017 observations with the ICP 2021 cycle's revised 2017 benchmark. The series metadata member contains 20 notes, not a complete dictionary for all 48 series; use the observation file's series code/name columns as the complete observed series catalogue. The inspector recognizes this wide-year/one-series-per-row layout and retains missing values, the observed series catalogue and country metadata without inferring unreported values.
 
 
+## Official ICP 2005 DataBank acquisition
+
+The World Bank's ICP data page exposes the original 2005 cycle through its DataBank source. The public DataBank report entry point is:
+
+- Saved report: https://databank.worldbank.org/id/4129804e
+- DataBank source: https://databank.worldbank.org/source/international-comparison-program-%28icp%29-2005
+- Official ICP data page: https://www.worldbank.org/en/programs/icp/data
+- Historical global results: https://pubdocs.worldbank.org/en/421631487105159327/ICPreportprelim.pdf
+
+The saved report identifies the 2005 source and exposes 195 selected country/economy members and 47 series in its dimension controls. The DataBank source preview identifies 16 classifications and 47 series in the source catalogue. These are catalogue-selection counts, not proof that every country × classification × series combination has a nonmissing observation. The 2005 published global results cover 146 economies; the 2005 publication/access policy also distinguishes published main aggregates from more granular underlying material. Do not equate the DataBank control counts with participation or complete price/basic-heading coverage. See the World Bank's ICP data page and historical report for the published scope.
+
+The existing cookie-backed DataBank exporter now accepts a release-specific identity while retaining the same byte-preserving ZIP/CSV capture, endpoint trace, selected-dimension metadata, retrieval time and SHA-256 manifest. Acquire the 2005 saved report with:
+
+```fish
+uv run python -m tools.acquire_world_bank_icp_databank --report-url "https://databank.worldbank.org/id/4129804e" --release-key icp_2005_cycle --dataset-id world_bank_icp_2005_databank
+```
+
+This is a distinct `icp_2005_cycle` acquisition stream; it does not reuse or overwrite the ICP 2021 saved-report capture. The acquisition must be inspected after download to verify actual selected members, export completeness, archive integrity and the source's observation/missingness structure. It does not write either database, classify or harmonize observations, approve data, alter source selection or apply retention.
+
+**Access boundary:** the 2005 public release is not equivalent to the later cycles' full detailed-data availability. The 2017 ICP report's data-access appendix describes the 2005 published results as main aggregates/categories (24 headings), with basic-heading and limited item-price access restricted under the 2005 access policy. Preserve whatever the public DataBank export actually provides; do not infer unpublished detailed price data or attempt to treat the 2005 release as structurally equivalent to ICP 2017/2021.
+
 ## Official ICP 2011 workbook acquisition
 
 The official ICP data page links the original 2011 results workbook:
