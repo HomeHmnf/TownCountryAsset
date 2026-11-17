@@ -26,6 +26,7 @@ WDI_MANIFESTS = Path("data_manifests/sources/world_bank_wdi/wdi_selected_macro_i
 OUTPUT = ROOT / "reports/sources/annual-ppp-lineage"
 WEO_CSV = imf.CSV_PATH
 IDENTITY = imf.IDENTITY
+IDENTITY = imf.IDENTITY
 
 
 class LineageError(RuntimeError):
@@ -64,7 +65,7 @@ def _write_csv(path: Path, rows: list[dict[str, Any]], fields: list[str]) -> Non
         writer.writerows(rows)
 
 
-def _load_weo(path: Path) -> dict[tuple[str, int], dict[str, Any]]:
+def _load_weo(path: Path, allowed_country_codes: set[str] | None = None) -> dict[tuple[str, int], dict[str, Any]]:
     imf.fingerprint(path, imf.EXPECTED["csv"])
     output: dict[tuple[str, int], dict[str, Any]] = {}
     with path.open("r", encoding="utf-8-sig", newline="") as stream:
