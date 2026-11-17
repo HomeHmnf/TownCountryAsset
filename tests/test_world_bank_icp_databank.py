@@ -140,9 +140,11 @@ def test_selected_variables_matches_databank_payload_contract():
 def test_acquisition_accepts_a_distinct_historical_release_identity(tmp_path, monkeypatch):
     fake = FakeOpener()
     monkeypatch.setattr(databank.urllib.request, "build_opener", lambda *args: fake)
+    report_url = "https://databank.worldbank.org/id/4129804e"
+    monkeypatch.setattr(databank, "DEFAULT_REPORT_URL", report_url)
     result = databank.acquire_export(
         repository_root=tmp_path,
-        report_url="https://databank.worldbank.org/id/4129804e",
+        report_url=report_url,
         release_key="icp_2005_cycle",
         dataset_id="world_bank_icp_2005_databank",
         retrieved_at=datetime(2026, 11, 10, tzinfo=timezone.utc),
