@@ -329,13 +329,13 @@ The assessment selects the latest timestamped ICP inspection and semantic benchm
 
 Outputs are written under `reports/sources/annual-ppp-lineage/`:
 
-The assessment is a **global country screen**, not a Zimbabwe-only report. It uses the country universe represented by the captured WDI/WEO overlap (and retains source-specific ICP rows separately). It emits one row per diagnostic country in `country_reconciliation_screen.csv`, with screening signals for:
+The assessment is a **global country screen**, not a Zimbabwe-only report. It uses the country universe represented by the captured WDI/WEO diagnostic union; each arithmetic metric uses only the years where its required source observations overlap. Source-specific ICP rows remain separate. It emits one row per diagnostic country in `country_reconciliation_screen.csv`, with screening signals for:
 - WDI reported PPP GDP versus current-LCU GDP divided by WDI `PA.NUS.PPP`;
 - persistent WDI/WEO reported PPP-GDP differences;
-- stable WDI/WEO implied-factor ratios across multiple adjacent years; and
+- stable WDI/WEO implied-factor ratios across multiple observed years; and
 - large year-to-year breaks in those factor ratios.
 
-The explicit triage thresholds are 0.5% for the WDI arithmetic identity, 5% for a persistent PPP-GDP gap, 1% relative median absolute deviation for a stable factor ratio, and 25% for a year-to-year factor-ratio break. At least three years are required for persistent-gap and stable-ratio flags. These thresholds prioritize review; they are not claims of source error, unit equivalence or currency redenomination. The Markdown report lists flagged countries, while the CSV retains the full country screen. Zimbabwe is included in the same global output and is not given a special calculation path.
+The explicit triage thresholds are 0.5% for the WDI arithmetic identity, 5% for a persistent PPP-GDP gap, 1% relative median absolute deviation for a stable factor ratio, and 25% for a year-to-year factor-ratio break. At least three consecutive years are required for a persistent-gap flag; at least three observed years are required for a stable-ratio flag. These thresholds prioritize review; they are not claims of source error, unit equivalence or currency redenomination. The Markdown report lists flagged countries, while the CSV retains the full country screen. Zimbabwe is included in the same global output and is not given a special calculation path.
 
 - `annual_ppp_lineage.csv`: source/release-specific ICP GDP PPP factors, WDI annual PPP conversion factors and current-PPP GDP, WEO current-PPP GDP, and a separately identified WEO NGDP/PPPGDP derived factor. Country, year, source release, lineage role, unit, source file/row and observation status are retained.
 - `country_year_diagnostics.csv`: WDI reported PPP GDP versus the LCU/PPP-factor arithmetic reconstruction, and WDI factors versus the WEO-implied factor. Ratios are explicitly arithmetic diagnostics, not assertions of semantic equivalence.
