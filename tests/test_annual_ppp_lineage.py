@@ -75,6 +75,16 @@ def test_weo_ngdp_usd_is_not_treated_as_local_currency():
     assert lineage._weo_ngdp_local_currency_value({"NGDP": "9", "NGDP_unit": "Somali shilling"}) == 9.0
 
 
+def test_weo_domestic_currency_is_country_specific_for_somalia():
+    somalia = {"country_code": "SOM", "NGDP": "13.234", "NGDP_unit": "Domestic currency"}
+    sierra_leone = {"country_code": "SLE", "NGDP": "9.570", "NGDP_unit": "Domestic currency"}
+
+    assert lineage._weo_ngdp_is_usd(somalia) is True
+    assert lineage._weo_ngdp_local_currency_value(somalia) is None
+    assert lineage._weo_ngdp_is_usd(sierra_leone) is False
+    assert lineage._weo_ngdp_local_currency_value(sierra_leone) == 9.570
+
+
 def test_weo_loader_keeps_ngdp_and_pppgdp_distinct_and_ignores_aggregates(tmp_path, monkeypatch):
     path = tmp_path / "weo.csv"
     _write(path, [
