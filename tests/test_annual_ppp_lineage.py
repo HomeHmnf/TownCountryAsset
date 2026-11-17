@@ -94,13 +94,20 @@ def test_weo_loader_keeps_ngdp_and_pppgdp_distinct_and_ignores_aggregates(tmp_pa
          "SCALE": "Billions", "2015": "22", "2016": "24", "2017": ""},
         {"SERIES_CODE": "ZWE.PPPEX.A", "COUNTRY": "Zimbabwe", "UNIT": "National currency per dollar",
          "SCALE": "Units", "2015": "0.123", "2016": "0.124", "2017": "0.125"},
+        {"SERIES_CODE": "SOM.NGDP.A", "COUNTRY": "Somalia", "UNIT": "Domestic currency",
+         "SCALE": "Billions", "2015": "8", "2016": "9", "2017": "13.234"},
+        {"SERIES_CODE": "SLE.NGDP.A", "COUNTRY": "Sierra Leone", "UNIT": "Domestic currency",
+         "SCALE": "Billions", "2015": "4", "2016": "5", "2017": "6"},
         {"SERIES_CODE": "WLD.NGDP.A", "COUNTRY": "World", "UNIT": "US dollar",
          "SCALE": "Billions", "2015": "100", "2016": "110", "2017": "120"},
     ])
     monkeypatch.setattr(lineage.imf, "fingerprint", lambda *_args, **_kwargs: {})
-    result = lineage._load_weo(path, allowed_country_codes={"ZWE"})
+    result = lineage._load_weo(path, allowed_country_codes={"ZWE", "SOM", "SLE"})
 
     assert result[("ZWE", 2015)]["NGDP"] == 11
+    assert result[("SOM", 2017)]["country_code"] == "SOM"
+    assert lineage._weo_ngdp_local_currency_value(result[("SOM", 2017)]) is None
+    assert lineage._weo_ngdp_local_currency_value(result[("SLE", 2017)]) == 6
     assert result[("ZWE", 2015)]["PPPGDP"] == 22
     assert result[("ZWE", 2015)]["PPPGDP_scale"] == "Billions"
     assert ("WLD", 2015) not in result
