@@ -329,11 +329,20 @@ The assessment selects the latest timestamped ICP inspection and semantic benchm
 
 Outputs are written under `reports/sources/annual-ppp-lineage/`:
 
+The assessment is a **global country screen**, not a Zimbabwe-only report. It uses the country universe represented by the captured WDI/WEO overlap (and retains source-specific ICP rows separately). It emits one row per diagnostic country in `country_reconciliation_screen.csv`, with screening signals for:
+- WDI reported PPP GDP versus current-LCU GDP divided by WDI `PA.NUS.PPP`;
+- persistent WDI/WEO reported PPP-GDP differences;
+- stable WDI/WEO implied-factor ratios across multiple adjacent years; and
+- large year-to-year breaks in those factor ratios.
+
+The explicit triage thresholds are 0.5% for the WDI arithmetic identity, 5% for a persistent PPP-GDP gap, 1% relative median absolute deviation for a stable factor ratio, and 25% for a year-to-year factor-ratio break. At least three years are required for persistent-gap and stable-ratio flags. These thresholds prioritize review; they are not claims of source error, unit equivalence or currency redenomination. The Markdown report lists flagged countries, while the CSV retains the full country screen. Zimbabwe is included in the same global output and is not given a special calculation path.
+
 - `annual_ppp_lineage.csv`: source/release-specific ICP GDP PPP factors, WDI annual PPP conversion factors and current-PPP GDP, WEO current-PPP GDP, and a separately identified WEO NGDP/PPPGDP derived factor. Country, year, source release, lineage role, unit, source file/row and observation status are retained.
 - `country_year_diagnostics.csv`: WDI reported PPP GDP versus the LCU/PPP-factor arithmetic reconstruction, and WDI factors versus the WEO-implied factor. Ratios are explicitly arithmetic diagnostics, not assertions of semantic equivalence.
-- `assessment.json` and `assessment.md`: input fingerprints, source coverage, interpretation limits, side-effect declaration and a Zimbabwe diagnostic table.
+- `country_reconciliation_screen.csv`: global one-row-per-country screening of arithmetic mismatches, persistent WDI/WEO PPP-GDP gaps, stable factor-ratio patterns and abrupt factor-ratio breaks.
+- `assessment.json` and `assessment.md`: input fingerprints, source coverage, interpretation limits, side-effect declaration and a Zimbabwe diagnostic table plus a global country-screen summary.
 
-The original 2011 workbook D3 GDP factor, ICP 2017-cycle revised 2011 and original 2017 values, and ICP 2021-cycle revised 2017, 2021 benchmark, documented 2018–2020 interpolation and documented 2022–2023 GDP PPP extrapolation remain distinct rows. ICP 2017 archive years outside its explicit benchmark roles remain unclassified. The ICP 2021 saved-report export is still limited to its captured selection; absence from that export is not treated as global source missingness.
+The original 2011 workbook D3 GDP factor, ICP 2017-cycle revised 2011 and original 2017 values, and ICP 2021-cycle revised 2017, 2021 benchmark, documented 2018–2020 interpolation and documented 2022–2023 GDP PPP extrapolation remain distinct rows for all captured countries. ICP 2017 archive years outside its explicit benchmark roles remain unclassified. The ICP 2021 saved-report export is still limited to its captured selection; absence from that export is not treated as global source missingness.
 
 WDI `PA.NUS.PPP` remains a rolling annual API series. This capture does not provide observation-level benchmark/interpolation/extrapolation lineage, so the tool does not infer it. WEO `PPPGDP` is retained as reported current-PPP GDP; WEO `NGDP / PPPGDP` is separately marked as a derived arithmetic factor. The rounded WEO `PPPEX` field is not used for precise reconciliation. ICP factors are not normalized across release currency denominations. Cross-source factor ratios remain flagged for currency denomination, redenomination, national-accounts vintage and reference-unit review.
 
