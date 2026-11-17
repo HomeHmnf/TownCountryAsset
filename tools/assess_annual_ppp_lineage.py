@@ -360,7 +360,7 @@ def write_report(result: dict[str, Any], lineage_rows: list[dict[str, Any]],
         f"- WDI snapshot: {result['source_coverage']['wdi_snapshot_id']}",
         "- Read-only; no source selection, approval, database or canonical-data changes.", "",
         "## Zimbabwe diagnostic", "",
-        "| Year | WDI PPP factor | WDI PPP GDP reported | WDI PPP GDP from LCU/factor | WEO implied factor | WDI/WEO factor ratio (arithmetic only) |",
+        "| Year | WDI PPP factor | WDI PPP GDP reported | WDI PPP GDP from LCU/factor | WEO PPP GDP | WDI/WEO PPP GDP difference | WEO implied factor | WDI/WEO factor ratio (arithmetic only) |",
         "|---:|---:|---:|---:|---:|---:|",
     ]
     for row in zw:
@@ -368,6 +368,8 @@ def write_report(result: dict[str, Any], lineage_rows: list[dict[str, Any]],
         lines.append("| " + " | ".join([
             str(row["year"]), fmt(row["wdi_ppp_factor_lcu_per_intl_dollar"]),
             fmt(row["wdi_gdp_current_ppp_reported"]), fmt(row["wdi_gdp_current_ppp_implied_from_lcu_factor"]),
+            fmt(row["weo_pppgdp_current_intl_dollars_absolute"]),
+            fmt(row["wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only"]),
             fmt(row["weo_implied_ppp_factor_lcu_per_intl_dollar"]),
             fmt(row["wdi_factor_to_weo_implied_factor_ratio_arithmetic_only"]),
         ]) + " |")
