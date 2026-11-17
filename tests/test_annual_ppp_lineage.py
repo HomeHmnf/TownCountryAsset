@@ -69,6 +69,12 @@ def test_icp_lineage_preserves_releases_and_only_documented_annual_roles(tmp_pat
     assert by_release_year[("icp_2017_cycle", 2011)]["value"] == 0.5
 
 
+def test_weo_ngdp_usd_is_not_treated_as_local_currency():
+    assert lineage._weo_ngdp_local_currency_value({"NGDP": "13.234", "NGDP_unit": "U.S. dollars"}) is None
+    assert lineage._weo_ngdp_local_currency_value({"NGDP": "11", "NGDP_unit": "Zimbabwe dollar"}) == 11.0
+    assert lineage._weo_ngdp_local_currency_value({"NGDP": "9", "NGDP_unit": "Somali shilling"}) == 9.0
+
+
 def test_weo_loader_keeps_ngdp_and_pppgdp_distinct_and_ignores_aggregates(tmp_path, monkeypatch):
     path = tmp_path / "weo.csv"
     _write(path, [
