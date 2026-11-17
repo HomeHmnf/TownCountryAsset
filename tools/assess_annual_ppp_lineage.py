@@ -13,6 +13,7 @@ import sys
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from statistics import median
 from typing import Any
 
 from tools import assess_imf_weo as imf
@@ -139,6 +140,46 @@ def _load_icp_rows(inspection: Path, benchmark_report: Path) -> list[dict[str, A
             })
     return rows
 
+
+def build_country_screen(diagnostic_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Build a global country screen; flags are triage signals, not conclusions."""
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for row in diagnostic_rows:
+        grouped.setdefault(str(row["country_code"]), []).append(row)
+    output: list[dict[str, Any]] = []
+    for code, rows in sorted(grouped.items()):
+        rows.sort(key=lambda row: int(row["year"]))
+        arithmetic = [float(r["wdi_ppp_gdp_arithmetic_ratio_reported_to_implied"]) for r in rows if r.get("wdi_ppp_gdp_arithmetic_ratio_reported_to_implied") not in (None, "")]
+        diffs = [float(r["wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only"]) for r in rows if r.get("wdi_vs_weo_pppgdp_relative_difference_percent_arithmetic_only") not in (None, "")]
+        ratios = [(int(r["year"]), float(r["wdi_factor_to_weo_implied_factor_ratio_arithmetic_only"])) for r in rows if r.get("wdi_factor_to_weo_implied_factor_ratio_arithmetic_only") not in (None, "")]
+        mismatches = [v for v in arithmetic if abs(v - 1.0) > 0.005]
+        large_gaps = [v for v in diffs if abs(v) >= 5.0]
+        ratio_values = [v for _, v in ratios]
+        ratio_median = median(ratio_values) if ratio_values else None
+        ratio_mad = median([abs(v - ratio_median) for v in ratio_values]) if ratio_values else None
+        relative_mad = ratio_mad / abs(ratio_median) if ratio_mad is not None and ratio_median not in (None, 0) else None
+        breaks = [year for (py, pv), (year, cv) in zip(ratios, ratios[1:]) if year == py + 1 and pv != 0 and abs(cv / pv - 1) > 0.25]
+        flags: list[str] = []
+        if mismatches: flags.append("wdi_ppp_gdp_arithmetic_mismatch")
+        if len(large_gaps) >= 3: flags.append("persistent_wdi_weo_ppp_gdp_gap")
+        if len(ratio_values) >= 3 and relative_mad is not None and relative_mad <= 0.01: flags.append("stable_wdi_weo_factor_ratio")
+        if breaks: flags.append("large_factor_ratio_break")
+        output.append({
+            "country_code": code, "country_name": next((r.get("country_name") for r in rows if r.get("country_name")), ""),
+            "diagnostic_year_count": len(rows), "wdi_arithmetic_overlap_year_count": len(arithmetic),
+            "wdi_arithmetic_mismatch_year_count": len(mismatches),
+            "maximum_wdi_arithmetic_ratio_deviation_percent": max((abs(v - 1) * 100 for v in arithmetic), default=None),
+            "wdi_weo_pppgdp_overlap_year_count": len(diffs),
+            "wdi_weo_pppgdp_median_difference_percent_arithmetic_only": median(diffs) if diffs else None,
+            "wdi_weo_pppgdp_median_absolute_difference_percent": median([abs(v) for v in diffs]) if diffs else None,
+            "wdi_weo_pppgdp_years_with_absolute_gap_at_least_5_percent": len(large_gaps),
+            "factor_ratio_overlap_year_count": len(ratio_values),
+            "wdi_to_weo_factor_ratio_median_arithmetic_only": ratio_median,
+            "wdi_to_weo_factor_ratio_relative_mad": relative_mad,
+            "factor_ratio_break_years": ";".join(str(y) for y in breaks),
+            "screen_flags": ";".join(flags) if flags else "no_screen_flag",
+        })
+    return output
 
 def assess(
     *, repository_root: str | Path = ROOT, wdi_manifest: str | Path | None = None,
@@ -300,14 +341,17 @@ def assess(
 
     lineage_rows.sort(key=lambda row: (row["country_code"], row["year"], row["source"], row["source_release"], row["metric"]))
     diagnostic_rows.sort(key=lambda row: (row["country_code"], row["year"]))
+    country_screen_rows = build_country_screen(diagnostic_rows)
     countries = {row["country_code"] for row in lineage_rows}
     years = [row["year"] for row in lineage_rows]
+    flag_counts = Counter(flag for row in country_screen_rows for flag in row["screen_flags"].split(";") if flag != "no_screen_flag")
     return {
         "assessment": "annual_ppp_lineage_across_icp_wdi_imf_weo",
         "checked_at": datetime.now(timezone.utc).isoformat(),
         "country_count": len(countries),
         "lineage_row_count": len(lineage_rows),
         "country_year_diagnostic_row_count": len(diagnostic_rows),
+        "global_country_screen": {"country_count": len(country_screen_rows), "screen_flag_country_counts": dict(sorted(flag_counts.items())), "thresholds": {"wdi_arithmetic_identity_tolerance_percent": 0.5, "persistent_wdi_weo_ppp_gdp_gap_percent": 5.0, "stable_factor_ratio_relative_mad_percent": 1.0, "factor_ratio_year_over_year_break_percent": 25.0, "minimum_years_for_persistent_or_stable_flags": 3}},
         "year_range": {"minimum": min(years) if years else None, "maximum": max(years) if years else None},
         "source_coverage": {
             "icp_releases": dict(sorted(Counter(row["source_release"] for row in icp_rows).items())),
@@ -335,11 +379,11 @@ def assess(
             "source_selection_changed": False, "canonical_data_promoted": False,
             "retention_applied": False,
         },
-    }, lineage_rows, diagnostic_rows
+    }, lineage_rows, diagnostic_rows, country_screen_rows
 
 
 def write_report(result: dict[str, Any], lineage_rows: list[dict[str, Any]],
-                 diagnostic_rows: list[dict[str, Any]], output_root: Path) -> Path:
+                 diagnostic_rows: list[dict[str, Any]], country_screen_rows: list[dict[str, Any]], output_root: Path) -> Path:
     output_root.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     target = output_root / ("annual_ppp_lineage_" + stamp)
@@ -358,6 +402,8 @@ def write_report(result: dict[str, Any], lineage_rows: list[dict[str, Any]],
         "weo_implied_ppp_factor_lcu_per_intl_dollar"]
     _write_csv(target / "annual_ppp_lineage.csv", lineage_rows, lineage_fields)
     _write_csv(target / "country_year_diagnostics.csv", diagnostic_rows, diagnostic_fields)
+    screen_fields = list(country_screen_rows[0]) if country_screen_rows else ["country_code", "country_name", "screen_flags"]
+    _write_csv(target / "country_reconciliation_screen.csv", country_screen_rows, screen_fields)
     (target / "assessment.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     zw = [row for row in diagnostic_rows if row["country_code"] == "ZWE"]
     lines = [
@@ -396,9 +442,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output-root", type=Path, default=OUTPUT)
     args = parser.parse_args(argv)
     try:
-        result, lineage_rows, diagnostic_rows = assess(
+        result, lineage_rows, diagnostic_rows, country_screen_rows = assess(
             repository_root=args.root, wdi_manifest=args.wdi_manifest, weo_csv=args.weo_csv)
-        target = write_report(result, lineage_rows, diagnostic_rows, args.output_root)
+        target = write_report(result, lineage_rows, diagnostic_rows, country_screen_rows, args.output_root)
     except (LineageError, wdi_snapshot.SnapshotError, imf.AssessmentError,
             icp_benchmarks.ICPAssessmentError, OSError, ValueError, csv.Error) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
