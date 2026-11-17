@@ -10,7 +10,7 @@ import csv
 import json
 import math
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -20,9 +20,9 @@ from tools import assess_world_bank_icp_benchmarks as icp_benchmarks
 from tools import acquire_world_bank_wdi_snapshot as wdi_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
-ICP_INSPECTION = ROOT / "reports/sources/world-bank-icp"
-ICP_BENCHMARKS = ROOT / "reports/sources/world-bank-icp-benchmarks"
-WDI_MANIFESTS = ROOT / "data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators"
+ICP_INSPECTION = Path("reports/sources/world-bank-icp")
+ICP_BENCHMARKS = Path("reports/sources/world-bank-icp-benchmarks")
+WDI_MANIFESTS = Path("data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators")
 OUTPUT = ROOT / "reports/sources/annual-ppp-lineage"
 WEO_CSV = imf.CSV_PATH
 IDENTITY = imf.IDENTITY
