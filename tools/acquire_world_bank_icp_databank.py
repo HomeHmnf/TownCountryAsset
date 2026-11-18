@@ -46,6 +46,10 @@ class DataBankExportError(RuntimeError):
     """DataBank session, selection or export failure."""
 
 
+class _DimensionNotInitialized(DataBankExportError):
+    """DataBank returned its empty MemberListJSON sentinel for a dimension."""
+
+
 class _HiddenInputs(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
@@ -130,6 +134,18 @@ def _dimension_response(opener: urllib.request.OpenerDirector, cube_id: str,
                 raise DataBankExportError("dimension response is not an object")
             selected = value.get("Sel")
             members = value.get("Members")
+            # The live DataBank endpoint can return HTTP 200 with a completely
+            # uninitialized MemberListJSON envelope (all of Levels, Members,
+            # DT and Sel are null). HAR captures show this for Country and
+            # Time on both ICP report pages. It is a server-side dimension
+            # initialization failure, not a transient empty selection; retrying
+            # it only adds long backoff delays and obscures the useful diagnosis.
+            if all(value.get(key) is None for key in ("Levels", "Members", "DT", "Sel")):
+                raise _DimensionNotInitialized(
+                    "DataBank returned an uninitialized MemberListJSON envelope "
+                    "(Levels, Members, DT and Sel are all null); the browser "
+                    "capture does not establish a usable selection for this dimension"
+                )
             if not isinstance(selected, dict) or not isinstance(members, (dict, list)):
                 raise DataBankExportError("dimension response lacks Sel or Members")
             if not selected:
@@ -139,6 +155,10 @@ def _dimension_response(opener: urllib.request.OpenerDirector, cube_id: str,
                     f"dimension selection has {len(selected)} of {expected_count} expected members"
                 )
             return value
+        except _DimensionNotInitialized as exc:
+            # A syntactically valid but empty server envelope is deterministic.
+            # Do not repeat the same request with exponential backoff.
+            raise DataBankExportError(f"{control_id}: {exc}") from exc
         except DataBankExportError as exc:
             last_error = str(exc)
             if attempt >= retries:
