@@ -154,3 +154,31 @@ def test_acquisition_accepts_a_distinct_historical_release_identity(tmp_path, mo
     assert manifest["report_url"].endswith("/id/4129804e")
     assert manifest["release"] == "icp_2005_cycle"
     assert manifest["dataset_id"] == "world_bank_icp_2005_databank"
+
+
+
+def test_uninitialized_dimension_envelope_fails_without_retries(monkeypatch):
+    calls = []
+
+    def empty_dimension(*args, **kwargs):
+        calls.append((args, kwargs))
+        return {
+            "__type": "DDPNavigationNew.MemberListJSON",
+            "Levels": None,
+            "Members": None,
+            "DT": None,
+            "Sel": None,
+        }
+
+    monkeypatch.setattr(databank, "_post_json", empty_dimension)
+    try:
+        databank._dimension_response(
+            object(), "3869", "Country", "[Country].[List]",
+            expected_count=176, timeout=1, retries=5, retry_delay=0,
+        )
+    except databank.DataBankExportError as exc:
+        assert "Country" in str(exc)
+        assert "uninitialized MemberListJSON envelope" in str(exc)
+    else:
+        raise AssertionError("Expected an uninitialized dimension to fail")
+    assert len(calls) == 1
