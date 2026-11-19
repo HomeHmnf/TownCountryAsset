@@ -189,7 +189,7 @@ The operator command tools/bulk_approve_country_reviews.py provides a dry-run-fi
 
 The command separates country-record acceptance from the four review-proposal domains:
 
-- --approve-records approves eligible countries.record_status='candidate' rows only when each has exactly one current source mapping and one canonical English name. It does not set entity classification, ISO, localization, or flag status.
+- --approve-records approves eligible countries.record_status='candidate' rows only when each has at least one current source mapping and exactly one canonical English name. Multiple current source mappings are valid provenance relationships and do not, by themselves, make the persistent game_id or canonical name ambiguous. It does not set entity classification, ISO, localization, or flag status.
 - --proposal-type iso approves eligible ISO proposals and sets the matching country ISO pair and iso_assignment_status='verified'. Both codes must be present and syntactically valid, and codes must be unique against already-verified records and within the batch.
 - --proposal-type localization approves only proposals with a non-empty Persian name and inserts that canonical Persian name.
 - --proposal-type entity_type requires a matching current entity type and a non-empty evidence list. Existing imported entity proposals with empty evidence remain pending until evidence is supplied.
