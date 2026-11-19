@@ -263,6 +263,31 @@ def test_rejects_stale_iso_reference_checksum_before_database_write(tmp_path: Pa
         connection.close()
 
 
+@pytest.mark.parametrize("m49_row_count, accepted", [(1, True), (2, False)])
+def test_un_m49_provenance_uses_m49_row_count(tmp_path: Path, m49_row_count: int, accepted: bool):
+    inputs = fixture_inputs(tmp_path)
+    provenance = json.loads(inputs["iso_provenance"].read_text(encoding="utf-8"))
+    provenance.pop("reference_row_count")
+    provenance["source_id"] = "un_m49"
+    provenance["m49_row_count"] = m49_row_count
+    write_json(inputs["iso_provenance"], provenance)
+
+    if accepted:
+        artifact = review_data_import.build_review_application_artifact(
+            inputs["registry"], inputs["iso_reference"], inputs["iso_provenance"],
+            inputs["iso_proposals"], inputs["persian_candidates"],
+            inputs["persian_provenance"], inputs["taxonomy"], inputs["flags"],
+        )
+        assert artifact["metadata"]["iso_proposal_count"] == 1
+    else:
+        with pytest.raises(ReviewDataImportError, match="row count"):
+            review_data_import.build_review_application_artifact(
+                inputs["registry"], inputs["iso_reference"], inputs["iso_provenance"],
+                inputs["iso_proposals"], inputs["persian_candidates"],
+                inputs["persian_provenance"], inputs["taxonomy"], inputs["flags"],
+            )
+
+
 def test_rejects_persian_identity_mismatch_before_database_write(tmp_path: Path):
     inputs = fixture_inputs(tmp_path)
     payload = json.loads(inputs["persian_candidates"].read_text(encoding="utf-8"))
