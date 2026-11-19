@@ -137,14 +137,22 @@ def _is_known_footer(row: dict[str, str]) -> bool:
     return label.startswith("Data from database:") or label.startswith("Last Updated:")
 
 
-def _observation_rows(rows: list[dict[str, str]], label: str) -> tuple[dict[tuple[str, str, str], dict[str, str]], int]:
+def _observation_rows(
+    rows: list[dict[str, str]], label: str, *, allow_series_dictionary: bool = False
+) -> tuple[dict[tuple[str, str, str], dict[str, str]], int]:
     keyed: dict[tuple[str, str, str], dict[str, str]] = {}
     non_observation_count = 0
     for row_number, row in enumerate(rows, start=2):
         key = _key(row)
         if not all(key):
             non_observation_count += 1
-            if not _is_known_footer(row):
+            first = (row.get("Classification Name") or "").strip()
+            second = (row.get("Classification Code") or "").strip()
+            dictionary_row = allow_series_dictionary and (
+                (first == "Code" and bool(second))
+                or (first.isdigit() and bool(second))
+            )
+            if not _is_known_footer(row) and not dictionary_row:
                 raise ICPDataBankValidationError(
                     f"{label} contains an unrecognized non-observation row at CSV row {row_number}: "
                     f"{row!r}"
@@ -262,7 +270,9 @@ def validate_manifest(
         )
 
     data_keyed, data_extras = _observation_rows(data_rows, "Data CSV")
-    metadata_keyed, metadata_extras = _observation_rows(metadata_rows, "Series Metadata CSV")
+    metadata_keyed, metadata_extras = _observation_rows(
+        metadata_rows, "Series Metadata CSV", allow_series_dictionary=True
+    )
     if not data_keyed:
         raise ICPDataBankValidationError("Data CSV contains no observations")
     if data_keyed.keys() != metadata_keyed.keys():
