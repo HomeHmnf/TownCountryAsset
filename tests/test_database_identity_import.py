@@ -241,3 +241,46 @@ def test_reads_provenance_from_production_manifest(tmp_path):
         tmp_path / "canonical.sqlite", registry, candidate
     )
     assert result["countries"] == 2
+
+
+def test_preserves_verified_iso_assignment_during_identity_reimport(tmp_path):
+    registry, candidate = write_inputs(tmp_path)
+    database = tmp_path / "canonical.sqlite"
+    game_id = "tc_" + "1" * 32
+    connection = connect_database(database)
+    try:
+        apply_migrations(connection)
+        connection.execute(
+            """INSERT INTO countries (
+                game_id, entity_type, record_status, iso_alpha2, iso_alpha3,
+                iso_assignment_status, localization_status, created_at, updated_at
+            ) VALUES (?, 'unreviewed', 'approved', 'AA', 'AAA',
+                      'unverified', 'unreviewed', 'x', 'x')""",
+            (game_id,),
+        )
+        connection.execute(
+            """INSERT INTO review_proposals (
+                game_id, proposal_type, proposal_fingerprint, proposed_json,
+                evidence_json, review_status, created_at, reviewed_at
+            ) VALUES (?, 'iso', ?, ?, '{}', 'approved', 'x', '2026-11-19T00:00:00Z')""",
+            (game_id, "1" * 64, json.dumps({"alpha2": "AA", "alpha3": "AAA"})),
+        )
+        connection.execute(
+            "UPDATE countries SET iso_assignment_status='verified' WHERE game_id=?",
+            (game_id,),
+        )
+        connection.commit()
+    finally:
+        connection.close()
+
+    result = approved_import(database, registry, candidate)
+    assert result["countries"] == 2
+    connection = connect_database(database)
+    try:
+        country = connection.execute(
+            "SELECT record_status, iso_alpha2, iso_alpha3, iso_assignment_status FROM countries WHERE game_id=?",
+            (game_id,),
+        ).fetchone()
+        assert tuple(country) == ("approved", "AA", "AAA", "verified")
+    finally:
+        connection.close()
