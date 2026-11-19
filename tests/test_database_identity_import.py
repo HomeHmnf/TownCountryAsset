@@ -186,7 +186,7 @@ def test_rejects_manifest_checksum_mismatch(tmp_path):
         approved_import(tmp_path / "canonical.sqlite", registry, candidate)
 
 
-def test_rejects_conflicting_existing_country_record_and_rolls_back(tmp_path):
+def test_preserves_approved_record_status_during_identity_reimport(tmp_path):
     registry, candidate = write_inputs(tmp_path)
     database = tmp_path / "canonical.sqlite"
     connection = connect_database(database)
@@ -201,12 +201,14 @@ def test_rejects_conflicting_existing_country_record_and_rolls_back(tmp_path):
         )
     finally:
         connection.close()
-    with pytest.raises(IdentityImportError, match="conflicts"):
-        approved_import(database, registry, candidate)
+    result = approved_import(database, registry, candidate)
+    assert result["countries"] == 2
     connection = connect_database(database)
     try:
-        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 0
-        assert connection.execute("SELECT record_status FROM countries").fetchone()[0] == "approved"
+        assert connection.execute(
+            "SELECT record_status FROM countries WHERE game_id=?", ("tc_" + "1" * 32,)
+        ).fetchone()[0] == "approved"
+        assert connection.execute("SELECT COUNT(*) FROM dataset_imports").fetchone()[0] == 1
     finally:
         connection.close()
 
