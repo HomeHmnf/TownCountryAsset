@@ -377,6 +377,7 @@ def validate_manifest(
         "data_metadata_key_parity": True,
         "data_metadata_identity_and_value_parity": True,
         "archive_and_extracted_artifact_integrity": True,
+        "validation_report_path": (report_dir / "validation.json").relative_to(root).as_posix(),
         "side_effects": {
             "raw_data_written": False, "project_database_written": False,
             "game_database_written": False, "approval_created": False,
@@ -386,9 +387,6 @@ def validate_manifest(
     with (report_dir / "validation.json").open("x", encoding="utf-8") as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
         stream.write("\n")
-    result["validation_report_path"] = (
-        report_dir / "validation.json"
-    ).relative_to(root).as_posix()
     return result
 
 
