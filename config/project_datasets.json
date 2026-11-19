@@ -644,6 +644,74 @@
           }
         }
       ]
+    },
+    {
+      "source_key": "world_bank_icp",
+      "dataset_key": "world_bank_icp_databank_saved_report",
+      "name": "ICP annual PPPs — DataBank saved-report export",
+      "description": "Timestamped CSV captures of the World Bank ICP-Annual-PPPs DataBank saved report. Each capture preserves the selected countries, classification, series and years as source-reported; this is a report export, not a new provider-declared ICP release.",
+      "data_format": "csv_bundle",
+      "frequency": "annual",
+      "metadata": {
+        "report_name": "ICP-Annual-PPPs",
+        "report_url": "https://databank.worldbank.org/id/1da9d9a2?Report_Name=ICP-Annual-PPPs",
+        "manifest_directory": "data_manifests/sources/world_bank_icp/databank_exports",
+        "raw_directory": "raw_data/sources/world_bank_icp/databank_exports",
+        "acquisition_tool": "tools/acquire_world_bank_icp_databank.py",
+        "semantic_validation_tool": "tools/validate_world_bank_icp_databank.py",
+        "workflow_tool": "tools/process_world_bank_icp_databank.py",
+        "capture_unit": "One timestamped report export containing the original ZIP archive, the Data CSV and the Series Metadata CSV.",
+        "release_semantics": "A repeated saved-report capture is a new acquisition event, not a new ICP publication vintage.",
+        "statistical_scope": "The selected DataBank report currently captures global PPP classification PPPGlob, six expenditure aggregates and the selected annual time dimension. Scope is read from each manifest and is not assumed constant across future captures.",
+        "missingness": "Preserve the provider missing-value token '..'; do not impute missing observations or treat them as zero.",
+        "licensing": "Review World Bank dataset terms and any third-party restrictions before redistribution."
+      },
+      "streams": [
+        {
+          "stream_key": "saved_report_csv_export",
+          "name": "ICP annual PPPs DataBank saved-report CSV captures",
+          "acquisition_mode": "browser_session_csv_export",
+          "validation_contract": {
+            "manifest_directory": "data_manifests/sources/world_bank_icp/databank_exports",
+            "required_artifacts": [
+              "original_export_archive",
+              "*_Data.csv",
+              "*_Series_-_Metadata.csv"
+            ],
+            "required_dimensions": [
+              "Country",
+              "Classification",
+              "Series",
+              "Time"
+            ],
+            "observation_key": [
+              "classification_code",
+              "time_code",
+              "country_code"
+            ],
+            "require_unique_observation_keys": true,
+            "require_complete_country_classification_time_cross_product": true,
+            "indicator_columns_must_match_selected_series": true,
+            "data_and_series_metadata_observation_parity": true,
+            "missing_value_token": "..",
+            "artifact_integrity": [
+              "sha256",
+              "byte_count",
+              "ZIP CRC"
+            ],
+            "semantic_validation": "tools.validate_world_bank_icp_databank validates the selected dimension cross-product, row keys, values, encoding, and parity before Project DB acquisition registration.",
+            "application_boundary": "Project DB registration stores acquisition and artifact provenance only. Statistical observation import, approval, source selection and Game DB application are separate governed operations."
+          },
+          "metadata": {
+            "release_semantics": "Timestamped saved-report snapshots; not provider-declared release vintages.",
+            "capture_unit": "One ZIP archive and its two extracted CSV members from one DataBank report session.",
+            "canonical_observation_artifact": "*_Data.csv",
+            "supporting_metadata_artifact": "*_Series_-_Metadata.csv",
+            "metadata_encoding": "Decode using strict UTF-8 first, then Windows-1252 fallback; preserve original bytes.",
+            "duplicate_handling": "Never append the Series Metadata CSV as a second observation source; it repeats the same observations and adds a trailing series-code dictionary."
+          }
+        }
+      ]
     }
   ]
 }
