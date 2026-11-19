@@ -79,6 +79,26 @@ def test_bulk_approval_dry_run_does_not_write(review_db):
         connection.close()
 
 
+def test_multiple_current_source_mappings_do_not_make_identity_ambiguous(review_db):
+    database, registry = review_db
+    connection = connect_database(database)
+    import_id = connection.execute(
+        "SELECT import_id FROM country_sources WHERE game_id=?", (GAME_ID,)
+    ).fetchone()[0]
+    connection.execute(
+        """INSERT INTO country_sources(game_id, dataset, source_id, is_current, import_id)
+           VALUES (?, 'natural_earth_admin_0', 'AAA-SECOND', 1, ?)""",
+        (GAME_ID, import_id),
+    )
+    connection.commit()
+    connection.close()
+
+    result = bulk.bulk_approve(database, registry, approve_records=True)
+    assert result["status"] == "dry_run"
+    assert result["record_candidates_eligible"] == 2
+    assert result["skipped"] == {}
+
+
 def test_bulk_approval_applies_records_and_iso_atomically(review_db):
     database, registry = review_db
     result = bulk.bulk_approve(
