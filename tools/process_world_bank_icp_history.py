@@ -142,6 +142,7 @@ def _canonical_iso_registry(database_path: str | Path) -> tuple[dict[str, list[d
     if not path.is_file():
         return {}, "database_file_not_present"
     uri = path.as_uri() + "?mode=ro"
+    connection = None
     try:
         connection = sqlite3.connect(uri, uri=True)
         connection.row_factory = sqlite3.Row
@@ -149,9 +150,11 @@ def _canonical_iso_registry(database_path: str | Path) -> tuple[dict[str, list[d
             """SELECT game_id, iso_alpha3, iso_assignment_status, record_status
                FROM countries WHERE iso_alpha3 IS NOT NULL"""
         ).fetchall()
-        connection.close()
     except sqlite3.Error:
         return {}, "canonical_country_registry_unavailable"
+    finally:
+        if connection is not None:
+            connection.close()
     result: dict[str, list[dict[str, str]]] = {}
     for row in rows:
         if row["iso_assignment_status"] == "verified" and row["record_status"] == "approved":
