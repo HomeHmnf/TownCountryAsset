@@ -118,7 +118,12 @@ def _validate_iso(
     if provenance.get("normalized_reference") and Path(provenance["normalized_reference"]).name != reference_path.name:
         raise ReviewDataImportError("ISO provenance identifies a different normalized reference file")
     reference = read_reference(reference_path)
-    if provenance.get("reference_row_count") != len(reference):
+    reference_row_count = (
+        provenance.get("m49_row_count")
+        if provenance.get("source_id") == "un_m49"
+        else provenance.get("reference_row_count")
+    )
+    if reference_row_count != len(reference):
         raise ReviewDataImportError("ISO reference row count does not match provenance")
     report_rows = _read_iso_report(report_path)
     fresh = propose(registry, reference)
