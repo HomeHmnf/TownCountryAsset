@@ -258,7 +258,7 @@ def build_country_mapping_review(
     summary = {
         "source_country_count": len(country_rows),
         "candidate_game_mappings": len(mappings),
-        "exact_iso3_asset_matches": len(mappings) + sum(bool(x["asset_candidates"]) for x in exceptions),
+        "exact_iso3_asset_matches": sum(bool(x.get("asset_country_id")) for x in mappings) + sum(bool(x["asset_candidates"]) for x in exceptions),
         "ambiguous": counts["ambiguous_identity"],
         "manual_review_no_approved_game_crosswalk": counts["manual_review_no_approved_game_crosswalk"],
         "aggregate_not_a_country": counts["aggregate_not_a_country"],
@@ -341,6 +341,7 @@ def _approved_mapping_index(mapping: dict[str, Any]) -> dict[str, dict[str, str]
 def dry_run_icp_history(
     *, repository_root: str | Path = ROOT, manifest_path: str | Path,
     mapping_path: str | Path = DEFAULT_MAPPING,
+    database_path: str | Path = DEFAULT_DATABASE_PATH,
 ) -> dict[str, Any]:
     root = Path(repository_root).resolve()
     manifest, data_path, metadata_path = _manifest_paths(root, Path(manifest_path))
@@ -356,13 +357,20 @@ def dry_run_icp_history(
     if selected_country_count is None or len(country_codes) != selected_country_count:
         raise ICPHistoryError("Mapping review does not cover the complete selected Country dimension")
     approved = _approved_mapping_index(mapping)
+    canonical_registry, canonical_registry_status = _canonical_iso_registry(database_path)
+    eligible_mappings = {
+        code: item for code, item in approved.items()
+        if len(canonical_registry.get(code, [])) == 1
+        and canonical_registry[code][0]["game_id"] == item["game_id"]
+    }
+    ineligible_mappings = sorted(set(approved) - set(eligible_mappings))
     if set(indicator_codes) != set(INDICATOR_NAMES):
         raise ICPHistoryError("Data CSV indicator columns differ from the six-indicator contract")
     valid_rows = [r for r in rows if (r.get("Country Code") or "").strip() and (r.get("Time Code") or "").strip()]
     expected = len(valid_rows) * len(indicator_columns)
     observed = missing = eligible = 0
     per_indicator = {}
-    mapped_codes = set(approved)
+    mapped_codes = set(eligible_mappings)
     for col, code in zip(indicator_columns, indicator_codes):
         count_observed = count_missing = count_eligible = 0
         for row in valid_rows:
@@ -398,7 +406,7 @@ def dry_run_icp_history(
         "historical_cells_expected": expected,
         "years": years,
         "source_country_count": len(country_codes),
-        "approved_country_mappings": len(approved),
+        "approved_country_mappings": len(approved),\n        "canonical_registry_status": canonical_registry_status,\n        "eligible_country_mappings": len(eligible_mappings),\n        "ineligible_approved_country_codes": ineligible_mappings,
         "pending_candidate_mappings": sum(x.get("review_status") != "approved" for x in mapping.get("mappings", [])),
         "unmapped_or_manual_review_entities": len(mapping.get("exceptions", [])),
         "eligible_historical_cells": eligible,
@@ -409,7 +417,7 @@ def dry_run_icp_history(
         "game_database_written": False,
         "approval_created": False,
         "observations_imported": False,
-        "status": "ready_for_mapping_review" if not approved else "ready_for_approval_proposal",
+        "status": "ready_for_mapping_review" if not eligible_mappings else "ready_for_approval_proposal",
     }
 
 
@@ -444,6 +452,12 @@ def propose_icp_application(
     database_path: str | Path = DEFAULT_DATABASE_PATH,
 ) -> dict[str, Any]:
     artifact = build_icp_application_artifact(manifest_path=manifest_path, mapping_path=mapping_path)
+    mapping = _json((ROOT / mapping_path).resolve() if not Path(mapping_path).is_absolute() else Path(mapping_path).resolve())
+    approved = _approved_mapping_index(mapping)
+    canonical_registry, _ = _canonical_iso_registry(database_path)
+    invalid = sorted(code for code, item in approved.items() if len(canonical_registry.get(code, [])) != 1 or canonical_registry[code][0]["game_id"] != item["game_id"])
+    if invalid:
+        raise ICPHistoryError("Mappings are not backed by unique approved/verified canonical ISO3 identities: " + ", ".join(invalid[:10]))
     connection = connect_database(database_path)
     try:
         apply_migrations(connection)
@@ -575,7 +589,7 @@ def main(argv: list[str] | None = None) -> int:
             result = import_icp_history(approval_id=args.approval_id, manifest_path=args.manifest,
                                         mapping_path=args.mapping, database_path=args.database)
         else:
-            result = dry_run_icp_history(manifest_path=args.manifest, mapping_path=args.mapping)
+            result = dry_run_icp_history(manifest_path=args.manifest, mapping_path=args.mapping, database_path=args.database)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     except (ICPHistoryError, ApplicationApprovalError, OSError, ValueError, sqlite3.Error) as exc:
