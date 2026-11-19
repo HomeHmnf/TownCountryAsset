@@ -505,13 +505,26 @@ def import_icp_history(
         apply_migrations(connection)
         connection.execute("BEGIN IMMEDIATE")
         require_approved_application(connection, approval_id=approval_id, artifact=artifact)
-        country_status = {r["game_id"]: (r["record_status"], r["iso_alpha3"], r["iso_assignment_status"]) for r in connection.execute("SELECT game_id, record_status, iso_alpha3, iso_assignment_status FROM countries")}
+        country_rows = connection.execute(
+            "SELECT game_id, record_status, iso_alpha3, iso_assignment_status FROM countries"
+        ).fetchall()
+        country_status = {r["game_id"]: (r["record_status"], r["iso_alpha3"], r["iso_assignment_status"]) for r in country_rows}
+        verified_by_iso: dict[str, list[str]] = {}
+        for row in country_rows:
+            if row["record_status"] == "approved" and row["iso_assignment_status"] == "verified" and row["iso_alpha3"]:
+                verified_by_iso.setdefault(str(row["iso_alpha3"]).upper(), []).append(row["game_id"])
         missing_game_ids = sorted({x["game_id"] for x in approved.values()} - set(country_status))
         if missing_game_ids:
             raise ICPHistoryError("Approved mapping references unknown canonical game IDs: " + ", ".join(missing_game_ids[:10]))
-        ineligible = sorted(game_id for game_id in {x["game_id"] for x in approved.values()} if country_status[game_id][0] != "approved" or country_status[game_id][2] != "verified" or country_status[game_id][1] != next(item["source_country_code"] for item in approved.values() if item["game_id"] == game_id))
-        if ineligible:
-            raise ICPHistoryError("ICP mappings require approved canonical country identities: " + ", ".join(ineligible[:10]))
+        invalid_codes = sorted(
+            code for code, item in approved.items()
+            if verified_by_iso.get(code, []) != [item["game_id"]]
+            or country_status[item["game_id"]][0] != "approved"
+            or country_status[item["game_id"]][2] != "verified"
+            or country_status[item["game_id"]][1] != code
+        )
+        if invalid_codes:
+            raise ICPHistoryError("ICP mappings require unique approved/verified canonical ISO3 identities: " + ", ".join(invalid_codes[:10]))
         imported_at = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
         raw_sha = hashlib.sha256(data_path.read_bytes()).hexdigest()
         cursor = connection.execute(
