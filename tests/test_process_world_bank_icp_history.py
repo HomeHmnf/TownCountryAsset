@@ -18,6 +18,9 @@ def test_m49_normalization_preserves_non_numeric_exception_codes():
 
 def test_approved_mapping_index_ignores_pending_and_rejects_non_bijective():
     mapping = {
+        "schema_version": 1,
+        "source_key": "world_bank_icp",
+        "dataset": "world_bank_icp_databank_saved_report",
         "mappings": [
             {"source_country_code": "AUS", "game_id": "tc_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "review_status": "pending"},
             {"source_country_code": "KHM", "game_id": "tc_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "review_status": "approved"},

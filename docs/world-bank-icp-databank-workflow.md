@@ -25,7 +25,7 @@ The selected series names and full descriptions are recorded in
 `reports/sources/world-bank-icp/country-mapping-review/indicator_dictionary.json`.
 The DataBank export does not provide a separate per-row currency field. The
 classification states US$ = 1; the importer therefore records the source unit as
-“PPP ratio (US$ = 1)” and does not invent country currency codes.
+“PPP (US$ = 1; source classification)” and does not invent country currency codes.
 
 ## Country identity mapping
 

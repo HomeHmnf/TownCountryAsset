@@ -27,42 +27,42 @@
       "indicator_name": "Gross domestic product",
       "source_display_name": "1000000:GROSS DOMESTIC PRODUCT",
       "source_definition": "This ICP classification heading covers individual consumption expenditure by households; individual consumption expenditure by nonprofit institutions serving households (NPISHs); individual consumption expenditure by government; collective consumption expenditure by government; gross capital formation; balance of exports and imports.",
-      "unit": "PPP ratio (US$ = 1)"
+      "unit": "PPP (US$ = 1; source classification)"
     },
     {
       "indicator_code": "9020000",
       "indicator_name": "Actual individual consumption",
       "source_display_name": "9020000:ACTUAL INDIVIDUAL CONSUMPTION",
       "source_definition": "The total value of the individual consumption expenditures of households, nonprofit institutions serving households (NPISHs), and government at purchasers prices.",
-      "unit": "PPP ratio (US$ = 1)"
+      "unit": "PPP (US$ = 1; source classification)"
     },
     {
       "indicator_code": "9100000",
       "indicator_name": "Households and NPISHs final consumption expenditure",
       "source_display_name": "9100000:HOUSEHOLDS AND NPISHS FINAL CONSUMPTION EXPENDITURE",
       "source_definition": "The total value of actual and imputed final consumption expenditures incurred by households and NPISHs on individual goods and services. It also includes expenditures on individual goods and services sold at prices that are not economically significant.",
-      "unit": "PPP ratio (US$ = 1)"
+      "unit": "PPP (US$ = 1; source classification)"
     },
     {
       "indicator_code": "9270000",
       "indicator_name": "General government final consumption expenditure",
       "source_display_name": "9270000:GENERAL GOVERNMENT FINAL CONSUMPTION EXPENDITURE",
       "source_definition": "The total value of actual and imputed final consumption expenditures incurred by government on individual goods and services and final consumption expenditure of government on collective goods and services.",
-      "unit": "PPP ratio (US$ = 1)"
+      "unit": "PPP (US$ = 1; source classification)"
     },
     {
       "indicator_code": "1501000",
       "indicator_name": "Gross fixed capital formation",
       "source_display_name": "1501000:GROSS FIXED CAPITAL FORMATION",
       "source_definition": "This ICP classification heading covers expenditures for Fabricated metal products, except machinery and equipment; Electrical and optical equipment; General purpose machinery; Special purpose machinery; Road transport equipment; Other transport equipment; Residential buildings; Non-residential buildings; Civil engineering works; Other products.",
-      "unit": "PPP ratio (US$ = 1)"
+      "unit": "PPP (US$ = 1; source classification)"
     },
     {
       "indicator_code": "9250000",
       "indicator_name": "Domestic absorption",
       "source_display_name": "9250000:DOMESTIC ABSORPTION",
       "source_definition": "Actual individual consumption at purchasers prices plus collective consumption expenditure by government at purchasers prices plus gross capital formation at purchasers prices.",
-      "unit": "PPP ratio (US$ = 1)"
+      "unit": "PPP (US$ = 1; source classification)"
     }
   ],
   "mappings": [
