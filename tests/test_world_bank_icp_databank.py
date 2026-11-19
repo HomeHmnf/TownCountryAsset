@@ -75,7 +75,19 @@ class FakeOpener:
         if url.endswith(databank.FILEINFO_ENDPOINT):
             fields = urllib.parse.parse_qs(data.decode())
             assert fields["down-radio"] == ["csv"]
+            assert fields["ddl-excel-format"] == ["xlsx"]
             assert fields["ddl-export-range"] == ["full"]
+            assert fields["ddl-data-format"] == ["Table"]
+            assert fields["ddl-variable-format"] == ["Both"]
+            assert fields["ddl-na-preference"] == [".."]
+            assert fields["ddl-text-delimiter"] == ["None"]
+            assert fields["ddl-export-notes"] == ["N"]
+            assert set(fields) == {
+                "reqtype", "data-option-radio", "ddl-excel-format",
+                "ddl-export-range", "ddl-data-format", "ddl-variable-format",
+                "ddl-na-preference", "ddl-text-delimiter", "ddl-export-notes",
+                "down-radio",
+            }
             return FakeResponse(
                 b"filename=P_test.zip&filetype=CSV&language=en&displayfile=P_test.zip",
                 url, "text/plain",
