@@ -8,7 +8,8 @@
   "mapping_basis": {
     "first_link": "ICP Country Code equals generated asset ISO3 code",
     "second_link": "generated asset UN_A3 M49 code joins the already-reviewed UN WPP source crosswalk",
-    "limitation": "Candidate bridge only; the existing WPP approval is source-specific and does not approve ICP mappings."
+    "limitation": "Candidate bridge only; the existing WPP approval is source-specific and does not approve ICP mappings.",
+    "canonical_registry_status": "not_assessed_from_tracked_repository_snapshot"
   },
   "summary": {
     "source_country_count": 184,
@@ -19,7 +20,8 @@
     "aggregate_not_a_country": 8,
     "unmatched_identity": 5,
     "approved_mappings": 0,
-    "policy": "All candidate mappings remain pending; no name-only, fuzzy, ISO-inferred or aggregate-to-country mapping is approved automatically."
+    "policy": "All candidate mappings remain pending; no name-only, fuzzy, ISO-inferred or aggregate-to-country mapping is approved automatically.",
+    "canonical_registry_verified_matches": null
   },
   "indicators": [
     {

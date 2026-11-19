@@ -29,8 +29,10 @@ classification states US$ = 1; the importer therefore records the source unit as
 
 ## Country identity mapping
 
-The mapping review compares each distinct ICP Country Code with the generated
-asset-country ISO3 identifier. Candidate persistent game IDs are reached only
+The mapping review first reads the canonical country registry in read-only mode
+and accepts a direct candidate only where ISO alpha-3 is verified and the country
+record is approved. It also compares each distinct ICP Country Code with the generated
+asset-country ISO3 identifier as secondary evidence. Candidate persistent game IDs are reached only
 when the asset's UN_A3 M49 identifier also joins the existing reviewed UN WPP
 source crosswalk. That WPP crosswalk is source-specific; it is evidence for a
 candidate, not an ICP approval.
@@ -42,7 +44,10 @@ The current report distinguishes:
 - unmatched identities; and
 - benchmark aggregates, which are not game countries and must not be mapped.
 
-No mapping is approved automatically. Edit
+The checked-in initial report was generated from tracked source files and therefore
+marks the local canonical registry as not assessed. Running --build-review on the
+working checkout adds the read-only canonical registry comparison. No mapping is
+approved automatically. Edit
 `data/manual/source_crosswalks/world_bank_icp.json` only after checking the ICP
 entity scope and persistent game identity. Change a mapping's
 `review_status` from `pending` to `approved` only when the mapping has been

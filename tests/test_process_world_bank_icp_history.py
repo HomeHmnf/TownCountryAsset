@@ -44,3 +44,29 @@ def test_approved_mapping_index_ignores_pending_and_rejects_non_bijective():
 def test_indicator_contract_has_six_distinct_codes():
     assert len(INDICATOR_NAMES) == 6
     assert len(set(INDICATOR_NAMES)) == 6
+
+def test_canonical_registry_reads_only_approved_verified_iso_assignments(tmp_path: Path):
+    import sqlite3
+    from tools.process_world_bank_icp_history import _canonical_iso_registry
+
+    db = tmp_path / "canonical.sqlite"
+    connection = sqlite3.connect(db)
+    connection.execute(
+        "CREATE TABLE countries (game_id TEXT, iso_alpha3 TEXT, iso_assignment_status TEXT, record_status TEXT)"
+    )
+    connection.executemany(
+        "INSERT INTO countries VALUES (?, ?, ?, ?)",
+        [
+            ("tc_" + "a" * 32, "AUS", "verified", "approved"),
+            ("tc_" + "b" * 32, "BRN", "unverified", "approved"),
+            ("tc_" + "c" * 32, "KHM", "verified", "candidate"),
+        ],
+    )
+    connection.commit()
+    connection.close()
+
+    matches, status = _canonical_iso_registry(db)
+    assert status == "read_only_verified_registry_loaded"
+    assert [item["game_id"] for item in matches["AUS"]] == ["tc_" + "a" * 32]
+    assert "BRN" not in matches
+    assert "KHM" not in matches

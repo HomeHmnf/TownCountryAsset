@@ -5,7 +5,8 @@
   "mapping_policy": {
     "first_link": "ICP Country Code equals generated asset ISO3 code",
     "second_link": "generated asset UN_A3 M49 code joins the already-reviewed UN WPP source crosswalk",
-    "limitation": "Candidate bridge only; the existing WPP approval is source-specific and does not approve ICP mappings."
+    "limitation": "Candidate bridge only; the existing WPP approval is source-specific and does not approve ICP mappings.",
+    "canonical_registry_status": "not_assessed_from_tracked_repository_snapshot"
   },
   "review_approval": {
     "status": "pending",
