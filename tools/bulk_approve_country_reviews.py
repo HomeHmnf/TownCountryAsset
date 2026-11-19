@@ -146,7 +146,7 @@ def _load_candidates(
         seen3: dict[str, str] = {}
         existing = connection.execute(
             """SELECT game_id, iso_alpha2, iso_alpha3 FROM countries
-               WHERE iso_assignment_status='verified'"""
+               WHERE iso_alpha2 IS NOT NULL OR iso_alpha3 IS NOT NULL"""
         ).fetchall()
         for row in existing:
             if row["game_id"] not in selected_ids:
