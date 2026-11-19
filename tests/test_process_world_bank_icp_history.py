@@ -70,3 +70,22 @@ def test_canonical_registry_reads_only_approved_verified_iso_assignments(tmp_pat
     assert [item["game_id"] for item in matches["AUS"]] == ["tc_" + "a" * 32]
     assert "BRN" not in matches
     assert "KHM" not in matches
+
+def test_exception_entity_cannot_be_promoted_to_country_mapping():
+    mapping = {
+        "schema_version": 1,
+        "source_key": "world_bank_icp",
+        "dataset": "world_bank_icp_databank_saved_report",
+        "mappings": [
+            {"source_country_code": "WLD", "game_id": "tc_" + "a" * 32, "review_status": "approved"}
+        ],
+        "exceptions": [
+            {"source_country_code": "WLD", "status": "aggregate_not_a_country"}
+        ],
+    }
+    try:
+        _approved_mapping_index(mapping)
+    except RuntimeError as exc:
+        assert "listed as an exception" in str(exc)
+    else:
+        raise AssertionError("benchmark aggregate must never be approved as a country")
