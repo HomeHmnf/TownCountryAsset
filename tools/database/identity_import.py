@@ -189,8 +189,28 @@ def _ensure_country(connection: sqlite3.Connection, record: dict[str, Any], now:
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (game_id, *expected, now, now),
         )
-    elif tuple(existing) != expected:
-        raise IdentityImportError(f"Existing country record conflicts with registry for {game_id}")
+    else:
+        actual = tuple(existing)
+        identity_matches = (
+            actual[0] == expected[0]
+            and actual[2:4] == expected[2:4]
+        )
+        record_status_is_valid = actual[1] in {"candidate", "approved"}
+        iso_status_is_valid = (
+            actual[4] == expected[4]
+            or (expected[4] == "unverified" and actual[4] == "verified")
+        )
+        localization_status_is_valid = (
+            actual[5] == expected[5]
+            or (expected[5] == "unreviewed" and actual[5] == "reviewed")
+        )
+        if not (
+            identity_matches and record_status_is_valid
+            and iso_status_is_valid and localization_status_is_valid
+        ):
+            raise IdentityImportError(
+                f"Existing country identity/values conflict with registry or contain an invalid review-state transition for {game_id}"
+            )
 
 
 def _ensure_source(
