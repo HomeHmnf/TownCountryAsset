@@ -1,6 +1,6 @@
 {
   "manifest_schema_version": 1,
-  "source_id": "world_bank_wdi",
+  "source_id": "world_bank_icp",
   "dataset_id": "world_bank_icp_databank_saved_report",
   "release": "saved_report_export",
   "export_id": "databank_20261109T180637192513Z",
