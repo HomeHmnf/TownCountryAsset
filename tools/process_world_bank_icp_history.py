@@ -495,6 +495,10 @@ def import_icp_history(
     headers, rows = _read_csv(data_path)
     series = _series_dictionary(metadata_path, manifest)
     series_by_code = {x["indicator_code"]: x for x in series}
+    classification_members = _dimension_members(manifest, "Classification")
+    if len(classification_members) != 1:
+        raise ICPHistoryError("ICP historical import requires exactly one selected classification")
+    classification_code = str(classification_members[0]["unique_name"]).rsplit("&[", 1)[-1].rstrip("]")
     indicator_columns = {x.split(":", 1)[0]: x for x in headers if x[:1].isdigit() and ":" in x}
     connection = connect_database(database_path)
     try:
@@ -544,7 +548,7 @@ def import_icp_history(
                         source_country_code, source_country_name, source_reference,
                         source_version, retrieved_at, import_id)
                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                    (country["game_id"], indicator_code, info["indicator_name"], "PPPGlob",
+                    (country["game_id"], indicator_code, info["indicator_name"], classification_code,
                      year, value, status, missing_token, UNIT, code,
                      row.get("Country Name", ""), manifest.get("report_url", ""),
                      manifest.get("export_id", ""), manifest.get("retrieved_at", ""), import_id),
