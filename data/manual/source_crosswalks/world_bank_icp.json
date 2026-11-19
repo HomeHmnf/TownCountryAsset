@@ -1,0 +1,2051 @@
+{
+  "schema_version": 1,
+  "dataset": "world_bank_icp_databank_saved_report",
+  "source_key": "world_bank_icp",
+  "mapping_policy": {
+    "first_link": "ICP Country Code equals generated asset ISO3 code",
+    "second_link": "generated asset UN_A3 M49 code joins the already-reviewed UN WPP source crosswalk",
+    "limitation": "Candidate bridge only; the existing WPP approval is source-specific and does not approve ICP mappings."
+  },
+  "review_approval": {
+    "status": "pending",
+    "scope": "ICP source identity mapping only; not global identity or ISO assignment approval."
+  },
+  "mappings": [
+    {
+      "source_country_code": "ABW",
+      "source_country_name": "Aruba",
+      "asset_country_id": "ABW",
+      "asset_country_name": "Aruba",
+      "game_id": "tc_8344feaf14da4684aaa8d4c263653778",
+      "wpp_m49_source_id": "533",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "AGO",
+      "source_country_name": "Angola",
+      "asset_country_id": "AGO",
+      "asset_country_name": "Angola",
+      "game_id": "tc_fa43ff476d6b428fa8edb4dde1aa9d3f",
+      "wpp_m49_source_id": "24",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "AIA",
+      "source_country_name": "Anguilla",
+      "asset_country_id": "AIA",
+      "asset_country_name": "Anguilla",
+      "game_id": "tc_0b9688bbf4264477b023a0f2af180c2e",
+      "wpp_m49_source_id": "660",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ALB",
+      "source_country_name": "Albania",
+      "asset_country_id": "ALB",
+      "asset_country_name": "Albania",
+      "game_id": "tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1",
+      "wpp_m49_source_id": "8",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ARE",
+      "source_country_name": "United Arab Emirates",
+      "asset_country_id": "ARE",
+      "asset_country_name": "United Arab Emirates",
+      "game_id": "tc_3cbd960008724744b928265acc0638a4",
+      "wpp_m49_source_id": "784",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ARG",
+      "source_country_name": "Argentina",
+      "asset_country_id": "ARG",
+      "asset_country_name": "Argentina",
+      "game_id": "tc_2a29d5b72b294244a5de6db37118237a",
+      "wpp_m49_source_id": "32",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ARM",
+      "source_country_name": "Armenia",
+      "asset_country_id": "ARM",
+      "asset_country_name": "Armenia",
+      "game_id": "tc_f97b56c9c74845de8b41aa24ed12a47f",
+      "wpp_m49_source_id": "51",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ATG",
+      "source_country_name": "Antigua and Barbuda",
+      "asset_country_id": "ATG",
+      "asset_country_name": "Antigua and Barbuda",
+      "game_id": "tc_9221f2a3fd704847b66da16efa03c2b8",
+      "wpp_m49_source_id": "28",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "AUS",
+      "source_country_name": "Australia",
+      "asset_country_id": "AUS",
+      "asset_country_name": "Australia",
+      "game_id": "tc_270a6ecb902d4ea1ac7373b3d1a3b2cc",
+      "wpp_m49_source_id": "36",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "AUT",
+      "source_country_name": "Austria",
+      "asset_country_id": "AUT",
+      "asset_country_name": "Austria",
+      "game_id": "tc_a0422e821c824e78bd95525b36155b65",
+      "wpp_m49_source_id": "40",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "AZE",
+      "source_country_name": "Azerbaijan",
+      "asset_country_id": "AZE",
+      "asset_country_name": "Azerbaijan",
+      "game_id": "tc_b8c860bb8d404dcca918bad769e7ead7",
+      "wpp_m49_source_id": "31",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BDI",
+      "source_country_name": "Burundi",
+      "asset_country_id": "BDI",
+      "asset_country_name": "Burundi",
+      "game_id": "tc_4ac5b3c6b7774a05b4ceb5573c4a9d27",
+      "wpp_m49_source_id": "108",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BEL",
+      "source_country_name": "Belgium",
+      "asset_country_id": "BEL",
+      "asset_country_name": "Belgium",
+      "game_id": "tc_f1cc713e923c4be48e176657a00469f0",
+      "wpp_m49_source_id": "56",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BEN",
+      "source_country_name": "Benin",
+      "asset_country_id": "BEN",
+      "asset_country_name": "Benin",
+      "game_id": "tc_874ae1f05e8c4d67a2c839095d760b72",
+      "wpp_m49_source_id": "204",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BFA",
+      "source_country_name": "Burkina Faso",
+      "asset_country_id": "BFA",
+      "asset_country_name": "Burkina Faso",
+      "game_id": "tc_3c920b9b9f324cb19ef9d4b6debf10ba",
+      "wpp_m49_source_id": "854",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BGD",
+      "source_country_name": "Bangladesh",
+      "asset_country_id": "BGD",
+      "asset_country_name": "Bangladesh",
+      "game_id": "tc_8169e562ece7475e960f78f231cb1ab7",
+      "wpp_m49_source_id": "50",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BGR",
+      "source_country_name": "Bulgaria",
+      "asset_country_id": "BGR",
+      "asset_country_name": "Bulgaria",
+      "game_id": "tc_523810acde564c1c907acd5befe575ab",
+      "wpp_m49_source_id": "100",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BHR",
+      "source_country_name": "Bahrain",
+      "asset_country_id": "BHR",
+      "asset_country_name": "Bahrain",
+      "game_id": "tc_38fd6c5cd2be45739f3be11bc4cab9c8",
+      "wpp_m49_source_id": "48",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BIH",
+      "source_country_name": "Bosnia and Herzegovina",
+      "asset_country_id": "BIH",
+      "asset_country_name": "Bosnia and Herzegovina",
+      "game_id": "tc_0628271c897b49558f423321cbc48ce4",
+      "wpp_m49_source_id": "70",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BLR",
+      "source_country_name": "Belarus",
+      "asset_country_id": "BLR",
+      "asset_country_name": "Belarus",
+      "game_id": "tc_6ebc90b251e14f70b8bf758d8008e839",
+      "wpp_m49_source_id": "112",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BLZ",
+      "source_country_name": "Belize",
+      "asset_country_id": "BLZ",
+      "asset_country_name": "Belize",
+      "game_id": "tc_d066174c4df546d1a410d386f363ee80",
+      "wpp_m49_source_id": "84",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BMU",
+      "source_country_name": "Bermuda",
+      "asset_country_id": "BMU",
+      "asset_country_name": "Bermuda",
+      "game_id": "tc_d81e2d4c4b934f57a67f380b2fdaec9d",
+      "wpp_m49_source_id": "60",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BRA",
+      "source_country_name": "Brazil",
+      "asset_country_id": "BRA",
+      "asset_country_name": "Brazil",
+      "game_id": "tc_4923336d91d94afc919d8a2b8a4ad415",
+      "wpp_m49_source_id": "76",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BTN",
+      "source_country_name": "Bhutan",
+      "asset_country_id": "BTN",
+      "asset_country_name": "Bhutan",
+      "game_id": "tc_91f04a21215642aeb5da856a78dc9949",
+      "wpp_m49_source_id": "64",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "BWA",
+      "source_country_name": "Botswana",
+      "asset_country_id": "BWA",
+      "asset_country_name": "Botswana",
+      "game_id": "tc_ca2bdd688a454bb8b6457c9448612669",
+      "wpp_m49_source_id": "72",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CAF",
+      "source_country_name": "Central African Republic",
+      "asset_country_id": "CAF",
+      "asset_country_name": "Central African Republic",
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "wpp_m49_source_id": "140",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CAN",
+      "source_country_name": "Canada",
+      "asset_country_id": "CAN",
+      "asset_country_name": "Canada",
+      "game_id": "tc_ba9087366ba54d51932e88bf8a11616d",
+      "wpp_m49_source_id": "124",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CHE",
+      "source_country_name": "Switzerland",
+      "asset_country_id": "CHE",
+      "asset_country_name": "Switzerland",
+      "game_id": "tc_e693e8b799f94e7bb814e89bd46d886d",
+      "wpp_m49_source_id": "756",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CHL",
+      "source_country_name": "Chile",
+      "asset_country_id": "CHL",
+      "asset_country_name": "Chile",
+      "game_id": "tc_4c51c695cb6e47d2aed2fb04c397bece",
+      "wpp_m49_source_id": "152",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CHN",
+      "source_country_name": "China",
+      "asset_country_id": "CHN",
+      "asset_country_name": "China",
+      "game_id": "tc_3349a0b8b7454088b11e917a24de3ad5",
+      "wpp_m49_source_id": "156",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CMR",
+      "source_country_name": "Cameroon",
+      "asset_country_id": "CMR",
+      "asset_country_name": "Cameroon",
+      "game_id": "tc_f5cd614ef03c414d8e98d87102df5c14",
+      "wpp_m49_source_id": "120",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "COD",
+      "source_country_name": "Congo, Dem. Rep.",
+      "asset_country_id": "COD",
+      "asset_country_name": "Democratic Republic of the Congo",
+      "game_id": "tc_2763c19aa8734ce9aa8b17d8effb6645",
+      "wpp_m49_source_id": "180",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "COL",
+      "source_country_name": "Colombia",
+      "asset_country_id": "COL",
+      "asset_country_name": "Colombia",
+      "game_id": "tc_648b019cc83e486ab9fb8497386777a9",
+      "wpp_m49_source_id": "170",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "COM",
+      "source_country_name": "Comoros",
+      "asset_country_id": "COM",
+      "asset_country_name": "Comoros",
+      "game_id": "tc_10dd5e9664664abf9eca33c250a74cdb",
+      "wpp_m49_source_id": "174",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CPV",
+      "source_country_name": "Cabo Verde",
+      "asset_country_id": "CPV",
+      "asset_country_name": "Cabo Verde",
+      "game_id": "tc_d9d1737635ce4385a50c4307c2716832",
+      "wpp_m49_source_id": "132",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CRI",
+      "source_country_name": "Costa Rica",
+      "asset_country_id": "CRI",
+      "asset_country_name": "Costa Rica",
+      "game_id": "tc_79512b2eaf8f45b5b118130859ebdaaf",
+      "wpp_m49_source_id": "188",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CUW",
+      "source_country_name": "Curacao",
+      "asset_country_id": "CUW",
+      "asset_country_name": "Curaçao",
+      "game_id": "tc_2d0dc3f3edb9467090ea74861dbc7b9e",
+      "wpp_m49_source_id": "531",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CYM",
+      "source_country_name": "Cayman Islands",
+      "asset_country_id": "CYM",
+      "asset_country_name": "Cayman Islands",
+      "game_id": "tc_19acfc8e1cf44c25aa753729115d60d6",
+      "wpp_m49_source_id": "136",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CYP",
+      "source_country_name": "Cyprus",
+      "asset_country_id": "CYP",
+      "asset_country_name": "Cyprus",
+      "game_id": "tc_3c148b1f7650455fa710ca87cf376728",
+      "wpp_m49_source_id": "196",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "CZE",
+      "source_country_name": "Czechia",
+      "asset_country_id": "CZE",
+      "asset_country_name": "Czechia",
+      "game_id": "tc_e43afc3a83a3458c833dac5644b7186a",
+      "wpp_m49_source_id": "203",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "DEU",
+      "source_country_name": "Germany",
+      "asset_country_id": "DEU",
+      "asset_country_name": "Germany",
+      "game_id": "tc_ff445b0a87494070bf868827de190acf",
+      "wpp_m49_source_id": "276",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "DJI",
+      "source_country_name": "Djibouti",
+      "asset_country_id": "DJI",
+      "asset_country_name": "Djibouti",
+      "game_id": "tc_f4814b1a89384c4d93a92c19b301a814",
+      "wpp_m49_source_id": "262",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "DMA",
+      "source_country_name": "Dominica",
+      "asset_country_id": "DMA",
+      "asset_country_name": "Dominica",
+      "game_id": "tc_e5391af862dd490bb3a01fa80f4ac15e",
+      "wpp_m49_source_id": "212",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "DNK",
+      "source_country_name": "Denmark",
+      "asset_country_id": "DNK",
+      "asset_country_name": "Denmark",
+      "game_id": "tc_11da440eb0704bd195fe0b11fa0890af",
+      "wpp_m49_source_id": "208",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "DOM",
+      "source_country_name": "Dominican Republic",
+      "asset_country_id": "DOM",
+      "asset_country_name": "Dominican Republic",
+      "game_id": "tc_ee04e01170f84b92afabbb40abdbd4e3",
+      "wpp_m49_source_id": "214",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "DZA",
+      "source_country_name": "Algeria",
+      "asset_country_id": "DZA",
+      "asset_country_name": "Algeria",
+      "game_id": "tc_e245d37005f843168d67b7b327ece7f9",
+      "wpp_m49_source_id": "12",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ECU",
+      "source_country_name": "Ecuador",
+      "asset_country_id": "ECU",
+      "asset_country_name": "Ecuador",
+      "game_id": "tc_2a54eb1caed54a2185a62cce0c2db6cb",
+      "wpp_m49_source_id": "218",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "EGY",
+      "source_country_name": "Egypt, Arab Rep.",
+      "asset_country_id": "EGY",
+      "asset_country_name": "Egypt",
+      "game_id": "tc_939f236600dd47a8bf850a7ff19dc047",
+      "wpp_m49_source_id": "818",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ESP",
+      "source_country_name": "Spain",
+      "asset_country_id": "ESP",
+      "asset_country_name": "Spain",
+      "game_id": "tc_21a70a0fbf1b43c292783397ce218239",
+      "wpp_m49_source_id": "724",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "EST",
+      "source_country_name": "Estonia",
+      "asset_country_id": "EST",
+      "asset_country_name": "Estonia",
+      "game_id": "tc_383873de760147cd97dfac5ef5d60b08",
+      "wpp_m49_source_id": "233",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ETH",
+      "source_country_name": "Ethiopia",
+      "asset_country_id": "ETH",
+      "asset_country_name": "Ethiopia",
+      "game_id": "tc_860d12ee66fc4fceb3faddbc92c87930",
+      "wpp_m49_source_id": "231",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "FIN",
+      "source_country_name": "Finland",
+      "asset_country_id": "FIN",
+      "asset_country_name": "Finland",
+      "game_id": "tc_374e55a3eefe4a1a83fed6b64b5045f5",
+      "wpp_m49_source_id": "246",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "FJI",
+      "source_country_name": "Fiji",
+      "asset_country_id": "FJI",
+      "asset_country_name": "Fiji",
+      "game_id": "tc_8d67737674744dce8986565b98cbbb1f",
+      "wpp_m49_source_id": "242",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GAB",
+      "source_country_name": "Gabon",
+      "asset_country_id": "GAB",
+      "asset_country_name": "Gabon",
+      "game_id": "tc_d59dfb6324524b07a32c87b73009e97f",
+      "wpp_m49_source_id": "266",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GEO",
+      "source_country_name": "Georgia",
+      "asset_country_id": "GEO",
+      "asset_country_name": "Georgia",
+      "game_id": "tc_741bd244c1ec4961918565c4ed02c5c6",
+      "wpp_m49_source_id": "268",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GHA",
+      "source_country_name": "Ghana",
+      "asset_country_id": "GHA",
+      "asset_country_name": "Ghana",
+      "game_id": "tc_f63061b714ce4390948838410758c016",
+      "wpp_m49_source_id": "288",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GIN",
+      "source_country_name": "Guinea",
+      "asset_country_id": "GIN",
+      "asset_country_name": "Guinea",
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "wpp_m49_source_id": "324",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GMB",
+      "source_country_name": "Gambia, The",
+      "asset_country_id": "GMB",
+      "asset_country_name": "Gambia",
+      "game_id": "tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a",
+      "wpp_m49_source_id": "270",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GNB",
+      "source_country_name": "Guinea-Bissau",
+      "asset_country_id": "GNB",
+      "asset_country_name": "Guinea-Bissau",
+      "game_id": "tc_dc93b6caf7324df884ec2b070a5296b9",
+      "wpp_m49_source_id": "624",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GNQ",
+      "source_country_name": "Equatorial Guinea",
+      "asset_country_id": "GNQ",
+      "asset_country_name": "Equatorial Guinea",
+      "game_id": "tc_06d71df13c4f415fbf22a0147f19bc53",
+      "wpp_m49_source_id": "226",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GRC",
+      "source_country_name": "Greece",
+      "asset_country_id": "GRC",
+      "asset_country_name": "Greece",
+      "game_id": "tc_dab67464d7ad44cdbf925450627e4186",
+      "wpp_m49_source_id": "300",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GRD",
+      "source_country_name": "Grenada",
+      "asset_country_id": "GRD",
+      "asset_country_name": "Grenada",
+      "game_id": "tc_c5b3fecc12a94e85a7acddc70fa7a086",
+      "wpp_m49_source_id": "308",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GTM",
+      "source_country_name": "Guatemala",
+      "asset_country_id": "GTM",
+      "asset_country_name": "Guatemala",
+      "game_id": "tc_9348779eba844ab2beb5bed00053b7c6",
+      "wpp_m49_source_id": "320",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "GUY",
+      "source_country_name": "Guyana",
+      "asset_country_id": "GUY",
+      "asset_country_name": "Guyana",
+      "game_id": "tc_893d4efa8ccf42af896949ffd7007fef",
+      "wpp_m49_source_id": "328",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "HND",
+      "source_country_name": "Honduras",
+      "asset_country_id": "HND",
+      "asset_country_name": "Honduras",
+      "game_id": "tc_80c318b9217a4320beaad6b93eb74ac5",
+      "wpp_m49_source_id": "340",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "HRV",
+      "source_country_name": "Croatia",
+      "asset_country_id": "HRV",
+      "asset_country_name": "Croatia",
+      "game_id": "tc_fb4046d4910a4bf89f4a93810e2f4d8a",
+      "wpp_m49_source_id": "191",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "HUN",
+      "source_country_name": "Hungary",
+      "asset_country_id": "HUN",
+      "asset_country_name": "Hungary",
+      "game_id": "tc_e3ede57c1b754a2dbd940335f9655f11",
+      "wpp_m49_source_id": "348",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "IDN",
+      "source_country_name": "Indonesia",
+      "asset_country_id": "IDN",
+      "asset_country_name": "Indonesia",
+      "game_id": "tc_c40da0ac977b4201b8587ce04aa66f56",
+      "wpp_m49_source_id": "360",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "IND",
+      "source_country_name": "India",
+      "asset_country_id": "IND",
+      "asset_country_name": "India",
+      "game_id": "tc_39ad5030b5f94f068d4a1528c60e5638",
+      "wpp_m49_source_id": "356",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "IRL",
+      "source_country_name": "Ireland",
+      "asset_country_id": "IRL",
+      "asset_country_name": "Ireland",
+      "game_id": "tc_16d6044d9abf4743821a6fb238942a22",
+      "wpp_m49_source_id": "372",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "IRQ",
+      "source_country_name": "Iraq",
+      "asset_country_id": "IRQ",
+      "asset_country_name": "Iraq",
+      "game_id": "tc_5ee7b31f968941dca65e70519901915f",
+      "wpp_m49_source_id": "368",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ISL",
+      "source_country_name": "Iceland",
+      "asset_country_id": "ISL",
+      "asset_country_name": "Iceland",
+      "game_id": "tc_861af4b9250e4e17a9d3f1f4e1ea33d4",
+      "wpp_m49_source_id": "352",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ISR",
+      "source_country_name": "Israel",
+      "asset_country_id": "ISR",
+      "asset_country_name": "Israel",
+      "game_id": "tc_28952c75855947a7b31bb7509dc1fce1",
+      "wpp_m49_source_id": "376",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ITA",
+      "source_country_name": "Italy",
+      "asset_country_id": "ITA",
+      "asset_country_name": "Italy",
+      "game_id": "tc_1f3e0c90df4341f082ed90ecdd95fb10",
+      "wpp_m49_source_id": "380",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "JAM",
+      "source_country_name": "Jamaica",
+      "asset_country_id": "JAM",
+      "asset_country_name": "Jamaica",
+      "game_id": "tc_bf02736242694622ae7c730beb0f0da6",
+      "wpp_m49_source_id": "388",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "JOR",
+      "source_country_name": "Jordan",
+      "asset_country_id": "JOR",
+      "asset_country_name": "Jordan",
+      "game_id": "tc_6e28258973b54dfeb5811c563cd0a2e8",
+      "wpp_m49_source_id": "400",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "JPN",
+      "source_country_name": "Japan",
+      "asset_country_id": "JPN",
+      "asset_country_name": "Japan",
+      "game_id": "tc_8d0620ea475f498d9402134857882bf1",
+      "wpp_m49_source_id": "392",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "KAZ",
+      "source_country_name": "Kazakhstan",
+      "asset_country_id": "KAZ",
+      "asset_country_name": "Kazakhstan",
+      "game_id": "tc_feadffc011db4cf695df6c0997a003c8",
+      "wpp_m49_source_id": "398",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "KEN",
+      "source_country_name": "Kenya",
+      "asset_country_id": "KEN",
+      "asset_country_name": "Kenya",
+      "game_id": "tc_9f3dc962bf9744a5a3cdf1f7a1cbb159",
+      "wpp_m49_source_id": "404",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "KGZ",
+      "source_country_name": "Kyrgyz Republic",
+      "asset_country_id": "KGZ",
+      "asset_country_name": "Kyrgyzstan",
+      "game_id": "tc_130ca81b84d04b058e9301121b2b7802",
+      "wpp_m49_source_id": "417",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "KHM",
+      "source_country_name": "Cambodia",
+      "asset_country_id": "KHM",
+      "asset_country_name": "Cambodia",
+      "game_id": "tc_f956986338e5418481784ba2d2781063",
+      "wpp_m49_source_id": "116",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "KNA",
+      "source_country_name": "St. Kitts and Nevis",
+      "asset_country_id": "KNA",
+      "asset_country_name": "Saint Kitts and Nevis",
+      "game_id": "tc_f22d58e7280f41f7a5a68fb03e1ab87e",
+      "wpp_m49_source_id": "659",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "KWT",
+      "source_country_name": "Kuwait",
+      "asset_country_id": "KWT",
+      "asset_country_name": "Kuwait",
+      "game_id": "tc_fa491c61ffa24dc3a21c6a6da7d39fad",
+      "wpp_m49_source_id": "414",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LBN",
+      "source_country_name": "Lebanon",
+      "asset_country_id": "LBN",
+      "asset_country_name": "Lebanon",
+      "game_id": "tc_8466a0747d0b4d1a8c23feb70f7c6ed1",
+      "wpp_m49_source_id": "422",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LBR",
+      "source_country_name": "Liberia",
+      "asset_country_id": "LBR",
+      "asset_country_name": "Liberia",
+      "game_id": "tc_40dc9d2e141343e98a4d0c762c578473",
+      "wpp_m49_source_id": "430",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LCA",
+      "source_country_name": "St. Lucia",
+      "asset_country_id": "LCA",
+      "asset_country_name": "Saint Lucia",
+      "game_id": "tc_6629fdb92d05409f856d9030b63b1470",
+      "wpp_m49_source_id": "662",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LKA",
+      "source_country_name": "Sri Lanka",
+      "asset_country_id": "LKA",
+      "asset_country_name": "Sri Lanka",
+      "game_id": "tc_5e47c88bebac452e953fc5dfa8b1ba06",
+      "wpp_m49_source_id": "144",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LSO",
+      "source_country_name": "Lesotho",
+      "asset_country_id": "LSO",
+      "asset_country_name": "Lesotho",
+      "game_id": "tc_c0fa4e9b8e984f59ba17beb7547c5811",
+      "wpp_m49_source_id": "426",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LTU",
+      "source_country_name": "Lithuania",
+      "asset_country_id": "LTU",
+      "asset_country_name": "Lithuania",
+      "game_id": "tc_77de0a41c4d94d8388d6f0732438be81",
+      "wpp_m49_source_id": "440",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LUX",
+      "source_country_name": "Luxembourg",
+      "asset_country_id": "LUX",
+      "asset_country_name": "Luxembourg",
+      "game_id": "tc_f4261f4507cd48858cdfb7e3bd0ae738",
+      "wpp_m49_source_id": "442",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "LVA",
+      "source_country_name": "Latvia",
+      "asset_country_id": "LVA",
+      "asset_country_name": "Latvia",
+      "game_id": "tc_f161aef25a39413e8aef8c147e97b28a",
+      "wpp_m49_source_id": "428",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MAR",
+      "source_country_name": "Morocco",
+      "asset_country_id": "MAR",
+      "asset_country_name": "Morocco",
+      "game_id": "tc_84dc0c18f03144bea337f6aacd50bf0f",
+      "wpp_m49_source_id": "504",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MDG",
+      "source_country_name": "Madagascar",
+      "asset_country_id": "MDG",
+      "asset_country_name": "Madagascar",
+      "game_id": "tc_7abbe0f9aa1346c7a9f69cc1027b4282",
+      "wpp_m49_source_id": "450",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MDV",
+      "source_country_name": "Maldives",
+      "asset_country_id": "MDV",
+      "asset_country_name": "Maldives",
+      "game_id": "tc_408d22fe5b894b4b947a0521ace1018a",
+      "wpp_m49_source_id": "462",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MEX",
+      "source_country_name": "Mexico",
+      "asset_country_id": "MEX",
+      "asset_country_name": "Mexico",
+      "game_id": "tc_c6b830c3cba64d4883eac8cee7864cfd",
+      "wpp_m49_source_id": "484",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MKD",
+      "source_country_name": "North Macedonia",
+      "asset_country_id": "MKD",
+      "asset_country_name": "North Macedonia",
+      "game_id": "tc_949bf877e3284f5c8a56cfc89bcafa90",
+      "wpp_m49_source_id": "807",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MLI",
+      "source_country_name": "Mali",
+      "asset_country_id": "MLI",
+      "asset_country_name": "Mali",
+      "game_id": "tc_a3f73fd3bb6d4d7fb4ea31d433453bae",
+      "wpp_m49_source_id": "466",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MLT",
+      "source_country_name": "Malta",
+      "asset_country_id": "MLT",
+      "asset_country_name": "Malta",
+      "game_id": "tc_f97b2223a2a84e53ac13614ddde1f602",
+      "wpp_m49_source_id": "470",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MNE",
+      "source_country_name": "Montenegro",
+      "asset_country_id": "MNE",
+      "asset_country_name": "Montenegro",
+      "game_id": "tc_eb1de71332ef4db496cb76c95aa56cd4",
+      "wpp_m49_source_id": "499",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MNG",
+      "source_country_name": "Mongolia",
+      "asset_country_id": "MNG",
+      "asset_country_name": "Mongolia",
+      "game_id": "tc_d0fb202ca0aa4a868af6fa154ab84c30",
+      "wpp_m49_source_id": "496",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MOZ",
+      "source_country_name": "Mozambique",
+      "asset_country_id": "MOZ",
+      "asset_country_name": "Mozambique",
+      "game_id": "tc_2249b79a9c944a1c835b0cad2676e48d",
+      "wpp_m49_source_id": "508",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MRT",
+      "source_country_name": "Mauritania",
+      "asset_country_id": "MRT",
+      "asset_country_name": "Mauritania",
+      "game_id": "tc_17137c4e4fcc4fa58e32c924f08efcda",
+      "wpp_m49_source_id": "478",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MSR",
+      "source_country_name": "Montserrat",
+      "asset_country_id": "MSR",
+      "asset_country_name": "Montserrat",
+      "game_id": "tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d",
+      "wpp_m49_source_id": "500",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MUS",
+      "source_country_name": "Mauritius",
+      "asset_country_id": "MUS",
+      "asset_country_name": "Mauritius",
+      "game_id": "tc_c7b728ec16b94e35b05d96d14a253eec",
+      "wpp_m49_source_id": "480",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MWI",
+      "source_country_name": "Malawi",
+      "asset_country_id": "MWI",
+      "asset_country_name": "Malawi",
+      "game_id": "tc_ee1c1ac1ad5c4faf818070115133b174",
+      "wpp_m49_source_id": "454",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "MYS",
+      "source_country_name": "Malaysia",
+      "asset_country_id": "MYS",
+      "asset_country_name": "Malaysia",
+      "game_id": "tc_b21225f45c3b40509640603249110f89",
+      "wpp_m49_source_id": "458",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "NAM",
+      "source_country_name": "Namibia",
+      "asset_country_id": "NAM",
+      "asset_country_name": "Namibia",
+      "game_id": "tc_7379cdcc5c4848c181ace3144aeba70f",
+      "wpp_m49_source_id": "516",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "NER",
+      "source_country_name": "Niger",
+      "asset_country_id": "NER",
+      "asset_country_name": "Niger",
+      "game_id": "tc_4d31375845614c2b91a71736069d4ab3",
+      "wpp_m49_source_id": "562",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "NGA",
+      "source_country_name": "Nigeria",
+      "asset_country_id": "NGA",
+      "asset_country_name": "Nigeria",
+      "game_id": "tc_7a8158c93a934345a2ade9fd16ee4999",
+      "wpp_m49_source_id": "566",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "NIC",
+      "source_country_name": "Nicaragua",
+      "asset_country_id": "NIC",
+      "asset_country_name": "Nicaragua",
+      "game_id": "tc_2fdae8757e51402e9f67c428d2b79368",
+      "wpp_m49_source_id": "558",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "NPL",
+      "source_country_name": "Nepal",
+      "asset_country_id": "NPL",
+      "asset_country_name": "Nepal",
+      "game_id": "tc_1c4ff3f2a8f04b43b0c28e830a9403ad",
+      "wpp_m49_source_id": "524",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "NZL",
+      "source_country_name": "New Zealand",
+      "asset_country_id": "NZL",
+      "asset_country_name": "New Zealand",
+      "game_id": "tc_d4b67e03f0c04d9a87089f477e5fa669",
+      "wpp_m49_source_id": "554",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "OMN",
+      "source_country_name": "Oman",
+      "asset_country_id": "OMN",
+      "asset_country_name": "Oman",
+      "game_id": "tc_22bd85ff61234a46a95506d105d5fee4",
+      "wpp_m49_source_id": "512",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "PAK",
+      "source_country_name": "Pakistan",
+      "asset_country_id": "PAK",
+      "asset_country_name": "Pakistan",
+      "game_id": "tc_0dc6216a94e34b44b27e42ed35fa6376",
+      "wpp_m49_source_id": "586",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "PAN",
+      "source_country_name": "Panama",
+      "asset_country_id": "PAN",
+      "asset_country_name": "Panama",
+      "game_id": "tc_ba6cf14fa6224eb4a0b085b3ea1df6dc",
+      "wpp_m49_source_id": "591",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "PER",
+      "source_country_name": "Peru",
+      "asset_country_id": "PER",
+      "asset_country_name": "Peru",
+      "game_id": "tc_a90d391a4a9a473b9074fc99cce11cb5",
+      "wpp_m49_source_id": "604",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "PHL",
+      "source_country_name": "Philippines",
+      "asset_country_id": "PHL",
+      "asset_country_name": "Philippines",
+      "game_id": "tc_fc8f1a9536d342899526129acf15acd2",
+      "wpp_m49_source_id": "608",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "POL",
+      "source_country_name": "Poland",
+      "asset_country_id": "POL",
+      "asset_country_name": "Poland",
+      "game_id": "tc_9865dd6a50c3458b98f5040f0cc76357",
+      "wpp_m49_source_id": "616",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "PRT",
+      "source_country_name": "Portugal",
+      "asset_country_id": "PRT",
+      "asset_country_name": "Portugal",
+      "game_id": "tc_43ee3db974884a72bacf5f5519e2c145",
+      "wpp_m49_source_id": "620",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "PRY",
+      "source_country_name": "Paraguay",
+      "asset_country_id": "PRY",
+      "asset_country_name": "Paraguay",
+      "game_id": "tc_3eb6dc12494541e793a8a5b68980f29f",
+      "wpp_m49_source_id": "600",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "QAT",
+      "source_country_name": "Qatar",
+      "asset_country_id": "QAT",
+      "asset_country_name": "Qatar",
+      "game_id": "tc_13df99232f33400d9079316c041f066c",
+      "wpp_m49_source_id": "634",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ROU",
+      "source_country_name": "Romania",
+      "asset_country_id": "ROU",
+      "asset_country_name": "Romania",
+      "game_id": "tc_c41863f7cb4e4dccbbdf0a1296f9ee1c",
+      "wpp_m49_source_id": "642",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "RWA",
+      "source_country_name": "Rwanda",
+      "asset_country_id": "RWA",
+      "asset_country_name": "Rwanda",
+      "game_id": "tc_7f3c6637070f4c42a40c1f5456ec4721",
+      "wpp_m49_source_id": "646",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SAU",
+      "source_country_name": "Saudi Arabia",
+      "asset_country_id": "SAU",
+      "asset_country_name": "Saudi Arabia",
+      "game_id": "tc_86b0f7fcb4504f9b8dc1b60b42b16ea0",
+      "wpp_m49_source_id": "682",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SDN",
+      "source_country_name": "Sudan",
+      "asset_country_id": "SDN",
+      "asset_country_name": "Sudan",
+      "game_id": "tc_b0ca3e0386b34603a6356b8ebc8b0565",
+      "wpp_m49_source_id": "729",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SEN",
+      "source_country_name": "Senegal",
+      "asset_country_id": "SEN",
+      "asset_country_name": "Senegal",
+      "game_id": "tc_29ec74ae4e094053a930487b9ce602d1",
+      "wpp_m49_source_id": "686",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SGP",
+      "source_country_name": "Singapore",
+      "asset_country_id": "SGP",
+      "asset_country_name": "Singapore",
+      "game_id": "tc_9d65e06bf97d417c8aa62742225ef5c9",
+      "wpp_m49_source_id": "702",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SLE",
+      "source_country_name": "Sierra Leone",
+      "asset_country_id": "SLE",
+      "asset_country_name": "Sierra Leone",
+      "game_id": "tc_56e9d1977fa14da298ae125fbda1b63c",
+      "wpp_m49_source_id": "694",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SLV",
+      "source_country_name": "El Salvador",
+      "asset_country_id": "SLV",
+      "asset_country_name": "El Salvador",
+      "game_id": "tc_471268dbb85845de93e546317686debb",
+      "wpp_m49_source_id": "222",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SOM",
+      "source_country_name": "Somalia",
+      "asset_country_id": "SOM",
+      "asset_country_name": "Somalia",
+      "game_id": "tc_e82cc51b989841109d9e1a7f6a5d1727",
+      "wpp_m49_source_id": "706",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SSD",
+      "source_country_name": "South Sudan",
+      "asset_country_id": "SDS",
+      "asset_country_name": "South Sudan",
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "wpp_m49_source_id": "728",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "STP",
+      "source_country_name": "Sao Tome and Principe",
+      "asset_country_id": "STP",
+      "asset_country_name": "São Tomé and Principe",
+      "game_id": "tc_4a2ed326dc6047efa2e28926df0bc7f0",
+      "wpp_m49_source_id": "678",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SUR",
+      "source_country_name": "Suriname",
+      "asset_country_id": "SUR",
+      "asset_country_name": "Suriname",
+      "game_id": "tc_168a848021b84cc6a6c3fc320012a176",
+      "wpp_m49_source_id": "740",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SVK",
+      "source_country_name": "Slovak Republic",
+      "asset_country_id": "SVK",
+      "asset_country_name": "Slovakia",
+      "game_id": "tc_b3bea891d7114d148714d5e398ee06b1",
+      "wpp_m49_source_id": "703",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SVN",
+      "source_country_name": "Slovenia",
+      "asset_country_id": "SVN",
+      "asset_country_name": "Slovenia",
+      "game_id": "tc_c0484640d9554c8285e92412bae25785",
+      "wpp_m49_source_id": "705",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SWE",
+      "source_country_name": "Sweden",
+      "asset_country_id": "SWE",
+      "asset_country_name": "Sweden",
+      "game_id": "tc_d74b429fff544cf9bafeb459c4b3edd8",
+      "wpp_m49_source_id": "752",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SWZ",
+      "source_country_name": "Eswatini",
+      "asset_country_id": "SWZ",
+      "asset_country_name": "eSwatini",
+      "game_id": "tc_fc2ad04f3c88446e91bd770190d6fe4c",
+      "wpp_m49_source_id": "748",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "SYC",
+      "source_country_name": "Seychelles",
+      "asset_country_id": "SYC",
+      "asset_country_name": "Seychelles",
+      "game_id": "tc_4bc377d3ea57485bac43c9b512587dbc",
+      "wpp_m49_source_id": "690",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "TCD",
+      "source_country_name": "Chad",
+      "asset_country_id": "TCD",
+      "asset_country_name": "Chad",
+      "game_id": "tc_1da2daf3a3d34a30b96100d643963f70",
+      "wpp_m49_source_id": "148",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "TGO",
+      "source_country_name": "Togo",
+      "asset_country_id": "TGO",
+      "asset_country_name": "Togo",
+      "game_id": "tc_06a09ff0e27b49e392ef2e88161023eb",
+      "wpp_m49_source_id": "768",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "THA",
+      "source_country_name": "Thailand",
+      "asset_country_id": "THA",
+      "asset_country_name": "Thailand",
+      "game_id": "tc_fc12d0184fc7498f982ab8033ae64436",
+      "wpp_m49_source_id": "764",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "TJK",
+      "source_country_name": "Tajikistan",
+      "asset_country_id": "TJK",
+      "asset_country_name": "Tajikistan",
+      "game_id": "tc_772e2ac5253c46e98b79cf5a6f19e9f5",
+      "wpp_m49_source_id": "762",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "TTO",
+      "source_country_name": "Trinidad and Tobago",
+      "asset_country_id": "TTO",
+      "asset_country_name": "Trinidad and Tobago",
+      "game_id": "tc_1bd98a138f884dd4b4d9d1efbbf357b0",
+      "wpp_m49_source_id": "780",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "TUN",
+      "source_country_name": "Tunisia",
+      "asset_country_id": "TUN",
+      "asset_country_name": "Tunisia",
+      "game_id": "tc_1d1d2c1274384efa82f9591e1c069aba",
+      "wpp_m49_source_id": "788",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "TZA",
+      "source_country_name": "Tanzania",
+      "asset_country_id": "TZA",
+      "asset_country_name": "United Republic of Tanzania",
+      "game_id": "tc_0f4c47ec59434e46871845e474964499",
+      "wpp_m49_source_id": "834",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "UGA",
+      "source_country_name": "Uganda",
+      "asset_country_id": "UGA",
+      "asset_country_name": "Uganda",
+      "game_id": "tc_2bd67b30564b46b4b502a36decc333bf",
+      "wpp_m49_source_id": "800",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "UKR",
+      "source_country_name": "Ukraine",
+      "asset_country_id": "UKR",
+      "asset_country_name": "Ukraine",
+      "game_id": "tc_65f8a168b10143c2a596917c1fca3731",
+      "wpp_m49_source_id": "804",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "URY",
+      "source_country_name": "Uruguay",
+      "asset_country_id": "URY",
+      "asset_country_name": "Uruguay",
+      "game_id": "tc_e19506c4a1564ca085b73b9284fa6f56",
+      "wpp_m49_source_id": "858",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "USA",
+      "source_country_name": "United States",
+      "asset_country_id": "USA",
+      "asset_country_name": "United States of America",
+      "game_id": "tc_f0a8b61c54a14d4089774716657e9433",
+      "wpp_m49_source_id": "840",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "UZB",
+      "source_country_name": "Uzbekistan",
+      "asset_country_id": "UZB",
+      "asset_country_name": "Uzbekistan",
+      "game_id": "tc_5d951c36a4ad4471ae9b9037fe338d70",
+      "wpp_m49_source_id": "860",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "VCT",
+      "source_country_name": "St. Vincent and the Grenadines",
+      "asset_country_id": "VCT",
+      "asset_country_name": "Saint Vincent and the Grenadines",
+      "game_id": "tc_67290f5714c846f4a84d1f53c6fd495a",
+      "wpp_m49_source_id": "670",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "VGB",
+      "source_country_name": "British Virgin Islands",
+      "asset_country_id": "VGB",
+      "asset_country_name": "British Virgin Islands",
+      "game_id": "tc_f3832fd029cb445483c26654bddadfac",
+      "wpp_m49_source_id": "92",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ZAF",
+      "source_country_name": "South Africa",
+      "asset_country_id": "ZAF",
+      "asset_country_name": "South Africa",
+      "game_id": "tc_dc6419869818416db051f50cbfd95036",
+      "wpp_m49_source_id": "710",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ZMB",
+      "source_country_name": "Zambia",
+      "asset_country_id": "ZMB",
+      "asset_country_name": "Zambia",
+      "game_id": "tc_e75bc9ac62fa443c90b5529778f3b1af",
+      "wpp_m49_source_id": "894",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    },
+    {
+      "source_country_code": "ZWE",
+      "source_country_name": "Zimbabwe",
+      "asset_country_id": "ZWE",
+      "asset_country_name": "Zimbabwe",
+      "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+      "wpp_m49_source_id": "716",
+      "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "review_status": "pending",
+      "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
+    }
+  ],
+  "exceptions": [
+    {
+      "source_country_code": "BOL",
+      "source_country_name": "Bolivia",
+      "asset_candidates": [
+        {
+          "asset_country_id": "BOL",
+          "asset_country_name": "Bolivia",
+          "un_m49": "068"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "BON",
+      "source_country_name": "Bonaire",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "unmatched_identity",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "BRN",
+      "source_country_name": "Brunei Darussalam",
+      "asset_candidates": [
+        {
+          "asset_country_id": "BRN",
+          "asset_country_name": "Brunei",
+          "un_m49": "096"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "CIV",
+      "source_country_name": "Cote d'Ivoire",
+      "asset_candidates": [
+        {
+          "asset_country_id": "CIV",
+          "asset_country_name": "Ivory Coast",
+          "un_m49": "384"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "COG",
+      "source_country_name": "Congo, Rep.",
+      "asset_candidates": [
+        {
+          "asset_country_id": "COG",
+          "asset_country_name": "Republic of the Congo",
+          "un_m49": "178"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "EAB",
+      "source_country_name": "East Asia & Pacific (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "ECB",
+      "source_country_name": "Europe & Central Asia (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "FRA",
+      "source_country_name": "France",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "unmatched_identity",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "GBR",
+      "source_country_name": "United Kingdom",
+      "asset_candidates": [
+        {
+          "asset_country_id": "GBR",
+          "asset_country_name": "United Kingdom",
+          "un_m49": "826"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "HKG",
+      "source_country_name": "Hong Kong SAR, China",
+      "asset_candidates": [
+        {
+          "asset_country_id": "HKG",
+          "asset_country_name": "Hong Kong S.A.R.",
+          "un_m49": "344"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "KOR",
+      "source_country_name": "Korea, Rep.",
+      "asset_candidates": [
+        {
+          "asset_country_id": "KOR",
+          "asset_country_name": "South Korea",
+          "un_m49": "410"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "LAO",
+      "source_country_name": "Lao PDR",
+      "asset_candidates": [
+        {
+          "asset_country_id": "LAO",
+          "asset_country_name": "Laos",
+          "un_m49": "418"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "LCB",
+      "source_country_name": "Latin America & Caribbean (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "MDA",
+      "source_country_name": "Moldova",
+      "asset_candidates": [
+        {
+          "asset_country_id": "MDA",
+          "asset_country_name": "Moldova",
+          "un_m49": "498"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "MEB",
+      "source_country_name": "Middle East & North Africa (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "NAB",
+      "source_country_name": "North America (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "NLD",
+      "source_country_name": "Netherlands",
+      "asset_candidates": [
+        {
+          "asset_country_id": "NLD",
+          "asset_country_name": "Netherlands",
+          "un_m49": "528"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "NOR",
+      "source_country_name": "Norway",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "unmatched_identity",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "PSE",
+      "source_country_name": "West Bank and Gaza",
+      "asset_candidates": [
+        {
+          "asset_country_id": "PSX",
+          "asset_country_name": "Palestine",
+          "un_m49": "275"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "RUT",
+      "source_country_name": "Russian Federation",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "unmatched_identity",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "SAB",
+      "source_country_name": "South Asia (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "SRB",
+      "source_country_name": "Serbia",
+      "asset_candidates": [
+        {
+          "asset_country_id": "SRB",
+          "asset_country_name": "Republic of Serbia",
+          "un_m49": "688"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "SSB",
+      "source_country_name": "Sub-Saharan Africa (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "SYR",
+      "source_country_name": "Syrian Arab Republic",
+      "asset_candidates": [
+        {
+          "asset_country_id": "SYR",
+          "asset_country_name": "Syria",
+          "un_m49": "760"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "TUR",
+      "source_country_name": "Turkiye",
+      "asset_candidates": [
+        {
+          "asset_country_id": "TUR",
+          "asset_country_name": "Turkey",
+          "un_m49": "792"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "TWN",
+      "source_country_name": "Taiwan, China",
+      "asset_candidates": [
+        {
+          "asset_country_id": "TWN",
+          "asset_country_name": "Taiwan",
+          "un_m49": "-099"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "VNM",
+      "source_country_name": "Viet Nam",
+      "asset_candidates": [
+        {
+          "asset_country_id": "VNM",
+          "asset_country_name": "Vietnam",
+          "un_m49": "704"
+        }
+      ],
+      "game_id_candidates": [],
+      "status": "manual_review_no_approved_game_crosswalk",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "WLD",
+      "source_country_name": "WORLD (Benchmark)",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "aggregate_not_a_country",
+      "review_status": "pending"
+    },
+    {
+      "source_country_code": "XKX",
+      "source_country_name": "Kosovo",
+      "asset_candidates": [],
+      "game_id_candidates": [],
+      "status": "unmatched_identity",
+      "review_status": "pending"
+    }
+  ]
+}
