@@ -316,7 +316,7 @@ def validate_manifest(
                 raise ICPDataBankValidationError(
                     f"Observation {key!r} has an empty dimension label in {field!r}"
                 )
-        time_match = re.fullmatch(r"YR(\\d{4})", key[1])
+        time_match = re.fullmatch(r"YR(\d{4})", key[1])
         if not time_match or (row.get("Time") or "").strip() != time_match.group(1):
             raise ICPDataBankValidationError(
                 f"Time label/code mismatch for observation {key!r}"
