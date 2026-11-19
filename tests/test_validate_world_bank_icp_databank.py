@@ -11,6 +11,7 @@ import pytest
 
 from tools.validate_world_bank_icp_databank import (
     ICPDataBankValidationError,
+    _read_csv,
     validate_manifest,
 )
 
@@ -158,13 +159,28 @@ def test_validates_observation_scope_encoding_missingness_and_csv_parity(tmp_pat
     assert Path(tmp_path / result["validation_report_path"]).is_file()
 
 
+def _replace_archive_member(manifest_path, member_name, member_bytes):
+    payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    archive_artifact = next(x for x in payload["files"]
+                            if x["artifact_role"] == "original_export_archive")
+    archive_path = manifest_path.parents[4] / archive_artifact["local_raw_path"]
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(archive_path) as old, zipfile.ZipFile(buffer, "w") as new:
+        for name in old.namelist():
+            new.writestr(name, member_bytes if name == member_name else old.read(name))
+    archive_path.write_bytes(buffer.getvalue())
+    archive_artifact["byte_count"] = archive_path.stat().st_size
+    archive_artifact["sha256"] = hashlib.sha256(archive_path.read_bytes()).hexdigest()
+    manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+
+
 def test_rejects_duplicate_observation_keys(tmp_path):
     manifest, data_path, _ = _fixture(tmp_path)
-    _, rows, _ = __import__(
-        "tools.validate_world_bank_icp_databank", fromlist=["_read_csv"]
-    )._read_csv(data_path)
+    _, rows, _ = _read_csv(data_path)
     rows.append(dict(rows[0]))
-    data_path.write_bytes(_csv_bytes(rows, "utf-8-sig"))
+    changed = _csv_bytes(rows, "utf-8-sig")
+    data_path.write_bytes(changed)
+    _replace_archive_member(manifest, "123_Data.csv", changed)
     payload = json.loads(manifest.read_text(encoding="utf-8"))
     artifact = next(x for x in payload["files"] if x["local_raw_path"].endswith("_Data.csv"))
     artifact["byte_count"] = data_path.stat().st_size
@@ -177,11 +193,11 @@ def test_rejects_duplicate_observation_keys(tmp_path):
 
 def test_rejects_data_metadata_value_mismatch(tmp_path):
     manifest, _, metadata_path = _fixture(tmp_path)
-    _, rows, _ = __import__(
-        "tools.validate_world_bank_icp_databank", fromlist=["_read_csv"]
-    )._read_csv(metadata_path)
+    _, rows, _ = _read_csv(metadata_path)
     rows[0][FIELDS[6]] = "999"
-    metadata_path.write_bytes(_csv_bytes(rows, "cp1252"))
+    changed = _csv_bytes(rows, "cp1252")
+    metadata_path.write_bytes(changed)
+    _replace_archive_member(manifest, "123_Series - Metadata.csv", changed)
     payload = json.loads(manifest.read_text(encoding="utf-8"))
     artifact = next(x for x in payload["files"]
                     if x["local_raw_path"].endswith("Series - Metadata.csv"))
@@ -189,5 +205,5 @@ def test_rejects_data_metadata_value_mismatch(tmp_path):
     artifact["sha256"] = hashlib.sha256(metadata_path.read_bytes()).hexdigest()
     manifest.write_text(json.dumps(payload), encoding="utf-8")
 
-    with pytest.raises(ICPDataBankValidationError, match="differs from ZIP bytes"):
+    with pytest.raises(ICPDataBankValidationError, match="Data/metadata value mismatch"):
         validate_manifest(repository_root=tmp_path, manifest_path=manifest)
