@@ -37,26 +37,38 @@ The Python implementation's dimension order, endpoint paths, and selected-variab
 
 - Classification returned 16 members and a populated `Sel`.
 - Series returned 47 members and a populated `Sel`.
-- Country returned HTTP 200 but an empty `MemberListJSON` envelope: `Levels`, `Members`, `DT`, and `Sel` were all null.
-- Time returned the same empty envelope.
+- Country returned HTTP 200 with an all-null `MemberListJSON` envelope.
+- Time returned HTTP 200 with the same all-null envelope.
 
-### ICP 2021 (cube 3869)
+### ICP 2021 (cube 3869): successful capture on 2026-11-19
 
-- Classification returned 17 members; its selected set contained only `PPPGlob` (Purchasing power parity (PPP) (US$ = 1)).
-- Series returned 48 members; its selected set contained six indicators.
-- Country returned HTTP 200 with the same all-null envelope.
-- The Time request ended with HAR status 0 and no response body.
+The new browser capture is split across `temp/browser-captures/newfile-parts/part-001.har` through `part-012.har`. In `part-010.har`, the dimension requests at entries 0, 4, 9, and 12 all returned HTTP 200 with populated responses:
 
-These responses do **not** establish a valid Country or Time selection. In particular, a null `Sel` must not be silently interpreted as “all members selected”: the browser capture provides no evidence for that assumption.
+| Dimension | DT | Members | Sel |
+|---|---:|---:|---:|
+| Country | C | 207 | 184 |
+| Classification | N | 17 | 1 |
+| Series | S | 48 | 6 |
+| Time | T | 7 | 7 |
+
+Important response-shape observations:
+
+- `Members` is a list of available member records; it is not the selected set.
+- `Sel` is a dictionary keyed by each selected member's unique name.
+- `Levels` is empty for Country, Classification, and Time in this successful capture. This is valid and must not be treated as an uninitialized dimension.
+- `DT` is the dimension type marker (`C`, `N`, `S`, or `T`), not a count.
+- Country has 207 available members but 184 selected members.
+
+The same capture records successful selected-variable registration with 184 Country members, one Classification member, six Series members, and seven Time members. FileInfo requests for CSV, Excel, and tab-delimited output returned HTTP 200; the corresponding downloads also returned HTTP 200. The CSV request's browser form includes `ddl-excel-format=xlsx` even though `down-radio=csv`.
 
 ## Fix applied
 
-`_dimension_response()` previously treated the all-null server envelope as a generic malformed response and retried it with exponential backoff. The captures show this is a deterministic server response, not a transport timeout. The acquisition code now recognizes this exact empty-envelope signature and fails immediately with a dimension-specific diagnostic. A regression test verifies that it performs only one request even when retries are configured.
+`_dimension_response()` recognizes the all-null envelope signature (all of `Levels`, `Members`, `DT`, and `Sel` are null) as an uninitialized server response and fails immediately rather than retrying it. It does not reject an empty `Levels` list when the other response fields are populated.
 
-This is a fail-fast correction, not a claim that the captured reports are now exportable. It prevents long, futile retries and prevents the acquisition pipeline from fabricating a selection for Country or Time.
+The FileInfo CSV form now matches the successful browser request captured in `part-010.har`, including `ddl-excel-format=xlsx` and excluding fields not present in that captured request. The regression test asserts the complete CSV form field set.
 
 ## What the HARs do not prove
 
-Neither capture contains a successful user-driven Country/Time selection followed by the complete export workflow. The HARs do not contain successful requests to `SelectVariableHandler.ashx`, `FileInfoHandler.ashx`, or `FileDownloadHandler.ashx`. Consequently, the browser-side endpoint names are confirmed from the loaded page and JavaScript, but the exact POST body and export option values currently used by the Python client are not yet validated against a real successful browser export.
+Neither capture contains a successful user-driven Country/Time selection followed by the complet## What the HARs do not prove
 
-The next required capture must include opening Country and Time, changing or confirming their selections, applying the variable changes, and completing a CSV export. It should retain request and response bodies for the three handlers above. Until then, changing the current export form fields would be guesswork.
+The new capture establishes one successful ICP 2021 browser export sequence and its selected-variable registration. It does not establish that every saved report, report release, or selection configuration will behave identically. The HAR contains sensitive session and request material; keep the captures private and do not publish them without reviewing and redacting request headers, cookies, tokens, and bodies.
