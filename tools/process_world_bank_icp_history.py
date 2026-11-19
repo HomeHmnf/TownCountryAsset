@@ -270,7 +270,7 @@ def build_country_mapping_review(
         "review_approval": {"status": "pending", "scope": "ICP source identity mapping only; not global identity or ISO assignment approval."},
         "mappings": mappings, "exceptions": exceptions,
     }
-    crosswalk_file.write_text(json.dumps(crosswalk, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    crosswalk_file.write_text(json.dumps(crosswalk, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return report
 
 
