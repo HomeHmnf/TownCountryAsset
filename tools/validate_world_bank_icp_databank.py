@@ -352,7 +352,7 @@ def validate_manifest(
     if stamp.tzinfo is None or stamp.utcoffset() is None:
         raise ValueError("validated_at must be timezone-aware")
     export_id = str(manifest.get("export_id") or manifest_file.stem)
-    validation_id = "databank_validation_" + stamp.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    validation_id = "databank_validation_" + stamp.astimezone(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     report_dir = root / REPORT_ROOT / validation_id
     report_dir.mkdir(parents=True, exist_ok=False)
     result = {
