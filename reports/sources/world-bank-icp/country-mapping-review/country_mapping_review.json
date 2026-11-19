@@ -2103,5 +2103,36 @@
       "status": "unmatched_identity",
       "review_status": "pending"
     }
-  ]
+  ],
+  "data_scope": {
+    "classification_code": "PPPGlob",
+    "classification_label": "Purchasing power parity (PPP) (US$ = 1)",
+    "years": [
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "country_year_rows": 1288,
+    "indicator_count": 6,
+    "historical_cells": 7728,
+    "missing_value_token": "..",
+    "missing_value_counts_by_indicator": {
+      "1000000": 96,
+      "1501000": 442,
+      "9020000": 425,
+      "9100000": 411,
+      "9250000": 442,
+      "9270000": 442
+    },
+    "source_missing_total": 2258,
+    "observed_numeric_total": 5470,
+    "data_csv_non_observation_rows": 5,
+    "series_metadata_csv_encoding": "cp1252",
+    "data_csv_encoding": "utf-8",
+    "unit_interpretation": "The source supplies a classification label but no separate per-row currency/unit field; retain PPP (US$ = 1) as source classification and do not infer national currency codes."
+  }
 }
