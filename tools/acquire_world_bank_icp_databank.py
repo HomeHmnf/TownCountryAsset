@@ -285,19 +285,20 @@ def acquire_export(*, repository_root: str | Path = ROOT,
     if registration_status != 200:
         raise DataBankExportError("DataBank rejected selected-variable registration")
 
+    # Match the successful browser CSV request captured in
+    # temp/browser-captures/newfile-parts/part-010.har. In particular,
+    # the browser sends ddl-excel-format even when down-radio=csv.
     fileinfo_values = {
         "reqtype": "data",
         "data-option-radio": "data-download",
-        "down-radio": "csv",
-        "ddl-text-delimiter": "None",
+        "ddl-excel-format": "xlsx",
         "ddl-export-range": "full",
         "ddl-data-format": "Table",
         "ddl-variable-format": "Both",
         "ddl-na-preference": "..",
-        "hdnEditMode": "",
+        "ddl-text-delimiter": "None",
         "ddl-export-notes": "N",
-        "dataset-name": "",
-        "chk-scale-precision": "N",
+        "down-radio": "csv",
     }
     fileinfo_body, fileinfo_status, _, _ = _post_form(
         opener, AJAX_BASE + FILEINFO_ENDPOINT, fileinfo_values,
