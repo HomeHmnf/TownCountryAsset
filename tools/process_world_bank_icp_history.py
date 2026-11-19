@@ -136,12 +136,40 @@ def _series_dictionary(metadata_path: Path, manifest: dict[str, Any]) -> list[di
     return result
 
 
+def _canonical_iso_registry(database_path: str | Path) -> tuple[dict[str, list[dict[str, str]]], str]:
+    """Read verified canonical ISO assignments without creating or migrating the DB."""
+    path = Path(database_path).resolve()
+    if not path.is_file():
+        return {}, "database_file_not_present"
+    uri = path.as_uri() + "?mode=ro"
+    try:
+        connection = sqlite3.connect(uri, uri=True)
+        connection.row_factory = sqlite3.Row
+        rows = connection.execute(
+            """SELECT game_id, iso_alpha3, iso_assignment_status, record_status
+               FROM countries WHERE iso_alpha3 IS NOT NULL"""
+        ).fetchall()
+        connection.close()
+    except sqlite3.Error:
+        return {}, "canonical_country_registry_unavailable"
+    result: dict[str, list[dict[str, str]]] = {}
+    for row in rows:
+        if row["iso_assignment_status"] == "verified" and row["record_status"] == "approved":
+            result.setdefault(str(row["iso_alpha3"]).upper(), []).append({
+                "game_id": str(row["game_id"]),
+                "iso_assignment_status": str(row["iso_assignment_status"]),
+                "record_status": str(row["record_status"]),
+            })
+    return result, "read_only_verified_registry_loaded"
+
+
 def build_country_mapping_review(
     *, repository_root: str | Path = ROOT, manifest_path: str | Path,
     asset_countries_path: str | Path = ASSET_COUNTRIES,
     wpp_crosswalk_path: str | Path = WPP_CROSSWALK,
     output_dir: str | Path = REPORT_DIR,
     crosswalk_path: str | Path = DEFAULT_MAPPING,
+    database_path: str | Path = DEFAULT_DATABASE_PATH,
 ) -> dict[str, Any]:
     root = Path(repository_root).resolve()
     manifest, data_path, metadata_path = _manifest_paths(root, Path(manifest_path))
@@ -162,6 +190,7 @@ def build_country_mapping_review(
         iso = str(item.get("iso3") or "").upper()
         if iso:
             by_iso3.setdefault(iso, []).append(item)
+    canonical_by_iso3, canonical_registry_status = _canonical_iso_registry(database_path)
     by_m49: dict[str, list[dict[str, Any]]] = {}
     for item in wpp.get("mappings", []):
         by_m49.setdefault(_norm_m49(item.get("source_id")), []).append(item)
@@ -174,9 +203,19 @@ def build_country_mapping_review(
             m49 = _norm_m49((asset.get("source_attributes") or {}).get("UN_A3"))
             game_matches.extend(by_m49.get(m49, []))
         unique_games = {x["game_id"]: x for x in game_matches}
-        if len(asset_matches) == 1 and len(unique_games) == 1:
+        registry_matches = canonical_by_iso3.get(code, [])
+        candidate_game_ids = set(unique_games) | {x["game_id"] for x in registry_matches}
+        if len(registry_matches) == 1 and len(candidate_game_ids) == 1:
+            match = registry_matches[0]
+            asset = asset_matches[0] if len(asset_matches) == 1 else {}
+            mapping_method = "canonical_registry_verified_iso3"
+        elif len(asset_matches) == 1 and len(unique_games) == 1 and not registry_matches:
             asset = asset_matches[0]
             match = next(iter(unique_games.values()))
+            mapping_method = "candidate_iso3_asset_and_un_m49_wpp_crosswalk"
+        else:
+            match = None
+        if match is not None:
             mappings.append({
                 "source_country_code": code,
                 "source_country_name": name,
@@ -184,7 +223,7 @@ def build_country_mapping_review(
                 "asset_country_name": asset.get("name"),
                 "game_id": match["game_id"],
                 "wpp_m49_source_id": match["source_id"],
-                "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+                "match_method": mapping_method,\n                "canonical_registry_status": canonical_registry_status,
                 "review_status": "pending",
                 "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.",
             })
@@ -205,7 +244,7 @@ def build_country_mapping_review(
                      "un_m49": (x.get("source_attributes") or {}).get("UN_A3")}
                     for x in asset_matches
                 ],
-                "game_id_candidates": sorted(unique_games),
+                "game_id_candidates": sorted(candidate_game_ids),\n                "canonical_registry_candidates": registry_matches,
                 "status": status,
                 "review_status": "pending",
             })
@@ -219,7 +258,7 @@ def build_country_mapping_review(
         "manual_review_no_approved_game_crosswalk": counts["manual_review_no_approved_game_crosswalk"],
         "aggregate_not_a_country": counts["aggregate_not_a_country"],
         "unmatched_identity": counts["unmatched_identity"],
-        "approved_mappings": 0,
+        "canonical_registry_verified_matches": sum(1 for x in mappings if x.get("match_method") == "canonical_registry_verified_iso3"),\n        "approved_mappings": 0,
         "policy": "All candidate mappings remain pending; no name-only, fuzzy, ISO-inferred or aggregate-to-country mapping is approved automatically.",
     }
     report = {
@@ -232,7 +271,7 @@ def build_country_mapping_review(
         "mapping_basis": {
             "first_link": "ICP Country Code equals generated asset ISO3 code",
             "second_link": "generated asset UN_A3 M49 code joins the already-reviewed UN WPP source crosswalk",
-            "limitation": "This is a candidate bridge, not an ICP-approved identity crosswalk; the existing WPP approval is explicitly source-specific.",
+            "limitation": "This is a candidate bridge, not an ICP-approved identity crosswalk; verified canonical ISO3 assignments take precedence, and the existing WPP approval is explicitly source-specific.",\n            "canonical_registry_status": canonical_registry_status,
         },
         "summary": summary,
         "indicators": indicators,
@@ -435,11 +474,11 @@ def import_icp_history(
         apply_migrations(connection)
         connection.execute("BEGIN IMMEDIATE")
         require_approved_application(connection, approval_id=approval_id, artifact=artifact)
-        country_status = {r["game_id"]: r["record_status"] for r in connection.execute("SELECT game_id, record_status FROM countries")}
+        country_status = {r["game_id"]: (r["record_status"], r["iso_alpha3"], r["iso_assignment_status"]) for r in connection.execute("SELECT game_id, record_status, iso_alpha3, iso_assignment_status FROM countries")}
         missing_game_ids = sorted({x["game_id"] for x in approved.values()} - set(country_status))
         if missing_game_ids:
             raise ICPHistoryError("Approved mapping references unknown canonical game IDs: " + ", ".join(missing_game_ids[:10]))
-        ineligible = sorted(game_id for game_id in {x["game_id"] for x in approved.values()} if country_status[game_id] != "approved")
+        ineligible = sorted(game_id for game_id in {x["game_id"] for x in approved.values()} if country_status[game_id][0] != "approved" or country_status[game_id][2] != "verified" or country_status[game_id][1] != next(item["source_country_code"] for item in approved.values() if item["game_id"] == game_id))
         if ineligible:
             raise ICPHistoryError("ICP mappings require approved canonical country identities: " + ", ".join(ineligible[:10]))
         imported_at = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
@@ -517,7 +556,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         if args.build_review:
-            result = build_country_mapping_review(manifest_path=args.manifest)
+            result = build_country_mapping_review(manifest_path=args.manifest, database_path=args.database)
         elif args.propose:
             if not args.approval_id:
                 raise ICPHistoryError("--propose requires --approval-id")
