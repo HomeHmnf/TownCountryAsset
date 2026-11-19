@@ -32,7 +32,7 @@ ASSET_COUNTRIES = Path("generated/town_country_asset/countries.json")
 WPP_CROSSWALK = Path("data/manual/source_crosswalks/un_wpp.json")
 REPORT_DIR = Path("reports/sources/world-bank-icp/country-mapping-review")
 DOMAIN = "world_bank_icp_historical_statistics"
-UNIT = "PPP ratio (US$ = 1)"
+UNIT = "PPP (US$ = 1; source classification)"
 INDICATOR_NAMES = {
     "1000000": "Gross domestic product",
     "9020000": "Actual individual consumption",
@@ -275,6 +275,8 @@ def build_country_mapping_review(
 
 
 def _approved_mapping_index(mapping: dict[str, Any]) -> dict[str, dict[str, str]]:
+    if mapping.get("schema_version") != 1 or mapping.get("source_key") != "world_bank_icp" or mapping.get("dataset") != "world_bank_icp_databank_saved_report":
+        raise ICPHistoryError("Mapping file is not the ICP DataBank saved-report crosswalk")
     result = {}
     seen_games = set()
     for item in mapping.get("mappings", []):
