@@ -141,6 +141,7 @@ def build_country_mapping_review(
     asset_countries_path: str | Path = ASSET_COUNTRIES,
     wpp_crosswalk_path: str | Path = WPP_CROSSWALK,
     output_dir: str | Path = REPORT_DIR,
+    crosswalk_path: str | Path = DEFAULT_MAPPING,
 ) -> dict[str, Any]:
     root = Path(repository_root).resolve()
     manifest, data_path, metadata_path = _manifest_paths(root, Path(manifest_path))
@@ -260,6 +261,16 @@ def build_country_mapping_review(
                 "status": item["status"], "review_status": item["review_status"],
             })
     (out / "indicator_dictionary.json").write_text(json.dumps(indicators, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    crosswalk_file = (root / crosswalk_path).resolve() if not Path(crosswalk_path).is_absolute() else Path(crosswalk_path).resolve()
+    crosswalk_file.relative_to(root)
+    crosswalk_file.parent.mkdir(parents=True, exist_ok=True)
+    crosswalk = {
+        "schema_version": 1, "dataset": "world_bank_icp_databank_saved_report",
+        "source_key": "world_bank_icp", "mapping_policy": report["mapping_basis"],
+        "review_approval": {"status": "pending", "scope": "ICP source identity mapping only; not global identity or ISO assignment approval."},
+        "mappings": mappings, "exceptions": exceptions,
+    }
+    crosswalk_file.write_text(json.dumps(crosswalk, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
     return report
 
 
@@ -293,7 +304,8 @@ def dry_run_icp_history(
     indicator_codes = [x.split(":", 1)[0] for x in indicator_columns]
     country_codes = {x["source_country_code"] for x in mapping.get("mappings", [])}
     country_codes.update(x["source_country_code"] for x in mapping.get("exceptions", []))
-    if len(country_codes) != int(manifest["dimensions"][0]["selected_count"]):
+    selected_country_count = next((int(x["selected_count"]) for x in manifest["dimensions"] if x.get("control_id") == "Country"), None)
+    if selected_country_count is None or len(country_codes) != selected_country_count:
         raise ICPHistoryError("Mapping review does not cover the complete selected Country dimension")
     approved = _approved_mapping_index(mapping)
     if set(indicator_codes) != set(INDICATOR_NAMES):
@@ -421,10 +433,13 @@ def import_icp_history(
         apply_migrations(connection)
         connection.execute("BEGIN IMMEDIATE")
         require_approved_application(connection, approval_id=approval_id, artifact=artifact)
-        known = {r["game_id"] for r in connection.execute("SELECT game_id FROM countries")}
-        missing_game_ids = sorted({x["game_id"] for x in approved.values()} - known)
+        country_status = {r["game_id"]: r["record_status"] for r in connection.execute("SELECT game_id, record_status FROM countries")}
+        missing_game_ids = sorted({x["game_id"] for x in approved.values()} - set(country_status))
         if missing_game_ids:
             raise ICPHistoryError("Approved mapping references unknown canonical game IDs: " + ", ".join(missing_game_ids[:10]))
+        ineligible = sorted(game_id for game_id in {x["game_id"] for x in approved.values()} if country_status[game_id] != "approved")
+        if ineligible:
+            raise ICPHistoryError("ICP mappings require approved canonical country identities: " + ", ".join(ineligible[:10]))
         imported_at = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
         raw_sha = hashlib.sha256(data_path.read_bytes()).hexdigest()
         cursor = connection.execute(
