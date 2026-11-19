@@ -1,88 +1,128 @@
-# World Bank ICP DataBank saved-report workflow
+# World Bank ICP DataBank saved-report and historical-data workflow
 
-## Scope and identity
+## Acquisition and source interpretation
 
-The ICP-Annual-PPPs DataBank saved report is registered as the distinct source
-`world_bank_icp` and dataset `world_bank_icp_databank_saved_report`. A saved-report
-capture is a timestamped acquisition event, not a new provider-declared ICP release
-vintage.
+The ICP-Annual-PPPs saved report is source `world_bank_icp`, dataset
+`world_bank_icp_databank_saved_report`, DataBank cube 3869. Acquisition manifests
+are timestamped captures of the saved report, not new provider release vintages.
+The 2026-11-19 capture and the earlier capture each passed semantic validation;
+their Data and Series Metadata CSVs had exact observation-key, identity and value
+parity. Only the Data CSV is normalized as observations. The Series Metadata CSV
+is retained as source evidence and supplies the trailing indicator definitions.
 
-Each acquisition retains three artifacts:
+The selected scope is:
 
-- the original DataBank ZIP archive;
-- the extracted `*_Data.csv`, which is the canonical observation representation;
-- the extracted Series Metadata CSV, which repeats the observations and adds a
-  trailing indicator-code dictionary.
+- Classification: `PPPGlob`, “Purchasing power parity (PPP) (US$ = 1)”.
+- Years: 2017–2023 inclusive.
+- Selected DataBank country dimension: 184 entries, including regional/world
+  benchmark aggregates.
+- Six series: 1000000, 9020000, 9100000, 9270000, 1501000 and 9250000.
+- The source missing token is `..`. It is stored as `value=NULL`,
+  `value_status='source_missing'`, and `missing_value_token='..'`. It is not
+  converted to zero, not_applicable, or estimated, and is never imputed.
 
-Do not append both CSVs as observations. They contain the same observation keys and
-indicator values. The metadata CSV is supporting evidence and a parity check.
+The selected series names and full descriptions are recorded in
+`reports/sources/world-bank-icp/country-mapping-review/indicator_dictionary.json`.
+The DataBank export does not provide a separate per-row currency field. The
+classification states US$ = 1; the importer therefore records the source unit as
+“PPP ratio (US$ = 1)” and does not invent country currency codes.
 
-## Validation contract
+## Country identity mapping
 
-`tools.validate_world_bank_icp_databank` verifies:
+The mapping review compares each distinct ICP Country Code with the generated
+asset-country ISO3 identifier. Candidate persistent game IDs are reached only
+when the asset's UN_A3 M49 identifier also joins the existing reviewed UN WPP
+source crosswalk. That WPP crosswalk is source-specific; it is evidence for a
+candidate, not an ICP approval.
 
-- manifest-referenced artifact byte counts and SHA-256 hashes;
-- ZIP CRC integrity and exact byte identity between archive members and extracted CSVs;
-- the selected Country, Classification, Series and Time members recorded in the manifest;
-- indicator columns matching the selected Series members;
-- a complete Country × Classification × Time observation cross-product;
-- unique `(classification_code, time_code, country_code)` keys;
-- numeric finite values or the source missing-value token `..`;
-- exact observation-key, dimension-field and indicator-value parity between the two CSVs;
-- the Series Metadata CSV's trailing indicator-code dictionary;
-- strict UTF-8 decoding with Windows-1252 fallback, without changing source bytes.
+The current report distinguishes:
+- candidate ISO3 + M49 + WPP game-ID mappings (pending review);
+- entities with an asset candidate but no approved WPP game-ID bridge;
+- ambiguous identities;
+- unmatched identities; and
+- benchmark aggregates, which are not game countries and must not be mapped.
 
-The validator writes a timestamped report under
-`reports/sources/world-bank-icp/`. It does not write either database.
+No mapping is approved automatically. Edit
+`data/manual/source_crosswalks/world_bank_icp.json` only after checking the ICP
+entity scope and persistent game identity. Change a mapping's
+`review_status` from `pending` to `approved` only when the mapping has been
+reviewed. Do not map benchmark aggregates to countries. The importer also checks
+that every approved game ID exists in the canonical `countries` table.
 
-## Commands
+The machine-readable and CSV review reports are under
+`reports/sources/world-bank-icp/country-mapping-review/`.
 
-Validate the known 19 November 2026 capture:
+## Historical storage
+
+ICP history is stored in `icp_historical_observations`, not
+`current_statistics`. Its natural key is
+`(game_id, indicator_code, classification_code, observation_year)`.
+Each row retains the source country code/name, indicator code/name, classification,
+source unit, source report URL, export ID, retrieval timestamp and dataset import
+foreign key. Observed numeric values and source-missing values are represented
+explicitly. This allows all seven years and all six indicators to coexist without
+overwriting a current statistic.
+
+The schema migration is `migrations/005_icp_historical_observations.sql`.
+
+## Commands (fish)
+
+Build the country/indicator review from the latest capture (replace the manifest
+path with the 2026-11-19 export ID if needed):
 
 ```fish
-uv run python -m tools.validate_world_bank_icp_databank \
-  --manifest data_manifests/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z.json
+uv run python -m tools.process_world_bank_icp_history \
+  --manifest data_manifests/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z.json \
+  --build-review
 ```
 
-Run the full gated workflow in preflight mode. This audits and semantically validates
-every manifest in the ICP DataBank manifest directory, synchronizes the Project DB
-source/dataset catalogues, and performs a dry-run acquisition-registration preflight:
+Inspect the proposed historical import. This is read-only and reports eligible
+coverage after explicit mapping approvals:
 
 ```fish
-uv run python -m tools.process_world_bank_icp_databank
+uv run python -m tools.process_world_bank_icp_history \
+  --manifest data_manifests/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z.json \
+  --dry-run
 ```
 
-Only after the preflight reports `ready_for_registration`, register acquisition and
-artifact provenance in the Project SQLite database:
+After reviewing and explicitly approving the country mappings in the crosswalk,
+create a pending canonical application proposal:
 
 ```fish
-uv run python -m tools.process_world_bank_icp_databank --register
+uv run python -m tools.process_world_bank_icp_history \
+  --manifest data_manifests/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z.json \
+  --propose --approval-id icp-history-20261119-v1
 ```
 
-The `--register` flag does not import statistical observations. The Project DB
-records the acquisition event, manifest evidence and artifact provenance. The Game
-DB is not opened or changed.
-
-To produce the existing normalized long-form inspection outputs after validation:
+Approve or reject the proposal through the existing project-wide approval gate:
 
 ```fish
-uv run python -m tools.assess_world_bank_icp_exports
+uv run python -m tools.manage_database_applications approve \
+  --approval-id icp-history-20261119-v1 \
+  --actor project_owner \
+  --note "Reviewed ICP country crosswalk, indicator definitions, 2017-2023 history and missing-value semantics"
 ```
 
-## Database and approval boundary
+Only then may the exact fingerprinted artifact be applied:
 
-Catalogue synchronization and acquisition registration are provenance operations.
-They do not establish that the observations are semantically approved for canonical
-use. Observation normalization, statistical interpretation, source selection,
-approval, retention promotion and Game DB application remain separate governed
-steps. In particular, missing values remain missing; no imputation, interpolation,
-extrapolation or carry-forward is authorized by this workflow.
+```fish
+uv run python -m tools.process_world_bank_icp_history \
+  --manifest data_manifests/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z.json \
+  --apply --approval-id icp-history-20261119-v1
+```
+
+Any edit to the manifest, raw CSV, country crosswalk, asset identity evidence or
+WPP crosswalk changes the fingerprint and requires a new proposal and approval.
+The application is transactional; the approval is marked applied in the same
+transaction as the historical observation inserts. It writes only the canonical
+asset database, never the Project DB or Game DB. It does not populate
+`current_statistics` or change source selection.
 
 ## Regression tests
 
 ```fish
 uv run python -m pytest -v \
+  tests/test_process_world_bank_icp_history.py \
   tests/test_validate_world_bank_icp_databank.py \
-  tests/test_process_world_bank_icp_databank.py \
-  tests/test_world_bank_icp_databank.py
+  tests/test_process_world_bank_icp_databank.py
 ```
