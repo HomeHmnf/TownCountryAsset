@@ -291,7 +291,8 @@ def build_country_mapping_review(
     with (out / "country_mapping_review.csv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=[
             "source_country_code", "source_country_name", "asset_country_id",
-            "asset_country_name", "game_id", "wpp_m49_source_id", "status",
+            "asset_country_name", "game_id", "wpp_m49_source_id",
+            "match_method", "canonical_registry_status", "status",
             "review_status", "review_note",
         ])
         writer.writeheader()
