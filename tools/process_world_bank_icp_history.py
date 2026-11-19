@@ -223,7 +223,8 @@ def build_country_mapping_review(
                 "asset_country_name": asset.get("name"),
                 "game_id": match["game_id"],
                 "wpp_m49_source_id": match.get("source_id"),
-                "match_method": mapping_method,\n                "canonical_registry_status": canonical_registry_status,
+                "match_method": mapping_method,
+                "canonical_registry_status": canonical_registry_status,
                 "review_status": "pending",
                 "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.",
             })
@@ -244,7 +245,8 @@ def build_country_mapping_review(
                      "un_m49": (x.get("source_attributes") or {}).get("UN_A3")}
                     for x in asset_matches
                 ],
-                "game_id_candidates": sorted(candidate_game_ids),\n                "canonical_registry_candidates": registry_matches,
+                "game_id_candidates": sorted(candidate_game_ids),
+                "canonical_registry_candidates": registry_matches,
                 "status": status,
                 "review_status": "pending",
             })
@@ -258,7 +260,8 @@ def build_country_mapping_review(
         "manual_review_no_approved_game_crosswalk": counts["manual_review_no_approved_game_crosswalk"],
         "aggregate_not_a_country": counts["aggregate_not_a_country"],
         "unmatched_identity": counts["unmatched_identity"],
-        "canonical_registry_verified_matches": sum(1 for x in mappings if x.get("match_method") == "canonical_registry_verified_iso3"),\n        "approved_mappings": 0,
+        "canonical_registry_verified_matches": sum(1 for x in mappings if x.get("match_method") == "canonical_registry_verified_iso3"),
+        "approved_mappings": 0,
         "policy": "All candidate mappings remain pending; no name-only, fuzzy, ISO-inferred or aggregate-to-country mapping is approved automatically.",
     }
     report = {
@@ -271,7 +274,8 @@ def build_country_mapping_review(
         "mapping_basis": {
             "first_link": "ICP Country Code equals generated asset ISO3 code",
             "second_link": "generated asset UN_A3 M49 code joins the already-reviewed UN WPP source crosswalk",
-            "limitation": "This is a candidate bridge, not an ICP-approved identity crosswalk; verified canonical ISO3 assignments take precedence, and the existing WPP approval is explicitly source-specific.",\n            "canonical_registry_status": canonical_registry_status,
+            "limitation": "This is a candidate bridge, not an ICP-approved identity crosswalk; verified canonical ISO3 assignments take precedence, and the existing WPP approval is explicitly source-specific.",
+            "canonical_registry_status": canonical_registry_status,
         },
         "summary": summary,
         "indicators": indicators,
