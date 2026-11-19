@@ -182,3 +182,45 @@ Migration 003 preserves existing `current_statistics` rows while extending the c
 Source downloads are local-only. Git tracks contracts and manifests/checksums, not raw source files. Source licence restrictions are documented separately and do not block local acquisition, but they must not be misrepresented as open redistribution rights. See `reports/wp1-5-source-licenses.md`.
 
 The one consolidated null/empty completeness audit remains deferred until all 41 fields and all applicable country/source domains have been visited. No consumer cutover or JSON pipeline replacement is part of WP1.5.
+
+## Bulk approval of previously reviewed country candidates
+
+The operator command tools/bulk_approve_country_reviews.py provides a dry-run-first path for applying review decisions already made by a human. It uses the existing application_approvals and database_application_events audit tables; no schema migration is required.
+
+The command separates country-record acceptance from the four review-proposal domains:
+
+- --approve-records approves eligible countries.record_status='candidate' rows only when each has exactly one current source mapping and one canonical English name. It does not set entity classification, ISO, localization, or flag status.
+- --proposal-type iso approves eligible ISO proposals and sets the matching country ISO pair and iso_assignment_status='verified'. Both codes must be present and syntactically valid, and codes must be unique against already-verified records and within the batch.
+- --proposal-type localization approves only proposals with a non-empty Persian name and inserts that canonical Persian name.
+- --proposal-type entity_type requires a matching current entity type and a non-empty evidence list. Existing imported entity proposals with empty evidence remain pending until evidence is supplied.
+- --proposal-type flag requires an actual flag mapping and non-empty evidence.
+
+The tool leaves missing, conflicting, duplicate, rejected, and evidence-incomplete items unchanged. It does not infer values or convert an unavailable ISO assignment into a verified one. The ISO reference mirror is third-party evidence; the reviewer must independently confirm assignments against appropriate authoritative evidence before selecting the ISO domain.
+
+### Operator workflow
+
+Run from the repository root. First preview identity approvals and ISO proposals:
+
+```fish
+uv run python -m tools.bulk_approve_country_reviews \
+  --approve-records \
+  --proposal-type iso
+```
+
+Inspect the counts and skipped reasons. If the eligible records and ISO proposals are exactly the ones already reviewed, apply the decision with an identifiable reviewer and rationale:
+
+```fish
+uv run python -m tools.bulk_approve_country_reviews \
+  --approve-records \
+  --proposal-type iso \
+  --actor "OWNER_IDENTIFIER" \
+  --note "Bulk approval of previously reviewed canonical country identities and ISO assignments." \
+  --confirm-reviewed \
+  --apply
+```
+
+The --confirm-reviewed flag is an explicit human attestation for the selected eligible scope. --apply is required to write; without it the command is read-only. Use --database to target an isolated database. Additional domains can be selected by repeating --proposal-type, but do not select a domain unless its individual decisions and evidence have already been reviewed.
+
+Each apply creates a fingerprinted bulk_country_review application record and records proposed, approved, and applied events in the same transaction as country/proposal changes. SQLite integrity and foreign-key checks run before commit; any failure rolls back the entire batch. The command does not modify the JSON identity registry or generated assets.
+
+Bulk record approval does not by itself satisfy the ICP import's ISO verification prerequisite. Run the ISO proposal scope only for code assignments that have actually been checked and approved. Unmatched entities, aggregates, records without ISO codes, and ISO conflicts remain unresolved for manual handling.
