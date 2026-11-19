@@ -191,10 +191,17 @@ def _ensure_country(connection: sqlite3.Connection, record: dict[str, Any], now:
         )
     else:
         actual = tuple(existing)
-        identity_matches = (
-            actual[0] == expected[0]
-            and actual[2:4] == expected[2:4]
-        )
+        iso_values_match = actual[2:4] == expected[2:4]
+        if not iso_values_match and actual[4] == "verified":
+            approved_iso = connection.execute(
+                """SELECT 1 FROM review_proposals
+                   WHERE game_id=? AND proposal_type='iso' AND review_status='approved'
+                     AND json_extract(proposed_json, '$.alpha2')=?
+                     AND json_extract(proposed_json, '$.alpha3')=? LIMIT 1""",
+                (game_id, actual[2], actual[3]),
+            ).fetchone()
+            iso_values_match = approved_iso is not None
+        identity_matches = actual[0] == expected[0] and iso_values_match
         record_status_is_valid = actual[1] in {"candidate", "approved"}
         iso_status_is_valid = (
             actual[4] == expected[4]
