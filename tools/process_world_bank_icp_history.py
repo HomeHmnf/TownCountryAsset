@@ -222,7 +222,7 @@ def build_country_mapping_review(
                 "asset_country_id": asset.get("id"),
                 "asset_country_name": asset.get("name"),
                 "game_id": match["game_id"],
-                "wpp_m49_source_id": match["source_id"],
+                "wpp_m49_source_id": match.get("source_id"),
                 "match_method": mapping_method,\n                "canonical_registry_status": canonical_registry_status,
                 "review_status": "pending",
                 "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.",
@@ -232,7 +232,7 @@ def build_country_mapping_review(
                 status = "aggregate_not_a_country"
             elif not asset_matches:
                 status = "unmatched_identity"
-            elif len(asset_matches) > 1 or len(unique_games) > 1:
+            elif len(asset_matches) > 1 or len(candidate_game_ids) > 1 or len(registry_matches) > 1:
                 status = "ambiguous_identity"
             else:
                 status = "manual_review_no_approved_game_crosswalk"
