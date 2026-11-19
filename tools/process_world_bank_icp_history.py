@@ -325,12 +325,15 @@ def _approved_mapping_index(mapping: dict[str, Any]) -> dict[str, dict[str, str]
         raise ICPHistoryError("Mapping file is not the ICP DataBank saved-report crosswalk")
     result = {}
     seen_games = set()
+    exception_codes = {x.get("source_country_code") for x in mapping.get("exceptions", [])}
     for item in mapping.get("mappings", []):
         if item.get("review_status") != "approved":
             continue
         code, game_id = item.get("source_country_code"), item.get("game_id")
-        if not isinstance(code, str) or not isinstance(game_id, str):
-            raise ICPHistoryError("Approved mapping requires source_country_code and game_id")
+        if not isinstance(code, str) or len(code) != 3 or not code.isupper() or not isinstance(game_id, str) or len(game_id) != 35 or not game_id.startswith("tc_"):
+            raise ICPHistoryError("Approved mapping requires a three-character source code and persistent tc_ game ID")
+        if code in exception_codes:
+            raise ICPHistoryError(f"Source country {code} is listed as an exception and cannot be approved as a country mapping")
         if code in result or game_id in seen_games:
             raise ICPHistoryError("Approved ICP country mappings must be one-to-one")
         result[code] = item
