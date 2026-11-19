@@ -76,7 +76,7 @@ def _load_candidates(
             if row["record_status"] != "candidate":
                 skipped[f"record_status_{row['record_status']}"] += 1
                 continue
-            if row["current_sources"] != 1 or row["english_names"] != 1:
+            if row["current_sources"] < 1 or row["english_names"] != 1:
                 skipped["identity_missing_or_ambiguous_source_or_name"] += 1
                 continue
             records.append({"game_id": row["game_id"]})
