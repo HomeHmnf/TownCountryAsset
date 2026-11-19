@@ -1193,6 +1193,30 @@
         "latest_applied": null,
         "notes": "Acquisition captures two explicitly identified workbooks; newer publications require a reviewed catalogue/tool update rather than inferred URL generation."
       }
+    },
+    "world_bank_icp": {
+      "name": "World Bank International Comparison Program",
+      "homepage_url": "https://www.worldbank.org/en/programs/icp/data",
+      "domains": [
+        "purchasing_power_parities",
+        "national_accounts",
+        "macroeconomy"
+      ],
+      "license_status": "unclear_or_unverified",
+      "terms_url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets",
+      "attribution": "World Bank Group, International Comparison Program; preserve source-reported indicator definitions, classification and benchmark/annual-series distinctions.",
+      "notes": "The International Comparison Program is a distinct statistical programme from World Development Indicators. Keep ICP benchmark results and annual PPP series under this source identity; do not merge them with WDI observations. Review dataset-specific licensing and third-party notices before redistribution.",
+      "acquisition_mode": "browser_session_csv_export",
+      "downloads": [],
+      "release_discovery": {
+        "mode": "manual_review",
+        "provider_url": "https://www.worldbank.org/en/programs/icp/data",
+        "automation_status": "saved_report_csv_capture_implemented",
+        "latest_available": null,
+        "latest_validated": null,
+        "latest_applied": null,
+        "notes": "Saved DataBank report exports are timestamped captures of a provider report, not new provider-declared ICP release vintages. Validation, approval and application remain separate."
+      }
     }
   },
   "release_management": {
