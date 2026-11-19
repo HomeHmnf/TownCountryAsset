@@ -225,6 +225,10 @@ def validate_manifest(
                            if not name.endswith("/") and name.lower().endswith(".csv")}
     except zipfile.BadZipFile as exc:
         raise ICPDataBankValidationError("Original export archive is not a valid ZIP") from exc
+    if len(archive_csv) != 2:
+        raise ICPDataBankValidationError(
+            f"Expected exactly two CSV members in the export ZIP, found {len(archive_csv)}"
+        )
 
     csv_artifacts = [(a, p) for a, p in verified
                      if a.get("artifact_role") == "extracted_csv_member"]
@@ -307,6 +311,16 @@ def validate_manifest(
     identity_fields = sorted(required_identity)
     for key, row in data_keyed.items():
         metadata_row = metadata_keyed[key]
+        for field in ("Classification Name", "Time", "Country Name"):
+            if not (row.get(field) or "").strip():
+                raise ICPDataBankValidationError(
+                    f"Observation {key!r} has an empty dimension label in {field!r}"
+                )
+        time_match = re.fullmatch(r"YR(\\d{4})", key[1])
+        if not time_match or (row.get("Time") or "").strip() != time_match.group(1):
+            raise ICPDataBankValidationError(
+                f"Time label/code mismatch for observation {key!r}"
+            )
         for field in identity_fields:
             if (row.get(field) or "") != (metadata_row.get(field) or ""):
                 raise ICPDataBankValidationError(
