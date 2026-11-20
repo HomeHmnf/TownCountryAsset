@@ -111,8 +111,10 @@ def seed_database(path: Path, registry):
         import_id = connection.execute("SELECT last_insert_rowid()").fetchone()[0]
         connection.execute(
             """INSERT INTO application_approvals
-               (approval_id, domain, artifact_sha256, artifact_json, status, created_at)
-               VALUES ('edge-case-test-001', 'test', ?, '{}', 'approved', '2026-11-20T00:00:00Z')""",
+               (approval_id, domain, artifact_sha256, artifact_json, status, created_at,
+                approved_by, approved_at)
+               VALUES ('edge-case-test-001', 'test', ?, '{}', 'approved',
+                       '2026-11-20T00:00:00Z', 'project-owner', '2026-11-20T00:00:00Z')""",
             ("b" * 64,),
         )
         for record in registry["records"]:
