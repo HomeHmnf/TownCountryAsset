@@ -201,12 +201,31 @@ def _ensure_country(connection: sqlite3.Connection, record: dict[str, Any], now:
                 (game_id, actual[2], actual[3]),
             ).fetchone()
             iso_values_match = approved_iso is not None
-        identity_matches = actual[0] == expected[0] and iso_values_match
-        record_status_is_valid = actual[1] in {"candidate", "approved"}
+        entity_type_matches = actual[0] == expected[0]
+        if not entity_type_matches:
+            approved_entity_type = connection.execute(
+                """SELECT 1 FROM review_proposals
+                   WHERE game_id=? AND proposal_type='entity_type' AND review_status='approved'
+                     AND json_extract(proposed_json, '$.entity_type')=? LIMIT 1""",
+                (game_id, actual[0]),
+            ).fetchone()
+            entity_type_matches = approved_entity_type is not None
+        identity_matches = entity_type_matches and iso_values_match
+        record_status_is_valid = actual[1] in {"candidate", "approved", "retired"}
         iso_status_is_valid = (
             actual[4] == expected[4]
             or (expected[4] == "unverified" and actual[4] == "verified")
         )
+        if expected[4] == "unverified" and actual[4] == "not_applicable" and iso_values_match:
+            approved_no_iso = connection.execute(
+                """SELECT 1 FROM review_proposals
+                   WHERE game_id=? AND proposal_type='iso' AND review_status='approved'
+                     AND json_extract(proposed_json, '$.alpha2') IS NULL
+                     AND json_extract(proposed_json, '$.alpha3') IS NULL
+                     AND json_extract(proposed_json, '$.decision') IS NOT NULL LIMIT 1""",
+                (game_id,),
+            ).fetchone()
+            iso_status_is_valid = approved_no_iso is not None
         localization_status_is_valid = (
             actual[5] == expected[5]
             or (expected[5] == "unreviewed" and actual[5] == "reviewed")

@@ -1,59 +1,48 @@
 # ISO alpha-2 gap review report
 
-**Review status:** Step 1 decision applied; no ISO assignments are marked verified.
+**Review status:** Historical France/Norway proposals remain unverified. The eight current identity edge cases have been reconciled in the canonical review-decision workflow.
 **Branch:** `work/compiler-hardening`
-**Decision:** Store `FR` for France and `NO` for Norway in the persistent identity registry as unverified proposals. Keep the other six official ISO alpha-2 values empty. Defer any Kosovo-specific `XK` application code to a later decision.
-**Data boundary:** No approved snapshot or TownCountryGame files were changed. Stable `game_id` values were preserved.
+**Decision date:** 2026-11-20
+**Identity invariant:** Preserve all existing `game_id` values. Keep official ISO assignments separate from user-assigned project identifiers and flag-source identifiers.
 
-## Summary
+## Current edge-case decisions
 
-Eight records had Natural Earth `ISO_A2=-99`. Two records now have registry alpha-2 proposal values backed by Natural Earth `ISO_A2_EH`; both remain `status=proposed` and `assignment_status=unverified`. The other six remain null in the registry's official ISO alpha-2 field.
-
-| Natural Earth ID | Entity | Registry ISO alpha-2 after decision | Assignment status | Decision rationale |
+| Natural Earth ID | Entity | Official ISO alpha-2 / alpha-3 | Database assignment status | Decision |
 |---|---|---|---|---|
-| `FRA` | France | `FR` | `unverified` | Natural Earth `ISO_A2_EH=FR`; official listing confirmation remains required before verification. |
-| `NOR` | Norway | `NO` | `unverified` | Natural Earth `ISO_A2_EH=NO`; official listing confirmation remains required before verification. |
-| `SOL` | Somaliland | `null` | `unverified` | No official alpha-2 assignment evidenced in the inspected source. |
-| `KOS` | Kosovo | `null` | `unverified` | `XK` is not an official ISO 3166-1 alpha-2 assignment; defer separate application-code design. |
-| `CYN` | Northern Cyprus | `null` | `unverified` | No official alpha-2 assignment evidenced in the inspected source; entity classification is still open. |
-| `IOA` | Indian Ocean Territories | `null` | `unverified` | `ISO_A2_EH=AU` is a parent-state fallback, not a distinct code for this feature. |
-| `ATC` | Ashmore and Cartier Islands | `null` | `unverified` | `ISO_A2_EH=AU` is a parent-state fallback, not a distinct code for this feature. |
-| `KAS` | Siachen Glacier | `null` | `unverified` | No official alpha-2 assignment evidenced in the inspected source; entity classification is still open. |
+| `FLK` | Falkland Islands | `FK / FLK` | `verified` | UN M49 captured reference provides the formal-name variant “Falkland Islands (Malvinas)”; feature scope reviewed. |
+| `TWN` | Taiwan | `TW / TWN` | `verified` | ILO metadata records TW/TWN and M49 158; Natural Earth records `ISO_A2_EH=TW`, `ISO_A3_EH=TWN`. The project M49 CSV has no Taiwan row, so this is separately evidenced, not a M49 name match. |
+| `SOL` | Somaliland | null / null | `not_applicable` | No official ISO 3166-1 assignment is evidenced; preserve identity without inventing a code. |
+| `KOS` | Kosovo | null / null | `not_applicable` | No official ISO assignment. `XK` is retained only in the project-specific identifier namespace. |
+| `CYN` | Northern Cyprus | null / null | `not_applicable` | No official ISO assignment; preserve a distinct reviewed entity classification. |
+| `IOA` | Indian Ocean Territories | null / null | `not_applicable` | Natural Earth feature is a grouping of Christmas Island and Cocos (Keeling) Islands. `ISO_A2_EH=AU` is parent-state fallback. |
+| `ATC` | Ashmore and Cartier Islands | null / null | `not_applicable` | Australian external territory. `AU` is a parent-state fallback, not a unique code for this feature. |
+| `KAS` | Siachen Glacier | null / null | `not_applicable` | Geographic feature, not a country; identity is retired from the active country catalogue. |
 
-## Record-level traceability
+## Historical eight-record investigation is a separate cohort
 
-| Natural Earth ID | Stable game ID |
-|---|---|
-| `FRA` | `tc_471ae6d7112b4537a7ae5ca1e6a816a5` |
-| `NOR` | `tc_f4a6e15a05474af2b81c9524ed988d89` |
-| `SOL` | `tc_9a78f2eebcc24906a5c67581c0c3895e` |
-| `KOS` | `tc_28aa17b84db24952b92fc51b421075e0` |
-| `CYN` | `tc_d3e7f81572fd44ab920bfc066d592873` |
-| `IOA` | `tc_7cd2130353a64e57bd3782773a8e12c7` |
-| `ATC` | `tc_b61ca098adb74efc84564fd9fa800bf8` |
-| `KAS` | `tc_644aaabf37604038996e34c1bc91c970` |
+The 2026-10 Natural Earth `ISO_A2=-99` investigation covered France, Norway, Somaliland, Kosovo, Northern Cyprus, Indian Ocean Territories, Ashmore and Cartier Islands, and Siachen Glacier. It is not the same cohort as the current M49 unmatched rows.
 
-## Verification and limitations
+- France (`FRA`) and Norway (`NOR`) remain proposed `FR` and `NO` values with `assignment_status=unverified`; this reconciliation does not approve them.
+- The six remaining historical records now have explicit `not_applicable` decisions in the database.
+- The current M49 proposal report has 235 candidates and 7 unmatched rows. Falkland Islands is a candidate with FK/FLK; Taiwan remains unmatched in that M49 snapshot because its row is absent from the captured CSV. Taiwan's TW/TWN assignment is independently evidenced and recorded separately.
 
-- This step records proposals only. It does not claim that France or Norway has passed direct confirmation against the current ISO Online Browsing Platform.
-- Source fallback fields are evidence for review, not automatic approvals.
-- Kosovo's `XK` must not be represented as an official ISO alpha-2 assignment.
-- The two Australian-associated features must not inherit `AU` as if it were their unique ISO code.
-- No entity type, Persian localization, flag mapping, source feature identity, or stable game ID was approved or changed.
+## ISO and project identifier separation
+
+- Official ISO codes are stored only in `countries.iso_alpha2` and `countries.iso_alpha3`.
+- Kosovo's `XK` is stored only as a project identifier in the ISO review decision JSON with `is_official_iso=false`.
+- Flag asset codes such as `fk`, `tw`, and `xk` are source identifiers and do not establish ISO status.
+- Null official ISO values are paired with an explicit decision code and evidence in `country_review_decisions`, rather than left unexplained.
 
 ## Sources
 
-- [ISO 3166 country codes](https://www.iso.org/iso-3166-country-codes.html)
-- [Natural Earth issue #675: ISO_A2 / ISO_A3 sentinel values](https://github.com/nvkelso/natural-earth-vector/issues/675)
-- [Natural Earth country-field metadata mirror](https://source.coop/portolan/portolan-pipeline/portolan-reference/PRs/175/reference/natural-earth-countries/README.md)
-- [Persistent country identity registry](https://github.com/HomeHmnf/TownCountryAsset/blob/work/compiler-hardening/config/country_identity_registry.json)
-- [Detailed gap investigation](https://github.com/HomeHmnf/TownCountryAsset/blob/work/compiler-hardening/docs/review/iso-alpha2-gap-investigation.md)
+- ISO, [ISO 3166-1:2020](https://www.iso.org/standard/72482.html).
+- UNSD, [M49 overview](https://unstats.un.org/unsd/methodology/m49/overview/), including Falkland Islands (Malvinas) FK/FLK.
+- ILO, [Taiwan metadata](https://metadata.ilo.org/thesaurus/351.html), records TW, TWN and M49 158.
+- Natural Earth, [issue #675](https://github.com/nvkelso/natural-earth-vector/issues/675), documenting ISO sentinel values for special/disputed features.
+- EU Vocabularies, [Countries and territories](https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories), states Kosovo has no ISO 3166 code and uses user-assigned XK/XKX.
+- Natural Earth, [Indian Ocean Territories IOA feature](https://api.mapserverstudio.net/mapserver/naturalearth/ogcapi/collections/ne_10m_admin_0_countries/items/1159320363?f=html).
 
-## Decision record
+## Database application
 
-- User decision: applied.
-- France proposal: `FR`, proposed and unverified.
-- Norway proposal: `NO`, proposed and unverified.
-- Other six official ISO alpha-2 values: null.
-- Kosovo `XK`: deferred to a later application-code decision.
-- Approved data changed: no.
+Migration `006_review_decisions.sql` adds append-only decision records. The dedicated reconciler writes five decisions per identity (ISO, entity type, flag, catalogue scope, naming), creates approved review proposals where applicable, updates canonical country fields and validates SQLite integrity/foreign keys transactionally.
+

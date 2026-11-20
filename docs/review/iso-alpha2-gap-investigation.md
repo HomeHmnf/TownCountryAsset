@@ -50,3 +50,8 @@ The source's `ISO_A2` field is not authoritative by itself when its value is `-9
 - Kosovo `XK`: deferred; it is not treated as an official ISO code.
 - Stable `game_id` values unchanged; no approved snapshot or TownCountryGame files changed.
 - Full decision report: [reports/iso-alpha2-gap-review.md](../../reports/iso-alpha2-gap-review.md).
+
+
+## Final reconciliation checkpoint — 2026-11-20
+
+The earlier Step 1 investigation is historical evidence. Its initial recommendation is superseded for these eight edge cases by [the current reconciliation report](../../reports/identity-edge-case-reconciliation.md). France and Norway remain unverified proposals. Falkland Islands is FK/FLK, Taiwan is TW/TWN using separately cited ILO/Natural Earth evidence, and the six other historical edge cases have explicit not-applicable ISO decisions. Kosovo's XK remains a project identifier, never an official ISO code.

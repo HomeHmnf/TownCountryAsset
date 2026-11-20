@@ -9,32 +9,45 @@
 - Archive SHA-256: 478bf8407080f3e8a0ed8b688f29daf7fcaed585be829fe3f980229e35b2f3ae
 - Available source SVG codes: 257
 - Registry records: 242
-- Unconfirmed/unusable mappings: 242
+- Reviewed source-code mappings: 3 (FK, TW, XK)
+- Deliberately unassigned mappings: 3 (Indian Ocean Territories, Ashmore and Cartier Islands, Siachen Glacier)
+- Unresolved flag mappings: 2 (Somaliland, Northern Cyprus)
+- Other records awaiting review: 234
 - Manual SVG directory: /home/hmnf/Projects/Python/TownAndCountry/raw_data/flags/manual
 - Manual SVG files found: 0
 - ISO operator confirmation: yes
 - ISO reference selected: /home/hmnf/Projects/Python/TownAndCountry/data/reference/iso/iso-3166-1.csv
 - ISO note: Operator confirmed the manual reference; validated 249 rows from /home/hmnf/Projects/Python/TownAndCountry/data/reference/iso/iso-3166-1.csv.
 
-## Seven edge cases
+## Eight edge cases reconciled
 
-| Territory                   | game_id                             | Mapping status | Candidate source codes found | Evidence URL                                                          | Review guidance                                                                                                                                                         |
-| --------------------------- | ----------------------------------- | -------------- | ---------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Falkland Islands            | tc_815eb2563fde4a4cb077173220e2a533 | unreviewed     | fk (available)               | https://www.gov.fk/about/                                             | The lipis source is expected to contain fk. Verify the territorial flag and add FK/FLK ISO metadata only from authoritative evidence.                                   |
-| Somaliland                  | tc_9a78f2eebcc24906a5c67581c0c3895e | unreviewed     | no safe automatic candidate  | https://govsomaliland.org/                                            | No official ISO 3166-1 alpha-2/alpha-3 assignment. Use a source flag only if the artwork is explicitly Somaliland's flag; otherwise review a manual SVG.                |
-| Somaliland                  | tc_a3f73fd3bb6d4d7fb4ea31d433453bae | unreviewed     | no safe automatic candidate  | https://govsomaliland.org/                                            | No official ISO 3166-1 alpha-2/alpha-3 assignment. Use a source flag only if the artwork is explicitly Somaliland's flag; otherwise review a manual SVG.                |
-| Kosovo                      | tc_28aa17b84db24952b92fc51b421075e0 | unreviewed     | xk (available)               | https://president-ksgov.net/en/legislation/                           | XK/XKX are user-assigned conventions, not official ISO 3166-1 assignments. Verify a Kosovo-specific flag and record the source identifier separately from ISO metadata. |
-| Northern Cyprus             | tc_d3e7f81572fd44ab920bfc066d592873 | unreviewed     | no safe automatic candidate  | https://mfa.gov.ct.tr/                                                | No official ISO 3166-1 assignment. Verify the artwork and political/territorial representation before mapping a source or manual SVG.                                   |
-| Northern Cyprus             | tc_3c148b1f7650455fa710ca87cf376728 | unreviewed     | no safe automatic candidate  | https://mfa.gov.ct.tr/                                                | No official ISO 3166-1 assignment. Verify the artwork and political/territorial representation before mapping a source or manual SVG.                                   |
-| Indian Ocean Territories    | tc_73138c628d2a4509bad88f66deb5b27b | unreviewed     | no safe automatic candidate  | https://www.gov.uk/world/organisations/british-indian-ocean-territory | Resolve the exact entity represented by this Natural Earth record before choosing a flag. Do not assume it means the British Indian Ocean Territory.                    |
-| Indian Ocean Territories    | tc_39ad5030b5f94f068d4a1528c60e5638 | unreviewed     | no safe automatic candidate  | https://www.gov.uk/world/organisations/british-indian-ocean-territory | Resolve the exact entity represented by this Natural Earth record before choosing a flag. Do not assume it means the British Indian Ocean Territory.                    |
-| Indian Ocean Territories    | tc_7cd2130353a64e57bd3782773a8e12c7 | unreviewed     | no safe automatic candidate  | https://www.gov.uk/world/organisations/british-indian-ocean-territory | Resolve the exact entity represented by this Natural Earth record before choosing a flag. Do not assume it means the British Indian Ocean Territory.                    |
-| Ashmore and Cartier Islands | tc_b61ca098adb74efc84564fd9fa800bf8 | unreviewed     | no safe automatic candidate  | https://www.dcceew.gov.au/                                            | Decide explicitly whether the game representation should use Australia's flag or another approved representation; do not infer this from geography.                     |
-| Siachen Glacier             | tc_644aaabf37604038996e34c1bc91c970 | unreviewed     | no safe automatic candidate  | https://www.britannica.com/place/Siachen-Glacier                      | This is a geographic feature, not an ISO 3166-1 country. Do not assign a national flag by inference; decide whether a neutral marker is appropriate.                    |
+The decisions below are recorded in `config/identity_edge_case_reconciliation.json` and applied by the approval-gated database reconciler. A source flag asset is not an ISO assignment.
+
+| Territory | Canonical game_id | ISO decision | Flag decision | Entity/catalogue decision |
+|---|---|---|---|---|
+| Falkland Islands | `tc_815eb2563fde4a4cb077173220e2a533` | `FK/FLK` verified from the captured UN M49 row | `fk` reviewed from pinned flag-icons commit | Dependent territory; retained |
+| Taiwan | `tc_98ab3dee1d554162b6bbd5dac6374fc8` | `TW/TWN` verified from ILO metadata and Natural Earth fallback fields; not from the M49 CSV | `tw` reviewed from pinned flag-icons commit | Disputed/partially recognized entity; retained without sovereignty adjudication |
+| Somaliland | `tc_9a78f2eebcc24906a5c67581c0c3895e` | No official ISO assignment; both fields null | Unresolved: no reviewed manual SVG is present | Disputed/partially recognized entity; retained |
+| Kosovo | `tc_28aa17b84db24952b92fc51b421075e0` | No official ISO assignment; `XK` is project-only | `xk` reviewed; source code is user-assigned, not ISO | Disputed/partially recognized entity; retained |
+| Northern Cyprus | `tc_d3e7f81572fd44ab920bfc066d592873` | No official ISO assignment; both fields null | Unresolved pending manual asset review | Disputed/partially recognized entity; retained |
+| Indian Ocean Territories | `tc_7cd2130353a64e57bd3782773a8e12c7` | No individual ISO assignment; `AU` is parent-state fallback | Not applicable: composite feature has no single flag | Australian dependency grouping of Christmas Island and Cocos (Keeling) Islands; retained |
+| Ashmore and Cartier Islands | `tc_b61ca098adb74efc84564fd9fa800bf8` | No individual ISO assignment; `AU` is parent-state fallback | Parent-flag fallback to Australia; no duplicate `au` mapping | Australian external territory; retained |
+| Siachen Glacier | `tc_644aaabf37604038996e34c1bc91c970` | Not applicable: geographic feature | Not applicable: no national flag | Geographic feature; retired from active country catalogue, identity retained |
+
+### Historical ID corrections
+
+The previous edge-case table included stale IDs that now identify different canonical records. They are not aliases or duplicate identities:
+
+- `tc_a3f73fd3bb6d4d7fb4ea31d433453bae` is Mali, not Somaliland.
+- `tc_3c148b1f7650455fa710ca87cf376728` is Cyprus, not Northern Cyprus.
+- `tc_73138c628d2a4509bad88f66deb5b27b` is British Indian Ocean Territory, not Indian Ocean Territories.
+- `tc_39ad5030b5f94f068d4a1528c60e5638` is India, not Indian Ocean Territories.
+
+The canonical IDs above are authoritative; no ID was regenerated or reassigned.
 
 ## Unconfirmed or unusable mappings
 
-A mapping is unresolved when it is not marked reviewed or its selected source SVG/manual SVG is unavailable. This report does not approve or edit any mapping.
+This inventory includes reviewed, unresolved, and deliberately unassigned mappings. The eight edge-case outcomes above are reflected in the mapping status column; unresolved items remain candidates and rejected mappings are deliberate no-assignment decisions.
 
 | Territory | game_id | Source code | Manual SVG path | Status |
 |---|---|---|---|---|
@@ -60,7 +73,7 @@ A mapping is unresolved when it is not marked reviewed or its selected source SV
 | Saint Helena | tc_9bd5e00f9fc944edbf2eb3097e413328 | — | — | unreviewed |
 | Pitcairn Islands | tc_0900903d1eb84838aae9c039c9fd0da2 | — | — | unreviewed |
 | Anguilla | tc_0b9688bbf4264477b023a0f2af180c2e | — | — | unreviewed |
-| Falkland Islands | tc_815eb2563fde4a4cb077173220e2a533 | — | — | unreviewed |
+| Falkland Islands | tc_815eb2563fde4a4cb077173220e2a533 | fk | — | reviewed |
 | Cayman Islands | tc_19acfc8e1cf44c25aa753729115d60d6 | — | — | unreviewed |
 | Bermuda | tc_d81e2d4c4b934f57a67f380b2fdaec9d | — | — | unreviewed |
 | British Virgin Islands | tc_f3832fd029cb445483c26654bddadfac | — | — | unreviewed |
@@ -83,7 +96,7 @@ A mapping is unresolved when it is not marked reviewed or its selected source SV
 | Thailand | tc_fc12d0184fc7498f982ab8033ae64436 | — | — | unreviewed |
 | United Republic of Tanzania | tc_0f4c47ec59434e46871845e474964499 | — | — | unreviewed |
 | Tajikistan | tc_772e2ac5253c46e98b79cf5a6f19e9f5 | — | — | unreviewed |
-| Taiwan | tc_98ab3dee1d554162b6bbd5dac6374fc8 | — | — | unreviewed |
+| Taiwan | tc_98ab3dee1d554162b6bbd5dac6374fc8 | tw | — | reviewed |
 | Syria | tc_c205b2615c45490182519ecedb651e99 | — | — | unreviewed |
 | Switzerland | tc_e693e8b799f94e7bb814e89bd46d886d | — | — | unreviewed |
 | Sweden | tc_d74b429fff544cf9bafeb459c4b3edd8 | — | — | unreviewed |
@@ -168,7 +181,7 @@ A mapping is unresolved when it is not marked reviewed or its selected source SV
 | Laos | tc_71a3ecd24ca74da9a6cea3dae8cd1f82 | — | — | unreviewed |
 | Kyrgyzstan | tc_130ca81b84d04b058e9301121b2b7802 | — | — | unreviewed |
 | Kuwait | tc_fa491c61ffa24dc3a21c6a6da7d39fad | — | — | unreviewed |
-| Kosovo | tc_28aa17b84db24952b92fc51b421075e0 | — | — | unreviewed |
+| Kosovo | tc_28aa17b84db24952b92fc51b421075e0 | xk | — | reviewed |
 | Kiribati | tc_c23a3cf00b1a4ebf97a70a4f41a7761d | — | — | unreviewed |
 | Kenya | tc_9f3dc962bf9744a5a3cdf1f7a1cbb159 | — | — | unreviewed |
 | Kazakhstan | tc_feadffc011db4cf695df6c0997a003c8 | — | — | unreviewed |
@@ -264,10 +277,10 @@ A mapping is unresolved when it is not marked reviewed or its selected source SV
 | Azerbaijan | tc_b8c860bb8d404dcca918bad769e7ead7 | — | — | unreviewed |
 | Austria | tc_a0422e821c824e78bd95525b36155b65 | — | — | unreviewed |
 | Australia | tc_270a6ecb902d4ea1ac7373b3d1a3b2cc | — | — | unreviewed |
-| Indian Ocean Territories | tc_7cd2130353a64e57bd3782773a8e12c7 | — | — | unreviewed |
+| Indian Ocean Territories | tc_7cd2130353a64e57bd3782773a8e12c7 | — | — | rejected: no single composite flag |
 | Heard Island and McDonald Islands | tc_e86aec8164734ab8be1b207a743e6ea4 | — | — | unreviewed |
 | Norfolk Island | tc_003dbd71493240f5bd22a52176868806 | — | — | unreviewed |
-| Ashmore and Cartier Islands | tc_b61ca098adb74efc84564fd9fa800bf8 | — | — | unreviewed |
+| Ashmore and Cartier Islands | tc_b61ca098adb74efc84564fd9fa800bf8 | — | — | rejected: parent Australia fallback |
 | Armenia | tc_f97b56c9c74845de8b41aa24ed12a47f | — | — | unreviewed |
 | Argentina | tc_2a29d5b72b294244a5de6db37118237a | — | — | unreviewed |
 | Antigua and Barbuda | tc_9221f2a3fd704847b66da16efa03c2b8 | — | — | unreviewed |
@@ -276,7 +289,7 @@ A mapping is unresolved when it is not marked reviewed or its selected source SV
 | Algeria | tc_e245d37005f843168d67b7b327ece7f9 | — | — | unreviewed |
 | Albania | tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1 | — | — | unreviewed |
 | Afghanistan | tc_928d15fd89764353a6889f571bfd0a1c | — | — | unreviewed |
-| Siachen Glacier | tc_644aaabf37604038996e34c1bc91c970 | — | — | unreviewed |
+| Siachen Glacier | tc_644aaabf37604038996e34c1bc91c970 | — | — | rejected: retired geographic feature |
 | Antarctica | tc_c3c21e18d6e94254a4ca4a009530bac9 | — | — | unreviewed |
 | Sint Maarten | tc_d79e2777be2741c3bcf291431e2e4efb | — | — | unreviewed |
 | Tuvalu | tc_47cd272cd9c9455185a13f6e69bd805c | — | — | unreviewed |
@@ -301,6 +314,6 @@ Operator confirmed the manual reference; validated 249 rows from /home/hmnf/Proj
 
 ## Safety
 
-- No identity registry or mapping records were modified.
-- No mapping was auto-approved.
-- Candidate assets were not generated by this review command.
+- Canonical identity IDs and identity registry records were preserved.
+- The eight edge-case mapping records were updated only through the owner-approved reconciliation input: three source SVGs reviewed, three deliberate no-assignments, and two unresolved manual-asset decisions.
+- No source SVG files were copied, edited, or generated by this review command.

@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "policy_version": "identity-edge-case-reconciliation-2026-11-20",
+  "reviewed_at": "2026-11-20T00:00:00Z",
+  "policy": {
+    "iso": "Only official ISO 3166-1 assignments are stored in the ISO columns. User-assigned/project identifiers remain separate.",
+    "entity": "Taxonomy is descriptive and does not adjudicate sovereignty or diplomatic recognition.",
+    "flags": "Only verified source SVGs are mapped; unresolved, not-applicable and parent-fallback outcomes are explicit.",
+    "catalogue": "Preserve persistent game IDs; retire non-country geographic features rather than deleting identity history."
+  },
+  "records": [
+    {
+      "game_id": "tc_815eb2563fde4a4cb077173220e2a533",
+      "source_id": "FLK",
+      "name": "Falkland Islands",
+      "iso": {
+        "alpha2": "FK",
+        "alpha3": "FLK",
+        "assignment_status": "verified",
+        "decision_code": "official_iso_assignment",
+        "reference_name": "Falkland Islands (Malvinas)",
+        "evidence": [
+          {
+            "url": "https://unstats.un.org/unsd/methodology/m49/overview",
+            "note": "UN M49 captured reference contains FK/FLK under the formal Malvinas label."
+          },
+          {
+            "url": "https://www.iso.org/standard/72482.html",
+            "note": "ISO 3166-1 is the governing standard."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "dependent_territory",
+        "evidence": [
+          {
+            "url": "https://www.gov.fk/about/",
+            "note": "Falkland Islands dependency; classification is a catalogue taxonomy, not a sovereignty adjudication."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "approved",
+        "decision_code": "source_flag_asset",
+        "source_flag_code": "fk",
+        "evidence": [
+          "https://unstats.un.org/unsd/methodology/m49/overview",
+          "https://www.gov.fk/about/",
+          "https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/fk.svg"
+        ]
+      },
+      "catalogue": {
+        "decision_status": "approved",
+        "decision_code": "retain_dependency",
+        "rationale": "Retain separately represented entity; this is not a sovereignty or recognition statement."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_add_reference_aliases",
+        "aliases_en": [
+          "Falkland Islands (Malvinas)",
+          "Falkland Islands (the) [Malvinas]"
+        ]
+      }
+    },
+    {
+      "game_id": "tc_98ab3dee1d554162b6bbd5dac6374fc8",
+      "source_id": "TWN",
+      "name": "Taiwan",
+      "iso": {
+        "alpha2": "TW",
+        "alpha3": "TWN",
+        "assignment_status": "verified",
+        "decision_code": "official_iso_assignment_external_reference",
+        "reference_name": "Taiwan, Province of China",
+        "evidence": [
+          {
+            "url": "https://metadata.ilo.org/thesaurus/351.html",
+            "note": "ILO metadata records TW, TWN and M49 158; Natural Earth records ISO_A2_EH=TW and ISO_A3_EH=TWN."
+          },
+          {
+            "url": "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries/",
+            "note": "The captured M49 CSV has no Taiwan row; this is a separately evidenced assignment."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "disputed_or_partially_recognized_entity",
+        "evidence": [
+          {
+            "url": "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries/",
+            "note": "Separately represented Taiwan identity with contested sovereignty/recognition; classification records project policy without a legal position."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "approved",
+        "decision_code": "source_flag_asset",
+        "source_flag_code": "tw",
+        "evidence": [
+          "https://metadata.ilo.org/thesaurus/351.html",
+          "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries/",
+          "https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/tw.svg"
+        ]
+      },
+      "catalogue": {
+        "decision_status": "approved",
+        "decision_code": "retain_disputed_or_partially_recognized_entity",
+        "rationale": "Retain separately represented entity; this is not a sovereignty or recognition statement."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_add_reference_aliases",
+        "aliases_en": [
+          "Taiwan, Province of China"
+        ]
+      }
+    },
+    {
+      "game_id": "tc_9a78f2eebcc24906a5c67581c0c3895e",
+      "source_id": "SOL",
+      "name": "Somaliland",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "not_applicable",
+        "decision_code": "no_official_iso_assignment",
+        "reference_name": null,
+        "evidence": [
+          {
+            "url": "https://govsomaliland.org/",
+            "note": "No official ISO 3166-1 assignment is evidenced in the reviewed sources."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "disputed_or_partially_recognized_entity",
+        "evidence": [
+          {
+            "url": "https://govsomaliland.org/",
+            "note": "Separately represented de facto self-governing entity with contested/limited recognition; this label does not adjudicate sovereignty."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "unresolved",
+        "decision_code": "manual_flag_asset_not_yet_verified",
+        "source_flag_code": null,
+        "evidence": [
+          "https://govsomaliland.org/",
+          "https://www.naturalearthdata.com/about/disputed-boundaries-policy/",
+          "https://github.com/nvkelso/natural-earth-vector/issues/675"
+        ]
+      },
+      "catalogue": {
+        "decision_status": "approved",
+        "decision_code": "retain_disputed_or_partially_recognized_entity",
+        "rationale": "Retain separately represented entity; this is not a sovereignty or recognition statement."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_name",
+        "aliases_en": []
+      }
+    },
+    {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "source_id": "KOS",
+      "name": "Kosovo",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "not_applicable",
+        "decision_code": "no_official_iso_assignment_keep_project_code_separate",
+        "reference_name": null,
+        "application_code": {
+          "namespace": "project",
+          "code": "XK",
+          "is_official_iso": false
+        },
+        "evidence": [
+          {
+            "url": "https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories",
+            "note": "No official ISO 3166-1 assignment is evidenced in the reviewed sources."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "disputed_or_partially_recognized_entity",
+        "evidence": [
+          {
+            "url": "https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories",
+            "note": "Kosovo has partial international recognition; retain a distinct project identity without asserting universal recognition."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "approved",
+        "decision_code": "source_flag_asset_user_assigned_namespace",
+        "source_flag_code": "xk",
+        "evidence": [
+          "https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories",
+          "https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf",
+          "https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/xk.svg"
+        ]
+      },
+      "catalogue": {
+        "decision_status": "approved",
+        "decision_code": "retain_disputed_or_partially_recognized_entity",
+        "rationale": "Retain separately represented entity; this is not a sovereignty or recognition statement."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_name",
+        "aliases_en": []
+      }
+    },
+    {
+      "game_id": "tc_d3e7f81572fd44ab920bfc066d592873",
+      "source_id": "CYN",
+      "name": "Northern Cyprus",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "not_applicable",
+        "decision_code": "no_official_iso_assignment",
+        "reference_name": null,
+        "evidence": [
+          {
+            "url": "https://www.naturalearthdata.com/about/disputed-boundaries-policy/",
+            "note": "No official ISO 3166-1 assignment is evidenced in the reviewed sources."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "disputed_or_partially_recognized_entity",
+        "evidence": [
+          {
+            "url": "https://www.naturalearthdata.com/about/disputed-boundaries-policy/",
+            "note": "Separately represented breakaway administration with highly limited recognition; classification is descriptive, not recognition."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "unresolved",
+        "decision_code": "manual_flag_asset_not_yet_verified",
+        "source_flag_code": null,
+        "evidence": [
+          "https://www.naturalearthdata.com/about/disputed-boundaries-policy/",
+          "https://github.com/nvkelso/natural-earth-vector/issues/675",
+          "https://mfa.gov.ct.tr/"
+        ]
+      },
+      "catalogue": {
+        "decision_status": "approved",
+        "decision_code": "retain_disputed_or_partially_recognized_entity",
+        "rationale": "Retain separately represented entity; this is not a sovereignty or recognition statement."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_name",
+        "aliases_en": []
+      }
+    },
+    {
+      "game_id": "tc_7cd2130353a64e57bd3782773a8e12c7",
+      "source_id": "IOA",
+      "name": "Indian Ocean Territories",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "not_applicable",
+        "decision_code": "composite_dependency_no_individual_iso_assignment",
+        "reference_name": null,
+        "evidence": [
+          {
+            "url": "https://api.mapserverstudio.net/mapserver/naturalearth/ogcapi/collections/ne_10m_admin_0_countries/items/1159320363?f=html",
+            "note": "Natural Earth IOA has no unique ISO pair; ISO_A2_EH=AU is parent-state fallback and its WOE_NOTE groups Christmas Island and Cocos/Keeling Islands."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "dependent_territory",
+        "evidence": [
+          {
+            "url": "https://api.mapserverstudio.net/mapserver/naturalearth/ogcapi/collections/ne_10m_admin_0_countries/items/1159320363?f=html",
+            "note": "Natural Earth IOA groups Christmas Island and Cocos (Keeling) Islands under Australia; it is not the British Indian Ocean Territory."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "not_applicable",
+        "decision_code": "no_single_flag_for_composite",
+        "source_flag_code": null,
+        "evidence": [
+          "https://api.mapserverstudio.net/mapserver/naturalearth/ogcapi/collections/ne_10m_admin_0_countries/items/1159320363?f=html",
+          "https://www.infrastructure.gov.au/territories-regions/australian-territories"
+        ]
+      },
+      "catalogue": {
+        "decision_status": "approved",
+        "decision_code": "retain_composite_dependency",
+        "rationale": "Retain composite dependency grouping; do not reinterpret it as British Indian Ocean Territory."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_name",
+        "aliases_en": []
+      }
+    },
+    {
+      "game_id": "tc_b61ca098adb74efc84564fd9fa800bf8",
+      "source_id": "ATC",
+      "name": "Ashmore and Cartier Islands",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "not_applicable",
+        "decision_code": "parent_state_fallback_not_individual_iso_assignment",
+        "reference_name": null,
+        "evidence": [
+          {
+            "url": "https://www.infrastructure.gov.au/territories-regions/territories/ashmore-and-cartier-islands",
+            "note": "Australian external territory; AU is parent-state fallback, not a unique ISO assignment."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "dependent_territory",
+        "evidence": [
+          {
+            "url": "https://www.infrastructure.gov.au/territories-regions/territories/ashmore-and-cartier-islands",
+            "note": "Australian Government sources identify Ashmore and Cartier Islands as an Australian external territory."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "approved",
+        "decision_code": "parent_flag_fallback",
+        "source_flag_code": null,
+        "evidence": [
+          "https://www.infrastructure.gov.au/territories-regions/territories/ashmore-and-cartier-islands",
+          "https://www.ga.gov.au/scientific-topics/national-location-information/geography/external-territories"
+        ],
+        "parent_game_id": "tc_270a6ecb902d4ea1ac7373b3d1a3b2cc"
+      },
+      "catalogue": {
+        "decision_status": "approved",
+        "decision_code": "retain_dependent_territory",
+        "rationale": "Retain as an Australian external territory."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_name",
+        "aliases_en": []
+      }
+    },
+    {
+      "game_id": "tc_644aaabf37604038996e34c1bc91c970",
+      "source_id": "KAS",
+      "name": "Siachen Glacier",
+      "iso": {
+        "alpha2": null,
+        "alpha3": null,
+        "assignment_status": "not_applicable",
+        "decision_code": "geographic_feature_no_iso_assignment",
+        "reference_name": null,
+        "evidence": [
+          {
+            "url": "https://www.britannica.com/place/Siachen-Glacier",
+            "note": "A glacier is a geographic feature, not an ISO country."
+          }
+        ]
+      },
+      "entity": {
+        "entity_type": "geographic_feature",
+        "evidence": [
+          {
+            "url": "https://www.britannica.com/place/Siachen-Glacier",
+            "note": "Siachen Glacier is a geographic feature, not a country or administrative territory."
+          }
+        ]
+      },
+      "flag": {
+        "decision_status": "not_applicable",
+        "decision_code": "geographic_feature_no_national_flag",
+        "source_flag_code": null,
+        "evidence": [
+          "https://www.britannica.com/place/Siachen-Glacier",
+          "https://github.com/nvkelso/natural-earth-vector/issues/675"
+        ]
+      },
+      "catalogue": {
+        "decision_status": "excluded",
+        "decision_code": "retire_geographic_feature",
+        "rationale": "Retire from active country catalogue while preserving game_id, source mapping and historical rows."
+      },
+      "naming": {
+        "decision_status": "approved",
+        "decision_code": "retain_canonical_name",
+        "aliases_en": []
+      }
+    }
+  ]
+}

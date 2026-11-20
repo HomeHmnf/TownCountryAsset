@@ -276,10 +276,15 @@
     },
     {
       "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
-      "source_flag_code": null,
-      "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "source_flag_code": "xk",
+      "status": "reviewed",
+      "decision_note": "Kosovo-specific flag asset uses the source's user-assigned XK identifier; XK is not an official ISO assignment.",
+      "evidence": [
+        "https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories",
+        "https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf",
+        "https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/xk.svg"
+      ],
+      "reviewed_at": "2026-11-20T00:00:00Z"
     },
     {
       "game_id": "tc_29ec74ae4e094053a930487b9ce602d1",
@@ -641,9 +646,12 @@
     {
       "game_id": "tc_644aaabf37604038996e34c1bc91c970",
       "source_flag_code": null,
-      "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "status": "rejected",
+      "decision_note": "No national flag is assigned to a glacier; the identity is retired from the active country catalogue.",
+      "evidence": [
+        "https://www.britannica.com/place/Siachen-Glacier",
+        "https://github.com/nvkelso/natural-earth-vector/issues/675"
+      ]
     },
     {
       "game_id": "tc_648b019cc83e486ab9fb8497386777a9",
@@ -774,9 +782,12 @@
     {
       "game_id": "tc_7cd2130353a64e57bd3782773a8e12c7",
       "source_flag_code": null,
-      "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "status": "rejected",
+      "decision_note": "No single flag is assigned to the composite feature grouping Christmas Island and Cocos (Keeling) Islands.",
+      "evidence": [
+        "https://api.mapserverstudio.net/mapserver/naturalearth/ogcapi/collections/ne_10m_admin_0_countries/items/1159320363?f=html",
+        "https://www.infrastructure.gov.au/territories-regions/australian-territories"
+      ]
     },
     {
       "game_id": "tc_7f3c6637070f4c42a40c1f5456ec4721",
@@ -794,10 +805,15 @@
     },
     {
       "game_id": "tc_815eb2563fde4a4cb077173220e2a533",
-      "source_flag_code": null,
-      "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "source_flag_code": "fk",
+      "status": "reviewed",
+      "decision_note": "Verified Falkland Islands flag asset; keep flag source code separate from ISO assignment.",
+      "evidence": [
+        "https://unstats.un.org/unsd/methodology/m49/overview",
+        "https://www.gov.fk/about/",
+        "https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/fk.svg"
+      ],
+      "reviewed_at": "2026-11-20T00:00:00Z"
     },
     {
       "game_id": "tc_8169e562ece7475e960f78f231cb1ab7",
@@ -962,17 +978,26 @@
     },
     {
       "game_id": "tc_98ab3dee1d554162b6bbd5dac6374fc8",
-      "source_flag_code": null,
-      "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "source_flag_code": "tw",
+      "status": "reviewed",
+      "decision_note": "Verified Taiwan flag asset; flag code is independent of ISO and geopolitical classification.",
+      "evidence": [
+        "https://metadata.ilo.org/thesaurus/351.html",
+        "https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries/",
+        "https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/tw.svg"
+      ],
+      "reviewed_at": "2026-11-20T00:00:00Z"
     },
     {
       "game_id": "tc_9a78f2eebcc24906a5c67581c0c3895e",
       "source_flag_code": null,
       "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "decision_note": "No reviewed manual SVG asset is present; retain unresolved until verified.",
+      "evidence": [
+        "https://govsomaliland.org/",
+        "https://www.naturalearthdata.com/about/disputed-boundaries-policy/",
+        "https://github.com/nvkelso/natural-earth-vector/issues/675"
+      ]
     },
     {
       "game_id": "tc_9bd5e00f9fc944edbf2eb3097e413328",
@@ -1089,9 +1114,12 @@
     {
       "game_id": "tc_b61ca098adb74efc84564fd9fa800bf8",
       "source_flag_code": null,
-      "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "status": "rejected",
+      "decision_note": "No separate territorial SVG is approved; use the parent Australia flag as a display fallback, not a duplicate AU source-code mapping.",
+      "evidence": [
+        "https://www.infrastructure.gov.au/territories-regions/territories/ashmore-and-cartier-islands",
+        "https://www.ga.gov.au/scientific-topics/national-location-information/geography/external-territories"
+      ]
     },
     {
       "game_id": "tc_b8c860bb8d404dcca918bad769e7ead7",
@@ -1300,8 +1328,12 @@
       "game_id": "tc_d3e7f81572fd44ab920bfc066d592873",
       "source_flag_code": null,
       "status": "unreviewed",
-      "decision_note": null,
-      "evidence": []
+      "decision_note": "No approved source SVG is present; retain unresolved pending manual-asset review.",
+      "evidence": [
+        "https://www.naturalearthdata.com/about/disputed-boundaries-policy/",
+        "https://github.com/nvkelso/natural-earth-vector/issues/675",
+        "https://mfa.gov.ct.tr/"
+      ]
     },
     {
       "game_id": "tc_d4b67e03f0c04d9a87089f477e5fa669",

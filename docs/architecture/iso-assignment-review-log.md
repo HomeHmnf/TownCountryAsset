@@ -62,3 +62,8 @@ Append one entry per reviewed record, and update the registry only after evidenc
 ## Current checkpoint
 
 At the time this log was created, the proposal report lists 234 candidates, 8 unmatched records, 0 ambiguous matches, and 0 records marked verified. The candidate total includes exact normalized-name matches and explicit name-variant matches; see the report's separate counters after regeneration. This log does not approve any candidate or alter the identity registry.
+
+
+## Final edge-case reconciliation — 2026-11-20
+
+The earlier unmatched-record and scope-sensitive queues are reconciled by [the authoritative edge-case report](../../reports/identity-edge-case-reconciliation.md). The current M49 cohort has 235 candidates and 7 unmatched records; the historical Natural Earth `ISO_A2=-99` cohort is separate. Falkland Islands is FK/FLK, Taiwan is TW/TWN from separately cited ILO/Natural Earth evidence, and the other six current edge cases have explicit not-applicable ISO decisions. Kosovo's XK is project-specific only. Siachen Glacier is retained by persistent ID but retired from the active country catalogue. Somaliland and Northern Cyprus flag assets remain unresolved; those outcomes are recorded explicitly.
