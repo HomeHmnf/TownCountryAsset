@@ -374,3 +374,18 @@ uv run python -m compileall -q tools/database tools/import_wp1_5.py
 ```
 
 Record the owner-run results before marking this increment locally validated.
+
+### ISO proposal visibility and official-identity separation
+
+Added migration `007_iso_proposal_visibility.sql` and `tests/test_database_iso_identity_view.py`. The migration creates `country_iso_identity`, a database read model that exposes official ISO codes only when the assignment status is `verified`, and exposes the latest proposed alpha-2/alpha-3 pair separately with its proposal status and proposal ID. Candidate proposals remain candidate when persisted; applying a proposal to the database does not promote it to official identity. `not_applicable` and `unverified` remain distinct assignment states.
+
+The view does not duplicate proposal evidence or source provenance. It points to the existing `review_proposals` row, where the complete proposal/evidence payload remains auditable. It also preserves the existing ISO decision/application workflow; no proposal is approved by this migration.
+
+Owner validation is pending. After pulling, run:
+
+```fish
+uv run python -m pytest -q tests/test_database_iso_identity_view.py tests/test_database_schema.py tests/test_database_identity_import.py tests/test_database_review_data_import.py tests/test_database_edge_case_reconciliation.py
+uv run python -m compileall -q tools/database
+```
+
+Do not mark this increment locally validated until the owner reports successful execution.
