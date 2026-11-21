@@ -220,6 +220,35 @@ def test_reconciliation_records_explicit_decisions_and_retires_siachen(tmp_path:
         connection.close()
 
 
+
+def test_reconciliation_ignores_current_source_mappings_from_other_datasets(tmp_path: Path):
+    registry, decisions, taxonomy, flags_payload = fixture_data()
+    database = tmp_path / "canonical.sqlite"
+    seed_database(database, registry)
+
+    connection = connect_database(database)
+    try:
+        connection.execute(
+            """INSERT INTO dataset_imports(dataset, sha256, import_status, imported_at)
+               VALUES ('un_wpp', ?, 'candidate', '2026-11-20T00:00:00Z')""",
+            ("d" * 64,),
+        )
+        wpp_import_id = connection.execute("SELECT last_insert_rowid()").fetchone()[0]
+        connection.execute(
+            """INSERT INTO country_sources(game_id, dataset, source_id, is_current, import_id)
+               VALUES (?, 'un_wpp', '158', 1, ?)""",
+            (IDS["TWN"], wpp_import_id),
+        )
+
+        result = apply_reconciliation(
+            connection, registry, decisions, taxonomy, flags_payload,
+            actor="project-owner", approval_id="edge-case-test-001",
+            now="2026-11-20T12:00:00Z",
+        )
+        assert result["records"] == 8
+    finally:
+        connection.close()
+
 def test_reconciliation_is_idempotent_for_the_same_decisions(tmp_path: Path):
     registry, decisions, taxonomy, flags_payload = fixture_data()
     database = tmp_path / "canonical.sqlite"
