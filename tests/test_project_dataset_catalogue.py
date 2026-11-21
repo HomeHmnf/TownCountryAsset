@@ -101,7 +101,7 @@ def test_repository_dataset_registry_has_only_evidenced_streams(tmp_path):
         "datasets": len(config["datasets"]),
         "streams": sum(len(item.get("streams", [])) for item in config["datasets"]),
     }
-    assert counts == {"datasets": 6, "streams": 4}
+    assert counts == {"datasets": 7, "streams": 5}
     with connect_project_database(database) as connection:
         wpp = connection.execute(
             "SELECT COUNT(*) FROM datasets WHERE source_key='un_wpp'"
@@ -112,3 +112,13 @@ def test_repository_dataset_registry_has_only_evidenced_streams(tmp_path):
         ).fetchone()[0]
         assert wpp == 2
         assert wpp_streams == 0
+        wdi_area = connection.execute(
+            "SELECT COUNT(*) FROM datasets WHERE source_key='world_bank_wdi' AND dataset_key='wdi_wp1_5_area'"
+        ).fetchone()[0]
+        wdi_area_streams = connection.execute(
+            """SELECT COUNT(*) FROM acquisition_streams AS s
+               JOIN datasets AS d USING(dataset_id)
+               WHERE d.source_key='world_bank_wdi' AND d.dataset_key='wdi_wp1_5_area'"""
+        ).fetchone()[0]
+        assert wdi_area == 1
+        assert wdi_area_streams == 1
