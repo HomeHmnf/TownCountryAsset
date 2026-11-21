@@ -344,7 +344,6 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
         latest: dict[str, dict[str, Any]] = {}
         null_rows = 0
         aggregates = 0
-        unknown_iso3 = set()
         invalid = 0
         for row in observations[code]:
             iso3 = row.get("countryiso3code")
@@ -362,6 +361,8 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
             except (TypeError, ValueError):
                 invalid += 1
                 continue
+            if not scope["start_year"] <= year <= scope["end_year"]:
+                raise AreaSnapshotError(f"{code}/{iso3}: observation year {year} outside captured period")
             key = (iso3, year)
             if key in seen:
                 raise AreaSnapshotError(f"Duplicate observation key {code}/{iso3}/{year}")
@@ -404,7 +405,8 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
             rows.append({"game_id": item["game_id"] or "", "country_iso3": iso3,
                 "country_name": item["country_name"] or "", "field_id": spec["field_id"],
                 "field_key": spec["key"], "indicator_code": code, "value": item["value"],
-                "unit": spec["unit"], "reference_year": item["year"],
+                "unit": spec["unit"], "source_organization": metadata_review[code]["source_organization"],
+                "reference_year": item["year"],
                 "obs_status": item["obs_status"] or "", "mapping_status": "mapped" if item["game_id"] else "unmapped"})
     output_dir = root / REPORT_BASE / loaded["manifest"]["snapshot_id"] / "candidate_validation"
     output_dir.mkdir(parents=True, exist_ok=False)
@@ -412,7 +414,7 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
     with csv_path.open("x", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]) if rows else [
             "game_id", "country_iso3", "country_name", "field_id", "field_key",
-            "indicator_code", "value", "unit", "reference_year", "obs_status", "mapping_status"])
+            "indicator_code", "value", "unit", "source_organization", "reference_year", "obs_status", "mapping_status"])
         writer.writeheader()
         writer.writerows(rows)
     report = {"assessment": "world_bank_wdi_wp1_5_area_candidate_validation",
