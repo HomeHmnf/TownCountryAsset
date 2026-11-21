@@ -1,4 +1,5 @@
-UN WPP SOURCE MAPPINGS: 199
+UN WPP SOURCE MAPPINGS:
+COUNT: 199
 {'game_id': 'tc_523810acde564c1c907acd5befe575ab', 'source_id': '100', 'is_current': 1, 'record_status': 'approved', 'entity_type': 'unreviewed', 'iso_alpha2': None, 'iso_alpha3': 'BGR', 'iso_assignment_status': 'unverified'}
 {'game_id': 'tc_b4847e5d14f94efdbbd46d6467d90237', 'source_id': '104', 'is_current': 1, 'record_status': 'approved', 'entity_type': 'unreviewed', 'iso_alpha2': None, 'iso_alpha3': 'MMR', 'iso_assignment_status': 'unverified'}
 {'game_id': 'tc_4ac5b3c6b7774a05b4ceb5573c4a9d27', 'source_id': '108', 'is_current': 1, 'record_status': 'approved', 'entity_type': 'unreviewed', 'iso_alpha2': None, 'iso_alpha3': 'BDI', 'iso_assignment_status': 'unverified'}
