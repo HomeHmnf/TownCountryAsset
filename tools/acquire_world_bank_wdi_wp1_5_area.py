@@ -65,7 +65,6 @@ def _save(root: Path, raw_dir: Path, filename: str, url: str, params: dict[str, 
     body, status, headers, final_url = request_get(url)
     if status != 200 or not body:
         raise AreaSnapshotError(f"Invalid HTTP response ({status}) or empty body: {url}")
-    payload = common._payload(body, filename)
     path = raw_dir / filename
     path.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -73,6 +72,7 @@ def _save(root: Path, raw_dir: Path, filename: str, url: str, params: dict[str, 
             stream.write(body)
     except FileExistsError as exc:
         raise AreaSnapshotError(f"Refusing to overwrite {path}") from exc
+    payload = common._payload(body, filename)
     artifact = {
         "filename": filename, "local_raw_path": path.relative_to(root).as_posix(),
         "content_type": next((v for k, v in headers.items() if k.casefold() == "content-type"), "application/json"),
@@ -407,9 +407,15 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
             if iso3 not in latest or year > latest[iso3]["year"]:
                 latest[iso3] = candidate
         selected[code] = latest
+        mapped_without_observation = sorted(
+            mapping.game_id for mapping in crosswalk.mappings
+            if mapping.source_id not in latest
+        )
         coverage[code] = {"field_id": spec["field_id"], "candidate_iso3_count": len(latest),
             "mapped_candidate_count": sum(1 for iso3 in latest if iso3 in iso_to_game),
             "unmapped_candidate_count": sum(1 for iso3 in latest if iso3 not in iso_to_game),
+            "crosswalk_game_ids_without_observation": mapped_without_observation,
+            "crosswalk_game_ids_without_observation_count": len(mapped_without_observation),
             "null_observation_rows": null_rows, "aggregate_rows_excluded": aggregates,
             "invalid_rows": invalid, "latest_year_min": min((x["year"] for x in latest.values()), default=None),
             "latest_year_max": max((x["year"] for x in latest.values()), default=None)}
