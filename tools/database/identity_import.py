@@ -265,6 +265,46 @@ def _ensure_source(
         )
 
 
+def _ensure_attribute(
+    connection: sqlite3.Connection, game_id: str, key: str, value: Any
+) -> None:
+    """Persist a captured source attribute without losing its JSON value type."""
+    if value is None:
+        value_type, attribute_value = "null", None
+    elif isinstance(value, bool):
+        value_type, attribute_value = "boolean", "true" if value else "false"
+    elif isinstance(value, int):
+        value_type, attribute_value = "integer", str(value)
+    elif isinstance(value, float):
+        value_type, attribute_value = "real", json.dumps(value, allow_nan=False)
+    elif isinstance(value, str):
+        value_type, attribute_value = "text", value
+    else:
+        value_type = "json"
+        attribute_value = json.dumps(
+            value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False
+        )
+
+    existing = connection.execute(
+        """SELECT attribute_value, value_type FROM country_attributes
+           WHERE game_id=? AND attribute_key=?""",
+        (game_id, key),
+    ).fetchone()
+    expected = (attribute_value, value_type)
+    if existing is not None:
+        if tuple(existing) != expected:
+            raise IdentityImportError(
+                f"Existing source attribute conflicts for {game_id}/{key}"
+            )
+        return
+    connection.execute(
+        """INSERT INTO country_attributes
+           (game_id, attribute_key, attribute_value, value_type)
+           VALUES (?, ?, ?, ?)""",
+        (game_id, key, attribute_value, value_type),
+    )
+
+
 def _ensure_name(
     connection: sqlite3.Connection, game_id: str, language: str, name: str, name_type: str
 ) -> None:
@@ -382,6 +422,10 @@ def import_identity_registry(
         region_count = 0
         for record in records:
             _ensure_country(connection, record, now)
+            for attribute_key, attribute_value in (record.get("source_attributes") or {}).items():
+                _ensure_attribute(
+                    connection, record["game_id"], attribute_key, attribute_value
+                )
             current_id = record["source"]["current_source_id"]
             _ensure_source(connection, record["game_id"], dataset, current_id, 1, import_id)
             source_count += 1
