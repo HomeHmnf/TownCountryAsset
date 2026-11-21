@@ -261,15 +261,22 @@ def load_snapshot(manifest_path: str | Path, *, repository_root: str | Path = RO
     countries: dict[str, dict[str, Any]] = {}
     metadata = {}
     pages: dict[str, list[tuple[int, int, list[dict[str, Any]]]]] = {}
+    country_page_records: list[tuple[int, int]] = []
     for item in artifacts:
         name = Path(item["local_raw_path"]).name
         payload = _read(root, item)
         if name == "source_metadata.json":
             source = payload
         elif name.startswith("country_metadata_page_"):
+            page_number = int(item.get("page_number") or 0)
             pages_count = int(item.get("page_count") or 0)
-            countries.update({str(row.get("id")): row for row in payload[1] if isinstance(row.get("id"), str)})
-            # Country pagination completeness checked below from artifact records.
+            country_page_records.append((page_number, pages_count))
+            for row in payload[1]:
+                iso3 = row.get("id")
+                if isinstance(iso3, str):
+                    if iso3 in countries:
+                        raise AreaSnapshotError(f"Duplicate country catalogue ISO3: {iso3}")
+                    countries[iso3] = row
         elif name.startswith("indicator_metadata_"):
             code = name.removeprefix("indicator_metadata_").removesuffix(".json")
             row = next((r for r in payload[1] if r.get("id") == code), None)
@@ -282,6 +289,10 @@ def load_snapshot(manifest_path: str | Path, *, repository_root: str | Path = RO
             pages.setdefault(code, []).append((int(page_text), int(item.get("page_count") or 0), payload[1]))
     if source is None or not any(str(x.get("id")) == SOURCE_ID for x in source[1]):
         raise AreaSnapshotError("Snapshot lacks WDI source metadata")
+    country_page_records.sort()
+    expected_country_pages = country_page_records[0][1] if country_page_records else 0
+    if expected_country_pages != len(country_page_records) or [x[0] for x in country_page_records] != list(range(1, expected_country_pages + 1)) or any(x[1] != expected_country_pages for x in country_page_records):
+        raise AreaSnapshotError("Country metadata pagination is incomplete")
     if set(metadata) != set(INDICATORS) or set(pages) != set(INDICATORS):
         raise AreaSnapshotError("Snapshot does not contain all three indicator bundles")
     observations = {}
