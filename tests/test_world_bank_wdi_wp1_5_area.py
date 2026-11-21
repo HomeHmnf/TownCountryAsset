@@ -20,7 +20,7 @@ def fake_request(url):
             {"id": "2", "name": "World Development Indicators"},
         ]]
     elif parsed.path.endswith("/country"):
-        payload = [{"page": 1, "pages": 1, "total": 2}, [
+        payload = [{"page": 1, "pages": 1, "total": 3}, [
             {"id": "USA", "name": "United States", "region": {"id": "NAC", "value": "North America"}},
             {"id": "CAN", "name": "Canada", "region": {"id": "NAC", "value": "North America"}},
             {"id": "WLD", "name": "World", "region": {"id": "NA", "value": "Aggregates"}},
