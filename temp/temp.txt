@@ -1,126 +1,691 @@
-WDI WP1.5 AREA — UNMATCHED IDENTITY INVESTIGATION
+WDI WP1.5 — FULL UNMATCHED IDENTITY SEARCH
 DATABASE: /home/hmnf/Projects/Python/TownAndCountry/data/canonical/town_country_asset.sqlite
 
-COUNTRIES TABLE SCHEMA
+TABLES SCANNED: 17
+
+NAME MATCHES
+
+CHI — 3 rows
 [
   {
-    "cid": 0,
-    "name": "game_id",
-    "type": "TEXT",
-    "notnull": 0,
-    "dflt_value": null,
-    "pk": 1
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_43796017cb7d4a279de2d9ed65c32c80",
+      "attribute_key": "BRK_GROUP",
+      "attribute_value": "Channel Islands",
+      "value_type": "text"
+    }
   },
   {
-    "cid": 1,
-    "name": "entity_type",
-    "type": "TEXT",
-    "notnull": 1,
-    "dflt_value": "'unreviewed'",
-    "pk": 0
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_be9b1fd97db1475191612805ba7f9920",
+      "attribute_key": "BRK_GROUP",
+      "attribute_value": "Channel Islands",
+      "value_type": "text"
+    }
   },
   {
-    "cid": 2,
-    "name": "record_status",
-    "type": "TEXT",
-    "notnull": 1,
-    "dflt_value": "'candidate'",
-    "pk": 0
-  },
-  {
-    "cid": 3,
-    "name": "iso_alpha2",
-    "type": "TEXT",
-    "notnull": 0,
-    "dflt_value": null,
-    "pk": 0
-  },
-  {
-    "cid": 4,
-    "name": "iso_alpha3",
-    "type": "TEXT",
-    "notnull": 0,
-    "dflt_value": null,
-    "pk": 0
-  },
-  {
-    "cid": 5,
-    "name": "iso_assignment_status",
-    "type": "TEXT",
-    "notnull": 1,
-    "dflt_value": "'unverified'",
-    "pk": 0
-  },
-  {
-    "cid": 6,
-    "name": "localization_status",
-    "type": "TEXT",
-    "notnull": 1,
-    "dflt_value": "'unreviewed'",
-    "pk": 0
-  },
-  {
-    "cid": 7,
-    "name": "created_at",
-    "type": "TEXT",
-    "notnull": 1,
-    "dflt_value": null,
-    "pk": 0
-  },
-  {
-    "cid": 8,
-    "name": "updated_at",
-    "type": "TEXT",
-    "notnull": 1,
-    "dflt_value": null,
-    "pk": 0
-  },
-  {
-    "cid": 9,
-    "name": "entity_type_status",
-    "type": "TEXT",
-    "notnull": 1,
-    "dflt_value": "'unreviewed'",
-    "pk": 0
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_8d01644699e04b74ae3a4751c6f1fc41",
+      "attribute_key": "WOE_NOTE",
+      "attribute_value": "Eh ID includes Channel Islands and Isle of Man. UK constituent countries of England (24554868), Wales (12578049), Scotland (12578048), and Northern Ireland (20070563).",
+      "value_type": "text"
+    }
   }
 ]
 
-UNMATCHED WDI CODES
-
-CHI — Channel Islands
-COUNTRY RECORDS:
-[]
-SOURCE MAPPINGS:
+GIB — 0 rows
 []
 
-GIB — Gibraltar
-COUNTRY RECORDS:
-[]
-SOURCE MAPPINGS:
+PSE — 13 rows
+[
+  {
+    "table": "country_names",
+    "row": {
+      "name_id": 148,
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "language": "en",
+      "name": "Palestine",
+      "name_type": "canonical"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "ADMIN",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "BRK_NAME",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "FORMAL_EN",
+      "attribute_value": "West Bank and Gaza",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "GEOUNIT",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "NAME",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "NAME_EN",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "NAME_FR",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "NAME_LONG",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "NAME_SORT",
+      "attribute_value": "Palestine (West Bank and Gaza)",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "NAME_VI",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "attribute_key": "SUBUNIT",
+      "attribute_value": "Palestine",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "review_proposals",
+    "row": {
+      "proposal_id": 418,
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "proposal_type": "iso",
+      "proposal_fingerprint": "a9c02b5d47ef1ffd06da2feac54f9c8972aba5b36ac08ad15a497861097c7e03",
+      "proposed_json": "{\"alpha2\":\"PS\",\"alpha3\":\"PSE\",\"decision\":\"candidate: explicit name-variant match; human verification required\",\"match_type\":\"explicit name variant\",\"reference_name\":\"State of Palestine\"}",
+      "evidence_json": "{\"normalized_reference\":\"m49-iso-reference.csv\",\"normalized_sha256\":\"7575550969de58be3909e0c2290478a4331c5c13be123a1043214c73de929b74\",\"raw_sha256\":\"b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb\",\"retrieved_at_utc\":\"2026-11-01T06:40:27.732163+00:00\",\"source_repository\":null,\"source_url\":\"https://unstats.un.org/unsd/methodology/m49/overview\"}",
+      "review_status": "candidate",
+      "created_at": "2026-11-21T05:26:35Z",
+      "reviewed_at": null
+    }
+  }
+]
+
+SSD — 11 rows
+[
+  {
+    "table": "country_names",
+    "row": {
+      "name_id": 56,
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "language": "en",
+      "name": "South Sudan",
+      "name_type": "canonical"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "ADMIN",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "FORMAL_EN",
+      "attribute_value": "Republic of South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "GEOUNIT",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "NAME_CIAWF",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "NAME_EN",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "NAME_LONG",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "NAME_SORT",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "SOVEREIGNT",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "attribute_key": "SUBUNIT",
+      "attribute_value": "South Sudan",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "review_proposals",
+    "row": {
+      "proposal_id": 154,
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "proposal_type": "iso",
+      "proposal_fingerprint": "ba6e0e6e02359acf6c5dde983353b635442745c3c4ac4853c87c83136ad69b7e",
+      "proposed_json": "{\"alpha2\":\"SS\",\"alpha3\":\"SSD\",\"decision\":\"candidate: exact normalized English-name match; human verification required\",\"match_type\":\"exact normalized name\",\"reference_name\":\"South Sudan\"}",
+      "evidence_json": "{\"normalized_reference\":\"m49-iso-reference.csv\",\"normalized_sha256\":\"7575550969de58be3909e0c2290478a4331c5c13be123a1043214c73de929b74\",\"raw_sha256\":\"b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb\",\"retrieved_at_utc\":\"2026-11-01T06:40:27.732163+00:00\",\"source_repository\":null,\"source_url\":\"https://unstats.un.org/unsd/methodology/m49/overview\"}",
+      "review_status": "candidate",
+      "created_at": "2026-11-21T05:26:35Z",
+      "reviewed_at": null
+    }
+  }
+]
+
+XKX — 29 rows
+[
+  {
+    "table": "country_names",
+    "row": {
+      "name_id": 139,
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "language": "en",
+      "name": "Kosovo",
+      "name_type": "canonical"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_98a68180b9f0479f90dcde7809d60470",
+      "attribute_key": "WOE_NOTE",
+      "attribute_value": "Expired WOE also contains Kosovo.",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "ADMIN",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "BRK_NAME",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "FORMAL_EN",
+      "attribute_value": "Republic of Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "GEOUNIT",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_CIAWF",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_DE",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_EN",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_ES",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_FR",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_ID",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_IT",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_LONG",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_NL",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_PT",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_SORT",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_SV",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "NAME_VI",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "SOVEREIGNT",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_attributes",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "attribute_key": "SUBUNIT",
+      "attribute_value": "Kosovo",
+      "value_type": "text"
+    }
+  },
+  {
+    "table": "country_flags",
+    "row": {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "source_flag_code": "xk",
+      "mapping_status": "reviewed",
+      "decision_note": "source_flag_asset_user_assigned_namespace",
+      "evidence_json": "[\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\",\"https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf\",\"https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/xk.svg\"]"
+    }
+  },
+  {
+    "table": "review_proposals",
+    "row": {
+      "proposal_id": 393,
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "proposal_type": "flag",
+      "proposal_fingerprint": "901d2c8a696f6c6fec7e9f2a4762cd2097ca940b5d080262e215d50bf8a9e052",
+      "proposed_json": "{\"decision_note\":\"Kosovo-specific flag asset uses the source's user-assigned XK identifier; XK is not an official ISO assignment.\",\"manual_svg_path\":null,\"source_flag_code\":\"xk\"}",
+      "evidence_json": "{\"evidence\":[\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\",\"https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf\",\"https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/xk.svg\"],\"mapping_sha256\":\"6b08e77407ef1e2dd8d3ee2ad107b1045b3c63e1db2b21e4e089a5d0a22a785c\",\"mapping_source\":{\"configured_ref\":\"main\",\"license\":\"MIT\",\"project\":\"lipis/flag-icons\",\"repository_url\":\"https://github.com/lipis/flag-icons\"}}",
+      "review_status": "approved",
+      "created_at": "2026-11-21T05:26:35Z",
+      "reviewed_at": "2026-11-20T00:00:00Z"
+    }
+  },
+  {
+    "table": "review_proposals",
+    "row": {
+      "proposal_id": 736,
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "proposal_type": "entity_type",
+      "proposal_fingerprint": "17a294e734942a551accabe70cf103317a07602ccd170a198fcd1d5290b850a2",
+      "proposed_json": "{\"entity_type\":\"disputed_or_partially_recognized_entity\"}",
+      "evidence_json": "[{\"note\":\"Kosovo has partial international recognition; retain a distinct project identity without asserting universal recognition.\",\"url\":\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\"}]",
+      "review_status": "approved",
+      "created_at": "2026-11-21T05:34:34Z",
+      "reviewed_at": "2026-11-21T05:34:34Z"
+    }
+  },
+  {
+    "table": "review_proposals",
+    "row": {
+      "proposal_id": 737,
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "proposal_type": "flag",
+      "proposal_fingerprint": "44dd68c4c80965393dea418eb64515f8ba693d01ee7e79b809e3b32e07cf23f3",
+      "proposed_json": "{\"decision_code\":\"source_flag_asset_user_assigned_namespace\",\"manual_svg_path\":null,\"parent_game_id\":null,\"source_flag_code\":\"xk\"}",
+      "evidence_json": "{\"evidence\":[\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\",\"https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf\",\"https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/xk.svg\"]}",
+      "review_status": "approved",
+      "created_at": "2026-11-21T05:34:34Z",
+      "reviewed_at": "2026-11-21T05:34:34Z"
+    }
+  },
+  {
+    "table": "country_review_decisions",
+    "row": {
+      "decision_id": 17,
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "decision_domain": "entity_type",
+      "decision_code": "entity_type_assigned",
+      "decision_status": "approved",
+      "decision_json": "{\"entity_type\":\"disputed_or_partially_recognized_entity\",\"evidence\":[{\"note\":\"Kosovo has partial international recognition; retain a distinct project identity without asserting universal recognition.\",\"url\":\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\"}]}",
+      "evidence_json": "[{\"note\":\"Kosovo has partial international recognition; retain a distinct project identity without asserting universal recognition.\",\"url\":\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\"}]",
+      "decision_fingerprint": "e37382eec93b04fb616f2fd79ed7017c932f80cda7a8508e60da166b3eb5d1ac",
+      "actor": "project-owner",
+      "decided_at": "2026-11-21T05:34:34Z",
+      "approval_id": "edge-case-e43bab2d4bde9f5ac403"
+    }
+  },
+  {
+    "table": "country_review_decisions",
+    "row": {
+      "decision_id": 18,
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "decision_domain": "flag",
+      "decision_code": "source_flag_asset_user_assigned_namespace",
+      "decision_status": "approved",
+      "decision_json": "{\"decision_code\":\"source_flag_asset_user_assigned_namespace\",\"decision_status\":\"approved\",\"evidence\":[\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\",\"https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf\",\"https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/xk.svg\"],\"source_flag_code\":\"xk\"}",
+      "evidence_json": "[\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\",\"https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf\",\"https://github.com/lipis/flag-icons/blob/ac7e0eb3259eb62aa6100c435607e2fe03896a97/flags/4x3/xk.svg\"]",
+      "decision_fingerprint": "faf730eb871a488cd4852d7b6db6851d5fe245974aa8a1f7c665daf60e5de02c",
+      "actor": "project-owner",
+      "decided_at": "2026-11-21T05:34:34Z",
+      "approval_id": "edge-case-e43bab2d4bde9f5ac403"
+    }
+  },
+  {
+    "table": "country_review_decisions",
+    "row": {
+      "decision_id": 19,
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "decision_domain": "catalogue_scope",
+      "decision_code": "retain_disputed_or_partially_recognized_entity",
+      "decision_status": "approved",
+      "decision_json": "{\"decision_code\":\"retain_disputed_or_partially_recognized_entity\",\"decision_status\":\"approved\",\"rationale\":\"Retain separately represented entity; this is not a sovereignty or recognition statement.\"}",
+      "evidence_json": "[{\"note\":\"Kosovo has partial international recognition; retain a distinct project identity without asserting universal recognition.\",\"url\":\"https://op.europa.eu/en/web/eu-vocabularies/countries-and-territories\"}]",
+      "decision_fingerprint": "34e575e6da546da598a4e1e0f82e440a4353efe88b7bfbe25cb9ade62e72e23d",
+      "actor": "project-owner",
+      "decided_at": "2026-11-21T05:34:34Z",
+      "approval_id": "edge-case-e43bab2d4bde9f5ac403"
+    }
+  }
+]
+
+EXACT CODE-FIELD MATCHES
+
+CHI — 0 rows
 []
 
-PSE — West Bank and Gaza
-COUNTRY RECORDS:
-[]
-SOURCE MAPPINGS:
+GIB — 0 rows
 []
 
-SSD — South Sudan
-COUNTRY RECORDS:
-[]
-SOURCE MAPPINGS:
+PSE — 1 rows
+[
+  {
+    "table": "countries",
+    "row": {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "entity_type": "unreviewed",
+      "record_status": "approved",
+      "iso_alpha2": null,
+      "iso_alpha3": "PSE",
+      "iso_assignment_status": "unverified",
+      "localization_status": "unreviewed",
+      "created_at": "2026-11-01T15:21:08Z",
+      "updated_at": "2026-11-19T16:24:51Z",
+      "entity_type_status": "unreviewed"
+    }
+  }
+]
+
+SSD — 1 rows
+[
+  {
+    "table": "countries",
+    "row": {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "entity_type": "unreviewed",
+      "record_status": "approved",
+      "iso_alpha2": null,
+      "iso_alpha3": "SSD",
+      "iso_assignment_status": "unverified",
+      "localization_status": "unreviewed",
+      "created_at": "2026-11-01T15:21:08Z",
+      "updated_at": "2026-11-19T16:24:51Z",
+      "entity_type_status": "unreviewed"
+    }
+  }
+]
+
+XKX — 0 rows
 []
 
-XKX — Kosovo
-COUNTRY RECORDS:
-[]
-SOURCE MAPPINGS:
-[]
+TRACKED JSON FILE SEARCH
+FILES SCANNED: 13
 
-WPP SOURCE MAPPING COUNTS
-{
-  "natural_earth_admin_0": 242,
-  "un_wpp": 199
-}
+config/country_identity_registry.json — PSE
+[
+  "        \"alpha3\": \"PSE\",",
+  "        \"en\": \"Palestine\","
+]
 
-NOTE: Search is by existing country-record text fields; absence of a result is not evidence that an entity does not exist.
+config/country_identity_registry.json — SSD
+[
+  "        \"alpha3\": \"SSD\",",
+  "        \"en\": \"South Sudan\","
+]
+
+config/country_identity_registry.json — XKX
+[
+  "        \"en\": \"Kosovo\","
+]
+
+config/country_flag_mapping.json — XKX
+[
+  "      \"decision_note\": \"Kosovo-specific flag asset uses the source's user-assigned XK identifier; XK is not an official ISO assignment.\",",
+  "        \"https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf\","
+]
+
+config/identity_edge_case_reconciliation.json — XKX
+[
+  "      \"name\": \"Kosovo\",",
+  "            \"note\": \"Kosovo has partial international recognition; retain a distinct project identity without asserting universal recognition.\"",
+  "          \"https://assets.publishing.service.gov.uk/media/6941525329501ea90654a505/Kosovo_Toponymic_Factfile.pdf\","
+]
+
+config/data_sources.json — XKX
+[
+  "        \"KOSOVO\": \"https://president-ksgov.net/en/legislation/\","
+]
+
+data/manual/source_crosswalks/un_wpp.json — SSD
+[
+  "      \"source_name\": \"South Sudan\","
+]
+
+data/manual/source_crosswalks/world_bank_icp.json — PSE
+[
+  "      \"source_country_code\": \"PSE\",",
+  "      \"source_country_name\": \"West Bank and Gaza\",",
+  "          \"asset_country_name\": \"Palestine\","
+]
+
+data/manual/source_crosswalks/world_bank_icp.json — SSD
+[
+  "      \"source_country_code\": \"SSD\",",
+  "      \"source_country_name\": \"South Sudan\",",
+  "      \"asset_country_name\": \"South Sudan\","
+]
+
+data/manual/source_crosswalks/world_bank_icp.json — XKX
+[
+  "      \"source_country_code\": \"XKX\",",
+  "      \"source_country_name\": \"Kosovo\","
+]
