@@ -32,7 +32,7 @@ def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
     path = tmp_path / "nested" / "canonical.sqlite"
     with connect_database(path) as connection:
         assert current_schema_version(connection) == 0
-        assert apply_migrations(connection) == 4
+        assert apply_migrations(connection) == 7
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
         assert validate_database(connection) == []
@@ -41,8 +41,8 @@ def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
 
 
 def test_migration_is_idempotent(database):
-    assert apply_migrations(database) == 4
-    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 4
+    assert apply_migrations(database) == 7
+    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 7
 
 
 def test_game_id_requires_exact_tc_prefix_and_32_lowercase_hex(database):
