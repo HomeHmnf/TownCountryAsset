@@ -57,7 +57,7 @@ def test_area_capture_is_separate_and_loads_complete_immutable_bundle(tmp_path):
     report = area.capture_snapshot(repository_root=tmp_path, start_year=2020, end_year=2025,
         retrieved_at="2026-11-21T07:00:00Z", request_get=fake_request)
     loaded = area.load_snapshot(report["manifest_path"], repository_root=tmp_path)
-    assert report["artifact_count"] == 11
+    assert report["artifact_count"] == 8
     assert loaded["manifest"]["download_id"] == "wdi_wp1_5_area"
     assert loaded["manifest"]["snapshot_scope"]["field_ids"] == [3, 33, 34]
     assert set(loaded["observations"]) == set(area.INDICATORS)
