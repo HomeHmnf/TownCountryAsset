@@ -310,6 +310,32 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
         expected_dataset=dataset, known_game_ids=known_game_ids)
     iso_to_game = {mapping.source_id.upper(): mapping.game_id for mapping in crosswalk.mappings}
     observations = loaded["observations"]
+    scope = loaded["manifest"]["snapshot_scope"]
+    metadata_review = {}
+    expected_name_tokens = {
+        "EN.POP.DNST": ("population density", "land area"),
+        "AG.SRF.TOTL.K2": ("surface area", "sq. km"),
+        "AG.LND.TOTL.K2": ("land area", "sq. km"),
+    }
+    for code, tokens in expected_name_tokens.items():
+        meta = loaded["indicator_metadata"][code]
+        name = str(meta.get("name") or "").casefold()
+        source_note = str(meta.get("sourceNote") or "").strip()
+        source_org = str(meta.get("sourceOrganization") or "").strip()
+        missing_tokens = [token for token in tokens if token not in name]
+        if missing_tokens:
+            raise AreaSnapshotError(f"{code}: indicator name does not confirm expected unit/meaning tokens {missing_tokens}")
+        if not source_note:
+            raise AreaSnapshotError(f"{code}: provider source note is missing")
+        if not source_org:
+            raise AreaSnapshotError(f"{code}: originating organisation metadata is missing")
+        metadata_review[code] = {
+            "name": meta.get("name"), "unit_metadata": meta.get("unit"),
+            "canonical_unit": INDICATORS[code]["unit"],
+            "source_organization": source_org, "source_note": source_note,
+            "metadata_last_updated": loaded["manifest"]["indicator_summaries"][code].get("api_last_updated"),
+            "review_status": "captured_for_human_source_and_license_review",
+        }
     selected: dict[str, dict[str, dict[str, Any]]] = {}
     coverage: dict[str, Any] = {}
     anomalies: list[dict[str, Any]] = []
