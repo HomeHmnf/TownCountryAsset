@@ -118,6 +118,9 @@ def test_audit_rejects_unsafe_artifact_paths(tmp_path, unsafe):
 
 def test_repository_manifests_have_supported_layouts_and_valid_artifact_fingerprints():
     result = audit_manifests()
-    assert result["manifest_count"] == 10
-    assert result["artifact_count"] == 15
+    # Repository snapshots grow over time; assert the committed baseline,
+    # not a brittle exact count that rejects newly acquired immutable manifests.
+    assert result["manifest_count"] >= 22
+    assert result["artifact_count"] >= 70
+    assert result["valid_manifest_count"] == result["manifest_count"]
     assert result["status"] == "ok", result
