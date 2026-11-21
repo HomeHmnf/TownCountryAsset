@@ -424,3 +424,43 @@ def test_iso_report_header_accepts_markdown_spacing_variation(tmp_path: Path):
         "Match type": "exact",
         "Decision": "candidate",
     }]
+
+def test_import_ignores_current_source_mappings_from_other_datasets(tmp_path: Path):
+    inputs = fixture_inputs(tmp_path)
+    database = tmp_path / "canonical.sqlite"
+    make_database(database)
+
+    connection = connect_database(database)
+    try:
+        connection.execute(
+            """INSERT INTO dataset_imports
+               (dataset, sha256, import_status, imported_at)
+               VALUES ('un_wpp', ?, 'candidate', '2026-10-01T00:00:00Z')""",
+            ("e" * 64,),
+        )
+        wpp_import_id = connection.execute("SELECT last_insert_rowid()").fetchone()[0]
+        connection.execute(
+            """INSERT INTO country_sources(game_id, dataset, source_id, is_current, import_id)
+               VALUES (?, 'un_wpp', 'UN-AAA', 1, ?)""",
+            (GAME_ID, wpp_import_id),
+        )
+    finally:
+        connection.close()
+
+    result = run_import(database, inputs)
+    assert result["countries"] == 1
+
+    connection = connect_database(database)
+    try:
+        mappings = connection.execute(
+            """SELECT dataset, source_id, is_current
+               FROM country_sources WHERE game_id=? ORDER BY dataset""",
+            (GAME_ID,),
+        ).fetchall()
+        assert [tuple(row) for row in mappings] == [
+            ("natural_earth_admin_0", "AAA", 1),
+            ("un_wpp", "UN-AAA", 1),
+        ]
+    finally:
+        connection.close()
+
