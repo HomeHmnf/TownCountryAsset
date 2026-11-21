@@ -26,7 +26,11 @@ def fake_request(url):
     elif "/indicator/" in parsed.path and "/country/all/" not in parsed.path:
         code = parsed.path.rsplit("/", 1)[-1]
         payload = [{"page": 1, "pages": 1, "lastupdated": "2026-10-08"}, [{
-            "id": code, "name": area.INDICATORS[code]["meaning"],
+            "id": code, "name": {
+                "EN.POP.DNST": "Population density (people per sq. km of land area)",
+                "AG.SRF.TOTL.K2": "Surface area (sq. km)",
+                "AG.LND.TOTL.K2": "Land area (sq. km)",
+            }[code],
             "unit": "", "source": {"id": "2", "value": "World Development Indicators"},
             "sourceNote": area.INDICATORS[code]["meaning"],
             "sourceOrganization": "FAO; World Bank", "topics": [],
