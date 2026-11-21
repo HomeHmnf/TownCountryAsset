@@ -10,6 +10,7 @@ import csv
 import hashlib
 import json
 import math
+import re
 import sys
 import urllib.parse
 from datetime import datetime, timezone
@@ -319,7 +320,16 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
     dataset = "world_bank_wdi_wp1_5_area"
     crosswalk = load_crosswalk(crosswalk_path if Path(crosswalk_path).is_absolute() else root / crosswalk_path,
         expected_dataset=dataset, known_game_ids=known_game_ids)
-    iso_to_game = {mapping.source_id.upper(): mapping.game_id for mapping in crosswalk.mappings}
+    if crosswalk.source_key != SOURCE_KEY:
+        raise AreaSnapshotError(f"Crosswalk source_key must be {SOURCE_KEY!r}")
+    iso_to_game = {}
+    for mapping in crosswalk.mappings:
+        iso3 = mapping.source_id
+        if not re.fullmatch(r"[A-Z]{3}", iso3):
+            raise AreaSnapshotError(f"Crosswalk source_id must be an uppercase ISO3 code: {iso3!r}")
+        if iso3 in iso_to_game:
+            raise AreaSnapshotError(f"Duplicate normalized ISO3 in crosswalk: {iso3}")
+        iso_to_game[iso3] = mapping.game_id
     observations = loaded["observations"]
     scope = loaded["manifest"]["snapshot_scope"]
     metadata_review = {}
