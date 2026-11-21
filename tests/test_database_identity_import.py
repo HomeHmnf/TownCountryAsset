@@ -66,7 +66,7 @@ def write_inputs(tmp_path, *, conflict=False):
         },
     ]
     countries = [
-        {"id": "AAA", "game_id": records[0]["game_id"], "iso3": "AAA", "name": "Alpha", "aliases": ["Alpha Isles"], "regions": ["Asia"]},
+        {"id": "AAA", "game_id": records[0]["game_id"], "iso3": "AAA", "name": "Alpha", "aliases": ["Alpha Isles"], "regions": ["Asia"], "source_attributes": {"WIKIDATAID": "Q1", "POP_EST": 123, "HOMEPART": True, "EMPTY": None}},
         {"id": "BBB", "game_id": records[1]["game_id"], "iso3": "BBB", "name": "Beta", "aliases": [], "regions": []},
     ]
     if conflict:
@@ -135,6 +135,19 @@ def test_imports_identity_provenance_names_regions_and_history(tmp_path):
             ("tc_" + "1" * 32,),
         ).fetchone()[0] == "Alpha"
         assert connection.execute("SELECT COUNT(*) FROM country_regions").fetchone()[0] == 1
+        attributes = {
+            row["attribute_key"]: (row["attribute_value"], row["value_type"])
+            for row in connection.execute(
+                "SELECT attribute_key, attribute_value, value_type FROM country_attributes WHERE game_id=?",
+                ("tc_" + "1" * 32,),
+            )
+        }
+        assert attributes == {
+            "WIKIDATAID": ("Q1", "text"),
+            "POP_EST": ("123", "integer"),
+            "HOMEPART": ("true", "boolean"),
+            "EMPTY": (None, "null"),
+        }
         country = connection.execute(
             "SELECT record_status, iso_alpha2, iso_alpha3, iso_assignment_status, localization_status "
             "FROM countries WHERE game_id = ?",
