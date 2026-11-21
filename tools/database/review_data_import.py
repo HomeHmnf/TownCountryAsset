@@ -447,7 +447,9 @@ def import_review_data(
             """SELECT c.game_id, cs.dataset, cs.source_id
                FROM countries c JOIN country_sources cs
                  ON cs.game_id=c.game_id AND cs.is_current=1
-               ORDER BY c.game_id"""
+               WHERE cs.dataset = ?
+               ORDER BY c.game_id""",
+            (registry["dataset"],),
         ).fetchall()
         db_sources = {row["game_id"]: (row["dataset"], row["source_id"]) for row in current_rows}
         if len(current_rows) != len(db_sources):
