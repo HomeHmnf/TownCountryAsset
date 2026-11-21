@@ -22,6 +22,7 @@ def fake_request(url):
     elif parsed.path.endswith("/country"):
         payload = [{"page": 1, "pages": 1, "total": 2}, [
             {"id": "USA", "name": "United States", "region": {"id": "NAC", "value": "North America"}},
+            {"id": "CAN", "name": "Canada", "region": {"id": "NAC", "value": "North America"}},
             {"id": "WLD", "name": "World", "region": {"id": "NA", "value": "Aggregates"}},
         ]]
     elif "/indicator/" in parsed.path and "/country/all/" not in parsed.path:
@@ -39,10 +40,12 @@ def fake_request(url):
     elif "/country/all/indicator/" in parsed.path:
         code = parsed.path.rsplit("/", 1)[-1]
         value = {"EN.POP.DNST": "36.5", "AG.SRF.TOTL.K2": "9833520", "AG.LND.TOTL.K2": "9161968"}[code]
-        payload = [{"page": int(params["page"][0]), "pages": 1, "total": 2,
+        payload = [{"page": int(params["page"][0]), "pages": 1, "total": 3,
                     "lastupdated": "2026-10-08"}, [
             {"indicator": {"id": code, "value": code}, "country": {"id": "US", "value": "United States"},
              "countryiso3code": "USA", "date": "2024", "value": value, "obs_status": ""},
+            {"indicator": {"id": code, "value": code}, "country": {"id": "CA", "value": "Canada"},
+             "countryiso3code": "CAN", "date": "2024", "value": value, "obs_status": ""},
             {"indicator": {"id": code, "value": code}, "country": {"id": "1W", "value": "World"},
              "countryiso3code": "WLD", "date": "2024", "value": "100", "obs_status": ""},
         ]]
@@ -96,9 +99,9 @@ def test_validation_uses_explicit_iso3_crosswalk_and_keeps_unmapped_candidates(t
             "match_method": "reviewed_manual", "evidence_url": "https://example.org/usa"}],
     }), encoding="utf-8")
     result = area.validate_candidates(report["manifest_path"], crosswalk, registry, repository_root=tmp_path)
-    assert result["candidate_rows"] == 3
+    assert result["candidate_rows"] == 6
     assert result["coverage"]["EN.POP.DNST"]["mapped_candidate_count"] == 1
-    assert result["coverage"]["EN.POP.DNST"]["unmapped_candidate_count"] == 0
+    assert result["coverage"]["EN.POP.DNST"]["unmapped_candidate_count"] == 1
     assert result["side_effects"]["canonical_database_written"] is False
 
 
