@@ -176,7 +176,7 @@
       "release_discovery": {
         "mode": "manual_review",
         "provider_url": "https://databank.worldbank.org/source/world-development-indicators",
-        "automation_status": "api_snapshot_capture_implemented_for_macro_and_wp1_5_area",
+        "automation_status": "not_implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
@@ -1187,7 +1187,7 @@
       "release_discovery": {
         "mode": "manual_review",
         "provider_url": "https://www.zimstat.co.zw/national-accounts/",
-        "automation_status": "two_publication_downloads_implemented",
+        "automation_status": "not_implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
@@ -1211,7 +1211,7 @@
       "release_discovery": {
         "mode": "manual_review",
         "provider_url": "https://www.worldbank.org/en/programs/icp/data",
-        "automation_status": "saved_report_csv_capture_implemented",
+        "automation_status": "not_implemented",
         "latest_available": null,
         "latest_validated": null,
         "latest_applied": null,
