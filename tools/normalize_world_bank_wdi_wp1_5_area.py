@@ -110,8 +110,14 @@ def normalize_snapshot(
     acquisition = loaded["manifest"]
     acquisition_path = Path(loaded["manifest_path"])
     artifacts = acquisition["files"]
-    primary = artifacts[0]
-    additional = artifacts[1:]
+    if len(artifacts) != 8:
+        raise AreaSnapshotError(f"Expected the immutable eight-artifact WDI bundle; found {len(artifacts)}")
+    # Use the captured source metadata response as the required primary raw
+    # input; the other seven captured responses remain explicit additional inputs.
+    primary = next((item for item in artifacts if Path(item["local_raw_path"]).name == "source_metadata.json"), None)
+    if primary is None:
+        raise AreaSnapshotError("Snapshot is missing source_metadata.json")
+    additional = [item for item in artifacts if item is not primary]
     def raw_input(item: dict[str, Any]) -> dict[str, Any]:
         return {
             "local_raw_path": item["local_raw_path"],
