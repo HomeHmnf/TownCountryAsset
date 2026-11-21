@@ -256,6 +256,50 @@
       ]
     },
     {
+      "source_key": "world_bank_wdi",
+      "dataset_key": "wdi_wp1_5_area",
+      "name": "WDI WP1.5 area and population-density indicators",
+      "description": "Separate immutable WDI API snapshot for WP1.5 fields 3, 33 and 34. Acquisition and candidate validation only; no source-selection or application approval.",
+      "data_format": "json_api_bundle",
+      "frequency": "annual",
+      "metadata": {
+        "provider_source_id": "2",
+        "provider_source_name": "World Development Indicators",
+        "api_base_url": "https://api.worldbank.org/v2",
+        "api_documentation_url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
+        "terms_url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets",
+        "field_ids": [3, 33, 34],
+        "indicator_codes": ["EN.POP.DNST", "AG.SRF.TOTL.K2", "AG.LND.TOTL.K2"],
+        "raw_directory": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area",
+        "manifest_directory": "data_manifests/sources/world_bank_wdi/wdi_wp1_5_area",
+        "acquisition_tool": "tools/acquire_world_bank_wdi_wp1_5_area.py",
+        "validation_tool": "tools/acquire_world_bank_wdi_wp1_5_area.py validate",
+        "licensing": "Unclear pending indicator-level originating-organisation and third-party terms review."
+      },
+      "streams": [
+        {
+          "stream_key": "rolling_api_snapshot",
+          "name": "WDI WP1.5 area and density rolling API snapshots",
+          "acquisition_mode": "api",
+          "validation_contract": {
+            "required_artifacts": ["source_metadata.json", "country_metadata_page_*", "indicator_metadata_*", "observations_*_page_*"],
+            "required_indicator_codes": ["EN.POP.DNST", "AG.SRF.TOTL.K2", "AG.LND.TOTL.K2"],
+            "complete_pagination": true,
+            "byte_integrity": ["sha256", "byte_count"],
+            "identity_join": "Explicit reviewed ISO3-to-game_id crosswalk only; no country-name inference.",
+            "period": "Latest non-null observation selected independently per indicator and country; reference year retained.",
+            "semantic_validation": "Separate candidate assessment; acquisition and candidate reports do not approve or apply observations."
+          },
+          "metadata": {
+            "release_semantics": "Timestamped rolling API capture, not a provider-declared WDI vintage.",
+            "event_identity": "Manifest repository-relative path; each capture is immutable and distinct.",
+            "observation_status": "Preserve obs_status verbatim; blank status is not assumed to mean actual.",
+            "area_semantics": "Surface area includes inland water; land area excludes inland water. Never substitute one for the other."
+          }
+        }
+      ]
+    },
+    {
       "source_key": "guinea_ins",
       "dataset_key": "national_accounts_legacy_2023",
       "name": "Guinea national accounts — legacy series in La Guinée en chiffres 2023",
