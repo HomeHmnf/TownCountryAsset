@@ -199,7 +199,7 @@ def _validate_observation(
         )
     period = _text(row.get("observation_period"), f"{label}.observation_period")
     status = row.get("value_status")
-    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
+    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unspecified", "unavailable", "not_applicable"}:
         raise StatisticsImportError(f"{label}.value_status is invalid")
     if "value" not in row:
         raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
@@ -229,8 +229,8 @@ def _validate_observation(
             if not finite:
                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
             value = float(value)
-            if status not in {"observed", "estimated", "projected"}:
-                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected status")
+            if status not in {"observed", "estimated", "projected", "unspecified"}:
+                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected/unspecified status")
     else:
         if value is None or not isinstance(value, (dict, list)):
             raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
@@ -272,6 +272,9 @@ def build_wp1_5_application_artifact(
     manifest = _read_object(manifest_path, "source manifest")
     normalized = _read_object(observations_path, "normalized observations")
     source_key = _text(normalized.get("source_key"), "normalized.source_key")
+    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
+    if manifest.get("dataset", source_key) != dataset:
+        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
     _validate_manifest(manifest, source_key)
     if normalized.get("release") != manifest.get("release"):
         raise StatisticsImportError("Normalized observations and manifest release do not match")
@@ -353,6 +356,9 @@ def import_wp1_5_dataset(
         raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
     # Keep the historical ID in manifests, crosswalks and database provenance;
     # use its canonical provider ID only for current field-contract validation.
+    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
+    if manifest.get("dataset", source_key) != dataset:
+        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
     release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
     if normalized.get("source_key") != manifest.get("source_key"):
         raise StatisticsImportError("Normalized observations and source manifest do not match")
@@ -369,10 +375,12 @@ def import_wp1_5_dataset(
     try:
         crosswalk = load_crosswalk(
             crosswalk_path,
-            expected_dataset=source_key,
+            expected_dataset=dataset,
         )
     except CrosswalkError as exc:
         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
+    if crosswalk.dataset != dataset:
+        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
     if crosswalk.source_key != source_key:
         raise StatisticsImportError("Crosswalk source_key does not match source contract")
     crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
