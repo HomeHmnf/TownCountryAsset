@@ -147,5 +147,5 @@ def test_repository_source_registry_maps_all_stable_keys_and_configured_urls(tmp
         "sources": expected_source_count,
         "source_urls": expected_url_count,
     }
-    assert expected_source_count == 31
-    assert expected_url_count == 92
+    assert expected_source_count == 36
+    assert expected_url_count == 114
