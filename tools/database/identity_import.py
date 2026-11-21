@@ -159,6 +159,20 @@ def _validate_inputs(
             raise IdentityImportError(f"Region membership mismatch for source ID {source_id}")
         if country.get("iso3") != record["iso"].get("alpha3"):
             raise IdentityImportError(f"ISO alpha-3 candidate mismatch for source ID {source_id}")
+        source_attributes = country.get("source_attributes", {})
+        if not isinstance(source_attributes, dict):
+            raise IdentityImportError(
+                f"Source attributes must be an object for source ID {source_id}"
+            )
+        if any(not isinstance(key, str) or not key.strip() for key in source_attributes):
+            raise IdentityImportError(
+                f"Source attribute keys must be non-empty strings for source ID {source_id}"
+            )
+        # Source attributes belong to the generated candidate snapshot, not
+        # the hand-maintained identity registry. Attach them to the matched
+        # registry record so the transactional importer persists the actual
+        # captured Natural Earth attributes under the stable game_id.
+        record["source_attributes"] = source_attributes
 
     return dataset, records, source
 
