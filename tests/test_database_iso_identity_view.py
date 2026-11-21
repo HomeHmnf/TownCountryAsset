@@ -38,9 +38,29 @@ def test_country_iso_identity_separates_official_and_proposed_codes(tmp_path):
             """INSERT INTO countries (
                 game_id, entity_type, record_status, iso_alpha2, iso_alpha3,
                 iso_assignment_status, localization_status, created_at, updated_at
-            ) VALUES (?, 'unreviewed', 'approved', 'TW', 'TWN',
-                      'verified', 'unreviewed', ?, ?)""",
+            ) VALUES (?, 'unreviewed', 'approved', NULL, NULL,
+                      'unverified', 'unreviewed', ?, ?)""",
             (verified_id, now, now),
+        )
+        connection.execute(
+            """INSERT INTO review_proposals (
+                game_id, proposal_type, proposal_fingerprint, proposed_json,
+                evidence_json, review_status, created_at, reviewed_at
+            ) VALUES (?, 'iso', ?, ?, '{}', 'approved', ?, ?)""",
+            (
+                verified_id, "c" * 64,
+                json.dumps({"alpha2": "TW", "alpha3": "TWN"}),
+                now, now,
+            ),
+        )
+        connection.execute(
+            """UPDATE countries
+               SET iso_alpha2 = 'TW',
+                   iso_alpha3 = 'TWN',
+                   iso_assignment_status = 'verified',
+                   updated_at = ?
+               WHERE game_id = ?""",
+            (now, verified_id),
         )
         connection.execute(
             """INSERT INTO countries (
