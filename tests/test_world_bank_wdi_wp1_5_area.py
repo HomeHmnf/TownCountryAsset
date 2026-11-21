@@ -6,6 +6,7 @@ from urllib.parse import parse_qs, urlparse
 import pytest
 
 from tools import acquire_world_bank_wdi_wp1_5_area as area
+from tools.database.source_crosswalk import CrosswalkError
 
 
 G1 = "tc_" + "1" * 32
@@ -110,5 +111,5 @@ def test_validation_rejects_crosswalk_dataset_mismatch(tmp_path):
     crosswalk.write_text(json.dumps({"schema_version": 1, "dataset": "wrong",
         "source_key": "world_bank_wdi", "mappings": [{
             "game_id": G1, "source_id": "USA", "match_method": "reviewed_manual"}]}), encoding="utf-8")
-    with pytest.raises(Exception, match="dataset mismatch"):
+    with pytest.raises(CrosswalkError, match="dataset mismatch"):
         area.validate_candidates(report["manifest_path"], crosswalk, registry, repository_root=tmp_path)
