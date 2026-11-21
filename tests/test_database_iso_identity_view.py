@@ -107,6 +107,9 @@ def test_country_iso_identity_separates_official_and_proposed_codes(tmp_path):
         ).fetchone()
         assert verified["official_iso_alpha2"] == "TW"
         assert verified["official_iso_alpha3"] == "TWN"
-        assert verified["iso_proposal_id"] is None
+        assert verified["iso_proposal_id"] is not None
+        assert verified["proposed_iso_alpha2"] == "TW"
+        assert verified["proposed_iso_alpha3"] == "TWN"
+        assert verified["iso_proposal_status"] == "approved"
     finally:
         connection.close()
