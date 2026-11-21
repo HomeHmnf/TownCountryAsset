@@ -971,8 +971,7 @@
       "TLS",
       "TUR",
       "VEN",
-      "VNM",
-      "XKX"
+      "VNM"
     ],
     "natural_earth_codes_excluded_not_in_wdi": [
       "AIA",
@@ -988,6 +987,9 @@
       "SPM",
       "TWN"
     ],
-    "exclusions_policy": "Unmatched WDI codes remain unresolved or excluded; composite territories and user-assigned codes are not forced onto another project identity. Non-WDI Natural Earth codes are not imported."
+    "exclusions_policy": "The 29 non-null usable unmapped WDI codes remain unresolved or excluded. XKX is a separate null-only non-aggregate code with no usable observation in any of the three indicators and is excluded from candidate mapping. Composite territories and user-assigned codes are not forced onto another project identity. Non-WDI Natural Earth codes are not imported.",
+    "wdi_null_only_nonaggregate_codes": [
+      "XKX"
+    ]
   }
 }
