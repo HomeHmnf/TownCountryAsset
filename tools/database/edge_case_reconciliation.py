@@ -219,11 +219,17 @@ def apply_reconciliation(
     }
     current_rows = connection.execute(
         """SELECT game_id, dataset, source_id FROM country_sources
-           WHERE is_current=1 ORDER BY game_id"""
+           WHERE is_current=1 ORDER BY game_id, dataset"""
     ).fetchall()
-    actual_sources = {row["game_id"]: (row["dataset"], row["source_id"]) for row in current_rows}
-    for gid, source in expected_sources.items():
-        if actual_sources.get(gid) != source:
+    # A canonical identity may have one current mapping per source dataset
+    # (for example Natural Earth and UN WPP). Validate the registry's own
+    # dataset mapping without allowing another dataset to overwrite it.
+    actual_sources = {
+        (row["game_id"], row["dataset"]): row["source_id"]
+        for row in current_rows
+    }
+    for gid, (dataset, source_id) in expected_sources.items():
+        if actual_sources.get((gid, dataset)) != source_id:
             raise ReconciliationError(f"{gid}: canonical current source mapping is missing or conflicts")
     flag_rows = {r["game_id"]: r for r in flags_payload["records"]}
     for gid, item in decisions.items():
