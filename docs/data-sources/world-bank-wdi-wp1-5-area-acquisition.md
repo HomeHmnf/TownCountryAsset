@@ -1,6 +1,6 @@
 # WDI WP1.5 area and population-density acquisition
 
-**Status:** acquisition and read-only candidate-validation workflow implemented; no live acquisition or semantic approval implied.  
+**Status:** acquisition and read-only candidate-validation workflow implemented; one live snapshot was captured on 2026-11-21. Capture does not imply semantic approval, source-crosswalk approval or permission to redistribute third-party-originated series.  
 **Dataset:** `wdi_wp1_5_area` (separate from `wdi_selected_macro_indicators`)  
 **Fields:** 3, 33 and 34.
 
