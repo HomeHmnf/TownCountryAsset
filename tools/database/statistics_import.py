@@ -318,6 +318,7 @@ def build_wp1_5_application_artifact(
         inputs=inputs,
         metadata={
             "source_key": normalized.get("source_key"),
+            "dataset": normalized.get("dataset", normalized.get("source_key")),
             "release": normalized.get("release"),
             "source_sha256": normalized.get("source_sha256"),
             "policy_version": policy_version,
