@@ -224,3 +224,19 @@ The --confirm-reviewed flag is an explicit human attestation for the selected el
 Each apply creates a fingerprinted bulk_country_review application record and records proposed, approved, and applied events in the same transaction as country/proposal changes. SQLite integrity and foreign-key checks run before commit; any failure rolls back the entire batch. The command does not modify the JSON identity registry or generated assets.
 
 Bulk record approval does not by itself satisfy the ICP import's ISO verification prerequisite. Run the ISO proposal scope only for code assignments that have actually been checked and approved. Unmatched entities, aggregates, records without ISO codes, and ISO conflicts remain unresolved for manual handling.
+
+## Official ISO identity versus proposed ISO correspondence
+
+Migration 007 adds the queryable `country_iso_identity` view. It is the consumer-facing read model for ISO identity and deliberately separates:
+
+- `official_iso_alpha2` / `official_iso_alpha3`: populated only when `countries.iso_assignment_status='verified'`;
+- `proposed_iso_alpha2` / `proposed_iso_alpha3`: values from the latest ISO review proposal, whether candidate, approved, or rejected;
+- `iso_proposal_status`: the review state of that proposal;
+- `iso_proposal_id`: the proposal record to inspect in `review_proposals`;
+- `iso_assignment_status`: the independent official-assignment state, including `unverified` and `not_applicable`.
+
+Persisting/applying a candidate proposal means making it queryable in this database; it does not set the official ISO columns or change `iso_assignment_status`. An approved review proposal is still distinguishable from an official assignment until the explicit ISO identity application changes the country assignment to `verified`. Consumers that need an official ISO code must use the `official_iso_*` columns from this view, not the raw unverified candidate values in `countries`.
+
+The view exposes only game-facing identity values and review state, not source evidence or acquisition provenance. Detailed proposal evidence remains in `review_proposals`. The view selects the latest proposal by creation timestamp and proposal ID, so a later rejection or replacement remains visible rather than silently falling back to an older candidate.
+
+Owner validation is pending for migration 007 and `tests/test_database_iso_identity_view.py`. This is a schema/read-model change only; it does not approve any pending proposal, assign ISO codes, or import World Bank observations.
