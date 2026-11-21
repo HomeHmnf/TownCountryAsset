@@ -104,3 +104,35 @@ uv run python -m pytest -q tests/test_world_bank_wdi_wp1_5_area.py tests/test_wo
 ```
 
 The new tests use mocked provider responses. They verify snapshot separation, immutable raw-byte integrity, refusal to overwrite, explicit crosswalk use, and rejection of crosswalk dataset mismatch. They do not replace a live owner-run acquisition or provider/licensing review.
+
+## 6. Owner-captured snapshot record — 2026-11-21
+
+The owner completed a live capture using the workflow above. This is a recorded acquisition, not semantic approval or authorization to import values.
+
+- Snapshot ID: `api_snapshot_20261121T074357472382Z`
+- Retrieved at: `2026-11-21T07:44:07.275083+00:00`
+- Reference period requested: 2015–2025
+- Manifest: `data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z.json`
+- Local raw root: `raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/`
+- Captured artifacts: 8 responses, 2,024,318 bytes
+- Country catalogue: 296 records, one page
+- Each of the three indicator bundles: 2,926 observation rows, one page
+- Provider metadata last-updated date: 2026-11-11 for all three indicators
+
+### Captured coverage audit
+
+For each indicator, the capture contains 2,926 rows: 2,871 rows with valid ISO3 identifiers and 55 rows with blank ISO3. The 55 blank-ISO3 rows all use WDI country ID `XD` and represent five income-group aggregates (High income, Low income, Lower middle income, Not classified, Upper middle income), each over 11 years. Among valid-ISO3 rows, 484 are region-`NA` aggregates (44 aggregate IDs × 11 years), leaving 2,387 non-aggregate observations (217 ISO3 identifiers × 11 years). There are zero duplicate (ISO3, year) keys and zero unknown ISO3 values among the valid-ISO3 rows. This is a structural panel audit; it does not assert that every observation value is non-null or that every source entity is eligible for the game catalogue.
+
+All three indicators have the same row structure. The observation `obs_status` values are blank in the captured rows; blank is preserved and must not be interpreted as actual. The validator selects the latest non-null observation separately per indicator, so the selected reference years may differ.
+
+### Source definitions and licensing
+
+- `EN.POP.DNST`: midyear population divided by land area; people per square kilometre of land area. The metadata cites FAO population estimates and World Bank population estimates.
+- `AG.SRF.TOTL.K2`: surface area, including inland water and some coastal waterways. The metadata cites FAO electronic files/site.
+- `AG.LND.TOTL.K2`: land area excluding inland water, national claims to continental shelf and EEZ. The metadata cites FAOSTAT.
+
+The API's unit metadata fields were blank; the canonical units above are explicit project-level field definitions, not values inferred from the API unit field. Metadata identifies third-party originating organisations. Indicator-level redistribution/reuse permission remains `unclear_or_unverified_indicator_level_third_party_review_required`. Preserve attribution and do not assume the WDI umbrella licence resolves FAO-originated rights. Licensing review is a gate before redistribution or publication.
+
+### Identity and application boundary
+
+This capture does not authorize a global ISO identity assignment, a WDI source crosswalk, a canonical database import, a source-selection change, or application of observations. The WDI ISO3 inventory is a provider identifier inventory only. In particular, composite/exception codes and identities whose project ISO assignment is unverified must remain unmapped or explicitly reviewed under a source-specific policy; they must not be silently converted into official ISO identities. The raw snapshot is local-only; the manifest and this report are tracked. Retain the original immutable local snapshot for validation and do not recreate it as a substitute.
