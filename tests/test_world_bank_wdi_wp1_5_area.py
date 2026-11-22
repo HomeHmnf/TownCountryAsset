@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+import hashlib
 import json
+from itertools import product
+from string import ascii_uppercase
 from urllib.parse import parse_qs, urlparse
 
 import pytest
 
 from tools import acquire_world_bank_wdi_wp1_5_area as area
+from tools import normalize_world_bank_wdi_wp1_5_area as normalizer
 from tools.database.source_crosswalk import CrosswalkError
 
 
@@ -116,3 +120,120 @@ def test_validation_rejects_crosswalk_dataset_mismatch(tmp_path):
             "game_id": G1, "source_id": "USA", "match_method": "reviewed_manual"}]}), encoding="utf-8")
     with pytest.raises(CrosswalkError, match="dataset mismatch"):
         area.validate_candidates(report["manifest_path"], crosswalk, registry, repository_root=tmp_path)
+
+def test_normalizer_uses_crosswalk_dataset_not_acquisition_storage_key(tmp_path, monkeypatch):
+    iso3_codes = [
+        "".join(chars)
+        for chars in product(ascii_uppercase, repeat=3)
+    ][:187]
+    mappings = [
+        {
+            "game_id": "tc_" + f"{index:032x}",
+            "source_id": iso3,
+            "match_method": "reviewed_manual",
+        }
+        for index, iso3 in enumerate(iso3_codes, start=1)
+    ]
+    crosswalk_path = tmp_path / "crosswalk.json"
+    crosswalk_path.write_text(json.dumps({
+        "schema_version": 1,
+        "dataset": area.CROSSWALK_DATASET,
+        "source_key": area.SOURCE_KEY,
+        "mappings": mappings,
+    }), encoding="utf-8")
+
+    raw_root = tmp_path / "raw_data" / "sources" / "world_bank_wdi" / area.DATASET_KEY / "snapshot"
+    artifact_names = [
+        "source_metadata.json",
+        "country_metadata_page_001.json",
+        "indicator_metadata_EN.POP.DNST.json",
+        "observations_EN.POP.DNST_page_001.json",
+        "indicator_metadata_AG.SRF.TOTL.K2.json",
+        "observations_AG.SRF.TOTL.K2_page_001.json",
+        "indicator_metadata_AG.LND.TOTL.K2.json",
+        "observations_AG.LND.TOTL.K2_page_001.json",
+    ]
+    artifacts = []
+    for index, name in enumerate(artifact_names):
+        raw_path = raw_root / name
+        raw_path.parent.mkdir(parents=True, exist_ok=True)
+        raw_bytes = f"captured artifact {index}".encode()
+        raw_path.write_bytes(raw_bytes)
+        artifacts.append({
+            "local_raw_path": raw_path.relative_to(tmp_path).as_posix(),
+            "sha256": hashlib.sha256(raw_bytes).hexdigest(),
+            "byte_count": len(raw_bytes),
+        })
+
+    acquisition_manifest_path = (
+        tmp_path / "data_manifests" / "sources" / "world_bank_wdi"
+        / area.DATASET_KEY / "snapshot.json"
+    )
+    acquisition_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    acquisition_manifest_path.write_text("{}", encoding="utf-8")
+    acquisition = {
+        "download_id": area.DATASET_KEY,
+        "dataset_id": area.DATASET_KEY,
+        "release": "api_snapshot_test",
+        "source_url": "https://api.worldbank.org/v2",
+        "final_url": "https://api.worldbank.org/v2",
+        "retrieved_at": "2026-11-21T00:00:00Z",
+        "attribution": "World Bank Group",
+        "license_status": "review_required",
+        "files": artifacts,
+    }
+
+    countries = {
+        iso3: {"region": {"id": "NAC"}}
+        for iso3 in iso3_codes
+    }
+    observations = {
+        indicator: [
+            {
+                "countryiso3code": iso3,
+                "date": "2024",
+                "value": "12.5",
+                "obs_status": "",
+                "country": {"value": iso3},
+            }
+            for iso3 in iso3_codes
+        ]
+        for indicator in area.INDICATORS
+    }
+    indicator_metadata = {
+        indicator: {
+            "sourceOrganization": "FAO; World Bank",
+            "sourceNote": "Captured provider methodology.",
+            "unit": "",
+        }
+        for indicator in area.INDICATORS
+    }
+    loaded = {
+        "manifest": acquisition,
+        "manifest_path": acquisition_manifest_path,
+        "manifest_sha256": "a" * 64,
+        "countries": countries,
+        "indicator_metadata": indicator_metadata,
+        "observations": observations,
+    }
+    monkeypatch.setattr(normalizer, "load_snapshot", lambda *args, **kwargs: loaded)
+
+    observations_path = tmp_path / "normalized" / "observations.json"
+    import_manifest_path = tmp_path / "normalized" / "import_manifest.json"
+    result = normalizer.normalize_snapshot(
+        acquisition_manifest_path,
+        crosswalk_path,
+        observations_path,
+        import_manifest_path,
+        repository_root=tmp_path,
+    )
+
+    normalized = json.loads(observations_path.read_text(encoding="utf-8"))
+    import_manifest = json.loads(import_manifest_path.read_text(encoding="utf-8"))
+    assert normalized["dataset"] == area.CROSSWALK_DATASET
+    assert import_manifest["dataset"] == area.CROSSWALK_DATASET
+    assert normalized["source_key"] == import_manifest["source_key"] == area.SOURCE_KEY
+    assert result["dataset"] == area.CROSSWALK_DATASET
+    assert result["acquisition_dataset"] == area.DATASET_KEY
+    assert result["observations"] == 187 * len(area.INDICATORS)
+
