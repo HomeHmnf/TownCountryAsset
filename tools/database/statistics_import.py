@@ -326,6 +326,124 @@ def build_wp1_5_application_artifact(
     )
 
 
+def validate_wp1_5_dataset(
+    *,
+    observations_path: str | Path,
+    crosswalk_path: str | Path,
+    manifest_path: str | Path,
+    config_path: str | Path = DEFAULT_CONFIG,
+) -> dict[str, Any]:
+    """Validate a normalized WP1.5 dataset without opening or changing a database."""
+    normalized = _read_object(observations_path, "normalized observations")
+    manifest = _read_object(manifest_path, "source manifest")
+    config = _read_object(config_path, "WP1.5 field contract")
+    if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
+        raise StatisticsImportError("Unsupported normalized observation schema")
+
+    source_key = _text(normalized.get("source_key"), "normalized.source_key")
+    registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
+    registry_path = Path(registry_reference)
+    if not registry_path.is_absolute():
+        registry_path = (REPOSITORY_ROOT / registry_path).resolve()
+    try:
+        source_registry = load_registry(registry_path)
+    except SourceError as exc:
+        raise StatisticsImportError(f"Cannot load project source registry: {exc}") from exc
+    canonical_source_key = canonical_source_id(source_registry, source_key)
+    if canonical_source_key is None:
+        raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
+
+    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
+    if manifest.get("dataset", source_key) != dataset:
+        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
+    release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
+    if normalized.get("source_key") != manifest.get("source_key"):
+        raise StatisticsImportError("Normalized observations and source manifest do not match")
+    if normalized.get("source_sha256") != source_sha or normalized.get("release") != release:
+        raise StatisticsImportError("Normalized observations do not identify the captured source release/checksum")
+
+    fields = config.get("fields")
+    if not isinstance(fields, list) or len(fields) != 41:
+        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 fields")
+    field_by_id = {item.get("id"): item for item in fields if isinstance(item, dict)}
+    if len(field_by_id) != 41:
+        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 distinct fields")
+
+    try:
+        crosswalk = load_crosswalk(crosswalk_path, expected_dataset=dataset)
+    except CrosswalkError as exc:
+        raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
+    if crosswalk.dataset != dataset:
+        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
+    if crosswalk.source_key != source_key:
+        raise StatisticsImportError("Crosswalk source_key does not match source contract")
+    crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
+
+    rows = normalized.get("observations")
+    if not isinstance(rows, list) or not rows:
+        raise StatisticsImportError("Normalized observations must be a non-empty array")
+    validated = [
+        _validate_observation(
+            row,
+            index=index,
+            field_by_id=field_by_id,
+            source_key=canonical_source_key,
+            crosswalk_by_game=crosswalk_by_game,
+        )
+        for index, row in enumerate(rows)
+    ]
+    keys = [(row["game_id"], row["field"]["id"]) for row in validated]
+    if len(keys) != len(set(keys)):
+        raise StatisticsImportError("Duplicate country/field observations in normalized dataset")
+
+    try:
+        artifact = build_wp1_5_application_artifact(
+            observations_path=observations_path,
+            crosswalk_path=crosswalk_path,
+            manifest_path=manifest_path,
+            config_path=config_path,
+        )
+    except (ApplicationApprovalError, OSError, ValueError) as exc:
+        raise StatisticsImportError(f"Cannot fingerprint WP1.5 application inputs: {exc}") from exc
+
+    # Re-read all validated JSON inputs to detect changes during validation.
+    if _read_object(observations_path, "normalized observations") != normalized:
+        raise StatisticsImportError("Normalized observations changed during dry-run validation")
+    if _read_object(manifest_path, "source manifest") != manifest:
+        raise StatisticsImportError("Source manifest changed during dry-run validation")
+    if _read_object(config_path, "WP1.5 field contract") != config:
+        raise StatisticsImportError("WP1.5 field contract changed during dry-run validation")
+    _validate_manifest(manifest, source_key)
+
+    field_counts: dict[str, int] = {}
+    for row in validated:
+        field_id = str(row["field"]["id"])
+        field_counts[field_id] = field_counts.get(field_id, 0) + 1
+    return {
+        "assessment": "wp1_5_statistics_import_dry_run",
+        "source_key": source_key,
+        "canonical_source_key": canonical_source_key,
+        "dataset": dataset,
+        "release": release,
+        "source_sha256": source_sha,
+        "source_url": source_url,
+        "retrieved_at": retrieved_at,
+        "observations": len(validated),
+        "crosswalk_mappings": len(crosswalk.mappings),
+        "field_counts": dict(sorted(field_counts.items(), key=lambda item: int(item[0]))),
+        "license_status": manifest.get("license_status"),
+        "attribution": manifest.get("attribution"),
+        "application_artifact_sha256": artifact["artifact_sha256"],
+        "application_artifact": artifact,
+        "side_effects": {
+            "database_opened": False,
+            "database_written": False,
+            "approval_created": False,
+            "source_selection_changed": False,
+        },
+    }
+
+
 def import_wp1_5_dataset(
     *,
     observations_path: str | Path,
