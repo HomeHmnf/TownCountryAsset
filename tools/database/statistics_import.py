@@ -331,12 +331,13 @@ def validate_wp1_5_dataset(
     observations_path: str | Path,
     crosswalk_path: str | Path,
     manifest_path: str | Path,
-    config_path: str | Path = DEFAULT_CONFIG,
+    config_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Validate a normalized WP1.5 dataset without opening or changing a database."""
+    selected_config_path = config_path if config_path is not None else DEFAULT_CONFIG
     normalized = _read_object(observations_path, "normalized observations")
     manifest = _read_object(manifest_path, "source manifest")
-    config = _read_object(config_path, "WP1.5 field contract")
+    config = _read_object(selected_config_path, "WP1.5 field contract")
     if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
         raise StatisticsImportError("Unsupported normalized observation schema")
 
@@ -401,7 +402,7 @@ def validate_wp1_5_dataset(
             observations_path=observations_path,
             crosswalk_path=crosswalk_path,
             manifest_path=manifest_path,
-            config_path=config_path,
+            config_path=selected_config_path,
         )
     except (ApplicationApprovalError, OSError, ValueError) as exc:
         raise StatisticsImportError(f"Cannot fingerprint WP1.5 application inputs: {exc}") from exc
@@ -411,7 +412,7 @@ def validate_wp1_5_dataset(
         raise StatisticsImportError("Normalized observations changed during dry-run validation")
     if _read_object(manifest_path, "source manifest") != manifest:
         raise StatisticsImportError("Source manifest changed during dry-run validation")
-    if _read_object(config_path, "WP1.5 field contract") != config:
+    if _read_object(selected_config_path, "WP1.5 field contract") != config:
         raise StatisticsImportError("WP1.5 field contract changed during dry-run validation")
     _validate_manifest(manifest, source_key)
 
