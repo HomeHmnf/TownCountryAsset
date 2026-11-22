@@ -529,3 +529,39 @@ def test_additional_snapshot_inputs_are_checksum_validated(tmp_path):
             observations_path=observations, crosswalk_path=crosswalk,
             manifest_path=manifest_path, database_path=database,
         )
+
+
+
+def test_dry_run_validates_writes_no_database_and_returns_artifact(tmp_path):
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    database = tmp_path / "must-not-be-created.sqlite"
+    result = statistics_import.validate_wp1_5_dataset(
+        observations_path=observations,
+        crosswalk_path=crosswalk,
+        manifest_path=manifest,
+    )
+    assert result["assessment"] == "wp1_5_statistics_import_dry_run"
+    assert result["observations"] == 1
+    assert result["crosswalk_mappings"] == 2
+    assert result["field_counts"] == {"1": 1}
+    assert result["application_artifact_sha256"]
+    assert result["side_effects"] == {
+        "database_opened": False,
+        "database_written": False,
+        "approval_created": False,
+        "source_selection_changed": False,
+    }
+    assert not database.exists()
+
+
+def test_dry_run_rejects_duplicate_observations_without_database(tmp_path):
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(observations.read_text(encoding="utf-8"))
+    payload["observations"].append(dict(payload["observations"][0]))
+    observations.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(StatisticsImportError, match="Duplicate country/field"):
+        statistics_import.validate_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
+        )
