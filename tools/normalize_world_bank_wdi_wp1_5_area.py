@@ -175,6 +175,7 @@ def normalize_snapshot(
     return {
         "assessment": "world_bank_wdi_wp1_5_area_normalization_candidate",
         "dataset": CROSSWALK_DATASET,
+        "acquisition_dataset": DATASET_KEY,
         "source_key": SOURCE_KEY,
         "release": acquisition["release"],
         "observations": len(rows),
