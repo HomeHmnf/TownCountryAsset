@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from tools.acquire_world_bank_wdi_wp1_5_area import (
-    API, DATASET_KEY, INDICATORS, ROOT, SOURCE_KEY, AreaSnapshotError, load_snapshot,
+    API, CROSSWALK_DATASET, DATASET_KEY, INDICATORS, ROOT, SOURCE_KEY, AreaSnapshotError, load_snapshot,
 )
 from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 
@@ -35,7 +35,7 @@ def normalize_snapshot(
     loaded = load_snapshot(manifest_path, repository_root=root)
     crosswalk = load_crosswalk(
         Path(crosswalk_path) if Path(crosswalk_path).is_absolute() else root / crosswalk_path,
-        expected_dataset=DATASET_KEY,
+        expected_dataset=CROSSWALK_DATASET,
     )
     if crosswalk.source_key != SOURCE_KEY:
         raise AreaSnapshotError("Crosswalk source_key does not match the WDI provider")
@@ -130,7 +130,7 @@ def normalize_snapshot(
         "manifest_schema_version": 1,
         "work_package": "WP1.5",
         "source_key": SOURCE_KEY,
-        "dataset": DATASET_KEY,
+        "dataset": CROSSWALK_DATASET,
         "release": acquisition["release"],
         "sha256": hashlib.sha256(primary_bytes).hexdigest(),
         "local_raw_path": primary["local_raw_path"],
@@ -150,7 +150,7 @@ def normalize_snapshot(
         "schema_version": 1,
         "work_package": "WP1.5",
         "source_key": SOURCE_KEY,
-        "dataset": DATASET_KEY,
+        "dataset": CROSSWALK_DATASET,
         "release": acquisition["release"],
         "source_sha256": import_manifest["sha256"],
         "observations": rows,
@@ -174,7 +174,7 @@ def normalize_snapshot(
     _write_json(manifest_output, import_manifest)
     return {
         "assessment": "world_bank_wdi_wp1_5_area_normalization_candidate",
-        "dataset": DATASET_KEY,
+        "dataset": CROSSWALK_DATASET,
         "source_key": SOURCE_KEY,
         "release": acquisition["release"],
         "observations": len(rows),
