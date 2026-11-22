@@ -22,7 +22,8 @@ from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_KEY = "world_bank_wdi"
-DATASET_KEY = "wdi_wp1_5_area"
+DATASET_KEY = "wdi_wp1_5_area"  # Acquisition/storage identifier in the API snapshot.
+CROSSWALK_DATASET = "world_bank_wdi_wp1_5_area"  # Stable source-correspondence dataset identity.
 SOURCE_ID = "2"
 API = common.API
 PER_PAGE = 20000
@@ -317,9 +318,8 @@ def validate_candidates(manifest_path: str | Path, crosswalk_path: str | Path,
     if not isinstance(records, list):
         raise AreaSnapshotError("Identity registry has no records array")
     known_game_ids = [row["game_id"] for row in records if isinstance(row, dict) and isinstance(row.get("game_id"), str)]
-    dataset = "world_bank_wdi_wp1_5_area"
     crosswalk = load_crosswalk(crosswalk_path if Path(crosswalk_path).is_absolute() else root / crosswalk_path,
-        expected_dataset=dataset, known_game_ids=known_game_ids)
+        expected_dataset=CROSSWALK_DATASET, known_game_ids=known_game_ids)
     if crosswalk.source_key != SOURCE_KEY:
         raise AreaSnapshotError(f"Crosswalk source_key must be {SOURCE_KEY!r}")
     iso_to_game = {}
