@@ -102,3 +102,54 @@ def test_artifact_requires_unique_repo_local_inputs(monkeypatch, tmp_path):
         approval.build_application_artifact(domain="test", inputs=[source, source])
     with pytest.raises(approval.ApplicationApprovalError, match="At least one"):
         approval.build_application_artifact(domain="test", inputs=[])
+
+
+def test_shared_approval_workflow_creates_and_commits_explicit_approval(monkeypatch, tmp_path):
+    monkeypatch.setattr(approval, "REPOSITORY_ROOT", tmp_path)
+    source = tmp_path / "reviewed.json"
+    source.write_text('{"approved": true}', encoding="utf-8")
+    artifact = approval.build_application_artifact(
+        domain="future_project_domain", inputs=[source], metadata={"batch": "one"}
+    )
+    connection = setup_connection()
+
+    row = approval.approve_application(
+        connection,
+        approval_id="future-domain-0001",
+        artifact=artifact,
+        actor="project_owner",
+        note="Reviewed and approved for application.",
+    )
+
+    assert row["status"] == "approved"
+    assert not connection.in_transaction
+    assert connection.execute(
+        "SELECT status, approved_by, decision_note FROM application_approvals WHERE approval_id=?",
+        ("future-domain-0001",),
+    ).fetchone()[:] == ("approved", "project_owner", "Reviewed and approved for application.")
+    assert [row[0] for row in connection.execute(
+        "SELECT event_type FROM database_application_events ORDER BY event_id"
+    ).fetchall()] == ["proposed", "approved"]
+
+
+def test_shared_approval_workflow_respects_callers_transaction(monkeypatch, tmp_path):
+    monkeypatch.setattr(approval, "REPOSITORY_ROOT", tmp_path)
+    source = tmp_path / "reviewed.json"
+    source.write_text("{}", encoding="utf-8")
+    artifact = approval.build_application_artifact(domain="country_data", inputs=[source])
+    connection = setup_connection()
+    connection.execute("BEGIN")
+
+    approval.approve_application(
+        connection,
+        approval_id="country-data-0002",
+        artifact=artifact,
+        actor="project_owner",
+        note="Reviewed.",
+    )
+
+    assert connection.in_transaction
+    connection.rollback()
+    assert connection.execute(
+        "SELECT COUNT(*) FROM application_approvals"
+    ).fetchone()[0] == 0
