@@ -15,6 +15,11 @@ This section documents providers, acquisition, source-specific validation, relea
 - [IMF WEO coverage assessment](imf-weo-coverage-assessment.md) — series coverage and code assessment.
 - [UN WPP crosswalk review](un-wpp-crosswalk-review.md) — reviewed M49-to-project identity mapping.
 
+## WP1.5 review and application governance
+
+- [WP1.5 review, approval and database application workflow](wp1-5-review-approval-application-workflow.md) — mandatory shared review, edge-case, approval and application sequence for all remaining fields.
+- [WP1.5 remaining acquisition and application plan](wp1-5-remaining-acquisition-plan.md) — execution order beginning with IMF WEO, then ILOSTAT and remaining fields.
+
 ## Provider acquisition and validation
 
 - [Bahrain unemployment data acquisition](bahrain-unemployment-data-acquisition.md) — official API acquisition and immutable snapshots.
