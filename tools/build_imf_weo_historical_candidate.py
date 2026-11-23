@@ -46,7 +46,7 @@ def identity_index(path: Path) -> dict[str, set[str]]:
         iso = record.get("iso") or {}
         codes = {source.get("current_source_id"), iso.get("alpha3")}
         for code in codes:
-            if isinstance(code, str) and code:
+            if isinstance(code, str) and code and isinstance(game_id, str) and game_id:
                 result.setdefault(code, set()).add(game_id)
     return result
 
@@ -145,15 +145,21 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
     keys = [(r["game_id"], r["indicator_code"], r["observation_year"]) for r in observations]
     if len(keys) != len(set(keys)):
         raise CandidateError("Multiple WEO source rows map to the same game/indicator/year")
+    def display_path(path: Path) -> str:
+        try:
+            return path.resolve().relative_to(ROOT.resolve()).as_posix()
+        except ValueError:
+            return path.name
+
     summary = {
         "schema_version": 1,
         "candidate_type": "imf_weo_annual_historical_observations",
         "source_key": "imf_weo",
         "release": "october_2026",
-        "source_path": raw_path.relative_to(ROOT).as_posix(),
+        "source_path": display_path(raw_path),
         "source_sha256": raw_hash,
         "source_byte_count": byte_count,
-        "identity_registry_path": identity_path.relative_to(ROOT).as_posix(),
+        "identity_registry_path": display_path(identity_path),
         "observation_count": len(observations),
         "distinct_game_ids": len({r["game_id"] for r in observations}),
         "indicator_counts": dict(sorted(Counter(r["indicator_code"] for r in observations).items())),
