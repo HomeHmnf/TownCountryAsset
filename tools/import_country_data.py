@@ -51,6 +51,7 @@ def main() -> int:
                     connection, approval_id=approval_id, artifact=artifact,
                     actor=args.actor, note=args.note,
                 )
+                print(f"Approval created for validated inputs: {approval_id}")
             finally:
                 connection.close()
         result = import_country_data(
