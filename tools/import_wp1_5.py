@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sqlite3
 
 from tools.database.application_approval import (
     ApplicationApprovalError,
@@ -84,7 +85,7 @@ def main() -> int:
         result = import_wp1_5_dataset(**kwargs, approval_id=approval_id)
     except (
         StatisticsImportError, MigrationError, ApplicationApprovalError,
-        OSError, ValueError,
+        sqlite3.Error, OSError, ValueError,
     ) as exc:
         print(f"WP1.5 import failed: {exc}")
         return 1
