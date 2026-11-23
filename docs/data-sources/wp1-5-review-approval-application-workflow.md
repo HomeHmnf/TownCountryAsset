@@ -41,6 +41,8 @@ At minimum, the package contains:
 
 A package must identify its schema/version and provide deterministic row keys so that review decisions can be carried forward safely when regenerated. If candidate inputs change, stale decisions must be detected; they must not silently attach to changed observations.
 
+The first implementation is the [Stage 4E IMF WEO–WDI consolidated review package](../implementation/data-store-separation-stage-4e-weo-review-package.md). It provides the observation-level review register and linked edge-case queue; it is intentionally review-only.
+
 ## 4. Edge-case register
 
 Generate an actionable edge-case register from the same candidate and review package. It is a linked work queue, not a second approval surface.
