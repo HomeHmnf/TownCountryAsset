@@ -13,6 +13,7 @@ from tools.database.statistics_import import (
     StatisticsImportError,
     build_wp1_5_application_artifact,
     import_wp1_5_dataset,
+    validate_wp1_5_dataset,
 )
 from tools.database.schema import MigrationError, apply_migrations
 
@@ -57,14 +58,15 @@ def main() -> int:
                 raise ApplicationApprovalError("--approve-and-apply requires --actor")
             if not args.note or not args.note.strip():
                 raise ApplicationApprovalError("--approve-and-apply requires --note")
-            artifact_kwargs = {
+            validation_kwargs = {
                 "observations_path": args.observations,
                 "crosswalk_path": args.crosswalk,
                 "manifest_path": args.manifest,
             }
             if config_path:
-                artifact_kwargs["config_path"] = config_path
-            artifact = build_wp1_5_application_artifact(**artifact_kwargs)
+                validation_kwargs["config_path"] = config_path
+            validation = validate_wp1_5_dataset(**validation_kwargs)
+            artifact = validation["application_artifact"]
             approval_id = "wp1-5-" + artifact["artifact_sha256"][:20]
             connection = connect_database(database_path)
             try:
@@ -78,6 +80,7 @@ def main() -> int:
                 )
             finally:
                 connection.close()
+            print(f"Approval created for validated inputs: {approval_id}")
 
         result = import_wp1_5_dataset(**kwargs, approval_id=approval_id)
     except (
