@@ -2,6 +2,8 @@
 
 **Status:** Candidate source matrix; the owner confirmed the complete selection is 41 distinct field IDs. Religion (48) and Gini index (56) are included. Source-specific acquisition adapters still require validation.
 
+**Implementation progress (2026-11-23):** UN WPP fields 1, 2, 6, 12, 13 and 14, and World Bank WDI fields 3, 33 and 34, have been applied and owner-verified. The October 2026 IMF WEO release is acquired and assessed for fields 15, 16, 18, 20 and 21, but those fields are not recorded as applied here. The remaining primary-source acquisition work is tracked in [WP1.5 remaining data acquisition plan](wp1-5-remaining-acquisition-plan.md). This progress note does not change the candidate source contract or source-selection policy.
+
 ## Scope and source policy
 
 WP1.5 covers the 41 selected data fields in `config/wp1_5_data_sources.json`. Natural Earth remains a geographic/cartographic source only. It is not used for statistics, economic classifications, demographics, or other WP1.5 values.
