@@ -67,7 +67,7 @@ Missing values must not be represented as zero. SQL NULL is explicit and must di
 ## Completed and in-progress work
 
 - WP1.1–WP1.4 database foundations, identity, metadata/geometry and review-domain work were owner-validated.
-- WP1.5 WPP and WDI field applications listed above are complete and locally verified. The immediate next work is to finish the already captured IMF WEO application workflow, then begin acquisition for the remaining primary-source groups. The 41-field source-selection policy remains unchanged.
+- WP1.5 WPP and WDI field applications listed above are complete and locally verified. The October 2026 IMF WEO release is captured and assessed but is explicitly not ready for canonical application: field-definition, country-identity and country-year status gates remain. Close those gates before any WEO candidate can proceed through guarded application. ILOSTAT field 22 is the first new primary-source acquisition; its ICLS13/ICLS19 series candidates and acquisition requirements are documented separately. The 41-field source-selection policy remains unchanged. See [WP1.5 remaining data acquisition plan](data-sources/wp1-5-remaining-acquisition-plan.md) and [ILOSTAT acquisition research](data-sources/ilostat-labour-force-acquisition.md).
 - Shared PDF text extraction is implemented and owner-validated.
 - Project DB catalogue and acquisition-provenance stages have been implemented and owner-validated; see the [implementation index](implementation/README.md) for exact stage boundaries and outstanding work.
 
