@@ -16,7 +16,7 @@ from tools.database.application_approval import (
     ApplicationApprovalError, approve_application, build_application_artifact,
     require_approved_application, record_application_applied,
 )
-from tools.database.schema import apply_migrations, validate_database
+from tools.database.schema import MigrationError, apply_migrations, validate_database
 from tools.audit_iso_proposal_evidence import _cells
 from tools.propose_iso_assignments import propose, read_reference
 
@@ -645,7 +645,7 @@ def main() -> int:
             args.iso_proposals, args.persian_candidates, args.persian_provenance,
             args.entity_taxonomy, args.flag_mapping, approval_id=approval_id,
         )
-    except (OSError, ValueError, sqlite3.Error, ReviewDataImportError, ApplicationApprovalError) as exc:
+    except (OSError, ValueError, sqlite3.Error, MigrationError, ReviewDataImportError, ApplicationApprovalError) as exc:
         parser.error(str(exc))
     print(json.dumps(result, indent=2, sort_keys=True))
     print("Review-domain import completed; database integrity and foreign-key checks passed.")
