@@ -235,3 +235,47 @@ def record_application_applied(
     if cursor.rowcount != 1:
         raise ApplicationApprovalError("Application approval was consumed or is no longer valid")
     _event(connection, approval_id, "applied", details={"application_id": application_id, **(details or {})})
+
+
+
+def approve_application(
+    connection: sqlite3.Connection,
+    *,
+    approval_id: str,
+    artifact: dict[str, Any],
+    actor: str,
+    note: str,
+) -> sqlite3.Row:
+    """Create and approve an artifact using the shared project approval lifecycle.
+
+    If the caller already owns a transaction, all lifecycle events remain in
+    that transaction. Otherwise this helper creates and commits its own
+    transaction. Domain-specific validation and application remain the
+    responsibility of the caller.
+    """
+    if not isinstance(actor, str) or not actor.strip():
+        raise ApplicationApprovalError("Approval actor must be identified")
+    if not isinstance(note, str) or not note.strip():
+        raise ApplicationApprovalError("Approval decision note must be non-empty")
+    owns_transaction = not connection.in_transaction
+    try:
+        if owns_transaction:
+            connection.execute("BEGIN IMMEDIATE")
+        propose_application(connection, approval_id=approval_id, artifact=artifact)
+        decide_application(
+            connection,
+            approval_id=approval_id,
+            decision="approved",
+            actor=actor.strip(),
+            note=note.strip(),
+        )
+        row = require_approved_application(
+            connection, approval_id=approval_id, artifact=artifact
+        )
+        if owns_transaction:
+            connection.commit()
+        return row
+    except Exception:
+        if owns_transaction and connection.in_transaction:
+            connection.rollback()
+        raise
