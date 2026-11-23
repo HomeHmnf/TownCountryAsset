@@ -1,0 +1,38 @@
+{
+  "manifest_schema_version": 1,
+  "work_package": "WP1.5",
+  "manifest_kind": "project_wp1_5_import_manifest",
+  "provider_manifest_present": false,
+  "source_registry": "config/data_sources.json",
+  "source_key": "imf_weo",
+  "source_name": "IMF World Economic Outlook",
+  "dataset": "world_economic_outlook",
+  "release": "october_2026",
+  "source_url": "https://data.imf.org/datasets/WEO",
+  "final_url": "https://data.imf.org/datasets/WEO",
+  "terms_url": "https://www.imf.org/en/about/copyright-and-terms",
+  "attribution": null,
+  "license_status": "unclear_or_unverified",
+  "retrieval_method": "manual_portal_export",
+  "retrieved_at": "2026-11-02",
+  "retrieval_date_precision": "day",
+  "project_database_acquisition_id": 5,
+  "provider_published_at": "2026-10-13",
+  "provider_dataset_version": "IMF.RES_WEO_9.0.0",
+  "filename": "dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+  "local_raw_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+  "content_type": "text/csv",
+  "byte_count": 26692032,
+  "sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+  "additional_inputs": [
+    {
+      "label": "october_2026_database_appendix",
+      "role": "supporting_document",
+      "local_raw_path": "raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf",
+      "content_type": "application/pdf",
+      "byte_count": 985701,
+      "sha256": "cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a"
+    }
+  ],
+  "provenance_note": "Manual acquisition date is known only to day precision. The timestamp embedded in the CSV filename is an export-generation timestamp and is not represented as the acquisition time. Project DB acquisition ID 5 records the same two-artifact bundle as acquired with byte integrity verified."
+}
