@@ -28,3 +28,4 @@ These are implementation records, not the normative architecture contract. See [
 - [Turkmenistan macroeconomic evidence acquisition](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md) — three owner-validated IMF/TurkmenStat captures, two documented IMF access gaps, manifest audits, catalogue synchronization and guarded Project DB registration workflow.
 
 - [Stage 4F IMF WEO annual historical candidate](data-store-separation-stage-4f-weo-historical-candidate.md) — source-faithful annual candidate generation and a dedicated historical table preserving unresolved status, original units and date-precision acquisition provenance; owner-run validation pending.
+- [Stage 4G IMF WEO historical application](data-store-separation-stage-4g-weo-historical-application.md) — approval-fingerprinted, transactional importer for annual WEO observations with idempotent replay and unresolved-status preservation; owner-run validation pending.
