@@ -44,7 +44,7 @@ def _inputs(tmp_path: Path):
 def test_complete_values_import_candidate_even_with_unverified_identity(tmp_path):
     raw, identity = _inputs(tmp_path)
     observations, exceptions, summary = build_candidate(raw, identity, verify_snapshot=False)
-    assert len(observations) == 3
+    assert len(observations) == 4
     assert {row["game_id"] for row in observations} == {"tc_" + "a" * 32}
     assert all(row["value_status"] == "unclassified" for row in observations)
     assert summary["distinct_game_ids"] == 1
@@ -62,7 +62,7 @@ def test_wdi_presence_is_not_an_input_to_eligibility(tmp_path):
     raw, identity = _inputs(tmp_path)
     observations, _, _ = build_candidate(raw, identity, verify_snapshot=False)
     assert {(row["indicator_code"], row["observation_year"]) for row in observations} == {
-        ("NGDPD", 2024), ("NGDPD", 2025), ("LUR", 2024)
+        ("NGDPD", 2024), ("NGDPD", 2025), ("LUR", 2024), ("PPPGDP", 2025)
     }
 
 
