@@ -8,6 +8,7 @@ This section documents providers, acquisition, source-specific validation, relea
 - [Source selection](source-selection.md) — priority/fallback/custom-mixture policy and resolution rules.
 - [WP1.5 source coverage](wp1-5-sources.md) — the 41 selected data fields and provider coverage.
 - [WP1.5 remaining data acquisition plan](wp1-5-remaining-acquisition-plan.md) — current WPP/WDI application status, IMF WEO follow-through, remaining 27 field acquisitions, rights gates and recommended execution order.
+- [ILOSTAT labour-force acquisition research](ilostat-labour-force-acquisition.md) — field 22 candidate ICLS13/ICLS19 series, bulk-download evidence, field-definition gaps and acquisition/normalization gates.
 - [World Bank WDI onboarding review](world-bank-wdi-onboarding-review.md) — indicator coverage and onboarding assessment.
 - [World Bank WDI immutable API snapshot acquisition](world-bank-wdi-snapshot-acquisition.md) — byte-preserving capture, manifest integrity, Project DB provenance registration and snapshot-backed comparison.
 - [World Bank ICP multi-cycle acquisition and inspection](world-bank-icp-multicycle-acquisition.md) — original and revised benchmark cycles, ICP 2005 DataBank acquisition, automated multi-release saved-report export, export inspection, missingness, country-indicator-specific latest coverage and the 2026-11-17 public-source review of global WDI/WEO PPP anomalies.
