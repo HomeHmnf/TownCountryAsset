@@ -5,8 +5,8 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import sqlite3
-from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -89,7 +89,7 @@ def _load_candidate(candidate_dir: Path, source_path: Path, identity_path: Path,
                 field_id = int(raw["field_id"])
             except (TypeError, ValueError) as exc:
                 raise WEOImportError(f"Invalid numeric candidate value at CSV line {index}") from exc
-            if not __import__("math").isfinite(value):
+            if not math.isfinite(value):
                 raise WEOImportError(f"Non-finite candidate value at CSV line {index}")
             if raw["value_status"] != "unclassified":
                 raise WEOImportError(f"Candidate status must remain unclassified at CSV line {index}")
@@ -104,6 +104,8 @@ def _load_candidate(candidate_dir: Path, source_path: Path, identity_path: Path,
                 raise WEOImportError(f"Source acquisition metadata mismatch at CSV line {index}")
             if raw["acquisition_time_precision"] != "day":
                 raise WEOImportError(f"Acquisition precision mismatch at CSV line {index}")
+            if not raw["source_country_code"].strip() or not raw["source_country_name"].strip():
+                raise WEOImportError(f"Source country code/name missing at CSV line {index}")
             if not raw["game_id"] or len(raw["game_id"]) != 35 or not raw["game_id"].startswith("tc_"):
                 raise WEOImportError(f"Invalid persistent game_id at CSV line {index}")
             key = (raw["game_id"], raw["indicator_code"], year, raw["source_version"])
@@ -145,7 +147,7 @@ def prepare_application(candidate_dir: str | Path, *, database_path: str | Path 
                         migration_path: str | Path = DEFAULT_MIGRATION,
                         approval_id: str | None = None) -> dict[str, Any]:
     candidate_dir, source_path, identity_path, migration_path = map(
-        Path, (candidate_dir, source_path, identity_path, migration_path)
+        lambda item: Path(item).resolve(), (candidate_dir, source_path, identity_path, migration_path)
     )
     artifact, rows, summary = _artifact(candidate_dir, source_path, identity_path, migration_path)
     if not approval_id:
@@ -185,6 +187,11 @@ def decide_application_for_weo(approval_id: str, *, decision: str, actor: str, n
     try:
         apply_migrations(connection)
         connection.execute("BEGIN IMMEDIATE")
+        approval = connection.execute(
+            "SELECT domain, status FROM application_approvals WHERE approval_id=?", (approval_id,)
+        ).fetchone()
+        if approval is None or approval["domain"] != "imf_weo_historical_observations":
+            raise WEOImportError("Approval ID does not identify an IMF WEO historical application")
         decide_application(connection, approval_id=approval_id, decision=decision, actor=actor, note=note)
         connection.commit()
         return {"approval_id": approval_id, "status": decision, "actor": actor, "database_observations_written": False}
