@@ -7,6 +7,7 @@ import pytest
 import tools.import_wp1_5 as wp15
 import tools.import_country_data as country
 import tools.database.review_data_import as review
+import tools.import_identity_registry as identity
 
 
 ARTIFACT = {"artifact_sha256": "a" * 64}
@@ -112,6 +113,12 @@ def test_review_data_prints_approval_id_before_failed_apply(monkeypatch, capsys)
              "--approval-id", "resume-review-001"],
             "import_review_data", {"countries": 1},
         ),
+        (
+            identity,
+            ["import_identity_registry", "--database", "db.sqlite", "--registry", "registry.json",
+             "--candidate-dir", "candidate", "--approval-id", "resume-identity-001"],
+            "import_identity_registry", {"countries": 1},
+        ),
     ],
 )
 def test_importers_keep_existing_approval_id_recovery_path(
@@ -129,3 +136,22 @@ def test_importers_keep_existing_approval_id_recovery_path(
 
     assert result == 0
     assert calls[0]["approval_id"] == argv[argv.index("--approval-id") + 1]
+
+
+
+def test_identity_registry_prints_approval_id_before_failed_apply(monkeypatch, capsys):
+    calls = patch_approval_setup(monkeypatch, identity)
+    monkeypatch.setattr(identity, "build_identity_application_artifact", lambda *_args: ARTIFACT)
+    monkeypatch.setattr(
+        identity, "import_identity_registry",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(identity.IdentityImportError("simulated apply failure")),
+    )
+    monkeypatch.setattr(sys, "argv", [
+        "import_identity_registry", "--registry", "registry.json",
+        "--candidate-dir", "candidate", "--database", "db.sqlite",
+        "--approve-and-apply", "--actor", "reviewer", "--note", "Reviewed inputs",
+    ])
+
+    assert identity.main() == 1
+    assert calls[0]["approval_id"] == "identity-registry-" + "a" * 20
+    assert "Approval created for validated inputs: identity-registry-" + "a" * 20 in capsys.readouterr().out
