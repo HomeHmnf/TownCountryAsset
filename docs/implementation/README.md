@@ -13,6 +13,9 @@
 - [Stage 3B provenance registration implementation](data-store-separation-stage-3b-provenance-registration.md) — migration 003, transactional manifest-backed registration, and owner-validated result: four acquisitions and seven artifacts registered; ICASEES/WPP deferred.
 - [Stage 3C IMF WEO manual acquisition registration](data-store-separation-stage-3c-imf-manual-acquisition.md) — source-specific registration of the October 2026 CSV and Database Appendix as one date-precision manual acquisition event; owner-validated, acquisition ID 5, two artifacts, byte integrity verified.
 
+- [WP1.5 review, approval and database application workflow](../data-sources/wp1-5-review-approval-application-workflow.md) — common governance contract applied to every remaining source/field batch.
+- [WP1.5 remaining acquisition and application plan](../data-sources/wp1-5-remaining-acquisition-plan.md) — current execution order and gates.
+
 These are implementation records, not the normative architecture contract. See [architecture](../architecture/README.md) for stable design rules and [feature documentation standard](../feature-documentation-standard.md) for new work.
 - [Stage 4 IMF WEO semantic assessment](data-store-separation-stage-4-imf-weo-semantic-assessment.md) — consolidated five-field semantic disposition, country discrepancy evidence, coverage/identity limitations, completed frozen-WDI reproducibility evidence, outstanding metadata gates, and governance boundary.
 - [Stage 4B WDI immutable API snapshot](data-store-separation-stage-4b-wdi-snapshot.md) — byte-preserving WDI response capture, audited manifest, Project DB acquisition registration, database integrity checks and owner-validated frozen comparison.
