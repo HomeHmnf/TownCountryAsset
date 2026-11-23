@@ -101,3 +101,50 @@ def test_migration_allows_multiple_release_vintages():
                 assert "source_version" in cols
     finally:
         connection.close()
+
+
+
+def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
+    from tools.database import application_approval
+
+    candidate, source, identity, migration = _package(tmp_path)
+    monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
+    monkeypatch.setattr(application_approval, "REPOSITORY_ROOT", tmp_path)
+    database = tmp_path / "canonical.sqlite"
+    connection = connect_database(database)
+    try:
+        apply_migrations(connection)
+        connection.execute(
+            """INSERT INTO countries (
+                game_id, entity_type, record_status, iso_assignment_status,
+                localization_status, created_at, updated_at
+            ) VALUES (?, 'unreviewed', 'candidate', 'unverified', 'unreviewed', 'now', 'now')""",
+            ("tc_" + "a" * 32,),
+        )
+    finally:
+        connection.close()
+
+    first = importer.prepare_application(candidate, database_path=database,
+        source_path=source, identity_path=identity, migration_path=migration,
+        approval_id="imf-weo-test-approval-1")
+    assert first["status"] == "pending"
+    assert first["database_observations_written"] is False
+    importer.decide_application_for_weo(first["approval_id"], decision="approved",
+        actor="reviewer", note="Reviewed exact WEO candidate", database_path=database)
+    applied = importer.apply_application(candidate, first["approval_id"],
+        database_path=database, source_path=source, identity_path=identity,
+        migration_path=migration)
+    assert applied["inserted"] == 1
+    assert applied["unchanged"] == 0
+    assert applied["dataset_import_status"] == "candidate"
+
+    second = importer.prepare_application(candidate, database_path=database,
+        source_path=source, identity_path=identity, migration_path=migration,
+        approval_id="imf-weo-test-approval-2")
+    importer.decide_application_for_weo(second["approval_id"], decision="approved",
+        actor="reviewer", note="Reviewed exact same WEO candidate", database_path=database)
+    replay = importer.apply_application(candidate, second["approval_id"],
+        database_path=database, source_path=source, identity_path=identity,
+        migration_path=migration)
+    assert replay["inserted"] == 0
+    assert replay["unchanged"] == 1
