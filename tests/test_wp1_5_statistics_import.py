@@ -565,3 +565,36 @@ def test_dry_run_rejects_duplicate_observations_without_database(tmp_path):
             crosswalk_path=crosswalk,
             manifest_path=manifest,
         )
+
+
+
+def test_accepts_day_precision_manual_acquisition_without_inventing_time(tmp_path):
+    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["retrieved_at"] = "2026-11-02"
+    manifest["retrieval_date_precision"] = "day"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = statistics_import.validate_wp1_5_dataset(
+        observations_path=observations,
+        crosswalk_path=crosswalk,
+        manifest_path=manifest_path,
+    )
+
+    assert result["retrieved_at"] == "2026-11-02"
+    assert result["side_effects"]["database_opened"] is False
+
+
+def test_rejects_day_precision_manifest_with_inferred_time(tmp_path):
+    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["retrieved_at"] = "2026-11-02T00:00:00Z"
+    manifest["retrieval_date_precision"] = "day"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    with pytest.raises(StatisticsImportError, match="YYYY-MM-DD without an inferred time"):
+        statistics_import.validate_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest_path,
+        )
