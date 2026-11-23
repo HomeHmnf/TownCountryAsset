@@ -45,7 +45,7 @@ A package must identify its schema/version and provide deterministic row keys so
 
 Generate an actionable edge-case register from the same candidate and review package. It is a linked work queue, not a second approval surface.
 
-Each case records a stable case ID, affected observation keys, issue category, evidence, current disposition, required resolution/action, owner decision and closure evidence. Cases can group multiple observation rows, but must link back to every affected row.
+Each case records a stable case ID, affected observation keys, issue category, evidence, current disposition and required resolution/action. Cases can group multiple observation rows, but must link back to every affected row. Final observation decisions and their rationale are recorded only in the consolidated review register; the edge-case work queue must not become a competing decision surface. Case closure is reflected by the linked observation decisions and supporting closure evidence.
 
 Typical categories include:
 
