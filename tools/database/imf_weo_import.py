@@ -163,6 +163,9 @@ def prepare_application(candidate_dir: str | Path, *, database_path: str | Path 
     try:
         apply_migrations(connection)
         connection.execute("BEGIN IMMEDIATE")
+        present_game_ids = {row["game_id"] for row in connection.execute("SELECT game_id FROM countries")}
+        candidate_game_ids = {row["game_id"] for row in rows}
+        missing_game_ids = sorted(candidate_game_ids - present_game_ids)
         existing = connection.execute(
             "SELECT artifact_sha256, status FROM application_approvals WHERE approval_id=?",
             (approval_id,),
@@ -173,13 +176,17 @@ def prepare_application(candidate_dir: str | Path, *, database_path: str | Path 
             connection.rollback()
             return {"approval_id": approval_id, "status": existing["status"],
                     "artifact_sha256": artifact["artifact_sha256"], "observation_count": len(rows),
-                    "database_observations_written": False, "idempotent": True}
+                    "database_observations_written": False, "idempotent": True,
+                    "canonical_game_ids_present": len(candidate_game_ids) - len(missing_game_ids),
+                    "missing_game_ids": missing_game_ids}
         propose_application(connection, approval_id=approval_id, artifact=artifact)
         connection.commit()
         return {"approval_id": approval_id, "status": "pending",
                 "artifact_sha256": artifact["artifact_sha256"], "observation_count": len(rows),
                 "candidate_sha256": summary["observations_sha256"],
-                "database_observations_written": False, "approval_created": True}
+                "database_observations_written": False, "approval_created": True,
+                "canonical_game_ids_present": len(candidate_game_ids) - len(missing_game_ids),
+                "missing_game_ids": missing_game_ids}
     except (sqlite3.Error, ApplicationApprovalError, WEOImportError):
         if connection.in_transaction:
             connection.rollback()
