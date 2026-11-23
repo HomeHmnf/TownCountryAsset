@@ -21,4 +21,8 @@ These are implementation records, not the normative architecture contract. See [
 - Stage 4C.1 adds year-bounded country evidence and country-field/field review queues; Stage 4C.2 adds the validated global and field-level decision-readiness assessment.
 - [Stage 4D WDI macro-series decomposition](data-store-separation-stage-4d-wdi-macro-decomposition.md) — supporting WDI local-GDP, exchange-rate, PPP-factor, population and CPI-index series plus read-only arithmetic diagnostics; owner-validated expanded snapshot, Project DB registration and Turkmenistan fields 15/16/18 reconciliation.
 - [ZIMSTAT national-accounts acquisition implementation](../data-sources/zimbabwe-national-accounts-acquisition.md) — two separate official workbooks, resumable HTTPS/SOCKS5 download, immutable manifests and guarded Project DB registration.
-- [Turkmenistan macroeconomic evidence acquisition](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md) — three owner-validated IMF/TurkmenStat captures, two documented IMF access gaps, manifest audits, catalogue synchronization and guarded Project DB registration workflow.
+- [Turkmenistan macroeconomic evidence acquisition](../data-sources/turkmenistan-macroeconomic-evidence-acquisition.md) — three owner-validated IMF/TurkmenStat captures, two documented IMF access gaps, manifest audits, catalogue synchronization and guarded Project DB registration.
+
+## Next WP1.5 data-acquisition phase
+
+The WPP and WDI field groups are applied and verified. The next work package is to finish the already-captured IMF WEO five-field application (15, 16, 18, 20 and 21), then acquire and process the remaining primary-source groups. See [WP1.5 remaining data acquisition plan](../data-sources/wp1-5-remaining-acquisition-plan.md) for the source inventory, licensing gates and execution sequence.
