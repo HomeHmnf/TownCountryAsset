@@ -153,7 +153,7 @@ def prepare_application(candidate_dir: str | Path, *, database_path: str | Path 
                         migration_path: str | Path = DEFAULT_MIGRATION,
                         acquisition_record_path: str | Path = DEFAULT_ACQUISITION_RECORD,
                         approval_id: str | None = None) -> dict[str, Any]:
-    candidate_dir, source_path, identity_path, migration_path = map(
+    candidate_dir, source_path, identity_path, migration_path, acquisition_record_path = map(
         lambda item: Path(item).resolve(), (candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
     )
     artifact, rows, summary = _artifact(candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
@@ -216,8 +216,8 @@ def apply_application(candidate_dir: str | Path, approval_id: str, *,
                       identity_path: str | Path = DEFAULT_IDENTITY,
                       migration_path: str | Path = DEFAULT_MIGRATION,
                       acquisition_record_path: str | Path = DEFAULT_ACQUISITION_RECORD) -> dict[str, Any]:
-    candidate_dir, source_path, identity_path, migration_path = map(
-        Path, (candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
+    candidate_dir, source_path, identity_path, migration_path, acquisition_record_path = map(
+        lambda item: Path(item).resolve(), (candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
     )
     artifact, rows, summary = _artifact(candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
     connection = connect_database(database_path)
