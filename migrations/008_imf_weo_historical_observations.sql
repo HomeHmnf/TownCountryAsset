@@ -21,7 +21,7 @@ CREATE TABLE imf_weo_historical_observations (
     acquired_on TEXT NOT NULL,
     acquisition_time_precision TEXT NOT NULL CHECK (acquisition_time_precision IN ('day', 'timestamp')),
     import_id INTEGER NOT NULL,
-    UNIQUE (game_id, indicator_code, observation_year),
+    UNIQUE (game_id, indicator_code, observation_year, source_version),
     FOREIGN KEY (game_id) REFERENCES countries(game_id) ON DELETE RESTRICT,
     FOREIGN KEY (import_id) REFERENCES dataset_imports(import_id) ON DELETE RESTRICT
 );
