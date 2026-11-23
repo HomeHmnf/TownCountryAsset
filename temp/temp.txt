@@ -1,9 +1,22 @@
-ERROR: file or directory not found: tests/test_application_approval_cli.py
+WP1.5 NEXT PHASE — IMF WEO APPLICATION
 
-============================= test session starts ==============================
-platform linux -- Python 3.15.2, pytest-9.1.1, pluggy-1.6.0
-rootdir: /home/hmnf/Projects/Python/TownAndCountry
-configfile: pyproject.toml
-collected 0 items
+STATUS
+- World Bank WDI fields 3, 33 and 34: applied and verified.
+- IMF WEO fields 15, 16, 18, 20 and 21: source data already captured.
+- Next task: inspect existing IMF WEO artifacts, validate normalization and application readiness, then apply through the shared approval workflow.
+- Do not reacquire existing WEO source data.
+- Do not change dataset import status without an explicit domain-specific decision.
 
-============================ no tests ran in 0.00s =============================
+NEXT ACQUISITION
+- Source: ILOSTAT
+- WP1.5 field: 22
+- Subject: labour force
+- Inspect source selection, acquisition requirements, existing raw data and manifests before implementing acquisition.
+
+REQUIREMENTS
+- Preserve source provenance, release identifiers, retrieval timestamps and checksums.
+- Preserve entity crosswalk and unresolved-entity reporting.
+- Validate coverage, duplicates, nulls, units and observation periods.
+- Keep candidate and verified states distinct.
+- Use the shared application approval workflow for canonical database mutations.
+- Do not modify canonical database contents during acquisition or dry-run.
