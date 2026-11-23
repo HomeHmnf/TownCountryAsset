@@ -13,7 +13,7 @@ from typing import Any
 
 from tools.database.connection import REPOSITORY_ROOT, connect_database
 from tools.database.application_approval import (
-    ApplicationApprovalError, build_application_artifact,
+    ApplicationApprovalError, approve_application, build_application_artifact,
     require_approved_application, record_application_applied,
 )
 from tools.database.schema import apply_migrations, validate_database
@@ -608,15 +608,43 @@ def main() -> int:
     parser.add_argument("--persian-provenance", type=Path, required=True)
     parser.add_argument("--entity-taxonomy", type=Path, default=DEFAULT_TAXONOMY)
     parser.add_argument("--flag-mapping", type=Path, default=DEFAULT_FLAGS)
-    parser.add_argument("--approval-id", required=True, help="Previously approved review-data application ID")
+    approval = parser.add_mutually_exclusive_group(required=True)
+    approval.add_argument("--approval-id", help="Previously approved review-data application ID")
+    approval.add_argument(
+        "--approve-and-apply", action="store_true",
+        help="Create approval for these exact reviewed inputs and apply them",
+    )
+    parser.add_argument("--actor", help="Reviewer identity; required with --approve-and-apply")
+    parser.add_argument("--note", help="Approval rationale; required with --approve-and-apply")
     args = parser.parse_args()
     try:
+        approval_id = args.approval_id
+        if args.approve_and_apply:
+            if not args.actor or not args.actor.strip():
+                raise ReviewDataImportError("--approve-and-apply requires --actor")
+            if not args.note or not args.note.strip():
+                raise ReviewDataImportError("--approve-and-apply requires --note")
+            artifact = build_review_application_artifact(
+                args.registry, args.iso_reference, args.iso_provenance,
+                args.iso_proposals, args.persian_candidates, args.persian_provenance,
+                args.entity_taxonomy, args.flag_mapping,
+            )
+            approval_id = "review-data-" + artifact["artifact_sha256"][:20]
+            connection = connect_database(args.database)
+            try:
+                apply_migrations(connection)
+                approve_application(
+                    connection, approval_id=approval_id, artifact=artifact,
+                    actor=args.actor, note=args.note,
+                )
+            finally:
+                connection.close()
         result = import_review_data(
             args.database, args.registry, args.iso_reference, args.iso_provenance,
             args.iso_proposals, args.persian_candidates, args.persian_provenance,
-            args.entity_taxonomy, args.flag_mapping, approval_id=args.approval_id,
+            args.entity_taxonomy, args.flag_mapping, approval_id=approval_id,
         )
-    except (OSError, ValueError, sqlite3.Error, ReviewDataImportError) as exc:
+    except (OSError, ValueError, sqlite3.Error, ReviewDataImportError, ApplicationApprovalError) as exc:
         parser.error(str(exc))
     print(json.dumps(result, indent=2, sort_keys=True))
     print("Review-domain import completed; database integrity and foreign-key checks passed.")
