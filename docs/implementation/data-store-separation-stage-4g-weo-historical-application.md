@@ -55,7 +55,7 @@ Do not run `--decide approved` or `--apply` until the owner has reviewed the can
 
 ## Expected owner verification
 
-The importer reports candidate, inserted and unchanged counts, distinct identities, import ID, approval state and database integrity. Owner verification should additionally query:
+The preparation step also reports which candidate identities are already present in canonical `countries` and lists missing `game_id` values. Missing identities do not disqualify observations, but they must be registered through the existing identity workflow before application. The importer reports candidate, inserted and unchanged counts, distinct identities, import ID, approval state and database integrity. Owner verification should additionally query:
 
 - Total rows and distinct `game_id` in `imf_weo_historical_observations` for the October 2026 source version.
 - Per-indicator counts (expected candidate counts: NGDPD 9,329; NGDPDPC 9,190; PPPGDP 9,354; PCPIPCH 9,217; LUR 4,934).
