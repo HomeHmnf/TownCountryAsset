@@ -180,7 +180,7 @@ def prepare_application(candidate_dir: str | Path, *, database_path: str | Path 
                 "artifact_sha256": artifact["artifact_sha256"], "observation_count": len(rows),
                 "candidate_sha256": summary["observations_sha256"],
                 "database_observations_written": False, "approval_created": True}
-    except (sqlite3.Error, ApplicationApprovalError):
+    except (sqlite3.Error, ApplicationApprovalError, WEOImportError):
         if connection.in_transaction:
             connection.rollback()
         raise
