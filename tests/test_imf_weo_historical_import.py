@@ -22,6 +22,8 @@ def _package(root: Path):
     identity.write_text("{}", encoding="utf-8")
     migration = root / "008.sql"
     migration.write_text("-- test migration dependency", encoding="utf-8")
+    acquisition = root / "acquisition.md"
+    acquisition.write_text("Snapshot: weo.csv SHA-256: " + hashlib.sha256(source.read_bytes()).hexdigest(), encoding="utf-8")
     source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
     headers = [
         "game_id", "source_country_code", "source_country_name", "indicator_code",
@@ -52,24 +54,24 @@ def _package(root: Path):
         "observation_count": 1,
     }
     (candidate / "candidate.json").write_text(json.dumps(summary), encoding="utf-8")
-    return candidate, source, identity, migration
+    return candidate, source, identity, migration, acquisition
 
 
 def test_candidate_package_checksums_and_provenance(tmp_path, monkeypatch):
-    candidate, source, identity, migration = _package(tmp_path)
+    candidate, source, identity, migration, acquisition = _package(tmp_path)
     monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
-    rows, summary, inputs = importer._load_candidate(candidate, source, identity, migration)
+    rows, summary, inputs = importer._load_candidate(candidate, source, identity, migration, acquisition)
     assert len(rows) == 1
     assert rows[0]["value_status"] == "unclassified"
     assert rows[0]["unit"] == "US dollar"
-    assert len(inputs) == 6
+    assert len(inputs) == 7
     (candidate / "observations.csv").write_text("changed", encoding="utf-8")
     with pytest.raises(importer.WEOImportError, match="observations.csv checksum"):
         importer._load_candidate(candidate, source, identity, migration)
 
 
 def test_candidate_package_rejects_missing_units_only_if_not_preserved(tmp_path, monkeypatch):
-    candidate, source, identity, migration = _package(tmp_path)
+    candidate, source, identity, migration, acquisition = _package(tmp_path)
     monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
     path = candidate / "observations.csv"
     rows = list(csv.DictReader(path.open(encoding="utf-8", newline="")))
@@ -78,7 +80,6 @@ def test_candidate_package_rejects_missing_units_only_if_not_preserved(tmp_path,
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
-    exceptions = candidate / "identity_exceptions.csv"
     summary = json.loads((candidate / "candidate.json").read_text())
     summary["observations_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
     (candidate / "candidate.json").write_text(json.dumps(summary))
@@ -125,7 +126,7 @@ def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
         connection.close()
 
     first = importer.prepare_application(candidate, database_path=database,
-        source_path=source, identity_path=identity, migration_path=migration,
+        source_path=source, identity_path=identity, migration_path=migration, acquisition_record_path=acquisition,
         approval_id="imf-weo-test-approval-1")
     assert first["status"] == "pending"
     assert first["database_observations_written"] is False
@@ -133,7 +134,7 @@ def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
         actor="reviewer", note="Reviewed exact WEO candidate", database_path=database)
     applied = importer.apply_application(candidate, first["approval_id"],
         database_path=database, source_path=source, identity_path=identity,
-        migration_path=migration)
+        migration_path=migration, acquisition_record_path=acquisition)
     assert applied["inserted"] == 1
     assert applied["unchanged"] == 0
     assert applied["dataset_import_status"] == "candidate"
