@@ -1,22 +1,47 @@
-WP1.5 NEXT PHASE — IMF WEO APPLICATION
+============================= test session starts ==============================
+platform linux -- Python 3.15.2, pytest-9.1.1, pluggy-1.6.0 -- /home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/hmnf/Projects/Python/TownAndCountry
+configfile: pyproject.toml
+collecting ... collected 5 items
 
-STATUS
-- World Bank WDI fields 3, 33 and 34: applied and verified.
-- IMF WEO fields 15, 16, 18, 20 and 21: source data already captured.
-- Next task: inspect existing IMF WEO artifacts, validate normalization and application readiness, then apply through the shared approval workflow.
-- Do not reacquire existing WEO source data.
-- Do not change dataset import status without an explicit domain-specific decision.
+tests/test_imf_weo_historical_candidate.py::test_complete_values_import_candidate_even_with_unverified_identity PASSED [ 20%]
+tests/test_imf_weo_historical_candidate.py::test_blank_cells_are_not_synthesized_and_unclassified_is_preserved PASSED [ 40%]
+tests/test_imf_weo_historical_candidate.py::test_wdi_presence_is_not_an_input_to_eligibility PASSED [ 60%]
+tests/test_imf_weo_historical_candidate.py::test_missing_unit_is_retained_as_null_not_inferred PASSED [ 80%]
+tests/test_imf_weo_historical_candidate.py::test_duplicate_source_series_rejected PASSED [100%]
 
-NEXT ACQUISITION
-- Source: ILOSTAT
-- WP1.5 field: 22
-- Subject: labour force
-- Inspect source selection, acquisition requirements, existing raw data and manifests before implementing acquisition.
-
-REQUIREMENTS
-- Preserve source provenance, release identifiers, retrieval timestamps and checksums.
-- Preserve entity crosswalk and unresolved-entity reporting.
-- Validate coverage, duplicates, nulls, units and observation periods.
-- Keep candidate and verified states distinct.
-- Use the shared application approval workflow for canonical database mutations.
-- Do not modify canonical database contents during acquisition or dry-run.
+============================== 5 passed in 0.11s ===============================
+{
+  "schema_version": 1,
+  "candidate_type": "imf_weo_annual_historical_observations",
+  "source_key": "imf_weo",
+  "release": "october_2026",
+  "source_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+  "source_sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+  "source_byte_count": 26692032,
+  "identity_registry_path": "config/country_identity_registry.json",
+  "observation_count": 42024,
+  "distinct_game_ids": 196,
+  "indicator_counts": {
+    "LUR": 4934,
+    "NGDPD": 9329,
+    "NGDPDPC": 9190,
+    "PCPIPCH": 9217,
+    "PPPGDP": 9354
+  },
+  "year_range": [
+    1980,
+    2031
+  ],
+  "exception_count": 47,
+  "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
+  "identity_policy": "retain_existing_game_id; ISO verification status is not changed",
+  "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
+  "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
+  "database_written": false,
+  "approval_created": false,
+  "candidate_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-historical-candidate/20261123T103749Z",
+  "observations_sha256": "c8f256e3388b4d7f5baf503cc40ececae153e0714204ea568ea206dc55207841",
+  "exceptions_sha256": "36fb80e80da92e45bd5498861db176cae6aa83e791e0dc1034ed6b170ce1f712"
+}
