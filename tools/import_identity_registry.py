@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sqlite3
 
 from tools.database.application_approval import ApplicationApprovalError, approve_application
 from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
@@ -14,7 +15,7 @@ from tools.database.identity_import import (
     build_identity_application_artifact,
     import_identity_registry,
 )
-from tools.database.schema import apply_migrations
+from tools.database.schema import MigrationError, apply_migrations
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -59,7 +60,7 @@ def main() -> int:
         result = import_identity_registry(
             args.database, args.registry, args.candidate_dir, approval_id=approval_id
         )
-    except (OSError, ValueError, ApplicationApprovalError, IdentityImportError) as exc:
+    except (OSError, ValueError, sqlite3.Error, MigrationError, ApplicationApprovalError, IdentityImportError) as exc:
         print(f"Identity registry import failed: {exc}")
         return 1
     print(json.dumps(result, indent=2, sort_keys=True))
