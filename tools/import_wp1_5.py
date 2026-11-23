@@ -11,7 +11,6 @@ from tools.database.application_approval import (
 from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
 from tools.database.statistics_import import (
     StatisticsImportError,
-    build_wp1_5_application_artifact,
     import_wp1_5_dataset,
     validate_wp1_5_dataset,
 )
