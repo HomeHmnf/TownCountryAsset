@@ -10,7 +10,7 @@ import hashlib
 import json
 import math
 import sqlite3
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -100,12 +100,29 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
     if not source_url.startswith("https://"):
         raise StatisticsImportError("Source manifest URL must use HTTPS")
     retrieved_at = _text(manifest.get("retrieved_at"), "manifest.retrieved_at")
-    try:
-        retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
-    except ValueError as exc:
-        raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
-    if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
-        raise StatisticsImportError("manifest.retrieved_at must include a timezone")
+    retrieval_precision = manifest.get("retrieval_date_precision")
+    if retrieval_precision == "day":
+        try:
+            parsed_date = date.fromisoformat(retrieved_at)
+        except ValueError as exc:
+            raise StatisticsImportError(
+                "day-precision manifest.retrieved_at must be an ISO-8601 calendar date"
+            ) from exc
+        if parsed_date.isoformat() != retrieved_at:
+            raise StatisticsImportError(
+                "day-precision manifest.retrieved_at must use YYYY-MM-DD without an inferred time"
+            )
+    elif retrieval_precision in {None, "instant"}:
+        try:
+            retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
+        except ValueError as exc:
+            raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
+        if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
+            raise StatisticsImportError("manifest.retrieved_at must include a timezone")
+    else:
+        raise StatisticsImportError(
+            "manifest.retrieval_date_precision must be 'instant' or 'day' when supplied"
+        )
     additional_inputs = manifest.get("additional_inputs", [])
     if not isinstance(additional_inputs, list):
         raise StatisticsImportError("manifest.additional_inputs must be an array")
