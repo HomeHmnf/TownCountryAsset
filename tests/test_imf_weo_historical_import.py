@@ -82,7 +82,7 @@ def test_candidate_package_rejects_missing_units_only_if_not_preserved(tmp_path,
     summary = json.loads((candidate / "candidate.json").read_text())
     summary["observations_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
     (candidate / "candidate.json").write_text(json.dumps(summary))
-    result, _, _ = importer._load_candidate(candidate, source, identity, migration)
+    result, _, _ = importer._load_candidate(candidate, source, identity, migration, acquisition)
     assert result[0]["unit"] is None
 
 
