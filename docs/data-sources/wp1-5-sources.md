@@ -4,6 +4,8 @@
 
 ## Scope and source policy
 
+All remaining source/field batches must follow the [common WP1.5 review, approval and database application workflow](wp1-5-review-approval-application-workflow.md). The [remaining acquisition plan](wp1-5-remaining-acquisition-plan.md) records the current order. The normalized importer contract below remains the application interface; source-specific assessment reports do not replace the consolidated review package.
+
 WP1.5 covers the 41 selected data fields in `config/wp1_5_data_sources.json`. Natural Earth remains a geographic/cartographic source only. It is not used for statistics, economic classifications, demographics, or other WP1.5 values.
 
 The canonical join key is the existing persistent `game_id`. Provider identifiers (ISO codes, UN M49 codes, World Bank codes, IMF codes, and source-specific IDs) are crosswalk attributes, not replacement identities. Every source import must carry an explicit, reviewed country crosswalk. Do not join by display name alone.
