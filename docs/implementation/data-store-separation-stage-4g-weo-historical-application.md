@@ -10,7 +10,7 @@ The importer:
 
 - Revalidates the candidate JSON, both CSV fingerprints, the raw October 2026 source checksum/byte count, the persistent identity registry path and the migration dependency.
 - Validates every observation's indicator/field mapping, finite numeric value, source checksum, release, acquisition date and status. It rejects duplicate (game, indicator, year, vintage) keys.
-- Includes the candidate observations, exception register, candidate summary, immutable raw CSV, identity registry and historical-table migration in the shared approval fingerprint.
+- Includes the candidate observations, exception register, candidate summary, immutable raw CSV, identity registry, manual acquisition record and historical-table migration in the shared approval fingerprint.
 - Creates a pending application proposal only in `--prepare`; it does not insert observations.
 - Requires an explicit human decision with actor and note. `--apply` requires an approved application with an exact matching fingerprint.
 - Requires each candidate `game_id` to exist already in canonical `countries`. If not, the error directs the owner to import the identity registry first; it does not create identities or change ISO assignment status.
