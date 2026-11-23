@@ -9,6 +9,7 @@ from tools.database.application_approval import ApplicationApprovalError, approv
 from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
 from tools.database.country_data_import import (
     DEFAULT_CANDIDATE_DIR,
+    CountryDataImportError,
     build_country_data_application_artifact,
     import_country_data,
 )
@@ -55,7 +56,7 @@ def main() -> int:
         result = import_country_data(
             args.database, args.candidate_dir, approval_id=approval_id
         )
-    except (OSError, ValueError, ApplicationApprovalError) as exc:
+    except (OSError, ValueError, ApplicationApprovalError, CountryDataImportError) as exc:
         print(f"Country data import failed: {exc}")
         return 1
     print(json.dumps(result, indent=2, sort_keys=True))
