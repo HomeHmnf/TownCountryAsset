@@ -1,21 +1,9 @@
+ERROR: file or directory not found: tests/test_application_approval_cli.py
 
-INDICATOR: EN.POP.DNST
-RAW NON-AGGREGATE ISO3: 217
-SELECTED NON-NULL ISO3: 216
-NO SELECTED VALUE: ['XKX']
-NULL-ONLY ISO3: ['XKX']
-SELECTED YEARS: [2021, 2023, 2024]
+============================= test session starts ==============================
+platform linux -- Python 3.15.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/hmnf/Projects/Python/TownAndCountry
+configfile: pyproject.toml
+collected 0 items
 
-INDICATOR: AG.SRF.TOTL.K2
-RAW NON-AGGREGATE ISO3: 217
-SELECTED NON-NULL ISO3: 216
-NO SELECTED VALUE: ['XKX']
-NULL-ONLY ISO3: ['XKX']
-SELECTED YEARS: [2021, 2023, 2024]
-
-INDICATOR: AG.LND.TOTL.K2
-RAW NON-AGGREGATE ISO3: 217
-SELECTED NON-NULL ISO3: 216
-NO SELECTED VALUE: ['XKX']
-NULL-ONLY ISO3: ['XKX']
-SELECTED YEARS: [2021, 2023, 2024]
+============================ no tests ran in 0.00s =============================
