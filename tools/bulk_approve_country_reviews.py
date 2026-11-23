@@ -18,11 +18,9 @@ from typing import Any
 
 from tools.database.application_approval import (
     ApplicationApprovalError,
+    approve_application,
     build_application_artifact,
-    decide_application,
-    propose_application,
     record_application_applied,
-    require_approved_application,
 )
 from tools.database.connection import REPOSITORY_ROOT, connect_database
 from tools.database.schema import apply_migrations, validate_database
@@ -247,12 +245,13 @@ def bulk_approve(
         )
         approval_id = "bulk-review-" + artifact["artifact_sha256"][:20]
         try:
-            propose_application(connection, approval_id=approval_id, artifact=artifact)
-            decide_application(
-                connection, approval_id=approval_id, decision="approved",
-                actor=actor.strip(), note=note.strip(),
+            approve_application(
+                connection,
+                approval_id=approval_id,
+                artifact=artifact,
+                actor=actor.strip(),
+                note=note.strip(),
             )
-            require_approved_application(connection, approval_id=approval_id, artifact=artifact)
         except ApplicationApprovalError as exc:
             raise BulkApprovalError(str(exc)) from exc
 
