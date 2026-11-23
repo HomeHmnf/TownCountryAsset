@@ -26,6 +26,10 @@ Proposed project DB path: `data/project/project_data.sqlite`. Proposed game DB p
 
 **Important status distinction:** this is an approved design direction, not implemented behavior. Stage 0 read-only inventory is in progress; no schema, migration, retention or database code has been changed. See the [Stage 0 inventory procedure](implementation/data-store-separation-inventory.md) and the [separation plan](architecture/data-store-separation-plan.md).
 
+## WP1.5 review and application governance
+
+All remaining WP1.5 source/field batches use one common candidate → consolidated review package → linked edge-case resolution → exact-artifact approval → transactional database application workflow. The consolidated package is the single decision surface; supporting assessments are evidence, not parallel approval queues. See [WP1.5 review, approval and database application workflow](data-sources/wp1-5-review-approval-application-workflow.md) and the [remaining acquisition plan](data-sources/wp1-5-remaining-acquisition-plan.md). IMF WEO fields 15/16/18/20/21 are next, followed by ILOSTAT field 22 and all other uncompleted fields under the same process.
+
 ## Source-version retention invariant
 
 The target project DB retains exactly the **two latest successful acquired versions per stable source dataset/acquisition stream**. A version may be a multi-file publication bundle or a complete paginated API capture. The stream is keyed by stable source and dataset/download/API IDs, not by a release year.
