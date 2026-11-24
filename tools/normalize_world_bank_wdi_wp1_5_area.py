@@ -85,13 +85,13 @@ def normalize_snapshot(
                 "field_id": spec["field_id"],
                 "value": selected["value"],
                 "unit": spec["unit"],
-                "value_status": "unspecified",
+                "value_status": "unclassified",
                 "observation_period": str(selected["year"]),
                 "source_reference": f"{API}/country/{iso3}/indicator/{code}?date={selected['year']}",
                 "methodology": (
                     f"World Bank WDI indicator {code}: {spec['meaning']} "
                     f"Originating source organization: {metadata.get('sourceOrganization') or 'not supplied'}. "
-                    "Provider obs_status is blank; value status is therefore unspecified."
+                    "Provider obs_status is blank; the populated scalar value remains unclassified."
                 ),
                 "provenance": {
                     "wdi_iso3": iso3,
@@ -158,7 +158,7 @@ def normalize_snapshot(
             "policy": "latest_non_null_per_indicator_and_entity",
             "indicator_counts": per_indicator,
             "observation_count": len(rows),
-            "value_status_policy": "unspecified_when_provider_obs_status_blank",
+            "value_status_policy": "unclassified_when_provider_obs_status_blank",
             "unmapped_candidate_codes_excluded": 29,
             "null_only_code_excluded": ["XKX"],
             "official_iso_identity_changed": False,
