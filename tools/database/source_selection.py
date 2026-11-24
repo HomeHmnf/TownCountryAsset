@@ -6,7 +6,6 @@ validate provider datasets, import into SQLite, or approve manual overrides.
 from __future__ import annotations
 
 import json
-import math
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
