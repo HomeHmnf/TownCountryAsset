@@ -18,6 +18,15 @@ from tools.acquire_world_bank_wdi_wp1_5_area import (
 from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 from tools.database.observation_contract import validate_observation_value
 
+
+def _value_status(provider_status: Any) -> str:
+    """Keep blank WDI statuses unclassified; require review for coded statuses."""
+    if provider_status is None or provider_status == "":
+        return "unclassified"
+    raise AreaSnapshotError(
+        f"WDI obs_status {provider_status!r} requires an explicit canonical status mapping"
+    )
+
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x", encoding="utf-8") as stream:
@@ -86,7 +95,7 @@ def normalize_snapshot(
                 "field_id": spec["field_id"],
                 "value": selected["value"],
                 "unit": spec["unit"],
-                "value_status": "unclassified",
+                "value_status": _value_status(selected["provider_status"]),
                 "observation_period": str(selected["year"]),
                 "source_reference": f"{API}/country/{iso3}/indicator/{code}?date={selected['year']}",
                 "methodology": (
