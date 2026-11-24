@@ -35,7 +35,7 @@ def _normalise_artifacts(manifest: dict[str, Any]) -> list[dict[str, Any]]:
         artifacts.extend(dict(item) for item in files)
 
     # UN M49 and some legacy snapshots describe one artifact at the top level.
-    elif _first(manifest, "local_raw_path", "repository_path", "path"):
+    if not artifacts and _first(manifest, "local_raw_path", "repository_path", "path"):
         artifacts.append(dict(manifest))
 
     # Project import bundles can list supporting source files separately.
