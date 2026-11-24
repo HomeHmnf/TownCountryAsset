@@ -458,3 +458,23 @@ source IDs exist in both datasets.
 ### UN WPP source-coverage exceptions
 
 The WPP crosswalk builder distinguishes an M49 identity match from WPP dataset coverage. If a valid M49 identifier is absent from **both** 2026 Medium Country/Area snapshots, the mapping is held in the crosswalk's `coverage_exceptions` with status `source_not_covered`; it is not added to `mappings`, and the build continues. If demographic and age-sex snapshots disagree about coverage, the build fails validation. No substitute identifier is inferred. This preserves the distinction between an identity that is unresolved and an identity that is valid but outside WPP's published country/area universe.
+
+### Canonical observation status contract for scalar imports
+
+WP1.5 normalized observations use the shared validator in
+`tools/database/observation_contract.py`. A populated finite scalar may use
+`observed`, `estimated`, `projected`, or `unclassified`; the latter records
+that the source does not provide enough information to assign a canonical
+classification. A populated structured payload must use `observed`,
+`estimated`, or `projected`. Explicit JSON null is permitted only with
+`unavailable` or `not_applicable`; an observation that does not exist is
+omitted rather than represented by a null row.
+
+For the World Bank WDI WP1.5 area/density adapter, blank provider
+`obs_status` is retained verbatim in provenance and normalized to
+`unclassified`. A nonblank provider status is also retained in provenance but
+stops normalization until an explicit, reviewed mapping to the canonical
+status vocabulary is implemented. The adapter validates each selected finite
+scalar with the shared contract before writing candidate files. Candidate
+normalization remains database-independent and does not create or approve an
+application.
