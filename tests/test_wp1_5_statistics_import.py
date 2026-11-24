@@ -529,3 +529,25 @@ def test_additional_snapshot_inputs_are_checksum_validated(tmp_path):
             observations_path=observations, crosswalk_path=crosswalk,
             manifest_path=manifest_path, database_path=database,
         )
+
+
+
+def test_imports_unclassified_populated_scalar_but_rejects_structured(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    result = run_import(
+        tmp_path, database, field_id=1, value=1234, status="unclassified",
+        release="2024-unclassified",
+    )
+    assert result["scalar_observations"] == 1
+    connection = sqlite3.connect(database)
+    assert connection.execute(
+        "SELECT value, value_status FROM current_statistics"
+    ).fetchone() == (1234.0, "unclassified")
+    connection.close()
+
+    with pytest.raises(StatisticsImportError, match="structured value requires"):
+        run_import(
+            tmp_path, database, field_id=12, value={"0-4": 100},
+            status="unclassified", release="2024-structured-unclassified",
+        )
