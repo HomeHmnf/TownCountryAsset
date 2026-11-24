@@ -103,6 +103,10 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str, 
     retrieved_at = _text(manifest.get("retrieved_at"), "manifest.retrieved_at")
     retrieval_precision = manifest.get("retrieval_date_precision")
     if retrieval_precision == "day":
+        if len(retrieved_at) != 10:
+            raise StatisticsImportError(
+                "day-precision manifest.retrieved_at must use YYYY-MM-DD without an inferred time"
+            )
         try:
             parsed_date = date.fromisoformat(retrieved_at)
         except ValueError as exc:
@@ -244,6 +248,8 @@ def _validate_observation(
             if not finite:
                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
             value = float(value)
+        if value is None and status not in {"unavailable", "not_applicable"}:
+            raise StatisticsImportError(f"{label} NULL value requires unavailable/not_applicable status")
         if not validate_observation_value(value, status, "scalar"):
             raise StatisticsImportError(f"{label} scalar has an invalid value/status combination")
     else:
