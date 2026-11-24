@@ -5,7 +5,13 @@ import sqlite3
 import pytest
 
 from tools.database.connection import connect_database
-from tools.database.schema import MigrationError, apply_migrations, current_schema_version, validate_database
+from tools.database.schema import (
+    MigrationError,
+    apply_migrations,
+    current_schema_version,
+    latest_schema_version,
+    validate_database,
+)
 
 
 @pytest.fixture
@@ -32,7 +38,15 @@ def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
     path = tmp_path / "nested" / "canonical.sqlite"
     with connect_database(path) as connection:
         assert current_schema_version(connection) == 0
-        assert apply_migrations(connection) == 7
+        expected_version = latest_schema_version()
+        assert expected_version > 0
+        assert apply_migrations(connection) == expected_version
+        applied_versions = [
+            row[0] for row in connection.execute(
+                "SELECT version FROM schema_migrations ORDER BY version"
+            )
+        ]
+        assert applied_versions == list(range(1, expected_version + 1))
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
         assert validate_database(connection) == []
@@ -41,8 +55,11 @@ def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
 
 
 def test_migration_is_idempotent(database):
-    assert apply_migrations(database) == 7
-    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 7
+    expected_version = latest_schema_version()
+    assert apply_migrations(database) == expected_version
+    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == expected_version
+    assert apply_migrations(database) == expected_version
+    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == expected_version
 
 
 def test_game_id_requires_exact_tc_prefix_and_32_lowercase_hex(database):
