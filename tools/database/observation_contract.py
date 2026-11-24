@@ -24,7 +24,7 @@ def validate_observation_value(value: Any, status: Any, storage: Any) -> bool:
     payloads require a classified status. Explicit nulls require unavailable or
     not_applicable; missing observations are represented by absent rows.
     """
-    if storage not in {"scalar", "structured"} or status not in ALLOWED_VALUE_STATUSES:
+    if storage not in {"scalar", "structured"} or not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
         return False
     if value is None:
         return status in NULL_VALUE_STATUSES
