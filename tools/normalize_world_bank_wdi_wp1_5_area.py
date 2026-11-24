@@ -148,6 +148,7 @@ def normalize_snapshot(
         "source_url": acquisition["source_url"],
         "final_url": acquisition["final_url"],
         "retrieved_at": acquisition["retrieved_at"],
+        "value_status_policy": "unclassified_when_provider_obs_status_blank",
         "attribution": acquisition.get("attribution"),
         "license_status": acquisition.get("license_status"),
         "additional_inputs": [raw_input(item) for item in additional],
