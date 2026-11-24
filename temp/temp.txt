@@ -1,47 +1,792 @@
-============================= test session starts ==============================
-platform linux -- Python 3.15.2, pytest-9.1.1, pluggy-1.6.0 -- /home/hmnf/Projects/Python/TownAndCountry/.venv/bin/python
-cachedir: .pytest_cache
-rootdir: /home/hmnf/Projects/Python/TownAndCountry
-configfile: pyproject.toml
-collecting ... collected 5 items
+===== WDI FILES IN MAIN CHECKOUT =====
+tools/__pycache__/assess_world_bank_wdi.cpython-314.pyc
+tools/__pycache__/compare_imf_weo_wdi.cpython-314.pyc
+tools/__pycache__/investigate_imf_weo_wdi_discrepancies.cpython-314.pyc
+tools/__pycache__/acquire_world_bank_wdi_snapshot.cpython-315.pyc
+tools/__pycache__/assess_wdi_macro_decomposition.cpython-315.pyc
+tools/__pycache__/assess_world_bank_wdi.cpython-315.pyc
+tools/__pycache__/build_imf_weo_wdi_decision_readiness.cpython-315.pyc
+tools/__pycache__/build_imf_weo_wdi_semantic_disposition.cpython-315.pyc
+tools/__pycache__/compare_imf_weo_wdi.cpython-315.pyc
+tools/__pycache__/investigate_imf_weo_wdi_discrepancies.cpython-315.pyc
+tools/__pycache__/acquire_world_bank_wdi_wp1_5_area.cpython-315.pyc
+tools/__pycache__/build_imf_weo_wdi_review_package.cpython-315.pyc
+tools/acquire_world_bank_wdi_snapshot.py
+tools/assess_wdi_macro_decomposition.py
+tools/assess_world_bank_wdi.py
+tools/build_imf_weo_wdi_decision_readiness.py
+tools/build_imf_weo_wdi_semantic_disposition.py
+tools/compare_imf_weo_wdi.py
+tools/investigate_imf_weo_wdi_discrepancies.py
+tools/acquire_world_bank_wdi_wp1_5_area.py
+tools/build_imf_weo_wdi_review_package.py
+===== WDI FILES IN DEVELOPMENT WORKTREE =====
+../TownAndCountry-wp15-wdi/tools/acquire_world_bank_wdi_snapshot.py
+../TownAndCountry-wp15-wdi/tools/assess_wdi_macro_decomposition.py
+../TownAndCountry-wp15-wdi/tools/assess_world_bank_wdi.py
+../TownAndCountry-wp15-wdi/tools/build_imf_weo_wdi_decision_readiness.py
+../TownAndCountry-wp15-wdi/tools/build_imf_weo_wdi_semantic_disposition.py
+../TownAndCountry-wp15-wdi/tools/compare_imf_weo_wdi.py
+../TownAndCountry-wp15-wdi/tools/investigate_imf_weo_wdi_discrepancies.py
+../TownAndCountry-wp15-wdi/tools/__pycache__/acquire_world_bank_wdi_snapshot.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/acquire_world_bank_wdi_wp1_5_area.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/normalize_world_bank_wdi_wp1_5_area.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/compare_imf_weo_wdi.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/assess_world_bank_wdi.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/build_imf_weo_wdi_decision_readiness.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/investigate_imf_weo_wdi_discrepancies.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/build_imf_weo_wdi_semantic_disposition.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/__pycache__/assess_wdi_macro_decomposition.cpython-315.pyc
+../TownAndCountry-wp15-wdi/tools/acquire_world_bank_wdi_wp1_5_area.py
+../TownAndCountry-wp15-wdi/tools/normalize_world_bank_wdi_wp1_5_area.py
+===== STATUS LOGIC IN WDI WORKTREE =====
+../TownAndCountry-wp15-wdi/docs/world-bank-icp-databank-workflow.md
+17-- Selected DataBank country dimension: 184 entries, including regional/world
+18-  benchmark aggregates.
+19-- Six series: 1000000, 9020000, 9100000, 9270000, 1501000 and 9250000.
+20-- The source missing token is `..`. It is stored as `value=NULL`,
+21:  `value_status='source_missing'`, and `missing_value_token='..'`. It is not
+22-  converted to zero, not_applicable, or estimated, and is never imputed.
+23-
+24-The selected series names and full descriptions are recorded in
+25-`reports/sources/world-bank-icp/country-mapping-review/indicator_dictionary.json`.
 
-tests/test_imf_weo_historical_candidate.py::test_complete_values_import_candidate_even_with_unverified_identity PASSED [ 20%]
-tests/test_imf_weo_historical_candidate.py::test_blank_cells_are_not_synthesized_and_unclassified_is_preserved PASSED [ 40%]
-tests/test_imf_weo_historical_candidate.py::test_wdi_presence_is_not_an_input_to_eligibility PASSED [ 60%]
-tests/test_imf_weo_historical_candidate.py::test_missing_unit_is_retained_as_null_not_inferred PASSED [ 80%]
-tests/test_imf_weo_historical_candidate.py::test_duplicate_source_series_rejected PASSED [100%]
+../TownAndCountry-wp15-wdi/docs/implementation/database.md
+315-
+316-Record the actual focused test, CLI-help and compilation results before treating this importer increment as locally validated.
+317-
+318-
+319:The normalized contract also requires `value`, `value_status`, `observation_period` and `unit` on every row. Missing status is never defaulted to `observed`; unavailable scalar values must explicitly carry JSON `null` plus `unavailable` or `not_applicable`.
+320-
+321-
+322-### WP1.5 transactional normalized observation importer
+323-
 
-============================== 5 passed in 0.11s ===============================
-{
-  "schema_version": 1,
-  "candidate_type": "imf_weo_annual_historical_observations",
-  "source_key": "imf_weo",
-  "release": "october_2026",
-  "source_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
-  "source_sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
-  "source_byte_count": 26692032,
-  "identity_registry_path": "config/country_identity_registry.json",
-  "observation_count": 42024,
-  "distinct_game_ids": 196,
-  "indicator_counts": {
-    "LUR": 4934,
-    "NGDPD": 9329,
-    "NGDPDPC": 9190,
-    "PCPIPCH": 9217,
-    "PPPGDP": 9354
-  },
-  "year_range": [
-    1980,
-    2031
-  ],
-  "exception_count": 47,
-  "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
-  "identity_policy": "retain_existing_game_id; ISO verification status is not changed",
-  "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
-  "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
-  "database_written": false,
-  "approval_created": false,
-  "candidate_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-historical-candidate/20261123T103749Z",
-  "observations_sha256": "c8f256e3388b4d7f5baf503cc40ececae153e0714204ea568ea206dc55207841",
-  "exceptions_sha256": "36fb80e80da92e45bd5498861db176cae6aa83e791e0dc1034ed6b170ce1f712"
-}
+../TownAndCountry-wp15-wdi/docs/architecture/canonical-database.md
+51-- ISO values are nullable. Alpha-2/alpha-3 syntax is checked, and `verified` status requires both codes on INSERT and UPDATE.
+52-- Candidate is the default record/import/proposal status. Approved proposals require a review timestamp. A reviewed flag requires an approved flag proposal.
+53-- Schema v2 requires a matching approved `entity_type` proposal before `entity_type_status` can become `reviewed`, a matching approved Persian localization proposal before `localization_status` can become `reviewed`, and a matching approved ISO proposal before `iso_assignment_status` can become `verified`. The existing alpha-2/alpha-3 requirement remains in force.
+54-- Geometry profiles are limited to low, medium, and high. Geometry and selected game-data payloads must be valid JSON; geometry and provenance hashes must be 64-character lowercase SHA-256 strings.
+55:- Current statistics are unique by country/statistic key. Historical statistics are not part of this current-only table contract. Schema v3 permits explicit SQL NULL only when `value_status` is `unavailable` or `not_applicable`; non-null values must be `observed`, `estimated` or `projected`. It records observation period, source reference/version, methodology and retrieval timestamp separately from the observation date.
+56-- Schema v3 adds matching provenance fields to `selected_game_data`; structured payloads remain valid JSON and retain import-level provenance.
+57-- Proposal fingerprints make repeated imports idempotent at the proposal-record level.
+58-
+59-## Local operation
+
+../TownAndCountry-wp15-wdi/docs/implementation/data-store-separation-stage-4d-wdi-macro-decomposition.md
+40-- Official exchange rates, alternative conversion factors, national accounts and PPP factors can have different reference periods, source vintages and compilation methods.
+41-- GDP per capita depends on a population denominator whose reference date and universe may not match the denominator used by the published series.
+42-- CPI index growth may differ from the inflation series because of index conventions, annual averaging and source-vintage revisions.
+43-- The WDI snapshot remains a timestamped capture of a rolling API, not a provider-declared vintage aligned with the October 2026 WEO export.
+44:- WDI observation status is preserved but not interpreted; blank status is not actual status.
+45-- Every country identity remains subject to the separate identity-governance gate.
+46-- No source priority, country override, approval, release state or Game DB value is changed.
+47-
+48-## HTTP retry hardening
+--
+115-- World Bank, [GDP (current LCU), NY.GDP.MKTP.CN](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/NY.GDP.MKTP.CN).
+116-- World Bank, [DEC alternative conversion factor, PA.NUS.ATLS](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/PA.NUS.ATLS).
+117-- World Bank, [GDP PPP conversion factor, PA.NUS.PPP](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/PA.NUS.PPP).
+118-- World Bank, [Consumer price index, FP.CPI.TOTL](https://databank.worldbank.org/metadataglossary/world-development-indicators/series/FP.CPI.TOTL).
+119:- World Bank, [WDI API response metadata and observation status](https://datahelpdesk.worldbank.org/knowledgebase/articles/1886674-new-features-and-enhancements-in-the-v2-api).
+120-
+121-
+122-## Owner-run acquisition and assessment record (2026-11-07)
+123-
+
+../TownAndCountry-wp15-wdi/docs/implementation/data-store-separation-stage-4c-semantic-disposition-matrix.md
+27-| 21 | Non-equivalent products in general | IMF unit, population, reference period and method |
+28-
+29-Country-specific evidence cases are explicitly attached for CAR, Guinea, Turkmenistan, Zimbabwe, Samoa, Tonga, Palau, Bahrain, Moldova and the Philippines. They point to the existing assessments; they do not claim that every year in a country-field series is resolved. Bahrain remains closed under its documented disposition.
+30-
+31:All identities remain governed by the identity registry. A row with an identity status other than `mapped_verified` retains an identity-review gate. IMF latest-actual metadata remains a hint. Blank WDI observation status is not converted into actual, estimate or projection. Missing observations remain missing.
+32-
+33-## Run
+34-
+35-From the repository root, using the frozen 7 November comparison:
+
+../TownAndCountry-wp15-wdi/tools/sources/wpp.py
+344-            f"UN WPP 2024 {demographic_release}; {demo_manifest.get('final_url') or demo_manifest.get('source_url')}"
+345-        )
+346-        common = {
+347-            "game_id": game_id, "source_id": loc_id, "observation_period": str(YEAR),
+348:            "value_status": status, "source_reference": reference,
+349-        }
+350-        scalar_fields = (
+351-            (1, "TPopulation1July", "people", "Population at 1 July, source thousands × 1,000."),
+352-            (2, "PopGrowthRate", "percent_per_year", "Annual population growth rate, percent per year."),
+
+../TownAndCountry-wp15-wdi/docs/implementation/data-store-separation-stage-4b-wdi-snapshot.md
+111-- Report: `reports/sources/imf-wdi-comparison/20261107T144614Z/`
+112-- Period: 2015–2025; 13,310 rows = 242 identities × 5 fields × 11 years.
+113-- Coverage: both sources 9,324; IMF only 450; WDI only 1,354; neither 2,182.
+114-- Compared with the 2026-11-05 live API matrix: no key, WDI value, IMF value, coverage, IMF status-hint or IMF reporting-period-classification changes.
+115:- WDI `obs_status` is blank in all 13,310 candidate rows. The 10,678 rows with WDI observations remain `not_classified_by_this_comparison`; 2,632 rows without a WDI observation are `missing`. Blank status does not establish actual data.
+116-
+117-Owner-run local validation: 19 focused tests passed; `compileall` completed without errors. The snapshot capture, audit, registry sync, provenance registration, database integrity checks and comparison all completed successfully.
+118-
+119-This confirms reproducibility of the captured values and coverage relative to the earlier live run. It does not establish provider vintage alignment, IMF–WDI semantic equivalence, or actual/estimate/projection status. The snapshot remains a timestamped rolling API capture, not a provider-declared vintage.
+
+../TownAndCountry-wp15-wdi/docs/implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md
+132-
+133-No universal three-way status classification is currently supported:
+134-- IMF `LATEST_ACTUAL_ANNUAL_DATA` can identify an actual-data boundary for supported WEO country series; years after it are not automatically distinguishable as estimate versus projection.
+135-- PPPGDP has no latest-actual metadata in this export.
+136:- The snapshot-backed comparison preserves WDI obs_status; only explicit API status F is labelled forecast. Blank and other statuses remain unclassified, so WDI actual/estimate status is not generally established.
+137-- National source publications can be preliminary or revised; that status must be sourced independently and retained with the country-year evidence.
+138-- Country groups and aggregates must not inherit country-level status rules.
+139-
+140-Do not populate a definitive `actual | estimate | projection` field where source metadata does not support it. Use explicit `unknown` / `not_classified` states.
+--
+144-The original 2026-11-05 comparison combined the fixed IMF October 2026 CSV export with live WDI API responses. On 2026-11-07, an immutable response snapshot was captured and replayed. The snapshot remains a timestamped rolling API capture, not a provider-declared WDI vintage; it does not align the WDI source publication vintage with the IMF October 2026 release.
+145-
+146-Owner-run capture, full manifest audit, Project DB provenance registration, database integrity checks and frozen comparison have now completed. The exact manifest, fingerprint and equivalence results are recorded in [World Bank WDI immutable API snapshot acquisition](../data-sources/world-bank-wdi-snapshot-acquisition.md). The snapshot reproduces all 13,310 candidate keys, WDI and IMF values, coverage states, IMF status hints and IMF reporting-period classifications from the 2026-11-05 live comparison. This confirms input-value stability across those two runs, not semantic equivalence between providers.
+147-
+148:The captured WDI `obs_status` field is blank for all 13,310 candidate rows. Of these, 10,678 rows have a WDI observation but remain `not_classified_by_this_comparison`; 2,632 rows have no WDI observation and are classified `missing`. No WDI observation is thereby established as actual, estimate or projection. The snapshot does not authorize redistribution beyond verified dataset/indicator terms.
+149-
+150-## 7. Remaining work, ordered by dependency
+151-
+152-1. **Freeze comparison inputs — complete:** the 2026-11-07 WDI snapshot was captured, all 14 artifacts passed byte-count and SHA-256 audit, provenance was registered in the Project DB, and the frozen comparison reproduced the 2026-11-05 live-run values and coverage exactly. Preserve both reports and the manifest as the reproducibility evidence.
+
+../TownAndCountry-wp15-wdi/tools/database/statistics_import.py
+197-        raise StatisticsImportError(
+198-            f"{label} source {source_key!r} is not the contracted primary source for field {field_id}"
+199-        )
+200-    period = _text(row.get("observation_period"), f"{label}.observation_period")
+201:    status = row.get("value_status")
+202:    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unspecified", "unavailable", "not_applicable"}:
+203:        raise StatisticsImportError(f"{label}.value_status is invalid")
+204-    if "value" not in row:
+205-        raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
+206-    value = row.get("value")
+207-    unit = row.get("unit")
+--
+228-                finite = False
+229-            if not finite:
+230-                raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
+231-            value = float(value)
+232:            if status not in {"observed", "estimated", "projected", "unspecified"}:
+233:                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected/unspecified status")
+234-    else:
+235-        if value is None or not isinstance(value, (dict, list)):
+236-            raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
+237-        if status not in {"observed", "estimated", "projected"}:
+--
+642-                        row["value"], row["unit"], None, row["period"], row["status"],
+643-                        reference, release, row["methodology"], retrieved_at, import_id,
+644-                    )
+645-                    existing = connection.execute(
+646:                        """SELECT value, unit, observed_at, observation_period, value_status,
+647-                                  source_reference, source_version, methodology, retrieved_at, import_id
+648-                           FROM current_statistics WHERE game_id = ? AND statistic_key = ?""",
+649-                        (row["game_id"], field["key"]),
+650-                    ).fetchone()
+--
+659-                        row["status"], row["period"], reference, release,
+660-                        row["methodology"], retrieved_at, import_id,
+661-                    )
+662-                    existing = connection.execute(
+663:                        """SELECT payload_json, value_status, observation_period, source_reference,
+664-                                  source_version, methodology, retrieved_at, import_id
+665-                           FROM selected_game_data WHERE game_id = ? AND data_category = 'wp1_5'
+666-                             AND data_key = ?""",
+667-                        (row["game_id"], field["key"]),
+--
+737-                    row["value"], row["unit"], None, row["period"],
+738-                    row["status"], reference, release, row["methodology"], retrieved_at, import_id,
+739-                )
+740-                existing = connection.execute(
+741:                    """SELECT value, unit, observed_at, observation_period, value_status,
+742-                              source_reference, source_version, methodology, retrieved_at, import_id
+743-                       FROM current_statistics WHERE game_id = ? AND statistic_key = ?""",
+744-                    (row["game_id"], field["key"]),
+745-                ).fetchone()
+--
+764-                                f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
+765-                            )
+766-                    connection.execute(
+767-                        """UPDATE current_statistics SET value=?, unit=?, observed_at=?, observation_period=?,
+768:                                  value_status=?, source_reference=?, source_version=?, methodology=?,
+769-                                  retrieved_at=?, import_id=?
+770-                           WHERE game_id=? AND statistic_key=?""",
+771-                        (*values, row["game_id"], field["key"]),
+772-                    )
+773-                elif existing is None:
+774-                    connection.execute(
+775-                        """INSERT INTO current_statistics
+776:                           (value, unit, observed_at, observation_period, value_status,
+777-                            source_reference, source_version, methodology, retrieved_at,
+778-                            import_id, game_id, statistic_key)
+779-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+780-                        (*values, row["game_id"], field["key"]),
+--
+786-                    payload, row["status"], row["period"], reference, release,
+787-                    row["methodology"], retrieved_at, import_id,
+788-                )
+789-                existing = connection.execute(
+790:                    """SELECT payload_json, value_status, observation_period, source_reference,
+791-                              source_version, methodology, retrieved_at, import_id
+792-                       FROM selected_game_data WHERE game_id = ? AND data_category = 'wp1_5'
+793-                         AND data_key = ?""",
+794-                    (row["game_id"], field["key"]),
+--
+813-                            raise StatisticsImportError(
+814-                                f"Refusing non-newer source snapshot to replace {row['game_id']}/{field['key']}"
+815-                            )
+816-                    connection.execute(
+817:                        """UPDATE selected_game_data SET payload_json=?, value_status=?, observation_period=?,
+818-                                  source_reference=?, source_version=?, methodology=?, retrieved_at=?, import_id=?
+819-                           WHERE game_id=? AND data_category='wp1_5' AND data_key=?""",
+820-                        (*values, row["game_id"], field["key"]),
+821-                    )
+822-                elif existing is None:
+823-                    connection.execute(
+824-                        """INSERT INTO selected_game_data
+825:                           (payload_json, value_status, observation_period, source_reference,
+826-                            source_version, methodology, retrieved_at, import_id, game_id, data_category, data_key)
+827-                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'wp1_5', ?)""",
+828-                        (*values, row["game_id"], field["key"]),
+829-                    )
+
+../TownAndCountry-wp15-wdi/tools/normalize_world_bank_wdi_wp1_5_area.py
+69-            previous = latest.get(iso3)
+70-            if previous is None or year > previous["year"]:
+71-                latest[iso3] = {
+72-                    "year": year, "value": numeric,
+73:                    "provider_status": item.get("obs_status"),
+74-                    "country_name": (item.get("country") or {}).get("value"),
+75-                }
+76-        if set(latest) != set(mapping):
+77-            missing = sorted(set(mapping) - set(latest))
+--
+84-                "source_id": iso3,
+85-                "field_id": spec["field_id"],
+86-                "value": selected["value"],
+87-                "unit": spec["unit"],
+88:                "value_status": "unspecified",
+89-                "observation_period": str(selected["year"]),
+90-                "source_reference": f"{API}/country/{iso3}/indicator/{code}?date={selected['year']}",
+91-                "methodology": (
+92-                    f"World Bank WDI indicator {code}: {spec['meaning']} "
+93-                    f"Originating source organization: {metadata.get('sourceOrganization') or 'not supplied'}. "
+94:                    "Provider obs_status is blank; value status is therefore unspecified."
+95-                ),
+96-                "provenance": {
+97-                    "wdi_iso3": iso3,
+98-                    "country_name": selected["country_name"],
+99-                    "indicator_code": code,
+100:                    "provider_obs_status": selected["provider_status"],
+101-                    "provider_source_organization": metadata.get("sourceOrganization"),
+102-                    "provider_source_note": metadata.get("sourceNote"),
+103-                    "provider_unit_metadata": metadata.get("unit"),
+104-                },
+--
+157-        "normalization": {
+158-            "policy": "latest_non_null_per_indicator_and_entity",
+159-            "indicator_counts": per_indicator,
+160-            "observation_count": len(rows),
+161:            "value_status_policy": "unspecified_when_provider_obs_status_blank",
+162-            "unmapped_candidate_codes_excluded": 29,
+163-            "null_only_code_excluded": ["XKX"],
+164-            "official_iso_identity_changed": False,
+165-        },
+
+../TownAndCountry-wp15-wdi/tools/assess_annual_ppp_lineage.py
+259-            key = (iso3, int(year))
+260-            target = wdi_index.setdefault(key, {"country_name": item.get("country", {}).get("value", "")})
+261-            target[code] = _number(item.get("value"))
+262-            target[f"{code}_present"] = True
+263:            target[f"{code}_status"] = item.get("obs_status", "")
+264-    for (code, year), item in sorted(wdi_index.items()):
+265-        if item.get("PA.NUS.PPP_present"):
+266-            lineage_rows.append({
+267-                "country_code": code, "country_name": item.get("country_name", ""), "year": year,
+--
+325-        diagnostic_rows.append({
+326-            "country_code": code, "country_name": wdi_item.get("country_name") or weo_item.get("country_name", ""),
+327-            "year": year,
+328-            "wdi_ppp_factor_lcu_per_intl_dollar": wdi_factor,
+329:            "wdi_ppp_factor_obs_status": wdi_item.get("PA.NUS.PPP_status", ""),
+330-            "wdi_gdp_current_lcu": wdi_lcu_gdp,
+331-            "wdi_gdp_current_ppp_reported": wdi_ppp_gdp,
+332-            "wdi_gdp_current_ppp_implied_from_lcu_factor": wdi_implied_ppp_gdp,
+333-            "wdi_ppp_gdp_arithmetic_ratio_reported_to_implied": (
+
+../TownAndCountry-wp15-wdi/tools/assess_wdi_macro_decomposition.py
+171-                **imf_values,
+172-            }
+173-            for code in SUPPORTING:
+174-                record = observation(code, iso3, year)
+175:                row[f"status_{code}"] = record.get("obs_status") if record else None
+176-            rows.append(row)
+177-
+178-    return {
+179-        "assessment": "wdi_macro_series_decomposition",
+
+../TownAndCountry-wp15-wdi/tools/process_world_bank_icp_history.py
+557-                info = series_by_code[indicator_code]
+558-                connection.execute(
+559-                    """INSERT INTO icp_historical_observations
+560-                       (game_id, indicator_code, indicator_name, classification_code,
+561:                        observation_year, value, value_status, missing_value_token, unit,
+562-                        source_country_code, source_country_name, source_reference,
+563-                        source_version, retrieved_at, import_id)
+564-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+565-                    (country["game_id"], indicator_code, info["indicator_name"], classification_code,
+
+../TownAndCountry-wp15-wdi/tools/acquire_world_bank_wdi_wp1_5_area.py
+401-                invalid += 1
+402-                anomalies.append({"indicator": code, "iso3": iso3, "year": year, "value": value, "reason": "non_finite_or_out_of_range"})
+403-                continue
+404-            candidate = {"iso3": iso3, "game_id": iso_to_game.get(iso3),
+405:                "year": year, "value": numeric, "obs_status": row.get("obs_status"),
+406-                "country_name": (row.get("country") or {}).get("value")}
+407-            if iso3 not in latest or year > latest[iso3]["year"]:
+408-                latest[iso3] = candidate
+409-        selected[code] = latest
+--
+433-                "country_name": item["country_name"] or "", "field_id": spec["field_id"],
+434-                "field_key": spec["key"], "indicator_code": code, "value": item["value"],
+435-                "unit": spec["unit"], "source_organization": metadata_review[code]["source_organization"],
+436-                "reference_year": item["year"],
+437:                "obs_status": item["obs_status"] or "", "mapping_status": "mapped" if item["game_id"] else "unmapped"})
+438-    output_dir = root / REPORT_BASE / loaded["manifest"]["snapshot_id"] / "candidate_validation"
+439-    output_dir.mkdir(parents=True, exist_ok=False)
+440-    csv_path = output_dir / "wdi_wp1_5_area_candidates.csv"
+441-    with csv_path.open("x", encoding="utf-8", newline="") as stream:
+442-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]) if rows else [
+443-            "game_id", "country_iso3", "country_name", "field_id", "field_key",
+444:            "indicator_code", "value", "unit", "source_organization", "reference_year", "obs_status", "mapping_status"])
+445-        writer.writeheader()
+446-        writer.writerows(rows)
+447-    report = {"assessment": "world_bank_wdi_wp1_5_area_candidate_validation",
+448-        "snapshot_id": loaded["manifest"]["snapshot_id"],
+
+../TownAndCountry-wp15-wdi/tools/wp1_5_validators/un_wpp.py
+57-            for field_id, (key, storage, unit) in FIELD_KEYS.items():
+58-                row = fields.get(field_id)
+59-                if row is None:
+60-                    continue
+61:                if row.get("unit") != unit or row.get("value_status") != "projected" or row.get("observation_period") != "2026":
+62-                    errors.append(f"{game_id}/{key}: unexpected unit, status or observation period")
+63-            pop_row = fields.get(1)
+64-            pop = pop_row.get("value") if pop_row else None
+65-            age_row, sex_row, migration = fields.get(12), fields.get(13), fields.get(14)
+--
+129-            db_errors = []
+130-            for (game_id, field_id), row in grouped.items():
+131-                if field_id in scalar_map:
+132-                    stored = connection.execute(
+133:                        "SELECT value, unit, value_status, observation_period, source_reference, methodology FROM current_statistics WHERE game_id = ? AND statistic_key = ? AND import_id = ?",
+134-                        (game_id, scalar_map[field_id], import_id),
+135-                    ).fetchone()
+136-                    if stored is None or row.get("value") is None or abs(float(stored["value"]) - float(row["value"])) > 1e-7:
+137-                        db_errors.append(f"{game_id}/{scalar_map[field_id]} differs or is missing in canonical DB")
+138-                elif field_id in {12, 13}:
+139-                    category = "wp1_5"
+140-                    data_key = "age_distribution" if field_id == 12 else "sex_distribution"
+141-                    stored = connection.execute(
+142:                        "SELECT payload_json, value_status, observation_period, source_reference FROM selected_game_data WHERE game_id = ? AND data_category = ? AND data_key = ? AND import_id = ?",
+143-                        (game_id, category, data_key, import_id),
+144-                    ).fetchone()
+145-                    if stored is None:
+146-                        db_errors.append(f"{game_id}/{data_key} missing in canonical DB")
+--
+204-                field_key, storage, _unit = FIELD_KEYS[row["field_id"]]
+205-                base = {
+206-                    "game_id": row["game_id"], "field_key": field_key,
+207-                    "source_id": "un_wpp", "release_id": str(manifest.get("release")),
+208:                    "unit": row["unit"], "status": row["value_status"],
+209-                    "observation_period": row["observation_period"],
+210-                    "source_reference": row.get("source_reference"),
+211-                    "methodology": row.get("methodology"),
+212-                    "retrieved_at": manifest.get("retrieved_at"), "value": row.get("value"),
+
+../TownAndCountry-wp15-wdi/tools/build_imf_weo_wdi_semantic_disposition.py
+325-        f"- Rows: {summary['row_count']}",
+326-        f"- Project identities: {summary['country_count']}",
+327-        "- All rows remain diagnostic and not approved.",
+328-        "- Identity review remains a separate gate.",
+329:        "- Unknown observation status is preserved; no estimate/projection inference is made.",
+330-        "",
+331-        "## Field-level gates",
+332-        "",
+333-        "| Field | Concept disposition | Required gate |",
+--
+349-        "## Coverage and interpretation",
+350-        "",
+351-        "This artifact enriches the supplied candidate matrix; it does not recompute observations or differences. Country cases are bounded to the evidence recorded in the linked assessment documents. A case disposition does not automatically validate every year in that country-field series.",
+352-        "",
+353:        "The IMF latest-actual metadata remains a hint; years after that boundary are not automatically separated into estimates and projections. WDI blank observation status remains unclassified. Missing WDI observations are labelled missing, not estimated.",
+354-        "",
+355-        "No identity was promoted, no source policy changed, no approval was created, no release was promoted, and neither database was written.",
+356-        "",
+357-    ]
+
+../TownAndCountry-wp15-wdi/tools/compare_imf_weo_wdi.py
+300-                raise ComparisonError(f"Duplicate WDI country-year: {wdi_code}/{source_code}/{year}")
+301-            wdi_values[key] = {
+302-                "value": value, "source_code": source_code,
+303-                "country_name": (row.get("country") or {}).get("value") or source_code,
+304:                "observation_status": row.get("obs_status") or None,
+305-            }
+306-
+307-        national_metadata = None
+308-        national_values: dict[tuple[str, int], dict[str, Any]] = {}
+--
+335-                national_values[national_key] = {
+336-                    "value": national_value,
+337-                    "source_code": national_iso3,
+338-                    "country_name": (national_row.get("country") or {}).get("value") or national_iso3,
+339:                    "observation_status": national_row.get("obs_status") or None,
+340-                }
+341-
+342-        imf_code = contract["imf_code"]
+343-        left = imf_data[imf_code]
+--
+371-                "imf_status_hint": a["status_hint"],
+372-                "imf_latest_actual_annual_data": a["latest_actual_annual_data"],
+373-                "imf_reporting_year_months": reporting_period,
+374-                "imf_reporting_period_classification": _reporting_period_classification(reporting_period),
+375:                "wdi_status": ("forecast_per_wdi_obs_status" if b.get("observation_status") == "F" else "not_classified_by_this_comparison"),
+376-                "wdi_observation_status": b.get("observation_status"),
+377-                "imf_unit": a.get("imf_unit"),
+378-                "imf_scale": a.get("imf_scale"),
+379-                "imf_reporting_period_type": a.get("imf_reporting_period_type"),
+--
+442-                    "wdi_observation_present": wdi_present,
+443-                    "imf_value_canonical_unit": imf_row["value"] if imf_present else None,
+444-                    "wdi_value_canonical_unit": wdi_row["value"] if wdi_present else None,
+445-                    "wdi_observation_status": wdi_row.get("observation_status") if wdi_present else None,
+446:                    "wdi_status_classification": ("forecast_per_wdi_obs_status" if wdi_row.get("observation_status") == "F" else "not_classified_by_this_comparison") if wdi_present else "missing",
+447-                    "imf_status_hint": imf_row["status_hint"] if imf_present else "missing",
+448-                    "imf_latest_actual_annual_data": imf_row["latest_actual_annual_data"] if imf_present else None,
+449-                    "imf_reporting_year_months": imf_row["reporting_year_months"] if imf_present else None,
+450-                    "imf_reporting_period_classification": (
+--
+582-        "- IMF values in Billions are converted to absolute dollars; GDP per capita and percentage series are not rescaled.",
+583-        "- IMF actual/estimate classification is only a hint from LATEST_ACTUAL_ANNUAL_DATA; fiscal-year labels and PPPGDP are unclassified.",
+584-        "- The CSV reports signed_difference (IMF minus WDI), absolute_difference, signed relative_difference_percent, and absolute_relative_difference_percent separately.",
+585-        "- Calendar-year sensitivity includes only IMF January/December reporting periods; fiscal-year and unknown-period observations are excluded without shifting year labels.",
+586:        "- WDI observation status is retained verbatim; only explicit API status F is labelled forecast. Other statuses remain unclassified. A live API run may change between runs.",
+587-        "- For field 21, SL.UEM.TOTL.NE.ZS is included as a separate national-estimate diagnostic; it is not treated as interchangeable with the ILO-modelled SL.UEM.TOTL.ZS series.",
+588-        "- Field 21 retains country-specific IMF WEO unit, source, employment-definition, methodology-note, latest-actual and update-date metadata. Blank metadata remains unknown, not inferred.",
+589-        "- Fields 18, 20 and 21 require explicit definition review before a policy decision; PPP benchmark, CPI period convention and unemployment methodology/unit remain material caveats.",
+590-        "- `candidate_matrix.csv` is a rectangular project-identity × field × year grid; missing observations are explicit, and identity verification remains separately flagged.",
+
+../TownAndCountry-wp15-wdi/tools/build_imf_weo_wdi_decision_readiness.py
+87-        "readiness": "blocked_semantic_and_identity_gates",
+88-        "blockers": [
+89-            "IMF LUR unit is blank in the acquired WEO export; reference population and period need country-level verification.",
+90-            "WDI modelled ILO estimates and WDI national estimates are distinct products, neither automatically interchangeable with WEO.",
+91:            "WDI observation status is unclassified for all present observations in this snapshot.",
+92-        ],
+93-        "next_actions": [
+94-            "Establish IMF LUR unit, reference population and annual aggregation for each country.",
+95-            "Keep modelled and national-estimate WDI indicators separate in any future comparison.",
+--
+114-    },
+115-    {
+116-        "gate": "observation_status",
+117-        "status": "blocking_for_status_sensitive_use",
+118:        "finding": "WDI provides no explicit observation status in this capture; IMF latest-actual metadata is only a boundary hint and does not classify later years as projections.",
+119-        "action": "Preserve unclassified/missing states; obtain explicit source status or country-specific evidence before classifying actual, estimate or projection.",
+120-    },
+121-    {
+122-        "gate": "approval_and_application",
+
+../TownAndCountry-wp15-wdi/docs/data-sources/wp1-5-sources.md
+65-- **UN WPP 2024:** its country/area universe does not match the 242 persistent game identities. Build an explicit crosswalk and preserve uncovered identities as missing; do not synthesize data.
+66-- **Pew religion estimates:** the dataset covers 201 countries/territories with populations of at least 100,000 in 2010 or 2020. It reports seven broad categories and recommends rounded counts for reporting small groups. Do not convert small rounded categories into false precision.
+67-- **Climate:** Köppen-Geiger is spatially distributed. A country may contain multiple classes. Any country-level representation must be a reproducible area-weighted distribution using the chosen project geometry and raster vintage.
+68-- **Natural resources:** USGS MCS covers more than 90 nonfuel mineral commodities, but country/commodity metrics are not uniformly available and it is not a complete inventory of all natural resources. A missing source row is not evidence of absence.
+69:- **Macroeconomics:** IMF WEO contains historical observations, estimates and projections. Preserve the WEO release vintage and observation status; do not label every value in the newest release as an observed actual.
+70-- **Area:** World Bank surface area includes inland waters; land area excludes inland waters. They are distinct fields.
+71-- **Population density:** prefer a source-published indicator. If derived, use population and land area for aligned reference periods and retain the formula and input references.
+72-- **Governance:** WGI scores are perception-based estimates. Its usage advisory restricts redistribution/republication of certain standardized values derived from third-party proprietary sources without authorization.
+73-- **Military:** IISS is a subscription publication candidate. SIPRI military expenditure data is downloadable, but commercial use requires authorization/licensing.
+--
+184-      "game_id": "tc_0123456789abcdef0123456789abcdef",
+185-      "source_id": "4",
+186-      "field_id": 1,
+187-      "value": 42000000,
+188:      "value_status": "estimated",
+189-      "observation_period": "2024",
+190-      "unit": "people",
+191-      "methodology": "Provider-reported total population"
+192-    },
+--
+194-      "game_id": "tc_0123456789abcdef0123456789abcdef",
+195-      "source_id": "4",
+196-      "field_id": 12,
+197-      "value": {"0-4": 3500000, "5-9": 3400000},
+198:      "value_status": "estimated",
+199-      "observation_period": "2024",
+200-      "unit": "age_band_share_or_count"
+201-    }
+202-  ]
+203-}
+204-\`\`\`
+205-
+206:Use the provider's exact source identifier in \`source_id\`; \`game_id\` must match the same pair in the explicit crosswalk. The \`field_id\` must be one of the 41 selected IDs and the source must match that field's declared primary source. Scalar \`value\` must be a finite number, or JSON null with \`value_status\` set to \`unavailable\` or \`not_applicable\`. Structured \`value\` must be a finite JSON object or array. The importer stores scalar values in \`current_statistics\` and structured values in \`selected_game_data\`.
+207-
+208-The importer verifies the captured raw file against the manifest checksum, release and source key; validates the crosswalk and canonical database identities; persists crosswalk mappings in \`country_sources\`; and writes observations plus dataset provenance in one SQLite transaction. It rejects duplicate country/field rows, wrong-source fields, identity conflicts, and overwrites from a different provider. A later release from the same provider may replace that provider's current observation while preserving the prior dataset-import provenance row. Imported records remain candidate data; no verification/review status is promoted.
+209-
+210-Run:
+--
+242-The interim update is dated 19 January 2026 and corrects Togo population estimates and medium projections using newly available 2022 census results. The UN says other locations and global/regional aggregates are unchanged. Apply its matching `*_Update.csv` rows only to Togo; do not replace the full base dataset with this Togo-only bundle. It includes updated demographic-indicator, total-population-by-sex and population-by-age/sex files. The next WPP revision was postponed to 11 July 2027, so this is the latest published WPP revision/update identified in this source review.
+243-
+244-The exact URLs, filenames, release keys, field IDs and rights metadata are machine-readable under `sources.un_wpp.downloads` in `config/wp1_5_data_sources.json`. Capture each file as its own immutable acquisition snapshot using the release key shown above. Use terms URL `https://population.un.org/wpp/`, licence status `CC BY 3.0 IGO`, and attribution: United Nations, Department of Economic and Social Affairs, Population Division (2024). *World Population Prospects 2024, Online Edition*.
+245-
+246:Do not implement the WPP adapter until the owner has acquired these snapshots and the actual CSV headers/notes have been inspected locally. In particular, WPP's population, age/sex counts and net-migration counts are expressed in thousands: normalize count values to the canonical unit (people) by multiplying by 1,000, and record the conversion in each row's methodology. Growth remains percent per year and median age remains years. Distinguish historical estimates (through 2023) from medium-variant projections (2024 onward). For the current-statistics snapshot, the source contract selects **2026, Medium variant** for the WPP fields and requires `value_status=projected`; do not label these values as observed. This selection is recorded in `sources.un_wpp.selected_current_period`, `selected_variant` and `selected_value_status`. Population density is not sourced from WPP under this contract; field 3 remains World Bank WDI.
+247-
+248-
+249-### WPP acquisition commands
+250-
+--
+307-- WPP home and coverage description: https://population.un.org/wpp/
+308-- Licence: https://creativecommons.org/licenses/by/3.0/igo/
+309-
+310-
+311:Every normalized observation must explicitly include `value`, `value_status`, `observation_period` and `unit`. The importer does not default a missing status to `observed`, because that could misclassify an estimate or projection. For a scalar unavailable value, include `"value": null` and an explicit `unavailable` or `not_applicable` status. A missing `value` property is invalid.
+312-
+313-
+314-Acquire the two small metadata tables as separate snapshots as well; they define indicator codes/units and location notes used by the parser and crosswalk review:
+315-
+--
+351-      "source_id": "4",
+352-      "field_id": 1,
+353-      "value": 1234000,
+354-      "unit": "people",
+355:      "value_status": "projected",
+356-      "observation_period": "2026",
+357-      "source_reference": "WPP2024 demographic indicator; 2026 mid-year",
+358-      "methodology": "Source value in thousands multiplied by 1,000."
+359-    }
+
+../TownAndCountry-wp15-wdi/docs/data-sources/field-21-unemployment-comparability-assessment.md
+65-
+66-1. Keep field 21's existing `imf_weo` priority-source assignment unchanged.
+67-2. Do not promote WDI `SL.UEM.TOTL.ZS` to priority or fallback solely on the basis of its modelled status.
+68-3. Do not create country-specific manual overrides from this investigation.
+69:4. Keep country-level source/methodology metadata and observation status in the evidence trail.
+70-5. If a future source-policy change is proposed, first acquire immutable WDI snapshots and the relevant national source vintages, compare exact reference periods/population universes, and prepare a separate compatibility review and approval artifact.
+71-
+72-This assessment is evidence and interpretation only. It does not change source registry entries, source-selection policy, approvals, release ledgers, or canonical SQLite. No WP1.5 observations are imported or promoted by this document.
+73-
+
+../TownAndCountry-wp15-wdi/docs/data-sources/world-bank-wdi-wp1-5-area-acquisition.md
+75-
+76-- excludes WDI aggregates using the captured country catalogue's region classification;
+77-- rejects duplicate ISO3/year observation keys and flags invalid, non-finite or out-of-range values;
+78-- retains null-row counts and missing coverage rather than filling values;
+79:- selects the latest non-null observation independently for each indicator and ISO3, retaining the reference year and raw `obs_status`;
+80-- maps ISO3 to `game_id` only through the supplied crosswalk;
+81-- checks surface area against land area only when both selected observations have the same reference year.
+82-
+83-Candidate output is written under `reports/sources/world-bank-wdi-wp1-5-area/<snapshot_id>/candidate_validation/`, including `assessment.json`, `assessment.md` and `wdi_wp1_5_area_candidates.csv`.
+84-
+85:A blank `obs_status` is not interpreted as actual. Different indicators can have different latest reference years. The same-year surface/land check is a consistency diagnostic, not an assertion that all country areas must match an external geometry dataset.
+86-
+87-## 4. Review and approval boundary
+88-
+89-This workflow does **not**:
+--
+122-### Captured coverage audit
+123-
+124-For each indicator, the capture contains 2,926 rows: 2,871 rows with valid ISO3 identifiers and 55 rows with blank ISO3. The 55 blank-ISO3 rows all use WDI country ID `XD` and represent five income-group aggregates (High income, Low income, Lower middle income, Not classified, Upper middle income), each over 11 years. Among valid-ISO3 rows, 484 are region-`NA` aggregates (44 aggregate IDs × 11 years), leaving 2,387 non-aggregate observations (217 ISO3 identifiers × 11 years). There are zero duplicate (ISO3, year) keys and zero unknown ISO3 values among the valid-ISO3 rows. This is a structural panel audit; it does not assert that every observation value is non-null or that every source entity is eligible for the game catalogue.
+125-
+126:All three indicators have the same row structure. The observation `obs_status` values are blank in the captured rows; blank is preserved and must not be interpreted as actual. The validator selects the latest non-null observation separately per indicator, so the selected reference years may differ.
+127-
+128-### Source definitions and licensing
+129-
+130-- `EN.POP.DNST`: midyear population divided by land area; people per square kilometre of land area. The metadata cites FAO population estimates and World Bank population estimates.
+
+../TownAndCountry-wp15-wdi/docs/data-sources/imf-weo-wdi-comparison.md
+45-- `diagnostic_only_not_approved` semantic status.
+46-
+47-An identity is marked `mapped_verified` only when the registry record is approved and its ISO assignment is verified. Existing proposed/unverified identities remain visible as `mapped_review_required`; the comparison does not promote or repair them. Missing source codes and ambiguous code assignments remain explicit. Therefore, a populated comparison row does not itself establish an approved country identity.
+48-
+49:The matrix is a coverage and review instrument, not an import file. It preserves WDI observation status; only explicit API status F is labelled forecast, while blank/other statuses remain unclassified. The IMF `after_latest_actual` hint does not distinguish estimates from projections. PPPGDP remains unclassified because its WEO export has no latest-actual metadata. Field 20/21 reporting-period blanks remain unknown unless independently corroborated by the existing country investigations.
+50-
+51-## Matching and normalization
+52-
+53-- IMF source identifiers and WDI ISO3 codes are independently resolved through the existing country identity registry to `game_id`. No new identity assignment or ISO approval is made.
+54-- WDI aggregate regions are excluded using the World Bank country catalogue's region classification.
+55-- IMF GDP and PPP GDP are published in billions in this WEO export; the comparison multiplies those values by 1,000,000,000. GDP per capita and percentage values are not rescaled.
+56-- Only country-year pairs present and non-null in both sources are numerically compared.
+57-- The report separately counts IMF-only and WDI-only country-years and lists source codes that cannot be resolved through the existing registry.
+58:- The report retains WDI `obs_status` verbatim and labels only the documented explicit `F` status as forecast; all other values remain unclassified.
+59-- The CSV distinguishes `signed_difference` (IMF minus WDI), `absolute_difference`, signed `relative_difference_percent`, and `absolute_relative_difference_percent`. A zero WDI denominator produces a null relative difference rather than an infinite value.
+60-- Summary percentiles and threshold counts use absolute relative differences. The 5% and 20% markers are descriptive, not acceptance thresholds.
+61-- Each row classifies IMF reporting metadata as `calendar_year` only for the exact `January/December` value, `non_calendar_fiscal_year` when another reporting period is supplied, or `unknown` when blank.
+62-- The report includes a calendar-year-only sensitivity summary using only January/December IMF rows. Fiscal-year and unknown-period rows are excluded; year labels are never shifted or interpreted as fiscal-year end dates.
+--
+149-    uv run python -m tools.acquire_world_bank_wdi_snapshot --start-year 2015 --end-year 2025
+150-    set manifest (find data_manifests/sources/world_bank_wdi/wdi_selected_macro_indicators -type f -name '*.json' | sort | tail -n 1)
+151-    uv run python -m tools.compare_imf_weo_wdi --start-year 2015 --end-year 2025 --wdi-snapshot-manifest $manifest
+152-
+153:Snapshot mode verifies every artifact SHA-256 and byte count, checks all six captured indicator bundles and country metadata, and rejects incomplete pagination or a mismatched year range. It records the WDI manifest path/hash, snapshot ID and retrieval timestamp in the comparison report. It also preserves the raw WDI observation status; only an explicit F is labelled forecast. A blank status does not prove an observation is actual.
+154-
+155-The captured six-indicator bundle includes the five primary comparisons and SL.UEM.TOTL.NE.ZS as a separate field-21 national-estimate diagnostic. Snapshot capture and Project DB provenance registration do not semantically validate or approve any value. See the dedicated acquisition document for the exact audit, registration and test commands.
+156-
+157-
+--
+160-The immutable WDI snapshot `api_snapshot_20261107T133112433299Z` was captured at `2026-11-07T13:31:36.501505+00:00`, audited successfully (14/14 response artifacts; zero errors), and registered in the Project DB as acquisition ID 6 with integrity status `verified`. The Project DB integrity check returned `ok` and its foreign-key check returned no violations.
+161-
+162-The snapshot-backed comparison is in `reports/sources/imf-wdi-comparison/20261107T144614Z/`. It produced the same 13,310 candidate keys and the same coverage counts as the 2026-11-05 live-API comparison: both sources 9,324; IMF only 450; WDI only 1,354; neither 2,182. A row-key comparison found zero additions or removals, and value-level comparison found zero changes in WDI values, IMF values, coverage states, IMF status hints or IMF reporting-period classifications.
+163-
+164:The snapshot's WDI `obs_status` is blank for all 13,310 candidate rows. The 10,678 rows with a WDI observation are therefore `not_classified_by_this_comparison`; 2,632 rows without a WDI observation are `missing`. Blank observation status is not evidence of actual data. No actual/estimate/projection classification is inferred.
+165-
+166-This establishes reproducibility of the values and coverage between the two comparison runs. It does not make the rolling WDI API snapshot a provider-declared vintage, align it with the fixed IMF October 2026 vintage, or demonstrate semantic equivalence. Existing five-field source-selection priorities and all approval/application gates remain unchanged. See the [Stage 4 assessment](../implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md) and [WDI snapshot acquisition record](world-bank-wdi-snapshot-acquisition.md).
+167-
+168-
+169-## Semantic disposition matrix
+170-
+171-The read-only enrichment tool `tools/build_imf_weo_wdi_semantic_disposition.py` adds explicit identity, concept, period, methodology, observation-status, country-case, field-gate and evidence-document dispositions to every row of a frozen `candidate_matrix.csv`. It preserves the original values and coverage states. The tool's rules are documented in [Stage 4C semantic disposition matrix](../implementation/data-store-separation-stage-4c-semantic-disposition-matrix.md).
+172-
+173:The country-case register reuses existing evidence for CAR, Guinea, Turkmenistan, Zimbabwe, Samoa, Tonga, Palau, Bahrain, Moldova and the Philippines. It does not claim all years resolved. Bahrain's established disposition remains closed. Identity approval remains separate, WDI blank observation status remains unclassified, and all generated rows remain diagnostic/not approved.
+
+../TownAndCountry-wp15-wdi/docs/data-sources/world-bank-wdi-snapshot-acquisition.md
+92-The comparison loader verifies every response SHA-256 and byte count, checks that all required indicator and country metadata are present, and verifies complete page numbering before using the captured observations. The report records the WDI manifest path, manifest SHA-256, snapshot ID and retrieval timestamp. It retains the rectangular country × field × year candidate matrix.
+93-
+94-A snapshot with a different year range is rejected rather than silently clipped or expanded. The existing live-API mode remains available for exploration, but must be labelled live_rolling_api_not_immutable_snapshot and must not be used as the frozen comparison evidence.
+95-
+96:The API's obs_status is preserved in the comparison output. Only an explicit F status is labelled as forecast; other or blank statuses remain unclassified. Do not infer that a blank status means actual.
+97-
+98-## 6. Licensing and attribution
+99-
+100-World Bank dataset terms state that CC BY 4.0 is the default for datasets produced by the World Bank. The same terms explicitly warn that some indicators contain third-party data with different restrictions. Accordingly:
+--
+156-The frozen comparison report is `reports/sources/imf-wdi-comparison/20261107T144614Z/`. It contains 13,310 candidate rows (242 identities × five fields × 11 years), with coverage counts: both sources 9,324; IMF only 450; WDI only 1,354; neither 2,182.
+157-
+158-Comparison with the 2026-11-05 live API run found identical row keys and zero changes to WDI values, IMF values, coverage states, IMF status hints or IMF reporting-period classifications. This confirms value/coverage stability between those two runs; it does not prove semantic comparability or vintage alignment.
+159-
+160:The snapshot-backed matrix contains a blank WDI `obs_status` for all 13,310 rows. Of these, 10,678 rows contain WDI observations and remain `not_classified_by_this_comparison`; 2,632 rows have no WDI observation and are `missing`. No WDI observation is thereby established as actual, estimate or projection.
+161-
+162-Owner-run focused validation passed 19 tests; `compileall` completed without errors. The live capture, audit, synchronization, registration, database integrity checks and frozen comparison all completed successfully.
+163-
+164-
+
+../TownAndCountry-wp15-wdi/docs/data-sources/world-bank-icp-multicycle-acquisition.md
+357-- large year-to-year breaks in those factor ratios.
+358-
+359-The explicit triage thresholds are 0.5% for the WDI arithmetic identity, 5% for a persistent PPP-GDP gap, 1% relative median absolute deviation plus a median factor-ratio deviation greater than 1% from unity for a stable off-unity factor-ratio flag, and 25% for a year-to-year factor-ratio break. Stable ratios close to 1.0 are treated as neutral rather than anomalous. A stable off-unity ratio is flagged only when at least three values are available and no large adjacent-year break is present. At least three consecutive years are required for a persistent-gap flag; at least three observed years are required for a stable-ratio flag. The CSV records the actual years exceeding both the WDI arithmetic-mismatch threshold and the WDI/WEO PPP-GDP gap threshold, so a low full-period median does not hide a historical consecutive run. These thresholds prioritize review; they are not claims of source error, unit equivalence or currency redenomination. The Markdown report shows up to 25 prioritized flagged countries, while the CSV retains the full country screen. Zimbabwe is included in the same global output and is not given a special calculation path.
+360-
+361:- `annual_ppp_lineage.csv`: source/release-specific ICP GDP PPP factors, WDI annual PPP conversion factors and current-PPP GDP, WEO current-PPP GDP, and a separately identified WEO NGDP/PPPGDP derived factor. Country, year, source release, lineage role, unit, source file/row and observation status are retained.
+362-- `country_year_diagnostics.csv`: WDI reported PPP GDP versus the LCU/PPP-factor arithmetic reconstruction, and WDI factors versus the WEO-implied factor. Ratios are explicitly arithmetic diagnostics, not assertions of semantic equivalence.
+363-- `country_reconciliation_screen.csv`: global one-row-per-country screening of arithmetic mismatches, persistent WDI/WEO PPP-GDP gaps, stable off-unity factor-ratio patterns and abrupt factor-ratio breaks.
+364-- `assessment.json` and `assessment.md`: input fingerprints, source coverage, interpretation limits, side-effect declaration and a Zimbabwe diagnostic table plus a global country-screen summary.
+365-
+--
+441-| Country-specific unit and denomination findings (Sierra Leone and Somalia) | Sierra Leone's stable approximately 0.001 factor ratio is consistent with the documented 1:1,000 Leone redenomination; retain source values and units without rescaling. Somalia's WEO NGDP is confirmed as USD-denominated from official national accounts despite the generic `Domestic currency` label, so it is excluded from WEO LCU factor derivation. The Somalia factor-ratio signal is removed; Sierra Leone's stable off-unity signal remains visible as a documented denomination difference. Neither interpretation clears either country's separate PPPGDP level-gap flag. |
+442-| Stable Pacific off-unity ratios | Benchmark/imputation comparability is plausible but not confirmed country by country. Do not normalize or apply a regional adjustment. |
+443-| Other WDI/WEO PPPGDP gaps | Retain as source-vintage comparison flags unless a specific country-year revision is documented. |
+444-
+445:No values were corrected in this review. No country is cleared of a same-source WDI arithmetic mismatch merely because it experienced war, sanctions, inflation or GDP rebasing. For unresolved rows, the next defensible check is a release-by-release comparison of nominal GDP, PPP factor, PPPGDP, currency unit and observation status—not a blanket adjustment.
+446-
+447-
+448-### Follow-up: same-source arithmetic and currency-unit reconciliation (2026-11-17)
+449-
+===== WP1.5 NORMALIZED DATA CONTRACT =====
+8-
+9-WP1.5 covers the 41 selected data fields in `config/wp1_5_data_sources.json`. Natural Earth remains a geographic/cartographic source only. It is not used for statistics, economic classifications, demographics, or other WP1.5 values.
+10-
+11-The canonical join key is the existing persistent `game_id`. Provider identifiers (ISO codes, UN M49 codes, World Bank codes, IMF codes, and source-specific IDs) are crosswalk attributes, not replacement identities. Every source import must carry an explicit, reviewed country crosswalk. Do not join by display name alone.
+12-
+13:The project stores one current observation per country/statistic, not a full historic time series. Each observation must retain its source reference period and source edition/vintage. A publication or retrieval date is not a substitute for the period measured. Actual, estimated and projected values must remain distinguishable. A null value may be stored only with an explicit `unavailable` or `not_applicable` status; absent rows remain missing and are included in the single final completeness audit. Importers must not infer or fill missing values.
+14-
+15-Raw source downloads remain local and are not committed. Git tracks source contracts, acquisition manifests, URLs, retrieval timestamps, release identifiers and SHA-256 checksums. A raw snapshot is immutable once captured; a new release creates a new snapshot rather than overwriting the old one.
+16-
+17-## Field/source matrix
+18-
+--
+23-| 3 | population_density | `world_bank_wdi` | scalar | Prefer published indicator; derivation requires aligned population and land-area periods |
+24-| 6 | median_age | `un_wpp` | scalar | Reference year |
+25-| 12 | age_distribution | `un_wpp` | structured | Preserve age-band boundaries, sex scope and units |
+26-| 13 | sex_distribution | `un_wpp` | structured | Preserve source categories and reference year |
+27-| 14 | net_migration | `un_wpp` | scalar | Select either net migrant count or rate; never mix |
+28:| 15 | gdp | `imf_weo` | scalar | Current-price GDP; retain currency/scale and actual/estimate/projected status |
+29-| 16 | gdp_per_capita | `imf_weo` | scalar | Current-price per-capita measure |
+30-| 18 | gdp_ppp | `imf_weo` | scalar | PPP basis and WEO vintage |
+31-| 20 | inflation | `imf_weo` | scalar | Distinguish annual-average from end-period CPI |
+32-| 21 | unemployment | `imf_weo` | scalar | Preserve source definition and status |
+33-| 22 | labour_force | `ilostat` | scalar | Age/sex scope and reference year |
+--
+66-
+67-- **UN WPP 2024:** its country/area universe does not match the 242 persistent game identities. Build an explicit crosswalk and preserve uncovered identities as missing; do not synthesize data.
+68-- **Pew religion estimates:** the dataset covers 201 countries/territories with populations of at least 100,000 in 2010 or 2020. It reports seven broad categories and recommends rounded counts for reporting small groups. Do not convert small rounded categories into false precision.
+69-- **Climate:** Köppen-Geiger is spatially distributed. A country may contain multiple classes. Any country-level representation must be a reproducible area-weighted distribution using the chosen project geometry and raster vintage.
+70-- **Natural resources:** USGS MCS covers more than 90 nonfuel mineral commodities, but country/commodity metrics are not uniformly available and it is not a complete inventory of all natural resources. A missing source row is not evidence of absence.
+71:- **Macroeconomics:** IMF WEO contains historical observations, estimates and projections. Preserve the WEO release vintage and observation status; do not label every value in the newest release as an observed actual.
+72-- **Area:** World Bank surface area includes inland waters; land area excludes inland waters. They are distinct fields.
+73-- **Population density:** prefer a source-published indicator. If derived, use population and land area for aligned reference periods and retain the formula and input references.
+74-- **Governance:** WGI scores are perception-based estimates. Its usage advisory restricts redistribution/republication of certain standardized values derived from third-party proprietary sources without authorization.
+75-- **Military:** IISS is a subscription publication candidate. SIPRI military expenditure data is downloadable, but commercial use requires authorization/licensing.
+76-- **Protected areas:** Protected Planet prohibits commercial use without prior written permission and restricts redistribution of its database materials. The project must not assume that derived or aggregated outputs are exempt.
+--
+185-    {
+186-      "game_id": "tc_0123456789abcdef0123456789abcdef",
+187-      "source_id": "4",
+188-      "field_id": 1,
+189-      "value": 42000000,
+190:      "value_status": "estimated",
+191-      "observation_period": "2024",
+192-      "unit": "people",
+193-      "methodology": "Provider-reported total population"
+194-    },
+195-    {
+196-      "game_id": "tc_0123456789abcdef0123456789abcdef",
+197-      "source_id": "4",
+198-      "field_id": 12,
+199-      "value": {"0-4": 3500000, "5-9": 3400000},
+200:      "value_status": "estimated",
+201-      "observation_period": "2024",
+202-      "unit": "age_band_share_or_count"
+203-    }
+204-  ]
+205-}
+206-\`\`\`
+207-
+208:Use the provider's exact source identifier in \`source_id\`; \`game_id\` must match the same pair in the explicit crosswalk. The \`field_id\` must be one of the 41 selected IDs and the source must match that field's declared primary source. Scalar \`value\` must be a finite number, or JSON null with \`value_status\` set to \`unavailable\` or \`not_applicable\`. Structured \`value\` must be a finite JSON object or array. The importer stores scalar values in \`current_statistics\` and structured values in \`selected_game_data\`.
+209-
+210-The importer verifies the captured raw file against the manifest checksum, release and source key; validates the crosswalk and canonical database identities; persists crosswalk mappings in \`country_sources\`; and writes observations plus dataset provenance in one SQLite transaction. It rejects duplicate country/field rows, wrong-source fields, identity conflicts, and overwrites from a different provider. A later release from the same provider may replace that provider's current observation while preserving the prior dataset-import provenance row. Imported records remain candidate data; no verification/review status is promoted.
+211-
+212-Run:
+213-
+--
+243-
+244-The interim update is dated 19 January 2026 and corrects Togo population estimates and medium projections using newly available 2022 census results. The UN says other locations and global/regional aggregates are unchanged. Apply its matching `*_Update.csv` rows only to Togo; do not replace the full base dataset with this Togo-only bundle. It includes updated demographic-indicator, total-population-by-sex and population-by-age/sex files. The next WPP revision was postponed to 11 July 2027, so this is the latest published WPP revision/update identified in this source review.
+245-
+246-The exact URLs, filenames, release keys, field IDs and rights metadata are machine-readable under `sources.un_wpp.downloads` in `config/wp1_5_data_sources.json`. Capture each file as its own immutable acquisition snapshot using the release key shown above. Use terms URL `https://population.un.org/wpp/`, licence status `CC BY 3.0 IGO`, and attribution: United Nations, Department of Economic and Social Affairs, Population Division (2024). *World Population Prospects 2024, Online Edition*.
+247-
+248:Do not implement the WPP adapter until the owner has acquired these snapshots and the actual CSV headers/notes have been inspected locally. In particular, WPP's population, age/sex counts and net-migration counts are expressed in thousands: normalize count values to the canonical unit (people) by multiplying by 1,000, and record the conversion in each row's methodology. Growth remains percent per year and median age remains years. Distinguish historical estimates (through 2023) from medium-variant projections (2024 onward). For the current-statistics snapshot, the source contract selects **2026, Medium variant** for the WPP fields and requires `value_status=projected`; do not label these values as observed. This selection is recorded in `sources.un_wpp.selected_current_period`, `selected_variant` and `selected_value_status`. Population density is not sourced from WPP under this contract; field 3 remains World Bank WDI.
+249-
+250-
+251-### WPP acquisition commands
+252-
+253-Run each snapshot separately; the distinct release keys prevent the acquisition utility's immutable-manifest collision. These commands use the verified official direct-download URLs and the WPP attribution/licence metadata:
+--
+308-- Download catalogue: https://population.un.org/wpp/assets/downloads.json
+309-- WPP home and coverage description: https://population.un.org/wpp/
+310-- Licence: https://creativecommons.org/licenses/by/3.0/igo/
+311-
+312-
+313:Every normalized observation must explicitly include `value`, `value_status`, `observation_period` and `unit`. The importer does not default a missing status to `observed`, because that could misclassify an estimate or projection. For a scalar unavailable value, include `"value": null` and an explicit `unavailable` or `not_applicable` status. A missing `value` property is invalid.
+314-
+315-
+316-Acquire the two small metadata tables as separate snapshots as well; they define indicator codes/units and location notes used by the parser and crosswalk review:
+317-
+318-```fish
+--
+352-      "game_id": "tc_0123456789abcdef0123456789abcdef",
+353-      "source_id": "4",
+354-      "field_id": 1,
+355-      "value": 1234000,
+356-      "unit": "people",
+357:      "value_status": "projected",
+358-      "observation_period": "2026",
+359-      "source_reference": "WPP2024 demographic indicator; 2026 mid-year",
+360-      "methodology": "Source value in thousands multiplied by 1,000."
+361-    }
+362-  ]
