@@ -116,6 +116,30 @@ def test_audit_rejects_unsafe_artifact_paths(tmp_path, unsafe):
     assert result["manifests"][0]["artifacts"][0]["issues"][0]["code"] == "unsafe_path"
 
 
+def test_audit_supports_project_bundle_identity_and_additional_inputs(tmp_path):
+    primary = _artifact(tmp_path, "raw/primary.csv")
+    supporting = _artifact(tmp_path, "raw/appendix.pdf")
+    _write_manifest(tmp_path, "data_manifests/sources/sample/project_bundle.json", {
+        "source_key": "sample",
+        "dataset": "project_dataset",
+        "release": "2026-10",
+        **primary,
+        "additional_inputs": [supporting],
+    })
+
+    result = audit_manifests(repository_root=tmp_path)
+    assert result["status"] == "ok"
+    assert result["valid_manifest_count"] == 1
+    assert result["artifact_count"] == 2
+    manifest = result["manifests"][0]
+    assert manifest["source_id"] == "sample"
+    assert manifest["dataset_key"] == "project_dataset"
+    assert [item["path"] for item in manifest["artifacts"]] == [
+        "raw/primary.csv",
+        "raw/appendix.pdf",
+    ]
+
+
 def test_repository_manifests_have_supported_layouts_and_valid_artifact_fingerprints():
     result = audit_manifests()
     # Repository snapshots grow over time; assert the committed baseline,
