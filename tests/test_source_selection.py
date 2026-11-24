@@ -297,3 +297,15 @@ def test_validation_cli_reports_policy_counts(capsys):
     assert "priority_source: 36" in output
     assert "primary_with_fallback: 5" in output
     assert "custom_mixture: 0" in output
+
+
+
+def test_unclassified_status_is_valid_for_populated_scalar_observations(policy, registry):
+    candidate = observation(status="unclassified", value=1234)
+    result = resolve_field(
+        policy, registry, game_id="tc_example", field_key="population",
+        observations=[candidate], release_states={"un_wpp": "wpp-2024"},
+    )
+    assert result["value"] == 1234
+    assert result["selection_status"] == "unclassified"
+    assert result["selected_source"] == "un_wpp"
