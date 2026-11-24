@@ -39,6 +39,12 @@ def _migration_files(migrations_dir: str | Path) -> list[tuple[int, str, Path]]:
     return migrations
 
 
+def latest_schema_version(migrations_dir: str | Path = DEFAULT_MIGRATIONS_DIR) -> int:
+    """Return the highest registered migration version (zero when none exist)."""
+    migrations = _migration_files(migrations_dir)
+    return migrations[-1][0] if migrations else 0
+
+
 def current_schema_version(connection: sqlite3.Connection) -> int:
     exists = connection.execute(
         "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'schema_migrations'"
