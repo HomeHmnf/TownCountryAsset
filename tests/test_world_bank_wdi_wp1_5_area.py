@@ -236,4 +236,7 @@ def test_normalizer_uses_crosswalk_dataset_not_acquisition_storage_key(tmp_path,
     assert result["dataset"] == area.CROSSWALK_DATASET
     assert result["acquisition_dataset"] == area.DATASET_KEY
     assert result["observations"] == 187 * len(area.INDICATORS)
+    assert {row["value_status"] for row in normalized["observations"]} == {"unclassified"}
+    assert {row["provenance"]["provider_obs_status"] for row in normalized["observations"]} == {""}
+    assert import_manifest["value_status_policy"] == "unclassified_when_provider_obs_status_blank"
 
