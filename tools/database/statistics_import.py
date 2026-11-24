@@ -15,6 +15,9 @@ from pathlib import Path
 from typing import Any
 
 from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
+from tools.database.observation_contract import (
+    ALLOWED_VALUE_STATUSES, validate_observation_value,
+)
 from tools.database.application_approval import (
     ApplicationApprovalError,
     build_application_artifact,
@@ -199,7 +202,7 @@ def _validate_observation(
         )
     period = _text(row.get("observation_period"), f"{label}.observation_period")
     status = row.get("value_status")
-    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
+    if not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
         raise StatisticsImportError(f"{label}.value_status is invalid")
     if "value" not in row:
         raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
@@ -229,13 +232,17 @@ def _validate_observation(
             if not finite:
                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
             value = float(value)
-            if status not in {"observed", "estimated", "projected"}:
-                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected status")
+            if not validate_observation_value(value, status, "scalar"):
+                raise StatisticsImportError(
+                    f"{label} populated scalar has an invalid value/status combination"
+                )
     else:
         if value is None or not isinstance(value, (dict, list)):
             raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
-        if status not in {"observed", "estimated", "projected"}:
-            raise StatisticsImportError(f"{label} structured value requires observed/estimated/projected status")
+        if not validate_observation_value(value, status, "structured"):
+            raise StatisticsImportError(
+                f"{label} structured value requires a valid observed/estimated/projected status"
+            )
         try:
             _canonical_json(value)
         except (TypeError, ValueError) as exc:
