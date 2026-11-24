@@ -16,6 +16,7 @@ from tools.acquire_world_bank_wdi_wp1_5_area import (
     API, CROSSWALK_DATASET, DATASET_KEY, INDICATORS, ROOT, SOURCE_KEY, AreaSnapshotError, load_snapshot,
 )
 from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
+from tools.database.observation_contract import validate_observation_value
 
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -64,7 +65,7 @@ def normalize_snapshot(
                 numeric = float(value)
             except (TypeError, ValueError) as exc:
                 raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}") from exc
-            if year < 1900 or not __import__("math").isfinite(numeric):
+            if year < 1900 or not validate_observation_value(numeric, "unclassified", "scalar"):
                 raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}/{year}")
             previous = latest.get(iso3)
             if previous is None or year > previous["year"]:
