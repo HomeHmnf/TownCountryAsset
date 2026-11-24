@@ -11,6 +11,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
+from tools.database.observation_contract import (
+    ALLOWED_VALUE_STATUSES, POPULATED_SCALAR_STATUSES,
+    validate_observation_value,
+)
 from tools.sources.registry import SourceError, canonical_source_id, load_registry
 
 
@@ -19,8 +23,8 @@ class SourceSelectionError(RuntimeError):
 
 
 ALLOWED_MODES = {"priority_source", "primary_with_fallback", "custom_mixture"}
-ALLOWED_STATUSES = {"observed", "estimated", "projected", "unavailable", "not_applicable"}
-POPULATED_STATUSES = {"observed", "estimated", "projected"}
+ALLOWED_STATUSES = ALLOWED_VALUE_STATUSES
+POPULATED_STATUSES = POPULATED_SCALAR_STATUSES
 
 
 def _read_json(path: Path, label: str) -> dict[str, Any]:
@@ -164,28 +168,12 @@ def _unit_allowed(field: dict[str, Any], unit: Any) -> bool:
 
 
 def _valid_value(field: dict[str, Any], row: dict[str, Any]) -> bool:
-    status = row.get("status")
-    value = row.get("value")
-    if status not in ALLOWED_STATUSES or not _unit_allowed(field, row.get("unit")):
-        return False
-    if value is None:
-        return status in {"unavailable", "not_applicable"}
-    if status not in POPULATED_STATUSES:
-        return False
-    if field["storage"] == "scalar":
-        if isinstance(value, bool) or not isinstance(value, (int, float)):
-            return False
-        try:
-            return math.isfinite(float(value))
-        except (OverflowError, ValueError):
-            return False
-    if not isinstance(value, (dict, list)):
-        return False
-    try:
-        json.dumps(value, ensure_ascii=False, allow_nan=False)
-    except (TypeError, ValueError):
-        return False
-    return True
+    return (
+        _unit_allowed(field, row.get("unit"))
+        and validate_observation_value(
+            row.get("value"), row.get("status"), field.get("storage")
+        )
+    )
 
 
 def _timestamp(value: Any, label: str) -> datetime:
