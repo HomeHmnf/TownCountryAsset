@@ -376,3 +376,944 @@ wheels = [
 
     ~/Projects/Python/TownAndCountry   work/compiler-hardening ⇡10 !8 ?13                                                                            19s  󰌠 3.14.10  19:56:32
 ❯
+
+============================================================
+SHARED OBSERVATION CONTRACT INSPECTION
+Tue Nov 24 05:58:34 PM UTC 2026
+============================================================
+
+===== CONTRACT COMMIT FILE SUMMARIES =====
+
+COMMIT eeafbcc Use shared canonical observation status contract
+
+ tools/database/source_selection.py | 36 ++++++++++++------------------------
+ 1 file changed, 12 insertions(+), 24 deletions(-)
+
+COMMIT a139707 Validate WP1.5 rows with shared observation contract
+
+ tools/database/statistics_import.py | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
+
+COMMIT 13d2068 Add shared canonical observation value contract
+
+ tools/database/observation_contract.py | 46 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+
+COMMIT d3994bc Allow unclassified scalar observations in canonical statistics
+
+ migrations/009_unclassified_scalar_status.sql | 48 +++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+
+COMMIT 4c9f604 Test unclassified scalar source selection
+
+ tests/test_source_selection.py | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+COMMIT 55b8c57 Keep structured source status classification strict
+
+ tests/test_structured_source_selection.py | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+COMMIT 83cb47e Test scalar unclassified import and structured rejection
+
+ tests/test_wp1_5_statistics_import.py | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+COMMIT 92f6123 Add shared observation contract validation tests
+
+ tests/test_observation_contract.py | 41 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+
+COMMIT 2cf1644 Remove obsolete scalar validation import
+
+ tools/database/source_selection.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+COMMIT 8ca0022 Harden shared status validation for malformed inputs
+
+ tools/database/observation_contract.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+===== CONTRACT IMPLEMENTATION PATCH =====
+commit 13d20688c6c205c8c548d86aa794cfbc4d078148
+Author:     HomeHmnf <home.hmnf@gmail.com>
+AuthorDate: Tue Nov 24 14:30:43 2026 +0000
+Commit:     HomeHmnf <home.hmnf@gmail.com>
+CommitDate: Tue Nov 24 14:30:43 2026 +0000
+
+    Add shared canonical observation value contract
+
+diff --git a/tools/database/observation_contract.py b/tools/database/observation_contract.py
+new file mode 100644
+index 0000000..8bd0ba2
+--- /dev/null
++++ b/tools/database/observation_contract.py
+@@ -0,0 +1,46 @@
++"""Canonical value/status rules shared by acquisition and selection pipelines.
++
++Missing observations are represented by absent rows. Explicit null values are
++reserved for unavailable or not-applicable observations.
++"""
++from __future__ import annotations
++
++import json
++import math
++from typing import Any
++
++UNCLASSIFIED = "unclassified"
++NULL_VALUE_STATUSES = frozenset({"unavailable", "not_applicable"})
++CLASSIFIED_POPULATED_STATUSES = frozenset({"observed", "estimated", "projected"})
++POPULATED_SCALAR_STATUSES = CLASSIFIED_POPULATED_STATUSES | {UNCLASSIFIED}
++ALLOWED_VALUE_STATUSES = POPULATED_SCALAR_STATUSES | NULL_VALUE_STATUSES
++POPULATED_STRUCTURED_STATUSES = CLASSIFIED_POPULATED_STATUSES
++
++
++def validate_observation_value(value: Any, status: Any, storage: Any) -> bool:
++    """Validate a scalar or structured value/status pair without inference.
++
++    ``unclassified`` is valid only for finite populated scalar values. Structured
++    payloads require a classified status. Explicit nulls require unavailable or
++    not_applicable; missing observations are represented by absent rows.
++    """
++    if storage not in {"scalar", "structured"} or status not in ALLOWED_VALUE_STATUSES:
++        return False
++    if value is None:
++        return status in NULL_VALUE_STATUSES
++    if storage == "scalar":
++        if status not in POPULATED_SCALAR_STATUSES:
++            return False
++        if isinstance(value, bool) or not isinstance(value, (int, float)):
++            return False
++        try:
++            return math.isfinite(float(value))
++        except (OverflowError, TypeError, ValueError):
++            return False
++    if status not in POPULATED_STRUCTURED_STATUSES or not isinstance(value, (dict, list)):
++        return False
++    try:
++        json.dumps(value, ensure_ascii=False, allow_nan=False)
++    except (TypeError, ValueError):
++        return False
++    return True
+
+===== IMPORTER INTEGRATION PATCHES =====
+
+
+commit a13970765b81af5e4cb8a4217c10e99ec82873cf
+Author:     HomeHmnf <home.hmnf@gmail.com>
+AuthorDate: Tue Nov 24 14:30:13 2026 +0000
+Commit:     HomeHmnf <home.hmnf@gmail.com>
+CommitDate: Tue Nov 24 14:30:13 2026 +0000
+
+    Validate WP1.5 rows with shared observation contract
+
+diff --git a/tools/database/statistics_import.py b/tools/database/statistics_import.py
+index 6cc46e7..e5fbb75 100644
+--- a/tools/database/statistics_import.py
++++ b/tools/database/statistics_import.py
+@@ -15,6 +15,9 @@ from pathlib import Path
+ from typing import Any
+ 
+ from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
++from tools.database.observation_contract import (
++    ALLOWED_VALUE_STATUSES, validate_observation_value,
++)
+ from tools.database.application_approval import (
+     ApplicationApprovalError,
+     build_application_artifact,
+@@ -199,7 +202,7 @@ def _validate_observation(
+         )
+     period = _text(row.get("observation_period"), f"{label}.observation_period")
+     status = row.get("value_status")
+-    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
++    if not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
+         raise StatisticsImportError(f"{label}.value_status is invalid")
+     if "value" not in row:
+         raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
+@@ -229,13 +232,17 @@ def _validate_observation(
+             if not finite:
+                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
+             value = float(value)
+-            if status not in {"observed", "estimated", "projected"}:
+-                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected status")
++            if not validate_observation_value(value, status, "scalar"):
++                raise StatisticsImportError(
++                    f"{label} populated scalar has an invalid value/status combination"
++                )
+     else:
+         if value is None or not isinstance(value, (dict, list)):
+             raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
+-        if status not in {"observed", "estimated", "projected"}:
+-            raise StatisticsImportError(f"{label} structured value requires observed/estimated/projected status")
++        if not validate_observation_value(value, status, "structured"):
++            raise StatisticsImportError(
++                f"{label} structured value requires a valid observed/estimated/projected status"
++            )
+         try:
+             _canonical_json(value)
+         except (TypeError, ValueError) as exc:
+
+===== WDI BRANCH NORMALIZER AND IMPORTER STATUS =====
+diff --git a/tests/test_world_bank_wdi_wp1_5_area.py b/tests/test_world_bank_wdi_wp1_5_area.py
+index a34617a..d876d78 100644
+--- a/tests/test_world_bank_wdi_wp1_5_area.py
++++ b/tests/test_world_bank_wdi_wp1_5_area.py
+@@ -1,15 +1,11 @@
+ from __future__ import annotations
+ 
+-import hashlib
+ import json
+-from itertools import product
+-from string import ascii_uppercase
+ from urllib.parse import parse_qs, urlparse
+ 
+ import pytest
+ 
+ from tools import acquire_world_bank_wdi_wp1_5_area as area
+-from tools import normalize_world_bank_wdi_wp1_5_area as normalizer
+ from tools.database.source_crosswalk import CrosswalkError
+ 
+ 
+@@ -120,123 +116,3 @@ def test_validation_rejects_crosswalk_dataset_mismatch(tmp_path):
+             "game_id": G1, "source_id": "USA", "match_method": "reviewed_manual"}]}), encoding="utf-8")
+     with pytest.raises(CrosswalkError, match="dataset mismatch"):
+         area.validate_candidates(report["manifest_path"], crosswalk, registry, repository_root=tmp_path)
+-
+-def test_normalizer_uses_crosswalk_dataset_not_acquisition_storage_key(tmp_path, monkeypatch):
+-    iso3_codes = [
+-        "".join(chars)
+-        for chars in product(ascii_uppercase, repeat=3)
+-    ][:187]
+-    mappings = [
+-        {
+-            "game_id": "tc_" + f"{index:032x}",
+-            "source_id": iso3,
+-            "match_method": "reviewed_manual",
+-        }
+-        for index, iso3 in enumerate(iso3_codes, start=1)
+-    ]
+-    crosswalk_path = tmp_path / "crosswalk.json"
+-    crosswalk_path.write_text(json.dumps({
+-        "schema_version": 1,
+-        "dataset": area.CROSSWALK_DATASET,
+-        "source_key": area.SOURCE_KEY,
+-        "mappings": mappings,
+-    }), encoding="utf-8")
+-
+-    raw_root = tmp_path / "raw_data" / "sources" / "world_bank_wdi" / area.DATASET_KEY / "snapshot"
+-    artifact_names = [
+-        "source_metadata.json",
+-        "country_metadata_page_001.json",
+-        "indicator_metadata_EN.POP.DNST.json",
+-        "observations_EN.POP.DNST_page_001.json",
+-        "indicator_metadata_AG.SRF.TOTL.K2.json",
+-        "observations_AG.SRF.TOTL.K2_page_001.json",
+-        "indicator_metadata_AG.LND.TOTL.K2.json",
+-        "observations_AG.LND.TOTL.K2_page_001.json",
+-    ]
+-    artifacts = []
+-    for index, name in enumerate(artifact_names):
+-        raw_path = raw_root / name
+-        raw_path.parent.mkdir(parents=True, exist_ok=True)
+-        raw_bytes = f"captured artifact {index}".encode()
+-        raw_path.write_bytes(raw_bytes)
+-        artifacts.append({
+-            "local_raw_path": raw_path.relative_to(tmp_path).as_posix(),
+-            "sha256": hashlib.sha256(raw_bytes).hexdigest(),
+-            "byte_count": len(raw_bytes),
+-        })
+-
+-    acquisition_manifest_path = (
+-        tmp_path / "data_manifests" / "sources" / "world_bank_wdi"
+-        / area.DATASET_KEY / "snapshot.json"
+-    )
+-    acquisition_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+-    acquisition_manifest_path.write_text("{}", encoding="utf-8")
+-    acquisition = {
+-        "download_id": area.DATASET_KEY,
+-        "dataset_id": area.DATASET_KEY,
+-        "release": "api_snapshot_test",
+-        "source_url": "https://api.worldbank.org/v2",
+-        "final_url": "https://api.worldbank.org/v2",
+-        "retrieved_at": "2026-11-21T00:00:00Z",
+-        "attribution": "World Bank Group",
+-        "license_status": "review_required",
+-        "files": artifacts,
+-    }
+-
+-    countries = {
+-        iso3: {"region": {"id": "NAC"}}
+-        for iso3 in iso3_codes
+-    }
+-    observations = {
+-        indicator: [
+-            {
+-                "countryiso3code": iso3,
+-                "date": "2024",
+-                "value": "12.5",
+-                "obs_status": "",
+-                "country": {"value": iso3},
+-            }
+-            for iso3 in iso3_codes
+-        ]
+-        for indicator in area.INDICATORS
+-    }
+-    indicator_metadata = {
+-        indicator: {
+-            "sourceOrganization": "FAO; World Bank",
+-            "sourceNote": "Captured provider methodology.",
+-            "unit": "",
+-        }
+-        for indicator in area.INDICATORS
+-    }
+-    loaded = {
+-        "manifest": acquisition,
+-        "manifest_path": acquisition_manifest_path,
+-        "manifest_sha256": "a" * 64,
+-        "countries": countries,
+-        "indicator_metadata": indicator_metadata,
+-        "observations": observations,
+-    }
+-    monkeypatch.setattr(normalizer, "load_snapshot", lambda *args, **kwargs: loaded)
+-
+-    observations_path = tmp_path / "normalized" / "observations.json"
+-    import_manifest_path = tmp_path / "normalized" / "import_manifest.json"
+-    result = normalizer.normalize_snapshot(
+-        acquisition_manifest_path,
+-        crosswalk_path,
+-        observations_path,
+-        import_manifest_path,
+-        repository_root=tmp_path,
+-    )
+-
+-    normalized = json.loads(observations_path.read_text(encoding="utf-8"))
+-    import_manifest = json.loads(import_manifest_path.read_text(encoding="utf-8"))
+-    assert normalized["dataset"] == area.CROSSWALK_DATASET
+-    assert import_manifest["dataset"] == area.CROSSWALK_DATASET
+-    assert normalized["source_key"] == import_manifest["source_key"] == area.SOURCE_KEY
+-    assert result["dataset"] == area.CROSSWALK_DATASET
+-    assert result["acquisition_dataset"] == area.DATASET_KEY
+-    assert result["observations"] == 187 * len(area.INDICATORS)
+-    assert {row["value_status"] for row in normalized["observations"]} == {"unclassified"}
+-    assert {row["provenance"]["provider_obs_status"] for row in normalized["observations"]} == {""}
+-    assert import_manifest["value_status_policy"] == "unclassified_when_provider_obs_status_blank"
+-
+diff --git a/tests/test_wp1_5_statistics_import.py b/tests/test_wp1_5_statistics_import.py
+index 9dd4b71..04c22a4 100644
+--- a/tests/test_wp1_5_statistics_import.py
++++ b/tests/test_wp1_5_statistics_import.py
+@@ -532,69 +532,22 @@ def test_additional_snapshot_inputs_are_checksum_validated(tmp_path):
+ 
+ 
+ 
+-def test_dry_run_validates_writes_no_database_and_returns_artifact(tmp_path):
+-    observations, crosswalk, manifest = setup_inputs(tmp_path)
+-    database = tmp_path / "must-not-be-created.sqlite"
+-    result = statistics_import.validate_wp1_5_dataset(
+-        observations_path=observations,
+-        crosswalk_path=crosswalk,
+-        manifest_path=manifest,
+-    )
+-    assert result["assessment"] == "wp1_5_statistics_import_dry_run"
+-    assert result["observations"] == 1
+-    assert result["crosswalk_mappings"] == 2
+-    assert result["field_counts"] == {"1": 1}
+-    assert result["application_artifact_sha256"]
+-    assert result["side_effects"] == {
+-        "database_opened": False,
+-        "database_written": False,
+-        "approval_created": False,
+-        "source_selection_changed": False,
+-    }
+-    assert not database.exists()
+-
+-
+-def test_dry_run_rejects_duplicate_observations_without_database(tmp_path):
+-    observations, crosswalk, manifest = setup_inputs(tmp_path)
+-    payload = json.loads(observations.read_text(encoding="utf-8"))
+-    payload["observations"].append(dict(payload["observations"][0]))
+-    observations.write_text(json.dumps(payload), encoding="utf-8")
+-    with pytest.raises(StatisticsImportError, match="Duplicate country/field"):
+-        statistics_import.validate_wp1_5_dataset(
+-            observations_path=observations,
+-            crosswalk_path=crosswalk,
+-            manifest_path=manifest,
+-        )
+-
+-
+-
+-def test_accepts_day_precision_manual_acquisition_without_inventing_time(tmp_path):
+-    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
+-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+-    manifest["retrieved_at"] = "2026-11-02"
+-    manifest["retrieval_date_precision"] = "day"
+-    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+-
+-    result = statistics_import.validate_wp1_5_dataset(
+-        observations_path=observations,
+-        crosswalk_path=crosswalk,
+-        manifest_path=manifest_path,
++def test_imports_unclassified_populated_scalar_but_rejects_structured(tmp_path):
++    database = tmp_path / "canonical.sqlite"
++    setup_database(database)
++    result = run_import(
++        tmp_path, database, field_id=1, value=1234, status="unclassified",
++        release="2024-unclassified",
+     )
++    assert result["scalar_observations"] == 1
++    connection = sqlite3.connect(database)
++    assert connection.execute(
++        "SELECT value, value_status FROM current_statistics"
++    ).fetchone() == (1234.0, "unclassified")
++    connection.close()
+ 
+-    assert result["retrieved_at"] == "2026-11-02"
+-    assert result["side_effects"]["database_opened"] is False
+-
+-
+-def test_rejects_day_precision_manifest_with_inferred_time(tmp_path):
+-    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
+-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+-    manifest["retrieved_at"] = "2026-11-02T00:00:00Z"
+-    manifest["retrieval_date_precision"] = "day"
+-    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+-
+-    with pytest.raises(StatisticsImportError, match="YYYY-MM-DD without an inferred time"):
+-        statistics_import.validate_wp1_5_dataset(
+-            observations_path=observations,
+-            crosswalk_path=crosswalk,
+-            manifest_path=manifest_path,
++    with pytest.raises(StatisticsImportError, match="structured value requires"):
++        run_import(
++            tmp_path, database, field_id=12, value={"0-4": 100},
++            status="unclassified", release="2024-structured-unclassified",
+         )
+diff --git a/tools/database/observation_contract.py b/tools/database/observation_contract.py
+new file mode 100644
+index 0000000..0c2e833
+--- /dev/null
++++ b/tools/database/observation_contract.py
+@@ -0,0 +1,46 @@
++"""Canonical value/status rules shared by acquisition and selection pipelines.
++
++Missing observations are represented by absent rows. Explicit null values are
++reserved for unavailable or not-applicable observations.
++"""
++from __future__ import annotations
++
++import json
++import math
++from typing import Any
++
++UNCLASSIFIED = "unclassified"
++NULL_VALUE_STATUSES = frozenset({"unavailable", "not_applicable"})
++CLASSIFIED_POPULATED_STATUSES = frozenset({"observed", "estimated", "projected"})
++POPULATED_SCALAR_STATUSES = CLASSIFIED_POPULATED_STATUSES | {UNCLASSIFIED}
++ALLOWED_VALUE_STATUSES = POPULATED_SCALAR_STATUSES | NULL_VALUE_STATUSES
++POPULATED_STRUCTURED_STATUSES = CLASSIFIED_POPULATED_STATUSES
++
++
++def validate_observation_value(value: Any, status: Any, storage: Any) -> bool:
++    """Validate a scalar or structured value/status pair without inference.
++
++    ``unclassified`` is valid only for finite populated scalar values. Structured
++    payloads require a classified status. Explicit nulls require unavailable or
++    not_applicable; missing observations are represented by absent rows.
++    """
++    if storage not in {"scalar", "structured"} or not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
++        return False
++    if value is None:
++        return status in NULL_VALUE_STATUSES
++    if storage == "scalar":
++        if status not in POPULATED_SCALAR_STATUSES:
++            return False
++        if isinstance(value, bool) or not isinstance(value, (int, float)):
++            return False
++        try:
++            return math.isfinite(float(value))
++        except (OverflowError, TypeError, ValueError):
++            return False
++    if status not in POPULATED_STRUCTURED_STATUSES or not isinstance(value, (dict, list)):
++        return False
++    try:
++        json.dumps(value, ensure_ascii=False, allow_nan=False)
++    except (TypeError, ValueError):
++        return False
++    return True
+diff --git a/tools/database/statistics_import.py b/tools/database/statistics_import.py
+index 9e97e30..e5fbb75 100644
+--- a/tools/database/statistics_import.py
++++ b/tools/database/statistics_import.py
+@@ -10,11 +10,14 @@ import hashlib
+ import json
+ import math
+ import sqlite3
+-from datetime import date, datetime, timezone
++from datetime import datetime, timezone
+ from pathlib import Path
+ from typing import Any
+ 
+ from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
++from tools.database.observation_contract import (
++    ALLOWED_VALUE_STATUSES, validate_observation_value,
++)
+ from tools.database.application_approval import (
+     ApplicationApprovalError,
+     build_application_artifact,
+@@ -100,29 +103,12 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str,
+     if not source_url.startswith("https://"):
+         raise StatisticsImportError("Source manifest URL must use HTTPS")
+     retrieved_at = _text(manifest.get("retrieved_at"), "manifest.retrieved_at")
+-    retrieval_precision = manifest.get("retrieval_date_precision")
+-    if retrieval_precision == "day":
+-        try:
+-            parsed_date = date.fromisoformat(retrieved_at)
+-        except ValueError as exc:
+-            raise StatisticsImportError(
+-                "day-precision manifest.retrieved_at must be an ISO-8601 calendar date"
+-            ) from exc
+-        if parsed_date.isoformat() != retrieved_at:
+-            raise StatisticsImportError(
+-                "day-precision manifest.retrieved_at must use YYYY-MM-DD without an inferred time"
+-            )
+-    elif retrieval_precision in {None, "instant"}:
+-        try:
+-            retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
+-        except ValueError as exc:
+-            raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
+-        if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
+-            raise StatisticsImportError("manifest.retrieved_at must include a timezone")
+-    else:
+-        raise StatisticsImportError(
+-            "manifest.retrieval_date_precision must be 'instant' or 'day' when supplied"
+-        )
++    try:
++        retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
++    except ValueError as exc:
++        raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
++    if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
++        raise StatisticsImportError("manifest.retrieved_at must include a timezone")
+     additional_inputs = manifest.get("additional_inputs", [])
+     if not isinstance(additional_inputs, list):
+         raise StatisticsImportError("manifest.additional_inputs must be an array")
+@@ -216,7 +202,7 @@ def _validate_observation(
+         )
+     period = _text(row.get("observation_period"), f"{label}.observation_period")
+     status = row.get("value_status")
+-    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unspecified", "unavailable", "not_applicable"}:
++    if not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
+         raise StatisticsImportError(f"{label}.value_status is invalid")
+     if "value" not in row:
+         raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
+@@ -246,13 +232,17 @@ def _validate_observation(
+             if not finite:
+                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
+             value = float(value)
+-            if status not in {"observed", "estimated", "projected", "unspecified"}:
+-                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected/unspecified status")
++            if not validate_observation_value(value, status, "scalar"):
++                raise StatisticsImportError(
++                    f"{label} populated scalar has an invalid value/status combination"
++                )
+     else:
+         if value is None or not isinstance(value, (dict, list)):
+             raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
+-        if status not in {"observed", "estimated", "projected"}:
+-            raise StatisticsImportError(f"{label} structured value requires observed/estimated/projected status")
++        if not validate_observation_value(value, status, "structured"):
++            raise StatisticsImportError(
++                f"{label} structured value requires a valid observed/estimated/projected status"
++            )
+         try:
+             _canonical_json(value)
+         except (TypeError, ValueError) as exc:
+@@ -289,9 +279,6 @@ def build_wp1_5_application_artifact(
+     manifest = _read_object(manifest_path, "source manifest")
+     normalized = _read_object(observations_path, "normalized observations")
+     source_key = _text(normalized.get("source_key"), "normalized.source_key")
+-    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
+-    if manifest.get("dataset", source_key) != dataset:
+-        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
+     _validate_manifest(manifest, source_key)
+     if normalized.get("release") != manifest.get("release"):
+         raise StatisticsImportError("Normalized observations and manifest release do not match")
+@@ -335,7 +322,6 @@ def build_wp1_5_application_artifact(
+         inputs=inputs,
+         metadata={
+             "source_key": normalized.get("source_key"),
+-            "dataset": normalized.get("dataset", normalized.get("source_key")),
+             "release": normalized.get("release"),
+             "source_sha256": normalized.get("source_sha256"),
+             "policy_version": policy_version,
+@@ -343,125 +329,6 @@ def build_wp1_5_application_artifact(
+     )
+ 
+ 
+-def validate_wp1_5_dataset(
+-    *,
+-    observations_path: str | Path,
+-    crosswalk_path: str | Path,
+-    manifest_path: str | Path,
+-    config_path: str | Path | None = None,
+-) -> dict[str, Any]:
+-    """Validate a normalized WP1.5 dataset without opening or changing a database."""
+-    selected_config_path = config_path if config_path is not None else DEFAULT_CONFIG
+-    normalized = _read_object(observations_path, "normalized observations")
+-    manifest = _read_object(manifest_path, "source manifest")
+-    config = _read_object(selected_config_path, "WP1.5 field contract")
+-    if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
+-        raise StatisticsImportError("Unsupported normalized observation schema")
+-
+-    source_key = _text(normalized.get("source_key"), "normalized.source_key")
+-    registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
+-    registry_path = Path(registry_reference)
+-    if not registry_path.is_absolute():
+-        registry_path = (REPOSITORY_ROOT / registry_path).resolve()
+-    try:
+-        source_registry = load_registry(registry_path)
+-    except SourceError as exc:
+-        raise StatisticsImportError(f"Cannot load project source registry: {exc}") from exc
+-    canonical_source_key = canonical_source_id(source_registry, source_key)
+-    if canonical_source_key is None:
+-        raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
+-
+-    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
+-    if manifest.get("dataset", source_key) != dataset:
+-        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
+-    release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
+-    if normalized.get("source_key") != manifest.get("source_key"):
+-        raise StatisticsImportError("Normalized observations and source manifest do not match")
+-    if normalized.get("source_sha256") != source_sha or normalized.get("release") != release:
+-        raise StatisticsImportError("Normalized observations do not identify the captured source release/checksum")
+-
+-    fields = config.get("fields")
+-    if not isinstance(fields, list) or len(fields) != 41:
+-        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 fields")
+-    field_by_id = {item.get("id"): item for item in fields if isinstance(item, dict)}
+-    if len(field_by_id) != 41:
+-        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 distinct fields")
+-
+-    try:
+-        crosswalk = load_crosswalk(crosswalk_path, expected_dataset=dataset)
+-    except CrosswalkError as exc:
+-        raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
+-    if crosswalk.dataset != dataset:
+-        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
+-    if crosswalk.source_key != source_key:
+-        raise StatisticsImportError("Crosswalk source_key does not match source contract")
+-    crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
+-
+-    rows = normalized.get("observations")
+-    if not isinstance(rows, list) or not rows:
+-        raise StatisticsImportError("Normalized observations must be a non-empty array")
+-    validated = [
+-        _validate_observation(
+-            row,
+-            index=index,
+-            field_by_id=field_by_id,
+-            source_key=canonical_source_key,
+-            crosswalk_by_game=crosswalk_by_game,
+-        )
+-        for index, row in enumerate(rows)
+-    ]
+-    keys = [(row["game_id"], row["field"]["id"]) for row in validated]
+-    if len(keys) != len(set(keys)):
+-        raise StatisticsImportError("Duplicate country/field observations in normalized dataset")
+-
+-    try:
+-        artifact = build_wp1_5_application_artifact(
+-            observations_path=observations_path,
+-            crosswalk_path=crosswalk_path,
+-            manifest_path=manifest_path,
+-            config_path=selected_config_path,
+-        )
+-    except (ApplicationApprovalError, OSError, ValueError) as exc:
+-        raise StatisticsImportError(f"Cannot fingerprint WP1.5 application inputs: {exc}") from exc
+-
+-    # Re-read all validated JSON inputs to detect changes during validation.
+-    if _read_object(observations_path, "normalized observations") != normalized:
+-        raise StatisticsImportError("Normalized observations changed during dry-run validation")
+-    if _read_object(manifest_path, "source manifest") != manifest:
+-        raise StatisticsImportError("Source manifest changed during dry-run validation")
+-    if _read_object(selected_config_path, "WP1.5 field contract") != config:
+-        raise StatisticsImportError("WP1.5 field contract changed during dry-run validation")
+-    _validate_manifest(manifest, source_key)
+-
+-    field_counts: dict[str, int] = {}
+-    for row in validated:
+-        field_id = str(row["field"]["id"])
+-        field_counts[field_id] = field_counts.get(field_id, 0) + 1
+-    return {
+-        "assessment": "wp1_5_statistics_import_dry_run",
+-        "source_key": source_key,
+-        "canonical_source_key": canonical_source_key,
+-        "dataset": dataset,
+-        "release": release,
+-        "source_sha256": source_sha,
+-        "source_url": source_url,
+-        "retrieved_at": retrieved_at,
+-        "observations": len(validated),
+-        "crosswalk_mappings": len(crosswalk.mappings),
+-        "field_counts": dict(sorted(field_counts.items(), key=lambda item: int(item[0]))),
+-        "license_status": manifest.get("license_status"),
+-        "attribution": manifest.get("attribution"),
+-        "application_artifact_sha256": artifact["artifact_sha256"],
+-        "application_artifact": artifact,
+-        "side_effects": {
+-            "database_opened": False,
+-            "database_written": False,
+-            "approval_created": False,
+-            "source_selection_changed": False,
+-        },
+-    }
+-
+-
+ def import_wp1_5_dataset(
+     *,
+     observations_path: str | Path,
+@@ -493,9 +360,6 @@ def import_wp1_5_dataset(
+         raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
+     # Keep the historical ID in manifests, crosswalks and database provenance;
+     # use its canonical provider ID only for current field-contract validation.
+-    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
+-    if manifest.get("dataset", source_key) != dataset:
+-        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
+     release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
+     if normalized.get("source_key") != manifest.get("source_key"):
+         raise StatisticsImportError("Normalized observations and source manifest do not match")
+@@ -512,12 +376,10 @@ def import_wp1_5_dataset(
+     try:
+         crosswalk = load_crosswalk(
+             crosswalk_path,
+-            expected_dataset=dataset,
++            expected_dataset=source_key,
+         )
+     except CrosswalkError as exc:
+         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
+-    if crosswalk.dataset != dataset:
+-        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
+     if crosswalk.source_key != source_key:
+         raise StatisticsImportError("Crosswalk source_key does not match source contract")
+     crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
+diff --git a/tools/normalize_world_bank_wdi_wp1_5_area.py b/tools/normalize_world_bank_wdi_wp1_5_area.py
+deleted file mode 100644
+index 8640a57..0000000
+--- a/tools/normalize_world_bank_wdi_wp1_5_area.py
++++ /dev/null
+@@ -1,214 +0,0 @@
+-"""Normalize the immutable WDI WP1.5 area/density snapshot for review/import.
+-
+-This adapter emits candidate observations only. It does not approve, select, or
+-write data to either project database.
+-"""
+-from __future__ import annotations
+-
+-import argparse
+-import hashlib
+-import json
+-import sys
+-from pathlib import Path
+-from typing import Any
+-
+-from tools.acquire_world_bank_wdi_wp1_5_area import (
+-    API, CROSSWALK_DATASET, DATASET_KEY, INDICATORS, ROOT, SOURCE_KEY, AreaSnapshotError, load_snapshot,
+-)
+-from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
+-
+-def _write_json(path: Path, value: Any) -> None:
+-    path.parent.mkdir(parents=True, exist_ok=True)
+-    with path.open("x", encoding="utf-8") as stream:
+-        json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
+-        stream.write("\n")
+-
+-def normalize_snapshot(
+-    manifest_path: str | Path,
+-    crosswalk_path: str | Path,
+-    observations_path: str | Path,
+-    import_manifest_path: str | Path,
+-    *,
+-    repository_root: str | Path = ROOT,
+-) -> dict[str, Any]:
+-    root = Path(repository_root).resolve()
+-    loaded = load_snapshot(manifest_path, repository_root=root)
+-    crosswalk = load_crosswalk(
+-        Path(crosswalk_path) if Path(crosswalk_path).is_absolute() else root / crosswalk_path,
+-        expected_dataset=CROSSWALK_DATASET,
+-    )
+-    if crosswalk.source_key != SOURCE_KEY:
+-        raise AreaSnapshotError("Crosswalk source_key does not match the WDI provider")
+-    mapping = {item.source_id: item.game_id for item in crosswalk.mappings}
+-    if len(mapping) != 187:
+-        raise AreaSnapshotError(f"Expected the owner-approved 187-entry WDI crosswalk; found {len(mapping)}")
+-    if any(not (len(code) == 3 and code.isupper() and code.isalpha()) for code in mapping):
+-        raise AreaSnapshotError("Crosswalk source IDs must be uppercase three-letter WDI codes")
+-
+-    rows: list[dict[str, Any]] = []
+-    per_indicator: dict[str, int] = {}
+-    for code, spec in INDICATORS.items():
+-        latest: dict[str, dict[str, Any]] = {}
+-        for item in loaded["observations"][code]:
+-            iso3 = item.get("countryiso3code")
+-            if not isinstance(iso3, str) or len(iso3) != 3:
+-                continue
+-            country = loaded["countries"].get(iso3)
+-            if country is None or (country.get("region") or {}).get("id") == "NA":
+-                continue
+-            value = item.get("value")
+-            if value is None or iso3 not in mapping:
+-                continue
+-            try:
+-                year = int(item.get("date"))
+-                numeric = float(value)
+-            except (TypeError, ValueError) as exc:
+-                raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}") from exc
+-            if year < 1900 or not __import__("math").isfinite(numeric):
+-                raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}/{year}")
+-            previous = latest.get(iso3)
+-            if previous is None or year > previous["year"]:
+-                latest[iso3] = {
+-                    "year": year, "value": numeric,
+-                    "provider_status": item.get("obs_status"),
+-                    "country_name": (item.get("country") or {}).get("value"),
+-                }
+-        if set(latest) != set(mapping):
+-            missing = sorted(set(mapping) - set(latest))
+-            raise AreaSnapshotError(f"{code}: mapped entities lack non-null observations: {missing[:10]}")
+-        per_indicator[code] = len(latest)
+-        metadata = loaded["indicator_metadata"][code]
+-        for iso3, selected in sorted(latest.items()):
+-            rows.append({
+-                "game_id": mapping[iso3],
+-                "source_id": iso3,
+-                "field_id": spec["field_id"],
+-                "value": selected["value"],
+-                "unit": spec["unit"],
+-                "value_status": "unclassified",
+-                "observation_period": str(selected["year"]),
+-                "source_reference": f"{API}/country/{iso3}/indicator/{code}?date={selected['year']}",
+-                "methodology": (
+-                    f"World Bank WDI indicator {code}: {spec['meaning']} "
+-                    f"Originating source organization: {metadata.get('sourceOrganization') or 'not supplied'}. "
+-                    "Provider obs_status is blank; the populated scalar value remains unclassified."
+-                ),
+-                "provenance": {
+-                    "wdi_iso3": iso3,
+-                    "country_name": selected["country_name"],
+-                    "indicator_code": code,
+-                    "provider_obs_status": selected["provider_status"],
+-                    "provider_source_organization": metadata.get("sourceOrganization"),
+-                    "provider_source_note": metadata.get("sourceNote"),
+-                    "provider_unit_metadata": metadata.get("unit"),
+-                },
+-            })
+-    expected = len(mapping) * len(INDICATORS)
+-    if len(rows) != expected or len({(r["game_id"], r["field_id"]) for r in rows}) != expected:
+-        raise AreaSnapshotError(f"Expected {expected} unique observations; generated {len(rows)}")
+-
+-    acquisition = loaded["manifest"]
+-    acquisition_path = Path(loaded["manifest_path"])
+-    artifacts = acquisition["files"]
+-    if len(artifacts) != 8:
+-        raise AreaSnapshotError(f"Expected the immutable eight-artifact WDI bundle; found {len(artifacts)}")
+-    # Use the captured source metadata response as the required primary raw
+-    # input; the other seven captured responses remain explicit additional inputs.
+-    primary = next((item for item in artifacts if Path(item["local_raw_path"]).name == "source_metadata.json"), None)
+-    if primary is None:
+-        raise AreaSnapshotError("Snapshot is missing source_metadata.json")
+-    additional = [item for item in artifacts if item is not primary]
+-    def raw_input(item: dict[str, Any]) -> dict[str, Any]:
+-        return {
+-            "local_raw_path": item["local_raw_path"],
+-            "sha256": item["sha256"],
+-            "byte_count": item["byte_count"],
+-        }
+-    primary_path = root / primary["local_raw_path"]
+-    primary_bytes = primary_path.read_bytes()
+-    import_manifest = {
+-        "manifest_schema_version": 1,
+-        "work_package": "WP1.5",
+-        "source_key": SOURCE_KEY,
+-        "dataset": CROSSWALK_DATASET,
+-        "release": acquisition["release"],
+-        "sha256": hashlib.sha256(primary_bytes).hexdigest(),
+-        "local_raw_path": primary["local_raw_path"],
+-        "byte_count": len(primary_bytes),
+-        "source_url": acquisition["source_url"],
+-        "final_url": acquisition["final_url"],
+-        "retrieved_at": acquisition["retrieved_at"],
+-        "attribution": acquisition.get("attribution"),
+-        "license_status": acquisition.get("license_status"),
+-        "additional_inputs": [raw_input(item) for item in additional],
+-        "upstream_manifests": [{
+-            "path": acquisition_path.relative_to(root).as_posix(),
+-            "sha256": loaded["manifest_sha256"],
+-        }],
+-    }
+-    normalized = {
+-        "schema_version": 1,
+-        "work_package": "WP1.5",
+-        "source_key": SOURCE_KEY,
+-        "dataset": CROSSWALK_DATASET,
+-        "release": acquisition["release"],
+-        "source_sha256": import_manifest["sha256"],
+-        "observations": rows,
+-        "normalization": {
+-            "policy": "latest_non_null_per_indicator_and_entity",
+-            "indicator_counts": per_indicator,
+-            "observation_count": len(rows),
+-            "value_status_policy": "unclassified_when_provider_obs_status_blank",
+-            "unmapped_candidate_codes_excluded": 29,
+-            "null_only_code_excluded": ["XKX"],
+-            "official_iso_identity_changed": False,
+-        },
+-    }
+-    output = Path(observations_path)
+-    manifest_output = Path(import_manifest_path)
+-    if not output.is_absolute():
+-        output = root / output
+-    if not manifest_output.is_absolute():
+-        manifest_output = root / manifest_output
+-    _write_json(output, normalized)
+-    _write_json(manifest_output, import_manifest)
+-    return {
+-        "assessment": "world_bank_wdi_wp1_5_area_normalization_candidate",
+-        "dataset": CROSSWALK_DATASET,
+-        "acquisition_dataset": DATASET_KEY,
+-        "source_key": SOURCE_KEY,
+-        "release": acquisition["release"],
+-        "observations": len(rows),
+-        "indicator_counts": per_indicator,
+-        "observations_path": output.relative_to(root).as_posix(),
+-        "import_manifest_path": manifest_output.relative_to(root).as_posix(),
+-        "license_status": acquisition.get("license_status"),
+-        "side_effects": {
+-            "canonical_database_written": False,
+-            "project_database_written": False,
+-            "approval_created": False,
+-            "source_selection_changed": False,
+-        },
+-    }
+-
+-def main(argv: list[str] | None = None) -> int:
+-    parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--manifest", type=Path, required=True)
+-    parser.add_argument("--crosswalk", type=Path, required=True)
+-    parser.add_argument("--observations", type=Path, required=True)
+-    parser.add_argument("--import-manifest", type=Path, required=True)
+-    parser.add_argument("--root", type=Path, default=ROOT)
+-    args = parser.parse_args(argv)
+-    try:
+-        result = normalize_snapshot(
+-            args.manifest, args.crosswalk, args.observations, args.import_manifest,
+-            repository_root=args.root,
+-        )
+-    except (AreaSnapshotError, CrosswalkError, OSError, ValueError) as exc:
+-        print(f"ERROR: {exc}", file=sys.stderr)
+-        return 1
+-    print(json.dumps(result, ensure_ascii=False, indent=2))
+-    return 0
+-
+-if __name__ == "__main__":
+-    raise SystemExit(main())
+
+===== END OF INSPECTION =====
