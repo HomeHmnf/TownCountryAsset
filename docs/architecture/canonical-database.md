@@ -70,6 +70,50 @@ Use an isolated database path for tests or inspection:
 uv run python tools/migrate_database.py --database /tmp/tca-test.sqlite
 ```
 
+### Shell compatibility: Fish
+
+The command examples in this document use Fish syntax. Fish does not support the Bash/POSIX here-document form `python - <<'PY'`; running that form in Fish produces a redirection parse error. For short inline Python inspections, use `uv run python -c '...'` with the Python statements inside a single-quoted argument, or save the code to a `.py` file and run it with `uv run python path/to/script.py`.
+
+For example, inspect the canonical database without opening it for writes:
+
+```fish
+uv run python -c '
+import sqlite3
+from pathlib import Path
+
+path = Path("data/canonical/town_country_asset.sqlite")
+uri = f"file:{path.resolve()}?mode=ro"
+
+with sqlite3.connect(uri, uri=True) as db:
+    print("schema version:", db.execute(
+        "SELECT MAX(version) FROM schema_migrations"
+    ).fetchone()[0])
+    print("current_statistics objects:")
+    for row in db.execute("""
+        SELECT type, name, sql
+        FROM sqlite_master
+        WHERE tbl_name = "current_statistics"
+          AND type IN ("index", "trigger")
+        ORDER BY type, name
+    """):
+        print(row)
+    print("foreign keys:", db.execute(
+        "PRAGMA foreign_key_list(current_statistics)"
+    ).fetchall())
+    print("row count:", db.execute(
+        "SELECT COUNT(*) FROM current_statistics"
+    ).fetchone()[0])
+    print("integrity:", db.execute(
+        "PRAGMA integrity_check"
+    ).fetchall())
+    print("foreign-key violations:", db.execute(
+        "PRAGMA foreign_key_check"
+    ).fetchall())
+'
+```
+
+The `mode=ro` URI parameter makes this inspection read-only. Do not remove it when using this example to inspect the canonical database.
+
 SQLite database, WAL, and shared-memory files are local state and ignored by Git. Migration SQL, database code, tests, and architecture documentation are tracked. WP1.1 does not import production records. WP1.2 imports identity and source provenance only.
 
 ## Migration policy
