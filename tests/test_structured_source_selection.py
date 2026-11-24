@@ -206,3 +206,13 @@ def test_scalar_field_cannot_be_passed_to_structured_resolver(policy, registry):
             policy, registry, game_id="tc_example", field_key="population",
             observations=[], release_states={},
         )
+
+
+
+def test_structured_observations_reject_unclassified_status(policy, registry):
+    with pytest.raises(SourceSelectionError, match="Invalid value/status"):
+        resolve_structured_field(
+            policy, registry, game_id="tc_example", field_key="religions",
+            observations=[record(status="unclassified")],
+            release_states={"pew_religion": "pew-2020"},
+        )
