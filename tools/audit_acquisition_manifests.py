@@ -24,20 +24,32 @@ def _first(mapping: dict[str, Any], *keys: str) -> Any:
 
 
 def _normalise_artifacts(manifest: dict[str, Any]) -> list[dict[str, Any]]:
-    """Adapt list-based and legacy single-artifact manifest layouts."""
+    """Adapt list-based, project-bundle, and legacy single-artifact layouts."""
+    artifacts: list[dict[str, Any]] = []
     files = manifest.get("files")
     if files is not None:
         if not isinstance(files, list):
             raise ValueError("'files' must be a list when present")
-        if files:
-            if not all(isinstance(item, dict) for item in files):
-                raise ValueError("every entry in 'files' must be an object")
-            return [dict(item) for item in files]
+        if not all(isinstance(item, dict) for item in files):
+            raise ValueError("every entry in 'files' must be an object")
+        artifacts.extend(dict(item) for item in files)
 
     # UN M49 and some legacy snapshots describe one artifact at the top level.
-    if _first(manifest, "local_raw_path", "repository_path", "path"):
-        return [manifest]
-    raise ValueError("manifest contains no artifact entries")
+    elif _first(manifest, "local_raw_path", "repository_path", "path"):
+        artifacts.append(dict(manifest))
+
+    # Project import bundles can list supporting source files separately.
+    additional = manifest.get("additional_inputs")
+    if additional is not None:
+        if not isinstance(additional, list):
+            raise ValueError("'additional_inputs' must be a list when present")
+        if not all(isinstance(item, dict) for item in additional):
+            raise ValueError("every entry in 'additional_inputs' must be an object")
+        artifacts.extend(dict(item) for item in additional)
+
+    if not artifacts:
+        raise ValueError("manifest contains no artifact entries")
+    return artifacts
 
 
 def _artifact_path(artifact: dict[str, Any]) -> Any:
@@ -174,8 +186,8 @@ def audit_manifests(
             })
             continue
 
-        source_id = payload.get("source_id")
-        dataset_key = _first(payload, "download_id", "dataset_id")
+        source_id = _first(payload, "source_id", "source_key")
+        dataset_key = _first(payload, "download_id", "dataset_id", "dataset")
         release = _first(payload, "release", "snapshot_id")
         for field, value in (("source_id", source_id), ("dataset/download identity", dataset_key), ("release/snapshot identity", release)):
             if not isinstance(value, str) or not value.strip():
