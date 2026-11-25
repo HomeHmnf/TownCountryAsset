@@ -1,4 +1,12 @@
-STOP: source checksum differs from validated snapshot
+Traceback (most recent call last):
+  File "<string>", line 73, in <module>
+    for row in connection.execute(
+               ~~~~~~~~~~~~~~~~~~^
+        "SELECT name FROM sqlite_master WHERE type = table"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+sqlite3.OperationalError: near "table": syntax error
 ===== CANDIDATE REVALIDATION =====
 {
   "assessment": "wp1_5_statistics_import_dry_run",
@@ -15,3 +23,5 @@ STOP: source checksum differs from validated snapshot
   },
   "application_artifact_sha256": "8300f23d1359ded5b48a53d56ada47ee902a14af673563576ecc81f961ede168"
 }
+
+===== CANONICAL DATABASE READ-ONLY INSPECTION =====
