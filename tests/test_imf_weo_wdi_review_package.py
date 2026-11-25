@@ -80,3 +80,23 @@ def test_build_package_rejects_missing_contract_columns(tmp_path: Path) -> None:
     source.write_text("game_id,field_id\nx,21\n", encoding="utf-8")
     with pytest.raises(ReviewPackageError, match="missing required columns"):
         build_package(source)
+
+
+def test_build_package_can_be_scoped_to_one_field(tmp_path: Path) -> None:
+    source = tmp_path / "semantic.csv"
+    _input(source, [
+        _row(field_id="15", year="2016"),
+        _row(field_id="21", year="2017"),
+    ])
+    rows, cases, summary = build_package(source, field_ids={15})
+    assert len(rows) == 1
+    assert rows[0]["field_id"] == "15"
+    assert summary["field_ids"] == [15]
+    assert summary["field_counts"] == {"15": 1}
+
+
+def test_build_package_rejects_empty_field_scope(tmp_path: Path) -> None:
+    source = tmp_path / "semantic.csv"
+    _input(source, [_row()])
+    with pytest.raises(ReviewPackageError, match="field_ids"):
+        build_package(source, field_ids=set())
