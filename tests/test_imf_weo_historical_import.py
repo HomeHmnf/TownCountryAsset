@@ -78,7 +78,7 @@ def test_candidate_package_checksums_and_provenance(tmp_path, monkeypatch):
 
 
 def test_candidate_package_rejects_missing_units_only_if_not_preserved(tmp_path, monkeypatch):
-    candidate, source, identity, migration, acquisition = _package(tmp_path)
+    candidate, source, identity, crosswalk, migration, acquisition = _package(tmp_path)
     monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
     path = candidate / "observations.csv"
     rows = list(csv.DictReader(path.open(encoding="utf-8", newline="")))
@@ -90,7 +90,7 @@ def test_candidate_package_rejects_missing_units_only_if_not_preserved(tmp_path,
     summary = json.loads((candidate / "candidate.json").read_text())
     summary["observations_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
     (candidate / "candidate.json").write_text(json.dumps(summary))
-    result, _, _ = importer._load_candidate(candidate, source, identity, migration, acquisition)
+    result, _, _ = importer._load_candidate(candidate, source, identity, crosswalk, migration, acquisition)
     assert result[0]["unit"] is None
 
 
