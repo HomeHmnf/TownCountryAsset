@@ -14,6 +14,7 @@
 - [Stage 3C IMF WEO manual acquisition registration](data-store-separation-stage-3c-imf-manual-acquisition.md) — source-specific registration of the October 2026 CSV and Database Appendix as one date-precision manual acquisition event; owner-validated, acquisition ID 5, two artifacts, byte integrity verified.
 
 - [WP1.5 review, approval and database application workflow](../data-sources/wp1-5-review-approval-application-workflow.md) — common governance contract applied to every remaining source/field batch.
+- [World Bank WDI WP1.5 application record](../data-sources/world-bank-wdi-wp1-5-application.md) — owner-verified application of 561 WDI scalar observations and 187 country-source mappings.
 - [WP1.5 remaining acquisition and application plan](../data-sources/wp1-5-remaining-acquisition-plan.md) — current execution order and gates.
 
 These are implementation records, not the normative architecture contract. See [architecture](../architecture/README.md) for stable design rules and [feature documentation standard](../feature-documentation-standard.md) for new work.
