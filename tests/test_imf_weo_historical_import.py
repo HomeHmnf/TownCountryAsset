@@ -19,6 +19,11 @@ def _package(root: Path):
     source.write_text("immutable test source", encoding="utf-8")
     identity = root / "identity.json"
     identity.write_text("{}", encoding="utf-8")
+    crosswalk = root / "crosswalk.json"
+    crosswalk.write_text(json.dumps({
+        "schema_version": 1, "dataset": "world_economic_outlook",
+        "source_key": "imf_weo", "mappings": []
+    }), encoding="utf-8")
     migration = root / "008.sql"
     migration.write_text("-- test migration dependency", encoding="utf-8")
     acquisition = root / "acquisition.md"
@@ -48,22 +53,25 @@ def _package(root: Path):
         "source_byte_count": source.stat().st_size,
         "source_path": "weo.csv",
         "identity_registry_path": "identity.json",
+        "crosswalk_path": "crosswalk.json",
+        "crosswalk_sha256": hashlib.sha256(crosswalk.read_bytes()).hexdigest(),
+        "field_ids": [15],
         "observations_sha256": hashlib.sha256(observations.read_bytes()).hexdigest(),
         "exceptions_sha256": hashlib.sha256(exceptions.read_bytes()).hexdigest(),
         "observation_count": 1,
     }
     (candidate / "candidate.json").write_text(json.dumps(summary), encoding="utf-8")
-    return candidate, source, identity, migration, acquisition
+    return candidate, source, identity, crosswalk, migration, acquisition
 
 
 def test_candidate_package_checksums_and_provenance(tmp_path, monkeypatch):
-    candidate, source, identity, migration, acquisition = _package(tmp_path)
+    candidate, source, identity, crosswalk, migration, acquisition = _package(tmp_path)
     monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
-    rows, summary, inputs = importer._load_candidate(candidate, source, identity, migration, acquisition)
+    rows, summary, inputs = importer._load_candidate(candidate, source, identity, crosswalk, migration, acquisition)
     assert len(rows) == 1
     assert rows[0]["value_status"] == "unclassified"
     assert rows[0]["unit"] == "US dollar"
-    assert len(inputs) == 7
+    assert len(inputs) == 8
     (candidate / "observations.csv").write_text("changed", encoding="utf-8")
     with pytest.raises(importer.WEOImportError, match="observations.csv checksum"):
         importer._load_candidate(candidate, source, identity, migration, acquisition)
@@ -125,14 +133,15 @@ def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
         connection.close()
 
     first = importer.prepare_application(candidate, database_path=database,
-        source_path=source, identity_path=identity, migration_path=migration, acquisition_record_path=acquisition,
+        source_path=source, identity_path=identity, crosswalk_path=crosswalk,
+        migration_path=migration, acquisition_record_path=acquisition,
         approval_id="imf-weo-test-approval-1")
     assert first["status"] == "pending"
     assert first["database_observations_written"] is False
     importer.decide_application_for_weo(first["approval_id"], decision="approved",
         actor="reviewer", note="Reviewed exact WEO candidate", database_path=database)
     applied = importer.apply_application(candidate, first["approval_id"],
-        database_path=database, source_path=source, identity_path=identity,
+        database_path=database, source_path=source, identity_path=identity, crosswalk_path=crosswalk,
         migration_path=migration, acquisition_record_path=acquisition)
     assert applied["inserted"] == 1
     assert applied["unchanged"] == 0
