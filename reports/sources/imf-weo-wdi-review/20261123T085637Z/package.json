@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "package_type": "imf_weo_wdi_consolidated_review",
+  "source": "imf_weo",
+  "release": "october_2026",
+  "upstream_semantic_matrix": "reports/sources/imf-wdi-semantic-disposition/20261107T145725Z/semantic_disposition_matrix.csv",
+  "upstream_semantic_matrix_sha256": "b365d3f6fb2f3d1d52fbc0dda32658a5060c86b024ceebf7f4987c015eed7dde",
+  "observation_row_count": 13310,
+  "distinct_project_identities": 242,
+  "field_counts": {
+    "15": 2662,
+    "16": 2662,
+    "18": 2662,
+    "20": 2662,
+    "21": 2662
+  },
+  "review_decision_counts": {
+    "pending": 13310
+  },
+  "edge_case_count": 1511,
+  "edge_case_counts_by_category": {
+    "comparison_status": 996,
+    "country_case": 15,
+    "field_semantics": 5,
+    "identity": 242,
+    "observation_status": 253
+  },
+  "review_authority": "review_register.csv",
+  "edge_case_role": "linked_work_queue_not_a_separate_decision_surface",
+  "decision_vocabulary": [
+    "approve",
+    "exclude",
+    "hold_for_evidence",
+    "not_applicable",
+    "pending"
+  ],
+  "candidate_is_approved": false,
+  "approval_created": false,
+  "normalized_application_artifact_created": false,
+  "database_written": false,
+  "source_policy_changed": false,
+  "package_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-wdi-review/20261123T085637Z",
+  "review_register_sha256": "9247bb20c7f3e4cfd51955ad8d5dcca57d1f805697947c0d642407bef2326691",
+  "edge_cases_sha256": "5abd2c9200e4e045a8f3b418c8b0bb595b9d9424e29916886d361099ed8cd211"
+}

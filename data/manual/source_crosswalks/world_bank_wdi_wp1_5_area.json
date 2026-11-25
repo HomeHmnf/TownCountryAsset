@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "dataset": "world_bank_wdi_wp1_5_area",
+  "dataset": "world_bank_wdi",
   "source_key": "world_bank_wdi",
   "mapping_policy": "Explicit WDI ISO3 source correspondence approved from the intersection of non-aggregate WDI countryiso3code values and existing Natural Earth source mappings that also have current UN WPP mappings to the same persistent game_id. Source-specific correspondence only; no official ISO identity assignment or approval.",
   "review_approval": "Owner-approved scope: 187 exact WDI ISO3 matches with current Natural Earth and UN WPP source correspondences. Approval applies only to this WDI dataset crosswalk.",
@@ -971,8 +971,7 @@
       "TLS",
       "TUR",
       "VEN",
-      "VNM",
-      "XKX"
+      "VNM"
     ],
     "natural_earth_codes_excluded_not_in_wdi": [
       "AIA",
@@ -988,6 +987,9 @@
       "SPM",
       "TWN"
     ],
-    "exclusions_policy": "Unmatched WDI codes remain unresolved or excluded; composite territories and user-assigned codes are not forced onto another project identity. Non-WDI Natural Earth codes are not imported."
+    "exclusions_policy": "The 29 non-null usable unmapped WDI codes remain unresolved or excluded. XKX is a separate null-only non-aggregate code with no usable observation in any of the three indicators and is excluded from candidate mapping. Composite territories and user-assigned codes are not forced onto another project identity. Non-WDI Natural Earth codes are not imported.",
+    "wdi_null_only_nonaggregate_codes": [
+      "XKX"
+    ]
   }
 }

@@ -1,0 +1,419 @@
+{
+  "manifest_schema_version": 1,
+  "source_id": "world_bank_wdi",
+  "source_name": "World Bank World Development Indicators",
+  "download_id": "wdi_wp1_5_area",
+  "dataset_id": "wdi_wp1_5_area",
+  "release": "api_snapshot_20261121T074357472382Z",
+  "snapshot_id": "api_snapshot_20261121T074357472382Z",
+  "release_kind": "rolling_api_snapshot",
+  "release_discovery_mode": "api_capture",
+  "source_url": "https://api.worldbank.org/v2",
+  "final_url": "https://api.worldbank.org/v2",
+  "api_documentation_url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392",
+  "terms_url": "https://www.worldbank.org/ext/en/legal/terms-conditions/datasets",
+  "attribution": "World Bank Group, World Development Indicators; originating organisations and source notes retained per indicator.",
+  "license_status": "unclear_or_unverified_indicator_level_third_party_review_required",
+  "retrieved_at": "2026-11-21T07:44:07.275083+00:00",
+  "capture_started_at": "2026-11-21T07:43:57.472382+00:00",
+  "snapshot_scope": {
+    "profile": "wp1_5_area_and_density",
+    "work_package": "WP1.5",
+    "field_ids": [
+      3,
+      33,
+      34
+    ],
+    "world_bank_source_id": "2",
+    "start_year": 2015,
+    "end_year": 2025,
+    "primary_indicators": [
+      "EN.POP.DNST",
+      "AG.SRF.TOTL.K2",
+      "AG.LND.TOTL.K2"
+    ],
+    "all_indicators": [
+      "EN.POP.DNST",
+      "AG.SRF.TOTL.K2",
+      "AG.LND.TOTL.K2"
+    ],
+    "api_version": "v2",
+    "observation_api_per_page": 20000,
+    "country_catalogue_record_count": 296,
+    "country_catalogue_page_count": 1,
+    "observation_status": "Preserved verbatim; not interpreted as actual, estimate or forecast."
+  },
+  "indicator_summaries": {
+    "EN.POP.DNST": {
+      "field_id": 3,
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-11-11",
+      "indicator_name": "Population density (people per sq. km of land area)",
+      "unit_metadata": "",
+      "source_organization": "FAO population estimates, Food and Agriculture Organization of the United Nations (FAO), publisher: Food and Agriculture Organization of the United Nations (FAO);\nWorld Bank population estimates, World Bank (WB), publisher: World Bank (WB)",
+      "source_note": "Population density is midyear population divided by land area in square kilometers. Population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship--except for refugees not permanently settled in the country of asylum, who are generally considered part of the population of their country of origin. Land area is a country's total area, excluding area under inland water bodies, national claims to continental shelf, and exclusive economic zones. In most cases the definition of inland water bodies includes major rivers and lakes."
+    },
+    "AG.SRF.TOTL.K2": {
+      "field_id": 33,
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-11-11",
+      "indicator_name": "Surface area (sq. km)",
+      "unit_metadata": "",
+      "source_organization": "FAO electronic files and web site, Food and Agriculture Organization of the United Nations (FAO), publisher: Food and Agriculture Organization of the United Nations (FAO)",
+      "source_note": "Surface area is a country's total area, including areas under inland bodies of water and some coastal waterways."
+    },
+    "AG.LND.TOTL.K2": {
+      "field_id": 34,
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-11-11",
+      "indicator_name": "Land area (sq. km)",
+      "unit_metadata": "",
+      "source_organization": "FAOSTAT, Food and Agriculture Organization of the United Nations (FAO), uri: https://www.fao.org/faostat/en/#data/RL, publisher: Food and Agriculture Organization of the United Nations (FAO)",
+      "source_note": "Land area is a country's total area, excluding area under inland water bodies, national claims to continental shelf, and exclusive economic zones. In most cases the definition of inland water bodies includes major rivers and lakes."
+    }
+  },
+  "files": [
+    {
+      "filename": "source_metadata.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/source_metadata.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 236,
+      "sha256": "7196c4bf58e63a75c4576fef063b0fd96cba99c118f9c112dadc4afbbd2a0476",
+      "url": "https://api.worldbank.org/v2/sources/2?format=json",
+      "final_url": "https://api.worldbank.org/v2/sources/2?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:43:58.816684+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:43:58 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=xsp6xu1F5AHVtYMDPr42fUYyTNqexy5UxIAaujE.lGY-1795247038.696962-1.0.1.1-Uc60ssdaSrX0Oh_2PUmJ.XQlD55fEgC2VbaA_krLCoU; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de1107dbaadc82-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "70073",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 22 Nov 2026 07:43:58 GMT",
+        "Last-Modified": "Fri, 20 Nov 2026 12:16:05 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "country_metadata_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/country_metadata_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 113954,
+      "sha256": "c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce",
+      "url": "https://api.worldbank.org/v2/country?format=json&per_page=400&page=1",
+      "final_url": "https://api.worldbank.org/v2/country?format=json&per_page=400&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:43:59.609775+00:00",
+      "request_parameters": {
+        "format": "json",
+        "per_page": "400",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:43:59 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=yh0MpQZPxW3UxeTex3Ex1xpKEzagcPTngV5ralMd0PQ-1795247039.2123845-1.0.1.1-vWTn.PaRMKW3Kmq1YBmymYIkfUx2H3YYQ41SNZFHkXk; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de110b1cf746a9-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "74953",
+        "Cache-Control": "public, max-age=42694",
+        "Expires": "Sat, 21 Nov 2026 19:35:33 GMT",
+        "Last-Modified": "Thu, 19 Nov 2026 22:46:19 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 296
+    },
+    {
+      "filename": "indicator_metadata_EN.POP.DNST.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_EN.POP.DNST.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 1134,
+      "sha256": "c5df1b392124d9113915d833c5d4a47e73d9c6b989de0e6a64a9487479f9040c",
+      "url": "https://api.worldbank.org/v2/indicator/EN.POP.DNST?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/EN.POP.DNST?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:44:00.078975+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:44:00 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=PFCo6DIkCRBRtzkIdPYOWIhqJJZ2b0Vo6md.wMKU_ck-1795247039.9995189-1.0.1.1-AB7NMWbm1VjDFq2Q3AvkRe_wY6BEz2X_hdK9LZGqrSg; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de110ff99be093-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "40025",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 22 Nov 2026 07:44:00 GMT",
+        "Last-Modified": "Fri, 20 Nov 2026 20:36:54 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_EN.POP.DNST_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_EN.POP.DNST_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 707628,
+      "sha256": "e0029dedbdbee884b27ab19777e909819cb083411e86b8ce6fedb3c2dde0bd84",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/EN.POP.DNST?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/EN.POP.DNST?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:44:02.195307+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:44:00 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=E62CndztD_81aCUgTyG0haA.8kPZLaVUBkgeFn1UPwo-1795247040.5413797-1.0.1.1-7T3gEsSaF34GgrqeEOnuQu2NRIxANzw1Ydr7SP1YNRo; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de11135c5f9754-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "764",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 22 Nov 2026 07:44:00 GMT",
+        "Last-Modified": "Sat, 21 Nov 2026 07:31:15 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    },
+    {
+      "filename": "indicator_metadata_AG.SRF.TOTL.K2.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.SRF.TOTL.K2.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 596,
+      "sha256": "0b359a437f7bc6501fb7dfaae43262ddb181ff7c5ab4ba760c0a6a5356684b10",
+      "url": "https://api.worldbank.org/v2/indicator/AG.SRF.TOTL.K2?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/AG.SRF.TOTL.K2?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:44:02.706263+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:44:02 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=g8XUJYsYwEjVMuDy2SHHzkJQlMXuiMYbRwO0eCC.Nx4-1795247042.563029-1.0.1.1-j1Jl8qvyBZBVZg33PC6BXw3MCZgubMuUvshqqY4jAu4; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de11200f88d256-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "23519",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 22 Nov 2026 07:44:02 GMT",
+        "Last-Modified": "Sat, 21 Nov 2026 01:12:03 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_AG.SRF.TOTL.K2_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.SRF.TOTL.K2_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 604323,
+      "sha256": "b23ba9ee2a0d8f657c718062680848a2bc9659df302de0dbcebff28871c8e421",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/AG.SRF.TOTL.K2?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/AG.SRF.TOTL.K2?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:44:05.098815+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:44:03 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=bvSFCGg.4Dr_w.yYn7RWjy.a5qmXTpX6AY82r3NOD2Q-1795247043.2061133-1.0.1.1-ZPooM4xV3yF_I5V9RfkGNUChOkPCMGTK8XV.DSiaNVc; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de1123ff72e537-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "742",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 22 Nov 2026 07:44:03 GMT",
+        "Last-Modified": "Sat, 21 Nov 2026 07:31:40 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    },
+    {
+      "filename": "indicator_metadata_AG.LND.TOTL.K2.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.LND.TOTL.K2.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 738,
+      "sha256": "5bbf22fc31f4de6995e22f30d09f4149b4cb9a645d97bcf539d79479c87ed58c",
+      "url": "https://api.worldbank.org/v2/indicator/AG.LND.TOTL.K2?format=json",
+      "final_url": "https://api.worldbank.org/v2/indicator/AG.LND.TOTL.K2?format=json",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:44:05.675551+00:00",
+      "request_parameters": {
+        "format": "json"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:44:05 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=wpEtKCix2ltofI2VJzUCTG9paE6hYD1_OmGtwubMzd4-1795247045.5576022-1.0.1.1-5JuA0YnxkMD7HpxtHygzdgjMO1Q2iQkHdiKhPi3fN5Y; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de1132bd3273a1-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "79527",
+        "Cache-Control": "public, max-age=53485",
+        "Expires": "Sat, 21 Nov 2026 22:35:30 GMT",
+        "Last-Modified": "Fri, 20 Nov 2026 00:30:03 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": null
+    },
+    {
+      "filename": "observations_AG.LND.TOTL.K2_page_001.json",
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.LND.TOTL.K2_page_001.json",
+      "content_type": "application/json;charset=utf-8",
+      "format": "json",
+      "byte_count": 595709,
+      "sha256": "a354fff28ca1c6856e5daebcb6c6042f68f6f80bb9bf5074358af58e6b2b9abe",
+      "url": "https://api.worldbank.org/v2/country/all/indicator/AG.LND.TOTL.K2?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "final_url": "https://api.worldbank.org/v2/country/all/indicator/AG.LND.TOTL.K2?format=json&date=2015%3A2025&per_page=20000&page=1",
+      "http_status": 200,
+      "retrieved_at": "2026-11-21T07:44:07.272698+00:00",
+      "request_parameters": {
+        "format": "json",
+        "date": "2015:2025",
+        "per_page": "20000",
+        "page": "1"
+      },
+      "response_headers": {
+        "Date": "Sat, 21 Nov 2026 07:44:06 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "close",
+        "set-cookie": "_cfuvid=NDY_P1KmsFOoGKPh_sFpv4Dm7PbQuUfimbkly6LfRZc-1795247046.0305033-1.0.1.1-lNekMg4NH2.TMobL09lUlvwNDcH26Ef2gL6JJGjllts; HttpOnly; SameSite=None; Secure; Path=/; Domain=worldbank.org",
+        "CF-Ray": "a5de1135ae73d3b4-FRA",
+        "CF-Cache-Status": "HIT",
+        "Access-Control-Allow-Origin": "*",
+        "Age": "707",
+        "Cache-Control": "public, max-age=86400",
+        "Expires": "Sun, 22 Nov 2026 07:44:06 GMT",
+        "Last-Modified": "Sat, 21 Nov 2026 07:32:18 GMT",
+        "Server": "cloudflare",
+        "Vary": "accept-encoding",
+        "Access-Control-Allow-Headers": "X-Requested-With",
+        "Access-Control-Allow-Methods": "GET",
+        "Request-Context": "appId=cid-v1:da002513-bd8b-4441-9f30-737944134422",
+        "X-Powered-By": "ASP.NET"
+      },
+      "request_headers": {
+        "User-Agent": "TownCountryAsset-WDI-WP1.5-Area/1.0",
+        "Accept": "application/json"
+      },
+      "page_number": 1,
+      "page_count": 1,
+      "row_count": 2926
+    }
+  ]
+}

@@ -2,14 +2,14 @@
 
 - Registry records reviewed: 242
 - Reference rows: 248
-- Total ISO candidates proposed: 235
+- Total ISO candidates proposed: 234
 - Exact normalized-name matches: 202
-- Explicit reviewed name-variant matches: 33
-- No-match or missing-name records: 7
+- Explicit reviewed name-variant matches: 32
+- No-match or missing-name records: 8
 - Ambiguous reference matches: 0
 - Records already marked verified: 0
 - Reference file: `raw_data/iso/m49-iso-reference.csv`
-- Reference source URL: https://unstats.un.org/unsd/methodology/m49/overview (official United Nations Statistics Division M49 reference; ISO codes are cross-references)
+- Reference source URL: https://unstats.un.org/unsd/methodology/m49/overview
 - Retrieved on: 2026-11-01
 
 ## Candidate review
@@ -38,7 +38,7 @@
 | tc_9bd5e00f9fc944edbf2eb3097e413328 | Saint Helena | SH | SHN | Saint Helena | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_0900903d1eb84838aae9c039c9fd0da2 | Pitcairn Islands | PN | PCN | Pitcairn | explicit name variant | candidate: explicit name-variant match; human verification required |
 | tc_0b9688bbf4264477b023a0f2af180c2e | Anguilla | AI | AIA | Anguilla | exact normalized name | candidate: exact normalized English-name match; human verification required |
-| tc_815eb2563fde4a4cb077173220e2a533 | Falkland Islands | FK | FLK | Falkland Islands (Malvinas) | explicit name variant | candidate: explicit name-variant match; human verification required |
+| tc_815eb2563fde4a4cb077173220e2a533 | Falkland Islands |  |  |  | unmatched | review: no exact normalized English-name match |
 | tc_19acfc8e1cf44c25aa753729115d60d6 | Cayman Islands | KY | CYM | Cayman Islands | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_d81e2d4c4b934f57a67f380b2fdaec9d | Bermuda | BM | BMU | Bermuda | exact normalized name | candidate: exact normalized English-name match; human verification required |
 | tc_f3832fd029cb445483c26654bddadfac | British Virgin Islands | VG | VGB | British Virgin Islands | exact normalized name | candidate: exact normalized English-name match; human verification required |
@@ -267,13 +267,3 @@
 - Dependencies may have ISO codes; disputed or other features may not. Do not invent codes for unmatched entities.
 - Resolve spelling and naming variants through separately documented, human-reviewed evidence rather than fuzzy matching.
 - Record the reference source and retrieval date in the review evidence before changing assignment_status to verified.
-
-## M49 acquisition and parsing provenance
-
-- Raw HTML snapshot: /home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_m49/country_area_overview_html/2026-10-current/m49-country-area-overview.html
-- Source manifest: /home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_m49/country_area_overview_html/2026-10-current.json
-- Parser provenance: raw_data/iso/m49-provenance-20261101T064027Z.json
-- Raw SHA-256: b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb
-- M49 rows: 248
-- Rows without ISO codes (retained in provenance, not proposed): 0
-- UN M49 republishes ISO alpha-code cross-references; it is not the ISO 3166 assignment authority. All proposals require human review.

@@ -1,0 +1,4061 @@
+{
+  "source_files": [
+    {
+      "name": "icp2005.har",
+      "bytes": 7141851
+    },
+    {
+      "name": "icp2021.har",
+      "bytes": 15610953
+    }
+  ],
+  "requests": [
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/EXe6cb5b15a4484c15b2f9ed4b1739e9d7-libraryCode_source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/EXe6cb5b15a4484c15b2f9ed4b1739e9d7-libraryCode_source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC12847e8f216243748506feff56517cfb-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC12847e8f216243748506feff56517cfb-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC2e3636800ddb470a8bd9e4c1c20acdfd-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC2e3636800ddb470a8bd9e4c1c20acdfd-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7b66513f348242d8a803f534ea2d78a8-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7b66513f348242d8a803f534ea2d78a8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7c8bc1a1fe3f4befbe1788c53326d752-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7c8bc1a1fe3f4befbe1788c53326d752-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC92fd33c7fb334edab38329a750ca1b66-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC92fd33c7fb334edab38329a750ca1b66-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCb453f6bd4b6b4056a53aa2926bf43934-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCb453f6bd4b6b4056a53aa2926bf43934-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCbb4e9702bffe4ffbb6fad9ee3d3a2be8-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCbb4e9702bffe4ffbb6fad9ee3d3a2be8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCf2a918b6a3814e33b071041595a61b01-source.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCf2a918b6a3814e33b071041595a61b01-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 304,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "by2.uservoice.com",
+      "path": "/t2/136660/web/e3652aca-3feb-4db3-48dc-ff0a7cd51667/track.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "by2.uservoice.com",
+          "path": "/t2/136660/web/e3652aca-3feb-4db3-48dc-ff0a7cd51667/track.js",
+          "query_parameter_names": [
+            "_",
+            "c",
+            "d",
+            "s"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/javascript; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "cdn.appdynamics.com",
+      "path": "/adrum/adrum-4.3.2.0.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "cdn.appdynamics.com",
+          "path": "/adrum/adrum-4.3.2.0.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "connect.facebook.net",
+      "path": "/en_US/sdk.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "connect.facebook.net",
+          "path": "/en_US/sdk.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "data.worldbank.org",
+      "path": "/favicon.ico",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "data.worldbank.org",
+          "path": "/favicon.ico",
+          "query_parameter_names": [
+            "v"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/App_Themes/GridTheme/GridDefaultTheme.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/App_Themes/GridTheme/GridDefaultTheme.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/DXR.axd",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/DXR.axd",
+          "query_parameter_names": [
+            "r"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/DXR.axd",
+          "query_parameter_names": [
+            "r"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/ScriptResource.axd",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/ScriptResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/ScriptResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/WebResource.axd",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/WebResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/css/font-awesome.min.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/font-awesome.min.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/css/icon.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/icon.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/css/wb_feedback.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/wb_feedback.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/id/4129804e",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/id/4129804e",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/ajax-loader.gif",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/ajax-loader.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/ajax-loader.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/home-icon-blue.png",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/home-icon-blue.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/icon-login-green.png",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/icon-login-green.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/logo-ibrd.png",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/logo-ibrd.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/mappoint.gif",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/mappoint.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/rangearrows.gif",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/rangearrows.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/sprite.png",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/sprite.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/validate.png",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/validate.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/js/appdynamics.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/js/appdynamics.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/js/wb_feedback.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/js/wb_feedback.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/SubnationalData.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/SubnationalData.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/embedOptions.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/embedOptions.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/bootstrap-select.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap-select.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/bootstrap-switch.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap-switch.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/bootstrap.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jpicker.min.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jpicker.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery-ui-v1.10.3.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery-ui-v1.10.3.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery-v1.11.1.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery-v1.11.1.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery.deprecated.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery.deprecated.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery.sortcontent.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery.sortcontent.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jqx-all.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jqx-all.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/reportcommon.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/reportcommon.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/selectvariable.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/selectvariable.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/selectvariableadvanced.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/selectvariableadvanced.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/tablecustomstyles.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/tablecustomstyles.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/tableoptions.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/tableoptions.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/1.10.3/themes/smoothness/jquery-ui.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/1.10.3/themes/smoothness/jquery-ui.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/Subnational.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/Subnational.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/bootstrap-switch.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/bootstrap-switch.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/bootstrap.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/bootstrap.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/jPicker-dialog.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/jPicker-dialog.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/jqx.base.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/jqx.base.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/reports.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/reports.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/selectvariable.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/selectvariable.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/selectvariableIE.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/selectvariableIE.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/style-Header-Footer-nonArabic.css",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/style-Header-Footer-nonArabic.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "dpm.demdex.net",
+      "path": "/id",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "dpm.demdex.net",
+          "path": "/id",
+          "query_parameter_names": [
+            "d_fieldgroup",
+            "d_mid",
+            "d_nsid",
+            "d_orgid",
+            "d_rtbd",
+            "d_ver",
+            "d_visid_ver",
+            "ts"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "script.crazyegg.com",
+      "path": "/pages/scripts/0058/1350.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "script.crazyegg.com",
+          "path": "/pages/scripts/0058/1350.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "script.crazyegg.com",
+          "path": "/pages/scripts/0058/1350.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "widget.uservoice.com",
+      "path": "/XzQsWhTqmnE8dYDOJ0HjJQ.js",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "widget.uservoice.com",
+          "path": "/XzQsWhTqmnE8dYDOJ0HjJQ.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 304,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "GET",
+      "host": "worldbank.tt.omtrdc.net",
+      "path": "/m2/worldbank/mbox/json",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "worldbank.tt.omtrdc.net",
+          "path": "/m2/worldbank/mbox/json",
+          "query_parameter_names": [
+            "PageName",
+            "browserHeight",
+            "browserTimeOffset",
+            "browserWidth",
+            "colorDepth",
+            "devicePixelRatio",
+            "mbox",
+            "mboxCount",
+            "mboxHost",
+            "mboxMCGVID",
+            "mboxMCSDID",
+            "mboxPC",
+            "mboxPage",
+            "mboxReferrer",
+            "mboxRid",
+            "mboxSession",
+            "mboxTime",
+            "mboxURL",
+            "mboxVersion",
+            "screenHeight",
+            "screenOrientation",
+            "screenWidth",
+            "vst.trk",
+            "vst.trks"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/GetDatabaseListJSON",
+      "count": 1,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDatabaseListJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+      "count": 4,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{cubeid: '1009', controlid: 'Country', hierarchy: '[Country].[List]'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{cubeid: '1009', controlid: 'Classification', hierarchy: '[Classification].[List]'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{cubeid: '1009', controlid: 'Series', hierarchy: '[Series].[List]'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/GetExceptionOperationID",
+      "count": 2,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetExceptionOperationID",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetExceptionOperationID",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2005.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+      "count": 10,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{Page: 'Report' ,Feature: 'Variables->Database->Preview'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{Page: 'Report' ,Feature: 'Variables->Database'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{Page: 'Report' ,Feature: 'Layout->Display->Row50'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/EXe6cb5b15a4484c15b2f9ed4b1739e9d7-libraryCode_source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/EXe6cb5b15a4484c15b2f9ed4b1739e9d7-libraryCode_source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/EXe6cb5b15a4484c15b2f9ed4b1739e9d7-libraryCode_source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/EXe6cb5b15a4484c15b2f9ed4b1739e9d7-libraryCode_source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC12847e8f216243748506feff56517cfb-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC12847e8f216243748506feff56517cfb-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC12847e8f216243748506feff56517cfb-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC12847e8f216243748506feff56517cfb-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC2e3636800ddb470a8bd9e4c1c20acdfd-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC2e3636800ddb470a8bd9e4c1c20acdfd-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC2e3636800ddb470a8bd9e4c1c20acdfd-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC2e3636800ddb470a8bd9e4c1c20acdfd-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7b66513f348242d8a803f534ea2d78a8-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7b66513f348242d8a803f534ea2d78a8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7b66513f348242d8a803f534ea2d78a8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7b66513f348242d8a803f534ea2d78a8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7c8bc1a1fe3f4befbe1788c53326d752-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7c8bc1a1fe3f4befbe1788c53326d752-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7c8bc1a1fe3f4befbe1788c53326d752-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC7c8bc1a1fe3f4befbe1788c53326d752-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC92fd33c7fb334edab38329a750ca1b66-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC92fd33c7fb334edab38329a750ca1b66-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC92fd33c7fb334edab38329a750ca1b66-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RC92fd33c7fb334edab38329a750ca1b66-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCb453f6bd4b6b4056a53aa2926bf43934-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCb453f6bd4b6b4056a53aa2926bf43934-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCb453f6bd4b6b4056a53aa2926bf43934-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCb453f6bd4b6b4056a53aa2926bf43934-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCbb4e9702bffe4ffbb6fad9ee3d3a2be8-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCbb4e9702bffe4ffbb6fad9ee3d3a2be8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCbb4e9702bffe4ffbb6fad9ee3d3a2be8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCbb4e9702bffe4ffbb6fad9ee3d3a2be8-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCf2a918b6a3814e33b071041595a61b01-source.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCf2a918b6a3814e33b071041595a61b01-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCf2a918b6a3814e33b071041595a61b01-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/435b9a374f35/RCf2a918b6a3814e33b071041595a61b01-source.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "assets.adobedtm.com",
+      "path": "/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 304,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "assets.adobedtm.com",
+          "path": "/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "by2.uservoice.com",
+      "path": "/t2/136660/web/e3652aca-3feb-4db3-48dc-ff0a7cd51667/track.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "by2.uservoice.com",
+          "path": "/t2/136660/web/e3652aca-3feb-4db3-48dc-ff0a7cd51667/track.js",
+          "query_parameter_names": [
+            "_",
+            "c",
+            "d",
+            "s"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/javascript; charset=utf-8"
+        },
+        {
+          "method": "GET",
+          "host": "by2.uservoice.com",
+          "path": "/t2/136660/web/e3652aca-3feb-4db3-48dc-ff0a7cd51667/track.js",
+          "query_parameter_names": [
+            "_",
+            "c",
+            "d",
+            "s"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/javascript; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "cdn.appdynamics.com",
+      "path": "/adrum/adrum-4.3.2.0.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "cdn.appdynamics.com",
+          "path": "/adrum/adrum-4.3.2.0.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "cdn.appdynamics.com",
+          "path": "/adrum/adrum-4.3.2.0.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "cdn.appdynamics.com",
+          "path": "/adrum/adrum-4.3.2.0.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "connect.facebook.net",
+      "path": "/en_US/sdk.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "connect.facebook.net",
+          "path": "/en_US/sdk.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "connect.facebook.net",
+          "path": "/en_US/sdk.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "connect.facebook.net",
+          "path": "/en_US/sdk.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "data.worldbank.org",
+      "path": "/favicon.ico",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "data.worldbank.org",
+          "path": "/favicon.ico",
+          "query_parameter_names": [
+            "v"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8"
+        },
+        {
+          "method": "GET",
+          "host": "data.worldbank.org",
+          "path": "/favicon.ico",
+          "query_parameter_names": [
+            "v"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/App_Themes/GridTheme/GridDefaultTheme.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/App_Themes/GridTheme/GridDefaultTheme.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/App_Themes/GridTheme/GridDefaultTheme.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/DXR.axd",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/DXR.axd",
+          "query_parameter_names": [
+            "r"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/DXR.axd",
+          "query_parameter_names": [
+            "r"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/DXR.axd",
+          "query_parameter_names": [
+            "r"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/ScriptResource.axd",
+      "count": 8,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/ScriptResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/ScriptResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/ScriptResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/WebResource.axd",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/WebResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/WebResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/WebResource.axd",
+          "query_parameter_names": [
+            "d",
+            "t"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/css/font-awesome.min.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/font-awesome.min.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/font-awesome.min.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/css/icon.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/icon.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/icon.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/css/wb_feedback.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/wb_feedback.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/css/wb_feedback.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/embed/ICP-Annual-PPPs/id/1da9d9a2",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/embed/ICP-Annual-PPPs/id/1da9d9a2",
+          "query_parameter_names": [
+            "bdrClr",
+            "bdrStyle",
+            "bdrWidth",
+            "dd",
+            "ds",
+            "dw",
+            "exptypes",
+            "inf",
+            "md",
+            "navigator",
+            "pr",
+            "sh",
+            "tb",
+            "theme",
+            "ti",
+            "title",
+            "zm"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/embed/ICP-Annual-PPPs/id/1da9d9a2",
+          "query_parameter_names": [
+            "bdrClr",
+            "bdrStyle",
+            "bdrWidth",
+            "dd",
+            "ds",
+            "dw",
+            "exptypes",
+            "inf",
+            "md",
+            "navigator",
+            "pr",
+            "sh",
+            "tb",
+            "theme",
+            "ti",
+            "title",
+            "zm"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/id/1da9d9a2",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/id/1da9d9a2",
+          "query_parameter_names": [
+            "Report_Name"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/id/4129804e",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/id/4129804e",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/ajax-loader.gif",
+      "count": 5,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/ajax-loader.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/ajax-loader.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/ajax-loader.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/grippy.png",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/grippy.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/home-icon-blue.png",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/home-icon-blue.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/home-icon-blue.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/icon-login-green.png",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/icon-login-green.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/icon-login-green.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/logo-ibrd.png",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/logo-ibrd.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/logo-ibrd.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/mappoint.gif",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/mappoint.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/mappoint.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/openhand.cur",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/openhand.cur",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/octet-stream"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/rangearrows.gif",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/rangearrows.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/rangearrows.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/sprite.png",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/sprite.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/sprite.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/images/validate.png",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/validate.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/images/validate.png",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/png"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/js/appdynamics.js",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/js/appdynamics.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/js/appdynamics.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/js/appdynamics.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/js/wb_feedback.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/js/wb_feedback.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/js/wb_feedback.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/SubnationalData.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/SubnationalData.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/SubnationalData.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/embedOptions.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/embedOptions.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/embedOptions.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/bootstrap-select.min.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap-select.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap-select.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/bootstrap-switch.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap-switch.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap-switch.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/bootstrap.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/bootstrap.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jpicker.min.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jpicker.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jpicker.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery-ui-v1.10.3.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery-ui-v1.10.3.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery-ui-v1.10.3.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery-v1.11.1.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery-v1.11.1.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery-v1.11.1.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery.deprecated.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery.deprecated.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery.deprecated.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jquery.sortcontent.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery.sortcontent.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jquery.sortcontent.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/plugins/jqx-all.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jqx-all.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/plugins/jqx-all.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/reportcommon.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/reportcommon.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/reportcommon.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/selectvariable.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/selectvariable.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/selectvariable.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/selectvariableadvanced.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/selectvariableadvanced.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/selectvariableadvanced.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/tablecustomstyles.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/tablecustomstyles.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/tablecustomstyles.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/scripts/reports/tableoptions.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/tableoptions.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/scripts/reports/tableoptions.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/1.10.3/themes/smoothness/jquery-ui.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/1.10.3/themes/smoothness/jquery-ui.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/1.10.3/themes/smoothness/jquery-ui.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/Subnational.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/Subnational.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/Subnational.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/bootstrap-switch.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/bootstrap-switch.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/bootstrap-switch.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/bootstrap.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/bootstrap.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/bootstrap.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/jPicker-dialog.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/jPicker-dialog.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/jPicker-dialog.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/jqx.base.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/jqx.base.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/jqx.base.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/reports.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/reports.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/reports.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/selectvariable.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/selectvariable.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/selectvariable.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/reports/selectvariableIE.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/selectvariableIE.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/reports/selectvariableIE.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/styles/style-Header-Footer-nonArabic.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/style-Header-Footer-nonArabic.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/styles/style-Header-Footer-nonArabic.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/images/themeIconSprite.gif",
+      "count": 1,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/images/themeIconSprite.gif",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "image/gif"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/scripts/chosen.jquery.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/chosen.jquery.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/chosen.jquery.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/scripts/template/ddpreport.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/template/ddpreport.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/template/ddpreport.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/scripts/template/jquery-ui.min.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/template/jquery-ui.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/template/jquery-ui.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/scripts/template/jquery.min.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/template/jquery.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/scripts/template/jquery.min.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/x-javascript"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/styles/chosen.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/chosen.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/chosen.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/styles/embedStyles.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/embedStyles.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/embedStyles.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/styles/template/ddpreport.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/template/ddpreport.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/template/ddpreport.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "databank.worldbank.org",
+      "path": "/views/styles/template/jquery-ui.css",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/template/jquery-ui.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        },
+        {
+          "method": "GET",
+          "host": "databank.worldbank.org",
+          "path": "/views/styles/template/jquery-ui.css",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/css"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "dpm.demdex.net",
+      "path": "/id",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "dpm.demdex.net",
+          "path": "/id",
+          "query_parameter_names": [
+            "d_fieldgroup",
+            "d_mid",
+            "d_nsid",
+            "d_orgid",
+            "d_rtbd",
+            "d_ver",
+            "d_visid_ver",
+            "ts"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "dpm.demdex.net",
+          "path": "/id",
+          "query_parameter_names": [
+            "d_fieldgroup",
+            "d_mid",
+            "d_nsid",
+            "d_orgid",
+            "d_rtbd",
+            "d_ver",
+            "d_visid_ver",
+            "ts"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "dpm.demdex.net",
+          "path": "/id",
+          "query_parameter_names": [
+            "d_fieldgroup",
+            "d_mid",
+            "d_nsid",
+            "d_orgid",
+            "d_rtbd",
+            "d_ver",
+            "d_visid_ver",
+            "ts"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "script.crazyegg.com",
+      "path": "/pages/scripts/0058/1350.js",
+      "count": 8,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "script.crazyegg.com",
+          "path": "/pages/scripts/0058/1350.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "script.crazyegg.com",
+          "path": "/pages/scripts/0058/1350.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "script.crazyegg.com",
+          "path": "/pages/scripts/0058/1350.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "widget.uservoice.com",
+      "path": "/XzQsWhTqmnE8dYDOJ0HjJQ.js",
+      "count": 2,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "widget.uservoice.com",
+          "path": "/XzQsWhTqmnE8dYDOJ0HjJQ.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 304,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "widget.uservoice.com",
+          "path": "/XzQsWhTqmnE8dYDOJ0HjJQ.js",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "text/javascript; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "GET",
+      "host": "worldbank.tt.omtrdc.net",
+      "path": "/m2/worldbank/mbox/json",
+      "count": 4,
+      "samples": [
+        {
+          "method": "GET",
+          "host": "worldbank.tt.omtrdc.net",
+          "path": "/m2/worldbank/mbox/json",
+          "query_parameter_names": [
+            "PageName",
+            "browserHeight",
+            "browserTimeOffset",
+            "browserWidth",
+            "colorDepth",
+            "devicePixelRatio",
+            "mbox",
+            "mboxCount",
+            "mboxHost",
+            "mboxMCGVID",
+            "mboxMCSDID",
+            "mboxPC",
+            "mboxPage",
+            "mboxReferrer",
+            "mboxRid",
+            "mboxSession",
+            "mboxTime",
+            "mboxURL",
+            "mboxVersion",
+            "screenHeight",
+            "screenOrientation",
+            "screenWidth",
+            "vst.trk",
+            "vst.trks"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "worldbank.tt.omtrdc.net",
+          "path": "/m2/worldbank/mbox/json",
+          "query_parameter_names": [
+            "PageName",
+            "browserHeight",
+            "browserTimeOffset",
+            "browserWidth",
+            "colorDepth",
+            "devicePixelRatio",
+            "mbox",
+            "mboxCount",
+            "mboxHost",
+            "mboxMCGVID",
+            "mboxMCSDID",
+            "mboxPC",
+            "mboxPage",
+            "mboxReferrer",
+            "mboxRid",
+            "mboxSession",
+            "mboxTime",
+            "mboxURL",
+            "mboxVersion",
+            "screenHeight",
+            "screenOrientation",
+            "screenWidth",
+            "vst.trk",
+            "vst.trks"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        },
+        {
+          "method": "GET",
+          "host": "worldbank.tt.omtrdc.net",
+          "path": "/m2/worldbank/mbox/json",
+          "query_parameter_names": [
+            "PageName",
+            "browserHeight",
+            "browserTimeOffset",
+            "browserWidth",
+            "colorDepth",
+            "devicePixelRatio",
+            "mbox",
+            "mboxCount",
+            "mboxHost",
+            "mboxMCGVID",
+            "mboxMCSDID",
+            "mboxPC",
+            "mboxPage",
+            "mboxReferrer",
+            "mboxRid",
+            "mboxSession",
+            "mboxTime",
+            "mboxURL",
+            "mboxVersion",
+            "screenHeight",
+            "screenOrientation",
+            "screenWidth",
+            "vst.trk",
+            "vst.trks"
+          ],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 0,
+          "content_type": null
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/GetDatabaseListJSON",
+      "count": 2,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDatabaseListJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDatabaseListJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+      "count": 8,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{cubeid: '1009', controlid: 'Country', hierarchy: '[Country].[List]'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{cubeid: '1009', controlid: 'Classification', hierarchy: '[Classification].[List]'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetDimensionJSON",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{cubeid: '1009', controlid: 'Series', hierarchy: '[Series].[List]'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/GetExceptionOperationID",
+      "count": 3,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetExceptionOperationID",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetExceptionOperationID",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/GetExceptionOperationID",
+          "query_parameter_names": [],
+          "post_data_mime_type": null,
+          "post_data": "",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "capture": "icp2021.har",
+      "method": "POST",
+      "host": "databank.worldbank.org",
+      "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+      "count": 18,
+      "samples": [
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{Page: 'Report' ,Feature: 'Variables->Database->Preview'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{Page: 'Report' ,Feature: 'Variables->Database'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        },
+        {
+          "method": "POST",
+          "host": "databank.worldbank.org",
+          "path": "/AjaxServices/AjaxReportMethods.asmx/TrackFeature",
+          "query_parameter_names": [],
+          "post_data_mime_type": "application/json; charset=utf-8",
+          "post_data": "{Page: 'Report' ,Feature: 'Layout->Display->Row50'}",
+          "status": 200,
+          "content_type": "application/json; charset=utf-8"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "assessment": "world_bank_wdi_wp1_5_area_candidate_validation",
+  "snapshot_id": "api_snapshot_20261121T074357472382Z",
+  "manifest_sha256": "0f338a0606cdc951245de2c125221c7dacb537601c3d5db6fdb88aa0c0915748",
+  "crosswalk_dataset": "world_bank_wdi_wp1_5_area",
+  "crosswalk_source_key": "world_bank_wdi",
+  "crosswalk_mappings": 187,
+  "known_game_ids": 242,
+  "coverage": {
+    "EN.POP.DNST": {
+      "field_id": 3,
+      "candidate_iso3_count": 216,
+      "mapped_candidate_count": 187,
+      "unmapped_candidate_count": 29,
+      "crosswalk_game_ids_without_observation": [],
+      "crosswalk_game_ids_without_observation_count": 0,
+      "null_observation_rows": 231,
+      "aggregate_rows_excluded": 539,
+      "invalid_rows": 0,
+      "latest_year_min": 2021,
+      "latest_year_max": 2024
+    },
+    "AG.SRF.TOTL.K2": {
+      "field_id": 33,
+      "candidate_iso3_count": 216,
+      "mapped_candidate_count": 187,
+      "unmapped_candidate_count": 29,
+      "crosswalk_game_ids_without_observation": [],
+      "crosswalk_game_ids_without_observation_count": 0,
+      "null_observation_rows": 232,
+      "aggregate_rows_excluded": 539,
+      "invalid_rows": 0,
+      "latest_year_min": 2021,
+      "latest_year_max": 2024
+    },
+    "AG.LND.TOTL.K2": {
+      "field_id": 34,
+      "candidate_iso3_count": 216,
+      "mapped_candidate_count": 187,
+      "unmapped_candidate_count": 29,
+      "crosswalk_game_ids_without_observation": [],
+      "crosswalk_game_ids_without_observation_count": 0,
+      "null_observation_rows": 231,
+      "aggregate_rows_excluded": 539,
+      "invalid_rows": 0,
+      "latest_year_min": 2021,
+      "latest_year_max": 2024
+    }
+  },
+  "metadata_review": {
+    "EN.POP.DNST": {
+      "name": "Population density (people per sq. km of land area)",
+      "unit_metadata": "",
+      "canonical_unit": "people_per_km2",
+      "source_organization": "FAO population estimates, Food and Agriculture Organization of the United Nations (FAO), publisher: Food and Agriculture Organization of the United Nations (FAO);\nWorld Bank population estimates, World Bank (WB), publisher: World Bank (WB)",
+      "source_note": "Population density is midyear population divided by land area in square kilometers. Population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship--except for refugees not permanently settled in the country of asylum, who are generally considered part of the population of their country of origin. Land area is a country's total area, excluding area under inland water bodies, national claims to continental shelf, and exclusive economic zones. In most cases the definition of inland water bodies includes major rivers and lakes.",
+      "metadata_last_updated": "2026-11-11",
+      "review_status": "captured_for_human_source_and_license_review"
+    },
+    "AG.SRF.TOTL.K2": {
+      "name": "Surface area (sq. km)",
+      "unit_metadata": "",
+      "canonical_unit": "km2",
+      "source_organization": "FAO electronic files and web site, Food and Agriculture Organization of the United Nations (FAO), publisher: Food and Agriculture Organization of the United Nations (FAO)",
+      "source_note": "Surface area is a country's total area, including areas under inland bodies of water and some coastal waterways.",
+      "metadata_last_updated": "2026-11-11",
+      "review_status": "captured_for_human_source_and_license_review"
+    },
+    "AG.LND.TOTL.K2": {
+      "name": "Land area (sq. km)",
+      "unit_metadata": "",
+      "canonical_unit": "km2",
+      "source_organization": "FAOSTAT, Food and Agriculture Organization of the United Nations (FAO), uri: https://www.fao.org/faostat/en/#data/RL, publisher: Food and Agriculture Organization of the United Nations (FAO)",
+      "source_note": "Land area is a country's total area, excluding area under inland water bodies, national claims to continental shelf, and exclusive economic zones. In most cases the definition of inland water bodies includes major rivers and lakes.",
+      "metadata_last_updated": "2026-11-11",
+      "review_status": "captured_for_human_source_and_license_review"
+    }
+  },
+  "area_consistency_checks": [],
+  "anomalies": [],
+  "candidate_rows": 648,
+  "candidate_csv": "reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/candidate_validation/wdi_wp1_5_area_candidates.csv",
+  "limitations": [
+    "Latest non-null observation is selected independently per indicator and country; years need not align.",
+    "Observation status is preserved verbatim; blank status is not interpreted as actual.",
+    "ISO3-to-game_id mapping is exclusively through the supplied explicit crosswalk.",
+    "Metadata source organization and source notes require human review; WDI source ID alone does not prove originating-organization authority.",
+    "Surface/land consistency is checked only where their selected reference years match.",
+    "No database writes, approval, source-selection or retention changes."
+  ],
+  "side_effects": {
+    "canonical_database_written": false,
+    "project_database_written": false,
+    "approval_created": false,
+    "source_selection_changed": false
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "manifest_schema_version": 1,
+  "work_package": "WP1.5",
+  "source_key": "world_bank_wdi",
+  "dataset": "world_bank_wdi_wp1_5_area",
+  "release": "api_snapshot_20261121T074357472382Z",
+  "sha256": "7196c4bf58e63a75c4576fef063b0fd96cba99c118f9c112dadc4afbbd2a0476",
+  "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/source_metadata.json",
+  "byte_count": 236,
+  "source_url": "https://api.worldbank.org/v2",
+  "final_url": "https://api.worldbank.org/v2",
+  "retrieved_at": "2026-11-21T07:44:07.275083+00:00",
+  "attribution": "World Bank Group, World Development Indicators; originating organisations and source notes retained per indicator.",
+  "license_status": "unclear_or_unverified_indicator_level_third_party_review_required",
+  "additional_inputs": [
+    {
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/country_metadata_page_001.json",
+      "sha256": "c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce",
+      "byte_count": 113954
+    },
+    {
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_EN.POP.DNST.json",
+      "sha256": "c5df1b392124d9113915d833c5d4a47e73d9c6b989de0e6a64a9487479f9040c",
+      "byte_count": 1134
+    },
+    {
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_EN.POP.DNST_page_001.json",
+      "sha256": "e0029dedbdbee884b27ab19777e909819cb083411e86b8ce6fedb3c2dde0bd84",
+      "byte_count": 707628
+    },
+    {
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.SRF.TOTL.K2.json",
+      "sha256": "0b359a437f7bc6501fb7dfaae43262ddb181ff7c5ab4ba760c0a6a5356684b10",
+      "byte_count": 596
+    },
+    {
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.SRF.TOTL.K2_page_001.json",
+      "sha256": "b23ba9ee2a0d8f657c718062680848a2bc9659df302de0dbcebff28871c8e421",
+      "byte_count": 604323
+    },
+    {
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.LND.TOTL.K2.json",
+      "sha256": "5bbf22fc31f4de6995e22f30d09f4149b4cb9a645d97bcf539d79479c87ed58c",
+      "byte_count": 738
+    },
+    {
+      "local_raw_path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.LND.TOTL.K2_page_001.json",
+      "sha256": "a354fff28ca1c6856e5daebcb6c6042f68f6f80bb9bf5074358af58e6b2b9abe",
+      "byte_count": 595709
+    }
+  ],
+  "upstream_manifests": [
+    {
+      "path": "data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z.json",
+      "sha256": "0f338a0606cdc951245de2c125221c7dacb537601c3d5db6fdb88aa0c0915748"
+    }
+  ],
+  "license_attestation": {
+    "status": "owner_confirmed_licensed",
+    "attestation_date": "2026-11-23",
+    "attestation_source": "project_owner_confirmation",
+    "scope": {
+      "EN.POP.DNST": {
+        "field_id": 3,
+        "field": "population_density"
+      },
+      "AG.SRF.TOTL.K2": {
+        "field_id": 33,
+        "field": "total_area"
+      },
+      "AG.LND.TOTL.K2": {
+        "field_id": 34,
+        "field": "land_area"
+      }
+    },
+    "statement": "The project owner confirmed that licences are available for all three indicators.",
+    "verification_status": "user_attestation_not_independently_verified",
+    "limitations": [
+      "No licence terms, expiry dates, redistribution rights or commercial-use permissions are inferred."
+    ]
+  }
+}

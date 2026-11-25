@@ -1,0 +1,68 @@
+{
+  "assessment": "annual_ppp_lineage_across_icp_wdi_imf_weo",
+  "checked_at": "2026-11-17T10:48:21.220603+00:00",
+  "country_count": 238,
+  "lineage_row_count": 27682,
+  "country_year_diagnostic_row_count": 10468,
+  "global_country_screen": {
+    "country_count": 219,
+    "screen_flag_country_counts": {
+      "large_factor_ratio_break": 7,
+      "persistent_wdi_weo_ppp_gdp_gap": 43,
+      "stable_wdi_weo_factor_ratio": 144,
+      "wdi_ppp_gdp_arithmetic_mismatch": 8
+    },
+    "thresholds": {
+      "wdi_arithmetic_identity_tolerance_percent": 0.5,
+      "persistent_wdi_weo_ppp_gdp_gap_percent": 5.0,
+      "stable_factor_ratio_relative_mad_percent": 1.0,
+      "factor_ratio_year_over_year_break_percent": 25.0,
+      "minimum_years_for_persistent_or_stable_flags": 3
+    }
+  },
+  "year_range": {
+    "minimum": 1980,
+    "maximum": 2031
+  },
+  "source_coverage": {
+    "icp_releases": {
+      "icp_2011_cycle": 166,
+      "icp_2017_cycle": 1561,
+      "icp_2021_saved_report": 1288
+    },
+    "not_captured_icp_releases": [
+      "icp_2005_cycle"
+    ],
+    "wdi_snapshot_id": "api_snapshot_20261107T161129160851Z",
+    "wdi_snapshot_retrieved_at": "2026-11-07T16:12:07.812622+00:00",
+    "wdi_snapshot_manifest_sha256": "8e91b8ce5269bb387374e3b653038af6a5fc7d65fb98a7f570f6e05f536e8bf5",
+    "weo_release": "imf_weo_october_2026",
+    "weo_csv_fingerprint": {
+      "path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+      "sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+      "byte_count": 26692032,
+      "matches_recorded_snapshot": true
+    }
+  },
+  "interpretation": [
+    "ICP original and revised benchmark releases remain distinct. Annual roles are assigned only where the ICP publication explicitly documents them.",
+    "ICP 2017 archive years other than its original 2017 and revised 2011 benchmark roles remain unclassified; year columns alone do not prove interpolation or extrapolation.",
+    "WDI PA.NUS.PPP is a rolling annual API series. Its observation-level benchmark/interpolation/extrapolation lineage is not supplied by this capture.",
+    "WEO PPPGDP is reported current-PPP GDP. Where its source scale is Billions, it is rescaled to absolute international dollars before the WDI/WEO PPP-GDP arithmetic comparison. NGDP divided by PPPGDP is a derived arithmetic factor, not the provider's PPPEX field or a published conversion-factor series.",
+    "WEO PPPEX is not used because its captured precision is rounded and unsuitable for exact factor reconciliation.",
+    "Numerical WDI/WEO factor ratios are diagnostics only; currency redenomination, national-accounts vintage and reference-unit compatibility remain unverified.",
+    "ICP PPP factor values are retained per source release and not normalized across currency denominations or vintages.",
+    "The original ICP 2005 release is not present in the captured inputs and is not represented as zero or missing country observations.",
+    "No source observations are filled, interpolated, extrapolated or imputed by this assessment."
+  ],
+  "side_effects": {
+    "raw_data_written": false,
+    "project_database_written": false,
+    "game_database_written": false,
+    "approval_created": false,
+    "source_selection_changed": false,
+    "canonical_data_promoted": false,
+    "retention_applied": false
+  },
+  "report_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104821Z"
+}

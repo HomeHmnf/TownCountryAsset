@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "candidate_type": "imf_weo_annual_historical_observations",
+  "source_key": "imf_weo",
+  "release": "october_2026",
+  "source_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+  "source_sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+  "source_byte_count": 26692032,
+  "identity_registry_path": "config/country_identity_registry.json",
+  "observation_count": 42024,
+  "distinct_game_ids": 196,
+  "indicator_counts": {
+    "LUR": 4934,
+    "NGDPD": 9329,
+    "NGDPDPC": 9190,
+    "PCPIPCH": 9217,
+    "PPPGDP": 9354
+  },
+  "year_range": [
+    1980,
+    2031
+  ],
+  "exception_count": 47,
+  "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
+  "identity_policy": "retain_existing_game_id; ISO verification status is not changed",
+  "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
+  "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
+  "database_written": false,
+  "approval_created": false,
+  "candidate_directory": "reports/sources/imf-weo-historical-candidate/20261123T103728Z",
+  "observations_sha256": "c8f256e3388b4d7f5baf503cc40ececae153e0714204ea568ea206dc55207841",
+  "exceptions_sha256": "36fb80e80da92e45bd5498861db176cae6aa83e791e0dc1034ed6b170ce1f712"
+}

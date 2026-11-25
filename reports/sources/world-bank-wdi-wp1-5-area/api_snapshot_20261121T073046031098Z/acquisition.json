@@ -1,0 +1,55 @@
+{
+  "assessment": "world_bank_wdi_wp1_5_area_immutable_api_snapshot",
+  "snapshot_id": "api_snapshot_20261121T073046031098Z",
+  "retrieved_at": "2026-11-21T07:32:21.829192+00:00",
+  "manifest_path": "data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z.json",
+  "artifact_count": 8,
+  "artifact_bytes": 2024318,
+  "country_catalogue_record_count": 296,
+  "period": {
+    "start_year": 2015,
+    "end_year": 2025
+  },
+  "indicators": {
+    "EN.POP.DNST": {
+      "field_id": 3,
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-11-11",
+      "indicator_name": "Population density (people per sq. km of land area)",
+      "unit_metadata": "",
+      "source_organization": "FAO population estimates, Food and Agriculture Organization of the United Nations (FAO), publisher: Food and Agriculture Organization of the United Nations (FAO);\nWorld Bank population estimates, World Bank (WB), publisher: World Bank (WB)",
+      "source_note": "Population density is midyear population divided by land area in square kilometers. Population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship--except for refugees not permanently settled in the country of asylum, who are generally considered part of the population of their country of origin. Land area is a country's total area, excluding area under inland water bodies, national claims to continental shelf, and exclusive economic zones. In most cases the definition of inland water bodies includes major rivers and lakes."
+    },
+    "AG.SRF.TOTL.K2": {
+      "field_id": 33,
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-11-11",
+      "indicator_name": "Surface area (sq. km)",
+      "unit_metadata": "",
+      "source_organization": "FAO electronic files and web site, Food and Agriculture Organization of the United Nations (FAO), publisher: Food and Agriculture Organization of the United Nations (FAO)",
+      "source_note": "Surface area is a country's total area, including areas under inland bodies of water and some coastal waterways."
+    },
+    "AG.LND.TOTL.K2": {
+      "field_id": 34,
+      "pages": 1,
+      "observation_rows": 2926,
+      "api_last_updated": "2026-11-11",
+      "indicator_name": "Land area (sq. km)",
+      "unit_metadata": "",
+      "source_organization": "FAOSTAT, Food and Agriculture Organization of the United Nations (FAO), uri: https://www.fao.org/faostat/en/#data/RL, publisher: Food and Agriculture Organization of the United Nations (FAO)",
+      "source_note": "Land area is a country's total area, excluding area under inland water bodies, national claims to continental shelf, and exclusive economic zones. In most cases the definition of inland water bodies includes major rivers and lakes."
+    }
+  },
+  "source_last_updated": null,
+  "side_effects": {
+    "raw_snapshot_acquired": true,
+    "manifest_written": true,
+    "project_database_written": false,
+    "game_database_written": false,
+    "candidate_report_written": false,
+    "approval_created": false,
+    "source_selection_changed": false
+  }
+}

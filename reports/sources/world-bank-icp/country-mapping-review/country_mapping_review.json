@@ -3,13 +3,13 @@
   "report_type": "world_bank_icp_country_identity_mapping_review",
   "source_key": "world_bank_icp",
   "dataset_key": "world_bank_icp_databank_saved_report",
-  "export_id": "databank_20261109T180637192513Z",
-  "retrieved_at": "2026-11-09T18:06:58.241394+00:00",
+  "export_id": "databank_20261119T075746677306Z",
+  "retrieved_at": "2026-11-19T07:58:00.815045+00:00",
   "mapping_basis": {
     "first_link": "ICP Country Code equals generated asset ISO3 code",
     "second_link": "generated asset UN_A3 M49 code joins the already-reviewed UN WPP source crosswalk",
-    "limitation": "Candidate bridge only; the existing WPP approval is source-specific and does not approve ICP mappings.",
-    "canonical_registry_status": "not_assessed_from_tracked_repository_snapshot"
+    "limitation": "This is a candidate bridge, not an ICP-approved identity crosswalk; verified canonical ISO3 assignments take precedence, and the existing WPP approval is explicitly source-specific.",
+    "canonical_registry_status": "read_only_verified_registry_loaded"
   },
   "summary": {
     "source_country_count": 184,
@@ -19,9 +19,9 @@
     "manual_review_no_approved_game_crosswalk": 16,
     "aggregate_not_a_country": 8,
     "unmatched_identity": 5,
+    "canonical_registry_verified_matches": 0,
     "approved_mappings": 0,
-    "policy": "All candidate mappings remain pending; no name-only, fuzzy, ISO-inferred or aggregate-to-country mapping is approved automatically.",
-    "canonical_registry_verified_matches": null
+    "policy": "All candidate mappings remain pending; no name-only, fuzzy, ISO-inferred or aggregate-to-country mapping is approved automatically."
   },
   "indicators": [
     {
@@ -35,7 +35,7 @@
       "indicator_code": "9020000",
       "indicator_name": "Actual individual consumption",
       "source_display_name": "9020000:ACTUAL INDIVIDUAL CONSUMPTION",
-      "source_definition": "The total value of the individual consumption expenditures of households, nonprofit institutions serving households (NPISHs), and government at purchasers prices.",
+      "source_definition": "The total value of the individual consumption expenditures of households, nonprofit institutions serving households (NPISHs), and government at purchasers’ prices.",
       "unit": "PPP (US$ = 1; source classification)"
     },
     {
@@ -63,7 +63,7 @@
       "indicator_code": "9250000",
       "indicator_name": "Domestic absorption",
       "source_display_name": "9250000:DOMESTIC ABSORPTION",
-      "source_definition": "Actual individual consumption at purchasers prices plus collective consumption expenditure by government at purchasers prices plus gross capital formation at purchasers prices.",
+      "source_definition": "Actual individual consumption at purchasers’ prices plus collective consumption expenditure by government at purchasers’ prices plus gross capital formation at purchasers’ prices.",
       "unit": "PPP (US$ = 1; source classification)"
     }
   ],
@@ -76,6 +76,7 @@
       "game_id": "tc_8344feaf14da4684aaa8d4c263653778",
       "wpp_m49_source_id": "533",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -87,6 +88,7 @@
       "game_id": "tc_fa43ff476d6b428fa8edb4dde1aa9d3f",
       "wpp_m49_source_id": "24",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -98,6 +100,7 @@
       "game_id": "tc_0b9688bbf4264477b023a0f2af180c2e",
       "wpp_m49_source_id": "660",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -109,6 +112,7 @@
       "game_id": "tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1",
       "wpp_m49_source_id": "8",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -120,6 +124,7 @@
       "game_id": "tc_3cbd960008724744b928265acc0638a4",
       "wpp_m49_source_id": "784",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -131,6 +136,7 @@
       "game_id": "tc_2a29d5b72b294244a5de6db37118237a",
       "wpp_m49_source_id": "32",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -142,6 +148,7 @@
       "game_id": "tc_f97b56c9c74845de8b41aa24ed12a47f",
       "wpp_m49_source_id": "51",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -153,6 +160,7 @@
       "game_id": "tc_9221f2a3fd704847b66da16efa03c2b8",
       "wpp_m49_source_id": "28",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -164,6 +172,7 @@
       "game_id": "tc_270a6ecb902d4ea1ac7373b3d1a3b2cc",
       "wpp_m49_source_id": "36",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -175,6 +184,7 @@
       "game_id": "tc_a0422e821c824e78bd95525b36155b65",
       "wpp_m49_source_id": "40",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -186,6 +196,7 @@
       "game_id": "tc_b8c860bb8d404dcca918bad769e7ead7",
       "wpp_m49_source_id": "31",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -197,6 +208,7 @@
       "game_id": "tc_4ac5b3c6b7774a05b4ceb5573c4a9d27",
       "wpp_m49_source_id": "108",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -208,6 +220,7 @@
       "game_id": "tc_f1cc713e923c4be48e176657a00469f0",
       "wpp_m49_source_id": "56",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -219,6 +232,7 @@
       "game_id": "tc_874ae1f05e8c4d67a2c839095d760b72",
       "wpp_m49_source_id": "204",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -230,6 +244,7 @@
       "game_id": "tc_3c920b9b9f324cb19ef9d4b6debf10ba",
       "wpp_m49_source_id": "854",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -241,6 +256,7 @@
       "game_id": "tc_8169e562ece7475e960f78f231cb1ab7",
       "wpp_m49_source_id": "50",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -252,6 +268,7 @@
       "game_id": "tc_523810acde564c1c907acd5befe575ab",
       "wpp_m49_source_id": "100",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -263,6 +280,7 @@
       "game_id": "tc_38fd6c5cd2be45739f3be11bc4cab9c8",
       "wpp_m49_source_id": "48",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -274,6 +292,7 @@
       "game_id": "tc_0628271c897b49558f423321cbc48ce4",
       "wpp_m49_source_id": "70",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -285,6 +304,7 @@
       "game_id": "tc_6ebc90b251e14f70b8bf758d8008e839",
       "wpp_m49_source_id": "112",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -296,6 +316,7 @@
       "game_id": "tc_d066174c4df546d1a410d386f363ee80",
       "wpp_m49_source_id": "84",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -307,6 +328,7 @@
       "game_id": "tc_d81e2d4c4b934f57a67f380b2fdaec9d",
       "wpp_m49_source_id": "60",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -318,6 +340,7 @@
       "game_id": "tc_4923336d91d94afc919d8a2b8a4ad415",
       "wpp_m49_source_id": "76",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -329,6 +352,7 @@
       "game_id": "tc_91f04a21215642aeb5da856a78dc9949",
       "wpp_m49_source_id": "64",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -340,6 +364,7 @@
       "game_id": "tc_ca2bdd688a454bb8b6457c9448612669",
       "wpp_m49_source_id": "72",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -351,6 +376,7 @@
       "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
       "wpp_m49_source_id": "140",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -362,6 +388,7 @@
       "game_id": "tc_ba9087366ba54d51932e88bf8a11616d",
       "wpp_m49_source_id": "124",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -373,6 +400,7 @@
       "game_id": "tc_e693e8b799f94e7bb814e89bd46d886d",
       "wpp_m49_source_id": "756",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -384,6 +412,7 @@
       "game_id": "tc_4c51c695cb6e47d2aed2fb04c397bece",
       "wpp_m49_source_id": "152",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -395,6 +424,7 @@
       "game_id": "tc_3349a0b8b7454088b11e917a24de3ad5",
       "wpp_m49_source_id": "156",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -406,6 +436,7 @@
       "game_id": "tc_f5cd614ef03c414d8e98d87102df5c14",
       "wpp_m49_source_id": "120",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -417,6 +448,7 @@
       "game_id": "tc_2763c19aa8734ce9aa8b17d8effb6645",
       "wpp_m49_source_id": "180",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -428,6 +460,7 @@
       "game_id": "tc_648b019cc83e486ab9fb8497386777a9",
       "wpp_m49_source_id": "170",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -439,6 +472,7 @@
       "game_id": "tc_10dd5e9664664abf9eca33c250a74cdb",
       "wpp_m49_source_id": "174",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -450,6 +484,7 @@
       "game_id": "tc_d9d1737635ce4385a50c4307c2716832",
       "wpp_m49_source_id": "132",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -461,6 +496,7 @@
       "game_id": "tc_79512b2eaf8f45b5b118130859ebdaaf",
       "wpp_m49_source_id": "188",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -472,6 +508,7 @@
       "game_id": "tc_2d0dc3f3edb9467090ea74861dbc7b9e",
       "wpp_m49_source_id": "531",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -483,6 +520,7 @@
       "game_id": "tc_19acfc8e1cf44c25aa753729115d60d6",
       "wpp_m49_source_id": "136",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -494,6 +532,7 @@
       "game_id": "tc_3c148b1f7650455fa710ca87cf376728",
       "wpp_m49_source_id": "196",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -505,6 +544,7 @@
       "game_id": "tc_e43afc3a83a3458c833dac5644b7186a",
       "wpp_m49_source_id": "203",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -516,6 +556,7 @@
       "game_id": "tc_ff445b0a87494070bf868827de190acf",
       "wpp_m49_source_id": "276",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -527,6 +568,7 @@
       "game_id": "tc_f4814b1a89384c4d93a92c19b301a814",
       "wpp_m49_source_id": "262",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -538,6 +580,7 @@
       "game_id": "tc_e5391af862dd490bb3a01fa80f4ac15e",
       "wpp_m49_source_id": "212",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -549,6 +592,7 @@
       "game_id": "tc_11da440eb0704bd195fe0b11fa0890af",
       "wpp_m49_source_id": "208",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -560,6 +604,7 @@
       "game_id": "tc_ee04e01170f84b92afabbb40abdbd4e3",
       "wpp_m49_source_id": "214",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -571,6 +616,7 @@
       "game_id": "tc_e245d37005f843168d67b7b327ece7f9",
       "wpp_m49_source_id": "12",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -582,6 +628,7 @@
       "game_id": "tc_2a54eb1caed54a2185a62cce0c2db6cb",
       "wpp_m49_source_id": "218",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -593,6 +640,7 @@
       "game_id": "tc_939f236600dd47a8bf850a7ff19dc047",
       "wpp_m49_source_id": "818",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -604,6 +652,7 @@
       "game_id": "tc_21a70a0fbf1b43c292783397ce218239",
       "wpp_m49_source_id": "724",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -615,6 +664,7 @@
       "game_id": "tc_383873de760147cd97dfac5ef5d60b08",
       "wpp_m49_source_id": "233",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -626,6 +676,7 @@
       "game_id": "tc_860d12ee66fc4fceb3faddbc92c87930",
       "wpp_m49_source_id": "231",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -637,6 +688,7 @@
       "game_id": "tc_374e55a3eefe4a1a83fed6b64b5045f5",
       "wpp_m49_source_id": "246",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -648,6 +700,7 @@
       "game_id": "tc_8d67737674744dce8986565b98cbbb1f",
       "wpp_m49_source_id": "242",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -659,6 +712,7 @@
       "game_id": "tc_d59dfb6324524b07a32c87b73009e97f",
       "wpp_m49_source_id": "266",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -670,6 +724,7 @@
       "game_id": "tc_741bd244c1ec4961918565c4ed02c5c6",
       "wpp_m49_source_id": "268",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -681,6 +736,7 @@
       "game_id": "tc_f63061b714ce4390948838410758c016",
       "wpp_m49_source_id": "288",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -692,6 +748,7 @@
       "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
       "wpp_m49_source_id": "324",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -703,6 +760,7 @@
       "game_id": "tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a",
       "wpp_m49_source_id": "270",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -714,6 +772,7 @@
       "game_id": "tc_dc93b6caf7324df884ec2b070a5296b9",
       "wpp_m49_source_id": "624",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -725,6 +784,7 @@
       "game_id": "tc_06d71df13c4f415fbf22a0147f19bc53",
       "wpp_m49_source_id": "226",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -736,6 +796,7 @@
       "game_id": "tc_dab67464d7ad44cdbf925450627e4186",
       "wpp_m49_source_id": "300",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -747,6 +808,7 @@
       "game_id": "tc_c5b3fecc12a94e85a7acddc70fa7a086",
       "wpp_m49_source_id": "308",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -758,6 +820,7 @@
       "game_id": "tc_9348779eba844ab2beb5bed00053b7c6",
       "wpp_m49_source_id": "320",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -769,6 +832,7 @@
       "game_id": "tc_893d4efa8ccf42af896949ffd7007fef",
       "wpp_m49_source_id": "328",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -780,6 +844,7 @@
       "game_id": "tc_80c318b9217a4320beaad6b93eb74ac5",
       "wpp_m49_source_id": "340",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -791,6 +856,7 @@
       "game_id": "tc_fb4046d4910a4bf89f4a93810e2f4d8a",
       "wpp_m49_source_id": "191",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -802,6 +868,7 @@
       "game_id": "tc_e3ede57c1b754a2dbd940335f9655f11",
       "wpp_m49_source_id": "348",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -813,6 +880,7 @@
       "game_id": "tc_c40da0ac977b4201b8587ce04aa66f56",
       "wpp_m49_source_id": "360",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -824,6 +892,7 @@
       "game_id": "tc_39ad5030b5f94f068d4a1528c60e5638",
       "wpp_m49_source_id": "356",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -835,6 +904,7 @@
       "game_id": "tc_16d6044d9abf4743821a6fb238942a22",
       "wpp_m49_source_id": "372",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -846,6 +916,7 @@
       "game_id": "tc_5ee7b31f968941dca65e70519901915f",
       "wpp_m49_source_id": "368",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -857,6 +928,7 @@
       "game_id": "tc_861af4b9250e4e17a9d3f1f4e1ea33d4",
       "wpp_m49_source_id": "352",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -868,6 +940,7 @@
       "game_id": "tc_28952c75855947a7b31bb7509dc1fce1",
       "wpp_m49_source_id": "376",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -879,6 +952,7 @@
       "game_id": "tc_1f3e0c90df4341f082ed90ecdd95fb10",
       "wpp_m49_source_id": "380",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -890,6 +964,7 @@
       "game_id": "tc_bf02736242694622ae7c730beb0f0da6",
       "wpp_m49_source_id": "388",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -901,6 +976,7 @@
       "game_id": "tc_6e28258973b54dfeb5811c563cd0a2e8",
       "wpp_m49_source_id": "400",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -912,6 +988,7 @@
       "game_id": "tc_8d0620ea475f498d9402134857882bf1",
       "wpp_m49_source_id": "392",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -923,6 +1000,7 @@
       "game_id": "tc_feadffc011db4cf695df6c0997a003c8",
       "wpp_m49_source_id": "398",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -934,6 +1012,7 @@
       "game_id": "tc_9f3dc962bf9744a5a3cdf1f7a1cbb159",
       "wpp_m49_source_id": "404",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -945,6 +1024,7 @@
       "game_id": "tc_130ca81b84d04b058e9301121b2b7802",
       "wpp_m49_source_id": "417",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -956,6 +1036,7 @@
       "game_id": "tc_f956986338e5418481784ba2d2781063",
       "wpp_m49_source_id": "116",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -967,6 +1048,7 @@
       "game_id": "tc_f22d58e7280f41f7a5a68fb03e1ab87e",
       "wpp_m49_source_id": "659",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -978,6 +1060,7 @@
       "game_id": "tc_fa491c61ffa24dc3a21c6a6da7d39fad",
       "wpp_m49_source_id": "414",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -989,6 +1072,7 @@
       "game_id": "tc_8466a0747d0b4d1a8c23feb70f7c6ed1",
       "wpp_m49_source_id": "422",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1000,6 +1084,7 @@
       "game_id": "tc_40dc9d2e141343e98a4d0c762c578473",
       "wpp_m49_source_id": "430",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1011,6 +1096,7 @@
       "game_id": "tc_6629fdb92d05409f856d9030b63b1470",
       "wpp_m49_source_id": "662",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1022,6 +1108,7 @@
       "game_id": "tc_5e47c88bebac452e953fc5dfa8b1ba06",
       "wpp_m49_source_id": "144",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1033,6 +1120,7 @@
       "game_id": "tc_c0fa4e9b8e984f59ba17beb7547c5811",
       "wpp_m49_source_id": "426",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1044,6 +1132,7 @@
       "game_id": "tc_77de0a41c4d94d8388d6f0732438be81",
       "wpp_m49_source_id": "440",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1055,6 +1144,7 @@
       "game_id": "tc_f4261f4507cd48858cdfb7e3bd0ae738",
       "wpp_m49_source_id": "442",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1066,6 +1156,7 @@
       "game_id": "tc_f161aef25a39413e8aef8c147e97b28a",
       "wpp_m49_source_id": "428",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1077,6 +1168,7 @@
       "game_id": "tc_84dc0c18f03144bea337f6aacd50bf0f",
       "wpp_m49_source_id": "504",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1088,6 +1180,7 @@
       "game_id": "tc_7abbe0f9aa1346c7a9f69cc1027b4282",
       "wpp_m49_source_id": "450",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1099,6 +1192,7 @@
       "game_id": "tc_408d22fe5b894b4b947a0521ace1018a",
       "wpp_m49_source_id": "462",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1110,6 +1204,7 @@
       "game_id": "tc_c6b830c3cba64d4883eac8cee7864cfd",
       "wpp_m49_source_id": "484",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1121,6 +1216,7 @@
       "game_id": "tc_949bf877e3284f5c8a56cfc89bcafa90",
       "wpp_m49_source_id": "807",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1132,6 +1228,7 @@
       "game_id": "tc_a3f73fd3bb6d4d7fb4ea31d433453bae",
       "wpp_m49_source_id": "466",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1143,6 +1240,7 @@
       "game_id": "tc_f97b2223a2a84e53ac13614ddde1f602",
       "wpp_m49_source_id": "470",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1154,6 +1252,7 @@
       "game_id": "tc_eb1de71332ef4db496cb76c95aa56cd4",
       "wpp_m49_source_id": "499",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1165,6 +1264,7 @@
       "game_id": "tc_d0fb202ca0aa4a868af6fa154ab84c30",
       "wpp_m49_source_id": "496",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1176,6 +1276,7 @@
       "game_id": "tc_2249b79a9c944a1c835b0cad2676e48d",
       "wpp_m49_source_id": "508",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1187,6 +1288,7 @@
       "game_id": "tc_17137c4e4fcc4fa58e32c924f08efcda",
       "wpp_m49_source_id": "478",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1198,6 +1300,7 @@
       "game_id": "tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d",
       "wpp_m49_source_id": "500",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1209,6 +1312,7 @@
       "game_id": "tc_c7b728ec16b94e35b05d96d14a253eec",
       "wpp_m49_source_id": "480",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1220,6 +1324,7 @@
       "game_id": "tc_ee1c1ac1ad5c4faf818070115133b174",
       "wpp_m49_source_id": "454",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1231,6 +1336,7 @@
       "game_id": "tc_b21225f45c3b40509640603249110f89",
       "wpp_m49_source_id": "458",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1242,6 +1348,7 @@
       "game_id": "tc_7379cdcc5c4848c181ace3144aeba70f",
       "wpp_m49_source_id": "516",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1253,6 +1360,7 @@
       "game_id": "tc_4d31375845614c2b91a71736069d4ab3",
       "wpp_m49_source_id": "562",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1264,6 +1372,7 @@
       "game_id": "tc_7a8158c93a934345a2ade9fd16ee4999",
       "wpp_m49_source_id": "566",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1275,6 +1384,7 @@
       "game_id": "tc_2fdae8757e51402e9f67c428d2b79368",
       "wpp_m49_source_id": "558",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1286,6 +1396,7 @@
       "game_id": "tc_1c4ff3f2a8f04b43b0c28e830a9403ad",
       "wpp_m49_source_id": "524",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1297,6 +1408,7 @@
       "game_id": "tc_d4b67e03f0c04d9a87089f477e5fa669",
       "wpp_m49_source_id": "554",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1308,6 +1420,7 @@
       "game_id": "tc_22bd85ff61234a46a95506d105d5fee4",
       "wpp_m49_source_id": "512",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1319,6 +1432,7 @@
       "game_id": "tc_0dc6216a94e34b44b27e42ed35fa6376",
       "wpp_m49_source_id": "586",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1330,6 +1444,7 @@
       "game_id": "tc_ba6cf14fa6224eb4a0b085b3ea1df6dc",
       "wpp_m49_source_id": "591",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1341,6 +1456,7 @@
       "game_id": "tc_a90d391a4a9a473b9074fc99cce11cb5",
       "wpp_m49_source_id": "604",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1352,6 +1468,7 @@
       "game_id": "tc_fc8f1a9536d342899526129acf15acd2",
       "wpp_m49_source_id": "608",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1363,6 +1480,7 @@
       "game_id": "tc_9865dd6a50c3458b98f5040f0cc76357",
       "wpp_m49_source_id": "616",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1374,6 +1492,7 @@
       "game_id": "tc_43ee3db974884a72bacf5f5519e2c145",
       "wpp_m49_source_id": "620",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1385,6 +1504,7 @@
       "game_id": "tc_3eb6dc12494541e793a8a5b68980f29f",
       "wpp_m49_source_id": "600",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1396,6 +1516,7 @@
       "game_id": "tc_13df99232f33400d9079316c041f066c",
       "wpp_m49_source_id": "634",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1407,6 +1528,7 @@
       "game_id": "tc_c41863f7cb4e4dccbbdf0a1296f9ee1c",
       "wpp_m49_source_id": "642",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1418,6 +1540,7 @@
       "game_id": "tc_7f3c6637070f4c42a40c1f5456ec4721",
       "wpp_m49_source_id": "646",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1429,6 +1552,7 @@
       "game_id": "tc_86b0f7fcb4504f9b8dc1b60b42b16ea0",
       "wpp_m49_source_id": "682",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1440,6 +1564,7 @@
       "game_id": "tc_b0ca3e0386b34603a6356b8ebc8b0565",
       "wpp_m49_source_id": "729",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1451,6 +1576,7 @@
       "game_id": "tc_29ec74ae4e094053a930487b9ce602d1",
       "wpp_m49_source_id": "686",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1462,6 +1588,7 @@
       "game_id": "tc_9d65e06bf97d417c8aa62742225ef5c9",
       "wpp_m49_source_id": "702",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1473,6 +1600,7 @@
       "game_id": "tc_56e9d1977fa14da298ae125fbda1b63c",
       "wpp_m49_source_id": "694",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1484,6 +1612,7 @@
       "game_id": "tc_471268dbb85845de93e546317686debb",
       "wpp_m49_source_id": "222",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1495,6 +1624,7 @@
       "game_id": "tc_e82cc51b989841109d9e1a7f6a5d1727",
       "wpp_m49_source_id": "706",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1506,6 +1636,7 @@
       "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
       "wpp_m49_source_id": "728",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1517,6 +1648,7 @@
       "game_id": "tc_4a2ed326dc6047efa2e28926df0bc7f0",
       "wpp_m49_source_id": "678",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1528,6 +1660,7 @@
       "game_id": "tc_168a848021b84cc6a6c3fc320012a176",
       "wpp_m49_source_id": "740",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1539,6 +1672,7 @@
       "game_id": "tc_b3bea891d7114d148714d5e398ee06b1",
       "wpp_m49_source_id": "703",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1550,6 +1684,7 @@
       "game_id": "tc_c0484640d9554c8285e92412bae25785",
       "wpp_m49_source_id": "705",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1561,6 +1696,7 @@
       "game_id": "tc_d74b429fff544cf9bafeb459c4b3edd8",
       "wpp_m49_source_id": "752",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1572,6 +1708,7 @@
       "game_id": "tc_fc2ad04f3c88446e91bd770190d6fe4c",
       "wpp_m49_source_id": "748",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1583,6 +1720,7 @@
       "game_id": "tc_4bc377d3ea57485bac43c9b512587dbc",
       "wpp_m49_source_id": "690",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1594,6 +1732,7 @@
       "game_id": "tc_1da2daf3a3d34a30b96100d643963f70",
       "wpp_m49_source_id": "148",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1605,6 +1744,7 @@
       "game_id": "tc_06a09ff0e27b49e392ef2e88161023eb",
       "wpp_m49_source_id": "768",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1616,6 +1756,7 @@
       "game_id": "tc_fc12d0184fc7498f982ab8033ae64436",
       "wpp_m49_source_id": "764",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1627,6 +1768,7 @@
       "game_id": "tc_772e2ac5253c46e98b79cf5a6f19e9f5",
       "wpp_m49_source_id": "762",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1638,6 +1780,7 @@
       "game_id": "tc_1bd98a138f884dd4b4d9d1efbbf357b0",
       "wpp_m49_source_id": "780",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1649,6 +1792,7 @@
       "game_id": "tc_1d1d2c1274384efa82f9591e1c069aba",
       "wpp_m49_source_id": "788",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1660,6 +1804,7 @@
       "game_id": "tc_0f4c47ec59434e46871845e474964499",
       "wpp_m49_source_id": "834",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1671,6 +1816,7 @@
       "game_id": "tc_2bd67b30564b46b4b502a36decc333bf",
       "wpp_m49_source_id": "800",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1682,6 +1828,7 @@
       "game_id": "tc_65f8a168b10143c2a596917c1fca3731",
       "wpp_m49_source_id": "804",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1693,6 +1840,7 @@
       "game_id": "tc_e19506c4a1564ca085b73b9284fa6f56",
       "wpp_m49_source_id": "858",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1704,6 +1852,7 @@
       "game_id": "tc_f0a8b61c54a14d4089774716657e9433",
       "wpp_m49_source_id": "840",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1715,6 +1864,7 @@
       "game_id": "tc_5d951c36a4ad4471ae9b9037fe338d70",
       "wpp_m49_source_id": "860",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1726,6 +1876,7 @@
       "game_id": "tc_67290f5714c846f4a84d1f53c6fd495a",
       "wpp_m49_source_id": "670",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1737,6 +1888,7 @@
       "game_id": "tc_f3832fd029cb445483c26654bddadfac",
       "wpp_m49_source_id": "92",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1748,6 +1900,7 @@
       "game_id": "tc_dc6419869818416db051f50cbfd95036",
       "wpp_m49_source_id": "710",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1759,6 +1912,7 @@
       "game_id": "tc_e75bc9ac62fa443c90b5529778f3b1af",
       "wpp_m49_source_id": "894",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     },
@@ -1770,6 +1924,7 @@
       "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
       "wpp_m49_source_id": "716",
       "match_method": "candidate_iso3_asset_and_un_m49_wpp_crosswalk",
+      "canonical_registry_status": "read_only_verified_registry_loaded",
       "review_status": "pending",
       "review_note": "Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved."
     }
@@ -1786,6 +1941,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1794,6 +1950,7 @@
       "source_country_name": "Bonaire",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "unmatched_identity",
       "review_status": "pending"
     },
@@ -1808,6 +1965,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1822,6 +1980,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1836,6 +1995,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1844,6 +2004,7 @@
       "source_country_name": "East Asia & Pacific (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -1852,6 +2013,7 @@
       "source_country_name": "Europe & Central Asia (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -1860,6 +2022,7 @@
       "source_country_name": "France",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "unmatched_identity",
       "review_status": "pending"
     },
@@ -1874,6 +2037,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1888,6 +2052,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1902,6 +2067,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1916,6 +2082,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1924,6 +2091,7 @@
       "source_country_name": "Latin America & Caribbean (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -1938,6 +2106,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1946,6 +2115,7 @@
       "source_country_name": "Middle East & North Africa (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -1954,6 +2124,7 @@
       "source_country_name": "North America (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -1968,6 +2139,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1976,6 +2148,7 @@
       "source_country_name": "Norway",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "unmatched_identity",
       "review_status": "pending"
     },
@@ -1990,6 +2163,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -1998,6 +2172,7 @@
       "source_country_name": "Russian Federation",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "unmatched_identity",
       "review_status": "pending"
     },
@@ -2006,6 +2181,7 @@
       "source_country_name": "South Asia (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -2020,6 +2196,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -2028,6 +2205,7 @@
       "source_country_name": "Sub-Saharan Africa (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -2042,6 +2220,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -2056,6 +2235,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -2070,6 +2250,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -2084,6 +2265,7 @@
         }
       ],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "manual_review_no_approved_game_crosswalk",
       "review_status": "pending"
     },
@@ -2092,6 +2274,7 @@
       "source_country_name": "WORLD (Benchmark)",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "aggregate_not_a_country",
       "review_status": "pending"
     },
@@ -2100,39 +2283,9 @@
       "source_country_name": "Kosovo",
       "asset_candidates": [],
       "game_id_candidates": [],
+      "canonical_registry_candidates": [],
       "status": "unmatched_identity",
       "review_status": "pending"
     }
-  ],
-  "data_scope": {
-    "classification_code": "PPPGlob",
-    "classification_label": "Purchasing power parity (PPP) (US$ = 1)",
-    "years": [
-      "2017",
-      "2018",
-      "2019",
-      "2020",
-      "2021",
-      "2022",
-      "2023"
-    ],
-    "country_year_rows": 1288,
-    "indicator_count": 6,
-    "historical_cells": 7728,
-    "missing_value_token": "..",
-    "missing_value_counts_by_indicator": {
-      "1000000": 96,
-      "1501000": 442,
-      "9020000": 425,
-      "9100000": 411,
-      "9250000": 442,
-      "9270000": 442
-    },
-    "source_missing_total": 2258,
-    "observed_numeric_total": 5470,
-    "data_csv_non_observation_rows": 5,
-    "series_metadata_csv_encoding": "cp1252",
-    "data_csv_encoding": "utf-8",
-    "unit_interpretation": "The source supplies a classification label but no separate per-row currency/unit field; retain PPP (US$ = 1) as source classification and do not infer national currency codes."
-  }
+  ]
 }
