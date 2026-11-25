@@ -81,3 +81,59 @@ def test_duplicate_source_series_rejected(tmp_path):
     raw.write_text(text + duplicate + "\n", encoding="utf-8")
     with pytest.raises(CandidateError, match="Duplicate WEO series"):
         build_candidate(raw, identity, verify_snapshot=False)
+
+
+
+def test_explicit_imf_crosswalk_maps_wbg_and_field_filter_is_respected(tmp_path):
+    raw, identity = _inputs(tmp_path)
+    with raw.open("a", encoding="utf-8", newline="") as stream:
+        writer = csv.writer(stream)
+        writer.writerow([
+            "WBG.NGDPD.A", "West Bank and Gaza", "Annual", "US dollar", "Billions",
+            "2025", "January/December", "3.5", "", ""
+        ])
+        writer.writerow([
+            "G001.NGDPD.A", "World", "Annual", "US dollar", "Billions",
+            "2025", "January/December", "100", "", ""
+        ])
+    crosswalk = tmp_path / "imf_weo.json"
+    crosswalk.write_text(json.dumps({
+        "schema_version": 1,
+        "dataset": "world_economic_outlook",
+        "source_key": "imf_weo",
+        "mappings": [{
+            "game_id": "tc_" + "a" * 32,
+            "source_id": "WBG",
+            "match_method": "reviewed_manual",
+            "evidence_url": "https://example.org/imf-weo-appendix",
+            "source_name": "West Bank and Gaza"
+        }]
+    }), encoding="utf-8")
+    observations, exceptions, summary = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk, field_ids={15}
+    )
+    wbg = [row for row in observations if row["source_country_code"] == "WBG"]
+    assert len(wbg) == 1
+    assert wbg[0]["game_id"] == "tc_" + "a" * 32
+    assert wbg[0]["field_id"] == 15
+    assert all(row["field_id"] == 15 for row in observations)
+    assert any(row.get("source_country_code") == "G001" for row in exceptions)
+    assert summary["field_ids"] == [15]
+    assert summary["crosswalk_sha256"] == sha256(crosswalk)
+
+
+def test_imf_crosswalk_rejects_game_id_not_in_registry(tmp_path):
+    raw, identity = _inputs(tmp_path)
+    crosswalk = tmp_path / "imf_weo.json"
+    crosswalk.write_text(json.dumps({
+        "schema_version": 1,
+        "dataset": "world_economic_outlook",
+        "source_key": "imf_weo",
+        "mappings": [{
+            "game_id": "tc_" + "b" * 32,
+            "source_id": "WBG",
+            "match_method": "reviewed_manual"
+        }]
+    }), encoding="utf-8")
+    with pytest.raises(CandidateError, match="canonical identity registry"):
+        build_candidate(raw, identity, verify_snapshot=False, crosswalk_path=crosswalk)
