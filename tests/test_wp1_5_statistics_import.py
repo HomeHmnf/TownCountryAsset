@@ -654,6 +654,51 @@ def test_dry_run_validates_writes_no_database_and_returns_artifact(tmp_path):
     assert not database.exists()
 
 
+def test_dry_run_accepts_dataset_identifier_distinct_from_crosswalk_source_key(tmp_path):
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    dataset = "un_wpp_2024_area_variant"
+
+    normalized_payload = json.loads(observations.read_text(encoding="utf-8"))
+    normalized_payload["dataset"] = dataset
+    observations.write_text(json.dumps(normalized_payload), encoding="utf-8")
+    manifest_payload = json.loads(manifest.read_text(encoding="utf-8"))
+    manifest_payload["dataset"] = dataset
+    manifest.write_text(json.dumps(manifest_payload), encoding="utf-8")
+
+    result = statistics_import.validate_wp1_5_dataset(
+        observations_path=observations,
+        crosswalk_path=crosswalk,
+        manifest_path=manifest,
+    )
+
+    assert result["dataset"] == dataset
+    assert result["source_key"] == SOURCE
+    assert result["crosswalk_mappings"] == 2
+
+
+def test_import_accepts_dataset_identifier_distinct_from_crosswalk_source_key(tmp_path):
+    database = tmp_path / "dataset-alias.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    dataset = "un_wpp_2024_area_variant"
+
+    normalized_payload = json.loads(observations.read_text(encoding="utf-8"))
+    normalized_payload["dataset"] = dataset
+    observations.write_text(json.dumps(normalized_payload), encoding="utf-8")
+    manifest_payload = json.loads(manifest.read_text(encoding="utf-8"))
+    manifest_payload["dataset"] = dataset
+    manifest.write_text(json.dumps(manifest_payload), encoding="utf-8")
+
+    result = import_wp1_5_dataset(
+        observations_path=observations,
+        crosswalk_path=crosswalk,
+        manifest_path=manifest,
+        database_path=database,
+    )
+
+    assert result["scalar_observations"] == 1
+
+
 def test_dry_run_rejects_duplicate_observations_without_database(tmp_path):
     observations, crosswalk, manifest = setup_inputs(tmp_path)
     payload = json.loads(observations.read_text(encoding="utf-8"))
