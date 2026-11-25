@@ -102,6 +102,30 @@ The owner applied and independently verified the World Bank WDI WP1.5 candidate 
 
 The October 2026 IMF WEO acquisition is already registered in the Project DB as acquisition ID `5`; it is source evidence, not a completed field. Start with field 15 only. The Stage 4C semantic matrix and Stage 4E multi-field review package are supporting tools, not field approvals. The field-15 candidate and review package must exclude fields 16, 18, 20 and 21.
 
+## 12. Field-15 reconciliation and canonical identity schema audit — 2026-11-25
+
+The October 2026 IMF WEO field-15 source uses composite annual series codes of the form `<source-country-or-area-code>.NGDPD.A`. The country/area code is the prefix before `.NGDPD.A`; `NGDPD` is not the complete `SERIES_CODE`. The source contains 210 NGDPD series rows and 10,026 nonblank annual values (1980–2031). The canonical Game DB contains 9,329 observations for the matching source fingerprint. A read-only value reconciliation found zero value mismatches, zero extra canonical keys and zero metadata mismatches among matched records; 697 source values have no corresponding canonical observation.
+
+The 697-value gap is classified by source series:
+- Twelve aggregate/regional codes (`G001`, `G110`, `G119`, `G200`, `G205`, `G400`, `G505`, `G510`, `G603`, `G903`, `G998`, `GX123`) account for 624 values.
+- `G163` (Euro Area) accounts for 41 values.
+- `WBG` (West Bank and Gaza) accounts for 32 values, for 1994–2025. These are not to be silently classified as aggregates or excluded; they require an explicit identity disposition.
+
+Canonical identity schema confirmed by read-only inspection:
+- `countries` stores identity state and ISO attributes, keyed by `game_id`; it has no country-name column. Relevant columns include `entity_type`, `record_status`, `iso_alpha2`, `iso_alpha3`, `iso_assignment_status`, `localization_status` and `entity_type_status`.
+- `country_names` stores names separately, linked by `game_id`, with `language`, `name` and `name_type`.
+- `country_sources` stores provider crosswalks using `game_id`, `dataset`, `source_id`, `is_current` and `import_id`; names are not stored in this table.
+
+WBG identity audit findings:
+- No `country_sources` row exists for source ID `WBG`.
+- No `imf_weo_historical_observations` row exists for source country code `WBG`.
+- A canonical country record exists with ISO alpha-3 `PSE`, but `iso_assignment_status='unverified'`, `entity_type='unreviewed'` and `record_status='approved'`. The `country_names` search for “West Bank” returned no matching name row.
+- These facts do not establish that WBG maps to the PSE identity. Do not create or infer the mapping from the ISO code, display name or geography alone. Keep the 32 WBG values in an identity-review hold until authoritative identity evidence and an explicit owner decision are recorded.
+
+The first corrected crosswalk audit attempt failed because it assumed `countries.name`; that column does not exist. The schema above is the verified contract for future read-only identity queries. The corrected schema inspection completed with SQLite integrity `ok` and zero foreign-key violations. The earlier field-15 value reconciliation also completed with integrity `ok` and zero foreign-key violations.
+
+These are diagnostic/reconciliation findings only. They do not constitute semantic approval, identity approval, field approval, or a Game DB write. Field 15 remains open; do not proceed to field 16.
+
 ## 11. Relationship to existing project contracts
 
 - Persistent `game_id` remains the internal identity; provider identifiers are crosswalk attributes.
