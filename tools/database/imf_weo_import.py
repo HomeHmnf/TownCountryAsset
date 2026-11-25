@@ -132,6 +132,14 @@ def _load_candidate(candidate_dir: Path, source_path: Path, identity_path: Path,
             })
     if len(rows) != summary.get("observation_count"):
         raise WEOImportError("Candidate observation count does not match candidate.json")
+    declared_field_ids = summary.get("field_ids")
+    actual_field_ids = {row["field_id"] for row in rows}
+    if (
+        not isinstance(declared_field_ids, list)
+        or any(not isinstance(value, int) for value in declared_field_ids)
+        or not actual_field_ids.issubset(set(declared_field_ids))
+    ):
+        raise WEOImportError("Candidate field_ids do not cover the observations in observations.csv")
     return rows, summary, [observations_path, exceptions_path, summary_path, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path]
 
 
