@@ -8,12 +8,15 @@ import json
 import math
 import sys
 from collections import Counter
+
+from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv"
 IDENTITY = ROOT / "config/country_identity_registry.json"
+DEFAULT_CROSSWALK = ROOT / "data/manual/source_crosswalks/imf_weo.json"
 OUTPUT = ROOT / "reports/sources/imf-weo-historical-candidate"
 EXPECTED_SHA256 = "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d"
 EXPECTED_BYTES = 26692032
@@ -52,7 +55,8 @@ def identity_index(path: Path) -> dict[str, set[str]]:
 
 
 def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
-                    *, verify_snapshot: bool = True) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+                    *, verify_snapshot: bool = True, crosswalk_path: Path | None = None,
+                    field_ids: set[int] | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     if not raw_path.is_file():
         raise CandidateError(f"Missing IMF WEO CSV: {raw_path}")
     raw_hash = sha256(raw_path)
@@ -60,6 +64,36 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
     if verify_snapshot and (raw_hash != EXPECTED_SHA256 or byte_count != EXPECTED_BYTES):
         raise CandidateError("IMF WEO bytes differ from the recorded October 2026 snapshot")
     identities = identity_index(identity_path)
+    crosswalk_hash = None
+    if crosswalk_path is not None:
+        try:
+            identity_document = json.loads(identity_path.read_text(encoding="utf-8"))
+            known_game_ids = {
+                record.get("game_id") for record in identity_document.get("records", [])
+                if isinstance(record, dict) and isinstance(record.get("game_id"), str)
+            }
+            crosswalk = load_crosswalk(
+                crosswalk_path, expected_dataset="world_economic_outlook",
+                known_game_ids=known_game_ids,
+            )
+        except (OSError, json.JSONDecodeError, CrosswalkError) as exc:
+            raise CandidateError(f"Invalid IMF WEO source crosswalk: {exc}") from exc
+        if crosswalk.source_key != "imf_weo":
+            raise CandidateError("IMF WEO source crosswalk source_key must be 'imf_weo'")
+        for mapping in crosswalk.mappings:
+            existing = identities.get(mapping.source_id, set())
+            if existing and existing != {mapping.game_id}:
+                raise CandidateError(
+                    f"IMF WEO crosswalk conflicts with identity registry for {mapping.source_id}"
+                )
+            identities[mapping.source_id] = {mapping.game_id}
+        crosswalk_hash = sha256(crosswalk_path)
+    selected_indicators = {
+        code: field_id for code, field_id in INDICATORS.items()
+        if field_ids is None or field_id in field_ids
+    }
+    if field_ids is not None and not selected_indicators:
+        raise CandidateError(f"No supported IMF WEO indicators selected for fields {sorted(field_ids)}")
     observations: list[dict[str, Any]] = []
     exceptions: list[dict[str, Any]] = []
     seen_series: set[str] = set()
@@ -79,7 +113,7 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
                 raise CandidateError("WEO CSV has no annual year columns")
             for line_number, row in enumerate(reader, start=2):
                 parts = (row.get("SERIES_CODE") or "").split(".")
-                if len(parts) != 3 or parts[1] not in INDICATORS:
+                if len(parts) != 3 or parts[1] not in selected_indicators:
                     continue
                 if parts[2] != "A" or row.get("FREQUENCY", "").strip() != "Annual":
                     exceptions.append({"line_number": line_number, "series_code": row.get("SERIES_CODE", ""),
@@ -100,7 +134,7 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
                     })
                     continue
                 game_id = next(iter(matches))
-                field_id = INDICATORS[parts[1]]
+                field_id = selected_indicators[parts[1]]
                 series_count[parts[1]] += 1
                 for year_text in year_columns:
                     raw_value = (row.get(year_text) or "").strip()
@@ -160,6 +194,9 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
         "source_sha256": raw_hash,
         "source_byte_count": byte_count,
         "identity_registry_path": display_path(identity_path),
+        "crosswalk_path": display_path(crosswalk_path) if crosswalk_path is not None else None,
+        "crosswalk_sha256": crosswalk_hash,
+        "field_ids": sorted(field_ids) if field_ids is not None else sorted(set(INDICATORS.values())),
         "observation_count": len(observations),
         "distinct_game_ids": len({r["game_id"] for r in observations}),
         "indicator_counts": dict(sorted(Counter(r["indicator_code"] for r in observations).items())),
@@ -202,12 +239,16 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--csv", type=Path, default=RAW)
     parser.add_argument("--identity-registry", type=Path, default=IDENTITY)
+    parser.add_argument("--crosswalk", type=Path, default=DEFAULT_CROSSWALK)
+    parser.add_argument("--field-id", type=int, action="append", help="Restrict candidate to one or more WP1.5 field IDs")
     parser.add_argument("--output-root", type=Path, default=OUTPUT)
     parser.add_argument("--skip-snapshot-check", action="store_true")
     args = parser.parse_args(argv)
     try:
         observations, exceptions, summary = build_candidate(
-            args.csv, args.identity_registry, verify_snapshot=not args.skip_snapshot_check
+            args.csv, args.identity_registry, verify_snapshot=not args.skip_snapshot_check,
+            crosswalk_path=args.crosswalk,
+            field_ids=set(args.field_id) if args.field_id else None,
         )
         target = write_candidate(observations, exceptions, summary, args.output_root)
     except (CandidateError, OSError, csv.Error, ValueError) as exc:
