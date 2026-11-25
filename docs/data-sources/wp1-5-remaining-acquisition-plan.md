@@ -6,7 +6,7 @@
 ## Completed
 
 - UN WPP fields 1, 2, 6, 12, 13 and 14 were previously applied.
-- World Bank WDI fields 3, 33 and 34 were imported and owner-verified: 561 observations across 187 mapped entities, with integrity and foreign-key checks passing.
+- World Bank WDI fields 3, 33 and 34 were applied and independently owner-verified on 2026-11-25: approval `wp1-5-wdi-20261125-regenerated` (actor `project-owner`), import ID `4`, 561 scalar observations and 187 crosswalk mappings. The approval ledger is `applied`; the persisted rows, SQLite integrity and foreign keys were independently checked. See the [application record](world-bank-wdi-wp1-5-application.md) for exact fingerprints and audit evidence.
 - The shared project-wide application approval engine and CLI adapters were implemented and owner-tested.
 - IMF WEO October 2026 source capture, Project DB acquisition registration, coverage assessment, WDI comparison, Stage 4C semantic disposition and Stage 4D macro decomposition are existing evidence. These are not yet semantic approval or canonical application.
 
