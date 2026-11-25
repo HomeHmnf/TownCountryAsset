@@ -48,6 +48,16 @@ The Project/source database and Game database have separate responsibilities. So
 
 The combined canonical Game DB remains the active target for this phase. Do not begin the future Game DB/Project DB separation cutover during this work; verify the existing Project/source database and combined Game DB independently under their current contracts.
 
+### Field 15 audit update — 2026-11-25
+
+The IMF WEO `NGDPD` source has 210 country/area series and 10,026 nonblank annual values. The existing canonical Game DB has 9,329 matching observations; matched values and compared metadata reconcile with zero mismatches and no extra database keys. The 697 absent source keys comprise 624 values across 12 aggregate/regional series, 41 Euro Area aggregate values (`G163`), and 32 West Bank and Gaza values (`WBG`, 1994–2025).
+
+The 665 aggregate/regional values must be explicitly dispositioned as non-country series in the field-15 review package, rather than silently omitted. The 32 WBG values remain an identity-review hold. The canonical database contains a `PSE` ISO alpha-3 identity, but its ISO assignment is unverified; there is no `WBG` row in `country_sources`, no WBG historical observation, and no “West Bank” name match in `country_names`. Do not map WBG to PSE without authoritative evidence and an explicit decision.
+
+Schema note for future audits: `countries` contains identity/ISO state but no name column; `country_names` stores names by `game_id`; `country_sources` stores provider crosswalk attributes (`dataset`, `source_id`, `is_current`, `import_id`). The earlier audit's attempted `countries.name` reference was invalid; the schema inspection established these actual columns. Both completed read-only integrity checks reported SQLite `ok` and zero foreign-key violations.
+
+This evidence does not approve field 15 or authorize a write. The field-15-only identity and semantic review, full explicit disposition register, approval, dual-database verification and documentation remain outstanding. Field 16 remains blocked.
+
 ## Owner-run validation and evidence
 
 The owner runs local tests and database commands. Record exact commands, counts, approval IDs, artifact fingerprints, Project DB acquisition/artifact IDs, Game DB import/application IDs, integrity results and commit references only after receiving the output. Repository documentation or code changes alone do not establish successful local acquisition or database application.
