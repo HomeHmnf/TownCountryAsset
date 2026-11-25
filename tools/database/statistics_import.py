@@ -47,7 +47,7 @@ def _canonical_json(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
-def _source_registry_path(config: dict[str, Any], config_path: str | Path) -> Path:
+def _source_registry_path(config: dict[str, Any]) -> Path:
     reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
     path = Path(reference)
     if not path.is_absolute():
@@ -325,7 +325,7 @@ def build_wp1_5_application_artifact(
     if not raw_path.is_absolute():
         raw_path = (REPOSITORY_ROOT / raw_path).resolve()
     config = _read_object(config_path, "WP1.5 field contract")
-    registry_path = _source_registry_path(config, config_path)
+    registry_path = _source_registry_path(config)
     inputs: list[Path] = [
         Path(observations_path), Path(crosswalk_path), Path(manifest_path),
         Path(config_path), registry_path, raw_path,
@@ -385,7 +385,7 @@ def validate_wp1_5_dataset(
         raise StatisticsImportError("Unsupported normalized observation schema")
 
     source_key = _text(normalized.get("source_key"), "normalized.source_key")
-    registry_path = _source_registry_path(config, selected_config_path)
+    registry_path = _source_registry_path(config)
     registry_bytes = _capture_file(registry_path, "project source registry")
     try:
         source_registry = load_registry(registry_path)
@@ -505,7 +505,7 @@ def import_wp1_5_dataset(
     if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
         raise StatisticsImportError("Unsupported normalized observation schema")
     source_key = _text(normalized.get("source_key"), "normalized.source_key")
-    registry_path = _source_registry_path(config, config_path)
+    registry_path = _source_registry_path(config)
     registry_bytes = _capture_file(registry_path, "project source registry")
     try:
         source_registry = load_registry(registry_path)
