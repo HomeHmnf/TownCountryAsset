@@ -47,6 +47,26 @@ def _canonical_json(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
+def _source_registry_path(config: dict[str, Any], config_path: str | Path) -> Path:
+    reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
+    path = Path(reference)
+    if not path.is_absolute():
+        path = (REPOSITORY_ROOT / path).resolve()
+    return path
+
+
+def _capture_file(path: str | Path, label: str) -> bytes:
+    try:
+        return Path(path).read_bytes()
+    except OSError as exc:
+        raise StatisticsImportError(f"Cannot read {label} {path}: {exc}") from exc
+
+
+def _assert_file_unchanged(path: str | Path, expected: bytes, label: str) -> None:
+    if _capture_file(path, label) != expected:
+        raise StatisticsImportError(f"{label} changed during WP1.5 validation")
+
+
 def _utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
 
@@ -304,9 +324,11 @@ def build_wp1_5_application_artifact(
     raw_path = Path(_text(manifest.get("local_raw_path"), "manifest.local_raw_path"))
     if not raw_path.is_absolute():
         raw_path = (REPOSITORY_ROOT / raw_path).resolve()
+    config = _read_object(config_path, "WP1.5 field contract")
+    registry_path = _source_registry_path(config, config_path)
     inputs: list[Path] = [
         Path(observations_path), Path(crosswalk_path), Path(manifest_path),
-        Path(config_path), raw_path,
+        Path(config_path), registry_path, raw_path,
     ]
     additional_inputs = manifest.get("additional_inputs", [])
     if not isinstance(additional_inputs, list):
@@ -363,10 +385,8 @@ def validate_wp1_5_dataset(
         raise StatisticsImportError("Unsupported normalized observation schema")
 
     source_key = _text(normalized.get("source_key"), "normalized.source_key")
-    registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
-    registry_path = Path(registry_reference)
-    if not registry_path.is_absolute():
-        registry_path = (REPOSITORY_ROOT / registry_path).resolve()
+    registry_path = _source_registry_path(config, selected_config_path)
+    registry_bytes = _capture_file(registry_path, "project source registry")
     try:
         source_registry = load_registry(registry_path)
     except SourceError as exc:
@@ -391,6 +411,7 @@ def validate_wp1_5_dataset(
     if len(field_by_id) != 41:
         raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 distinct fields")
 
+    crosswalk_bytes = _capture_file(crosswalk_path, "source crosswalk")
     try:
         crosswalk = load_crosswalk(crosswalk_path, expected_dataset=dataset)
     except CrosswalkError as exc:
@@ -435,6 +456,8 @@ def validate_wp1_5_dataset(
         raise StatisticsImportError("Source manifest changed during dry-run validation")
     if _read_object(selected_config_path, "WP1.5 field contract") != config:
         raise StatisticsImportError("WP1.5 field contract changed during dry-run validation")
+    _assert_file_unchanged(crosswalk_path, crosswalk_bytes, "Source crosswalk")
+    _assert_file_unchanged(registry_path, registry_bytes, "Project source registry")
     _validate_manifest(manifest, source_key)
 
     field_counts: dict[str, int] = {}
@@ -482,12 +505,8 @@ def import_wp1_5_dataset(
     if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
         raise StatisticsImportError("Unsupported normalized observation schema")
     source_key = _text(normalized.get("source_key"), "normalized.source_key")
-    registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
-    registry_path = Path(registry_reference)
-    if not registry_path.is_absolute():
-        # Registry references in project configuration are repository-root-relative,
-        # not relative to the directory containing the referencing config file.
-        registry_path = (REPOSITORY_ROOT / registry_path).resolve()
+    registry_path = _source_registry_path(config, config_path)
+    registry_bytes = _capture_file(registry_path, "project source registry")
     try:
         source_registry = load_registry(registry_path)
     except SourceError as exc:
@@ -513,6 +532,7 @@ def import_wp1_5_dataset(
     if len(field_by_id) != 41:
         raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 distinct fields")
 
+    crosswalk_bytes = _capture_file(crosswalk_path, "source crosswalk")
     try:
         crosswalk = load_crosswalk(
             crosswalk_path,
@@ -561,6 +581,8 @@ def import_wp1_5_dataset(
         raise StatisticsImportError("Source manifest changed while preparing the approved application")
     if _read_object(config_path, "WP1.5 field contract") != config:
         raise StatisticsImportError("WP1.5 field contract changed while preparing the approved application")
+    _assert_file_unchanged(crosswalk_path, crosswalk_bytes, "Source crosswalk")
+    _assert_file_unchanged(registry_path, registry_bytes, "Project source registry")
     _validate_manifest(manifest, source_key)
 
     connection = connect_database(database_path)
