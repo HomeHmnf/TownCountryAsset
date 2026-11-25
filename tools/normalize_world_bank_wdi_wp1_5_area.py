@@ -72,7 +72,7 @@ def _write_json_pair(
             temporary_paths.append(temporary)
             with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
                 json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
-                stream.write("\\n")
+                stream.write("\n")
                 stream.flush()
                 os.fsync(stream.fileno())
 
