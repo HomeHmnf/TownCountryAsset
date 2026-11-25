@@ -138,3 +138,9 @@ def test_imf_crosswalk_rejects_game_id_not_in_registry(tmp_path):
     }), encoding="utf-8")
     with pytest.raises(CandidateError, match="canonical identity registry"):
         build_candidate(raw, identity, verify_snapshot=False, crosswalk_path=crosswalk)
+
+
+def test_unsupported_field_filter_is_rejected(tmp_path):
+    raw, identity = _inputs(tmp_path)
+    with pytest.raises(CandidateError, match="Unsupported WP1.5 field IDs"):
+        build_candidate(raw, identity, verify_snapshot=False, field_ids={999})
