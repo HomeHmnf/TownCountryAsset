@@ -20,6 +20,7 @@ from tools.database.schema import apply_migrations, validate_database
 DEFAULT_CANDIDATE = REPOSITORY_ROOT / "reports/sources/imf-weo-historical-candidate"
 DEFAULT_SOURCE = REPOSITORY_ROOT / "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv"
 DEFAULT_IDENTITY = REPOSITORY_ROOT / "config/country_identity_registry.json"
+DEFAULT_CROSSWALK = REPOSITORY_ROOT / "data/manual/source_crosswalks/imf_weo.json"
 DEFAULT_MIGRATION = REPOSITORY_ROOT / "migrations/008_imf_weo_historical_observations.sql"
 DEFAULT_ACQUISITION_RECORD = REPOSITORY_ROOT / "docs/data-sources/imf-weo-october-2026-manual-acquisition.md"
 SOURCE_URL = "https://data.imf.org/datasets/WEO"
@@ -50,7 +51,8 @@ def _candidate_files(candidate_dir: Path) -> tuple[Path, Path, Path]:
 
 
 def _load_candidate(candidate_dir: Path, source_path: Path, identity_path: Path,
-                    migration_path: Path, acquisition_record_path: Path) -> tuple[list[dict[str, Any]], dict[str, Any], list[Path]]:
+                    crosswalk_path: Path, migration_path: Path,
+                    acquisition_record_path: Path) -> tuple[list[dict[str, Any]], dict[str, Any], list[Path]]:
     observations_path, exceptions_path, summary_path = _candidate_files(candidate_dir)
     try:
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
@@ -70,6 +72,10 @@ def _load_candidate(candidate_dir: Path, source_path: Path, identity_path: Path,
         raise WEOImportError("Candidate source path does not identify the recorded raw snapshot")
     if summary.get("identity_registry_path") != identity_path.relative_to(REPOSITORY_ROOT).as_posix():
         raise WEOImportError("Candidate identity registry path does not match the configured registry")
+    if summary.get("crosswalk_path") != crosswalk_path.relative_to(REPOSITORY_ROOT).as_posix():
+        raise WEOImportError("Candidate IMF WEO crosswalk path does not match the configured crosswalk")
+    if summary.get("crosswalk_sha256") != _sha(crosswalk_path):
+        raise WEOImportError("IMF WEO source crosswalk checksum differs from candidate summary")
     if not acquisition_record_path.is_file():
         raise WEOImportError("IMF WEO manual acquisition record is missing")
     acquisition_text = acquisition_record_path.read_text(encoding="utf-8")
@@ -126,12 +132,12 @@ def _load_candidate(candidate_dir: Path, source_path: Path, identity_path: Path,
             })
     if len(rows) != summary.get("observation_count"):
         raise WEOImportError("Candidate observation count does not match candidate.json")
-    return rows, summary, [observations_path, exceptions_path, summary_path, source_path, identity_path, migration_path, acquisition_record_path]
+    return rows, summary, [observations_path, exceptions_path, summary_path, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path]
 
 
-def _artifact(candidate_dir: Path, source_path: Path, identity_path: Path,
+def _artifact(candidate_dir: Path, source_path: Path, identity_path: Path, crosswalk_path: Path,
               migration_path: Path, acquisition_record_path: Path) -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, Any]]:
-    rows, summary, inputs = _load_candidate(candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
+    rows, summary, inputs = _load_candidate(candidate_dir, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path)
     artifact = build_application_artifact(
         domain="imf_weo_historical_observations",
         inputs=inputs,
@@ -140,6 +146,8 @@ def _artifact(candidate_dir: Path, source_path: Path, identity_path: Path,
             "source_sha256": summary["source_sha256"],
             "candidate_observation_count": len(rows),
             "candidate_sha256": summary["observations_sha256"],
+            "crosswalk_sha256": summary["crosswalk_sha256"],
+            "field_ids": summary.get("field_ids"),
             "status_policy": "unclassified",
             "identity_policy": "preserve_existing_game_id_and_identity_status",
         },
@@ -150,13 +158,14 @@ def _artifact(candidate_dir: Path, source_path: Path, identity_path: Path,
 def prepare_application(candidate_dir: str | Path, *, database_path: str | Path = DEFAULT_DATABASE_PATH,
                         source_path: str | Path = DEFAULT_SOURCE,
                         identity_path: str | Path = DEFAULT_IDENTITY,
+                        crosswalk_path: str | Path = DEFAULT_CROSSWALK,
                         migration_path: str | Path = DEFAULT_MIGRATION,
                         acquisition_record_path: str | Path = DEFAULT_ACQUISITION_RECORD,
                         approval_id: str | None = None) -> dict[str, Any]:
-    candidate_dir, source_path, identity_path, migration_path, acquisition_record_path = map(
-        lambda item: Path(item).resolve(), (candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
+    candidate_dir, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path = map(
+        lambda item: Path(item).resolve(), (candidate_dir, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path)
     )
-    artifact, rows, summary = _artifact(candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
+    artifact, rows, summary = _artifact(candidate_dir, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path)
     if not approval_id:
         approval_id = "imf-weo-oct2026-" + artifact["artifact_sha256"][:16]
     connection = connect_database(database_path)
@@ -221,12 +230,13 @@ def apply_application(candidate_dir: str | Path, approval_id: str, *,
                       database_path: str | Path = DEFAULT_DATABASE_PATH,
                       source_path: str | Path = DEFAULT_SOURCE,
                       identity_path: str | Path = DEFAULT_IDENTITY,
+                      crosswalk_path: str | Path = DEFAULT_CROSSWALK,
                       migration_path: str | Path = DEFAULT_MIGRATION,
                       acquisition_record_path: str | Path = DEFAULT_ACQUISITION_RECORD) -> dict[str, Any]:
-    candidate_dir, source_path, identity_path, migration_path, acquisition_record_path = map(
-        lambda item: Path(item).resolve(), (candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
+    candidate_dir, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path = map(
+        lambda item: Path(item).resolve(), (candidate_dir, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path)
     )
-    artifact, rows, summary = _artifact(candidate_dir, source_path, identity_path, migration_path, acquisition_record_path)
+    artifact, rows, summary = _artifact(candidate_dir, source_path, identity_path, crosswalk_path, migration_path, acquisition_record_path)
     connection = connect_database(database_path)
     try:
         apply_migrations(connection)
@@ -351,6 +361,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--database", type=Path, default=DEFAULT_DATABASE_PATH)
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--identity-registry", type=Path, default=DEFAULT_IDENTITY)
+    parser.add_argument("--crosswalk", type=Path, default=DEFAULT_CROSSWALK)
     parser.add_argument("--migration", type=Path, default=DEFAULT_MIGRATION)
     parser.add_argument("--acquisition-record", type=Path, default=DEFAULT_ACQUISITION_RECORD)
     modes = parser.add_mutually_exclusive_group(required=True)
@@ -365,7 +376,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.prepare:
             result = prepare_application(args.candidate_dir, database_path=args.database,
                 source_path=args.source, identity_path=args.identity_registry,
-                migration_path=args.migration, acquisition_record_path=args.acquisition_record,
+                crosswalk_path=args.crosswalk, migration_path=args.migration, acquisition_record_path=args.acquisition_record,
                 approval_id=args.approval_id)
         elif args.decide:
             if not args.approval_id or not args.actor or not args.note:
@@ -377,7 +388,8 @@ def main(argv: list[str] | None = None) -> int:
                 raise WEOImportError("--apply requires --approval-id")
             result = apply_application(args.candidate_dir, args.approval_id,
                 database_path=args.database, source_path=args.source,
-                identity_path=args.identity_registry, migration_path=args.migration,
+                identity_path=args.identity_registry, crosswalk_path=args.crosswalk,
+                migration_path=args.migration,
                 acquisition_record_path=args.acquisition_record)
     except (WEOImportError, ApplicationApprovalError, OSError, ValueError, sqlite3.Error) as exc:
         parser.exit(1, f"IMF WEO import failed: {exc}\n")
