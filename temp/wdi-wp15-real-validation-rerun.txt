@@ -1,0 +1,26 @@
+===== REAL SNAPSHOT NORMALIZATION =====
+{
+  "assessment": "world_bank_wdi_wp1_5_area_normalization_candidate",
+  "dataset": "world_bank_wdi_wp1_5_area",
+  "acquisition_dataset": "wdi_wp1_5_area",
+  "source_key": "world_bank_wdi",
+  "release": "api_snapshot_20261121T074357472382Z",
+  "observations": 561,
+  "indicator_counts": {
+    "EN.POP.DNST": 187,
+    "AG.SRF.TOTL.K2": 187,
+    "AG.LND.TOTL.K2": 187
+  },
+  "observations_path": "reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/verification_20261125_rerun_1118/observations.json",
+  "import_manifest_path": "reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/verification_20261125_rerun_1118/import_manifest.json",
+  "license_status": "unclear_or_unverified_indicator_level_third_party_review_required",
+  "side_effects": {
+    "canonical_database_written": false,
+    "project_database_written": false,
+    "approval_created": false,
+    "source_selection_changed": false
+  }
+}
+
+===== WP1.5 DRY-RUN VALIDATION =====
+ERROR: Invalid source crosswalk: Crosswalk dataset mismatch: expected 'world_bank_wdi_wp1_5_area', received 'world_bank_wdi'

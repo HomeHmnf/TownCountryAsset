@@ -1,0 +1,116 @@
+===== WP1.5 DRY-RUN VALIDATION =====
+{
+  "assessment": "wp1_5_statistics_import_dry_run",
+  "source_key": "world_bank_wdi",
+  "canonical_source_key": "world_bank_wdi",
+  "dataset": "world_bank_wdi_wp1_5_area",
+  "release": "api_snapshot_20261121T074357472382Z",
+  "source_sha256": "7196c4bf58e63a75c4576fef063b0fd96cba99c118f9c112dadc4afbbd2a0476",
+  "source_url": "https://api.worldbank.org/v2",
+  "retrieved_at": "2026-11-21T07:44:07.275083+00:00",
+  "observations": 561,
+  "crosswalk_mappings": 187,
+  "field_counts": {
+    "3": 187,
+    "33": 187,
+    "34": 187
+  },
+  "license_status": "unclear_or_unverified_indicator_level_third_party_review_required",
+  "attribution": "World Bank Group, World Development Indicators; originating organisations and source notes retained per indicator.",
+  "application_artifact_sha256": "8300f23d1359ded5b48a53d56ada47ee902a14af673563576ecc81f961ede168",
+  "application_artifact": {
+    "schema_version": 1,
+    "domain": "wp1_5_statistics",
+    "inputs": [
+      {
+        "path": "config/data_sources.json",
+        "sha256": "4834784ba026ef48e95a6445d4b06e2774b97fdf0bbf3b9f815824cd5c3625b2",
+        "byte_count": 55212
+      },
+      {
+        "path": "config/source_selection.json",
+        "sha256": "8b9c63e6552ef9e8cf24149c627283a64369383428474b0469d0839b7f5736f7",
+        "byte_count": 19666
+      },
+      {
+        "path": "config/wp1_5_data_sources.json",
+        "sha256": "ae755a380d0bff157c1e2ccb44fc89198e53f7d76717e1ea7b0f9fbf246bd70b",
+        "byte_count": 14700
+      },
+      {
+        "path": "data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json",
+        "sha256": "b56997a0ec070f824d83772e4534d0ff8c0c509b7e9625bf2a1a6b0a1304a221",
+        "byte_count": 27000
+      },
+      {
+        "path": "data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z.json",
+        "sha256": "0f338a0606cdc951245de2c125221c7dacb537601c3d5db6fdb88aa0c0915748",
+        "byte_count": 20064
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/country_metadata_page_001.json",
+        "sha256": "c9acf3932785191a649cbc04c3056af4cf64a236e5c3b49d49be25ddb0440bce",
+        "byte_count": 113954
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.LND.TOTL.K2.json",
+        "sha256": "5bbf22fc31f4de6995e22f30d09f4149b4cb9a645d97bcf539d79479c87ed58c",
+        "byte_count": 738
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.SRF.TOTL.K2.json",
+        "sha256": "0b359a437f7bc6501fb7dfaae43262ddb181ff7c5ab4ba760c0a6a5356684b10",
+        "byte_count": 596
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_EN.POP.DNST.json",
+        "sha256": "c5df1b392124d9113915d833c5d4a47e73d9c6b989de0e6a64a9487479f9040c",
+        "byte_count": 1134
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.LND.TOTL.K2_page_001.json",
+        "sha256": "a354fff28ca1c6856e5daebcb6c6042f68f6f80bb9bf5074358af58e6b2b9abe",
+        "byte_count": 595709
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.SRF.TOTL.K2_page_001.json",
+        "sha256": "b23ba9ee2a0d8f657c718062680848a2bc9659df302de0dbcebff28871c8e421",
+        "byte_count": 604323
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_EN.POP.DNST_page_001.json",
+        "sha256": "e0029dedbdbee884b27ab19777e909819cb083411e86b8ce6fedb3c2dde0bd84",
+        "byte_count": 707628
+      },
+      {
+        "path": "raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/source_metadata.json",
+        "sha256": "7196c4bf58e63a75c4576fef063b0fd96cba99c118f9c112dadc4afbbd2a0476",
+        "byte_count": 236
+      },
+      {
+        "path": "reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/verification_20261125_rerun_1118/import_manifest.json",
+        "sha256": "4705e3b0806df5abc7c302878fe04da382fd81efe96ad4d528fb9b991a6bfc9f",
+        "byte_count": 3027
+      },
+      {
+        "path": "reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/verification_20261125_rerun_1118/observations.json",
+        "sha256": "5c50cea5becd614a1cda553b5dd45102025645fc1d4dd8c6d37eea8121add087",
+        "byte_count": 898399
+      }
+    ],
+    "metadata": {
+      "source_key": "world_bank_wdi",
+      "dataset": "world_bank_wdi_wp1_5_area",
+      "release": "api_snapshot_20261121T074357472382Z",
+      "source_sha256": "7196c4bf58e63a75c4576fef063b0fd96cba99c118f9c112dadc4afbbd2a0476",
+      "policy_version": 1
+    },
+    "artifact_sha256": "8300f23d1359ded5b48a53d56ada47ee902a14af673563576ecc81f961ede168"
+  },
+  "side_effects": {
+    "database_opened": false,
+    "database_written": false,
+    "approval_created": false,
+    "source_selection_changed": false
+  }
+}

@@ -1,0 +1,2 @@
+===== REAL SNAPSHOT NORMALIZATION =====
+ERROR: Crosswalk dataset mismatch: expected 'world_bank_wdi_wp1_5_area', received 'world_bank_wdi'
