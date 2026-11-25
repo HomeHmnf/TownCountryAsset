@@ -177,3 +177,19 @@ Until the owner explicitly decides:
 - record the IMF appendix, M49 snapshot and exact proposed target game_id in the field-15 evidence register.
 
 A future owner-approved crosswalk must be explicit, source-keyed (imf_weo / WBG), target the persistent game_id, retain both provider and M49 evidence, and be included in the exact candidate fingerprint and approval dependencies. This field-specific decision does not settle any other WEO field or any broader geopolitical/catalogue policy.
+
+
+## 14. Owner decision — IMF WEO WBG source crosswalk — 2026-11-25
+
+The project owner explicitly approved the following field-specific source crosswalk:
+
+- Source key: `imf_weo`
+- Provider code: `WBG` (IMF October 2026 WEO name: West Bank and Gaza)
+- Target persistent identity: `tc_50c420df8b2c4c6eaae47d795f9a1ea2` (registry display name: Palestine)
+- Match method: `reviewed_manual`
+- Scope: WP1.5 field 15 / IMF indicator `NGDPD` only for this sequential application.
+- Crosswalk artifact: `data/manual/source_crosswalks/imf_weo.json`
+
+The crosswalk is provider-specific and fingerprinted as a candidate input. It does not change the identity registry, ISO alpha-2/alpha-3 assignments, PSE verification status, Natural Earth mapping, WDI mapping, or any other provider crosswalk. It does not authorize field 16/18/20/21 application. The 13 non-country aggregate series remain excluded from country observations with explicit review dispositions; they are not mapped to a game identity.
+
+The WBG mapping restores the 32 source-populated field-15 observations to the candidate observation set. No Game DB write, approval record, or observation status classification is performed by this decision or by the candidate builder.
