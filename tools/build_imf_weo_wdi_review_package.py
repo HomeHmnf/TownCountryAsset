@@ -228,7 +228,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True, help="Stage 4C semantic_disposition_matrix.csv")
     parser.add_argument("--field-id", type=int, action="append", help="Restrict package to one or more WP1.5 field IDs")
-    parser.add_argument("--output-root, type=Path, default=DEFAULT_INPUT_ROOT)
+    parser.add_argument("--output-root", type=Path, default=DEFAULT_INPUT_ROOT)
     args = parser.parse_args(argv)
     try:
         rows, cases, summary = build_package(args.input, field_ids=set(args.field_id) if args.field_id else None)
