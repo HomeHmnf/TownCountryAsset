@@ -1,7 +1,7 @@
 # WP1.5 remaining acquisition and application plan
 
 **Status:** execution plan; governed by the [WP1.5 review, approval and database application workflow](wp1-5-review-approval-application-workflow.md).  
-**Last reviewed:** 2026-11-23.
+**Last reviewed:** 2026-11-25.
 
 ## Completed
 
