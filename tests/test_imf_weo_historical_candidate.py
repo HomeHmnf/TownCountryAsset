@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import json
 from pathlib import Path
+import hashlib
 
 import pytest
 
@@ -119,7 +120,7 @@ def test_explicit_imf_crosswalk_maps_wbg_and_field_filter_is_respected(tmp_path)
     assert all(row["field_id"] == 15 for row in observations)
     assert any(row.get("source_country_code") == "G001" for row in exceptions)
     assert summary["field_ids"] == [15]
-    assert summary["crosswalk_sha256"] == sha256(crosswalk)
+    assert summary["crosswalk_sha256"] == hashlib.sha256(crosswalk.read_bytes()).hexdigest()
 
 
 def test_imf_crosswalk_rejects_game_id_not_in_registry(tmp_path):
