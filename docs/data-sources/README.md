@@ -9,6 +9,7 @@ This section documents providers, acquisition, source-specific validation, relea
 - [WP1.5 source coverage](wp1-5-sources.md) — the 41 selected data fields and provider coverage.
 - [World Bank WDI onboarding review](world-bank-wdi-onboarding-review.md) — indicator coverage and onboarding assessment.
 - [World Bank WDI immutable API snapshot acquisition](world-bank-wdi-snapshot-acquisition.md) — byte-preserving capture, manifest integrity, Project DB provenance registration and snapshot-backed comparison.
+- [World Bank WDI WP1.5 application record](world-bank-wdi-wp1-5-application.md) — approved and owner-verified import of fields 3, 33 and 34, including exact artifact/approval fingerprints, import ID, persisted row counts and integrity checks.
 - [World Bank ICP multi-cycle acquisition and inspection](world-bank-icp-multicycle-acquisition.md) — original and revised benchmark cycles, ICP 2005 DataBank acquisition, automated multi-release saved-report export, export inspection, missingness, country-indicator-specific latest coverage and the 2026-11-17 public-source review of global WDI/WEO PPP anomalies.
 - [World Bank ICP 2021 release acquisition](world-bank-icp-2021-acquisition.md) — initial Data Catalog API capture and known resource-download limitations.
 - [IMF WEO October 2026 manual acquisition](imf-weo-october-2026-manual-acquisition.md) — immutable export provenance and metadata.
