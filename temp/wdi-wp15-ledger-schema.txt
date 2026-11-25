@@ -1,0 +1,6 @@
+
+===== application_approvals =====
+columns: ['approval_id', 'domain', 'artifact_sha256', 'artifact_json', 'status', 'created_at', 'approved_by', 'approved_at', 'decision_note', 'applied_at', 'application_id']
+
+===== database_application_events =====
+columns: ['event_id', 'approval_id', 'event_type', 'event_at', 'actor', 'details_json']

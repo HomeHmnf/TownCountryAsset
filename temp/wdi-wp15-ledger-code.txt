@@ -1,0 +1,75 @@
+tools/database/application_approval.py-82-    return artifact
+tools/database/application_approval.py-83-
+tools/database/application_approval.py-84-
+tools/database/application_approval.py-85-def _event(
+tools/database/application_approval.py-86-    connection: sqlite3.Connection,
+tools/database/application_approval.py-87-    approval_id: str,
+tools/database/application_approval.py-88-    event_type: str,
+tools/database/application_approval.py-89-    *,
+tools/database/application_approval.py:90:    actor: str | None = None,
+tools/database/application_approval.py-91-    details: dict[str, Any] | None = None,
+tools/database/application_approval.py-92-) -> None:
+tools/database/application_approval.py-93-    connection.execute(
+tools/database/application_approval.py-94-        """INSERT INTO database_application_events
+tools/database/application_approval.py:95:           (approval_id, event_type, event_at, actor, details_json)
+tools/database/application_approval.py-96-           VALUES (?, ?, ?, ?, ?)""",
+tools/database/application_approval.py:97:        (approval_id, event_type, utc_now(), actor, canonical_json(details or {})),
+tools/database/application_approval.py-98-    )
+tools/database/application_approval.py-99-
+tools/database/application_approval.py-100-
+tools/database/application_approval.py-101-def propose_application(
+tools/database/application_approval.py-102-    connection: sqlite3.Connection,
+tools/database/application_approval.py-103-    *,
+tools/database/application_approval.py-104-    approval_id: str,
+tools/database/application_approval.py-105-    artifact: dict[str, Any],
+--
+tools/database/application_approval.py-117-        """INSERT INTO application_approvals
+tools/database/application_approval.py-118-           (approval_id, domain, artifact_sha256, artifact_json, status, created_at)
+tools/database/application_approval.py-119-           VALUES (?, ?, ?, ?, 'pending', ?)""",
+tools/database/application_approval.py-120-        (approval_id, artifact["domain"], expected, canonical_json(artifact), utc_now()),
+tools/database/application_approval.py-121-    )
+tools/database/application_approval.py-122-    _event(connection, approval_id, "proposed", details={"artifact_sha256": expected})
+tools/database/application_approval.py-123-
+tools/database/application_approval.py-124-
+tools/database/application_approval.py:125:def decide_application(
+tools/database/application_approval.py-126-    connection: sqlite3.Connection,
+tools/database/application_approval.py-127-    *,
+tools/database/application_approval.py-128-    approval_id: str,
+tools/database/application_approval.py-129-    decision: str,
+tools/database/application_approval.py:130:    actor: str,
+tools/database/application_approval.py-131-    note: str | None = None,
+tools/database/application_approval.py-132-) -> None:
+tools/database/application_approval.py-133-    """Record an explicit human approval or rejection of a pending proposal."""
+tools/database/application_approval.py-134-    if decision not in {"approved", "rejected"}:
+tools/database/application_approval.py-135-        raise ApplicationApprovalError("Decision must be approved or rejected")
+tools/database/application_approval.py:136:    if not isinstance(actor, str) or not actor.strip():
+tools/database/application_approval.py:137:        raise ApplicationApprovalError("Approval actor must be identified")
+tools/database/application_approval.py-138-    row = connection.execute(
+tools/database/application_approval.py-139-        "SELECT status FROM application_approvals WHERE approval_id = ?", (approval_id,)
+tools/database/application_approval.py-140-    ).fetchone()
+tools/database/application_approval.py-141-    if row is None or row["status"] != "pending":
+tools/database/application_approval.py-142-        raise ApplicationApprovalError("Only a pending application can be approved or rejected")
+tools/database/application_approval.py-143-    now = utc_now()
+tools/database/application_approval.py-144-    if decision == "approved":
+tools/database/application_approval.py-145-        connection.execute(
+tools/database/application_approval.py-146-            """UPDATE application_approvals
+tools/database/application_approval.py:147:               SET status='approved', approved_by=?, approved_at=?, decision_note=?
+tools/database/application_approval.py-148-               WHERE approval_id=? AND status='pending'""",
+tools/database/application_approval.py:149:            (actor.strip(), now, note, approval_id),
+tools/database/application_approval.py-150-        )
+tools/database/application_approval.py-151-    else:
+tools/database/application_approval.py-152-        connection.execute(
+tools/database/application_approval.py-153-            """UPDATE application_approvals
+tools/database/application_approval.py:154:               SET status='rejected', decision_note=?
+tools/database/application_approval.py-155-               WHERE approval_id=? AND status='pending'""",
+tools/database/application_approval.py-156-            (note, approval_id),
+tools/database/application_approval.py-157-        )
+tools/database/application_approval.py:158:    _event(connection, approval_id, decision, actor=actor.strip(), details={"note": note})
+tools/database/application_approval.py-159-
+tools/database/application_approval.py-160-
+tools/database/application_approval.py-161-def require_approved_application(
+tools/database/application_approval.py-162-    connection: sqlite3.Connection,
+tools/database/application_approval.py-163-    *,
+tools/database/application_approval.py-164-    approval_id: str,
+tools/database/application_approval.py-165-    artifact: dict[str, Any],
+tools/database/application_approval.py-166-) -> sqlite3.Row:
