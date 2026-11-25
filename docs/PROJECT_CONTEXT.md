@@ -72,6 +72,13 @@ Missing values must not be represented as zero. SQL NULL is explicit and must di
 
 Use the [data-source index](data-sources/README.md), provider assessments and [implementation logs](implementation/README.md) for exact evidence, reports, commands and validation outputs. This context guide intentionally avoids duplicating those details.
 
+
+## Operator identity and approval audit actor
+
+- The repository owner's GitHub login is **`HomeHmnf`**. This is confirmed by the GitHub author/committer metadata on recent commits to `work/compiler-hardening` (including commits `1e54a6d` and `eef2876`).
+- When a CLI approval/rejection action requires `--actor` for this repository owner, use `--actor "HomeHmnf"`; do not use placeholder text such as `YOUR_GITHUB_USERNAME`.
+- Approval actor values are written to the append-only-style application event history. Verify the intended actor before executing a decision. If an incorrect actor was recorded, preserve the original event and document any correction as a separate audit event; do not silently rewrite history.
+
 ## Working and validation protocol
 
 - Work on `work/compiler-hardening` unless the owner explicitly changes the target.
