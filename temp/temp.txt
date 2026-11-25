@@ -28,7 +28,7 @@
   "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
   "database_written": false,
   "approval_created": false,
-  "candidate_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-historical-candidate/20261125T151448Z",
+  "candidate_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-historical-candidate/20261125T152006Z",
   "observations_sha256": "47d8e3ac053eb0842e632ba71aaca02dc76fe780d9665ee431ab775dfcb9f76d",
   "exceptions_sha256": "b35a2984fd5704fa3c47fed01e067b9baed16e8c8785a1ca4218938c3d1c148e"
 }
