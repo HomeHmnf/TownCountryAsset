@@ -102,6 +102,14 @@ The owner applied and independently verified the World Bank WDI WP1.5 candidate 
 
 The October 2026 IMF WEO acquisition is already registered in the Project DB as acquisition ID `5`; it is source evidence, not a completed field. Start with field 15 only. The Stage 4C semantic matrix and Stage 4E multi-field review package are supporting tools, not field approvals. The field-15 candidate and review package must exclude fields 16, 18, 20 and 21.
 
+## 11. Relationship to existing project contracts
+
+- Persistent `game_id` remains the internal identity; provider identifiers are crosswalk attributes.
+- `config/wp1_5_data_sources.json` and `config/data_sources.json` remain authoritative for field and source contracts.
+- `config/source_selection.json` remains authoritative for source priority; this workflow does not silently change it.
+- The WP1.5 normalized observation/import contract and shared approval engine remain authoritative.
+- Existing source-specific assessments are evidence, not approval artifacts.
+
 ## 12. Field-15 reconciliation and canonical identity schema audit — 2026-11-25
 
 The October 2026 IMF WEO field-15 source uses composite annual series codes of the form `<source-country-or-area-code>.NGDPD.A`. The country/area code is the prefix before `.NGDPD.A`; `NGDPD` is not the complete `SERIES_CODE`. The source contains 210 NGDPD series rows and 10,026 nonblank annual values (1980–2031). The canonical Game DB contains 9,329 observations for the matching source fingerprint. A read-only value reconciliation found zero value mismatches, zero extra canonical keys and zero metadata mismatches among matched records; 697 source values have no corresponding canonical observation.
@@ -125,11 +133,3 @@ WBG identity audit findings:
 The first corrected crosswalk audit attempt failed because it assumed `countries.name`; that column does not exist. The schema above is the verified contract for future read-only identity queries. The corrected schema inspection completed with SQLite integrity `ok` and zero foreign-key violations. The earlier field-15 value reconciliation also completed with integrity `ok` and zero foreign-key violations.
 
 These are diagnostic/reconciliation findings only. They do not constitute semantic approval, identity approval, field approval, or a Game DB write. Field 15 remains open; do not proceed to field 16.
-
-## 11. Relationship to existing project contracts
-
-- Persistent `game_id` remains the internal identity; provider identifiers are crosswalk attributes.
-- `config/wp1_5_data_sources.json` and `config/data_sources.json` remain authoritative for field and source contracts.
-- `config/source_selection.json` remains authoritative for source priority; this workflow does not silently change it.
-- The WP1.5 normalized observation/import contract and shared approval engine remain authoritative.
-- Existing source-specific assessments are evidence, not approval artifacts.
