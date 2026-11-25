@@ -1,0 +1,52 @@
+===== RECENT COMMITS =====
+51b36aa (HEAD -> work/compiler-hardening, origin/work/compiler-hardening) temp added
+3c460a4 Corred some tests
+ce30577 Correct WDI integration file inventory
+d573b5f Record exact WDI integration test inventory and baseline
+3274dce Correct WDI selective integration inspection
+===== CORE INTEGRATION COMMIT =====
+3c460a4 Corred some tests
+ tests/test_wp1_5_statistics_import.py      |  79 +++++++++---
+ tools/acquire_world_bank_wdi_wp1_5_area.py |   1 +
+ tools/database/statistics_import.py        | 188 +++++++++++++++++++++++++----
+ 3 files changed, 229 insertions(+), 39 deletions(-)
+===== CURRENT STATUS =====
+?? data/canonical/town_country_asset.sqlite-shm
+?? data/canonical/town_country_asset.sqlite-wal
+?? temp/wdi-integration-followup.txt
+?? temp/wdi-wp15-core.patch
+?? tests/test_normalize_world_bank_wdi_wp1_5_area.py
+?? tools/normalize_world_bank_wdi_wp1_5_area.py
+?? tools/validate_wp1_5_statistics_import.py
+===== NORMALIZER TESTS =====
+from __future__ import annotations
+
+import pytest
+
+from tools.acquire_world_bank_wdi_wp1_5_area import AreaSnapshotError
+from tools.normalize_world_bank_wdi_wp1_5_area import _value_status
+
+
+@pytest.mark.parametrize("provider_status", [None, ""])
+def test_blank_wdi_provider_status_is_unclassified(provider_status):
+    assert _value_status(provider_status) == "unclassified"
+
+
+@pytest.mark.parametrize("provider_status", ["E", "P", "A", "unknown"])
+def test_nonblank_wdi_provider_status_requires_explicit_mapping(provider_status):
+    with pytest.raises(AreaSnapshotError, match="requires an explicit canonical status mapping"):
+        _value_status(provider_status)
+===== CORE IMPORTER TEST ADDITIONS =====
+===== ACQUISITION MODULE CHANGE =====
+diff --git a/tools/acquire_world_bank_wdi_wp1_5_area.py b/tools/acquire_world_bank_wdi_wp1_5_area.py
+index e38783a..158f59c 100644
+--- a/tools/acquire_world_bank_wdi_wp1_5_area.py
++++ b/tools/acquire_world_bank_wdi_wp1_5_area.py
+@@ -23,6 +23,7 @@ from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
+ ROOT = Path(__file__).resolve().parents[1]
+ SOURCE_KEY = "world_bank_wdi"
+ DATASET_KEY = "wdi_wp1_5_area"
++CROSSWALK_DATASET = "world_bank_wdi_wp1_5_area"
+ SOURCE_ID = "2"
+ API = common.API
+ PER_PAGE = 20000
