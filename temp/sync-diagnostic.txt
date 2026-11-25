@@ -1,0 +1,1082 @@
+===== LOCAL STATUS =====
+## work/compiler-hardening...origin/work/compiler-hardening [ahead 2, behind 37]
+ M data/canonical/town_country_asset.sqlite
+?? temp/sync-diagnostic.txt
+?? temp/wdi-wp15-ledger-records.txt
+?? temp/wdi-wp15-regenerated/import.txt
+?? temp/wdi-wp15-regenerated/post-import-verification.txt
+===== FETCH REMOTE =====
+===== BRANCH DIVERGENCE =====
+2	37
+===== COMMITS TO RECONCILE =====
+< a770648 (HEAD -> work/compiler-hardening) temp updated
+> 83429f9 (origin/work/compiler-hardening) docs: add field-15 candidate and review package steps
+> 3107028 docs: document field-15 crosswalk and scoped review tooling
+> f850529 fix: correct WEO review package output argument
+> 54f8b01 test: cover field-scoped WEO review packages
+> 9d4e4d9 feat: support field-scoped WEO review packages
+> 5c4a02b test: enforce IMF crosswalk fingerprint dependency
+> 0ec7848 test: reject unsupported IMF field filters
+> a03cbff fix: reject unsupported IMF candidate field filters
+> 29a9f2c test: pass crosswalk through all importer scenarios
+> cd2a9ae test: fix importer fixture crosswalk arguments
+> bade679 test: cover fingerprinted IMF crosswalk in importer package
+> 1e746ab fix: validate field scope in IMF WEO candidate
+> a53e65d style: normalize IMF candidate builder imports
+> 5375069 test: correct crosswalk checksum assertion
+> 7d412e8 docs: record approved WBG crosswalk for field 15
+> 8f9ffb3 docs: record owner approval of IMF WBG crosswalk
+> 14f04a5 test: cover IMF WBG crosswalk and field 15 candidate filter
+> ef49e16 feat: fingerprint IMF WEO source crosswalk in approvals
+> a080279 feat: support explicit IMF crosswalk and field-scoped candidates
+> 473acae data: add owner-approved IMF WEO WBG crosswalk
+> bcbe56e docs: update field 15 WBG evidence and owner gate
+> 24aa5c6 docs: record IMF WBG identity evidence for WP1.5 field 15
+> 3904777 Place field 15 audit after workflow contract section
+> dece9e8 Update WP1.5 plan with field 15 identity audit findings
+> a31a2bd Document WP1.5 field 15 reconciliation and identity schema audit
+< bc39a0f temp updated
+> 121e782 Require sequential field closure across both databases
+> 5f607d7 Define field-by-field WP1.5 completion gates
+> 117ac27 Update WP1.5 verified application status
+> bc637fd Update WP1.5 verified application status
+> 5cd16f2 Record verified WP1.5 WDI application
+> d2cb1a1 Record verified WP1.5 WDI application
+> 150ac1c Record verified WP1.5 WDI application
+> b59180e Record verified WP1.5 WDI application
+> 1a4f981 Document verified WP1.5 WDI application
+> 4e23d55 Document confirmed approval audit actor
+> ffe1bab docs: correct approval actor lookup guidance
+> 792c9af docs: record repository approval actor identity
+===== LOCAL COMMIT DETAILS =====
+commit a770648c002f9144aaefcb58eabdb9fceb16a398
+Author:     hmnf-home <home.hmnf@gmail.com>
+AuthorDate: Wed Nov 25 17:44:21 2026 +0330
+Commit:     hmnf-home <home.hmnf@gmail.com>
+CommitDate: Wed Nov 25 17:44:21 2026 +0330
+
+    temp updated
+
+ temp/temp.txt | 1013 +++------------------------------------------------------
+ 1 file changed, 51 insertions(+), 962 deletions(-)
+===== TEMP FILE CHANGE =====
+diff --git a/temp/temp.txt b/temp/temp.txt
+index c9679b4..a5e92dc 100644
+--- a/temp/temp.txt
++++ b/temp/temp.txt
+@@ -1,962 +1,51 @@
+-{
+-  "source_files": {
+-    "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv": {
+-      "exists": true,
+-      "bytes": 26692032,
+-      "sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d"
+-    },
+-    "raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf": {
+-      "exists": true,
+-      "bytes": 985701,
+-      "sha256": "cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a"
+-    }
+-  },
+-  "field_15_semantic_matrix": {
+-    "headers": [
+-      "game_id",
+-      "country_name",
+-      "source_lookup_code",
+-      "identity_record_status",
+-      "iso_assignment_status",
+-      "identity_mapping_status",
+-      "field_id",
+-      "imf_indicator",
+-      "wdi_indicator",
+-      "year",
+-      "coverage_status",
+-      "imf_observation_present",
+-      "wdi_observation_present",
+-      "imf_value_canonical_unit",
+-      "wdi_value_canonical_unit",
+-      "wdi_observation_status",
+-      "wdi_status_classification",
+-      "imf_status_hint",
+-      "imf_latest_actual_annual_data",
+-      "imf_reporting_year_months",
+-      "imf_reporting_period_classification",
+-      "signed_difference",
+-      "absolute_difference",
+-      "relative_difference_percent",
+-      "semantic_status",
+-      "year_evidence_scope",
+-      "year_evidence_note",
+-      "identity_gate",
+-      "concept_disposition",
+-      "period_disposition",
+-      "methodology_disposition",
+-      "imf_observation_status",
+-      "country_case_id",
+-      "country_case_disposition",
+-      "field_gate",
+-      "evidence_documents",
+-      "semantic_disposition"
+-    ],
+-    "row_count": 2662,
+-    "distributions": {
+-      "identity_mapping_status:mapped_review_required": 2662,
+-      "identity_gate:identity_review_required": 2662,
+-      "coverage_status:both_sources_present": 2087,
+-      "imf_status_hint:actual_per_weo_metadata": 1872,
+-      "imf_observation_status:actual_per_weo_metadata": 1872,
+-      "semantic_disposition:diagnostic_review_required_not_approved": 2662,
+-      "field_gate:reconcile_national_accounts_vintage_and_usd_conversion": 2662,
+-      "coverage_status:imf_only": 52,
+-      "imf_status_hint:after_latest_actual": 58,
+-      "imf_observation_status:after_latest_actual": 58,
+-      "coverage_status:neither_source_present": 355,
+-      "imf_status_hint:missing": 523,
+-      "imf_observation_status:missing": 523,
+-      "imf_status_hint:status_unclassified": 209,
+-      "imf_observation_status:status_unclassified": 209,
+-      "coverage_status:wdi_only": 168
+-    },
+-    "samples": [
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2015",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "28123000000.0",
+-        "wdi_value_canonical_unit": "19973250000.0",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "8149750000.0",
+-        "absolute_difference": "8149750000.0",
+-        "relative_difference_percent": "40.80332444644713",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2016",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "29257000000.0",
+-        "wdi_value_canonical_unit": "20559250000.0",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "8697750000.0",
+-        "absolute_difference": "8697750000.0",
+-        "relative_difference_percent": "42.305774772912436",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2017",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "31018000000.0",
+-        "wdi_value_canonical_unit": "51035657370.5179",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "-20017657370.5179",
+-        "absolute_difference": "20017657370.5179",
+-        "relative_difference_percent": "-39.22288533522766",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2018",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "53914000000.0",
+-        "wdi_value_canonical_unit": "34141666666.6667",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "19772333333.3333",
+-        "absolute_difference": "19772333333.3333",
+-        "relative_difference_percent": "57.912618989504374",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2019",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "39776000000.0",
+-        "wdi_value_canonical_unit": "33360632553.3556",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "6415367446.644402",
+-        "absolute_difference": "6415367446.644402",
+-        "relative_difference_percent": "19.23035313069658",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved"
+-      }
+-    ]
+-  },
+-  "existing_review_register": {
+-    "headers": [
+-      "game_id",
+-      "country_name",
+-      "source_lookup_code",
+-      "identity_record_status",
+-      "iso_assignment_status",
+-      "identity_mapping_status",
+-      "field_id",
+-      "imf_indicator",
+-      "wdi_indicator",
+-      "year",
+-      "coverage_status",
+-      "imf_observation_present",
+-      "wdi_observation_present",
+-      "imf_value_canonical_unit",
+-      "wdi_value_canonical_unit",
+-      "wdi_observation_status",
+-      "wdi_status_classification",
+-      "imf_status_hint",
+-      "imf_latest_actual_annual_data",
+-      "imf_reporting_year_months",
+-      "imf_reporting_period_classification",
+-      "signed_difference",
+-      "absolute_difference",
+-      "relative_difference_percent",
+-      "semantic_status",
+-      "year_evidence_scope",
+-      "year_evidence_note",
+-      "identity_gate",
+-      "concept_disposition",
+-      "period_disposition",
+-      "methodology_disposition",
+-      "imf_observation_status",
+-      "country_case_id",
+-      "country_case_disposition",
+-      "field_gate",
+-      "evidence_documents",
+-      "semantic_disposition",
+-      "review_row_id",
+-      "review_decision",
+-      "review_note",
+-      "reviewer",
+-      "reviewed_at",
+-      "edge_case_ids",
+-      "review_decision_allowed_values"
+-    ],
+-    "row_count": 2662,
+-    "distributions": {
+-      "identity_mapping_status:mapped_review_required": 2662,
+-      "identity_gate:identity_review_required": 2662,
+-      "coverage_status:both_sources_present": 2087,
+-      "imf_status_hint:actual_per_weo_metadata": 1872,
+-      "imf_observation_status:actual_per_weo_metadata": 1872,
+-      "semantic_disposition:diagnostic_review_required_not_approved": 2662,
+-      "field_gate:reconcile_national_accounts_vintage_and_usd_conversion": 2662,
+-      "review_decision:pending": 2662,
+-      "coverage_status:imf_only": 52,
+-      "imf_status_hint:after_latest_actual": 58,
+-      "imf_observation_status:after_latest_actual": 58,
+-      "coverage_status:neither_source_present": 355,
+-      "imf_status_hint:missing": 523,
+-      "imf_observation_status:missing": 523,
+-      "imf_status_hint:status_unclassified": 209,
+-      "imf_observation_status:status_unclassified": 209,
+-      "coverage_status:wdi_only": 168
+-    },
+-    "samples": [
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2015",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "28123000000.0",
+-        "wdi_value_canonical_unit": "19973250000.0",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "8149750000.0",
+-        "absolute_difference": "8149750000.0",
+-        "relative_difference_percent": "40.80332444644713",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved",
+-        "review_row_id": "obs_b454ecad123c3523",
+-        "review_decision": "pending",
+-        "review_note": "",
+-        "reviewer": "",
+-        "reviewed_at": "",
+-        "edge_case_ids": "weo_13703512a2b97bc6;weo_367765c0de226d60;weo_cdd277c56d637ed3",
+-        "review_decision_allowed_values": "approve|exclude|hold_for_evidence|not_applicable"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2016",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "29257000000.0",
+-        "wdi_value_canonical_unit": "20559250000.0",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "8697750000.0",
+-        "absolute_difference": "8697750000.0",
+-        "relative_difference_percent": "42.305774772912436",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved",
+-        "review_row_id": "obs_a5a14da4ad3e2a6c",
+-        "review_decision": "pending",
+-        "review_note": "",
+-        "reviewer": "",
+-        "reviewed_at": "",
+-        "edge_case_ids": "weo_13703512a2b97bc6;weo_367765c0de226d60;weo_cdd277c56d637ed3",
+-        "review_decision_allowed_values": "approve|exclude|hold_for_evidence|not_applicable"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2017",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "31018000000.0",
+-        "wdi_value_canonical_unit": "51035657370.5179",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "-20017657370.5179",
+-        "absolute_difference": "20017657370.5179",
+-        "relative_difference_percent": "-39.22288533522766",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved",
+-        "review_row_id": "obs_ca57828678884d35",
+-        "review_decision": "pending",
+-        "review_note": "",
+-        "reviewer": "",
+-        "reviewed_at": "",
+-        "edge_case_ids": "weo_13703512a2b97bc6;weo_367765c0de226d60;weo_cdd277c56d637ed3",
+-        "review_decision_allowed_values": "approve|exclude|hold_for_evidence|not_applicable"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2018",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "53914000000.0",
+-        "wdi_value_canonical_unit": "34141666666.6667",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "19772333333.3333",
+-        "absolute_difference": "19772333333.3333",
+-        "relative_difference_percent": "57.912618989504374",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved",
+-        "review_row_id": "obs_b31e173d8adf094d",
+-        "review_decision": "pending",
+-        "review_note": "",
+-        "reviewer": "",
+-        "reviewed_at": "",
+-        "edge_case_ids": "weo_13703512a2b97bc6;weo_367765c0de226d60;weo_cdd277c56d637ed3",
+-        "review_decision_allowed_values": "approve|exclude|hold_for_evidence|not_applicable"
+-      },
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "country_name": "Zimbabwe",
+-        "source_lookup_code": "ZWE",
+-        "identity_record_status": "proposed",
+-        "iso_assignment_status": "unverified",
+-        "identity_mapping_status": "mapped_review_required",
+-        "field_id": "15",
+-        "imf_indicator": "NGDPD",
+-        "wdi_indicator": "NY.GDP.MKTP.CD",
+-        "year": "2019",
+-        "coverage_status": "both_sources_present",
+-        "imf_observation_present": "True",
+-        "wdi_observation_present": "True",
+-        "imf_value_canonical_unit": "39776000000.0",
+-        "wdi_value_canonical_unit": "33360632553.3556",
+-        "wdi_observation_status": "wdi_actual_estimate_status_not_established",
+-        "wdi_status_classification": "not_classified_by_this_comparison",
+-        "imf_status_hint": "actual_per_weo_metadata",
+-        "imf_latest_actual_annual_data": "2025",
+-        "imf_reporting_year_months": "January/December",
+-        "imf_reporting_period_classification": "calendar_year",
+-        "signed_difference": "6415367446.644402",
+-        "absolute_difference": "6415367446.644402",
+-        "relative_difference_percent": "19.23035313069658",
+-        "semantic_status": "diagnostic_only_not_approved",
+-        "year_evidence_scope": "no_country_case_year_scope",
+-        "year_evidence_note": "No country-specific year scope is recorded.",
+-        "identity_gate": "identity_review_required",
+-        "concept_disposition": "qualified_comparability_nominal_gdp_current_usd",
+-        "period_disposition": "imf_calendar_year_metadata_wdi_annual_period_not_vintage_aligned",
+-        "methodology_disposition": "national_accounts_vintage_and_exchange_rate_conversion",
+-        "imf_observation_status": "actual_per_weo_metadata",
+-        "country_case_id": "no_specific_country_case_recorded",
+-        "country_case_disposition": "field_level_review_only_no_country_resolution",
+-        "field_gate": "reconcile_national_accounts_vintage_and_usd_conversion",
+-        "evidence_documents": "docs/data-sources/field-15-16-gdp-comparability-assessment.md",
+-        "semantic_disposition": "diagnostic_review_required_not_approved",
+-        "review_row_id": "obs_f37e32c63481fd7f",
+-        "review_decision": "pending",
+-        "review_note": "",
+-        "reviewer": "",
+-        "reviewed_at": "",
+-        "edge_case_ids": "weo_13703512a2b97bc6;weo_367765c0de226d60;weo_cdd277c56d637ed3",
+-        "review_decision_allowed_values": "approve|exclude|hold_for_evidence|not_applicable"
+-      }
+-    ]
+-  },
+-  "existing_edge_case_file": {
+-    "exists": true,
+-    "bytes": 1527024
+-  },
+-  "identity_registry": {
+-    "record_count": 242,
+-    "status_counts": {
+-      "proposed": 242
+-    },
+-    "iso_assignment_counts": {
+-      "unverified": 242
+-    },
+-    "entity_type_counts": {
+-      "unreviewed": 242
+-    },
+-    "sample": [
+-      {
+-        "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "ZWE",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "ZWE",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Zimbabwe",
+-        "entity_type": "unreviewed"
+-      },
+-      {
+-        "game_id": "tc_e75bc9ac62fa443c90b5529778f3b1af",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "ZMB",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "ZMB",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Zambia",
+-        "entity_type": "unreviewed"
+-      },
+-      {
+-        "game_id": "tc_e32ec835b247449084d1b535ebccf7f1",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "YEM",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "YEM",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Yemen",
+-        "entity_type": "unreviewed"
+-      },
+-      {
+-        "game_id": "tc_e65eabf3cd054585a43347bdfea6201b",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "VNM",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "VNM",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Vietnam",
+-        "entity_type": "unreviewed"
+-      },
+-      {
+-        "game_id": "tc_1aa00cb7ebb34cdca928353a58ff5b12",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "VEN",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "VEN",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Venezuela",
+-        "entity_type": "unreviewed"
+-      },
+-      {
+-        "game_id": "tc_a8a10a8bdf13428593d1b0ab46990697",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "VAT",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "VAT",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Vatican",
+-        "entity_type": "unreviewed"
+-      },
+-      {
+-        "game_id": "tc_43c4be0a76ca43a2bb7e634de5a1f4f4",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "VUT",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "VUT",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Vanuatu",
+-        "entity_type": "unreviewed"
+-      },
+-      {
+-        "game_id": "tc_5d951c36a4ad4471ae9b9037fe338d70",
+-        "source": {
+-          "dataset": "natural_earth_admin_0",
+-          "current_source_id": "UZB",
+-          "previous_source_ids": []
+-        },
+-        "status": "proposed",
+-        "iso": {
+-          "alpha2": null,
+-          "alpha3": "UZB",
+-          "assignment_status": "unverified"
+-        },
+-        "name": "Uzbekistan",
+-        "entity_type": "unreviewed"
+-      }
+-    ]
+-  },
+-  "imf_field_15_source": {
+-    "headers": [
+-      "DATASET",
+-      "SERIES_CODE",
+-      "OBS_MEASURE",
+-      "COUNTRY",
+-      "INDICATOR",
+-      "FREQUENCY",
+-      "SCALE",
+-      "DECIMALS_DISPLAYED",
+-      "FUNCTIONAL_CAT",
+-      "INT_ACC_ITEM",
+-      "NA_STO",
+-      "GFS_STO",
+-      "COICOP_1999",
+-      "TRADE_FLOW",
+-      "COMMODITY",
+-      "SOC_CONCEPTS",
+-      "SECTOR",
+-      "ACCOUNTING_ENTRY",
+-      "INDEX_TYPE",
+-      "PRICES",
+-      "STATISTICAL_MEASURES",
+-      "EXRATE",
+-      "TRANSFORMATION",
+-      "UNIT",
+-      "REPORTING_PERIOD_TYPE",
+-      "OVERLAP",
+-      "COUNTRY_UPDATE_DATE",
+-      "DOI",
+-      "FULL_DESCRIPTION",
+-      "AUTHOR",
+-      "PUBLISHER",
+-      "DEPARTMENT",
+-      "CONTACT_POINT",
+-      "TOPIC",
+-      "TOPIC_DATASET",
+-      "KEYWORDS",
+-      "KEYWORDS_DATASET",
+-      "LANGUAGE",
+-      "PUBLICATION_DATE",
+-      "UPDATE_DATE",
+-      "METHODOLOGY",
+-      "METHODOLOGY_NOTES",
+-      "ACCESS_SHARING_LEVEL",
+-      "ACCESS_SHARING_NOTES",
+-      "SECURITY_CLASSIFICATION",
+-      "SHORT_SOURCE_CITATION",
+-      "FULL_SOURCE_CITATION",
+-      "LICENSE",
+-      "SUGGESTED_CITATION",
+-      "KEY_INDICATOR",
+-      "SERIES_NAME",
+-      "LATEST_ACTUAL_ANNUAL_DATA",
+-      "HISTORICAL_DATA_SOURCE",
+-      "BASE_YEAR",
+-      "START_END_MONTHS_OF_REPORTING_YEAR",
+-      "CHAIN_WEIGHTED",
+-      "BASIS_OF_PROJECTIONS",
+-      "VALUATION",
+-      "PRICES_SECTOR_HARMONIZED_PRICES",
+-      "LABOR_SECTOR_EMPLOYMENT_TYPE",
+-      "FISCAL_SECTOR_GENERAL_GOVERNMENT_COMPOSITION",
+-      "FISCAL_SECTOR_VALUATION_OF_DEBT",
+-      "FISCAL_SECTOR_INSTRUMENTS_INCLUDED_IN_GROSS_AND_NET_DEBT",
+-      "TRADE_SECTOR_OIL_COVERAGE",
+-      "PRIMARY_DOMESTIC_CURRENCY",
+-      "1980",
+-      "1981",
+-      "1982",
+-      "1983",
+-      "1984",
+-      "1985",
+-      "1986",
+-      "1987",
+-      "1988",
+-      "1989",
+-      "1990",
+-      "1991",
+-      "1992",
+-      "1993",
+-      "1994",
+-      "1995",
+-      "1996",
+-      "1997",
+-      "1998",
+-      "1999",
+-      "2000",
+-      "2001",
+-      "2002",
+-      "2003",
+-      "2004",
+-      "2005",
+-      "2006",
+-      "2007",
+-      "2008",
+-      "2009",
+-      "2010",
+-      "2011",
+-      "2012",
+-      "2013",
+-      "2014",
+-      "2015",
+-      "2016",
+-      "2017",
+-      "2018",
+-      "2019",
+-      "2020",
+-      "2021",
+-      "2022",
+-      "2023",
+-      "2024",
+-      "2025",
+-      "2026",
+-      "2027",
+-      "2028",
+-      "2029",
+-      "2030",
+-      "2031"
+-    ],
+-    "indicator_column": null,
+-    "ngdpd_row_count": 0,
+-    "country_code_counts_top": [],
+-    "units": {},
+-    "scales": {},
+-    "samples": []
+-  },
+-  "project_database": {
+-    "path": "data/project/project_data.sqlite",
+-    "exists": true,
+-    "integrity_check": "ok",
+-    "foreign_key_violations": [],
+-    "relevant_tables": {
+-      "acquisition_artifacts": {
+-        "columns": [
+-          "artifact_id",
+-          "acquisition_id",
+-          "artifact_role",
+-          "relative_path",
+-          "sha256",
+-          "byte_count",
+-          "media_type",
+-          "retrieval_url",
+-          "metadata_json",
+-          "created_at"
+-        ],
+-        "row_count": 62,
+-        "acquisition_5": [
+-          {
+-            "artifact_id": 8,
+-            "acquisition_id": 5,
+-            "artifact_role": "dataset",
+-            "relative_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+-            "sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+-            "byte_count": 26692032,
+-            "media_type": "text/csv",
+-            "retrieval_url": "https://data.imf.org/datasets/WEO",
+-            "metadata_json": "{\"artifact_label\":\"csv\",\"manual_acquisition_date\":\"2026-11-02\",\"manual_acquisition_date_precision\":\"day\",\"manual_record\":\"docs/data-sources/imf-weo-october-2026-manual-acquisition.md\",\"provider_dataset_version\":\"IMF.RES_WEO_9.0.0\",\"provider_release\":\"October 2026\",\"recorded_byte_count\":26692032,\"recorded_sha256\":\"a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d\",\"retrieval_method\":\"manual portal export\",\"retrieval_url_role\":\"dataset_page\"}",
+-            "created_at": "2026-11-05T10:19:36Z"
+-          },
+-          {
+-            "artifact_id": 9,
+-            "acquisition_id": 5,
+-            "artifact_role": "supporting_document",
+-            "relative_path": "raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf",
+-            "sha256": "cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a",
+-            "byte_count": 985701,
+-            "media_type": "application/pdf",
+-            "retrieval_url": "https://data.imf.org/datasets/WEO",
+-            "metadata_json": "{\"artifact_label\":\"appendix\",\"manual_acquisition_date\":\"2026-11-02\",\"manual_acquisition_date_precision\":\"day\",\"manual_record\":\"docs/data-sources/imf-weo-october-2026-manual-acquisition.md\",\"provider_dataset_version\":\"IMF.RES_WEO_9.0.0\",\"provider_release\":\"October 2026\",\"recorded_byte_count\":985701,\"recorded_sha256\":\"cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a\",\"retrieval_method\":\"manual portal export\",\"retrieval_url_role\":\"dataset_page\"}",
+-            "created_at": "2026-11-05T10:19:36Z"
+-          }
+-        ]
+-      },
+-      "acquisition_streams": {
+-        "columns": [
+-          "stream_id",
+-          "dataset_id",
+-          "stream_key",
+-          "name",
+-          "acquisition_mode",
+-          "validation_contract_json",
+-          "retention_limit",
+-          "is_active",
+-          "created_at",
+-          "updated_at"
+-        ],
+-        "row_count": 15
+-      },
+-      "acquisitions": {
+-        "columns": [
+-          "acquisition_id",
+-          "stream_id",
+-          "provider_release_id",
+-          "acquisition_year",
+-          "acquired_at",
+-          "provider_published_at",
+-          "status",
+-          "acquisition_note",
+-          "metadata_json",
+-          "created_at",
+-          "updated_at",
+-          "acquisition_event_key",
+-          "manifest_sha256",
+-          "integrity_status",
+-          "evidence_json"
+-        ],
+-        "row_count": 16,
+-        "acquisition_5": [
+-          {
+-            "acquisition_id": 5,
+-            "stream_id": 3,
+-            "provider_release_id": "october_2026",
+-            "acquisition_year": 2026,
+-            "acquired_at": "2026-11-02",
+-            "provider_published_at": "2026-10-13",
+-            "status": "acquired",
+-            "acquisition_note": "Manual October 2026 WEO bundle; date precision is one calendar day.",
+-            "metadata_json": "{\"acquisition_date_precision\":\"day\",\"manual_record_path\":\"docs/data-sources/imf-weo-october-2026-manual-acquisition.md\",\"manual_record_sha256\":\"694fdd5211e540d2087f99fe71223472a1d94df421880c405307217c2ebc4422\",\"provider_dataset_version\":\"IMF.RES_WEO_9.0.0\"}",
+-            "created_at": "2026-11-05T10:19:36Z",
+-            "updated_at": "2026-11-05T10:19:36Z",
+-            "acquisition_event_key": "manual:october_2026:2026-11-02",
+-            "manifest_sha256": null,
+-            "integrity_status": "verified",
+-            "evidence_json": "{\"acquisition_date\":\"2026-11-02\",\"acquisition_date_precision\":\"day\",\"artifacts\":[{\"byte_count\":26692032,\"media_type\":\"text/csv\",\"metadata\":{\"artifact_label\":\"csv\",\"manual_acquisition_date\":\"2026-11-02\",\"manual_acquisition_date_precision\":\"day\",\"manual_record\":\"docs/data-sources/imf-weo-october-2026-manual-acquisition.md\",\"provider_dataset_version\":\"IMF.RES_WEO_9.0.0\",\"provider_release\":\"October 2026\",\"recorded_byte_count\":26692032,\"recorded_sha256\":\"a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d\",\"retrieval_method\":\"manual portal export\",\"retrieval_url_role\":\"dataset_page\"},\"path\":\"raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv\",\"retrieval_url\":\"https://data.imf.org/datasets/WEO\",\"role\":\"dataset\",\"sha256\":\"a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d\"},{\"byte_count\":985701,\"media_type\":\"application/pdf\",\"metadata\":{\"artifact_label\":\"appendix\",\"manual_acquisition_date\":\"2026-11-02\",\"manual_acquisition_date_precision\":\"day\",\"manual_record\":\"docs/data-sources/imf-weo-october-2026-manual-acquisition.md\",\"provider_dataset_version\":\"IMF.RES_WEO_9.0.0\",\"provider_release\":\"October 2026\",\"recorded_byte_count\":985701,\"recorded_sha256\":\"cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a\",\"retrieval_method\":\"manual portal export\",\"retrieval_url_role\":\"dataset_page\"},\"path\":\"raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf\",\"retrieval_url\":\"https://data.imf.org/datasets/WEO\",\"role\":\"supporting_document\",\"sha256\":\"cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a\"}],\"formal_manifest_present\":false,\"manual_record_path\":\"docs/data-sources/imf-weo-october-2026-manual-acquisition.md\",\"manual_record_sha256\":\"694fdd5211e540d2087f99fe71223472a1d94df421880c405307217c2ebc4422\",\"provider_dataset_version\":\"IMF.RES_WEO_9.0.0\",\"provider_published_at\":\"2026-10-13\",\"provider_release_label\":\"October 2026\",\"registration_method\":\"manual_bundle_record_v1\",\"source_page\":\"https://data.imf.org/datasets/WEO\",\"timestamp_limitation\":\"The manual record gives a download date but no exact acquisition time. The CSV filename timestamp is an export-generation timestamp, not an independently verified acquisition timestamp.\"}"
+-          }
+-        ]
+-      },
+-      "datasets": {
+-        "columns": [
+-          "dataset_id",
+-          "source_key",
+-          "dataset_key",
+-          "name",
+-          "description",
+-          "data_format",
+-          "frequency",
+-          "metadata_json",
+-          "created_at",
+-          "updated_at"
+-        ],
+-        "row_count": 17
+-      }
+-    }
+-  }
+-}
++===== LOCAL STATUS =====
++## work/compiler-hardening...origin/work/compiler-hardening [ahead 1, behind 12]
++ M data/canonical/town_country_asset.sqlite
++ M temp/temp.txt
++?? temp/wdi-wp15-ledger-records.txt
++?? temp/wdi-wp15-regenerated/import.txt
++?? temp/wdi-wp15-regenerated/post-import-verification.txt
++===== FETCH REMOTE =====
++From github-home:HomeHmnf/TownCountryAsset
++   121e782..83429f9  work/compiler-hardening -> origin/work/compiler-hardening
++===== BRANCH DIVERGENCE =====
++1	37
++===== COMMITS TO RECONCILE =====
++> 83429f9 docs: add field-15 candidate and review package steps
++> 3107028 docs: document field-15 crosswalk and scoped review tooling
++> f850529 fix: correct WEO review package output argument
++> 54f8b01 test: cover field-scoped WEO review packages
++> 9d4e4d9 feat: support field-scoped WEO review packages
++> 5c4a02b test: enforce IMF crosswalk fingerprint dependency
++> 0ec7848 test: reject unsupported IMF field filters
++> a03cbff fix: reject unsupported IMF candidate field filters
++> 29a9f2c test: pass crosswalk through all importer scenarios
++> cd2a9ae test: fix importer fixture crosswalk arguments
++> bade679 test: cover fingerprinted IMF crosswalk in importer package
++> 1e746ab fix: validate field scope in IMF WEO candidate
++> a53e65d style: normalize IMF candidate builder imports
++> 5375069 test: correct crosswalk checksum assertion
++> 7d412e8 docs: record approved WBG crosswalk for field 15
++> 8f9ffb3 docs: record owner approval of IMF WBG crosswalk
++> 14f04a5 test: cover IMF WBG crosswalk and field 15 candidate filter
++> ef49e16 feat: fingerprint IMF WEO source crosswalk in approvals
++> a080279 feat: support explicit IMF crosswalk and field-scoped candidates
++> 473acae data: add owner-approved IMF WEO WBG crosswalk
++> bcbe56e docs: update field 15 WBG evidence and owner gate
++> 24aa5c6 docs: record IMF WBG identity evidence for WP1.5 field 15
++> 3904777 Place field 15 audit after workflow contract section
++> dece9e8 Update WP1.5 plan with field 15 identity audit findings
++> a31a2bd Document WP1.5 field 15 reconciliation and identity schema audit
++< bc39a0f temp updated
++> 121e782 Require sequential field closure across both databases
++> 5f607d7 Define field-by-field WP1.5 completion gates
++> 117ac27 Update WP1.5 verified application status
++> bc637fd Update WP1.5 verified application status
++> 5cd16f2 Record verified WP1.5 WDI application
++> d2cb1a1 Record verified WP1.5 WDI application
++> 150ac1c Record verified WP1.5 WDI application
++> b59180e Record verified WP1.5 WDI application
++> 1a4f981 Document verified WP1.5 WDI application
++> 4e23d55 Document confirmed approval audit actor
++> ffe1bab docs: correct approval actor lookup guidance
++> 792c9af docs: record repository approval actor identity
+===== REMOTE HEAD =====
+83429f9 docs: add field-15 candidate and review package steps

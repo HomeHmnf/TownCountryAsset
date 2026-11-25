@@ -1,0 +1,12 @@
+{
+  "dataset": "world_bank_wdi",
+  "release": "api_snapshot_20261121T074357472382Z",
+  "import_id": 4,
+  "observations": 561,
+  "scalar_observations": 561,
+  "structured_observations": 0,
+  "crosswalk_mappings": 187,
+  "integrity": "ok",
+  "foreign_keys": "ok",
+  "idempotent": false
+}

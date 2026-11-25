@@ -1,0 +1,42 @@
+
+===== wp1-5-wdi-20261125 =====
+{
+  "approval_id": "wp1-5-wdi-20261125",
+  "domain": "wp1_5_statistics",
+  "artifact_sha256": "ac214a957b2166334ccfbecd8c4516c82ecf342f4c79ec0d9a9f37eaa90c5eb5",
+  "status": "rejected",
+  "approved_by": null,
+  "decision_note": "Superseded: original normalized observations contained invalid value_status=unspecified; regenerated candidate validates with all 561 statuses unclassified. No statistics imported.",
+  "applied_at": null
+}
+Events:
+{
+  "event_type": "proposed",
+  "actor": null,
+  "details_json": "{\"artifact_sha256\":\"ac214a957b2166334ccfbecd8c4516c82ecf342f4c79ec0d9a9f37eaa90c5eb5\"}",
+  "event_at": "2026-11-25T08:23:38Z"
+}
+{
+  "event_type": "rejected",
+  "actor": "YOUR_GITHUB_USERNAME",
+  "details_json": "{\"note\":\"Superseded: original normalized observations contained invalid value_status=unspecified; regenerated candidate validates with all 561 statuses unclassified. No statistics imported.\"}",
+  "event_at": "2026-11-25T08:30:34Z"
+}
+
+===== wp1-5-wdi-20261125-regenerated =====
+{
+  "approval_id": "wp1-5-wdi-20261125-regenerated",
+  "domain": "wp1_5_statistics",
+  "artifact_sha256": "86196b1cdb1783c00e6d391d11d5314cf5c50ad4351b1664f24fa65735349c5b",
+  "status": "pending",
+  "approved_by": null,
+  "decision_note": null,
+  "applied_at": null
+}
+Events:
+{
+  "event_type": "proposed",
+  "actor": null,
+  "details_json": "{\"artifact_sha256\":\"86196b1cdb1783c00e6d391d11d5314cf5c50ad4351b1664f24fa65735349c5b\"}",
+  "event_at": "2026-11-25T08:30:49Z"
+}

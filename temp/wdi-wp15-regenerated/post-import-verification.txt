@@ -1,0 +1,93 @@
+{
+  "integrity_check": "ok",
+  "foreign_key_violations": [],
+  "approval": {
+    "approval_id": "wp1-5-wdi-20261125-regenerated",
+    "domain": "wp1_5_statistics",
+    "artifact_sha256": "86196b1cdb1783c00e6d391d11d5314cf5c50ad4351b1664f24fa65735349c5b",
+    "status": "applied",
+    "approved_by": "project-owner",
+    "approved_at": "2026-11-25T12:56:38Z",
+    "applied_at": "2026-11-25T12:57:35Z",
+    "application_id": "wp1-5:world_bank_wdi:api_snapshot_20261121T074357472382Z:7196c4bf58e6"
+  },
+  "approval_events": [
+    {
+      "event_type": "proposed",
+      "event_at": "2026-11-25T08:30:49Z",
+      "actor": null,
+      "details_json": "{\"artifact_sha256\":\"86196b1cdb1783c00e6d391d11d5314cf5c50ad4351b1664f24fa65735349c5b\"}"
+    },
+    {
+      "event_type": "approved",
+      "event_at": "2026-11-25T12:56:38Z",
+      "actor": "project-owner",
+      "details_json": "{\"note\":\"Approved regenerated WP1.5 World Bank WDI candidate after successful validation of 561 observations and 187 crosswalk mappings. Exact artifact SHA256: 86196b1cdb1783c00e6d391d11d5314cf5c50ad4351b1664f24fa65735349c5b.\"}"
+    },
+    {
+      "event_type": "applied",
+      "event_at": "2026-11-25T12:57:35Z",
+      "actor": null,
+      "details_json": "{\"application_id\":\"wp1-5:world_bank_wdi:api_snapshot_20261121T074357472382Z:7196c4bf58e6\",\"idempotent\":false,\"import_id\":4,\"observations\":561,\"scalar_observations\":561,\"structured_observations\":0}"
+    }
+  ],
+  "relevant_tables": {
+    "country_sources": {
+      "columns": [
+        "game_id",
+        "dataset",
+        "source_id",
+        "is_current",
+        "import_id"
+      ],
+      "row_count": 628,
+      "import_id_4_count": 187
+    },
+    "current_statistics": {
+      "columns": [
+        "statistic_id",
+        "game_id",
+        "statistic_key",
+        "value",
+        "unit",
+        "observed_at",
+        "observation_period",
+        "value_status",
+        "source_reference",
+        "source_version",
+        "methodology",
+        "retrieved_at",
+        "import_id"
+      ],
+      "row_count": 1357,
+      "import_id_4_count": 561
+    },
+    "dataset_imports": {
+      "columns": [
+        "import_id",
+        "dataset",
+        "source_version",
+        "source_url",
+        "retrieval_date",
+        "sha256",
+        "attribution",
+        "license",
+        "import_status",
+        "imported_at"
+      ],
+      "row_count": 4,
+      "import_id_4_count": 1
+    },
+    "import_runs": {
+      "columns": [
+        "run_id",
+        "started_at",
+        "completed_at",
+        "status",
+        "source_sha256",
+        "error_message"
+      ],
+      "row_count": 0
+    }
+  }
+}

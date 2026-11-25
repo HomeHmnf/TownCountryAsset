@@ -155,7 +155,8 @@ def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
         actor="reviewer", note="Reviewed exact same WEO candidate", database_path=database)
     replay = importer.apply_application(candidate, second["approval_id"],
         database_path=database, source_path=source, identity_path=identity,
-        migration_path=migration, acquisition_record_path=acquisition)
+        crosswalk_path=crosswalk, migration_path=migration,
+        acquisition_record_path=acquisition)
     assert replay["inserted"] == 0
     assert replay["unchanged"] == 1
 

@@ -1,31 +1,29 @@
-===== CANDIDATE REVALIDATION =====
-{
-  "assessment": "wp1_5_statistics_import_dry_run",
-  "source_key": "world_bank_wdi",
-  "dataset": "world_bank_wdi_wp1_5_area",
-  "release": "api_snapshot_20261121T074357472382Z",
-  "source_sha256": "7196c4bf58e63a75c4576fef063b0fd96cba99c118f9c112dadc4afbbd2a0476",
-  "observations": 561,
-  "crosswalk_mappings": 187,
-  "field_counts": {
-    "3": 187,
-    "33": 187,
-    "34": 187
-  },
-  "application_artifact_sha256": "8300f23d1359ded5b48a53d56ada47ee902a14af673563576ecc81f961ede168"
-}
+......F............                                                      [100%]
+=================================== FAILURES ===================================
+______________ test_imf_crosswalk_rejects_game_id_not_in_registry ______________
 
-===== CANONICAL DATABASE READ-ONLY INSPECTION =====
-journal_mode: wal
-integrity_check: ['ok']
-foreign_key_check: []
-current_schema_version: 9
-latest_repository_schema_version: 9
-canonical_country_count: 242
-matching_dataset_imports: []
-existing_wdi_crosswalk: {'mappings': 0, 'distinct_source_ids': 0, 'current_mappings': None}
-existing_target_statistics: []
-existing_wp1_5_approvals: [{'approval_id': 'un-wpp-2026-11-01', 'status': 'applied', 'artifact_sha256': '000ec80bae30c890f1d4487e56908b809434b14c6fef7b477d6a29b655fdce24'}, {'approval_id': 'wp1-5-wdi-20261124', 'status': 'approved', 'artifact_sha256': 'a026903b28f71e209fb3fbac58c645afc83d1ec96591c9a85b1ec4a321c22c23'}, {'approval_id': 'wp1-5-wdi-20261124-v2', 'status': 'approved', 'artifact_sha256': '6b57395cde84422079532df26d88e8d3311168b506b777cac95447f1fcf352b6'}]
-SCHEMA CURRENT
+tmp_path = PosixPath('/tmp/pytest-of-hmnf/pytest-1/test_imf_crosswalk_rejects_gam0')
 
-PREFLIGHT COMPLETED
+    def test_imf_crosswalk_rejects_game_id_not_in_registry(tmp_path):
+        raw, identity = _inputs(tmp_path)
+        crosswalk = tmp_path / "imf_weo.json"
+        crosswalk.write_text(json.dumps({
+            "schema_version": 1,
+            "dataset": "world_economic_outlook",
+            "source_key": "imf_weo",
+            "mappings": [{
+                "game_id": "tc_" + "b" * 32,
+                "source_id": "WBG",
+                "match_method": "reviewed_manual"
+            }]
+        }), encoding="utf-8")
+>       with pytest.raises(CandidateError, match="canonical identity registry"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE CandidateError
+
+tests/test_imf_weo_historical_candidate.py:142: Failed
+=========================== short test summary info ============================
+FAILED tests/test_imf_weo_historical_candidate.py::test_imf_crosswalk_rejects_game_id_not_in_registry
+1 failed, 18 passed in 0.60s
+
+===== TEST EXIT STATUS: 1 =====

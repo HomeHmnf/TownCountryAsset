@@ -16,7 +16,10 @@ def _inputs(tmp_path: Path):
         "records": [
             {"game_id": "tc_" + "a" * 32,
              "source": {"current_source_id": "AAA"},
-             "iso": {"alpha3": "AAA", "assignment_status": "unverified"}}
+             "iso": {"alpha3": "AAA", "assignment_status": "unverified"}},
+            {"game_id": "tc_" + "b" * 32,
+             "source": {"current_source_id": "PSE"},
+             "iso": {"alpha3": "PSE", "assignment_status": "unverified"}}
         ]
     }), encoding="utf-8")
     raw = tmp_path / "weo.csv"
@@ -103,7 +106,7 @@ def test_explicit_imf_crosswalk_maps_wbg_and_field_filter_is_respected(tmp_path)
         "dataset": "world_economic_outlook",
         "source_key": "imf_weo",
         "mappings": [{
-            "game_id": "tc_" + "a" * 32,
+            "game_id": "tc_" + "b" * 32,
             "source_id": "WBG",
             "match_method": "reviewed_manual",
             "evidence_url": "https://example.org/imf-weo-appendix",
@@ -115,7 +118,7 @@ def test_explicit_imf_crosswalk_maps_wbg_and_field_filter_is_respected(tmp_path)
     )
     wbg = [row for row in observations if row["source_country_code"] == "WBG"]
     assert len(wbg) == 1
-    assert wbg[0]["game_id"] == "tc_" + "a" * 32
+    assert wbg[0]["game_id"] == "tc_" + "b" * 32
     assert wbg[0]["field_id"] == 15
     assert all(row["field_id"] == 15 for row in observations)
     assert any(row.get("source_country_code") == "G001" for row in exceptions)
