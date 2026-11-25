@@ -77,8 +77,14 @@ def _edge_case(
     }
 
 
-def build_package(input_path: Path) -> tuple[list[dict[str, str]], list[dict[str, str]], dict[str, Any]]:
+def build_package(input_path: Path, *, field_ids: set[int] | None = None) -> tuple[list[dict[str, str]], list[dict[str, str]], dict[str, Any]]:
     rows = _read_rows(input_path)
+    if field_ids is not None:
+        if not field_ids or any(field_id <= 0 for field_id in field_ids):
+            raise ReviewPackageError("field_ids must be a non-empty set of positive field IDs")
+        rows = [row for row in rows if int(row["field_id"]) in field_ids]
+        if not rows:
+            raise ReviewPackageError(f"No semantic review rows found for fields {sorted(field_ids)}")
     row_ids: set[str] = set()
     for row in rows:
         key = (row["game_id"], row["field_id"], row["year"])
@@ -149,6 +155,7 @@ def build_package(input_path: Path) -> tuple[list[dict[str, str]], list[dict[str
         "upstream_semantic_matrix_sha256": input_hash,
         "observation_row_count": len(rows),
         "distinct_project_identities": len({r["game_id"] for r in rows}),
+        "field_ids": sorted({int(r["field_id"]) for r in rows}),
         "field_counts": dict(sorted(Counter(r["field_id"] for r in rows).items(), key=lambda x: int(x[0]))),
         "review_decision_counts": {"pending": len(rows)},
         "edge_case_count": len(edge_cases),
@@ -220,10 +227,11 @@ def write_package(rows: list[dict[str, str]], cases: list[dict[str, str]],
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True, help="Stage 4C semantic_disposition_matrix.csv")
-    parser.add_argument("--output-root", type=Path, default=DEFAULT_INPUT_ROOT)
+    parser.add_argument("--field-id", type=int, action="append", help="Restrict package to one or more WP1.5 field IDs")
+    parser.add_argument("--output-root, type=Path, default=DEFAULT_INPUT_ROOT)
     args = parser.parse_args(argv)
     try:
-        rows, cases, summary = build_package(args.input)
+        rows, cases, summary = build_package(args.input, field_ids=set(args.field_id) if args.field_id else None)
         target = write_package(rows, cases, summary, args.output_root)
     except (ReviewPackageError, OSError, csv.Error) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
