@@ -108,7 +108,7 @@ def normalize_snapshot(
     loaded = load_snapshot(manifest_path, repository_root=root)
     crosswalk = load_crosswalk(
         Path(crosswalk_path) if Path(crosswalk_path).is_absolute() else root / crosswalk_path,
-        expected_dataset=CROSSWALK_DATASET,
+        expected_dataset=SOURCE_KEY,
     )
     if crosswalk.source_key != SOURCE_KEY:
         raise AreaSnapshotError("Crosswalk source_key does not match the WDI provider")
