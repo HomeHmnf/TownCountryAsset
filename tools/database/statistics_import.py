@@ -417,7 +417,7 @@ def validate_wp1_5_dataset(
     except CrosswalkError as exc:
         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
     if crosswalk.dataset != source_key:
-        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
+        raise StatisticsImportError("Crosswalk dataset does not match source_key")
     if crosswalk.source_key != source_key:
         raise StatisticsImportError("Crosswalk source_key does not match source contract")
     crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
@@ -541,7 +541,7 @@ def import_wp1_5_dataset(
     except CrosswalkError as exc:
         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
     if crosswalk.dataset != source_key:
-        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
+        raise StatisticsImportError("Crosswalk dataset does not match source_key")
     if crosswalk.source_key != source_key:
         raise StatisticsImportError("Crosswalk source_key does not match source contract")
     crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
