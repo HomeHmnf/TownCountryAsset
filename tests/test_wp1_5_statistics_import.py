@@ -532,6 +532,53 @@ def test_additional_snapshot_inputs_are_checksum_validated(tmp_path):
 
 
 
+
+def test_imports_unclassified_populated_scalar_but_rejects_structured(tmp_path):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    result = run_import(
+        tmp_path, database, field_id=1, value=1234, status="unclassified",
+        release="2024-unclassified",
+    )
+    assert result["scalar_observations"] == 1
+    connection = sqlite3.connect(database)
+    assert connection.execute(
+        "SELECT value, value_status FROM current_statistics"
+    ).fetchone() == (1234.0, "unclassified")
+    connection.close()
+
+    with pytest.raises(StatisticsImportError, match="structured value requires"):
+        run_import(
+            tmp_path, database, field_id=12, value={"0-4": 100},
+            status="unclassified", release="2024-structured-unclassified",
+        )
+
+
+@pytest.mark.parametrize("changed_input", ["crosswalk", "registry"])
+def test_dry_run_rejects_crosswalk_or_registry_change_during_fingerprinting(
+    tmp_path, monkeypatch, changed_input
+):
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    original_builder = statistics_import.build_wp1_5_application_artifact
+
+    def build_then_mutate(**kwargs):
+        artifact = original_builder(**kwargs)
+        target = crosswalk if changed_input == "crosswalk" else tmp_path / "config" / "data_sources.json"
+        target.write_bytes(target.read_bytes() + b"\\n")
+        return artifact
+
+    monkeypatch.setattr(
+        statistics_import, "build_wp1_5_application_artifact", build_then_mutate
+    )
+    expected = "Source crosswalk changed" if changed_input == "crosswalk" else "Project source registry changed"
+    with pytest.raises(StatisticsImportError, match=expected):
+        statistics_import.validate_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
+        )
+
+
 def test_dry_run_validates_writes_no_database_and_returns_artifact(tmp_path):
     observations, crosswalk, manifest = setup_inputs(tmp_path)
     database = tmp_path / "must-not-be-created.sqlite"
