@@ -1,21 +1,31 @@
-REGISTER: reports/sources/imf-weo-historical-candidate/20261125T152006Z/field_15_exclusion_register.csv
-SERIES: 13
-POPULATED OBSERVATIONS: 665
-DISPOSITION COUNTS: {'excluded': 13}
-YEAR COUNTS:
-G001 World 52
-G110 Advanced Economies 52
-G119 G7 52
-G163 Euro Area (EA) 41
-G200 Emerging Market and Developing Economies 52
-G205 Latin America and the Caribbean (LAC) 52
-G400 Middle East and Central Asia 52
-G505 Emerging and Developing Asia 52
-G510 ASEAN-5 52
-G603 Sub-Saharan Africa (SSA) 52
-G903 Emerging and Developing Europe 52
-G998 European Union (EU) 52
-GX123 Other Advanced Economies (Advanced Economies excluding G7 and Euro Area countries) 52
-REGISTER BYTES: 5254
+===== MATRIX =====
+columns: ['game_id', 'country_name', 'source_lookup_code', 'identity_record_status', 'iso_assignment_status', 'identity_mapping_status', 'field_id', 'imf_indicator', 'wdi_indicator', 'year', 'coverage_status', 'imf_observation_present', 'wdi_observation_present', 'imf_value_canonical_unit', 'wdi_value_canonical_unit', 'wdi_observation_status', 'wdi_status_classification', 'imf_status_hint', 'imf_latest_actual_annual_data', 'imf_reporting_year_months', 'imf_reporting_period_classification', 'signed_difference', 'absolute_difference', 'relative_difference_percent', 'semantic_status', 'year_evidence_scope', 'year_evidence_note', 'identity_gate', 'concept_disposition', 'period_disposition', 'methodology_disposition', 'imf_observation_status', 'country_case_id', 'country_case_disposition', 'field_gate', 'evidence_documents', 'semantic_disposition']
+total_rows: 13310
+field_15_rows: 2662
+field_15_game_ids: 242
+field_15_years: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
+identity_gate: {'identity_review_required': 2662}
+semantic_disposition: {'diagnostic_review_required_not_approved': 2662}
+field_gate: {'reconcile_national_accounts_vintage_and_usd_conversion': 2662}
+country_case_disposition: {'field_level_review_only_no_country_resolution': 2629, 'dual_exchange_rate_and_conversion_factor_require_reconciliation': 11, 'rebased_national_accounts_support_woe_direction_but_vintage_alignment_open': 11, 'newer_2019_base_sna2008_accounts_require_vintage_alignment': 11}
 
-===== REGISTER EXIT STATUS: 0 =====
+===== CANDIDATE =====
+columns: ['game_id', 'source_country_code', 'source_country_name', 'indicator_code', 'field_id', 'observation_year', 'value', 'unit', 'scale', 'value_status', 'latest_actual_annual_data', 'reporting_year_months', 'source_reference', 'source_version', 'source_sha256', 'acquired_on', 'acquisition_time_precision']
+total_rows: 9361
+field_15_rows: 9361
+field_15_game_ids: 197
+field_15_years: []
+
+===== KEY RECONCILIATION =====
+candidate_unique_game_year_keys: 197
+matrix_unique_game_year_keys: 2662
+candidate_keys_missing_from_matrix: 197
+matrix_keys_not_in_candidate: 2662
+candidate_missing_examples: [('tc_05eaf88055cc4388b518332f2e7fc115', None), ('tc_0628271c897b49558f423321cbc48ce4', None), ('tc_06a09ff0e27b49e392ef2e88161023eb', None), ('tc_06d71df13c4f415fbf22a0147f19bc53', None), ('tc_0ce7eb254c32428c88601905c0df8e87', None), ('tc_0dc6216a94e34b44b27e42ed35fa6376', None), ('tc_0f4c47ec59434e46871845e474964499', None), ('tc_10dd5e9664664abf9eca33c250a74cdb', None), ('tc_11da440eb0704bd195fe0b11fa0890af', None), ('tc_12491d45eed544948b316c89f82a7ee7', None), ('tc_130ca81b84d04b058e9301121b2b7802', None), ('tc_13df99232f33400d9079316c041f066c', None), ('tc_155414257ec0498690f73c3595d85e7c', None), ('tc_168a848021b84cc6a6c3fc320012a176', None), ('tc_168ca96e60634f5d83f3f22ad2505e66', None), ('tc_16d6044d9abf4743821a6fb238942a22', None), ('tc_17137c4e4fcc4fa58e32c924f08efcda', None), ('tc_18c639798e4948899643d84aa2bce93c', None), ('tc_1aa00cb7ebb34cdca928353a58ff5b12', None), ('tc_1bd98a138f884dd4b4d9d1efbbf357b0', None), ('tc_1c4ff3f2a8f04b43b0c28e830a9403ad', None), ('tc_1d1d2c1274384efa82f9591e1c069aba', None), ('tc_1da2daf3a3d34a30b96100d643963f70', None), ('tc_1f3e0c90df4341f082ed90ecdd95fb10', None), ('tc_21a70a0fbf1b43c292783397ce218239', None)]
+matrix_extra_examples: [('tc_003dbd71493240f5bd22a52176868806', '2015'), ('tc_003dbd71493240f5bd22a52176868806', '2016'), ('tc_003dbd71493240f5bd22a52176868806', '2017'), ('tc_003dbd71493240f5bd22a52176868806', '2018'), ('tc_003dbd71493240f5bd22a52176868806', '2019'), ('tc_003dbd71493240f5bd22a52176868806', '2020'), ('tc_003dbd71493240f5bd22a52176868806', '2021'), ('tc_003dbd71493240f5bd22a52176868806', '2022'), ('tc_003dbd71493240f5bd22a52176868806', '2023'), ('tc_003dbd71493240f5bd22a52176868806', '2024'), ('tc_003dbd71493240f5bd22a52176868806', '2025'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2015'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2016'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2017'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2018'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2019'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2020'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2021'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2022'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2023'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2024'), ('tc_05eaf88055cc4388b518332f2e7fc115', '2025'), ('tc_0628271c897b49558f423321cbc48ce4', '2015'), ('tc_0628271c897b49558f423321cbc48ce4', '2016'), ('tc_0628271c897b49558f423321cbc48ce4', '2017')]
+
+===== WBG CHECK =====
+candidate_wbg_rows: 32
+candidate_wbg_game_ids: ['tc_50c420df8b2c4c6eaae47d795f9a1ea2']
+candidate_wbg_years: []
+matrix_contains_palestine_game_id: True
