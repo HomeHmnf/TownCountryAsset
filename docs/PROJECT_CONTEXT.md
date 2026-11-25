@@ -1,7 +1,7 @@
 # Project context — TownCountryAsset
 
 **Purpose:** Orientation and durable working context for developers and future ChatGPT sessions. This is a navigation and invariants document, not a replacement for the detailed architecture, feature, source-assessment or implementation records.
-**Last reviewed:** 2026-11-05.
+**Last reviewed:** 2026-11-25.
 
 ## Start here
 
@@ -72,12 +72,11 @@ Missing values must not be represented as zero. SQL NULL is explicit and must di
 
 Use the [data-source index](data-sources/README.md), provider assessments and [implementation logs](implementation/README.md) for exact evidence, reports, commands and validation outputs. This context guide intentionally avoids duplicating those details.
 
-
 ## Approval audit actor handling
 
-- Use the actor identifier explicitly supplied by the owner in project conversation history. Do not infer it from GitHub login, commit author/committer metadata, email, operating-system username or other external account labels.
-- Before any approval/rejection CLI action, search the available project conversation context for the owner's stated actor identifier. If it cannot be found, ask the owner; never substitute a placeholder.
-- Approval actor values are recorded in application event history. Verify the intended actor before executing a decision. If an incorrect actor was recorded, preserve the original event and document any correction as a separate audit event; do not silently rewrite history.
+- The owner-confirmed actor identifier for approval/rejection decisions is **`project-owner`**. Use this exact value for the CLI `--actor` argument; do not substitute a GitHub login, commit author/committer, email, operating-system username or placeholder.
+- Approval/rejection actor values are recorded in `database_application_events`. Verify the intended approval ID and decision before executing a decision.
+- If an incorrect actor was recorded, preserve the original event and document any correction as a separate audit event; do not silently rewrite history.
 
 ## Working and validation protocol
 
