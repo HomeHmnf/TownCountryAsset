@@ -94,6 +94,10 @@ Record and inspect:
 
 The owner runs local tests and database verification. Documentation must distinguish repository implementation from owner-verified execution; do not claim local validation without supplied output.
 
+## 7.1 Completed application reference — World Bank WDI
+
+The owner applied and independently verified the World Bank WDI WP1.5 candidate on 2026-11-25. The exact approval ID is `wp1-5-wdi-20261125-regenerated`; actor `project-owner`; candidate artifact SHA-256 `86196b1cdb1783c00e6d391d11d5314cf5c50ad4351b1664f24fa65735349c5b`. The application created import ID `4` and application ID `wp1-5:world_bank_wdi:api_snapshot_20261121T074357472382Z:7196c4bf58e6`, with 561 scalar observations and 187 explicit crosswalk mappings. The approval ledger records `proposed` → `approved` → `applied`; independent read-only verification confirmed 561 `current_statistics` rows and 187 `country_sources` rows for import ID 4, one `dataset_imports` row, SQLite integrity `ok`, and no foreign-key violations. The first application correctly reports `idempotent=false`. Full evidence is in [World Bank WDI WP1.5 application record](world-bank-wdi-wp1-5-application.md).
+
 ## 8. Applying the workflow to remaining WP1.5 fields
 
 The sequence above applies uniformly to all remaining fields and providers, not only IMF WEO.
