@@ -413,10 +413,10 @@ def validate_wp1_5_dataset(
 
     crosswalk_bytes = _capture_file(crosswalk_path, "source crosswalk")
     try:
-        crosswalk = load_crosswalk(crosswalk_path, expected_dataset=dataset)
+        crosswalk = load_crosswalk(crosswalk_path, expected_dataset=source_key)
     except CrosswalkError as exc:
         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
-    if crosswalk.dataset != dataset:
+    if crosswalk.dataset != source_key:
         raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
     if crosswalk.source_key != source_key:
         raise StatisticsImportError("Crosswalk source_key does not match source contract")
@@ -536,11 +536,11 @@ def import_wp1_5_dataset(
     try:
         crosswalk = load_crosswalk(
             crosswalk_path,
-            expected_dataset=dataset,
+            expected_dataset=source_key,
         )
     except CrosswalkError as exc:
         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
-    if crosswalk.dataset != dataset:
+    if crosswalk.dataset != source_key:
         raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
     if crosswalk.source_key != source_key:
         raise StatisticsImportError("Crosswalk source_key does not match source contract")
