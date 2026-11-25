@@ -78,3 +78,10 @@ The existing project UN M49 snapshot explicitly matched the registry display nam
 This makes that persistent identity a strong candidate for an IMF WBG crosswalk, but no direct IMF-to-M49 concordance is recorded. The owner must explicitly decide the mapping. Until then, all 32 values remain held for identity evidence: no aggregate exclusion, no inferred mapping, no country_sources write, no registry edit, and no Game DB write. The evidence and proposed target game_id must be included in the field-15 review register. Do not alter the PSE ISO verification state as a side effect.
 
 Field 15 remains open; fields 16 onward remain blocked.
+
+
+### Field 15 WBG crosswalk owner approval — 2026-11-25
+
+The project owner approved the exact IMF-specific mapping: `imf_weo / WBG` → `tc_50c420df8b2c4c6eaae47d795f9a1ea2` (Palestine registry identity). It is recorded in `data/manual/source_crosswalks/imf_weo.json`, with the IMF October 2026 appendix evidence and the existing reviewed UN M49 name-variant reconciliation. Scope is limited to field 15 (`NGDPD`) in the current sequential pass. This does not alter the identity registry or PSE verification status, nor authorize the other WEO fields.
+
+The candidate builder/importer will treat the crosswalk file as an exact hashed input. The field-15 candidate must contain the 32 WBG observations; the 13 aggregate series remain explicit non-country review exceptions. No DB write or approval has been performed.
