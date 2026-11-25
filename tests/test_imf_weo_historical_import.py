@@ -158,3 +158,11 @@ def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
         migration_path=migration, acquisition_record_path=acquisition)
     assert replay["inserted"] == 0
     assert replay["unchanged"] == 1
+
+
+def test_candidate_rejects_changed_crosswalk_checksum(tmp_path, monkeypatch):
+    candidate, source, identity, crosswalk, migration, acquisition = _package(tmp_path)
+    monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
+    crosswalk.write_text("changed", encoding="utf-8")
+    with pytest.raises(importer.WEOImportError, match="crosswalk checksum"):
+        importer._load_candidate(candidate, source, identity, crosswalk, migration, acquisition)
