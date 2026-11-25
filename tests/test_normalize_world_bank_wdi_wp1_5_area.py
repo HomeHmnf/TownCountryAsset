@@ -142,14 +142,13 @@ def test_normalize_snapshot_emits_561_rows_and_complete_provenance(tmp_path, mon
             "observations": observations,
         },
     )
-    monkeypatch.setattr(
-        normalizer,
-        "load_crosswalk",
-        lambda *args, **kwargs: SimpleNamespace(
-            source_key=normalizer.SOURCE_KEY,
-            mappings=mappings,
-        ),
-    )
+    crosswalk_load_options = {}
+
+    def fake_load_crosswalk(*args, **kwargs):
+        crosswalk_load_options.update(kwargs)
+        return SimpleNamespace(source_key=normalizer.SOURCE_KEY, mappings=mappings)
+
+    monkeypatch.setattr(normalizer, "load_crosswalk", fake_load_crosswalk)
 
     output = root / "normalized" / "observations.json"
     import_manifest = root / "normalized" / "manifest.json"
@@ -160,7 +159,7 @@ def test_normalize_snapshot_emits_561_rows_and_complete_provenance(tmp_path, mon
         import_manifest,
         repository_root=root,
     )
-    assert normalizer.SOURCE_KEY == "world_bank_wdi"
+    assert crosswalk_load_options["expected_dataset"] == "world_bank_wdi"
 
     normalized = json.loads(output.read_text(encoding="utf-8"))
     manifest = json.loads(import_manifest.read_text(encoding="utf-8"))
