@@ -1,29 +1,4 @@
-......F............                                                      [100%]
-=================================== FAILURES ===================================
-______________ test_imf_crosswalk_rejects_game_id_not_in_registry ______________
+...................                                                      [100%]
+19 passed in 0.38s
 
-tmp_path = PosixPath('/tmp/pytest-of-hmnf/pytest-1/test_imf_crosswalk_rejects_gam0')
-
-    def test_imf_crosswalk_rejects_game_id_not_in_registry(tmp_path):
-        raw, identity = _inputs(tmp_path)
-        crosswalk = tmp_path / "imf_weo.json"
-        crosswalk.write_text(json.dumps({
-            "schema_version": 1,
-            "dataset": "world_economic_outlook",
-            "source_key": "imf_weo",
-            "mappings": [{
-                "game_id": "tc_" + "b" * 32,
-                "source_id": "WBG",
-                "match_method": "reviewed_manual"
-            }]
-        }), encoding="utf-8")
->       with pytest.raises(CandidateError, match="canonical identity registry"):
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-E       Failed: DID NOT RAISE CandidateError
-
-tests/test_imf_weo_historical_candidate.py:142: Failed
-=========================== short test summary info ============================
-FAILED tests/test_imf_weo_historical_candidate.py::test_imf_crosswalk_rejects_game_id_not_in_registry
-1 failed, 18 passed in 0.60s
-
-===== TEST EXIT STATUS: 1 =====
+===== TEST EXIT STATUS: 0 =====

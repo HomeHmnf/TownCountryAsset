@@ -134,7 +134,7 @@ def test_imf_crosswalk_rejects_game_id_not_in_registry(tmp_path):
         "dataset": "world_economic_outlook",
         "source_key": "imf_weo",
         "mappings": [{
-            "game_id": "tc_" + "b" * 32,
+            "game_id": "tc_" + "c" * 32,
             "source_id": "WBG",
             "match_method": "reviewed_manual"
         }]
