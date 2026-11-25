@@ -458,3 +458,56 @@ source IDs exist in both datasets.
 ### UN WPP source-coverage exceptions
 
 The WPP crosswalk builder distinguishes an M49 identity match from WPP dataset coverage. If a valid M49 identifier is absent from **both** 2026 Medium Country/Area snapshots, the mapping is held in the crosswalk's `coverage_exceptions` with status `source_not_covered`; it is not added to `mappings`, and the build continues. If demographic and age-sex snapshots disagree about coverage, the build fails validation. No substitute identifier is inferred. This preserves the distinction between an identity that is unresolved and an identity that is valid but outside WPP's published country/area universe.
+
+
+## World Bank WDI WP1.5 area/density candidate adapter
+
+The immutable WDI area/density acquisition bundle is normalized by
+`tools/normalize_world_bank_wdi_wp1_5_area.py`. It consumes the captured
+eight-artifact API snapshot and the reviewed
+`world_bank_wdi_wp1_5_area` crosswalk. It emits 561 candidate observations
+(187 mapped entities × fields 3, 33 and 34), selecting the latest non-null
+observation independently for each indicator and entity. The three fields are
+population density (`EN.POP.DNST`), surface area (`AG.SRF.TOTL.K2`) and land
+area (`AG.LND.TOTL.K2`). Blank provider `obs_status` is retained as
+`unclassified`; nonblank status codes are rejected until an explicit canonical
+mapping is reviewed. The adapter does not change ISO identity, approve data,
+change source selection, or open either database.
+
+The normalizer writes the normalized observations and import manifest as a
+pair. It serializes and fsyncs temporary sibling files before publication,
+uses exclusive hard-link creation so existing outputs are not overwritten,
+and rolls back the first newly published file if publication of the second
+fails. This protects against ordinary write/publication failures; it is not a
+transaction spanning two files in the event of abrupt process or machine
+failure.
+
+Example candidate normalization (paths are specific to the captured snapshot):
+
+```fish
+uv run python -m tools.normalize_world_bank_wdi_wp1_5_area \
+  --manifest data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z.json \
+  --crosswalk data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json \
+  --observations reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/observations.json \
+  --import-manifest reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/import_manifest.json
+```
+
+Run the non-mutating normalized-dataset validator after normalization:
+
+```fish
+uv run python -m tools.validate_wp1_5_statistics_import \
+  --observations reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/observations.json \
+  --crosswalk data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json \
+  --manifest reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/import_manifest.json
+```
+
+The validator checks the 41-field WP1.5 contract, source registry, dataset
+identifier, crosswalk and every observation. It fingerprints the complete
+application input set, including the source registry, crosswalk, field
+contract, source-selection policy and raw/upstream provenance inputs. It
+rechecks the crosswalk and source registry after fingerprinting to detect
+concurrent changes. The importer applies the same checks before opening the
+canonical database. Validation creates no approval and writes no database.
+Candidate normalization and dry-run validation do not themselves authorize
+import; use the shared owner-controlled proposal, review, approval and
+application workflow.
