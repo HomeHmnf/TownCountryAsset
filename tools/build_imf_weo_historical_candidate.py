@@ -8,10 +8,10 @@ import json
 import math
 import sys
 from collections import Counter
-
-from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 from pathlib import Path
 from typing import Any
+
+from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv"
