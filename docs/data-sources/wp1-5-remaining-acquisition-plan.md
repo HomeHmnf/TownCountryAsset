@@ -61,3 +61,20 @@ This evidence does not approve field 15 or authorize a write. The field-15-only 
 ## Owner-run validation and evidence
 
 The owner runs local tests and database commands. Record exact commands, counts, approval IDs, artifact fingerprints, Project DB acquisition/artifact IDs, Game DB import/application IDs, integrity results and commit references only after receiving the output. Repository documentation or code changes alone do not establish successful local acquisition or database application.
+
+
+### Field 15 WBG identity evidence update — 2026-11-25
+
+The 32 unmatched nonblank WBG.NGDPD.A values (1994–2025) now have additional authoritative context. The official October 2026 IMF WEO Database Appendix:
+- lists West Bank and Gaza as an individual economy within Emerging and Developing Economies and Middle East and Central Asia (pages 6 and 8);
+- defines the WEO use of “country/economy” to include some separately maintained territorial statistical entities that are not states under international law (page 3);
+- identifies WBG as West Bank and Gaza in the country-data documentation, with Israeli new shekel, NSO historical data, latest actual annual data 2025, 2015 base year and SNA 2008 (page 14);
+- notes that 2022–23 data previously excluded pending methodological adjustments are included again, while projections for 2024–29 are excluded due to uncertainty (page 19). This note is not an observation-level status classifier.
+
+Official appendix: https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf
+
+The existing project UN M49 snapshot explicitly matched the registry display name Palestine to M49 formal name State of Palestine (M49 275, ISO PS/PSE) using a reviewed name variant; alpha-3 agrees. The matched registry record is game_id=tc_50c420df8b2c4c6eaae47d795f9a1ea2, Natural Earth source ID PSX. M49 snapshot provenance is in reports/database/town_country_asset/identity/m49-current/; the registry PSE status remains unverified.
+
+This makes that persistent identity a strong candidate for an IMF WBG crosswalk, but no direct IMF-to-M49 concordance is recorded. The owner must explicitly decide the mapping. Until then, all 32 values remain held for identity evidence: no aggregate exclusion, no inferred mapping, no country_sources write, no registry edit, and no Game DB write. The evidence and proposed target game_id must be included in the field-15 review register. Do not alter the PSE ISO verification state as a side effect.
+
+Field 15 remains open; fields 16 onward remain blocked.
