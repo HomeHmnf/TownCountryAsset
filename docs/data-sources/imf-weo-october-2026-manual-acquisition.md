@@ -108,3 +108,21 @@ Next, complete indicator-definition and unit verification, explicit country-code
 The comparison and targeted discrepancy investigation are now complete as read-only diagnostics. The owner ran the comparison test group (15 tests passed) and generated the 2015–2025 candidate matrix and matched-pair output. The targeted investigation selected 15 country/field groups and 165 observations from that comparison; it did not fetch original provider records or change any database/policy state.
 
 The consolidated findings and remaining semantic gates are recorded in [Stage 4 — IMF WEO semantic assessment](../implementation/data-store-separation-stage-4-imf-weo-semantic-assessment.md) and [the IMF WEO/WDI comparison record](imf-weo-wdi-comparison.md). The assessment is not an approval: all five existing IMF WEO priority assignments remain unchanged; the WDI comparison remains live-vintage and diagnostic; no semantic validation, approval, retention, release promotion or Game DB write has occurred.
+
+
+## Field 15 candidate and aggregate disposition update — 2026-11-25
+
+A field-15-only historical candidate was generated from the acquired October 2026 WEO CSV using the recorded source snapshot and owner-approved IMF crosswalk.
+
+Candidate directory:
+`reports/sources/imf-weo-historical-candidate/20261125T152006Z/`
+
+The candidate contains 9,361 finite numeric NGDPD observations across 197 distinct game identities, covering 1980–2031. Its source SHA-256 is `a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d`; its crosswalk SHA-256 is `df72a50e9fd37cbc05088a074367be05e3e067194b932997f7e7ec95589f91a9`. Candidate observation and exception hashes are recorded in `candidate.json`. The candidate builder reports that it did not write a database or create an approval.
+
+The 13 unmapped NGDPD series are IMF aggregates rather than individual country identities. The owner approved their explicit `excluded` disposition from country-level field 15 application. The durable register is `reports/sources/imf-weo-historical-candidate/20261125T152006Z/field_15_exclusion_register.csv`. It records all 13 series and accounts for 665 populated annual observations. Twelve series contain 52 populated years each; G163 (Euro Area) contains 41 populated years, 1991–2031.
+
+The exclusion rationale is that IMF regional, economic-group and global aggregates are outside the country-level game identity universe. Their source evidence is retained; their observations are not mapped to country identities or silently discarded.
+
+The 32 WBG observations are included separately through the owner-approved `imf_weo / WBG` field-15 crosswalk to the Palestine persistent game identity. This mapping remains scoped to field 15 and does not change the global identity registry or ISO verification state.
+
+This update records candidate construction and source-row disposition only. It does not constitute semantic approval, field approval, canonical application or release promotion. The field-15 review and guarded approval/application workflow remain mandatory.

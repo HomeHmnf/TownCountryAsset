@@ -108,3 +108,32 @@ uv run python -m tools.build_imf_weo_wdi_review_package --input reports/sources/
 ```
 
 Reconcile that package against the new candidate and crosswalk before entering review decisions. Field 15 remains open; fields 16 onward remain blocked.
+
+
+### Field 15 aggregate dispositions and candidate build — 2026-11-25
+
+The owner approved `excluded` for all 13 IMF aggregate and regional NGDPD series. The explicit register is:
+
+`reports/sources/imf-weo-historical-candidate/20261125T152006Z/field_15_exclusion_register.csv`
+
+It accounts for 665 populated annual source observations across 13 series. Twelve series have 52 populated years each; G163 (Euro Area) has 41 populated years, 1991–2031. The excluded source codes are G001, G110, G119, G163, G200, G205, G400, G505, G510, G603, G903, G998 and GX123. The register records source names, series codes, year coverage, latest-actual metadata, disposition and rationale.
+
+The common rationale is that IMF regional, economic-group and global aggregates are outside the country-level game identity universe. They remain represented in source evidence and are excluded from country-level field 15 application. They are not country identities and must not be mapped to game IDs.
+
+The field-15-only candidate was successfully built at:
+`reports/sources/imf-weo-historical-candidate/20261125T152006Z/`
+
+Verified candidate metadata:
+- 9,361 NGDPD observations.
+- 197 distinct game IDs.
+- Year range 1980–2031.
+- 13 identity exceptions, corresponding to the aggregate codes in the exclusion register.
+- Source SHA-256: `a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d`.
+- Crosswalk SHA-256: `df72a50e9fd37cbc05088a074367be05e3e067194b932997f7e7ec95589f91a9`.
+- Candidate observation SHA-256: `47d8e3ac053eb0842e632ba71aaca02dc76fe780d9665ee431ab775dfcb9f76d`.
+- Candidate exception SHA-256: `b35a2984fd5704fa3c47fed01e067b9baed16e8c8785a1ca4218938c3d1c148e`.
+- `database_written=false`; `approval_created=false`.
+
+The 32 WBG observations are included under the owner-approved IMF-specific field-15 crosswalk and are not excluded as aggregates. The earlier WBG identity hold is superseded by that explicit owner decision.
+
+**Current gate:** aggregate dispositions and candidate construction are complete. Field 15 is not yet approved or applied. The field-15 semantic review must still be reconciled against the candidate, crosswalk and exclusion register. Approval, application and independent verification of both databases remain outstanding. Field 16 remains blocked.

@@ -226,3 +226,27 @@ uv run python -m tools.build_imf_weo_wdi_review_package --input reports/sources/
 ```
 
 The resulting package must be reconciled to the candidate and its explicit crosswalk before any decisions are made. The field-15 package is review-only; the separate importer approval gate remains mandatory.
+
+
+## 16. Field-15 aggregate exclusion register — 2026-11-25
+
+The owner approved the explicit `excluded` disposition for all 13 unmapped IMF aggregate and regional series. These are global, regional or economic-group aggregates, not individual country identities in the game catalogue. They must not be mapped to country `game_id` values.
+
+The shared rationale recorded in the exclusion register is:
+
+> IMF regional, economic-group and global aggregates are outside the country-level game identity universe. Their populated observations are retained in source evidence but excluded from country-level field 15 candidate application.
+
+The register is:
+`reports/sources/imf-weo-historical-candidate/20261125T152006Z/field_15_exclusion_register.csv`
+
+It records 13 series and 665 populated annual observations. Twelve series contain 52 populated years each; G163 (Euro Area) contains 41 populated years, 1991–2031. All 13 rows have disposition `excluded`.
+
+The 13 source codes are G001, G110, G119, G163, G200, G205, G400, G505, G510, G603, G903, G998 and GX123. The register retains each source name, series code, populated-year count, year range, latest-actual metadata and source SHA-256.
+
+The field-15 candidate generated at
+`reports/sources/imf-weo-historical-candidate/20261125T152006Z/`
+contains 9,361 observations for NGDPD, across 197 distinct game identities, covering 1980–2031. Its 13 identity exceptions correspond to the aggregate series explicitly covered by the exclusion register. The candidate metadata records `database_written: false` and `approval_created: false`.
+
+The 32 WBG observations are included through the separately owner-approved, field-15-only IMF crosswalk. They are not part of the aggregate exclusions.
+
+This is a source-row disposition and candidate-reconciliation update only. It is not semantic approval, field approval, an application authorization or a database write. Field 15 remains open pending the complete review, approval, application and independent verification workflow. Fields 16, 18, 20 and 21 remain outside this field-scoped decision.
