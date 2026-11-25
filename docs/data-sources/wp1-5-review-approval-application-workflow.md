@@ -193,3 +193,36 @@ The project owner explicitly approved the following field-specific source crossw
 The crosswalk is provider-specific and fingerprinted as a candidate input. It does not change the identity registry, ISO alpha-2/alpha-3 assignments, PSE verification status, Natural Earth mapping, WDI mapping, or any other provider crosswalk. It does not authorize field 16/18/20/21 application. The 13 non-country aggregate series remain excluded from country observations with explicit review dispositions; they are not mapped to a game identity.
 
 The WBG mapping restores the 32 source-populated field-15 observations to the candidate observation set. No Game DB write, approval record, or observation status classification is performed by this decision or by the candidate builder.
+
+
+## 15. Field-15 crosswalk and field-scoped review tooling — 2026-11-25
+
+The owner-approved IMF WEO crosswalk is stored separately from the global identity registry at `data/manual/source_crosswalks/imf_weo.json`. It contains one reviewed-manual mapping, source key `imf_weo`, source code `WBG`, and target `game_id=tc_50c420df8b2c4c6eaae47d795f9a1ea2`. Its approval scope is field 15 only. The global identity registry was not edited; the Palestine record's ISO alpha-3 `PSE` verification state remains unchanged.
+
+The IMF WEO candidate builder now:
+- accepts the explicit crosswalk through `--crosswalk` (defaulting to the approved file);
+- validates the crosswalk against the existing identity registry and rejects conflicts;
+- accepts repeatable `--field-id` arguments, with unsupported field IDs rejected;
+- records the crosswalk path and SHA-256 plus selected field IDs in `candidate.json`.
+
+The IMF WEO importer now requires the same crosswalk path and SHA-256 at candidate validation time and includes the crosswalk file in the exact application artifact inputs and metadata. A changed crosswalk therefore invalidates the candidate's approval fingerprint. The importer also checks that declared field scope covers every observation row.
+
+The consolidated WEO–WDI review-package builder now supports repeatable `--field-id` filtering and records the actual field scope in its package summary. This allows a field-15-only review package to be built from the Stage 4C semantic matrix without including fields 16, 18, 20 or 21.
+
+Regression coverage was added for explicit WBG mapping, field-15 filtering, unsupported field IDs, importer crosswalk fingerprint enforcement, and field-scoped review packages. These tests have been authored but have not yet been executed in the owner's local environment. No candidate has yet been generated from the local IMF CSV, no review decisions have been recorded, and no approval/application or database write has occurred.
+
+Owner-side read-only candidate command after syncing this branch:
+
+```fish
+uv run python -m tools.build_imf_weo_historical_candidate --field-id 15
+```
+
+The resulting candidate must be checked for exactly 9,361 finite numeric observations (9,329 previously reconciled country observations plus the 32 owner-approved WBG observations), with all 13 aggregate series retained as explicit identity exceptions and no field IDs other than 15. The expected observation total is an acceptance target to verify, not an assertion that generation has already succeeded.
+
+A field-15-only review package can then be built from the local Stage 4C matrix:
+
+```fish
+uv run python -m tools.build_imf_weo_wdi_review_package --input reports/sources/imf-wdi-semantic-disposition/20261107T145725Z/semantic_disposition_matrix.csv --field-id 15
+```
+
+The resulting package must be reconciled to the candidate and its explicit crosswalk before any decisions are made. The field-15 package is review-only; the separate importer approval gate remains mandatory.
