@@ -1,36 +1,17 @@
-{
-  "schema_version": 1,
-  "candidate_type": "imf_weo_annual_historical_observations",
-  "source_key": "imf_weo",
-  "release": "october_2026",
-  "source_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
-  "source_sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
-  "source_byte_count": 26692032,
-  "identity_registry_path": "config/country_identity_registry.json",
-  "crosswalk_path": "data/manual/source_crosswalks/imf_weo.json",
-  "crosswalk_sha256": "df72a50e9fd37cbc05088a074367be05e3e067194b932997f7e7ec95589f91a9",
-  "field_ids": [
-    15
-  ],
-  "observation_count": 9361,
-  "distinct_game_ids": 197,
-  "indicator_counts": {
-    "NGDPD": 9361
-  },
-  "year_range": [
-    1980,
-    2031
-  ],
-  "exception_count": 13,
-  "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
-  "identity_policy": "retain_existing_game_id; ISO verification status is not changed",
-  "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
-  "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
-  "database_written": false,
-  "approval_created": false,
-  "candidate_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-historical-candidate/20261125T152006Z",
-  "observations_sha256": "47d8e3ac053eb0842e632ba71aaca02dc76fe780d9665ee431ab775dfcb9f76d",
-  "exceptions_sha256": "b35a2984fd5704fa3c47fed01e067b9baed16e8c8785a1ca4218938c3d1c148e"
-}
+COLUMNS: ['line_number', 'series_code', 'source_country_code', 'exception', 'candidate_game_ids']
+EXCEPTION COUNT: 13
+{'line_number': '1037', 'series_code': 'G903.NGDPD.A', 'source_country_code': 'G903', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '2220', 'series_code': 'G998.NGDPD.A', 'source_country_code': 'G998', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '2272', 'series_code': 'G001.NGDPD.A', 'source_country_code': 'G001', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '2354', 'series_code': 'G110.NGDPD.A', 'source_country_code': 'G110', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '2475', 'series_code': 'G119.NGDPD.A', 'source_country_code': 'G119', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '2597', 'series_code': 'GX123.NGDPD.A', 'source_country_code': 'GX123', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '3246', 'series_code': 'G163.NGDPD.A', 'source_country_code': 'G163', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '3713', 'series_code': 'G200.NGDPD.A', 'source_country_code': 'G200', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '3737', 'series_code': 'G205.NGDPD.A', 'source_country_code': 'G205', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '5148', 'series_code': 'G400.NGDPD.A', 'source_country_code': 'G400', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '5748', 'series_code': 'G505.NGDPD.A', 'source_country_code': 'G505', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '5882', 'series_code': 'G510.NGDPD.A', 'source_country_code': 'G510', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
+{'line_number': '6778', 'series_code': 'G603.NGDPD.A', 'source_country_code': 'G603', 'exception': 'unmapped_or_ambiguous_identity', 'candidate_game_ids': ''}
 
-===== BUILD EXIT STATUS: 0 =====
+===== INSPECTION EXIT STATUS: 0 =====
