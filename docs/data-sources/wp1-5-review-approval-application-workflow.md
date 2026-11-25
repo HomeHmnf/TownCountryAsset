@@ -133,3 +133,47 @@ WBG identity audit findings:
 The first corrected crosswalk audit attempt failed because it assumed `countries.name`; that column does not exist. The schema above is the verified contract for future read-only identity queries. The corrected schema inspection completed with SQLite integrity `ok` and zero foreign-key violations. The earlier field-15 value reconciliation also completed with integrity `ok` and zero foreign-key violations.
 
 These are diagnostic/reconciliation findings only. They do not constitute semantic approval, identity approval, field approval, or a Game DB write. Field 15 remains open; do not proceed to field 16.
+
+
+## 13. Field-15 WBG identity evidence update — 2026-11-25
+
+An authoritative review of the IMF October 2026 WEO Database Appendix and the existing project UN M49 reconciliation adds evidence relevant to the 32 unmatched WBG.NGDPD.A values. This is an evidence update, not an identity decision or approval.
+
+### IMF WEO evidence
+
+The official October 2026 appendix is published at:
+
+https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf
+
+Relevant appendix evidence:
+- The WEO defines “country” and “economy” broadly; the terms do not always mean a state under international law. The database also maintains separate statistical data for some territorial entities (page 3).
+- “West Bank and Gaza” is listed under Emerging and Developing Economies and under Middle East and Central Asia (pages 6 and 8). It is therefore an individual WEO economy entry, not one of the composite country-group series.
+- The Country Data Documentation table identifies code WBG, name “West Bank and Gaza”, currency “Israeli new shekel”, national-accounts historical data source NSO, latest actual annual data 2025, base year 2015, and SNA 2008 (page 14).
+- The appendix notes that West Bank and Gaza data for 2022–23, previously excluded pending methodological adjustments, are included again; projections for 2024–29 are excluded due to uncertainty (page 19). This is a vintage-specific publication note and must not be used to infer the status of each field-15 annual value.
+
+This evidence establishes the IMF meaning and statistical role of the WBG code. It does not, by itself, establish a project game_id mapping.
+
+### Existing project UN M49 evidence
+
+The project’s read-only UN M49 reconciliation snapshot records:
+- registry identity game_id=tc_50c420df8b2c4c6eaae47d795f9a1ea2, display name Palestine, Natural Earth source ID PSX;
+- M49 reference name State of Palestine, M49 code 275, alpha-2 PS, alpha-3 PSE;
+- an explicit reviewed name-variant match from Palestine to State of Palestine, with alpha-3 agreement;
+- no alpha-2 value currently recorded on the registry identity.
+
+Snapshot provenance: retrieved 2026-11-01T06:40:27.732163Z; raw M49 SHA-256 b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb; normalized reference SHA-256 7575550969de58be3909e0c2290478a4331c5c13be123a1043214c73de929b74. The matching policy used normalized English names and explicitly maintained variants, not fuzzy, code-only or source-ID matching. The M49 report is evidence, not approval; the registry’s PSE assignment remains unverified.
+
+The current UN M49 reference is also publicly available at https://unstats.un.org/unsd/methodology/m49/overview and identifies State of Palestine as M49 275, ISO alpha-2 PS, ISO alpha-3 PSE.
+
+### Field-15 disposition
+
+The combined evidence makes the existing Palestine game_id a strong candidate for an IMF WBG crosswalk, but no direct IMF-to-M49 concordance has been recorded in the project. The labels and statistical scope are consistent enough to propose that mapping for owner review; they are not permission to infer or write it automatically.
+
+Until the owner explicitly decides:
+- retain all 32 nonblank WBG field-15 values (1994–2025) in an identity-review hold;
+- do not classify WBG as an aggregate or silently exclude it;
+- do not create a country_sources mapping, change the identity registry, or write WBG observations to the Game DB;
+- do not change the PSE ISO verification state as a side effect of the field-15 review;
+- record the IMF appendix, M49 snapshot and exact proposed target game_id in the field-15 evidence register.
+
+A future owner-approved crosswalk must be explicit, source-keyed (imf_weo / WBG), target the persistent game_id, retain both provider and M49 evidence, and be included in the exact candidate fingerprint and approval dependencies. This field-specific decision does not settle any other WEO field or any broader geopolitical/catalogue policy.
