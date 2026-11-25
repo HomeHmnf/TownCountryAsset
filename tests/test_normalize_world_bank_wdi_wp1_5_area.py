@@ -160,6 +160,7 @@ def test_normalize_snapshot_emits_561_rows_and_complete_provenance(tmp_path, mon
         import_manifest,
         repository_root=root,
     )
+    assert normalizer.SOURCE_KEY == "world_bank_wdi"
 
     normalized = json.loads(output.read_text(encoding="utf-8"))
     manifest = json.loads(import_manifest.read_text(encoding="utf-8"))
