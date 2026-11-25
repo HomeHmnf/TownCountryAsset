@@ -88,6 +88,10 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
                 )
             identities[mapping.source_id] = {mapping.game_id}
         crosswalk_hash = sha256(crosswalk_path)
+    if field_ids is not None:
+        unsupported_fields = sorted(field_ids - set(INDICATORS.values()))
+        if unsupported_fields:
+            raise CandidateError(f"Unsupported WP1.5 field IDs: {unsupported_fields}")
     selected_indicators = {
         code: field_id for code, field_id in INDICATORS.items()
         if field_ids is None or field_id in field_ids
