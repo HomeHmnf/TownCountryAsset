@@ -1217,3 +1217,1144 @@ if __name__ == "__main__":
 ===== STATUS =====
 ?? data/canonical/town_country_asset.sqlite-shm
 ?? data/canonical/town_country_asset.sqlite-wal
+===== TARGET MIGRATION 009 =====
+-- Permit populated scalar observations whose provider status is not classified.
+-- Keep null-value and structured-data status semantics unchanged.
+CREATE TABLE current_statistics_v4 (
+    statistic_id INTEGER PRIMARY KEY,
+    game_id TEXT NOT NULL,
+    statistic_key TEXT NOT NULL CHECK (length(trim(statistic_key)) > 0),
+    value REAL,
+    unit TEXT,
+    observed_at TEXT,
+    observation_period TEXT,
+    value_status TEXT NOT NULL DEFAULT 'observed'
+        CHECK (value_status IN (
+            'observed', 'estimated', 'projected', 'unclassified',
+            'unavailable', 'not_applicable'
+        )),
+    source_reference TEXT,
+    source_version TEXT,
+    methodology TEXT,
+    retrieved_at TEXT,
+    import_id INTEGER,
+    UNIQUE (game_id, statistic_key),
+    FOREIGN KEY (game_id) REFERENCES countries(game_id) ON DELETE RESTRICT,
+    FOREIGN KEY (import_id) REFERENCES dataset_imports(import_id) ON DELETE RESTRICT,
+    CHECK (
+        (value IS NOT NULL AND value_status IN (
+            'observed', 'estimated', 'projected', 'unclassified'
+        ))
+        OR
+        (value IS NULL AND value_status IN ('unavailable', 'not_applicable'))
+    )
+);
+
+INSERT INTO current_statistics_v4 (
+    statistic_id, game_id, statistic_key, value, unit, observed_at,
+    observation_period, value_status, source_reference, source_version,
+    methodology, retrieved_at, import_id
+)
+SELECT
+    statistic_id, game_id, statistic_key, value, unit, observed_at,
+    observation_period, value_status, source_reference, source_version,
+    methodology, retrieved_at, import_id
+FROM current_statistics;
+
+DROP TABLE current_statistics;
+ALTER TABLE current_statistics_v4 RENAME TO current_statistics;
+
+CREATE INDEX ix_current_statistics_key
+    ON current_statistics(statistic_key, value_status);
+===== WDI MIGRATION 008 =====
+-- Allow populated scalar observations whose provider does not publish
+-- an observed/estimated/projected classification. NULL values remain restricted
+-- to unavailable/not_applicable. Existing rows and identifiers are preserved.
+
+CREATE TABLE current_statistics_v4 (
+    statistic_id INTEGER PRIMARY KEY,
+    game_id TEXT NOT NULL,
+    statistic_key TEXT NOT NULL CHECK (length(trim(statistic_key)) > 0),
+    value REAL,
+    unit TEXT,
+    observed_at TEXT,
+    observation_period TEXT,
+    value_status TEXT NOT NULL DEFAULT 'observed'
+        CHECK (value_status IN ('observed', 'estimated', 'projected', 'unspecified', 'unavailable', 'not_applicable')),
+    source_reference TEXT,
+    source_version TEXT,
+    methodology TEXT,
+    retrieved_at TEXT,
+    import_id INTEGER,
+    UNIQUE (game_id, statistic_key),
+    FOREIGN KEY (game_id) REFERENCES countries(game_id) ON DELETE RESTRICT,
+    FOREIGN KEY (import_id) REFERENCES dataset_imports(import_id) ON DELETE RESTRICT,
+    CHECK (
+        (value IS NOT NULL AND value_status IN ('observed', 'estimated', 'projected', 'unspecified'))
+        OR
+        (value IS NULL AND value_status IN ('unavailable', 'not_applicable'))
+    )
+);
+
+INSERT INTO current_statistics_v4 (
+    statistic_id, game_id, statistic_key, value, unit, observed_at,
+    observation_period, value_status, source_reference, source_version,
+    methodology, retrieved_at, import_id
+)
+SELECT
+    statistic_id, game_id, statistic_key, value, unit, observed_at,
+    observation_period, value_status, source_reference, source_version,
+    methodology, retrieved_at, import_id
+FROM current_statistics;
+
+DROP TABLE current_statistics;
+ALTER TABLE current_statistics_v4 RENAME TO current_statistics;
+
+CREATE INDEX ix_current_statistics_key
+    ON current_statistics(statistic_key, value_status);
+===== STATISTICS IMPORTER DIFF =====
+diff --git a/tools/database/statistics_import.py b/tools/database/statistics_import.py
+index e5fbb75..a474ce4 100644
+--- a/tools/database/statistics_import.py
++++ b/tools/database/statistics_import.py
+@@ -8,18 +8,16 @@ from __future__ import annotations
+ 
+ import hashlib
+ import json
+ import math
+ import sqlite3
+-from datetime import datetime, timezone
++from datetime import date, datetime, timezone
+ from pathlib import Path
+ from typing import Any
+ 
+ from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
+-from tools.database.observation_contract import (
+-    ALLOWED_VALUE_STATUSES, validate_observation_value,
+-)
++from tools.database.observation_contract import ALLOWED_VALUE_STATUSES, validate_observation_value
+ from tools.database.application_approval import (
+     ApplicationApprovalError,
+     build_application_artifact,
+     require_approved_application,
+     record_application_applied,
+@@ -101,16 +99,37 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str,
+         raise StatisticsImportError("Captured raw source byte count does not match its manifest")
+     source_url = _text(manifest.get("final_url") or manifest.get("source_url"), "manifest source URL")
+     if not source_url.startswith("https://"):
+         raise StatisticsImportError("Source manifest URL must use HTTPS")
+     retrieved_at = _text(manifest.get("retrieved_at"), "manifest.retrieved_at")
+-    try:
+-        retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
+-    except ValueError as exc:
+-        raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
+-    if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
+-        raise StatisticsImportError("manifest.retrieved_at must include a timezone")
++    retrieval_precision = manifest.get("retrieval_date_precision")
++    if retrieval_precision == "day":
++        if len(retrieved_at) != 10:
++            raise StatisticsImportError(
++                "day-precision manifest.retrieved_at must use YYYY-MM-DD without an inferred time"
++            )
++        try:
++            parsed_date = date.fromisoformat(retrieved_at)
++        except ValueError as exc:
++            raise StatisticsImportError(
++                "day-precision manifest.retrieved_at must be an ISO-8601 calendar date"
++            ) from exc
++        if parsed_date.isoformat() != retrieved_at:
++            raise StatisticsImportError(
++                "day-precision manifest.retrieved_at must use YYYY-MM-DD without an inferred time"
++            )
++    elif retrieval_precision in {None, "instant"}:
++        try:
++            retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
++        except ValueError as exc:
++            raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
++        if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
++            raise StatisticsImportError("manifest.retrieved_at must include a timezone")
++    else:
++        raise StatisticsImportError(
++            "manifest.retrieval_date_precision must be 'instant' or 'day' when supplied"
++        )
+     additional_inputs = manifest.get("additional_inputs", [])
+     if not isinstance(additional_inputs, list):
+         raise StatisticsImportError("manifest.additional_inputs must be an array")
+     for index, item in enumerate(additional_inputs):
+         if not isinstance(item, dict):
+@@ -217,34 +236,29 @@ def _validate_observation(
+     if unit not in allowed_units:
+         raise StatisticsImportError(
+             f"{label}.unit {unit!r} is not permitted by field contract {contracted_unit!r}"
+         )
+     if field["storage"] == "scalar":
+-        if value is None:
+-            if status not in {"unavailable", "not_applicable"}:
+-                raise StatisticsImportError(f"{label} NULL value requires unavailable/not_applicable status")
+-        else:
++        if value is not None:
+             if isinstance(value, bool) or not isinstance(value, (int, float)):
+                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
+             try:
+                 finite = math.isfinite(float(value))
+-            except (OverflowError, ValueError):
++            except (OverflowError, TypeError, ValueError):
+                 finite = False
+             if not finite:
+                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
+             value = float(value)
+-            if not validate_observation_value(value, status, "scalar"):
+-                raise StatisticsImportError(
+-                    f"{label} populated scalar has an invalid value/status combination"
+-                )
++        if value is None and status not in {"unavailable", "not_applicable"}:
++            raise StatisticsImportError(f"{label} NULL value requires unavailable/not_applicable status")
++        if not validate_observation_value(value, status, "scalar"):
++            raise StatisticsImportError(f"{label} scalar has an invalid value/status combination")
+     else:
+         if value is None or not isinstance(value, (dict, list)):
+             raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
+         if not validate_observation_value(value, status, "structured"):
+-            raise StatisticsImportError(
+-                f"{label} structured value requires a valid observed/estimated/projected status"
+-            )
++            raise StatisticsImportError(f"{label} structured value requires a valid observed/estimated/projected status")
+         try:
+             _canonical_json(value)
+         except (TypeError, ValueError) as exc:
+             raise StatisticsImportError(f"{label} structured value is not valid finite JSON") from exc
+     source_reference = row.get("source_reference")
+@@ -277,10 +291,13 @@ def build_wp1_5_application_artifact(
+ ) -> dict[str, Any]:
+     """Fingerprint the complete WP1.5 input set that an approver reviewed."""
+     manifest = _read_object(manifest_path, "source manifest")
+     normalized = _read_object(observations_path, "normalized observations")
+     source_key = _text(normalized.get("source_key"), "normalized.source_key")
++    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
++    if manifest.get("dataset", source_key) != dataset:
++        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
+     _validate_manifest(manifest, source_key)
+     if normalized.get("release") != manifest.get("release"):
+         raise StatisticsImportError("Normalized observations and manifest release do not match")
+     if normalized.get("source_sha256") != manifest.get("sha256"):
+         raise StatisticsImportError("Normalized observations and manifest checksum do not match")
+@@ -320,17 +337,137 @@ def build_wp1_5_application_artifact(
+     return build_application_artifact(
+         domain="wp1_5_statistics",
+         inputs=inputs,
+         metadata={
+             "source_key": normalized.get("source_key"),
++            "dataset": normalized.get("dataset", normalized.get("source_key")),
+             "release": normalized.get("release"),
+             "source_sha256": normalized.get("source_sha256"),
+             "policy_version": policy_version,
+         },
+     )
+ 
+ 
++def validate_wp1_5_dataset(
++    *,
++    observations_path: str | Path,
++    crosswalk_path: str | Path,
++    manifest_path: str | Path,
++    config_path: str | Path | None = None,
++) -> dict[str, Any]:
++    """Validate a normalized WP1.5 dataset without opening or changing a database."""
++    selected_config_path = config_path if config_path is not None else DEFAULT_CONFIG
++    normalized = _read_object(observations_path, "normalized observations")
++    manifest = _read_object(manifest_path, "source manifest")
++    config = _read_object(selected_config_path, "WP1.5 field contract")
++    if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
++        raise StatisticsImportError("Unsupported normalized observation schema")
++
++    source_key = _text(normalized.get("source_key"), "normalized.source_key")
++    registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
++    registry_path = Path(registry_reference)
++    if not registry_path.is_absolute():
++        registry_path = (REPOSITORY_ROOT / registry_path).resolve()
++    try:
++        source_registry = load_registry(registry_path)
++    except SourceError as exc:
++        raise StatisticsImportError(f"Cannot load project source registry: {exc}") from exc
++    canonical_source_key = canonical_source_id(source_registry, source_key)
++    if canonical_source_key is None:
++        raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
++
++    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
++    if manifest.get("dataset", source_key) != dataset:
++        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
++    release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
++    if normalized.get("source_key") != manifest.get("source_key"):
++        raise StatisticsImportError("Normalized observations and source manifest do not match")
++    if normalized.get("source_sha256") != source_sha or normalized.get("release") != release:
++        raise StatisticsImportError("Normalized observations do not identify the captured source release/checksum")
++
++    fields = config.get("fields")
++    if not isinstance(fields, list) or len(fields) != 41:
++        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 fields")
++    field_by_id = {item.get("id"): item for item in fields if isinstance(item, dict)}
++    if len(field_by_id) != 41:
++        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 distinct fields")
++
++    try:
++        crosswalk = load_crosswalk(crosswalk_path, expected_dataset=dataset)
++    except CrosswalkError as exc:
++        raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
++    if crosswalk.dataset != dataset:
++        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
++    if crosswalk.source_key != source_key:
++        raise StatisticsImportError("Crosswalk source_key does not match source contract")
++    crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
++
++    rows = normalized.get("observations")
++    if not isinstance(rows, list) or not rows:
++        raise StatisticsImportError("Normalized observations must be a non-empty array")
++    validated = [
++        _validate_observation(
++            row,
++            index=index,
++            field_by_id=field_by_id,
++            source_key=canonical_source_key,
++            crosswalk_by_game=crosswalk_by_game,
++        )
++        for index, row in enumerate(rows)
++    ]
++    keys = [(row["game_id"], row["field"]["id"]) for row in validated]
++    if len(keys) != len(set(keys)):
++        raise StatisticsImportError("Duplicate country/field observations in normalized dataset")
++
++    try:
++        artifact = build_wp1_5_application_artifact(
++            observations_path=observations_path,
++            crosswalk_path=crosswalk_path,
++            manifest_path=manifest_path,
++            config_path=selected_config_path,
++        )
++    except (ApplicationApprovalError, OSError, ValueError) as exc:
++        raise StatisticsImportError(f"Cannot fingerprint WP1.5 application inputs: {exc}") from exc
++
++    # Re-read all validated JSON inputs to detect changes during validation.
++    if _read_object(observations_path, "normalized observations") != normalized:
++        raise StatisticsImportError("Normalized observations changed during dry-run validation")
++    if _read_object(manifest_path, "source manifest") != manifest:
++        raise StatisticsImportError("Source manifest changed during dry-run validation")
++    if _read_object(selected_config_path, "WP1.5 field contract") != config:
++        raise StatisticsImportError("WP1.5 field contract changed during dry-run validation")
++    _validate_manifest(manifest, source_key)
++
++    field_counts: dict[str, int] = {}
++    for row in validated:
++        field_id = str(row["field"]["id"])
++        field_counts[field_id] = field_counts.get(field_id, 0) + 1
++    return {
++        "assessment": "wp1_5_statistics_import_dry_run",
++        "source_key": source_key,
++        "canonical_source_key": canonical_source_key,
++        "dataset": dataset,
++        "release": release,
++        "source_sha256": source_sha,
++        "source_url": source_url,
++        "retrieved_at": retrieved_at,
++        "observations": len(validated),
++        "crosswalk_mappings": len(crosswalk.mappings),
++        "field_counts": dict(sorted(field_counts.items(), key=lambda item: int(item[0]))),
++        "license_status": manifest.get("license_status"),
++        "attribution": manifest.get("attribution"),
++        "application_artifact_sha256": artifact["artifact_sha256"],
++        "application_artifact": artifact,
++        "side_effects": {
++            "database_opened": False,
++            "database_written": False,
++            "approval_created": False,
++            "source_selection_changed": False,
++        },
++    }
++
++
+ def import_wp1_5_dataset(
+     *,
+     observations_path: str | Path,
+     crosswalk_path: str | Path,
+     manifest_path: str | Path,
+@@ -358,10 +495,13 @@ def import_wp1_5_dataset(
+     canonical_source_key = canonical_source_id(source_registry, source_key)
+     if canonical_source_key is None:
+         raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
+     # Keep the historical ID in manifests, crosswalks and database provenance;
+     # use its canonical provider ID only for current field-contract validation.
++    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
++    if manifest.get("dataset", source_key) != dataset:
++        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
+     release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
+     if normalized.get("source_key") != manifest.get("source_key"):
+         raise StatisticsImportError("Normalized observations and source manifest do not match")
+     if normalized.get("source_sha256") != source_sha or normalized.get("release") != release:
+         raise StatisticsImportError("Normalized observations do not identify the captured source release/checksum")
+@@ -374,14 +514,16 @@ def import_wp1_5_dataset(
+         raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 distinct fields")
+ 
+     try:
+         crosswalk = load_crosswalk(
+             crosswalk_path,
+-            expected_dataset=source_key,
++            expected_dataset=dataset,
+         )
+     except CrosswalkError as exc:
+         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
++    if crosswalk.dataset != dataset:
++        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
+     if crosswalk.source_key != source_key:
+         raise StatisticsImportError("Crosswalk source_key does not match source contract")
+     crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
+ 
+     rows = normalized.get("observations")
+===== APPROVAL WORKFLOW DIFF =====
+diff --git a/tools/database/application_approval.py b/tools/database/application_approval.py
+index 9b120d9..cdb4839 100644
+--- a/tools/database/application_approval.py
++++ b/tools/database/application_approval.py
+@@ -233,5 +233,49 @@ def record_application_applied(
+         (utc_now(), application_id, approval_id),
+     )
+     if cursor.rowcount != 1:
+         raise ApplicationApprovalError("Application approval was consumed or is no longer valid")
+     _event(connection, approval_id, "applied", details={"application_id": application_id, **(details or {})})
++
++
++
++def approve_application(
++    connection: sqlite3.Connection,
++    *,
++    approval_id: str,
++    artifact: dict[str, Any],
++    actor: str,
++    note: str,
++) -> sqlite3.Row:
++    """Create and approve an artifact using the shared project approval lifecycle.
++
++    If the caller already owns a transaction, all lifecycle events remain in
++    that transaction. Otherwise this helper creates and commits its own
++    transaction. Domain-specific validation and application remain the
++    responsibility of the caller.
++    """
++    if not isinstance(actor, str) or not actor.strip():
++        raise ApplicationApprovalError("Approval actor must be identified")
++    if not isinstance(note, str) or not note.strip():
++        raise ApplicationApprovalError("Approval decision note must be non-empty")
++    owns_transaction = not connection.in_transaction
++    try:
++        if owns_transaction:
++            connection.execute("BEGIN IMMEDIATE")
++        propose_application(connection, approval_id=approval_id, artifact=artifact)
++        decide_application(
++            connection,
++            approval_id=approval_id,
++            decision="approved",
++            actor=actor.strip(),
++            note=note.strip(),
++        )
++        row = require_approved_application(
++            connection, approval_id=approval_id, artifact=artifact
++        )
++        if owns_transaction:
++            connection.commit()
++        return row
++    except Exception:
++        if owns_transaction and connection.in_transaction:
++            connection.rollback()
++        raise
+diff --git a/tools/database/review_data_import.py b/tools/database/review_data_import.py
+index 8e7df73..3f3fa3f 100644
+--- a/tools/database/review_data_import.py
++++ b/tools/database/review_data_import.py
+@@ -11,14 +11,14 @@ from datetime import datetime, timezone
+ from pathlib import Path, PurePosixPath
+ from typing import Any
+ 
+ from tools.database.connection import REPOSITORY_ROOT, connect_database
+ from tools.database.application_approval import (
+-    ApplicationApprovalError, build_application_artifact,
++    ApplicationApprovalError, approve_application, build_application_artifact,
+     require_approved_application, record_application_applied,
+ )
+-from tools.database.schema import apply_migrations, validate_database
++from tools.database.schema import MigrationError, apply_migrations, validate_database
+ from tools.audit_iso_proposal_evidence import _cells
+ from tools.propose_iso_assignments import propose, read_reference
+ 
+ DEFAULT_REGISTRY = REPOSITORY_ROOT / "config/country_identity_registry.json"
+ DEFAULT_TAXONOMY = REPOSITORY_ROOT / "config/entity_types.json"
+@@ -606,19 +606,48 @@ def main() -> int:
+     parser.add_argument("--iso-proposals", type=Path, required=True)
+     parser.add_argument("--persian-candidates", type=Path, required=True)
+     parser.add_argument("--persian-provenance", type=Path, required=True)
+     parser.add_argument("--entity-taxonomy", type=Path, default=DEFAULT_TAXONOMY)
+     parser.add_argument("--flag-mapping", type=Path, default=DEFAULT_FLAGS)
+-    parser.add_argument("--approval-id", required=True, help="Previously approved review-data application ID")
++    approval = parser.add_mutually_exclusive_group(required=True)
++    approval.add_argument("--approval-id", help="Previously approved review-data application ID")
++    approval.add_argument(
++        "--approve-and-apply", action="store_true",
++        help="Create approval for these exact reviewed inputs and apply them",
++    )
++    parser.add_argument("--actor", help="Reviewer identity; required with --approve-and-apply")
++    parser.add_argument("--note", help="Approval rationale; required with --approve-and-apply")
+     args = parser.parse_args()
+     try:
++        approval_id = args.approval_id
++        if args.approve_and_apply:
++            if not args.actor or not args.actor.strip():
++                raise ReviewDataImportError("--approve-and-apply requires --actor")
++            if not args.note or not args.note.strip():
++                raise ReviewDataImportError("--approve-and-apply requires --note")
++            artifact = build_review_application_artifact(
++                args.registry, args.iso_reference, args.iso_provenance,
++                args.iso_proposals, args.persian_candidates, args.persian_provenance,
++                args.entity_taxonomy, args.flag_mapping,
++            )
++            approval_id = "review-data-" + artifact["artifact_sha256"][:20]
++            connection = connect_database(args.database)
++            try:
++                apply_migrations(connection)
++                approve_application(
++                    connection, approval_id=approval_id, artifact=artifact,
++                    actor=args.actor, note=args.note,
++                )
++                print(f"Approval created for validated inputs: {approval_id}")
++            finally:
++                connection.close()
+         result = import_review_data(
+             args.database, args.registry, args.iso_reference, args.iso_provenance,
+             args.iso_proposals, args.persian_candidates, args.persian_provenance,
+-            args.entity_taxonomy, args.flag_mapping, approval_id=args.approval_id,
++            args.entity_taxonomy, args.flag_mapping, approval_id=approval_id,
+         )
+-    except (OSError, ValueError, sqlite3.Error, ReviewDataImportError) as exc:
++    except (OSError, ValueError, sqlite3.Error, MigrationError, ReviewDataImportError, ApplicationApprovalError) as exc:
+         parser.error(str(exc))
+     print(json.dumps(result, indent=2, sort_keys=True))
+     print("Review-domain import completed; database integrity and foreign-key checks passed.")
+     return 0
+ 
+===== WP1.5 AND COUNTRY IMPORTER DIFF =====
+diff --git a/tools/import_country_data.py b/tools/import_country_data.py
+index 437d992..1a39780 100644
+--- a/tools/import_country_data.py
++++ b/tools/import_country_data.py
+@@ -2,29 +2,70 @@
+ 
+ from __future__ import annotations
+ 
+ import argparse
+ import json
++import sqlite3
+ 
+-from tools.database.connection import DEFAULT_DATABASE_PATH
+-from tools.database.country_data_import import DEFAULT_CANDIDATE_DIR, import_country_data
++from tools.database.application_approval import ApplicationApprovalError, approve_application
++from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
++from tools.database.country_data_import import (
++    DEFAULT_CANDIDATE_DIR,
++    CountryDataImportError,
++    build_country_data_application_artifact,
++    import_country_data,
++)
++from tools.database.schema import MigrationError, apply_migrations
+ 
+ 
+ def build_parser() -> argparse.ArgumentParser:
+     parser = argparse.ArgumentParser(
+         description="Import Natural Earth source attributes and game-ID geometry profiles into canonical SQLite."
+     )
+     parser.add_argument("--database", default=str(DEFAULT_DATABASE_PATH))
+     parser.add_argument("--candidate-dir", default=str(DEFAULT_CANDIDATE_DIR))
+-    parser.add_argument("--approval-id", required=True, help="Previously approved country-data application ID")
++    approval = parser.add_mutually_exclusive_group(required=True)
++    approval.add_argument("--approval-id", help="Previously approved country-data application ID")
++    approval.add_argument(
++        "--approve-and-apply", action="store_true",
++        help="Create approval for these exact candidate files and immediately apply them",
++    )
++    parser.add_argument("--actor", help="Reviewer identity; required with --approve-and-apply")
++    parser.add_argument("--note", help="Approval rationale; required with --approve-and-apply")
+     return parser
+ 
+ 
+ def main() -> int:
+     args = build_parser().parse_args()
+-    result = import_country_data(args.database, args.candidate_dir, approval_id=args.approval_id)
++    try:
++        approval_id = args.approval_id
++        if args.approve_and_apply:
++            if not args.actor or not args.actor.strip():
++                raise ApplicationApprovalError("--approve-and-apply requires --actor")
++            if not args.note or not args.note.strip():
++                raise ApplicationApprovalError("--approve-and-apply requires --note")
++            artifact = build_country_data_application_artifact(args.candidate_dir)
++            approval_id = "country-data-" + artifact["artifact_sha256"][:20]
++            connection = connect_database(args.database)
++            try:
++                apply_migrations(connection)
++                approve_application(
++                    connection, approval_id=approval_id, artifact=artifact,
++                    actor=args.actor, note=args.note,
++                )
++                print(f"Approval created for validated inputs: {approval_id}")
++            finally:
++                connection.close()
++        result = import_country_data(
++            args.database, args.candidate_dir, approval_id=approval_id
++        )
++    except (OSError, ValueError, sqlite3.Error, MigrationError, ApplicationApprovalError, CountryDataImportError) as exc:
++        print(f"Country data import failed: {exc}")
++        return 1
+     print(json.dumps(result, indent=2, sort_keys=True))
++    if args.approve_and_apply:
++        print(f"Approval created and applied: {approval_id}")
+     print("Country metadata and geometry import completed; database integrity and foreign-key checks passed.")
+     return 0
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/tools/import_identity_registry.py b/tools/import_identity_registry.py
+index 8f0c2a3..638b411 100644
+--- a/tools/import_identity_registry.py
++++ b/tools/import_identity_registry.py
+@@ -2,34 +2,72 @@
+ 
+ from __future__ import annotations
+ 
+ import argparse
+ import json
++import sqlite3
+ 
+-from tools.database.connection import DEFAULT_DATABASE_PATH
++from tools.database.application_approval import ApplicationApprovalError, approve_application
++from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
+ from tools.database.identity_import import (
+     DEFAULT_CANDIDATE_DIR,
+     DEFAULT_REGISTRY_PATH,
++    IdentityImportError,
++    build_identity_application_artifact,
+     import_identity_registry,
+ )
++from tools.database.schema import MigrationError, apply_migrations
+ 
+ 
+ def build_parser() -> argparse.ArgumentParser:
+     parser = argparse.ArgumentParser(
+         description="Import identity registry and source provenance into canonical SQLite."
+     )
+     parser.add_argument("--database", default=str(DEFAULT_DATABASE_PATH))
+     parser.add_argument("--registry", default=str(DEFAULT_REGISTRY_PATH))
+     parser.add_argument("--candidate-dir", default=str(DEFAULT_CANDIDATE_DIR))
+-    parser.add_argument("--approval-id", required=True, help="Previously approved identity application ID")
++    approval = parser.add_mutually_exclusive_group(required=True)
++    approval.add_argument("--approval-id", help="Previously approved identity application ID")
++    approval.add_argument(
++        "--approve-and-apply", action="store_true",
++        help="Create approval for these exact identity inputs and immediately apply them",
++    )
++    parser.add_argument("--actor", help="Reviewer identity; required with --approve-and-apply")
++    parser.add_argument("--note", help="Approval rationale; required with --approve-and-apply")
+     return parser
+ 
+ 
+ def main() -> int:
+     args = build_parser().parse_args()
+-    result = import_identity_registry(args.database, args.registry, args.candidate_dir, approval_id=args.approval_id)
++    try:
++        approval_id = args.approval_id
++        if args.approve_and_apply:
++            if not args.actor or not args.actor.strip():
++                raise ApplicationApprovalError("--approve-and-apply requires --actor")
++            if not args.note or not args.note.strip():
++                raise ApplicationApprovalError("--approve-and-apply requires --note")
++            artifact = build_identity_application_artifact(args.registry, args.candidate_dir)
++            approval_id = "identity-registry-" + artifact["artifact_sha256"][:20]
++            connection = connect_database(args.database)
++            try:
++                apply_migrations(connection)
++                approve_application(
++                    connection, approval_id=approval_id, artifact=artifact,
++                    actor=args.actor, note=args.note,
++                )
++                print(f"Approval created for validated inputs: {approval_id}")
++            finally:
++                connection.close()
++        result = import_identity_registry(
++            args.database, args.registry, args.candidate_dir, approval_id=approval_id
++        )
++    except (OSError, ValueError, sqlite3.Error, MigrationError, ApplicationApprovalError, IdentityImportError) as exc:
++        print(f"Identity registry import failed: {exc}")
++        return 1
+     print(json.dumps(result, indent=2, sort_keys=True))
++    if args.approve_and_apply:
++        print(f"Approval created and applied: {approval_id}")
+     print("Identity registry import completed; database integrity and foreign-key checks passed.")
+     return 0
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/tools/import_wp1_5.py b/tools/import_wp1_5.py
+index 07772d1..c1320db 100644
+--- a/tools/import_wp1_5.py
++++ b/tools/import_wp1_5.py
+@@ -1,13 +1,23 @@
+ """Import one normalized WP1.5 source dataset into canonical SQLite."""
+ from __future__ import annotations
+ 
+ import argparse
+ import json
++import sqlite3
+ 
+-from tools.database.statistics_import import StatisticsImportError, import_wp1_5_dataset
+-from tools.database.schema import MigrationError
++from tools.database.application_approval import (
++    ApplicationApprovalError,
++    approve_application,
++)
++from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
++from tools.database.statistics_import import (
++    StatisticsImportError,
++    import_wp1_5_dataset,
++    validate_wp1_5_dataset,
++)
++from tools.database.schema import MigrationError, apply_migrations
+ 
+ 
+ def build_parser() -> argparse.ArgumentParser:
+     parser = argparse.ArgumentParser(
+         description="Import normalized WP1.5 observations with source manifest and explicit country crosswalk."
+@@ -15,32 +25,75 @@ def build_parser() -> argparse.ArgumentParser:
+     parser.add_argument("--observations", required=True, help="Normalized WP1.5 observations JSON")
+     parser.add_argument("--crosswalk", required=True, help="Explicit provider-ID to game_id crosswalk JSON")
+     parser.add_argument("--manifest", required=True, help="Immutable source acquisition manifest JSON")
+     parser.add_argument("--database", help="Canonical SQLite database path")
+     parser.add_argument("--config", help="WP1.5 field contract JSON")
+-    parser.add_argument("--approval-id", required=True, help="Previously approved application ID")
++    approval = parser.add_mutually_exclusive_group(required=True)
++    approval.add_argument("--approval-id", help="Previously approved application ID")
++    approval.add_argument(
++        "--approve-and-apply", action="store_true",
++        help="Create an approval for these exact inputs and immediately apply them",
++    )
++    parser.add_argument("--actor", help="Reviewer identity; required with --approve-and-apply")
++    parser.add_argument("--note", help="Approval rationale; required with --approve-and-apply")
+     return parser
+ 
+ 
+ def main() -> int:
+     args = build_parser().parse_args()
++    database_path = args.database or DEFAULT_DATABASE_PATH
++    config_path = args.config
+     kwargs = {
+         "observations_path": args.observations,
+         "crosswalk_path": args.crosswalk,
+         "manifest_path": args.manifest,
+-        "approval_id": args.approval_id,
++        "database_path": database_path,
+     }
+-    if args.database:
+-        kwargs["database_path"] = args.database
+-    if args.config:
+-        kwargs["config_path"] = args.config
++    if config_path:
++        kwargs["config_path"] = config_path
++
+     try:
+-        result = import_wp1_5_dataset(**kwargs)
+-    except (StatisticsImportError, MigrationError, OSError, ValueError) as exc:
++        approval_id = args.approval_id
++        if args.approve_and_apply:
++            if not args.actor or not args.actor.strip():
++                raise ApplicationApprovalError("--approve-and-apply requires --actor")
++            if not args.note or not args.note.strip():
++                raise ApplicationApprovalError("--approve-and-apply requires --note")
++            validation_kwargs = {
++                "observations_path": args.observations,
++                "crosswalk_path": args.crosswalk,
++                "manifest_path": args.manifest,
++            }
++            if config_path:
++                validation_kwargs["config_path"] = config_path
++            validation = validate_wp1_5_dataset(**validation_kwargs)
++            artifact = validation["application_artifact"]
++            approval_id = "wp1-5-" + artifact["artifact_sha256"][:20]
++            connection = connect_database(database_path)
++            try:
++                apply_migrations(connection)
++                approve_application(
++                    connection,
++                    approval_id=approval_id,
++                    artifact=artifact,
++                    actor=args.actor,
++                    note=args.note,
++                )
++            finally:
++                connection.close()
++            print(f"Approval created for validated inputs: {approval_id}")
++
++        result = import_wp1_5_dataset(**kwargs, approval_id=approval_id)
++    except (
++        StatisticsImportError, MigrationError, ApplicationApprovalError,
++        sqlite3.Error, OSError, ValueError,
++    ) as exc:
+         print(f"WP1.5 import failed: {exc}")
+         return 1
+     print(json.dumps(result, ensure_ascii=False, indent=2))
++    if args.approve_and_apply:
++        print(f"Approval created and applied: {approval_id}")
+     return 0
+ 
+ 
+ if __name__ == "__main__":
+     raise SystemExit(main())
+===== SCHEMA MANAGER AND TEST DIFF =====
+diff --git a/tests/test_database_schema.py b/tests/test_database_schema.py
+index ef9c0c9..88ac24e 100644
+--- a/tests/test_database_schema.py
++++ b/tests/test_database_schema.py
+@@ -3,17 +3,11 @@ from __future__ import annotations
+ import sqlite3
+ 
+ import pytest
+ 
+ from tools.database.connection import connect_database
+-from tools.database.schema import (
+-    MigrationError,
+-    apply_migrations,
+-    current_schema_version,
+-    latest_schema_version,
+-    validate_database,
+-)
++from tools.database.schema import MigrationError, apply_migrations, current_schema_version, validate_database
+ 
+ 
+ @pytest.fixture
+ def database(tmp_path):
+     connection = connect_database(tmp_path / "canonical.sqlite")
+@@ -36,32 +30,21 @@ def seed_country(connection, game_id="tc_00000000000000000000000000000000"):
+ 
+ def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
+     path = tmp_path / "nested" / "canonical.sqlite"
+     with connect_database(path) as connection:
+         assert current_schema_version(connection) == 0
+-        expected_version = latest_schema_version()
+-        assert expected_version > 0
+-        assert apply_migrations(connection) == expected_version
+-        applied_versions = [
+-            row[0] for row in connection.execute(
+-                "SELECT version FROM schema_migrations ORDER BY version"
+-            )
+-        ]
+-        assert applied_versions == list(range(1, expected_version + 1))
++        assert apply_migrations(connection) == 8
+         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
+         assert connection.execute("PRAGMA journal_mode").fetchone()[0].lower() == "wal"
+         assert validate_database(connection) == []
+         tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+         assert {"countries", "country_sources", "country_geometries", "review_proposals", "current_statistics", "selected_game_data", "schema_migrations", "application_approvals", "database_application_events"} <= tables
+ 
+ 
+ def test_migration_is_idempotent(database):
+-    expected_version = latest_schema_version()
+-    assert apply_migrations(database) == expected_version
+-    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == expected_version
+-    assert apply_migrations(database) == expected_version
+-    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == expected_version
++    assert apply_migrations(database) == 8
++    assert database.execute("SELECT COUNT(*) FROM schema_migrations").fetchone()[0] == 8
+ 
+ 
+ def test_game_id_requires_exact_tc_prefix_and_32_lowercase_hex(database):
+     for invalid in ("tc_abc", "tc_" + "g" * 32, "TC_" + "a" * 32, "tc_" + "A" * 32):
+         with pytest.raises(sqlite3.IntegrityError):
+diff --git a/tools/database/schema.py b/tools/database/schema.py
+index a8b3ff8..433c30b 100644
+--- a/tools/database/schema.py
++++ b/tools/database/schema.py
+@@ -37,16 +37,10 @@ def _migration_files(migrations_dir: str | Path) -> list[tuple[int, str, Path]]:
+     if versions and versions != list(range(1, max(versions) + 1)):
+         raise MigrationError("Migration versions must be contiguous starting at 001")
+     return migrations
+ 
+ 
+-def latest_schema_version(migrations_dir: str | Path = DEFAULT_MIGRATIONS_DIR) -> int:
+-    """Return the highest registered migration version (zero when none exist)."""
+-    migrations = _migration_files(migrations_dir)
+-    return migrations[-1][0] if migrations else 0
+-
+-
+ def current_schema_version(connection: sqlite3.Connection) -> int:
+     exists = connection.execute(
+         "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'schema_migrations'"
+     ).fetchone()
+     if exists is None:
+===== WDI IMPORTER AND NORMALIZER =====
+"""Normalize the immutable WDI WP1.5 area/density snapshot for review/import.
+
+This adapter emits candidate observations only. It does not approve, select, or
+write data to either project database.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import sys
+from pathlib import Path
+from typing import Any
+
+from tools.acquire_world_bank_wdi_wp1_5_area import (
+    API, CROSSWALK_DATASET, DATASET_KEY, INDICATORS, ROOT, SOURCE_KEY, AreaSnapshotError, load_snapshot,
+)
+from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
+from tools.database.observation_contract import validate_observation_value
+
+
+def _value_status(provider_status: Any) -> str:
+    """Keep blank WDI statuses unclassified; require review for coded statuses."""
+    if provider_status is None or provider_status == "":
+        return "unclassified"
+    raise AreaSnapshotError(
+        f"WDI obs_status {provider_status!r} requires an explicit canonical status mapping"
+    )
+
+def _write_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("x", encoding="utf-8") as stream:
+        json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
+        stream.write("\n")
+
+def normalize_snapshot(
+    manifest_path: str | Path,
+    crosswalk_path: str | Path,
+    observations_path: str | Path,
+    import_manifest_path: str | Path,
+    *,
+    repository_root: str | Path = ROOT,
+) -> dict[str, Any]:
+    root = Path(repository_root).resolve()
+    loaded = load_snapshot(manifest_path, repository_root=root)
+    crosswalk = load_crosswalk(
+        Path(crosswalk_path) if Path(crosswalk_path).is_absolute() else root / crosswalk_path,
+        expected_dataset=CROSSWALK_DATASET,
+    )
+    if crosswalk.source_key != SOURCE_KEY:
+        raise AreaSnapshotError("Crosswalk source_key does not match the WDI provider")
+    mapping = {item.source_id: item.game_id for item in crosswalk.mappings}
+    if len(mapping) != 187:
+        raise AreaSnapshotError(f"Expected the owner-approved 187-entry WDI crosswalk; found {len(mapping)}")
+    if any(not (len(code) == 3 and code.isupper() and code.isalpha()) for code in mapping):
+        raise AreaSnapshotError("Crosswalk source IDs must be uppercase three-letter WDI codes")
+
+    rows: list[dict[str, Any]] = []
+    per_indicator: dict[str, int] = {}
+    for code, spec in INDICATORS.items():
+        latest: dict[str, dict[str, Any]] = {}
+        for item in loaded["observations"][code]:
+            iso3 = item.get("countryiso3code")
+            if not isinstance(iso3, str) or len(iso3) != 3:
+                continue
+            country = loaded["countries"].get(iso3)
+            if country is None or (country.get("region") or {}).get("id") == "NA":
+                continue
+            value = item.get("value")
+            if value is None or iso3 not in mapping:
+                continue
+            try:
+                year = int(item.get("date"))
+                numeric = float(value)
+            except (TypeError, ValueError) as exc:
+                raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}") from exc
+            if year < 1900 or not validate_observation_value(numeric, "unclassified", "scalar"):
+                raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}/{year}")
+            previous = latest.get(iso3)
+            if previous is None or year > previous["year"]:
+                latest[iso3] = {
+                    "year": year, "value": numeric,
+                    "provider_status": item.get("obs_status"),
+                    "country_name": (item.get("country") or {}).get("value"),
+                }
+        if set(latest) != set(mapping):
+            missing = sorted(set(mapping) - set(latest))
+            raise AreaSnapshotError(f"{code}: mapped entities lack non-null observations: {missing[:10]}")
+        per_indicator[code] = len(latest)
+        metadata = loaded["indicator_metadata"][code]
+        for iso3, selected in sorted(latest.items()):
+            rows.append({
+                "game_id": mapping[iso3],
+                "source_id": iso3,
+                "field_id": spec["field_id"],
+                "value": selected["value"],
+                "unit": spec["unit"],
+                "value_status": _value_status(selected["provider_status"]),
+                "observation_period": str(selected["year"]),
+                "source_reference": f"{API}/country/{iso3}/indicator/{code}?date={selected['year']}",
+                "methodology": (
+                    f"World Bank WDI indicator {code}: {spec['meaning']} "
+                    f"Originating source organization: {metadata.get('sourceOrganization') or 'not supplied'}. "
+                    "Provider obs_status is blank; the populated scalar value remains unclassified."
+                ),
+                "provenance": {
+                    "wdi_iso3": iso3,
+                    "country_name": selected["country_name"],
+                    "indicator_code": code,
+                    "provider_obs_status": selected["provider_status"],
+                    "provider_source_organization": metadata.get("sourceOrganization"),
+                    "provider_source_note": metadata.get("sourceNote"),
+                    "provider_unit_metadata": metadata.get("unit"),
+                },
+            })
+    expected = len(mapping) * len(INDICATORS)
+    if len(rows) != expected or len({(r["game_id"], r["field_id"]) for r in rows}) != expected:
+        raise AreaSnapshotError(f"Expected {expected} unique observations; generated {len(rows)}")
+
+    acquisition = loaded["manifest"]
+    acquisition_path = Path(loaded["manifest_path"])
+    artifacts = acquisition["files"]
+    if len(artifacts) != 8:
+        raise AreaSnapshotError(f"Expected the immutable eight-artifact WDI bundle; found {len(artifacts)}")
+    # Use the captured source metadata response as the required primary raw
+    # input; the other seven captured responses remain explicit additional inputs.
+    primary = next((item for item in artifacts if Path(item["local_raw_path"]).name == "source_metadata.json"), None)
+    if primary is None:
+        raise AreaSnapshotError("Snapshot is missing source_metadata.json")
+    additional = [item for item in artifacts if item is not primary]
+    def raw_input(item: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "local_raw_path": item["local_raw_path"],
+            "sha256": item["sha256"],
+            "byte_count": item["byte_count"],
+        }
+    primary_path = root / primary["local_raw_path"]
+    primary_bytes = primary_path.read_bytes()
+    import_manifest = {
+        "manifest_schema_version": 1,
+        "work_package": "WP1.5",
+        "source_key": SOURCE_KEY,
+        "dataset": CROSSWALK_DATASET,
+        "release": acquisition["release"],
+        "sha256": hashlib.sha256(primary_bytes).hexdigest(),
+        "local_raw_path": primary["local_raw_path"],
+        "byte_count": len(primary_bytes),
+        "source_url": acquisition["source_url"],
+        "final_url": acquisition["final_url"],
+        "retrieved_at": acquisition["retrieved_at"],
+        "value_status_policy": "unclassified_when_provider_obs_status_blank",
+        "attribution": acquisition.get("attribution"),
+        "license_status": acquisition.get("license_status"),
+        "additional_inputs": [raw_input(item) for item in additional],
+        "upstream_manifests": [{
+            "path": acquisition_path.relative_to(root).as_posix(),
+            "sha256": loaded["manifest_sha256"],
+        }],
+    }
+    normalized = {
+        "schema_version": 1,
+        "work_package": "WP1.5",
+        "source_key": SOURCE_KEY,
+        "dataset": CROSSWALK_DATASET,
+        "release": acquisition["release"],
+        "source_sha256": import_manifest["sha256"],
+        "observations": rows,
+        "normalization": {
+            "policy": "latest_non_null_per_indicator_and_entity",
+            "indicator_counts": per_indicator,
+            "observation_count": len(rows),
+            "value_status_policy": "unclassified_when_provider_obs_status_blank",
+            "unmapped_candidate_codes_excluded": 29,
+            "null_only_code_excluded": ["XKX"],
+            "official_iso_identity_changed": False,
+        },
+    }
+    output = Path(observations_path)
+    manifest_output = Path(import_manifest_path)
+    if not output.is_absolute():
+        output = root / output
+    if not manifest_output.is_absolute():
+        manifest_output = root / manifest_output
+    _write_json(output, normalized)
+    _write_json(manifest_output, import_manifest)
+    return {
+        "assessment": "world_bank_wdi_wp1_5_area_normalization_candidate",
+        "dataset": CROSSWALK_DATASET,
+        "acquisition_dataset": DATASET_KEY,
+        "source_key": SOURCE_KEY,
+        "release": acquisition["release"],
+        "observations": len(rows),
+        "indicator_counts": per_indicator,
+        "observations_path": output.relative_to(root).as_posix(),
+        "import_manifest_path": manifest_output.relative_to(root).as_posix(),
+        "license_status": acquisition.get("license_status"),
+        "side_effects": {
+            "canonical_database_written": False,
+            "project_database_written": False,
+            "approval_created": False,
+            "source_selection_changed": False,
+        },
+    }
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--crosswalk", type=Path, required=True)
+    parser.add_argument("--observations", type=Path, required=True)
+    parser.add_argument("--import-manifest", type=Path, required=True)
+    parser.add_argument("--root", type=Path, default=ROOT)
+    args = parser.parse_args(argv)
+    try:
+        result = normalize_snapshot(
+            args.manifest, args.crosswalk, args.observations, args.import_manifest,
+            repository_root=args.root,
+        )
+    except (AreaSnapshotError, CrosswalkError, OSError, ValueError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+"""Non-mutating validation for normalized WP1.5 statistics imports."""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+from tools.database.statistics_import import StatisticsImportError, validate_wp1_5_dataset
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--observations", type=Path, required=True)
+    parser.add_argument("--crosswalk", type=Path, required=True)
+    parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument(
+        "--config", type=Path,
+        default=Path("config/wp1_5_data_sources.json"),
+    )
+    args = parser.parse_args(argv)
+    try:
+        result = validate_wp1_5_dataset(
+            observations_path=args.observations,
+            crosswalk_path=args.crosswalk,
+            manifest_path=args.manifest,
+            config_path=args.config,
+        )
+    except (StatisticsImportError, OSError, ValueError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+===== STATUS =====
+ M temp/temp.txt
+?? data/canonical/town_country_asset.sqlite-shm
+?? data/canonical/town_country_asset.sqlite-wal
