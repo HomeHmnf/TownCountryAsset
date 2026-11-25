@@ -23,6 +23,7 @@ from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_KEY = "world_bank_wdi"
 DATASET_KEY = "wdi_wp1_5_area"
+CROSSWALK_DATASET = "world_bank_wdi_wp1_5_area"
 SOURCE_ID = "2"
 API = common.API
 PER_PAGE = 20000

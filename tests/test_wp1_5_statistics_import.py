@@ -532,22 +532,69 @@ def test_additional_snapshot_inputs_are_checksum_validated(tmp_path):
 
 
 
-def test_imports_unclassified_populated_scalar_but_rejects_structured(tmp_path):
-    database = tmp_path / "canonical.sqlite"
-    setup_database(database)
-    result = run_import(
-        tmp_path, database, field_id=1, value=1234, status="unclassified",
-        release="2024-unclassified",
+def test_dry_run_validates_writes_no_database_and_returns_artifact(tmp_path):
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    database = tmp_path / "must-not-be-created.sqlite"
+    result = statistics_import.validate_wp1_5_dataset(
+        observations_path=observations,
+        crosswalk_path=crosswalk,
+        manifest_path=manifest,
     )
-    assert result["scalar_observations"] == 1
-    connection = sqlite3.connect(database)
-    assert connection.execute(
-        "SELECT value, value_status FROM current_statistics"
-    ).fetchone() == (1234.0, "unclassified")
-    connection.close()
+    assert result["assessment"] == "wp1_5_statistics_import_dry_run"
+    assert result["observations"] == 1
+    assert result["crosswalk_mappings"] == 2
+    assert result["field_counts"] == {"1": 1}
+    assert result["application_artifact_sha256"]
+    assert result["side_effects"] == {
+        "database_opened": False,
+        "database_written": False,
+        "approval_created": False,
+        "source_selection_changed": False,
+    }
+    assert not database.exists()
 
-    with pytest.raises(StatisticsImportError, match="structured value requires"):
-        run_import(
-            tmp_path, database, field_id=12, value={"0-4": 100},
-            status="unclassified", release="2024-structured-unclassified",
+
+def test_dry_run_rejects_duplicate_observations_without_database(tmp_path):
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    payload = json.loads(observations.read_text(encoding="utf-8"))
+    payload["observations"].append(dict(payload["observations"][0]))
+    observations.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(StatisticsImportError, match="Duplicate country/field"):
+        statistics_import.validate_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
+        )
+
+
+
+def test_accepts_day_precision_manual_acquisition_without_inventing_time(tmp_path):
+    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["retrieved_at"] = "2026-11-02"
+    manifest["retrieval_date_precision"] = "day"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = statistics_import.validate_wp1_5_dataset(
+        observations_path=observations,
+        crosswalk_path=crosswalk,
+        manifest_path=manifest_path,
+    )
+
+    assert result["retrieved_at"] == "2026-11-02"
+    assert result["side_effects"]["database_opened"] is False
+
+
+def test_rejects_day_precision_manifest_with_inferred_time(tmp_path):
+    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["retrieved_at"] = "2026-11-02T00:00:00Z"
+    manifest["retrieval_date_precision"] = "day"
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    with pytest.raises(StatisticsImportError, match="YYYY-MM-DD without an inferred time"):
+        statistics_import.validate_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest_path,
         )
