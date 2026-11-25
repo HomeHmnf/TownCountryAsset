@@ -74,7 +74,7 @@ def test_candidate_package_checksums_and_provenance(tmp_path, monkeypatch):
     assert len(inputs) == 8
     (candidate / "observations.csv").write_text("changed", encoding="utf-8")
     with pytest.raises(importer.WEOImportError, match="observations.csv checksum"):
-        importer._load_candidate(candidate, source, identity, migration, acquisition)
+        importer._load_candidate(candidate, source, identity, crosswalk, migration, acquisition)
 
 
 def test_candidate_package_rejects_missing_units_only_if_not_preserved(tmp_path, monkeypatch):
@@ -115,7 +115,7 @@ def test_migration_allows_multiple_release_vintages():
 def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
     from tools.database import application_approval
 
-    candidate, source, identity, migration, acquisition = _package(tmp_path)
+    candidate, source, identity, crosswalk, migration, acquisition = _package(tmp_path)
     monkeypatch.setattr(importer, "REPOSITORY_ROOT", tmp_path)
     monkeypatch.setattr(application_approval, "REPOSITORY_ROOT", tmp_path)
     database = tmp_path / "canonical.sqlite"
@@ -148,7 +148,8 @@ def test_approval_gated_apply_and_idempotent_replay(tmp_path, monkeypatch):
     assert applied["dataset_import_status"] == "candidate"
 
     second = importer.prepare_application(candidate, database_path=database,
-        source_path=source, identity_path=identity, migration_path=migration, acquisition_record_path=acquisition,
+        source_path=source, identity_path=identity, crosswalk_path=crosswalk,
+        migration_path=migration, acquisition_record_path=acquisition,
         approval_id="imf-weo-test-approval-2")
     importer.decide_application_for_weo(second["approval_id"], decision="approved",
         actor="reviewer", note="Reviewed exact same WEO candidate", database_path=database)
