@@ -85,3 +85,26 @@ Field 15 remains open; fields 16 onward remain blocked.
 The project owner approved the exact IMF-specific mapping: `imf_weo / WBG` → `tc_50c420df8b2c4c6eaae47d795f9a1ea2` (Palestine registry identity). It is recorded in `data/manual/source_crosswalks/imf_weo.json`, with the IMF October 2026 appendix evidence and the existing reviewed UN M49 name-variant reconciliation. Scope is limited to field 15 (`NGDPD`) in the current sequential pass. This does not alter the identity registry or PSE verification status, nor authorize the other WEO fields.
 
 The candidate builder/importer will treat the crosswalk file as an exact hashed input. The field-15 candidate must contain the 32 WBG observations; the 13 aggregate series remain explicit non-country review exceptions. No DB write or approval has been performed.
+
+
+### Field-15 implementation update — 2026-11-25
+
+The owner-approved `imf_weo / WBG` → Palestine `game_id` crosswalk is now in `data/manual/source_crosswalks/imf_weo.json`, separate from the global identity registry. The IMF candidate builder accepts the crosswalk, hashes it into candidate metadata, and supports a field-15-only build. The approval importer verifies the crosswalk hash and includes the file as an application artifact dependency. The WEO–WDI review-package builder now accepts `--field-id 15` to avoid mixing fields in the review surface.
+
+Regression tests were added for the mapping, field scoping, unsupported field IDs, and importer fingerprint checks; they remain unexecuted until the owner syncs and runs them locally. No local IMF candidate or field-15 review package has yet been generated; no database, approval or observation data has been written.
+
+After syncing, build the field-15 candidate with:
+
+```fish
+uv run python -m tools.build_imf_weo_historical_candidate --field-id 15
+```
+
+Expected acceptance check: 9,361 observations (9,329 previously reconciled country observations plus 32 WBG values), only field 15, and all 13 aggregate series represented as identity exceptions. Verify rather than assume these counts.
+
+Then build the field-scoped review package from the existing Stage 4C semantic matrix:
+
+```fish
+uv run python -m tools.build_imf_weo_wdi_review_package --input reports/sources/imf-wdi-semantic-disposition/20261107T145725Z/semantic_disposition_matrix.csv --field-id 15
+```
+
+Reconcile that package against the new candidate and crosswalk before entering review decisions. Field 15 remains open; fields 16 onward remain blocked.
