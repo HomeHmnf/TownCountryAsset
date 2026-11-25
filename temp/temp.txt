@@ -1,1319 +1,199 @@
 
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening ⇡10 !8 ?13                                                                                   󰌠 3.14.10  19:55:15
-❯ echo "===== PYTHON VERSION ====="
-  uv run python --version
+    ~/Projects/Python/TownAndCountry-wp15-wdi   work/wp1-5-wdi-import ?3                                                                                    󰌠 3.14.10  09:59:28
+❯ cd ~/Projects/Python/TownAndCountry
 
-  echo "===== INSTALLED PACKAGES ====="
-  uv pip list
+  git diff --stat
+  git diff --name-only
+  git ls-files --others --exclude-standard
+ data/canonical/town_country_asset.sqlite                                          | Bin 1896448 -> 28688384 bytes
+ data/manual/source_crosswalks/world_bank_icp.json                                 | 188 +++++++++++++++++++++++++++++++++++++++++++++++-
+ data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json                      |  10 +--
+ reports/iso-assignment-proposals.md                                               |  20 ++----
+ reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv  | 370 +++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------------------
+ reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.json | 233 ++++++++++++++++++++++++++++++++++++++++++++++++-----------
+ reports/sources/world-bank-icp/country-mapping-review/indicator_dictionary.json   |  34 +++------
+ 7 files changed, 583 insertions(+), 272 deletions(-)
+data/canonical/town_country_asset.sqlite
+data/manual/source_crosswalks/world_bank_icp.json
+data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json
+reports/iso-assignment-proposals.md
+reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv
+reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.json
+reports/sources/world-bank-icp/country-mapping-review/indicator_dictionary.json
+.python-version
+data_manifests/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z.json
+data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z.json
+data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z.json
+raw_data/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z/contents/0a5ab5df-f86c-4577-b850-d1c1fde94ead_Data.csv
+raw_data/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z/contents/0a5ab5df-f86c-4577-b850-d1c1fde94ead_Series_-_Metadata.csv
+raw_data/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z/databank_export.zip
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T072958050461Z/country_metadata_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T072958050461Z/indicator_metadata_EN.POP.DNST.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T072958050461Z/source_metadata.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/country_metadata_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/indicator_metadata_AG.LND.TOTL.K2.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/indicator_metadata_AG.SRF.TOTL.K2.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/indicator_metadata_EN.POP.DNST.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/observations_AG.LND.TOTL.K2_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/observations_AG.SRF.TOTL.K2_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/observations_EN.POP.DNST_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T073046031098Z/source_metadata.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/country_metadata_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.LND.TOTL.K2.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.SRF.TOTL.K2.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_EN.POP.DNST.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.LND.TOTL.K2_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.SRF.TOTL.K2_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_EN.POP.DNST_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/source_metadata.json
+reports/iso-proposal-evidence-audit.md
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T102846Z/annual_ppp_lineage.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T102846Z/assessment.json
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T102846Z/assessment.md
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T102846Z/country_year_diagnostics.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104336Z/annual_ppp_lineage.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104336Z/assessment.json
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104336Z/assessment.md
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104336Z/country_reconciliation_screen.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104336Z/country_year_diagnostics.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104821Z/annual_ppp_lineage.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104821Z/assessment.json
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104821Z/assessment.md
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104821Z/country_reconciliation_screen.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T104821Z/country_year_diagnostics.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T110022Z/annual_ppp_lineage.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T110022Z/assessment.json
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T110022Z/assessment.md
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T110022Z/country_reconciliation_screen.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T110022Z/country_year_diagnostics.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T130900Z/annual_ppp_lineage.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T130900Z/assessment.json
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T130900Z/assessment.md
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T130900Z/country_reconciliation_screen.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T130900Z/country_year_diagnostics.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T134609Z/annual_ppp_lineage.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T134609Z/assessment.json
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T134609Z/assessment.md
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T134609Z/country_reconciliation_screen.csv
+reports/sources/annual-ppp-lineage/annual_ppp_lineage_20261117T134609Z/country_year_diagnostics.csv
+reports/sources/imf-weo-historical-candidate/20261123T103728Z/candidate.json
+reports/sources/imf-weo-historical-candidate/20261123T103728Z/identity_exceptions.csv
+reports/sources/imf-weo-historical-candidate/20261123T103728Z/observations.csv
+reports/sources/imf-weo-wdi-review/20261123T085637Z/README.md
+reports/sources/imf-weo-wdi-review/20261123T085637Z/package.json
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T073046031098Z/acquisition.json
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T073046031098Z/acquisition.md
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/acquisition.json
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/acquisition.md
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/candidate_validation/assessment.json
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/candidate_validation/assessment.md
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/candidate_validation/wdi_wp1_5_area_candidates.csv
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/import_manifest.json
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/observations.json
+temp/browser-captures/P_ICP-Annual-PPPs.zip
+temp/browser-captures/har-index.json
 
-  echo "===== DEPENDENCY TREE ====="
-  uv tree
+    ~/Projects/Python/TownAndCountry   work/compiler-hardening !7 ?13                                                                                       󰌠 3.14.10  09:59:29
+❯ git diff --stat work/compiler-hardening...work/wp1-5-wdi-import
+  git diff --name-only work/compiler-hardening...work/wp1-5-wdi-import
+ data/canonical/town_country_asset.sqlite                                                                            |   Bin 1896448 -> 2539520 bytes
+ data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json                                                        |     8 +-
+ data_manifests/sources/imf_weo/october_2026.json                                                                    |    38 +
+ data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z.json                       |   419 +++
+ docs/PROJECT_CONTEXT.md                                                                                             |    53 +-
+ docs/data-sources/README.md                                                                                         |     2 +
+ docs/data-sources/ilostat-labour-force-acquisition.md                                                               |    92 +
+ docs/data-sources/imf-weo-october-2026-manual-acquisition.md                                                        |     2 +-
+ docs/data-sources/wp1-5-remaining-acquisition-plan.md                                                               |   108 +
+ docs/data-sources/wp1-5-sources.md                                                                                  |    22 +
+ docs/implementation/README.md                                                                                       |     6 +-
+ migrations/008_unspecified_scalar_status.sql                                                                        |    45 +
+ raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/country_metadata_page_001.json   |     1 +
+ .../world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.LND.TOTL.K2.json        |     1 +
+ .../world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.SRF.TOTL.K2.json        |     1 +
+ .../sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_EN.POP.DNST.json   |     1 +
+ .../world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.LND.TOTL.K2_page_001.json     |     1 +
+ .../world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.SRF.TOTL.K2_page_001.json     |     1 +
+ .../world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_EN.POP.DNST_page_001.json        |     1 +
+ raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/source_metadata.json             |     1 +
+ reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/import_manifest.json       |    82 +
+ reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/observations.json          | 11245 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ temp/temp.txt                                                                                                       |    28 +-
+ tests/test_acquisition_manifest_audit.py                                                                            |    24 +
+ tests/test_application_approval.py                                                                                  |    51 +
+ tests/test_application_approval_cli.py                                                                              |   157 +
+ tests/test_database_schema.py                                                                                       |     6 +-
+ tests/test_normalize_world_bank_wdi_wp1_5_area.py                                                                   |    17 +
+ tests/test_observation_contract.py                                                                                  |    41 +
+ tests/test_world_bank_wdi_wp1_5_area.py                                                                             |   124 +
+ tests/test_wp1_5_statistics_import.py                                                                               |    69 +
+ tools/acquire_world_bank_wdi_wp1_5_area.py                                                                          |     6 +-
+ tools/audit_acquisition_manifests.py                                                                                |    32 +-
+ tools/bulk_approve_country_reviews.py                                                                               |    15 +-
+ tools/database/application_approval.py                                                                              |    44 +
+ tools/database/observation_contract.py                                                                              |    46 +
+ tools/database/review_data_import.py                                                                                |    39 +-
+ tools/database/statistics_import.py                                                                                 |   185 +-
+ tools/import_country_data.py                                                                                        |    49 +-
+ tools/import_identity_registry.py                                                                                   |    44 +-
+ tools/import_wp1_5.py                                                                                               |    73 +-
+ tools/normalize_world_bank_wdi_wp1_5_area.py                                                                        |   225 ++
+ tools/validate_wp1_5_statistics_import.py                                                                           |    37 +
+ 43 files changed, 13330 insertions(+), 112 deletions(-)
+data/canonical/town_country_asset.sqlite
+data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json
+data_manifests/sources/imf_weo/october_2026.json
+data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z.json
+docs/PROJECT_CONTEXT.md
+docs/data-sources/README.md
+docs/data-sources/ilostat-labour-force-acquisition.md
+docs/data-sources/imf-weo-october-2026-manual-acquisition.md
+docs/data-sources/wp1-5-remaining-acquisition-plan.md
+docs/data-sources/wp1-5-sources.md
+docs/implementation/README.md
+migrations/008_unspecified_scalar_status.sql
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/country_metadata_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.LND.TOTL.K2.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_AG.SRF.TOTL.K2.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/indicator_metadata_EN.POP.DNST.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.LND.TOTL.K2_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_AG.SRF.TOTL.K2_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/observations_EN.POP.DNST_page_001.json
+raw_data/sources/world_bank_wdi/wdi_wp1_5_area/api_snapshot_20261121T074357472382Z/source_metadata.json
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/import_manifest.json
+reports/sources/world-bank-wdi-wp1-5-area/api_snapshot_20261121T074357472382Z/normalized/observations.json
+temp/temp.txt
+tests/test_acquisition_manifest_audit.py
+tests/test_application_approval.py
+tests/test_application_approval_cli.py
+tests/test_database_schema.py
+tests/test_normalize_world_bank_wdi_wp1_5_area.py
+tests/test_observation_contract.py
+tests/test_world_bank_wdi_wp1_5_area.py
+tests/test_wp1_5_statistics_import.py
+tools/acquire_world_bank_wdi_wp1_5_area.py
+tools/audit_acquisition_manifests.py
+tools/bulk_approve_country_reviews.py
+tools/database/application_approval.py
+tools/database/observation_contract.py
+tools/database/review_data_import.py
+tools/database/statistics_import.py
+tools/import_country_data.py
+tools/import_identity_registry.py
+tools/import_wp1_5.py
+tools/normalize_world_bank_wdi_wp1_5_area.py
+tools/validate_wp1_5_statistics_import.py
 
-  echo "===== FULL TEST SUITE ====="
-  uv run pytest -q
-===== PYTHON VERSION =====
-Python 3.15.2
-===== INSTALLED PACKAGES =====
-Package            Version Editable project location
------------------- ------- -----------------------------------------
-et-xmlfile         2.0.0
-iniconfig          2.3.1
-numpy              2.5.5
-openpyxl           3.1.5
-packaging          26.4
-pluggy             1.7.0
-pygments           2.21.0
-pypdf              7.1.1
-pyshp              3.1.9
-pytest             9.2.0
-shapely            2.2.0
-town-country-asset 0.1.0   /home/hmnf/Projects/Python/TownAndCountry
-===== DEPENDENCY TREE =====
-Resolved 19 packages in 3ms
-town-country-asset v0.1.0
-├── openpyxl v3.1.5
-│   └── et-xmlfile v2.0.0
-├── pypdf v7.1.1
-├── pyshp v3.1.9
-├── shapely v2.2.0
-│   └── numpy v2.5.5
-└── pytest v9.2.0 (extra: dev)
-    ├── iniconfig v2.3.1
-    ├── packaging v26.4
-    ├── pluggy v1.7.0
-    └── pygments v2.21.0
-===== FULL TEST SUITE =====
-..................................................................................................FF............................................................................ [ 32%]
-................................................................................................................................................................................ [ 64%]
-................................................................................................................................................................................ [ 97%]
-..............                                                                                                                                                                   [100%]
-======================================================================================= FAILURES =======================================================================================
-___________________________________________________________ test_fresh_database_applies_all_migrations_and_integrity_passes ____________________________________________________________
+    ~/Projects/Python/TownAndCountry   work/compiler-hardening !7 ?13                                                                                       󰌠 3.14.10  09:59:37
+❯ git branch -r
+  origin/HEAD -> origin/main
+  origin/Update-2026
+  origin/main
+  origin/migration/godot-4.7.2
+  origin/stage/data-architecture
+  origin/work/compiler-hardening
+  origin/work/shared-observation-contract
+  origin/work/wp1-5-wdi-import
 
-tmp_path = PosixPath('/tmp/pytest-of-hmnf/pytest-9/test_fresh_database_applies_al0')
-
-    def test_fresh_database_applies_all_migrations_and_integrity_passes(tmp_path):
-        path = tmp_path / "nested" / "canonical.sqlite"
-        with connect_database(path) as connection:
-            assert current_schema_version(connection) == 0
->           assert apply_migrations(connection) == 7
-E           assert 9 == 7
-E            +  where 9 = apply_migrations(<sqlite3.Connection object at 0x7f579eb93760>)
-
-tests/test_database_schema.py:35: AssertionError
-_____________________________________________________________________________ test_migration_is_idempotent _____________________________________________________________________________
-
-database = <sqlite3.Connection object at 0x7f57b698cf20>
-
-    def test_migration_is_idempotent(database):
->       assert apply_migrations(database) == 7
-E       assert 9 == 7
-E        +  where 9 = apply_migrations(<sqlite3.Connection object at 0x7f57b698cf20>)
-
-tests/test_database_schema.py:44: AssertionError
-=============================================================================== short test summary info ================================================================================
-FAILED tests/test_database_schema.py::test_fresh_database_applies_all_migrations_and_integrity_passes - assert 9 == 7
-FAILED tests/test_database_schema.py::test_migration_is_idempotent - assert 9 == 7
-2 failed, 540 passed in 17.67s
-
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening ⇡10 !8 ?13                                                                            20s  󰌠 3.14.10  19:55:41
-❯ git status --short --branch
-  git diff --check
-
-  git diff -- pyproject.toml uv.lock .python-version
-## work/compiler-hardening...origin/work/compiler-hardening [ahead 10]
- M data/canonical/town_country_asset.sqlite
- M data/manual/source_crosswalks/world_bank_icp.json
- M data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json
- M reports/iso-assignment-proposals.md
- M reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv
- M reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.json
- M reports/sources/world-bank-icp/country-mapping-review/indicator_dictionary.json
- M uv.lock
-?? .python-version
-?? data_manifests/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z.json
-?? data_manifests/sources/world_bank_wdi/wdi_wp1_5_area/
-?? raw_data/sources/world_bank_icp/databank_exports/databank_20261119T075746677306Z/
-?? raw_data/sources/world_bank_wdi/wdi_wp1_5_area/
-?? reports/iso-proposal-evidence-audit.md
-?? reports/sources/annual-ppp-lineage/
-?? reports/sources/imf-weo-historical-candidate/20261123T103728Z/
-?? reports/sources/imf-weo-wdi-review/20261123T085637Z/README.md
-?? reports/sources/imf-weo-wdi-review/20261123T085637Z/package.json
-?? reports/sources/world-bank-wdi-wp1-5-area/
-?? temp/browser-captures/P_ICP-Annual-PPPs.zip
-?? temp/browser-captures/har-index.json
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:1: trailing whitespace.
-+source_country_code,source_country_name,asset_country_id,asset_country_name,game_id,wpp_m49_source_id,match_method,canonical_registry_status,status,review_status,review_note
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:2: trailing whitespace.
-+ABW,Aruba,ABW,Aruba,tc_8344feaf14da4684aaa8d4c263653778,533,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:3: trailing whitespace.
-+AGO,Angola,AGO,Angola,tc_fa43ff476d6b428fa8edb4dde1aa9d3f,24,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:4: trailing whitespace.
-+AIA,Anguilla,AIA,Anguilla,tc_0b9688bbf4264477b023a0f2af180c2e,660,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:5: trailing whitespace.
-+ALB,Albania,ALB,Albania,tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1,8,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:6: trailing whitespace.
-+ARE,United Arab Emirates,ARE,United Arab Emirates,tc_3cbd960008724744b928265acc0638a4,784,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:7: trailing whitespace.
-+ARG,Argentina,ARG,Argentina,tc_2a29d5b72b294244a5de6db37118237a,32,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:8: trailing whitespace.
-+ARM,Armenia,ARM,Armenia,tc_f97b56c9c74845de8b41aa24ed12a47f,51,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:9: trailing whitespace.
-+ATG,Antigua and Barbuda,ATG,Antigua and Barbuda,tc_9221f2a3fd704847b66da16efa03c2b8,28,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:10: trailing whitespace.
-+AUS,Australia,AUS,Australia,tc_270a6ecb902d4ea1ac7373b3d1a3b2cc,36,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:11: trailing whitespace.
-+AUT,Austria,AUT,Austria,tc_a0422e821c824e78bd95525b36155b65,40,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:12: trailing whitespace.
-+AZE,Azerbaijan,AZE,Azerbaijan,tc_b8c860bb8d404dcca918bad769e7ead7,31,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:13: trailing whitespace.
-+BDI,Burundi,BDI,Burundi,tc_4ac5b3c6b7774a05b4ceb5573c4a9d27,108,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:14: trailing whitespace.
-+BEL,Belgium,BEL,Belgium,tc_f1cc713e923c4be48e176657a00469f0,56,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:15: trailing whitespace.
-+BEN,Benin,BEN,Benin,tc_874ae1f05e8c4d67a2c839095d760b72,204,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:16: trailing whitespace.
-+BFA,Burkina Faso,BFA,Burkina Faso,tc_3c920b9b9f324cb19ef9d4b6debf10ba,854,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:17: trailing whitespace.
-+BGD,Bangladesh,BGD,Bangladesh,tc_8169e562ece7475e960f78f231cb1ab7,50,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:18: trailing whitespace.
-+BGR,Bulgaria,BGR,Bulgaria,tc_523810acde564c1c907acd5befe575ab,100,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:19: trailing whitespace.
-+BHR,Bahrain,BHR,Bahrain,tc_38fd6c5cd2be45739f3be11bc4cab9c8,48,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:20: trailing whitespace.
-+BIH,Bosnia and Herzegovina,BIH,Bosnia and Herzegovina,tc_0628271c897b49558f423321cbc48ce4,70,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:21: trailing whitespace.
-+BLR,Belarus,BLR,Belarus,tc_6ebc90b251e14f70b8bf758d8008e839,112,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:22: trailing whitespace.
-+BLZ,Belize,BLZ,Belize,tc_d066174c4df546d1a410d386f363ee80,84,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:23: trailing whitespace.
-+BMU,Bermuda,BMU,Bermuda,tc_d81e2d4c4b934f57a67f380b2fdaec9d,60,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:24: trailing whitespace.
-+BRA,Brazil,BRA,Brazil,tc_4923336d91d94afc919d8a2b8a4ad415,76,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:25: trailing whitespace.
-+BTN,Bhutan,BTN,Bhutan,tc_91f04a21215642aeb5da856a78dc9949,64,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:26: trailing whitespace.
-+BWA,Botswana,BWA,Botswana,tc_ca2bdd688a454bb8b6457c9448612669,72,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:27: trailing whitespace.
-+CAF,Central African Republic,CAF,Central African Republic,tc_9d80376a997845b6ba6bbc08d436a50d,140,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:28: trailing whitespace.
-+CAN,Canada,CAN,Canada,tc_ba9087366ba54d51932e88bf8a11616d,124,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:29: trailing whitespace.
-+CHE,Switzerland,CHE,Switzerland,tc_e693e8b799f94e7bb814e89bd46d886d,756,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:30: trailing whitespace.
-+CHL,Chile,CHL,Chile,tc_4c51c695cb6e47d2aed2fb04c397bece,152,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:31: trailing whitespace.
-+CHN,China,CHN,China,tc_3349a0b8b7454088b11e917a24de3ad5,156,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:32: trailing whitespace.
-+CMR,Cameroon,CMR,Cameroon,tc_f5cd614ef03c414d8e98d87102df5c14,120,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:33: trailing whitespace.
-+COD,"Congo, Dem. Rep.",COD,Democratic Republic of the Congo,tc_2763c19aa8734ce9aa8b17d8effb6645,180,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:34: trailing whitespace.
-+COL,Colombia,COL,Colombia,tc_648b019cc83e486ab9fb8497386777a9,170,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:35: trailing whitespace.
-+COM,Comoros,COM,Comoros,tc_10dd5e9664664abf9eca33c250a74cdb,174,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:36: trailing whitespace.
-+CPV,Cabo Verde,CPV,Cabo Verde,tc_d9d1737635ce4385a50c4307c2716832,132,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:37: trailing whitespace.
-+CRI,Costa Rica,CRI,Costa Rica,tc_79512b2eaf8f45b5b118130859ebdaaf,188,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:38: trailing whitespace.
-+CUW,Curacao,CUW,Curaçao,tc_2d0dc3f3edb9467090ea74861dbc7b9e,531,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:39: trailing whitespace.
-+CYM,Cayman Islands,CYM,Cayman Islands,tc_19acfc8e1cf44c25aa753729115d60d6,136,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:40: trailing whitespace.
-+CYP,Cyprus,CYP,Cyprus,tc_3c148b1f7650455fa710ca87cf376728,196,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:41: trailing whitespace.
-+CZE,Czechia,CZE,Czechia,tc_e43afc3a83a3458c833dac5644b7186a,203,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:42: trailing whitespace.
-+DEU,Germany,DEU,Germany,tc_ff445b0a87494070bf868827de190acf,276,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:43: trailing whitespace.
-+DJI,Djibouti,DJI,Djibouti,tc_f4814b1a89384c4d93a92c19b301a814,262,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:44: trailing whitespace.
-+DMA,Dominica,DMA,Dominica,tc_e5391af862dd490bb3a01fa80f4ac15e,212,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:45: trailing whitespace.
-+DNK,Denmark,DNK,Denmark,tc_11da440eb0704bd195fe0b11fa0890af,208,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:46: trailing whitespace.
-+DOM,Dominican Republic,DOM,Dominican Republic,tc_ee04e01170f84b92afabbb40abdbd4e3,214,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:47: trailing whitespace.
-+DZA,Algeria,DZA,Algeria,tc_e245d37005f843168d67b7b327ece7f9,12,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:48: trailing whitespace.
-+ECU,Ecuador,ECU,Ecuador,tc_2a54eb1caed54a2185a62cce0c2db6cb,218,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:49: trailing whitespace.
-+EGY,"Egypt, Arab Rep.",EGY,Egypt,tc_939f236600dd47a8bf850a7ff19dc047,818,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:50: trailing whitespace.
-+ESP,Spain,ESP,Spain,tc_21a70a0fbf1b43c292783397ce218239,724,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:51: trailing whitespace.
-+EST,Estonia,EST,Estonia,tc_383873de760147cd97dfac5ef5d60b08,233,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:52: trailing whitespace.
-+ETH,Ethiopia,ETH,Ethiopia,tc_860d12ee66fc4fceb3faddbc92c87930,231,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:53: trailing whitespace.
-+FIN,Finland,FIN,Finland,tc_374e55a3eefe4a1a83fed6b64b5045f5,246,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:54: trailing whitespace.
-+FJI,Fiji,FJI,Fiji,tc_8d67737674744dce8986565b98cbbb1f,242,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:55: trailing whitespace.
-+GAB,Gabon,GAB,Gabon,tc_d59dfb6324524b07a32c87b73009e97f,266,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:56: trailing whitespace.
-+GEO,Georgia,GEO,Georgia,tc_741bd244c1ec4961918565c4ed02c5c6,268,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:57: trailing whitespace.
-+GHA,Ghana,GHA,Ghana,tc_f63061b714ce4390948838410758c016,288,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:58: trailing whitespace.
-+GIN,Guinea,GIN,Guinea,tc_05eaf88055cc4388b518332f2e7fc115,324,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:59: trailing whitespace.
-+GMB,"Gambia, The",GMB,Gambia,tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a,270,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:60: trailing whitespace.
-+GNB,Guinea-Bissau,GNB,Guinea-Bissau,tc_dc93b6caf7324df884ec2b070a5296b9,624,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:61: trailing whitespace.
-+GNQ,Equatorial Guinea,GNQ,Equatorial Guinea,tc_06d71df13c4f415fbf22a0147f19bc53,226,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:62: trailing whitespace.
-+GRC,Greece,GRC,Greece,tc_dab67464d7ad44cdbf925450627e4186,300,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:63: trailing whitespace.
-+GRD,Grenada,GRD,Grenada,tc_c5b3fecc12a94e85a7acddc70fa7a086,308,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:64: trailing whitespace.
-+GTM,Guatemala,GTM,Guatemala,tc_9348779eba844ab2beb5bed00053b7c6,320,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:65: trailing whitespace.
-+GUY,Guyana,GUY,Guyana,tc_893d4efa8ccf42af896949ffd7007fef,328,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:66: trailing whitespace.
-+HND,Honduras,HND,Honduras,tc_80c318b9217a4320beaad6b93eb74ac5,340,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:67: trailing whitespace.
-+HRV,Croatia,HRV,Croatia,tc_fb4046d4910a4bf89f4a93810e2f4d8a,191,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:68: trailing whitespace.
-+HUN,Hungary,HUN,Hungary,tc_e3ede57c1b754a2dbd940335f9655f11,348,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:69: trailing whitespace.
-+IDN,Indonesia,IDN,Indonesia,tc_c40da0ac977b4201b8587ce04aa66f56,360,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:70: trailing whitespace.
-+IND,India,IND,India,tc_39ad5030b5f94f068d4a1528c60e5638,356,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:71: trailing whitespace.
-+IRL,Ireland,IRL,Ireland,tc_16d6044d9abf4743821a6fb238942a22,372,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:72: trailing whitespace.
-+IRQ,Iraq,IRQ,Iraq,tc_5ee7b31f968941dca65e70519901915f,368,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:73: trailing whitespace.
-+ISL,Iceland,ISL,Iceland,tc_861af4b9250e4e17a9d3f1f4e1ea33d4,352,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:74: trailing whitespace.
-+ISR,Israel,ISR,Israel,tc_28952c75855947a7b31bb7509dc1fce1,376,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:75: trailing whitespace.
-+ITA,Italy,ITA,Italy,tc_1f3e0c90df4341f082ed90ecdd95fb10,380,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:76: trailing whitespace.
-+JAM,Jamaica,JAM,Jamaica,tc_bf02736242694622ae7c730beb0f0da6,388,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:77: trailing whitespace.
-+JOR,Jordan,JOR,Jordan,tc_6e28258973b54dfeb5811c563cd0a2e8,400,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:78: trailing whitespace.
-+JPN,Japan,JPN,Japan,tc_8d0620ea475f498d9402134857882bf1,392,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:79: trailing whitespace.
-+KAZ,Kazakhstan,KAZ,Kazakhstan,tc_feadffc011db4cf695df6c0997a003c8,398,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:80: trailing whitespace.
-+KEN,Kenya,KEN,Kenya,tc_9f3dc962bf9744a5a3cdf1f7a1cbb159,404,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:81: trailing whitespace.
-+KGZ,Kyrgyz Republic,KGZ,Kyrgyzstan,tc_130ca81b84d04b058e9301121b2b7802,417,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:82: trailing whitespace.
-+KHM,Cambodia,KHM,Cambodia,tc_f956986338e5418481784ba2d2781063,116,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:83: trailing whitespace.
-+KNA,St. Kitts and Nevis,KNA,Saint Kitts and Nevis,tc_f22d58e7280f41f7a5a68fb03e1ab87e,659,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:84: trailing whitespace.
-+KWT,Kuwait,KWT,Kuwait,tc_fa491c61ffa24dc3a21c6a6da7d39fad,414,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:85: trailing whitespace.
-+LBN,Lebanon,LBN,Lebanon,tc_8466a0747d0b4d1a8c23feb70f7c6ed1,422,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:86: trailing whitespace.
-+LBR,Liberia,LBR,Liberia,tc_40dc9d2e141343e98a4d0c762c578473,430,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:87: trailing whitespace.
-+LCA,St. Lucia,LCA,Saint Lucia,tc_6629fdb92d05409f856d9030b63b1470,662,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:88: trailing whitespace.
-+LKA,Sri Lanka,LKA,Sri Lanka,tc_5e47c88bebac452e953fc5dfa8b1ba06,144,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:89: trailing whitespace.
-+LSO,Lesotho,LSO,Lesotho,tc_c0fa4e9b8e984f59ba17beb7547c5811,426,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:90: trailing whitespace.
-+LTU,Lithuania,LTU,Lithuania,tc_77de0a41c4d94d8388d6f0732438be81,440,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:91: trailing whitespace.
-+LUX,Luxembourg,LUX,Luxembourg,tc_f4261f4507cd48858cdfb7e3bd0ae738,442,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:92: trailing whitespace.
-+LVA,Latvia,LVA,Latvia,tc_f161aef25a39413e8aef8c147e97b28a,428,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:93: trailing whitespace.
-+MAR,Morocco,MAR,Morocco,tc_84dc0c18f03144bea337f6aacd50bf0f,504,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:94: trailing whitespace.
-+MDG,Madagascar,MDG,Madagascar,tc_7abbe0f9aa1346c7a9f69cc1027b4282,450,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:95: trailing whitespace.
-+MDV,Maldives,MDV,Maldives,tc_408d22fe5b894b4b947a0521ace1018a,462,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:96: trailing whitespace.
-+MEX,Mexico,MEX,Mexico,tc_c6b830c3cba64d4883eac8cee7864cfd,484,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:97: trailing whitespace.
-+MKD,North Macedonia,MKD,North Macedonia,tc_949bf877e3284f5c8a56cfc89bcafa90,807,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:98: trailing whitespace.
-+MLI,Mali,MLI,Mali,tc_a3f73fd3bb6d4d7fb4ea31d433453bae,466,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:99: trailing whitespace.
-+MLT,Malta,MLT,Malta,tc_f97b2223a2a84e53ac13614ddde1f602,470,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:100: trailing whitespace.
-+MNE,Montenegro,MNE,Montenegro,tc_eb1de71332ef4db496cb76c95aa56cd4,499,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:101: trailing whitespace.
-+MNG,Mongolia,MNG,Mongolia,tc_d0fb202ca0aa4a868af6fa154ab84c30,496,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:102: trailing whitespace.
-+MOZ,Mozambique,MOZ,Mozambique,tc_2249b79a9c944a1c835b0cad2676e48d,508,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:103: trailing whitespace.
-+MRT,Mauritania,MRT,Mauritania,tc_17137c4e4fcc4fa58e32c924f08efcda,478,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:104: trailing whitespace.
-+MSR,Montserrat,MSR,Montserrat,tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d,500,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:105: trailing whitespace.
-+MUS,Mauritius,MUS,Mauritius,tc_c7b728ec16b94e35b05d96d14a253eec,480,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:106: trailing whitespace.
-+MWI,Malawi,MWI,Malawi,tc_ee1c1ac1ad5c4faf818070115133b174,454,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:107: trailing whitespace.
-+MYS,Malaysia,MYS,Malaysia,tc_b21225f45c3b40509640603249110f89,458,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:108: trailing whitespace.
-+NAM,Namibia,NAM,Namibia,tc_7379cdcc5c4848c181ace3144aeba70f,516,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:109: trailing whitespace.
-+NER,Niger,NER,Niger,tc_4d31375845614c2b91a71736069d4ab3,562,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:110: trailing whitespace.
-+NGA,Nigeria,NGA,Nigeria,tc_7a8158c93a934345a2ade9fd16ee4999,566,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:111: trailing whitespace.
-+NIC,Nicaragua,NIC,Nicaragua,tc_2fdae8757e51402e9f67c428d2b79368,558,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:112: trailing whitespace.
-+NPL,Nepal,NPL,Nepal,tc_1c4ff3f2a8f04b43b0c28e830a9403ad,524,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:113: trailing whitespace.
-+NZL,New Zealand,NZL,New Zealand,tc_d4b67e03f0c04d9a87089f477e5fa669,554,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Verify ICP entity scope and persistent game identity before changing review_status to approved.
-reports/sources/world-bank-icp/country-mapping-review/country_mapping_review.csv:114: trailing whitespace.
-+OMN,Oman,OMN,Oman,tc_22bd85ff61234a46a95506d105d5fee4,512,candidate_iso3_asset_and_un_m49_wpp_crosswalk,read_only_verified_registry_loaded,candidate_mapping,pending,Candidate only. Ve
-Δ uv.lock
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-─────────────────┐
-• 27: wheels = [ │
-─────────────────┘
-
-[[package]]
-name = "exceptiongroup"
-version = "1.3.1"
-version = "1.3.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
-sdist = { url = "https://files.pythonhosted.org/packages/85/ac/f882fe3234606340c8729372da0fb98c634b97a560c9d375d9afea21496b/exceptiongroup-1.3.2.tar.gz", hash = "sha256:ca82e69f0cb535fbde934885744b67669a3efddd50fe7bc00d3398839fcaddec", size = 34687, upload-time = "2026-11-19T22:10:16.815Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/8a/0e/97c33bf5009bdbac74fd2beace167cab3f978feb69cc36f1ef79360d6c4e/exceptiongroup-1.3.1-py3-none-any.whl", hash = "sha256:a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598", size = 16740, upload-time = "2025-11-21T23:01:53.443Z" },
-    { url = "https://files.pythonhosted.org/packages/a0/7d/0fb19ccdf794c448141461180d5992c50402f69f8515a801bfac7ad65f45/exceptiongroup-1.3.2-py3-none-any.whl", hash = "sha256:41c6a70dfec22050d3d8b43386b059a4dc0bca3f3d40a40971cb206fff1785af", size = 16854, upload-time = "2026-11-19T22:10:15.746Z" },
-]
-
-[[package]]
-
-──────────────────┐
-• 195: wheels = [ │
-──────────────────┘
-
-[[package]]
-name = "numpy"
-version = "2.5.4"
-version = "2.5.5"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.12'",
-]
-sdist = { url = "https://files.pythonhosted.org/packages/95/b0/c7453d0b6e2073c3264468b106ee1563750cecc910965e67357e3698c83e/numpy-2.5.4.tar.gz", hash = "sha256:9a94cf751c9ad8ebaa835bcd3d40dacf8534ad086b88c38029b65123c7999d2a", size = 20866315, upload-time = "2026-10-10T20:05:31.422Z" }
-sdist = { url = "https://files.pythonhosted.org/packages/4e/3a/8770c288c47f0b5c2a786d3c20e79f66fd245f2d42cd232d7cd5e00e83e5/numpy-2.5.5.tar.gz", hash = "sha256:5cddc243c75114ba845f01b1f87aca1572dbf7b6c2d88636ed3e1d2bccd7f1bf", size = 20873892, upload-time = "2026-11-15T21:32:28.607Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d0/97/ba2074e92b7befea137e77ea8471e768bbd87c339b7e8c9f5a931949f977/numpy-2.5.4-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:c6342f54c67093cae5c0227eb0eb772fdb79f2a2c37a6eb278b9909ee06aa356", size = 17001609, upload-time = "2026-10-10T20:02:40.843Z" },
-    { url = "https://files.pythonhosted.org/packages/ff/a9/bac826765e971d8e16e2064e9ac7525fd69b40ac17c905033a7f5442023f/numpy-2.5.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:b11e8fda06a7d69f15ebf542660b74466c2e51094800c1fb794f47ad4faeef17", size = 12015718, upload-time = "2026-10-10T20:02:43.45Z" },
-    { url = "https://files.pythonhosted.org/packages/31/2f/5ea3570fcb8ccd0882bea99436a513b2c85dad8f774a2057849130a8fb99/numpy-2.5.4-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:9cb18a327b49c5c337f972b03682f6a49855525faaf3c0d3e9c96cd0fd8880a8", size = 5451717, upload-time = "2026-10-10T20:02:46.169Z" },
-
-    ~/Projects/Python/TownAndCountry   work/compiler-hardening ⇡10 !8 ?13                                                                            19s  󰌠 3.14.10  19:56:32
+    ~/Projects/Python/TownAndCountry   work/compiler-hardening !7 ?13                                                                                       󰌠 3.14.10  09:59:42
 ❯
-
-============================================================
-SHARED OBSERVATION CONTRACT INSPECTION
-Tue Nov 24 05:58:34 PM UTC 2026
-============================================================
-
-===== CONTRACT COMMIT FILE SUMMARIES =====
-
-COMMIT eeafbcc Use shared canonical observation status contract
-
- tools/database/source_selection.py | 36 ++++++++++++------------------------
- 1 file changed, 12 insertions(+), 24 deletions(-)
-
-COMMIT a139707 Validate WP1.5 rows with shared observation contract
-
- tools/database/statistics_import.py | 17 ++++++++++++-----
- 1 file changed, 12 insertions(+), 5 deletions(-)
-
-COMMIT 13d2068 Add shared canonical observation value contract
-
- tools/database/observation_contract.py | 46 ++++++++++++++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
-
-COMMIT d3994bc Allow unclassified scalar observations in canonical statistics
-
- migrations/009_unclassified_scalar_status.sql | 48 +++++++++++++++++++++++++++
- 1 file changed, 48 insertions(+)
-
-COMMIT 4c9f604 Test unclassified scalar source selection
-
- tests/test_source_selection.py | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-COMMIT 55b8c57 Keep structured source status classification strict
-
- tests/test_structured_source_selection.py | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-COMMIT 83cb47e Test scalar unclassified import and structured rejection
-
- tests/test_wp1_5_statistics_import.py | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
-
-COMMIT 92f6123 Add shared observation contract validation tests
-
- tests/test_observation_contract.py | 41 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 41 insertions(+)
-
-COMMIT 2cf1644 Remove obsolete scalar validation import
-
- tools/database/source_selection.py | 1 -
- 1 file changed, 1 deletion(-)
-
-COMMIT 8ca0022 Harden shared status validation for malformed inputs
-
- tools/database/observation_contract.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-===== CONTRACT IMPLEMENTATION PATCH =====
-commit 13d20688c6c205c8c548d86aa794cfbc4d078148
-Author:     HomeHmnf <home.hmnf@gmail.com>
-AuthorDate: Tue Nov 24 14:30:43 2026 +0000
-Commit:     HomeHmnf <home.hmnf@gmail.com>
-CommitDate: Tue Nov 24 14:30:43 2026 +0000
-
-    Add shared canonical observation value contract
-
-diff --git a/tools/database/observation_contract.py b/tools/database/observation_contract.py
-new file mode 100644
-index 0000000..8bd0ba2
---- /dev/null
-+++ b/tools/database/observation_contract.py
-@@ -0,0 +1,46 @@
-+"""Canonical value/status rules shared by acquisition and selection pipelines.
-+
-+Missing observations are represented by absent rows. Explicit null values are
-+reserved for unavailable or not-applicable observations.
-+"""
-+from __future__ import annotations
-+
-+import json
-+import math
-+from typing import Any
-+
-+UNCLASSIFIED = "unclassified"
-+NULL_VALUE_STATUSES = frozenset({"unavailable", "not_applicable"})
-+CLASSIFIED_POPULATED_STATUSES = frozenset({"observed", "estimated", "projected"})
-+POPULATED_SCALAR_STATUSES = CLASSIFIED_POPULATED_STATUSES | {UNCLASSIFIED}
-+ALLOWED_VALUE_STATUSES = POPULATED_SCALAR_STATUSES | NULL_VALUE_STATUSES
-+POPULATED_STRUCTURED_STATUSES = CLASSIFIED_POPULATED_STATUSES
-+
-+
-+def validate_observation_value(value: Any, status: Any, storage: Any) -> bool:
-+    """Validate a scalar or structured value/status pair without inference.
-+
-+    ``unclassified`` is valid only for finite populated scalar values. Structured
-+    payloads require a classified status. Explicit nulls require unavailable or
-+    not_applicable; missing observations are represented by absent rows.
-+    """
-+    if storage not in {"scalar", "structured"} or status not in ALLOWED_VALUE_STATUSES:
-+        return False
-+    if value is None:
-+        return status in NULL_VALUE_STATUSES
-+    if storage == "scalar":
-+        if status not in POPULATED_SCALAR_STATUSES:
-+            return False
-+        if isinstance(value, bool) or not isinstance(value, (int, float)):
-+            return False
-+        try:
-+            return math.isfinite(float(value))
-+        except (OverflowError, TypeError, ValueError):
-+            return False
-+    if status not in POPULATED_STRUCTURED_STATUSES or not isinstance(value, (dict, list)):
-+        return False
-+    try:
-+        json.dumps(value, ensure_ascii=False, allow_nan=False)
-+    except (TypeError, ValueError):
-+        return False
-+    return True
-
-===== IMPORTER INTEGRATION PATCHES =====
-
-
-commit a13970765b81af5e4cb8a4217c10e99ec82873cf
-Author:     HomeHmnf <home.hmnf@gmail.com>
-AuthorDate: Tue Nov 24 14:30:13 2026 +0000
-Commit:     HomeHmnf <home.hmnf@gmail.com>
-CommitDate: Tue Nov 24 14:30:13 2026 +0000
-
-    Validate WP1.5 rows with shared observation contract
-
-diff --git a/tools/database/statistics_import.py b/tools/database/statistics_import.py
-index 6cc46e7..e5fbb75 100644
---- a/tools/database/statistics_import.py
-+++ b/tools/database/statistics_import.py
-@@ -15,6 +15,9 @@ from pathlib import Path
- from typing import Any
- 
- from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
-+from tools.database.observation_contract import (
-+    ALLOWED_VALUE_STATUSES, validate_observation_value,
-+)
- from tools.database.application_approval import (
-     ApplicationApprovalError,
-     build_application_artifact,
-@@ -199,7 +202,7 @@ def _validate_observation(
-         )
-     period = _text(row.get("observation_period"), f"{label}.observation_period")
-     status = row.get("value_status")
--    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unavailable", "not_applicable"}:
-+    if not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
-         raise StatisticsImportError(f"{label}.value_status is invalid")
-     if "value" not in row:
-         raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
-@@ -229,13 +232,17 @@ def _validate_observation(
-             if not finite:
-                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
-             value = float(value)
--            if status not in {"observed", "estimated", "projected"}:
--                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected status")
-+            if not validate_observation_value(value, status, "scalar"):
-+                raise StatisticsImportError(
-+                    f"{label} populated scalar has an invalid value/status combination"
-+                )
-     else:
-         if value is None or not isinstance(value, (dict, list)):
-             raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
--        if status not in {"observed", "estimated", "projected"}:
--            raise StatisticsImportError(f"{label} structured value requires observed/estimated/projected status")
-+        if not validate_observation_value(value, status, "structured"):
-+            raise StatisticsImportError(
-+                f"{label} structured value requires a valid observed/estimated/projected status"
-+            )
-         try:
-             _canonical_json(value)
-         except (TypeError, ValueError) as exc:
-
-===== WDI BRANCH NORMALIZER AND IMPORTER STATUS =====
-diff --git a/tests/test_world_bank_wdi_wp1_5_area.py b/tests/test_world_bank_wdi_wp1_5_area.py
-index a34617a..d876d78 100644
---- a/tests/test_world_bank_wdi_wp1_5_area.py
-+++ b/tests/test_world_bank_wdi_wp1_5_area.py
-@@ -1,15 +1,11 @@
- from __future__ import annotations
- 
--import hashlib
- import json
--from itertools import product
--from string import ascii_uppercase
- from urllib.parse import parse_qs, urlparse
- 
- import pytest
- 
- from tools import acquire_world_bank_wdi_wp1_5_area as area
--from tools import normalize_world_bank_wdi_wp1_5_area as normalizer
- from tools.database.source_crosswalk import CrosswalkError
- 
- 
-@@ -120,123 +116,3 @@ def test_validation_rejects_crosswalk_dataset_mismatch(tmp_path):
-             "game_id": G1, "source_id": "USA", "match_method": "reviewed_manual"}]}), encoding="utf-8")
-     with pytest.raises(CrosswalkError, match="dataset mismatch"):
-         area.validate_candidates(report["manifest_path"], crosswalk, registry, repository_root=tmp_path)
--
--def test_normalizer_uses_crosswalk_dataset_not_acquisition_storage_key(tmp_path, monkeypatch):
--    iso3_codes = [
--        "".join(chars)
--        for chars in product(ascii_uppercase, repeat=3)
--    ][:187]
--    mappings = [
--        {
--            "game_id": "tc_" + f"{index:032x}",
--            "source_id": iso3,
--            "match_method": "reviewed_manual",
--        }
--        for index, iso3 in enumerate(iso3_codes, start=1)
--    ]
--    crosswalk_path = tmp_path / "crosswalk.json"
--    crosswalk_path.write_text(json.dumps({
--        "schema_version": 1,
--        "dataset": area.CROSSWALK_DATASET,
--        "source_key": area.SOURCE_KEY,
--        "mappings": mappings,
--    }), encoding="utf-8")
--
--    raw_root = tmp_path / "raw_data" / "sources" / "world_bank_wdi" / area.DATASET_KEY / "snapshot"
--    artifact_names = [
--        "source_metadata.json",
--        "country_metadata_page_001.json",
--        "indicator_metadata_EN.POP.DNST.json",
--        "observations_EN.POP.DNST_page_001.json",
--        "indicator_metadata_AG.SRF.TOTL.K2.json",
--        "observations_AG.SRF.TOTL.K2_page_001.json",
--        "indicator_metadata_AG.LND.TOTL.K2.json",
--        "observations_AG.LND.TOTL.K2_page_001.json",
--    ]
--    artifacts = []
--    for index, name in enumerate(artifact_names):
--        raw_path = raw_root / name
--        raw_path.parent.mkdir(parents=True, exist_ok=True)
--        raw_bytes = f"captured artifact {index}".encode()
--        raw_path.write_bytes(raw_bytes)
--        artifacts.append({
--            "local_raw_path": raw_path.relative_to(tmp_path).as_posix(),
--            "sha256": hashlib.sha256(raw_bytes).hexdigest(),
--            "byte_count": len(raw_bytes),
--        })
--
--    acquisition_manifest_path = (
--        tmp_path / "data_manifests" / "sources" / "world_bank_wdi"
--        / area.DATASET_KEY / "snapshot.json"
--    )
--    acquisition_manifest_path.parent.mkdir(parents=True, exist_ok=True)
--    acquisition_manifest_path.write_text("{}", encoding="utf-8")
--    acquisition = {
--        "download_id": area.DATASET_KEY,
--        "dataset_id": area.DATASET_KEY,
--        "release": "api_snapshot_test",
--        "source_url": "https://api.worldbank.org/v2",
--        "final_url": "https://api.worldbank.org/v2",
--        "retrieved_at": "2026-11-21T00:00:00Z",
--        "attribution": "World Bank Group",
--        "license_status": "review_required",
--        "files": artifacts,
--    }
--
--    countries = {
--        iso3: {"region": {"id": "NAC"}}
--        for iso3 in iso3_codes
--    }
--    observations = {
--        indicator: [
--            {
--                "countryiso3code": iso3,
--                "date": "2024",
--                "value": "12.5",
--                "obs_status": "",
--                "country": {"value": iso3},
--            }
--            for iso3 in iso3_codes
--        ]
--        for indicator in area.INDICATORS
--    }
--    indicator_metadata = {
--        indicator: {
--            "sourceOrganization": "FAO; World Bank",
--            "sourceNote": "Captured provider methodology.",
--            "unit": "",
--        }
--        for indicator in area.INDICATORS
--    }
--    loaded = {
--        "manifest": acquisition,
--        "manifest_path": acquisition_manifest_path,
--        "manifest_sha256": "a" * 64,
--        "countries": countries,
--        "indicator_metadata": indicator_metadata,
--        "observations": observations,
--    }
--    monkeypatch.setattr(normalizer, "load_snapshot", lambda *args, **kwargs: loaded)
--
--    observations_path = tmp_path / "normalized" / "observations.json"
--    import_manifest_path = tmp_path / "normalized" / "import_manifest.json"
--    result = normalizer.normalize_snapshot(
--        acquisition_manifest_path,
--        crosswalk_path,
--        observations_path,
--        import_manifest_path,
--        repository_root=tmp_path,
--    )
--
--    normalized = json.loads(observations_path.read_text(encoding="utf-8"))
--    import_manifest = json.loads(import_manifest_path.read_text(encoding="utf-8"))
--    assert normalized["dataset"] == area.CROSSWALK_DATASET
--    assert import_manifest["dataset"] == area.CROSSWALK_DATASET
--    assert normalized["source_key"] == import_manifest["source_key"] == area.SOURCE_KEY
--    assert result["dataset"] == area.CROSSWALK_DATASET
--    assert result["acquisition_dataset"] == area.DATASET_KEY
--    assert result["observations"] == 187 * len(area.INDICATORS)
--    assert {row["value_status"] for row in normalized["observations"]} == {"unclassified"}
--    assert {row["provenance"]["provider_obs_status"] for row in normalized["observations"]} == {""}
--    assert import_manifest["value_status_policy"] == "unclassified_when_provider_obs_status_blank"
--
-diff --git a/tests/test_wp1_5_statistics_import.py b/tests/test_wp1_5_statistics_import.py
-index 9dd4b71..04c22a4 100644
---- a/tests/test_wp1_5_statistics_import.py
-+++ b/tests/test_wp1_5_statistics_import.py
-@@ -532,69 +532,22 @@ def test_additional_snapshot_inputs_are_checksum_validated(tmp_path):
- 
- 
- 
--def test_dry_run_validates_writes_no_database_and_returns_artifact(tmp_path):
--    observations, crosswalk, manifest = setup_inputs(tmp_path)
--    database = tmp_path / "must-not-be-created.sqlite"
--    result = statistics_import.validate_wp1_5_dataset(
--        observations_path=observations,
--        crosswalk_path=crosswalk,
--        manifest_path=manifest,
--    )
--    assert result["assessment"] == "wp1_5_statistics_import_dry_run"
--    assert result["observations"] == 1
--    assert result["crosswalk_mappings"] == 2
--    assert result["field_counts"] == {"1": 1}
--    assert result["application_artifact_sha256"]
--    assert result["side_effects"] == {
--        "database_opened": False,
--        "database_written": False,
--        "approval_created": False,
--        "source_selection_changed": False,
--    }
--    assert not database.exists()
--
--
--def test_dry_run_rejects_duplicate_observations_without_database(tmp_path):
--    observations, crosswalk, manifest = setup_inputs(tmp_path)
--    payload = json.loads(observations.read_text(encoding="utf-8"))
--    payload["observations"].append(dict(payload["observations"][0]))
--    observations.write_text(json.dumps(payload), encoding="utf-8")
--    with pytest.raises(StatisticsImportError, match="Duplicate country/field"):
--        statistics_import.validate_wp1_5_dataset(
--            observations_path=observations,
--            crosswalk_path=crosswalk,
--            manifest_path=manifest,
--        )
--
--
--
--def test_accepts_day_precision_manual_acquisition_without_inventing_time(tmp_path):
--    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
--    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
--    manifest["retrieved_at"] = "2026-11-02"
--    manifest["retrieval_date_precision"] = "day"
--    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
--
--    result = statistics_import.validate_wp1_5_dataset(
--        observations_path=observations,
--        crosswalk_path=crosswalk,
--        manifest_path=manifest_path,
-+def test_imports_unclassified_populated_scalar_but_rejects_structured(tmp_path):
-+    database = tmp_path / "canonical.sqlite"
-+    setup_database(database)
-+    result = run_import(
-+        tmp_path, database, field_id=1, value=1234, status="unclassified",
-+        release="2024-unclassified",
-     )
-+    assert result["scalar_observations"] == 1
-+    connection = sqlite3.connect(database)
-+    assert connection.execute(
-+        "SELECT value, value_status FROM current_statistics"
-+    ).fetchone() == (1234.0, "unclassified")
-+    connection.close()
- 
--    assert result["retrieved_at"] == "2026-11-02"
--    assert result["side_effects"]["database_opened"] is False
--
--
--def test_rejects_day_precision_manifest_with_inferred_time(tmp_path):
--    observations, crosswalk, manifest_path = setup_inputs(tmp_path)
--    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
--    manifest["retrieved_at"] = "2026-11-02T00:00:00Z"
--    manifest["retrieval_date_precision"] = "day"
--    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
--
--    with pytest.raises(StatisticsImportError, match="YYYY-MM-DD without an inferred time"):
--        statistics_import.validate_wp1_5_dataset(
--            observations_path=observations,
--            crosswalk_path=crosswalk,
--            manifest_path=manifest_path,
-+    with pytest.raises(StatisticsImportError, match="structured value requires"):
-+        run_import(
-+            tmp_path, database, field_id=12, value={"0-4": 100},
-+            status="unclassified", release="2024-structured-unclassified",
-         )
-diff --git a/tools/database/observation_contract.py b/tools/database/observation_contract.py
-new file mode 100644
-index 0000000..0c2e833
---- /dev/null
-+++ b/tools/database/observation_contract.py
-@@ -0,0 +1,46 @@
-+"""Canonical value/status rules shared by acquisition and selection pipelines.
-+
-+Missing observations are represented by absent rows. Explicit null values are
-+reserved for unavailable or not-applicable observations.
-+"""
-+from __future__ import annotations
-+
-+import json
-+import math
-+from typing import Any
-+
-+UNCLASSIFIED = "unclassified"
-+NULL_VALUE_STATUSES = frozenset({"unavailable", "not_applicable"})
-+CLASSIFIED_POPULATED_STATUSES = frozenset({"observed", "estimated", "projected"})
-+POPULATED_SCALAR_STATUSES = CLASSIFIED_POPULATED_STATUSES | {UNCLASSIFIED}
-+ALLOWED_VALUE_STATUSES = POPULATED_SCALAR_STATUSES | NULL_VALUE_STATUSES
-+POPULATED_STRUCTURED_STATUSES = CLASSIFIED_POPULATED_STATUSES
-+
-+
-+def validate_observation_value(value: Any, status: Any, storage: Any) -> bool:
-+    """Validate a scalar or structured value/status pair without inference.
-+
-+    ``unclassified`` is valid only for finite populated scalar values. Structured
-+    payloads require a classified status. Explicit nulls require unavailable or
-+    not_applicable; missing observations are represented by absent rows.
-+    """
-+    if storage not in {"scalar", "structured"} or not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
-+        return False
-+    if value is None:
-+        return status in NULL_VALUE_STATUSES
-+    if storage == "scalar":
-+        if status not in POPULATED_SCALAR_STATUSES:
-+            return False
-+        if isinstance(value, bool) or not isinstance(value, (int, float)):
-+            return False
-+        try:
-+            return math.isfinite(float(value))
-+        except (OverflowError, TypeError, ValueError):
-+            return False
-+    if status not in POPULATED_STRUCTURED_STATUSES or not isinstance(value, (dict, list)):
-+        return False
-+    try:
-+        json.dumps(value, ensure_ascii=False, allow_nan=False)
-+    except (TypeError, ValueError):
-+        return False
-+    return True
-diff --git a/tools/database/statistics_import.py b/tools/database/statistics_import.py
-index 9e97e30..e5fbb75 100644
---- a/tools/database/statistics_import.py
-+++ b/tools/database/statistics_import.py
-@@ -10,11 +10,14 @@ import hashlib
- import json
- import math
- import sqlite3
--from datetime import date, datetime, timezone
-+from datetime import datetime, timezone
- from pathlib import Path
- from typing import Any
- 
- from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT, connect_database
-+from tools.database.observation_contract import (
-+    ALLOWED_VALUE_STATUSES, validate_observation_value,
-+)
- from tools.database.application_approval import (
-     ApplicationApprovalError,
-     build_application_artifact,
-@@ -100,29 +103,12 @@ def _validate_manifest(manifest: dict[str, Any], source_key: str) -> tuple[str,
-     if not source_url.startswith("https://"):
-         raise StatisticsImportError("Source manifest URL must use HTTPS")
-     retrieved_at = _text(manifest.get("retrieved_at"), "manifest.retrieved_at")
--    retrieval_precision = manifest.get("retrieval_date_precision")
--    if retrieval_precision == "day":
--        try:
--            parsed_date = date.fromisoformat(retrieved_at)
--        except ValueError as exc:
--            raise StatisticsImportError(
--                "day-precision manifest.retrieved_at must be an ISO-8601 calendar date"
--            ) from exc
--        if parsed_date.isoformat() != retrieved_at:
--            raise StatisticsImportError(
--                "day-precision manifest.retrieved_at must use YYYY-MM-DD without an inferred time"
--            )
--    elif retrieval_precision in {None, "instant"}:
--        try:
--            retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
--        except ValueError as exc:
--            raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
--        if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
--            raise StatisticsImportError("manifest.retrieved_at must include a timezone")
--    else:
--        raise StatisticsImportError(
--            "manifest.retrieval_date_precision must be 'instant' or 'day' when supplied"
--        )
-+    try:
-+        retrieved_timestamp = datetime.fromisoformat(retrieved_at.replace("Z", "+00:00"))
-+    except ValueError as exc:
-+        raise StatisticsImportError("manifest.retrieved_at must be an ISO-8601 timestamp") from exc
-+    if retrieved_timestamp.tzinfo is None or retrieved_timestamp.utcoffset() is None:
-+        raise StatisticsImportError("manifest.retrieved_at must include a timezone")
-     additional_inputs = manifest.get("additional_inputs", [])
-     if not isinstance(additional_inputs, list):
-         raise StatisticsImportError("manifest.additional_inputs must be an array")
-@@ -216,7 +202,7 @@ def _validate_observation(
-         )
-     period = _text(row.get("observation_period"), f"{label}.observation_period")
-     status = row.get("value_status")
--    if not isinstance(status, str) or status not in {"observed", "estimated", "projected", "unspecified", "unavailable", "not_applicable"}:
-+    if not isinstance(status, str) or status not in ALLOWED_VALUE_STATUSES:
-         raise StatisticsImportError(f"{label}.value_status is invalid")
-     if "value" not in row:
-         raise StatisticsImportError(f"{label}.value must be present; use explicit JSON null only for unavailable/not_applicable")
-@@ -246,13 +232,17 @@ def _validate_observation(
-             if not finite:
-                 raise StatisticsImportError(f"{label} scalar value must be a finite number or explicit NULL")
-             value = float(value)
--            if status not in {"observed", "estimated", "projected", "unspecified"}:
--                raise StatisticsImportError(f"{label} populated scalar requires observed/estimated/projected/unspecified status")
-+            if not validate_observation_value(value, status, "scalar"):
-+                raise StatisticsImportError(
-+                    f"{label} populated scalar has an invalid value/status combination"
-+                )
-     else:
-         if value is None or not isinstance(value, (dict, list)):
-             raise StatisticsImportError(f"{label} structured value must be a JSON object or array")
--        if status not in {"observed", "estimated", "projected"}:
--            raise StatisticsImportError(f"{label} structured value requires observed/estimated/projected status")
-+        if not validate_observation_value(value, status, "structured"):
-+            raise StatisticsImportError(
-+                f"{label} structured value requires a valid observed/estimated/projected status"
-+            )
-         try:
-             _canonical_json(value)
-         except (TypeError, ValueError) as exc:
-@@ -289,9 +279,6 @@ def build_wp1_5_application_artifact(
-     manifest = _read_object(manifest_path, "source manifest")
-     normalized = _read_object(observations_path, "normalized observations")
-     source_key = _text(normalized.get("source_key"), "normalized.source_key")
--    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
--    if manifest.get("dataset", source_key) != dataset:
--        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
-     _validate_manifest(manifest, source_key)
-     if normalized.get("release") != manifest.get("release"):
-         raise StatisticsImportError("Normalized observations and manifest release do not match")
-@@ -335,7 +322,6 @@ def build_wp1_5_application_artifact(
-         inputs=inputs,
-         metadata={
-             "source_key": normalized.get("source_key"),
--            "dataset": normalized.get("dataset", normalized.get("source_key")),
-             "release": normalized.get("release"),
-             "source_sha256": normalized.get("source_sha256"),
-             "policy_version": policy_version,
-@@ -343,125 +329,6 @@ def build_wp1_5_application_artifact(
-     )
- 
- 
--def validate_wp1_5_dataset(
--    *,
--    observations_path: str | Path,
--    crosswalk_path: str | Path,
--    manifest_path: str | Path,
--    config_path: str | Path | None = None,
--) -> dict[str, Any]:
--    """Validate a normalized WP1.5 dataset without opening or changing a database."""
--    selected_config_path = config_path if config_path is not None else DEFAULT_CONFIG
--    normalized = _read_object(observations_path, "normalized observations")
--    manifest = _read_object(manifest_path, "source manifest")
--    config = _read_object(selected_config_path, "WP1.5 field contract")
--    if normalized.get("schema_version") != 1 or normalized.get("work_package") != "WP1.5":
--        raise StatisticsImportError("Unsupported normalized observation schema")
--
--    source_key = _text(normalized.get("source_key"), "normalized.source_key")
--    registry_reference = _text(config.get("source_registry"), "WP1.5 contract source_registry")
--    registry_path = Path(registry_reference)
--    if not registry_path.is_absolute():
--        registry_path = (REPOSITORY_ROOT / registry_path).resolve()
--    try:
--        source_registry = load_registry(registry_path)
--    except SourceError as exc:
--        raise StatisticsImportError(f"Cannot load project source registry: {exc}") from exc
--    canonical_source_key = canonical_source_id(source_registry, source_key)
--    if canonical_source_key is None:
--        raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
--
--    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
--    if manifest.get("dataset", source_key) != dataset:
--        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
--    release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
--    if normalized.get("source_key") != manifest.get("source_key"):
--        raise StatisticsImportError("Normalized observations and source manifest do not match")
--    if normalized.get("source_sha256") != source_sha or normalized.get("release") != release:
--        raise StatisticsImportError("Normalized observations do not identify the captured source release/checksum")
--
--    fields = config.get("fields")
--    if not isinstance(fields, list) or len(fields) != 41:
--        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 fields")
--    field_by_id = {item.get("id"): item for item in fields if isinstance(item, dict)}
--    if len(field_by_id) != 41:
--        raise StatisticsImportError("WP1.5 contract must enumerate exactly 41 distinct fields")
--
--    try:
--        crosswalk = load_crosswalk(crosswalk_path, expected_dataset=dataset)
--    except CrosswalkError as exc:
--        raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
--    if crosswalk.dataset != dataset:
--        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
--    if crosswalk.source_key != source_key:
--        raise StatisticsImportError("Crosswalk source_key does not match source contract")
--    crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
--
--    rows = normalized.get("observations")
--    if not isinstance(rows, list) or not rows:
--        raise StatisticsImportError("Normalized observations must be a non-empty array")
--    validated = [
--        _validate_observation(
--            row,
--            index=index,
--            field_by_id=field_by_id,
--            source_key=canonical_source_key,
--            crosswalk_by_game=crosswalk_by_game,
--        )
--        for index, row in enumerate(rows)
--    ]
--    keys = [(row["game_id"], row["field"]["id"]) for row in validated]
--    if len(keys) != len(set(keys)):
--        raise StatisticsImportError("Duplicate country/field observations in normalized dataset")
--
--    try:
--        artifact = build_wp1_5_application_artifact(
--            observations_path=observations_path,
--            crosswalk_path=crosswalk_path,
--            manifest_path=manifest_path,
--            config_path=selected_config_path,
--        )
--    except (ApplicationApprovalError, OSError, ValueError) as exc:
--        raise StatisticsImportError(f"Cannot fingerprint WP1.5 application inputs: {exc}") from exc
--
--    # Re-read all validated JSON inputs to detect changes during validation.
--    if _read_object(observations_path, "normalized observations") != normalized:
--        raise StatisticsImportError("Normalized observations changed during dry-run validation")
--    if _read_object(manifest_path, "source manifest") != manifest:
--        raise StatisticsImportError("Source manifest changed during dry-run validation")
--    if _read_object(selected_config_path, "WP1.5 field contract") != config:
--        raise StatisticsImportError("WP1.5 field contract changed during dry-run validation")
--    _validate_manifest(manifest, source_key)
--
--    field_counts: dict[str, int] = {}
--    for row in validated:
--        field_id = str(row["field"]["id"])
--        field_counts[field_id] = field_counts.get(field_id, 0) + 1
--    return {
--        "assessment": "wp1_5_statistics_import_dry_run",
--        "source_key": source_key,
--        "canonical_source_key": canonical_source_key,
--        "dataset": dataset,
--        "release": release,
--        "source_sha256": source_sha,
--        "source_url": source_url,
--        "retrieved_at": retrieved_at,
--        "observations": len(validated),
--        "crosswalk_mappings": len(crosswalk.mappings),
--        "field_counts": dict(sorted(field_counts.items(), key=lambda item: int(item[0]))),
--        "license_status": manifest.get("license_status"),
--        "attribution": manifest.get("attribution"),
--        "application_artifact_sha256": artifact["artifact_sha256"],
--        "application_artifact": artifact,
--        "side_effects": {
--            "database_opened": False,
--            "database_written": False,
--            "approval_created": False,
--            "source_selection_changed": False,
--        },
--    }
--
--
- def import_wp1_5_dataset(
-     *,
-     observations_path: str | Path,
-@@ -493,9 +360,6 @@ def import_wp1_5_dataset(
-         raise StatisticsImportError(f"Unknown source ID in project source registry: {source_key}")
-     # Keep the historical ID in manifests, crosswalks and database provenance;
-     # use its canonical provider ID only for current field-contract validation.
--    dataset = _text(normalized.get("dataset", source_key), "normalized.dataset")
--    if manifest.get("dataset", source_key) != dataset:
--        raise StatisticsImportError("Normalized dataset identifier does not match source manifest")
-     release, source_sha, source_url, retrieved_at = _validate_manifest(manifest, source_key)
-     if normalized.get("source_key") != manifest.get("source_key"):
-         raise StatisticsImportError("Normalized observations and source manifest do not match")
-@@ -512,12 +376,10 @@ def import_wp1_5_dataset(
-     try:
-         crosswalk = load_crosswalk(
-             crosswalk_path,
--            expected_dataset=dataset,
-+            expected_dataset=source_key,
-         )
-     except CrosswalkError as exc:
-         raise StatisticsImportError(f"Invalid source crosswalk: {exc}") from exc
--    if crosswalk.dataset != dataset:
--        raise StatisticsImportError("Crosswalk dataset does not match normalized dataset")
-     if crosswalk.source_key != source_key:
-         raise StatisticsImportError("Crosswalk source_key does not match source contract")
-     crosswalk_by_game = {item.game_id: item.source_id for item in crosswalk.mappings}
-diff --git a/tools/normalize_world_bank_wdi_wp1_5_area.py b/tools/normalize_world_bank_wdi_wp1_5_area.py
-deleted file mode 100644
-index 8640a57..0000000
---- a/tools/normalize_world_bank_wdi_wp1_5_area.py
-+++ /dev/null
-@@ -1,214 +0,0 @@
--"""Normalize the immutable WDI WP1.5 area/density snapshot for review/import.
--
--This adapter emits candidate observations only. It does not approve, select, or
--write data to either project database.
--"""
--from __future__ import annotations
--
--import argparse
--import hashlib
--import json
--import sys
--from pathlib import Path
--from typing import Any
--
--from tools.acquire_world_bank_wdi_wp1_5_area import (
--    API, CROSSWALK_DATASET, DATASET_KEY, INDICATORS, ROOT, SOURCE_KEY, AreaSnapshotError, load_snapshot,
--)
--from tools.database.source_crosswalk import CrosswalkError, load_crosswalk
--
--def _write_json(path: Path, value: Any) -> None:
--    path.parent.mkdir(parents=True, exist_ok=True)
--    with path.open("x", encoding="utf-8") as stream:
--        json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
--        stream.write("\n")
--
--def normalize_snapshot(
--    manifest_path: str | Path,
--    crosswalk_path: str | Path,
--    observations_path: str | Path,
--    import_manifest_path: str | Path,
--    *,
--    repository_root: str | Path = ROOT,
--) -> dict[str, Any]:
--    root = Path(repository_root).resolve()
--    loaded = load_snapshot(manifest_path, repository_root=root)
--    crosswalk = load_crosswalk(
--        Path(crosswalk_path) if Path(crosswalk_path).is_absolute() else root / crosswalk_path,
--        expected_dataset=CROSSWALK_DATASET,
--    )
--    if crosswalk.source_key != SOURCE_KEY:
--        raise AreaSnapshotError("Crosswalk source_key does not match the WDI provider")
--    mapping = {item.source_id: item.game_id for item in crosswalk.mappings}
--    if len(mapping) != 187:
--        raise AreaSnapshotError(f"Expected the owner-approved 187-entry WDI crosswalk; found {len(mapping)}")
--    if any(not (len(code) == 3 and code.isupper() and code.isalpha()) for code in mapping):
--        raise AreaSnapshotError("Crosswalk source IDs must be uppercase three-letter WDI codes")
--
--    rows: list[dict[str, Any]] = []
--    per_indicator: dict[str, int] = {}
--    for code, spec in INDICATORS.items():
--        latest: dict[str, dict[str, Any]] = {}
--        for item in loaded["observations"][code]:
--            iso3 = item.get("countryiso3code")
--            if not isinstance(iso3, str) or len(iso3) != 3:
--                continue
--            country = loaded["countries"].get(iso3)
--            if country is None or (country.get("region") or {}).get("id") == "NA":
--                continue
--            value = item.get("value")
--            if value is None or iso3 not in mapping:
--                continue
--            try:
--                year = int(item.get("date"))
--                numeric = float(value)
--            except (TypeError, ValueError) as exc:
--                raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}") from exc
--            if year < 1900 or not __import__("math").isfinite(numeric):
--                raise AreaSnapshotError(f"Invalid selected value for {code}/{iso3}/{year}")
--            previous = latest.get(iso3)
--            if previous is None or year > previous["year"]:
--                latest[iso3] = {
--                    "year": year, "value": numeric,
--                    "provider_status": item.get("obs_status"),
--                    "country_name": (item.get("country") or {}).get("value"),
--                }
--        if set(latest) != set(mapping):
--            missing = sorted(set(mapping) - set(latest))
--            raise AreaSnapshotError(f"{code}: mapped entities lack non-null observations: {missing[:10]}")
--        per_indicator[code] = len(latest)
--        metadata = loaded["indicator_metadata"][code]
--        for iso3, selected in sorted(latest.items()):
--            rows.append({
--                "game_id": mapping[iso3],
--                "source_id": iso3,
--                "field_id": spec["field_id"],
--                "value": selected["value"],
--                "unit": spec["unit"],
--                "value_status": "unclassified",
--                "observation_period": str(selected["year"]),
--                "source_reference": f"{API}/country/{iso3}/indicator/{code}?date={selected['year']}",
--                "methodology": (
--                    f"World Bank WDI indicator {code}: {spec['meaning']} "
--                    f"Originating source organization: {metadata.get('sourceOrganization') or 'not supplied'}. "
--                    "Provider obs_status is blank; the populated scalar value remains unclassified."
--                ),
--                "provenance": {
--                    "wdi_iso3": iso3,
--                    "country_name": selected["country_name"],
--                    "indicator_code": code,
--                    "provider_obs_status": selected["provider_status"],
--                    "provider_source_organization": metadata.get("sourceOrganization"),
--                    "provider_source_note": metadata.get("sourceNote"),
--                    "provider_unit_metadata": metadata.get("unit"),
--                },
--            })
--    expected = len(mapping) * len(INDICATORS)
--    if len(rows) != expected or len({(r["game_id"], r["field_id"]) for r in rows}) != expected:
--        raise AreaSnapshotError(f"Expected {expected} unique observations; generated {len(rows)}")
--
--    acquisition = loaded["manifest"]
--    acquisition_path = Path(loaded["manifest_path"])
--    artifacts = acquisition["files"]
--    if len(artifacts) != 8:
--        raise AreaSnapshotError(f"Expected the immutable eight-artifact WDI bundle; found {len(artifacts)}")
--    # Use the captured source metadata response as the required primary raw
--    # input; the other seven captured responses remain explicit additional inputs.
--    primary = next((item for item in artifacts if Path(item["local_raw_path"]).name == "source_metadata.json"), None)
--    if primary is None:
--        raise AreaSnapshotError("Snapshot is missing source_metadata.json")
--    additional = [item for item in artifacts if item is not primary]
--    def raw_input(item: dict[str, Any]) -> dict[str, Any]:
--        return {
--            "local_raw_path": item["local_raw_path"],
--            "sha256": item["sha256"],
--            "byte_count": item["byte_count"],
--        }
--    primary_path = root / primary["local_raw_path"]
--    primary_bytes = primary_path.read_bytes()
--    import_manifest = {
--        "manifest_schema_version": 1,
--        "work_package": "WP1.5",
--        "source_key": SOURCE_KEY,
--        "dataset": CROSSWALK_DATASET,
--        "release": acquisition["release"],
--        "sha256": hashlib.sha256(primary_bytes).hexdigest(),
--        "local_raw_path": primary["local_raw_path"],
--        "byte_count": len(primary_bytes),
--        "source_url": acquisition["source_url"],
--        "final_url": acquisition["final_url"],
--        "retrieved_at": acquisition["retrieved_at"],
--        "attribution": acquisition.get("attribution"),
--        "license_status": acquisition.get("license_status"),
--        "additional_inputs": [raw_input(item) for item in additional],
--        "upstream_manifests": [{
--            "path": acquisition_path.relative_to(root).as_posix(),
--            "sha256": loaded["manifest_sha256"],
--        }],
--    }
--    normalized = {
--        "schema_version": 1,
--        "work_package": "WP1.5",
--        "source_key": SOURCE_KEY,
--        "dataset": CROSSWALK_DATASET,
--        "release": acquisition["release"],
--        "source_sha256": import_manifest["sha256"],
--        "observations": rows,
--        "normalization": {
--            "policy": "latest_non_null_per_indicator_and_entity",
--            "indicator_counts": per_indicator,
--            "observation_count": len(rows),
--            "value_status_policy": "unclassified_when_provider_obs_status_blank",
--            "unmapped_candidate_codes_excluded": 29,
--            "null_only_code_excluded": ["XKX"],
--            "official_iso_identity_changed": False,
--        },
--    }
--    output = Path(observations_path)
--    manifest_output = Path(import_manifest_path)
--    if not output.is_absolute():
--        output = root / output
--    if not manifest_output.is_absolute():
--        manifest_output = root / manifest_output
--    _write_json(output, normalized)
--    _write_json(manifest_output, import_manifest)
--    return {
--        "assessment": "world_bank_wdi_wp1_5_area_normalization_candidate",
--        "dataset": CROSSWALK_DATASET,
--        "acquisition_dataset": DATASET_KEY,
--        "source_key": SOURCE_KEY,
--        "release": acquisition["release"],
--        "observations": len(rows),
--        "indicator_counts": per_indicator,
--        "observations_path": output.relative_to(root).as_posix(),
--        "import_manifest_path": manifest_output.relative_to(root).as_posix(),
--        "license_status": acquisition.get("license_status"),
--        "side_effects": {
--            "canonical_database_written": False,
--            "project_database_written": False,
--            "approval_created": False,
--            "source_selection_changed": False,
--        },
--    }
--
--def main(argv: list[str] | None = None) -> int:
--    parser = argparse.ArgumentParser(description=__doc__)
--    parser.add_argument("--manifest", type=Path, required=True)
--    parser.add_argument("--crosswalk", type=Path, required=True)
--    parser.add_argument("--observations", type=Path, required=True)
--    parser.add_argument("--import-manifest", type=Path, required=True)
--    parser.add_argument("--root", type=Path, default=ROOT)
--    args = parser.parse_args(argv)
--    try:
--        result = normalize_snapshot(
--            args.manifest, args.crosswalk, args.observations, args.import_manifest,
--            repository_root=args.root,
--        )
--    except (AreaSnapshotError, CrosswalkError, OSError, ValueError) as exc:
--        print(f"ERROR: {exc}", file=sys.stderr)
--        return 1
--    print(json.dumps(result, ensure_ascii=False, indent=2))
--    return 0
--
--if __name__ == "__main__":
--    raise SystemExit(main())
-
-===== END OF INSPECTION =====
