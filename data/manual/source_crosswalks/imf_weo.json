@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "dataset": "world_economic_outlook",
+  "source_key": "imf_weo",
+  "mapping_policy": {
+    "scope": "IMF WEO source identity crosswalk only; does not change the project identity registry, ISO/M49 assignments, or other provider mappings.",
+    "unmatched_identities": "Remain unresolved and excluded from candidate observations unless separately owner-approved.",
+    "no_inference": "No fuzzy, name-only, ISO-inferred, coordinate-based, or automatic identity matching."
+  },
+  "review_approval": {
+    "status": "approved",
+    "approved_on": "2026-11-25",
+    "approver_role": "project_owner",
+    "approval_record": "docs/data-sources/wp1-5-review-approval-application-workflow.md",
+    "scope": "Field 15 (NGDPD) only; IMF WEO source code WBG maps to the existing Palestine game_id. No global identity or ISO/M49 registry change."
+  },
+  "mappings": [
+    {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "source_id": "WBG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "West Bank and Gaza",
+      "review_note": "Explicit project-owner-approved, field-15-only crosswalk. The IMF October 2026 WEO Appendix identifies WBG as West Bank and Gaza and classifies it as an individual economy entry. The existing project UN M49 snapshot matches the Palestine registry identity to State of Palestine (M49 275, PS/PSE) via a reviewed name variant. Target game_id is persistent and exact. This source-specific mapping does not verify or modify the registry ISO assignment status."
+    }
+  ]
+}
