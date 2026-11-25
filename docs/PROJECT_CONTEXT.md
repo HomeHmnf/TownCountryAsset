@@ -66,7 +66,7 @@ Missing values must not be represented as zero. SQL NULL is explicit and must di
 ## Completed and in-progress work
 
 - WP1.1–WP1.4 database foundations, identity, metadata/geometry and review-domain work were owner-validated.
-- WP1.5 is in progress. UN WPP population/demographic data were applied for fields 1, 2, 6, 12, 13 and 14. WDI and IMF WEO acquisition/coverage/comparability work has been assessed; ICASEES Central African Republic national accounts were acquired and assessed. Do not infer that assessed sources have been imported or approved.
+- WP1.5 is in progress. UN WPP population/demographic data were applied for fields 1, 2, 6, 12, 13 and 14. World Bank WDI fields 3, 33 and 34 were approved, applied and independently owner-verified on 2026-11-25 (561 scalar observations, 187 crosswalk mappings; approval actor `project-owner`; import ID 4). IMF WEO acquisition/coverage/comparability work remains assessment evidence, not semantic approval or canonical application. ICASEES Central African Republic national accounts were acquired and assessed; do not infer that assessment means import or approval.
 - Shared PDF text extraction is implemented and owner-validated.
 - The 41-field source-selection policy is established; do not change it as part of database separation.
 
