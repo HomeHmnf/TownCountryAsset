@@ -579,6 +579,58 @@ def test_dry_run_rejects_crosswalk_or_registry_change_during_fingerprinting(
         )
 
 
+
+@pytest.mark.parametrize("changed_input", ["crosswalk", "registry"])
+def test_import_rejects_crosswalk_or_registry_change_before_opening_database(
+    tmp_path, monkeypatch, changed_input
+):
+    database = tmp_path / "canonical.sqlite"
+    setup_database(database)
+    observations, crosswalk, manifest = setup_inputs(tmp_path)
+    artifact = statistics_import.build_wp1_5_application_artifact(
+        observations_path=observations,
+        crosswalk_path=crosswalk,
+        manifest_path=manifest,
+        config_path=statistics_import.DEFAULT_CONFIG,
+    )
+    approval_id = f"test-wp1-5-race-{next(_APPROVAL_COUNTER):08d}"
+    with connect_database(database) as connection:
+        connection.execute("BEGIN IMMEDIATE")
+        application_approval.propose_application(
+            connection, approval_id=approval_id, artifact=artifact
+        )
+        application_approval.decide_application(
+            connection, approval_id=approval_id, decision="approved", actor="test-reviewer"
+        )
+        connection.commit()
+
+    original_builder = statistics_import.build_wp1_5_application_artifact
+
+    def build_then_mutate(**kwargs):
+        current_artifact = original_builder(**kwargs)
+        target = crosswalk if changed_input == "crosswalk" else tmp_path / "config" / "data_sources.json"
+        target.write_bytes(target.read_bytes() + b"\\n")
+        return current_artifact
+
+    monkeypatch.setattr(
+        statistics_import, "build_wp1_5_application_artifact", build_then_mutate
+    )
+    monkeypatch.setattr(
+        statistics_import,
+        "connect_database",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("database opened")),
+    )
+    expected = "Source crosswalk changed" if changed_input == "crosswalk" else "Project source registry changed"
+    with pytest.raises(StatisticsImportError, match=expected):
+        statistics_import.import_wp1_5_dataset(
+            observations_path=observations,
+            crosswalk_path=crosswalk,
+            manifest_path=manifest,
+            database_path=database,
+            approval_id=approval_id,
+        )
+
+
 def test_dry_run_validates_writes_no_database_and_returns_artifact(tmp_path):
     observations, crosswalk, manifest = setup_inputs(tmp_path)
     database = tmp_path / "must-not-be-created.sqlite"
