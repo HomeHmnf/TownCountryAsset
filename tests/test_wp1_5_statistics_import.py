@@ -627,6 +627,7 @@ def test_import_rejects_crosswalk_or_registry_change_before_opening_database(
             crosswalk_path=crosswalk,
             manifest_path=manifest,
             database_path=database,
+            config_path=statistics_import.DEFAULT_CONFIG,
             approval_id=approval_id,
         )
 
