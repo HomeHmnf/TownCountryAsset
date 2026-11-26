@@ -16,7 +16,7 @@ The review manager automatically selects the newest completed automatic package.
 
 The command creates:
 
-`reports/sources/imf-weo-field15-identity-review/field_15_owner_review_kos_approved.md`
+`reports/sources/imf-weo-field15-identity-review/field_15_owner_review_kos_approved_registry_state_qualified.md`
 
 It refuses to overwrite an existing review file. It reads the automatic final identity register and aggregate exclusion register generated from the original IMF WEO source and official evidence. It does not read the historical manually prepared batch files or manual inventory/exclusion registers.
 
