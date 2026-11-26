@@ -121,7 +121,9 @@ def _pdf_pages(text: str) -> dict[int, str]:
     return pages
 
 
-def parse_imf_appendix_codes(text: str, source_codes: set[str]) -> tuple[set[str], dict[int, str]]:
+def parse_imf_appendix_codes(
+    text: str, source_codes: set[str], *, expected_count: int | None = 197
+) -> tuple[set[str], dict[int, str]]:
     """Read the Appendix ISO Code column from Country Data Documentation pages."""
     pages = _pdf_pages(text)
     table_text = "\n".join(pages.get(number, "") for number in range(10, 15))
@@ -138,8 +140,10 @@ def parse_imf_appendix_codes(text: str, source_codes: set[str]) -> tuple[set[str
         raise IdentityReviewError("IMF Appendix Country Data Documentation is missing TWN")
     if "KOS" in codes or "UVK" not in codes:
         raise IdentityReviewError("Expected the documented KOS/UVK IMF Appendix code discrepancy")
-    if len(codes) != 197:
-        raise IdentityReviewError(f"Expected 196 WEO code matches plus Appendix code UVK; found {len(codes)}")
+    if expected_count is not None and len(codes) != expected_count:
+        raise IdentityReviewError(
+            f"Expected {expected_count} Appendix identity codes including UVK; found {len(codes)}"
+        )
     return codes, pages
 
 
@@ -405,6 +409,14 @@ def build_review(
     }
     if len(m49_by_alpha3) != parsed_m49["iso_candidate_count"]:
         raise IdentityReviewError("UN M49 contains duplicate or missing ISO-alpha3 reference keys")
+
+    if verify_snapshots:
+        fingerprints["canonical_identity_registry"] = {
+            "path": str(registry_path), "sha256": sha256_file(registry_path)
+        }
+        fingerprints["imf_weo_crosswalk"] = {
+            "path": str(crosswalk_path), "sha256": sha256_file(crosswalk_path)
+        }
 
     registry = _read_json(registry_path)
     registry_records = registry.get("records")
