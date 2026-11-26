@@ -32,8 +32,8 @@ MIGRATION = ROOT / "migrations/008_imf_weo_historical_observations.sql"
 RELEASE = "October 2026 / IMF.RES_WEO_9.0.0"
 META_OPEN = "<!-- REVIEW-METADATA-JSON"
 META_CLOSE = "REVIEW-METADATA-JSON -->"
-HEADER = "| Batch | Source ID | Source name | Series | Populated years | Proposed game_id | Registry name | M49 | Evidence | Decision | Approved game_id | Owner rationale |"
-SEPARATOR = "|---:|---|---|---|---:|---|---|---|---|---|---|---|"
+HEADER = "| Batch | Source ID | Source name | Series | Populated years (count / range) | Proposed game_id | Registry name | M49 | Evidence | Proposal basis | Decision | Approved game_id | Owner rationale |"
+SEPARATOR = "|---:|---|---|---|---|---|---|---|---|---|---|---|---|"
 
 class ReviewError(RuntimeError):
     pass
@@ -151,8 +151,9 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
     for source_index, row in enumerate(rows):
         batch = source_index // 20 + 1
         if row["source_id"] == "KOS":
+            years = f'{row["populated_year_count"]} ({row["first_populated_year"]}–{row["last_populated_year"]})'
             vals = [f"{batch:02d}", "KOS", row["source_name"], row["series_code"],
-                    row["populated_year_count"], "-", "-", "-", row["independent_evidence_reference"],
+                    years, "-", "-", "-", row["independent_evidence_reference"], row["review_notes"],
                     "HOLD", "-", row["review_notes"]]
             lines.append("| " + " | ".join(cell(v) for v in vals) + " |")
             continue
@@ -164,10 +165,11 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         if registry_name != row["proposed_registry_name"]:
             raise ReviewError(f"Registry-name mismatch for {row['source_id']}")
         proposal_index += 1
+        years = f'{row["populated_year_count"]} ({row["first_populated_year"]}–{row["last_populated_year"]})'
         vals = [
             f"{batch:02d}", row["source_id"], row["source_name"], row["series_code"],
-            row["populated_year_count"], game_id, registry_name, row["un_m49_code"],
-            row["independent_evidence_reference"], "PENDING", "-", "",
+            years, game_id, registry_name, row["un_m49_code"],
+            row["independent_evidence_reference"], row["review_notes"], "PENDING", "-", "",
         ]
         lines.append("| " + " | ".join(cell(v) for v in vals) + " |")
     if proposal_index != 195:
@@ -201,8 +203,8 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
         raise ReviewError("Unexpected review document")
     rows, inside = [], False
     fields = ("batch", "source_id", "source_name", "series_code", "populated_years",
-              "proposed_game_id", "registry_name", "m49", "evidence", "decision",
-              "approved_game_id", "rationale")
+              "proposed_game_id", "registry_name", "m49", "evidence", "proposal_basis",
+              "decision", "approved_game_id", "rationale")
     for line in document.splitlines():
         if line == HEADER:
             inside = True
@@ -297,8 +299,9 @@ def validate_review_against_source_register(meta: dict[str, Any], rows: list[dic
             raise ReviewError(f"Batch number changed for {row['source_id']}")
         expected = {
             "source_name": source["source_name"], "series_code": source["series_code"],
-            "populated_years": source["populated_year_count"],
+            "populated_years": f'{source["populated_year_count"]} ({source["first_populated_year"]}–{source["last_populated_year"]})',
             "evidence": source["independent_evidence_reference"],
+            "proposal_basis": source["review_notes"],
         }
         for field, value in expected.items():
             if row[field] != value:
