@@ -270,8 +270,13 @@ def validate_review(path: Path, complete: bool) -> dict[str, Any]:
 def verify_project_acquisition(path: Path) -> dict[str, Any]:
     if not path.is_file():
         raise ReviewError(f"Project DB not found: {path}")
-    con = connect_project_database(path)
+    con = sqlite3.connect(f"file:{path.resolve()}?mode=ro", uri=True)
+    con.row_factory = sqlite3.Row
     try:
+        integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
+        fk = [tuple(r) for r in con.execute("PRAGMA foreign_key_check")]
+        if integrity != "ok" or fk:
+            raise ReviewError(f"Project DB integrity/FK failure: {integrity}; {fk[:5]}")
         tables = [r["name"] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")]
         found = []
         for table in tables:
@@ -280,19 +285,21 @@ def verify_project_acquisition(path: Path) -> dict[str, Any]:
             if "acquisition_id" in columns:
                 for row in con.execute(f'SELECT * FROM "{safe}" WHERE acquisition_id=5'):
                     found.append((table, dict(row)))
-        if len(found) != 1:
-            raise ReviewError(f"Expected exactly one Project DB acquisition 5 record; found {len(found)}")
-        text = json.dumps(found[0][1], default=str).lower()
-        if not any(term in text for term in ("imf_weo", "imf weo", "october_2026")):
-            raise ReviewError("Project DB acquisition 5 does not identify the October 2026 WEO source")
-        return {"acquisition_id": 5, "table": found[0][0], "record_found": True}
+        relevant = [(table, row) for table, row in found
+                    if any(term in json.dumps(row, default=str).lower()
+                           for term in ("imf_weo", "imf weo", "october_2026"))]
+        if len(relevant) != 1:
+            raise ReviewError(f"Expected one IMF WEO acquisition_id=5 record; found {len(relevant)}")
+        return {"acquisition_id": 5, "table": relevant[0][0], "record_found": True,
+                "integrity_check": integrity, "foreign_key_violations": len(fk)}
     finally:
         con.close()
 
 def verify_game_database(candidate: Path, database: Path) -> dict[str, Any]:
     expected = read_csv(candidate / "observations.csv")
     summary = json.loads((candidate / "candidate.json").read_text(encoding="utf-8"))
-    con = connect_database(database)
+    con = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
+    con.row_factory = sqlite3.Row
     try:
         integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
         fk = [tuple(r) for r in con.execute("PRAGMA foreign_key_check")]
