@@ -216,7 +216,7 @@ The project owner explicitly approved:
 - Match method: `reviewed_manual`
 - Scope: October 2026 WEO / NGDPD / field 15 only.
 
-The target identity is corroborated by the canonical registry record (English name Kosovo; source and geometry key KOS) and the Game DB identity record for the same persistent game_id. The Game DB record has an approved `disputed_or_partially_recognized_entity` entity-type decision. ISO alpha-2 and alpha-3 remain unassigned.
+The target persistent game_id is present in both the canonical registry and Game DB. The canonical registry record has English name Kosovo and source/geometry key KOS, but its registry status is `proposed`, its `entity_type` is `unreviewed`, and its ISO assignment status is `unverified`. The separate Game DB `countries` record for the same game_id has `record_status='approved'`, `entity_type='disputed_or_partially_recognized_entity'`, and `entity_type_status='reviewed'`; its ISO alpha-2 and alpha-3 values are null. The owner-approved IMF WEO crosswalk is provider-specific and does not promote or modify the canonical registry record or global identity attributes.
 
 The IMF Appendix Country Data Documentation uses `UVK` for Kosovo, while the WEO CSV uses `KOS`. This discrepancy is explicitly acknowledged in the owner decision. UN M49 FAQ statistical-use code 412 is contextual statistical evidence only; it is not treated as an IMF code concordance. No global registry, ISO/M49 assignment, entity-type, or other provider mapping is changed.
 
