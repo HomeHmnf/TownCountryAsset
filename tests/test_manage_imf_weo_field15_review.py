@@ -130,8 +130,8 @@ def test_cli_help_runs_outside_repository_without_pythonpath(tmp_path: Path):
 def _write_candidate_fixture(directory: Path) -> None:
     directory.mkdir(parents=True, exist_ok=True)
     (directory / "observations.csv").write_text(
-        "game_id,indicator_code,observation_year\n"
-        "tc_" + "a" * 32 + ",NGDPD,2000\n",
+        "game_id,source_country_code,indicator_code,observation_year\n"
+        "tc_" + "a" * 32 + ",AAA,NGDPD,2000\n",
         encoding="utf-8",
     )
     (directory / "candidate.json").write_text(
