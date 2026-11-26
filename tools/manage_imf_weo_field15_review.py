@@ -100,8 +100,8 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
     if not all(p.is_file() for p in (final, exclusions, summary_path)):
         raise ReviewError("Automatic source-derived review package is incomplete")
     rows, aggregates = read_csv(final), read_csv(exclusions)
-    if len(rows) != 196 or sum(bool(r["reviewed_proposed_game_id"]) for r in rows) != 195:
-        raise ReviewError("Expected 195 proposal rows plus the KOS hold")
+    if len(rows) != 195 or sum(bool(r["reviewed_proposed_game_id"]) for r in rows) != 195:
+        raise ReviewError("Expected exactly 195 new proposal rows; WBG and KOS are fixed approved crosswalk mappings")
     if len(aggregates) != 13 or sum(int(r["populated_year_count"]) for r in aggregates) != 665:
         raise ReviewError("Expected 13 previously approved aggregate exclusions / 665 values")
     if any(r.get("disposition") != "excluded" or not r.get("rationale", "").strip() for r in aggregates):
@@ -116,7 +116,7 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         "fixed_decisions": {
             "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
             "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
-            "KOS": "Preserve hold_for_evidence; no identity mapping.",
+            "KOS": "Reuse owner-approved IMF WEO KOS-to-Kosovo mapping; field 15 only; document KOS/UVK discrepancy.",
         },
     }
     lines = [
@@ -124,7 +124,7 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         "This is the single authoritative review document for all ten batches.", "",
         "- Scope: WP1.5 field 15 / NGDPD / IMF WEO October 2026 only.",
         "- 195 proposed mappings in ten batches (20 identities per batch, final batch 10 has 16).",
-        "- Existing WBG approval, 13 aggregate exclusions and KOS hold are carried forward.",
+        "- Existing WBG and KOS crosswalk approvals, plus 13 aggregate exclusions, are carried forward.",
         "- Every new identity requires an explicit owner decision and rationale.",
         "- APPROVE requires Approved game_id to equal Proposed game_id exactly.",
         "- EXCLUDE and HOLD require Approved game_id to be -.", "",
@@ -137,6 +137,11 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         "- imf_weo / WBG / West Bank and Gaza maps to tc_50c420df8b2c4c6eaae47d795f9a1ea2 (Palestine).",
         "- Match method reviewed_manual; owner approval dated 2026-11-25; field 15 / NGDPD only.",
         "- The original manual crosswalk will not be modified.", "",
+        "### KOS — existing owner-approved crosswalk", "",
+        "- imf_weo / KOS / Kosovo maps to tc_28aa17b84db24952b92fc51b421075e0 (Kosovo).",
+        "- Match method reviewed_manual; approved 2026-11-26; field 15 / NGDPD only.",
+        "- WEO CSV uses KOS while IMF Appendix Country Data Documentation uses UVK; acknowledged as a source-code qualification only. No ISO/M49 assignment is made.",
+        "- Preserve all 32 existing KOS observations and require exact candidate value/provenance reconciliation.", "",
         "### Aggregate exclusions — existing owner decision", "",
         "| Source ID | Source name | Series | Populated values | Years | Disposition |",
         "|---|---|---|---:|---|---|",
@@ -148,8 +153,6 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         lines.append("| " + " | ".join(cell(v) for v in vals) + " |")
     lines += [
         "", "Total: 13 aggregate series and 665 populated annual values; excluded from country observations.",
-        "", "### KOS — existing hold", "",
-        "Keep KOS on HOLD with no target. The IMF source code / Appendix UVK discrepancy remains unresolved; M49 statistical-use code 412 does not resolve it.",
         "", "## New identity decisions — all ten batches", "", HEADER, SEPARATOR,
     ]
     proposal_index = 0
@@ -223,24 +226,26 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
             if len(parts) != len(fields):
                 raise ReviewError(f"Malformed review row: {line}")
             rows.append(dict(zip(fields, parts)))
-    if len(rows) != 196 or len({r["source_id"] for r in rows}) != 196:
-        raise ReviewError(f"Expected 195 proposals plus KOS hold; found {len(rows)} rows")
+    if len(rows) != 195 or len({r["source_id"] for r in rows}) != 195:
+        raise ReviewError(f"Expected exactly 195 new proposal rows; found {len(rows)} rows")
     if meta.get("fixed_decisions") != {
         "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
         "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
-        "KOS": "Preserve hold_for_evidence; no identity mapping.",
+        "KOS": "Reuse owner-approved IMF WEO KOS-to-Kosovo mapping; field 15 only; document KOS/UVK discrepancy.",
     }:
         raise ReviewError("Fixed prior-decision manifest was changed")
     counts = [sum(r["batch"] == f"{n:02d}" for r in rows) for n in range(1, 11)]
-    if counts != [20,20,20,20,20,20,20,20,20,16]:
+    if counts != [20,20,20,20,20,20,20,20,20,15]:
         raise ReviewError(f"Batch membership is invalid: {counts}")
-    kos_rows = [r for r in rows if r["source_id"] == "KOS"]
-    if len(kos_rows) != 1 or kos_rows[0]["decision"] != "HOLD" or kos_rows[0]["approved_game_id"] != "-":
-        raise ReviewError("The existing KOS hold must remain explicit and unmapped")
-    if sum(r["source_id"] != "KOS" for r in rows) != 195:
+    if any(r["source_id"] == "KOS" for r in rows):
+        raise ReviewError("KOS is a fixed approved crosswalk mapping, not a new proposal row")
+    if len(rows) != 195:
         raise ReviewError("Expected exactly 195 new identity proposals")
-    if "tc_50c420df8b2c4c6eaae47d795f9a1ea2" not in document or "665 populated annual values" not in document:
-        raise ReviewError("Reused WBG approval or aggregate exclusion section is missing")
+    if ("tc_50c420df8b2c4c6eaae47d795f9a1ea2" not in document
+            or "tc_28aa17b84db24952b92fc51b421075e0" not in document
+            or "665 populated annual values" not in document
+            or "KOS/UVK" not in document):
+        raise ReviewError("Reused WBG/KOS approvals or aggregate exclusion section is missing")
     for row in rows:
         if row["series_code"] != row["source_id"] + ".NGDPD.A":
             raise ReviewError(f"Wrong series code for {row['source_id']}")
@@ -309,9 +314,7 @@ def validate_review_against_source_register(meta: dict[str, Any], rows: list[dic
             if row[field] != value:
                 raise ReviewError(f"Source-derived {field} changed for {row['source_id']}")
         if row["source_id"] == "KOS":
-            if row["proposed_game_id"] != "-" or row["registry_name"] != "-" or row["m49"] != "-":
-                raise ReviewError("KOS must remain held with no proposed identity or M49 code")
-            continue
+            raise ReviewError("KOS must not appear among new proposals; its approved mapping is fixed in the crosswalk")
         game_id = source["reviewed_proposed_game_id"]
         target = registry.get(game_id)
         registry_name = (target.get("names") or {}).get("en", "") if target else ""
@@ -335,6 +338,8 @@ def validate_review_against_source_register(meta: dict[str, Any], rows: list[dic
         raise ReviewError("Aggregate exclusion total changed in Markdown")
     if "WBG / West Bank and Gaza maps to tc_50c420df8b2c4c6eaae47d795f9a1ea2 (Palestine)" not in document:
         raise ReviewError("Previously approved WBG mapping changed in Markdown")
+    if "KOS / Kosovo maps to tc_28aa17b84db24952b92fc51b421075e0 (Kosovo)" not in document:
+        raise ReviewError("Previously approved KOS mapping changed in Markdown")
 
 
 def validate_review(path: Path, complete: bool) -> dict[str, Any]:
@@ -570,8 +575,11 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     if actor != owner:
         raise ReviewError("CLI actor must match the owner recorded in the review Markdown")
     original = json.loads(CROSSWALK.read_text(encoding="utf-8"))
-    if len(original.get("mappings", [])) != 1 or original["mappings"][0].get("source_id") != "WBG":
-        raise ReviewError("Original WBG crosswalk has changed; expected its sole existing WBG mapping")
+    existing_mappings = {item.get("source_id"): item for item in original.get("mappings", [])}
+    if set(existing_mappings) != {"WBG", "KOS"}:
+        raise ReviewError("Original crosswalk must contain exactly the owner-approved WBG and KOS mappings")
+    if existing_mappings["KOS"].get("game_id") != "tc_28aa17b84db24952b92fc51b421075e0":
+        raise ReviewError("Owner-approved KOS crosswalk target changed")
     crosswalk = dict(original)
     crosswalk["mappings"] = list(original["mappings"]) + [{
         "game_id": r["approved_game_id"], "source_id": r["source_id"],
@@ -612,15 +620,15 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         elif decision:
             exc["disposition"] = "excluded" if decision["decision"].upper() == "EXCLUDE" else "hold_for_evidence"
             exc["owner_rationale"] = decision["rationale"]
-    expected_codes = {"WBG"} | {r["source_id"] for r in rows if r["decision"].upper() == "APPROVE"}
+    expected_codes = {"WBG", "KOS"} | {r["source_id"] for r in rows if r["decision"].upper() == "APPROVE"}
     actual_codes = {r["source_country_code"] for r in observations}
     if actual_codes != expected_codes:
         raise ReviewError(f"Candidate source identities mismatch: missing={sorted(expected_codes-actual_codes)}, extra={sorted(actual_codes-expected_codes)}")
-    expected_unmapped = 14 + sum(r["decision"].upper() in {"HOLD", "EXCLUDE"} for r in rows if r["source_id"] != "KOS")
+    expected_unmapped = 13 + sum(r["decision"].upper() in {"HOLD", "EXCLUDE"} for r in rows)
     actual_unmapped = [r for r in exceptions if r.get("exception") == "unmapped_or_ambiguous_identity"]
     if len(actual_unmapped) != expected_unmapped:
         raise ReviewError(f"Candidate exceptions mismatch: expected {expected_unmapped}, got {len(actual_unmapped)}")
-    expected_exception_codes = set(aggregate_by_code) | {"KOS"} | {r["source_id"] for r in rows if r["decision"].upper() in {"HOLD", "EXCLUDE"}}
+    expected_exception_codes = set(aggregate_by_code) | {r["source_id"] for r in rows if r["decision"].upper() in {"HOLD", "EXCLUDE"}}
     actual_exception_codes = {r.get("source_country_code") for r in actual_unmapped}
     if actual_exception_codes != expected_exception_codes:
         raise ReviewError(f"Exception dispositions do not reconcile: missing={sorted(expected_exception_codes-actual_exception_codes)}, extra={sorted(actual_exception_codes-expected_exception_codes)}")
