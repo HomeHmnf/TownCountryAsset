@@ -1,0 +1,1598 @@
+{
+  "schema_version": 1,
+  "dataset": "world_economic_outlook",
+  "source_key": "imf_weo",
+  "mapping_policy": {
+    "scope": "IMF WEO source identity crosswalk only; does not change the project identity registry, ISO/M49 assignments, or other provider mappings.",
+    "unmatched_identities": "Remain unresolved and excluded from candidate observations unless separately owner-approved.",
+    "no_inference": "No fuzzy, name-only, ISO-inferred, coordinate-based, or automatic identity matching."
+  },
+  "review_approval": {
+    "status": "approved",
+    "approved_on": "2026-11-26",
+    "approver_role": "project_owner",
+    "approval_record": "reports/sources/imf-weo-field15-reviewed-candidate/bulk-owner-approvals/field_15_bulk_approval_61ab1328bf74fc5f.md",
+    "scope": "Field 15 / NGDPD only; existing WBG mapping plus explicitly approved rows in the owner review."
+  },
+  "mappings": [
+    {
+      "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2",
+      "source_id": "WBG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "West Bank and Gaza",
+      "review_note": "Explicit project-owner-approved, field-15-only crosswalk. The IMF October 2026 WEO Appendix identifies WBG as West Bank and Gaza and classifies it as an individual economy entry. The existing project UN M49 snapshot matches the Palestine registry identity to State of Palestine (M49 275, PS/PSE) via a reviewed name variant. Target game_id is persistent and exact. This source-specific mapping does not verify or modify the registry ISO assignment status."
+    },
+    {
+      "game_id": "tc_8344feaf14da4684aaa8d4c263653778",
+      "source_id": "ABW",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Aruba, Kingdom of the Netherlands",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_928d15fd89764353a6889f571bfd0a1c",
+      "source_id": "AFG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Afghanistan, Islamic Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_fa43ff476d6b428fa8edb4dde1aa9d3f",
+      "source_id": "AGO",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Angola",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1",
+      "source_id": "ALB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Albania",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_224c06bfe0f04031b422bddc81ea3ce5",
+      "source_id": "AND",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Andorra, Principality of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_3cbd960008724744b928265acc0638a4",
+      "source_id": "ARE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "United Arab Emirates",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2a29d5b72b294244a5de6db37118237a",
+      "source_id": "ARG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Argentina",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f97b56c9c74845de8b41aa24ed12a47f",
+      "source_id": "ARM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Armenia, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_9221f2a3fd704847b66da16efa03c2b8",
+      "source_id": "ATG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Antigua and Barbuda",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_270a6ecb902d4ea1ac7373b3d1a3b2cc",
+      "source_id": "AUS",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Australia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_a0422e821c824e78bd95525b36155b65",
+      "source_id": "AUT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Austria",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_b8c860bb8d404dcca918bad769e7ead7",
+      "source_id": "AZE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Azerbaijan, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4ac5b3c6b7774a05b4ceb5573c4a9d27",
+      "source_id": "BDI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Burundi",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f1cc713e923c4be48e176657a00469f0",
+      "source_id": "BEL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Belgium",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_874ae1f05e8c4d67a2c839095d760b72",
+      "source_id": "BEN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Benin",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_3c920b9b9f324cb19ef9d4b6debf10ba",
+      "source_id": "BFA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Burkina Faso",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_8169e562ece7475e960f78f231cb1ab7",
+      "source_id": "BGD",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Bangladesh",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_523810acde564c1c907acd5befe575ab",
+      "source_id": "BGR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Bulgaria",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_38fd6c5cd2be45739f3be11bc4cab9c8",
+      "source_id": "BHR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Bahrain, Kingdom of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_53553c35a9f44fddb64f46b5b2d7b90c",
+      "source_id": "BHS",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Bahamas, The",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_0628271c897b49558f423321cbc48ce4",
+      "source_id": "BIH",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Bosnia and Herzegovina",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_6ebc90b251e14f70b8bf758d8008e839",
+      "source_id": "BLR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Belarus, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_d066174c4df546d1a410d386f363ee80",
+      "source_id": "BLZ",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Belize",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4cd6d52014244914bdeb62e6a6452e42",
+      "source_id": "BOL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Bolivia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4923336d91d94afc919d8a2b8a4ad415",
+      "source_id": "BRA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Brazil",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_7a679c592eef40c58b7cdf58e6032bb5",
+      "source_id": "BRB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Barbados",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e416804f7e41490a9e7d743a45a72f0e",
+      "source_id": "BRN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Brunei Darussalam",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_91f04a21215642aeb5da856a78dc9949",
+      "source_id": "BTN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Bhutan",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_ca2bdd688a454bb8b6457c9448612669",
+      "source_id": "BWA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Botswana",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_9d80376a997845b6ba6bbc08d436a50d",
+      "source_id": "CAF",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Central African Republic",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_ba9087366ba54d51932e88bf8a11616d",
+      "source_id": "CAN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Canada",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e693e8b799f94e7bb814e89bd46d886d",
+      "source_id": "CHE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Switzerland",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4c51c695cb6e47d2aed2fb04c397bece",
+      "source_id": "CHL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Chile",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_3349a0b8b7454088b11e917a24de3ad5",
+      "source_id": "CHN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "China, People's Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_18c639798e4948899643d84aa2bce93c",
+      "source_id": "CIV",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Côte d'Ivoire",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f5cd614ef03c414d8e98d87102df5c14",
+      "source_id": "CMR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Cameroon",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2763c19aa8734ce9aa8b17d8effb6645",
+      "source_id": "COD",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Congo, Democratic Republic of the",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_451d8109e28b45eaa6923dfcac9d1601",
+      "source_id": "COG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Congo, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_648b019cc83e486ab9fb8497386777a9",
+      "source_id": "COL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Colombia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_10dd5e9664664abf9eca33c250a74cdb",
+      "source_id": "COM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Comoros, Union of the",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_d9d1737635ce4385a50c4307c2716832",
+      "source_id": "CPV",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Cabo Verde",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_79512b2eaf8f45b5b118130859ebdaaf",
+      "source_id": "CRI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Costa Rica",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_3c148b1f7650455fa710ca87cf376728",
+      "source_id": "CYP",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Cyprus",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e43afc3a83a3458c833dac5644b7186a",
+      "source_id": "CZE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Czech Republic",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_ff445b0a87494070bf868827de190acf",
+      "source_id": "DEU",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Germany",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f4814b1a89384c4d93a92c19b301a814",
+      "source_id": "DJI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Djibouti",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e5391af862dd490bb3a01fa80f4ac15e",
+      "source_id": "DMA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Dominica",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_11da440eb0704bd195fe0b11fa0890af",
+      "source_id": "DNK",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Denmark",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_ee04e01170f84b92afabbb40abdbd4e3",
+      "source_id": "DOM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Dominican Republic",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e245d37005f843168d67b7b327ece7f9",
+      "source_id": "DZA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Algeria",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2a54eb1caed54a2185a62cce0c2db6cb",
+      "source_id": "ECU",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Ecuador",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_939f236600dd47a8bf850a7ff19dc047",
+      "source_id": "EGY",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Egypt, Arab Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f9d7128c5ef04c6f955f43f9bcc56a0c",
+      "source_id": "ERI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Eritrea, The State of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_21a70a0fbf1b43c292783397ce218239",
+      "source_id": "ESP",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Spain",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_383873de760147cd97dfac5ef5d60b08",
+      "source_id": "EST",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Estonia, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_860d12ee66fc4fceb3faddbc92c87930",
+      "source_id": "ETH",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Ethiopia, The Federal Democratic Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_374e55a3eefe4a1a83fed6b64b5045f5",
+      "source_id": "FIN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Finland",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_8d67737674744dce8986565b98cbbb1f",
+      "source_id": "FJI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Fiji, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_471ae6d7112b4537a7ae5ca1e6a816a5",
+      "source_id": "FRA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "France",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4add61cba99b4e63a37406cd1d0feb5f",
+      "source_id": "FSM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Micronesia, Federated States of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_d59dfb6324524b07a32c87b73009e97f",
+      "source_id": "GAB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Gabon",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_8d01644699e04b74ae3a4751c6f1fc41",
+      "source_id": "GBR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "United Kingdom",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_741bd244c1ec4961918565c4ed02c5c6",
+      "source_id": "GEO",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Georgia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f63061b714ce4390948838410758c016",
+      "source_id": "GHA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Ghana",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_05eaf88055cc4388b518332f2e7fc115",
+      "source_id": "GIN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Guinea",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a",
+      "source_id": "GMB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Gambia, The",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_dc93b6caf7324df884ec2b070a5296b9",
+      "source_id": "GNB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Guinea-Bissau",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_06d71df13c4f415fbf22a0147f19bc53",
+      "source_id": "GNQ",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Equatorial Guinea, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_dab67464d7ad44cdbf925450627e4186",
+      "source_id": "GRC",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Greece",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c5b3fecc12a94e85a7acddc70fa7a086",
+      "source_id": "GRD",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Grenada",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_9348779eba844ab2beb5bed00053b7c6",
+      "source_id": "GTM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Guatemala",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_893d4efa8ccf42af896949ffd7007fef",
+      "source_id": "GUY",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Guyana",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_394248a9960c4d28b4385210c82a0a0b",
+      "source_id": "HKG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Hong Kong Special Administrative Region, People's Republic of China",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_80c318b9217a4320beaad6b93eb74ac5",
+      "source_id": "HND",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Honduras",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_fb4046d4910a4bf89f4a93810e2f4d8a",
+      "source_id": "HRV",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Croatia, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_9ee610c6d55a4f4bbdbbb073b33628a2",
+      "source_id": "HTI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Haiti",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e3ede57c1b754a2dbd940335f9655f11",
+      "source_id": "HUN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Hungary",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c40da0ac977b4201b8587ce04aa66f56",
+      "source_id": "IDN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Indonesia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_39ad5030b5f94f068d4a1528c60e5638",
+      "source_id": "IND",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "India",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_16d6044d9abf4743821a6fb238942a22",
+      "source_id": "IRL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Ireland",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_ddf21c4d378e4fc9bc3d5b4ba50890a2",
+      "source_id": "IRN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Iran, Islamic Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_5ee7b31f968941dca65e70519901915f",
+      "source_id": "IRQ",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Iraq",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_861af4b9250e4e17a9d3f1f4e1ea33d4",
+      "source_id": "ISL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Iceland",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_28952c75855947a7b31bb7509dc1fce1",
+      "source_id": "ISR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Israel",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_1f3e0c90df4341f082ed90ecdd95fb10",
+      "source_id": "ITA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Italy",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_bf02736242694622ae7c730beb0f0da6",
+      "source_id": "JAM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Jamaica",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_6e28258973b54dfeb5811c563cd0a2e8",
+      "source_id": "JOR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Jordan",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_8d0620ea475f498d9402134857882bf1",
+      "source_id": "JPN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Japan",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_feadffc011db4cf695df6c0997a003c8",
+      "source_id": "KAZ",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Kazakhstan, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_9f3dc962bf9744a5a3cdf1f7a1cbb159",
+      "source_id": "KEN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Kenya",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_130ca81b84d04b058e9301121b2b7802",
+      "source_id": "KGZ",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Kyrgyz Republic",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f956986338e5418481784ba2d2781063",
+      "source_id": "KHM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Cambodia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c23a3cf00b1a4ebf97a70a4f41a7761d",
+      "source_id": "KIR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Kiribati",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f22d58e7280f41f7a5a68fb03e1ab87e",
+      "source_id": "KNA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "St. Kitts and Nevis",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_cf8be733dbf44dd6b112e9fe12d2b19e",
+      "source_id": "KOR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Korea, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_fa491c61ffa24dc3a21c6a6da7d39fad",
+      "source_id": "KWT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Kuwait",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_71a3ecd24ca74da9a6cea3dae8cd1f82",
+      "source_id": "LAO",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Lao People's Democratic Republic",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_8466a0747d0b4d1a8c23feb70f7c6ed1",
+      "source_id": "LBN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Lebanon",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_40dc9d2e141343e98a4d0c762c578473",
+      "source_id": "LBR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Liberia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_bb5622bab363429ca481c5476acc824c",
+      "source_id": "LBY",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Libya",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_6629fdb92d05409f856d9030b63b1470",
+      "source_id": "LCA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "St. Lucia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_a8bd42bd635b43289f3c26695dc58939",
+      "source_id": "LIE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Liechtenstein, Principality of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_5e47c88bebac452e953fc5dfa8b1ba06",
+      "source_id": "LKA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Sri Lanka",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c0fa4e9b8e984f59ba17beb7547c5811",
+      "source_id": "LSO",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Lesotho, Kingdom of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_77de0a41c4d94d8388d6f0732438be81",
+      "source_id": "LTU",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Lithuania, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f4261f4507cd48858cdfb7e3bd0ae738",
+      "source_id": "LUX",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Luxembourg",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f161aef25a39413e8aef8c147e97b28a",
+      "source_id": "LVA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Latvia, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f9a64d8c1e6342d2b1941833ff7588d0",
+      "source_id": "MAC",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Macao Special Administrative Region, People's Republic of China",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_84dc0c18f03144bea337f6aacd50bf0f",
+      "source_id": "MAR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Morocco",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_96ea5c49288d40b0945401031405c2c8",
+      "source_id": "MDA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Moldova, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_7abbe0f9aa1346c7a9f69cc1027b4282",
+      "source_id": "MDG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Madagascar, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_408d22fe5b894b4b947a0521ace1018a",
+      "source_id": "MDV",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Maldives",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c6b830c3cba64d4883eac8cee7864cfd",
+      "source_id": "MEX",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Mexico",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f201b19690a04a8f903f9ea4cb0c7af4",
+      "source_id": "MHL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Marshall Islands, Republic of the",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_949bf877e3284f5c8a56cfc89bcafa90",
+      "source_id": "MKD",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "North Macedonia, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_a3f73fd3bb6d4d7fb4ea31d433453bae",
+      "source_id": "MLI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Mali",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f97b2223a2a84e53ac13614ddde1f602",
+      "source_id": "MLT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Malta",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_b4847e5d14f94efdbbd46d6467d90237",
+      "source_id": "MMR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Myanmar",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_eb1de71332ef4db496cb76c95aa56cd4",
+      "source_id": "MNE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Montenegro",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_d0fb202ca0aa4a868af6fa154ab84c30",
+      "source_id": "MNG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Mongolia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2249b79a9c944a1c835b0cad2676e48d",
+      "source_id": "MOZ",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Mozambique, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_17137c4e4fcc4fa58e32c924f08efcda",
+      "source_id": "MRT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Mauritania, Islamic Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c7b728ec16b94e35b05d96d14a253eec",
+      "source_id": "MUS",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Mauritius",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_ee1c1ac1ad5c4faf818070115133b174",
+      "source_id": "MWI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Malawi",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_b21225f45c3b40509640603249110f89",
+      "source_id": "MYS",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Malaysia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_7379cdcc5c4848c181ace3144aeba70f",
+      "source_id": "NAM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Namibia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4d31375845614c2b91a71736069d4ab3",
+      "source_id": "NER",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Niger",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_7a8158c93a934345a2ade9fd16ee4999",
+      "source_id": "NGA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Nigeria",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2fdae8757e51402e9f67c428d2b79368",
+      "source_id": "NIC",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Nicaragua",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_898b220cf53a425e9bac3630f2c17473",
+      "source_id": "NLD",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Netherlands, The",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f4a6e15a05474af2b81c9524ed988d89",
+      "source_id": "NOR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Norway",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_1c4ff3f2a8f04b43b0c28e830a9403ad",
+      "source_id": "NPL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Nepal",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2722269bdef04648b655fe363650d565",
+      "source_id": "NRU",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Naoero, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_d4b67e03f0c04d9a87089f477e5fa669",
+      "source_id": "NZL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "New Zealand",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_22bd85ff61234a46a95506d105d5fee4",
+      "source_id": "OMN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Oman",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_0dc6216a94e34b44b27e42ed35fa6376",
+      "source_id": "PAK",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Pakistan",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_ba6cf14fa6224eb4a0b085b3ea1df6dc",
+      "source_id": "PAN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Panama",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_a90d391a4a9a473b9074fc99cce11cb5",
+      "source_id": "PER",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Peru",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_fc8f1a9536d342899526129acf15acd2",
+      "source_id": "PHL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Philippines",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_642fbe2581cf4b8c857d967717d1f1ef",
+      "source_id": "PLW",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Palau, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_82d51d964745422e8ed3a9109757d2ee",
+      "source_id": "PNG",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Papua New Guinea",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_9865dd6a50c3458b98f5040f0cc76357",
+      "source_id": "POL",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Poland, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_37f10315a18d4c3abf3486086b5822e1",
+      "source_id": "PRI",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Puerto Rico",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_43ee3db974884a72bacf5f5519e2c145",
+      "source_id": "PRT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Portugal",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_3eb6dc12494541e793a8a5b68980f29f",
+      "source_id": "PRY",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Paraguay",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_13df99232f33400d9079316c041f066c",
+      "source_id": "QAT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Qatar",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c41863f7cb4e4dccbbdf0a1296f9ee1c",
+      "source_id": "ROU",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Romania",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c587d1c1cd8d4ec489f3d8e2524ec607",
+      "source_id": "RUS",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Russian Federation",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_7f3c6637070f4c42a40c1f5456ec4721",
+      "source_id": "RWA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Rwanda",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_86b0f7fcb4504f9b8dc1b60b42b16ea0",
+      "source_id": "SAU",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Saudi Arabia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_b0ca3e0386b34603a6356b8ebc8b0565",
+      "source_id": "SDN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Sudan",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_29ec74ae4e094053a930487b9ce602d1",
+      "source_id": "SEN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Senegal",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_9d65e06bf97d417c8aa62742225ef5c9",
+      "source_id": "SGP",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Singapore",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_0ce7eb254c32428c88601905c0df8e87",
+      "source_id": "SLB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Solomon Islands",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_56e9d1977fa14da298ae125fbda1b63c",
+      "source_id": "SLE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Sierra Leone",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_471268dbb85845de93e546317686debb",
+      "source_id": "SLV",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "El Salvador",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e4ea859bd6704c13912ad7f5cf19de41",
+      "source_id": "SMR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "San Marino, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e82cc51b989841109d9e1a7f6a5d1727",
+      "source_id": "SOM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Somalia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_98a68180b9f0479f90dcde7809d60470",
+      "source_id": "SRB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Serbia, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_12491d45eed544948b316c89f82a7ee7",
+      "source_id": "SSD",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "South Sudan, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4a2ed326dc6047efa2e28926df0bc7f0",
+      "source_id": "STP",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "São Tomé and Príncipe, Democratic Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_168a848021b84cc6a6c3fc320012a176",
+      "source_id": "SUR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Suriname",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_b3bea891d7114d148714d5e398ee06b1",
+      "source_id": "SVK",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Slovak Republic",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c0484640d9554c8285e92412bae25785",
+      "source_id": "SVN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Slovenia, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_d74b429fff544cf9bafeb459c4b3edd8",
+      "source_id": "SWE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Sweden",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_fc2ad04f3c88446e91bd770190d6fe4c",
+      "source_id": "SWZ",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Eswatini, Kingdom of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_4bc377d3ea57485bac43c9b512587dbc",
+      "source_id": "SYC",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Seychelles",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_c205b2615c45490182519ecedb651e99",
+      "source_id": "SYR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Syrian Arab Republic",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_1da2daf3a3d34a30b96100d643963f70",
+      "source_id": "TCD",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Chad",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_06a09ff0e27b49e392ef2e88161023eb",
+      "source_id": "TGO",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Togo",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_fc12d0184fc7498f982ab8033ae64436",
+      "source_id": "THA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Thailand",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_772e2ac5253c46e98b79cf5a6f19e9f5",
+      "source_id": "TJK",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Tajikistan, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_72de9a194d85404098bb741ae4ffc826",
+      "source_id": "TKM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Turkmenistan",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_bd40ea14860a4c4083eced5549d2d9c4",
+      "source_id": "TLS",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Timor-Leste, Democratic Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2c6f6c5486f04a87aa94277e67d6e51a",
+      "source_id": "TON",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Tonga",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_1bd98a138f884dd4b4d9d1efbbf357b0",
+      "source_id": "TTO",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Trinidad and Tobago",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_1d1d2c1274384efa82f9591e1c069aba",
+      "source_id": "TUN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Tunisia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_155414257ec0498690f73c3595d85e7c",
+      "source_id": "TUR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Türkiye, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_47cd272cd9c9455185a13f6e69bd805c",
+      "source_id": "TUV",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Tuvalu",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_98ab3dee1d554162b6bbd5dac6374fc8",
+      "source_id": "TWN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Taiwan Province of China",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_0f4c47ec59434e46871845e474964499",
+      "source_id": "TZA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Tanzania, United Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_2bd67b30564b46b4b502a36decc333bf",
+      "source_id": "UGA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Uganda",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_65f8a168b10143c2a596917c1fca3731",
+      "source_id": "UKR",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Ukraine",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e19506c4a1564ca085b73b9284fa6f56",
+      "source_id": "URY",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Uruguay",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_f0a8b61c54a14d4089774716657e9433",
+      "source_id": "USA",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "United States",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_5d951c36a4ad4471ae9b9037fe338d70",
+      "source_id": "UZB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Uzbekistan, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_67290f5714c846f4a84d1f53c6fd495a",
+      "source_id": "VCT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "St. Vincent and the Grenadines",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_1aa00cb7ebb34cdca928353a58ff5b12",
+      "source_id": "VEN",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Venezuela, República Bolivariana de",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e65eabf3cd054585a43347bdfea6201b",
+      "source_id": "VNM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Vietnam",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_43c4be0a76ca43a2bb7e634de5a1f4f4",
+      "source_id": "VUT",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Vanuatu",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_76082bd796c546d1ab76a7a8a3251369",
+      "source_id": "WSM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Samoa",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e32ec835b247449084d1b535ebccf7f1",
+      "source_id": "YEM",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Yemen, Republic of",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_dc6419869818416db051f50cbfd95036",
+      "source_id": "ZAF",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "South Africa",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_e75bc9ac62fa443c90b5529778f3b1af",
+      "source_id": "ZMB",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Zambia",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    },
+    {
+      "game_id": "tc_168ca96e60634f5d83f3f22ad2505e66",
+      "source_id": "ZWE",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Zimbabwe",
+      "review_note": "I have reviewed and approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+    }
+  ],
+  "reused_prior_approval": {
+    "status": "approved",
+    "approved_on": "2026-11-25",
+    "approver_role": "project_owner",
+    "approval_record": "docs/data-sources/wp1-5-review-approval-application-workflow.md",
+    "scope": "Field 15 (NGDPD) only; IMF WEO source code WBG maps to the existing Palestine game_id. No global identity or ISO/M49 registry change."
+  },
+  "review_document": {
+    "path": "reports/sources/imf-weo-field15-reviewed-candidate/bulk-owner-approvals/field_15_bulk_approval_61ab1328bf74fc5f.md",
+    "sha256": "61ab1328bf74fc5fad1cf8b46eaf3596d0979502f71f8c1a9c72582694cb78e0"
+  }
+}

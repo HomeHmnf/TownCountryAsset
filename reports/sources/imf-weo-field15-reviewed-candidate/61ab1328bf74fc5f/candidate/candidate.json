@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "candidate_type": "imf_weo_annual_historical_observations",
+  "source_key": "imf_weo",
+  "release": "october_2026",
+  "source_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+  "source_sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+  "source_byte_count": 26692032,
+  "identity_registry_path": "config/country_identity_registry.json",
+  "crosswalk_path": "reports/sources/imf-weo-field15-reviewed-candidate/61ab1328bf74fc5f/reviewed_imf_weo_crosswalk.json",
+  "crosswalk_sha256": "9a59659ec37c96c8e9c4024009fdd009ebdfd63f5e121a2a1c4c0d095d6d1993",
+  "field_ids": [
+    15
+  ],
+  "observation_count": 9329,
+  "distinct_game_ids": 196,
+  "indicator_counts": {
+    "NGDPD": 9329
+  },
+  "year_range": [
+    1980,
+    2031
+  ],
+  "exception_count": 14,
+  "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
+  "identity_policy": "explicit_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback",
+  "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
+  "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
+  "database_written": false,
+  "approval_created": false,
+  "candidate_directory": "reports/sources/imf-weo-field15-reviewed-candidate/61ab1328bf74fc5f/candidate",
+  "observations_sha256": "a2a6196a006fd5cf3bf3d8efa5991263edafc2a6e18b1b0ba1c55d2567c44927",
+  "exceptions_sha256": "1e9dca1cc745314125fded249aab893f2faf87d2abf94c7664f93e18a35cb929"
+}
