@@ -168,6 +168,16 @@ def test_one_run_writes_all_ten_cumulative_batches_and_final_register(tmp_path: 
         "exceptions": exceptions,
         "review_rows": rows,
         "fingerprints": {},
+        "m49_faq_html": "<html>official FAQ snapshot</html>",
+        "m49_faq_provenance": {
+            "source_url": "https://unstats.un.org/unsd/methodology/m49/",
+            "final_url": "https://unstats.un.org/unsd/methodology/m49/",
+            "retrieved_at_utc": "2026-11-26T00:00:00+00:00",
+            "content_type": "text/html; charset=utf-8",
+            "byte_count": 30,
+            "sha256": "a" * 64,
+            "validation": "test",
+        },
         "summary": {
             "source_identity_count": 210, "aggregate_exclusion_count": 13,
             "individual_economy_count": 197, "existing_approved_crosswalk_count": 1,
