@@ -251,6 +251,34 @@ The 32 WBG observations are included through the separately owner-approved, fiel
 
 This is a source-row disposition and candidate-reconciliation update only. It is not semantic approval, field approval, an application authorization or a database write. Field 15 remains open pending the complete review, approval, application and independent verification workflow. Fields 16, 18, 20 and 21 remain outside this field-scoped decision.
 
+
+## 18. Owner decision — IMF WEO KOS source crosswalk — 2026-11-26
+
+The project owner explicitly approved a second provider-specific identity mapping for the October 2026 IMF WEO field-15 candidate:
+
+- Source key: `imf_weo`
+- WEO source code: `KOS` (source name identifies Kosovo)
+- Target persistent identity: `tc_28aa17b84db24952b92fc51b421075e0` (the existing Kosovo registry/Game DB identity)
+- Match method: `reviewed_manual`
+- Scope: IMF WEO October 2026, NGDPD, WP1.5 field 15 only.
+- Crosswalk artifact: `data/manual/source_crosswalks/imf_weo.json`
+
+### Evidence and qualification
+
+The WEO CSV uses source code `KOS`, while the October 2026 IMF Appendix Country Data Documentation identifies Kosovo with code `UVK`. The project identity evidence independently identifies the target persistent game_id as Kosovo: the canonical registry record names Kosovo and records its source/geometry key as KOS; the Game DB record has the same game_id and an approved `disputed_or_partially_recognized_entity` entity-type decision. Its ISO alpha-2 and alpha-3 values remain unassigned.
+
+The UN M49 FAQ's statistical-use numerical code 412 is relevant statistical context, but it does not itself establish an IMF KOS-to-UVK code concordance. The owner decision is therefore an explicit provider-specific crosswalk based on the source identity and project identity evidence, with the IMF Appendix code discrepancy retained as a qualification. It is not an ISO assignment or a geopolitical/legal determination.
+
+### Limits and legacy observations
+
+- This mapping applies only to `imf_weo / KOS`, October 2026 NGDPD, field 15.
+- Do not change the canonical identity registry, Game DB identity record, ISO assignments, M49 assignments, or any other provider crosswalk as a consequence.
+- Preserve the 32 existing KOS observations for 2000–2031. Their existing values and provenance must be checked against the rebuilt candidate exactly; this decision does not authorize deletion, remapping, overwriting, or status classification.
+- The mapping must be included in the exact candidate and approval fingerprints. The prior `hold_for_evidence` disposition for KOS is superseded for this field-15 source only.
+- No database application is authorized merely by recording this identity decision. The normal explicit application approval, safe backup, compatibility preflight, transactional import and independent verification remain mandatory.
+
+This decision resolves the provider-specific identity disposition for KOS in field 15. It does not close field 15 or authorize field 16/18/20/21.
+
 ## 17. Consolidated IMF WEO field-15 owner review
 
 The ten source-derived identity batches are consolidated into one owner-review Markdown file and one explicit application CLI. Follow [the field-15 owner review workflow](imf-weo-field15-owner-review-workflow.md). The review document is generated from the automatic final register, not the historical manual batches. It carries forward the existing WBG approval, 13 aggregate exclusions (665 values), and KOS hold. Use `tools/approve_imf_weo_field15_all.py` for one-command bulk owner approval and application of the 195 generated proposals; dry-run is the default, and writes require `--apply --confirm-all-proposals`, an owner actor, and a decision note. The command creates a separate fingerprint-bound approval copy and reuses the existing WEO application ledger/importer. Generation and dry-run validation do not write to either database.
