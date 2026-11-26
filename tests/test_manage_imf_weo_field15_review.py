@@ -130,8 +130,8 @@ def test_cli_help_runs_outside_repository_without_pythonpath(tmp_path: Path):
 def _write_candidate_fixture(directory: Path) -> None:
     directory.mkdir(parents=True, exist_ok=True)
     (directory / "observations.csv").write_text(
-        "game_id,source_country_code,indicator_code,observation_year\n"
-        "tc_" + "a" * 32 + ",AAA,NGDPD,2000\n",
+        "game_id,source_country_code,indicator_code,observation_year,source_country_name,field_id,value,unit,scale,value_status,latest_actual_annual_data,reporting_year_months,source_reference,source_version,source_sha256,acquired_on,acquisition_time_precision\n"
+        "tc_" + "a" * 32 + ",AAA,NGDPD,2000,Example AAA,15,1.25,,,unclassified,,,https://example.org/weo,October 2026 / IMF.RES_WEO_9.0.0," + "a" * 64 + ",2026-11-02,day\n",
         encoding="utf-8",
     )
     (directory / "candidate.json").write_text(
@@ -146,26 +146,31 @@ def _write_existing_observations_db(path: Path, *, extra_kos: bool) -> None:
         connection.execute(
             """CREATE TABLE imf_weo_historical_observations (
                 game_id TEXT, source_country_code TEXT, indicator_code TEXT,
-                observation_year INTEGER, source_version TEXT, source_sha256 TEXT,
-                field_id INTEGER
+                observation_year INTEGER, source_country_name TEXT, field_id INTEGER,
+                value REAL, unit TEXT, scale TEXT, value_status TEXT,
+                latest_actual_annual_data TEXT, reporting_year_months TEXT,
+                source_reference TEXT, source_version TEXT, source_sha256 TEXT,
+                acquired_on TEXT, acquisition_time_precision TEXT
             )"""
         )
+        values = (
+            "tc_" + "a" * 32, "AAA", "NGDPD", 2000, "Example AAA", 15,
+            1.25, None, None, "unclassified", None, None, "https://example.org/weo",
+            "October 2026 / IMF.RES_WEO_9.0.0", "a" * 64, "2026-11-02", "day",
+        )
         connection.execute(
-            """INSERT INTO imf_weo_historical_observations VALUES
-               (?, ?, ?, ?, ?, ?, ?)""",
-            (
-                "tc_" + "a" * 32, "AAA", "NGDPD", 2000,
-                "October 2026 / IMF.RES_WEO_9.0.0", "a" * 64, 15,
-            ),
+            "INSERT INTO imf_weo_historical_observations VALUES (" + ",".join("?" for _ in values) + ")",
+            values,
         )
         if extra_kos:
+            kos_values = (
+                "tc_" + "b" * 32, "KOS", "NGDPD", 2001, "Kosovo", 15,
+                2.0, None, None, "unclassified", None, None, "https://example.org/weo",
+                "October 2026 / IMF.RES_WEO_9.0.0", "a" * 64, "2026-11-02", "day",
+            )
             connection.execute(
-                """INSERT INTO imf_weo_historical_observations VALUES
-                   (?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    "tc_" + "b" * 32, "KOS", "NGDPD", 2001,
-                    "October 2026 / IMF.RES_WEO_9.0.0", "a" * 64, 15,
-                ),
+                "INSERT INTO imf_weo_historical_observations VALUES (" + ",".join("?" for _ in kos_values) + ")",
+                kos_values,
             )
         connection.commit()
     finally:
