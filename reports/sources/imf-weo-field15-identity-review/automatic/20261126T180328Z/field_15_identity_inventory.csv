@@ -1,0 +1,211 @@
+source_id,source_name,series_code,populated_year_count,first_populated_year,last_populated_year,classification,proposed_game_id
+ABW,"Aruba, Kingdom of the Netherlands",ABW.NGDPD.A,37,1995,2031,proposal,tc_8344feaf14da4684aaa8d4c263653778
+AFG,"Afghanistan, Islamic Republic of",AFG.NGDPD.A,24,2002,2025,proposal,tc_928d15fd89764353a6889f571bfd0a1c
+AGO,Angola,AGO.NGDPD.A,52,1980,2031,proposal,tc_fa43ff476d6b428fa8edb4dde1aa9d3f
+ALB,Albania,ALB.NGDPD.A,52,1980,2031,proposal,tc_4d8b70a33bce41a9b8bf8fbe22d6d0f1
+AND,"Andorra, Principality of",AND.NGDPD.A,32,2000,2031,proposal,tc_224c06bfe0f04031b422bddc81ea3ce5
+ARE,United Arab Emirates,ARE.NGDPD.A,52,1980,2031,proposal,tc_3cbd960008724744b928265acc0638a4
+ARG,Argentina,ARG.NGDPD.A,52,1980,2031,proposal,tc_2a29d5b72b294244a5de6db37118237a
+ARM,"Armenia, Republic of",ARM.NGDPD.A,40,1992,2031,proposal,tc_f97b56c9c74845de8b41aa24ed12a47f
+ATG,Antigua and Barbuda,ATG.NGDPD.A,52,1980,2031,proposal,tc_9221f2a3fd704847b66da16efa03c2b8
+AUS,Australia,AUS.NGDPD.A,52,1980,2031,proposal,tc_270a6ecb902d4ea1ac7373b3d1a3b2cc
+AUT,Austria,AUT.NGDPD.A,52,1980,2031,proposal,tc_a0422e821c824e78bd95525b36155b65
+AZE,"Azerbaijan, Republic of",AZE.NGDPD.A,40,1992,2031,proposal,tc_b8c860bb8d404dcca918bad769e7ead7
+BDI,Burundi,BDI.NGDPD.A,52,1980,2031,proposal,tc_4ac5b3c6b7774a05b4ceb5573c4a9d27
+BEL,Belgium,BEL.NGDPD.A,52,1980,2031,proposal,tc_f1cc713e923c4be48e176657a00469f0
+BEN,Benin,BEN.NGDPD.A,52,1980,2031,proposal,tc_874ae1f05e8c4d67a2c839095d760b72
+BFA,Burkina Faso,BFA.NGDPD.A,52,1980,2031,proposal,tc_3c920b9b9f324cb19ef9d4b6debf10ba
+BGD,Bangladesh,BGD.NGDPD.A,52,1980,2031,proposal,tc_8169e562ece7475e960f78f231cb1ab7
+BGR,Bulgaria,BGR.NGDPD.A,52,1980,2031,proposal,tc_523810acde564c1c907acd5befe575ab
+BHR,"Bahrain, Kingdom of",BHR.NGDPD.A,52,1980,2031,proposal,tc_38fd6c5cd2be45739f3be11bc4cab9c8
+BHS,"Bahamas, The",BHS.NGDPD.A,52,1980,2031,proposal,tc_53553c35a9f44fddb64f46b5b2d7b90c
+BIH,Bosnia and Herzegovina,BIH.NGDPD.A,36,1996,2031,proposal,tc_0628271c897b49558f423321cbc48ce4
+BLR,"Belarus, Republic of",BLR.NGDPD.A,40,1992,2031,proposal,tc_6ebc90b251e14f70b8bf758d8008e839
+BLZ,Belize,BLZ.NGDPD.A,52,1980,2031,proposal,tc_d066174c4df546d1a410d386f363ee80
+BOL,Bolivia,BOL.NGDPD.A,47,1980,2026,proposal,tc_4cd6d52014244914bdeb62e6a6452e42
+BRA,Brazil,BRA.NGDPD.A,52,1980,2031,proposal,tc_4923336d91d94afc919d8a2b8a4ad415
+BRB,Barbados,BRB.NGDPD.A,52,1980,2031,proposal,tc_7a679c592eef40c58b7cdf58e6032bb5
+BRN,Brunei Darussalam,BRN.NGDPD.A,47,1985,2031,proposal,tc_e416804f7e41490a9e7d743a45a72f0e
+BTN,Bhutan,BTN.NGDPD.A,52,1980,2031,proposal,tc_91f04a21215642aeb5da856a78dc9949
+BWA,Botswana,BWA.NGDPD.A,52,1980,2031,proposal,tc_ca2bdd688a454bb8b6457c9448612669
+CAF,Central African Republic,CAF.NGDPD.A,52,1980,2031,proposal,tc_9d80376a997845b6ba6bbc08d436a50d
+CAN,Canada,CAN.NGDPD.A,52,1980,2031,proposal,tc_ba9087366ba54d51932e88bf8a11616d
+CHE,Switzerland,CHE.NGDPD.A,52,1980,2031,proposal,tc_e693e8b799f94e7bb814e89bd46d886d
+CHL,Chile,CHL.NGDPD.A,52,1980,2031,proposal,tc_4c51c695cb6e47d2aed2fb04c397bece
+CHN,"China, People's Republic of",CHN.NGDPD.A,52,1980,2031,proposal,tc_3349a0b8b7454088b11e917a24de3ad5
+CIV,Côte d'Ivoire,CIV.NGDPD.A,52,1980,2031,proposal,tc_18c639798e4948899643d84aa2bce93c
+CMR,Cameroon,CMR.NGDPD.A,52,1980,2031,proposal,tc_f5cd614ef03c414d8e98d87102df5c14
+COD,"Congo, Democratic Republic of the",COD.NGDPD.A,52,1980,2031,proposal,tc_2763c19aa8734ce9aa8b17d8effb6645
+COG,"Congo, Republic of",COG.NGDPD.A,52,1980,2031,proposal,tc_451d8109e28b45eaa6923dfcac9d1601
+COL,Colombia,COL.NGDPD.A,52,1980,2031,proposal,tc_648b019cc83e486ab9fb8497386777a9
+COM,"Comoros, Union of the",COM.NGDPD.A,52,1980,2031,proposal,tc_10dd5e9664664abf9eca33c250a74cdb
+CPV,Cabo Verde,CPV.NGDPD.A,52,1980,2031,proposal,tc_d9d1737635ce4385a50c4307c2716832
+CRI,Costa Rica,CRI.NGDPD.A,52,1980,2031,proposal,tc_79512b2eaf8f45b5b118130859ebdaaf
+CYP,Cyprus,CYP.NGDPD.A,52,1980,2031,proposal,tc_3c148b1f7650455fa710ca87cf376728
+CZE,Czech Republic,CZE.NGDPD.A,37,1995,2031,proposal,tc_e43afc3a83a3458c833dac5644b7186a
+DEU,Germany,DEU.NGDPD.A,52,1980,2031,proposal,tc_ff445b0a87494070bf868827de190acf
+DJI,Djibouti,DJI.NGDPD.A,42,1990,2031,proposal,tc_f4814b1a89384c4d93a92c19b301a814
+DMA,Dominica,DMA.NGDPD.A,52,1980,2031,proposal,tc_e5391af862dd490bb3a01fa80f4ac15e
+DNK,Denmark,DNK.NGDPD.A,52,1980,2031,proposal,tc_11da440eb0704bd195fe0b11fa0890af
+DOM,Dominican Republic,DOM.NGDPD.A,52,1980,2031,proposal,tc_ee04e01170f84b92afabbb40abdbd4e3
+DZA,Algeria,DZA.NGDPD.A,52,1980,2031,proposal,tc_e245d37005f843168d67b7b327ece7f9
+ECU,Ecuador,ECU.NGDPD.A,52,1980,2031,proposal,tc_2a54eb1caed54a2185a62cce0c2db6cb
+EGY,"Egypt, Arab Republic of",EGY.NGDPD.A,52,1980,2031,proposal,tc_939f236600dd47a8bf850a7ff19dc047
+ERI,"Eritrea, The State of",ERI.NGDPD.A,28,1992,2019,proposal,tc_f9d7128c5ef04c6f955f43f9bcc56a0c
+ESP,Spain,ESP.NGDPD.A,52,1980,2031,proposal,tc_21a70a0fbf1b43c292783397ce218239
+EST,"Estonia, Republic of",EST.NGDPD.A,39,1993,2031,proposal,tc_383873de760147cd97dfac5ef5d60b08
+ETH,"Ethiopia, The Federal Democratic Republic of",ETH.NGDPD.A,52,1980,2031,proposal,tc_860d12ee66fc4fceb3faddbc92c87930
+FIN,Finland,FIN.NGDPD.A,52,1980,2031,proposal,tc_374e55a3eefe4a1a83fed6b64b5045f5
+FJI,"Fiji, Republic of",FJI.NGDPD.A,52,1980,2031,proposal,tc_8d67737674744dce8986565b98cbbb1f
+FRA,France,FRA.NGDPD.A,52,1980,2031,proposal,tc_471ae6d7112b4537a7ae5ca1e6a816a5
+FSM,"Micronesia, Federated States of",FSM.NGDPD.A,37,1995,2031,proposal,tc_4add61cba99b4e63a37406cd1d0feb5f
+G001,World,G001.NGDPD.A,52,1980,2031,excluded_aggregate,
+G110,Advanced Economies,G110.NGDPD.A,52,1980,2031,excluded_aggregate,
+G119,G7,G119.NGDPD.A,52,1980,2031,excluded_aggregate,
+G163,Euro Area (EA),G163.NGDPD.A,41,1991,2031,excluded_aggregate,
+G200,Emerging Market and Developing Economies,G200.NGDPD.A,52,1980,2031,excluded_aggregate,
+G205,Latin America and the Caribbean (LAC),G205.NGDPD.A,52,1980,2031,excluded_aggregate,
+G400,Middle East and Central Asia,G400.NGDPD.A,52,1980,2031,excluded_aggregate,
+G505,Emerging and Developing Asia,G505.NGDPD.A,52,1980,2031,excluded_aggregate,
+G510,ASEAN-5,G510.NGDPD.A,52,1980,2031,excluded_aggregate,
+G603,Sub-Saharan Africa (SSA),G603.NGDPD.A,52,1980,2031,excluded_aggregate,
+G903,Emerging and Developing Europe,G903.NGDPD.A,52,1980,2031,excluded_aggregate,
+G998,European Union (EU),G998.NGDPD.A,52,1980,2031,excluded_aggregate,
+GAB,Gabon,GAB.NGDPD.A,52,1980,2031,proposal,tc_d59dfb6324524b07a32c87b73009e97f
+GBR,United Kingdom,GBR.NGDPD.A,52,1980,2031,proposal,tc_8d01644699e04b74ae3a4751c6f1fc41
+GEO,Georgia,GEO.NGDPD.A,38,1994,2031,proposal,tc_741bd244c1ec4961918565c4ed02c5c6
+GHA,Ghana,GHA.NGDPD.A,52,1980,2031,proposal,tc_f63061b714ce4390948838410758c016
+GIN,Guinea,GIN.NGDPD.A,52,1980,2031,proposal,tc_05eaf88055cc4388b518332f2e7fc115
+GMB,"Gambia, The",GMB.NGDPD.A,52,1980,2031,proposal,tc_d1d3a8eb94cb4a558b51f3bd73cb4b2a
+GNB,Guinea-Bissau,GNB.NGDPD.A,52,1980,2031,proposal,tc_dc93b6caf7324df884ec2b070a5296b9
+GNQ,"Equatorial Guinea, Republic of",GNQ.NGDPD.A,52,1980,2031,proposal,tc_06d71df13c4f415fbf22a0147f19bc53
+GRC,Greece,GRC.NGDPD.A,52,1980,2031,proposal,tc_dab67464d7ad44cdbf925450627e4186
+GRD,Grenada,GRD.NGDPD.A,52,1980,2031,proposal,tc_c5b3fecc12a94e85a7acddc70fa7a086
+GTM,Guatemala,GTM.NGDPD.A,52,1980,2031,proposal,tc_9348779eba844ab2beb5bed00053b7c6
+GUY,Guyana,GUY.NGDPD.A,52,1980,2031,proposal,tc_893d4efa8ccf42af896949ffd7007fef
+GX123,Other Advanced Economies (Advanced Economies excluding G7 and Euro Area countries),GX123.NGDPD.A,52,1980,2031,excluded_aggregate,
+HKG,"Hong Kong Special Administrative Region, People's Republic of China",HKG.NGDPD.A,52,1980,2031,proposal,tc_394248a9960c4d28b4385210c82a0a0b
+HND,Honduras,HND.NGDPD.A,52,1980,2031,proposal,tc_80c318b9217a4320beaad6b93eb74ac5
+HRV,"Croatia, Republic of",HRV.NGDPD.A,40,1992,2031,proposal,tc_fb4046d4910a4bf89f4a93810e2f4d8a
+HTI,Haiti,HTI.NGDPD.A,52,1980,2031,proposal,tc_9ee610c6d55a4f4bbdbbb073b33628a2
+HUN,Hungary,HUN.NGDPD.A,52,1980,2031,proposal,tc_e3ede57c1b754a2dbd940335f9655f11
+IDN,Indonesia,IDN.NGDPD.A,52,1980,2031,proposal,tc_c40da0ac977b4201b8587ce04aa66f56
+IND,India,IND.NGDPD.A,52,1980,2031,proposal,tc_39ad5030b5f94f068d4a1528c60e5638
+IRL,Ireland,IRL.NGDPD.A,52,1980,2031,proposal,tc_16d6044d9abf4743821a6fb238942a22
+IRN,"Iran, Islamic Republic of",IRN.NGDPD.A,52,1980,2031,proposal,tc_ddf21c4d378e4fc9bc3d5b4ba50890a2
+IRQ,Iraq,IRQ.NGDPD.A,32,2000,2031,proposal,tc_5ee7b31f968941dca65e70519901915f
+ISL,Iceland,ISL.NGDPD.A,52,1980,2031,proposal,tc_861af4b9250e4e17a9d3f1f4e1ea33d4
+ISR,Israel,ISR.NGDPD.A,52,1980,2031,proposal,tc_28952c75855947a7b31bb7509dc1fce1
+ITA,Italy,ITA.NGDPD.A,52,1980,2031,proposal,tc_1f3e0c90df4341f082ed90ecdd95fb10
+JAM,Jamaica,JAM.NGDPD.A,52,1980,2031,proposal,tc_bf02736242694622ae7c730beb0f0da6
+JOR,Jordan,JOR.NGDPD.A,52,1980,2031,proposal,tc_6e28258973b54dfeb5811c563cd0a2e8
+JPN,Japan,JPN.NGDPD.A,52,1980,2031,proposal,tc_8d0620ea475f498d9402134857882bf1
+KAZ,"Kazakhstan, Republic of",KAZ.NGDPD.A,40,1992,2031,proposal,tc_feadffc011db4cf695df6c0997a003c8
+KEN,Kenya,KEN.NGDPD.A,52,1980,2031,proposal,tc_9f3dc962bf9744a5a3cdf1f7a1cbb159
+KGZ,Kyrgyz Republic,KGZ.NGDPD.A,40,1992,2031,proposal,tc_130ca81b84d04b058e9301121b2b7802
+KHM,Cambodia,KHM.NGDPD.A,46,1986,2031,proposal,tc_f956986338e5418481784ba2d2781063
+KIR,Kiribati,KIR.NGDPD.A,52,1980,2031,proposal,tc_c23a3cf00b1a4ebf97a70a4f41a7761d
+KNA,St. Kitts and Nevis,KNA.NGDPD.A,52,1980,2031,proposal,tc_f22d58e7280f41f7a5a68fb03e1ab87e
+KOR,"Korea, Republic of",KOR.NGDPD.A,52,1980,2031,proposal,tc_cf8be733dbf44dd6b112e9fe12d2b19e
+KOS,"Kosovo, Republic of",KOS.NGDPD.A,32,2000,2031,approved_existing_crosswalk,tc_28aa17b84db24952b92fc51b421075e0
+KWT,Kuwait,KWT.NGDPD.A,51,1981,2031,proposal,tc_fa491c61ffa24dc3a21c6a6da7d39fad
+LAO,Lao People's Democratic Republic,LAO.NGDPD.A,52,1980,2031,proposal,tc_71a3ecd24ca74da9a6cea3dae8cd1f82
+LBN,Lebanon,LBN.NGDPD.A,46,1980,2025,proposal,tc_8466a0747d0b4d1a8c23feb70f7c6ed1
+LBR,Liberia,LBR.NGDPD.A,32,2000,2031,proposal,tc_40dc9d2e141343e98a4d0c762c578473
+LBY,Libya,LBY.NGDPD.A,52,1980,2031,proposal,tc_bb5622bab363429ca481c5476acc824c
+LCA,St. Lucia,LCA.NGDPD.A,52,1980,2031,proposal,tc_6629fdb92d05409f856d9030b63b1470
+LIE,"Liechtenstein, Principality of",LIE.NGDPD.A,32,2000,2031,proposal,tc_a8bd42bd635b43289f3c26695dc58939
+LKA,Sri Lanka,LKA.NGDPD.A,52,1980,2031,proposal,tc_5e47c88bebac452e953fc5dfa8b1ba06
+LSO,"Lesotho, Kingdom of",LSO.NGDPD.A,52,1980,2031,proposal,tc_c0fa4e9b8e984f59ba17beb7547c5811
+LTU,"Lithuania, Republic of",LTU.NGDPD.A,37,1995,2031,proposal,tc_77de0a41c4d94d8388d6f0732438be81
+LUX,Luxembourg,LUX.NGDPD.A,52,1980,2031,proposal,tc_f4261f4507cd48858cdfb7e3bd0ae738
+LVA,"Latvia, Republic of",LVA.NGDPD.A,40,1992,2031,proposal,tc_f161aef25a39413e8aef8c147e97b28a
+MAC,"Macao Special Administrative Region, People's Republic of China",MAC.NGDPD.A,31,2001,2031,proposal,tc_f9a64d8c1e6342d2b1941833ff7588d0
+MAR,Morocco,MAR.NGDPD.A,52,1980,2031,proposal,tc_84dc0c18f03144bea337f6aacd50bf0f
+MDA,"Moldova, Republic of",MDA.NGDPD.A,40,1992,2031,proposal,tc_96ea5c49288d40b0945401031405c2c8
+MDG,"Madagascar, Republic of",MDG.NGDPD.A,52,1980,2031,proposal,tc_7abbe0f9aa1346c7a9f69cc1027b4282
+MDV,Maldives,MDV.NGDPD.A,52,1980,2031,proposal,tc_408d22fe5b894b4b947a0521ace1018a
+MEX,Mexico,MEX.NGDPD.A,52,1980,2031,proposal,tc_c6b830c3cba64d4883eac8cee7864cfd
+MHL,"Marshall Islands, Republic of the",MHL.NGDPD.A,35,1997,2031,proposal,tc_f201b19690a04a8f903f9ea4cb0c7af4
+MKD,"North Macedonia, Republic of",MKD.NGDPD.A,40,1992,2031,proposal,tc_949bf877e3284f5c8a56cfc89bcafa90
+MLI,Mali,MLI.NGDPD.A,52,1980,2031,proposal,tc_a3f73fd3bb6d4d7fb4ea31d433453bae
+MLT,Malta,MLT.NGDPD.A,37,1995,2031,proposal,tc_f97b2223a2a84e53ac13614ddde1f602
+MMR,Myanmar,MMR.NGDPD.A,34,1998,2031,proposal,tc_b4847e5d14f94efdbbd46d6467d90237
+MNE,Montenegro,MNE.NGDPD.A,32,2000,2031,proposal,tc_eb1de71332ef4db496cb76c95aa56cd4
+MNG,Mongolia,MNG.NGDPD.A,52,1980,2031,proposal,tc_d0fb202ca0aa4a868af6fa154ab84c30
+MOZ,"Mozambique, Republic of",MOZ.NGDPD.A,52,1980,2031,proposal,tc_2249b79a9c944a1c835b0cad2676e48d
+MRT,"Mauritania, Islamic Republic of",MRT.NGDPD.A,42,1990,2031,proposal,tc_17137c4e4fcc4fa58e32c924f08efcda
+MUS,Mauritius,MUS.NGDPD.A,52,1980,2031,proposal,tc_c7b728ec16b94e35b05d96d14a253eec
+MWI,Malawi,MWI.NGDPD.A,52,1980,2031,proposal,tc_ee1c1ac1ad5c4faf818070115133b174
+MYS,Malaysia,MYS.NGDPD.A,52,1980,2031,proposal,tc_b21225f45c3b40509640603249110f89
+NAM,Namibia,NAM.NGDPD.A,43,1989,2031,proposal,tc_7379cdcc5c4848c181ace3144aeba70f
+NER,Niger,NER.NGDPD.A,52,1980,2031,proposal,tc_4d31375845614c2b91a71736069d4ab3
+NGA,Nigeria,NGA.NGDPD.A,42,1990,2031,proposal,tc_7a8158c93a934345a2ade9fd16ee4999
+NIC,Nicaragua,NIC.NGDPD.A,52,1980,2031,proposal,tc_2fdae8757e51402e9f67c428d2b79368
+NLD,"Netherlands, The",NLD.NGDPD.A,52,1980,2031,proposal,tc_898b220cf53a425e9bac3630f2c17473
+NOR,Norway,NOR.NGDPD.A,52,1980,2031,proposal,tc_f4a6e15a05474af2b81c9524ed988d89
+NPL,Nepal,NPL.NGDPD.A,52,1980,2031,proposal,tc_1c4ff3f2a8f04b43b0c28e830a9403ad
+NRU,"Naoero, Republic of",NRU.NGDPD.A,28,2004,2031,proposal,tc_2722269bdef04648b655fe363650d565
+NZL,New Zealand,NZL.NGDPD.A,52,1980,2031,proposal,tc_d4b67e03f0c04d9a87089f477e5fa669
+OMN,Oman,OMN.NGDPD.A,52,1980,2031,proposal,tc_22bd85ff61234a46a95506d105d5fee4
+PAK,Pakistan,PAK.NGDPD.A,47,1980,2026,proposal,tc_0dc6216a94e34b44b27e42ed35fa6376
+PAN,Panama,PAN.NGDPD.A,52,1980,2031,proposal,tc_ba6cf14fa6224eb4a0b085b3ea1df6dc
+PER,Peru,PER.NGDPD.A,52,1980,2031,proposal,tc_a90d391a4a9a473b9074fc99cce11cb5
+PHL,Philippines,PHL.NGDPD.A,52,1980,2031,proposal,tc_fc8f1a9536d342899526129acf15acd2
+PLW,"Palau, Republic of",PLW.NGDPD.A,32,2000,2031,proposal,tc_642fbe2581cf4b8c857d967717d1f1ef
+PNG,Papua New Guinea,PNG.NGDPD.A,52,1980,2031,proposal,tc_82d51d964745422e8ed3a9109757d2ee
+POL,"Poland, Republic of",POL.NGDPD.A,52,1980,2031,proposal,tc_9865dd6a50c3458b98f5040f0cc76357
+PRI,Puerto Rico,PRI.NGDPD.A,52,1980,2031,proposal,tc_37f10315a18d4c3abf3486086b5822e1
+PRT,Portugal,PRT.NGDPD.A,52,1980,2031,proposal,tc_43ee3db974884a72bacf5f5519e2c145
+PRY,Paraguay,PRY.NGDPD.A,52,1980,2031,proposal,tc_3eb6dc12494541e793a8a5b68980f29f
+QAT,Qatar,QAT.NGDPD.A,52,1980,2031,proposal,tc_13df99232f33400d9079316c041f066c
+ROU,Romania,ROU.NGDPD.A,52,1980,2031,proposal,tc_c41863f7cb4e4dccbbdf0a1296f9ee1c
+RUS,Russian Federation,RUS.NGDPD.A,40,1992,2031,proposal,tc_c587d1c1cd8d4ec489f3d8e2524ec607
+RWA,Rwanda,RWA.NGDPD.A,52,1980,2031,proposal,tc_7f3c6637070f4c42a40c1f5456ec4721
+SAU,Saudi Arabia,SAU.NGDPD.A,52,1980,2031,proposal,tc_86b0f7fcb4504f9b8dc1b60b42b16ea0
+SDN,Sudan,SDN.NGDPD.A,52,1980,2031,proposal,tc_b0ca3e0386b34603a6356b8ebc8b0565
+SEN,Senegal,SEN.NGDPD.A,46,1980,2025,proposal,tc_29ec74ae4e094053a930487b9ce602d1
+SGP,Singapore,SGP.NGDPD.A,52,1980,2031,proposal,tc_9d65e06bf97d417c8aa62742225ef5c9
+SLB,Solomon Islands,SLB.NGDPD.A,52,1980,2031,proposal,tc_0ce7eb254c32428c88601905c0df8e87
+SLE,Sierra Leone,SLE.NGDPD.A,52,1980,2031,proposal,tc_56e9d1977fa14da298ae125fbda1b63c
+SLV,El Salvador,SLV.NGDPD.A,52,1980,2031,proposal,tc_471268dbb85845de93e546317686debb
+SMR,"San Marino, Republic of",SMR.NGDPD.A,32,2000,2031,proposal,tc_e4ea859bd6704c13912ad7f5cf19de41
+SOM,Somalia,SOM.NGDPD.A,21,2011,2031,proposal,tc_e82cc51b989841109d9e1a7f6a5d1727
+SRB,"Serbia, Republic of",SRB.NGDPD.A,35,1997,2031,proposal,tc_98a68180b9f0479f90dcde7809d60470
+SSD,"South Sudan, Republic of",SSD.NGDPD.A,21,2011,2031,proposal,tc_12491d45eed544948b316c89f82a7ee7
+STP,"São Tomé and Príncipe, Democratic Republic of",STP.NGDPD.A,52,1980,2031,proposal,tc_4a2ed326dc6047efa2e28926df0bc7f0
+SUR,Suriname,SUR.NGDPD.A,52,1980,2031,proposal,tc_168a848021b84cc6a6c3fc320012a176
+SVK,Slovak Republic,SVK.NGDPD.A,39,1993,2031,proposal,tc_b3bea891d7114d148714d5e398ee06b1
+SVN,"Slovenia, Republic of",SVN.NGDPD.A,40,1992,2031,proposal,tc_c0484640d9554c8285e92412bae25785
+SWE,Sweden,SWE.NGDPD.A,52,1980,2031,proposal,tc_d74b429fff544cf9bafeb459c4b3edd8
+SWZ,"Eswatini, Kingdom of",SWZ.NGDPD.A,52,1980,2031,proposal,tc_fc2ad04f3c88446e91bd770190d6fe4c
+SYC,Seychelles,SYC.NGDPD.A,52,1980,2031,proposal,tc_4bc377d3ea57485bac43c9b512587dbc
+SYR,Syrian Arab Republic,SYR.NGDPD.A,31,1980,2010,proposal,tc_c205b2615c45490182519ecedb651e99
+TCD,Chad,TCD.NGDPD.A,52,1980,2031,proposal,tc_1da2daf3a3d34a30b96100d643963f70
+TGO,Togo,TGO.NGDPD.A,52,1980,2031,proposal,tc_06a09ff0e27b49e392ef2e88161023eb
+THA,Thailand,THA.NGDPD.A,52,1980,2031,proposal,tc_fc12d0184fc7498f982ab8033ae64436
+TJK,"Tajikistan, Republic of",TJK.NGDPD.A,40,1992,2031,proposal,tc_772e2ac5253c46e98b79cf5a6f19e9f5
+TKM,Turkmenistan,TKM.NGDPD.A,40,1992,2031,proposal,tc_72de9a194d85404098bb741ae4ffc826
+TLS,"Timor-Leste, Democratic Republic of",TLS.NGDPD.A,32,2000,2031,proposal,tc_bd40ea14860a4c4083eced5549d2d9c4
+TON,Tonga,TON.NGDPD.A,52,1980,2031,proposal,tc_2c6f6c5486f04a87aa94277e67d6e51a
+TTO,Trinidad and Tobago,TTO.NGDPD.A,52,1980,2031,proposal,tc_1bd98a138f884dd4b4d9d1efbbf357b0
+TUN,Tunisia,TUN.NGDPD.A,52,1980,2031,proposal,tc_1d1d2c1274384efa82f9591e1c069aba
+TUR,"Türkiye, Republic of",TUR.NGDPD.A,52,1980,2031,proposal,tc_155414257ec0498690f73c3595d85e7c
+TUV,Tuvalu,TUV.NGDPD.A,32,2000,2031,proposal,tc_47cd272cd9c9455185a13f6e69bd805c
+TWN,Taiwan Province of China,TWN.NGDPD.A,52,1980,2031,proposal,tc_98ab3dee1d554162b6bbd5dac6374fc8
+TZA,"Tanzania, United Republic of",TZA.NGDPD.A,52,1980,2031,proposal,tc_0f4c47ec59434e46871845e474964499
+UGA,Uganda,UGA.NGDPD.A,52,1980,2031,proposal,tc_2bd67b30564b46b4b502a36decc333bf
+UKR,Ukraine,UKR.NGDPD.A,41,1991,2031,proposal,tc_65f8a168b10143c2a596917c1fca3731
+URY,Uruguay,URY.NGDPD.A,52,1980,2031,proposal,tc_e19506c4a1564ca085b73b9284fa6f56
+USA,United States,USA.NGDPD.A,52,1980,2031,proposal,tc_f0a8b61c54a14d4089774716657e9433
+UZB,"Uzbekistan, Republic of",UZB.NGDPD.A,40,1992,2031,proposal,tc_5d951c36a4ad4471ae9b9037fe338d70
+VCT,St. Vincent and the Grenadines,VCT.NGDPD.A,52,1980,2031,proposal,tc_67290f5714c846f4a84d1f53c6fd495a
+VEN,"Venezuela, República Bolivariana de",VEN.NGDPD.A,48,1980,2027,proposal,tc_1aa00cb7ebb34cdca928353a58ff5b12
+VNM,Vietnam,VNM.NGDPD.A,52,1980,2031,proposal,tc_e65eabf3cd054585a43347bdfea6201b
+VUT,Vanuatu,VUT.NGDPD.A,52,1980,2031,proposal,tc_43c4be0a76ca43a2bb7e634de5a1f4f4
+WBG,West Bank and Gaza,WBG.NGDPD.A,32,1994,2025,approved_existing_crosswalk,tc_50c420df8b2c4c6eaae47d795f9a1ea2
+WSM,Samoa,WSM.NGDPD.A,52,1980,2031,proposal,tc_76082bd796c546d1ab76a7a8a3251369
+YEM,"Yemen, Republic of",YEM.NGDPD.A,18,2014,2031,proposal,tc_e32ec835b247449084d1b535ebccf7f1
+ZAF,South Africa,ZAF.NGDPD.A,52,1980,2031,proposal,tc_dc6419869818416db051f50cbfd95036
+ZMB,Zambia,ZMB.NGDPD.A,52,1980,2031,proposal,tc_e75bc9ac62fa443c90b5529778f3b1af
+ZWE,Zimbabwe,ZWE.NGDPD.A,42,1990,2031,proposal,tc_168ca96e60634f5d83f3f22ad2505e66
