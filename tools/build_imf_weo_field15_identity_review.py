@@ -114,8 +114,8 @@ def compile_review_register(
     approval = crosswalk.get("review_approval", {})
     mappings = crosswalk.get("mappings", [])
     wbg = [row for row in mappings if row.get("source_id") == "WBG"]
-    if approval.get("status") != "approved" or len(wbg) != 1:
-        raise ReviewBuildError("Expected the separately owner-approved WBG crosswalk mapping")
+    if approval.get("status") != "approved" or len(mappings) != 1 or len(wbg) != 1:
+        raise ReviewBuildError("Expected WBG to remain the only separately owner-approved crosswalk mapping")
     if wbg[0].get("game_id") != "tc_50c420df8b2c4c6eaae47d795f9a1ea2":
         raise ReviewBuildError("WBG crosswalk target differs from the recorded owner approval")
     if "Field 15" not in approval.get("scope", ""):
