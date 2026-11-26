@@ -10,9 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from tools.build_imf_weo_historical_candidate import build_candidate
-from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
+from tools.database.connection import DEFAULT_DATABASE_PATH
 from tools.database.imf_weo_import import apply_application, decide_application_for_weo, prepare_application
-from tools.database.project_connection import DEFAULT_PROJECT_DATABASE_PATH, connect_project_database
+from tools.database.project_connection import DEFAULT_PROJECT_DATABASE_PATH
 
 AUTO = ROOT / "reports/sources/imf-weo-field15-identity-review/automatic/20261126T101015Z"
 REVIEW = ROOT / "reports/sources/imf-weo-field15-identity-review/field_15_owner_review.md"
@@ -27,6 +27,7 @@ M49_MANIFEST = ROOT / "data_manifests/sources/un_m49/country_area_overview_html/
 REGISTRY = ROOT / "config/country_identity_registry.json"
 CROSSWALK = ROOT / "data/manual/source_crosswalks/imf_weo.json"
 ACQUISITION = ROOT / "docs/data-sources/imf-weo-october-2026-manual-acquisition.md"
+PRIOR_DECISIONS_DOC = ROOT / "docs/data-sources/wp1-5-review-approval-application-workflow.md"
 MIGRATION = ROOT / "migrations/008_imf_weo_historical_observations.sql"
 RELEASE = "October 2026 / IMF.RES_WEO_9.0.0"
 META_OPEN = "<!-- REVIEW-METADATA-JSON"
@@ -62,7 +63,8 @@ def fingerprint_inputs(auto: Path) -> dict[str, dict[str, Any]]:
         "automatic_summary": auto / "summary.json",
         "automatic_final_register": auto / "field_15_identity_review_register_final.csv",
         "automatic_exclusion_register": auto / "field_15_exclusion_register.csv",
-        "manual_acquisition_record": ACQUISITION, "import_migration": MIGRATION,
+        "manual_acquisition_record": ACQUISITION, "prior_decisions_doc": PRIOR_DECISIONS_DOC,
+        "import_migration": MIGRATION,
     }
     result = {}
     for key, path in files.items():
@@ -392,9 +394,9 @@ def verify_game_database(candidate: Path, database: Path, approval_id: str) -> d
     finally:
         con.close()
 
-def write_deterministic_candidate(observations: list[dict[str, Any]], exceptions: list[dict[str, Any]], summary: dict[str, Any]) -> Path:
-    """Write a stable candidate path so retries reproduce the same approval fingerprint."""
-    target = CANDIDATE_ROOT / "candidate"
+def write_deterministic_candidate(observations: list[dict[str, Any]], exceptions: list[dict[str, Any]], summary: dict[str, Any], target: Path) -> Path:
+    """Write a stable review-specific candidate path; never overwrite changed bytes."""
+    target = target.resolve()
     target.mkdir(parents=True, exist_ok=True)
     def csv_bytes(rows: list[dict[str, Any]]) -> bytes:
         fields = list(dict.fromkeys(key for row in rows for key in row))
@@ -448,15 +450,18 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         "scope": "Field 15 / NGDPD only; existing WBG mapping plus explicitly approved rows in the owner review.",
     }
     crosswalk["review_document"] = {"path": relative(path), "sha256": sha(path)}
-    CANDIDATE_ROOT.mkdir(parents=True, exist_ok=True)
+    review_sha = sha(path)
+    review_root = CANDIDATE_ROOT / review_sha[:16]
+    review_root.mkdir(parents=True, exist_ok=True)
+    derived_crosswalk = review_root / "reviewed_imf_weo_crosswalk.json"
     crosswalk_bytes = (json.dumps(crosswalk, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-    if DERIVED_CROSSWALK.exists():
-        if DERIVED_CROSSWALK.read_bytes() != crosswalk_bytes:
-            raise ReviewError("Existing derived crosswalk differs from this approved review; refusing overwrite")
+    if derived_crosswalk.exists():
+        if derived_crosswalk.read_bytes() != crosswalk_bytes:
+            raise ReviewError("Existing derived crosswalk differs from this exact review; refusing overwrite")
     else:
-        DERIVED_CROSSWALK.write_bytes(crosswalk_bytes)
+        derived_crosswalk.write_bytes(crosswalk_bytes)
     observations, exceptions, summary = build_candidate(
-        RAW, REGISTRY, verify_snapshot=True, crosswalk_path=DERIVED_CROSSWALK, field_ids={15})
+        RAW, REGISTRY, verify_snapshot=True, crosswalk_path=derived_crosswalk, field_ids={15})
     decisions = {r["source_id"]: r for r in rows}
     aggregate_rows = read_csv((ROOT / meta["automatic_review_directory"]) / "field_15_exclusion_register.csv")
     aggregate_by_code = {r["source_country_code"]: r for r in aggregate_rows}
@@ -484,7 +489,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         status = "approved"
     if status == "approved":
         application = apply_application(candidate, approval_id, database_path=database,
-            source_path=RAW, identity_path=REGISTRY, crosswalk_path=DERIVED_CROSSWALK,
+            source_path=RAW, identity_path=REGISTRY, crosswalk_path=derived_crosswalk,
             migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
     elif status == "applied":
         application = {"approval_id": approval_id, "status": "already_applied"}
@@ -496,7 +501,8 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         "approved_new_mappings": len(approved),
         "excluded_new_identities": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
         "held_new_identities": sum(r["decision"].upper()=="HOLD" for r in rows),
-        "candidate_directory": relative(candidate), "candidate_observations": len(observations),
+        "candidate_directory": relative(candidate), "derived_crosswalk": relative(derived_crosswalk),
+        "candidate_observations": len(observations),
         "candidate_exceptions": len(exceptions), "approval_id": approval_id,
         "approval_status": "applied", "application": application,
         "game_database_verification": game_check,
