@@ -18,6 +18,8 @@ import json
 import math
 import re
 import sys
+import urllib.request
+from urllib.parse import urlparse
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -313,6 +315,47 @@ def _verify_source_snapshots(
     }
 
 
+
+def _validate_m49_faq_html(faq_html: str) -> None:
+    normalized = normalize_name(html.unescape(re.sub(r"<[^>]+>", " ", faq_html)))
+    for code in ("158", "412"):
+        phrase = f"numerical code {code} can be used to represent this area"
+        if phrase not in normalized:
+            raise IdentityReviewError(f"UN M49 FAQ no longer documents statistical-use code {code}")
+
+
+def _fetch_m49_faq(url: str = M49_FAQ_URL, timeout: int = 30) -> tuple[str, dict[str, Any]]:
+    request = urllib.request.Request(url, headers={
+        "User-Agent": "TownCountryAsset-IdentityReview/1.0",
+        "Accept": "text/html",
+    })
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        final_url = response.geturl()
+        parsed_url = urlparse(final_url)
+        content_type = response.headers.get("Content-Type", "")
+        if parsed_url.scheme != "https" or parsed_url.hostname != "unstats.un.org":
+            raise IdentityReviewError("UN M49 FAQ redirect left the official HTTPS host")
+        if content_type.split(";", 1)[0].strip().lower() != "text/html":
+            raise IdentityReviewError(f"Unexpected UN M49 FAQ content type: {content_type!r}")
+        payload = response.read()
+    if not payload:
+        raise IdentityReviewError("UN M49 FAQ response is empty")
+    try:
+        faq_html = payload.decode("utf-8-sig")
+    except UnicodeDecodeError as exc:
+        raise IdentityReviewError("UN M49 FAQ response is not valid UTF-8") from exc
+    _validate_m49_faq_html(faq_html)
+    metadata = {
+        "source_url": url,
+        "final_url": final_url,
+        "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
+        "content_type": content_type,
+        "byte_count": len(payload),
+        "sha256": hashlib.sha256(payload).hexdigest(),
+        "validation": "official_UN_M49_FAQ_contains_statistical_use_codes_158_and_412",
+    }
+    return faq_html, metadata
+
 def build_review(
     *,
     weo_path: Path = RAW_WEO,
@@ -347,11 +390,7 @@ def build_review(
     appendix_codes, pages = parse_imf_appendix_codes(appendix_text, source_codes)
     group_section = normalize_name("\n".join(pages[number] for number in range(4, 9)))
     m49_html = m49_html_path.read_text(encoding="utf-8-sig")
-    m49_text = normalize_name(html.unescape(re.sub(r"<[^>]+>", " ", m49_html)))
-    if "numerical code 158 can be used to represent this area" not in m49_text:
-        raise IdentityReviewError("UN M49 FAQ no longer documents statistical-use code 158 for Taiwan")
-    if "numerical code 412 can be used to represent this area" not in m49_text:
-        raise IdentityReviewError("UN M49 FAQ no longer documents statistical-use code 412 for Kosovo")
+    m49_faq_html, m49_faq_provenance = _fetch_m49_faq()
 
     try:
         parsed_m49 = parse_m49_html(m49_html)
@@ -603,6 +642,8 @@ def build_review(
         "exceptions": exceptions,
         "review_rows": review_rows,
         "fingerprints": fingerprints,
+        "m49_faq_html": m49_faq_html,
+        "m49_faq_provenance": m49_faq_provenance,
         "summary": {
             "source": "IMF WEO October 2026 NGDPD",
             "field_id": 15,
@@ -673,7 +714,13 @@ def write_outputs(result: dict[str, Any], output_root: Path = OUTPUT_ROOT, now: 
         _write_csv(target / filename, REVIEW_FIELDS, cumulative)
 
     _write_csv(target / "field_15_identity_review_register_final.csv", REVIEW_FIELDS, rows)
+    (target / "m49_faq_snapshot.html").write_text(result["m49_faq_html"], encoding="utf-8")
+    (target / "m49_faq_provenance.json").write_text(
+        json.dumps(result["m49_faq_provenance"], ensure_ascii=False, indent=2) + "\\n",
+        encoding="utf-8",
+    )
     summary = dict(result["summary"])
+    summary["m49_faq_provenance"] = result["m49_faq_provenance"]
     summary["generated_at_utc"] = datetime.now(timezone.utc).isoformat()
     summary["output_directory"] = str(target)
     summary["input_fingerprints"] = result["fingerprints"]
