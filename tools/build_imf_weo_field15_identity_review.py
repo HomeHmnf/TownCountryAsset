@@ -497,6 +497,20 @@ def build_review(
                 raise IdentityReviewError("Expected KOS source code versus UVK Appendix code discrepancy")
             if "kosovo" not in normalize_name(source_name):
                 raise IdentityReviewError("KOS source row no longer identifies Kosovo")
+            exceptions.append({
+                "source_country_code": source_id,
+                "source_country_name": source_name,
+                "series_code": item["series_code"],
+                "exception": "imf_appendix_code_discrepancy",
+                "candidate_game_ids": approved_kos_id,
+                "disposition": "approved_mapping",
+                "rationale": (
+                    "Owner-approved IMF WEO field-15-only reviewed_manual mapping to the existing Kosovo "
+                    "game_id. WEO code KOS differs from Appendix code UVK; this discrepancy is documented "
+                    "as a source-code qualification, not an ISO/M49 assignment or asserted code concordance."
+                ),
+                "evidence_reference": IMF_PDF_URL + ";" + M49_FAQ_URL,
+            })
             country_rows.append({
                 **item, "classification": "approved_existing_crosswalk",
                 "game_id": approved_kos_id, "registry_name": "Kosovo", "m49_code": "",
@@ -653,7 +667,10 @@ def build_review(
                 "first_populated_year", "last_populated_year",
             )},
             "classification": classification,
-            "proposed_game_id": review_by_code.get(source_id, {}).get("reviewed_proposed_game_id", approved_wbg_id if source_id == "WBG" else ""),
+            "proposed_game_id": review_by_code.get(source_id, {}).get(
+                "reviewed_proposed_game_id",
+                approved_wbg_id if source_id == "WBG" else approved_kos_id if source_id == "KOS" else "",
+            ),
         })
 
     return {
