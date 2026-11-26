@@ -1,0 +1,9 @@
+{
+  "source_url": "https://unstats.un.org/unsd/methodology/m49/",
+  "final_url": "https://unstats.un.org/unsd/methodology/m49/",
+  "retrieved_at_utc": "2026-11-26T10:10:14.928580+00:00",
+  "content_type": "text/html; charset=utf-8",
+  "byte_count": 2051368,
+  "sha256": "4d5cabcb10ad9ef184553b5e64c0a34ba8deeb20dab2e02cd0be3599b93bb01d",
+  "validation": "official_UN_M49_FAQ_contains_statistical_use_codes_158_and_412"
+}
