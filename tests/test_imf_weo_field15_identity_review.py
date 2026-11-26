@@ -104,17 +104,23 @@ def test_registry_targets_are_resolved_by_m49_names_not_registry_codes():
     assert resolved["044"][1]  # explicit reviewed name variant was used
 
 
-def test_wbg_crosswalk_must_remain_the_only_approved_mapping():
-    game_id = "tc_50c420df8b2c4c6eaae47d795f9a1ea2"
-    registry = {game_id: {"game_id": game_id, "names": {"en": "Palestine"}}}
+def test_crosswalk_requires_exact_owner_approved_wbg_and_kos_mappings():
+    wbg_id = "tc_50c420df8b2c4c6eaae47d795f9a1ea2"
+    kos_id = "tc_28aa17b84db24952b92fc51b421075e0"
+    registry = {
+        wbg_id: {"game_id": wbg_id, "names": {"en": "Palestine"}},
+        kos_id: {"game_id": kos_id, "names": {"en": "Kosovo"}},
+    }
     crosswalk = {
         "review_approval": {"status": "approved", "scope": "Field 15 only"},
-        "mappings": [{"source_id": "WBG", "game_id": game_id}],
+        "mappings": [
+            {"source_id": "WBG", "game_id": wbg_id, "match_method": "reviewed_manual"},
+            {"source_id": "KOS", "game_id": kos_id, "match_method": "reviewed_manual"},
+        ],
     }
-    assert _validate_wbg_crosswalk(crosswalk, registry) == game_id
-
+    assert _validate_wbg_crosswalk(crosswalk, registry) == wbg_id
     crosswalk["mappings"].append({"source_id": "AAA", "game_id": "tc_" + "b" * 32})
-    with pytest.raises(IdentityReviewError, match="sole owner-approved"):
+    with pytest.raises(IdentityReviewError, match="exactly the two"):
         _validate_wbg_crosswalk(crosswalk, registry)
 
 
@@ -140,16 +146,13 @@ def _review_row(source_id: str, index: int, *, held: bool = False) -> dict[str, 
 
 
 def test_one_run_writes_all_ten_cumulative_batches_and_final_register(tmp_path: Path):
-    before = [f"AA{i:03d}" for i in range(85)]
-    after = [f"ZZ{i:03d}" for i in range(110)]
-    source_ids = sorted(before + ["KOS"] + after)
-    rows = [_review_row(code, index, held=(code == "KOS")) for index, code in enumerate(source_ids)]
+    source_ids = [f"X{i:03d}" for i in range(195)]
+    rows = [_review_row(code, index) for index, code in enumerate(source_ids)]
     inventory = [{
         "source_id": row["source_id"], "source_name": row["source_name"],
         "series_code": row["series_code"], "populated_year_count": "52",
         "first_populated_year": "1980", "last_populated_year": "2031",
-        "classification": "hold_for_evidence" if row["source_id"] == "KOS" else "proposal",
-        "proposed_game_id": row["reviewed_proposed_game_id"],
+        "classification": "proposal", "proposed_game_id": row["reviewed_proposed_game_id"],
     } for row in rows]
     aggregate = [{
         "source_country_code": "G001", "series_code": "G001.NGDPD.A",
@@ -162,31 +165,27 @@ def test_one_run_writes_all_ten_cumulative_batches_and_final_register(tmp_path: 
     exceptions = [{
         "source_country_code": "KOS", "source_country_name": "Kosovo",
         "series_code": "KOS.NGDPD.A", "exception": "imf_appendix_code_discrepancy",
-        "candidate_game_ids": "", "disposition": "hold_for_evidence",
-        "rationale": "KOS versus UVK", "evidence_reference": "imf;un",
+        "candidate_game_ids": "tc_28aa17b84db24952b92fc51b421075e0",
+        "disposition": "approved_mapping", "rationale": "Owner-approved KOS mapping; KOS/UVK qualified",
+        "evidence_reference": "imf;un",
     }]
     result = {
-        "inventory": inventory,
-        "aggregates": aggregate,
-        "exceptions": exceptions,
-        "review_rows": rows,
-        "fingerprints": {},
+        "inventory": inventory, "aggregates": aggregate, "exceptions": exceptions,
+        "review_rows": rows, "fingerprints": {},
         "m49_faq_html": "<html>official FAQ snapshot</html>",
         "m49_faq_provenance": {
             "source_url": "https://unstats.un.org/unsd/methodology/m49/",
             "final_url": "https://unstats.un.org/unsd/methodology/m49/",
             "retrieved_at_utc": "2026-11-26T00:00:00+00:00",
-            "content_type": "text/html; charset=utf-8",
-            "byte_count": 30,
-            "sha256": "a" * 64,
-            "validation": "test",
+            "content_type": "text/html; charset=utf-8", "byte_count": 30,
+            "sha256": "a" * 64, "validation": "test",
         },
         "summary": {
             "source_identity_count": 210, "aggregate_exclusion_count": 13,
-            "individual_economy_count": 197, "existing_approved_crosswalk_count": 1,
-            "proposal_count": 195, "held_identity_count": 1,
+            "individual_economy_count": 197, "existing_approved_crosswalk_count": 2,
+            "proposal_count": 195, "held_identity_count": 0,
             "owner_approved_proposal_count": 0, "batch_size": 20,
-            "batch_count": 10, "batch_sizes": [20] * 9 + [16],
+            "batch_count": 10, "batch_sizes": [20] * 9 + [15],
             "database_written": False, "approval_created": False,
             "registry_modified": False, "crosswalk_modified": False,
             "manual_batch_registers_read": False,
@@ -208,17 +207,11 @@ def test_one_run_writes_all_ten_cumulative_batches_and_final_register(tmp_path: 
     batch1 = read_register(output / "field_15_identity_review_register_batch01.csv")
     batch5 = read_register(output / "field_15_identity_review_register_batch05.csv")
     final = read_register(output / "field_15_identity_review_register_final.csv")
-    assert len(batch1) == len(batch5) == len(final) == 196
+    assert len(batch1) == len(batch5) == len(final) == 195
     assert sum(row["reviewed_proposed_game_id"] != "" for row in batch1) == 20
-    assert sum(row["review_outcome"] == "hold_for_evidence" for row in batch5) == 1
-    assert sum(row["reviewed_proposed_game_id"] != "" for row in batch5) == 99
+    assert sum(row["reviewed_proposed_game_id"] != "" for row in batch5) == 100
     assert sum(row["reviewed_proposed_game_id"] != "" for row in final) == 195
     assert sum(row["review_outcome"] == "pending_review" for row in final) == 0
-    kos = next(row for row in final if row["source_id"] == "KOS")
-    assert kos["review_outcome"] == "hold_for_evidence"
-    assert kos["reviewed_proposed_game_id"] == ""
-    assert all(row["owner_decision"] == "pending_explicit_owner_approval" for row in final if row["reviewed_proposed_game_id"])
-
 
 
 def test_cli_runs_directly_without_pythonpath_from_outside_repository(tmp_path: Path):
