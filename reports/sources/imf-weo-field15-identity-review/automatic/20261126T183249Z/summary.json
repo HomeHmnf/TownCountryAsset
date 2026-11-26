@@ -1,0 +1,88 @@
+{
+  "source": "IMF WEO October 2026 NGDPD",
+  "field_id": 15,
+  "indicator_code": "NGDPD",
+  "source_identity_count": 210,
+  "aggregate_exclusion_count": 13,
+  "individual_economy_count": 197,
+  "existing_approved_crosswalk_count": 2,
+  "proposal_count": 195,
+  "unique_proposed_game_ids": 195,
+  "held_identity_count": 0,
+  "held_source_ids": [],
+  "owner_approved_proposal_count": 0,
+  "batch_size": 20,
+  "batch_count": 10,
+  "batch_sizes": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    15
+  ],
+  "database_written": false,
+  "approval_created": false,
+  "registry_modified": false,
+  "crosswalk_modified": false,
+  "manual_batch_registers_read": false,
+  "manual_inventory_or_exclusion_registers_read": false,
+  "m49_faq_provenance": {
+    "source_url": "https://unstats.un.org/unsd/methodology/m49/",
+    "final_url": "https://unstats.un.org/unsd/methodology/m49/",
+    "retrieved_at_utc": "2026-11-26T18:32:48.398094+00:00",
+    "content_type": "text/html; charset=utf-8",
+    "byte_count": 2051368,
+    "sha256": "4d5cabcb10ad9ef184553b5e64c0a34ba8deeb20dab2e02cd0be3599b93bb01d",
+    "validation": "official_UN_M49_FAQ_contains_statistical_use_codes_158_and_412"
+  },
+  "generated_at_utc": "2026-11-26T18:32:49.511373+00:00",
+  "output_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-field15-identity-review/automatic/20261126T183249Z",
+  "input_fingerprints": {
+    "imf_weo_csv": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+      "sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+      "byte_count": 26692032
+    },
+    "imf_appendix_pdf": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf",
+      "sha256": "cd4e2829d7e621d43134728bfc128547f776e909e08ef1d38b837e2d39e5ae2a",
+      "byte_count": 985701
+    },
+    "imf_appendix_text": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/derived_data/pdf_text/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf.txt",
+      "sha256": "81b5b9d04f2c01924129301e128c8e557998d63fae2e06cb9ece7c39b1a1f88a"
+    },
+    "un_m49_html": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/raw_data/sources/un_m49/country_area_overview_html/2026-10-current/m49-country-area-overview.html",
+      "sha256": "b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb",
+      "byte_count": 1721575,
+      "manifest": "/home/hmnf/Projects/Python/TownAndCountry/data_manifests/sources/un_m49/country_area_overview_html/2026-10-current.json",
+      "release": "2026-10-current"
+    },
+    "canonical_identity_registry": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/config/country_identity_registry.json",
+      "sha256": "329333a8e51e9c6bb50d9ce7a067ce7073174a2c477583374401a100de56f532"
+    },
+    "imf_weo_crosswalk": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data/manual/source_crosswalks/imf_weo.json",
+      "sha256": "30373977642d84fe137141acf5af5c058f5c18dbb4302c778292895b883a53c8"
+    }
+  },
+  "batch_files": [
+    "field_15_identity_review_register_batch01.csv",
+    "field_15_identity_review_register_batch02.csv",
+    "field_15_identity_review_register_batch03.csv",
+    "field_15_identity_review_register_batch04.csv",
+    "field_15_identity_review_register_batch05.csv",
+    "field_15_identity_review_register_batch06.csv",
+    "field_15_identity_review_register_batch07.csv",
+    "field_15_identity_review_register_batch08.csv",
+    "field_15_identity_review_register_batch09.csv",
+    "field_15_identity_review_register_batch10.csv"
+  ]
+}
