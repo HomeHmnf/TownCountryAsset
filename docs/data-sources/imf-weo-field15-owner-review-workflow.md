@@ -17,15 +17,15 @@ The command creates:
 
 It refuses to overwrite an existing review file. It reads the automatic final identity register and aggregate exclusion register generated from the original IMF WEO source and official evidence. It does not read the historical manually prepared batch files or manual inventory/exclusion registers.
 
-The document contains all 196 source identities in their original ten-batch sequence: 195 proposed mappings and the separately owner-approved KOS mapping. It also records the already-approved WBG mapping and the 13 already-approved aggregate exclusions (665 populated values).
+The automatic register contains 195 new proposals in ten batches. WBG and KOS are separately owner-approved fixed crosswalk mappings and are not new proposal rows. It also records the already-approved WBG mapping and the 13 already-approved aggregate exclusions (665 populated values).
 
-Generation is read-only with respect to both databases. It creates no application approval and does not change the original WBG crosswalk or canonical identity registry.
+Generation is read-only with respect to both databases. It creates no application approval and does not change the owner-approved IMF WEO crosswalk or canonical identity registry.
 
 ## 2. Review the single Markdown file
 
-Do not edit 195 table rows manually. The bulk approval command below creates a separate, immutable approval copy, marks all 195 proposals APPROVE, copies each proposed game_id into its approved field, and records the owner's decision note on every row. It leaves KOS on HOLD.
+Do not edit 195 table rows manually. The bulk approval command below creates a separate, immutable approval copy, marks all 195 new proposals APPROVE, copies each proposed game_id into its approved field, and records the owner's decision note on every row. WBG and KOS remain fixed, previously owner-approved mappings.
 
-WBG and KOS are reused from their prior owner decisions, and the 13 aggregate exclusions are reused from their prior owner decision. KOS maps to the existing Kosovo game_id through an explicit IMF WEO field-15-only reviewed-manual crosswalk; the IMF Appendix KOS/UVK discrepancy is documented and does not change ISO/M49 assignments. The command does not modify the original review Markdown, original crosswalk, or identity registry.
+WBG and KOS are reused from their prior owner decisions, and the 13 aggregate exclusions are reused from their prior owner decision. KOS maps to the existing Kosovo game_id through an explicit IMF WEO field-15-only reviewed-manual crosswalk; the IMF Appendix KOS/UVK discrepancy is documented and does not change ISO/M49 assignments. The command does not modify the original review Markdown, owner-approved source crosswalk, or identity registry.
 
 ## 3. Validate the completed review
 
@@ -58,8 +58,8 @@ The application is bound to the review document SHA-256 through the derived cros
 
 ## 5. Safety and closure conditions
 
-- The command is field 15 / NGDPD only. It cannot apply fields 16, 18, 20 or 21.
-- The canonical identity registry and original manual WBG crosswalk remain unchanged.
+- The command is field 15 / NGDPD only. It cannot apply fields 16, 18, 20 or 21. The KOS/UVK source-code discrepancy remains documented; no ISO/M49 assignment is created.
+- The canonical identity registry and owner-approved IMF WEO crosswalk remain unchanged.
 - No identity is inferred from names, provider IDs or registry ISO fields at application time; only explicit owner-approved crosswalk entries resolve identities.
 - WEO observation statuses remain `unclassified`. Technical import verification is not semantic classification or field-level semantic approval.
 - The Project DB acquisition is checked, not rewritten or re-registered.
