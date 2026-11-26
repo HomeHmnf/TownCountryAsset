@@ -69,5 +69,5 @@ The application is bound to the review document SHA-256 through the derived cros
 ## 6. Tests
 
 ```fish
-uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_identity_review.py tests/test_imf_weo_field15_review_workflow.py
+uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_identity_review.py tests/test_imf_weo_field15_review_workflow.py tests/test_manage_imf_weo_field15_review.py tests/test_approve_imf_weo_field15_all.py
 ```
