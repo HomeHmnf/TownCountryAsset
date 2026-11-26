@@ -400,6 +400,46 @@ def verify_project_acquisition(path: Path, expected_source_sha: str) -> dict[str
     finally:
         con.close()
 
+def verify_existing_observations_are_candidate_subset(candidate: Path, database: Path) -> dict[str, Any]:
+    candidate_rows = read_csv(candidate / "observations.csv")
+    summary = json.loads((candidate / "candidate.json").read_text(encoding="utf-8"))
+    expected = {
+        (r["game_id"], r["indicator_code"], int(r["observation_year"]))
+        for r in candidate_rows
+    }
+    con = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
+    con.row_factory = sqlite3.Row
+    try:
+        existing = con.execute(
+            """SELECT game_id, source_country_code, indicator_code, observation_year
+               FROM imf_weo_historical_observations
+               WHERE source_version=? AND source_sha256=? AND field_id=15""",
+            (RELEASE, summary["source_sha256"]),
+        ).fetchall()
+        extras = [
+            row for row in existing
+            if (row["game_id"], row["indicator_code"], int(row["observation_year"])) not in expected
+        ]
+        if extras:
+            by_code: dict[str, int] = {}
+            for row in extras:
+                code = row["source_country_code"]
+                by_code[code] = by_code.get(code, 0) + 1
+            detail = ", ".join(f"{code}:{count}" for code, count in sorted(by_code.items()))
+            raise ReviewError(
+                "Existing field-15 WEO observations fall outside the newly approved candidate "
+                f"({len(extras)} rows: {detail}). No approval or database write was made. "
+                "Resolve these legacy rows explicitly; this workflow will not delete or remap them."
+            )
+        return {
+            "existing_observation_rows": len(existing),
+            "existing_rows_outside_candidate": 0,
+            "preflight_passed": True,
+        }
+    finally:
+        con.close()
+
+
 def verify_candidate_game_ids(observations: list[dict[str, Any]], database: Path) -> dict[str, Any]:
     expected = {row["game_id"] for row in observations}
     con = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
@@ -584,6 +624,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         raise ReviewError("Every unmapped source identity must have an explicit disposition and rationale")
     candidate = write_deterministic_candidate(observations, exceptions, summary, review_root / "candidate")
     canonical_identity_check = verify_candidate_game_ids(observations, database)
+    existing_rows_check = verify_existing_observations_are_candidate_subset(candidate, database)
     prep = prepare_application(candidate, database_path=database,
         identity_path=REGISTRY, crosswalk_path=derived_crosswalk,
         migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
@@ -612,6 +653,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         "candidate_exceptions": len(exceptions), "approval_id": approval_id,
         "approval_status": "applied", "application": application,
         "canonical_identity_preflight": canonical_identity_check,
+        "existing_observation_preflight": existing_rows_check,
         "game_database_verification": game_check,
         "project_database_acquisition_verification": project_check,
         "original_crosswalk_modified": False, "identity_registry_modified": False,
