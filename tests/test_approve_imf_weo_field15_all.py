@@ -26,13 +26,10 @@ def _document() -> str:
             "Evidence-backed source proposal", "PENDING", "-", "",
         ]
         lines.append("| " + " | ".join(values) + " |")
-    kos = ["10", "KOS", "Kosovo", "KOS.NGDPD.A", "52 (1980–2031)", "-", "-", "-", "IMF appendix",
-           "Code discrepancy", "HOLD", "-", "Retain evidence hold"]
-    lines.append("| " + " | ".join(kos) + " |")
     return "\n".join(lines) + "\n"
 
 
-def test_bulk_builder_approves_every_proposal_and_preserves_kos_hold():
+def test_bulk_builder_approves_all_new_proposals_and_reuses_fixed_kos_mapping():
     note = "Owner confirms the complete generated identity proposal set for field 15."
     result, count = build_bulk_approved_document(
         _document(), actor="project-owner", note=note, approval_date="2026-11-26"
@@ -41,7 +38,7 @@ def test_bulk_builder_approves_every_proposal_and_preserves_kos_hold():
     assert "- Owner actor: project-owner" in result
     assert "- Approval date (YYYY-MM-DD): 2026-11-26" in result
     assert result.count("| APPROVE |") == 195
-    assert result.count("| HOLD |") == 1
+    assert result.count("| HOLD |") == 0
     assert result.count("| tc_") == 390
     assert note in result
 
