@@ -190,9 +190,9 @@ The `--actor` value must exactly match the Owner actor recorded in the Markdown.
 3. Builds a versioned, field-15-only derived crosswalk containing the reused WBG mapping and only the newly approved rows. The original crosswalk and global identity registry are not modified.
 4. Rebuilds the candidate from the original IMF WEO CSV, not from manual batch or inventory registers.
 5. Confirms every candidate identity is either WBG or explicitly approved, and every unmapped aggregate, KOS hold, owner hold or exclusion has an explicit disposition.
-6. Checks that every candidate `game_id` already exists in the canonical Game DB before creating the approval record.
+6. Checks that every candidate `game_id` already exists in the canonical Game DB before creating the approval record, and confirms that existing WEO field-15 rows for this source fingerprint are a subset of the candidate. Any legacy row outside the approved candidate (for example, an unresolved KOS mapping) stops the command before approval creation or observation writes. The workflow never deletes or remaps those rows automatically.
 7. Reuses an identical existing approval/application if present; otherwise creates the exact-artifact approval, records the owner decision and applies transactionally.
-8. Independently compares imported keys, values, units, source metadata and status against the candidate; verifies the approval event history, import linkage, SQLite integrity and foreign keys; and rechecks the Project DB acquisition.
+8. Independently compares imported keys, values, units, source metadata and status against the candidate; verifies the approval event history, import linkage, SQLite integrity and foreign keys; and rechecks the Project DB acquisition and its two recorded artifact hashes/byte counts.
 
 The command writes a verification report under `reports/sources/imf-weo-field15-reviewed-candidate/<review-hash>/`. It leaves all WEO observation statuses as `unclassified`. Successful import and technical verification do not themselves complete semantic field review or authorize field 16. Field 15 must be closed and documented under the project workflow before the next field begins.
 
