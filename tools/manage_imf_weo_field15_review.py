@@ -14,7 +14,14 @@ from tools.database.connection import DEFAULT_DATABASE_PATH
 from tools.database.imf_weo_import import WEOImportError, apply_application, decide_application_for_weo, prepare_application
 from tools.database.project_connection import DEFAULT_PROJECT_DATABASE_PATH
 
-AUTO = ROOT / "reports/sources/imf-weo-field15-identity-review/automatic/20261126T101015Z"
+AUTO_ROOT = ROOT / "reports/sources/imf-weo-field15-identity-review/automatic"
+def latest_automatic_review_directory() -> Path:
+    candidates = [path for path in AUTO_ROOT.iterdir() if path.is_dir() and (path / "summary.json").is_file()] if AUTO_ROOT.is_dir() else []
+    if not candidates:
+        raise ReviewError("No generated automatic IMF WEO field-15 review package exists; run the source-derived generator first")
+    return max(candidates, key=lambda path: path.name)
+
+AUTO = latest_automatic_review_directory() if AUTO_ROOT.is_dir() else AUTO_ROOT
 REVIEW = ROOT / "reports/sources/imf-weo-field15-identity-review/field_15_owner_review.md"
 CANDIDATE_ROOT = ROOT / "reports/sources/imf-weo-field15-reviewed-candidate"
 DERIVED_CROSSWALK = CANDIDATE_ROOT / "reviewed_imf_weo_crosswalk.json"
