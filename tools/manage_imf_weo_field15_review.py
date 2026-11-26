@@ -367,10 +367,27 @@ def verify_project_acquisition(path: Path, expected_source_sha: str) -> dict[str
             raise ReviewError("Manual acquisition record does not corroborate the exact IMF CSV checksum and filename")
         if sha(RAW) != expected_source_sha:
             raise ReviewError("Local IMF WEO CSV differs from the reviewed source fingerprint")
+        artifact_rows = con.execute(
+            """SELECT artifact_role, relative_path, sha256, byte_count
+               FROM acquisition_artifacts WHERE acquisition_id=5 ORDER BY relative_path"""
+        ).fetchall()
+        expected_artifacts = {
+            relative(RAW): (sha(RAW), RAW.stat().st_size),
+            relative(PDF): (sha(PDF), PDF.stat().st_size),
+        }
+        actual_artifacts = {
+            item["relative_path"]: (item["sha256"], int(item["byte_count"]))
+            for item in artifact_rows
+        }
+        if actual_artifacts != expected_artifacts or len(artifact_rows) != 2:
+            raise ReviewError(
+                "Project DB acquisition 5 artifact records do not exactly match the IMF CSV and Appendix PDF"
+            )
         return {
             "acquisition_id": 5, "source_key": row["source_key"], "dataset_key": row["dataset_key"],
             "provider_release_id": row["provider_release_id"], "status": row["status"],
             "integrity_status": row["integrity_status"], "source_sha256_verified": True,
+            "artifact_count": len(artifact_rows), "artifacts_sha256_and_bytes_verified": True,
             "sqlite_integrity": integrity, "foreign_key_violations": len(fk),
             "database_written": False,
         }
