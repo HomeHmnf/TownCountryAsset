@@ -37,21 +37,6 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def identity_index(path: Path) -> dict[str, set[str]]:
-    try:
-        document = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
-        raise CandidateError(f"Cannot read identity registry: {exc}") from exc
-    result: dict[str, set[str]] = {}
-    for record in document.get("records", []):
-        game_id = record.get("game_id")
-        source = record.get("source") or {}
-        iso = record.get("iso") or {}
-        codes = {source.get("current_source_id"), iso.get("alpha3")}
-        for code in codes:
-            if isinstance(code, str) and code and isinstance(game_id, str) and game_id:
-                result.setdefault(code, set()).add(game_id)
-    return result
 
 
 def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
@@ -63,7 +48,8 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
     byte_count = raw_path.stat().st_size
     if verify_snapshot and (raw_hash != EXPECTED_SHA256 or byte_count != EXPECTED_BYTES):
         raise CandidateError("IMF WEO bytes differ from the recorded October 2026 snapshot")
-    identities = identity_index(identity_path)
+    # IMF WEO identities resolve only through its explicitly reviewed crosswalk.
+    identities: dict[str, set[str]] = {}
     crosswalk_hash = None
     if crosswalk_path is not None:
         try:
@@ -81,11 +67,8 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
         if crosswalk.source_key != "imf_weo":
             raise CandidateError("IMF WEO source crosswalk source_key must be 'imf_weo'")
         for mapping in crosswalk.mappings:
-            existing = identities.get(mapping.source_id, set())
-            if existing and existing != {mapping.game_id}:
-                raise CandidateError(
-                    f"IMF WEO crosswalk conflicts with identity registry for {mapping.source_id}"
-                )
+            # This provider-specific crosswalk is authoritative. Registry source IDs
+            # and ISO alpha-3 values are not fallback IMF WEO mappings.
             identities[mapping.source_id] = {mapping.game_id}
         crosswalk_hash = sha256(crosswalk_path)
     if field_ids is not None:
@@ -207,7 +190,7 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
         "year_range": [min(years), max(years)] if years else None,
         "exception_count": len(exceptions),
         "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
-        "identity_policy": "retain_existing_game_id; ISO verification status is not changed",
+        "identity_policy": "explicit_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback",
         "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
         "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
         "database_written": False,

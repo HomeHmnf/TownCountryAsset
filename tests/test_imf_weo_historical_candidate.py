@@ -19,7 +19,10 @@ def _inputs(tmp_path: Path):
              "iso": {"alpha3": "AAA", "assignment_status": "unverified"}},
             {"game_id": "tc_" + "b" * 32,
              "source": {"current_source_id": "PSE"},
-             "iso": {"alpha3": "PSE", "assignment_status": "unverified"}}
+             "iso": {"alpha3": "PSE", "assignment_status": "unverified"}},
+            {"game_id": "tc_" + "c" * 32,
+             "source": {"current_source_id": "CCC"},
+             "iso": {"alpha3": "BBB", "assignment_status": "unverified"}}
         ]
     }), encoding="utf-8")
     raw = tmp_path / "weo.csv"
@@ -45,9 +48,47 @@ def _inputs(tmp_path: Path):
     return raw, identity
 
 
+def _explicit_crosswalk(tmp_path: Path, source_id: str = "AAA",
+                        game_id: str = "tc_" + "a" * 32) -> Path:
+    crosswalk = tmp_path / "imf_weo.json"
+    crosswalk.write_text(json.dumps({
+        "schema_version": 1,
+        "dataset": "world_economic_outlook",
+        "source_key": "imf_weo",
+        "mappings": [{
+            "game_id": game_id,
+            "source_id": source_id,
+            "match_method": "reviewed_manual",
+            "evidence_url": "https://example.org/imf-weo-evidence",
+            "source_name": source_id
+        }]
+    }), encoding="utf-8")
+    return crosswalk
+
+
+def test_registry_source_ids_and_iso_codes_do_not_resolve_without_crosswalk(tmp_path):
+    raw, identity = _inputs(tmp_path)
+    observations, exceptions, summary = build_candidate(
+        raw, identity, verify_snapshot=False
+    )
+    assert observations == []
+    unresolved = {
+        row.get("source_country_code")
+        for row in exceptions
+        if row.get("exception") == "unmapped_or_ambiguous_identity"
+    }
+    assert unresolved == {"AAA", "BBB"}
+    assert summary["identity_policy"] == (
+        "explicit_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback"
+    )
+
+
 def test_complete_values_import_candidate_even_with_unverified_identity(tmp_path):
     raw, identity = _inputs(tmp_path)
-    observations, exceptions, summary = build_candidate(raw, identity, verify_snapshot=False)
+    crosswalk = _explicit_crosswalk(tmp_path)
+    observations, exceptions, summary = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk
+    )
     assert len(observations) == 4
     assert {row["game_id"] for row in observations} == {"tc_" + "a" * 32}
     assert all(row["value_status"] == "unclassified" for row in observations)
@@ -57,14 +98,20 @@ def test_complete_values_import_candidate_even_with_unverified_identity(tmp_path
 
 def test_blank_cells_are_not_synthesized_and_unclassified_is_preserved(tmp_path):
     raw, identity = _inputs(tmp_path)
-    observations, _, _ = build_candidate(raw, identity, verify_snapshot=False)
+    crosswalk = _explicit_crosswalk(tmp_path)
+    observations, _, _ = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk
+    )
     assert not any(row["observation_year"] == 2026 for row in observations)
     assert all(row["value_status"] == "unclassified" for row in observations)
 
 
 def test_wdi_presence_is_not_an_input_to_eligibility(tmp_path):
     raw, identity = _inputs(tmp_path)
-    observations, _, _ = build_candidate(raw, identity, verify_snapshot=False)
+    crosswalk = _explicit_crosswalk(tmp_path)
+    observations, _, _ = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk
+    )
     assert {(row["indicator_code"], row["observation_year"]) for row in observations} == {
         ("NGDPD", 2024), ("NGDPD", 2025), ("LUR", 2024), ("PPPGDP", 2025)
     }
@@ -72,7 +119,10 @@ def test_wdi_presence_is_not_an_input_to_eligibility(tmp_path):
 
 def test_missing_unit_is_retained_as_null_not_inferred(tmp_path):
     raw, identity = _inputs(tmp_path)
-    observations, _, _ = build_candidate(raw, identity, verify_snapshot=False)
+    crosswalk = _explicit_crosswalk(tmp_path)
+    observations, _, _ = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk
+    )
     unemployment = next(row for row in observations if row["indicator_code"] == "LUR")
     assert unemployment["unit"] is None
     assert unemployment["scale"] == "Units"
