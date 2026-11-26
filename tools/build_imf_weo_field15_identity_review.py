@@ -136,6 +136,8 @@ def parse_imf_appendix_codes(text: str, source_codes: set[str]) -> tuple[set[str
         raise IdentityReviewError("IMF Appendix Country Data Documentation is missing TWN")
     if "KOS" in codes or "UVK" not in codes:
         raise IdentityReviewError("Expected the documented KOS/UVK IMF Appendix code discrepancy")
+    if len(codes) != 197:
+        raise IdentityReviewError(f"Expected 196 WEO code matches plus Appendix code UVK; found {len(codes)}")
     return codes, pages
 
 
@@ -339,8 +341,7 @@ def build_review(
     )
 
     inventory = read_weo_ngdpd_inventory(weo_path)
-    source_by_id = {row["source_id"]: row for row in inventory}
-    source_codes = set(source_by_id)
+    source_codes = {row["source_id"] for row in inventory}
 
     appendix_text = text_path.read_text(encoding="utf-8")
     appendix_codes, pages = parse_imf_appendix_codes(appendix_text, source_codes)
@@ -357,6 +358,8 @@ def build_review(
     except (ValueError, UnicodeError) as exc:
         raise IdentityReviewError(f"Cannot parse official UN M49 HTML snapshot: {exc}") from exc
     m49_rows = parsed_m49["all_rows"]
+    if parsed_m49["row_count"] != 248:
+        raise IdentityReviewError(f"Expected 248 rows in the October 2026 M49 snapshot; found {parsed_m49['row_count']}")
     m49_by_alpha3 = {
         (row.get("ISO-alpha3 Code") or "").strip().upper(): row
         for row in m49_rows if (row.get("ISO-alpha3 Code") or "").strip()
@@ -564,6 +567,8 @@ def build_review(
         })
 
     review_rows.sort(key=lambda row: row["source_id"])
+    if len(review_rows) != 196:
+        raise IdentityReviewError(f"Expected 196 review identities excluding aggregates and WBG; found {len(review_rows)}")
     proposal_ids = [row["reviewed_proposed_game_id"] for row in review_rows if row["reviewed_proposed_game_id"]]
     if len(proposal_ids) != 195 or len(set(proposal_ids)) != 195:
         raise IdentityReviewError("Expected 195 unique persistent game_id proposals")
