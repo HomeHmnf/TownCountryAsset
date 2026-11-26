@@ -420,7 +420,7 @@ def verify_existing_observations_are_candidate_subset(candidate: Path, database:
     candidate_rows = read_csv(candidate / "observations.csv")
     summary = json.loads((candidate / "candidate.json").read_text(encoding="utf-8"))
     expected = {
-        (r["game_id"], r["indicator_code"], int(r["observation_year"]))
+        (r["game_id"], r["indicator_code"], int(r["observation_year"])): r["source_country_code"]
         for r in candidate_rows
     }
     con = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
@@ -434,7 +434,11 @@ def verify_existing_observations_are_candidate_subset(candidate: Path, database:
         ).fetchall()
         extras = [
             row for row in existing
-            if (row["game_id"], row["indicator_code"], int(row["observation_year"])) not in expected
+            if (
+                (row["game_id"], row["indicator_code"], int(row["observation_year"])) not in expected
+                or expected[(row["game_id"], row["indicator_code"], int(row["observation_year"]))]
+                != row["source_country_code"]
+            )
         ]
         if extras:
             by_code: dict[str, int] = {}
