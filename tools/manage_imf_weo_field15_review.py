@@ -22,7 +22,7 @@ def latest_automatic_review_directory() -> Path:
     return max(candidates, key=lambda path: path.name)
 
 AUTO = latest_automatic_review_directory() if AUTO_ROOT.is_dir() else AUTO_ROOT
-REVIEW = ROOT / "reports/sources/imf-weo-field15-identity-review/field_15_owner_review.md"
+REVIEW = ROOT / "reports/sources/imf-weo-field15-identity-review/field_15_owner_review_kos_approved.md"
 CANDIDATE_ROOT = ROOT / "reports/sources/imf-weo-field15-reviewed-candidate"
 DERIVED_CROSSWALK = CANDIDATE_ROOT / "reviewed_imf_weo_crosswalk.json"
 RAW = ROOT / "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv"
