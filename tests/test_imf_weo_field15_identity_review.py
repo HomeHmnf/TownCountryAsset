@@ -99,7 +99,7 @@ def test_wbg_crosswalk_must_remain_the_only_approved_mapping():
         _validate_wbg_crosswalk(crosswalk, registry)
 
 
-def _review_row(source_id: str, *, held: bool = False) -> dict[str, str]:
+def _review_row(source_id: str, index: int, *, held: bool = False) -> dict[str, str]:
     row = {field: "" for field in REVIEW_FIELDS}
     row.update({
         "field_id": "15",
@@ -113,7 +113,7 @@ def _review_row(source_id: str, *, held: bool = False) -> dict[str, str]:
         "exact_normalized_name_match": "false",
         "review_outcome": "hold_for_evidence" if held else "proposed_manual_review",
         "owner_decision": "" if held else "pending_explicit_owner_approval",
-        "reviewed_proposed_game_id": "" if held else "tc_" + (str(abs(hash(source_id)))[:32].ljust(32, "0")),
+        "reviewed_proposed_game_id": "" if held else "tc_" + f"{index:032x}",
         "proposed_registry_name": "" if held else "Proposed " + source_id,
         "un_m49_code": "" if held else "001",
     })
@@ -124,7 +124,7 @@ def test_one_run_writes_all_ten_cumulative_batches_and_final_register(tmp_path: 
     before = [f"AA{i:03d}" for i in range(85)]
     after = [f"ZZ{i:03d}" for i in range(110)]
     source_ids = sorted(before + ["KOS"] + after)
-    rows = [_review_row(code, held=(code == "KOS")) for code in source_ids]
+    rows = [_review_row(code, index, held=(code == "KOS")) for index, code in enumerate(source_ids)]
     inventory = [{
         "source_id": row["source_id"], "source_name": row["source_name"],
         "series_code": row["series_code"], "populated_year_count": "52",
