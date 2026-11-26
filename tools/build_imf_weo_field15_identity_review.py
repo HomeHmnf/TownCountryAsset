@@ -640,6 +640,8 @@ def build_review(
     proposal_ids = [row["reviewed_proposed_game_id"] for row in review_rows if row["reviewed_proposed_game_id"]]
     if len(proposal_ids) != 195 or len(set(proposal_ids)) != 195:
         raise IdentityReviewError("Expected 195 unique persistent game_id proposals")
+    if set(proposal_ids) & {approved_wbg_id, approved_kos_id}:
+        raise IdentityReviewError("New proposal targets must be distinct from the fixed WBG and KOS crosswalk targets")
     proposed_m49_codes = [
         row["un_m49_code"] for row in review_rows if row["reviewed_proposed_game_id"]
     ]
