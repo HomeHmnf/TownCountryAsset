@@ -37,15 +37,25 @@ uv run python tools/approve_imf_weo_field15_all.py
 
 It must report 195 proposals to approve, reuse of the WBG and KOS mappings and aggregate decisions, and no database write.
 
-## 4. Explicitly approve, apply, and verify
+## 4. Prepare and reconcile before any database application
 
-After inspecting the dry-run summary, explicitly authorize the complete proposal set with one command:
+First create the owner-approved review copy and candidate without creating a database approval or writing to either database:
+
+```fish
+uv run python tools/approve_imf_weo_field15_all.py --prepare-only --confirm-all-proposals --actor "project-owner" --note "I approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
+```
+
+The prepare-only report must be inspected before application. It reports the actual candidate observation count, the candidate KOS row count, the existing KOS rows by source code, candidate identity checks, and Project DB acquisition verification. It must show all 32 existing KOS observations inside the candidate with the same target game_id and source code. The preflight compares every existing source-version/checksum field-15 row against the candidate, including source code, year, value, source name, unit/scale, status and provenance. Any mismatch blocks preparation; no legacy row is overwritten or remapped.
+
+Before applying, create and verify a SQLite online backup of the Game DB using SQLite's backup API (or the SQLite CLI `.backup` command). Do not copy the live database file directly and do not manipulate WAL/SHM sidecars. Keep the backup outside Git.
+
+Only after inspecting the prepare-only report and verifying the backup, run the application command:
 
 ```fish
 uv run python tools/approve_imf_weo_field15_all.py --apply --confirm-all-proposals --actor "project-owner" --note "I approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
 ```
 
-This is the sole bulk approval and application command. The actor and note are recorded in the generated review artifact and application approval ledger. It:
+This is the sole database approval and application command. The actor and note are recorded in the generated review artifact and application approval ledger. It:
 
 1. Revalidates the Markdown decisions and immutable source fingerprints.
 2. Creates a versioned, derived IMF WEO crosswalk containing the existing WBG mapping plus only the rows marked APPROVE. The original manual crosswalk is not modified.
@@ -59,7 +69,7 @@ The application is bound to the review document SHA-256 through the derived cros
 ## 5. Safety and closure conditions
 
 - The command is field 15 / NGDPD only. It cannot apply fields 16, 18, 20 or 21. The KOS/UVK source-code discrepancy remains documented; no ISO/M49 assignment is created.
-- The canonical identity registry and owner-approved IMF WEO crosswalk remain unchanged.
+- The canonical identity registry and owner-approved IMF WEO crosswalk remain unchanged. The 32 legacy KOS rows must reconcile exactly before application; no database backup is created automatically by the application command.
 - No identity is inferred from names, provider IDs or registry ISO fields at application time; only explicit owner-approved crosswalk entries resolve identities.
 - WEO observation statuses remain `unclassified`. Technical import verification is not semantic classification or field-level semantic approval.
 - The Project DB acquisition is checked, not rewritten or re-registered.
