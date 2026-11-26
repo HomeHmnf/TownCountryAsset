@@ -61,6 +61,8 @@ def fingerprint_inputs(auto: Path) -> dict[str, dict[str, Any]]:
         "m49_faq_provenance": auto / "m49_faq_provenance.json",
         "identity_registry": REGISTRY, "approved_wbg_crosswalk": CROSSWALK,
         "automatic_summary": auto / "summary.json",
+        "automatic_inventory": auto / "field_15_identity_inventory.csv",
+        "automatic_identity_exceptions": auto / "identity_exceptions.csv",
         "automatic_final_register": auto / "field_15_identity_review_register_final.csv",
         "automatic_exclusion_register": auto / "field_15_exclusion_register.csv",
         "manual_acquisition_record": ACQUISITION, "prior_decisions_doc": PRIOR_DECISIONS_DOC,
@@ -222,6 +224,12 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
         "KOS": "Preserve hold_for_evidence; no identity mapping.",
     }:
         raise ReviewError("Fixed prior-decision manifest was changed")
+    if meta.get("fixed_decisions") != {
+        "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
+        "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
+        "KOS": "Preserve hold_for_evidence; no identity mapping.",
+    }:
+        raise ReviewError("Fixed prior-decision manifest was changed")
     counts = [sum(r["batch"] == f"{n:02d}" for r in rows) for n in range(1, 11)]
     if counts != [20,20,20,20,20,20,20,20,20,16]:
         raise ReviewError(f"Batch membership is invalid: {counts}")
@@ -230,6 +238,8 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
         raise ReviewError("The existing KOS hold must remain explicit and unmapped")
     if sum(r["source_id"] != "KOS" for r in rows) != 195:
         raise ReviewError("Expected exactly 195 new identity proposals")
+    if "tc_50c420df8b2c4c6eaae47d795f9a1ea2" not in document or "665 populated annual values" not in document:
+        raise ReviewError("Reused WBG approval or aggregate exclusion section is missing")
     if "tc_50c420df8b2c4c6eaae47d795f9a1ea2" not in document or "665 populated annual values" not in document:
         raise ReviewError("Reused WBG approval or aggregate exclusion decision is missing from the review")
     for row in rows:
@@ -455,6 +465,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     meta, rows, document = parse_review(path, True)
     validate_fingerprints(meta)
     validate_review_against_source_register(meta, rows)
+    project_preflight = verify_project_acquisition(project_database, meta["source_sha256"])
     approved = [r for r in rows if r["decision"].upper() == "APPROVE"]
     if not approved:
         raise ReviewError("No new identity mappings approved; refusing an empty application")
@@ -514,9 +525,15 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     actual_unmapped = [r for r in exceptions if r.get("exception") == "unmapped_or_ambiguous_identity"]
     if len(actual_unmapped) != expected_unmapped:
         raise ReviewError(f"Candidate exceptions mismatch: expected {expected_unmapped}, got {len(actual_unmapped)}")
+    expected_exception_codes = set(aggregate_by_code) | {"KOS"} | {r["source_id"] for r in rows if r["decision"].upper() in {"HOLD", "EXCLUDE"}}
+    actual_exception_codes = {r.get("source_country_code") for r in actual_unmapped}
+    if actual_exception_codes != expected_exception_codes:
+        raise ReviewError(f"Exception dispositions do not reconcile: missing={sorted(expected_exception_codes-actual_exception_codes)}, extra={sorted(actual_exception_codes-expected_exception_codes)}")
+    if any(not r.get("disposition") or not r.get("owner_rationale") for r in actual_unmapped):
+        raise ReviewError("Every unmapped source identity must have an explicit disposition and rationale")
     candidate = write_deterministic_candidate(observations, exceptions, summary, review_root / "candidate")
     prep = prepare_application(candidate, database_path=database, source_path=RAW,
-        identity_path=REGISTRY, crosswalk_path=DERIVED_CROSSWALK,
+        identity_path=REGISTRY, crosswalk_path=derived_crosswalk,
         migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
     approval_id, status = prep["approval_id"], prep["status"]
     if status == "pending":
@@ -533,7 +550,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     else:
         raise ReviewError(f"Existing approval has incompatible status: {status}")
     game_check = verify_game_database(candidate, database, approval_id)
-    project_check = verify_project_acquisition(project_database, meta["source_sha256"])
+    project_check = project_preflight
     return {
         "approved_new_mappings": len(approved),
         "excluded_new_identities": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
