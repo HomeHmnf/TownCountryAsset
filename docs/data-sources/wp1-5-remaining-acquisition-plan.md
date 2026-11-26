@@ -137,3 +137,12 @@ Verified candidate metadata:
 The 32 WBG observations are included under the owner-approved IMF-specific field-15 crosswalk and are not excluded as aggregates. The earlier WBG identity hold is superseded by that explicit owner decision.
 
 **Current gate:** aggregate dispositions and candidate construction are complete. Field 15 is not yet approved or applied. The field-15 semantic review must still be reconciled against the candidate, crosswalk and exclusion register. Approval, application and independent verification of both databases remain outstanding. Field 16 remains blocked.
+
+
+## Field 15 current status — 2026-11-26
+
+This status supersedes the earlier "Current gate" and audit statements above where they describe field 15 as not yet approved or applied.
+
+The IMF WEO October 2026 NGDPD / field-15 identity review, owner approval, Game DB application and technical verification have completed. The owner-approved application is `imf-weo-oct2026-1eb2e784bf93821c` (`applied`). The local read-only database check returned **PASS**: 9,361 observations, 197 game IDs, 197 source codes, years 1980–2031, zero non-`unclassified` statuses, zero checksum mismatches, one import ID (3), dataset import status `candidate`, SQLite integrity `ok`, and zero foreign-key violations. See the [shared application workflow](wp1-5-review-approval-application-workflow.md) for the recorded verification.
+
+**Field 15 is not yet closed.** The database check confirms row presence and technical integrity; it does not satisfy the field-specific semantic review and closure checklist. In particular, observation statuses remain `unclassified`, and the dataset import remains `candidate`. Therefore field 16 remains blocked. The next action is to complete and document field-15 semantic classification and the remaining per-field closeout requirements; do not begin field-16 acquisition or application before that gate passes.
