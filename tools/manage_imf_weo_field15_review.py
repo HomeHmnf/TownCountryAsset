@@ -336,7 +336,7 @@ def verify_project_acquisition(path: Path) -> dict[str, Any]:
     finally:
         con.close()
 
-def verify_game_database(candidate: Path, database: Path) -> dict[str, Any]:
+def verify_game_database(candidate: Path, database: Path, approval_id: str) -> dict[str, Any]:
     expected = read_csv(candidate / "observations.csv")
     summary = json.loads((candidate / "candidate.json").read_text(encoding="utf-8"))
     con = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
@@ -348,8 +348,9 @@ def verify_game_database(candidate: Path, database: Path) -> dict[str, Any]:
             raise ReviewError(f"SQLite integrity/FK failure: {integrity}; {fk[:5]}")
         actual = con.execute(
             """SELECT game_id, source_country_code, source_country_name, indicator_code, field_id,
-                      observation_year, value, unit, scale, value_status, source_reference,
-                      source_version, source_sha256, acquired_on, acquisition_time_precision
+                      observation_year, value, unit, scale, value_status, latest_actual_annual_data,
+                      reporting_year_months, source_reference, source_version, source_sha256,
+                      acquired_on, acquisition_time_precision
                FROM imf_weo_historical_observations
                WHERE source_version=? AND source_sha256=? AND field_id=15""",
             (RELEASE, summary["source_sha256"]),
@@ -364,16 +365,29 @@ def verify_game_database(candidate: Path, database: Path) -> dict[str, Any]:
                 "source_country_code": want["source_country_code"], "source_country_name": want["source_country_name"],
                 "field_id": int(want["field_id"]), "value": float(want["value"]),
                 "unit": want["unit"] or None, "scale": want["scale"] or None,
-                "value_status": "unclassified", "source_reference": want["source_reference"],
+                "value_status": "unclassified",
+                "latest_actual_annual_data": want["latest_actual_annual_data"] or None,
+                "reporting_year_months": want["reporting_year_months"] or None,
+                "source_reference": want["source_reference"],
                 "source_version": want["source_version"], "source_sha256": want["source_sha256"],
                 "acquired_on": want["acquired_on"], "acquisition_time_precision": want["acquisition_time_precision"],
             }
             for field, value in checks.items():
                 if got[field] != value:
                     raise ReviewError(f"Imported row {key} differs at {field}")
+        approval = con.execute("SELECT domain, status, artifact_sha256 FROM application_approvals WHERE approval_id=?",
+                               (approval_id,)).fetchone()
+        events = [r["event_type"] for r in con.execute(
+            "SELECT event_type FROM database_application_events WHERE approval_id=? ORDER BY event_id",
+            (approval_id,))]
+        if approval is None or approval["domain"] != "imf_weo_historical_observations" or approval["status"] != "applied":
+            raise ReviewError("Application approval ledger is not in applied state")
+        if not {"proposed", "approved", "applied"}.issubset(set(events)):
+            raise ReviewError(f"Application approval event history is incomplete: {events}")
         return {"integrity_check": integrity, "foreign_key_violations": len(fk),
                 "expected_observations": len(expected), "actual_observations": len(actual),
                 "distinct_game_ids": len({r["game_id"] for r in expected}),
+                "approval_status": approval["status"], "approval_events": events,
                 "all_statuses_unclassified": all(r["value_status"] == "unclassified" for r in actual)}
     finally:
         con.close()
@@ -444,9 +458,18 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     observations, exceptions, summary = build_candidate(
         RAW, REGISTRY, verify_snapshot=True, crosswalk_path=DERIVED_CROSSWALK, field_ids={15})
     decisions = {r["source_id"]: r for r in rows}
+    aggregate_rows = read_csv((ROOT / meta["automatic_review_directory"]) / "field_15_exclusion_register.csv")
+    aggregate_by_code = {r["source_country_code"]: r for r in aggregate_rows}
+    if len(aggregate_by_code) != 13 or sum(int(r["populated_year_count"]) for r in aggregate_rows) != 665:
+        raise ReviewError("The fingerprinted aggregate exclusion evidence no longer reconciles")
     for exc in exceptions:
-        decision = decisions.get(exc.get("source_country_code", ""))
-        if decision:
+        source_code = exc.get("source_country_code", "")
+        decision = decisions.get(source_code)
+        aggregate = aggregate_by_code.get(source_code)
+        if aggregate:
+            exc["disposition"] = "excluded"
+            exc["owner_rationale"] = aggregate["rationale"]
+        elif decision:
             exc["disposition"] = "excluded" if decision["decision"].upper() == "EXCLUDE" else "hold_for_evidence"
             exc["owner_rationale"] = decision["rationale"]
     candidate = write_deterministic_candidate(observations, exceptions, summary)
@@ -467,7 +490,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         application = {"approval_id": approval_id, "status": "already_applied"}
     else:
         raise ReviewError(f"Existing approval has incompatible status: {status}")
-    game_check = verify_game_database(candidate, database)
+    game_check = verify_game_database(candidate, database, approval_id)
     project_check = verify_project_acquisition(project_database)
     return {
         "approved_new_mappings": len(approved),
