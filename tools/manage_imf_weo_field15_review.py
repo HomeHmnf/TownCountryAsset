@@ -1,0 +1,425 @@
+#!/usr/bin/env python3
+"""Generate, validate, and explicitly apply the owner-reviewed IMF WEO field-15 package."""
+from __future__ import annotations
+import argparse, csv, hashlib, json, re, sqlite3, sys
+from datetime import date
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from tools.build_imf_weo_historical_candidate import build_candidate, write_candidate
+from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
+from tools.database.imf_weo_import import apply_application, decide_application_for_weo, prepare_application
+from tools.database.project_connection import DEFAULT_PROJECT_DATABASE_PATH, connect_project_database
+
+AUTO = ROOT / "reports/sources/imf-weo-field15-identity-review/automatic/20261126T101015Z"
+REVIEW = ROOT / "reports/sources/imf-weo-field15-identity-review/field_15_owner_review.md"
+CANDIDATE_ROOT = ROOT / "reports/sources/imf-weo-field15-reviewed-candidate"
+DERIVED_CROSSWALK = CANDIDATE_ROOT / "reviewed_imf_weo_crosswalk.json"
+RAW = ROOT / "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv"
+PDF = ROOT / "raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf"
+TEXT = ROOT / "derived_data/pdf_text/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf.txt"
+TEXT_META = ROOT / "derived_data/pdf_text/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf.txt.json"
+M49 = ROOT / "raw_data/sources/un_m49/country_area_overview_html/2026-10-current/m49-country-area-overview.html"
+M49_MANIFEST = ROOT / "data_manifests/sources/un_m49/country_area_overview_html/2026-10-current.json"
+REGISTRY = ROOT / "config/country_identity_registry.json"
+CROSSWALK = ROOT / "data/manual/source_crosswalks/imf_weo.json"
+ACQUISITION = ROOT / "docs/data-sources/imf-weo-october-2026-manual-acquisition.md"
+MIGRATION = ROOT / "migrations/008_imf_weo_historical_observations.sql"
+RELEASE = "October 2026 / IMF.RES_WEO_9.0.0"
+META_OPEN = "<!-- REVIEW-METADATA-JSON"
+META_CLOSE = "REVIEW-METADATA-JSON -->"
+HEADER = "| Batch | Source ID | Source name | Series | Populated years | Proposed game_id | Registry name | M49 | Evidence | Decision | Approved game_id | Owner rationale |"
+SEPARATOR = "|---:|---|---|---|---:|---|---|---|---|---|---|---|"
+
+class ReviewError(RuntimeError):
+    pass
+
+def sha(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for block in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
+
+def relative(path: Path) -> str:
+    return path.resolve().relative_to(ROOT.resolve()).as_posix()
+
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open(encoding="utf-8-sig", newline="") as f:
+        return list(csv.DictReader(f))
+
+def fingerprint_inputs(auto: Path) -> dict[str, dict[str, Any]]:
+    files = {
+        "weo_csv": RAW, "imf_appendix_pdf": PDF, "imf_appendix_text": TEXT,
+        "imf_appendix_text_metadata": TEXT_META, "un_m49_html": M49,
+        "un_m49_manifest": M49_MANIFEST,
+        "m49_faq_snapshot": auto / "m49_faq_snapshot.html",
+        "m49_faq_provenance": auto / "m49_faq_provenance.json",
+        "identity_registry": REGISTRY, "approved_wbg_crosswalk": CROSSWALK,
+        "automatic_summary": auto / "summary.json",
+        "automatic_final_register": auto / "field_15_identity_review_register_final.csv",
+        "automatic_exclusion_register": auto / "field_15_exclusion_register.csv",
+        "manual_acquisition_record": ACQUISITION, "import_migration": MIGRATION,
+    }
+    result = {}
+    for key, path in files.items():
+        if not path.is_file():
+            raise ReviewError(f"Required source evidence missing: {path}")
+        result[key] = {"path": relative(path), "sha256": sha(path), "byte_count": path.stat().st_size}
+    return result
+
+def cell(value: Any) -> str:
+    return str(value or "").replace("|", "\\|").replace("\n", " ").strip()
+
+def extract_metadata(document: str) -> dict[str, Any]:
+    match = re.search(re.escape(META_OPEN) + r"\s*(\{.*?\})\s*" + re.escape(META_CLOSE), document, re.S)
+    if not match:
+        raise ReviewError("Review metadata block is missing")
+    try:
+        data = json.loads(match.group(1))
+    except json.JSONDecodeError as exc:
+        raise ReviewError(f"Invalid review metadata JSON: {exc}") from exc
+    if not isinstance(data, dict):
+        raise ReviewError("Review metadata must be a JSON object")
+    return data
+
+def generate_review(auto: Path, output: Path) -> dict[str, Any]:
+    final = auto / "field_15_identity_review_register_final.csv"
+    exclusions = auto / "field_15_exclusion_register.csv"
+    summary_path = auto / "summary.json"
+    if not all(p.is_file() for p in (final, exclusions, summary_path)):
+        raise ReviewError("Automatic source-derived review package is incomplete")
+    rows, aggregates = read_csv(final), read_csv(exclusions)
+    if len(rows) != 196 or sum(bool(r["reviewed_proposed_game_id"]) for r in rows) != 195:
+        raise ReviewError("Expected 195 proposal rows plus the KOS hold")
+    if len(aggregates) != 13 or sum(int(r["populated_year_count"]) for r in aggregates) != 665:
+        raise ReviewError("Expected 13 previously approved aggregate exclusions / 665 values")
+    registry_doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    registry = {r.get("game_id"): r for r in registry_doc.get("records", []) if isinstance(r, dict)}
+    metadata = {
+        "schema_version": 1, "field_id": 15, "indicator_code": "NGDPD",
+        "source_release": "october_2026", "source_sha256": sha(RAW),
+        "automatic_review_directory": relative(auto),
+        "input_fingerprints": fingerprint_inputs(auto),
+        "fixed_decisions": {
+            "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
+            "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
+            "KOS": "Preserve hold_for_evidence; no identity mapping.",
+        },
+    }
+    lines = [
+        "# IMF WEO October 2026 — field 15 / NGDPD owner review", "",
+        "This is the single authoritative review document for all ten batches.", "",
+        "- Scope: WP1.5 field 15 / NGDPD / IMF WEO October 2026 only.",
+        "- 195 proposed mappings in ten batches (20 identities per batch, final batch 15 has 16).",
+        "- Existing WBG approval, 13 aggregate exclusions and KOS hold are carried forward.",
+        "- Every new identity requires an explicit owner decision and rationale.",
+        "- APPROVE requires Approved game_id to equal Proposed game_id exactly.",
+        "- EXCLUDE and HOLD require Approved game_id to be -.", "",
+        "## Owner approval of the complete review", "",
+        "- Owner actor: PENDING",
+        "- Approval date (YYYY-MM-DD): PENDING",
+        "- Approval statement: PENDING",
+        "", "## Reused prior decisions", "",
+        "### WBG — existing approved crosswalk", "",
+        "- imf_weo / WBG / West Bank and Gaza maps to tc_50c420df8b2c4c6eaae47d795f9a1ea2 (Palestine).",
+        "- Match method reviewed_manual; owner approval dated 2026-11-25; field 15 / NGDPD only.",
+        "- The original manual crosswalk will not be modified.", "",
+        "### Aggregate exclusions — existing owner decision", "",
+        "| Source ID | Source name | Series | Populated values | Years | Disposition |",
+        "|---|---|---|---:|---|---|",
+    ]
+    for r in aggregates:
+        vals = [r["source_country_code"], r["source_country_name"], r["series_code"],
+                r["populated_year_count"], f'{r["first_populated_year"]}–{r["last_populated_year"]}',
+                "EXCLUDED — prior owner approval"]
+        lines.append("| " + " | ".join(cell(v) for v in vals) + " |")
+    lines += [
+        "", "Total: 13 aggregate series and 665 populated annual values; excluded from country observations.",
+        "", "### KOS — existing hold", "",
+        "Keep KOS on HOLD with no target. The IMF source code / Appendix UVK discrepancy remains unresolved; M49 statistical-use code 412 does not resolve it.",
+        "", "## New identity decisions — all ten batches", "", HEADER, SEPARATOR,
+    ]
+    proposal_index = 0
+    for row in rows:
+        if row["source_id"] == "KOS":
+            continue
+        game_id = row["reviewed_proposed_game_id"]
+        target = registry.get(game_id)
+        if not target:
+            raise ReviewError(f"Proposed target is absent from the canonical registry: {row['source_id']}")
+        registry_name = (target.get("names") or {}).get("en", "")
+        if registry_name != row["proposed_registry_name"]:
+            raise ReviewError(f"Registry-name mismatch for {row['source_id']}")
+        batch = proposal_index // 20 + 1
+        proposal_index += 1
+        vals = [
+            f"{batch:02d}", row["source_id"], row["source_name"], row["series_code"],
+            row["populated_year_count"], game_id, registry_name, row["un_m49_code"],
+            row["independent_evidence_reference"], "PENDING", "-", "",
+        ]
+        lines.append("| " + " | ".join(cell(v) for v in vals) + " |")
+    if proposal_index != 195:
+        raise ReviewError(f"Expected 195 proposal rows, found {proposal_index}")
+    lines += [
+        "", "## Decision rules", "",
+        "- APPROVE: review the identity evidence; enter APPROVE, copy the exact proposed game_id into Approved game_id, and write a specific rationale.",
+        "- EXCLUDE: explicitly exclude this source economy from field 15; leave Approved game_id as - and explain why.",
+        "- HOLD: keep unresolved; leave Approved game_id as - and explain the missing evidence.",
+        "- A name resemblance alone is not sufficient. Do not modify global ISO/M49 assignments.",
+        "- No PENDING decisions may remain when applying.", "",
+        "## Immutable input fingerprints", "", META_OPEN,
+        json.dumps(metadata, ensure_ascii=False, indent=2, sort_keys=True), META_CLOSE, "",
+        "Generation is review-only: no approval record, database write, registry change, or original crosswalk change.",
+    ]
+    output = output.resolve()
+    if output.exists():
+        raise ReviewError(f"Refusing to overwrite existing review file: {output}")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return {"review_file": relative(output), "proposal_rows": proposal_index,
+            "aggregate_exclusions": len(aggregates), "aggregate_values": 665,
+            "database_written": False, "approval_created": False}
+
+def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[str, str]], str]:
+    document = path.read_text(encoding="utf-8")
+    meta = extract_metadata(document)
+    if meta.get("field_id") != 15 or meta.get("indicator_code") != "NGDPD":
+        raise ReviewError("Wrong field or indicator scope")
+    if not document.startswith("# IMF WEO October 2026 — field 15 / NGDPD owner review"):
+        raise ReviewError("Unexpected review document")
+    rows, inside = [], False
+    fields = ("batch", "source_id", "source_name", "series_code", "populated_years",
+              "proposed_game_id", "registry_name", "m49", "evidence", "decision",
+              "approved_game_id", "rationale")
+    for line in document.splitlines():
+        if line == HEADER:
+            inside = True
+            continue
+        if inside:
+            if not line.startswith("|"):
+                break
+            if line == SEPARATOR:
+                continue
+            parts = [p.strip().replace("\\|", "|") for p in line.strip().strip("|").split("|")]
+            if len(parts) != len(fields):
+                raise ReviewError(f"Malformed review row: {line}")
+            rows.append(dict(zip(fields, parts)))
+    if len(rows) != 195 or len({r["source_id"] for r in rows}) != 195:
+        raise ReviewError(f"Expected 195 unique proposal rows; found {len(rows)}")
+    counts = [sum(r["batch"] == f"{n:02d}" for r in rows) for n in range(1, 11)]
+    if counts != [20,20,20,20,20,20,20,20,20,15]:
+        raise ReviewError(f"Batch membership is invalid: {counts}")
+    for row in rows:
+        if row["series_code"] != row["source_id"] + ".NGDPD.A":
+            raise ReviewError(f"Wrong series code for {row['source_id']}")
+        decision = row["decision"].upper()
+        if decision == "PENDING":
+            if complete:
+                raise ReviewError(f"Decision pending for {row['source_id']}")
+            continue
+        if decision not in {"APPROVE", "EXCLUDE", "HOLD"}:
+            raise ReviewError(f"Invalid decision {decision} for {row['source_id']}")
+        if len(row["rationale"].strip()) < 12:
+            raise ReviewError(f"Rationale missing for {row['source_id']}")
+        if decision == "APPROVE" and row["approved_game_id"] != row["proposed_game_id"]:
+            raise ReviewError(f"Approved target differs from proposal for {row['source_id']}")
+        if decision != "APPROVE" and row["approved_game_id"] not in {"", "-"}:
+            raise ReviewError(f"{decision} must not have an approved target for {row['source_id']}")
+    if complete:
+        def field_value(label: str) -> str:
+            match = re.search(r"^- " + re.escape(label) + r": (.+)$", document, re.M)
+            return match.group(1).strip() if match else ""
+        owner, approval_date, statement = (field_value("Owner actor"), field_value("Approval date (YYYY-MM-DD)"),
+                                           field_value("Approval statement"))
+        if not owner or owner == "PENDING" or not statement or statement == "PENDING" or len(statement) < 20:
+            raise ReviewError("Owner actor and explicit approval statement must be completed")
+        try:
+            date.fromisoformat(approval_date)
+        except ValueError as exc:
+            raise ReviewError("Owner approval date must be YYYY-MM-DD") from exc
+    return meta, rows, document
+
+def validate_fingerprints(meta: dict[str, Any]) -> None:
+    for key, item in meta.get("input_fingerprints", {}).items():
+        path = ROOT / item["path"]
+        if not path.is_file() or sha(path) != item["sha256"] or path.stat().st_size != item["byte_count"]:
+            raise ReviewError(f"Reviewed source changed or missing: {key}")
+
+def validate_review(path: Path, complete: bool) -> dict[str, Any]:
+    meta, rows, _ = parse_review(path, complete)
+    validate_fingerprints(meta)
+    return {"proposal_rows": len(rows), "approved": sum(r["decision"].upper()=="APPROVE" for r in rows),
+            "excluded": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
+            "held": sum(r["decision"].upper()=="HOLD" for r in rows),
+            "pending": sum(r["decision"].upper()=="PENDING" for r in rows),
+            "fingerprints_valid": True, "database_written": False}
+
+def verify_project_acquisition(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        raise ReviewError(f"Project DB not found: {path}")
+    con = connect_project_database(path)
+    try:
+        tables = [r["name"] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")]
+        found = []
+        for table in tables:
+            safe = table.replace('"', '""')
+            columns = [r["name"] for r in con.execute(f'PRAGMA table_info("{safe}")')]
+            if "acquisition_id" in columns:
+                for row in con.execute(f'SELECT * FROM "{safe}" WHERE acquisition_id=5'):
+                    found.append((table, dict(row)))
+        if len(found) != 1:
+            raise ReviewError(f"Expected exactly one Project DB acquisition 5 record; found {len(found)}")
+        text = json.dumps(found[0][1], default=str).lower()
+        if not any(term in text for term in ("imf_weo", "imf weo", "october_2026")):
+            raise ReviewError("Project DB acquisition 5 does not identify the October 2026 WEO source")
+        return {"acquisition_id": 5, "table": found[0][0], "record_found": True}
+    finally:
+        con.close()
+
+def verify_game_database(candidate: Path, database: Path) -> dict[str, Any]:
+    expected = read_csv(candidate / "observations.csv")
+    summary = json.loads((candidate / "candidate.json").read_text(encoding="utf-8"))
+    con = connect_database(database)
+    try:
+        integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
+        fk = [tuple(r) for r in con.execute("PRAGMA foreign_key_check")]
+        if integrity != "ok" or fk:
+            raise ReviewError(f"SQLite integrity/FK failure: {integrity}; {fk[:5]}")
+        actual = con.execute(
+            """SELECT game_id, source_country_code, source_country_name, indicator_code, field_id,
+                      observation_year, value, unit, scale, value_status, source_reference,
+                      source_version, source_sha256, acquired_on, acquisition_time_precision
+               FROM imf_weo_historical_observations
+               WHERE source_version=? AND source_sha256=? AND field_id=15""",
+            (RELEASE, summary["source_sha256"]),
+        ).fetchall()
+        e = {(r["game_id"], r["indicator_code"], int(r["observation_year"])): r for r in expected}
+        a = {(r["game_id"], r["indicator_code"], int(r["observation_year"])): r for r in actual}
+        if len(actual) != len(expected) or set(e) != set(a):
+            raise ReviewError(f"Imported key/count mismatch: expected {len(expected)}, got {len(actual)}")
+        for key, want in e.items():
+            got = a[key]
+            checks = {
+                "source_country_code": want["source_country_code"], "source_country_name": want["source_country_name"],
+                "field_id": int(want["field_id"]), "value": float(want["value"]),
+                "unit": want["unit"] or None, "scale": want["scale"] or None,
+                "value_status": "unclassified", "source_reference": want["source_reference"],
+                "source_version": want["source_version"], "source_sha256": want["source_sha256"],
+                "acquired_on": want["acquired_on"], "acquisition_time_precision": want["acquisition_time_precision"],
+            }
+            for field, value in checks.items():
+                if got[field] != value:
+                    raise ReviewError(f"Imported row {key} differs at {field}")
+        return {"integrity_check": integrity, "foreign_key_violations": len(fk),
+                "expected_observations": len(expected), "actual_observations": len(actual),
+                "distinct_game_ids": len({r["game_id"] for r in expected}),
+                "all_statuses_unclassified": all(r["value_status"] == "unclassified" for r in actual)}
+    finally:
+        con.close()
+
+def apply_review(path: Path, actor: str, database: Path, project_database: Path) -> dict[str, Any]:
+    meta, rows, document = parse_review(path, True)
+    validate_fingerprints(meta)
+    approved = [r for r in rows if r["decision"].upper() == "APPROVE"]
+    if not approved:
+        raise ReviewError("No new identity mappings approved; refusing an empty application")
+    def field_value(label: str) -> str:
+        m = re.search(r"^- " + re.escape(label) + r": (.+)$", document, re.M)
+        return m.group(1).strip() if m else ""
+    owner, approval_date = field_value("Owner actor"), field_value("Approval date (YYYY-MM-DD)")
+    if actor != owner:
+        raise ReviewError("CLI actor must match the owner recorded in the review Markdown")
+    original = json.loads(CROSSWALK.read_text(encoding="utf-8"))
+    if len(original.get("mappings", [])) != 1 or original["mappings"][0].get("source_id") != "WBG":
+        raise ReviewError("Original WBG crosswalk has changed; expected its sole existing WBG mapping")
+    crosswalk = dict(original)
+    crosswalk["mappings"] = list(original["mappings"]) + [{
+        "game_id": r["approved_game_id"], "source_id": r["source_id"],
+        "match_method": "reviewed_manual", "evidence_url": r["evidence"].split(";")[0].strip(),
+        "source_name": r["source_name"], "review_note": r["rationale"],
+    } for r in approved]
+    crosswalk["review_approval"] = {
+        "status": "approved", "approved_on": approval_date, "approver_role": "project_owner",
+        "approval_record": relative(path),
+        "scope": "Field 15 / NGDPD only; existing WBG mapping plus explicitly approved rows in the owner review.",
+    }
+    crosswalk["review_document"] = {"path": relative(path), "sha256": sha(path)}
+    CANDIDATE_ROOT.mkdir(parents=True, exist_ok=True)
+    if DERIVED_CROSSWALK.exists():
+        raise ReviewError(f"Refusing to overwrite derived crosswalk: {DERIVED_CROSSWALK}")
+    DERIVED_CROSSWALK.write_text(json.dumps(crosswalk, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    observations, exceptions, summary = build_candidate(
+        RAW, REGISTRY, verify_snapshot=True, crosswalk_path=DERIVED_CROSSWALK, field_ids={15})
+    decisions = {r["source_id"]: r for r in rows}
+    for exc in exceptions:
+        decision = decisions.get(exc.get("source_country_code", ""))
+        if decision:
+            exc["disposition"] = decision["decision"].lower()
+            exc["owner_rationale"] = decision["rationale"]
+    candidate = write_candidate(observations, exceptions, summary, CANDIDATE_ROOT)
+    prep = prepare_application(candidate, database_path=database, source_path=RAW,
+        identity_path=REGISTRY, crosswalk_path=DERIVED_CROSSWALK,
+        migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
+    approval_id, status = prep["approval_id"], prep["status"]
+    if status == "pending":
+        decide_application_for_weo(approval_id, decision="approved", actor=actor,
+            note=f"Owner-approved Markdown review {relative(path)}; field 15 / NGDPD only.",
+            database_path=database)
+        status = "approved"
+    if status == "approved":
+        application = apply_application(candidate, approval_id, database_path=database,
+            source_path=RAW, identity_path=REGISTRY, crosswalk_path=DERIVED_CROSSWALK,
+            migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
+    elif status == "applied":
+        application = {"approval_id": approval_id, "status": "already_applied"}
+    else:
+        raise ReviewError(f"Existing approval has incompatible status: {status}")
+    game_check = verify_game_database(candidate, database)
+    project_check = verify_project_acquisition(project_database)
+    return {
+        "approved_new_mappings": len(approved),
+        "excluded_new_identities": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
+        "held_new_identities": sum(r["decision"].upper()=="HOLD" for r in rows),
+        "candidate_directory": relative(candidate), "candidate_observations": len(observations),
+        "candidate_exceptions": len(exceptions), "approval_id": approval_id,
+        "approval_status": "applied", "application": application,
+        "game_database_verification": game_check,
+        "project_database_acquisition_verification": project_check,
+        "original_crosswalk_modified": False, "identity_registry_modified": False,
+        "observation_status_policy": "unclassified",
+    }
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest="command", required=True)
+    gen = sub.add_parser("generate-review")
+    gen.add_argument("--automatic-review-dir", type=Path, default=AUTO)
+    gen.add_argument("--output", type=Path, default=REVIEW)
+    val = sub.add_parser("validate-review")
+    val.add_argument("--review", type=Path, default=REVIEW)
+    val.add_argument("--require-complete", action="store_true")
+    app = sub.add_parser("apply-reviewed")
+    app.add_argument("--review", type=Path, default=REVIEW)
+    app.add_argument("--actor", required=True)
+    app.add_argument("--database", type=Path, default=DEFAULT_DATABASE_PATH)
+    app.add_argument("--project-database", type=Path, default=DEFAULT_PROJECT_DATABASE_PATH)
+    args = parser.parse_args(argv)
+    try:
+        if args.command == "generate-review":
+            result = generate_review(args.automatic_review_dir, args.output)
+        elif args.command == "validate-review":
+            result = validate_review(args.review, args.require_complete)
+        else:
+            result = apply_review(args.review, args.actor, args.database, args.project_database)
+    except (OSError, csv.Error, json.JSONDecodeError, sqlite3.Error, ReviewError, ValueError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())
