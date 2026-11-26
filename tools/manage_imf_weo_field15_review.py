@@ -618,7 +618,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         "observation_status_policy": "unclassified",
     }
     report_path = review_root / "verification_report.json"
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     report["verification_report"] = relative(report_path)
     return report
 
