@@ -45,7 +45,7 @@ It refuses to overwrite an existing run directory.
 4. Official UN M49 FAQ, fetched during each run, validated for statistical-use codes 158 and 412, and saved with a timestamp and SHA-256 in the output directory.
 5. Read-only canonical registry:
    `config/country_identity_registry.json`
-6. Existing explicit owner-approved WBG-only crosswalk:
+6. Existing explicit owner-approved WBG/KOS crosswalk:
    `data/manual/source_crosswalks/imf_weo.json`
 
 The tool parses the M49 HTML snapshot with the existing project M49 parser and retrieves the official FAQ separately. It does not use the manually generated M49 identity-review reports or the ten field-15 batch registers as source inputs.
@@ -74,7 +74,7 @@ The generated mapping remains a proposal. Name variants are recorded in the revi
 ### 3. Explicit exceptions and existing approval
 
 - **WBG:** preserve the separately owner-approved field-15-only WBG-to-Palestine crosswalk. It is not added to the new proposal set.
-- **KOS:** keep `hold_for_evidence`. The WEO source uses KOS while the IMF Appendix identifies Kosovo as UVK. The M49 FAQ permits statistical-use code 412, but that does not resolve the IMF source-code discrepancy.
+- **KOS (historical baseline):** the original generator held KOS because the WEO source uses KOS while the IMF Appendix identifies Kosovo as UVK. This hold was superseded by the explicit owner-approved mapping recorded in the 2026-11-26 addendum below.
 - **TWN:** use M49 FAQ numerical code 158 strictly for statistical purposes. The standard M49 country/area table does not list Taiwan separately. The proposal makes no sovereignty determination.
 
 Unexpected source codes, missing M49 rows, ambiguous registry-name claims, duplicate targets, or changed source contracts fail closed rather than generating guessed mappings.
@@ -85,9 +85,9 @@ Each run writes:
 
 - `field_15_identity_inventory.csv` — all 210 source identities, derived from the original WEO CSV;
 - `field_15_exclusion_register.csv` — 13 aggregate dispositions;
-- `identity_exceptions.csv` — KOS hold and evidence rationale;
+- `identity_exceptions.csv` — historical KOS/UVK evidence qualification and later approved mapping disposition;
 - `field_15_identity_review_register_batch01.csv` through `field_15_identity_review_register_batch10.csv` — all ten cumulative batches, generated in one run;
-- `field_15_identity_review_register_final.csv` — final 196-row review register;
+- `field_15_identity_review_register_final.csv` — historical 196-row review register, superseded by the 195-proposal register generated after KOS approval;
 - `m49_faq_snapshot.html` and `m49_faq_provenance.json` — the live official FAQ evidence and its retrieval fingerprint.
 - `summary.json` and `summary.md` — counts, source fingerprints, validation and governance status.
 
@@ -101,7 +101,7 @@ Expected October 2026 result:
 | Existing approved WBG crosswalk | 1 |
 | New owner-approved mappings | 0 |
 
-The 196 review identities are divided into nine batches of 20 and one final batch of 16. Batch 5 contains 19 proposals and the KOS hold.
+The historical 196-row review register was divided into nine batches of 20 and one final batch of 16. The post-approval register contains 195 new proposals in nine batches of 20 and a final batch of 15; KOS is now a fixed approved crosswalk mapping.
 
 ## Governance and side effects
 
@@ -131,7 +131,7 @@ The tests cover raw CSV inventory derivation, IMF Appendix code parsing, KOS/UVK
 
 ## Owner review, batch approval and field-15 application workflow
 
-The ten generated CSV batches are now consolidated into one owner decision document. The workflow reuses the previously approved WBG-to-Palestine mapping, the 13 aggregate exclusions (665 populated values), and the KOS hold. It does not treat the 195 proposal rows as approved.
+The original ten generated CSV batches were consolidated into one historical owner decision document. The current workflow reuses the previously approved WBG-to-Palestine and KOS-to-Kosovo mappings, plus the 13 aggregate exclusions (665 populated values). It does not treat the 195 new proposal rows as approved.
 
 ### Generate the single Markdown review file
 
@@ -143,7 +143,7 @@ uv run python tools/manage_imf_weo_field15_review.py generate-review
 
 This creates:
 
-`reports/sources/imf-weo-field15-identity-review/field_15_owner_review.md`
+`reports/sources/imf-weo-field15-identity-review/field_15_owner_review_kos_approved.md`
 
 Generation refuses to overwrite an existing review. It fingerprints the original IMF CSV and Appendix, M49 source snapshots and FAQ evidence, automatic source-derived inventory/registers, canonical identity registry, existing WBG crosswalk, prior-decision documentation, acquisition record and importer migration. It performs no database writes and creates no approval record.
 
@@ -157,7 +157,7 @@ Inspect all 195 proposal rows across batches 01–10. For each row:
 
 Do not change the proposed identity, M49 code, source name, series, year coverage or proposal-basis evidence. The validator compares these columns with the fingerprinted source-derived register and canonical registry.
 
-The document's owner declaration must also contain the actual owner actor, approval date, and an explicit overall approval statement. The KOS hold is fixed. The WBG mapping and aggregate exclusions are carried forward from their prior approvals; they are not re-decided by editing the new proposal rows.
+The active document's owner declaration must contain the actual owner actor, approval date, and an explicit overall approval statement. The WBG and KOS mappings and aggregate exclusions are fixed prior decisions; they are not re-decided by editing the 195 new proposal rows.
 
 ### Validate the edited Markdown
 
@@ -189,8 +189,8 @@ The `--actor` value must exactly match the Owner actor recorded in the Markdown.
 2. Checks the existing Project DB acquisition ID 5 and its integrity before creating a Game DB approval.
 3. Builds a versioned, field-15-only derived crosswalk containing the reused WBG mapping and only the newly approved rows. The original crosswalk and global identity registry are not modified.
 4. Rebuilds the candidate from the original IMF WEO CSV, not from manual batch or inventory registers.
-5. Confirms every candidate identity is either WBG or explicitly approved, and every unmapped aggregate, KOS hold, owner hold or exclusion has an explicit disposition.
-6. Checks that every candidate `game_id` already exists in the canonical Game DB before creating the approval record, and confirms that existing WEO field-15 rows for this source fingerprint are a subset of the candidate. Any legacy row outside the approved candidate (for example, an unresolved KOS mapping) stops the command before approval creation or observation writes. The workflow never deletes or remaps those rows automatically.
+5. Confirms every candidate identity is either WBG/KOS or explicitly approved, and every unmapped aggregate, owner hold or exclusion has an explicit disposition.
+6. Checks that every candidate `game_id` already exists in the canonical Game DB before creating the approval record, and confirms that existing WEO field-15 rows for this source fingerprint are an exact compatible subset of the candidate. Any identity, value or provenance mismatch stops the command before approval creation or observation writes. The workflow never deletes, remaps or overwrites those rows automatically.
 7. Reuses an identical existing approval/application if present; otherwise creates the exact-artifact approval, records the owner decision and applies transactionally.
 8. Independently compares imported keys, values, units, source metadata and status against the candidate; verifies the approval event history, import linkage, SQLite integrity and foreign keys; and rechecks the Project DB acquisition and its two recorded artifact hashes/byte counts.
 
