@@ -250,3 +250,7 @@ contains 9,361 observations for NGDPD, across 197 distinct game identities, cove
 The 32 WBG observations are included through the separately owner-approved, field-15-only IMF crosswalk. They are not part of the aggregate exclusions.
 
 This is a source-row disposition and candidate-reconciliation update only. It is not semantic approval, field approval, an application authorization or a database write. Field 15 remains open pending the complete review, approval, application and independent verification workflow. Fields 16, 18, 20 and 21 remain outside this field-scoped decision.
+
+## 17. Consolidated IMF WEO field-15 owner review
+
+The ten source-derived identity batches are consolidated into one owner-review Markdown file and one explicit application CLI. Follow [the field-15 owner review workflow](imf-weo-field15-owner-review-workflow.md). The review document is generated from the automatic final register, not the historical manual batches. It carries forward the existing WBG approval, 13 aggregate exclusions (665 values), and KOS hold. The CLI validates every decision against fingerprinted source evidence and applies only after the completed Markdown review is explicitly approved by the owner. Generation and validation do not write to either database.
