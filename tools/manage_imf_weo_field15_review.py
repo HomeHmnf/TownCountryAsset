@@ -79,11 +79,15 @@ def cell(value: Any) -> str:
     return str(value or "").replace("|", "\\|").replace("\n", " ").strip()
 
 def extract_metadata(document: str) -> dict[str, Any]:
-    match = re.search(re.escape(META_OPEN) + r"\s*(\{.*?\})\s*" + re.escape(META_CLOSE), document, re.S)
-    if not match:
+    start = document.find(META_OPEN)
+    if start < 0:
         raise ReviewError("Review metadata block is missing")
+    start += len(META_OPEN)
+    end = document.find(META_CLOSE, start)
+    if end < 0:
+        raise ReviewError("Review metadata block terminator is missing")
     try:
-        data = json.loads(match.group(1))
+        data = json.loads(document[start:end].strip())
     except json.JSONDecodeError as exc:
         raise ReviewError(f"Invalid review metadata JSON: {exc}") from exc
     if not isinstance(data, dict):
