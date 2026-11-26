@@ -127,3 +127,79 @@ uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_identity_revie
 ```
 
 The tests cover raw CSV inventory derivation, IMF Appendix code parsing, KOS/UVK detection, M49 FAQ statistical-code validation, M49-name-only registry matching, WBG crosswalk exclusivity, and one-run generation of all ten cumulative batches.
+
+
+## Owner review, batch approval and field-15 application workflow
+
+The ten generated CSV batches are now consolidated into one owner decision document. The workflow reuses the previously approved WBG-to-Palestine mapping, the 13 aggregate exclusions (665 populated values), and the KOS hold. It does not treat the 195 proposal rows as approved.
+
+### Generate the single Markdown review file
+
+From the repository root:
+
+```fish
+uv run python tools/manage_imf_weo_field15_review.py generate-review
+```
+
+This creates:
+
+`reports/sources/imf-weo-field15-identity-review/field_15_owner_review.md`
+
+Generation refuses to overwrite an existing review. It fingerprints the original IMF CSV and Appendix, M49 source snapshots and FAQ evidence, automatic source-derived inventory/registers, canonical identity registry, existing WBG crosswalk, prior-decision documentation, acquisition record and importer migration. It performs no database writes and creates no approval record.
+
+### Owner review
+
+Inspect all 195 proposal rows across batches 01–10. For each row:
+
+- `APPROVE`: accept the exact proposed persistent `game_id`, copy it into **Approved game_id**, and record an evidence-based rationale.
+- `HOLD`: leave **Approved game_id** as `-` and explain what evidence is missing.
+- `EXCLUDE`: leave **Approved game_id** as `-` and explain why the source identity is outside this field's candidate scope.
+
+Do not change the proposed identity, M49 code, source name, series, year coverage or proposal-basis evidence. The validator compares these columns with the fingerprinted source-derived register and canonical registry.
+
+The document's owner declaration must also contain the actual owner actor, approval date, and an explicit overall approval statement. The KOS hold is fixed. The WBG mapping and aggregate exclusions are carried forward from their prior approvals; they are not re-decided by editing the new proposal rows.
+
+### Validate the edited Markdown
+
+First validate while decisions are still pending:
+
+```fish
+uv run python tools/manage_imf_weo_field15_review.py validate-review
+```
+
+After every new row has an explicit decision and rationale, validate the complete approval package:
+
+```fish
+uv run python tools/manage_imf_weo_field15_review.py validate-review --require-complete
+```
+
+Both commands are read-only. Any changed source, registry, prior approval evidence or protected proposal field causes validation to fail.
+
+### One explicit command to approve, apply and verify
+
+Only after the owner has inspected and completed the Markdown, run:
+
+```fish
+uv run python tools/manage_imf_weo_field15_review.py apply-reviewed --actor "project-owner"
+```
+
+The `--actor` value must exactly match the Owner actor recorded in the Markdown. This single explicit command:
+
+1. Revalidates the complete review and all source fingerprints.
+2. Checks the existing Project DB acquisition ID 5 and its integrity before creating a Game DB approval.
+3. Builds a versioned, field-15-only derived crosswalk containing the reused WBG mapping and only the newly approved rows. The original crosswalk and global identity registry are not modified.
+4. Rebuilds the candidate from the original IMF WEO CSV, not from manual batch or inventory registers.
+5. Confirms every candidate identity is either WBG or explicitly approved, and every unmapped aggregate, KOS hold, owner hold or exclusion has an explicit disposition.
+6. Checks that every candidate `game_id` already exists in the canonical Game DB before creating the approval record.
+7. Reuses an identical existing approval/application if present; otherwise creates the exact-artifact approval, records the owner decision and applies transactionally.
+8. Independently compares imported keys, values, units, source metadata and status against the candidate; verifies the approval event history, import linkage, SQLite integrity and foreign keys; and rechecks the Project DB acquisition.
+
+The command writes a verification report under `reports/sources/imf-weo-field15-reviewed-candidate/<review-hash>/`. It leaves all WEO observation statuses as `unclassified`. Successful import and technical verification do not themselves complete semantic field review or authorize field 16. Field 15 must be closed and documented under the project workflow before the next field begins.
+
+### Focused tests
+
+```fish
+uv run --extra dev python -m pytest -q tests/test_manage_imf_weo_field15_review.py tests/test_imf_weo_historical_candidate.py tests/test_imf_weo_field15_identity_review.py
+```
+
+No owner review or database application has been performed by committing this tooling.
