@@ -40,13 +40,14 @@ def make_review(tmp_path: Path, *, decision: str = "PENDING", approved: str = "-
         batch = index // 20 + 1
         if source_id == "KOS":
             values = [f"{batch:02d}", source_id, "Kosovo", "KOS.NGDPD.A", "52",
-                      "-", "-", "-", "IMF;UN", "HOLD", "-", "Retain the established evidence hold."]
+                      "-", "-", "-", "IMF;UN", "Existing source-code discrepancy; retain the established evidence hold.",
+                      "HOLD", "-", "Retain the established evidence hold."]
         else:
             row_decision = decision if index == 0 else "PENDING"
             approved_id = approved if index == 0 else "-"
             values = [f"{batch:02d}", source_id, source_id, source_id + ".NGDPD.A", "52",
                       "tc_" + f"{index:032x}", "Registry " + source_id, "001", "https://example.org/evidence",
-                      row_decision, approved_id,
+                      "IMF-to-M49 evidence chain and registry reconciliation.", row_decision, approved_id,
                       "Owner reviewed the independent identity evidence and recorded this disposition."
                       if row_decision != "PENDING" else ""]
         lines.append("| " + " | ".join(values) + " |")
