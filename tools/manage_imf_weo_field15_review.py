@@ -18,7 +18,7 @@ AUTO_ROOT = ROOT / "reports/sources/imf-weo-field15-identity-review/automatic"
 def latest_automatic_review_directory() -> Path:
     candidates = [path for path in AUTO_ROOT.iterdir() if path.is_dir() and (path / "summary.json").is_file()] if AUTO_ROOT.is_dir() else []
     if not candidates:
-        raise ReviewError("No generated automatic IMF WEO field-15 review package exists; run the source-derived generator first")
+        raise RuntimeError("No generated automatic IMF WEO field-15 review package exists; run the source-derived generator first")
     return max(candidates, key=lambda path: path.name)
 
 AUTO = latest_automatic_review_directory() if AUTO_ROOT.is_dir() else AUTO_ROOT
