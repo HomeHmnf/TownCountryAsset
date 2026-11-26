@@ -37,6 +37,11 @@ def make_review(tmp_path: Path, *, decision: str = "PENDING", approved: str = "-
         "- Approval date (YYYY-MM-DD): PENDING",
         "- Approval statement: PENDING",
         "",
+        "## Reused prior owner decisions",
+        "",
+        "- WBG: `tc_50c420df8b2c4c6eaae47d795f9a1ea2` — existing approved mapping, field 15 only.",
+        "- Aggregates: 13 excluded series, 665 populated annual values.",
+        "",
         HEADER,
         SEPARATOR,
     ]
