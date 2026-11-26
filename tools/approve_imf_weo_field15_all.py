@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bulk owner-approve all validated IMF WEO field-15 proposals and apply them.
 
-Dry-run is the default. Applying requires --apply, --confirm-all-proposals,
+Dry-run is the default. Preparation requires --prepare-only and application requires --apply, each with --confirm-all-proposals,
 an identified owner, and a decision note. The original review Markdown is
 never modified; a fingerprinted, generated approval copy is retained.
 """
@@ -102,10 +102,10 @@ def run(*, review: Path, actor: str | None, note: str | None, apply: bool,
     meta, rows, document = parse_review(review, False)
     validate_fingerprints(meta)
     validate_review_against_source_register(meta, rows, document)
-    pending = [row for row in rows if row["source_id"] != "KOS" and row["decision"].upper() == "PENDING"]
-    if len(pending) != 195 or len(rows) != 196:
+    pending = [row for row in rows if row["decision"].upper() == "PENDING"]
+    if len(pending) != 195 or len(rows) != 195:
         raise ReviewError(
-            f"Bulk approval expects the untouched 195-pending-proposal review plus KOS hold; "
+            f"Bulk approval expects the untouched 195-pending-proposal review; "
             f"found {len(pending)} pending proposals across {len(rows)} rows"
         )
     if apply and prepare_only:
