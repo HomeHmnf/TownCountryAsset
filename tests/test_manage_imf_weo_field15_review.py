@@ -198,3 +198,21 @@ def test_existing_rows_that_are_candidate_subset_pass_preflight(tmp_path: Path):
     assert result["existing_observation_rows"] == 1
     assert result["existing_rows_outside_candidate"] == 0
     assert result["preflight_passed"] is True
+
+def test_existing_rows_with_metadata_mismatch_block_preflight(tmp_path: Path):
+    candidate = tmp_path / "candidate"
+    database = tmp_path / "game.sqlite"
+    _write_candidate_fixture(candidate)
+    _write_existing_observations_db(database, extra_kos=False)
+    connection = sqlite3.connect(database)
+    try:
+        connection.execute(
+            "UPDATE imf_weo_historical_observations SET source_country_name=?",
+            ("Different source name",),
+        )
+        connection.commit()
+    finally:
+        connection.close()
+
+    with pytest.raises(ReviewError, match="metadata_or_value_mismatches=1"):
+        verify_existing_observations_are_candidate_subset(candidate, database)
