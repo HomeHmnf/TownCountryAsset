@@ -17,7 +17,7 @@ The command creates:
 
 It refuses to overwrite an existing review file. It reads the automatic final identity register and aggregate exclusion register generated from the original IMF WEO source and official evidence. It does not read the historical manually prepared batch files or manual inventory/exclusion registers.
 
-The document contains all 196 source identities in their original ten-batch sequence: 195 proposed mappings and the fixed KOS hold. It also records the already-approved WBG mapping and the 13 already-approved aggregate exclusions (665 populated values).
+The document contains all 196 source identities in their original ten-batch sequence: 195 proposed mappings and the separately owner-approved KOS mapping. It also records the already-approved WBG mapping and the 13 already-approved aggregate exclusions (665 populated values).
 
 Generation is read-only with respect to both databases. It creates no application approval and does not change the original WBG crosswalk or canonical identity registry.
 
@@ -25,7 +25,7 @@ Generation is read-only with respect to both databases. It creates no applicatio
 
 Do not edit 195 table rows manually. The bulk approval command below creates a separate, immutable approval copy, marks all 195 proposals APPROVE, copies each proposed game_id into its approved field, and records the owner's decision note on every row. It leaves KOS on HOLD.
 
-WBG and the 13 aggregate exclusions are reused from their prior owner decisions. The command does not modify the original review Markdown, original WBG crosswalk, or identity registry.
+WBG and KOS are reused from their prior owner decisions, and the 13 aggregate exclusions are reused from their prior owner decision. KOS maps to the existing Kosovo game_id through an explicit IMF WEO field-15-only reviewed-manual crosswalk; the IMF Appendix KOS/UVK discrepancy is documented and does not change ISO/M49 assignments. The command does not modify the original review Markdown, original crosswalk, or identity registry.
 
 ## 3. Validate the completed review
 
@@ -35,7 +35,7 @@ First run the bulk command without write flags. This is a dry-run and validates 
 uv run python tools/approve_imf_weo_field15_all.py
 ```
 
-It must report 195 proposals to approve, reuse of WBG and aggregate decisions, KOS held, and no database write.
+It must report 195 proposals to approve, reuse of the WBG and KOS mappings and aggregate decisions, and no database write.
 
 ## 4. Explicitly approve, apply, and verify
 
@@ -49,7 +49,7 @@ This is the sole bulk approval and application command. The actor and note are r
 
 1. Revalidates the Markdown decisions and immutable source fingerprints.
 2. Creates a versioned, derived IMF WEO crosswalk containing the existing WBG mapping plus only the rows marked APPROVE. The original manual crosswalk is not modified.
-3. Builds a deterministic field-15-only candidate from the original IMF WEO CSV. EXCLUDE and HOLD decisions remain explicit candidate exceptions; the 13 aggregate exclusions and KOS hold are preserved.
+3. Builds a deterministic field-15-only candidate from the original IMF WEO CSV. EXCLUDE and HOLD decisions remain explicit candidate exceptions; the 13 aggregate exclusions are preserved, while the owner-approved KOS mapping is reused.
 4. Uses the existing application-approval ledger. An identical pending approval is resumed; an identical approved approval is applied; an already-applied identical artifact is not applied twice. A different artifact cannot reuse an old approval.
 5. Applies the approved candidate transactionally using the existing IMF WEO importer.
 6. Independently compares imported observation keys, values, units, statuses and provenance against the candidate; checks the approval event history; runs SQLite integrity and foreign-key checks; and verifies Project DB acquisition ID 5.
