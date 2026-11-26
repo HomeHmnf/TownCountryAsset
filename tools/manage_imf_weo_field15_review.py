@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate, validate, and explicitly apply the owner-reviewed IMF WEO field-15 package."""
 from __future__ import annotations
-import argparse, csv, hashlib, json, re, sqlite3, sys
+import argparse, csv, hashlib, io, json, re, sqlite3, sys
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -9,7 +9,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from tools.build_imf_weo_historical_candidate import build_candidate, write_candidate
+from tools.build_imf_weo_historical_candidate import build_candidate
 from tools.database.connection import DEFAULT_DATABASE_PATH, connect_database
 from tools.database.imf_weo_import import apply_application, decide_application_for_weo, prepare_application
 from tools.database.project_connection import DEFAULT_PROJECT_DATABASE_PATH, connect_project_database
@@ -330,6 +330,34 @@ def verify_game_database(candidate: Path, database: Path) -> dict[str, Any]:
     finally:
         con.close()
 
+def write_deterministic_candidate(observations: list[dict[str, Any]], exceptions: list[dict[str, Any]], summary: dict[str, Any]) -> Path:
+    """Write a stable candidate path so retries reproduce the same approval fingerprint."""
+    target = CANDIDATE_ROOT / "candidate"
+    target.mkdir(parents=True, exist_ok=True)
+    def csv_bytes(rows: list[dict[str, Any]]) -> bytes:
+        fields = list(dict.fromkeys(key for row in rows for key in row))
+        stream = io.StringIO(newline="")
+        writer = csv.DictWriter(stream, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+        return stream.getvalue().encode("utf-8")
+    obs_bytes, exc_bytes = csv_bytes(observations), csv_bytes(exceptions)
+    candidate_summary = dict(summary)
+    candidate_summary["candidate_directory"] = relative(target)
+    candidate_summary["observations_sha256"] = hashlib.sha256(obs_bytes).hexdigest()
+    candidate_summary["exceptions_sha256"] = hashlib.sha256(exc_bytes).hexdigest()
+    summary_bytes = (json.dumps(candidate_summary, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    expected = {"observations.csv": obs_bytes, "identity_exceptions.csv": exc_bytes, "candidate.json": summary_bytes}
+    for name, payload in expected.items():
+        output = target / name
+        if output.exists():
+            if output.read_bytes() != payload:
+                raise ReviewError(f"Existing deterministic candidate differs: {output}; refusing overwrite")
+        else:
+            output.write_bytes(payload)
+    return target
+
+
 def apply_review(path: Path, actor: str, database: Path, project_database: Path) -> dict[str, Any]:
     meta, rows, document = parse_review(path, True)
     validate_fingerprints(meta)
@@ -358,9 +386,12 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     }
     crosswalk["review_document"] = {"path": relative(path), "sha256": sha(path)}
     CANDIDATE_ROOT.mkdir(parents=True, exist_ok=True)
+    crosswalk_bytes = (json.dumps(crosswalk, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     if DERIVED_CROSSWALK.exists():
-        raise ReviewError(f"Refusing to overwrite derived crosswalk: {DERIVED_CROSSWALK}")
-    DERIVED_CROSSWALK.write_text(json.dumps(crosswalk, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if DERIVED_CROSSWALK.read_bytes() != crosswalk_bytes:
+            raise ReviewError("Existing derived crosswalk differs from this approved review; refusing overwrite")
+    else:
+        DERIVED_CROSSWALK.write_bytes(crosswalk_bytes)
     observations, exceptions, summary = build_candidate(
         RAW, REGISTRY, verify_snapshot=True, crosswalk_path=DERIVED_CROSSWALK, field_ids={15})
     decisions = {r["source_id"]: r for r in rows}
@@ -369,7 +400,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         if decision:
             exc["disposition"] = "excluded" if decision["decision"].upper() == "EXCLUDE" else "hold_for_evidence"
             exc["owner_rationale"] = decision["rationale"]
-    candidate = write_candidate(observations, exceptions, summary, CANDIDATE_ROOT)
+    candidate = write_deterministic_candidate(observations, exceptions, summary)
     prep = prepare_application(candidate, database_path=database, source_path=RAW,
         identity_path=REGISTRY, crosswalk_path=DERIVED_CROSSWALK,
         migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
