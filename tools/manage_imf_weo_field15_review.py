@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from tools.build_imf_weo_historical_candidate import build_candidate
 from tools.database.connection import DEFAULT_DATABASE_PATH
-from tools.database.imf_weo_import import apply_application, decide_application_for_weo, prepare_application
+from tools.database.imf_weo_import import WEOImportError, apply_application, decide_application_for_weo, prepare_application
 from tools.database.project_connection import DEFAULT_PROJECT_DATABASE_PATH
 
 AUTO = ROOT / "reports/sources/imf-weo-field15-identity-review/automatic/20261126T101015Z"
@@ -686,7 +686,7 @@ def main(argv: list[str] | None = None) -> int:
             result = validate_review(args.review, args.require_complete)
         else:
             result = apply_review(args.review, args.actor, args.database, args.project_database)
-    except (OSError, csv.Error, json.JSONDecodeError, sqlite3.Error, ReviewError, ValueError) as exc:
+    except (OSError, csv.Error, json.JSONDecodeError, sqlite3.Error, ReviewError, WEOImportError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
     print(json.dumps(result, ensure_ascii=False, indent=2))
