@@ -451,8 +451,13 @@ def verify_existing_observations_are_candidate_subset(candidate: Path, database:
                 f"({len(extras)} rows: {detail}). No approval or database write was made. "
                 "Resolve these legacy rows explicitly; this workflow will not delete or remap them."
             )
+        existing_by_code: dict[str, int] = {}
+        for row in existing:
+            code = row["source_country_code"]
+            existing_by_code[code] = existing_by_code.get(code, 0) + 1
         return {
             "existing_observation_rows": len(existing),
+            "existing_rows_by_source_code": dict(sorted(existing_by_code.items())),
             "existing_rows_outside_candidate": 0,
             "preflight_passed": True,
         }
@@ -571,7 +576,7 @@ def write_deterministic_candidate(observations: list[dict[str, Any]], exceptions
     return target
 
 
-def apply_review(path: Path, actor: str, database: Path, project_database: Path) -> dict[str, Any]:
+def apply_review(path: Path, actor: str, database: Path, project_database: Path, *, prepare_only: bool = False) -> dict[str, Any]:
     meta, rows, document = parse_review(path, True)
     validate_fingerprints(meta)
     validate_review_against_source_register(meta, rows, document)
@@ -648,6 +653,34 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     candidate = write_deterministic_candidate(observations, exceptions, summary, review_root / "candidate")
     canonical_identity_check = verify_candidate_game_ids(observations, database)
     existing_rows_check = verify_existing_observations_are_candidate_subset(candidate, database)
+    if prepare_only:
+        kos_candidate_count = sum(1 for row in observations if row["source_country_code"] == "KOS")
+        kos_existing_count = existing_rows_check["existing_rows_by_source_code"].get("KOS", 0)
+        if kos_existing_count != 32 or kos_candidate_count < kos_existing_count:
+            raise ReviewError(
+                "KOS legacy reconciliation did not find the expected 32 existing rows within the candidate: "
+                f"existing={kos_existing_count}, candidate={kos_candidate_count}"
+            )
+        report = {
+            "status": "prepared_no_database_write",
+            "candidate_directory": relative(candidate),
+            "derived_crosswalk": relative(derived_crosswalk),
+            "candidate_observations": len(observations),
+            "candidate_exceptions": len(exceptions),
+            "candidate_KOS_observations": kos_candidate_count,
+            "existing_observation_preflight": existing_rows_check,
+            "canonical_identity_preflight": canonical_identity_check,
+            "project_database_acquisition_verification": project_preflight,
+            "database_written": False,
+            "approval_created": False,
+            "original_crosswalk_modified": False,
+            "identity_registry_modified": False,
+            "observation_status_policy": "unclassified",
+        }
+        report_path = review_root / "prepare_only_report.json"
+        report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        report["prepare_only_report"] = relative(report_path)
+        return report
     prep = prepare_application(candidate, database_path=database,
         identity_path=REGISTRY, crosswalk_path=derived_crosswalk,
         migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
