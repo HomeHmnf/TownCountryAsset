@@ -23,43 +23,29 @@ Generation is read-only with respect to both databases. It creates no applicatio
 
 ## 2. Review the single Markdown file
 
-Review every proposal row. For each of the 195 new identity proposals:
+Do not edit 195 table rows manually. The bulk approval command below creates a separate, immutable approval copy, marks all 195 proposals APPROVE, copies each proposed game_id into its approved field, and records the owner's decision note on every row. It leaves KOS on HOLD.
 
-- Set Decision to `APPROVE`, `EXCLUDE`, or `HOLD`.
-- For `APPROVE`, copy the exact Proposed game_id into Approved game_id.
-- For `EXCLUDE` or `HOLD`, leave Approved game_id as `-`.
-- Enter a substantive Owner rationale for every decision.
-- Do not change source IDs, source names, series, proposed game IDs, registry names, M49 codes, evidence references, or batch numbers.
-
-The KOS row is prefilled as HOLD and must remain unmapped. WBG and the 13 aggregate exclusions are carried forward from their prior owner decisions; they are not re-proposed.
-
-At the top of the document, complete:
-
-- Owner actor — the approving identity.
-- Approval date — actual date in YYYY-MM-DD format.
-- Approval statement — explicit statement approving the completed field-15 decisions for application.
-
-The approval statement is a human owner decision. Do not fill it until the full review is complete.
+WBG and the 13 aggregate exclusions are reused from their prior owner decisions. The command does not modify the original review Markdown, original WBG crosswalk, or identity registry.
 
 ## 3. Validate the completed review
 
-After editing the Markdown file:
+First run the bulk command without write flags. This is a dry-run and validates all source fingerprints and all 195 proposal rows:
 
 ```fish
-uv run python tools/manage_imf_weo_field15_review.py validate-review --require-complete
+uv run python tools/approve_imf_weo_field15_all.py
 ```
 
-Validation checks the complete 196-row / ten-batch structure, all 195 source-derived proposal identities, exact proposed targets, owner decisions and rationales, KOS hold, and every captured input fingerprint. It performs no database writes.
+It must report 195 proposals to approve, reuse of WBG and aggregate decisions, KOS held, and no database write.
 
 ## 4. Explicitly approve, apply, and verify
 
-Only after the Markdown review has been inspected and approved by the project owner, run:
+After inspecting the dry-run summary, explicitly authorize the complete proposal set with one command:
 
 ```fish
-uv run python tools/manage_imf_weo_field15_review.py apply-reviewed --actor "project-owner"
+uv run python tools/approve_imf_weo_field15_all.py --apply --confirm-all-proposals --actor "project-owner" --note "I approve all 195 source-derived IMF WEO October 2026 NGDPD identity proposals for WP1.5 field 15 only."
 ```
 
-The `--actor` value must exactly match the Owner actor in the Markdown document. This is the sole write command. It:
+This is the sole bulk approval and application command. The actor and note are recorded in the generated review artifact and application approval ledger. It:
 
 1. Revalidates the Markdown decisions and immutable source fingerprints.
 2. Creates a versioned, derived IMF WEO crosswalk containing the existing WBG mapping plus only the rows marked APPROVE. The original manual crosswalk is not modified.
