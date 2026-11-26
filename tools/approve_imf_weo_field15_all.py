@@ -98,7 +98,7 @@ def build_bulk_approved_document(document: str, *, actor: str, note: str, approv
 
 
 def run(*, review: Path, actor: str | None, note: str | None, apply: bool,
-        confirm_all: bool, database: Path, project_database: Path) -> dict:
+        prepare_only: bool, confirm_all: bool, database: Path, project_database: Path) -> dict:
     meta, rows, document = parse_review(review, False)
     validate_fingerprints(meta)
     validate_review_against_source_register(meta, rows, document)
@@ -108,23 +108,26 @@ def run(*, review: Path, actor: str | None, note: str | None, apply: bool,
             f"Bulk approval expects the untouched 195-pending-proposal review plus KOS hold; "
             f"found {len(pending)} pending proposals across {len(rows)} rows"
         )
-    if not apply:
+    if apply and prepare_only:
+        raise ReviewError("Choose either --apply or --prepare-only, not both")
+    if not apply and not prepare_only:
         return {
             "status": "dry_run",
             "proposal_rows_to_approve": len(pending),
             "existing_wbg_mapping_reused": True,
+            "existing_kos_mapping_reused": True,
             "aggregate_exclusions_reused": 13,
             "aggregate_populated_values_excluded": 665,
-            "kos_remains_held": True,
+            "kos_mapping_approved_and_reused": True,
             "fingerprints_valid": True,
             "database_written": False,
             "approval_created": False,
-            "next_step": "Rerun with --apply --confirm-all-proposals --actor and --note after reviewing this summary.",
+            "next_step": "Run with --prepare-only --confirm-all-proposals --actor and --note to build and preflight the candidate without database writes.",
         }
     if not confirm_all:
-        raise ReviewError("--apply requires --confirm-all-proposals as explicit owner authorization")
+        raise ReviewError("--apply/--prepare-only requires --confirm-all-proposals as explicit owner authorization")
     if not actor or not note:
-        raise ReviewError("--apply requires --actor and --note")
+        raise ReviewError("--apply/--prepare-only requires --actor and --note")
     approval_date = date.today().isoformat()
     approved_document, count = build_bulk_approved_document(
         document, actor=actor, note=note, approval_date=approval_date
@@ -138,9 +141,9 @@ def run(*, review: Path, actor: str | None, note: str | None, apply: bool,
     else:
         output.write_text(approved_document, encoding="utf-8")
     validation = validate_review(output, True)
-    result = apply_review(output, actor, database, project_database)
+    result = apply_review(output, actor, database, project_database, prepare_only=prepare_only)
     return {
-        "status": "applied",
+        "status": "prepared" if prepare_only else "applied",
         "bulk_approved_proposals": count,
         "owner_actor": actor,
         "owner_approval_date": approval_date,
@@ -158,7 +161,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--project-database", type=Path, default=DEFAULT_PROJECT_DATABASE_PATH)
     parser.add_argument("--actor", help="Owner identity recorded in the approval ledger")
     parser.add_argument("--note", help="Owner decision rationale for approving the complete proposal set")
-    parser.add_argument("--apply", action="store_true", help="Create approval and apply; otherwise dry-run only")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--apply", action="store_true", help="Create database approval and apply observations")
+    mode.add_argument("--prepare-only", action="store_true", help="Build candidate and run read-only preflight; create no database approval or writes")
     parser.add_argument(
         "--confirm-all-proposals", action="store_true",
         help="Explicitly attest that all 195 generated identity proposals are approved for field 15",
@@ -167,7 +172,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         result = run(
             review=args.review, actor=args.actor, note=args.note, apply=args.apply,
-            confirm_all=args.confirm_all_proposals, database=args.database,
+            prepare_only=args.prepare_only, confirm_all=args.confirm_all_proposals, database=args.database,
             project_database=args.project_database,
         )
     except (OSError, ValueError, ReviewError, WEOImportError, ApplicationApprovalError, sqlite3.Error, csv.Error, json.JSONDecodeError) as exc:
@@ -175,6 +180,8 @@ def main(argv: list[str] | None = None) -> int:
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
     if result["status"] == "dry_run":
         print("Dry run only. No approval or database changes were made.")
+    elif result["status"] == "prepared":
+        print("Candidate prepared and read-only preflight completed. No database approval or database writes were made.")
     else:
         print("Bulk owner approval and field-15 application completed; inspect the verification report.")
     return 0
