@@ -299,3 +299,23 @@ The 32 pre-existing KOS observations were reconciled as part of the successful p
 Project DB acquisition ID 5 was independently verified: both recorded source artifacts matched their byte counts and SHA-256 fingerprints, and Project DB SQLite integrity and foreign-key checks passed. The Project DB remains the acquisition/provenance ledger; observation rows reside in the Game DB, not duplicated in the Project DB. No Project DB write was performed by this application.
 
 All observation statuses remain `unclassified`, and the dataset import ledger remains `candidate`; the field-scoped application approval is `applied`. This establishes completion of the field-15 identity-review, candidate-approval, application and technical-verification stages. It does not establish semantic classification of the observations. Do not advance to field 16 until any separately required field-level semantic review and closure documentation are complete.
+
+
+
+## 20. Independent local field-15 database presence check — 2026-11-26
+
+The project owner ran the read-only SQLite verification command against the local canonical Game DB after synchronizing the documentation and application result. The returned result was **PASS**.
+
+Verified directly in the database:
+
+- 9,361 field-15 / NGDPD observations.
+- 197 distinct game IDs and 197 distinct IMF source-country codes.
+- Observation-year range 1980–2031.
+- Zero observations with a status other than `unclassified`.
+- Zero source-checksum mismatches.
+- Exactly one dataset import ID (3).
+- Application approval `imf-weo-oct2026-1eb2e784bf93821c` has status `applied`.
+- Dataset import ID 3 remains `candidate`.
+- SQLite `integrity_check=ok`; zero foreign-key violations.
+
+All eleven command checks returned true. This independently confirms that the expected field-15 observation rows exist in the local Game DB and that their recorded provenance and database integrity checks pass. It does not semantically classify the observations or change the dataset import status. The field-15 semantic review/closure gate remains outstanding; field 16 must not start until that gate is satisfied and documented.
