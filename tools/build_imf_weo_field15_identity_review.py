@@ -590,7 +590,7 @@ def build_review(
             f"series and {sum(int(row['populated_year_count']) for row in aggregates)} values"
         )
     if len(country_rows) != 197 or sum(row["classification"] == "proposal" for row in country_rows) != 195:
-        raise IdentityReviewError("Expected 195 proposal identities plus the separately approved WBG identity")
+        raise IdentityReviewError("Expected 195 proposal identities plus the separately approved WBG and KOS identities")
     if len(exceptions) != 1 or exceptions[0].get("source_country_code") != "KOS" or exceptions[0].get("disposition") != "approved_mapping":
         raise IdentityReviewError("Expected exactly one documented, owner-approved KOS/UVK mapping qualification")
 
@@ -779,7 +779,7 @@ def write_outputs(result: dict[str, Any], output_root: Path = OUTPUT_ROOT, now: 
         f"| Source identities | {summary['source_identity_count']} |",
         f"| Aggregate exclusions | {summary['aggregate_exclusion_count']} |",
         f"| Individual economies | {summary['individual_economy_count']} |",
-        f"| Existing WBG approved crosswalk | {summary['existing_approved_crosswalk_count']} |",
+        f"| Existing WBG/KOS approved crosswalk | {summary['existing_approved_crosswalk_count']} |",
         f"| Proposal-only mappings | {summary['proposal_count']} |",
         f"| Held identities | {summary['held_identity_count']} |",
         f"| Owner-approved new mappings | {summary['owner_approved_proposal_count']} |",
