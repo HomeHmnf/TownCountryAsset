@@ -42,7 +42,7 @@ def test_bulk_builder_approves_every_proposal_and_preserves_kos_hold():
     assert "- Approval date (YYYY-MM-DD): 2026-11-26" in result
     assert result.count("| APPROVE |") == 195
     assert result.count("| HOLD |") == 1
-    assert result.count("| tc_") == 195
+    assert result.count("| tc_") == 390
     assert note in result
 
 
