@@ -3,7 +3,7 @@
 
 No manually prepared identity inventory, batch register, or exclusion register is
 read. Inputs are the immutable IMF WEO CSV/Appendix, the UN M49 HTML snapshot,
-the canonical identity registry, and the separately approved WBG crosswalk.
+the canonical identity registry, and the separately owner-approved WBG/KOS crosswalk.
 
 The tool generates proposal-only review artifacts. It never approves mappings
 or writes to the registry, crosswalk, Project DB, or Game DB.
@@ -220,20 +220,27 @@ def read_weo_ngdpd_inventory(path: Path, *, expected_count: int = 210) -> list[d
 def _validate_wbg_crosswalk(crosswalk: dict[str, Any], registry_by_id: dict[str, dict[str, Any]]) -> str:
     approval = crosswalk.get("review_approval", {})
     mappings = crosswalk.get("mappings", [])
-    if approval.get("status") != "approved" or len(mappings) != 1:
-        raise IdentityReviewError("WBG must remain the sole owner-approved IMF WEO crosswalk mapping")
-    mapping = mappings[0]
-    if mapping.get("source_id") != "WBG":
-        raise IdentityReviewError("The sole approved IMF WEO crosswalk entry is not WBG")
-    game_id = mapping.get("game_id")
-    target = registry_by_id.get(game_id)
-    if game_id != "tc_50c420df8b2c4c6eaae47d795f9a1ea2" or target is None:
-        raise IdentityReviewError("WBG crosswalk target differs from the recorded owner approval")
-    if target.get("names", {}).get("en") != "Palestine":
-        raise IdentityReviewError("WBG crosswalk target no longer resolves to the Palestine registry record")
+    if approval.get("status") != "approved" or len(mappings) != 2:
+        raise IdentityReviewError("IMF WEO crosswalk must contain exactly the two owner-approved WBG and KOS mappings")
+    by_source = {item.get("source_id"): item for item in mappings}
+    if set(by_source) != {"WBG", "KOS"}:
+        raise IdentityReviewError("Only the owner-approved WBG and KOS source identities may be mapped")
+    expected = {
+        "WBG": ("tc_50c420df8b2c4c6eaae47d795f9a1ea2", "Palestine"),
+        "KOS": ("tc_28aa17b84db24952b92fc51b421075e0", "Kosovo"),
+    }
+    for source_id, (expected_id, expected_name) in expected.items():
+        mapping = by_source[source_id]
+        target = registry_by_id.get(mapping.get("game_id"))
+        if mapping.get("game_id") != expected_id or target is None:
+            raise IdentityReviewError(f"{source_id} crosswalk target differs from its recorded owner approval")
+        if target.get("names", {}).get("en") != expected_name:
+            raise IdentityReviewError(f"{source_id} target no longer resolves to {expected_name}")
+        if mapping.get("match_method") != "reviewed_manual":
+            raise IdentityReviewError(f"{source_id} must use reviewed_manual matching")
     if "Field 15" not in approval.get("scope", ""):
-        raise IdentityReviewError("WBG approval is not explicitly scoped to field 15")
-    return game_id
+        raise IdentityReviewError("WBG/KOS approval is not explicitly scoped to field 15")
+    return by_source["WBG"]["game_id"]
 
 
 def _registry_m49_name_index(
@@ -431,7 +438,9 @@ def build_review(
     registry_by_id = {row.get("game_id"): row for row in registry_records}
     if len(registry_by_id) != len(registry_records):
         raise IdentityReviewError("Canonical registry contains duplicate or missing persistent game IDs")
-    approved_wbg_id = _validate_wbg_crosswalk(_read_json(crosswalk_path), registry_by_id)
+    approved_crosswalk = _read_json(crosswalk_path)
+    approved_wbg_id = _validate_wbg_crosswalk(approved_crosswalk, registry_by_id)
+    approved_kos_id = next(item["game_id"] for item in approved_crosswalk["mappings"] if item["source_id"] == "KOS")
 
     registry_by_m49, ambiguous_m49 = _registry_m49_name_index(registry_records, m49_rows)
     registry_by_exact_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -488,22 +497,10 @@ def build_review(
                 raise IdentityReviewError("Expected KOS source code versus UVK Appendix code discrepancy")
             if "kosovo" not in normalize_name(source_name):
                 raise IdentityReviewError("KOS source row no longer identifies Kosovo")
-            exceptions.append({
-                "source_country_code": source_id,
-                "source_country_name": source_name,
-                "series_code": item["series_code"],
-                "exception": "imf_appendix_code_discrepancy",
-                "candidate_game_ids": "",
-                "disposition": "hold_for_evidence",
-                "rationale": (
-                    "WEO source inventory uses KOS, while the October 2026 IMF Appendix Country Data "
-                    "Documentation identifies Kosovo as UVK. UN M49 FAQ permits statistical-use code 412, "
-                    "but the source-code discrepancy remains unresolved. Preserve the existing hold; no "
-                    "game_id or M49 code is proposed."
-                ),
-                "evidence_reference": IMF_PDF_URL + ";" + M49_FAQ_URL,
+            country_rows.append({
+                **item, "classification": "approved_existing_crosswalk",
+                "game_id": approved_kos_id, "registry_name": "Kosovo", "m49_code": "",
             })
-            country_rows.append({**item, "classification": "hold_for_evidence"})
             continue
 
         if source_id not in appendix_codes:
@@ -580,8 +577,8 @@ def build_review(
         )
     if len(country_rows) != 197 or sum(row["classification"] == "proposal" for row in country_rows) != 195:
         raise IdentityReviewError("Expected 195 proposal identities plus the separately approved WBG identity")
-    if len(exceptions) != 1 or exceptions[0]["source_country_code"] != "KOS":
-        raise IdentityReviewError("Expected KOS to be the only held identity exception")
+    if exceptions:
+        raise IdentityReviewError("No identity exceptions are expected for the owner-approved WBG/KOS mappings")
 
     review_rows: list[dict[str, str]] = []
     for item in country_rows:
@@ -591,7 +588,7 @@ def build_review(
         evidence = item.pop("_evidence", "")
         match_note = item.pop("_match_note", "")
         source_id = item["source_id"]
-        is_hold = source_id == "KOS"
+        is_hold = False
         review_rows.append({
             "field_id": "15",
             "indicator_code": "NGDPD",
@@ -607,11 +604,11 @@ def build_review(
             "triage_entity_type": triage.get("triage_entity_type", ""),
             "triage_iso_assignment_status": triage.get("triage_iso_assignment_status", ""),
             "exact_normalized_name_match": triage.get("exact_normalized_name_match", "false"),
-            "independent_evidence_reference": evidence if not is_hold else IMF_PDF_URL + ";" + M49_FAQ_URL,
-            "review_outcome": "hold_for_evidence" if is_hold else "proposed_manual_review",
+            "independent_evidence_reference": evidence,
+            "review_outcome": "proposed_manual_review",
             "approved_game_id": "",
-            "owner_decision": "" if is_hold else "pending_explicit_owner_approval",
-            "review_notes": exceptions[0]["rationale"] if is_hold else (
+            "owner_decision": "pending_explicit_owner_approval",
+            "review_notes": (
                 "Automatically generated proposal; not owner-approved. "
                 "Identity chain: IMF WEO source code -> October 2026 IMF Appendix ISO Code -> "
                 "UN M49 ISO-alpha3/M49 row -> canonical registry target by M49 English name. "
@@ -624,8 +621,8 @@ def build_review(
         })
 
     review_rows.sort(key=lambda row: row["source_id"])
-    if len(review_rows) != 196:
-        raise IdentityReviewError(f"Expected 196 review identities excluding aggregates and WBG; found {len(review_rows)}")
+    if len(review_rows) != 195:
+        raise IdentityReviewError(f"Expected 195 new proposal identities excluding aggregates, WBG and KOS; found {len(review_rows)}")
     proposal_ids = [row["reviewed_proposed_game_id"] for row in review_rows if row["reviewed_proposed_game_id"]]
     if len(proposal_ids) != 195 or len(set(proposal_ids)) != 195:
         raise IdentityReviewError("Expected 195 unique persistent game_id proposals")
@@ -647,7 +644,7 @@ def build_review(
         elif source_id == "WBG":
             classification = "approved_existing_crosswalk"
         elif source_id == "KOS":
-            classification = "hold_for_evidence"
+            classification = "approved_existing_crosswalk"
         else:
             classification = "proposal"
         inventory_output.append({
@@ -674,11 +671,11 @@ def build_review(
             "source_identity_count": len(inventory),
             "aggregate_exclusion_count": len(aggregates),
             "individual_economy_count": len(country_rows),
-            "existing_approved_crosswalk_count": 1,
+            "existing_approved_crosswalk_count": 2,
             "proposal_count": len(proposal_ids),
             "unique_proposed_game_ids": len(set(proposal_ids)),
-            "held_identity_count": len(exceptions),
-            "held_source_ids": ["KOS"],
+            "held_identity_count": 0,
+            "held_source_ids": [],
             "owner_approved_proposal_count": 0,
             "batch_size": 20,
             "batch_count": math.ceil(len(review_rows) / 20),
