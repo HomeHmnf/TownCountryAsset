@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import sqlite3
 import subprocess
 import sys
 from pathlib import Path
@@ -15,6 +16,7 @@ from tools.manage_imf_weo_field15_review import (
     SEPARATOR,
     ReviewError,
     parse_review,
+    verify_existing_observations_are_candidate_subset,
 )
 
 
@@ -121,3 +123,72 @@ def test_cli_help_runs_outside_repository_without_pythonpath(tmp_path: Path):
     assert "generate-review" in completed.stdout
     assert "validate-review" in completed.stdout
     assert "apply-reviewed" in completed.stdout
+
+
+
+def _write_candidate_fixture(directory: Path) -> None:
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "observations.csv").write_text(
+        "game_id,indicator_code,observation_year\\n"
+        "tc_" + "a" * 32 + ",NGDPD,2000\\n",
+        encoding="utf-8",
+    )
+    (directory / "candidate.json").write_text(
+        json.dumps({"source_sha256": "a" * 64}),
+        encoding="utf-8",
+    )
+
+
+def _write_existing_observations_db(path: Path, *, extra_kos: bool) -> None:
+    connection = sqlite3.connect(path)
+    try:
+        connection.execute(
+            """CREATE TABLE imf_weo_historical_observations (
+                game_id TEXT, source_country_code TEXT, indicator_code TEXT,
+                observation_year INTEGER, source_version TEXT, source_sha256 TEXT,
+                field_id INTEGER
+            )"""
+        )
+        connection.execute(
+            """INSERT INTO imf_weo_historical_observations VALUES
+               (?, ?, ?, ?, ?, ?, ?)""",
+            (
+                "tc_" + "a" * 32, "AAA", "NGDPD", 2000,
+                "October 2026 / IMF.RES_WEO_9.0.0", "a" * 64, 15,
+            ),
+        )
+        if extra_kos:
+            connection.execute(
+                """INSERT INTO imf_weo_historical_observations VALUES
+                   (?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    "tc_" + "b" * 32, "KOS", "NGDPD", 2001,
+                    "October 2026 / IMF.RES_WEO_9.0.0", "a" * 64, 15,
+                ),
+            )
+        connection.commit()
+    finally:
+        connection.close()
+
+
+def test_existing_legacy_rows_outside_candidate_block_before_application(tmp_path: Path):
+    candidate = tmp_path / "candidate"
+    database = tmp_path / "game.sqlite"
+    _write_candidate_fixture(candidate)
+    _write_existing_observations_db(database, extra_kos=True)
+
+    with pytest.raises(ReviewError, match="KOS:1"):
+        verify_existing_observations_are_candidate_subset(candidate, database)
+
+
+def test_existing_rows_that_are_candidate_subset_pass_preflight(tmp_path: Path):
+    candidate = tmp_path / "candidate"
+    database = tmp_path / "game.sqlite"
+    _write_candidate_fixture(candidate)
+    _write_existing_observations_db(database, extra_kos=False)
+
+    result = verify_existing_observations_are_candidate_subset(candidate, database)
+
+    assert result["existing_observation_rows"] == 1
+    assert result["existing_rows_outside_candidate"] == 0
+    assert result["preflight_passed"] is True
