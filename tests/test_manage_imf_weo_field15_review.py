@@ -24,54 +24,36 @@ from tools.manage_imf_weo_field15_review import (
 FIXED_DECISIONS = {
     "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
     "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
-    "KOS": "Preserve hold_for_evidence; no identity mapping.",
+    "KOS": "Reuse owner-approved IMF WEO KOS-to-Kosovo mapping; field 15 only; document KOS/UVK discrepancy.",
 }
 
 
 def _review_text(*, first_decision: str = "PENDING", first_approved_id: str = "-") -> str:
     metadata = {
-        "schema_version": 1,
-        "field_id": 15,
-        "indicator_code": "NGDPD",
+        "schema_version": 1, "field_id": 15, "indicator_code": "NGDPD",
         "fixed_decisions": FIXED_DECISIONS,
     }
     lines = [
         "# IMF WEO October 2026 — field 15 / NGDPD owner review",
         "WBG maps to tc_50c420df8b2c4c6eaae47d795f9a1ea2 (Palestine).",
+        "KOS / Kosovo maps to tc_28aa17b84db24952b92fc51b421075e0 (Kosovo).",
+        "KOS/UVK source-code discrepancy acknowledged; field 15 only.",
         "Total: 13 aggregate series and 665 populated annual values.",
-        META_OPEN,
-        json.dumps(metadata),
-        META_CLOSE,
-        HEADER,
-        SEPARATOR,
+        META_OPEN, json.dumps(metadata), META_CLOSE, HEADER, SEPARATOR,
     ]
-    sources = []
-    for i in range(196):
-        if i == 80:
-            source_id = "KOS"
-        else:
-            n = i if i < 80 else i - 1
-            source_id = f"X{n:02d}"
-        sources.append(source_id)
-    for i, source_id in enumerate(sources):
+    for i in range(195):
+        source_id = f"X{i:03d}"
         batch = f"{i // 20 + 1:02d}"
-        if source_id == "KOS":
-            values = [
-                batch, source_id, "Kosovo", "KOS.NGDPD.A", "52 (1980–2031)",
-                "-", "-", "-", "IMF Appendix; UN M49", "KOS / UVK discrepancy",
-                "HOLD", "-", "KOS and UVK source codes remain unresolved.",
-            ]
-        else:
-            proposed = "tc_" + f"{i:032x}"
-            decision = first_decision if i == 0 else "PENDING"
-            approved = first_approved_id if i == 0 else "-"
-            rationale = "Owner-reviewed identity rationale." if i == 0 and decision != "PENDING" else ""
-            values = [
-                batch, source_id, f"Example {source_id}", f"{source_id}.NGDPD.A",
-                "52 (1980–2031)", proposed, f"Registry {source_id}", "001",
-                "https://example.org/imf;https://example.org/m49",
-                "IMF Appendix to M49 to canonical registry", decision, approved, rationale,
-            ]
+        proposed = "tc_" + f"{i:032x}"
+        decision = first_decision if i == 0 else "PENDING"
+        approved = first_approved_id if i == 0 else "-"
+        rationale = "Owner-reviewed identity rationale." if i == 0 and decision != "PENDING" else ""
+        values = [
+            batch, source_id, f"Example {source_id}", f"{source_id}.NGDPD.A",
+            "52 (1980–2031)", proposed, f"Registry {source_id}", "001",
+            "https://example.org/imf;https://example.org/m49",
+            "IMF Appendix to M49 to canonical registry", decision, approved, rationale,
+        ]
         lines.append("| " + " | ".join(values) + " |")
     return "\n".join(lines) + "\n"
 
@@ -84,8 +66,7 @@ def test_parse_review_accepts_pending_195_identity_register(tmp_path: Path):
 
     assert metadata["field_id"] == 15
     assert metadata["indicator_code"] == "NGDPD"
-    assert len(rows) == 196
-    assert sum(row["source_id"] == "KOS" for row in rows) == 1
+    assert len(rows) == 195
     assert sum(row["decision"] == "PENDING" for row in rows) == 195
 
 
