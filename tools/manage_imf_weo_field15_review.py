@@ -130,7 +130,7 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         "# IMF WEO October 2026 — field 15 / NGDPD owner review", "",
         "This is the single authoritative review document for all ten batches.", "",
         "- Scope: WP1.5 field 15 / NGDPD / IMF WEO October 2026 only.",
-        "- 195 proposed mappings in ten batches (20 identities per batch, final batch 10 has 16).",
+        "- 195 proposed mappings in ten batches (20 identities per batch, final batch 10 has 15).",
         "- Existing WBG and KOS crosswalk approvals, plus 13 aggregate exclusions, are carried forward.",
         "- Every new identity requires an explicit owner decision and rationale.",
         "- APPROVE requires Approved game_id to equal Proposed game_id exactly.",
@@ -198,7 +198,7 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         "- No PENDING decisions may remain when applying.", "",
         "## Immutable input fingerprints", "", META_OPEN,
         json.dumps(metadata, ensure_ascii=False, indent=2, sort_keys=True), META_CLOSE, "",
-        "Generation is review-only: no approval record, database write, registry change, or original crosswalk change.",
+        "Generation is review-only: no approval record, database write, registry change, or crosswalk modification.",
     ]
     output = output.resolve()
     if output.exists():
@@ -332,7 +332,7 @@ def validate_review_against_source_register(meta: dict[str, Any], rows: list[dic
     if set(proposals) != {r["source_id"] for r in rows}:
         raise ReviewError("Markdown source identities differ from the automatic source register")
     exclusion_rows = read_csv(auto_dir / "field_15_exclusion_register.csv")
-    aggregate_section = document.split("### Aggregate exclusions — existing owner decision", 1)[-1].split("### KOS — existing hold", 1)[0]
+    aggregate_section = document.split("### Aggregate exclusions — existing owner decision", 1)[-1].split("## New identity decisions", 1)[0]
     for item in exclusion_rows:
         values = [item["source_country_code"], item["source_country_name"], item["series_code"],
                   item["populated_year_count"],
