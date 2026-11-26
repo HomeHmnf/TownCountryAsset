@@ -139,7 +139,7 @@ def parse_imf_appendix_codes(text: str, source_codes: set[str]) -> tuple[set[str
     return codes, pages
 
 
-def read_weo_ngdpd_inventory(path: Path) -> list[dict[str, str]]:
+def read_weo_ngdpd_inventory(path: Path, *, expected_count: int = 210) -> list[dict[str, str]]:
     """Derive the full field-15 identity inventory directly from the WEO CSV."""
     _, raw_rows = _read_csv(path)
     if not raw_rows:
@@ -198,8 +198,8 @@ def read_weo_ngdpd_inventory(path: Path) -> list[dict[str, str]]:
         })
 
     inventory.sort(key=lambda row: row["source_id"])
-    if len(inventory) != 210 or len({row["source_id"] for row in inventory}) != 210:
-        raise IdentityReviewError(f"Expected 210 unique NGDPD annual source identities; found {len(inventory)}")
+    if len(inventory) != expected_count or len({row["source_id"] for row in inventory}) != expected_count:
+        raise IdentityReviewError(f"Expected {expected_count} unique NGDPD annual source identities; found {len(inventory)}")
     return inventory
 
 
@@ -443,6 +443,7 @@ def build_review(
                 ),
                 "evidence_reference": IMF_PDF_URL + ";" + M49_FAQ_URL,
             })
+            country_rows.append({**item, "classification": "hold_for_evidence"})
             continue
 
         if source_id not in appendix_codes:
@@ -517,7 +518,7 @@ def build_review(
             f"Expected 13 IMF aggregate series and 665 populated values; found {len(aggregates)} "
             f"series and {sum(int(row['populated_year_count']) for row in aggregates)} values"
         )
-    if len(country_rows) != 196 or sum(row["classification"] == "proposal" for row in country_rows) != 195:
+    if len(country_rows) != 197 or sum(row["classification"] == "proposal" for row in country_rows) != 195:
         raise IdentityReviewError("Expected 195 proposal identities plus the separately approved WBG identity")
     if len(exceptions) != 1 or exceptions[0]["source_country_code"] != "KOS":
         raise IdentityReviewError("Expected KOS to be the only held identity exception")
