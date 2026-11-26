@@ -126,4 +126,4 @@ Run the focused tests:
 uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_identity_review.py
 ```
 
-The tests cover raw CSV inventory derivation, IMF Appendix code parsing, KOS/UVK detection, M49-name-only registry matching, WBG crosswalk exclusivity, and one-run generation of all ten cumulative batches.
+The tests cover raw CSV inventory derivation, IMF Appendix code parsing, KOS/UVK detection, M49 FAQ statistical-code validation, M49-name-only registry matching, WBG crosswalk exclusivity, and one-run generation of all ten cumulative batches.
