@@ -42,12 +42,13 @@ It refuses to overwrite an existing run directory.
 3. UN Statistics Division M49 HTML snapshot and acquisition manifest:
    `raw_data/sources/un_m49/country_area_overview_html/2026-10-current/m49-country-area-overview.html`
    `data_manifests/sources/un_m49/country_area_overview_html/2026-10-current.json`
-4. Read-only canonical registry:
+4. Official UN M49 FAQ, fetched during each run, validated for statistical-use codes 158 and 412, and saved with a timestamp and SHA-256 in the output directory.
+5. Read-only canonical registry:
    `config/country_identity_registry.json`
-5. Existing explicit owner-approved WBG-only crosswalk:
+6. Existing explicit owner-approved WBG-only crosswalk:
    `data/manual/source_crosswalks/imf_weo.json`
 
-The tool parses the M49 HTML snapshot with the existing project M49 parser. It does not use the manually generated M49 identity-review reports or the ten field-15 batch registers as source inputs.
+The tool parses the M49 HTML snapshot with the existing project M49 parser and retrieves the official FAQ separately. It does not use the manually generated M49 identity-review reports or the ten field-15 batch registers as source inputs.
 
 ## Automated reconciliation
 
@@ -87,6 +88,7 @@ Each run writes:
 - `identity_exceptions.csv` — KOS hold and evidence rationale;
 - `field_15_identity_review_register_batch01.csv` through `field_15_identity_review_register_batch10.csv` — all ten cumulative batches, generated in one run;
 - `field_15_identity_review_register_final.csv` — final 196-row review register;
+- `m49_faq_snapshot.html` and `m49_faq_provenance.json` — the live official FAQ evidence and its retrieval fingerprint.
 - `summary.json` and `summary.md` — counts, source fingerprints, validation and governance status.
 
 Expected October 2026 result:
