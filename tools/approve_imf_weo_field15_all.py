@@ -8,9 +8,11 @@ never modified; a fingerprinted, generated approval copy is retained.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import re
+import sqlite3
 import sys
 from datetime import date
 from pathlib import Path
@@ -31,6 +33,8 @@ from tools.manage_imf_weo_field15_review import (
     validate_review,
     validate_review_against_source_register,
 )
+from tools.database.application_approval import ApplicationApprovalError
+from tools.database.imf_weo_import import WEOImportError
 from tools.database.connection import DEFAULT_DATABASE_PATH
 from tools.database.project_connection import DEFAULT_PROJECT_DATABASE_PATH
 
@@ -166,7 +170,7 @@ def main(argv: list[str] | None = None) -> int:
             confirm_all=args.confirm_all_proposals, database=args.database,
             project_database=args.project_database,
         )
-    except (OSError, ValueError, ReviewError) as exc:
+    except (OSError, ValueError, ReviewError, WEOImportError, ApplicationApprovalError, sqlite3.Error, csv.Error, json.JSONDecodeError) as exc:
         parser.exit(1, f"IMF WEO field-15 bulk approval failed: {exc}\n")
     print(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True))
     if result["status"] == "dry_run":
