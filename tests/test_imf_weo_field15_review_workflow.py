@@ -19,47 +19,40 @@ from tools.manage_imf_weo_field15_review import (
 
 def make_review(tmp_path: Path, *, decision: str = "PENDING", approved: str = "-") -> Path:
     metadata = {
-        "schema_version": 1,
-        "field_id": 15,
-        "indicator_code": "NGDPD",
+        "schema_version": 1, "field_id": 15, "indicator_code": "NGDPD",
         "automatic_review_directory": "reports/sources/example",
         "input_fingerprints": {},
         "fixed_decisions": {
             "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
             "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
-            "KOS": "Preserve hold_for_evidence; no identity mapping.",
+            "KOS": "Reuse owner-approved IMF WEO KOS-to-Kosovo mapping; field 15 only; document KOS/UVK discrepancy.",
         },
     }
     lines = [
-        "# IMF WEO October 2026 — field 15 / NGDPD owner review",
-        "",
+        "# IMF WEO October 2026 — field 15 / NGDPD owner review", "",
         "- Owner actor: PENDING",
         "- Approval date (YYYY-MM-DD): PENDING",
-        "- Approval statement: PENDING",
-        "",
-        "## Reused prior owner decisions",
-        "",
-        "- WBG: `tc_50c420df8b2c4c6eaae47d795f9a1ea2` — existing approved mapping, field 15 only.",
-        "- Aggregates: 13 excluded series, 665 populated annual values.",
-        "",
-        HEADER,
-        SEPARATOR,
+        "- Approval statement: PENDING", "",
+        "## Reused prior owner decisions", "",
+        "- WBG / West Bank and Gaza maps to tc_50c420df8b2c4c6eaae47d795f9a1ea2 (Palestine).",
+        "- KOS / Kosovo maps to tc_28aa17b84db24952b92fc51b421075e0 (Kosovo).",
+        "- KOS/UVK source-code discrepancy acknowledged; no ISO/M49 assignment is made.",
+        "- Aggregates: 13 excluded series, 665 populated annual values.", "",
+        HEADER, SEPARATOR,
     ]
-    for index in range(196):
-        source_id = "KOS" if index == 100 else f"X{index:03d}"
+    for index in range(195):
+        source_id = f"X{index:03d}"
         batch = index // 20 + 1
-        if source_id == "KOS":
-            values = [f"{batch:02d}", source_id, "Kosovo", "KOS.NGDPD.A", "52",
-                      "-", "-", "-", "IMF;UN", "Existing source-code discrepancy; retain the established evidence hold.",
-                      "HOLD", "-", "Retain the established evidence hold."]
-        else:
-            row_decision = decision if index == 0 else "PENDING"
-            approved_id = approved if index == 0 else "-"
-            values = [f"{batch:02d}", source_id, source_id, source_id + ".NGDPD.A", "52",
-                      "tc_" + f"{index:032x}", "Registry " + source_id, "001", "https://example.org/evidence",
-                      "IMF-to-M49 evidence chain and registry reconciliation.", row_decision, approved_id,
-                      "Owner reviewed the independent identity evidence and recorded this disposition."
-                      if row_decision != "PENDING" else ""]
+        row_decision = decision if index == 0 else "PENDING"
+        approved_id = approved if index == 0 else "-"
+        values = [
+            f"{batch:02d}", source_id, source_id, source_id + ".NGDPD.A", "52",
+            "tc_" + f"{index:032x}", "Registry " + source_id, "001",
+            "https://example.org/evidence", "IMF-to-M49 evidence chain and registry reconciliation.",
+            row_decision, approved_id,
+            "Owner reviewed the independent identity evidence and recorded this disposition."
+            if row_decision != "PENDING" else "",
+        ]
         lines.append("| " + " | ".join(values) + " |")
     lines += ["", META_OPEN, __import__("json").dumps(metadata), META_CLOSE]
     path = tmp_path / "review.md"
@@ -71,8 +64,7 @@ def test_parser_accepts_initial_pending_review(tmp_path: Path):
     path = make_review(tmp_path)
     metadata, rows, _ = parse_review(path, complete=False)
     assert metadata["field_id"] == 15
-    assert len(rows) == 196
-    assert sum(row["source_id"] != "KOS" for row in rows) == 195
+    assert len(rows) == 195
 
 
 def test_parser_rejects_pending_decisions_for_application(tmp_path: Path):
