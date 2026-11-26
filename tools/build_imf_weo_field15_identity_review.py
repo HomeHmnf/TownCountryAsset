@@ -25,10 +25,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+# Direct execution (python tools/script.py) puts the tools/ directory,
+# rather than the repository root, on sys.path. Establish the root before
+# importing sibling project modules so this CLI works without PYTHONPATH.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from tools.propose_iso_assignments import REVIEWED_NAME_VARIANTS, normalize_name
 from tools.sources.m49 import parse_m49_html
 
-ROOT = Path(__file__).resolve().parents[1]
 RAW_WEO = ROOT / "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv"
 IMF_PDF = ROOT / "raw_data/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf"
 IMF_TEXT = ROOT / "derived_data/pdf_text/sources/imf_weo/october_2026/October 2026 WEO Database Appendix.pdf.txt"
