@@ -272,7 +272,7 @@ def validate_fingerprints(meta: dict[str, Any]) -> None:
         if not path.is_file() or sha(path) != item["sha256"] or path.stat().st_size != item["byte_count"]:
             raise ReviewError(f"Reviewed source changed or missing: {key}")
 
-def validate_review_against_source_register(meta: dict[str, Any], rows: list[dict[str, str]]) -> None:
+def validate_review_against_source_register(meta: dict[str, Any], rows: list[dict[str, str]], document: str) -> None:
     auto_dir = ROOT / meta["automatic_review_directory"]
     source_rows = read_csv(auto_dir / "field_15_identity_review_register_final.csv")
     if len(source_rows) != 196:
@@ -311,12 +311,26 @@ def validate_review_against_source_register(meta: dict[str, Any], rows: list[dic
             raise ReviewError(f"Registry target or M49 evidence changed for {row['source_id']}")
     if set(proposals) != {r["source_id"] for r in rows}:
         raise ReviewError("Markdown source identities differ from the automatic source register")
+    exclusion_rows = read_csv(auto_dir / "field_15_exclusion_register.csv")
+    aggregate_section = document.split("### Aggregate exclusions — existing owner decision", 1)[-1].split("### KOS — existing hold", 1)[0]
+    for item in exclusion_rows:
+        values = [item["source_country_code"], item["source_country_name"], item["series_code"],
+                  item["populated_year_count"],
+                  f'{item["first_populated_year"]}–{item["last_populated_year"]}',
+                  "EXCLUDED — prior owner approval"]
+        expected_line = "| " + " | ".join(cell(v) for v in values) + " |"
+        if expected_line not in aggregate_section:
+            raise ReviewError(f"Previously approved aggregate exclusion changed in Markdown: {item['source_country_code']}")
+    if "Total: 13 aggregate series and 665 populated annual values" not in aggregate_section:
+        raise ReviewError("Aggregate exclusion total changed in Markdown")
+    if "WBG / West Bank and Gaza maps to tc_50c420df8b2c4c6eaae47d795f9a1ea2 (Palestine)" not in document:
+        raise ReviewError("Previously approved WBG mapping changed in Markdown")
 
 
 def validate_review(path: Path, complete: bool) -> dict[str, Any]:
-    meta, rows, _ = parse_review(path, complete)
+    meta, rows, document = parse_review(path, complete)
     validate_fingerprints(meta)
-    validate_review_against_source_register(meta, rows)
+    validate_review_against_source_register(meta, rows, document)
     return {"proposal_rows": len(rows), "approved": sum(r["decision"].upper()=="APPROVE" for r in rows),
             "excluded": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
             "held": sum(r["decision"].upper()=="HOLD" for r in rows),
@@ -388,6 +402,8 @@ def verify_game_database(candidate: Path, database: Path, approval_id: str) -> d
         ).fetchall()
         if len(imports) != 1:
             raise ReviewError(f"Expected one dataset_imports record for this WEO snapshot; found {len(imports)}")
+        if imports[0]["import_status"] != "candidate":
+            raise ReviewError(f"Unexpected dataset_imports status: {imports[0]['import_status']}")
         import_id = int(imports[0]["import_id"])
         e = {(r["game_id"], r["indicator_code"], int(r["observation_year"])): r for r in expected}
         a = {(r["game_id"], r["indicator_code"], int(r["observation_year"])): r for r in actual}
@@ -413,7 +429,7 @@ def verify_game_database(candidate: Path, database: Path, approval_id: str) -> d
         approval = con.execute("SELECT domain, status, artifact_sha256 FROM application_approvals WHERE approval_id=?",
                                (approval_id,)).fetchone()
         events = [r["event_type"] for r in con.execute(
-            "SELECT event_type FROM database_application_events WHERE approval_id=? ORDER BY event_id",
+            "SELECT event_type FROM database_application_events WHERE approval_id=? ORDER BY rowid",
             (approval_id,))]
         if approval is None or approval["domain"] != "imf_weo_historical_observations" or approval["status"] != "applied":
             raise ReviewError("Application approval ledger is not in applied state")
