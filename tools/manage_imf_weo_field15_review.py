@@ -352,11 +352,18 @@ def verify_game_database(candidate: Path, database: Path, approval_id: str) -> d
             """SELECT game_id, source_country_code, source_country_name, indicator_code, field_id,
                       observation_year, value, unit, scale, value_status, latest_actual_annual_data,
                       reporting_year_months, source_reference, source_version, source_sha256,
-                      acquired_on, acquisition_time_precision
+                      acquired_on, acquisition_time_precision, import_id
                FROM imf_weo_historical_observations
                WHERE source_version=? AND source_sha256=? AND field_id=15""",
             (RELEASE, summary["source_sha256"]),
         ).fetchall()
+        imports = con.execute(
+            "SELECT import_id, import_status FROM dataset_imports WHERE dataset=? AND sha256=?",
+            ("world_economic_outlook", summary["source_sha256"]),
+        ).fetchall()
+        if len(imports) != 1:
+            raise ReviewError(f"Expected one dataset_imports record for this WEO snapshot; found {len(imports)}")
+        import_id = int(imports[0]["import_id"])
         e = {(r["game_id"], r["indicator_code"], int(r["observation_year"])): r for r in expected}
         a = {(r["game_id"], r["indicator_code"], int(r["observation_year"])): r for r in actual}
         if len(actual) != len(expected) or set(e) != set(a):
@@ -373,6 +380,7 @@ def verify_game_database(candidate: Path, database: Path, approval_id: str) -> d
                 "source_reference": want["source_reference"],
                 "source_version": want["source_version"], "source_sha256": want["source_sha256"],
                 "acquired_on": want["acquired_on"], "acquisition_time_precision": want["acquisition_time_precision"],
+                "import_id": import_id,
             }
             for field, value in checks.items():
                 if got[field] != value:
@@ -389,6 +397,7 @@ def verify_game_database(candidate: Path, database: Path, approval_id: str) -> d
         return {"integrity_check": integrity, "foreign_key_violations": len(fk),
                 "expected_observations": len(expected), "actual_observations": len(actual),
                 "distinct_game_ids": len({r["game_id"] for r in expected}),
+                "import_id": import_id, "dataset_import_status": imports[0]["import_status"],
                 "approval_status": approval["status"], "approval_events": events,
                 "all_statuses_unclassified": all(r["value_status"] == "unclassified" for r in actual)}
     finally:
