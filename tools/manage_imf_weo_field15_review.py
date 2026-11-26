@@ -216,6 +216,12 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
             rows.append(dict(zip(fields, parts)))
     if len(rows) != 196 or len({r["source_id"] for r in rows}) != 196:
         raise ReviewError(f"Expected 195 proposals plus KOS hold; found {len(rows)} rows")
+    if meta.get("fixed_decisions") != {
+        "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
+        "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
+        "KOS": "Preserve hold_for_evidence; no identity mapping.",
+    }:
+        raise ReviewError("Fixed prior-decision manifest was changed")
     counts = [sum(r["batch"] == f"{n:02d}" for r in rows) for n in range(1, 11)]
     if counts != [20,20,20,20,20,20,20,20,20,16]:
         raise ReviewError(f"Batch membership is invalid: {counts}")
@@ -224,6 +230,8 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
         raise ReviewError("The existing KOS hold must remain explicit and unmapped")
     if sum(r["source_id"] != "KOS" for r in rows) != 195:
         raise ReviewError("Expected exactly 195 new identity proposals")
+    if "tc_50c420df8b2c4c6eaae47d795f9a1ea2" not in document or "665 populated annual values" not in document:
+        raise ReviewError("Reused WBG approval or aggregate exclusion decision is missing from the review")
     for row in rows:
         if row["series_code"] != row["source_id"] + ".NGDPD.A":
             raise ReviewError(f"Wrong series code for {row['source_id']}")
@@ -310,7 +318,7 @@ def validate_review(path: Path, complete: bool) -> dict[str, Any]:
             "pending": sum(r["decision"].upper()=="PENDING" for r in rows),
             "fingerprints_valid": True, "database_written": False}
 
-def verify_project_acquisition(path: Path) -> dict[str, Any]:
+def verify_project_acquisition(path: Path, expected_source_sha: str) -> dict[str, Any]:
     if not path.is_file():
         raise ReviewError(f"Project DB not found: {path}")
     con = sqlite3.connect(f"file:{path.resolve()}?mode=ro", uri=True)
@@ -320,21 +328,33 @@ def verify_project_acquisition(path: Path) -> dict[str, Any]:
         fk = [tuple(r) for r in con.execute("PRAGMA foreign_key_check")]
         if integrity != "ok" or fk:
             raise ReviewError(f"Project DB integrity/FK failure: {integrity}; {fk[:5]}")
-        tables = [r["name"] for r in con.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")]
-        found = []
-        for table in tables:
-            safe = table.replace('"', '""')
-            columns = [r["name"] for r in con.execute(f'PRAGMA table_info("{safe}")')]
-            if "acquisition_id" in columns:
-                for row in con.execute(f'SELECT * FROM "{safe}" WHERE acquisition_id=5'):
-                    found.append((table, dict(row)))
-        relevant = [(table, row) for table, row in found
-                    if any(term in json.dumps(row, default=str).lower()
-                           for term in ("imf_weo", "imf weo", "october_2026"))]
-        if len(relevant) != 1:
-            raise ReviewError(f"Expected one IMF WEO acquisition_id=5 record; found {len(relevant)}")
-        return {"acquisition_id": 5, "table": relevant[0][0], "record_found": True,
-                "integrity_check": integrity, "foreign_key_violations": len(fk)}
+        row = con.execute(
+            """SELECT a.acquisition_id, a.status, a.integrity_status, a.provider_release_id,
+                      a.evidence_json, a.metadata_json, s.stream_id, d.dataset_key, src.source_key
+               FROM acquisitions a
+               JOIN acquisition_streams s ON s.stream_id=a.stream_id
+               JOIN datasets d ON d.dataset_id=s.dataset_id
+               JOIN sources src ON src.source_key=d.source_key
+               WHERE a.acquisition_id=5"""
+        ).fetchone()
+        if row is None or row["source_key"] != "imf_weo":
+            raise ReviewError("Project DB acquisition ID 5 is not registered to imf_weo")
+        if row["status"] != "acquired" or row["integrity_status"] != "verified":
+            raise ReviewError("Project DB acquisition ID 5 is not acquired/integrity-verified")
+        if "october_2026" not in str(row["provider_release_id"]).lower() and "2026" not in str(row["provider_release_id"]):
+            raise ReviewError("Project DB acquisition ID 5 release is not October 2026")
+        acquisition_text = ACQUISITION.read_text(encoding="utf-8")
+        if expected_source_sha not in acquisition_text or RAW.name not in acquisition_text:
+            raise ReviewError("Manual acquisition record does not corroborate the exact IMF CSV checksum and filename")
+        if sha(RAW) != expected_source_sha:
+            raise ReviewError("Local IMF WEO CSV differs from the reviewed source fingerprint")
+        return {
+            "acquisition_id": 5, "source_key": row["source_key"], "dataset_key": row["dataset_key"],
+            "provider_release_id": row["provider_release_id"], "status": row["status"],
+            "integrity_status": row["integrity_status"], "source_sha256_verified": True,
+            "sqlite_integrity": integrity, "foreign_key_violations": len(fk),
+            "database_written": False,
+        }
     finally:
         con.close()
 
@@ -486,14 +506,22 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         elif decision:
             exc["disposition"] = "excluded" if decision["decision"].upper() == "EXCLUDE" else "hold_for_evidence"
             exc["owner_rationale"] = decision["rationale"]
-    candidate = write_deterministic_candidate(observations, exceptions, summary)
+    expected_codes = {"WBG"} | {r["source_id"] for r in rows if r["decision"].upper() == "APPROVE"}
+    actual_codes = {r["source_country_code"] for r in observations}
+    if actual_codes != expected_codes:
+        raise ReviewError(f"Candidate source identities mismatch: missing={sorted(expected_codes-actual_codes)}, extra={sorted(actual_codes-expected_codes)}")
+    expected_unmapped = 14 + sum(r["decision"].upper() in {"HOLD", "EXCLUDE"} for r in rows if r["source_id"] != "KOS")
+    actual_unmapped = [r for r in exceptions if r.get("exception") == "unmapped_or_ambiguous_identity"]
+    if len(actual_unmapped) != expected_unmapped:
+        raise ReviewError(f"Candidate exceptions mismatch: expected {expected_unmapped}, got {len(actual_unmapped)}")
+    candidate = write_deterministic_candidate(observations, exceptions, summary, review_root / "candidate")
     prep = prepare_application(candidate, database_path=database, source_path=RAW,
         identity_path=REGISTRY, crosswalk_path=DERIVED_CROSSWALK,
         migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
     approval_id, status = prep["approval_id"], prep["status"]
     if status == "pending":
         decide_application_for_weo(approval_id, decision="approved", actor=actor,
-            note=f"Owner-approved Markdown review {relative(path)}; field 15 / NGDPD only.",
+            note=f"Owner-approved Markdown review {relative(path)}; {field_value('Approval statement')}; field 15 / NGDPD only.",
             database_path=database)
         status = "approved"
     if status == "approved":
@@ -505,7 +533,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     else:
         raise ReviewError(f"Existing approval has incompatible status: {status}")
     game_check = verify_game_database(candidate, database, approval_id)
-    project_check = verify_project_acquisition(project_database)
+    project_check = verify_project_acquisition(project_database, meta["source_sha256"])
     return {
         "approved_new_mappings": len(approved),
         "excluded_new_identities": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
