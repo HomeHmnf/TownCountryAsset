@@ -114,7 +114,7 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         "# IMF WEO October 2026 — field 15 / NGDPD owner review", "",
         "This is the single authoritative review document for all ten batches.", "",
         "- Scope: WP1.5 field 15 / NGDPD / IMF WEO October 2026 only.",
-        "- 195 proposed mappings in ten batches (20 identities per batch, final batch 15 has 16).",
+        "- 195 proposed mappings in ten batches (20 identities per batch, final batch 10 has 16).",
         "- Existing WBG approval, 13 aggregate exclusions and KOS hold are carried forward.",
         "- Every new identity requires an explicit owner decision and rationale.",
         "- APPROVE requires Approved game_id to equal Proposed game_id exactly.",
@@ -144,8 +144,13 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         "", "## New identity decisions — all ten batches", "", HEADER, SEPARATOR,
     ]
     proposal_index = 0
-    for row in rows:
+    for source_index, row in enumerate(rows):
+        batch = source_index // 20 + 1
         if row["source_id"] == "KOS":
+            vals = [f"{batch:02d}", "KOS", row["source_name"], row["series_code"],
+                    row["populated_year_count"], "-", "-", "-", row["independent_evidence_reference"],
+                    "HOLD", "-", row["review_notes"]]
+            lines.append("| " + " | ".join(cell(v) for v in vals) + " |")
             continue
         game_id = row["reviewed_proposed_game_id"]
         target = registry.get(game_id)
@@ -154,7 +159,6 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         registry_name = (target.get("names") or {}).get("en", "")
         if registry_name != row["proposed_registry_name"]:
             raise ReviewError(f"Registry-name mismatch for {row['source_id']}")
-        batch = proposal_index // 20 + 1
         proposal_index += 1
         vals = [
             f"{batch:02d}", row["source_id"], row["source_name"], row["series_code"],
@@ -208,11 +212,16 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
             if len(parts) != len(fields):
                 raise ReviewError(f"Malformed review row: {line}")
             rows.append(dict(zip(fields, parts)))
-    if len(rows) != 195 or len({r["source_id"] for r in rows}) != 195:
-        raise ReviewError(f"Expected 195 unique proposal rows; found {len(rows)}")
+    if len(rows) != 196 or len({r["source_id"] for r in rows}) != 196:
+        raise ReviewError(f"Expected 195 proposals plus KOS hold; found {len(rows)} rows")
     counts = [sum(r["batch"] == f"{n:02d}" for r in rows) for n in range(1, 11)]
-    if counts != [20,20,20,20,20,20,20,20,20,15]:
+    if counts != [20,20,20,20,20,20,20,20,20,16]:
         raise ReviewError(f"Batch membership is invalid: {counts}")
+    kos_rows = [r for r in rows if r["source_id"] == "KOS"]
+    if len(kos_rows) != 1 or kos_rows[0]["decision"] != "HOLD" or kos_rows[0]["approved_game_id"] != "-":
+        raise ReviewError("The existing KOS hold must remain explicit and unmapped")
+    if sum(r["source_id"] != "KOS" for r in rows) != 195:
+        raise ReviewError("Expected exactly 195 new identity proposals")
     for row in rows:
         if row["series_code"] != row["source_id"] + ".NGDPD.A":
             raise ReviewError(f"Wrong series code for {row['source_id']}")
@@ -358,7 +367,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     for exc in exceptions:
         decision = decisions.get(exc.get("source_country_code", ""))
         if decision:
-            exc["disposition"] = decision["decision"].lower()
+            exc["disposition"] = "excluded" if decision["decision"].upper() == "EXCLUDE" else "hold_for_evidence"
             exc["owner_rationale"] = decision["rationale"]
     candidate = write_candidate(observations, exceptions, summary, CANDIDATE_ROOT)
     prep = prepare_application(candidate, database_path=database, source_path=RAW,
