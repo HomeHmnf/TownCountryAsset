@@ -290,10 +290,10 @@ def validate_fingerprints(meta: dict[str, Any]) -> None:
 def validate_review_against_source_register(meta: dict[str, Any], rows: list[dict[str, str]], document: str) -> None:
     auto_dir = ROOT / meta["automatic_review_directory"]
     source_rows = read_csv(auto_dir / "field_15_identity_review_register_final.csv")
-    if len(source_rows) != 196:
-        raise ReviewError("Fingerprint-bound automatic register must contain 196 identities")
+    if len(source_rows) != 195:
+        raise ReviewError("Fingerprint-bound automatic register must contain 195 new proposals")
     proposals = {r["source_id"]: r for r in source_rows}
-    if len(proposals) != 196:
+    if len(proposals) != 195:
         raise ReviewError("Automatic source register contains duplicate source IDs")
     registry_doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     registry = {r.get("game_id"): r for r in registry_doc.get("records", []) if isinstance(r, dict)}
@@ -590,7 +590,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     crosswalk["review_approval"] = {
         "status": "approved", "approved_on": approval_date, "approver_role": "project_owner",
         "approval_record": relative(path),
-        "scope": "Field 15 / NGDPD only; existing WBG mapping plus explicitly approved rows in the owner review.",
+        "scope": "Field 15 / NGDPD only; existing owner-approved WBG and KOS mappings plus explicitly approved new rows in the owner review.",
     }
     crosswalk["review_document"] = {"path": relative(path), "sha256": sha(path)}
     review_sha = sha(path)
