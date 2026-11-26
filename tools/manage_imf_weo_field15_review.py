@@ -65,7 +65,7 @@ def fingerprint_inputs(auto: Path) -> dict[str, dict[str, Any]]:
         "automatic_identity_exceptions": auto / "identity_exceptions.csv",
         "automatic_final_register": auto / "field_15_identity_review_register_final.csv",
         "automatic_exclusion_register": auto / "field_15_exclusion_register.csv",
-        "manual_acquisition_record": ACQUISITION, "prior_decisions_doc": PRIOR_DECISIONS_DOC,
+        "manual_acquisition_record": ACQUISITION,
         "import_migration": MIGRATION,
     }
     result = {}
@@ -273,7 +273,12 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
     return meta, rows, document
 
 def validate_fingerprints(meta: dict[str, Any]) -> None:
+    # Procedural documentation is deliberately not a source-evidence dependency.
+    # Older review manifests may still contain this legacy fingerprint; ignore it
+    # so later workflow-document edits cannot invalidate unchanged data evidence.
     for key, item in meta.get("input_fingerprints", {}).items():
+        if key == "prior_decisions_doc":
+            continue
         path = ROOT / item["path"]
         if not path.is_file() or sha(path) != item["sha256"] or path.stat().st_size != item["byte_count"]:
             raise ReviewError(f"Reviewed source changed or missing: {key}")
