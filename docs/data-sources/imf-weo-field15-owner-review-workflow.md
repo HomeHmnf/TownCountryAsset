@@ -4,12 +4,15 @@ This workflow consolidates the ten automatically generated identity batches into
 
 ## 1. Generate the review document
 
-After syncing the branch and confirming the automatic source-derived package is present:
+After syncing the branch, regenerate the automatic package from the original IMF CSV, Appendix, M49 evidence, canonical registry and approved crosswalk. This rebuilds all ten cumulative batches; it does not read the historical manually prepared batch files.
 
 ```fish
 cd ~/Projects/Python/TownAndCountry
+uv run python tools/build_imf_weo_field15_identity_review.py
 uv run python tools/manage_imf_weo_field15_review.py generate-review
 ```
+
+The review manager automatically selects the newest completed automatic package.
 
 The command creates:
 
