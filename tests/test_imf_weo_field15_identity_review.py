@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import csv
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -215,3 +218,22 @@ def test_one_run_writes_all_ten_cumulative_batches_and_final_register(tmp_path: 
     assert kos["review_outcome"] == "hold_for_evidence"
     assert kos["reviewed_proposed_game_id"] == ""
     assert all(row["owner_decision"] == "pending_explicit_owner_approval" for row in final if row["reviewed_proposed_game_id"])
+
+
+
+def test_cli_runs_directly_without_pythonpath_from_outside_repository(tmp_path: Path):
+    script = Path(__file__).resolve().parents[1] / "tools/build_imf_weo_field15_identity_review.py"
+    env = os.environ.copy()
+    env.pop("PYTHONPATH", None)
+
+    completed = subprocess.run(
+        [sys.executable, str(script), "--help"],
+        cwd=tmp_path,
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert "Generate all IMF WEO field-15 identity-review batches" in completed.stdout
