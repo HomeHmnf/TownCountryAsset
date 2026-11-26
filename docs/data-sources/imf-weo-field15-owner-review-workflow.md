@@ -13,11 +13,11 @@ uv run python tools/manage_imf_weo_field15_review.py generate-review
 
 The command creates:
 
-`reports/sources/imf-weo-field15-identity-review/field_15_owner_review.md`
+`reports/sources/imf-weo-field15-identity-review/field_15_owner_review_kos_approved.md`
 
 It refuses to overwrite an existing review file. It reads the automatic final identity register and aggregate exclusion register generated from the original IMF WEO source and official evidence. It does not read the historical manually prepared batch files or manual inventory/exclusion registers.
 
-The automatic register contains 195 new proposals in ten batches. WBG and KOS are separately owner-approved fixed crosswalk mappings and are not new proposal rows. It also records the already-approved WBG mapping and the 13 already-approved aggregate exclusions (665 populated values).
+The new document contains all 195 proposals in ten batches. WBG and KOS are separately owner-approved fixed crosswalk mappings and are not new proposal rows. The earlier `field_15_owner_review.md` is retained as a historical review artifact; it is not the active review because it predates the KOS approval. It also records the already-approved WBG mapping and the 13 already-approved aggregate exclusions (665 populated values).
 
 Generation is read-only with respect to both databases. It creates no application approval and does not change the owner-approved IMF WEO crosswalk or canonical identity registry.
 
