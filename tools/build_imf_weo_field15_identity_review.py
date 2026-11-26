@@ -345,7 +345,7 @@ def _fetch_m49_faq(url: str = M49_FAQ_URL, timeout: int = 30) -> tuple[str, dict
     if not payload:
         raise IdentityReviewError("UN M49 FAQ response is empty")
     try:
-        faq_html = payload.decode("utf-8-sig")
+        faq_html = payload.decode("utf-8")
     except UnicodeDecodeError as exc:
         raise IdentityReviewError("UN M49 FAQ response is not valid UTF-8") from exc
     _validate_m49_faq_html(faq_html)
@@ -518,7 +518,7 @@ def build_review(
         if source_id == "TWN":
             if "taiwan" not in normalize_name(source_name):
                 raise IdentityReviewError("TWN source row no longer identifies Taiwan")
-            if any(normalize_name(row.get("Country or Area", "")) == "taiwan" for row in m49_rows):
+            if any("taiwan" in normalize_name(row.get("Country or Area", "")) for row in m49_rows):
                 raise IdentityReviewError("Taiwan unexpectedly appears as a separate row in the M49 country/area table")
             taiwan_matches = registry_by_exact_name.get("taiwan", [])
             if len(taiwan_matches) != 1:
@@ -623,6 +623,11 @@ def build_review(
     proposal_ids = [row["reviewed_proposed_game_id"] for row in review_rows if row["reviewed_proposed_game_id"]]
     if len(proposal_ids) != 195 or len(set(proposal_ids)) != 195:
         raise IdentityReviewError("Expected 195 unique persistent game_id proposals")
+    proposed_m49_codes = [
+        row["un_m49_code"] for row in review_rows if row["reviewed_proposed_game_id"]
+    ]
+    if len(set(proposed_m49_codes)) != 195:
+        raise IdentityReviewError("Expected 195 unique UN M49 statistical codes")
     if any(row["owner_decision"] != "pending_explicit_owner_approval" for row in review_rows if row["reviewed_proposed_game_id"]):
         raise IdentityReviewError("Every generated mapping must remain pending explicit owner approval")
 
