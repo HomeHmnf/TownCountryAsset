@@ -258,9 +258,50 @@ def validate_fingerprints(meta: dict[str, Any]) -> None:
         if not path.is_file() or sha(path) != item["sha256"] or path.stat().st_size != item["byte_count"]:
             raise ReviewError(f"Reviewed source changed or missing: {key}")
 
+def validate_review_against_source_register(meta: dict[str, Any], rows: list[dict[str, str]]) -> None:
+    auto_dir = ROOT / meta["automatic_review_directory"]
+    source_rows = read_csv(auto_dir / "field_15_identity_review_register_final.csv")
+    if len(source_rows) != 196:
+        raise ReviewError("Fingerprint-bound automatic register must contain 196 identities")
+    proposals = {r["source_id"]: r for r in source_rows}
+    if len(proposals) != 196:
+        raise ReviewError("Automatic source register contains duplicate source IDs")
+    registry_doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    registry = {r.get("game_id"): r for r in registry_doc.get("records", []) if isinstance(r, dict)}
+    for index, row in enumerate(rows):
+        source = proposals.get(row["source_id"])
+        if source is None:
+            raise ReviewError(f"Unknown source identity in Markdown: {row['source_id']}")
+        expected_batch = f"{index // 20 + 1:02d}"
+        if row["batch"] != expected_batch:
+            raise ReviewError(f"Batch number changed for {row['source_id']}")
+        expected = {
+            "source_name": source["source_name"], "series_code": source["series_code"],
+            "populated_years": source["populated_year_count"],
+            "evidence": source["independent_evidence_reference"],
+        }
+        for field, value in expected.items():
+            if row[field] != value:
+                raise ReviewError(f"Source-derived {field} changed for {row['source_id']}")
+        if row["source_id"] == "KOS":
+            if row["proposed_game_id"] != "-" or row["registry_name"] != "-" or row["m49"] != "-":
+                raise ReviewError("KOS must remain held with no proposed identity or M49 code")
+            continue
+        game_id = source["reviewed_proposed_game_id"]
+        target = registry.get(game_id)
+        registry_name = (target.get("names") or {}).get("en", "") if target else ""
+        if not game_id or row["proposed_game_id"] != game_id:
+            raise ReviewError(f"Proposed game_id changed for {row['source_id']}")
+        if row["registry_name"] != registry_name or row["m49"] != source["un_m49_code"]:
+            raise ReviewError(f"Registry target or M49 evidence changed for {row['source_id']}")
+    if set(proposals) != {r["source_id"] for r in rows}:
+        raise ReviewError("Markdown source identities differ from the automatic source register")
+
+
 def validate_review(path: Path, complete: bool) -> dict[str, Any]:
     meta, rows, _ = parse_review(path, complete)
     validate_fingerprints(meta)
+    validate_review_against_source_register(meta, rows)
     return {"proposal_rows": len(rows), "approved": sum(r["decision"].upper()=="APPROVE" for r in rows),
             "excluded": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
             "held": sum(r["decision"].upper()=="HOLD" for r in rows),
@@ -368,6 +409,7 @@ def write_deterministic_candidate(observations: list[dict[str, Any]], exceptions
 def apply_review(path: Path, actor: str, database: Path, project_database: Path) -> dict[str, Any]:
     meta, rows, document = parse_review(path, True)
     validate_fingerprints(meta)
+    validate_review_against_source_register(meta, rows)
     approved = [r for r in rows if r["decision"].upper() == "APPROVE"]
     if not approved:
         raise ReviewError("No new identity mappings approved; refusing an empty application")
