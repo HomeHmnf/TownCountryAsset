@@ -24,6 +24,11 @@ def make_review(tmp_path: Path, *, decision: str = "PENDING", approved: str = "-
         "indicator_code": "NGDPD",
         "automatic_review_directory": "reports/sources/example",
         "input_fingerprints": {},
+        "fixed_decisions": {
+            "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
+            "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
+            "KOS": "Preserve hold_for_evidence; no identity mapping.",
+        },
     }
     lines = [
         "# IMF WEO October 2026 — field 15 / NGDPD owner review",
