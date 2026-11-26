@@ -226,12 +226,6 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
         "KOS": "Preserve hold_for_evidence; no identity mapping.",
     }:
         raise ReviewError("Fixed prior-decision manifest was changed")
-    if meta.get("fixed_decisions") != {
-        "WBG": "Reuse existing owner-approved WBG to Palestine mapping; field 15 only.",
-        "aggregates": "Reuse 13 owner-approved excluded dispositions; 665 populated values.",
-        "KOS": "Preserve hold_for_evidence; no identity mapping.",
-    }:
-        raise ReviewError("Fixed prior-decision manifest was changed")
     counts = [sum(r["batch"] == f"{n:02d}" for r in rows) for n in range(1, 11)]
     if counts != [20,20,20,20,20,20,20,20,20,16]:
         raise ReviewError(f"Batch membership is invalid: {counts}")
@@ -242,8 +236,6 @@ def parse_review(path: Path, complete: bool) -> tuple[dict[str, Any], list[dict[
         raise ReviewError("Expected exactly 195 new identity proposals")
     if "tc_50c420df8b2c4c6eaae47d795f9a1ea2" not in document or "665 populated annual values" not in document:
         raise ReviewError("Reused WBG approval or aggregate exclusion section is missing")
-    if "tc_50c420df8b2c4c6eaae47d795f9a1ea2" not in document or "665 populated annual values" not in document:
-        raise ReviewError("Reused WBG approval or aggregate exclusion decision is missing from the review")
     for row in rows:
         if row["series_code"] != row["source_id"] + ".NGDPD.A":
             raise ReviewError(f"Wrong series code for {row['source_id']}")
@@ -487,6 +479,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         "match_method": "reviewed_manual", "evidence_url": r["evidence"].split(";")[0].strip(),
         "source_name": r["source_name"], "review_note": r["rationale"],
     } for r in approved]
+    crosswalk["reused_prior_approval"] = original.get("review_approval", {})
     crosswalk["review_approval"] = {
         "status": "approved", "approved_on": approval_date, "approver_role": "project_owner",
         "approval_record": relative(path),
