@@ -203,3 +203,22 @@ uv run --extra dev python -m pytest -q tests/test_manage_imf_weo_field15_review.
 ```
 
 No owner review or database application has been performed by committing this tooling.
+
+## Owner decision addendum — KOS source crosswalk — 2026-11-26
+
+This decision supersedes the earlier KOS `hold_for_evidence` disposition above for IMF WEO October 2026, NGDPD, WP1.5 field 15 only.
+
+The project owner explicitly approved:
+
+- Provider/source key: `imf_weo`
+- WEO source code: `KOS` (Kosovo)
+- Persistent target: `tc_28aa17b84db24952b92fc51b421075e0` (Kosovo)
+- Match method: `reviewed_manual`
+- Scope: October 2026 WEO / NGDPD / field 15 only.
+
+The target identity is corroborated by the canonical registry record (English name Kosovo; source and geometry key KOS) and the Game DB identity record for the same persistent game_id. The Game DB record has an approved `disputed_or_partially_recognized_entity` entity-type decision. ISO alpha-2 and alpha-3 remain unassigned.
+
+The IMF Appendix Country Data Documentation uses `UVK` for Kosovo, while the WEO CSV uses `KOS`. This discrepancy is explicitly acknowledged in the owner decision. UN M49 FAQ statistical-use code 412 is contextual statistical evidence only; it is not treated as an IMF code concordance. No global registry, ISO/M49 assignment, entity-type, or other provider mapping is changed.
+
+The 32 existing KOS observations (2000–2031) must be preserved and reconciled exactly against the rebuilt field-15 candidate, including values, target game_id and source provenance. The identity decision does not authorize deletion, remapping, overwriting, semantic status classification, or database application. Candidate generation and review tooling must consume the explicit crosswalk mapping and supersede the old generated KOS hold. Field 15 remains open until the normal approval, safe-backup, application and independent verification gates are completed.
+
