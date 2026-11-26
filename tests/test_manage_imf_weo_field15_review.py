@@ -16,6 +16,7 @@ from tools.manage_imf_weo_field15_review import (
     SEPARATOR,
     ReviewError,
     parse_review,
+    validate_fingerprints,
     verify_existing_observations_are_candidate_subset,
 )
 
@@ -105,6 +106,25 @@ def test_parse_review_rejects_pending_decisions_when_complete(tmp_path: Path):
 
     with pytest.raises(ReviewError, match="Decision pending"):
         parse_review(path, complete=True)
+
+
+def test_procedural_document_fingerprint_does_not_invalidate_review(tmp_path: Path, monkeypatch):
+    import tools.manage_imf_weo_field15_review as workflow
+
+    monkeypatch.setattr(workflow, "ROOT", tmp_path)
+    procedural_doc = tmp_path / "workflow.md"
+    procedural_doc.write_text("Updated procedural guidance", encoding="utf-8")
+
+    # Legacy review metadata included this non-evidentiary fingerprint.
+    validate_fingerprints({
+        "input_fingerprints": {
+            "prior_decisions_doc": {
+                "path": "workflow.md",
+                "sha256": "stale-by-design",
+                "byte_count": 1,
+            }
+        }
+    })
 
 
 def test_cli_help_runs_outside_repository_without_pythonpath(tmp_path: Path):
