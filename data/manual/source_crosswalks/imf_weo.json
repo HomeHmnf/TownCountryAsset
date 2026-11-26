@@ -9,10 +9,10 @@
   },
   "review_approval": {
     "status": "approved",
-    "approved_on": "2026-11-25",
+    "approved_on": "2026-11-26",
     "approver_role": "project_owner",
-    "approval_record": "docs/data-sources/wp1-5-review-approval-application-workflow.md",
-    "scope": "Field 15 (NGDPD) only; IMF WEO source code WBG maps to the existing Palestine game_id. No global identity or ISO/M49 registry change."
+    "approval_record": "docs/data-sources/wp1-5-review-approval-application-workflow.md#18-owner-decision--imf-weo-kos-source-crosswalk--2026-11-26",
+    "scope": "Field 15 (NGDPD) only; existing owner-approved WBG-to-Palestine and KOS-to-Kosovo IMF WEO source mappings. KOS/UVK Appendix discrepancy documented; no global identity or ISO/M49 registry change."
   },
   "mappings": [
     {
@@ -22,6 +22,14 @@
       "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
       "source_name": "West Bank and Gaza",
       "review_note": "Explicit project-owner-approved, field-15-only crosswalk. The IMF October 2026 WEO Appendix identifies WBG as West Bank and Gaza and classifies it as an individual economy entry. The existing project UN M49 snapshot matches the Palestine registry identity to State of Palestine (M49 275, PS/PSE) via a reviewed name variant. Target game_id is persistent and exact. This source-specific mapping does not verify or modify the registry ISO assignment status."
+    },
+    {
+      "game_id": "tc_28aa17b84db24952b92fc51b421075e0",
+      "source_id": "KOS",
+      "match_method": "reviewed_manual",
+      "evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf",
+      "source_name": "Kosovo",
+      "review_note": "Explicit project-owner-approved IMF WEO October 2026 NGDPD field-15-only mapping. The WEO CSV source identity is KOS; the October 2026 IMF Appendix Country Data Documentation identifies Kosovo as UVK. The canonical registry independently identifies this persistent game_id as Kosovo (English name Kosovo; source/geometry key KOS), and the Game DB entity-type decision is approved. The KOS/UVK discrepancy is acknowledged as a source-code qualification, not resolved by an asserted IMF concordance. No global ISO/M49 assignment, identity-registry record, or other provider mapping is changed."
     }
   ]
 }
