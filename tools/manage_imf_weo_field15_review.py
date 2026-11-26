@@ -101,6 +101,8 @@ def generate_review(auto: Path, output: Path) -> dict[str, Any]:
         raise ReviewError("Expected 195 proposal rows plus the KOS hold")
     if len(aggregates) != 13 or sum(int(r["populated_year_count"]) for r in aggregates) != 665:
         raise ReviewError("Expected 13 previously approved aggregate exclusions / 665 values")
+    if any(r.get("disposition") != "excluded" or not r.get("rationale", "").strip() for r in aggregates):
+        raise ReviewError("Aggregate source register must preserve an explicit excluded disposition and rationale for every series")
     registry_doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
     registry = {r.get("game_id"): r for r in registry_doc.get("records", []) if isinstance(r, dict)}
     metadata = {
@@ -597,7 +599,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         raise ReviewError(f"Existing approval has incompatible status: {status}")
     game_check = verify_game_database(candidate, database, approval_id)
     project_check = project_preflight
-    return {
+    report = {
         "approved_new_mappings": len(approved),
         "excluded_new_identities": sum(r["decision"].upper()=="EXCLUDE" for r in rows),
         "held_new_identities": sum(r["decision"].upper()=="HOLD" for r in rows),
@@ -611,6 +613,10 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         "original_crosswalk_modified": False, "identity_registry_modified": False,
         "observation_status_policy": "unclassified",
     }
+    report_path = review_root / "verification_report.json"
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\\n", encoding="utf-8")
+    report["verification_report"] = relative(report_path)
+    return report
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
