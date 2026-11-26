@@ -27,7 +27,6 @@ M49_MANIFEST = ROOT / "data_manifests/sources/un_m49/country_area_overview_html/
 REGISTRY = ROOT / "config/country_identity_registry.json"
 CROSSWALK = ROOT / "data/manual/source_crosswalks/imf_weo.json"
 ACQUISITION = ROOT / "docs/data-sources/imf-weo-october-2026-manual-acquisition.md"
-PRIOR_DECISIONS_DOC = ROOT / "docs/data-sources/wp1-5-review-approval-application-workflow.md"
 MIGRATION = ROOT / "migrations/008_imf_weo_historical_observations.sql"
 RELEASE = "October 2026 / IMF.RES_WEO_9.0.0"
 META_OPEN = "<!-- REVIEW-METADATA-JSON"
