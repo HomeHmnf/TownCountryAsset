@@ -282,3 +282,20 @@ This decision resolves the provider-specific identity disposition for KOS in fie
 ## 17. Consolidated IMF WEO field-15 owner review
 
 The ten source-derived identity batches are consolidated into one owner-review Markdown file and one explicit application CLI. Follow [the field-15 owner review workflow](imf-weo-field15-owner-review-workflow.md). The review document is generated from the automatic final register, not the historical manual batches. It carries forward the existing WBG and KOS field-15-only approvals and 13 aggregate exclusions (665 values). KOS/UVK is documented as a source-code discrepancy; no ISO/M49 assignment changes. Use `tools/approve_imf_weo_field15_all.py` to bulk approve the 195 new proposals. Dry-run is the default; `--prepare-only --confirm-all-proposals` builds the candidate and runs read-only identity/value/provenance preflight, including exact reconciliation of the 32 legacy KOS rows, without a database approval or database writes. Only after inspecting that report and creating a verified SQLite online backup should `--apply --confirm-all-proposals` be run. The command creates a separate fingerprint-bound approval copy and reuses the existing WEO application ledger/importer. Generation and dry-run validation do not write to either database.
+
+
+## 19. Field-15 identity approval and application result — 2026-11-26
+
+The owner-approved IMF WEO October 2026 NGDPD field-15 identity review and application completed successfully. The immutable verification report is:
+
+`reports/sources/imf-weo-field15-reviewed-candidate/656073575edb005a/verification_report.json`
+
+Application approval ID: `imf-weo-oct2026-1eb2e784bf93821c` (status `applied`). The approved review contains 195 newly approved source-derived mappings. The previously approved WBG and KOS provider-specific crosswalk decisions were reused, as were the 13 aggregate exclusions covering 665 populated source values.
+
+The candidate contains 9,361 NGDPD observations across 197 game identities, with 13 explicit aggregate exceptions. The Game DB verification reports 9,361 actual observations, 32 inserted and 9,329 unchanged. The existing-row preflight found no rows outside the candidate. All 197 candidate game IDs were present in the canonical identity store. SQLite integrity and foreign-key checks passed; approval events are `proposed`, `approved`, and `applied`.
+
+The 32 pre-existing KOS observations were reconciled as part of the successful preflight and application. No observation rows were deleted, remapped or overwritten. The original IMF WEO crosswalk and canonical identity registry were not modified.
+
+Project DB acquisition ID 5 was independently verified: both recorded source artifacts matched their byte counts and SHA-256 fingerprints, and Project DB SQLite integrity and foreign-key checks passed. The Project DB remains the acquisition/provenance ledger; observation rows reside in the Game DB, not duplicated in the Project DB. No Project DB write was performed by this application.
+
+All observation statuses remain `unclassified`, and the dataset import ledger remains `candidate`; the field-scoped application approval is `applied`. This establishes completion of the field-15 identity-review, candidate-approval, application and technical-verification stages. It does not establish semantic classification of the observations. Do not advance to field 16 until any separately required field-level semantic review and closure documentation are complete.
