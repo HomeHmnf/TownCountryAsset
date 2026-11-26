@@ -591,8 +591,8 @@ def build_review(
         )
     if len(country_rows) != 197 or sum(row["classification"] == "proposal" for row in country_rows) != 195:
         raise IdentityReviewError("Expected 195 proposal identities plus the separately approved WBG identity")
-    if exceptions:
-        raise IdentityReviewError("No identity exceptions are expected for the owner-approved WBG/KOS mappings")
+    if len(exceptions) != 1 or exceptions[0].get("source_country_code") != "KOS" or exceptions[0].get("disposition") != "approved_mapping":
+        raise IdentityReviewError("Expected exactly one documented, owner-approved KOS/UVK mapping qualification")
 
     review_rows: list[dict[str, str]] = []
     for item in country_rows:
