@@ -420,7 +420,7 @@ def verify_existing_observations_are_candidate_subset(candidate: Path, database:
     candidate_rows = read_csv(candidate / "observations.csv")
     summary = json.loads((candidate / "candidate.json").read_text(encoding="utf-8"))
     expected = {
-        (r["game_id"], r["indicator_code"], int(r["observation_year"])): r["source_country_code"]
+        (r["game_id"], r["indicator_code"], int(r["observation_year"])): r
         for r in candidate_rows
     }
     con = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
@@ -434,22 +434,49 @@ def verify_existing_observations_are_candidate_subset(candidate: Path, database:
         ).fetchall()
         extras = [
             row for row in existing
-            if (
-                (row["game_id"], row["indicator_code"], int(row["observation_year"])) not in expected
-                or expected[(row["game_id"], row["indicator_code"], int(row["observation_year"]))]
-                != row["source_country_code"]
-            )
+            if (row["game_id"], row["indicator_code"], int(row["observation_year"])) not in expected
+            or expected[(row["game_id"], row["indicator_code"], int(row["observation_year"]))]["source_country_code"]
+            != row["source_country_code"]
         ]
-        if extras:
+        mismatches = []
+        compare_fields = (
+            "source_country_name", "field_id", "value", "unit", "scale", "value_status",
+            "latest_actual_annual_data", "reporting_year_months", "source_reference",
+            "source_version", "source_sha256", "acquired_on", "acquisition_time_precision",
+        )
+        for existing_row in existing:
+            key = (existing_row["game_id"], existing_row["indicator_code"], int(existing_row["observation_year"]))
+            candidate_row = expected.get(key)
+            if candidate_row is None or existing_row["source_country_code"] != candidate_row["source_country_code"]:
+                continue
+            changed = []
+            for field in compare_fields:
+                old, new = existing_row[field], candidate_row.get(field)
+                if field in {"unit", "scale", "latest_actual_annual_data", "reporting_year_months"}:
+                    old = old or None
+                    new = new or None
+                elif field == "field_id":
+                    old, new = int(old), int(new)
+                elif field == "value":
+                    old, new = float(old), float(new)
+                if old != new:
+                    changed.append(field)
+            if changed:
+                mismatches.append((existing_row["source_country_code"], existing_row["observation_year"], changed))
+        if extras or mismatches:
             by_code: dict[str, int] = {}
             for row in extras:
                 code = row["source_country_code"]
                 by_code[code] = by_code.get(code, 0) + 1
             detail = ", ".join(f"{code}:{count}" for code, count in sorted(by_code.items()))
+            mismatch_detail = "; ".join(
+                f"{code}/{year}: {','.join(fields)}" for code, year, fields in mismatches[:10]
+            )
             raise ReviewError(
-                "Existing field-15 WEO observations fall outside the newly approved candidate "
-                f"({len(extras)} rows: {detail}). No approval or database write was made. "
-                "Resolve these legacy rows explicitly; this workflow will not delete or remap them."
+                "Existing field-15 WEO observations are not an exact compatible subset of the candidate "
+                f"(outside_candidate={len(extras)} [{detail}], metadata_or_value_mismatches={len(mismatches)} "
+                f"[{mismatch_detail}]). No approval or database write was made. "
+                "Resolve legacy differences explicitly; this workflow will not delete, remap or overwrite them."
             )
         existing_by_code: dict[str, int] = {}
         for row in existing:
