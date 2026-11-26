@@ -1,64 +1,23 @@
-===== MATRIX ROWS WITHOUT CANDIDATE OBSERVATION =====
-rows: 512
-distinct_game_ids: 47
-rows_per_identity: {6: 1, 11: 46}
-coverage_status: {'neither_source_present': 355, 'wdi_only': 157}
-imf_observation_present: {'False': 512}
-source_lookup_codes: {'VAT': 11, 'MNP': 11, 'VIR': 11, 'GUM': 11, 'ASM': 11, 'SGS': 11, 'IOT': 11, 'SHN': 11, 'PCN': 11, 'AIA': 11, 'FLK': 11, 'CYM': 11, 'BMU': 11, 'VGB': 11, 'TCA': 11, 'MSR': 11, 'JEY': 11, 'GGY': 11, 'IMN': 11, 'SYR': 11, 'SOL': 11, 'PRK': 11, 'NIU': 11, 'COK': 11, 'CUW': 11, 'ESH': 11, 'MCO': 11, 'SPM': 11, 'WLF': 11, 'MAF': 11, 'BLM': 11, 'PYF': 11, 'NCL': 11, 'ATF': 11, 'ALA': 11, 'ERI': 6, 'GRL': 11, 'FRO': 11, 'CYN': 11, 'CUB': 11, 'IOA': 11, 'HMD': 11, 'NFK': 11, 'ATC': 11, 'KAS': 11, 'ATA': 11, 'SXM': 11}
-years: {'2015': 46, '2016': 46, '2017': 46, '2018': 46, '2019': 46, '2020': 47, '2021': 47, '2022': 47, '2023': 47, '2024': 47, '2025': 47}
+===== CANDIDATE STATUS / YEAR PROFILE =====
+rows: 9361
+value_status: {'unclassified': 9361}
+years: {'1980': 144, '1981': 145, '1982': 145, '1983': 145, '1984': 145, '1985': 146, '1986': 147, '1987': 147, '1988': 147, '1989': 148, '1990': 152, '1991': 153, '1992': 168, '1993': 170, '1994': 172, '1995': 177, '1996': 178, '1997': 180, '1998': 181, '1999': 181, '2000': 191, '2001': 192, '2002': 193, '2003': 193, '2004': 194, '2005': 194, '2006': 194, '2007': 194, '2008': 194, '2009': 194, '2010': 194, '2011': 195, '2012': 195, '2013': 195, '2014': 196, '2015': 196, '2016': 196, '2017': 196, '2018': 196, '2019': 196, '2020': 195, '2021': 195, '2022': 195, '2023': 195, '2024': 195, '2025': 195, '2026': 191, '2027': 189, '2028': 188, '2029': 188, '2030': 188, '2031': 188}
+latest_actual_annual_data: {'2010': 31, '2019': 132, '2022': 104, '2023': 361, '2024': 1123, '2025': 6749, 'FY2020/21': 28, 'FY2021/22': 34, 'FY2024/25': 591, 'FY2025/26': 208}
 
-===== IDENTITIES WITH NO CANDIDATE OBSERVATIONS =====
-count: 45
-{'game_id': 'tc_003dbd71493240f5bd22a52176868806', 'country_name': 'Norfolk Island', 'source_lookup_code': 'NFK', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_07747651759a40219ba3f4710fa6ab11', 'country_name': 'Northern Mariana Islands', 'source_lookup_code': 'MNP', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_0900903d1eb84838aae9c039c9fd0da2', 'country_name': 'Pitcairn Islands', 'source_lookup_code': 'PCN', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_0b9688bbf4264477b023a0f2af180c2e', 'country_name': 'Anguilla', 'source_lookup_code': 'AIA', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_19acfc8e1cf44c25aa753729115d60d6', 'country_name': 'Cayman Islands', 'source_lookup_code': 'CYM', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_2493e62a2f78442e8fd4b8c0f0ca847c', 'country_name': 'French Polynesia', 'source_lookup_code': 'PYF', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_2d0dc3f3edb9467090ea74861dbc7b9e', 'country_name': 'Curaçao', 'source_lookup_code': 'CUW', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_3487eebc07114ff589974150237cae4f', 'country_name': 'Western Sahara', 'source_lookup_code': 'ESH', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_43796017cb7d4a279de2d9ed65c32c80', 'country_name': 'Jersey', 'source_lookup_code': 'JEY', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_4a3793e49e5441ae94aeec78cc887021', 'country_name': 'North Korea', 'source_lookup_code': 'PRK', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_4cb90152915543348c9a793599240eaa', 'country_name': 'Niue', 'source_lookup_code': 'NIU', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_504d6ccab85e4fbdad7ddd881dd6d87d', 'country_name': 'United States Virgin Islands', 'source_lookup_code': 'VIR', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_5551c0cc249f4e4e9ea6d57a0dacd2d5', 'country_name': 'Saint Pierre and Miquelon', 'source_lookup_code': 'SPM', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_576e758e1fbb456a973d63c58222dc30', 'country_name': 'Cuba', 'source_lookup_code': 'CUB', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_592dfefc0b584872853eedbd05b5e970', 'country_name': 'Aland', 'source_lookup_code': 'ALA', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_644aaabf37604038996e34c1bc91c970', 'country_name': 'Siachen Glacier', 'source_lookup_code': 'KAS', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_73138c628d2a4509bad88f66deb5b27b', 'country_name': 'British Indian Ocean Territory', 'source_lookup_code': 'IOT', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_7cd2130353a64e57bd3782773a8e12c7', 'country_name': 'Indian Ocean Territories', 'source_lookup_code': 'IOA', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_815eb2563fde4a4cb077173220e2a533', 'country_name': 'Falkland Islands', 'source_lookup_code': 'FLK', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_9a78f2eebcc24906a5c67581c0c3895e', 'country_name': 'Somaliland', 'source_lookup_code': 'SOL', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_9bd5e00f9fc944edbf2eb3097e413328', 'country_name': 'Saint Helena', 'source_lookup_code': 'SHN', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_9f1be169ba5347ff81384c532820401b', 'country_name': 'Wallis and Futuna', 'source_lookup_code': 'WLF', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_a8a10a8bdf13428593d1b0ab46990697', 'country_name': 'Vatican', 'source_lookup_code': 'VAT', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_ab146a31fa9243bc81a35e9cfaa1ed05', 'country_name': 'American Samoa', 'source_lookup_code': 'ASM', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_b61ca098adb74efc84564fd9fa800bf8', 'country_name': 'Ashmore and Cartier Islands', 'source_lookup_code': 'ATC', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_bb1615e8a28b4b3f8a248ca8a5e6fa6d', 'country_name': 'Montserrat', 'source_lookup_code': 'MSR', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_be9b1fd97db1475191612805ba7f9920', 'country_name': 'Guernsey', 'source_lookup_code': 'GGY', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_c08d501548d346c3ad3e27b514e1e902', 'country_name': 'South Georgia and the Islands', 'source_lookup_code': 'SGS', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_c3c21e18d6e94254a4ca4a009530bac9', 'country_name': 'Antarctica', 'source_lookup_code': 'ATA', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_c84e6493c6fc4373842ee9ba3a509db0', 'country_name': 'French Southern and Antarctic Lands', 'source_lookup_code': 'ATF', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_cbf271e54b9c4e3fbaa93c291355f6f7', 'country_name': 'Greenland', 'source_lookup_code': 'GRL', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_cc0688860b8848ddb5f52395162d9b71', 'country_name': 'Saint Martin', 'source_lookup_code': 'MAF', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_d0017ca5d5084ceeaedc02b6d436fb39', 'country_name': 'Cook Islands', 'source_lookup_code': 'COK', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_d3e7f81572fd44ab920bfc066d592873', 'country_name': 'Northern Cyprus', 'source_lookup_code': 'CYN', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_d608e7f9138e459ab3b96263618ae407', 'country_name': 'Faroe Islands', 'source_lookup_code': 'FRO', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_d79e2777be2741c3bcf291431e2e4efb', 'country_name': 'Sint Maarten', 'source_lookup_code': 'SXM', 'coverage_statuses': ['wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_d81e2d4c4b934f57a67f380b2fdaec9d', 'country_name': 'Bermuda', 'source_lookup_code': 'BMU', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_da92472e602c45c69d331812fa5193d8', 'country_name': 'Monaco', 'source_lookup_code': 'MCO', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_e0f0ed8d4d284acd8b41435902f2a6cc', 'country_name': 'Saint Barthelemy', 'source_lookup_code': 'BLM', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_e7d7320224a64229881b6b49ef1e74c3', 'country_name': 'New Caledonia', 'source_lookup_code': 'NCL', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_e86aec8164734ab8be1b207a743e6ea4', 'country_name': 'Heard Island and McDonald Islands', 'source_lookup_code': 'HMD', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_ea6ba8b48782477bad74e946641a16ae', 'country_name': 'Turks and Caicos Islands', 'source_lookup_code': 'TCA', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_f3832fd029cb445483c26654bddadfac', 'country_name': 'British Virgin Islands', 'source_lookup_code': 'VGB', 'coverage_statuses': ['neither_source_present'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_f94f97a8ffc24ef18872cadb5736ea2b', 'country_name': 'Isle of Man', 'source_lookup_code': 'IMN', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
-{'game_id': 'tc_ff2aa3765a3d4ee4a6d0c0bd0fb61ddd', 'country_name': 'Guam', 'source_lookup_code': 'GUM', 'coverage_statuses': ['neither_source_present', 'wdi_only'], 'imf_presence_values': ['False'], 'row_count': 11}
+===== CROSSWALK STRUCTURE =====
+root_type: dict
+root_keys: ['dataset', 'mapping_policy', 'mappings', 'review_approval', 'schema_version', 'source_key']
+entry_count: 1
+entry_keys: ['evidence_url', 'game_id', 'match_method', 'review_note', 'source_id', 'source_name']
 
-===== CANDIDATE IDENTITIES WITH PARTIAL WINDOW COVERAGE =====
-tc_f9d7128c5ef04c6f955f43f9bcc56a0c ['2015', '2016', '2017', '2018', '2019']
+===== CROSSWALK METHOD COUNTS =====
+match_method: {'reviewed_manual': 1}
+status: {'': 1}
+review_status: {'': 1}
 
-===== WBG CROSSWALK IMPACT =====
-WBG candidate rows: 32
-WBG candidate years: ['1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
-WBG window observations: 11
+===== WBG CROSSWALK ENTRY =====
+{"evidence_url": "https://data.imf.org/-/media/iData/External-Storage/Documents/C4182C5C54794FC48892DE8F6C74FF82/en/October-2026-WEO-Database-Appendix.pdf", "game_id": "tc_50c420df8b2c4c6eaae47d795f9a1ea2", "match_method": "reviewed_manual", "review_note": "Explicit project-owner-approved, field-15-only crosswalk. The IMF October 2026 WEO Appendix identifies WBG as West Bank and Gaza and classifies it as an individual economy entry. The existing project UN M49 snapshot matches the Palestine registry identity to State of Palestine (M49 275, PS/PSE) via a reviewed name variant. Target game_id is persistent and exact. This source-specific mapping does not verify or modify the registry ISO assignment status.", "source_id": "WBG", "source_name": "West Bank and Gaza"}
+
+===== CANDIDATE IDENTITY COUNT =====
+distinct_game_ids: 197
+distinct_source_codes: 197
