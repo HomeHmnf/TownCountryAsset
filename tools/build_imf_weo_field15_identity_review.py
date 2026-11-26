@@ -728,7 +728,7 @@ def write_outputs(result: dict[str, Any], output_root: Path = OUTPUT_ROOT, now: 
     _write_csv(target / "field_15_identity_review_register_final.csv", REVIEW_FIELDS, rows)
     (target / "m49_faq_snapshot.html").write_text(result["m49_faq_html"], encoding="utf-8")
     (target / "m49_faq_provenance.json").write_text(
-        json.dumps(result["m49_faq_provenance"], ensure_ascii=False, indent=2) + "\\n",
+        json.dumps(result["m49_faq_provenance"], ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
     summary = dict(result["summary"])
@@ -746,7 +746,7 @@ def write_outputs(result: dict[str, Any], output_root: Path = OUTPUT_ROOT, now: 
         "# IMF WEO field 15 identity review — automatic generation",
         "",
         f"- Generated (UTC): {summary['generated_at_utc']}",
-        "- Inputs: immutable IMF WEO CSV and Appendix, UN M49 HTML snapshot, canonical registry, approved WBG crosswalk.",
+        "- Inputs: immutable IMF WEO CSV and Appendix, UN M49 HTML snapshot, live official M49 FAQ snapshot, canonical registry, approved WBG crosswalk.",
         "- No manually prepared identity inventory, batch register, or aggregate exclusion register was read.",
         "",
         "| Measure | Count |",
@@ -783,6 +783,7 @@ def write_outputs(result: dict[str, Any], output_root: Path = OUTPUT_ROOT, now: 
         "- `identity_exceptions.csv`: unresolved identity exceptions.",
         "- `field_15_identity_review_register_batch01.csv` through `batch10.csv`: all cumulative batches generated in one run.",
         "- `field_15_identity_review_register_final.csv`: final 196-row register.",
+        "- `m49_faq_snapshot.html` and `m49_faq_provenance.json`: retrieved FAQ evidence and fingerprint.\n"
         "- `summary.json`: counts and source fingerprints.",
     ]
     (target / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
