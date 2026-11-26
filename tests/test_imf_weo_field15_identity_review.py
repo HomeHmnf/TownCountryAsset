@@ -9,6 +9,7 @@ from tools.build_imf_weo_field15_identity_review import (
     REVIEW_FIELDS,
     IdentityReviewError,
     _registry_m49_name_index,
+    _validate_m49_faq_html,
     _validate_wbg_crosswalk,
     parse_imf_appendix_codes,
     read_weo_ngdpd_inventory,
@@ -63,6 +64,19 @@ def test_appendix_parser_detects_official_codes_and_kosovo_discrepancy():
     assert {"AAA", "TWN", "WBG", "UVK"} <= codes
     assert "KOS" not in codes
     assert 10 in parsed_pages
+
+
+def test_m49_faq_requires_statistical_codes_for_taiwan_and_kosovo():
+    faq = (
+        "<p>For strictly statistical purposes, the numerical code 158 can be used "
+        "to represent this area.</p>"
+        "<p>For strictly statistical purposes, the numerical code 412 can be used "
+        "to represent this area.</p>"
+    )
+    _validate_m49_faq_html(faq)
+
+    with pytest.raises(IdentityReviewError, match="code 412"):
+        _validate_m49_faq_html(faq.replace("412", "413"))
 
 
 def test_registry_targets_are_resolved_by_m49_names_not_registry_codes():
