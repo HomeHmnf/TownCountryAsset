@@ -377,6 +377,22 @@ def verify_project_acquisition(path: Path, expected_source_sha: str) -> dict[str
     finally:
         con.close()
 
+def verify_candidate_game_ids(observations: list[dict[str, Any]], database: Path) -> dict[str, Any]:
+    expected = {row["game_id"] for row in observations}
+    con = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
+    try:
+        present = {row[0] for row in con.execute(
+            "SELECT game_id FROM countries WHERE game_id IN (" + ",".join("?" for _ in expected) + ")",
+            tuple(sorted(expected)),
+        )} if expected else set()
+        missing = sorted(expected - present)
+        if missing:
+            raise ReviewError("Candidate targets are absent from canonical Game DB countries: " + ", ".join(missing[:20]))
+        return {"candidate_game_ids": len(expected), "canonical_game_ids_present": len(present), "missing_game_ids": []}
+    finally:
+        con.close()
+
+
 def verify_game_database(candidate: Path, database: Path, approval_id: str) -> dict[str, Any]:
     expected = read_csv(candidate / "observations.csv")
     summary = json.loads((candidate / "candidate.json").read_text(encoding="utf-8"))
@@ -544,7 +560,8 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
     if any(not r.get("disposition") or not r.get("owner_rationale") for r in actual_unmapped):
         raise ReviewError("Every unmapped source identity must have an explicit disposition and rationale")
     candidate = write_deterministic_candidate(observations, exceptions, summary, review_root / "candidate")
-    prep = prepare_application(candidate, database_path=database, source_path=RAW,
+    canonical_identity_check = verify_candidate_game_ids(observations, database)
+    prep = prepare_application(candidate, database_path=database,
         identity_path=REGISTRY, crosswalk_path=derived_crosswalk,
         migration_path=MIGRATION, acquisition_record_path=ACQUISITION)
     approval_id, status = prep["approval_id"], prep["status"]
@@ -571,6 +588,7 @@ def apply_review(path: Path, actor: str, database: Path, project_database: Path)
         "candidate_observations": len(observations),
         "candidate_exceptions": len(exceptions), "approval_id": approval_id,
         "approval_status": "applied", "application": application,
+        "canonical_identity_preflight": canonical_identity_check,
         "game_database_verification": game_check,
         "project_database_acquisition_verification": project_check,
         "original_crosswalk_modified": False, "identity_registry_modified": False,
