@@ -84,3 +84,25 @@ The application is bound to the review document SHA-256 through the derived cros
 ```fish
 uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_identity_review.py tests/test_imf_weo_field15_review_workflow.py tests/test_manage_imf_weo_field15_review.py tests/test_approve_imf_weo_field15_all.py
 ```
+
+
+## 7. Completed application and verification — 2026-11-26
+
+The field-15 bulk owner approval and application have completed. The immutable verification report is:
+
+`reports/sources/imf-weo-field15-reviewed-candidate/656073575edb005a/verification_report.json`
+
+Approval ID: `imf-weo-oct2026-1eb2e784bf93821c`; approval status: `applied`. The 195 proposals were approved by `project-owner` on 2026-11-26 for IMF WEO October 2026 NGDPD / WP1.5 field 15 only. The WBG and KOS crosswalk decisions and 13 aggregate exclusions (665 populated values) were reused.
+
+Verification results:
+
+- 9,361 candidate and actual Game DB observations across 197 game identities.
+- 32 observations inserted; 9,329 exact existing observations unchanged; zero existing rows outside the candidate.
+- All 197 candidate game IDs present in the canonical identity store.
+- 13 aggregate exceptions retained; zero held or newly excluded individual identities.
+- 32 existing KOS observations reconciled within the candidate.
+- Game DB SQLite integrity and foreign-key checks passed; approval event history is `proposed`, `approved`, `applied`.
+- Project DB acquisition ID 5 and both source artifacts independently verified; Project DB integrity and foreign-key checks passed. No Project DB observation rows were written because it is the acquisition/provenance ledger.
+- Original crosswalk and canonical identity registry unchanged.
+
+All observation statuses remain `unclassified`; the dataset import ledger remains `candidate`. The applied field-scoped approval is distinct from semantic classification. The identity-review and technical-application workflow is complete, but do not mark semantic field review complete or start field 16 until the separate semantic review/closure requirements are satisfied and documented.
