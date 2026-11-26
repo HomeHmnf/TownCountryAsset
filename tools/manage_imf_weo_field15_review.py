@@ -427,7 +427,7 @@ def verify_existing_observations_are_candidate_subset(candidate: Path, database:
     con.row_factory = sqlite3.Row
     try:
         existing = con.execute(
-            """SELECT game_id, source_country_code, indicator_code, observation_year
+            """SELECT *
                FROM imf_weo_historical_observations
                WHERE source_version=? AND source_sha256=? AND field_id=15""",
             (RELEASE, summary["source_sha256"]),
