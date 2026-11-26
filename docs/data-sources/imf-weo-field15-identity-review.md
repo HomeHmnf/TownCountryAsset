@@ -143,7 +143,7 @@ uv run python tools/manage_imf_weo_field15_review.py generate-review
 
 This creates:
 
-`reports/sources/imf-weo-field15-identity-review/field_15_owner_review_kos_approved.md`
+`reports/sources/imf-weo-field15-identity-review/field_15_owner_review_kos_approved_registry_state_qualified.md`
 
 Generation refuses to overwrite an existing review. It fingerprints the original IMF CSV and Appendix, M49 source snapshots and FAQ evidence, automatic source-derived inventory/registers, canonical identity registry, existing WBG crosswalk, prior-decision documentation, acquisition record and importer migration. It performs no database writes and creates no approval record.
 
