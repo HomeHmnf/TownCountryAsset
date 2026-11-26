@@ -60,7 +60,9 @@ def test_appendix_parser_detects_official_codes_and_kosovo_discrepancy():
         pages.append(f"--- PAGE {number} ---\n{body}")
     text = "\n".join(pages)
 
-    codes, parsed_pages = parse_imf_appendix_codes(text, {"AAA", "TWN", "WBG", "KOS", "G001"})
+    codes, parsed_pages = parse_imf_appendix_codes(
+        text, {"AAA", "TWN", "WBG", "KOS", "G001"}, expected_count=4
+    )
     assert {"AAA", "TWN", "WBG", "UVK"} <= codes
     assert "KOS" not in codes
     assert 10 in parsed_pages
