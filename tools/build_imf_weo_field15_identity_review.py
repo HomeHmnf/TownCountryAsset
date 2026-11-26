@@ -790,7 +790,7 @@ def write_outputs(result: dict[str, Any], output_root: Path = OUTPUT_ROOT, now: 
         "## Governance",
         "",
         "- All 195 generated mappings remain pending explicit project-owner approval.",
-        "- KOS remains held because WEO uses KOS while the October 2026 IMF Appendix identifies Kosovo as UVK. The M49 FAQ's statistical-use code 412 is recorded as evidence but does not resolve the IMF code discrepancy.",
+        "- KOS is resolved by the explicit owner-approved field-15-only crosswalk to the existing Kosovo game_id. The WEO KOS / IMF Appendix UVK discrepancy remains documented as a source-code qualification; no ISO/M49 assignment is inferred or changed.",
         "- TWN uses M49 FAQ numerical code 158 strictly for statistical purposes; no sovereignty determination is made.",
         "- WBG and KOS remain separately owner-approved field-15-only mappings; the KOS/UVK Appendix discrepancy is documented without changing ISO/M49 assignments.",
         "- Registry source IDs and registry ISO fields are not used to establish identity; registry targets are resolved by official M49 English names and explicit reviewed name variants.",
