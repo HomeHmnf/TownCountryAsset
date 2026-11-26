@@ -554,7 +554,7 @@ def write_deterministic_candidate(observations: list[dict[str, Any]], exceptions
 def apply_review(path: Path, actor: str, database: Path, project_database: Path) -> dict[str, Any]:
     meta, rows, document = parse_review(path, True)
     validate_fingerprints(meta)
-    validate_review_against_source_register(meta, rows)
+    validate_review_against_source_register(meta, rows, document)
     project_preflight = verify_project_acquisition(project_database, meta["source_sha256"])
     approved = [r for r in rows if r["decision"].upper() == "APPROVE"]
     if not approved:
