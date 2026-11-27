@@ -1,6 +1,6 @@
 # IMF WEO field 15 semantic status review
 
-**Status:** deterministic semantic proposal build, post-fix tests and complete proposal CSV audit passed on 2026-11-27. The 9,361-row proposal is ready for explicit owner semantic review; approval and any subsequent application remain pending. No semantic statuses have been written to the Game DB.
+**Status:** the exact 9,361-row semantic proposal was explicitly approved by the project owner on 2026-11-27. The approval is recorded in `reports/sources/imf-weo-field15-semantic-review/20261127T152134Z/owner_semantic_approval.md`. Canonical status application is not yet authorized or performed; database rows remain `unclassified`.
 
 ## Scope and evidence
 
@@ -150,9 +150,9 @@ The second command is read-only preflight; it must report 9,361 rows, all `uncla
 
 ## Remaining gate
 
-1. Implement and test a separate guarded application path bound to the exact approved proposal and owner-approval record.
-2. Run read-only application preflight against the current Game DB and a fresh, independently verified backup. The preflight must prove all 9,361 target rows match the approved proposal and remain `unclassified`.
-3. Obtain explicit authorization for the actual status write. Apply transactionally, recording an application approval/event, and verify all 9,361 statuses, checksums, SQLite integrity and foreign keys independently.
+1. Run the new focused application-tool tests and the default read-only Game DB preflight.
+2. If both pass, obtain explicit authorization for the actual status write and create a fresh verified backup. Apply transactionally, recording an application approval/event.
+3. Independently verify all 9,361 statuses, source checksums, import status, SQLite integrity and foreign keys.
 4. Complete field-15 closeout documentation and all remaining field-level checks before beginning field 16.
 
 Do not alter the existing importer to accept classified candidate rows: its requirement that imported source observations remain `unclassified` is intentional. Field 16 remains blocked.
