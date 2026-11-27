@@ -284,3 +284,16 @@ The editable review and immutable baseline now include `existing_project_source_
 Crosswalk evidence is matched by source identifier and/or the exact persistent `game_id`; it is not used to infer or rewrite identity mappings. In particular, an approved WDI or WPP mapping remains scoped to that provider, an ICP candidate remains pending, and the existing IMF WEO WBG/KOS approval remains field 15 only. None is promoted to field-16 approval. The existing owner-review package at `20261127T183743Z` remains immutable historical evidence; generate a new timestamped package after syncing the enriched builder.
 
 Focused regression coverage now checks that the history sources are displayed, pending mappings remain pending, field-15 scope is retained verbatim (including the unresolved WBG record), previous identity decisions are surfaced, and existing crosswalk targets are compared with the proposed persistent game IDs. The workflow remains prepare-only: no approval creation, registry/crosswalk mutation or database write.
+
+### Field-16 owner-review evidence tiers — 2026-11-27
+
+The owner-review builder now assigns each of the 195 exact-registry proposals an explicit `identity_evidence_tier`, with supporting dataset columns and manifest counts. Classification is intentionally conservative:
+
+- `approved_source_corroboration`: at least one same-game-ID, owner-approved WDI or UN WPP mapping. These are independent provider-scoped precedents, not IMF field-16 approvals.
+- `pending_candidate_only`: no approved WDI/WPP corroboration, but a same-game-ID ICP mapping remains pending.
+- `field_scoped_mapping_only`: no approved WDI/WPP corroboration or pending ICP candidate, but an approved IMF WEO mapping exists. Its recorded field scope remains visible and is not treated as field-16 approval.
+- `registry_match_only`: none of the above; the proposal is supported only by the exact unique registry current-source-ID match used to create the proposal.
+
+If a row has both approved WDI/WPP corroboration and pending ICP evidence, the tier is `approved_source_corroboration`; the separate `pending_candidate_datasets` column still exposes the pending evidence. The row also retains the full `existing_project_source_mappings` JSON and prior identity-decision evidence. Manifest counts report all four mutually exclusive tiers and the overlapping approved, pending and field-scoped evidence counts. No tier creates an approval, changes a source crosswalk or modifies either database.
+
+The regression tests cover all four tiers, including mixed approved-plus-pending evidence and a field-15-only IMF mapping. Regenerate a new timestamped review package after syncing; preserve the committed `20261127T185010Z` package as the prior evidence snapshot.
