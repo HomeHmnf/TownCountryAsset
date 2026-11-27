@@ -150,3 +150,64 @@ def test_approve_requires_exact_target_and_evidence_reference(tmp_path: Path, mo
     write_csv(review_dir / "owner_review.csv", edited)
     with pytest.raises(OwnerReviewError, match="requires an evidence reference"):
         validate_owner_decisions(review_dir)
+
+
+def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(tmp_path: Path) -> None:
+    input_dir, registry_path = fixture(tmp_path)
+    history_dir = tmp_path / "history"
+    history_dir.mkdir()
+    payloads = {
+        "wdi": {
+            "dataset": "world_bank_wdi",
+            "review_approval": {"status": "approved", "scope": "WDI crosswalk only", "approval_record": "wdi-review.md"},
+            "mappings": [{"source_id": "C000", "game_id": "game-000", "source_name": "Country C000", "match_method": "reviewed_manual", "evidence_url": "https://example.invalid/wdi"}],
+        },
+        "wpp": {
+            "dataset": "un_wpp",
+            "review_approval": {"status": "approved", "scope": "UN WPP crosswalk only", "approval_record": "wpp-review.md"},
+            "mappings": [{"source_id": "999", "game_id": "game-000", "source_name": "Country C000", "match_method": "reviewed_manual", "evidence_url": "https://example.invalid/wpp"}],
+            "mapping_policy": {},
+        },
+        "icp": {
+            "dataset": "world_bank_icp",
+            "review_approval": {"status": "pending", "scope": "ICP candidate only"},
+            "mappings": [{"source_country_code": "C000", "game_id": "game-000", "source_country_name": "Country C000", "review_status": "pending", "match_method": "candidate"}],
+        },
+        "imf_weo": {
+            "dataset": "imf_weo",
+            "review_approval": {"status": "approved", "scope": "Field 15 NGDPD only", "approval_record": "imf-field15.md"},
+            "mappings": [{"source_id": "C000", "game_id": "game-000", "source_name": "Country C000", "match_method": "reviewed_manual"}],
+        },
+        "edge_cases": {
+            "policy_version": "identity-edge-review-v1",
+            "reviewed_at": "2026-11-20T00:00:00Z",
+            "records": [{
+                "source_id": "C000", "game_id": "game-000", "name": "Country C000",
+                "iso": {"assignment_status": "verified"},
+                "entity": {"entity_type": "country"},
+                "catalogue": {"decision_status": "approved"},
+                "naming": {"decision_status": "approved", "aliases_en": ["C000"]},
+            }],
+        },
+    }
+    paths = {}
+    for key, payload in payloads.items():
+        path = history_dir / f"{key}.json"
+        path.write_text(json.dumps(payload), encoding="utf-8")
+        paths[key] = path
+
+    rows, metadata = build_owner_review(input_dir, registry_path, paths)
+    first = rows[0]
+    mappings = json.loads(first["existing_project_source_mappings"])
+    decisions = json.loads(first["prior_project_identity_decision"])
+
+    assert {item["dataset"] for item in mappings} == {"world_bank_wdi", "un_wpp", "world_bank_icp", "imf_weo"}
+    imf = next(item for item in mappings if item["dataset"] == "imf_weo")
+    assert imf["approval_status"] == "approved"
+    assert imf["approval_scope"] == "Field 15 NGDPD only"
+    assert next(item for item in mappings if item["dataset"] == "world_bank_icp")["approval_status"] == "pending"
+    assert decisions["catalogue"]["decision_status"] == "approved"
+    assert metadata["identity_history_policy"].startswith("source-scoped review evidence only")
+    assert set(metadata["identity_history_files"]) == set(paths)
+    assert metadata["approval_created"] is False
+    assert metadata["database_written"] is False
