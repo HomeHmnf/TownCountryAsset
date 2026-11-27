@@ -162,6 +162,15 @@ def target_tuple(row: sqlite3.Row) -> tuple:
 
 def database_rows(connection: sqlite3.Connection) -> dict[tuple, sqlite3.Row]:
     result = {}
+    total_release_rows = connection.execute(
+        """SELECT COUNT(*) AS n FROM imf_weo_historical_observations
+           WHERE field_id=15 AND indicator_code='NGDPD' AND source_version=?""",
+        (SOURCE_VERSION,),
+    ).fetchone()["n"]
+    if int(total_release_rows) != EXPECTED_ROWS:
+        raise SemanticApplyError(
+            f"Field-15 release row count differs from the approved universe: {total_release_rows}"
+        )
     records = connection.execute(
         """SELECT observation_id, game_id, source_country_code, source_country_name,
                   indicator_code, field_id, observation_year, value, value_status,
@@ -202,10 +211,20 @@ def verify_database(connection: sqlite3.Connection, rows: list[dict]) -> dict:
         )
         if not all(checks):
             raise SemanticApplyError(f"Canonical row differs from approved proposal or is not unclassified: {key}")
+    imports = connection.execute(
+        """SELECT import_status FROM dataset_imports
+           WHERE dataset='world_economic_outlook' AND sha256=?""",
+        (DEFAULT_SOURCE_SHA256,),
+    ).fetchall()
+    if len(imports) != 1 or imports[0]["import_status"] != "candidate":
+        raise SemanticApplyError("Expected exactly one matching WEO dataset import in candidate status")
     issues = validate_database(connection)
     if issues:
         raise SemanticApplyError("Database integrity preflight failed: " + "; ".join(issues))
-    return {"rows": len(actual), "all_unclassified": True, "integrity": "ok", "foreign_keys": "ok"}
+    return {
+        "rows": len(actual), "all_unclassified": True, "integrity": "ok",
+        "foreign_keys": "ok", "dataset_import_status": "candidate",
+    }
 
 
 def verify_backup(backup_path: Path, backup_sha256: str, rows: list[dict], database_path: Path) -> dict:
@@ -299,13 +318,6 @@ def run(*, review_dir: Path, database_path: Path, apply: bool = False,
             if cursor.rowcount != 1:
                 raise SemanticApplyError(f"Concurrent or conflicting status update detected: {key}")
             updated += 1
-        counts = dict(connection.execute(
-            """SELECT value_status, COUNT(*) AS n
-               FROM imf_weo_historical_observations
-               WHERE field_id=15 AND indicator_code='NGDPD' AND source_version=? AND source_sha256=?
-               GROUP BY value_status""",
-            (SOURCE_VERSION, DEFAULT_SOURCE_SHA256),
-        ).fetchall())
         counts = {row["value_status"]: int(row["n"]) for row in connection.execute(
             """SELECT value_status, COUNT(*) AS n
                FROM imf_weo_historical_observations
