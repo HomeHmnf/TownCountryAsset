@@ -49,7 +49,8 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
     if verify_snapshot and (raw_hash != EXPECTED_SHA256 or byte_count != EXPECTED_BYTES):
         raise CandidateError("IMF WEO bytes differ from the recorded October 2026 snapshot")
     # IMF WEO identities resolve only through its explicitly reviewed crosswalk.
-    identities: dict[str, set[str]] = {}
+    # Crosswalk approvals are scoped to individual WP1.5 fields.
+    identities: dict[tuple[int, str], set[str]] = {}
     crosswalk_hash = None
     if crosswalk_path is not None:
         try:
@@ -69,9 +70,26 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
         # The existing WBG and KOS crosswalk approvals are explicitly scoped
         # to field 15 / NGDPD. Never reuse them for another WEO indicator.
         # Registry source IDs and ISO alpha-3 values remain prohibited fallbacks.
-        if field_ids is None or 15 in field_ids:
-            for mapping in crosswalk.mappings:
-                identities[mapping.source_id] = {mapping.game_id}
+        # Mapping-level field_ids are explicit scope. For the existing
+        # owner-approved WBG/KOS crosswalk, omitted field_ids default to
+        # field 15 only, matching its recorded owner approval.
+        crosswalk_document = json.loads(crosswalk_path.read_text(encoding="utf-8"))
+        scope_by_source = {
+            item["source_id"]: item.get("field_ids", [15])
+            for item in crosswalk_document.get("mappings", [])
+            if isinstance(item, dict) and isinstance(item.get("source_id"), str)
+        }
+        for mapping in crosswalk.mappings:
+            approved_fields = scope_by_source.get(mapping.source_id, [15])
+            if (not isinstance(approved_fields, list)
+                    or not approved_fields
+                    or any(type(value) is not int or value not in INDICATORS.values()
+                           for value in approved_fields)):
+                raise CandidateError(
+                    f"Invalid field scope for IMF WEO crosswalk mapping {mapping.source_id}"
+                )
+            for approved_field in approved_fields:
+                identities[(approved_field, mapping.source_id)] = {mapping.game_id}
         crosswalk_hash = sha256(crosswalk_path)
     if field_ids is not None:
         unsupported_fields = sorted(field_ids - set(INDICATORS.values()))
@@ -113,7 +131,8 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
                     raise CandidateError(f"Duplicate WEO series code: {series_code}")
                 seen_series.add(series_code)
                 source_code = parts[0]
-                matches = identities.get(source_code, set())
+                field_id = selected_indicators[parts[1]]
+                matches = identities.get((field_id, source_code), set())
                 if len(matches) != 1:
                     exceptions.append({
                         "line_number": line_number, "series_code": series_code,
@@ -123,7 +142,6 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
                     })
                     continue
                 game_id = next(iter(matches))
-                field_id = selected_indicators[parts[1]]
                 series_count[parts[1]] += 1
                 for year_text in year_columns:
                     raw_value = (row.get(year_text) or "").strip()
@@ -192,7 +210,7 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
         "year_range": [min(years), max(years)] if years else None,
         "exception_count": len(exceptions),
         "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
-        "identity_policy": "explicit_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback",
+        "identity_policy": "explicit_field_scoped_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback",
         "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
         "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
         "database_written": False,
