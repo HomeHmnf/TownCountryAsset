@@ -1,0 +1,78 @@
+{
+  "approval_created": false,
+  "batch_sizes": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    15
+  ],
+  "crosswalk_game_id_conflict_rows": 0,
+  "database_written": false,
+  "decision_vocabulary": [
+    "APPROVE",
+    "REJECT",
+    "HOLD"
+  ],
+  "existing_project_mapping_rows": 173,
+  "field_id": 16,
+  "identity_history_files": {
+    "edge_cases": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/config/identity_edge_case_reconciliation.json",
+      "sha256": "573b3209a2ecbb57361d96bcaa1f499be2beae5ef59667d60304230146813715"
+    },
+    "icp": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data/manual/source_crosswalks/world_bank_icp.json",
+      "sha256": "a35151f88dc188d1773a19878e7559facc51aef111b050bd15e13e883b9b5961"
+    },
+    "imf_weo": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data/manual/source_crosswalks/imf_weo.json",
+      "sha256": "30373977642d84fe137141acf5af5c058f5c18dbb4302c778292895b883a53c8"
+    },
+    "wdi": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json",
+      "sha256": "b56997a0ec070f824d83772e4534d0ff8c0c509b7e9625bf2a1a6b0a1304a221"
+    },
+    "wpp": {
+      "path": "/home/hmnf/Projects/Python/TownAndCountry/data/manual/source_crosswalks/un_wpp.json",
+      "sha256": "d7d7c18cefa8f3437f43c6abd1f2c8bbcafdd95354ff84c06324b0268c4adf66"
+    }
+  },
+  "identity_history_policy": "source-scoped review evidence only; approval scope is displayed and never promoted to IMF field-16 approval",
+  "indicator_code": "NGDPDPC",
+  "input_manifest_sha256": "769bc1bf58e35e12e237c6a0fe2e5145f1257e1ec49fca74a1b09f64fe0f7655",
+  "input_proposals_sha256": "c4feaac040a8a3fb2d528852026f9ea5e0106bddc395da6aa8e006ae98604311",
+  "input_review_directory": "reports/sources/imf-weo-field16-identity-review/20261127T181310Z",
+  "manual_review_flag_counts": {
+    "iso_assignment_not_approved": 195,
+    "registry_entity_type_unreviewed": 195,
+    "registry_status_not_approved": 195,
+    "source_registry_name_difference": 65,
+    "territory_or_disputed_identity_manual_review": 6
+  },
+  "name_comparison_counts": {
+    "exact_normalized_match": 129,
+    "name_difference_requires_review": 65,
+    "registry_alias_match": 1
+  },
+  "owner_review_baseline_sha256": "04f26df99739e7259209892e7642b9be82a89d7f21df618c03e2642d1911428b",
+  "owner_review_template_sha256": "04f26df99739e7259209892e7642b9be82a89d7f21df618c03e2642d1911428b",
+  "prior_identity_decision_rows": 2,
+  "proposal_count": 195,
+  "registry_path": "config/country_identity_registry.json",
+  "registry_sha256": "329333a8e51e9c6bb50d9ce7a067ce7073174a2c477583374401a100de56f532",
+  "review_directory": "reports/sources/imf-weo-field16-owner-review/20261127T185010Z",
+  "schema_version": 1,
+  "source_release": "october_2026",
+  "unresolved_identity_codes": [
+    "SSD",
+    "WBG"
+  ],
+  "unresolved_identity_count": 2,
+  "unresolved_identity_history_sha256": "5e87e2c85893191102257fa8e65768c530cfbdf27e53b5daf7fb19643bb40b6f"
+}
