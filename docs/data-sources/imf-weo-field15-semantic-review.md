@@ -1,6 +1,6 @@
 # IMF WEO field 15 semantic status review
 
-**Status:** deterministic semantic proposal build completed and committed on 2026-11-27; 9,361/9,361 candidate observations reconciled with zero unresolved series. Focused test rerun result has not yet been recorded here. Owner semantic review and any subsequent application remain pending. No semantic statuses have been written to the Game DB.
+**Status:** deterministic semantic proposal build, post-fix tests and complete proposal CSV audit passed on 2026-11-27. The 9,361-row proposal is ready for explicit owner semantic review; approval and any subsequent application remain pending. No semantic statuses have been written to the Game DB.
 
 ## Scope and evidence
 
@@ -82,6 +82,8 @@ uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_semantic_revie
 
 Tests cover integer cutoffs, zero/all-estimated metadata, fiscal-year ending-year parsing, malformed metadata, raw/candidate reconciliation, and rejection of candidate rows that are already classified.
 
+**Post-fix owner-run result — 2026-11-27:** `uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_semantic_review.py` returned **12 passed in 0.03s**. This confirms the fiscal-pattern correction in `ec38d21` and the focused regression suite.
+
 ## Owner-run build result — 2026-11-27
 
 The owner ran `tools/build_imf_weo_field15_semantic_review.py` twice. Both executions returned the same complete result and wrote no database rows or approvals:
@@ -99,11 +101,23 @@ The owner ran `tools/build_imf_weo_field15_semantic_review.py` twice. Both execu
 
 The generated `summary.json`, `summary.md` and `classification_proposals.csv` were committed in repository commit `7e064a4`. The identical second build confirms deterministic output for the recorded source and candidate fingerprints. The proposal is still a proposal; this result does not authorize or perform semantic status application.
 
+### Complete proposal CSV audit — 2026-11-27
+
+The owner ran a read-only audit over the complete committed `classification_proposals.csv` and reported **PASS**:
+
+- Proposal SHA-256 exactly matches `summary.json`: `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`.
+- 9,361 rows and 9,361 unique `(source_country_code, observation_year)` keys.
+- 197 distinct source series; year range 1980–2031.
+- Status counts exactly 8,168 `observed` and 1,193 `estimated`.
+- Rule counts exactly 178 `integer_latest_actual_year` series and 19 `fiscal_year_ending_year` series.
+- Every proposed status agrees with its recorded cutoff; every current status remains `unclassified`.
+
+The audit therefore validates proposal-file integrity, uniqueness, coverage and internal cutoff consistency. It does not independently establish a different IMF semantic interpretation, constitute owner approval, or change the database.
+
 ## Remaining gate
 
-1. Record the focused test rerun result; the initial run had five failures caused by the fiscal-pattern defect, which was corrected in commit `ec38d21`. Do not describe the tests as passing until the owner supplies the post-fix result.
-2. Inspect the complete committed proposal CSV, including row uniqueness, status counts, year coverage and fiscal-year cutoff assignments, against the recorded hashes.
-3. Owner-review and explicitly approve the semantic rule and exact proposal artifact.
-4. Only after explicit owner approval, design a separate guarded status-application workflow with exact artifact fingerprints, backup/preflight and independent post-write verification.
+1. **Owner semantic decision:** review and explicitly approve or reject the classification convention and this exact proposal artifact (proposal SHA-256 above). The 8,168 / 1,193 split is not approved merely because the automated checks passed.
+2. After explicit approval, design a separate guarded status-application workflow with exact artifact fingerprints, verified backup/preflight, transactional application and independent post-write verification.
+3. Complete field-15 closeout documentation and all remaining field-level checks before beginning field 16.
 
-Do not alter the existing importer to accept classified candidate rows: its requirement that imported source observations remain `unclassified` is intentional. Do not write statuses to the canonical database or begin field 16 until the field-15 semantic and closeout gates are complete.
+Do not alter the existing importer to accept classified candidate rows: its requirement that imported source observations remain `unclassified` is intentional. No semantic status write has been performed or authorized. Field 16 remains blocked.
