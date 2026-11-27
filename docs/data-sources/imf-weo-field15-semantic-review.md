@@ -99,7 +99,7 @@ The owner ran `tools/build_imf_weo_field15_semantic_review.py` twice. Both execu
 - Zero unresolved series; zero proposed `projected` values.
 - `complete=true`, `database_written=false`, `approval_created=false`.
 
-The generated `summary.json`, `summary.md` and `classification_proposals.csv` were committed in repository commit `7e064a4`. The identical second build confirms deterministic output for the recorded source and candidate fingerprints. The proposal is still a proposal; this result does not authorize or perform semantic status application.
+The generated `summary.json`, `summary.md` and `classification_proposals.csv` were committed in repository commit `7e064a4`. The identical second build confirms deterministic output for the recorded source and candidate fingerprints. The proposal was subsequently approved by the project owner as recorded in `owner_semantic_approval.md`; no semantic status application has been performed.
 
 ### Complete proposal CSV audit — 2026-11-27
 
@@ -112,12 +112,27 @@ The owner ran a read-only audit over the complete committed `classification_prop
 - Rule counts exactly 178 `integer_latest_actual_year` series and 19 `fiscal_year_ending_year` series.
 - Every proposed status agrees with its recorded cutoff; every current status remains `unclassified`.
 
-The audit therefore validates proposal-file integrity, uniqueness, coverage and internal cutoff consistency. It does not independently establish a different IMF semantic interpretation, constitute owner approval, or change the database.
+The audit validates proposal-file integrity, uniqueness, coverage and internal cutoff consistency. The separate owner decision below supplies semantic approval; neither the audit nor the approval record changes the database.
+
+## Owner semantic approval — 2026-11-27
+
+The project owner explicitly approved the classification convention and exact proposal artifact. The immutable decision record is:
+
+`reports/sources/imf-weo-field15-semantic-review/20261127T152134Z/owner_semantic_approval.md`
+
+- Decision: **APPROVED**.
+- Scope: WP1.5 field 15 only, IMF WEO October 2026 `NGDPD.A`.
+- Proposal SHA-256: `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`.
+- Approved counts: 8,168 `observed`; 1,193 `estimated`.
+- The approved convention is exactly the five-rule policy above; no `projected` values are inferred.
+
+This is semantic approval, **not authorization to write the statuses**. No database rows were changed by this decision. The existing field-15 observation rows remain `unclassified`.
 
 ## Remaining gate
 
-1. **Owner semantic decision:** review and explicitly approve or reject the classification convention and this exact proposal artifact (proposal SHA-256 above). The 8,168 / 1,193 split is not approved merely because the automated checks passed.
-2. After explicit approval, design a separate guarded status-application workflow with exact artifact fingerprints, verified backup/preflight, transactional application and independent post-write verification.
-3. Complete field-15 closeout documentation and all remaining field-level checks before beginning field 16.
+1. Implement and test a separate guarded application path bound to the exact approved proposal and owner-approval record.
+2. Run read-only application preflight against the current Game DB and a fresh, independently verified backup. The preflight must prove all 9,361 target rows match the approved proposal and remain `unclassified`.
+3. Obtain explicit authorization for the actual status write. Apply transactionally, recording an application approval/event, and verify all 9,361 statuses, checksums, SQLite integrity and foreign keys independently.
+4. Complete field-15 closeout documentation and all remaining field-level checks before beginning field 16.
 
-Do not alter the existing importer to accept classified candidate rows: its requirement that imported source observations remain `unclassified` is intentional. No semantic status write has been performed or authorized. Field 16 remains blocked.
+Do not alter the existing importer to accept classified candidate rows: its requirement that imported source observations remain `unclassified` is intentional. Field 16 remains blocked.
