@@ -207,9 +207,9 @@ def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any], h
         and item.get("proposal_game_id_match") == "same_game_id"
     })
     field_scoped_mapping_datasets = sorted({
-        str(item.get("dataset"))
+        "world_economic_outlook"
         for item in mappings
-        if item.get("dataset") == "world_economic_outlook"
+        if item.get("dataset") in {"world_economic_outlook", "imf_weo"}
         and item.get("approval_status") == "approved"
         and item.get("proposal_game_id_match") == "same_game_id"
     })
