@@ -1,6 +1,6 @@
 # IMF WEO field 15 semantic status review
 
-**Status:** source and candidate reconciliation audit passed; deterministic classification proposal builder and focused tests committed; local execution and owner review pending. No semantic statuses have been written to the Game DB.
+**Status:** deterministic semantic proposal build completed and committed on 2026-11-27; 9,361/9,361 candidate observations reconciled with zero unresolved series. Focused test rerun result has not yet been recorded here. Owner semantic review and any subsequent application remain pending. No semantic statuses have been written to the Game DB.
 
 ## Scope and evidence
 
@@ -82,12 +82,28 @@ uv run --extra dev python -m pytest -q tests/test_imf_weo_field15_semantic_revie
 
 Tests cover integer cutoffs, zero/all-estimated metadata, fiscal-year ending-year parsing, malformed metadata, raw/candidate reconciliation, and rejection of candidate rows that are already classified.
 
+## Owner-run build result — 2026-11-27
+
+The owner ran `tools/build_imf_weo_field15_semantic_review.py` twice. Both executions returned the same complete result and wrote no database rows or approvals:
+
+- Output: `reports/sources/imf-weo-field15-semantic-review/20261127T152134Z/`
+- Raw source SHA-256: `a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d`
+- Candidate observations SHA-256: `8f2c2dccfb3263d67544e6772ad2fe3acb47885040967db3a22feb560ed48365`
+- Proposal CSV SHA-256: `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`
+- 197 individual series; 13 aggregate series / 665 populated aggregate values explicitly excluded.
+- 9,361 candidate observations and 9,361 proposed classifications.
+- 8,168 proposed `observed`; 1,193 proposed `estimated`.
+- 178 integer-metadata series; 19 fiscal-year-ending-year series.
+- Zero unresolved series; zero proposed `projected` values.
+- `complete=true`, `database_written=false`, `approval_created=false`.
+
+The generated `summary.json`, `summary.md` and `classification_proposals.csv` were committed in repository commit `7e064a4`. The identical second build confirms deterministic output for the recorded source and candidate fingerprints. The proposal is still a proposal; this result does not authorize or perform semantic status application.
+
 ## Remaining gate
 
-1. Sync the branch and run the focused tests.
-2. Run the read-only proposal builder and inspect the generated summary and proposal CSV.
-3. Reconcile the generated counts to 8,168 observed and 1,193 estimated, with zero unresolved and exact 9,361-row coverage.
-4. Owner-review the semantic rule and the full proposal artifact.
-5. Only after explicit owner approval, design a separate guarded status-application workflow with exact artifact fingerprints, backup/preflight and independent post-write verification.
+1. Record the focused test rerun result; the initial run had five failures caused by the fiscal-pattern defect, which was corrected in commit `ec38d21`. Do not describe the tests as passing until the owner supplies the post-fix result.
+2. Inspect the complete committed proposal CSV, including row uniqueness, status counts, year coverage and fiscal-year cutoff assignments, against the recorded hashes.
+3. Owner-review and explicitly approve the semantic rule and exact proposal artifact.
+4. Only after explicit owner approval, design a separate guarded status-application workflow with exact artifact fingerprints, backup/preflight and independent post-write verification.
 
 Do not alter the existing importer to accept classified candidate rows: its requirement that imported source observations remain `unclassified` is intentional. Do not write statuses to the canonical database or begin field 16 until the field-15 semantic and closeout gates are complete.
