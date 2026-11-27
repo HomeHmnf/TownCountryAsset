@@ -1,6 +1,6 @@
 # IMF WEO field 15 semantic status review
 
-**Status:** the exact 9,361-row semantic proposal was explicitly approved by the project owner on 2026-11-27. The approval is recorded in `reports/sources/imf-weo-field15-semantic-review/20261127T152134Z/owner_semantic_approval.md`. Canonical status application is not yet authorized or performed; database rows remain `unclassified`.
+**Status (superseding the historical entries below):** the exact 9,361-row proposal was owner-approved and applied to the canonical Game DB on 2026-11-27. The application updated 9,361 rows: 8,168 `observed` and 1,193 `estimated`. The dataset import remains `candidate`. Independent post-application verification and final field-15 closeout documentation remain required; field 16 remains blocked.
 
 ## Scope and evidence
 
@@ -156,3 +156,55 @@ The second command is read-only preflight; it must report 9,361 rows, all `uncla
 4. Complete field-15 closeout documentation and all remaining field-level checks before beginning field 16.
 
 Do not alter the existing importer to accept classified candidate rows: its requirement that imported source observations remain `unclassified` is intentional. Field 16 remains blocked.
+
+
+## Field-15 semantic status application — 2026-11-27
+
+The owner authorized the guarded application after the focused application tests passed (**5 passed in 0.06s**) and the read-only preflight passed. The application command completed with:
+
+- Status: `applied`; approval ID: `imf-weo-field15-sem-28e8b9c1afd983e4`.
+- Updated rows: 9,361.
+- Final statuses: 8,168 `observed`; 1,193 `estimated`.
+- Proposal SHA-256: `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`.
+- Dataset import remains `candidate`.
+- SQLite integrity `ok`; zero foreign-key violations.
+
+The pre-application backup was created at:
+`/home/hmnf/Backups/TownCountryAsset/town_country_asset_pre_imf_weo_field15_semantic_status_20261127.sqlite`
+
+Backup SHA-256: `36702add308d50071bb683ecb7d3a2bb626d2ba99b85f036b3bea8b240e2c3cb`; size 28,688,384 bytes; integrity `ok`; zero foreign-key violations. The application tool independently rechecked the backup checksum and the exact 9,361-row pre-application target state before beginning the transaction.
+
+The application output is the successful transaction result. A separate read-only post-application audit must still verify every status, source checksum, import status, integrity and foreign keys before field 15 can close. The application itself does not authorize field 16.
+
+## Reusable SQLite backup utility and integrated backup workflow
+
+Reusable backup code and CLI:
+
+- `tools/database/backup.py` — SQLite online-backup helper; creates a unique timestamped backup, refuses overwrite, verifies SQLite integrity and foreign keys, and returns the SHA-256.
+- `tools/backup_database.py` — standalone command.
+- `tests/test_database_backup.py` — focused tests.
+
+Standalone usage:
+
+```fish
+uv run python tools/backup_database.py
+```
+
+To select a database or backup directory:
+
+```fish
+uv run python tools/backup_database.py --database data/canonical/town_country_asset.sqlite --backup-dir "$HOME/Backups/TownCountryAsset"
+```
+
+The guarded semantic application tool now also supports `--create-backup`. For a future eligible run, it creates and verifies the timestamped backup, calculates the SHA-256, passes that exact value into the existing backup-verification gate, and only then proceeds with the transaction:
+
+```fish
+uv run python tools/apply_imf_weo_field15_semantic_status.py \
+  --apply \
+  --confirm-semantic-status-application \
+  --actor "project-owner" \
+  --note "Owner-approved field-scoped semantic status application." \
+  --create-backup
+```
+
+The current field-15 application is already complete; do not rerun this one-shot command against the now-classified database. The default backup directory is `$HOME/Backups/TownCountryAsset`. The standalone backup utility is reusable for future database workflows.
