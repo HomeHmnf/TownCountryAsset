@@ -205,8 +205,11 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
     imf = next(item for item in mappings if item["dataset"] == "imf_weo")
     assert imf["approval_status"] == "approved"
     assert imf["approval_scope"] == "Field 15 NGDPD only"
+    assert imf["proposal_game_id_match"] == "same_game_id"
     assert next(item for item in mappings if item["dataset"] == "world_bank_icp")["approval_status"] == "pending"
     assert decisions["catalogue"]["decision_status"] == "approved"
+    assert decisions["proposal_game_id_match"] == "same_game_id"
+    assert metadata["crosswalk_game_id_conflict_rows"] == 0
     assert metadata["identity_history_policy"].startswith("source-scoped review evidence only")
     assert set(metadata["identity_history_files"]) == set(paths)
     assert metadata["approval_created"] is False
