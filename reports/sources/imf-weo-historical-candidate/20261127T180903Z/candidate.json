@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "candidate_type": "imf_weo_annual_historical_observations",
+  "source_key": "imf_weo",
+  "release": "october_2026",
+  "source_path": "raw_data/sources/imf_weo/october_2026/dataset_2026-11-02T07_37_00.482492506Z_DEFAULT_INTEGRATION_IMF.RES_WEO_9.0.0.csv",
+  "source_sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+  "source_byte_count": 26692032,
+  "identity_registry_path": "config/country_identity_registry.json",
+  "crosswalk_path": "data/manual/source_crosswalks/imf_weo.json",
+  "crosswalk_sha256": "30373977642d84fe137141acf5af5c058f5c18dbb4302c778292895b883a53c8",
+  "field_ids": [
+    16
+  ],
+  "observation_count": 0,
+  "distinct_game_ids": 0,
+  "indicator_counts": {},
+  "year_range": null,
+  "exception_count": 197,
+  "status_policy": "unclassified_for_all_rows; latest_actual_annual_data_is_retained_as_source_metadata_only",
+  "identity_policy": "explicit_field_scoped_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback",
+  "completeness_policy": "only finite numeric IMF source cells become observations; blank cells are not synthesized",
+  "comparison_policy": "WDI values and comparability gates do not determine WEO observation eligibility",
+  "database_written": false,
+  "approval_created": false,
+  "candidate_directory": "reports/sources/imf-weo-historical-candidate/20261127T180903Z",
+  "observations_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+  "exceptions_sha256": "b8b4a353cf0d10317ef5ca2073efb09c2845a78c63687239ecfb9d777b44c132"
+}
