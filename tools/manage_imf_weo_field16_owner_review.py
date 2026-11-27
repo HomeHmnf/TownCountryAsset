@@ -127,6 +127,12 @@ def build_owner_review(input_dir: Path, registry_path: Path) -> tuple[list[dict[
     by_game_id = {str(record.get("game_id", "")): record for record in records}
     if len(by_game_id) != len(records):
         raise OwnerReviewError("Registry contains duplicate game IDs")
+    by_source: dict[str, list[dict[str, Any]]] = {}
+    for record in records:
+        source = record.get("source") or {}
+        source_id = source.get("current_source_id")
+        if isinstance(source_id, str) and source_id:
+            by_source.setdefault(source_id, []).append(record)
 
     rows = []
     for proposal in proposals:
@@ -136,6 +142,10 @@ def build_owner_review(input_dir: Path, registry_path: Path) -> tuple[list[dict[
         source = record.get("source") or {}
         if source.get("current_source_id") != proposal["source_id"]:
             raise OwnerReviewError(f"Source/game identity mismatch for {proposal['source_id']}")
+        if len(by_source.get(proposal["source_id"], [])) != 1:
+            raise OwnerReviewError(f"Registry source ID is not unique for {proposal['source_id']}")
+        if proposal.get("proposal_basis") != "exact_unique_registry_current_source_id_match_only":
+            raise OwnerReviewError(f"Unexpected proposal basis for {proposal['source_id']}")
         if proposal.get("decision") != "PENDING" or proposal.get("approved_game_id") != "-":
             raise OwnerReviewError("Original proposal decisions are not in their untouched pending state")
         rows.append(enrich_proposal(proposal, record))
