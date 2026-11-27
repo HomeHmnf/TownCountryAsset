@@ -138,8 +138,14 @@ def load_approved_proposal(review_dir: Path) -> tuple[list[dict], dict, dict]:
     if len(rows) != EXPECTED_ROWS or len(set(keys)) != EXPECTED_ROWS:
         raise SemanticApplyError("Proposal row count or canonical observation keys are not exactly 9,361 unique")
     counts = dict(Counter(r["proposed_value_status"] for r in rows))
-    if counts != EXPECTED_COUNTS or len({r["source_country_code"] for r in rows}) != 197:
-        raise SemanticApplyError("Proposal status counts or 197-series coverage differ from approval")
+    if (
+        counts != EXPECTED_COUNTS
+        or len({r["source_country_code"] for r in rows}) != 197
+        or len({r["game_id"] for r in rows}) != 197
+        or min(r["observation_year"] for r in rows) != 1980
+        or max(r["observation_year"] for r in rows) != 2031
+    ):
+        raise SemanticApplyError("Proposal status counts, identity coverage or year range differ from approval")
     rules = {}
     for row in rows:
         code = row["source_country_code"]
