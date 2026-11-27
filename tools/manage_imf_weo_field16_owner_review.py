@@ -189,8 +189,45 @@ def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any], h
         }
     if any(item["proposal_game_id_match"] == "different_game_id" for item in mappings):
         flags.append("existing_project_crosswalk_targets_different_game_id")
+
+    # Only approved WDI/WPP mappings count as independent approved-source
+    # corroboration. IMF WEO history is field-15-scoped; ICP is pending.
+    approved_source_datasets = sorted({
+        str(item.get("dataset"))
+        for item in mappings
+        if item.get("dataset") in {"world_bank_wdi", "un_wpp"}
+        and item.get("approval_status") == "approved"
+        and item.get("proposal_game_id_match") == "same_game_id"
+    })
+    pending_candidate_datasets = sorted({
+        str(item.get("dataset"))
+        for item in mappings
+        if item.get("dataset") == "world_bank_icp_databank_saved_report"
+        and str(item.get("approval_status", "")).casefold() == "pending"
+        and item.get("proposal_game_id_match") == "same_game_id"
+    })
+    field_scoped_mapping_datasets = sorted({
+        str(item.get("dataset"))
+        for item in mappings
+        if item.get("dataset") == "world_economic_outlook"
+        and item.get("approval_status") == "approved"
+        and item.get("proposal_game_id_match") == "same_game_id"
+    })
+    if approved_source_datasets:
+        identity_evidence_tier = "approved_source_corroboration"
+    elif pending_candidate_datasets:
+        identity_evidence_tier = "pending_candidate_only"
+    elif field_scoped_mapping_datasets:
+        identity_evidence_tier = "field_scoped_mapping_only"
+    else:
+        identity_evidence_tier = "registry_match_only"
+
     return {
         **proposal,
+        "identity_evidence_tier": identity_evidence_tier,
+        "approved_source_corroboration_datasets": ";".join(approved_source_datasets),
+        "pending_candidate_datasets": ";".join(pending_candidate_datasets),
+        "field_scoped_mapping_datasets": ";".join(field_scoped_mapping_datasets),
         "existing_project_source_mappings": compact_json(mappings),
         "prior_project_identity_decision": compact_json(identity_decision),
         "registry_aliases_en": "; ".join(aliases),
@@ -296,6 +333,18 @@ def build_owner_review(input_dir: Path, registry_path: Path, history_paths: dict
             for key in ("exact_normalized_match", "registry_alias_match", "name_difference_requires_review")
         },
         "existing_project_mapping_rows": sum(bool(row["existing_project_source_mappings"]) for row in rows),
+        "identity_evidence_tier_counts": {
+            key: sum(row["identity_evidence_tier"] == key for row in rows)
+            for key in (
+                "approved_source_corroboration",
+                "pending_candidate_only",
+                "field_scoped_mapping_only",
+                "registry_match_only",
+            )
+        },
+        "approved_source_corroboration_rows": sum(bool(row["approved_source_corroboration_datasets"]) for row in rows),
+        "pending_candidate_rows": sum(bool(row["pending_candidate_datasets"]) for row in rows),
+        "field_scoped_mapping_rows": sum(bool(row["field_scoped_mapping_datasets"]) for row in rows),
         "prior_identity_decision_rows": sum(bool(row["prior_project_identity_decision"]) for row in rows),
         "crosswalk_game_id_conflict_rows": sum("existing_project_crosswalk_targets_different_game_id" in row["manual_review_flags"] for row in rows),
         "unresolved_identity_history_rows": unresolved_history,
