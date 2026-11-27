@@ -66,10 +66,12 @@ def build_candidate(raw_path: Path = RAW, identity_path: Path = IDENTITY,
             raise CandidateError(f"Invalid IMF WEO source crosswalk: {exc}") from exc
         if crosswalk.source_key != "imf_weo":
             raise CandidateError("IMF WEO source crosswalk source_key must be 'imf_weo'")
-        for mapping in crosswalk.mappings:
-            # This provider-specific crosswalk is authoritative. Registry source IDs
-            # and ISO alpha-3 values are not fallback IMF WEO mappings.
-            identities[mapping.source_id] = {mapping.game_id}
+        # The existing WBG and KOS crosswalk approvals are explicitly scoped
+        # to field 15 / NGDPD. Never reuse them for another WEO indicator.
+        # Registry source IDs and ISO alpha-3 values remain prohibited fallbacks.
+        if field_ids is None or 15 in field_ids:
+            for mapping in crosswalk.mappings:
+                identities[mapping.source_id] = {mapping.game_id}
         crosswalk_hash = sha256(crosswalk_path)
     if field_ids is not None:
         unsupported_fields = sorted(field_ids - set(INDICATORS.values()))
