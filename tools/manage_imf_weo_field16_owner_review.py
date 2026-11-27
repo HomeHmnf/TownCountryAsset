@@ -38,7 +38,16 @@ def load_identity_history(paths: dict[str, Path]) -> tuple[dict[str, dict[str, A
             raise OwnerReviewError(f"Required project identity-history file is missing: {path}")
         fingerprints[key] = sha256(path)
         payload = json.loads(path.read_text(encoding="utf-8"))
-        approval = payload.get("review_approval") or {}
+        approval_raw = payload.get("review_approval")
+        if isinstance(approval_raw, dict):
+            approval = approval_raw
+        elif isinstance(approval_raw, str):
+            approval = {
+                "status": "approved" if "approved" in approval_raw.casefold() else "recorded",
+                "scope": approval_raw,
+            }
+        else:
+            approval = {}
         scope = str(approval.get("scope") or payload.get("policy", {}).get("catalogue") or "recorded project identity evidence")
         approval_status = str(approval.get("status") or "recorded")
         if key == "edge_cases":
