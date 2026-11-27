@@ -128,6 +128,26 @@ The project owner explicitly approved the classification convention and exact pr
 
 This is semantic approval, **not authorization to write the statuses**. No database rows were changed by this decision. The existing field-15 observation rows remain `unclassified`.
 
+## Guarded status-application tooling
+
+A separate tool has been added:
+
+- `tools/apply_imf_weo_field15_semantic_status.py`
+- Tests: `tests/test_apply_imf_weo_field15_semantic_status.py`
+
+Its default invocation is read-only. It verifies the immutable owner approval record, exact proposal SHA-256, summary fingerprints and counts, every proposal row and cutoff, and the complete 9,361-row Game DB target set. It requires all target statuses to remain `unclassified`, verifies values and source metadata, checks the matching WEO dataset import remains `candidate`, and runs SQLite integrity / foreign-key checks. It does not run migrations.
+
+A separate `--apply` path requires an explicit confirmation flag, actor, decision note, backup file and backup SHA-256. It rechecks the target rows inside a write transaction, records the approved artifact in the shared application ledger, updates only `value_status`, validates the resulting counts and database integrity, and records the application event in the same transaction. The tool does not alter the importer or candidate rows.
+
+**The application code and tests have been committed but have not yet been run locally.** First sync and run:
+
+```fish
+uv run --extra dev python -m pytest -q tests/test_apply_imf_weo_field15_semantic_status.py
+uv run python tools/apply_imf_weo_field15_semantic_status.py
+```
+
+The second command is read-only preflight; it must report 9,361 rows, all `unclassified`, dataset import `candidate`, integrity `ok` and foreign keys `ok`. Do not use `--apply`: actual status application still requires separate explicit authorization after the tests and preflight pass, plus a fresh backup.
+
 ## Remaining gate
 
 1. Implement and test a separate guarded application path bound to the exact approved proposal and owner-approval record.
