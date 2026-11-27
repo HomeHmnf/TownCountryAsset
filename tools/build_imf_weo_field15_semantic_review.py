@@ -25,7 +25,7 @@ AGGREGATE_CODES = {
     "G903", "G998", "G001", "G110", "G119", "GX123", "G163",
     "G200", "G205", "G400", "G505", "G510", "G603",
 }
-FISCAL_PATTERN = re.compile(r"FY([0-9]{4})/([0-9]{2})\\Z")
+FISCAL_PATTERN = re.compile(r"FY([0-9]{4})/([0-9]{2})\Z")
 
 
 class SemanticReviewError(RuntimeError):
