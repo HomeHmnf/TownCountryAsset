@@ -183,3 +183,10 @@ These checks validate implementation and artifact integrity. They do not constit
 The project owner explicitly approved the semantic classification convention and the exact 9,361-row proposal. The immutable decision record is `reports/sources/imf-weo-field15-semantic-review/20261127T152134Z/owner_semantic_approval.md`, bound to proposal SHA-256 `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`. Approved counts are 8,168 `observed` and 1,193 `estimated`; no `projected` statuses are inferred.
 
 This semantic approval is not authorization for a database status write. The existing 9,361 Game DB observations remain `unclassified`. A separate fingerprint-bound application workflow, fresh verified backup, read-only preflight, explicit application authorization, transactional update and independent post-write verification are still required. Field 15 remains open and field 16 remains blocked.
+
+
+### Field 15 guarded semantic application tooling — 2026-11-27
+
+A separate fingerprint-bound application tool and focused tests have been added: `tools/apply_imf_weo_field15_semantic_status.py` and `tests/test_apply_imf_weo_field15_semantic_status.py`. The default command is read-only and validates the exact owner-approved proposal, approval record, every target Game DB row, current `unclassified` status, dataset-import candidate status, SQLite integrity and foreign keys. The explicit write path requires `--apply`, a separate confirmation flag, actor/note, and a fresh verified backup path plus SHA-256. It updates only the field-15 `value_status` values and records the application event transactionally.
+
+The new tool and tests have not yet been executed locally. The owner must sync, run the focused tests and read-only preflight, and report results. No status write has been authorized or performed. Field 15 remains open; field 16 remains blocked.
