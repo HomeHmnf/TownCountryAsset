@@ -54,7 +54,6 @@ def make_fixture(tmp_path: Path) -> tuple[Path, Path]:
         for i, code in enumerate(codes)
     ]
     write_csv(candidate_dir / "identity_exceptions.csv", exceptions)
-    write_csv(candidate_dir / "observations.csv", [])
     (candidate_dir / "observations.csv").write_text("\n", encoding="utf-8")
     candidate = {
         "field_ids": [16],
