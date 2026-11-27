@@ -1,6 +1,6 @@
 # IMF WEO field 15 semantic status review
 
-**Status (superseding the historical entries below):** the exact 9,361-row proposal was owner-approved and applied to the canonical Game DB on 2026-11-27. The application updated 9,361 rows: 8,168 `observed` and 1,193 `estimated`. The dataset import remains `candidate`. Independent post-application verification and final field-15 closeout documentation remain required; field 16 remains blocked.
+**Status:** field 15 semantic classification was owner-approved, applied and independently verified on 2026-11-27. Field 15 is closed. Field 16 is now the active field; its source acquisition is expected to reuse the registered October 2026 WEO release, subject to read-only verification.
 
 ## Scope and evidence
 
@@ -208,3 +208,22 @@ uv run python tools/apply_imf_weo_field15_semantic_status.py \
 ```
 
 The current field-15 application is already complete; do not rerun this one-shot command against the now-classified database. The default backup directory is `$HOME/Backups/TownCountryAsset`. The standalone backup utility is reusable for future database workflows.
+
+
+## Final field-15 closeout — 2026-11-27
+
+The owner completed the independent read-only post-application audit of the canonical Game DB. The audit returned **PASS** with:
+
+- 9,361 field-15 / NGDPD observations across 197 game IDs and 197 source codes.
+- 8,168 `observed` and 1,193 `estimated`; no other statuses.
+- Year range 1980–2031.
+- Zero malformed source-checksum values; the guarded application had already verified the exact source fingerprint and proposal dependency.
+- Exactly one matching WEO dataset-import record, still `candidate`.
+- SQLite integrity `ok`; zero foreign-key violations.
+- No writes during the independent audit.
+
+The owner also ran the backup-helper and semantic-application regression suites after syncing the pushed changes: **8 passed in 0.08s**.
+
+The field-15 semantic status application remains recorded as `imf-weo-field15-sem-28e8b9c1afd983e4`; proposal SHA-256 remains `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`. The pre-application backup remains recorded above. The dataset import deliberately remains `candidate`; this field-scoped approval/application does not promote the source release or import ledger.
+
+**Field 15 is closed.** The Project/source DB remains the acquisition and provenance ledger; the Game DB holds the observations. No observation rows are duplicated into the Project DB. The 9,361 Game DB rows and technical integrity have been independently verified. Field 16 may now begin under the sequential WP1.5 workflow.
