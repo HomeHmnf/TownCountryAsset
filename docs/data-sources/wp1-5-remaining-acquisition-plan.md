@@ -190,3 +190,12 @@ This semantic approval is not authorization for a database status write. The exi
 A separate fingerprint-bound application tool and focused tests have been added: `tools/apply_imf_weo_field15_semantic_status.py` and `tests/test_apply_imf_weo_field15_semantic_status.py`. The default command is read-only and validates the exact owner-approved proposal, approval record, every target Game DB row, current `unclassified` status, dataset-import candidate status, SQLite integrity and foreign keys. The explicit write path requires `--apply`, a separate confirmation flag, actor/note, and a fresh verified backup path plus SHA-256. It updates only the field-15 `value_status` values and records the application event transactionally.
 
 The new tool and tests have not yet been executed locally. The owner must sync, run the focused tests and read-only preflight, and report results. No status write has been authorized or performed. Field 15 remains open; field 16 remains blocked.
+
+
+### Field 15 semantic status application and backup automation — 2026-11-27
+
+The owner-approved IMF WEO October 2026 NGDPD semantic proposal has now been applied to the canonical Game DB. The guarded transaction updated all 9,361 target observations: 8,168 `observed` and 1,193 `estimated`. Application approval ID: `imf-weo-field15-sem-28e8b9c1afd983e4`. Dataset import status remains `candidate`; SQLite integrity is `ok` and foreign-key violations are zero. The pre-application backup was verified at 28,688,384 bytes with SHA-256 `36702add308d50071bb683ecb7d3a2bb626d2ba99b85f036b3bea8b240e2c3cb`.
+
+Reusable SQLite backup automation is now provided by `tools/database/backup.py` and `tools/backup_database.py`; focused tests are in `tests/test_database_backup.py`. The standalone command `uv run python tools/backup_database.py` creates a timestamped online backup, refuses overwrite, verifies integrity and foreign keys, and prints its SHA-256. The field-15 guarded application CLI also accepts `--create-backup`; it creates the backup, calculates the checksum, and passes that checksum directly to its existing backup-verification gate before application. Do not rerun the field-15 one-shot application after its successful completion.
+
+The owner's next action is to run the new backup-helper tests and the independent read-only post-application verification. Field 15 remains open until those checks and closeout documentation are complete. Field 16 remains blocked.
