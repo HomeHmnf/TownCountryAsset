@@ -238,3 +238,32 @@ The following gates apply before any Game DB application:
 7. Only after explicit owner authorization, use the guarded application workflow with a verified automatic backup, apply transactionally, then independently verify the Game DB and Project DB and update this plan and the field-specific record.
 
 **Current boundary:** field 16 may proceed through source verification, candidate generation and review preparation. No field-16 identity approval, semantic approval, application, dataset-import promotion or database write is implied or authorized by closing field 15.
+
+
+### Field-16 owner identity review workflow — 2026-11-27
+
+The next-stage owner-review workflow is implemented in `tools/manage_imf_weo_field16_owner_review.py`. It consumes the committed 195-row proposal package at `reports/sources/imf-weo-field16-identity-review/20261127T181310Z/` and the exact fingerprinted 242-record identity registry. It does not change the original proposal package, registry, crosswalk or either database.
+
+Build the editable owner-review package after syncing:
+
+```fish
+uv run --extra dev python -m pytest -q tests/test_imf_weo_field16_owner_review.py
+uv run python -m tools.manage_imf_weo_field16_owner_review build
+```
+
+The generated package contains:
+- `owner_review.csv`: editable owner decision surface, grouped into the original ten batches.
+- `owner_review_baseline.csv`: immutable identity-evidence baseline used to detect edits to source IDs, proposed game IDs, names, registry metadata, flags or batch assignment.
+- `owner_review_manifest.json`: fingerprints and counts for the input package, registry and review baseline.
+
+Each row displays the IMF source name and series, proposed game ID, registry name and aliases, registry status/entity type, previous source IDs, ISO codes and assignment status, regions, geometry key, year coverage, name comparison and manual-review flags. Flags explicitly distinguish unapproved registry status, unreviewed entity type, source/registry name differences, unapproved ISO assignment and a curated territory/disputed-identity manual-review set. These are review prompts, not automatic rejections or approvals. In particular, an exact source-code match is not treated as sufficient evidence that a proposed game identity is correct.
+
+The owner fills `owner_decision` with exactly `APPROVE`, `REJECT` or `HOLD`, supplies a rationale for every row, and for `APPROVE` supplies both the exact proposed game ID and a source/evidence reference. The immutable baseline prevents changes to identity evidence while decisions are entered.
+
+After all 195 rows have explicit decisions, validate the completed file and emit a separate immutable decision-proposal artifact:
+
+```fish
+uv run python -m tools.manage_imf_weo_field16_owner_review validate --review-dir reports/sources/imf-weo-field16-owner-review/<generated_timestamp>
+```
+
+Validation rejects missing decisions, missing rationales, unsupported decisions, altered identity evidence, an approval targeting a different game ID, or an approval without an evidence reference. The output is explicitly a **decision proposal, not an approval record**. It creates no approval, changes no registry/crosswalk and writes neither database. Any subsequent formal approval and application must be a separately reviewed, field-16-scoped workflow with explicit owner authorization, verified backup/preflight and independent post-write checks.
