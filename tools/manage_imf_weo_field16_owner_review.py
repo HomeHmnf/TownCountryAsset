@@ -20,6 +20,85 @@ SPECIAL_REVIEW_CODES = {
     "TCA", "TWN", "VIR", "KOS",
 }
 
+DEFAULT_HISTORY_FILES = {
+    "wdi": ROOT / "data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json",
+    "wpp": ROOT / "data/manual/source_crosswalks/un_wpp.json",
+    "icp": ROOT / "data/manual/source_crosswalks/world_bank_icp.json",
+    "imf_weo": ROOT / "data/manual/source_crosswalks/imf_weo.json",
+    "edge_cases": ROOT / "config/identity_edge_case_reconciliation.json",
+}
+
+
+def load_identity_history(paths: dict[str, Path]) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
+    """Load source-scoped crosswalks and prior identity decisions as review evidence only."""
+    by_source: dict[str, dict[str, Any]] = {}
+    fingerprints: dict[str, str] = {}
+    for key, path in paths.items():
+        if not path.is_file():
+            raise OwnerReviewError(f"Required project identity-history file is missing: {path}")
+        fingerprints[key] = sha256(path)
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        approval = payload.get("review_approval") or {}
+        scope = str(approval.get("scope") or payload.get("policy", {}).get("catalogue") or "recorded project identity evidence")
+        approval_status = str(approval.get("status") or "recorded")
+        if key == "edge_cases":
+            for item in payload.get("records", []):
+                source_id = str(item.get("source_id") or "")
+                if source_id:
+                    by_source.setdefault(source_id, {})["prior_identity_decision"] = {
+                        "game_id": item.get("game_id"),
+                        "canonical_name": item.get("name"),
+                        "iso": item.get("iso"),
+                        "entity": item.get("entity"),
+                        "catalogue": item.get("catalogue"),
+                        "naming": item.get("naming"),
+                        "policy_version": payload.get("policy_version"),
+                        "reviewed_at": payload.get("reviewed_at"),
+                    }
+            continue
+        for item in payload.get("mappings", []):
+            source_id = str(item.get("source_id") or item.get("source_country_code") or "")
+            game_id = str(item.get("game_id") or "")
+            if not source_id and not game_id:
+                continue
+            evidence = {
+                "dataset": payload.get("dataset") or key,
+                "source_id": source_id or None,
+                "source_name": item.get("source_name") or item.get("source_country_name"),
+                "mapped_game_id": game_id or None,
+                "approval_status": approval_status if key != "icp" else item.get("review_status", approval_status),
+                "approval_scope": scope,
+                "approval_record": approval.get("approval_record"),
+                "match_method": item.get("match_method"),
+                "evidence_reference": item.get("evidence_url"),
+                "review_note": item.get("review_note"),
+            }
+            if source_id:
+                by_source.setdefault(source_id, {}).setdefault("source_mappings", []).append(evidence)
+            if game_id:
+                by_source.setdefault(f"game_id:{game_id}", {}).setdefault("source_mappings", []).append(evidence)
+        if key == "wpp":
+            exception = payload.get("mapping_policy", {}).get("taiwan_exception")
+            if exception:
+                evidence = {
+                    "dataset": payload.get("dataset"),
+                    "source_id": exception.get("source_id"),
+                    "source_name": exception.get("source_name"),
+                    "mapped_game_id": exception.get("game_id"),
+                    "approval_status": approval_status,
+                    "approval_scope": exception.get("scope") or scope,
+                    "approval_record": approval.get("approval_record"),
+                    "match_method": exception.get("match_method"),
+                    "evidence_reference": exception.get("evidence_url"),
+                    "review_note": "Explicit WPP Taiwan exception; scope remains WPP only.",
+                }
+                by_source.setdefault(f"game_id:{exception.get('game_id')}", {}).setdefault("source_mappings", []).append(evidence)
+    return by_source, fingerprints
+
+
+def compact_json(value: Any) -> str:
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) if value else ""
+
 
 class OwnerReviewError(RuntimeError):
     """Invalid, incomplete, or altered owner-review evidence."""
@@ -51,7 +130,7 @@ def normalize_name(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", value.casefold()).strip()
 
 
-def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any]) -> dict[str, Any]:
+def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any], history: dict[str, dict[str, Any]]) -> dict[str, Any]:
     names = registry_record.get("names") or {}
     registry_name = str(names.get("en") or "")
     source_name = proposal["source_name"]
@@ -78,8 +157,17 @@ def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any]) -
     if iso.get("assignment_status") != "approved":
         flags.append("iso_assignment_not_approved")
 
+    prior = history.get(proposal["source_id"], {})
+    game_history = history.get(f"game_id:{proposal['proposed_game_id']}", {})
+    mappings = list(prior.get("source_mappings", [])) + [
+        item for item in game_history.get("source_mappings", [])
+        if item not in prior.get("source_mappings", [])
+    ]
+    identity_decision = prior.get("prior_identity_decision") or game_history.get("prior_identity_decision") or {}
     return {
         **proposal,
+        "existing_project_source_mappings": compact_json(mappings),
+        "prior_project_identity_decision": compact_json(identity_decision),
         "registry_aliases_en": "; ".join(aliases),
         "registry_previous_source_ids": "; ".join(source.get("previous_source_ids") or []),
         "registry_iso_alpha2": iso.get("alpha2") or "",
@@ -96,7 +184,7 @@ def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any]) -
     }
 
 
-def build_owner_review(input_dir: Path, registry_path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def build_owner_review(input_dir: Path, registry_path: Path, history_paths: dict[str, Path] | None = None) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     manifest_path = input_dir / "review_manifest.json"
     proposals_path = input_dir / "identity_proposals.csv"
     unresolved_path = input_dir / "unresolved_identities.csv"
@@ -118,6 +206,7 @@ def build_owner_review(input_dir: Path, registry_path: Path) -> tuple[list[dict[
             raise OwnerReviewError(f"Original {label} mismatch")
 
     proposals = read_csv(proposals_path)
+    history, history_fingerprints = load_identity_history(history_paths or DEFAULT_HISTORY_FILES)
     if len(proposals) != EXPECTED_CODES or len({row["source_id"] for row in proposals}) != EXPECTED_CODES:
         raise OwnerReviewError("Expected exactly 195 unique source identity proposals")
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
@@ -148,7 +237,7 @@ def build_owner_review(input_dir: Path, registry_path: Path) -> tuple[list[dict[
             raise OwnerReviewError(f"Unexpected proposal basis for {proposal['source_id']}")
         if proposal.get("decision") != "PENDING" or proposal.get("approved_game_id") != "-":
             raise OwnerReviewError("Original proposal decisions are not in their untouched pending state")
-        rows.append(enrich_proposal(proposal, record))
+        rows.append(enrich_proposal(proposal, record, history))
 
     rows.sort(key=lambda row: row["source_id"])
     return rows, {
@@ -161,6 +250,8 @@ def build_owner_review(input_dir: Path, registry_path: Path) -> tuple[list[dict[
         "input_proposals_sha256": sha256(proposals_path),
         "registry_path": manifest.get("registry_path"),
         "registry_sha256": sha256(registry_path),
+        "identity_history_files": {key: {"path": str(path), "sha256": history_fingerprints[key]} for key, path in (history_paths or DEFAULT_HISTORY_FILES).items()},
+        "identity_history_policy": "source-scoped review evidence only; approval scope is displayed and never promoted to IMF field-16 approval",
         "proposal_count": len(rows),
         "batch_sizes": [sum(row["batch"] == f"{n:02d}" for row in rows) for n in range(1, 11)],
         "name_comparison_counts": {
@@ -292,13 +383,19 @@ def main(argv: list[str] | None = None) -> int:
     build.add_argument("--input-dir", type=Path, default=DEFAULT_INPUT)
     build.add_argument("--identity-registry", type=Path, default=ROOT / "config/country_identity_registry.json")
     build.add_argument("--output-root", type=Path, default=DEFAULT_OUTPUT)
+    build.add_argument("--wdi-crosswalk", type=Path, default=DEFAULT_HISTORY_FILES["wdi"])
+    build.add_argument("--wpp-crosswalk", type=Path, default=DEFAULT_HISTORY_FILES["wpp"])
+    build.add_argument("--icp-crosswalk", type=Path, default=DEFAULT_HISTORY_FILES["icp"])
+    build.add_argument("--imf-weo-crosswalk", type=Path, default=DEFAULT_HISTORY_FILES["imf_weo"])
+    build.add_argument("--identity-edge-cases", type=Path, default=DEFAULT_HISTORY_FILES["edge_cases"])
     validate = sub.add_parser("validate")
     validate.add_argument("--review-dir", type=Path, required=True)
     validate.add_argument("--output-root", type=Path, default=ROOT / "reports/sources/imf-weo-field16-owner-decision-proposals")
     args = parser.parse_args(argv)
     try:
         if args.command == "build":
-            rows, metadata = build_owner_review(args.input_dir, args.identity_registry)
+            history_paths = {"wdi": args.wdi_crosswalk, "wpp": args.wpp_crosswalk, "icp": args.icp_crosswalk, "imf_weo": args.imf_weo_crosswalk, "edge_cases": args.identity_edge_cases}
+            rows, metadata = build_owner_review(args.input_dir, args.identity_registry, history_paths)
             target = write_owner_review(rows, metadata, args.output_root)
             print(json.dumps({**metadata, "review_directory": str(target)}, ensure_ascii=False, indent=2))
         else:
