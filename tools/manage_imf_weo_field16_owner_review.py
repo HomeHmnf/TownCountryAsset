@@ -256,6 +256,18 @@ def build_owner_review(input_dir: Path, registry_path: Path, history_paths: dict
         rows.append(enrich_proposal(proposal, record, history))
 
     rows.sort(key=lambda row: row["source_id"])
+    unresolved_rows = read_csv(unresolved_path)
+    unresolved_history = []
+    for item in unresolved_rows:
+        evidence = history.get(item["source_id"], {})
+        mappings = evidence.get("source_mappings", [])
+        decision = evidence.get("prior_identity_decision", {})
+        unresolved_history.append({
+            "source_id": item["source_id"],
+            "candidate_decision": item.get("decision", ""),
+            "existing_project_source_mappings": compact_json(mappings),
+            "prior_project_identity_decision": compact_json(decision),
+        })
     return rows, {
         "schema_version": 1,
         "field_id": 16,
@@ -277,6 +289,8 @@ def build_owner_review(input_dir: Path, registry_path: Path, history_paths: dict
         "existing_project_mapping_rows": sum(bool(row["existing_project_source_mappings"]) for row in rows),
         "prior_identity_decision_rows": sum(bool(row["prior_project_identity_decision"]) for row in rows),
         "crosswalk_game_id_conflict_rows": sum("existing_project_crosswalk_targets_different_game_id" in row["manual_review_flags"] for row in rows),
+        "unresolved_identity_history_rows": unresolved_history,
+        "unresolved_identity_count": len(unresolved_history),
         "manual_review_flag_counts": {
             key: sum(key in row["manual_review_flags"].split(";") for row in rows)
             for key in (
@@ -303,6 +317,10 @@ def write_owner_review(rows: list[dict[str, Any]], metadata: dict[str, Any], out
     target.mkdir(parents=True, exist_ok=False)
     write_csv(target / "owner_review_baseline.csv", rows)
     write_csv(target / "owner_review.csv", rows)
+    unresolved_history = metadata.pop("unresolved_identity_history_rows", [])
+    if unresolved_history:
+        write_csv(target / "unresolved_identity_history.csv", unresolved_history)
+        metadata["unresolved_identity_history_sha256"] = sha256(target / "unresolved_identity_history.csv")
     metadata["review_directory"] = target.relative_to(ROOT).as_posix()
     metadata["owner_review_baseline_sha256"] = sha256(target / "owner_review_baseline.csv")
     metadata["owner_review_template_sha256"] = sha256(target / "owner_review.csv")
