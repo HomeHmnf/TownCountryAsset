@@ -223,6 +223,10 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
     assert len(unresolved_csv) == 2
     assert json.loads(next(item for item in unresolved_csv if item["source_id"] == "WBG")["existing_project_source_mappings"])[0]["approval_scope"] == "Field 15 NGDPD only"
     assert metadata["identity_history_policy"].startswith("source-scoped review evidence only")
+    with (review_dir / "unresolved_identity_history.csv").open("a", encoding="utf-8") as stream:
+        stream.write("tampered\\n")
+    with pytest.raises(OwnerReviewError, match="Unresolved identity history checksum mismatch"):
+        validate_owner_decisions(review_dir)
     assert set(metadata["identity_history_files"]) == set(paths)
     assert metadata["approval_created"] is False
     assert metadata["database_written"] is False
