@@ -152,6 +152,13 @@ The IMF WEO October 2026 NGDPD / field-15 identity review, owner approval, Game 
 
 The owner ran a read-only full-coverage audit of IMF WEO October 2026 `NGDPD.A` against all 197 individual source series and reported **9,361 / 9,361** populated observations accounted for: 8,168 proposed `observed`, 1,193 proposed `estimated`, 178 integer-metadata series, 19 fiscal-year metadata series (861 observations), zero unresolved series, and no database writes. Fiscal-year labels were interpreted by ending year and reconciled against the October 2026 WEO Database Appendix country documentation.
 
+### Field 15 semantic proposal build — 2026-11-27
+
+The owner ran the read-only semantic proposal builder twice; both runs returned identical complete results. The generated artifact package was committed in `7e064a4` at `reports/sources/imf-weo-field15-semantic-review/20261127T152134Z/`. It contains 9,361 proposed classifications across 197 individual series: 8,168 `observed`, 1,193 `estimated`, zero unresolved, and zero `projected`. The 13 aggregate series / 665 populated values remain excluded under the existing owner-approved dispositions. The raw source, candidate observations and proposal fingerprints are recorded in `summary.json`; proposal SHA-256 is `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`. Both runs reported `database_written=false` and `approval_created=false`.
+
+The initial focused test run exposed five failures, including the fiscal-year parser escaping defect. The parser fix was committed in `ec38d21`; the post-fix test result still needs to be recorded. The complete proposal CSV also remains subject to detailed artifact review and explicit owner semantic approval. Canonical statuses remain `unclassified`; field 15 is open and field 16 remains blocked.
+
+
 The read-only proposal builder and focused tests are now in:
 - `tools/build_imf_weo_field15_semantic_review.py`
 - `tests/test_imf_weo_field15_semantic_review.py`
