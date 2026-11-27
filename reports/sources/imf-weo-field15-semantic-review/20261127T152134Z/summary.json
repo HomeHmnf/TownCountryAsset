@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "review_type": "imf_weo_field15_semantic_status_proposal",
+  "source_release": "October 2026 / IMF.RES_WEO_9.0.0",
+  "source_sha256": "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d",
+  "candidate_observations_sha256": "8f2c2dccfb3263d67544e6772ad2fe3acb47885040967db3a22feb560ed48365",
+  "candidate_directory": "/home/hmnf/Projects/Python/TownAndCountry/reports/sources/imf-weo-field15-reviewed-candidate/656073575edb005a/candidate",
+  "individual_series": 197,
+  "aggregate_series_excluded": 13,
+  "aggregate_populated_values_excluded": 665,
+  "candidate_observations": 9361,
+  "proposed_observations": 9361,
+  "proposed_status_counts": {
+    "estimated": 1193,
+    "observed": 8168
+  },
+  "metadata_rule_series_counts": {
+    "fiscal_year_ending_year": 19,
+    "integer_latest_actual_year": 178
+  },
+  "unresolved_series": [],
+  "unresolved_series_count": 0,
+  "projected_status_count": 0,
+  "status_policy": "latest_actual_annual_data_inclusive_cutoff; FYyyyy/yy uses ending year; zero means all estimated; no projected inference",
+  "database_written": false,
+  "approval_created": false,
+  "complete": true,
+  "proposal_sha256": "28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006",
+  "output_directory": "reports/sources/imf-weo-field15-semantic-review/20261127T152134Z"
+}
