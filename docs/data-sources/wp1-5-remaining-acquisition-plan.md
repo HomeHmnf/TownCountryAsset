@@ -44,7 +44,7 @@ The Project/source database and Game database have separate responsibilities. So
 
 ## Current gate
 
-**Field 15 is next; it is not yet approved or applied.** Existing Stage 4C diagnostics and Stage 4E's multi-field package builder are supporting evidence/tooling, not field-15 approval. Adapt or invoke the review tooling in a field-15-only mode; do not approve or import fields 16, 18, 20 or 21 as part of the field-15 work. First inspect the local source files, Project DB acquisition ID 5 and existing candidate outputs read-only. Do not reacquire valid evidence.
+**Field 15 is closed; field 16 is the sole active field.** The field-15 application and semantic-status verification are recorded below. Continue with field 16 only; do not reopen field 15 or begin fields 18, 20 or 21. Reuse Project DB acquisition ID 5 after fresh read-only source/artifact verification.
 
 The combined canonical Game DB remains the active target for this phase. Do not begin the future Game DB/Project DB separation cutover during this work; verify the existing Project/source database and combined Game DB independently under their current contracts.
 
@@ -209,12 +209,14 @@ The Project/source DB remains the acquisition/provenance ledger and the Game DB 
 
 ### Field 16 — GDP per capita (IMF WEO, NGDPDPC)
 
+**Identity-scope hardening:** the existing WBG and KOS crosswalk decisions are approved for field 15 only. The candidate builder now resolves crosswalk mappings by field ID and source code. A mapping without an explicit field_ids list defaults to field 15, matching the existing owner approval; any future broader mapping must carry an explicit field list and separate owner approval. This prevents field-15 approvals from leaking into field 16 or an unfiltered multi-field build. Regression tests cover field-15 retention, field-16 holds and multi-field behavior.
+
 Field 16 is now the sole active field. Contract: scalar `current_usd_per_person`, primary source `imf_weo`; source indicator `NGDPDPC.A`. The existing candidate builder supports `--field-id 16`, and the source observation schema permits field 16 / indicator `NGDPDPC`.
 
 The following gates apply before any Game DB application:
 
 1. Verify Project DB acquisition ID 5 and the raw CSV / October 2026 Appendix bytes, recorded byte counts and SHA-256 values. Verify Project DB integrity and foreign keys. Reuse this acquisition; do not register duplicate acquisition events or reacquire unchanged bytes.
-2. Build a **field-16-only** candidate from the original raw WEO CSV using `uv run python tools/build_imf_weo_historical_candidate.py --field-id 16`. This is candidate generation only and must not write either database.
+2. Build a **field-16-only** candidate from the original raw WEO CSV using `uv run python -m tools.build_imf_weo_historical_candidate --field-id 16`. This is candidate generation only and must not write either database.
 3. Treat all reused IMF source-code-to-`game_id` mappings as **field-16 identity proposals**, not as automatically approved field-16 decisions. The existing WBG and KOS decisions and the 195 other identity approvals were explicitly scoped to field 15. Re-review the field-16 source identities against the canonical registry and evidence, preserve the existing source-code discrepancy qualifications, and obtain field-16-scoped owner decisions. Do not broaden the existing crosswalk approval scope or alter global identity/ISO assignments.
 4. Audit every populated `NGDPDPC.A` source cell, source series, unit and scale, year coverage, reporting-year metadata, latest-actual metadata, duplicate keys and all 242 expected project identities. Record aggregates, unmapped identities, missing rows and unavailable/not-applicable cases explicitly.
 5. Resolve the field-16 denominator/population universe and comparability semantics. Do not derive GDP per capita by dividing field 15 by a population series; use the IMF-published `NGDPDPC` values. Preserve source unit/scale and the October 2026 vintage. Do not infer `observed` / `estimated` / `projected` status from field-15 decisions without an independently reviewed field-16 rule.
