@@ -181,9 +181,11 @@ def write_owner_review(rows: list[dict[str, Any]], metadata: dict[str, Any], out
         target = output_root / f"{stamp}-{suffix}"
         suffix += 1
     target.mkdir(parents=True, exist_ok=False)
+    write_csv(target / "owner_review_baseline.csv", rows)
     write_csv(target / "owner_review.csv", rows)
     metadata["review_directory"] = target.relative_to(ROOT).as_posix()
-    metadata["owner_review_sha256"] = sha256(target / "owner_review.csv")
+    metadata["owner_review_baseline_sha256"] = sha256(target / "owner_review_baseline.csv")
+    metadata["owner_review_template_sha256"] = sha256(target / "owner_review.csv")
     (target / "owner_review_manifest.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
@@ -194,16 +196,26 @@ def write_owner_review(rows: list[dict[str, Any]], metadata: dict[str, Any], out
 def validate_owner_decisions(review_dir: Path) -> dict[str, Any]:
     manifest_path = review_dir / "owner_review_manifest.json"
     review_path = review_dir / "owner_review.csv"
-    if not manifest_path.is_file() or not review_path.is_file():
-        raise OwnerReviewError("Owner-review manifest and CSV are required")
+    baseline_path = review_dir / "owner_review_baseline.csv"
+    if not manifest_path.is_file() or not review_path.is_file() or not baseline_path.is_file():
+        raise OwnerReviewError("Owner-review manifest, editable CSV and immutable baseline are required")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest.get("field_id") != 16 or manifest.get("approval_created") is not False:
         raise OwnerReviewError("Owner-review manifest is not a prepare-only field-16 package")
-    if sha256(review_path) != manifest.get("owner_review_sha256"):
-        raise OwnerReviewError("Owner-review CSV checksum mismatch; decisions or evidence were altered after manifest creation")
+    if sha256(baseline_path) != manifest.get("owner_review_baseline_sha256"):
+        raise OwnerReviewError("Immutable owner-review baseline checksum mismatch")
     rows = read_csv(review_path)
+    baseline = read_csv(baseline_path)
     if len(rows) != EXPECTED_CODES or len({row["source_id"] for row in rows}) != EXPECTED_CODES:
         raise OwnerReviewError("Owner decisions must cover exactly 195 unique source identities")
+    decision_fields = {"owner_decision", "approved_game_id", "owner_rationale", "owner_evidence_reference"}
+    baseline_by_source = {row["source_id"]: row for row in baseline}
+    if set(baseline_by_source) != {row["source_id"] for row in rows}:
+        raise OwnerReviewError("Owner-review source identity set differs from the immutable baseline")
+    for row in rows:
+        original = baseline_by_source[row["source_id"]]
+        if any(row.get(key, "") != value for key, value in original.items() if key not in decision_fields):
+            raise OwnerReviewError(f"Immutable identity evidence changed for {row['source_id']}")
     decisions = []
     for row in rows:
         decision = row.get("owner_decision", "").strip().upper()
@@ -241,6 +253,7 @@ def validate_owner_decisions(review_dir: Path) -> dict[str, Any]:
         "owner_review_directory": manifest.get("review_directory"),
         "owner_review_manifest_sha256": sha256(manifest_path),
         "owner_review_csv_sha256": sha256(review_path),
+        "owner_review_baseline_sha256": manifest.get("owner_review_baseline_sha256"),
         "decision_counts": counts,
         "decisions": decisions,
         "approval_created": False,
