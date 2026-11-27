@@ -297,3 +297,6 @@ The owner-review builder now assigns each of the 195 exact-registry proposals an
 If a row has both approved WDI/WPP corroboration and pending ICP evidence, the tier is `approved_source_corroboration`; the separate `pending_candidate_datasets` column still exposes the pending evidence. The row also retains the full `existing_project_source_mappings` JSON and prior identity-decision evidence. Manifest counts report all four mutually exclusive tiers and the overlapping approved, pending and field-scoped evidence counts. No tier creates an approval, changes a source crosswalk or modifies either database.
 
 The regression tests cover all four tiers, including mixed approved-plus-pending evidence and a field-15-only IMF mapping. Regenerate a new timestamped review package after syncing; preserve the committed `20261127T185010Z` package as the prior evidence snapshot.
+
+
+The evidence-tier classifier treats the IMF WEO crosswalk dataset identifiers `imf_weo` and `world_economic_outlook` as aliases for the same field-scoped evidence category. The owner-review display normalizes either identifier to `world_economic_outlook`; neither form is counted as independent WDI/WPP corroboration.
