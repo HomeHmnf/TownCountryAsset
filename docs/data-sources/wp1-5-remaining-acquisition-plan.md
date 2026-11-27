@@ -165,3 +165,14 @@ The read-only proposal builder and focused tests are now in:
 - [Field-15 semantic review record](imf-weo-field15-semantic-review.md)
 
 These are implementation artifacts only. Their local tests and builder execution remain pending owner-run validation. All canonical field-15 statuses remain `unclassified`; the 8,168 / 1,193 split is a proposal, not an approved database state. No status application has been authorized or performed. Field 15 remains open and field 16 remains blocked.
+
+
+### Field 15 semantic validation gate update — 2026-11-27
+
+This update supersedes the earlier statements above that the post-fix semantic tests and full proposal CSV audit were still pending.
+
+The owner reports the focused semantic-review suite passed (**12 passed in 0.03s**). A read-only audit of the complete committed proposal CSV also returned **PASS**: the file SHA-256 matches the recorded proposal fingerprint; all 9,361 rows have unique source-code/year keys across 197 series; the year range is 1980–2031; proposed counts are 8,168 `observed` and 1,193 `estimated`; the rule counts are 178 integer-cutoff and 19 fiscal-year-ending-year series; every status agrees with its cutoff; and every current status remains `unclassified`.
+
+These checks validate implementation and artifact integrity. They do not constitute semantic owner approval and have not changed the canonical database. The next gate is the owner's explicit decision on the semantic convention and exact proposal SHA-256 `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`. Only after approval may a separate guarded status-application workflow be designed and run with explicit authorization, backup/preflight and independent post-write verification.
+
+**Field 15 remains open; field 16 remains blocked.** Do not change any observation status or begin field 16 at this stage.
