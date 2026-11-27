@@ -182,6 +182,7 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
             "mappings": [
                 {"source_id": "C000", "game_id": "game-000", "source_name": "Country C000", "match_method": "reviewed_manual"},
                 {"source_id": "WBG", "game_id": "game-999", "source_name": "West Bank and Gaza", "match_method": "reviewed_manual"},
+                {"source_id": "C001", "game_id": "game-001", "source_name": "Country C001", "match_method": "reviewed_manual"},
             ],
         },
         "edge_cases": {
@@ -216,6 +217,21 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
     assert decisions["catalogue"]["decision_status"] == "approved"
     assert decisions["proposal_game_id_match"] == "same_game_id"
     assert metadata["crosswalk_game_id_conflict_rows"] == 0
+    assert first["identity_evidence_tier"] == "approved_source_corroboration"
+    assert first["approved_source_corroboration_datasets"] == "un_wpp;world_bank_wdi"
+    assert first["pending_candidate_datasets"] == "world_bank_icp"
+    assert first["field_scoped_mapping_datasets"] == "world_economic_outlook"
+    assert rows[1]["identity_evidence_tier"] == "field_scoped_mapping_only"
+    assert rows[2]["identity_evidence_tier"] == "registry_match_only"
+    assert metadata["identity_evidence_tier_counts"] == {
+        "approved_source_corroboration": 1,
+        "pending_candidate_only": 0,
+        "field_scoped_mapping_only": 1,
+        "registry_match_only": 193,
+    }
+    assert metadata["approved_source_corroboration_rows"] == 1
+    assert metadata["pending_candidate_rows"] == 1
+    assert metadata["field_scoped_mapping_rows"] == 1
     wbg = next(item for item in metadata["unresolved_identity_history_rows"] if item["source_id"] == "WBG")
     wbg_mapping = json.loads(wbg["existing_project_source_mappings"])[0]
     assert wbg_mapping["approval_scope"] == "Field 15 NGDPD only"
