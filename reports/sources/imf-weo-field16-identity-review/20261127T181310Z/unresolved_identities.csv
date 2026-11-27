@@ -1,0 +1,3 @@
+source_id,source_name,series_code,populated_year_count,first_populated_year,last_populated_year,candidate_line_number,candidate_exception,reason,candidate_game_ids,decision,approved_game_id,owner_rationale
+SSD,"South Sudan, Republic of",SSD.NGDPDPC.A,21,2011,2031,183,unmapped_or_ambiguous_identity,no_exact_current_source_id_match,,HOLD,-,
+WBG,West Bank and Gaza,WBG.NGDPDPC.A,32,1994,2025,5645,unmapped_or_ambiguous_identity,no_exact_current_source_id_match,,HOLD,-,

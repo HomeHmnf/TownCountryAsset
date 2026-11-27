@@ -1,0 +1,37 @@
+{
+  "approval_created": false,
+  "batch_sizes": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    15
+  ],
+  "candidate_directory": "reports/sources/imf-weo-historical-candidate/20261127T180903Z",
+  "candidate_exceptions_sha256": "b8b4a353cf0d10317ef5ca2073efb09c2845a78c63687239ecfb9d777b44c132",
+  "candidate_observations_sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+  "candidate_sha256": "f3dbd9a61c74a804b460383a6351d70b42a5e094f5ba4d7bf8c214326f6844b4",
+  "database_written": false,
+  "field_id": 16,
+  "fixed_unresolved": {
+    "SSD": "no exact registry current_source_id",
+    "WBG": "field-15-only crosswalk approval; field 16 requires separate evidence and owner decision"
+  },
+  "identity_proposals_sha256": "c4feaac040a8a3fb2d528852026f9ea5e0106bddc395da6aa8e006ae98604311",
+  "identity_rule": "exact_unique_current_source_id_match_is_a_proposal_only_not_an_approval",
+  "indicator_code": "NGDPDPC",
+  "proposal_count": 195,
+  "registry_path": "config/country_identity_registry.json",
+  "registry_record_count": 242,
+  "registry_sha256": "329333a8e51e9c6bb50d9ce7a067ce7073174a2c477583374401a100de56f532",
+  "review_directory": "reports/sources/imf-weo-field16-identity-review/20261127T181310Z",
+  "schema_version": 1,
+  "source_release": "october_2026",
+  "unresolved_count": 2,
+  "unresolved_identities_sha256": "fa17dd952ab88fe44eec5db5a9716fc8427564d9786b56f75b3d9429a1e21454"
+}
