@@ -162,7 +162,7 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
     payloads = {
         "wdi": {
             "dataset": "world_bank_wdi",
-            "review_approval": {"status": "approved", "scope": "WDI crosswalk only", "approval_record": "wdi-review.md"},
+            "review_approval": "Owner-approved WDI crosswalk only.",
             "mappings": [{"source_id": "C000", "game_id": "game-000", "source_name": "Country C000", "match_method": "reviewed_manual", "evidence_url": "https://example.invalid/wdi"}],
         },
         "wpp": {
