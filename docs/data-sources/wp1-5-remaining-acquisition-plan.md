@@ -199,3 +199,26 @@ The owner-approved IMF WEO October 2026 NGDPD semantic proposal has now been app
 Reusable SQLite backup automation is now provided by `tools/database/backup.py` and `tools/backup_database.py`; focused tests are in `tests/test_database_backup.py`. The standalone command `uv run python tools/backup_database.py` creates a timestamped online backup, refuses overwrite, verifies integrity and foreign keys, and prints its SHA-256. The field-15 guarded application CLI also accepts `--create-backup`; it creates the backup, calculates the checksum, and passes that checksum directly to its existing backup-verification gate before application. Do not rerun the field-15 one-shot application after its successful completion.
 
 The owner's next action is to run the new backup-helper tests and the independent read-only post-application verification. Field 15 remains open until those checks and closeout documentation are complete. Field 16 remains blocked.
+
+
+## Field-15 final closeout and field-16 gate — 2026-11-27
+
+Field 15 (IMF WEO October 2026, `NGDPD.A`) is **closed**. The owner completed semantic application and independent post-application verification. The final Game DB audit returned **PASS**: 9,361 observations; 197 game IDs; 197 source codes; 1980–2031; 8,168 `observed`; 1,193 `estimated`; no other statuses; no malformed checksum values; one matching dataset-import record remaining `candidate`; SQLite integrity `ok`; zero foreign-key violations. The audit was read-only. Backup-helper and semantic-application regression tests passed (**8 passed in 0.08s**). Application approval ID: `imf-weo-field15-sem-28e8b9c1afd983e4`; approved proposal SHA-256: `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`.
+
+The Project/source DB remains the acquisition/provenance ledger and the Game DB remains the observation store; these roles are not duplicated. The October 2026 WEO acquisition (Project DB acquisition ID 5) already contains the raw CSV and appendix used for field 15. Field 16 uses the same provider release and raw CSV, so **do not reacquire** if the existing source artifacts and acquisition registration pass a fresh read-only verification.
+
+### Field 16 — GDP per capita (IMF WEO, NGDPDPC)
+
+Field 16 is now the sole active field. Contract: scalar `current_usd_per_person`, primary source `imf_weo`; source indicator `NGDPDPC.A`. The existing candidate builder supports `--field-id 16`, and the source observation schema permits field 16 / indicator `NGDPDPC`.
+
+The following gates apply before any Game DB application:
+
+1. Verify Project DB acquisition ID 5 and the raw CSV / October 2026 Appendix bytes, recorded byte counts and SHA-256 values. Verify Project DB integrity and foreign keys. Reuse this acquisition; do not register duplicate acquisition events or reacquire unchanged bytes.
+2. Build a **field-16-only** candidate from the original raw WEO CSV using `uv run python tools/build_imf_weo_historical_candidate.py --field-id 16`. This is candidate generation only and must not write either database.
+3. Treat all reused IMF source-code-to-`game_id` mappings as **field-16 identity proposals**, not as automatically approved field-16 decisions. The existing WBG and KOS decisions and the 195 other identity approvals were explicitly scoped to field 15. Re-review the field-16 source identities against the canonical registry and evidence, preserve the existing source-code discrepancy qualifications, and obtain field-16-scoped owner decisions. Do not broaden the existing crosswalk approval scope or alter global identity/ISO assignments.
+4. Audit every populated `NGDPDPC.A` source cell, source series, unit and scale, year coverage, reporting-year metadata, latest-actual metadata, duplicate keys and all 242 expected project identities. Record aggregates, unmapped identities, missing rows and unavailable/not-applicable cases explicitly.
+5. Resolve the field-16 denominator/population universe and comparability semantics. Do not derive GDP per capita by dividing field 15 by a population series; use the IMF-published `NGDPDPC` values. Preserve source unit/scale and the October 2026 vintage. Do not infer `observed` / `estimated` / `projected` status from field-15 decisions without an independently reviewed field-16 rule.
+6. Produce a field-16-only consolidated review package, immutable candidate fingerprint and field-scoped approval. No Game DB write is authorized by candidate generation or review.
+7. Only after explicit owner authorization, use the guarded application workflow with a verified automatic backup, apply transactionally, then independently verify the Game DB and Project DB and update this plan and the field-specific record.
+
+**Current boundary:** field 16 may proceed through source verification, candidate generation and review preparation. No field-16 identity approval, semantic approval, application, dataset-import promotion or database write is implied or authorized by closing field 15.
