@@ -78,6 +78,9 @@ def _write_source(path: Path, metadata: str = "FY2024/25") -> Path:
         ])
         writer.writerow(["AAA.NGDPD.A", "Example", "Annual", metadata,
                          "April/March", "10", "11", "12"])
+        for code in sorted(review.AGGREGATE_CODES):
+            writer.writerow([f"{code}.NGDPD.A", code, "Annual", "2025",
+                             "January/December", "1", "", ""])
     return path
 
 
@@ -86,6 +89,7 @@ def test_build_review_reconciles_source_and_candidate_and_never_projects(tmp_pat
     candidate = _write_candidate(tmp_path, source)
     monkeypatch.setattr(review, "EXPECTED_SERIES", 1)
     monkeypatch.setattr(review, "EXPECTED_OBSERVATIONS", 3)
+    monkeypatch.setattr(review, "EXPECTED_AGGREGATE_VALUES", 13)
     proposals, report = review.build_review(source, candidate, verify_snapshot=False)
     assert [row["proposed_value_status"] for row in proposals] == [
         "observed", "observed", "estimated"
