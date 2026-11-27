@@ -103,11 +103,13 @@ def build_review(source_path: Path, candidate_dir: Path, *, verify_snapshot: boo
     year_columns = [name for name in raw_headers if name.isdigit() and len(name) == 4]
     source_series: dict[str, dict[str, Any]] = {}
     aggregate_values = 0
+    aggregate_codes_seen: set[str] = set()
     for raw in raw_rows:
         parts = (raw.get("SERIES_CODE") or "").split(".")
         if len(parts) != 3 or parts[1:] != ["NGDPD", "A"]:
             continue
         if parts[0] in AGGREGATE_CODES:
+            aggregate_codes_seen.add(parts[0])
             aggregate_values += sum(1 for year in year_columns if (raw.get(year) or "").strip())
             continue
         if raw.get("FREQUENCY", "").strip() != "Annual":
@@ -122,6 +124,9 @@ def build_review(source_path: Path, candidate_dir: Path, *, verify_snapshot: boo
                 for year in year_columns if (raw.get(year) or "").strip()
             },
         }
+
+    if aggregate_codes_seen != AGGREGATE_CODES:
+        raise SemanticReviewError("Raw aggregate series inventory differs from the 13 approved exclusions")
 
     candidate_rows, candidate_headers = _read_csv(observations_path)
     required_candidate = {
@@ -220,7 +225,7 @@ def build_review(source_path: Path, candidate_dir: Path, *, verify_snapshot: boo
         "candidate_observations_sha256": sha256(observations_path),
         "candidate_directory": candidate_dir.as_posix(),
         "individual_series": len(source_series),
-        "aggregate_series_excluded": len(AGGREGATE_CODES),
+        "aggregate_series_excluded": len(aggregate_codes_seen),
         "aggregate_populated_values_excluded": aggregate_values,
         "candidate_observations": len(candidate_by_key),
         "proposed_observations": len(proposals),
