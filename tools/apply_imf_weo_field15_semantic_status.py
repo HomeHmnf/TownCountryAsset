@@ -31,7 +31,7 @@ from tools.database.application_approval import (
     record_application_applied,
     require_approved_application,
 )
-from tools.database.backup import create_verified_backup
+from tools.database.backup import BackupError, create_verified_backup
 from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT
 from tools.database.schema import validate_database
 
@@ -399,7 +399,7 @@ def main(argv: list[str] | None = None) -> int:
             create_backup=args.create_backup, backup_dir=args.backup_dir,
         )
     except (OSError, ValueError, csv.Error, json.JSONDecodeError, sqlite3.Error,
-            SemanticApplyError, ApplicationApprovalError) as exc:
+            SemanticApplyError, ApplicationApprovalError, BackupError) as exc:
         parser.exit(1, f"IMF WEO field-15 semantic application failed: {exc}\n")
     print(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True))
     if result["status"] == "preflight_passed":
