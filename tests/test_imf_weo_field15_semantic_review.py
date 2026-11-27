@@ -107,6 +107,7 @@ def test_build_review_rejects_candidate_value_mismatch(tmp_path, monkeypatch):
     candidate = _write_candidate(tmp_path, source, candidate_value="999")
     monkeypatch.setattr(review, "EXPECTED_SERIES", 1)
     monkeypatch.setattr(review, "EXPECTED_OBSERVATIONS", 3)
+    monkeypatch.setattr(review, "EXPECTED_AGGREGATE_VALUES", 13)
     with pytest.raises(review.SemanticReviewError, match="Raw/candidate value mismatch"):
         review.build_review(source, candidate, verify_snapshot=False)
 
@@ -123,5 +124,6 @@ def test_build_review_rejects_non_unclassified_candidate_status(tmp_path, monkey
     summary_path.write_text(json.dumps(summary), encoding="utf-8")
     monkeypatch.setattr(review, "EXPECTED_SERIES", 1)
     monkeypatch.setattr(review, "EXPECTED_OBSERVATIONS", 3)
+    monkeypatch.setattr(review, "EXPECTED_AGGREGATE_VALUES", 13)
     with pytest.raises(review.SemanticReviewError, match="must remain unclassified"):
         review.build_review(source, candidate, verify_snapshot=False)
