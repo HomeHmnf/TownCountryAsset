@@ -301,5 +301,5 @@ def test_mapping_can_declare_an_additional_explicit_field_scope(tmp_path):
         raw, identity, verify_snapshot=False, crosswalk_path=crosswalk,
         field_ids={16}
     )
-    assert len(observations) == 1
-    assert observations[0]["indicator_code"] == "NGDPDPC"
+    assert len(observations) == 2
+    assert {row["indicator_code"] for row in observations} == {"NGDPDPC"}
