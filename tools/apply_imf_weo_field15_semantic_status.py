@@ -31,6 +31,7 @@ from tools.database.application_approval import (
     record_application_applied,
     require_approved_application,
 )
+from tools.database.backup import create_verified_backup
 from tools.database.connection import DEFAULT_DATABASE_PATH, REPOSITORY_ROOT
 from tools.database.schema import validate_database
 
@@ -268,7 +269,8 @@ def application_artifact(files: dict, summary: dict) -> dict:
 
 def run(*, review_dir: Path, database_path: Path, apply: bool = False,
         confirm: bool = False, actor: str | None = None, note: str | None = None,
-        backup_path: Path | None = None, backup_sha256: str | None = None) -> dict:
+        backup_path: Path | None = None, backup_sha256: str | None = None,
+        create_backup: bool = False, backup_dir: Path | None = None) -> dict:
     rows, summary, files = load_approved_proposal(review_dir.resolve())
     if not database_path.is_file():
         raise SemanticApplyError(f"Game DB does not exist: {database_path}")
@@ -291,8 +293,18 @@ def run(*, review_dir: Path, database_path: Path, apply: bool = False,
         raise SemanticApplyError("--apply requires --confirm-semantic-status-application")
     if not actor or not note or len(note.strip()) < 20:
         raise SemanticApplyError("--apply requires --actor and a decision --note of at least 20 characters")
-    if backup_path is None or not backup_sha256:
-        raise SemanticApplyError("--apply requires --backup and --backup-sha256")
+    if create_backup:
+        if backup_path is not None or backup_sha256:
+            raise SemanticApplyError("Use either --create-backup or the explicit --backup/--backup-sha256 pair")
+        created = create_verified_backup(
+            database_path,
+            backup_dir or (Path.home() / "Backups/TownCountryAsset"),
+            prefix=f"{database_path.stem}_pre_imf_weo_field15_semantic_status",
+        )
+        backup_path = Path(created["backup"])
+        backup_sha256 = created["sha256"]
+    elif backup_path is None or not backup_sha256:
+        raise SemanticApplyError("--apply requires --create-backup or both --backup and --backup-sha256")
     backup = verify_backup(backup_path, backup_sha256, rows, database_path)
     artifact = application_artifact(files, summary)
     approval_id = "imf-weo-field15-sem-" + DEFAULT_PROPOSAL_SHA256[:16]
@@ -374,12 +386,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--note")
     parser.add_argument("--backup", type=Path)
     parser.add_argument("--backup-sha256")
+    parser.add_argument("--create-backup", action="store_true",
+                        help="Create a timestamped verified backup and pass its SHA-256 automatically")
+    parser.add_argument("--backup-dir", type=Path,
+                        default=Path.home() / "Backups/TownCountryAsset")
     args = parser.parse_args(argv)
     try:
         result = run(
             review_dir=args.review_dir, database_path=args.database, apply=args.apply,
             confirm=args.confirm_semantic_status_application, actor=args.actor, note=args.note,
             backup_path=args.backup, backup_sha256=args.backup_sha256,
+            create_backup=args.create_backup, backup_dir=args.backup_dir,
         )
     except (OSError, ValueError, csv.Error, json.JSONDecodeError, sqlite3.Error,
             SemanticApplyError, ApplicationApprovalError) as exc:
