@@ -176,7 +176,10 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
         "imf_weo": {
             "dataset": "imf_weo",
             "review_approval": {"status": "approved", "scope": "Field 15 NGDPD only", "approval_record": "imf-field15.md"},
-            "mappings": [{"source_id": "C000", "game_id": "game-000", "source_name": "Country C000", "match_method": "reviewed_manual"}],
+            "mappings": [
+                {"source_id": "C000", "game_id": "game-000", "source_name": "Country C000", "match_method": "reviewed_manual"},
+                {"source_id": "WBG", "game_id": "game-999", "source_name": "West Bank and Gaza", "match_method": "reviewed_manual"},
+            ],
         },
         "edge_cases": {
             "policy_version": "identity-edge-review-v1",
@@ -210,6 +213,15 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
     assert decisions["catalogue"]["decision_status"] == "approved"
     assert decisions["proposal_game_id_match"] == "same_game_id"
     assert metadata["crosswalk_game_id_conflict_rows"] == 0
+    wbg = next(item for item in metadata["unresolved_identity_history_rows"] if item["source_id"] == "WBG")
+    wbg_mapping = json.loads(wbg["existing_project_source_mappings"])[0]
+    assert wbg_mapping["approval_scope"] == "Field 15 NGDPD only"
+    assert metadata["unresolved_identity_count"] == 2
+
+    review_dir = write_owner_review(rows, metadata, tmp_path / "owner-review")
+    unresolved_csv = list(csv.DictReader((review_dir / "unresolved_identity_history.csv").open(encoding="utf-8")))
+    assert len(unresolved_csv) == 2
+    assert json.loads(next(item for item in unresolved_csv if item["source_id"] == "WBG")["existing_project_source_mappings"])[0]["approval_scope"] == "Field 15 NGDPD only"
     assert metadata["identity_history_policy"].startswith("source-scoped review evidence only")
     assert set(metadata["identity_history_files"]) == set(paths)
     assert metadata["approval_created"] is False
