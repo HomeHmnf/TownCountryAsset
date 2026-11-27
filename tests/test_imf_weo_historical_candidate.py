@@ -40,6 +40,8 @@ def _inputs(tmp_path: Path):
          "January/December", "2", "", ""],
         ["AAA.PPPGDP.A", "Example", "Annual", "Purchasing power parity", "Billions", "",
          "January/December", "..", "8", ""],
+        ["AAA.NGDPDPC.A", "Example", "Annual", "US dollar", "Units", "2025",
+         "January/December", "100", "110", ""],
     ]
     with raw.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream)
@@ -60,7 +62,8 @@ def _explicit_crosswalk(tmp_path: Path, source_id: str = "AAA",
             "source_id": source_id,
             "match_method": "reviewed_manual",
             "evidence_url": "https://example.org/imf-weo-evidence",
-            "source_name": source_id
+            "source_name": source_id,
+            "field_ids": [15, 18, 21]
         }]
     }), encoding="utf-8")
     return crosswalk
@@ -79,7 +82,7 @@ def test_registry_source_ids_and_iso_codes_do_not_resolve_without_crosswalk(tmp_
     }
     assert unresolved == {"AAA", "BBB"}
     assert summary["identity_policy"] == (
-        "explicit_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback"
+        "explicit_field_scoped_imf_weo_crosswalk_only; no_registry_source_id_or_iso_fallback"
     )
 
 
@@ -197,3 +200,106 @@ def test_unsupported_field_filter_is_rejected(tmp_path):
     raw, identity = _inputs(tmp_path)
     with pytest.raises(CandidateError, match="Unsupported WP1.5 field IDs"):
         build_candidate(raw, identity, verify_snapshot=False, field_ids={999})
+
+
+def test_owner_approved_wbg_and_kos_mappings_are_limited_to_field_15(tmp_path):
+    raw, identity = _inputs(tmp_path)
+    with raw.open("a", encoding="utf-8", newline="") as stream:
+        writer = csv.writer(stream)
+        for source_code, country, value in (
+            ("WBG", "West Bank and Gaza", "3.5"),
+            ("KOS", "Kosovo", "4.5"),
+        ):
+            writer.writerow([
+                f"{source_code}.NGDPD.A", country, "Annual", "US dollar",
+                "Billions", "2025", "January/December", value, "", ""
+            ])
+            writer.writerow([
+                f"{source_code}.NGDPDPC.A", country, "Annual", "US dollar",
+                "Units", "2025", "January/December", value, "", ""
+            ])
+
+    crosswalk = tmp_path / "imf_weo.json"
+    crosswalk.write_text(json.dumps({
+        "schema_version": 1,
+        "dataset": "world_economic_outlook",
+        "source_key": "imf_weo",
+        "mappings": [
+            {
+                "game_id": "tc_" + "b" * 32,
+                "source_id": "WBG",
+                "match_method": "reviewed_manual",
+                "evidence_url": "https://example.org/wbg",
+                "source_name": "West Bank and Gaza"
+            },
+            {
+                "game_id": "tc_" + "c" * 32,
+                "source_id": "KOS",
+                "match_method": "reviewed_manual",
+                "evidence_url": "https://example.org/kos",
+                "source_name": "Kosovo"
+            }
+        ]
+    }), encoding="utf-8")
+
+    field15, exceptions15, _ = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk,
+        field_ids={15}
+    )
+    assert {
+        row["source_country_code"] for row in field15
+        if row["source_country_code"] in {"WBG", "KOS"}
+    } == {"WBG", "KOS"}
+    assert not any(
+        row.get("source_country_code") in {"WBG", "KOS"}
+        for row in exceptions15
+    )
+
+    field16, exceptions16, _ = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk,
+        field_ids={16}
+    )
+    assert not any(
+        row["source_country_code"] in {"WBG", "KOS"} for row in field16
+    )
+    unresolved16 = {
+        row.get("source_country_code") for row in exceptions16
+        if row.get("exception") == "unmapped_or_ambiguous_identity"
+    }
+    assert {"WBG", "KOS"} <= unresolved16
+
+    all_fields, all_exceptions, _ = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk
+    )
+    assert {
+        row["source_country_code"] for row in all_fields
+        if row["field_id"] == 15 and row["source_country_code"] in {"WBG", "KOS"}
+    } == {"WBG", "KOS"}
+    assert not any(
+        row["source_country_code"] in {"WBG", "KOS"} and row["field_id"] == 16
+        for row in all_fields
+    )
+    unresolved_all = {
+        (row.get("source_country_code"), row.get("series_code"))
+        for row in all_exceptions
+        if row.get("exception") == "unmapped_or_ambiguous_identity"
+    }
+    assert {
+        ("WBG", "WBG.NGDPDPC.A"),
+        ("KOS", "KOS.NGDPDPC.A"),
+    } <= unresolved_all
+
+
+def test_mapping_can_declare_an_additional_explicit_field_scope(tmp_path):
+    raw, identity = _inputs(tmp_path)
+    crosswalk = _explicit_crosswalk(tmp_path)
+    payload = json.loads(crosswalk.read_text(encoding="utf-8"))
+    payload["mappings"][0]["field_ids"] = [15, 16, 18, 20, 21]
+    crosswalk.write_text(json.dumps(payload), encoding="utf-8")
+
+    observations, _, _ = build_candidate(
+        raw, identity, verify_snapshot=False, crosswalk_path=crosswalk,
+        field_ids={16}
+    )
+    assert len(observations) == 1
+    assert observations[0]["indicator_code"] == "NGDPDPC"
