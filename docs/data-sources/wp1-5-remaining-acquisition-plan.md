@@ -267,3 +267,20 @@ uv run python -m tools.manage_imf_weo_field16_owner_review validate --review-dir
 ```
 
 Validation rejects missing decisions, missing rationales, unsupported decisions, altered identity evidence, an approval targeting a different game ID, or an approval without an evidence reference. The output is explicitly a **decision proposal, not an approval record**. It creates no approval, changes no registry/crosswalk and writes neither database. Any subsequent formal approval and application must be a separately reviewed, field-16-scoped workflow with explicit owner authorization, verified backup/preflight and independent post-write checks.
+
+
+### Field-16 owner-review history enrichment — 2026-11-27
+
+The initial owner-review package exposed the canonical registry but omitted prior project source crosswalks and the explicit identity edge-case decisions. The review builder now incorporates read-only evidence from:
+
+- `data/manual/source_crosswalks/world_bank_wdi_wp1_5_area.json` (owner-approved WDI crosswalk);
+- `data/manual/source_crosswalks/un_wpp.json` (owner-approved UN WPP crosswalk, including its explicit Taiwan exception);
+- `data/manual/source_crosswalks/world_bank_icp.json` (pending ICP candidate mappings, visibly distinguished from approvals);
+- `data/manual/source_crosswalks/imf_weo.json` (IMF WEO mappings, including the explicit field-15-only WBG/KOS approval scope);
+- `config/identity_edge_case_reconciliation.json` (prior identity, ISO, entity, catalogue and naming decisions).
+
+The editable review and immutable baseline now include `existing_project_source_mappings` and `prior_project_identity_decision`. Each source mapping records its dataset, source identifier/name, mapped persistent game ID, match method, evidence reference, approval status, approval scope and approval record where present. Prior edge-case records expose the recorded decision dimensions and policy version. The review manifest fingerprints every history file.
+
+Crosswalk evidence is matched by source identifier and/or the exact persistent `game_id`; it is not used to infer or rewrite identity mappings. In particular, an approved WDI or WPP mapping remains scoped to that provider, an ICP candidate remains pending, and the existing IMF WEO WBG/KOS approval remains field 15 only. None is promoted to field-16 approval. The existing owner-review package at `20261127T183743Z` remains immutable historical evidence; generate a new timestamped package after syncing the enriched builder.
+
+Focused regression coverage now checks that the history sources are displayed, pending mappings remain pending, field-15 scope is retained verbatim, and previous identity decisions are surfaced. The workflow remains prepare-only: no approval creation, registry/crosswalk mutation or database write.
