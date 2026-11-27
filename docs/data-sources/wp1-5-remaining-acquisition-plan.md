@@ -176,3 +176,10 @@ The owner reports the focused semantic-review suite passed (**12 passed in 0.03s
 These checks validate implementation and artifact integrity. They do not constitute semantic owner approval and have not changed the canonical database. The next gate is the owner's explicit decision on the semantic convention and exact proposal SHA-256 `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`. Only after approval may a separate guarded status-application workflow be designed and run with explicit authorization, backup/preflight and independent post-write verification.
 
 **Field 15 remains open; field 16 remains blocked.** Do not change any observation status or begin field 16 at this stage.
+
+
+### Field 15 semantic owner approval — 2026-11-27
+
+The project owner explicitly approved the semantic classification convention and the exact 9,361-row proposal. The immutable decision record is `reports/sources/imf-weo-field15-semantic-review/20261127T152134Z/owner_semantic_approval.md`, bound to proposal SHA-256 `28e8b9c1afd983e429a8a8f6ca37d97ee3f14fa4eb4455b7a512f524f6424006`. Approved counts are 8,168 `observed` and 1,193 `estimated`; no `projected` statuses are inferred.
+
+This semantic approval is not authorization for a database status write. The existing 9,361 Game DB observations remain `unclassified`. A separate fingerprint-bound application workflow, fresh verified backup, read-only preflight, explicit application authorization, transactional update and independent post-write verification are still required. Field 15 remains open and field 16 remains blocked.
