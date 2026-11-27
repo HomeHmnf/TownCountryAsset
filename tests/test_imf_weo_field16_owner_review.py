@@ -152,7 +152,10 @@ def test_approve_requires_exact_target_and_evidence_reference(tmp_path: Path, mo
         validate_owner_decisions(review_dir)
 
 
-def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(tmp_path: Path) -> None:
+def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import tools.manage_imf_weo_field16_owner_review as module
+
+    monkeypatch.setattr(module, "ROOT", tmp_path)
     input_dir, registry_path = fixture(tmp_path)
     history_dir = tmp_path / "history"
     history_dir.mkdir()
