@@ -53,13 +53,17 @@ def create_verified_backup(
 
     source_uri = "file:" + quote(str(source), safe="/:") + "?mode=ro"
     try:
-        source_connection = sqlite3.connect(source_uri, uri=True, timeout=30)
-        destination_connection = sqlite3.connect(str(destination), timeout=30)
+        source_connection = None
+        destination_connection = None
         try:
+            source_connection = sqlite3.connect(source_uri, uri=True, timeout=30)
+            destination_connection = sqlite3.connect(str(destination), timeout=30)
             source_connection.backup(destination_connection)
         finally:
-            destination_connection.close()
-            source_connection.close()
+            if destination_connection is not None:
+                destination_connection.close()
+            if source_connection is not None:
+                source_connection.close()
 
         check_uri = "file:" + quote(str(destination), safe="/:") + "?mode=ro"
         check = sqlite3.connect(check_uri, uri=True, timeout=30)
