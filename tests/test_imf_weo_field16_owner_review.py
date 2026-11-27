@@ -174,7 +174,10 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
         "icp": {
             "dataset": "world_bank_icp",
             "review_approval": {"status": "pending", "scope": "ICP candidate only"},
-            "mappings": [{"source_country_code": "C000", "game_id": "game-000", "source_country_name": "Country C000", "review_status": "pending", "match_method": "candidate"}],
+            "mappings": [
+                {"source_country_code": "C000", "game_id": "game-000", "source_country_name": "Country C000", "review_status": "pending", "match_method": "candidate"},
+                {"source_country_code": "C003", "game_id": "game-003", "source_country_name": "Country C003", "review_status": "pending", "match_method": "candidate"},
+            ],
         },
         "imf_weo": {
             "dataset": "imf_weo",
@@ -223,11 +226,12 @@ def test_build_includes_existing_source_scoped_mappings_and_identity_decisions(t
     assert first["field_scoped_mapping_datasets"] == "world_economic_outlook"
     assert rows[1]["identity_evidence_tier"] == "field_scoped_mapping_only"
     assert rows[2]["identity_evidence_tier"] == "registry_match_only"
+    assert rows[3]["identity_evidence_tier"] == "pending_candidate_only"
     assert metadata["identity_evidence_tier_counts"] == {
         "approved_source_corroboration": 1,
-        "pending_candidate_only": 0,
+        "pending_candidate_only": 1,
         "field_scoped_mapping_only": 1,
-        "registry_match_only": 193,
+        "registry_match_only": 192,
     }
     assert metadata["approved_source_corroboration_rows"] == 1
     assert metadata["pending_candidate_rows"] == 1
