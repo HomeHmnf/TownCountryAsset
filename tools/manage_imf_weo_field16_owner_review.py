@@ -202,7 +202,7 @@ def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any], h
     pending_candidate_datasets = sorted({
         str(item.get("dataset"))
         for item in mappings
-        if item.get("dataset") == "world_bank_icp_databank_saved_report"
+        if "icp" in str(item.get("dataset", "")).casefold()
         and str(item.get("approval_status", "")).casefold() == "pending"
         and item.get("proposal_game_id_match") == "same_game_id"
     })
