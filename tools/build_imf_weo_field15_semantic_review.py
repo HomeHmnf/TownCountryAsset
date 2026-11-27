@@ -20,6 +20,7 @@ DEFAULT_OUTPUT = ROOT / "reports/sources/imf-weo-field15-semantic-review"
 EXPECTED_SOURCE_SHA256 = "a19b2bd65b050a91d593cb6bcfc77a303e6359e058f03c3c92cf5ad849cda74d"
 EXPECTED_OBSERVATIONS = 9361
 EXPECTED_SERIES = 197
+EXPECTED_AGGREGATE_VALUES = 665
 AGGREGATE_CODES = {
     "G903", "G998", "G001", "G110", "G119", "GX123", "G163",
     "G200", "G205", "G400", "G505", "G510", "G603",
@@ -127,6 +128,10 @@ def build_review(source_path: Path, candidate_dir: Path, *, verify_snapshot: boo
 
     if aggregate_codes_seen != AGGREGATE_CODES:
         raise SemanticReviewError("Raw aggregate series inventory differs from the 13 approved exclusions")
+    if aggregate_values != EXPECTED_AGGREGATE_VALUES:
+        raise SemanticReviewError(
+            f"Expected {EXPECTED_AGGREGATE_VALUES} populated aggregate cells, got {aggregate_values}"
+        )
 
     candidate_rows, candidate_headers = _read_csv(observations_path)
     required_candidate = {
