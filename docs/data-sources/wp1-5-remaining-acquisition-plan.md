@@ -1,7 +1,7 @@
 # WP1.5 remaining acquisition and application plan
 
 **Status:** active field-by-field execution plan; governed by the [WP1.5 review, approval and database application workflow](wp1-5-review-approval-application-workflow.md).  
-**Last reviewed:** 2026-11-25.
+**Last reviewed:** 2026-11-27.
 
 ## Completion rule
 
@@ -146,3 +146,15 @@ This status supersedes the earlier "Current gate" and audit statements above whe
 The IMF WEO October 2026 NGDPD / field-15 identity review, owner approval, Game DB application and technical verification have completed. The owner-approved application is `imf-weo-oct2026-1eb2e784bf93821c` (`applied`). The local read-only database check returned **PASS**: 9,361 observations, 197 game IDs, 197 source codes, years 1980–2031, zero non-`unclassified` statuses, zero checksum mismatches, one import ID (3), dataset import status `candidate`, SQLite integrity `ok`, and zero foreign-key violations. See the [shared application workflow](wp1-5-review-approval-application-workflow.md) for the recorded verification.
 
 **Field 15 is not yet closed.** The database check confirms row presence and technical integrity; it does not satisfy the field-specific semantic review and closure checklist. In particular, observation statuses remain `unclassified`, and the dataset import remains `candidate`. Therefore field 16 remains blocked. The next action is to complete and document field-15 semantic classification and the remaining per-field closeout requirements; do not begin field-16 acquisition or application before that gate passes.
+
+
+### Field 15 semantic audit update — 2026-11-27
+
+The owner ran a read-only full-coverage audit of IMF WEO October 2026 `NGDPD.A` against all 197 individual source series and reported **9,361 / 9,361** populated observations accounted for: 8,168 proposed `observed`, 1,193 proposed `estimated`, 178 integer-metadata series, 19 fiscal-year metadata series (861 observations), zero unresolved series, and no database writes. Fiscal-year labels were interpreted by ending year and reconciled against the October 2026 WEO Database Appendix country documentation.
+
+The read-only proposal builder and focused tests are now in:
+- `tools/build_imf_weo_field15_semantic_review.py`
+- `tests/test_imf_weo_field15_semantic_review.py`
+- [Field-15 semantic review record](imf-weo-field15-semantic-review.md)
+
+These are implementation artifacts only. Their local tests and builder execution remain pending owner-run validation. All canonical field-15 statuses remain `unclassified`; the 8,168 / 1,193 split is a proposal, not an approved database state. No status application has been authorized or performed. Field 15 remains open and field 16 remains blocked.
