@@ -211,6 +211,20 @@ The Project/source DB remains the acquisition/provenance ledger and the Game DB 
 
 **Identity-scope hardening:** the existing WBG and KOS crosswalk decisions are approved for field 15 only. The candidate builder now resolves crosswalk mappings by field ID and source code. A mapping without an explicit field_ids list defaults to field 15, matching the existing owner approval; any future broader mapping must carry an explicit field list and separate owner approval. This prevents field-15 approvals from leaking into field 16 or an unfiltered multi-field build. Regression tests cover field-15 retention, field-16 holds and multi-field behavior.
 
+**Field-16 identity review preparation:** the first regenerated field-16 candidate correctly contains zero observations and 197 unresolved source identities. Its immutable diagnostic package is `reports/sources/imf-weo-historical-candidate/20261127T180903Z/` (candidate SHA-256 is recorded in its manifest); it is retained as evidence and is not an import candidate. A read-only comparison against the 242-record registry found 195 unique exact `current_source_id` matches and two unmatched codes: SSD and WBG. All 195 matched registry records are currently `proposed`, not approved. KOS is among the 195 and must receive a new field-16-specific decision; the field-15 KOS approval is not reusable.
+
+The prepare-only generator `tools/build_imf_weo_field16_identity_review.py` creates ten review batches (20 rows each for batches 1–9, 15 rows in batch 10), with source names and populated-year coverage from the fingerprinted IMF CSV. It records the exact candidate, registry and source fingerprints in `review_manifest.json`. It emits 195 proposals based solely on unique exact registry `current_source_id` matches, plus separate unresolved records for SSD and WBG. Every proposal begins as `PENDING`; `approved_game_id` is `-`; registry status and entity type are shown as review context, not treated as approval. WBG remains unresolved because its existing crosswalk approval is field-15-only. The generator refuses unexpected counts, duplicate source codes, changed candidate checksums, missing source rows or a registry other than the expected 242 records. It creates no owner approval, changes no crosswalk or registry, and writes neither database.
+
+After syncing, run the focused tests:
+```fish
+uv run --extra dev python -m pytest -q tests/test_imf_weo_field16_identity_review.py
+```
+If they pass, generate the review package:
+```fish
+uv run python -m tools.build_imf_weo_field16_identity_review
+```
+Commit the generated package and provide its manifest and review CSVs for audit. Do not enter owner decisions until the proposal evidence and all 195 target identities have been checked. No approval validator/application or database-write path is included in this preparation step.
+
 Field 16 is now the sole active field. Contract: scalar `current_usd_per_person`, primary source `imf_weo`; source indicator `NGDPDPC.A`. The existing candidate builder supports `--field-id 16`, and the source observation schema permits field 16 / indicator `NGDPDPC`.
 
 The following gates apply before any Game DB application:
