@@ -65,6 +65,17 @@ def build_review(candidate_dir: Path, registry_path: Path) -> tuple[list[dict[st
         if isinstance(source_id, str) and source_id:
             by_source.setdefault(source_id, []).append(record)
 
+    source_path = ROOT / str(candidate.get("source_path", ""))
+    if not source_path.is_file() or sha256(source_path) != candidate.get("source_sha256"):
+        raise ReviewBuildError("Original WEO source CSV is missing or its checksum differs from the candidate")
+    source_rows = {}
+    with source_path.open(encoding="utf-8-sig", newline="") as stream:
+        reader = csv.DictReader(stream)
+        year_columns = [name for name in reader.fieldnames or [] if name.isdigit() and len(name) == 4]
+        for source_row in reader:
+            if source_row.get("SERIES_CODE", "").endswith(f".{EXPECTED_INDICATOR}.A"):
+                source_rows[source_row["SERIES_CODE"]] = source_row
+
     raw_exceptions = read_csv(exceptions_path)
     if len(raw_exceptions) != candidate.get("exception_count"):
         raise ReviewBuildError("Candidate exception row count does not match candidate metadata")
@@ -80,9 +91,17 @@ def build_review(candidate_dir: Path, registry_path: Path) -> tuple[list[dict[st
             raise ReviewBuildError(f"Duplicate field-16 source identity: {code}")
         seen_sources.add(code)
         matches = by_source.get(code, [])
+        source_row = source_rows.get(series)
+        if source_row is None:
+            raise ReviewBuildError(f"Exception series is absent from the fingerprinted WEO CSV: {series}")
+        populated_years = [year for year in year_columns if (source_row.get(year) or "").strip()]
         base = {
             "source_id": code,
+            "source_name": (source_row.get("COUNTRY") or "").strip(),
             "series_code": series,
+            "populated_year_count": len(populated_years),
+            "first_populated_year": min(populated_years) if populated_years else "",
+            "last_populated_year": max(populated_years) if populated_years else "",
             "candidate_line_number": exception.get("line_number", ""),
             "candidate_exception": exception.get("exception", ""),
         }
@@ -100,7 +119,6 @@ def build_review(candidate_dir: Path, registry_path: Path) -> tuple[list[dict[st
         names = target.get("names") or {}
         proposal_rows.append({
             **base,
-            "source_name": "",
             "proposed_game_id": target.get("game_id", ""),
             "registry_name": names.get("en", ""),
             "registry_status": target.get("status", ""),
