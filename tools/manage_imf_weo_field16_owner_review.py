@@ -291,6 +291,7 @@ def build_owner_review(input_dir: Path, registry_path: Path, history_paths: dict
         "crosswalk_game_id_conflict_rows": sum("existing_project_crosswalk_targets_different_game_id" in row["manual_review_flags"] for row in rows),
         "unresolved_identity_history_rows": unresolved_history,
         "unresolved_identity_count": len(unresolved_history),
+        "unresolved_identity_codes": [item["source_id"] for item in unresolved_history],
         "manual_review_flag_counts": {
             key: sum(key in row["manual_review_flags"].split(";") for row in rows)
             for key in (
@@ -340,6 +341,13 @@ def validate_owner_decisions(review_dir: Path) -> dict[str, Any]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest.get("field_id") != 16 or manifest.get("approval_created") is not False:
         raise OwnerReviewError("Owner-review manifest is not a prepare-only field-16 package")
+    unresolved_path = review_dir / "unresolved_identity_history.csv"
+    if manifest.get("unresolved_identity_history_sha256"):
+        if not unresolved_path.is_file() or sha256(unresolved_path) != manifest["unresolved_identity_history_sha256"]:
+            raise OwnerReviewError("Unresolved identity history checksum mismatch")
+        unresolved_rows = read_csv(unresolved_path)
+        if [row["source_id"] for row in unresolved_rows] != manifest.get("unresolved_identity_codes"):
+            raise OwnerReviewError("Unresolved identity history source set differs from the manifest")
     if sha256(baseline_path) != manifest.get("owner_review_baseline_sha256"):
         raise OwnerReviewError("Immutable owner-review baseline checksum mismatch")
     rows = read_csv(review_path)
