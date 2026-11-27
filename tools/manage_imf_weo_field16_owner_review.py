@@ -164,6 +164,22 @@ def enrich_proposal(proposal: dict[str, str], registry_record: dict[str, Any], h
         if item not in prior.get("source_mappings", [])
     ]
     identity_decision = prior.get("prior_identity_decision") or game_history.get("prior_identity_decision") or {}
+    for item in mappings:
+        mapped_game_id = item.get("mapped_game_id")
+        item["proposal_game_id_match"] = (
+            "same_game_id" if mapped_game_id == proposal["proposed_game_id"]
+            else "different_game_id" if mapped_game_id else "no_game_id_in_mapping"
+        )
+    if identity_decision:
+        identity_decision = {
+            **identity_decision,
+            "proposal_game_id_match": (
+                "same_game_id" if identity_decision.get("game_id") == proposal["proposed_game_id"]
+                else "different_game_id"
+            ),
+        }
+    if any(item["proposal_game_id_match"] == "different_game_id" for item in mappings):
+        flags.append("existing_project_crosswalk_targets_different_game_id")
     return {
         **proposal,
         "existing_project_source_mappings": compact_json(mappings),
@@ -258,6 +274,9 @@ def build_owner_review(input_dir: Path, registry_path: Path, history_paths: dict
             key: sum(row["name_comparison"] == key for row in rows)
             for key in ("exact_normalized_match", "registry_alias_match", "name_difference_requires_review")
         },
+        "existing_project_mapping_rows": sum(bool(row["existing_project_source_mappings"]) for row in rows),
+        "prior_identity_decision_rows": sum(bool(row["prior_project_identity_decision"]) for row in rows),
+        "crosswalk_game_id_conflict_rows": sum("existing_project_crosswalk_targets_different_game_id" in row["manual_review_flags"] for row in rows),
         "manual_review_flag_counts": {
             key: sum(key in row["manual_review_flags"].split(";") for row in rows)
             for key in (
