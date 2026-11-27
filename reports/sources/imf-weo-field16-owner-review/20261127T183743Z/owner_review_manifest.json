@@ -1,0 +1,46 @@
+{
+  "approval_created": false,
+  "batch_sizes": [
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    20,
+    15
+  ],
+  "database_written": false,
+  "decision_vocabulary": [
+    "APPROVE",
+    "REJECT",
+    "HOLD"
+  ],
+  "field_id": 16,
+  "indicator_code": "NGDPDPC",
+  "input_manifest_sha256": "769bc1bf58e35e12e237c6a0fe2e5145f1257e1ec49fca74a1b09f64fe0f7655",
+  "input_proposals_sha256": "c4feaac040a8a3fb2d528852026f9ea5e0106bddc395da6aa8e006ae98604311",
+  "input_review_directory": "reports/sources/imf-weo-field16-identity-review/20261127T181310Z",
+  "manual_review_flag_counts": {
+    "iso_assignment_not_approved": 195,
+    "registry_entity_type_unreviewed": 195,
+    "registry_status_not_approved": 195,
+    "source_registry_name_difference": 65,
+    "territory_or_disputed_identity_manual_review": 6
+  },
+  "name_comparison_counts": {
+    "exact_normalized_match": 129,
+    "name_difference_requires_review": 65,
+    "registry_alias_match": 1
+  },
+  "owner_review_baseline_sha256": "4e109e5a7b629e4f77590293593f57c76d33a1f76e4b9d0a1fdfde5754464f4a",
+  "owner_review_template_sha256": "4e109e5a7b629e4f77590293593f57c76d33a1f76e4b9d0a1fdfde5754464f4a",
+  "proposal_count": 195,
+  "registry_path": "config/country_identity_registry.json",
+  "registry_sha256": "329333a8e51e9c6bb50d9ce7a067ce7073174a2c477583374401a100de56f532",
+  "review_directory": "reports/sources/imf-weo-field16-owner-review/20261127T183743Z",
+  "schema_version": 1,
+  "source_release": "october_2026"
+}
